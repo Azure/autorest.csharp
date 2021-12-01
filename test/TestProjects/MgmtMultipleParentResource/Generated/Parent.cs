@@ -438,7 +438,7 @@ namespace MgmtMultipleParentResource
 
         /// <summary> Gets a collection of SubParents in the Parent. </summary>
         /// <returns> An object representing collection of SubParents and their operations over a Parent. </returns>
-        public virtual SubParentCollection GetSubParents()
+        public SubParentCollection GetSubParents()
         {
             return new SubParentCollection(this);
         }

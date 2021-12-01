@@ -956,7 +956,7 @@ namespace Azure.Management.Storage
 
         /// <summary> Gets an object representing a BlobService along with the instance operations that can be performed on it in the StorageAccount. </summary>
         /// <returns> Returns a <see cref="BlobService" /> object. </returns>
-        public virtual BlobService GetBlobService()
+        public BlobService GetBlobService()
         {
             return new BlobService(this, Id + "/blobServices/default");
         }
@@ -966,7 +966,7 @@ namespace Azure.Management.Storage
 
         /// <summary> Gets an object representing a FileService along with the instance operations that can be performed on it in the StorageAccount. </summary>
         /// <returns> Returns a <see cref="FileService" /> object. </returns>
-        public virtual FileService GetFileService()
+        public FileService GetFileService()
         {
             return new FileService(this, Id + "/fileServices/default");
         }
@@ -976,7 +976,7 @@ namespace Azure.Management.Storage
 
         /// <summary> Gets a collection of ManagementPolicies in the StorageAccount. </summary>
         /// <returns> An object representing collection of ManagementPolicies and their operations over a StorageAccount. </returns>
-        public virtual ManagementPolicyCollection GetManagementPolicies()
+        public ManagementPolicyCollection GetManagementPolicies()
         {
             return new ManagementPolicyCollection(this);
         }
@@ -986,7 +986,7 @@ namespace Azure.Management.Storage
 
         /// <summary> Gets a collection of BlobInventoryPolicies in the StorageAccount. </summary>
         /// <returns> An object representing collection of BlobInventoryPolicies and their operations over a StorageAccount. </returns>
-        public virtual BlobInventoryPolicyCollection GetBlobInventoryPolicies()
+        public BlobInventoryPolicyCollection GetBlobInventoryPolicies()
         {
             return new BlobInventoryPolicyCollection(this);
         }
@@ -996,7 +996,7 @@ namespace Azure.Management.Storage
 
         /// <summary> Gets a collection of PrivateEndpointConnections in the StorageAccount. </summary>
         /// <returns> An object representing collection of PrivateEndpointConnections and their operations over a StorageAccount. </returns>
-        public virtual PrivateEndpointConnectionCollection GetPrivateEndpointConnections()
+        public PrivateEndpointConnectionCollection GetPrivateEndpointConnections()
         {
             return new PrivateEndpointConnectionCollection(this);
         }
@@ -1006,7 +1006,7 @@ namespace Azure.Management.Storage
 
         /// <summary> Gets a collection of ObjectReplicationPolicies in the StorageAccount. </summary>
         /// <returns> An object representing collection of ObjectReplicationPolicies and their operations over a StorageAccount. </returns>
-        public virtual ObjectReplicationPolicyCollection GetObjectReplicationPolicies()
+        public ObjectReplicationPolicyCollection GetObjectReplicationPolicies()
         {
             return new ObjectReplicationPolicyCollection(this);
         }
@@ -1016,7 +1016,7 @@ namespace Azure.Management.Storage
 
         /// <summary> Gets a collection of EncryptionScopes in the StorageAccount. </summary>
         /// <returns> An object representing collection of EncryptionScopes and their operations over a StorageAccount. </returns>
-        public virtual EncryptionScopeCollection GetEncryptionScopes()
+        public EncryptionScopeCollection GetEncryptionScopes()
         {
             return new EncryptionScopeCollection(this);
         }
