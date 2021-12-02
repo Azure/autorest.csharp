@@ -40,7 +40,7 @@ namespace MgmtExpandResourceTypes
             HasData = true;
             _data = resource;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _recordSetsRestClient = new RecordSetsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _recordSetsRestClient = new RecordSetsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="RecordSetMx"/> class. </summary>
@@ -49,7 +49,7 @@ namespace MgmtExpandResourceTypes
         internal RecordSetMx(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _recordSetsRestClient = new RecordSetsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _recordSetsRestClient = new RecordSetsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="RecordSetMx"/> class. </summary>
@@ -61,7 +61,7 @@ namespace MgmtExpandResourceTypes
         internal RecordSetMx(ArmClientOptions clientOptions, TokenCredential credential, Uri uri, HttpPipeline pipeline, ResourceIdentifier id) : base(clientOptions, credential, uri, pipeline, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _recordSetsRestClient = new RecordSetsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _recordSetsRestClient = new RecordSetsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
@@ -96,7 +96,7 @@ namespace MgmtExpandResourceTypes
             scope.Start();
             try
             {
-                var response = await _recordSetsRestClient.GetAsync(Id.ResourceGroupName, Id.Parent.Name, Id.ResourceType.Types.Last().ToRecordType(), Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _recordSetsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.ResourceType.Types.Last().ToRecordType(), Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new RecordSetMx(this, response.Value), response.GetRawResponse());
@@ -119,7 +119,7 @@ namespace MgmtExpandResourceTypes
             scope.Start();
             try
             {
-                var response = _recordSetsRestClient.Get(Id.ResourceGroupName, Id.Parent.Name, Id.ResourceType.Types.Last().ToRecordType(), Id.Name, cancellationToken);
+                var response = _recordSetsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.ResourceType.Types.Last().ToRecordType(), Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new RecordSetMx(this, response.Value), response.GetRawResponse());
@@ -160,7 +160,7 @@ namespace MgmtExpandResourceTypes
             scope.Start();
             try
             {
-                var response = await _recordSetsRestClient.DeleteAsync(Id.ResourceGroupName, Id.Parent.Name, Id.ResourceType.Types.Last().ToRecordType(), Id.Name, ifMatch, cancellationToken).ConfigureAwait(false);
+                var response = await _recordSetsRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.ResourceType.Types.Last().ToRecordType(), Id.Name, ifMatch, cancellationToken).ConfigureAwait(false);
                 var operation = new RecordSetDeleteOperation(response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
@@ -186,7 +186,7 @@ namespace MgmtExpandResourceTypes
             scope.Start();
             try
             {
-                var response = _recordSetsRestClient.Delete(Id.ResourceGroupName, Id.Parent.Name, Id.ResourceType.Types.Last().ToRecordType(), Id.Name, ifMatch, cancellationToken);
+                var response = _recordSetsRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.ResourceType.Types.Last().ToRecordType(), Id.Name, ifMatch, cancellationToken);
                 var operation = new RecordSetDeleteOperation(response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
@@ -218,7 +218,7 @@ namespace MgmtExpandResourceTypes
             scope.Start();
             try
             {
-                var response = await _recordSetsRestClient.UpdateAsync(Id.ResourceGroupName, Id.Parent.Name, Id.ResourceType.Types.Last().ToRecordType(), Id.Name, parameters, ifMatch, cancellationToken).ConfigureAwait(false);
+                var response = await _recordSetsRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.ResourceType.Types.Last().ToRecordType(), Id.Name, parameters, ifMatch, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new RecordSetMx(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -247,7 +247,7 @@ namespace MgmtExpandResourceTypes
             scope.Start();
             try
             {
-                var response = _recordSetsRestClient.Update(Id.ResourceGroupName, Id.Parent.Name, Id.ResourceType.Types.Last().ToRecordType(), Id.Name, parameters, ifMatch, cancellationToken);
+                var response = _recordSetsRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.ResourceType.Types.Last().ToRecordType(), Id.Name, parameters, ifMatch, cancellationToken);
                 return Response.FromValue(new RecordSetMx(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)

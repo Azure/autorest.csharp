@@ -22,14 +22,14 @@ namespace MgmtExpandResourceTypes
     /// <summary> A class to add extension methods to Subscription. </summary>
     public static partial class SubscriptionExtensions
     {
-        private static ZonesRestOperations GetZonesRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
+        private static ZonesRestOperations GetZonesRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, Uri endpoint = null)
         {
-            return new ZonesRestOperations(clientDiagnostics, pipeline, clientOptions, subscriptionId, endpoint);
+            return new ZonesRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint);
         }
 
-        private static DnsResourceReferenceRestOperations GetDnsResourceReferenceRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
+        private static DnsResourceReferenceRestOperations GetDnsResourceReferenceRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, Uri endpoint = null)
         {
-            return new DnsResourceReferenceRestOperations(clientDiagnostics, pipeline, clientOptions, subscriptionId, endpoint);
+            return new DnsResourceReferenceRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint);
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Network/dnszones
@@ -45,14 +45,14 @@ namespace MgmtExpandResourceTypes
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetZonesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
+                var restOperations = GetZonesRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
                 async Task<Page<Zone>> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetZones");
                     scope.Start();
                     try
                     {
-                        var response = await restOperations.ListAsync(top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        var response = await restOperations.ListAsync(subscription.Id.SubscriptionId, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                         return Page.FromValues(response.Value.Value.Select(value => new Zone(subscription, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -67,7 +67,7 @@ namespace MgmtExpandResourceTypes
                     scope.Start();
                     try
                     {
-                        var response = await restOperations.ListNextPageAsync(nextLink, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        var response = await restOperations.ListNextPageAsync(nextLink, subscription.Id.SubscriptionId, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                         return Page.FromValues(response.Value.Value.Select(value => new Zone(subscription, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -94,14 +94,14 @@ namespace MgmtExpandResourceTypes
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetZonesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
+                var restOperations = GetZonesRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
                 Page<Zone> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetZones");
                     scope.Start();
                     try
                     {
-                        var response = restOperations.List(top, cancellationToken: cancellationToken);
+                        var response = restOperations.List(subscription.Id.SubscriptionId, top, cancellationToken: cancellationToken);
                         return Page.FromValues(response.Value.Value.Select(value => new Zone(subscription, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -116,7 +116,7 @@ namespace MgmtExpandResourceTypes
                     scope.Start();
                     try
                     {
-                        var response = restOperations.ListNextPage(nextLink, top, cancellationToken: cancellationToken);
+                        var response = restOperations.ListNextPage(nextLink, subscription.Id.SubscriptionId, top, cancellationToken: cancellationToken);
                         return Page.FromValues(response.Value.Value.Select(value => new Zone(subscription, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -180,8 +180,8 @@ namespace MgmtExpandResourceTypes
                 scope.Start();
                 try
                 {
-                    var restOperations = GetDnsResourceReferenceRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                    var response = await restOperations.GetByTargetResourcesAsync(parameters, cancellationToken).ConfigureAwait(false);
+                    var restOperations = GetDnsResourceReferenceRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    var response = await restOperations.GetByTargetResourcesAsync(subscription.Id.SubscriptionId, parameters, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
                 catch (Exception e)
@@ -215,8 +215,8 @@ namespace MgmtExpandResourceTypes
                 scope.Start();
                 try
                 {
-                    var restOperations = GetDnsResourceReferenceRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                    var response = restOperations.GetByTargetResources(parameters, cancellationToken);
+                    var restOperations = GetDnsResourceReferenceRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    var response = restOperations.GetByTargetResources(subscription.Id.SubscriptionId, parameters, cancellationToken);
                     return response;
                 }
                 catch (Exception e)
