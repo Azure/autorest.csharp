@@ -99,13 +99,7 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
             _writer.WriteXmlDocumentationParameter("options", $"The client parameters to use in these operations.");
             _writer.WriteXmlDocumentationParameter("resource", $"The resource that is the target of operations.");
 
-            var idPropString = "resource.Id";
-            var baseTypes = _resourceData.EnumerateHierarchy().TakeLast(2).ToArray();
-            var baseType = baseTypes.Length == 1 || baseTypes[1].Declaration.Name == "Object" ? baseTypes[0] : baseTypes[1];
-            var idProperty = baseType.Properties.Where(p => p.Declaration.Name == "Id").First();
-            var idType = idProperty.Declaration.Type;
-            if (idType.IsFrameworkType && idType.FrameworkType == typeof(string))
-                idPropString = "new ResourceIdentifier(resource.Id)";
+            var idPropString = _resourceData.IsIdString() ? "new ResourceIdentifier(resource.Id)" : "resource.Id";
 
             // inherits the default constructor when it is not a resource
             using (_writer.Scope($"internal {TypeOfThis.Name}({typeof(ArmResource)} options, {_resourceData.Type} resource) : base(options, {idPropString})"))
