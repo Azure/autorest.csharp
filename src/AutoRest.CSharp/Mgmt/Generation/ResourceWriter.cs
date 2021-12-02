@@ -464,7 +464,7 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
             {
                 // we cannot guarantee that the singleResourceSuffix can only have two segments (it has many different cases),
                 // therefore instead of using the extension method of ResourceIdentifier, we are just concatting this as a string
-                _writer.Line($"return new {resource.Type.Name}(this, Id + \"/{singletonResourceIdSuffix}\");");
+                _writer.Line($"return new {resource.Type.Name}(this, new ResourceIdentifier(Id.ToString() + \"/{singletonResourceIdSuffix}\"));");
             }
         }
     }
