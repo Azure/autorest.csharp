@@ -98,8 +98,21 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
             _writer.WriteXmlDocumentationSummary($"Initializes a new instance of the <see cref = \"{TypeOfThis.Name}\"/> class.");
             _writer.WriteXmlDocumentationParameter("options", $"The client parameters to use in these operations.");
             _writer.WriteXmlDocumentationParameter("resource", $"The resource that is the target of operations.");
+
+            var idPropString = "resource.Id";
+            var baseTypes = _resourceData.EnumerateHierarchy().TakeLast(2).ToArray();
+            var baseType = baseTypes[1].Declaration.Name == "Object" ? baseTypes[0] : baseTypes[1];
+            var idProperty = baseType.Properties.Where(p => p.Declaration.Name == "Id").FirstOrDefault();
+            if (idProperty == null)
+            {
+                idPropString = "foobar";
+            }
+            var idType = idProperty!.Declaration.Type;
+            if (idType.IsFrameworkType && idType.FrameworkType == typeof(string))
+                idPropString = "new ResourceIdentifier(resource.Id)";
+
             // inherits the default constructor when it is not a resource
-            using (_writer.Scope($"internal {TypeOfThis.Name}({typeof(ArmResource)} options, {_resourceData.Type} resource) : base(options, resource.Id)"))
+            using (_writer.Scope($"internal {TypeOfThis.Name}({typeof(ArmResource)} options, {_resourceData.Type} resource) : base(options, {idPropString})"))
             {
                 _writer.Line($"HasData = true;");
                 _writer.Line($"_data = resource;");
