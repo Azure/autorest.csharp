@@ -101,7 +101,7 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
 
             var idPropString = "resource.Id";
             var baseTypes = _resourceData.EnumerateHierarchy().TakeLast(2).ToArray();
-            var baseType = baseTypes[1].Declaration.Name == "Object" ? baseTypes[0] : baseTypes[1];
+            var baseType = baseTypes.Length == 1 || baseTypes[1].Declaration.Name == "Object" ? baseTypes[0] : baseTypes[1];
             var idProperty = baseType.Properties.Where(p => p.Declaration.Name == "Id").First();
             var idType = idProperty.Declaration.Type;
             if (idType.IsFrameworkType && idType.FrameworkType == typeof(string))
