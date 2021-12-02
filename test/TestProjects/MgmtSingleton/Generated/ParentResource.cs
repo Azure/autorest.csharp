@@ -384,7 +384,7 @@ namespace MgmtSingleton
         /// <returns> Returns a <see cref="SingletonResource" /> object. </returns>
         public SingletonResource GetSingletonResource()
         {
-            return new SingletonResource(this, Id + "/singletonResources/default");
+            return new SingletonResource(this, new ResourceIdentifier(Id.ToString() + "/singletonResources/default"));
         }
         #endregion
 
@@ -394,7 +394,7 @@ namespace MgmtSingleton
         /// <returns> Returns a <see cref="SingletonResource2" /> object. </returns>
         public SingletonResource2 GetSingletonResource2()
         {
-            return new SingletonResource2(this, Id + "/singletonResources2/default");
+            return new SingletonResource2(this, new ResourceIdentifier(Id.ToString() + "/singletonResources2/default"));
         }
         #endregion
     }
