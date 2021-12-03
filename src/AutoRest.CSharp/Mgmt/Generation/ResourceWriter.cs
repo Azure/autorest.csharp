@@ -98,8 +98,11 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
             _writer.WriteXmlDocumentationSummary($"Initializes a new instance of the <see cref = \"{TypeOfThis.Name}\"/> class.");
             _writer.WriteXmlDocumentationParameter("options", $"The client parameters to use in these operations.");
             _writer.WriteXmlDocumentationParameter("resource", $"The resource that is the target of operations.");
+
+            var idPropString = _resourceData.IsIdString() ? "new ResourceIdentifier(resource.Id)" : "resource.Id";
+
             // inherits the default constructor when it is not a resource
-            using (_writer.Scope($"internal {TypeOfThis.Name}({typeof(ArmResource)} options, {_resourceData.Type} resource) : base(options, resource.Id)"))
+            using (_writer.Scope($"internal {TypeOfThis.Name}({typeof(ArmResource)} options, {_resourceData.Type} resource) : base(options, {idPropString})"))
             {
                 _writer.Line($"HasData = true;");
                 _writer.Line($"_data = resource;");
@@ -464,7 +467,7 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
             {
                 // we cannot guarantee that the singleResourceSuffix can only have two segments (it has many different cases),
                 // therefore instead of using the extension method of ResourceIdentifier, we are just concatting this as a string
-                _writer.Line($"return new {resource.Type.Name}(this, Id + \"/{singletonResourceIdSuffix}\");");
+                _writer.Line($"return new {resource.Type.Name}(this, new ResourceIdentifier(Id.ToString() + \"/{singletonResourceIdSuffix}\"));");
             }
         }
     }
