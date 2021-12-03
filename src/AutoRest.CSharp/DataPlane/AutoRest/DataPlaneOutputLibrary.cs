@@ -25,7 +25,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private BuildContext<DataPlaneOutputLibrary> _context;
         private CodeModel _codeModel;
 
-        public DataPlaneOutputLibrary(CodeModel codeModel, BuildContext<DataPlaneOutputLibrary> context) : base(codeModel, context)
+        public DataPlaneOutputLibrary(CodeModel codeModel, BuildContext<DataPlaneOutputLibrary> context)
         {
             _context = context;
             _codeModel = codeModel;

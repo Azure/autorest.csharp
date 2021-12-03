@@ -78,7 +78,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     var responseClassifierTypes = new List<ResponseClassifierType>();
                     var fieldNames = new Dictionary<string, string>(restClient.Parameters
                         .Select(p => new KeyValuePair<string, string>(p.Name, restClient.GetFieldReferenceByParameter(p)!.Name)));
-                    foreach (var method in restClient.Methods)
+                    foreach (var method in restClient.RequestMethods)
                     {
                         var responseClassifierType = CreateResponseClassifierType(method);
                         responseClassifierTypes.Add(responseClassifierType);

@@ -20,30 +20,30 @@ using Request = AutoRest.CSharp.Output.Models.Requests.Request;
 
 namespace AutoRest.CSharp.Output.Models
 {
-    internal class LowLevelRestClient : RestClient
+    internal class LowLevelRestClient : TypeProvider
     {
         private static readonly Parameter ClientDiagnosticsParameter = new("clientDiagnostics", "The ClientDiagnostics instance to use", new CSharpType(typeof(ClientDiagnostics)), null, true);
         private static readonly Parameter PipelineParameter = new("pipeline", "The pipeline instance to use", new CSharpType(typeof(HttpPipeline)), null, true);
         private static readonly Parameter KeyAuthParameter = new("keyCredential", "The key credential to copy", new CSharpType(typeof(AzureKeyCredential)), null, false);
         private static readonly Parameter TokenAuthParameter = new("tokenCredential", "The token credential to copy", new CSharpType(typeof(TokenCredential)), null, false);
 
+        protected override string DefaultName { get; }
         protected override string DefaultAccessibility { get; } = "public";
 
         private readonly BuildContext<LowLevelOutputLibrary> _context;
         private readonly bool _hasPublicConstructors = true;
         private readonly Dictionary<string, FieldDeclaration> _parametersToFields;
 
-        private LowLevelClientMethod[]? _clientMethods;
-        private LowLevelPagingMethod[]? _pagingMethods;
-        private LowLevelLongRunningOperationMethod[]? _longRunningOperationMethods;
-        private MethodSignature[]? _constructors;
         private MethodSignature? _subClientInternalConstructor;
 
-        public override string Description => BuilderHelpers.EscapeXmlDescription(ClientBuilder.CreateDescription(OperationGroup, ClientBuilder.GetClientPrefix(Declaration.Name, _context)));
-        public MethodSignature[] PublicConstructors => _constructors ??= BuildPublicConstructors().ToArray();
-        public LowLevelClientMethod[] ClientMethods => _clientMethods ??= BuildMethods().ToArray();
-        public LowLevelPagingMethod[] PagingMethods => _pagingMethods ??= BuildPagingMethods().ToArray();
-        public LowLevelLongRunningOperationMethod[] LongRunningOperationMethods => _longRunningOperationMethods ??= BuildLongRunningOperationMethods().ToArray();
+        public string Description { get; }
+        public MethodSignature[] PublicConstructors { get; }
+        public MethodSignature SubClientInternalConstructor => _subClientInternalConstructor ??= BuildSubClientInternalConstructor();
+
+        public IReadOnlyList<RestClientMethod> RequestMethods;
+        public LowLevelClientMethod[] ClientMethods { get; }
+        public LowLevelPagingMethod[] PagingMethods { get; }
+        public LowLevelLongRunningOperationMethod[] LongRunningOperationMethods { get; }
 
         public FieldDeclaration? AuthorizationHeaderConstant { get; }
         public FieldDeclaration? ScopesConstant { get; }
@@ -53,9 +53,9 @@ namespace AutoRest.CSharp.Output.Models
         public FieldDeclaration? KeyAuthField { get; }
         public FieldDeclaration? TokenAuthField { get; }
         public IReadOnlyList<FieldDeclaration> Fields { get; }
+        public IReadOnlyList<Parameter> Parameters { get; }
         public ClientOptionsTypeProvider ClientOptions { get; }
 
-        public MethodSignature SubClientInternalConstructor => _subClientInternalConstructor ??= BuildSubClientInternalConstructor();
         public string? ParentClientTypeName { get; }
 
         public bool IsSubClient => ParentClientTypeName != null;
@@ -72,9 +72,21 @@ namespace AutoRest.CSharp.Output.Models
             : this(operationGroup, null, context, clientOptions, parentClientTypeName) { }
 
         private LowLevelRestClient(OperationGroup operationGroup, IEnumerable<RequestParameter>? clientParameters, BuildContext<LowLevelOutputLibrary> context, ClientOptionsTypeProvider clientOptions, string? parentClientTypeName)
-            : base(operationGroup, clientParameters, context, ClientBuilder.GetClientPrefix(operationGroup.Language.Default.Name, context), parentClientTypeName != null ? string.Empty : ClientBuilder.GetClientSuffix(context))
+            : base(context)
         {
             _context = context;
+
+            var clientPrefix = ClientBuilder.GetClientPrefix(operationGroup.Language.Default.Name, context);
+            DefaultName = clientPrefix + (parentClientTypeName != null ? string.Empty : ClientBuilder.GetClientSuffix(context));
+            Description = BuilderHelpers.EscapeXmlDescription(ClientBuilder.CreateDescription(operationGroup, ClientBuilder.GetClientPrefix(Declaration.Name, context)));
+
+            clientParameters ??= operationGroup.Operations
+                .SelectMany(op => op.Parameters.Concat(op.Requests.SelectMany(r => r.Parameters)))
+                .Where(p => p.Implementation == ImplementationLocation.Client)
+                .Distinct();
+
+            var builder = new RestClientBuilder(clientParameters, context);
+
             ClientOptions = clientOptions;
             if (ExistingType != null && context.SourceInputModel != null && context.SourceInputModel.TryGetClientSourceInput(ExistingType, out var codeGenClientAttribute))
             {
@@ -107,6 +119,7 @@ namespace AutoRest.CSharp.Output.Models
                 }
             }
 
+            Parameters = builder.GetOrderedParameters();
             _parametersToFields = new Dictionary<string, FieldDeclaration>();
             foreach (var (parameterName, fieldDeclaration) in GetParametersToFields(Parameters))
             {
@@ -118,6 +131,19 @@ namespace AutoRest.CSharp.Output.Models
             }
 
             Fields = fields;
+
+            PublicConstructors = BuildPublicConstructors().ToArray();
+
+            var requestMethods = EnsureNormalMethods(operationGroup, builder);
+            var nextPageRequestMethods = EnsureGetNextPageMethods(operationGroup, requestMethods);
+            RequestMethods = requestMethods.Values
+                .Concat(nextPageRequestMethods.Values) // .Where(m => m.Operation.Language.Default.Paging?.NextLinkOperation == null)
+                .Distinct()
+                .ToArray();
+
+            ClientMethods = BuildMethods(operationGroup, requestMethods).ToArray();
+            PagingMethods = BuildPagingMethods(operationGroup, requestMethods, nextPageRequestMethods).ToArray();
+            LongRunningOperationMethods = BuildLongRunningOperationMethods(operationGroup, requestMethods, nextPageRequestMethods).ToArray();
         }
 
         public FieldDeclaration? GetFieldReferenceByParameter(Parameter parameter)
@@ -128,11 +154,11 @@ namespace AutoRest.CSharp.Output.Models
                 var name => _parametersToFields.TryGetValue(name, out var field) ? field : null
             };
 
-        protected override Dictionary<ServiceRequest, RestClientMethod> EnsureNormalMethods()
+        private Dictionary<ServiceRequest, RestClientMethod> EnsureNormalMethods(OperationGroup operationGroup, RestClientBuilder builder)
         {
             var requestMethods = new Dictionary<ServiceRequest, RestClientMethod>();
 
-            foreach (var operation in OperationGroup.Operations)
+            foreach (var operation in operationGroup.Operations)
             {
                 foreach (ServiceRequest serviceRequest in operation.Requests)
                 {
@@ -147,9 +173,9 @@ namespace AutoRest.CSharp.Output.Models
                     // parameter to be the last required parameter in the method signature (so any required path or query parameters
                     // will show up first.
 
-                    IEnumerable<RequestParameter> requestParameters = serviceRequest.Parameters.Where(FilterServiceParameters);
+                    var requestParameters = serviceRequest.Parameters.Where(FilterServiceParameters).ToList();
                     var accessibility = operation.Accessibility ?? "public";
-                    RestClientMethod method = Builder.BuildMethod(operation, httpRequest, requestParameters, null, accessibility);
+                    RestClientMethod method = builder.BuildMethod(operation, httpRequest, requestParameters, null, accessibility);
                     RequestHeader[] requestHeaders = method.Request.Headers;
                     List<Parameter> parameters = method.Parameters.ToList();
                     RequestBody? body = null;
@@ -159,7 +185,7 @@ namespace AutoRest.CSharp.Output.Models
                         RequestParameter bodyParameter = serviceRequest.Parameters.First(p => p.In == ParameterLocation.Body);
 
                         // If any body parameter is required, mark the entire request content as required.
-                        bool isBodyRequired = serviceRequest.Parameters.Where(p => p.In == ParameterLocation.Body && p.IsRequired).Any();
+                        bool isBodyRequired = serviceRequest.Parameters.Any(p => p.In == ParameterLocation.Body && p.IsRequired);
 
                         // The service request had some parameters for the body, so create a parameter for the body and inject it into the list of parameters,
                         // right before the first optional parameter.
@@ -218,9 +244,42 @@ namespace AutoRest.CSharp.Output.Models
             return requestMethods;
         }
 
-        private IEnumerable<LowLevelClientMethod> BuildMethods()
+        private Dictionary<ServiceRequest, RestClientMethod> EnsureGetNextPageMethods(OperationGroup operationGroup, IReadOnlyDictionary<ServiceRequest, RestClientMethod> requestMethods)
         {
-            foreach (var operation in OperationGroup.Operations)
+            var nextPageMethods = new Dictionary<ServiceRequest, RestClientMethod>();
+            foreach (var operation in operationGroup.Operations)
+            {
+                var paging = operation.Language.Default.Paging;
+                if (paging == null)
+                {
+                    continue;
+                }
+                foreach (var serviceRequest in operation.Requests)
+                {
+                    RestClientMethod? nextMethod = null;
+                    if (paging.NextLinkOperation != null)
+                    {
+                        nextMethod = requestMethods[paging.NextLinkOperation.Requests.Single()];
+                    }
+                    else if (paging.NextLinkName != null)
+                    {
+                        var method = requestMethods[serviceRequest];
+                        nextMethod = RestClient.BuildNextPageMethod(method, operation);
+                    }
+
+                    if (nextMethod != null)
+                    {
+                        nextPageMethods.Add(serviceRequest, nextMethod);
+                    }
+                }
+            }
+
+            return nextPageMethods;
+        }
+
+        private IEnumerable<LowLevelClientMethod> BuildMethods(OperationGroup operationGroup, IReadOnlyDictionary<ServiceRequest, RestClientMethod> requestMethods)
+        {
+            foreach (var operation in operationGroup.Operations)
             {
                 if (operation.IsLongRunning || operation.Language.Default.Paging != null)
                 {
@@ -229,7 +288,7 @@ namespace AutoRest.CSharp.Output.Models
 
                 foreach (var request in operation.Requests)
                 {
-                    RestClientMethod method = GetOperationMethod(request);
+                    RestClientMethod method = requestMethods[request];
                     Schema? requestSchema = request.Parameters.FirstOrDefault(p => p.In == ParameterLocation.Body)?.Schema;
                     Schema? responseSchema = operation.Responses.FirstOrDefault()?.ResponseSchema;
                     Schema? exceptionSchema = operation.Exceptions.FirstOrDefault()?.ResponseSchema;
@@ -242,9 +301,9 @@ namespace AutoRest.CSharp.Output.Models
             }
         }
 
-        private IEnumerable<LowLevelPagingMethod> BuildPagingMethods()
+        private IEnumerable<LowLevelPagingMethod> BuildPagingMethods(OperationGroup operationGroup, IReadOnlyDictionary<ServiceRequest, RestClientMethod> requestMethods, IReadOnlyDictionary<ServiceRequest, RestClientMethod> nextPageRequestMethods)
         {
-            foreach (var operation in OperationGroup.Operations)
+            foreach (var operation in operationGroup.Operations)
             {
                 Paging? paging = operation.Language.Default.Paging;
                 if (paging == null || operation.IsLongRunning)
@@ -254,17 +313,17 @@ namespace AutoRest.CSharp.Output.Models
 
                 foreach (var request in operation.Requests)
                 {
-                    RestClientMethod method = GetOperationMethod(request);
-                    RestClientMethod? nextPageMethod = GetNextOperationMethod(request);
+                    RestClientMethod method = requestMethods[request];
                     Schema? requestSchema = request.Parameters.FirstOrDefault(p => p.In == ParameterLocation.Body)?.Schema;
                     Schema? responseSchema = operation.Responses.FirstOrDefault()?.ResponseSchema;
                     Schema? exceptionSchema = operation.Exceptions.FirstOrDefault()?.ResponseSchema;
 
-                    if (!(method.Responses.SingleOrDefault(r => r.ResponseBody != null)?.ResponseBody is ObjectResponseBody objectResponseBody))
+                    if (!(method.Responses.SingleOrDefault(r => r.ResponseBody != null)?.ResponseBody is ObjectResponseBody))
                     {
                         throw new InvalidOperationException($"Method {method.Name} has to have a return value");
                     }
 
+                    nextPageRequestMethods.TryGetValue(request, out var nextPageMethod);
                     yield return new LowLevelPagingMethod(
                         method,
                         new LowLevelOperationSchemaInfo(requestSchema, responseSchema, exceptionSchema),
@@ -278,9 +337,9 @@ namespace AutoRest.CSharp.Output.Models
             }
         }
 
-        private IEnumerable<LowLevelLongRunningOperationMethod> BuildLongRunningOperationMethods()
+        private IEnumerable<LowLevelLongRunningOperationMethod> BuildLongRunningOperationMethods(OperationGroup operationGroup, IReadOnlyDictionary<ServiceRequest, RestClientMethod> requestMethods, IReadOnlyDictionary<ServiceRequest, RestClientMethod> nextPageRequestMethods)
         {
-            foreach (var operation in OperationGroup.Operations)
+            foreach (var operation in operationGroup.Operations)
             {
                 if (operation.IsLongRunning)
                 {
@@ -288,7 +347,7 @@ namespace AutoRest.CSharp.Output.Models
 
                     foreach (var request in operation.Requests)
                     {
-                        RestClientMethod startMethod = GetOperationMethod(request);
+                        RestClientMethod startMethod = requestMethods[request];
                         Schema? requestSchema = request.Parameters.FirstOrDefault(p => p.In == ParameterLocation.Body)?.Schema;
                         Schema? responseSchema = operation.Responses.FirstOrDefault()?.ResponseSchema;
                         Schema? exceptionSchema = operation.Exceptions.FirstOrDefault()?.ResponseSchema;
@@ -297,7 +356,7 @@ namespace AutoRest.CSharp.Output.Models
 
                         if (paging != null)
                         {
-                            RestClientMethod? nextPageMethod = GetNextOperationMethod(request);
+                            nextPageRequestMethods.TryGetValue(request, out var nextPageMethod);
                             pagingInfo = new LowLevelPagingResponseInfo(nextPageMethod, paging.NextLinkName, paging.ItemName ?? "value");
                         }
 

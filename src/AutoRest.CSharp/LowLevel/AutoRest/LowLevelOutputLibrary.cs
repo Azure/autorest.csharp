@@ -16,7 +16,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private readonly CachedDictionary<OperationGroup, LowLevelRestClient> _restClients;
         public ClientOptionsTypeProvider ClientOptions { get; }
 
-        public LowLevelOutputLibrary(CodeModel codeModel, BuildContext<LowLevelOutputLibrary> context) : base(codeModel, context)
+        public LowLevelOutputLibrary(CodeModel codeModel, BuildContext<LowLevelOutputLibrary> context)
         {
             _codeModel = codeModel;
             _context = context;
@@ -35,7 +35,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 var topLevelOperationGroup = _codeModel.OperationGroups.FirstOrDefault(og => string.IsNullOrEmpty(og.Key));
                 var topLevelClient = topLevelOperationGroup != null ? new LowLevelRestClient(topLevelOperationGroup, _context, ClientOptions, null) : LowLevelRestClient.CreateEmptyTopLevelClient(_context, ClientOptions);
-                restClients.Add(topLevelClient.OperationGroup, topLevelClient);
+                restClients.Add(topLevelOperationGroup ?? new OperationGroup { Key = string.Empty }, topLevelClient);
                 topLevelClientName = topLevelClient.Declaration.Name;
             }
 

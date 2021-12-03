@@ -76,7 +76,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         /// </summary>
         private Dictionary<OperationGroup, IEnumerable<string>> _operationGroupToRequestPaths;
 
-        public MgmtOutputLibrary(CodeModel codeModel, BuildContext<MgmtOutputLibrary> context) : base(codeModel, context)
+        public MgmtOutputLibrary(CodeModel codeModel, BuildContext<MgmtOutputLibrary> context)
         {
             OmitOperationGroups.RemoveOperationGroups(codeModel, context);
             _context = context;

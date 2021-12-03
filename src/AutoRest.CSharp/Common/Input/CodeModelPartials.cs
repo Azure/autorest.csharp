@@ -141,6 +141,8 @@ namespace AutoRest.CSharp.Input
 
     internal partial class RequestParameter
     {
+        public bool IsResourceParameter => Convert.ToBoolean(Extensions.GetValue<string>("x-ms-resource-parameter"));
+
         private static HashSet<string> ConditionRequstHeader = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
         {
             "If-Match",
@@ -154,11 +156,6 @@ namespace AutoRest.CSharp.Input
             "If-None-Match",
         };
         public ParameterLocation In => Protocol.Http is HttpParameter httpParameter ? httpParameter.In : ParameterLocation.None;
-
-        public RequestParameter ShallowCopy()
-        {
-            return (RequestParameter)this.MemberwiseClone();
-        }
 
         public bool IsRequestConditionHeader() {
             return ConditionRequstHeader.Contains(Language.Default.SerializedName ?? Language.Default.Name) && In == ParameterLocation.Header;

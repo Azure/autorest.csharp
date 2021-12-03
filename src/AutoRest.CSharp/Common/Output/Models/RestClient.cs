@@ -49,7 +49,6 @@ namespace AutoRest.CSharp.Output.Models
         protected RestClientBuilder Builder;
         internal OperationGroup OperationGroup { get; }
         public Parameter[] Parameters { get; }
-        public virtual string Description { get; } = "";
         public RestClientMethod[] Methods => _allMethods ??= BuildAllMethods().ToArray();
         public string ClientPrefix { get; }
         protected override string DefaultName { get; }
@@ -138,7 +137,7 @@ namespace AutoRest.CSharp.Output.Models
             return nextPageMethods;
         }
 
-        protected static RestClientMethod BuildNextPageMethod(RestClientMethod method, Operation operation)
+        public static RestClientMethod BuildNextPageMethod(RestClientMethod method, Operation operation)
         {
             var nextPageUrlParameter = new Parameter(
                 "nextLink",

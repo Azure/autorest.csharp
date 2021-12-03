@@ -26,7 +26,6 @@ namespace AutoRest.CSharp.Generation.Writers
             var @namespace = cs.Namespace;
             using (writer.Namespace(@namespace))
             {
-                writer.WriteXmlDocumentationSummary($"{restClient.Description}");
                 using (writer.Scope($"{restClient.Declaration.Accessibility} partial class {cs.Name}"))
                 {
                     WriteClientFields(writer, restClient);

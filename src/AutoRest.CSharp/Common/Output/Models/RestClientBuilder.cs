@@ -754,35 +754,13 @@ namespace AutoRest.CSharp.Output.Models
             }
         }
 
-        public static IEnumerable<Parameter> GetRequiredParameters(Parameter[] parameters)
-        {
-            List<Parameter> requiredParameters = new List<Parameter>();
-            foreach (var parameter in parameters)
-            {
-                if (parameter.DefaultValue == null)
-                {
-                    requiredParameters.Add(parameter);
-                }
-            }
+        public static IEnumerable<Parameter> GetRequiredParameters(IEnumerable<Parameter> parameters)
+            => parameters.Where(parameter => parameter.DefaultValue == null).ToList();
 
-            return requiredParameters;
-        }
+        public static IEnumerable<Parameter> GetOptionalParameters(IEnumerable<Parameter> parameters, bool includeAPIVersion = false)
+            => parameters.Where(parameter => parameter.DefaultValue != null && (includeAPIVersion || !parameter.IsApiVersionParameter)).ToList();
 
-        public static IEnumerable<Parameter> GetOptionalParameters(Parameter[] parameters, bool includeAPIVersion = false)
-        {
-            List<Parameter> optionalParameters = new List<Parameter>();
-            foreach (var parameter in parameters)
-            {
-                if (parameter.DefaultValue != null && (includeAPIVersion || !parameter.IsApiVersionParameter))
-                {
-                    optionalParameters.Add(parameter);
-                }
-            }
-
-            return optionalParameters;
-        }
-
-        public static IReadOnlyCollection<Parameter> GetConstructorParameters(Parameter[] parameters, CSharpType? credentialType, bool includeAPIVersion = false)
+        public static IReadOnlyCollection<Parameter> GetConstructorParameters(IReadOnlyList<Parameter> parameters, CSharpType? credentialType, bool includeAPIVersion = false)
         {
             List<Parameter> constructorParameters = new List<Parameter>();
 
