@@ -255,7 +255,7 @@ namespace AutoRest.CSharp.Output.Models
                 if (requestParameter.In == ParameterLocation.Header)
                 {
                     /* skip raw condition header if collapsed already. */
-                    if (_context.Configuration.LowLevelClient)
+                    if (_context.Configuration.DataPlane)
                     {
                         if ((collapseType == RequestConditionCollapseType.MatchConditionsCollapse && requestParameter.IsMatchConditionHeader()) ||
                         (collapseType == RequestConditionCollapseType.RequestConditionsCollapse && requestParameter.IsRequestConditionHeader()))
@@ -275,7 +275,7 @@ namespace AutoRest.CSharp.Output.Models
                 }
             }
 
-            if (_context.Configuration.LowLevelClient)
+            if (_context.Configuration.DataPlane)
             {
                 RequestConditionsHeader? collapseConditions = null;
                 if (collapseType != RequestConditionCollapseType.None)
@@ -355,7 +355,7 @@ namespace AutoRest.CSharp.Output.Models
             List<Parameter> methodParameters = new();
             foreach (var requestParameter in parameters)
             {
-                if (_context.Configuration.LowLevelClient)
+                if (_context.Configuration.DataPlane)
                 {
                     if ((collapseType == RequestConditionCollapseType.MatchConditionsCollapse && requestParameter.IsMatchConditionHeader()) ||
                         (collapseType == RequestConditionCollapseType.RequestConditionsCollapse && requestParameter.IsRequestConditionHeader()))
@@ -371,7 +371,7 @@ namespace AutoRest.CSharp.Output.Models
                     methodParameters.Add(parameter);
                 }
             }
-            if (_context.Configuration.LowLevelClient)
+            if (_context.Configuration.DataPlane)
             {
                 Parameter? collapseConditionParameter = BuildMethodRequestConditionParameter(parameters, collapseType);
                 if (collapseConditionParameter != null)
@@ -679,7 +679,7 @@ namespace AutoRest.CSharp.Output.Models
             var isRequired = requestParameter.Required == true;
             var defaultValue = ParseConstant(requestParameter);
 
-            if (_context.Configuration.LowLevelClient && requestParameter.IsMatchConditionHeader())
+            if (_context.Configuration.DataPlane && requestParameter.IsMatchConditionHeader())
             {
                 type = typeof(Azure.ETag);
                 type = type.WithNullable(requestParameter.IsNullable || !requestParameter.IsRequired);
