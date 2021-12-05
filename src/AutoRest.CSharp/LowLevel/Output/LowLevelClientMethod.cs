@@ -10,5 +10,5 @@ using AutoRest.CSharp.Input;
 
 namespace AutoRest.CSharp.Output.Models
 {
-    internal record LowLevelClientMethod(RestClientMethod RestMethod, LowLevelOperationSchemaInfo OperationSchemas, Diagnostic Diagnostics);
+    internal record LowLevelClientMethod(RestClientMethod RequestMethod, LowLevelOperationSchemaInfo OperationSchemas, Diagnostic Diagnostic, LowLevelPagingInfo? PagingInfo, bool IsLongRunning);
 }

@@ -57,27 +57,28 @@ namespace AutoRest.CSharp.Generation.Writers
 
                     foreach (var clientMethod in restClient.ClientMethods)
                     {
-                        WriteClientMethod(writer, restClient, clientMethod, context.Configuration, true);
-                        WriteClientMethod(writer, restClient, clientMethod, context.Configuration, false);
-                    }
-
-                    foreach (var pagingMethod in restClient.PagingMethods)
-                    {
-                        WritePagingMethod(writer, pagingMethod, true);
-                        WritePagingMethod(writer, pagingMethod, false);
-                    }
-
-                    foreach (var longRunningOperationMethod in restClient.LongRunningOperationMethods)
-                    {
-                        WriteLongRunningOperationMethod(writer, longRunningOperationMethod, true);
-                        WriteLongRunningOperationMethod(writer, longRunningOperationMethod, false);
+                        if (clientMethod.IsLongRunning)
+                        {
+                            WriteLongRunningOperationMethod(writer, clientMethod, true);
+                            WriteLongRunningOperationMethod(writer, clientMethod, false);
+                        }
+                        else if (clientMethod.PagingInfo != null)
+                        {
+                            WritePagingMethod(writer, clientMethod, true);
+                            WritePagingMethod(writer, clientMethod, false);
+                        }
+                        else
+                        {
+                            WriteClientMethod(writer, restClient, clientMethod, context.Configuration, true);
+                            WriteClientMethod(writer, restClient, clientMethod, context.Configuration, false);
+                        }
                     }
 
                     WriteSubClientFactoryMethod(writer, context, restClient, subClients);
 
                     var responseClassifierTypes = new List<ResponseClassifierType>();
                     var fieldNames = new Dictionary<string, string>(restClient.Parameters
-                        .Select(p => new KeyValuePair<string, string>(p.Name, restClient.GetFieldReferenceByParameter(p)!.Name)));
+                        .Select(p => new KeyValuePair<string, string>(p.Name, restClient.GetFieldByParameter(p)!.Name)));
                     foreach (var method in restClient.RequestMethods)
                     {
                         var responseClassifierType = CreateResponseClassifierType(method);
@@ -148,7 +149,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 var credentialParameter = signature.Parameters.FirstOrDefault(p => p.Name == "credential");
                 if (credentialParameter != null)
                 {
-                    var credentialField = client.GetFieldReferenceByParameter(credentialParameter);
+                    var credentialField = client.GetFieldByParameter(credentialParameter);
                     if (credentialField != null)
                     {
                         var fieldName = credentialField.Name;
@@ -168,7 +169,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 foreach (var parameter in client.Parameters)
                 {
-                    var field = client.GetFieldReferenceByParameter(parameter);
+                    var field = client.GetFieldByParameter(parameter);
                     if (field != null)
                     {
                         if (parameter.IsApiVersionParameter)
@@ -195,7 +196,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 foreach (var parameter in signature.Parameters)
                 {
-                    var field = client.GetFieldReferenceByParameter(parameter);
+                    var field = client.GetFieldByParameter(parameter);
                     if (field != null)
                     {
                         writer.Line($"{field.Name:I} = {parameter.Name:I};");
@@ -207,7 +208,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static void WriteClientMethod(CodeWriter writer, LowLevelRestClient client, LowLevelClientMethod clientMethod, Configuration configuration, bool async)
         {
-            var restMethod = clientMethod.RestMethod;
+            var restMethod = clientMethod.RequestMethod;
             var headAsBoolean = restMethod.Request.HttpMethod == RequestMethod.Head && configuration.HeadAsBoolean;
 
             var returnType = async
@@ -216,7 +217,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             using (WriteClientMethodDeclaration(writer, restMethod, clientMethod.OperationSchemas, returnType, async))
             {
-                using (WriteDiagnosticScope(writer, clientMethod.Diagnostics, ClientDiagnosticsField))
+                using (WriteDiagnosticScope(writer, clientMethod.Diagnostic, ClientDiagnosticsField))
                 {
                     var messageVariable = new CodeWriterDeclaration("message");
                     writer.Line($"using {typeof(HttpMessage)} {messageVariable:D} = {RequestWriterHelpers.CreateRequestMethodName(restMethod.Name)}({restMethod.Parameters.GetIdentifiersFormattable()});");
@@ -231,11 +232,11 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        private static void WritePagingMethod(CodeWriter writer, LowLevelPagingMethod clientMethod, bool async)
+        private static void WritePagingMethod(CodeWriter writer, LowLevelClientMethod clientMethod, bool async)
         {
-            var method = clientMethod.FirstPageMethod;
-            var pagingResponseInfo = clientMethod.PagingResponseInfo;
-            var nextPageMethod = clientMethod.PagingResponseInfo.NextPageMethod;
+            var method = clientMethod.RequestMethod;
+            var pagingInfo = clientMethod.PagingInfo!;
+            var nextPageMethod = pagingInfo.NextPageMethod;
             var returnType = async ? typeof(AsyncPageable<BinaryData>) : typeof(Pageable<BinaryData>);
 
             var createPageableMethodName = async ? CreateAsyncPageableMethodName : CreatePageableMethodName;
@@ -256,7 +257,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     var messageVariable = new CodeWriterDeclaration("message");
                     var pageVariable = new CodeWriterDeclaration("page");
-                    FormattableString processMessageMethodParameters = $"{PipelineField:I}, {messageVariable}, {ClientDiagnosticsField}, {RequestContextParameter.Name:I}, {pagingResponseInfo.ItemName:L}, {pagingResponseInfo.NextLinkName:L}{(async ? $", {EnumeratorCancellationTokenParameter.Name:I}" : "")}";
+                    FormattableString processMessageMethodParameters = $"{PipelineField:I}, {messageVariable}, {ClientDiagnosticsField}, {RequestContextParameter.Name:I}, {pagingInfo.ItemName:L}, {pagingInfo.NextLinkName:L}{(async ? $", {EnumeratorCancellationTokenParameter.Name:I}" : "")}";
 
                     if (nextPageMethod == null)
                     {
@@ -294,11 +295,11 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        private static void WriteLongRunningOperationMethod(CodeWriter writer, LowLevelLongRunningOperationMethod clientMethod, bool async)
+        private static void WriteLongRunningOperationMethod(CodeWriter writer, LowLevelClientMethod clientMethod, bool async)
         {
-            var startMethod = clientMethod.StartMethod;
-            var pagingResponseInfo = clientMethod.PagingResponseInfo;
-            var nextPageMethod = clientMethod.PagingResponseInfo?.NextPageMethod;
+            var startMethod = clientMethod.RequestMethod;
+            var pagingInfo = clientMethod.PagingInfo;
+            var nextPageMethod = clientMethod.PagingInfo?.NextPageMethod;
             var finalStateVia = startMethod.Operation.LongRunningFinalStateVia;
             var scopeName = clientMethod.Diagnostic.ScopeName;
             var isPageable = nextPageMethod != null;
@@ -323,7 +324,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         .WriteMethodCall(async, LroProcessMessageMethodAsyncName, LroProcessMessageMethodName, processMessageParameters);
                 }
 
-                if (nextPageMethod != null && pagingResponseInfo != null)
+                if (nextPageMethod != null && pagingInfo != null)
                 {
                     var createEnumerableParameters = async
                         ? new[] { ResponseParameter, NextLinkParameter, PageSizeHintParameter, EnumeratorCancellationTokenParameter }
@@ -341,7 +342,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         using (writer.Scope($"if ({NextLinkParameter.Name} == null)"))
                         {
                             writer
-                                .Line($"{pageVariable} = {typeof(LowLevelPageableHelpers)}.{nameof(LowLevelPageableHelpers.BuildPageForResponse)}(response, {pagingResponseInfo.ItemName:L}, {pagingResponseInfo.NextLinkName:L});")
+                                .Line($"{pageVariable} = {typeof(LowLevelPageableHelpers)}.{nameof(LowLevelPageableHelpers.BuildPageForResponse)}(response, {pagingInfo.ItemName:L}, {pagingInfo.NextLinkName:L});")
                                 .Line($"{NextLinkParameter.Name} = {pageVariable}.{nameof(Page<BinaryData>.ContinuationToken)};")
                                 .Line($"yield return {pageVariable};");
                         }
@@ -351,7 +352,7 @@ namespace AutoRest.CSharp.Generation.Writers
                             var messageVariable = new CodeWriterDeclaration("message");
                             writer.Line($"var {messageVariable:D} = Create{nextPageMethod.Name}Request({nextPageMethod.Parameters.GetIdentifiersFormattable()});");
 
-                            FormattableString pageableProcessMessageParameters = $"{PipelineField}, {messageVariable}, {ClientDiagnosticsField}, {RequestContextParameter.Name:I}, {pagingResponseInfo.ItemName:L}, {pagingResponseInfo.NextLinkName:L}{(async ? $", {EnumeratorCancellationTokenParameter.Name:I}" : "")}";
+                            FormattableString pageableProcessMessageParameters = $"{PipelineField}, {messageVariable}, {ClientDiagnosticsField}, {RequestContextParameter.Name:I}, {pagingInfo.ItemName:L}, {pagingInfo.NextLinkName:L}{(async ? $", {EnumeratorCancellationTokenParameter.Name:I}" : "")}";
 
                             writer
                                 .Append($"{pageVariable} = ").WriteMethodCall(async, PageableProcessMessageMethodAsyncName, PageableProcessMessageMethodName, pageableProcessMessageParameters)
@@ -375,7 +376,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 foreach (var parameter in subClient.SubClientInternalConstructor.Parameters)
                 {
-                    var field = parentClient.GetFieldReferenceByParameter(parameter);
+                    var field = parentClient.GetFieldByParameter(parameter);
                     if (field == null)
                     {
                         methodParameters.Add(parameter);

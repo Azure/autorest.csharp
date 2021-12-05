@@ -29,12 +29,17 @@ namespace AutoRest.CSharp.Output.Models
         private readonly OutputLibrary _library;
         private readonly Dictionary<string, Parameter> _parameters;
 
+
+        public RestClientBuilder(OperationGroup operationGroup, BuildContext context)
+            : this(GetParametersFromOperationGroups(operationGroup), context)
+        {
+        }
+
         public RestClientBuilder(IEnumerable<RequestParameter> clientParameters, BuildContext context)
         {
             _serializationBuilder = new SerializationBuilder();
             _context = context;
             _library = context.BaseLibrary!;
-
             _parameters = clientParameters.ToDictionary(p => p.Language.Default.Name, BuildClientParameter);
         }
 
@@ -52,11 +57,35 @@ namespace AutoRest.CSharp.Output.Models
 
         private record ConstructedParameter(Parameter? Parameter, ReferenceOrConstant Reference);
 
+        private static IEnumerable<RequestParameter> GetParametersFromOperationGroups(OperationGroup operationGroup) =>
+            operationGroup.Operations
+                .SelectMany(op => op.Parameters.Concat(op.Requests.SelectMany(r => r.Parameters)))
+                .Where(p => p.Implementation == ImplementationLocation.Client)
+                .Distinct();
+
         private string GetRequestParameterName(RequestParameter requestParameter)
         {
             string defaultName = requestParameter.Language.Default.Name;
             return requestParameter.Language.Default.SerializedName ?? defaultName;
         }
+
+        //public RestClientMethod BuildRequestMethod(Operation operation, ServiceRequest serviceRequest, HttpRequest httpRequest)
+        //{
+        //    var accessibility = operation.Accessibility ?? "public";
+
+        //    return new RestClientMethod(
+        //        operation.CSharpName(),
+        //        BuilderHelpers.EscapeXmlDescription(operation.Language.Default.Description),
+        //        responseType,
+        //        request,
+        //        methodParameters,
+        //        responses,
+        //        null,
+        //        operation.Extensions?.BufferResponse ?? true,
+        //        accessibility: accessibility,
+        //        operation
+        //    );
+        //}
 
         public RestClientMethod BuildMethod(Operation operation, HttpRequest httpRequest, IEnumerable<RequestParameter> requestParameters, DataPlaneResponseHeaderGroupType? responseHeaderModel, string accessibility, Func<string?, bool>? returnNullOn404Func = null)
         {
@@ -132,7 +161,7 @@ namespace AutoRest.CSharp.Output.Models
             return clientResponse.ToArray();
         }
 
-        private Request BuildRequest(HttpRequest httpRequest, IList<RequestParameter> requestParameters, Dictionary<RequestParameter, ConstructedParameter> allParameters)
+        private Request BuildRequest(HttpRequest httpRequest, IReadOnlyCollection<RequestParameter> requestParameters, Dictionary<RequestParameter, ConstructedParameter> allParameters)
         {
             RequestBody? body = null;
             if (httpRequest is HttpWithBodyRequest httpWithBodyRequest)
@@ -158,7 +187,7 @@ namespace AutoRest.CSharp.Output.Models
             return request;
         }
 
-        private Dictionary<string, PathSegment> BuildPathParameters(IList<RequestParameter> requestParameters, Dictionary<RequestParameter, ConstructedParameter> allParameters)
+        private Dictionary<string, PathSegment> BuildPathParameters(IEnumerable<RequestParameter> requestParameters, IReadOnlyDictionary<RequestParameter, ConstructedParameter> allParameters)
         {
             Dictionary<string, PathSegment> path = new();
             foreach (var requestParameter in requestParameters)
@@ -174,7 +203,7 @@ namespace AutoRest.CSharp.Output.Models
             return path;
         }
 
-        private Dictionary<string, PathSegment> BuildUriParameters(IList<RequestParameter> requestParameters, Dictionary<RequestParameter, ConstructedParameter> allParameters)
+        private Dictionary<string, PathSegment> BuildUriParameters(IEnumerable<RequestParameter> requestParameters, IReadOnlyDictionary<RequestParameter, ConstructedParameter> allParameters)
         {
             Dictionary<string, PathSegment> uriParameters = new();
             foreach (var requestParameter in requestParameters)
@@ -208,7 +237,7 @@ namespace AutoRest.CSharp.Output.Models
             return RequestConditionCollapseType.None;
         }
 
-        private RequestConditionsHeader? BuildRequestConditionsHeader(IList<RequestParameter> requestParameters, RequestConditionCollapseType collapseType)
+        private RequestConditionsHeader? BuildRequestConditionsHeader(IEnumerable<RequestParameter> requestParameters, RequestConditionCollapseType collapseType)
         {
             if (collapseType != RequestConditionCollapseType.None)
             {
@@ -226,7 +255,7 @@ namespace AutoRest.CSharp.Output.Models
                     name = "requestConditions";
                     format = SerializationFormat.DateTime_RFC1123;
                 }
-                bool isCollapseParamRequired = requestParameters.Where(p => p.IsRequestConditionHeader() && p.IsRequired).Any();
+                bool isCollapseParamRequired = requestParameters.Any(p => p.IsRequestConditionHeader() && p.IsRequired);
                 type = type.WithNullable(!isCollapseParamRequired);
                 Constant? defaultValue = null;
                 if (!isCollapseParamRequired && defaultValue == null)
@@ -246,7 +275,8 @@ namespace AutoRest.CSharp.Output.Models
 
             return null;
         }
-        private RequestHeader[] BuildHeaders(IList<RequestParameter> requestParameters, Dictionary<RequestParameter, ConstructedParameter> allParameters)
+
+        private RequestHeader[] BuildHeaders(IReadOnlyCollection<RequestParameter> requestParameters, IReadOnlyDictionary<RequestParameter, ConstructedParameter> allParameters)
         {
             RequestConditionCollapseType collapseType = GetRequestConditionCollapseType(requestParameters);
             List<RequestHeader> headers = new();
@@ -288,10 +318,10 @@ namespace AutoRest.CSharp.Output.Models
                 }
             }
 
-                return headers.ToArray();
+            return headers.ToArray();
         }
 
-        private QueryParameter[] BuildQueryParameters(IList<RequestParameter> requestParameters, Dictionary<RequestParameter, ConstructedParameter> allParameters)
+        private QueryParameter[] BuildQueryParameters(IEnumerable<RequestParameter> requestParameters, IReadOnlyDictionary<RequestParameter, ConstructedParameter> allParameters)
         {
             List<QueryParameter> query = new();
             foreach (var requestParameter in requestParameters)
@@ -313,11 +343,11 @@ namespace AutoRest.CSharp.Output.Models
             return query.ToArray();
         }
 
-        private Parameter? BuildMethodRequestConditionParameter(IList<RequestParameter> parameters, RequestConditionCollapseType collapseType)
+        private Parameter? BuildMethodRequestConditionParameter(IEnumerable<RequestParameter> parameters, RequestConditionCollapseType collapseType)
         {
             if (collapseType != RequestConditionCollapseType.None)
             {
-                bool isCollapseParamRequired = parameters.Where(p => p.IsRequestConditionHeader() && p.IsRequired).Any();
+                bool isCollapseParamRequired = parameters.Any(p => p.IsRequestConditionHeader() && p.IsRequired);
 
                 CSharpType? type = null;
                 string name = "";
@@ -349,7 +379,8 @@ namespace AutoRest.CSharp.Output.Models
 
             return null;
         }
-        private Parameter[] BuildMethodParameters(IList<RequestParameter> parameters, Dictionary<RequestParameter, ConstructedParameter> allParameters)
+
+        private Parameter[] BuildMethodParameters(IReadOnlyCollection<RequestParameter> parameters, IReadOnlyDictionary<RequestParameter, ConstructedParameter> allParameters)
         {
             RequestConditionCollapseType collapseType = GetRequestConditionCollapseType(parameters);
             List<Parameter> methodParameters = new();
@@ -382,9 +413,10 @@ namespace AutoRest.CSharp.Output.Models
 
             return OrderParameters(methodParameters);
         }
+
         private RequestBody? BuildRequestBody(
-            IList<RequestParameter> requestParameters,
-            Dictionary<RequestParameter, ConstructedParameter> allParameters,
+            IEnumerable<RequestParameter> requestParameters,
+            IReadOnlyDictionary<RequestParameter, ConstructedParameter> allParameters,
             KnownMediaType mediaType)
         {
             RequestBody? body = null;
@@ -528,10 +560,8 @@ namespace AutoRest.CSharp.Output.Models
             return new ConstructedParameter(parameter, constantOrReference);
         }
 
-        private SerializationFormat GetSerializationFormat(RequestParameter requestParameter)
-        {
-            return BuilderHelpers.GetSerializationFormat(GetValueSchema(requestParameter));
-        }
+        private static SerializationFormat GetSerializationFormat(RequestParameter requestParameter)
+            => BuilderHelpers.GetSerializationFormat(GetValueSchema(requestParameter));
 
         private ResponseBody? BuildResponseBody(ServiceResponse response)
         {
@@ -752,6 +782,55 @@ namespace AutoRest.CSharp.Output.Models
                     ? description
                     : $"{description}{(description.EndsWith(".") ? "" : ".")} Allowed values: {BuilderHelpers.EscapeXmlDescription(allowedValues)}";
             }
+        }
+
+        public static RestClientMethod BuildNextPageMethod(RestClientMethod method)
+        {
+            var nextPageUrlParameter = new Parameter(
+                "nextLink",
+                "The URL to the next page of results.",
+                typeof(string),
+                DefaultValue: null,
+                ValidateNotNull: true);
+
+            PathSegment[] pathSegments = method.Request.PathSegments
+                .Where(ps => ps.IsRaw)
+                .Append(new PathSegment(nextPageUrlParameter, false, SerializationFormat.Default, isRaw: true))
+                .ToArray();
+
+            var request = new Request(
+                RequestMethod.Get,
+                pathSegments,
+                Array.Empty<QueryParameter>(),
+                method.Request.Headers,
+                null);
+
+            Parameter[] parameters = method.Parameters.Where(p => p.Name != nextPageUrlParameter.Name)
+                .Prepend(nextPageUrlParameter)
+                .ToArray();
+
+            var responses = method.Responses;
+
+            // We hardcode 200 as expected response code for paged LRO results
+            if (method.Operation.IsLongRunning)
+            {
+                responses = new[]
+                {
+                    new Response(null, new[] { new StatusCodes(200, null) })
+                };
+            }
+
+            return new RestClientMethod(
+                $"{method.Name}NextPage",
+                method.Description,
+                method.ReturnType,
+                request,
+                parameters,
+                responses,
+                method.HeaderModel,
+                bufferResponse: true,
+                accessibility: "internal",
+                method.Operation);
         }
 
         public static IEnumerable<Parameter> GetRequiredParameters(IEnumerable<Parameter> parameters)

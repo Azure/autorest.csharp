@@ -30,12 +30,7 @@ namespace AutoRest.CSharp.Output.Models
         protected RestClient(OperationGroup operationGroup, IEnumerable<RequestParameter>? clientParameters, BuildContext context, string clientPrefix, string defaultClientSuffix) : base(context)
         {
             OperationGroup = operationGroup;
-            clientParameters ??= operationGroup.Operations
-                .SelectMany(op => op.Parameters.Concat(op.Requests.SelectMany(r => r.Parameters)))
-                .Where(p => p.Implementation == ImplementationLocation.Client)
-                .Distinct();
-
-            Builder = new RestClientBuilder(clientParameters, context);
+            Builder = new RestClientBuilder(operationGroup, context);
 
             _requestMethods = new CachedDictionary<ServiceRequest, RestClientMethod>(EnsureNormalMethods);
             _nextPageRequestMethods = new CachedDictionary<ServiceRequest, RestClientMethod>(EnsureGetNextPageMethods);
@@ -124,7 +119,7 @@ namespace AutoRest.CSharp.Output.Models
                     else if (paging.NextLinkName != null)
                     {
                         var method = GetOperationMethod(serviceRequest);
-                        nextMethod = BuildNextPageMethod(method, operation);
+                        nextMethod = RestClientBuilder.BuildNextPageMethod(method);
                     }
 
                     if (nextMethod != null)
@@ -135,55 +130,6 @@ namespace AutoRest.CSharp.Output.Models
             }
 
             return nextPageMethods;
-        }
-
-        public static RestClientMethod BuildNextPageMethod(RestClientMethod method, Operation operation)
-        {
-            var nextPageUrlParameter = new Parameter(
-                "nextLink",
-                "The URL to the next page of results.",
-                typeof(string),
-                DefaultValue: null,
-                ValidateNotNull: true);
-
-            PathSegment[] pathSegments = method.Request.PathSegments
-                .Where(ps => ps.IsRaw)
-                .Append(new PathSegment(nextPageUrlParameter, false, SerializationFormat.Default, isRaw: true))
-                .ToArray();
-            var request = new Request(
-                RequestMethod.Get,
-                pathSegments,
-                Array.Empty<QueryParameter>(),
-                method.Request.Headers,
-                null
-            );
-
-            Parameter[] parameters = method.Parameters.Where(p => p.Name != nextPageUrlParameter.Name)
-                .Prepend(nextPageUrlParameter)
-                .ToArray();
-
-            var responses = method.Responses;
-
-            // We hardcode 200 as expected response code for paged LRO results
-            if (operation.IsLongRunning)
-            {
-                responses = new[]
-                {
-                    new Response(null, new[] { new StatusCodes(200, null) })
-                };
-            }
-
-            return new RestClientMethod(
-                $"{method.Name}NextPage",
-                method.Description,
-                method.ReturnType,
-                request,
-                parameters,
-                responses,
-                method.HeaderModel,
-                bufferResponse: true,
-                accessibility: "internal",
-                operation);
         }
 
         public RestClientMethod? GetNextOperationMethod(ServiceRequest request)

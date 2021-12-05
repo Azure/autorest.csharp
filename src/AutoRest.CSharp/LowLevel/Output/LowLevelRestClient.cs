@@ -13,6 +13,7 @@ using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Responses;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -30,10 +31,10 @@ namespace AutoRest.CSharp.Output.Models
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility { get; } = "public";
 
-        private readonly BuildContext<LowLevelOutputLibrary> _context;
-        private readonly bool _hasPublicConstructors = true;
-        private readonly Dictionary<string, FieldDeclaration> _parametersToFields;
-
+        private readonly bool _hasPublicConstructors;
+        private readonly Dictionary<string, FieldDeclaration> _parameterNamesToFields;
+        private readonly FieldDeclaration? _keyAuthField;
+        private readonly FieldDeclaration? _tokenAuthField;
         private MethodSignature? _subClientInternalConstructor;
 
         public string Description { get; }
@@ -41,17 +42,13 @@ namespace AutoRest.CSharp.Output.Models
         public MethodSignature SubClientInternalConstructor => _subClientInternalConstructor ??= BuildSubClientInternalConstructor();
 
         public IReadOnlyList<RestClientMethod> RequestMethods;
-        public LowLevelClientMethod[] ClientMethods { get; }
-        public LowLevelPagingMethod[] PagingMethods { get; }
-        public LowLevelLongRunningOperationMethod[] LongRunningOperationMethods { get; }
+        public IReadOnlyList<LowLevelClientMethod> ClientMethods { get; }
 
         public FieldDeclaration? AuthorizationHeaderConstant { get; }
         public FieldDeclaration? ScopesConstant { get; }
 
         public FieldDeclaration ClientDiagnosticsField { get; }
         public FieldDeclaration PipelineField { get; }
-        public FieldDeclaration? KeyAuthField { get; }
-        public FieldDeclaration? TokenAuthField { get; }
         public IReadOnlyList<FieldDeclaration> Fields { get; }
         public IReadOnlyList<Parameter> Parameters { get; }
         public ClientOptionsTypeProvider ClientOptions { get; }
@@ -65,27 +62,18 @@ namespace AutoRest.CSharp.Output.Models
             var operationGroup = new OperationGroup { Key = string.Empty };
             var endpointParameter = context.CodeModel.GlobalParameters.FirstOrDefault(RestClientBuilder.IsEndpointParameter);
             var clientParameters = endpointParameter != null ? new[] { endpointParameter } : Array.Empty<RequestParameter>();
-            return new(operationGroup, clientParameters, context, clientOptions, null);
+            return new(operationGroup, new RestClientBuilder(clientParameters, context), context, clientOptions, null);
         }
 
         public LowLevelRestClient(OperationGroup operationGroup, BuildContext<LowLevelOutputLibrary> context, ClientOptionsTypeProvider clientOptions, string? parentClientTypeName)
-            : this(operationGroup, null, context, clientOptions, parentClientTypeName) { }
+            : this(operationGroup, new RestClientBuilder(operationGroup, context), context, clientOptions, parentClientTypeName) { }
 
-        private LowLevelRestClient(OperationGroup operationGroup, IEnumerable<RequestParameter>? clientParameters, BuildContext<LowLevelOutputLibrary> context, ClientOptionsTypeProvider clientOptions, string? parentClientTypeName)
+        private LowLevelRestClient(OperationGroup operationGroup, RestClientBuilder builder, BuildContext<LowLevelOutputLibrary> context, ClientOptionsTypeProvider clientOptions, string? parentClientTypeName)
             : base(context)
         {
-            _context = context;
-
             var clientPrefix = ClientBuilder.GetClientPrefix(operationGroup.Language.Default.Name, context);
             DefaultName = clientPrefix + (parentClientTypeName != null ? string.Empty : ClientBuilder.GetClientSuffix(context));
             Description = BuilderHelpers.EscapeXmlDescription(ClientBuilder.CreateDescription(operationGroup, ClientBuilder.GetClientPrefix(Declaration.Name, context)));
-
-            clientParameters ??= operationGroup.Operations
-                .SelectMany(op => op.Parameters.Concat(op.Requests.SelectMany(r => r.Parameters)))
-                .Where(p => p.Implementation == ImplementationLocation.Client)
-                .Distinct();
-
-            var builder = new RestClientBuilder(clientParameters, context);
 
             ClientOptions = clientOptions;
             if (ExistingType != null && context.SourceInputModel != null && context.SourceInputModel.TryGetClientSourceInput(ExistingType, out var codeGenClientAttribute))
@@ -98,8 +86,17 @@ namespace AutoRest.CSharp.Output.Models
             }
 
             _hasPublicConstructors = !IsSubClient;
+
+            Parameters = builder.GetOrderedParameters();
+
             ClientDiagnosticsField = new("private readonly", typeof(ClientDiagnostics), "_" + ClientDiagnosticsParameter.Name);
             PipelineField = new("private readonly", typeof(HttpPipeline), "_" + PipelineParameter.Name);
+
+            _parameterNamesToFields = new Dictionary<string, FieldDeclaration>
+            {
+                [PipelineParameter.Name] = PipelineField,
+                [ClientDiagnosticsParameter.Name] = ClientDiagnosticsField
+            };
 
             var fields = new List<FieldDeclaration>();
             foreach (var scheme in context.CodeModel.Security.Schemes)
@@ -108,53 +105,59 @@ namespace AutoRest.CSharp.Output.Models
                 {
                     case AzureKeySecurityScheme azureKeySecurityScheme:
                         AuthorizationHeaderConstant = new("private const", typeof(string), "AuthorizationHeader", $"{azureKeySecurityScheme.HeaderName:L}");
-                        KeyAuthField = new("private readonly", KeyAuthParameter.Type.WithNullable(true), "_" + KeyAuthParameter.Name);
+                        _keyAuthField = new("private readonly", KeyAuthParameter.Type.WithNullable(true), "_" + KeyAuthParameter.Name);
+
                         fields.Add(AuthorizationHeaderConstant);
+                        fields.Add(_keyAuthField);
+                        _parameterNamesToFields[KeyAuthParameter.Name] = _keyAuthField;
                         break;
                     case AADTokenSecurityScheme aadTokenSecurityScheme:
                         ScopesConstant = new("private static readonly", typeof(string[]), "AuthorizationScopes", $"new string[]{{ {aadTokenSecurityScheme.Scopes.GetLiteralsFormattable()} }}");
-                        TokenAuthField = new("private readonly", TokenAuthParameter.Type.WithNullable(true), "_" + TokenAuthParameter.Name);
+                        _tokenAuthField = new("private readonly", TokenAuthParameter.Type.WithNullable(true), "_" + TokenAuthParameter.Name);
+
                         fields.Add(ScopesConstant);
+                        fields.Add(_tokenAuthField);
+                        _parameterNamesToFields[TokenAuthParameter.Name] = _tokenAuthField;
                         break;
                 }
             }
 
-            Parameters = builder.GetOrderedParameters();
-            _parametersToFields = new Dictionary<string, FieldDeclaration>();
-            foreach (var (parameterName, fieldDeclaration) in GetParametersToFields(Parameters))
+            fields.Add(PipelineField);
+            fields.Add(ClientDiagnosticsField);
+
+            foreach (Parameter parameter in Parameters)
             {
-                if (fieldDeclaration != null)
-                {
-                    _parametersToFields[parameterName] = fieldDeclaration;
-                    fields.Add(fieldDeclaration);
-                }
+                var field = new FieldDeclaration("private readonly", parameter.Type, "_" + parameter.Name);
+                fields.Add(field);
+                _parameterNamesToFields.Add(parameter.Name, field);
             }
 
             Fields = fields;
 
             PublicConstructors = BuildPublicConstructors().ToArray();
 
-            var requestMethods = EnsureNormalMethods(operationGroup, builder);
-            var nextPageRequestMethods = EnsureGetNextPageMethods(operationGroup, requestMethods);
-            RequestMethods = requestMethods.Values
-                .Concat(nextPageRequestMethods.Values) // .Where(m => m.Operation.Language.Default.Paging?.NextLinkOperation == null)
-                .Distinct()
+            var requestMethods = BuildRequestMethods(operationGroup, builder);
+
+            var clientMethods = BuildMethods(Declaration.Name, requestMethods).ToArray();
+            ClientMethods = clientMethods
+                .OrderBy(m => m.IsLongRunning ? 2 : m.PagingInfo != null ? 1 : 0) // Temporary sorting to minimize amount of changed files. Will be removed when new LRO is implemented
                 .ToArray();
 
-            ClientMethods = BuildMethods(operationGroup, requestMethods).ToArray();
-            PagingMethods = BuildPagingMethods(operationGroup, requestMethods, nextPageRequestMethods).ToArray();
-            LongRunningOperationMethods = BuildLongRunningOperationMethods(operationGroup, requestMethods, nextPageRequestMethods).ToArray();
+            RequestMethods = ClientMethods.Select(m => m.RequestMethod)
+                .Concat(ClientMethods.Select(m => m.PagingInfo?.NextPageMethod).WhereNotNull())
+                .Distinct()
+                .ToArray();
         }
 
-        public FieldDeclaration? GetFieldReferenceByParameter(Parameter parameter)
+        public FieldDeclaration? GetFieldByParameter(Parameter parameter)
             => parameter.Name switch
             {
-                "credential" when parameter.Type.EqualsIgnoreNullable(KeyAuthParameter.Type) => KeyAuthField,
-                "credential" when parameter.Type.EqualsIgnoreNullable(TokenAuthParameter.Type) => TokenAuthField,
-                var name => _parametersToFields.TryGetValue(name, out var field) ? field : null
+                "credential" when parameter.Type.EqualsIgnoreNullable(KeyAuthParameter.Type) => _keyAuthField,
+                "credential" when parameter.Type.EqualsIgnoreNullable(TokenAuthParameter.Type) => _tokenAuthField,
+                var name => _parameterNamesToFields.TryGetValue(name, out var field) ? field : null
             };
 
-        private Dictionary<ServiceRequest, RestClientMethod> EnsureNormalMethods(OperationGroup operationGroup, RestClientBuilder builder)
+        private static IReadOnlyDictionary<ServiceRequest, RestClientMethod> BuildRequestMethods(OperationGroup operationGroup, RestClientBuilder builder)
         {
             var requestMethods = new Dictionary<ServiceRequest, RestClientMethod>();
 
@@ -163,7 +166,7 @@ namespace AutoRest.CSharp.Output.Models
                 foreach (ServiceRequest serviceRequest in operation.Requests)
                 {
                     // See also DataPlaneRestClient::EnsureNormalMethods if changing
-                    if (!(serviceRequest.Protocol.Http is HttpRequest httpRequest))
+                    if (serviceRequest.Protocol.Http is not HttpRequest httpRequest)
                     {
                         continue;
                     }
@@ -175,6 +178,7 @@ namespace AutoRest.CSharp.Output.Models
 
                     var requestParameters = serviceRequest.Parameters.Where(FilterServiceParameters).ToList();
                     var accessibility = operation.Accessibility ?? "public";
+
                     RestClientMethod method = builder.BuildMethod(operation, httpRequest, requestParameters, null, accessibility);
                     RequestHeader[] requestHeaders = method.Request.Headers;
                     List<Parameter> parameters = method.Parameters.ToList();
@@ -182,21 +186,19 @@ namespace AutoRest.CSharp.Output.Models
 
                     if (serviceRequest.Parameters.Any(p => p.In == ParameterLocation.Body))
                     {
-                        RequestParameter bodyParameter = serviceRequest.Parameters.First(p => p.In == ParameterLocation.Body);
-
                         // If any body parameter is required, mark the entire request content as required.
                         bool isBodyRequired = serviceRequest.Parameters.Any(p => p.In == ParameterLocation.Body && p.IsRequired);
 
                         // The service request had some parameters for the body, so create a parameter for the body and inject it into the list of parameters,
                         // right before the first optional parameter.
-                        Parameter bodyParam = new Parameter("content", "The content to send as the body of the request.", typeof(Azure.Core.RequestContent), null, isBodyRequired);
+                        Parameter bodyParameter = new Parameter("content", "The content to send as the body of the request.", typeof(RequestContent), null, isBodyRequired);
                         int bodyIndex = parameters.FindIndex(p => p.DefaultValue != null);
                         if (bodyIndex == -1)
                         {
                             bodyIndex = parameters.Count;
                         }
-                        parameters.Insert(bodyIndex, bodyParam);
-                        body = new RequestContentRequestBody(bodyParam);
+                        parameters.Insert(bodyIndex, bodyParameter);
+                        body = new RequestContentRequestBody(bodyParameter);
 
                         // If there's a Content-Type parameter in the parameters list, move it to after the parameter for the body, and change the
                         // type to be `Content-Type`
@@ -235,7 +237,7 @@ namespace AutoRest.CSharp.Output.Models
                         }
                     }
 
-                    Request request = new Request (method.Request.HttpMethod, method.Request.PathSegments, method.Request.Query, requestHeaders, body);
+                    var request = new Request (method.Request.HttpMethod, method.Request.PathSegments, method.Request.Query, requestHeaders, body);
 
                     requestMethods.Add(serviceRequest, new RestClientMethod(method.Name, method.Description, method.ReturnType, request, parameters.ToArray(), method.Responses, method.HeaderModel, method.BufferResponse, method.Accessibility, operation));
                 }
@@ -244,142 +246,37 @@ namespace AutoRest.CSharp.Output.Models
             return requestMethods;
         }
 
-        private Dictionary<ServiceRequest, RestClientMethod> EnsureGetNextPageMethods(OperationGroup operationGroup, IReadOnlyDictionary<ServiceRequest, RestClientMethod> requestMethods)
+        private static IEnumerable<LowLevelClientMethod> BuildMethods(string clientName, IReadOnlyDictionary<ServiceRequest, RestClientMethod> requestMethods)
         {
-            var nextPageMethods = new Dictionary<ServiceRequest, RestClientMethod>();
-            foreach (var operation in operationGroup.Operations)
+            foreach (var (request, method) in requestMethods)
             {
+                var operation = method.Operation;
                 var paging = operation.Language.Default.Paging;
-                if (paging == null)
+                Schema? requestSchema = request.Parameters.FirstOrDefault(p => p.In == ParameterLocation.Body)?.Schema;
+                Schema? responseSchema = operation.Responses.FirstOrDefault()?.ResponseSchema;
+                Schema? exceptionSchema = operation.Exceptions.FirstOrDefault()?.ResponseSchema;
+                var operationSchemas = new LowLevelOperationSchemaInfo(requestSchema, responseSchema, exceptionSchema);
+                var diagnostic = new Diagnostic($"{clientName}.{method.Name}");
+
+                LowLevelPagingInfo? pagingInfo = null;
+                if (paging != null)
                 {
-                    continue;
-                }
-                foreach (var serviceRequest in operation.Requests)
-                {
-                    RestClientMethod? nextMethod = null;
-                    if (paging.NextLinkOperation != null)
-                    {
-                        nextMethod = requestMethods[paging.NextLinkOperation.Requests.Single()];
-                    }
-                    else if (paging.NextLinkName != null)
-                    {
-                        var method = requestMethods[serviceRequest];
-                        nextMethod = RestClient.BuildNextPageMethod(method, operation);
-                    }
-
-                    if (nextMethod != null)
-                    {
-                        nextPageMethods.Add(serviceRequest, nextMethod);
-                    }
-                }
-            }
-
-            return nextPageMethods;
-        }
-
-        private IEnumerable<LowLevelClientMethod> BuildMethods(OperationGroup operationGroup, IReadOnlyDictionary<ServiceRequest, RestClientMethod> requestMethods)
-        {
-            foreach (var operation in operationGroup.Operations)
-            {
-                if (operation.IsLongRunning || operation.Language.Default.Paging != null)
-                {
-                    continue;
-                }
-
-                foreach (var request in operation.Requests)
-                {
-                    RestClientMethod method = requestMethods[request];
-                    Schema? requestSchema = request.Parameters.FirstOrDefault(p => p.In == ParameterLocation.Body)?.Schema;
-                    Schema? responseSchema = operation.Responses.FirstOrDefault()?.ResponseSchema;
-                    Schema? exceptionSchema = operation.Exceptions.FirstOrDefault()?.ResponseSchema;
-
-                    yield return new LowLevelClientMethod(
-                        method,
-                        new LowLevelOperationSchemaInfo(requestSchema, responseSchema, exceptionSchema),
-                        new Diagnostic($"{Declaration.Name}.{method.Name}"));
-                }
-            }
-        }
-
-        private IEnumerable<LowLevelPagingMethod> BuildPagingMethods(OperationGroup operationGroup, IReadOnlyDictionary<ServiceRequest, RestClientMethod> requestMethods, IReadOnlyDictionary<ServiceRequest, RestClientMethod> nextPageRequestMethods)
-        {
-            foreach (var operation in operationGroup.Operations)
-            {
-                Paging? paging = operation.Language.Default.Paging;
-                if (paging == null || operation.IsLongRunning)
-                {
-                    continue;
-                }
-
-                foreach (var request in operation.Requests)
-                {
-                    RestClientMethod method = requestMethods[request];
-                    Schema? requestSchema = request.Parameters.FirstOrDefault(p => p.In == ParameterLocation.Body)?.Schema;
-                    Schema? responseSchema = operation.Responses.FirstOrDefault()?.ResponseSchema;
-                    Schema? exceptionSchema = operation.Exceptions.FirstOrDefault()?.ResponseSchema;
-
-                    if (!(method.Responses.SingleOrDefault(r => r.ResponseBody != null)?.ResponseBody is ObjectResponseBody))
+                    if (!operation.IsLongRunning && method.Responses.SingleOrDefault(r => r.ResponseBody != null)?.ResponseBody is not ObjectResponseBody)
                     {
                         throw new InvalidOperationException($"Method {method.Name} has to have a return value");
                     }
 
-                    nextPageRequestMethods.TryGetValue(request, out var nextPageMethod);
-                    yield return new LowLevelPagingMethod(
-                        method,
-                        new LowLevelOperationSchemaInfo(requestSchema, responseSchema, exceptionSchema),
-                        new Diagnostic($"{Declaration.Name}.{method.Name}"),
-                        new LowLevelPagingResponseInfo(
-                            nextPageMethod,
-                            paging.NextLinkName,
-                            paging.ItemName ?? "value")
-                        );
+                    var nextLinkOperation = paging.NextLinkOperation;
+                    var nextLinkName = paging.NextLinkName;
+
+                    RestClientMethod? nextPageMethod = nextLinkOperation != null
+                        ? requestMethods[nextLinkOperation.Requests.Single()]
+                        : nextLinkName != null ? RestClientBuilder.BuildNextPageMethod(method) : null;
+
+                    pagingInfo = new LowLevelPagingInfo(nextPageMethod, nextLinkName, paging.ItemName ?? "value");
                 }
-            }
-        }
 
-        private IEnumerable<LowLevelLongRunningOperationMethod> BuildLongRunningOperationMethods(OperationGroup operationGroup, IReadOnlyDictionary<ServiceRequest, RestClientMethod> requestMethods, IReadOnlyDictionary<ServiceRequest, RestClientMethod> nextPageRequestMethods)
-        {
-            foreach (var operation in operationGroup.Operations)
-            {
-                if (operation.IsLongRunning)
-                {
-                    Paging? paging = operation.Language.Default.Paging;
-
-                    foreach (var request in operation.Requests)
-                    {
-                        RestClientMethod startMethod = requestMethods[request];
-                        Schema? requestSchema = request.Parameters.FirstOrDefault(p => p.In == ParameterLocation.Body)?.Schema;
-                        Schema? responseSchema = operation.Responses.FirstOrDefault()?.ResponseSchema;
-                        Schema? exceptionSchema = operation.Exceptions.FirstOrDefault()?.ResponseSchema;
-
-                        LowLevelPagingResponseInfo? pagingInfo = null;
-
-                        if (paging != null)
-                        {
-                            nextPageRequestMethods.TryGetValue(request, out var nextPageMethod);
-                            pagingInfo = new LowLevelPagingResponseInfo(nextPageMethod, paging.NextLinkName, paging.ItemName ?? "value");
-                        }
-
-                        yield return new LowLevelLongRunningOperationMethod(
-                            startMethod,
-                            new LowLevelOperationSchemaInfo(requestSchema, responseSchema, exceptionSchema),
-                            new Diagnostic($"{Declaration.Name}.{startMethod.Name}"),
-                            pagingInfo);
-                    }
-                }
-            }
-        }
-
-        private IEnumerable<(string ParameterName, FieldDeclaration? Field)> GetParametersToFields(IEnumerable<Parameter> parameters)
-        {
-            yield return new(KeyAuthParameter.Name, KeyAuthField);
-            yield return new(TokenAuthParameter.Name, TokenAuthField);
-            yield return new(PipelineParameter.Name, PipelineField);
-            yield return new(ClientDiagnosticsParameter.Name, ClientDiagnosticsField);
-
-            foreach (Parameter parameter in parameters)
-            {
-                yield return new(parameter.Name, new FieldDeclaration("private readonly", parameter.Type, "_" + parameter.Name));
+                yield return new LowLevelClientMethod(method, operationSchemas, diagnostic, pagingInfo, operation.IsLongRunning);
             }
         }
 
@@ -393,17 +290,17 @@ namespace AutoRest.CSharp.Output.Models
             var clientOptionsType = ClientOptions.Type.WithNullable(true);
             var clientOptionsParameter = new Parameter("options", "The options for configuring the client.", clientOptionsType, Constant.NewInstanceOf(clientOptionsType), false);
 
-            if (KeyAuthField != null)
+            if (_keyAuthField != null)
             {
-                yield return BuildPublicConstructor(KeyAuthField, clientOptionsParameter);
+                yield return BuildPublicConstructor(_keyAuthField, clientOptionsParameter);
             }
 
-            if (TokenAuthField != null)
+            if (_tokenAuthField != null)
             {
-                yield return BuildPublicConstructor(TokenAuthField, clientOptionsParameter);
+                yield return BuildPublicConstructor(_tokenAuthField, clientOptionsParameter);
             }
 
-            if (KeyAuthField == null && TokenAuthField == null)
+            if (_keyAuthField == null && _tokenAuthField == null)
             {
                 yield return BuildPublicConstructor(null, clientOptionsParameter);
             }
@@ -419,7 +316,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             var constructorParameters = new[]{ClientDiagnosticsParameter, PipelineParameter, KeyAuthParameter, TokenAuthParameter}
                 .Concat(RestClientBuilder.GetConstructorParameters(Parameters, null, includeAPIVersion: true))
-                .Where(p => _parametersToFields.ContainsKey(p.Name))
+                .Where(p => GetFieldByParameter(p) != null)
                 .ToArray();
 
             return new MethodSignature(Declaration.Name, $"Initializes a new instance of {Declaration.Name}", "internal", constructorParameters);
