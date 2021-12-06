@@ -1915,32 +1915,6 @@ namespace paging_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetMultiplePagesLRORequest(string clientRequestId, int? maxresults, int? timeout)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Post;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/paging/multiple/lro", false);
-            request.Uri = uri;
-            if (clientRequestId != null)
-            {
-                request.Headers.Add("client-request-id", clientRequestId);
-            }
-            if (maxresults != null)
-            {
-                request.Headers.Add("maxresults", maxresults.Value);
-            }
-            if (timeout != null)
-            {
-                request.Headers.Add("timeout", timeout.Value);
-            }
-            request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier202.Instance;
-            return message;
-        }
-
         internal HttpMessage CreateNextFragmentRequest(string apiVersion, string tenant, string nextLink)
         {
             var message = _pipeline.CreateMessage();
@@ -1988,6 +1962,32 @@ namespace paging_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetMultiplePagesLRORequest(string clientRequestId, int? maxresults, int? timeout)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paging/multiple/lro", false);
+            request.Uri = uri;
+            if (clientRequestId != null)
+            {
+                request.Headers.Add("client-request-id", clientRequestId);
+            }
+            if (maxresults != null)
+            {
+                request.Headers.Add("maxresults", maxresults.Value);
+            }
+            if (timeout != null)
+            {
+                request.Headers.Add("timeout", timeout.Value);
+            }
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier202.Instance;
             return message;
         }
 
@@ -2181,6 +2181,20 @@ namespace paging_LowLevel
             return message;
         }
 
+        internal HttpMessage CreateGetPagingModelWithItemNameWithXMSClientNameNextPageRequest(string nextLink)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRawNextLink(nextLink, false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
         internal HttpMessage CreateGetMultiplePagesLRONextPageRequest(string nextLink, string clientRequestId, int? maxresults, int? timeout)
         {
             var message = _pipeline.CreateMessage();
@@ -2202,20 +2216,6 @@ namespace paging_LowLevel
             {
                 request.Headers.Add("timeout", timeout.Value);
             }
-            request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
-            return message;
-        }
-
-        internal HttpMessage CreateGetPagingModelWithItemNameWithXMSClientNameNextPageRequest(string nextLink)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendRawNextLink(nextLink, false);
-            request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;

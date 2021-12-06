@@ -1416,70 +1416,6 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        internal HttpMessage CreateStartTranslationRequest(RequestContent content)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Post;
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(_endpoint, false);
-            uri.AppendRaw("/translator/text/batch/v1.0-preview.1", false);
-            uri.AppendPath("/batches", false);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", "application/json");
-            request.Content = content;
-            message.ResponseClassifier = ResponseClassifier202.Instance;
-            return message;
-        }
-
-        internal HttpMessage CreateGetTranslationsStatusRequest(int? top, int? skip, int? maxpagesize, IEnumerable<Guid> ids, IEnumerable<string> statuses, DateTimeOffset? createdDateTimeUtcStart, DateTimeOffset? createdDateTimeUtcEnd, IEnumerable<string> orderBy)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(_endpoint, false);
-            uri.AppendRaw("/translator/text/batch/v1.0-preview.1", false);
-            uri.AppendPath("/batches", false);
-            if (top != null)
-            {
-                uri.AppendQuery("$top", top.Value, true);
-            }
-            if (skip != null)
-            {
-                uri.AppendQuery("$skip", skip.Value, true);
-            }
-            if (maxpagesize != null)
-            {
-                uri.AppendQuery("$maxpagesize", maxpagesize.Value, true);
-            }
-            if (ids != null)
-            {
-                uri.AppendQueryDelimited("ids", ids, ",", true);
-            }
-            if (statuses != null)
-            {
-                uri.AppendQueryDelimited("statuses", statuses, ",", true);
-            }
-            if (createdDateTimeUtcStart != null)
-            {
-                uri.AppendQuery("createdDateTimeUtcStart", createdDateTimeUtcStart.Value, "O", true);
-            }
-            if (createdDateTimeUtcEnd != null)
-            {
-                uri.AppendQuery("createdDateTimeUtcEnd", createdDateTimeUtcEnd.Value, "O", true);
-            }
-            if (orderBy != null)
-            {
-                uri.AppendQueryDelimited("$orderBy", orderBy, ",", true);
-            }
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
-            return message;
-        }
-
         internal HttpMessage CreateGetDocumentStatusRequest(Guid id, Guid documentId)
         {
             var message = _pipeline.CreateMessage();
@@ -1524,6 +1460,98 @@ namespace Azure.AI.DocumentTranslation
             uri.AppendRaw("/translator/text/batch/v1.0-preview.1", false);
             uri.AppendPath("/batches/", false);
             uri.AppendPath(id, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetSupportedDocumentFormatsRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_endpoint, false);
+            uri.AppendRaw("/translator/text/batch/v1.0-preview.1", false);
+            uri.AppendPath("/documents/formats", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetSupportedGlossaryFormatsRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_endpoint, false);
+            uri.AppendRaw("/translator/text/batch/v1.0-preview.1", false);
+            uri.AppendPath("/glossaries/formats", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetSupportedStorageSourcesRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_endpoint, false);
+            uri.AppendRaw("/translator/text/batch/v1.0-preview.1", false);
+            uri.AppendPath("/storagesources", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetTranslationsStatusRequest(int? top, int? skip, int? maxpagesize, IEnumerable<Guid> ids, IEnumerable<string> statuses, DateTimeOffset? createdDateTimeUtcStart, DateTimeOffset? createdDateTimeUtcEnd, IEnumerable<string> orderBy)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_endpoint, false);
+            uri.AppendRaw("/translator/text/batch/v1.0-preview.1", false);
+            uri.AppendPath("/batches", false);
+            if (top != null)
+            {
+                uri.AppendQuery("$top", top.Value, true);
+            }
+            if (skip != null)
+            {
+                uri.AppendQuery("$skip", skip.Value, true);
+            }
+            if (maxpagesize != null)
+            {
+                uri.AppendQuery("$maxpagesize", maxpagesize.Value, true);
+            }
+            if (ids != null)
+            {
+                uri.AppendQueryDelimited("ids", ids, ",", true);
+            }
+            if (statuses != null)
+            {
+                uri.AppendQueryDelimited("statuses", statuses, ",", true);
+            }
+            if (createdDateTimeUtcStart != null)
+            {
+                uri.AppendQuery("createdDateTimeUtcStart", createdDateTimeUtcStart.Value, "O", true);
+            }
+            if (createdDateTimeUtcEnd != null)
+            {
+                uri.AppendQuery("createdDateTimeUtcEnd", createdDateTimeUtcEnd.Value, "O", true);
+            }
+            if (orderBy != null)
+            {
+                uri.AppendQueryDelimited("$orderBy", orderBy, ",", true);
+            }
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             message.ResponseClassifier = ResponseClassifier200.Instance;
@@ -1579,48 +1607,20 @@ namespace Azure.AI.DocumentTranslation
             return message;
         }
 
-        internal HttpMessage CreateGetSupportedDocumentFormatsRequest()
+        internal HttpMessage CreateStartTranslationRequest(RequestContent content)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethod.Get;
+            request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(_endpoint, false);
             uri.AppendRaw("/translator/text/batch/v1.0-preview.1", false);
-            uri.AppendPath("/documents/formats", false);
+            uri.AppendPath("/batches", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
-            return message;
-        }
-
-        internal HttpMessage CreateGetSupportedGlossaryFormatsRequest()
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(_endpoint, false);
-            uri.AppendRaw("/translator/text/batch/v1.0-preview.1", false);
-            uri.AppendPath("/glossaries/formats", false);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
-            return message;
-        }
-
-        internal HttpMessage CreateGetSupportedStorageSourcesRequest()
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(_endpoint, false);
-            uri.AppendRaw("/translator/text/batch/v1.0-preview.1", false);
-            uri.AppendPath("/storagesources", false);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            message.ResponseClassifier = ResponseClassifier202.Instance;
             return message;
         }
 
@@ -1654,19 +1654,6 @@ namespace Azure.AI.DocumentTranslation
             return message;
         }
 
-        private sealed class ResponseClassifier202 : ResponseClassifier
-        {
-            private static ResponseClassifier _instance;
-            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier202();
-            public override bool IsErrorResponse(HttpMessage message)
-            {
-                return message.Response.Status switch
-                {
-                    202 => false,
-                    _ => true
-                };
-            }
-        }
         private sealed class ResponseClassifier200 : ResponseClassifier
         {
             private static ResponseClassifier _instance;
@@ -1676,6 +1663,19 @@ namespace Azure.AI.DocumentTranslation
                 return message.Response.Status switch
                 {
                     200 => false,
+                    _ => true
+                };
+            }
+        }
+        private sealed class ResponseClassifier202 : ResponseClassifier
+        {
+            private static ResponseClassifier _instance;
+            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier202();
+            public override bool IsErrorResponse(HttpMessage message)
+            {
+                return message.Response.Status switch
+                {
+                    202 => false,
                     _ => true
                 };
             }

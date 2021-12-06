@@ -92,19 +92,17 @@ namespace CollapseRequestCondition_LowLevel
             }
         }
 
-        /// <param name="ifMatch"> Specify an ETag value to operate only on blobs with a matching value. </param>
-        /// <param name="ifModifiedSince"> Specify this header value to operate only on a blob if it has been modified since the specified date/time. </param>
-        /// <param name="ifUnmodifiedSince"> Specify this header value to operate only on a blob if it has not been modified since the specified date/time. </param>
+        /// <param name="ifNoneMatch"> Specify an ETag value to operate only on blobs without a matching value. </param>
         /// <param name="context"> The request context. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> CollapseGetAsync(ETag? ifMatch = null, DateTimeOffset? ifModifiedSince = null, DateTimeOffset? ifUnmodifiedSince = null, RequestContext context = null)
+        public virtual async Task<Response> CollapseGetAsync(ETag? ifNoneMatch = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("NonCollapseClient.CollapseGet");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateCollapseGetRequest(ifMatch, ifModifiedSince, ifUnmodifiedSince);
+                using HttpMessage message = CreateCollapseGetRequest(ifNoneMatch);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -114,19 +112,17 @@ namespace CollapseRequestCondition_LowLevel
             }
         }
 
-        /// <param name="ifMatch"> Specify an ETag value to operate only on blobs with a matching value. </param>
-        /// <param name="ifModifiedSince"> Specify this header value to operate only on a blob if it has been modified since the specified date/time. </param>
-        /// <param name="ifUnmodifiedSince"> Specify this header value to operate only on a blob if it has not been modified since the specified date/time. </param>
+        /// <param name="ifNoneMatch"> Specify an ETag value to operate only on blobs without a matching value. </param>
         /// <param name="context"> The request context. </param>
 #pragma warning disable AZC0002
-        public virtual Response CollapseGet(ETag? ifMatch = null, DateTimeOffset? ifModifiedSince = null, DateTimeOffset? ifUnmodifiedSince = null, RequestContext context = null)
+        public virtual Response CollapseGet(ETag? ifNoneMatch = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("NonCollapseClient.CollapseGet");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateCollapseGetRequest(ifMatch, ifModifiedSince, ifUnmodifiedSince);
+                using HttpMessage message = CreateCollapseGetRequest(ifNoneMatch);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -149,13 +145,17 @@ namespace CollapseRequestCondition_LowLevel
             {
                 request.Headers.Add("If-Match", ifMatch.Value);
             }
+            if (ifMatch != null)
+            {
+                request.Headers.Add("conditions", ifMatch.Value);
+            }
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        internal HttpMessage CreateCollapseGetRequest(ETag? ifMatch, DateTimeOffset? ifModifiedSince, DateTimeOffset? ifUnmodifiedSince)
+        internal HttpMessage CreateCollapseGetRequest(ETag? ifNoneMatch)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -164,17 +164,13 @@ namespace CollapseRequestCondition_LowLevel
             uri.Reset(_endpoint);
             uri.AppendPath("/NonCollapse/", false);
             request.Uri = uri;
-            if (ifMatch != null)
+            if (ifNoneMatch != null)
             {
-                request.Headers.Add("If-Match", ifMatch.Value);
+                request.Headers.Add("If-None-Match", ifNoneMatch.Value);
             }
-            if (ifModifiedSince != null)
+            if (ifNoneMatch != null)
             {
-                request.Headers.Add("If-Modified-Since", ifModifiedSince.Value, "R");
-            }
-            if (ifUnmodifiedSince != null)
-            {
-                request.Headers.Add("If-Unmodified-Since", ifUnmodifiedSince.Value, "R");
+                request.Headers.Add("conditions", ifNoneMatch.Value);
             }
             message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;

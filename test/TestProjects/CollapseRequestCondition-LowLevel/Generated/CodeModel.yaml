@@ -522,84 +522,6 @@ operationGroups:
             name: CollapseGet
             description: ''
         protocol: !Protocols {}
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: 1.0.0
-        parameters:
-          - *ref_1
-          - !Parameter &ref_22
-            schema: *ref_2
-            implementation: Method
-            extensions:
-              x-ms-parameter-grouping:
-                name: modified-access-conditions
-            language: !Languages 
-              default:
-                name: ifMatch
-                description: Specify an ETag value to operate only on blobs with a matching value.
-                serializedName: If-Match
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: header
-          - !Parameter &ref_23
-            schema: *ref_2
-            implementation: Method
-            extensions:
-              x-ms-parameter-grouping:
-                name: modified-access-conditions
-            language: !Languages 
-              default:
-                name: ifNoneMatch
-                description: Specify an ETag value to operate only on blobs without a matching value.
-                serializedName: If-None-Match
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: header
-          - !Parameter &ref_24
-            schema: *ref_3
-            implementation: Method
-            extensions:
-              x-ms-parameter-grouping:
-                name: modified-access-conditions
-            language: !Languages 
-              default:
-                name: ifModifiedSince
-                description: Specify this header value to operate only on a blob if it has been modified since the specified date/time.
-                serializedName: If-Modified-Since
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: header
-        requests:
-          - !Request 
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpRequest 
-                path: /MatchConditionCollapse/multi
-                method: get
-                uri: '{$host}'
-        signatureParameters:
-          - *ref_22
-          - *ref_23
-          - *ref_24
-        responses:
-          - !Response 
-            language: !Languages 
-              default:
-                name: ''
-                description: Received correct format
-            protocol: !Protocols 
-              http: !HttpResponse 
-                statusCodes:
-                  - '200'
-        language: !Languages 
-          default:
-            name: MulticollapseGet
-            description: ''
-        protocol: !Protocols {}
     language: !Languages 
       default:
         name: MatchConditionCollapse
@@ -614,7 +536,7 @@ operationGroups:
             version: 1.0.0
         parameters:
           - *ref_1
-          - !Parameter &ref_26
+          - !Parameter &ref_23
             schema: *ref_2
             implementation: Method
             extensions:
@@ -644,7 +566,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_25
+              - !Parameter &ref_22
                 schema: *ref_2
                 implementation: Method
                 required: false
@@ -657,7 +579,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_25
+              - *ref_22
             language: !Languages 
               default:
                 name: ''
@@ -671,7 +593,7 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_26
+          - *ref_23
         responses:
           - !Response 
             language: !Languages 
@@ -693,7 +615,7 @@ operationGroups:
             version: 1.0.0
         parameters:
           - *ref_1
-          - !Parameter &ref_27
+          - !Parameter &ref_24
             schema: *ref_2
             implementation: Method
             extensions:
@@ -701,37 +623,9 @@ operationGroups:
                 name: modified-access-conditions
             language: !Languages 
               default:
-                name: ifMatch
-                description: Specify an ETag value to operate only on blobs with a matching value.
-                serializedName: If-Match
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: header
-          - !Parameter &ref_28
-            schema: *ref_3
-            implementation: Method
-            extensions:
-              x-ms-parameter-grouping:
-                name: modified-access-conditions
-            language: !Languages 
-              default:
-                name: ifModifiedSince
-                description: Specify this header value to operate only on a blob if it has been modified since the specified date/time.
-                serializedName: If-Modified-Since
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: header
-          - !Parameter &ref_29
-            schema: *ref_3
-            implementation: Method
-            extensions:
-              x-ms-parameter-grouping:
-                name: modified-access-conditions
-            language: !Languages 
-              default:
-                name: ifUnmodifiedSince
-                description: Specify this header value to operate only on a blob if it has not been modified since the specified date/time.
-                serializedName: If-Unmodified-Since
+                name: ifNoneMatch
+                description: Specify an ETag value to operate only on blobs without a matching value.
+                serializedName: If-None-Match
             protocol: !Protocols 
               http: !HttpParameter 
                 in: header
@@ -747,9 +641,7 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_27
-          - *ref_28
-          - *ref_29
+          - *ref_24
         responses:
           - !Response 
             language: !Languages 

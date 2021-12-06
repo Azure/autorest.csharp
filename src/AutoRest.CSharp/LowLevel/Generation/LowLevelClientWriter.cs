@@ -31,6 +31,7 @@ namespace AutoRest.CSharp.Generation.Writers
     {
         private static readonly CSharpType RequestContextParameterType = new(typeof(RequestContext), true);
 
+        private static readonly Parameter WaitForCompletionParameter = new("waitForCompletion", "true if method should return after the long-running operation is completed; otherwise, false.", new CSharpType(typeof(bool)), null, false);
         private static readonly Parameter RequestContextParameter = new("context", "The request context", RequestContextParameterType, Constant.Default(RequestContextParameterType), false);
         private static readonly Parameter ResponseParameter = new("response", null, typeof(Response), null, false);
         private static readonly Parameter NextLinkParameter = new("nextLink", null, new CSharpType(typeof(string), true), null, false);
@@ -44,18 +45,18 @@ namespace AutoRest.CSharp.Generation.Writers
         private static readonly FormattableString CreatePageableMethodName = $"{typeof(PageableHelpers)}.{nameof(PageableHelpers.CreatePageable)}";
         private static readonly FormattableString CreateAsyncPageableMethodName = $"{typeof(PageableHelpers)}.{nameof(PageableHelpers.CreateAsyncPageable)}";
 
-        public void WriteClient(CodeWriter writer, LowLevelRestClient restClient, LowLevelRestClient[] subClients, BuildContext<LowLevelOutputLibrary> context)
+        public void WriteClient(CodeWriter writer, LowLevelClient client, LowLevelClient[] subClients, BuildContext<LowLevelOutputLibrary> context)
         {
-            var cs = restClient.Type;
+            var cs = client.Type;
             using (writer.Namespace(cs.Namespace))
             {
-                writer.WriteXmlDocumentationSummary($"{restClient.Description}");
-                using (writer.Scope($"{restClient.Declaration.Accessibility} partial class {cs.Name}"))
+                writer.WriteXmlDocumentationSummary($"{client.Description}");
+                using (writer.Scope($"{client.Declaration.Accessibility} partial class {cs.Name}"))
                 {
-                    WriteClientFields(writer, restClient);
-                    WriteConstructors(writer, restClient);
+                    WriteClientFields(writer, client);
+                    WriteConstructors(writer, client);
 
-                    foreach (var clientMethod in restClient.ClientMethods)
+                    foreach (var clientMethod in client.ClientMethods)
                     {
                         if (clientMethod.IsLongRunning)
                         {
@@ -69,21 +70,19 @@ namespace AutoRest.CSharp.Generation.Writers
                         }
                         else
                         {
-                            WriteClientMethod(writer, restClient, clientMethod, context.Configuration, true);
-                            WriteClientMethod(writer, restClient, clientMethod, context.Configuration, false);
+                            WriteClientMethod(writer, client, clientMethod, context.Configuration, true);
+                            WriteClientMethod(writer, client, clientMethod, context.Configuration, false);
                         }
                     }
 
-                    WriteSubClientFactoryMethod(writer, context, restClient, subClients);
+                    WriteSubClientFactoryMethod(writer, context, client, subClients);
 
                     var responseClassifierTypes = new List<ResponseClassifierType>();
-                    var fieldNames = new Dictionary<string, string>(restClient.Parameters
-                        .Select(p => new KeyValuePair<string, string>(p.Name, restClient.GetFieldByParameter(p)!.Name)));
-                    foreach (var method in restClient.RequestMethods)
+                    foreach (var method in client.RequestMethods)
                     {
                         var responseClassifierType = CreateResponseClassifierType(method);
                         responseClassifierTypes.Add(responseClassifierType);
-                        RequestWriterHelpers.WriteRequestCreation(writer, method, "internal", fieldNames, responseClassifierType.Name, false);
+                        RequestWriterHelpers.WriteRequestCreation(writer, method, "internal", client.Fields, responseClassifierType.Name, false);
                     }
 
                     foreach ((string name, StatusCodes[] statusCodes) in responseClassifierTypes.Distinct())
@@ -94,7 +93,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private static void WriteClientFields(CodeWriter writer, LowLevelRestClient client)
+        private static void WriteClientFields(CodeWriter writer, LowLevelClient client)
         {
             foreach (var field in client.Fields)
             {
@@ -104,12 +103,12 @@ namespace AutoRest.CSharp.Generation.Writers
             writer
                 .Line()
                 .WriteXmlDocumentationSummary($"The HTTP pipeline for sending and receiving REST requests and responses.")
-                .Line($"public virtual {typeof(HttpPipeline)} Pipeline => {client.PipelineField.Name};");
+                .Line($"public virtual {typeof(HttpPipeline)} Pipeline => {client.Fields.PipelineField.Name};");
 
             writer.Line();
         }
 
-        private static void WriteConstructors(CodeWriter writer, LowLevelRestClient client)
+        private static void WriteConstructors(CodeWriter writer, LowLevelClient client)
         {
             WriteEmptyConstructor(writer, client);
             foreach (var constructor in client.PublicConstructors)
@@ -132,7 +131,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        private static void WritePublicConstructor(CodeWriter writer, LowLevelRestClient client, MethodSignature signature)
+        private static void WritePublicConstructor(CodeWriter writer, LowLevelClient client, MethodSignature signature)
         {
             writer.WriteMethodDocumentation(signature);
             using (writer.WriteMethodDeclaration(signature))
@@ -141,7 +140,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.Line();
 
                 var clientOptionsParameter = signature.Parameters.Last(p => p.Type.EqualsIgnoreNullable(client.ClientOptions.Type));
-                writer.Line($"{client.ClientDiagnosticsField.Name:I} = new {client.ClientDiagnosticsField.Type}({clientOptionsParameter.Name:I});");
+                writer.Line($"{client.Fields.ClientDiagnosticsField.Name:I} = new {client.Fields.ClientDiagnosticsField.Type}({clientOptionsParameter.Name:I});");
 
                 FormattableString perCallPolicies = $"new {typeof(HttpPipelinePolicy)}[] {{ new {typeof(LowLevelCallbackPolicy)}()}}";
                 FormattableString perRetryPolicies = $"Array.Empty<{typeof(HttpPipelinePolicy)}>()";
@@ -149,27 +148,27 @@ namespace AutoRest.CSharp.Generation.Writers
                 var credentialParameter = signature.Parameters.FirstOrDefault(p => p.Name == "credential");
                 if (credentialParameter != null)
                 {
-                    var credentialField = client.GetFieldByParameter(credentialParameter);
+                    var credentialField = client.Fields.GetFieldByParameter(credentialParameter);
                     if (credentialField != null)
                     {
                         var fieldName = credentialField.Name;
                         writer.Line($"{fieldName:I} = {credentialParameter.Name:I};");
                         if (credentialField.Type.Equals(typeof(AzureKeyCredential)))
                         {
-                            perRetryPolicies = $"new {typeof(HttpPipelinePolicy)}[] {{new {typeof(AzureKeyCredentialPolicy)}({fieldName:I}, {client.AuthorizationHeaderConstant!.Name})}}";
+                            perRetryPolicies = $"new {typeof(HttpPipelinePolicy)}[] {{new {typeof(AzureKeyCredentialPolicy)}({fieldName:I}, {client.Fields.AuthorizationHeaderConstant!.Name})}}";
                         }
                         else if (credentialField.Type.Equals(typeof(TokenCredential)))
                         {
-                            perRetryPolicies = $"new {typeof(HttpPipelinePolicy)}[] {{new {typeof(BearerTokenAuthenticationPolicy)}({fieldName:I}, {client.ScopesConstant!.Name})}}";
+                            perRetryPolicies = $"new {typeof(HttpPipelinePolicy)}[] {{new {typeof(BearerTokenAuthenticationPolicy)}({fieldName:I}, {client.Fields.ScopesConstant!.Name})}}";
                         }
                     }
                 }
 
-                writer.Line($"{client.PipelineField.Name:I} = {typeof(HttpPipelineBuilder)}.{nameof(HttpPipelineBuilder.Build)}({clientOptionsParameter.Name:I}, {perCallPolicies}, {perRetryPolicies}, new {typeof(ResponseClassifier)}());");
+                writer.Line($"{client.Fields.PipelineField.Name:I} = {typeof(HttpPipelineBuilder)}.{nameof(HttpPipelineBuilder.Build)}({clientOptionsParameter.Name:I}, {perCallPolicies}, {perRetryPolicies}, new {typeof(ResponseClassifier)}());");
 
                 foreach (var parameter in client.Parameters)
                 {
-                    var field = client.GetFieldByParameter(parameter);
+                    var field = client.Fields.GetFieldByParameter(parameter);
                     if (field != null)
                     {
                         if (parameter.IsApiVersionParameter)
@@ -186,7 +185,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        private static void WriteSubClientInternalConstructor(CodeWriter writer, LowLevelRestClient client, MethodSignature signature)
+        private static void WriteSubClientInternalConstructor(CodeWriter writer, LowLevelClient client, MethodSignature signature)
         {
             writer.WriteMethodDocumentation(signature);
             using (writer.WriteMethodDeclaration(signature))
@@ -196,7 +195,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 foreach (var parameter in signature.Parameters)
                 {
-                    var field = client.GetFieldByParameter(parameter);
+                    var field = client.Fields.GetFieldByParameter(parameter);
                     if (field != null)
                     {
                         writer.Line($"{field.Name:I} = {parameter.Name:I};");
@@ -206,7 +205,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        private static void WriteClientMethod(CodeWriter writer, LowLevelRestClient client, LowLevelClientMethod clientMethod, Configuration configuration, bool async)
+        private static void WriteClientMethod(CodeWriter writer, LowLevelClient client, LowLevelClientMethod clientMethod, Configuration configuration, bool async)
         {
             var restMethod = clientMethod.RequestMethod;
             var headAsBoolean = restMethod.Request.HttpMethod == RequestMethod.Head && configuration.HeadAsBoolean;
@@ -226,7 +225,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         ? headAsBoolean ? nameof(HttpPipelineExtensions.ProcessHeadAsBoolMessageAsync) : nameof(HttpPipelineExtensions.ProcessMessageAsync)
                         : headAsBoolean ? nameof(HttpPipelineExtensions.ProcessHeadAsBoolMessage) : nameof(HttpPipelineExtensions.ProcessMessage);
 
-                    writer.AppendRaw("return ").WriteMethodCall(async, $"{client.PipelineField.Name}.{methodName}", $"{messageVariable}, {ClientDiagnosticsField}, {RequestContextParameter.Name:I}");
+                    writer.AppendRaw("return ").WriteMethodCall(async, $"{client.Fields.PipelineField.Name}.{methodName}", $"{messageVariable}, {ClientDiagnosticsField}, {RequestContextParameter.Name:I}");
                 }
             }
             writer.Line();
@@ -366,7 +365,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        private void WriteSubClientFactoryMethod(CodeWriter writer, BuildContext context, LowLevelRestClient parentClient, LowLevelRestClient[] subClients)
+        private void WriteSubClientFactoryMethod(CodeWriter writer, BuildContext context, LowLevelClient parentClient, LowLevelClient[] subClients)
         {
             var factoryMethods = new List<(FieldDeclaration?, MethodSignature, List<Reference>)>();
             foreach (var subClient in subClients)
@@ -376,7 +375,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 foreach (var parameter in subClient.SubClientInternalConstructor.Parameters)
                 {
-                    var field = parentClient.GetFieldByParameter(parameter);
+                    var field = parentClient.Fields.GetFieldByParameter(parameter);
                     if (field == null)
                     {
                         methodParameters.Add(parameter);
