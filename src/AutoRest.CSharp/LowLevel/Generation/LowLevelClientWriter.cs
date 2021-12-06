@@ -212,6 +212,8 @@ namespace AutoRest.CSharp.Generation.Writers
 
             using (WriteClientMethodDeclaration(writer, clientMethod, clientMethod.OperationSchemas, returnType, async))
             {
+                writer.WriteParameterNullChecks(clientMethod.RestMethod.Parameters);
+
                 using (WriteDiagnosticScope(writer, clientMethod.Diagnostic, client.Fields.ClientDiagnosticsField.Name))
                 {
                     var messageVariable = new CodeWriterDeclaration("message");
@@ -305,6 +307,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             using (WriteClientMethodDeclaration(writer, clientMethod, clientMethod.OperationSchemas, returnType, async))
             {
+                writer.WriteParameterNullChecks(clientMethod.StartMethod.Parameters);
                 var createEnumerableMethod = new CodeWriterDeclaration(CreateMethodName("CreateEnumerable", async));
                 using (WriteDiagnosticScope(writer, clientMethod.Diagnostic, fields.ClientDiagnosticsField.Name))
                 {
