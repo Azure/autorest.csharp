@@ -127,7 +127,7 @@ namespace Azure.Core
                 return null;
             }
 
-            if (_requestMethod == RequestMethod.Put || _originalResponseHasLocation && _finalStateVia == OperationFinalStateVia.OriginalUri)
+            if (_requestMethod == RequestMethod.Put || _requestMethod == RequestMethod.Patch || _originalResponseHasLocation && _finalStateVia == OperationFinalStateVia.OriginalUri)
             {
                 return _startRequestUri.AbsoluteUri;
             }
@@ -135,11 +135,6 @@ namespace Azure.Core
             if (_originalResponseHasLocation && _finalStateVia == OperationFinalStateVia.Location)
             {
                 return _lastKnownLocation;
-            }
-
-            if (_requestMethod == RequestMethod.Patch)
-            {
-                return _startRequestUri.AbsoluteUri;
             }
             return null;
         }
