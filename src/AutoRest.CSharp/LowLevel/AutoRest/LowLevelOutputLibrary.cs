@@ -77,7 +77,6 @@ namespace AutoRest.CSharp.Output.Models.Types
                     return new CSharpType(typeof(object));
             }
         }
-
         public override CSharpType? FindTypeByName(string originalName) => null;
     }
 }

@@ -39,7 +39,7 @@ namespace MgmtExtensionResource
             HasData = true;
             _data = resource;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _policyDefinitionsRestClient = new PolicyDefinitionsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _policyDefinitionsRestClient = new PolicyDefinitionsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="SubscriptionPolicyDefinition"/> class. </summary>
@@ -48,7 +48,7 @@ namespace MgmtExtensionResource
         internal SubscriptionPolicyDefinition(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _policyDefinitionsRestClient = new PolicyDefinitionsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _policyDefinitionsRestClient = new PolicyDefinitionsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="SubscriptionPolicyDefinition"/> class. </summary>
@@ -60,7 +60,7 @@ namespace MgmtExtensionResource
         internal SubscriptionPolicyDefinition(ArmClientOptions clientOptions, TokenCredential credential, Uri uri, HttpPipeline pipeline, ResourceIdentifier id) : base(clientOptions, credential, uri, pipeline, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _policyDefinitionsRestClient = new PolicyDefinitionsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _policyDefinitionsRestClient = new PolicyDefinitionsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
@@ -95,7 +95,7 @@ namespace MgmtExtensionResource
             scope.Start();
             try
             {
-                var response = await _policyDefinitionsRestClient.GetAsync(Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _policyDefinitionsRestClient.GetAsync(Id.SubscriptionId, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new SubscriptionPolicyDefinition(this, response.Value), response.GetRawResponse());
@@ -118,7 +118,7 @@ namespace MgmtExtensionResource
             scope.Start();
             try
             {
-                var response = _policyDefinitionsRestClient.Get(Id.Name, cancellationToken);
+                var response = _policyDefinitionsRestClient.Get(Id.SubscriptionId, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new SubscriptionPolicyDefinition(this, response.Value), response.GetRawResponse());
@@ -158,7 +158,7 @@ namespace MgmtExtensionResource
             scope.Start();
             try
             {
-                var response = await _policyDefinitionsRestClient.DeleteAsync(Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _policyDefinitionsRestClient.DeleteAsync(Id.SubscriptionId, Id.Name, cancellationToken).ConfigureAwait(false);
                 var operation = new PolicyDefinitionDeleteOperation(response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
@@ -183,7 +183,7 @@ namespace MgmtExtensionResource
             scope.Start();
             try
             {
-                var response = _policyDefinitionsRestClient.Delete(Id.Name, cancellationToken);
+                var response = _policyDefinitionsRestClient.Delete(Id.SubscriptionId, Id.Name, cancellationToken);
                 var operation = new PolicyDefinitionDeleteOperation(response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);

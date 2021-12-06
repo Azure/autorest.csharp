@@ -43,7 +43,7 @@ namespace MgmtScopeResource
             HasData = true;
             _data = resource;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _deploymentsRestClient = new DeploymentsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _deploymentsRestClient = new DeploymentsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
             _restClient = new ResourceManagementRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
             _deploymentOperationsRestClient = new DeploymentRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
@@ -54,7 +54,7 @@ namespace MgmtScopeResource
         internal DeploymentExtended(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _deploymentsRestClient = new DeploymentsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _deploymentsRestClient = new DeploymentsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
             _restClient = new ResourceManagementRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
             _deploymentOperationsRestClient = new DeploymentRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
@@ -68,7 +68,7 @@ namespace MgmtScopeResource
         internal DeploymentExtended(ArmClientOptions clientOptions, TokenCredential credential, Uri uri, HttpPipeline pipeline, ResourceIdentifier id) : base(clientOptions, credential, uri, pipeline, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _deploymentsRestClient = new DeploymentsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _deploymentsRestClient = new DeploymentsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
             _restClient = new ResourceManagementRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
             _deploymentOperationsRestClient = new DeploymentRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
@@ -384,8 +384,8 @@ namespace MgmtScopeResource
             {
                 if (Id.Parent.ResourceType == ResourceGroup.ResourceType)
                 {
-                    var response = await _deploymentsRestClient.WhatIfAsync(Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
-                    var operation = new DeploymentWhatIfOperation(_clientDiagnostics, Pipeline, _deploymentsRestClient.CreateWhatIfRequest(Id.ResourceGroupName, Id.Name, parameters).Request, response);
+                    var response = await _deploymentsRestClient.WhatIfAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
+                    var operation = new DeploymentWhatIfOperation(_clientDiagnostics, Pipeline, _deploymentsRestClient.CreateWhatIfRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters).Request, response);
                     if (waitForCompletion)
                         await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                     return operation;
@@ -408,8 +408,8 @@ namespace MgmtScopeResource
                 }
                 else if (Id.Parent.ResourceType == Subscription.ResourceType)
                 {
-                    var response = await _deploymentsRestClient.WhatIfAtSubscriptionScopeAsync(Id.Name, parameters, cancellationToken).ConfigureAwait(false);
-                    var operation = new DeploymentWhatIfOperation(_clientDiagnostics, Pipeline, _deploymentsRestClient.CreateWhatIfAtSubscriptionScopeRequest(Id.Name, parameters).Request, response);
+                    var response = await _deploymentsRestClient.WhatIfAtSubscriptionScopeAsync(Id.SubscriptionId, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
+                    var operation = new DeploymentWhatIfOperation(_clientDiagnostics, Pipeline, _deploymentsRestClient.CreateWhatIfAtSubscriptionScopeRequest(Id.SubscriptionId, Id.Name, parameters).Request, response);
                     if (waitForCompletion)
                         await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                     return operation;
@@ -456,8 +456,8 @@ namespace MgmtScopeResource
             {
                 if (Id.Parent.ResourceType == ResourceGroup.ResourceType)
                 {
-                    var response = _deploymentsRestClient.WhatIf(Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
-                    var operation = new DeploymentWhatIfOperation(_clientDiagnostics, Pipeline, _deploymentsRestClient.CreateWhatIfRequest(Id.ResourceGroupName, Id.Name, parameters).Request, response);
+                    var response = _deploymentsRestClient.WhatIf(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
+                    var operation = new DeploymentWhatIfOperation(_clientDiagnostics, Pipeline, _deploymentsRestClient.CreateWhatIfRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters).Request, response);
                     if (waitForCompletion)
                         operation.WaitForCompletion(cancellationToken);
                     return operation;
@@ -480,8 +480,8 @@ namespace MgmtScopeResource
                 }
                 else if (Id.Parent.ResourceType == Subscription.ResourceType)
                 {
-                    var response = _deploymentsRestClient.WhatIfAtSubscriptionScope(Id.Name, parameters, cancellationToken);
-                    var operation = new DeploymentWhatIfOperation(_clientDiagnostics, Pipeline, _deploymentsRestClient.CreateWhatIfAtSubscriptionScopeRequest(Id.Name, parameters).Request, response);
+                    var response = _deploymentsRestClient.WhatIfAtSubscriptionScope(Id.SubscriptionId, Id.Name, parameters, cancellationToken);
+                    var operation = new DeploymentWhatIfOperation(_clientDiagnostics, Pipeline, _deploymentsRestClient.CreateWhatIfAtSubscriptionScopeRequest(Id.SubscriptionId, Id.Name, parameters).Request, response);
                     if (waitForCompletion)
                         operation.WaitForCompletion(cancellationToken);
                     return operation;

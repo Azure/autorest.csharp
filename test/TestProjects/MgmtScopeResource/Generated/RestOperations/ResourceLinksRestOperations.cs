@@ -19,7 +19,6 @@ namespace MgmtScopeResource
 {
     internal partial class ResourceLinksRestOperations
     {
-        private string subscriptionId;
         private Uri endpoint;
         private ClientDiagnostics _clientDiagnostics;
         private HttpPipeline _pipeline;
@@ -29,12 +28,9 @@ namespace MgmtScopeResource
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="options"> The client options used to construct the current client. </param>
-        /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="endpoint"> server parameter. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> is null. </exception>
-        public ResourceLinksRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ClientOptions options, string subscriptionId, Uri endpoint = null)
+        public ResourceLinksRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ClientOptions options, Uri endpoint = null)
         {
-            this.subscriptionId = subscriptionId ?? throw new ArgumentNullException(nameof(subscriptionId));
             this.endpoint = endpoint ?? new Uri("https://management.azure.com");
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
@@ -262,7 +258,7 @@ namespace MgmtScopeResource
             }
         }
 
-        internal Azure.Core.HttpMessage CreateListAtSubscriptionRequest(string filter)
+        internal Azure.Core.HttpMessage CreateListAtSubscriptionRequest(string subscriptionId, string filter)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -284,11 +280,18 @@ namespace MgmtScopeResource
         }
 
         /// <summary> Gets all the linked resources for the subscription. </summary>
+        /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="filter"> The filter to apply on the list resource links operation. The supported filter for list resource links is targetId. For example, $filter=targetId eq {value}. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response<ResourceLinkResult>> ListAtSubscriptionAsync(string filter = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> is null. </exception>
+        public async Task<Response<ResourceLinkResult>> ListAtSubscriptionAsync(string subscriptionId, string filter = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreateListAtSubscriptionRequest(filter);
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
+
+            using var message = CreateListAtSubscriptionRequest(subscriptionId, filter);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -305,11 +308,18 @@ namespace MgmtScopeResource
         }
 
         /// <summary> Gets all the linked resources for the subscription. </summary>
+        /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="filter"> The filter to apply on the list resource links operation. The supported filter for list resource links is targetId. For example, $filter=targetId eq {value}. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ResourceLinkResult> ListAtSubscription(string filter = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> is null. </exception>
+        public Response<ResourceLinkResult> ListAtSubscription(string subscriptionId, string filter = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreateListAtSubscriptionRequest(filter);
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
+
+            using var message = CreateListAtSubscriptionRequest(subscriptionId, filter);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -397,7 +407,7 @@ namespace MgmtScopeResource
             }
         }
 
-        internal Azure.Core.HttpMessage CreateListAtSubscriptionNextPageRequest(string nextLink, string filter)
+        internal Azure.Core.HttpMessage CreateListAtSubscriptionNextPageRequest(string nextLink, string subscriptionId, string filter)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -413,17 +423,22 @@ namespace MgmtScopeResource
 
         /// <summary> Gets all the linked resources for the subscription. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
+        /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="filter"> The filter to apply on the list resource links operation. The supported filter for list resource links is targetId. For example, $filter=targetId eq {value}. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
-        public async Task<Response<ResourceLinkResult>> ListAtSubscriptionNextPageAsync(string nextLink, string filter = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="subscriptionId"/> is null. </exception>
+        public async Task<Response<ResourceLinkResult>> ListAtSubscriptionNextPageAsync(string nextLink, string subscriptionId, string filter = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
                 throw new ArgumentNullException(nameof(nextLink));
             }
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
 
-            using var message = CreateListAtSubscriptionNextPageRequest(nextLink, filter);
+            using var message = CreateListAtSubscriptionNextPageRequest(nextLink, subscriptionId, filter);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -441,17 +456,22 @@ namespace MgmtScopeResource
 
         /// <summary> Gets all the linked resources for the subscription. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
+        /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="filter"> The filter to apply on the list resource links operation. The supported filter for list resource links is targetId. For example, $filter=targetId eq {value}. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
-        public Response<ResourceLinkResult> ListAtSubscriptionNextPage(string nextLink, string filter = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="subscriptionId"/> is null. </exception>
+        public Response<ResourceLinkResult> ListAtSubscriptionNextPage(string nextLink, string subscriptionId, string filter = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
                 throw new ArgumentNullException(nameof(nextLink));
             }
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
 
-            using var message = CreateListAtSubscriptionNextPageRequest(nextLink, filter);
+            using var message = CreateListAtSubscriptionNextPageRequest(nextLink, subscriptionId, filter);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

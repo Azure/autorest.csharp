@@ -19,7 +19,6 @@ namespace MgmtListMethods
 {
     internal partial class FakeParentsRestOperations
     {
-        private string subscriptionId;
         private Uri endpoint;
         private string apiVersion;
         private ClientDiagnostics _clientDiagnostics;
@@ -30,13 +29,11 @@ namespace MgmtListMethods
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="options"> The client options used to construct the current client. </param>
-        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="apiVersion"> Api Version. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="apiVersion"/> is null. </exception>
-        public FakeParentsRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ClientOptions options, string subscriptionId, Uri endpoint = null, string apiVersion = "2020-06-01")
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
+        public FakeParentsRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ClientOptions options, Uri endpoint = null, string apiVersion = "2020-06-01")
         {
-            this.subscriptionId = subscriptionId ?? throw new ArgumentNullException(nameof(subscriptionId));
             this.endpoint = endpoint ?? new Uri("https://management.azure.com");
             this.apiVersion = apiVersion ?? throw new ArgumentNullException(nameof(apiVersion));
             _clientDiagnostics = clientDiagnostics;
@@ -44,7 +41,7 @@ namespace MgmtListMethods
             _userAgent = HttpMessageUtilities.GetUserAgentName(this, options);
         }
 
-        internal HttpMessage CreateCreateOrUpdateRequest(string fakeName, string fakeParentName, FakeParentData parameters)
+        internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string fakeName, string fakeParentName, FakeParentData parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -69,13 +66,18 @@ namespace MgmtListMethods
         }
 
         /// <summary> Create or update. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="fakeName"> Name. </param>
         /// <param name="fakeParentName"> Name. </param>
         /// <param name="parameters"> Parameters supplied to the Create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/>, <paramref name="fakeParentName"/>, or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<FakeParentData>> CreateOrUpdateAsync(string fakeName, string fakeParentName, FakeParentData parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="fakeName"/>, <paramref name="fakeParentName"/>, or <paramref name="parameters"/> is null. </exception>
+        public async Task<Response<FakeParentData>> CreateOrUpdateAsync(string subscriptionId, string fakeName, string fakeParentName, FakeParentData parameters, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (fakeName == null)
             {
                 throw new ArgumentNullException(nameof(fakeName));
@@ -89,7 +91,7 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var message = CreateCreateOrUpdateRequest(fakeName, fakeParentName, parameters);
+            using var message = CreateCreateOrUpdateRequest(subscriptionId, fakeName, fakeParentName, parameters);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -106,13 +108,18 @@ namespace MgmtListMethods
         }
 
         /// <summary> Create or update. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="fakeName"> Name. </param>
         /// <param name="fakeParentName"> Name. </param>
         /// <param name="parameters"> Parameters supplied to the Create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/>, <paramref name="fakeParentName"/>, or <paramref name="parameters"/> is null. </exception>
-        public Response<FakeParentData> CreateOrUpdate(string fakeName, string fakeParentName, FakeParentData parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="fakeName"/>, <paramref name="fakeParentName"/>, or <paramref name="parameters"/> is null. </exception>
+        public Response<FakeParentData> CreateOrUpdate(string subscriptionId, string fakeName, string fakeParentName, FakeParentData parameters, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (fakeName == null)
             {
                 throw new ArgumentNullException(nameof(fakeName));
@@ -126,7 +133,7 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var message = CreateCreateOrUpdateRequest(fakeName, fakeParentName, parameters);
+            using var message = CreateCreateOrUpdateRequest(subscriptionId, fakeName, fakeParentName, parameters);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -142,7 +149,7 @@ namespace MgmtListMethods
             }
         }
 
-        internal HttpMessage CreateGetRequest(string fakeName, string fakeParentName)
+        internal HttpMessage CreateGetRequest(string subscriptionId, string fakeName, string fakeParentName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -163,12 +170,17 @@ namespace MgmtListMethods
         }
 
         /// <summary> Retrieves information. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="fakeName"> Name. </param>
         /// <param name="fakeParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> or <paramref name="fakeParentName"/> is null. </exception>
-        public async Task<Response<FakeParentData>> GetAsync(string fakeName, string fakeParentName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="fakeName"/>, or <paramref name="fakeParentName"/> is null. </exception>
+        public async Task<Response<FakeParentData>> GetAsync(string subscriptionId, string fakeName, string fakeParentName, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (fakeName == null)
             {
                 throw new ArgumentNullException(nameof(fakeName));
@@ -178,7 +190,7 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(fakeParentName));
             }
 
-            using var message = CreateGetRequest(fakeName, fakeParentName);
+            using var message = CreateGetRequest(subscriptionId, fakeName, fakeParentName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -197,12 +209,17 @@ namespace MgmtListMethods
         }
 
         /// <summary> Retrieves information. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="fakeName"> Name. </param>
         /// <param name="fakeParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> or <paramref name="fakeParentName"/> is null. </exception>
-        public Response<FakeParentData> Get(string fakeName, string fakeParentName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="fakeName"/>, or <paramref name="fakeParentName"/> is null. </exception>
+        public Response<FakeParentData> Get(string subscriptionId, string fakeName, string fakeParentName, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (fakeName == null)
             {
                 throw new ArgumentNullException(nameof(fakeName));
@@ -212,7 +229,7 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(fakeParentName));
             }
 
-            using var message = CreateGetRequest(fakeName, fakeParentName);
+            using var message = CreateGetRequest(subscriptionId, fakeName, fakeParentName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -230,7 +247,7 @@ namespace MgmtListMethods
             }
         }
 
-        internal HttpMessage CreateListRequest(string fakeName)
+        internal HttpMessage CreateListRequest(string subscriptionId, string fakeName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -250,17 +267,22 @@ namespace MgmtListMethods
         }
 
         /// <summary> Lists all in a resource group. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="fakeName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> is null. </exception>
-        public async Task<Response<FakeParentListResult>> ListAsync(string fakeName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="fakeName"/> is null. </exception>
+        public async Task<Response<FakeParentListResult>> ListAsync(string subscriptionId, string fakeName, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (fakeName == null)
             {
                 throw new ArgumentNullException(nameof(fakeName));
             }
 
-            using var message = CreateListRequest(fakeName);
+            using var message = CreateListRequest(subscriptionId, fakeName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -277,17 +299,22 @@ namespace MgmtListMethods
         }
 
         /// <summary> Lists all in a resource group. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="fakeName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> is null. </exception>
-        public Response<FakeParentListResult> List(string fakeName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="fakeName"/> is null. </exception>
+        public Response<FakeParentListResult> List(string subscriptionId, string fakeName, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (fakeName == null)
             {
                 throw new ArgumentNullException(nameof(fakeName));
             }
 
-            using var message = CreateListRequest(fakeName);
+            using var message = CreateListRequest(subscriptionId, fakeName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -303,7 +330,7 @@ namespace MgmtListMethods
             }
         }
 
-        internal HttpMessage CreateListNextPageRequest(string nextLink, string fakeName)
+        internal HttpMessage CreateListNextPageRequest(string nextLink, string subscriptionId, string fakeName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -319,21 +346,26 @@ namespace MgmtListMethods
 
         /// <summary> Lists all in a resource group. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="fakeName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="fakeName"/> is null. </exception>
-        public async Task<Response<FakeParentListResult>> ListNextPageAsync(string nextLink, string fakeName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="subscriptionId"/>, or <paramref name="fakeName"/> is null. </exception>
+        public async Task<Response<FakeParentListResult>> ListNextPageAsync(string nextLink, string subscriptionId, string fakeName, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
                 throw new ArgumentNullException(nameof(nextLink));
+            }
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
             }
             if (fakeName == null)
             {
                 throw new ArgumentNullException(nameof(fakeName));
             }
 
-            using var message = CreateListNextPageRequest(nextLink, fakeName);
+            using var message = CreateListNextPageRequest(nextLink, subscriptionId, fakeName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -351,21 +383,26 @@ namespace MgmtListMethods
 
         /// <summary> Lists all in a resource group. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="fakeName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="fakeName"/> is null. </exception>
-        public Response<FakeParentListResult> ListNextPage(string nextLink, string fakeName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="subscriptionId"/>, or <paramref name="fakeName"/> is null. </exception>
+        public Response<FakeParentListResult> ListNextPage(string nextLink, string subscriptionId, string fakeName, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
                 throw new ArgumentNullException(nameof(nextLink));
+            }
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
             }
             if (fakeName == null)
             {
                 throw new ArgumentNullException(nameof(fakeName));
             }
 
-            using var message = CreateListNextPageRequest(nextLink, fakeName);
+            using var message = CreateListNextPageRequest(nextLink, subscriptionId, fakeName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
