@@ -174,6 +174,46 @@ namespace CollapseRequestCondition_LowLevel
             }
         }
 
+        /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
+        /// <param name="context"> The request context. </param>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> MulticollapseGetAsync(RequestConditions requestConditions = null, RequestContext context = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("MatchConditionCollapseClient.MulticollapseGet");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateMulticollapseGetRequest(requestConditions);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
+        /// <param name="context"> The request context. </param>
+#pragma warning disable AZC0002
+        public virtual Response MulticollapseGet(RequestConditions requestConditions = null, RequestContext context = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("MatchConditionCollapseClient.MulticollapseGet");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateMulticollapseGetRequest(requestConditions);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         internal HttpMessage CreateCollapseGetWithHeadRequest(string otherHeader, MatchConditions matchConditions)
         {
             var message = _pipeline.CreateMessage();
@@ -226,6 +266,23 @@ namespace CollapseRequestCondition_LowLevel
             if (matchConditions != null)
             {
                 request.Headers.Add(matchConditions);
+            }
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateMulticollapseGetRequest(RequestConditions requestConditions)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/MatchConditionCollapse/multi", false);
+            request.Uri = uri;
+            if (requestConditions != null)
+            {
+                request.Headers.Add(requestConditions, "R");
             }
             message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;

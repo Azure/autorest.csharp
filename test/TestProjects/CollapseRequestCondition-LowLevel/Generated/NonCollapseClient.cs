@@ -92,17 +92,17 @@ namespace CollapseRequestCondition_LowLevel
             }
         }
 
-        /// <param name="ifNoneMatch"> Specify an ETag value to operate only on blobs without a matching value. </param>
+        /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="context"> The request context. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> CollapseGetAsync(ETag? ifNoneMatch = null, RequestContext context = null)
+        public virtual async Task<Response> CollapseGetAsync(RequestConditions requestConditions = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("NonCollapseClient.CollapseGet");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateCollapseGetRequest(ifNoneMatch);
+                using HttpMessage message = CreateCollapseGetRequest(requestConditions);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -112,17 +112,17 @@ namespace CollapseRequestCondition_LowLevel
             }
         }
 
-        /// <param name="ifNoneMatch"> Specify an ETag value to operate only on blobs without a matching value. </param>
+        /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="context"> The request context. </param>
 #pragma warning disable AZC0002
-        public virtual Response CollapseGet(ETag? ifNoneMatch = null, RequestContext context = null)
+        public virtual Response CollapseGet(RequestConditions requestConditions = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("NonCollapseClient.CollapseGet");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateCollapseGetRequest(ifNoneMatch);
+                using HttpMessage message = CreateCollapseGetRequest(requestConditions);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -155,7 +155,7 @@ namespace CollapseRequestCondition_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateCollapseGetRequest(ETag? ifNoneMatch)
+        internal HttpMessage CreateCollapseGetRequest(RequestConditions requestConditions)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -164,13 +164,9 @@ namespace CollapseRequestCondition_LowLevel
             uri.Reset(_endpoint);
             uri.AppendPath("/NonCollapse/", false);
             request.Uri = uri;
-            if (ifNoneMatch != null)
+            if (requestConditions != null)
             {
-                request.Headers.Add("If-None-Match", ifNoneMatch.Value);
-            }
-            if (ifNoneMatch != null)
-            {
-                request.Headers.Add("conditions", ifNoneMatch.Value);
+                request.Headers.Add(requestConditions, "R");
             }
             message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;

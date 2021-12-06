@@ -207,7 +207,7 @@ namespace AutoRest.CSharp.Output.Models
                 {
                     if (requestParameter.IsRequired)
                     {
-                        throw new Exception("Required conditional request headers are not supported.");
+                        throw new NotSupportedException("Required conditional request headers are not supported.");
                     }
 
                     requestConditionHeaders |= header;
@@ -257,16 +257,14 @@ namespace AutoRest.CSharp.Output.Models
                     case RequestConditionHeaders.IfMatch | RequestConditionHeaders.IfNoneMatch:
                         requestConditionParameter = MatchConditionsParameter;
                         break;
-                    case RequestConditionHeaders.IfMatch | RequestConditionHeaders.IfNoneMatch | RequestConditionHeaders.IfModifiedSince | RequestConditionHeaders.IfUnmodifiedSince:
-                        requestConditionParameter = RequestConditionsParameter;
-                        break;
                     case RequestConditionHeaders.IfMatch:
                     case RequestConditionHeaders.IfNoneMatch:
                         requestConditionParameter = BuildParameter(requestConditionRequestParameter, typeof(ETag));
                         references[requestConditionRequestParameter] = CreateReference(requestConditionRequestParameter, requestConditionParameter);
                         break;
                     default:
-                        throw new NotSupportedException($"Behavior for combination of headers '{requestConditionHeaders}' in '{operation.Language.Default.Name}' is undefined");
+                        requestConditionParameter = RequestConditionsParameter;
+                        break;
                 }
                 orderedParameters.Add(requestConditionParameter);
             }
