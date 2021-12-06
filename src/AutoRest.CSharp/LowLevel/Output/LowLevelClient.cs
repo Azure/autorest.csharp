@@ -83,13 +83,13 @@ namespace AutoRest.CSharp.Output.Models
 
             PublicConstructors = BuildPublicConstructors().ToArray();
 
-            var clientMethods = BuildMethods(builder, operationGroup.Operations, Declaration.Name);
+            var clientMethods = BuildMethods(builder, operationGroup.Operations, Declaration.Name).ToArray();
 
             ClientMethods = clientMethods
                 .OrderBy(m => m.IsLongRunning ? 2 : m.PagingInfo != null ? 1 : 0) // Temporary sorting to minimize amount of changed files. Will be removed when new LRO is implemented
                 .ToArray();
 
-            RequestMethods = ClientMethods.Select(m => m.RequestMethod)
+            RequestMethods = clientMethods.Select(m => m.RequestMethod)
                 .Concat(ClientMethods.Select(m => m.PagingInfo?.NextPageMethod).WhereNotNull())
                 .Distinct()
                 .ToArray();
