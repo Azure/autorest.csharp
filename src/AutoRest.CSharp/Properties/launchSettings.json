@@ -404,6 +404,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ResourceRename\\Generated"
     },
+    "SingletonResource": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\SingletonResource\\Generated"
+    },
     "SingleTopLevelClientWithOperations-LowLevel": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\SingleTopLevelClientWithOperations-LowLevel\\Generated"
