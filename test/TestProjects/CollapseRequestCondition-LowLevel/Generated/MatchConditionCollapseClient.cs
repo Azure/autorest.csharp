@@ -174,18 +174,17 @@ namespace CollapseRequestCondition_LowLevel
             }
         }
 
-        /// <param name="ifModifiedSince"> Specify this header value to operate only on a blob if it has been modified since the specified date/time. </param>
-        /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
+        /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="context"> The request context. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> MulticollapseGetAsync(DateTimeOffset? ifModifiedSince = null, MatchConditions matchConditions = null, RequestContext context = null)
+        public virtual async Task<Response> MulticollapseGetAsync(RequestConditions requestConditions = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("MatchConditionCollapseClient.MulticollapseGet");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateMulticollapseGetRequest(ifModifiedSince, matchConditions);
+                using HttpMessage message = CreateMulticollapseGetRequest(requestConditions);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -195,18 +194,17 @@ namespace CollapseRequestCondition_LowLevel
             }
         }
 
-        /// <param name="ifModifiedSince"> Specify this header value to operate only on a blob if it has been modified since the specified date/time. </param>
-        /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
+        /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="context"> The request context. </param>
 #pragma warning disable AZC0002
-        public virtual Response MulticollapseGet(DateTimeOffset? ifModifiedSince = null, MatchConditions matchConditions = null, RequestContext context = null)
+        public virtual Response MulticollapseGet(RequestConditions requestConditions = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("MatchConditionCollapseClient.MulticollapseGet");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateMulticollapseGetRequest(ifModifiedSince, matchConditions);
+                using HttpMessage message = CreateMulticollapseGetRequest(requestConditions);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -273,7 +271,7 @@ namespace CollapseRequestCondition_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateMulticollapseGetRequest(DateTimeOffset? ifModifiedSince, MatchConditions matchConditions)
+        internal HttpMessage CreateMulticollapseGetRequest(RequestConditions requestConditions)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -282,13 +280,9 @@ namespace CollapseRequestCondition_LowLevel
             uri.Reset(_endpoint);
             uri.AppendPath("/MatchConditionCollapse/multi", false);
             request.Uri = uri;
-            if (ifModifiedSince != null)
+            if (requestConditions != null)
             {
-                request.Headers.Add("If-Modified-Since", ifModifiedSince.Value, "R");
-            }
-            if (matchConditions != null)
-            {
-                request.Headers.Add(matchConditions);
+                request.Headers.Add(requestConditions, "R");
             }
             message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;

@@ -12,6 +12,17 @@ namespace AutoRest.CSharp.Utilities
 {
     internal static class EnumerableExtensions
     {
+        public static IEnumerable<TSource> WhereNotNull<TSource>(this IEnumerable<TSource?> source)
+        {
+            foreach (var element in source)
+            {
+                if (element != null)
+                {
+                    yield return element;
+                }
+            }
+        }
+
         //https://stackoverflow.com/a/58600254/294804
         public static void ForEachLast<T>(this IEnumerable<T> collection, Action<T>? actionExceptLast = null, Action<T>? actionOnLast = null) =>
             // ReSharper disable once IteratorMethodResultIsIgnored
