@@ -31,7 +31,7 @@ namespace AutoRest.CSharp.Generation.Writers
     {
         private static readonly CSharpType RequestContextParameterType = new(typeof(RequestContext), true);
 
-        private static readonly Parameter WaitForCompletionParameter = new("waitForCompletion", "true if method should return after the long-running operation is completed; otherwise, false.", new CSharpType(typeof(bool)), null, false);
+        private static readonly Parameter WaitForCompletionParameter = new("waitForCompletion", "true if the method should wait to return until the long-running operation has completed on the service; false if it should return after starting the operation. For more information on long-running operations, please see <see href=\"https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md\"> Azure.Core Long-Running Operation samples</see>.", new CSharpType(typeof(bool)), null, false);
         private static readonly Parameter RequestContextParameter = new("context", "The request context", RequestContextParameterType, Constant.Default(RequestContextParameterType), false);
         private static readonly Parameter ResponseParameter = new("response", null, typeof(Response), null, false);
         private static readonly Parameter NextLinkParameter = new("nextLink", null, new CSharpType(typeof(string), true), null, false);
