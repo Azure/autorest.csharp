@@ -13,6 +13,8 @@ using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using Azure.Core;
 using AutoRest.CSharp.Utilities;
+using AutoRest.CSharp.Common.Output.Models.Requests;
+using System.Globalization;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -269,8 +271,13 @@ namespace AutoRest.CSharp.Generation.Writers
 
             using (WriteValueNullCheck(writer, header.Value))
             {
-                writer.Append($"{request}.Headers.{method}({header.Name:L}, ");
-
+                if (header is RequestConditionsHeader conditionsHeader)
+                {
+                    writer.Append($"{request}.Headers.{method}(");
+                } else
+                {
+                    writer.Append($"{request}.Headers.{method}({header.Name:L}, ");
+                }
                 if (header.Value.Type.Equals(typeof(Azure.Core.ContentType)))
                 {
                     WriteConstantOrParameterAsString(writer, header.Value);

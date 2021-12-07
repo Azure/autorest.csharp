@@ -19,7 +19,6 @@ namespace MgmtScopeResource
 {
     internal partial class DeploymentsRestOperations
     {
-        private string subscriptionId;
         private Uri endpoint;
         private ClientDiagnostics _clientDiagnostics;
         private HttpPipeline _pipeline;
@@ -29,12 +28,9 @@ namespace MgmtScopeResource
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="options"> The client options used to construct the current client. </param>
-        /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="endpoint"> server parameter. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> is null. </exception>
-        public DeploymentsRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ClientOptions options, string subscriptionId, Uri endpoint = null)
+        public DeploymentsRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ClientOptions options, Uri endpoint = null)
         {
-            this.subscriptionId = subscriptionId ?? throw new ArgumentNullException(nameof(subscriptionId));
             this.endpoint = endpoint ?? new Uri("https://management.azure.com");
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
@@ -796,7 +792,7 @@ namespace MgmtScopeResource
             }
         }
 
-        internal Azure.Core.HttpMessage CreateWhatIfAtSubscriptionScopeRequest(string deploymentName, DeploymentWhatIf parameters)
+        internal Azure.Core.HttpMessage CreateWhatIfAtSubscriptionScopeRequest(string subscriptionId, string deploymentName, DeploymentWhatIf parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -820,12 +816,17 @@ namespace MgmtScopeResource
         }
 
         /// <summary> Returns changes that will be made by the deployment if executed at the scope of the subscription. </summary>
+        /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="deploymentName"> The name of the deployment. </param>
         /// <param name="parameters"> Parameters to What If. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response> WhatIfAtSubscriptionScopeAsync(string deploymentName, DeploymentWhatIf parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="deploymentName"/>, or <paramref name="parameters"/> is null. </exception>
+        public async Task<Response> WhatIfAtSubscriptionScopeAsync(string subscriptionId, string deploymentName, DeploymentWhatIf parameters, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (deploymentName == null)
             {
                 throw new ArgumentNullException(nameof(deploymentName));
@@ -835,7 +836,7 @@ namespace MgmtScopeResource
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var message = CreateWhatIfAtSubscriptionScopeRequest(deploymentName, parameters);
+            using var message = CreateWhatIfAtSubscriptionScopeRequest(subscriptionId, deploymentName, parameters);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -848,12 +849,17 @@ namespace MgmtScopeResource
         }
 
         /// <summary> Returns changes that will be made by the deployment if executed at the scope of the subscription. </summary>
+        /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="deploymentName"> The name of the deployment. </param>
         /// <param name="parameters"> Parameters to What If. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> or <paramref name="parameters"/> is null. </exception>
-        public Response WhatIfAtSubscriptionScope(string deploymentName, DeploymentWhatIf parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="deploymentName"/>, or <paramref name="parameters"/> is null. </exception>
+        public Response WhatIfAtSubscriptionScope(string subscriptionId, string deploymentName, DeploymentWhatIf parameters, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (deploymentName == null)
             {
                 throw new ArgumentNullException(nameof(deploymentName));
@@ -863,7 +869,7 @@ namespace MgmtScopeResource
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var message = CreateWhatIfAtSubscriptionScopeRequest(deploymentName, parameters);
+            using var message = CreateWhatIfAtSubscriptionScopeRequest(subscriptionId, deploymentName, parameters);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -875,7 +881,7 @@ namespace MgmtScopeResource
             }
         }
 
-        internal Azure.Core.HttpMessage CreateWhatIfRequest(string resourceGroupName, string deploymentName, DeploymentWhatIf parameters)
+        internal Azure.Core.HttpMessage CreateWhatIfRequest(string subscriptionId, string resourceGroupName, string deploymentName, DeploymentWhatIf parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -901,13 +907,18 @@ namespace MgmtScopeResource
         }
 
         /// <summary> Returns changes that will be made by the deployment if executed at the scope of the resource group. </summary>
+        /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="resourceGroupName"> The name of the resource group the template will be deployed to. The name is case insensitive. </param>
         /// <param name="deploymentName"> The name of the deployment. </param>
         /// <param name="parameters"> Parameters to validate. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="deploymentName"/>, or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response> WhatIfAsync(string resourceGroupName, string deploymentName, DeploymentWhatIf parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="deploymentName"/>, or <paramref name="parameters"/> is null. </exception>
+        public async Task<Response> WhatIfAsync(string subscriptionId, string resourceGroupName, string deploymentName, DeploymentWhatIf parameters, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -921,7 +932,7 @@ namespace MgmtScopeResource
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var message = CreateWhatIfRequest(resourceGroupName, deploymentName, parameters);
+            using var message = CreateWhatIfRequest(subscriptionId, resourceGroupName, deploymentName, parameters);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -934,13 +945,18 @@ namespace MgmtScopeResource
         }
 
         /// <summary> Returns changes that will be made by the deployment if executed at the scope of the resource group. </summary>
+        /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="resourceGroupName"> The name of the resource group the template will be deployed to. The name is case insensitive. </param>
         /// <param name="deploymentName"> The name of the deployment. </param>
         /// <param name="parameters"> Parameters to validate. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="deploymentName"/>, or <paramref name="parameters"/> is null. </exception>
-        public Response WhatIf(string resourceGroupName, string deploymentName, DeploymentWhatIf parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="deploymentName"/>, or <paramref name="parameters"/> is null. </exception>
+        public Response WhatIf(string subscriptionId, string resourceGroupName, string deploymentName, DeploymentWhatIf parameters, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -954,7 +970,7 @@ namespace MgmtScopeResource
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var message = CreateWhatIfRequest(resourceGroupName, deploymentName, parameters);
+            using var message = CreateWhatIfRequest(subscriptionId, resourceGroupName, deploymentName, parameters);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

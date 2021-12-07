@@ -42,12 +42,6 @@
                 "operationId": "Toasters_List",
                 "parameters": [
                     {
-                        "name": "subscriptionId",
-                        "in": "path",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
                         "$ref": "#/parameters/ApiVersionParameter"
                     },
                     {
@@ -72,12 +66,6 @@
                 "operationId": "Toasters_CreateOrUpdate",
                 "description": "Create or update an availability set.",
                 "parameters": [
-                    {
-                        "name": "subscriptionId",
-                        "in": "path",
-                        "required": true,
-                        "type": "string"
-                    },
                     {
                         "name": "toasterName",
                         "in": "path",
@@ -116,12 +104,6 @@
                 ],
                 "operationId": "Toasters_Get",
                 "parameters": [
-                    {
-                        "name": "subscriptionId",
-                        "in": "path",
-                        "required": true,
-                        "type": "string"
-                    },
                     {
                         "name": "toasterName",
                         "in": "path",

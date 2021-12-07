@@ -81,6 +81,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             OmitOperationGroups.RemoveOperationGroups(codeModel, context);
             _context = context;
             _mgmtConfiguration = context.Configuration.MgmtConfiguration;
+            UpdateSubscriptionIdForAllResource(codeModel);
             _codeModel = codeModel;
             _operationGroupToRequestPaths = new Dictionary<OperationGroup, IEnumerable<string>>();
             _rawRequestPathToOperationSets = new Dictionary<string, OperationSet>();
@@ -100,6 +101,25 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
             // Decorate the operation sets to see if it corresponds to a resource
             DecorateOperationSets();
+        }
+
+        private void UpdateSubscriptionIdForAllResource(CodeModel codeModel)
+        {
+            foreach (var operationGroup in codeModel.OperationGroups)
+            {
+                foreach (var op in operationGroup.Operations)
+                {
+                    foreach (var p in op.Parameters)
+                    {
+                        //updater the first subscriptionId to be 'method'
+                        if (p.Language.Default.Name.Equals("subscriptionId", StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            p.Implementation = ImplementationLocation.Method;
+                            break;
+                        }
+                    }
+                }
+            }
         }
 
         private IEnumerable<OperationSet>? _resourceOperationSets;

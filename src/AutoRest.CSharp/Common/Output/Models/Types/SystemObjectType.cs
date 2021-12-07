@@ -11,7 +11,9 @@ using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
@@ -56,7 +58,11 @@ namespace AutoRest.CSharp.Output.Models.Types
             return new List<ParameterInfo>();
         }
 
-        private Type? GetSerializeAs(Type type) => ReferenceTypes.IsMgmtReferenceType(type) ? typeof(string) : null;
+        private static Type? GetSerializeAs(Type type) => type.Name switch
+        {
+            "ResourceIdentifier" => type,
+            _ => ReferenceTypes.IsMgmtReferenceType (type) ? typeof(string) : null,
+        };
 
         internal IEnumerable<Attribute> GetCustomAttributes()
         {

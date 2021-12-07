@@ -33,7 +33,7 @@ namespace MgmtParent
         internal DedicatedHostGroupCollection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _dedicatedHostGroupsRestClient = new DedicatedHostGroupsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _dedicatedHostGroupsRestClient = new DedicatedHostGroupsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
@@ -65,7 +65,7 @@ namespace MgmtParent
             scope.Start();
             try
             {
-                var response = _dedicatedHostGroupsRestClient.CreateOrUpdate(Id.ResourceGroupName, hostGroupName, parameters, cancellationToken);
+                var response = _dedicatedHostGroupsRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, hostGroupName, parameters, cancellationToken);
                 var operation = new DedicatedHostGroupCreateOrUpdateOperation(Parent, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
@@ -102,7 +102,7 @@ namespace MgmtParent
             scope.Start();
             try
             {
-                var response = await _dedicatedHostGroupsRestClient.CreateOrUpdateAsync(Id.ResourceGroupName, hostGroupName, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _dedicatedHostGroupsRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, hostGroupName, parameters, cancellationToken).ConfigureAwait(false);
                 var operation = new DedicatedHostGroupCreateOrUpdateOperation(Parent, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -133,7 +133,7 @@ namespace MgmtParent
             scope.Start();
             try
             {
-                var response = _dedicatedHostGroupsRestClient.Get(Id.ResourceGroupName, hostGroupName, cancellationToken);
+                var response = _dedicatedHostGroupsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, hostGroupName, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new DedicatedHostGroup(Parent, response.Value), response.GetRawResponse());
@@ -163,7 +163,7 @@ namespace MgmtParent
             scope.Start();
             try
             {
-                var response = await _dedicatedHostGroupsRestClient.GetAsync(Id.ResourceGroupName, hostGroupName, cancellationToken).ConfigureAwait(false);
+                var response = await _dedicatedHostGroupsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, hostGroupName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new DedicatedHostGroup(Parent, response.Value), response.GetRawResponse());
@@ -190,7 +190,7 @@ namespace MgmtParent
             scope.Start();
             try
             {
-                var response = _dedicatedHostGroupsRestClient.Get(Id.ResourceGroupName, hostGroupName, cancellationToken: cancellationToken);
+                var response = _dedicatedHostGroupsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, hostGroupName, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<DedicatedHostGroup>(null, response.GetRawResponse())
                     : Response.FromValue(new DedicatedHostGroup(this, response.Value), response.GetRawResponse());
@@ -217,7 +217,7 @@ namespace MgmtParent
             scope.Start();
             try
             {
-                var response = await _dedicatedHostGroupsRestClient.GetAsync(Id.ResourceGroupName, hostGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _dedicatedHostGroupsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, hostGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<DedicatedHostGroup>(null, response.GetRawResponse())
                     : Response.FromValue(new DedicatedHostGroup(this, response.Value), response.GetRawResponse());
