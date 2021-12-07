@@ -404,7 +404,7 @@ namespace MgmtSingleton
         /// <returns> Returns a <see cref="SingletonConfig" /> object. </returns>
         public SingletonConfig GetSingletonConfig()
         {
-            return new SingletonConfig(this, Id + "/singletonConfigs/web");
+            return new SingletonConfig(this, new ResourceIdentifier(Id.ToString() + "/singletonConfigs/web"));
         }
         #endregion
     }
