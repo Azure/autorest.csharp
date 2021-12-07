@@ -55,7 +55,7 @@ namespace MgmtMultipleParentResource
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parentName"/> or <paramref name="body"/> is null. </exception>
-        public virtual ParentCreateOrUpdateOperation CreateOrUpdate(string parentName, ParentData body, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual ParentCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string parentName, ParentData body, CancellationToken cancellationToken = default)
         {
             if (parentName == null)
             {
@@ -92,7 +92,7 @@ namespace MgmtMultipleParentResource
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parentName"/> or <paramref name="body"/> is null. </exception>
-        public async virtual Task<ParentCreateOrUpdateOperation> CreateOrUpdateAsync(string parentName, ParentData body, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<ParentCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string parentName, ParentData body, CancellationToken cancellationToken = default)
         {
             if (parentName == null)
             {

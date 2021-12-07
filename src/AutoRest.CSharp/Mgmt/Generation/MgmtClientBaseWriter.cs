@@ -567,10 +567,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
             Dictionary<RequestPath, IEnumerable<ParameterMapping>> parameterMappings, IReadOnlyList<Parameter> methodParameters,
             string methodName, bool async)
         {
-            // we can only make this an SLRO when all of the methods are not really long
-            bool isSLRO = !clientOperation.IsLongRunningReallyLong();
-            methodName = isSLRO ? methodName : $"Start{methodName}";
-
             // TODO -- since we are combining multiple operations under different parents, which description should we leave here?
             _writer.WriteXmlDocumentationSummary($"{clientOperation.Description}");
             foreach (var parameter in methodParameters)
@@ -584,7 +580,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var lroObjectType = GetLROObjectType(clientOperation.First().Operation, async);
             var responseType = lroObjectType.WrapAsync(async);
 
-            WriteLROMethodSignature(responseType, methodName, methodParameters, async, isSLRO, clientOperation.Accessibility, true);
+            WriteLROMethodSignature(responseType, methodName, methodParameters, async, clientOperation.Accessibility, true);
 
             using (_writer.Scope())
             {
@@ -662,16 +658,16 @@ namespace AutoRest.CSharp.Mgmt.Generation
         }
 
         protected virtual void WriteLROMethodSignature(CSharpType responseType, string methodName, IEnumerable<Parameter> methodParameters, bool async,
-            bool isSLRO, string accessibility = "public", bool isVirtual = true)
+            string accessibility = "public", bool isVirtual = true)
         {
             _writer.Append($"{accessibility} {GetAsyncKeyword(async)} {GetVirtual(isVirtual)} {responseType} {CreateMethodName(methodName, async)}(");
+            _writer.Append($"bool waitForCompletion, ");
             foreach (var parameter in methodParameters)
             {
                 _writer.WriteParameter(parameter);
             }
 
-            var defaultWaitForCompletion = isSLRO ? "true" : "false";
-            _writer.Line($"bool waitForCompletion = {defaultWaitForCompletion}, {typeof(CancellationToken)} cancellationToken = default)");
+            _writer.Line($"{typeof(CancellationToken)} cancellationToken = default)");
         }
 
         protected virtual void WriteLROResponse(CSharpType lroObjectType, string diagnosticsVariableName, string pipelineVariableName, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMapping, bool async)

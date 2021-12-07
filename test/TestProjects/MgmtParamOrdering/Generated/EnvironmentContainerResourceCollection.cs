@@ -52,7 +52,7 @@ namespace MgmtParamOrdering
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="body"/> is null. </exception>
-        public virtual EnvironmentContainerCreateOrUpdateOperation CreateOrUpdate(string name, EnvironmentContainerResourceData body, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual EnvironmentContainerCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string name, EnvironmentContainerResourceData body, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
@@ -89,7 +89,7 @@ namespace MgmtParamOrdering
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="body"/> is null. </exception>
-        public async virtual Task<EnvironmentContainerCreateOrUpdateOperation> CreateOrUpdateAsync(string name, EnvironmentContainerResourceData body, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<EnvironmentContainerCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string name, EnvironmentContainerResourceData body, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {

@@ -157,7 +157,7 @@ namespace MgmtSingleton
         /// <summary> Delete an SingletonResources2. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<SingletonResources2DeleteOperation> DeleteAsync(bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<SingletonResources2DeleteOperation> DeleteAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SingletonResource2.Delete");
             scope.Start();
@@ -182,7 +182,7 @@ namespace MgmtSingleton
         /// <summary> Delete an SingletonResources2. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual SingletonResources2DeleteOperation Delete(bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual SingletonResources2DeleteOperation Delete(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SingletonResource2.Delete");
             scope.Start();
@@ -208,7 +208,7 @@ namespace MgmtSingleton
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<SingletonResources2CreateOrUpdateOperation> CreateOrUpdateAsync(SingletonResource2Data parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<SingletonResources2CreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, SingletonResource2Data parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -239,7 +239,7 @@ namespace MgmtSingleton
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual SingletonResources2CreateOrUpdateOperation CreateOrUpdate(SingletonResource2Data parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual SingletonResources2CreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, SingletonResource2Data parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -326,7 +326,7 @@ namespace MgmtSingleton
         /// <param name="postParameter"> The Boolean to use. </param>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<SingletonResources2PostTestOperation> PostTestAsync(bool? postParameter = null, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<SingletonResources2PostTestOperation> PostTestAsync(bool waitForCompletion, bool? postParameter = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SingletonResource2.PostTest");
             scope.Start();
@@ -352,7 +352,7 @@ namespace MgmtSingleton
         /// <param name="postParameter"> The Boolean to use. </param>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual SingletonResources2PostTestOperation PostTest(bool? postParameter = null, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual SingletonResources2PostTestOperation PostTest(bool waitForCompletion, bool? postParameter = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SingletonResource2.PostTest");
             scope.Start();

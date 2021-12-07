@@ -52,7 +52,7 @@ namespace OmitOperationGroups
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="model2SName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual Model2CreateOrUpdateOperation CreateOrUpdate(string model2SName, Model2Data parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual Model2CreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string model2SName, Model2Data parameters, CancellationToken cancellationToken = default)
         {
             if (model2SName == null)
             {
@@ -88,7 +88,7 @@ namespace OmitOperationGroups
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="model2SName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<Model2CreateOrUpdateOperation> CreateOrUpdateAsync(string model2SName, Model2Data parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<Model2CreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string model2SName, Model2Data parameters, CancellationToken cancellationToken = default)
         {
             if (model2SName == null)
             {

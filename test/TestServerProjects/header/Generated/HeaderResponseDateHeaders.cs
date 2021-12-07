@@ -6,8 +6,8 @@
 #nullable disable
 
 using System;
+using System.Globalization;
 using Azure;
-using Azure.Core;
 
 namespace header
 {
@@ -19,6 +19,14 @@ namespace header
             _response = response;
         }
         /// <summary> response with header values &quot;2010-01-01&quot; or &quot;0001-01-01&quot;. </summary>
-        public DateTimeOffset? Value => _response.Headers.TryGetValue("value", out DateTimeOffset? value) ? value : null;
+        public DateTimeOffset? Value
+        {
+            get
+            {
+                string dtValue = string.Empty;
+                _response.Headers.TryGetValue("value", out dtValue);
+                return string.IsNullOrEmpty(dtValue) ? null : DateTimeOffset.Parse(dtValue, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal);
+            }
+        }
     }
 }

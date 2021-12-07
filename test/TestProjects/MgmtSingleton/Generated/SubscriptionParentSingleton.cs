@@ -155,7 +155,7 @@ namespace MgmtSingleton
         /// <summary> Delete a SubscriptionParentSingleton. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<SubscriptionParentSingletonDeleteOperation> DeleteAsync(bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<SubscriptionParentSingletonDeleteOperation> DeleteAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SubscriptionParentSingleton.Delete");
             scope.Start();
@@ -180,7 +180,7 @@ namespace MgmtSingleton
         /// <summary> Delete a SubscriptionParentSingleton. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual SubscriptionParentSingletonDeleteOperation Delete(bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual SubscriptionParentSingletonDeleteOperation Delete(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SubscriptionParentSingleton.Delete");
             scope.Start();
@@ -206,7 +206,7 @@ namespace MgmtSingleton
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<SubscriptionParentSingletonCreateOrUpdateOperation> CreateOrUpdateAsync(SubscriptionParentSingletonData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<SubscriptionParentSingletonCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, SubscriptionParentSingletonData parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -237,7 +237,7 @@ namespace MgmtSingleton
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual SubscriptionParentSingletonCreateOrUpdateOperation CreateOrUpdate(SubscriptionParentSingletonData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual SubscriptionParentSingletonCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, SubscriptionParentSingletonData parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -324,7 +324,7 @@ namespace MgmtSingleton
         /// <param name="postParameter"> The Boolean to use. </param>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<SubscriptionParentSingletonPostTestOperation> PostTestAsync(bool? postParameter = null, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<SubscriptionParentSingletonPostTestOperation> PostTestAsync(bool waitForCompletion, bool? postParameter = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SubscriptionParentSingleton.PostTest");
             scope.Start();
@@ -350,7 +350,7 @@ namespace MgmtSingleton
         /// <param name="postParameter"> The Boolean to use. </param>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual SubscriptionParentSingletonPostTestOperation PostTest(bool? postParameter = null, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual SubscriptionParentSingletonPostTestOperation PostTest(bool waitForCompletion, bool? postParameter = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SubscriptionParentSingleton.PostTest");
             scope.Start();

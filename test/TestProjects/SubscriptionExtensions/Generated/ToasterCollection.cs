@@ -53,7 +53,7 @@ namespace SubscriptionExtensions
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="toasterName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ToasterCreateOrUpdateOperation CreateOrUpdate(string toasterName, ToasterData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual ToasterCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string toasterName, ToasterData parameters, CancellationToken cancellationToken = default)
         {
             if (toasterName == null)
             {
@@ -90,7 +90,7 @@ namespace SubscriptionExtensions
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="toasterName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<ToasterCreateOrUpdateOperation> CreateOrUpdateAsync(string toasterName, ToasterData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<ToasterCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string toasterName, ToasterData parameters, CancellationToken cancellationToken = default)
         {
             if (toasterName == null)
             {

@@ -152,7 +152,7 @@ namespace MgmtParent
         /// <summary> Delete a dedicated host. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<DedicatedHostDeleteOperation> DeleteAsync(bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<DedicatedHostDeleteOperation> DeleteAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DedicatedHost.Delete");
             scope.Start();
@@ -177,7 +177,7 @@ namespace MgmtParent
         /// <summary> Delete a dedicated host. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual DedicatedHostDeleteOperation Delete(bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual DedicatedHostDeleteOperation Delete(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DedicatedHost.Delete");
             scope.Start();
@@ -376,7 +376,7 @@ namespace MgmtParent
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<DedicatedHostUpdateOperation> UpdateAsync(DedicatedHostUpdate parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<DedicatedHostUpdateOperation> UpdateAsync(bool waitForCompletion, DedicatedHostUpdate parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -408,7 +408,7 @@ namespace MgmtParent
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual DedicatedHostUpdateOperation Update(DedicatedHostUpdate parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual DedicatedHostUpdateOperation Update(bool waitForCompletion, DedicatedHostUpdate parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {

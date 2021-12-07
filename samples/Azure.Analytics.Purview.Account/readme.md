@@ -1,7 +1,7 @@
 ```yaml
 title: PurviewAccount
 require: $(this-folder)/../../readme.md
-input-file: https://github.com/Azure/azure-rest-api-specs/blob/b2bddfe2e59b5b14e559e0433b6e6d057bcff95d/specification/purview/data-plane/Azure.Analytics.Purview.Account/preview/2019-11-01-preview/account.json
+input-file: https://github.com/Azure/azure-rest-api-specs/blob/35ebd5881bab5377e72b90e0c241fc598da95d4f/specification/purview/data-plane/Azure.Analytics.Purview.Account/preview/2019-11-01-preview/account.json
 namespace: Azure.Analytics.Purview.Account
 low-level-client: true
 security: AADToken

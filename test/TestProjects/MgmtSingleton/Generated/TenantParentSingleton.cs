@@ -155,7 +155,7 @@ namespace MgmtSingleton
         /// <summary> Delete an TenantParentSingleton. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<TenantParentSingletonDeleteOperation> DeleteAsync(bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<TenantParentSingletonDeleteOperation> DeleteAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TenantParentSingleton.Delete");
             scope.Start();
@@ -180,7 +180,7 @@ namespace MgmtSingleton
         /// <summary> Delete an TenantParentSingleton. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual TenantParentSingletonDeleteOperation Delete(bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual TenantParentSingletonDeleteOperation Delete(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TenantParentSingleton.Delete");
             scope.Start();
@@ -206,7 +206,7 @@ namespace MgmtSingleton
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<TenantParentSingletonCreateOrUpdateOperation> CreateOrUpdateAsync(TenantParentSingletonData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<TenantParentSingletonCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, TenantParentSingletonData parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -237,7 +237,7 @@ namespace MgmtSingleton
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual TenantParentSingletonCreateOrUpdateOperation CreateOrUpdate(TenantParentSingletonData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual TenantParentSingletonCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, TenantParentSingletonData parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -324,7 +324,7 @@ namespace MgmtSingleton
         /// <param name="postParameter"> The Boolean to use. </param>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<TenantParentSingletonPostTestOperation> PostTestAsync(bool? postParameter = null, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<TenantParentSingletonPostTestOperation> PostTestAsync(bool waitForCompletion, bool? postParameter = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TenantParentSingleton.PostTest");
             scope.Start();
@@ -350,7 +350,7 @@ namespace MgmtSingleton
         /// <param name="postParameter"> The Boolean to use. </param>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual TenantParentSingletonPostTestOperation PostTest(bool? postParameter = null, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual TenantParentSingletonPostTestOperation PostTest(bool waitForCompletion, bool? postParameter = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TenantParentSingleton.PostTest");
             scope.Start();

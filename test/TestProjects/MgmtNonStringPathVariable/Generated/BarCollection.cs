@@ -50,7 +50,7 @@ namespace MgmtNonStringPathVariable
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        public virtual BarCreateOperation CreateOrUpdate(int barName, BarData body, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual BarCreateOperation CreateOrUpdate(bool waitForCompletion, int barName, BarData body, CancellationToken cancellationToken = default)
         {
             if (body == null)
             {
@@ -83,7 +83,7 @@ namespace MgmtNonStringPathVariable
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        public async virtual Task<BarCreateOperation> CreateOrUpdateAsync(int barName, BarData body, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<BarCreateOperation> CreateOrUpdateAsync(bool waitForCompletion, int barName, BarData body, CancellationToken cancellationToken = default)
         {
             if (body == null)
             {
