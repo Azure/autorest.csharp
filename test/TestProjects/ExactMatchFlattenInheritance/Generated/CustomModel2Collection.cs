@@ -36,7 +36,7 @@ namespace ExactMatchFlattenInheritance
         internal CustomModel2Collection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _customModel2sRestClient = new CustomModel2SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _customModel2sRestClient = new CustomModel2SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
@@ -64,7 +64,7 @@ namespace ExactMatchFlattenInheritance
             scope.Start();
             try
             {
-                var response = _customModel2sRestClient.Put(Id.ResourceGroupName, name, foo, cancellationToken);
+                var response = _customModel2sRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, name, foo, cancellationToken);
                 var operation = new CustomModel2PutOperation(Parent, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
@@ -97,7 +97,7 @@ namespace ExactMatchFlattenInheritance
             scope.Start();
             try
             {
-                var response = await _customModel2sRestClient.PutAsync(Id.ResourceGroupName, name, foo, cancellationToken).ConfigureAwait(false);
+                var response = await _customModel2sRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, name, foo, cancellationToken).ConfigureAwait(false);
                 var operation = new CustomModel2PutOperation(Parent, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -128,7 +128,7 @@ namespace ExactMatchFlattenInheritance
             scope.Start();
             try
             {
-                var response = _customModel2sRestClient.Get(Id.ResourceGroupName, name, cancellationToken);
+                var response = _customModel2sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new CustomModel2(Parent, response.Value), response.GetRawResponse());
@@ -158,7 +158,7 @@ namespace ExactMatchFlattenInheritance
             scope.Start();
             try
             {
-                var response = await _customModel2sRestClient.GetAsync(Id.ResourceGroupName, name, cancellationToken).ConfigureAwait(false);
+                var response = await _customModel2sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new CustomModel2(Parent, response.Value), response.GetRawResponse());
@@ -185,7 +185,7 @@ namespace ExactMatchFlattenInheritance
             scope.Start();
             try
             {
-                var response = _customModel2sRestClient.Get(Id.ResourceGroupName, name, cancellationToken: cancellationToken);
+                var response = _customModel2sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<CustomModel2>(null, response.GetRawResponse())
                     : Response.FromValue(new CustomModel2(this, response.Value), response.GetRawResponse());
@@ -212,7 +212,7 @@ namespace ExactMatchFlattenInheritance
             scope.Start();
             try
             {
-                var response = await _customModel2sRestClient.GetAsync(Id.ResourceGroupName, name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _customModel2sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<CustomModel2>(null, response.GetRawResponse())
                     : Response.FromValue(new CustomModel2(this, response.Value), response.GetRawResponse());
@@ -285,7 +285,7 @@ namespace ExactMatchFlattenInheritance
             scope.Start();
             try
             {
-                var response = _customModel2sRestClient.List(Id.ResourceGroupName, cancellationToken);
+                var response = _customModel2sRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken);
                 return Response.FromValue(response.Value.Value.Select(value => new CustomModel2(Parent, value)).ToArray() as IReadOnlyList<CustomModel2>, response.GetRawResponse());
             }
             catch (Exception e)
@@ -306,7 +306,7 @@ namespace ExactMatchFlattenInheritance
             scope.Start();
             try
             {
-                var response = await _customModel2sRestClient.ListAsync(Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
+                var response = await _customModel2sRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value.Value.Select(value => new CustomModel2(Parent, value)).ToArray() as IReadOnlyList<CustomModel2>, response.GetRawResponse());
             }
             catch (Exception e)

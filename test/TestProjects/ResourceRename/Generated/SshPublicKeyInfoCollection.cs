@@ -38,7 +38,7 @@ namespace ResourceRename
         internal SshPublicKeyInfoCollection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _sshPublicKeysRestClient = new SshPublicKeysRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _sshPublicKeysRestClient = new SshPublicKeysRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
@@ -66,7 +66,7 @@ namespace ResourceRename
             scope.Start();
             try
             {
-                var response = _sshPublicKeysRestClient.Create(Id.ResourceGroupName, sshPublicKeyName, properties, cancellationToken);
+                var response = _sshPublicKeysRestClient.Create(Id.SubscriptionId, Id.ResourceGroupName, sshPublicKeyName, properties, cancellationToken);
                 var operation = new SshPublicKeyCreateOperation(Parent, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
@@ -99,7 +99,7 @@ namespace ResourceRename
             scope.Start();
             try
             {
-                var response = await _sshPublicKeysRestClient.CreateAsync(Id.ResourceGroupName, sshPublicKeyName, properties, cancellationToken).ConfigureAwait(false);
+                var response = await _sshPublicKeysRestClient.CreateAsync(Id.SubscriptionId, Id.ResourceGroupName, sshPublicKeyName, properties, cancellationToken).ConfigureAwait(false);
                 var operation = new SshPublicKeyCreateOperation(Parent, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -130,7 +130,7 @@ namespace ResourceRename
             scope.Start();
             try
             {
-                var response = _sshPublicKeysRestClient.Get(Id.ResourceGroupName, sshPublicKeyName, cancellationToken);
+                var response = _sshPublicKeysRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, sshPublicKeyName, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new SshPublicKeyInfo(Parent, response.Value), response.GetRawResponse());
@@ -160,7 +160,7 @@ namespace ResourceRename
             scope.Start();
             try
             {
-                var response = await _sshPublicKeysRestClient.GetAsync(Id.ResourceGroupName, sshPublicKeyName, cancellationToken).ConfigureAwait(false);
+                var response = await _sshPublicKeysRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, sshPublicKeyName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new SshPublicKeyInfo(Parent, response.Value), response.GetRawResponse());
@@ -187,7 +187,7 @@ namespace ResourceRename
             scope.Start();
             try
             {
-                var response = _sshPublicKeysRestClient.Get(Id.ResourceGroupName, sshPublicKeyName, cancellationToken: cancellationToken);
+                var response = _sshPublicKeysRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, sshPublicKeyName, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<SshPublicKeyInfo>(null, response.GetRawResponse())
                     : Response.FromValue(new SshPublicKeyInfo(this, response.Value), response.GetRawResponse());
@@ -214,7 +214,7 @@ namespace ResourceRename
             scope.Start();
             try
             {
-                var response = await _sshPublicKeysRestClient.GetAsync(Id.ResourceGroupName, sshPublicKeyName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _sshPublicKeysRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, sshPublicKeyName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<SshPublicKeyInfo>(null, response.GetRawResponse())
                     : Response.FromValue(new SshPublicKeyInfo(this, response.Value), response.GetRawResponse());
@@ -290,7 +290,7 @@ namespace ResourceRename
                 scope.Start();
                 try
                 {
-                    var response = _sshPublicKeysRestClient.ListByResourceGroup(Id.ResourceGroupName, cancellationToken: cancellationToken);
+                    var response = _sshPublicKeysRestClient.ListByResourceGroup(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new SshPublicKeyInfo(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -305,7 +305,7 @@ namespace ResourceRename
                 scope.Start();
                 try
                 {
-                    var response = _sshPublicKeysRestClient.ListByResourceGroupNextPage(nextLink, Id.ResourceGroupName, cancellationToken: cancellationToken);
+                    var response = _sshPublicKeysRestClient.ListByResourceGroupNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new SshPublicKeyInfo(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -331,7 +331,7 @@ namespace ResourceRename
                 scope.Start();
                 try
                 {
-                    var response = await _sshPublicKeysRestClient.ListByResourceGroupAsync(Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _sshPublicKeysRestClient.ListByResourceGroupAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new SshPublicKeyInfo(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -346,7 +346,7 @@ namespace ResourceRename
                 scope.Start();
                 try
                 {
-                    var response = await _sshPublicKeysRestClient.ListByResourceGroupNextPageAsync(nextLink, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _sshPublicKeysRestClient.ListByResourceGroupNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new SshPublicKeyInfo(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)

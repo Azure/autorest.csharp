@@ -36,7 +36,7 @@ namespace MgmtListMethods
         internal ResGrpParentCollection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _resGrpParentsRestClient = new ResGrpParentsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _resGrpParentsRestClient = new ResGrpParentsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
@@ -68,7 +68,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = _resGrpParentsRestClient.CreateOrUpdate(Id.ResourceGroupName, resGrpParentName, parameters, cancellationToken);
+                var response = _resGrpParentsRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentName, parameters, cancellationToken);
                 var operation = new ResGrpParentCreateOrUpdateOperation(Parent, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
@@ -105,7 +105,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = await _resGrpParentsRestClient.CreateOrUpdateAsync(Id.ResourceGroupName, resGrpParentName, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _resGrpParentsRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentName, parameters, cancellationToken).ConfigureAwait(false);
                 var operation = new ResGrpParentCreateOrUpdateOperation(Parent, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -136,7 +136,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = _resGrpParentsRestClient.Get(Id.ResourceGroupName, resGrpParentName, cancellationToken);
+                var response = _resGrpParentsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentName, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new ResGrpParent(Parent, response.Value), response.GetRawResponse());
@@ -166,7 +166,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = await _resGrpParentsRestClient.GetAsync(Id.ResourceGroupName, resGrpParentName, cancellationToken).ConfigureAwait(false);
+                var response = await _resGrpParentsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new ResGrpParent(Parent, response.Value), response.GetRawResponse());
@@ -193,7 +193,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = _resGrpParentsRestClient.Get(Id.ResourceGroupName, resGrpParentName, cancellationToken: cancellationToken);
+                var response = _resGrpParentsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentName, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<ResGrpParent>(null, response.GetRawResponse())
                     : Response.FromValue(new ResGrpParent(this, response.Value), response.GetRawResponse());
@@ -220,7 +220,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = await _resGrpParentsRestClient.GetAsync(Id.ResourceGroupName, resGrpParentName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _resGrpParentsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<ResGrpParent>(null, response.GetRawResponse())
                     : Response.FromValue(new ResGrpParent(this, response.Value), response.GetRawResponse());
@@ -293,7 +293,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = _resGrpParentsRestClient.List(Id.ResourceGroupName, cancellationToken);
+                var response = _resGrpParentsRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken);
                 return Response.FromValue(response.Value.Value.Select(value => new ResGrpParent(Parent, value)).ToArray() as IReadOnlyList<ResGrpParent>, response.GetRawResponse());
             }
             catch (Exception e)
@@ -314,7 +314,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = await _resGrpParentsRestClient.ListAsync(Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
+                var response = await _resGrpParentsRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value.Value.Select(value => new ResGrpParent(Parent, value)).ToArray() as IReadOnlyList<ResGrpParent>, response.GetRawResponse());
             }
             catch (Exception e)

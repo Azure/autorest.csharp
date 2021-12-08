@@ -19,7 +19,6 @@ namespace MgmtNonStringPathVariable
 {
     internal partial class BarsRestOperations
     {
-        private string subscriptionId;
         private Uri endpoint;
         private string apiVersion;
         private ClientDiagnostics _clientDiagnostics;
@@ -30,13 +29,11 @@ namespace MgmtNonStringPathVariable
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="options"> The client options used to construct the current client. </param>
-        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="apiVersion"> Api Version. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="apiVersion"/> is null. </exception>
-        public BarsRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ClientOptions options, string subscriptionId, Uri endpoint = null, string apiVersion = "2020-06-01")
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
+        public BarsRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ClientOptions options, Uri endpoint = null, string apiVersion = "2020-06-01")
         {
-            this.subscriptionId = subscriptionId ?? throw new ArgumentNullException(nameof(subscriptionId));
             this.endpoint = endpoint ?? new Uri("https://management.azure.com");
             this.apiVersion = apiVersion ?? throw new ArgumentNullException(nameof(apiVersion));
             _clientDiagnostics = clientDiagnostics;
@@ -44,7 +41,7 @@ namespace MgmtNonStringPathVariable
             _userAgent = HttpMessageUtilities.GetUserAgentName(this, options);
         }
 
-        internal HttpMessage CreateCreateRequest(string resourceGroupName, int barName, BarData body)
+        internal HttpMessage CreateCreateRequest(string subscriptionId, string resourceGroupName, int barName, BarData body)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -69,13 +66,18 @@ namespace MgmtNonStringPathVariable
         }
 
         /// <summary> Retrieves information about an fake. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="barName"> The name of the bar. </param>
         /// <param name="body"> The Bar to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="body"/> is null. </exception>
-        public async Task<Response> CreateAsync(string resourceGroupName, int barName, BarData body, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="body"/> is null. </exception>
+        public async Task<Response> CreateAsync(string subscriptionId, string resourceGroupName, int barName, BarData body, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -85,7 +87,7 @@ namespace MgmtNonStringPathVariable
                 throw new ArgumentNullException(nameof(body));
             }
 
-            using var message = CreateCreateRequest(resourceGroupName, barName, body);
+            using var message = CreateCreateRequest(subscriptionId, resourceGroupName, barName, body);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -98,13 +100,18 @@ namespace MgmtNonStringPathVariable
         }
 
         /// <summary> Retrieves information about an fake. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="barName"> The name of the bar. </param>
         /// <param name="body"> The Bar to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="body"/> is null. </exception>
-        public Response Create(string resourceGroupName, int barName, BarData body, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="body"/> is null. </exception>
+        public Response Create(string subscriptionId, string resourceGroupName, int barName, BarData body, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -114,7 +121,7 @@ namespace MgmtNonStringPathVariable
                 throw new ArgumentNullException(nameof(body));
             }
 
-            using var message = CreateCreateRequest(resourceGroupName, barName, body);
+            using var message = CreateCreateRequest(subscriptionId, resourceGroupName, barName, body);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -126,7 +133,7 @@ namespace MgmtNonStringPathVariable
             }
         }
 
-        internal HttpMessage CreateUpdateRequest(string resourceGroupName, int barName, BarUpdate parameters)
+        internal HttpMessage CreateUpdateRequest(string subscriptionId, string resourceGroupName, int barName, BarUpdate parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -151,13 +158,18 @@ namespace MgmtNonStringPathVariable
         }
 
         /// <summary> Update an Bars. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="barName"> The name of the bar. </param>
         /// <param name="parameters"> Parameters supplied to the Update Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response> UpdateAsync(string resourceGroupName, int barName, BarUpdate parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="parameters"/> is null. </exception>
+        public async Task<Response> UpdateAsync(string subscriptionId, string resourceGroupName, int barName, BarUpdate parameters, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -167,7 +179,7 @@ namespace MgmtNonStringPathVariable
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var message = CreateUpdateRequest(resourceGroupName, barName, parameters);
+            using var message = CreateUpdateRequest(subscriptionId, resourceGroupName, barName, parameters);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -180,13 +192,18 @@ namespace MgmtNonStringPathVariable
         }
 
         /// <summary> Update an Bars. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="barName"> The name of the bar. </param>
         /// <param name="parameters"> Parameters supplied to the Update Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="parameters"/> is null. </exception>
-        public Response Update(string resourceGroupName, int barName, BarUpdate parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="parameters"/> is null. </exception>
+        public Response Update(string subscriptionId, string resourceGroupName, int barName, BarUpdate parameters, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -196,7 +213,7 @@ namespace MgmtNonStringPathVariable
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var message = CreateUpdateRequest(resourceGroupName, barName, parameters);
+            using var message = CreateUpdateRequest(subscriptionId, resourceGroupName, barName, parameters);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -208,7 +225,7 @@ namespace MgmtNonStringPathVariable
             }
         }
 
-        internal HttpMessage CreateGetRequest(string resourceGroupName, int barName)
+        internal HttpMessage CreateGetRequest(string subscriptionId, string resourceGroupName, int barName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -229,18 +246,23 @@ namespace MgmtNonStringPathVariable
         }
 
         /// <summary> Retrieves information about an fake. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="barName"> The name of the fake. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> is null. </exception>
-        public async Task<Response<BarData>> GetAsync(string resourceGroupName, int barName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
+        public async Task<Response<BarData>> GetAsync(string subscriptionId, string resourceGroupName, int barName, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
 
-            using var message = CreateGetRequest(resourceGroupName, barName);
+            using var message = CreateGetRequest(subscriptionId, resourceGroupName, barName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -259,18 +281,23 @@ namespace MgmtNonStringPathVariable
         }
 
         /// <summary> Retrieves information about an fake. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="barName"> The name of the fake. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> is null. </exception>
-        public Response<BarData> Get(string resourceGroupName, int barName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
+        public Response<BarData> Get(string subscriptionId, string resourceGroupName, int barName, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
 
-            using var message = CreateGetRequest(resourceGroupName, barName);
+            using var message = CreateGetRequest(subscriptionId, resourceGroupName, barName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -288,7 +315,7 @@ namespace MgmtNonStringPathVariable
             }
         }
 
-        internal HttpMessage CreateDeleteRequest(string resourceGroupName, int barName)
+        internal HttpMessage CreateDeleteRequest(string subscriptionId, string resourceGroupName, int barName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -308,18 +335,23 @@ namespace MgmtNonStringPathVariable
         }
 
         /// <summary> Retrieves information about an fake. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="barName"> The name of the fake. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> is null. </exception>
-        public async Task<Response> DeleteAsync(string resourceGroupName, int barName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
+        public async Task<Response> DeleteAsync(string subscriptionId, string resourceGroupName, int barName, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
 
-            using var message = CreateDeleteRequest(resourceGroupName, barName);
+            using var message = CreateDeleteRequest(subscriptionId, resourceGroupName, barName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -333,18 +365,23 @@ namespace MgmtNonStringPathVariable
         }
 
         /// <summary> Retrieves information about an fake. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="barName"> The name of the fake. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> is null. </exception>
-        public Response Delete(string resourceGroupName, int barName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
+        public Response Delete(string subscriptionId, string resourceGroupName, int barName, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
 
-            using var message = CreateDeleteRequest(resourceGroupName, barName);
+            using var message = CreateDeleteRequest(subscriptionId, resourceGroupName, barName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

@@ -40,7 +40,7 @@ namespace MgmtSingleton
             _data = resource;
             Parent = options;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _subscriptionParentSingletonRestClient = new SubscriptionParentSingletonRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _subscriptionParentSingletonRestClient = new SubscriptionParentSingletonRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="SubscriptionParentSingleton"/> class. </summary>
@@ -50,7 +50,7 @@ namespace MgmtSingleton
         {
             Parent = options;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _subscriptionParentSingletonRestClient = new SubscriptionParentSingletonRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _subscriptionParentSingletonRestClient = new SubscriptionParentSingletonRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="SubscriptionParentSingleton"/> class. </summary>
@@ -62,7 +62,7 @@ namespace MgmtSingleton
         internal SubscriptionParentSingleton(ArmClientOptions clientOptions, TokenCredential credential, Uri uri, HttpPipeline pipeline, ResourceIdentifier id) : base(clientOptions, credential, uri, pipeline, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _subscriptionParentSingletonRestClient = new SubscriptionParentSingletonRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _subscriptionParentSingletonRestClient = new SubscriptionParentSingletonRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
@@ -99,7 +99,7 @@ namespace MgmtSingleton
             scope.Start();
             try
             {
-                var response = await _subscriptionParentSingletonRestClient.GetDefaultAsync(cancellationToken).ConfigureAwait(false);
+                var response = await _subscriptionParentSingletonRestClient.GetDefaultAsync(Id.SubscriptionId, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new SubscriptionParentSingleton(this, response.Value), response.GetRawResponse());
@@ -121,7 +121,7 @@ namespace MgmtSingleton
             scope.Start();
             try
             {
-                var response = _subscriptionParentSingletonRestClient.GetDefault(cancellationToken);
+                var response = _subscriptionParentSingletonRestClient.GetDefault(Id.SubscriptionId, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new SubscriptionParentSingleton(this, response.Value), response.GetRawResponse());
@@ -161,7 +161,7 @@ namespace MgmtSingleton
             scope.Start();
             try
             {
-                var response = await _subscriptionParentSingletonRestClient.DeleteAsync(cancellationToken).ConfigureAwait(false);
+                var response = await _subscriptionParentSingletonRestClient.DeleteAsync(Id.SubscriptionId, cancellationToken).ConfigureAwait(false);
                 var operation = new SubscriptionParentSingletonDeleteOperation(response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
@@ -186,7 +186,7 @@ namespace MgmtSingleton
             scope.Start();
             try
             {
-                var response = _subscriptionParentSingletonRestClient.Delete(cancellationToken);
+                var response = _subscriptionParentSingletonRestClient.Delete(Id.SubscriptionId, cancellationToken);
                 var operation = new SubscriptionParentSingletonDeleteOperation(response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
@@ -217,7 +217,7 @@ namespace MgmtSingleton
             scope.Start();
             try
             {
-                var response = await _subscriptionParentSingletonRestClient.CreateOrUpdateAsync(parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _subscriptionParentSingletonRestClient.CreateOrUpdateAsync(Id.SubscriptionId, parameters, cancellationToken).ConfigureAwait(false);
                 var operation = new SubscriptionParentSingletonCreateOrUpdateOperation(this, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -248,7 +248,7 @@ namespace MgmtSingleton
             scope.Start();
             try
             {
-                var response = _subscriptionParentSingletonRestClient.CreateOrUpdate(parameters, cancellationToken);
+                var response = _subscriptionParentSingletonRestClient.CreateOrUpdate(Id.SubscriptionId, parameters, cancellationToken);
                 var operation = new SubscriptionParentSingletonCreateOrUpdateOperation(this, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
@@ -279,7 +279,7 @@ namespace MgmtSingleton
             scope.Start();
             try
             {
-                var response = await _subscriptionParentSingletonRestClient.UpdateAsync(parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _subscriptionParentSingletonRestClient.UpdateAsync(Id.SubscriptionId, parameters, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new SubscriptionParentSingleton(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -307,7 +307,7 @@ namespace MgmtSingleton
             scope.Start();
             try
             {
-                var response = _subscriptionParentSingletonRestClient.Update(parameters, cancellationToken);
+                var response = _subscriptionParentSingletonRestClient.Update(Id.SubscriptionId, parameters, cancellationToken);
                 return Response.FromValue(new SubscriptionParentSingleton(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -330,8 +330,8 @@ namespace MgmtSingleton
             scope.Start();
             try
             {
-                var response = await _subscriptionParentSingletonRestClient.PostTestAsync(postParameter, cancellationToken).ConfigureAwait(false);
-                var operation = new SubscriptionParentSingletonPostTestOperation(_clientDiagnostics, Pipeline, _subscriptionParentSingletonRestClient.CreatePostTestRequest(postParameter).Request, response);
+                var response = await _subscriptionParentSingletonRestClient.PostTestAsync(Id.SubscriptionId, postParameter, cancellationToken).ConfigureAwait(false);
+                var operation = new SubscriptionParentSingletonPostTestOperation(_clientDiagnostics, Pipeline, _subscriptionParentSingletonRestClient.CreatePostTestRequest(Id.SubscriptionId, postParameter).Request, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -356,8 +356,8 @@ namespace MgmtSingleton
             scope.Start();
             try
             {
-                var response = _subscriptionParentSingletonRestClient.PostTest(postParameter, cancellationToken);
-                var operation = new SubscriptionParentSingletonPostTestOperation(_clientDiagnostics, Pipeline, _subscriptionParentSingletonRestClient.CreatePostTestRequest(postParameter).Request, response);
+                var response = _subscriptionParentSingletonRestClient.PostTest(Id.SubscriptionId, postParameter, cancellationToken);
+                var operation = new SubscriptionParentSingletonPostTestOperation(_clientDiagnostics, Pipeline, _subscriptionParentSingletonRestClient.CreatePostTestRequest(Id.SubscriptionId, postParameter).Request, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

@@ -37,7 +37,7 @@ namespace MgmtListMethods
         internal FakeParentWithAncestorCollection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _fakeParentWithAncestorsRestClient = new FakeParentWithAncestorsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _fakeParentWithAncestorsRestClient = new FakeParentWithAncestorsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
@@ -69,7 +69,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = _fakeParentWithAncestorsRestClient.CreateOrUpdate(Id.Name, fakeParentWithAncestorName, parameters, cancellationToken);
+                var response = _fakeParentWithAncestorsRestClient.CreateOrUpdate(Id.SubscriptionId, Id.Name, fakeParentWithAncestorName, parameters, cancellationToken);
                 var operation = new FakeParentWithAncestorCreateOrUpdateOperation(Parent, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
@@ -106,7 +106,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = await _fakeParentWithAncestorsRestClient.CreateOrUpdateAsync(Id.Name, fakeParentWithAncestorName, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _fakeParentWithAncestorsRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.Name, fakeParentWithAncestorName, parameters, cancellationToken).ConfigureAwait(false);
                 var operation = new FakeParentWithAncestorCreateOrUpdateOperation(Parent, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -137,7 +137,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = _fakeParentWithAncestorsRestClient.Get(Id.Name, fakeParentWithAncestorName, cancellationToken);
+                var response = _fakeParentWithAncestorsRestClient.Get(Id.SubscriptionId, Id.Name, fakeParentWithAncestorName, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new FakeParentWithAncestor(Parent, response.Value), response.GetRawResponse());
@@ -167,7 +167,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = await _fakeParentWithAncestorsRestClient.GetAsync(Id.Name, fakeParentWithAncestorName, cancellationToken).ConfigureAwait(false);
+                var response = await _fakeParentWithAncestorsRestClient.GetAsync(Id.SubscriptionId, Id.Name, fakeParentWithAncestorName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new FakeParentWithAncestor(Parent, response.Value), response.GetRawResponse());
@@ -194,7 +194,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = _fakeParentWithAncestorsRestClient.Get(Id.Name, fakeParentWithAncestorName, cancellationToken: cancellationToken);
+                var response = _fakeParentWithAncestorsRestClient.Get(Id.SubscriptionId, Id.Name, fakeParentWithAncestorName, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<FakeParentWithAncestor>(null, response.GetRawResponse())
                     : Response.FromValue(new FakeParentWithAncestor(this, response.Value), response.GetRawResponse());
@@ -221,7 +221,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = await _fakeParentWithAncestorsRestClient.GetAsync(Id.Name, fakeParentWithAncestorName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _fakeParentWithAncestorsRestClient.GetAsync(Id.SubscriptionId, Id.Name, fakeParentWithAncestorName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<FakeParentWithAncestor>(null, response.GetRawResponse())
                     : Response.FromValue(new FakeParentWithAncestor(this, response.Value), response.GetRawResponse());
@@ -297,7 +297,7 @@ namespace MgmtListMethods
                 scope.Start();
                 try
                 {
-                    var response = _fakeParentWithAncestorsRestClient.List(Id.Name, cancellationToken: cancellationToken);
+                    var response = _fakeParentWithAncestorsRestClient.List(Id.SubscriptionId, Id.Name, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new FakeParentWithAncestor(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -312,7 +312,7 @@ namespace MgmtListMethods
                 scope.Start();
                 try
                 {
-                    var response = _fakeParentWithAncestorsRestClient.ListNextPage(nextLink, Id.Name, cancellationToken: cancellationToken);
+                    var response = _fakeParentWithAncestorsRestClient.ListNextPage(nextLink, Id.SubscriptionId, Id.Name, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new FakeParentWithAncestor(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -338,7 +338,7 @@ namespace MgmtListMethods
                 scope.Start();
                 try
                 {
-                    var response = await _fakeParentWithAncestorsRestClient.ListAsync(Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _fakeParentWithAncestorsRestClient.ListAsync(Id.SubscriptionId, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new FakeParentWithAncestor(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -353,7 +353,7 @@ namespace MgmtListMethods
                 scope.Start();
                 try
                 {
-                    var response = await _fakeParentWithAncestorsRestClient.ListNextPageAsync(nextLink, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _fakeParentWithAncestorsRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new FakeParentWithAncestor(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)

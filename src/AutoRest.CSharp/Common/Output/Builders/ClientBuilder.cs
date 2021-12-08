@@ -54,8 +54,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         /// <param name="declaration">The type declaration options</param>
         /// <param name="nameOverrider">A delegate used for overriding the name of output <see cref="ClientMethod"/></param>
         /// <returns>An enumerable of <see cref="ClientMethod"/></returns>
-        public static IEnumerable<ClientMethod> BuildMethods(OperationGroup operationGroup, RestClient restClient, TypeDeclarationOptions declaration,
-            Func<OperationGroup, Operation, RestClientMethod, string>? nameOverrider = default)
+        public static IEnumerable<ClientMethod> BuildMethods(OperationGroup operationGroup, RestClient restClient, TypeDeclarationOptions declaration)
         {
             foreach (var operation in operationGroup.Operations)
             {
@@ -67,7 +66,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 foreach (var request in operation.Requests)
                 {
                     RestClientMethod startMethod = restClient.GetOperationMethod(request);
-                    var name = nameOverrider?.Invoke(operationGroup, operation, startMethod) ?? operation.CSharpName();
+                    var name = operation.CSharpName();
 
                     yield return new ClientMethod(
                         name,

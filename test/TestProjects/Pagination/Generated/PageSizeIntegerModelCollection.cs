@@ -38,7 +38,7 @@ namespace Pagination
         internal PageSizeIntegerModelCollection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _pageSizeIntegerModelsRestClient = new PageSizeIntegerModelsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _pageSizeIntegerModelsRestClient = new PageSizeIntegerModelsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
@@ -66,7 +66,7 @@ namespace Pagination
             scope.Start();
             try
             {
-                var response = _pageSizeIntegerModelsRestClient.Put(Id.ResourceGroupName, name, parameters, cancellationToken);
+                var response = _pageSizeIntegerModelsRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, name, parameters, cancellationToken);
                 var operation = new PageSizeIntegerModelPutOperation(Parent, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
@@ -99,7 +99,7 @@ namespace Pagination
             scope.Start();
             try
             {
-                var response = await _pageSizeIntegerModelsRestClient.PutAsync(Id.ResourceGroupName, name, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _pageSizeIntegerModelsRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, name, parameters, cancellationToken).ConfigureAwait(false);
                 var operation = new PageSizeIntegerModelPutOperation(Parent, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -126,7 +126,7 @@ namespace Pagination
             scope.Start();
             try
             {
-                var response = _pageSizeIntegerModelsRestClient.Get(Id.ResourceGroupName, name, cancellationToken);
+                var response = _pageSizeIntegerModelsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new PageSizeIntegerModel(Parent, response.Value), response.GetRawResponse());
@@ -152,7 +152,7 @@ namespace Pagination
             scope.Start();
             try
             {
-                var response = await _pageSizeIntegerModelsRestClient.GetAsync(Id.ResourceGroupName, name, cancellationToken).ConfigureAwait(false);
+                var response = await _pageSizeIntegerModelsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new PageSizeIntegerModel(Parent, response.Value), response.GetRawResponse());
@@ -179,7 +179,7 @@ namespace Pagination
             scope.Start();
             try
             {
-                var response = _pageSizeIntegerModelsRestClient.Get(Id.ResourceGroupName, name, cancellationToken: cancellationToken);
+                var response = _pageSizeIntegerModelsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<PageSizeIntegerModel>(null, response.GetRawResponse())
                     : Response.FromValue(new PageSizeIntegerModel(this, response.Value), response.GetRawResponse());
@@ -206,7 +206,7 @@ namespace Pagination
             scope.Start();
             try
             {
-                var response = await _pageSizeIntegerModelsRestClient.GetAsync(Id.ResourceGroupName, name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _pageSizeIntegerModelsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<PageSizeIntegerModel>(null, response.GetRawResponse())
                     : Response.FromValue(new PageSizeIntegerModel(this, response.Value), response.GetRawResponse());
@@ -279,7 +279,7 @@ namespace Pagination
                 scope.Start();
                 try
                 {
-                    var response = _pageSizeIntegerModelsRestClient.List(Id.ResourceGroupName, pageSizeHint, cancellationToken: cancellationToken);
+                    var response = _pageSizeIntegerModelsRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new PageSizeIntegerModel(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -294,7 +294,7 @@ namespace Pagination
                 scope.Start();
                 try
                 {
-                    var response = _pageSizeIntegerModelsRestClient.ListNextPage(nextLink, Id.ResourceGroupName, pageSizeHint, cancellationToken: cancellationToken);
+                    var response = _pageSizeIntegerModelsRestClient.ListNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new PageSizeIntegerModel(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -317,7 +317,7 @@ namespace Pagination
                 scope.Start();
                 try
                 {
-                    var response = await _pageSizeIntegerModelsRestClient.ListAsync(Id.ResourceGroupName, pageSizeHint, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _pageSizeIntegerModelsRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new PageSizeIntegerModel(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -332,7 +332,7 @@ namespace Pagination
                 scope.Start();
                 try
                 {
-                    var response = await _pageSizeIntegerModelsRestClient.ListNextPageAsync(nextLink, Id.ResourceGroupName, pageSizeHint, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _pageSizeIntegerModelsRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new PageSizeIntegerModel(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)

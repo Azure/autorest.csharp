@@ -30,9 +30,9 @@ namespace MgmtOperations
         }
         #endregion
 
-        private static AvailabilitySetsRestOperations GetAvailabilitySetsRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
+        private static AvailabilitySetsRestOperations GetAvailabilitySetsRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, Uri endpoint = null)
         {
-            return new AvailabilitySetsRestOperations(clientDiagnostics, pipeline, clientOptions, subscriptionId, endpoint);
+            return new AvailabilitySetsRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint);
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets
@@ -58,9 +58,9 @@ namespace MgmtOperations
                 scope.Start();
                 try
                 {
-                    var restOperations = GetAvailabilitySetsRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
-                    var response = await restOperations.TestLROMethodAsync(resourceGroup.Id.ResourceGroupName, parameters, cancellationToken).ConfigureAwait(false);
-                    var operation = new AvailabilitySetTestLROMethodOperation(clientDiagnostics, pipeline, restOperations.CreateTestLROMethodRequest(resourceGroup.Id.ResourceGroupName, parameters).Request, response);
+                    var restOperations = GetAvailabilitySetsRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    var response = await restOperations.TestLROMethodAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, parameters, cancellationToken).ConfigureAwait(false);
+                    var operation = new AvailabilitySetTestLROMethodOperation(clientDiagnostics, pipeline, restOperations.CreateTestLROMethodRequest(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, parameters).Request, response);
                     if (waitForCompletion)
                         await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                     return operation;
@@ -97,9 +97,9 @@ namespace MgmtOperations
                 scope.Start();
                 try
                 {
-                    var restOperations = GetAvailabilitySetsRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
-                    var response = restOperations.TestLROMethod(resourceGroup.Id.ResourceGroupName, parameters, cancellationToken);
-                    var operation = new AvailabilitySetTestLROMethodOperation(clientDiagnostics, pipeline, restOperations.CreateTestLROMethodRequest(resourceGroup.Id.ResourceGroupName, parameters).Request, response);
+                    var restOperations = GetAvailabilitySetsRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    var response = restOperations.TestLROMethod(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, parameters, cancellationToken);
+                    var operation = new AvailabilitySetTestLROMethodOperation(clientDiagnostics, pipeline, restOperations.CreateTestLROMethodRequest(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, parameters).Request, response);
                     if (waitForCompletion)
                         operation.WaitForCompletion(cancellationToken);
                     return operation;

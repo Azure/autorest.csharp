@@ -39,7 +39,7 @@ namespace MgmtScopeResource
         internal PolicyAssignmentCollection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _policyAssignmentsRestClient = new PolicyAssignmentsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _policyAssignmentsRestClient = new PolicyAssignmentsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
@@ -318,7 +318,7 @@ namespace MgmtScopeResource
                     scope.Start();
                     try
                     {
-                        var response = _policyAssignmentsRestClient.ListForResourceGroup(Id.ResourceGroupName, filter, top, cancellationToken: cancellationToken);
+                        var response = _policyAssignmentsRestClient.ListForResourceGroup(Id.SubscriptionId, Id.ResourceGroupName, filter, top, cancellationToken: cancellationToken);
                         return Page.FromValues(response.Value.Value.Select(value => new PolicyAssignment(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -333,7 +333,7 @@ namespace MgmtScopeResource
                     scope.Start();
                     try
                     {
-                        var response = _policyAssignmentsRestClient.ListForResourceGroupNextPage(nextLink, Id.ResourceGroupName, filter, top, cancellationToken: cancellationToken);
+                        var response = _policyAssignmentsRestClient.ListForResourceGroupNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, filter, top, cancellationToken: cancellationToken);
                         return Page.FromValues(response.Value.Value.Select(value => new PolicyAssignment(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -386,7 +386,7 @@ namespace MgmtScopeResource
                     scope.Start();
                     try
                     {
-                        var response = _policyAssignmentsRestClient.List(filter, top, cancellationToken: cancellationToken);
+                        var response = _policyAssignmentsRestClient.List(Id.SubscriptionId, filter, top, cancellationToken: cancellationToken);
                         return Page.FromValues(response.Value.Value.Select(value => new PolicyAssignment(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -401,7 +401,7 @@ namespace MgmtScopeResource
                     scope.Start();
                     try
                     {
-                        var response = _policyAssignmentsRestClient.ListNextPage(nextLink, filter, top, cancellationToken: cancellationToken);
+                        var response = _policyAssignmentsRestClient.ListNextPage(nextLink, Id.SubscriptionId, filter, top, cancellationToken: cancellationToken);
                         return Page.FromValues(response.Value.Value.Select(value => new PolicyAssignment(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -420,7 +420,7 @@ namespace MgmtScopeResource
                     scope.Start();
                     try
                     {
-                        var response = _policyAssignmentsRestClient.ListForResource(Id.ResourceGroupName, Id.ResourceType.Namespace, Id.Parent.SubstringAfterProviderNamespace(), Id.ResourceType.Types.Last(), Id.Name, filter, top, cancellationToken: cancellationToken);
+                        var response = _policyAssignmentsRestClient.ListForResource(Id.SubscriptionId, Id.ResourceGroupName, Id.ResourceType.Namespace, Id.Parent.SubstringAfterProviderNamespace(), Id.ResourceType.Types.Last(), Id.Name, filter, top, cancellationToken: cancellationToken);
                         return Page.FromValues(response.Value.Value.Select(value => new PolicyAssignment(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -435,7 +435,7 @@ namespace MgmtScopeResource
                     scope.Start();
                     try
                     {
-                        var response = _policyAssignmentsRestClient.ListForResourceNextPage(nextLink, Id.ResourceGroupName, Id.ResourceType.Namespace, Id.Parent.SubstringAfterProviderNamespace(), Id.ResourceType.Types.Last(), Id.Name, filter, top, cancellationToken: cancellationToken);
+                        var response = _policyAssignmentsRestClient.ListForResourceNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.ResourceType.Namespace, Id.Parent.SubstringAfterProviderNamespace(), Id.ResourceType.Types.Last(), Id.Name, filter, top, cancellationToken: cancellationToken);
                         return Page.FromValues(response.Value.Value.Select(value => new PolicyAssignment(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -475,7 +475,7 @@ namespace MgmtScopeResource
                     scope.Start();
                     try
                     {
-                        var response = await _policyAssignmentsRestClient.ListForResourceGroupAsync(Id.ResourceGroupName, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        var response = await _policyAssignmentsRestClient.ListForResourceGroupAsync(Id.SubscriptionId, Id.ResourceGroupName, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                         return Page.FromValues(response.Value.Value.Select(value => new PolicyAssignment(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -490,7 +490,7 @@ namespace MgmtScopeResource
                     scope.Start();
                     try
                     {
-                        var response = await _policyAssignmentsRestClient.ListForResourceGroupNextPageAsync(nextLink, Id.ResourceGroupName, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        var response = await _policyAssignmentsRestClient.ListForResourceGroupNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                         return Page.FromValues(response.Value.Value.Select(value => new PolicyAssignment(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -543,7 +543,7 @@ namespace MgmtScopeResource
                     scope.Start();
                     try
                     {
-                        var response = await _policyAssignmentsRestClient.ListAsync(filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        var response = await _policyAssignmentsRestClient.ListAsync(Id.SubscriptionId, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                         return Page.FromValues(response.Value.Value.Select(value => new PolicyAssignment(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -558,7 +558,7 @@ namespace MgmtScopeResource
                     scope.Start();
                     try
                     {
-                        var response = await _policyAssignmentsRestClient.ListNextPageAsync(nextLink, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        var response = await _policyAssignmentsRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                         return Page.FromValues(response.Value.Value.Select(value => new PolicyAssignment(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -577,7 +577,7 @@ namespace MgmtScopeResource
                     scope.Start();
                     try
                     {
-                        var response = await _policyAssignmentsRestClient.ListForResourceAsync(Id.ResourceGroupName, Id.ResourceType.Namespace, Id.Parent.SubstringAfterProviderNamespace(), Id.ResourceType.Types.Last(), Id.Name, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        var response = await _policyAssignmentsRestClient.ListForResourceAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.ResourceType.Namespace, Id.Parent.SubstringAfterProviderNamespace(), Id.ResourceType.Types.Last(), Id.Name, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                         return Page.FromValues(response.Value.Value.Select(value => new PolicyAssignment(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -592,7 +592,7 @@ namespace MgmtScopeResource
                     scope.Start();
                     try
                     {
-                        var response = await _policyAssignmentsRestClient.ListForResourceNextPageAsync(nextLink, Id.ResourceGroupName, Id.ResourceType.Namespace, Id.Parent.SubstringAfterProviderNamespace(), Id.ResourceType.Types.Last(), Id.Name, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        var response = await _policyAssignmentsRestClient.ListForResourceNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.ResourceType.Namespace, Id.Parent.SubstringAfterProviderNamespace(), Id.ResourceType.Types.Last(), Id.Name, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                         return Page.FromValues(response.Value.Value.Select(value => new PolicyAssignment(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)

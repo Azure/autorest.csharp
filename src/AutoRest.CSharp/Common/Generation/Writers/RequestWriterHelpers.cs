@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Serialization;
@@ -13,12 +14,13 @@ using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using Azure.Core;
 using AutoRest.CSharp.Utilities;
+using Azure;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
     internal static class RequestWriterHelpers
     {
-        public static void WriteRequestCreation(CodeWriter writer, RestClientMethod clientMethod, string methodAccessibility, IReadOnlyDictionary<string, string>? fieldNames, string? responseClassifierType, bool writeUserAgentOverride)
+        public static void WriteRequestCreation(CodeWriter writer, RestClientMethod clientMethod, string methodAccessibility, ClientFields? fields, string? responseClassifierType, bool writeUserAgentOverride)
         {
             using var methodScope = writer.AmbientScope();
             var parameters = clientMethod.Parameters;
@@ -50,7 +52,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.Line($"var {uri:D} = new RawRequestUriBuilder();");
                 foreach (var segment in clientMethod.Request.PathSegments)
                 {
-                    var value = FixFieldReference(fieldNames, segment.Value);
+                    var value = GetFieldReference(fields, segment.Value);
                     if (value.Type.IsFrameworkType && value.Type.FrameworkType == typeof(Uri))
                     {
                         writer.Append($"{uri}.Reset(");
@@ -70,7 +72,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 //TODO: Duplicate code between query and header parameter processing logic
                 foreach (var queryParameter in clientMethod.Request.Query)
                 {
-                    WriteQueryParameter(writer, uri, queryParameter, fieldNames);
+                    WriteQueryParameter(writer, uri, queryParameter, fields);
                 }
 
                 writer.Line($"{request}.Uri = {uri};");
@@ -211,8 +213,8 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        private static ReferenceOrConstant FixFieldReference(IReadOnlyDictionary<string, string>? fields, ReferenceOrConstant value) =>
-            fields != null && !value.IsConstant && fields.TryGetValue(value.Reference.Name, out var field) ? new Reference(field, value.Type) : value;
+        private static ReferenceOrConstant GetFieldReference(ClientFields? fields, ReferenceOrConstant value) =>
+            fields != null && !value.IsConstant ? fields.GetFieldByParameter(value.Reference.Name, value.Reference.Type) ?? value : value;
 
         public static void WriteHeaders(CodeWriter writer, RestClientMethod clientMethod, CodeWriterDeclaration request, bool content)
         {
@@ -269,9 +271,15 @@ namespace AutoRest.CSharp.Generation.Writers
 
             using (WriteValueNullCheck(writer, header.Value))
             {
-                writer.Append($"{request}.Headers.{method}({header.Name:L}, ");
+                if (header.Value.Type.Equals(typeof(MatchConditions)) || header.Value.Type.Equals(typeof(RequestConditions)))
+                {
+                    writer.Append($"{request}.Headers.{method}(");
+                } else
+                {
+                    writer.Append($"{request}.Headers.{method}({header.Name:L}, ");
+                }
 
-                if (header.Value.Type.Equals(typeof(Azure.Core.ContentType)))
+                if (header.Value.Type.Equals(typeof(ContentType)))
                 {
                     WriteConstantOrParameterAsString(writer, header.Value);
                 }
@@ -339,7 +347,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private static void WriteQueryParameter(CodeWriter writer, CodeWriterDeclaration uri, QueryParameter queryParameter, IReadOnlyDictionary<string, string>? fieldNames)
+        private static void WriteQueryParameter(CodeWriter writer, CodeWriterDeclaration uri, QueryParameter queryParameter, ClientFields? fields)
         {
             string? delimiter = GetSerializationStyleDelimiter(queryParameter.SerializationStyle);
             bool explode = queryParameter.Explode;
@@ -347,7 +355,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 ? nameof(RequestUriBuilderExtensions.AppendQueryDelimited)
                 : nameof(RequestUriBuilderExtensions.AppendQuery);
 
-            var value = FixFieldReference(fieldNames, queryParameter.Value);
+            var value = GetFieldReference(fields, queryParameter.Value);
             using (WriteValueNullCheck(writer, value))
             {
                 if (explode)

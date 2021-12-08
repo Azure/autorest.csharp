@@ -35,7 +35,7 @@ namespace MgmtOperations
         internal AvailabilitySetChildCollection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _availabilitySetChildRestClient = new AvailabilitySetChildRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _availabilitySetChildRestClient = new AvailabilitySetChildRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
@@ -67,7 +67,7 @@ namespace MgmtOperations
             scope.Start();
             try
             {
-                var response = _availabilitySetChildRestClient.CreateOrUpdate(Id.ResourceGroupName, Id.Name, availabilitySetChildName, parameters, cancellationToken);
+                var response = _availabilitySetChildRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, availabilitySetChildName, parameters, cancellationToken);
                 var operation = new AvailabilitySetChildCreateOrUpdateOperation(Parent, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
@@ -104,7 +104,7 @@ namespace MgmtOperations
             scope.Start();
             try
             {
-                var response = await _availabilitySetChildRestClient.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Name, availabilitySetChildName, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _availabilitySetChildRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, availabilitySetChildName, parameters, cancellationToken).ConfigureAwait(false);
                 var operation = new AvailabilitySetChildCreateOrUpdateOperation(Parent, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -135,7 +135,7 @@ namespace MgmtOperations
             scope.Start();
             try
             {
-                var response = _availabilitySetChildRestClient.Get(Id.ResourceGroupName, Id.Name, availabilitySetChildName, cancellationToken);
+                var response = _availabilitySetChildRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, availabilitySetChildName, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new AvailabilitySetChild(Parent, response.Value), response.GetRawResponse());
@@ -165,7 +165,7 @@ namespace MgmtOperations
             scope.Start();
             try
             {
-                var response = await _availabilitySetChildRestClient.GetAsync(Id.ResourceGroupName, Id.Name, availabilitySetChildName, cancellationToken).ConfigureAwait(false);
+                var response = await _availabilitySetChildRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, availabilitySetChildName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new AvailabilitySetChild(Parent, response.Value), response.GetRawResponse());
@@ -192,7 +192,7 @@ namespace MgmtOperations
             scope.Start();
             try
             {
-                var response = _availabilitySetChildRestClient.Get(Id.ResourceGroupName, Id.Name, availabilitySetChildName, cancellationToken: cancellationToken);
+                var response = _availabilitySetChildRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, availabilitySetChildName, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<AvailabilitySetChild>(null, response.GetRawResponse())
                     : Response.FromValue(new AvailabilitySetChild(this, response.Value), response.GetRawResponse());
@@ -219,7 +219,7 @@ namespace MgmtOperations
             scope.Start();
             try
             {
-                var response = await _availabilitySetChildRestClient.GetAsync(Id.ResourceGroupName, Id.Name, availabilitySetChildName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _availabilitySetChildRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, availabilitySetChildName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<AvailabilitySetChild>(null, response.GetRawResponse())
                     : Response.FromValue(new AvailabilitySetChild(this, response.Value), response.GetRawResponse());
@@ -292,7 +292,7 @@ namespace MgmtOperations
             scope.Start();
             try
             {
-                var response = _availabilitySetChildRestClient.List(Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _availabilitySetChildRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(response.Value.Value.Select(value => new AvailabilitySetChild(Parent, value)).ToArray() as IReadOnlyList<AvailabilitySetChild>, response.GetRawResponse());
             }
             catch (Exception e)
@@ -313,7 +313,7 @@ namespace MgmtOperations
             scope.Start();
             try
             {
-                var response = await _availabilitySetChildRestClient.ListAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _availabilitySetChildRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value.Value.Select(value => new AvailabilitySetChild(Parent, value)).ToArray() as IReadOnlyList<AvailabilitySetChild>, response.GetRawResponse());
             }
             catch (Exception e)

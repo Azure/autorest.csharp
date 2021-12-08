@@ -37,7 +37,7 @@ namespace MgmtListMethods
         internal FakeParentWithAncestorWithLocCollection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _fakeParentWithAncestorWithLocsRestClient = new FakeParentWithAncestorWithLocsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _fakeParentWithAncestorWithLocsRestClient = new FakeParentWithAncestorWithLocsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
@@ -69,7 +69,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = _fakeParentWithAncestorWithLocsRestClient.CreateOrUpdate(Id.Name, fakeParentWithAncestorWithLocName, parameters, cancellationToken);
+                var response = _fakeParentWithAncestorWithLocsRestClient.CreateOrUpdate(Id.SubscriptionId, Id.Name, fakeParentWithAncestorWithLocName, parameters, cancellationToken);
                 var operation = new FakeParentWithAncestorWithLocCreateOrUpdateOperation(Parent, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
@@ -106,7 +106,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = await _fakeParentWithAncestorWithLocsRestClient.CreateOrUpdateAsync(Id.Name, fakeParentWithAncestorWithLocName, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _fakeParentWithAncestorWithLocsRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.Name, fakeParentWithAncestorWithLocName, parameters, cancellationToken).ConfigureAwait(false);
                 var operation = new FakeParentWithAncestorWithLocCreateOrUpdateOperation(Parent, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -137,7 +137,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = _fakeParentWithAncestorWithLocsRestClient.Get(Id.Name, fakeParentWithAncestorWithLocName, cancellationToken);
+                var response = _fakeParentWithAncestorWithLocsRestClient.Get(Id.SubscriptionId, Id.Name, fakeParentWithAncestorWithLocName, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new FakeParentWithAncestorWithLoc(Parent, response.Value), response.GetRawResponse());
@@ -167,7 +167,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = await _fakeParentWithAncestorWithLocsRestClient.GetAsync(Id.Name, fakeParentWithAncestorWithLocName, cancellationToken).ConfigureAwait(false);
+                var response = await _fakeParentWithAncestorWithLocsRestClient.GetAsync(Id.SubscriptionId, Id.Name, fakeParentWithAncestorWithLocName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new FakeParentWithAncestorWithLoc(Parent, response.Value), response.GetRawResponse());
@@ -194,7 +194,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = _fakeParentWithAncestorWithLocsRestClient.Get(Id.Name, fakeParentWithAncestorWithLocName, cancellationToken: cancellationToken);
+                var response = _fakeParentWithAncestorWithLocsRestClient.Get(Id.SubscriptionId, Id.Name, fakeParentWithAncestorWithLocName, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<FakeParentWithAncestorWithLoc>(null, response.GetRawResponse())
                     : Response.FromValue(new FakeParentWithAncestorWithLoc(this, response.Value), response.GetRawResponse());
@@ -221,7 +221,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = await _fakeParentWithAncestorWithLocsRestClient.GetAsync(Id.Name, fakeParentWithAncestorWithLocName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _fakeParentWithAncestorWithLocsRestClient.GetAsync(Id.SubscriptionId, Id.Name, fakeParentWithAncestorWithLocName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<FakeParentWithAncestorWithLoc>(null, response.GetRawResponse())
                     : Response.FromValue(new FakeParentWithAncestorWithLoc(this, response.Value), response.GetRawResponse());
@@ -297,7 +297,7 @@ namespace MgmtListMethods
                 scope.Start();
                 try
                 {
-                    var response = _fakeParentWithAncestorWithLocsRestClient.ListTest(Id.Name, cancellationToken: cancellationToken);
+                    var response = _fakeParentWithAncestorWithLocsRestClient.ListTest(Id.SubscriptionId, Id.Name, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new FakeParentWithAncestorWithLoc(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -312,7 +312,7 @@ namespace MgmtListMethods
                 scope.Start();
                 try
                 {
-                    var response = _fakeParentWithAncestorWithLocsRestClient.ListTestNextPage(nextLink, Id.Name, cancellationToken: cancellationToken);
+                    var response = _fakeParentWithAncestorWithLocsRestClient.ListTestNextPage(nextLink, Id.SubscriptionId, Id.Name, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new FakeParentWithAncestorWithLoc(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -338,7 +338,7 @@ namespace MgmtListMethods
                 scope.Start();
                 try
                 {
-                    var response = await _fakeParentWithAncestorWithLocsRestClient.ListTestAsync(Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _fakeParentWithAncestorWithLocsRestClient.ListTestAsync(Id.SubscriptionId, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new FakeParentWithAncestorWithLoc(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -353,7 +353,7 @@ namespace MgmtListMethods
                 scope.Start();
                 try
                 {
-                    var response = await _fakeParentWithAncestorWithLocsRestClient.ListTestNextPageAsync(nextLink, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _fakeParentWithAncestorWithLocsRestClient.ListTestNextPageAsync(nextLink, Id.SubscriptionId, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new FakeParentWithAncestorWithLoc(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)

@@ -35,7 +35,7 @@ namespace MgmtParamOrdering
         internal EnvironmentContainerResourceCollection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _environmentContainersRestClient = new EnvironmentContainersRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _environmentContainersRestClient = new EnvironmentContainersRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
@@ -67,7 +67,7 @@ namespace MgmtParamOrdering
             scope.Start();
             try
             {
-                var response = _environmentContainersRestClient.CreateOrUpdate(Id.ResourceGroupName, Id.Name, name, body, cancellationToken);
+                var response = _environmentContainersRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, name, body, cancellationToken);
                 var operation = new EnvironmentContainerCreateOrUpdateOperation(Parent, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
@@ -104,7 +104,7 @@ namespace MgmtParamOrdering
             scope.Start();
             try
             {
-                var response = await _environmentContainersRestClient.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Name, name, body, cancellationToken).ConfigureAwait(false);
+                var response = await _environmentContainersRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, name, body, cancellationToken).ConfigureAwait(false);
                 var operation = new EnvironmentContainerCreateOrUpdateOperation(Parent, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -135,7 +135,7 @@ namespace MgmtParamOrdering
             scope.Start();
             try
             {
-                var response = _environmentContainersRestClient.Get(Id.ResourceGroupName, Id.Name, name, cancellationToken);
+                var response = _environmentContainersRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, name, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new EnvironmentContainerResource(Parent, response.Value), response.GetRawResponse());
@@ -165,7 +165,7 @@ namespace MgmtParamOrdering
             scope.Start();
             try
             {
-                var response = await _environmentContainersRestClient.GetAsync(Id.ResourceGroupName, Id.Name, name, cancellationToken).ConfigureAwait(false);
+                var response = await _environmentContainersRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new EnvironmentContainerResource(Parent, response.Value), response.GetRawResponse());
@@ -192,7 +192,7 @@ namespace MgmtParamOrdering
             scope.Start();
             try
             {
-                var response = _environmentContainersRestClient.Get(Id.ResourceGroupName, Id.Name, name, cancellationToken: cancellationToken);
+                var response = _environmentContainersRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, name, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<EnvironmentContainerResource>(null, response.GetRawResponse())
                     : Response.FromValue(new EnvironmentContainerResource(this, response.Value), response.GetRawResponse());
@@ -219,7 +219,7 @@ namespace MgmtParamOrdering
             scope.Start();
             try
             {
-                var response = await _environmentContainersRestClient.GetAsync(Id.ResourceGroupName, Id.Name, name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _environmentContainersRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, name, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<EnvironmentContainerResource>(null, response.GetRawResponse())
                     : Response.FromValue(new EnvironmentContainerResource(this, response.Value), response.GetRawResponse());
@@ -292,7 +292,7 @@ namespace MgmtParamOrdering
             scope.Start();
             try
             {
-                var response = _environmentContainersRestClient.List(Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _environmentContainersRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(response.Value.Value.Select(value => new EnvironmentContainerResource(Parent, value)).ToArray() as IReadOnlyList<EnvironmentContainerResource>, response.GetRawResponse());
             }
             catch (Exception e)
@@ -313,7 +313,7 @@ namespace MgmtParamOrdering
             scope.Start();
             try
             {
-                var response = await _environmentContainersRestClient.ListAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _environmentContainersRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value.Value.Select(value => new EnvironmentContainerResource(Parent, value)).ToArray() as IReadOnlyList<EnvironmentContainerResource>, response.GetRawResponse());
             }
             catch (Exception e)

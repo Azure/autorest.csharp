@@ -34,7 +34,7 @@ namespace MgmtParamOrdering
         internal VirtualMachineExtensionImageCollection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _virtualMachineExtensionImagesRestClient = new VirtualMachineExtensionImagesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _virtualMachineExtensionImagesRestClient = new VirtualMachineExtensionImagesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
@@ -75,7 +75,7 @@ namespace MgmtParamOrdering
             scope.Start();
             try
             {
-                var response = _virtualMachineExtensionImagesRestClient.Get(location, publisherName, type, version, cancellationToken);
+                var response = _virtualMachineExtensionImagesRestClient.Get(Id.SubscriptionId, location, publisherName, type, version, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new VirtualMachineExtensionImage(Parent, response.Value), response.GetRawResponse());
@@ -120,7 +120,7 @@ namespace MgmtParamOrdering
             scope.Start();
             try
             {
-                var response = await _virtualMachineExtensionImagesRestClient.GetAsync(location, publisherName, type, version, cancellationToken).ConfigureAwait(false);
+                var response = await _virtualMachineExtensionImagesRestClient.GetAsync(Id.SubscriptionId, location, publisherName, type, version, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new VirtualMachineExtensionImage(Parent, response.Value), response.GetRawResponse());
@@ -162,7 +162,7 @@ namespace MgmtParamOrdering
             scope.Start();
             try
             {
-                var response = _virtualMachineExtensionImagesRestClient.Get(location, publisherName, type, version, cancellationToken: cancellationToken);
+                var response = _virtualMachineExtensionImagesRestClient.Get(Id.SubscriptionId, location, publisherName, type, version, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<VirtualMachineExtensionImage>(null, response.GetRawResponse())
                     : Response.FromValue(new VirtualMachineExtensionImage(this, response.Value), response.GetRawResponse());
@@ -204,7 +204,7 @@ namespace MgmtParamOrdering
             scope.Start();
             try
             {
-                var response = await _virtualMachineExtensionImagesRestClient.GetAsync(location, publisherName, type, version, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _virtualMachineExtensionImagesRestClient.GetAsync(Id.SubscriptionId, location, publisherName, type, version, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<VirtualMachineExtensionImage>(null, response.GetRawResponse())
                     : Response.FromValue(new VirtualMachineExtensionImage(this, response.Value), response.GetRawResponse());
@@ -319,7 +319,7 @@ namespace MgmtParamOrdering
             scope.Start();
             try
             {
-                var response = _virtualMachineExtensionImagesRestClient.ListTypes(location, publisherName, cancellationToken);
+                var response = _virtualMachineExtensionImagesRestClient.ListTypes(Id.SubscriptionId, location, publisherName, cancellationToken);
                 return Response.FromValue(response.Value.Select(value => new VirtualMachineExtensionImage(Parent, value)).ToArray() as IReadOnlyList<VirtualMachineExtensionImage>, response.GetRawResponse());
             }
             catch (Exception e)
@@ -352,7 +352,7 @@ namespace MgmtParamOrdering
             scope.Start();
             try
             {
-                var response = await _virtualMachineExtensionImagesRestClient.ListTypesAsync(location, publisherName, cancellationToken).ConfigureAwait(false);
+                var response = await _virtualMachineExtensionImagesRestClient.ListTypesAsync(Id.SubscriptionId, location, publisherName, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value.Select(value => new VirtualMachineExtensionImage(Parent, value)).ToArray() as IReadOnlyList<VirtualMachineExtensionImage>, response.GetRawResponse());
             }
             catch (Exception e)
@@ -393,7 +393,7 @@ namespace MgmtParamOrdering
             scope.Start();
             try
             {
-                var response = _virtualMachineExtensionImagesRestClient.ListVersions(location, publisherName, type, filter, top, orderby, cancellationToken);
+                var response = _virtualMachineExtensionImagesRestClient.ListVersions(Id.SubscriptionId, location, publisherName, type, filter, top, orderby, cancellationToken);
                 return Response.FromValue(response.Value.Select(value => new VirtualMachineExtensionImage(Parent, value)).ToArray() as IReadOnlyList<VirtualMachineExtensionImage>, response.GetRawResponse());
             }
             catch (Exception e)
@@ -434,7 +434,7 @@ namespace MgmtParamOrdering
             scope.Start();
             try
             {
-                var response = await _virtualMachineExtensionImagesRestClient.ListVersionsAsync(location, publisherName, type, filter, top, orderby, cancellationToken).ConfigureAwait(false);
+                var response = await _virtualMachineExtensionImagesRestClient.ListVersionsAsync(Id.SubscriptionId, location, publisherName, type, filter, top, orderby, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value.Select(value => new VirtualMachineExtensionImage(Parent, value)).ToArray() as IReadOnlyList<VirtualMachineExtensionImage>, response.GetRawResponse());
             }
             catch (Exception e)

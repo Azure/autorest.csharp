@@ -39,7 +39,7 @@ namespace MgmtNonStringPathVariable
             HasData = true;
             _data = resource;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _barsRestClient = new BarsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _barsRestClient = new BarsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="Bar"/> class. </summary>
@@ -48,7 +48,7 @@ namespace MgmtNonStringPathVariable
         internal Bar(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _barsRestClient = new BarsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _barsRestClient = new BarsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="Bar"/> class. </summary>
@@ -60,7 +60,7 @@ namespace MgmtNonStringPathVariable
         internal Bar(ArmClientOptions clientOptions, TokenCredential credential, Uri uri, HttpPipeline pipeline, ResourceIdentifier id) : base(clientOptions, credential, uri, pipeline, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _barsRestClient = new BarsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _barsRestClient = new BarsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
@@ -95,7 +95,7 @@ namespace MgmtNonStringPathVariable
             scope.Start();
             try
             {
-                var response = await _barsRestClient.GetAsync(Id.ResourceGroupName, int.Parse(Id.Name), cancellationToken).ConfigureAwait(false);
+                var response = await _barsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, int.Parse(Id.Name), cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new Bar(this, response.Value), response.GetRawResponse());
@@ -118,7 +118,7 @@ namespace MgmtNonStringPathVariable
             scope.Start();
             try
             {
-                var response = _barsRestClient.Get(Id.ResourceGroupName, int.Parse(Id.Name), cancellationToken);
+                var response = _barsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, int.Parse(Id.Name), cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new Bar(this, response.Value), response.GetRawResponse());
@@ -158,8 +158,8 @@ namespace MgmtNonStringPathVariable
             scope.Start();
             try
             {
-                var response = await _barsRestClient.DeleteAsync(Id.ResourceGroupName, int.Parse(Id.Name), cancellationToken).ConfigureAwait(false);
-                var operation = new BarDeleteOperation(_clientDiagnostics, Pipeline, _barsRestClient.CreateDeleteRequest(Id.ResourceGroupName, int.Parse(Id.Name)).Request, response);
+                var response = await _barsRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, int.Parse(Id.Name), cancellationToken).ConfigureAwait(false);
+                var operation = new BarDeleteOperation(_clientDiagnostics, Pipeline, _barsRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, int.Parse(Id.Name)).Request, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -183,8 +183,8 @@ namespace MgmtNonStringPathVariable
             scope.Start();
             try
             {
-                var response = _barsRestClient.Delete(Id.ResourceGroupName, int.Parse(Id.Name), cancellationToken);
-                var operation = new BarDeleteOperation(_clientDiagnostics, Pipeline, _barsRestClient.CreateDeleteRequest(Id.ResourceGroupName, int.Parse(Id.Name)).Request, response);
+                var response = _barsRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, int.Parse(Id.Name), cancellationToken);
+                var operation = new BarDeleteOperation(_clientDiagnostics, Pipeline, _barsRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, int.Parse(Id.Name)).Request, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -215,7 +215,7 @@ namespace MgmtNonStringPathVariable
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _barsRestClient.GetAsync(Id.ResourceGroupName, int.Parse(Id.Name), cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _barsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, int.Parse(Id.Name), cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new Bar(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -244,7 +244,7 @@ namespace MgmtNonStringPathVariable
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _barsRestClient.Get(Id.ResourceGroupName, int.Parse(Id.Name), cancellationToken);
+                var originalResponse = _barsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, int.Parse(Id.Name), cancellationToken);
                 return Response.FromValue(new Bar(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -273,7 +273,7 @@ namespace MgmtNonStringPathVariable
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _barsRestClient.GetAsync(Id.ResourceGroupName, int.Parse(Id.Name), cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _barsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, int.Parse(Id.Name), cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new Bar(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -302,7 +302,7 @@ namespace MgmtNonStringPathVariable
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _barsRestClient.Get(Id.ResourceGroupName, int.Parse(Id.Name), cancellationToken);
+                var originalResponse = _barsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, int.Parse(Id.Name), cancellationToken);
                 return Response.FromValue(new Bar(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -330,7 +330,7 @@ namespace MgmtNonStringPathVariable
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _barsRestClient.GetAsync(Id.ResourceGroupName, int.Parse(Id.Name), cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _barsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, int.Parse(Id.Name), cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new Bar(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -358,7 +358,7 @@ namespace MgmtNonStringPathVariable
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _barsRestClient.Get(Id.ResourceGroupName, int.Parse(Id.Name), cancellationToken);
+                var originalResponse = _barsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, int.Parse(Id.Name), cancellationToken);
                 return Response.FromValue(new Bar(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -387,8 +387,8 @@ namespace MgmtNonStringPathVariable
             scope.Start();
             try
             {
-                var response = await _barsRestClient.UpdateAsync(Id.ResourceGroupName, int.Parse(Id.Name), parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new BarUpdateOperation(this, _clientDiagnostics, Pipeline, _barsRestClient.CreateUpdateRequest(Id.ResourceGroupName, int.Parse(Id.Name), parameters).Request, response);
+                var response = await _barsRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, int.Parse(Id.Name), parameters, cancellationToken).ConfigureAwait(false);
+                var operation = new BarUpdateOperation(this, _clientDiagnostics, Pipeline, _barsRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, int.Parse(Id.Name), parameters).Request, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -419,8 +419,8 @@ namespace MgmtNonStringPathVariable
             scope.Start();
             try
             {
-                var response = _barsRestClient.Update(Id.ResourceGroupName, int.Parse(Id.Name), parameters, cancellationToken);
-                var operation = new BarUpdateOperation(this, _clientDiagnostics, Pipeline, _barsRestClient.CreateUpdateRequest(Id.ResourceGroupName, int.Parse(Id.Name), parameters).Request, response);
+                var response = _barsRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, int.Parse(Id.Name), parameters, cancellationToken);
+                var operation = new BarUpdateOperation(this, _clientDiagnostics, Pipeline, _barsRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, int.Parse(Id.Name), parameters).Request, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

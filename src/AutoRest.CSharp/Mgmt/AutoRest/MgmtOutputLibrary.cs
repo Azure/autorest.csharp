@@ -30,8 +30,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         /// <summary>
         /// This is a map from raw request path to the corresponding <see cref="MgmtRestClient"/>
+        /// The type of values is a HashSet of <see cref="MgmtRestClient"/>, because we might get the case that multiple operation groups might share the same request path
         /// </summary>
-        private Dictionary<string, MgmtRestClient>? _rawRequestPathToRestClient;
+        private Dictionary<string, HashSet<MgmtRestClient>>? _rawRequestPathToRestClient;
 
         /// <summary>
         /// This is a map from raw request path to the corresponding <see cref="Resource"/>
@@ -75,12 +76,12 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         /// </summary>
         private Dictionary<OperationGroup, IEnumerable<string>> _operationGroupToRequestPaths;
 
-        public MgmtOutputLibrary(CodeModel codeModel, BuildContext<MgmtOutputLibrary> context) : base(codeModel, context)
+        public MgmtOutputLibrary(CodeModel codeModel, BuildContext<MgmtOutputLibrary> context)
         {
             OmitOperationGroups.RemoveOperationGroups(codeModel, context);
             _context = context;
             _mgmtConfiguration = context.Configuration.MgmtConfiguration;
-            //UpdateSubscriptionIdForTenantIdResource(codeModel);
+            UpdateSubscriptionIdForAllResource(codeModel);
             _codeModel = codeModel;
             _operationGroupToRequestPaths = new Dictionary<OperationGroup, IEnumerable<string>>();
             _rawRequestPathToOperationSets = new Dictionary<string, OperationSet>();
@@ -100,6 +101,25 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
             // Decorate the operation sets to see if it corresponds to a resource
             DecorateOperationSets();
+        }
+
+        private void UpdateSubscriptionIdForAllResource(CodeModel codeModel)
+        {
+            foreach (var operationGroup in codeModel.OperationGroups)
+            {
+                foreach (var op in operationGroup.Operations)
+                {
+                    foreach (var p in op.Parameters)
+                    {
+                        //updater the first subscriptionId to be 'method'
+                        if (p.Language.Default.Name.Equals("subscriptionId", StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            p.Implementation = ImplementationLocation.Method;
+                            break;
+                        }
+                    }
+                }
+            }
         }
 
         private IEnumerable<OperationSet>? _resourceOperationSets;
@@ -152,7 +172,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             {
                 foreach (var restClientMethod in restClient.Methods)
                 {
-                    // skipp all internal methods
+                    // skip all internal methods
                     if (restClientMethod.Accessibility != "public")
                         continue;
                     _restClientMethods.Add(restClientMethod.Operation, restClientMethod);
@@ -226,14 +246,16 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         }
 
         private IEnumerable<ResourceData>? _resourceDatas;
-
         public IEnumerable<ResourceData> ResourceData => _resourceDatas ??= EnsureRequestPathToResourceData().Values.Distinct();
 
-        public IEnumerable<MgmtRestClient> RestClients => EnsureRestClients().Values.Distinct();
+        private IEnumerable<MgmtRestClient>? _restClients;
+        public IEnumerable<MgmtRestClient> RestClients => _restClients ??= EnsureRestClients().Values.SelectMany(v => v).Distinct();
 
-        public IEnumerable<Resource> ArmResources => EnsureRequestPathToArmResources().Values.Distinct();
+        private IEnumerable<Resource>? _armResources;
+        public IEnumerable<Resource> ArmResources => _armResources ??= EnsureRequestPathToArmResources().Values.Distinct();
 
-        public IEnumerable<ResourceCollection> ResourceCollections => EnsureRequestPathToResourceCollections().Values.Distinct();
+        private IEnumerable<ResourceCollection>? _resourceCollections;
+        public IEnumerable<ResourceCollection> ResourceCollections => _resourceCollections ??= EnsureRequestPathToResourceCollections().Values.Distinct();
 
         public IEnumerable<MgmtLongRunningOperation> LongRunningOperations => EnsureLongRunningOperations().Values;
 
@@ -318,38 +340,44 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return EnsureRequestPathToArmResources().TryGetValue(requestPath, out resource);
         }
 
-        public MgmtRestClient GetRestClient(string requestPath)
+        public MgmtRestClient GetRestClient(Operation operation)
         {
-            if (TryGetRestClient(requestPath, out var restClient))
-                return restClient;
+            var requestPath = operation.GetHttpPath();
+            if (TryGetRestClients(requestPath, out var restClients))
+            {
+                // return the first client that contains this operation
+                return restClients.Single(client => client.OperationGroup.Operations.Contains(operation));
+            }
 
-            throw new InvalidOperationException($"Cannot find MgmtRestClient corresponding to {requestPath}");
+            throw new InvalidOperationException($"Cannot find MgmtRestClient corresponding to {requestPath} with method {operation.GetHttpMethod()}");
         }
 
-        public bool TryGetRestClient(string requestPath, [MaybeNullWhen(false)] out MgmtRestClient restClient)
+        public bool TryGetRestClients(string requestPath, [MaybeNullWhen(false)] out HashSet<MgmtRestClient> restClients)
         {
-            return EnsureRestClients().TryGetValue(requestPath, out restClient);
+            return EnsureRestClients().TryGetValue(requestPath, out restClients);
         }
 
         internal LongRunningOperation GetLongRunningOperation(Operation op) => EnsureLongRunningOperations()[op];
 
         internal NonLongRunningOperation GetNonLongRunningOperation(Operation op) => EnsureNonLongRunningOperations()[op];
 
-        private Dictionary<string, MgmtRestClient> EnsureRestClients()
+        private Dictionary<string, HashSet<MgmtRestClient>> EnsureRestClients()
         {
             if (_rawRequestPathToRestClient != null)
             {
                 return _rawRequestPathToRestClient;
             }
 
-            _rawRequestPathToRestClient = new Dictionary<string, MgmtRestClient>();
+            _rawRequestPathToRestClient = new Dictionary<string, HashSet<MgmtRestClient>>();
             foreach (var operationGroup in _codeModel.OperationGroups)
             {
                 var restClient = new MgmtRestClient(operationGroup, _context);
                 foreach (var requestPath in _operationGroupToRequestPaths[operationGroup])
                 {
-                    // this will throw an exception when there is a case that one request path has multiple rest clients
-                    _rawRequestPathToRestClient.Add(requestPath, restClient);
+                    if (_rawRequestPathToRestClient.TryGetValue(requestPath, out var set))
+                        set.Add(restClient);
+                    else
+                        _rawRequestPathToRestClient.Add(requestPath, new HashSet<MgmtRestClient> { restClient });
                 }
             }
 
