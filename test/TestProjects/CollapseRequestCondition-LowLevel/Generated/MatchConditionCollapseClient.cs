@@ -46,7 +46,7 @@ namespace CollapseRequestCondition_LowLevel
 
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
-            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
         }
 
@@ -61,7 +61,7 @@ namespace CollapseRequestCondition_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateCollapseGetWithHeadRequest(otherHeader, matchConditions);
+                using HttpMessage message = CreateCollapseGetWithHeadRequest(otherHeader, matchConditions, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -82,7 +82,7 @@ namespace CollapseRequestCondition_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateCollapseGetWithHeadRequest(otherHeader, matchConditions);
+                using HttpMessage message = CreateCollapseGetWithHeadRequest(otherHeader, matchConditions, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -103,7 +103,7 @@ namespace CollapseRequestCondition_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateCollapsePutRequest(content, matchConditions);
+                using HttpMessage message = CreateCollapsePutRequest(content, matchConditions, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -124,7 +124,7 @@ namespace CollapseRequestCondition_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateCollapsePutRequest(content, matchConditions);
+                using HttpMessage message = CreateCollapsePutRequest(content, matchConditions, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -144,7 +144,7 @@ namespace CollapseRequestCondition_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateCollapseGetRequest(matchConditions);
+                using HttpMessage message = CreateCollapseGetRequest(matchConditions, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -164,7 +164,7 @@ namespace CollapseRequestCondition_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateCollapseGetRequest(matchConditions);
+                using HttpMessage message = CreateCollapseGetRequest(matchConditions, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -184,7 +184,7 @@ namespace CollapseRequestCondition_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateMulticollapseGetRequest(requestConditions);
+                using HttpMessage message = CreateMulticollapseGetRequest(requestConditions, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -204,7 +204,7 @@ namespace CollapseRequestCondition_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateMulticollapseGetRequest(requestConditions);
+                using HttpMessage message = CreateMulticollapseGetRequest(requestConditions, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -214,9 +214,9 @@ namespace CollapseRequestCondition_LowLevel
             }
         }
 
-        internal HttpMessage CreateCollapseGetWithHeadRequest(string otherHeader, MatchConditions matchConditions)
+        internal HttpMessage CreateCollapseGetWithHeadRequest(string otherHeader, MatchConditions matchConditions, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -235,9 +235,9 @@ namespace CollapseRequestCondition_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateCollapsePutRequest(RequestContent content, MatchConditions matchConditions)
+        internal HttpMessage CreateCollapsePutRequest(RequestContent content, MatchConditions matchConditions, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -254,9 +254,9 @@ namespace CollapseRequestCondition_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateCollapseGetRequest(MatchConditions matchConditions)
+        internal HttpMessage CreateCollapseGetRequest(MatchConditions matchConditions, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -271,9 +271,9 @@ namespace CollapseRequestCondition_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateMulticollapseGetRequest(RequestConditions requestConditions)
+        internal HttpMessage CreateMulticollapseGetRequest(RequestConditions requestConditions, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();

@@ -46,7 +46,7 @@ namespace httpInfrastructure_LowLevel
 
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
-            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
         }
 
@@ -69,7 +69,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetEmptyErrorRequest();
+                using HttpMessage message = CreateGetEmptyErrorRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -98,7 +98,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetEmptyErrorRequest();
+                using HttpMessage message = CreateGetEmptyErrorRequest(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -118,7 +118,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetNoModelErrorRequest();
+                using HttpMessage message = CreateGetNoModelErrorRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -138,7 +138,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetNoModelErrorRequest();
+                using HttpMessage message = CreateGetNoModelErrorRequest(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -158,7 +158,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetNoModelEmptyRequest();
+                using HttpMessage message = CreateGetNoModelEmptyRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -178,7 +178,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetNoModelEmptyRequest();
+                using HttpMessage message = CreateGetNoModelEmptyRequest(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -188,9 +188,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        internal HttpMessage CreateGetEmptyErrorRequest()
+        internal HttpMessage CreateGetEmptyErrorRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -202,9 +202,9 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetNoModelErrorRequest()
+        internal HttpMessage CreateGetNoModelErrorRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -216,9 +216,9 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetNoModelEmptyRequest()
+        internal HttpMessage CreateGetNoModelEmptyRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();

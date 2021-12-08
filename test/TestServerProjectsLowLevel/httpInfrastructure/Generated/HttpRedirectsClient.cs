@@ -46,7 +46,7 @@ namespace httpInfrastructure_LowLevel
 
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
-            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
         }
 
@@ -69,7 +69,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateHead300Request();
+                using HttpMessage message = CreateHead300Request(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -98,7 +98,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateHead300Request();
+                using HttpMessage message = CreateHead300Request(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -127,7 +127,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGet300Request();
+                using HttpMessage message = CreateGet300Request(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -156,7 +156,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGet300Request();
+                using HttpMessage message = CreateGet300Request(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -185,7 +185,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateHead301Request();
+                using HttpMessage message = CreateHead301Request(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -214,7 +214,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateHead301Request();
+                using HttpMessage message = CreateHead301Request(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -243,7 +243,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGet301Request();
+                using HttpMessage message = CreateGet301Request(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -272,7 +272,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGet301Request();
+                using HttpMessage message = CreateGet301Request(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -302,7 +302,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePut301Request(content);
+                using HttpMessage message = CreatePut301Request(content, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -332,7 +332,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePut301Request(content);
+                using HttpMessage message = CreatePut301Request(content, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -361,7 +361,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateHead302Request();
+                using HttpMessage message = CreateHead302Request(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -390,7 +390,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateHead302Request();
+                using HttpMessage message = CreateHead302Request(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -419,7 +419,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGet302Request();
+                using HttpMessage message = CreateGet302Request(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -448,7 +448,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGet302Request();
+                using HttpMessage message = CreateGet302Request(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -478,7 +478,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePatch302Request(content);
+                using HttpMessage message = CreatePatch302Request(content, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -508,7 +508,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePatch302Request(content);
+                using HttpMessage message = CreatePatch302Request(content, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -538,7 +538,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePost303Request(content);
+                using HttpMessage message = CreatePost303Request(content, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -568,7 +568,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePost303Request(content);
+                using HttpMessage message = CreatePost303Request(content, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -597,7 +597,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateHead307Request();
+                using HttpMessage message = CreateHead307Request(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -626,7 +626,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateHead307Request();
+                using HttpMessage message = CreateHead307Request(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -655,7 +655,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGet307Request();
+                using HttpMessage message = CreateGet307Request(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -684,7 +684,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGet307Request();
+                using HttpMessage message = CreateGet307Request(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -713,7 +713,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateOptions307Request();
+                using HttpMessage message = CreateOptions307Request(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -742,7 +742,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateOptions307Request();
+                using HttpMessage message = CreateOptions307Request(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -772,7 +772,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePut307Request(content);
+                using HttpMessage message = CreatePut307Request(content, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -802,7 +802,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePut307Request(content);
+                using HttpMessage message = CreatePut307Request(content, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -832,7 +832,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePatch307Request(content);
+                using HttpMessage message = CreatePatch307Request(content, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -862,7 +862,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePatch307Request(content);
+                using HttpMessage message = CreatePatch307Request(content, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -892,7 +892,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePost307Request(content);
+                using HttpMessage message = CreatePost307Request(content, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -922,7 +922,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePost307Request(content);
+                using HttpMessage message = CreatePost307Request(content, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -952,7 +952,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateDelete307Request(content);
+                using HttpMessage message = CreateDelete307Request(content, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -982,7 +982,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateDelete307Request(content);
+                using HttpMessage message = CreateDelete307Request(content, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -992,9 +992,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        internal HttpMessage CreateHead300Request()
+        internal HttpMessage CreateHead300Request(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
@@ -1006,9 +1006,9 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGet300Request()
+        internal HttpMessage CreateGet300Request(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1020,9 +1020,9 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateHead301Request()
+        internal HttpMessage CreateHead301Request(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
@@ -1034,9 +1034,9 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGet301Request()
+        internal HttpMessage CreateGet301Request(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1048,9 +1048,9 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
-        internal HttpMessage CreatePut301Request(RequestContent content)
+        internal HttpMessage CreatePut301Request(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -1064,9 +1064,9 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateHead302Request()
+        internal HttpMessage CreateHead302Request(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
@@ -1078,9 +1078,9 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGet302Request()
+        internal HttpMessage CreateGet302Request(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1092,9 +1092,9 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
-        internal HttpMessage CreatePatch302Request(RequestContent content)
+        internal HttpMessage CreatePatch302Request(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Patch;
             var uri = new RawRequestUriBuilder();
@@ -1108,9 +1108,9 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
-        internal HttpMessage CreatePost303Request(RequestContent content)
+        internal HttpMessage CreatePost303Request(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1124,9 +1124,9 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateHead307Request()
+        internal HttpMessage CreateHead307Request(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
@@ -1138,9 +1138,9 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGet307Request()
+        internal HttpMessage CreateGet307Request(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1152,9 +1152,9 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateOptions307Request()
+        internal HttpMessage CreateOptions307Request(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Options;
             var uri = new RawRequestUriBuilder();
@@ -1166,9 +1166,9 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
-        internal HttpMessage CreatePut307Request(RequestContent content)
+        internal HttpMessage CreatePut307Request(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -1182,9 +1182,9 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
-        internal HttpMessage CreatePatch307Request(RequestContent content)
+        internal HttpMessage CreatePatch307Request(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Patch;
             var uri = new RawRequestUriBuilder();
@@ -1198,9 +1198,9 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
-        internal HttpMessage CreatePost307Request(RequestContent content)
+        internal HttpMessage CreatePost307Request(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1214,9 +1214,9 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateDelete307Request(RequestContent content)
+        internal HttpMessage CreateDelete307Request(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();

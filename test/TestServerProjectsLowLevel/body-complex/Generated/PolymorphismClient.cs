@@ -46,7 +46,7 @@ namespace body_complex_LowLevel
 
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
-            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
         }
 
@@ -77,7 +77,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetValidRequest();
+                using HttpMessage message = CreateGetValidRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -114,7 +114,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetValidRequest();
+                using HttpMessage message = CreateGetValidRequest(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -153,7 +153,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutValidRequest(content);
+                using HttpMessage message = CreatePutValidRequest(content, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -192,7 +192,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutValidRequest(content);
+                using HttpMessage message = CreatePutValidRequest(content, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -227,7 +227,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetDotSyntaxRequest();
+                using HttpMessage message = CreateGetDotSyntaxRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -262,7 +262,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetDotSyntaxRequest();
+                using HttpMessage message = CreateGetDotSyntaxRequest(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -307,7 +307,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetComposedWithDiscriminatorRequest();
+                using HttpMessage message = CreateGetComposedWithDiscriminatorRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -352,7 +352,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetComposedWithDiscriminatorRequest();
+                using HttpMessage message = CreateGetComposedWithDiscriminatorRequest(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -397,7 +397,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetComposedWithoutDiscriminatorRequest();
+                using HttpMessage message = CreateGetComposedWithoutDiscriminatorRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -442,7 +442,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetComposedWithoutDiscriminatorRequest();
+                using HttpMessage message = CreateGetComposedWithoutDiscriminatorRequest(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -488,7 +488,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetComplicatedRequest();
+                using HttpMessage message = CreateGetComplicatedRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -534,7 +534,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetComplicatedRequest();
+                using HttpMessage message = CreateGetComplicatedRequest(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -582,7 +582,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutComplicatedRequest(content);
+                using HttpMessage message = CreatePutComplicatedRequest(content, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -630,7 +630,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutComplicatedRequest(content);
+                using HttpMessage message = CreatePutComplicatedRequest(content, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -695,7 +695,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutMissingDiscriminatorRequest(content);
+                using HttpMessage message = CreatePutMissingDiscriminatorRequest(content, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -760,7 +760,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutMissingDiscriminatorRequest(content);
+                using HttpMessage message = CreatePutMissingDiscriminatorRequest(content, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -799,7 +799,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutValidMissingRequiredRequest(content);
+                using HttpMessage message = CreatePutValidMissingRequiredRequest(content, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -838,7 +838,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutValidMissingRequiredRequest(content);
+                using HttpMessage message = CreatePutValidMissingRequiredRequest(content, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -848,9 +848,9 @@ namespace body_complex_LowLevel
             }
         }
 
-        internal HttpMessage CreateGetValidRequest()
+        internal HttpMessage CreateGetValidRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -862,9 +862,9 @@ namespace body_complex_LowLevel
             return message;
         }
 
-        internal HttpMessage CreatePutValidRequest(RequestContent content)
+        internal HttpMessage CreatePutValidRequest(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -878,9 +878,9 @@ namespace body_complex_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetDotSyntaxRequest()
+        internal HttpMessage CreateGetDotSyntaxRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -892,9 +892,9 @@ namespace body_complex_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetComposedWithDiscriminatorRequest()
+        internal HttpMessage CreateGetComposedWithDiscriminatorRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -906,9 +906,9 @@ namespace body_complex_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetComposedWithoutDiscriminatorRequest()
+        internal HttpMessage CreateGetComposedWithoutDiscriminatorRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -920,9 +920,9 @@ namespace body_complex_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetComplicatedRequest()
+        internal HttpMessage CreateGetComplicatedRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -934,9 +934,9 @@ namespace body_complex_LowLevel
             return message;
         }
 
-        internal HttpMessage CreatePutComplicatedRequest(RequestContent content)
+        internal HttpMessage CreatePutComplicatedRequest(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -950,9 +950,9 @@ namespace body_complex_LowLevel
             return message;
         }
 
-        internal HttpMessage CreatePutMissingDiscriminatorRequest(RequestContent content)
+        internal HttpMessage CreatePutMissingDiscriminatorRequest(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -966,9 +966,9 @@ namespace body_complex_LowLevel
             return message;
         }
 
-        internal HttpMessage CreatePutValidMissingRequiredRequest(RequestContent content)
+        internal HttpMessage CreatePutValidMissingRequiredRequest(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();

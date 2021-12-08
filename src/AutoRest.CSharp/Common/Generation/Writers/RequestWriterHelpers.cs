@@ -39,7 +39,15 @@ namespace AutoRest.CSharp.Generation.Writers
                 var request = new CodeWriterDeclaration("request");
                 var uri = new CodeWriterDeclaration("uri");
 
-                writer.Line($"var {message:D} = _pipeline.CreateMessage();");
+                if (clientMethod.Parameters.Contains(KnownParameters.RequestContext))
+                {
+                    writer.Line($"var {message:D} = _pipeline.CreateMessage({KnownParameters.RequestContext.Name:I});");
+                }
+                else
+                {
+                    writer.Line($"var {message:D} = _pipeline.CreateMessage();");
+                }
+
                 writer.Line($"var {request:D} = {message}.Request;");
 
                 var method = clientMethod.Request.HttpMethod;

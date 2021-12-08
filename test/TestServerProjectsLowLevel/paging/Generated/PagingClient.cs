@@ -49,7 +49,7 @@ namespace paging_LowLevel
 
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
-            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
         }
 
@@ -74,8 +74,8 @@ namespace paging_LowLevel
                 do
                 {
                     var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateGetNoItemNamePagesRequest()
-                        : CreateGetNoItemNamePagesNextPageRequest(nextLink);
+                        ? CreateGetNoItemNamePagesRequest(context)
+                        : CreateGetNoItemNamePagesNextPageRequest(nextLink, context);
                     var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, context, "value", "nextLink", cancellationToken).ConfigureAwait(false);
                     nextLink = page.ContinuationToken;
                     yield return page;
@@ -104,8 +104,8 @@ namespace paging_LowLevel
                 do
                 {
                     var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateGetNoItemNamePagesRequest()
-                        : CreateGetNoItemNamePagesNextPageRequest(nextLink);
+                        ? CreateGetNoItemNamePagesRequest(context)
+                        : CreateGetNoItemNamePagesNextPageRequest(nextLink, context);
                     var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, context, "value", "nextLink");
                     nextLink = page.ContinuationToken;
                     yield return page;
@@ -138,7 +138,7 @@ namespace paging_LowLevel
             return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingClient.GetNullNextLinkNamePages");
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
-                using var message = CreateGetNullNextLinkNamePagesRequest();
+                using var message = CreateGetNullNextLinkNamePagesRequest(context);
                 var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, context, "values", null, cancellationToken).ConfigureAwait(false);
                 yield return page;
             }
@@ -168,7 +168,7 @@ namespace paging_LowLevel
             return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingClient.GetNullNextLinkNamePages");
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
-                using var message = CreateGetNullNextLinkNamePagesRequest();
+                using var message = CreateGetNullNextLinkNamePagesRequest(context);
                 var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, context, "values", null);
                 yield return page;
             }
@@ -201,8 +201,8 @@ namespace paging_LowLevel
                 do
                 {
                     var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateGetSinglePagesRequest()
-                        : CreateGetSinglePagesNextPageRequest(nextLink);
+                        ? CreateGetSinglePagesRequest(context)
+                        : CreateGetSinglePagesNextPageRequest(nextLink, context);
                     var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, context, "values", "nextLink", cancellationToken).ConfigureAwait(false);
                     nextLink = page.ContinuationToken;
                     yield return page;
@@ -238,8 +238,8 @@ namespace paging_LowLevel
                 do
                 {
                     var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateGetSinglePagesRequest()
-                        : CreateGetSinglePagesNextPageRequest(nextLink);
+                        ? CreateGetSinglePagesRequest(context)
+                        : CreateGetSinglePagesNextPageRequest(nextLink, context);
                     var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, context, "values", "nextLink");
                     nextLink = page.ContinuationToken;
                     yield return page;
@@ -268,8 +268,8 @@ namespace paging_LowLevel
                 do
                 {
                     var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateFirstResponseEmptyRequest()
-                        : CreateFirstResponseEmptyNextPageRequest(nextLink);
+                        ? CreateFirstResponseEmptyRequest(context)
+                        : CreateFirstResponseEmptyNextPageRequest(nextLink, context);
                     var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, context, "value", "nextLink", cancellationToken).ConfigureAwait(false);
                     nextLink = page.ContinuationToken;
                     yield return page;
@@ -298,8 +298,8 @@ namespace paging_LowLevel
                 do
                 {
                     var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateFirstResponseEmptyRequest()
-                        : CreateFirstResponseEmptyNextPageRequest(nextLink);
+                        ? CreateFirstResponseEmptyRequest(context)
+                        : CreateFirstResponseEmptyNextPageRequest(nextLink, context);
                     var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, context, "value", "nextLink");
                     nextLink = page.ContinuationToken;
                     yield return page;
@@ -338,8 +338,8 @@ namespace paging_LowLevel
                 do
                 {
                     var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateGetMultiplePagesRequest(clientRequestId, maxresults, timeout)
-                        : CreateGetMultiplePagesNextPageRequest(nextLink, clientRequestId, maxresults, timeout);
+                        ? CreateGetMultiplePagesRequest(clientRequestId, maxresults, timeout, context)
+                        : CreateGetMultiplePagesNextPageRequest(nextLink, clientRequestId, maxresults, timeout, context);
                     var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, context, "values", "nextLink", cancellationToken).ConfigureAwait(false);
                     nextLink = page.ContinuationToken;
                     yield return page;
@@ -378,8 +378,8 @@ namespace paging_LowLevel
                 do
                 {
                     var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateGetMultiplePagesRequest(clientRequestId, maxresults, timeout)
-                        : CreateGetMultiplePagesNextPageRequest(nextLink, clientRequestId, maxresults, timeout);
+                        ? CreateGetMultiplePagesRequest(clientRequestId, maxresults, timeout, context)
+                        : CreateGetMultiplePagesNextPageRequest(nextLink, clientRequestId, maxresults, timeout, context);
                     var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, context, "values", "nextLink");
                     nextLink = page.ContinuationToken;
                     yield return page;
@@ -416,8 +416,8 @@ namespace paging_LowLevel
                 do
                 {
                     var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateGetWithQueryParamsRequest(requiredQueryParameter)
-                        : CreateNextOperationWithQueryParamsRequest();
+                        ? CreateGetWithQueryParamsRequest(requiredQueryParameter, context)
+                        : CreateNextOperationWithQueryParamsRequest(context);
                     var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, context, "values", "nextLink", cancellationToken).ConfigureAwait(false);
                     nextLink = page.ContinuationToken;
                     yield return page;
@@ -454,8 +454,8 @@ namespace paging_LowLevel
                 do
                 {
                     var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateGetWithQueryParamsRequest(requiredQueryParameter)
-                        : CreateNextOperationWithQueryParamsRequest();
+                        ? CreateGetWithQueryParamsRequest(requiredQueryParameter, context)
+                        : CreateNextOperationWithQueryParamsRequest(context);
                     var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, context, "values", "nextLink");
                     nextLink = page.ContinuationToken;
                     yield return page;
@@ -488,7 +488,7 @@ namespace paging_LowLevel
             return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingClient.NextOperationWithQueryParams");
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
-                using var message = CreateNextOperationWithQueryParamsRequest();
+                using var message = CreateNextOperationWithQueryParamsRequest(context);
                 var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, context, "values", null, cancellationToken).ConfigureAwait(false);
                 yield return page;
             }
@@ -518,7 +518,7 @@ namespace paging_LowLevel
             return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingClient.NextOperationWithQueryParams");
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
-                using var message = CreateNextOperationWithQueryParamsRequest();
+                using var message = CreateNextOperationWithQueryParamsRequest(context);
                 var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, context, "values", null);
                 yield return page;
             }
@@ -554,8 +554,8 @@ namespace paging_LowLevel
                 do
                 {
                     var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateGetOdataMultiplePagesRequest(clientRequestId, maxresults, timeout)
-                        : CreateGetOdataMultiplePagesNextPageRequest(nextLink, clientRequestId, maxresults, timeout);
+                        ? CreateGetOdataMultiplePagesRequest(clientRequestId, maxresults, timeout, context)
+                        : CreateGetOdataMultiplePagesNextPageRequest(nextLink, clientRequestId, maxresults, timeout, context);
                     var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, context, "values", "odata.nextLink", cancellationToken).ConfigureAwait(false);
                     nextLink = page.ContinuationToken;
                     yield return page;
@@ -594,8 +594,8 @@ namespace paging_LowLevel
                 do
                 {
                     var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateGetOdataMultiplePagesRequest(clientRequestId, maxresults, timeout)
-                        : CreateGetOdataMultiplePagesNextPageRequest(nextLink, clientRequestId, maxresults, timeout);
+                        ? CreateGetOdataMultiplePagesRequest(clientRequestId, maxresults, timeout, context)
+                        : CreateGetOdataMultiplePagesNextPageRequest(nextLink, clientRequestId, maxresults, timeout, context);
                     var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, context, "values", "odata.nextLink");
                     nextLink = page.ContinuationToken;
                     yield return page;
@@ -635,8 +635,8 @@ namespace paging_LowLevel
                 do
                 {
                     var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateGetMultiplePagesWithOffsetRequest(offset, clientRequestId, maxresults, timeout)
-                        : CreateGetMultiplePagesWithOffsetNextPageRequest(nextLink, offset, clientRequestId, maxresults, timeout);
+                        ? CreateGetMultiplePagesWithOffsetRequest(offset, clientRequestId, maxresults, timeout, context)
+                        : CreateGetMultiplePagesWithOffsetNextPageRequest(nextLink, offset, clientRequestId, maxresults, timeout, context);
                     var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, context, "values", "nextLink", cancellationToken).ConfigureAwait(false);
                     nextLink = page.ContinuationToken;
                     yield return page;
@@ -676,8 +676,8 @@ namespace paging_LowLevel
                 do
                 {
                     var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateGetMultiplePagesWithOffsetRequest(offset, clientRequestId, maxresults, timeout)
-                        : CreateGetMultiplePagesWithOffsetNextPageRequest(nextLink, offset, clientRequestId, maxresults, timeout);
+                        ? CreateGetMultiplePagesWithOffsetRequest(offset, clientRequestId, maxresults, timeout, context)
+                        : CreateGetMultiplePagesWithOffsetNextPageRequest(nextLink, offset, clientRequestId, maxresults, timeout, context);
                     var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, context, "values", "nextLink");
                     nextLink = page.ContinuationToken;
                     yield return page;
@@ -713,8 +713,8 @@ namespace paging_LowLevel
                 do
                 {
                     var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateGetMultiplePagesRetryFirstRequest()
-                        : CreateGetMultiplePagesRetryFirstNextPageRequest(nextLink);
+                        ? CreateGetMultiplePagesRetryFirstRequest(context)
+                        : CreateGetMultiplePagesRetryFirstNextPageRequest(nextLink, context);
                     var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, context, "values", "nextLink", cancellationToken).ConfigureAwait(false);
                     nextLink = page.ContinuationToken;
                     yield return page;
@@ -750,8 +750,8 @@ namespace paging_LowLevel
                 do
                 {
                     var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateGetMultiplePagesRetryFirstRequest()
-                        : CreateGetMultiplePagesRetryFirstNextPageRequest(nextLink);
+                        ? CreateGetMultiplePagesRetryFirstRequest(context)
+                        : CreateGetMultiplePagesRetryFirstNextPageRequest(nextLink, context);
                     var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, context, "values", "nextLink");
                     nextLink = page.ContinuationToken;
                     yield return page;
@@ -787,8 +787,8 @@ namespace paging_LowLevel
                 do
                 {
                     var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateGetMultiplePagesRetrySecondRequest()
-                        : CreateGetMultiplePagesRetrySecondNextPageRequest(nextLink);
+                        ? CreateGetMultiplePagesRetrySecondRequest(context)
+                        : CreateGetMultiplePagesRetrySecondNextPageRequest(nextLink, context);
                     var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, context, "values", "nextLink", cancellationToken).ConfigureAwait(false);
                     nextLink = page.ContinuationToken;
                     yield return page;
@@ -824,8 +824,8 @@ namespace paging_LowLevel
                 do
                 {
                     var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateGetMultiplePagesRetrySecondRequest()
-                        : CreateGetMultiplePagesRetrySecondNextPageRequest(nextLink);
+                        ? CreateGetMultiplePagesRetrySecondRequest(context)
+                        : CreateGetMultiplePagesRetrySecondNextPageRequest(nextLink, context);
                     var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, context, "values", "nextLink");
                     nextLink = page.ContinuationToken;
                     yield return page;
@@ -861,8 +861,8 @@ namespace paging_LowLevel
                 do
                 {
                     var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateGetSinglePagesFailureRequest()
-                        : CreateGetSinglePagesFailureNextPageRequest(nextLink);
+                        ? CreateGetSinglePagesFailureRequest(context)
+                        : CreateGetSinglePagesFailureNextPageRequest(nextLink, context);
                     var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, context, "values", "nextLink", cancellationToken).ConfigureAwait(false);
                     nextLink = page.ContinuationToken;
                     yield return page;
@@ -898,8 +898,8 @@ namespace paging_LowLevel
                 do
                 {
                     var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateGetSinglePagesFailureRequest()
-                        : CreateGetSinglePagesFailureNextPageRequest(nextLink);
+                        ? CreateGetSinglePagesFailureRequest(context)
+                        : CreateGetSinglePagesFailureNextPageRequest(nextLink, context);
                     var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, context, "values", "nextLink");
                     nextLink = page.ContinuationToken;
                     yield return page;
@@ -935,8 +935,8 @@ namespace paging_LowLevel
                 do
                 {
                     var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateGetMultiplePagesFailureRequest()
-                        : CreateGetMultiplePagesFailureNextPageRequest(nextLink);
+                        ? CreateGetMultiplePagesFailureRequest(context)
+                        : CreateGetMultiplePagesFailureNextPageRequest(nextLink, context);
                     var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, context, "values", "nextLink", cancellationToken).ConfigureAwait(false);
                     nextLink = page.ContinuationToken;
                     yield return page;
@@ -972,8 +972,8 @@ namespace paging_LowLevel
                 do
                 {
                     var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateGetMultiplePagesFailureRequest()
-                        : CreateGetMultiplePagesFailureNextPageRequest(nextLink);
+                        ? CreateGetMultiplePagesFailureRequest(context)
+                        : CreateGetMultiplePagesFailureNextPageRequest(nextLink, context);
                     var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, context, "values", "nextLink");
                     nextLink = page.ContinuationToken;
                     yield return page;
@@ -1009,8 +1009,8 @@ namespace paging_LowLevel
                 do
                 {
                     var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateGetMultiplePagesFailureUriRequest()
-                        : CreateGetMultiplePagesFailureUriNextPageRequest(nextLink);
+                        ? CreateGetMultiplePagesFailureUriRequest(context)
+                        : CreateGetMultiplePagesFailureUriNextPageRequest(nextLink, context);
                     var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, context, "values", "nextLink", cancellationToken).ConfigureAwait(false);
                     nextLink = page.ContinuationToken;
                     yield return page;
@@ -1046,8 +1046,8 @@ namespace paging_LowLevel
                 do
                 {
                     var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateGetMultiplePagesFailureUriRequest()
-                        : CreateGetMultiplePagesFailureUriNextPageRequest(nextLink);
+                        ? CreateGetMultiplePagesFailureUriRequest(context)
+                        : CreateGetMultiplePagesFailureUriNextPageRequest(nextLink, context);
                     var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, context, "values", "nextLink");
                     nextLink = page.ContinuationToken;
                     yield return page;
@@ -1095,8 +1095,8 @@ namespace paging_LowLevel
                 do
                 {
                     var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateGetMultiplePagesFragmentNextLinkRequest(apiVersion, tenant)
-                        : CreateNextFragmentRequest(apiVersion, tenant, nextLink);
+                        ? CreateGetMultiplePagesFragmentNextLinkRequest(apiVersion, tenant, context)
+                        : CreateNextFragmentRequest(apiVersion, tenant, nextLink, context);
                     var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, context, "values", "odata.nextLink", cancellationToken).ConfigureAwait(false);
                     nextLink = page.ContinuationToken;
                     yield return page;
@@ -1144,8 +1144,8 @@ namespace paging_LowLevel
                 do
                 {
                     var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateGetMultiplePagesFragmentNextLinkRequest(apiVersion, tenant)
-                        : CreateNextFragmentRequest(apiVersion, tenant, nextLink);
+                        ? CreateGetMultiplePagesFragmentNextLinkRequest(apiVersion, tenant, context)
+                        : CreateNextFragmentRequest(apiVersion, tenant, nextLink, context);
                     var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, context, "values", "odata.nextLink");
                     nextLink = page.ContinuationToken;
                     yield return page;
@@ -1193,8 +1193,8 @@ namespace paging_LowLevel
                 do
                 {
                     var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateGetMultiplePagesFragmentWithGroupingNextLinkRequest(apiVersion, tenant)
-                        : CreateNextFragmentWithGroupingRequest(apiVersion, tenant, nextLink);
+                        ? CreateGetMultiplePagesFragmentWithGroupingNextLinkRequest(apiVersion, tenant, context)
+                        : CreateNextFragmentWithGroupingRequest(apiVersion, tenant, nextLink, context);
                     var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, context, "values", "odata.nextLink", cancellationToken).ConfigureAwait(false);
                     nextLink = page.ContinuationToken;
                     yield return page;
@@ -1242,8 +1242,8 @@ namespace paging_LowLevel
                 do
                 {
                     var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateGetMultiplePagesFragmentWithGroupingNextLinkRequest(apiVersion, tenant)
-                        : CreateNextFragmentWithGroupingRequest(apiVersion, tenant, nextLink);
+                        ? CreateGetMultiplePagesFragmentWithGroupingNextLinkRequest(apiVersion, tenant, context)
+                        : CreateNextFragmentWithGroupingRequest(apiVersion, tenant, nextLink, context);
                     var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, context, "values", "odata.nextLink");
                     nextLink = page.ContinuationToken;
                     yield return page;
@@ -1295,7 +1295,7 @@ namespace paging_LowLevel
             {
                 do
                 {
-                    var message = CreateNextFragmentRequest(apiVersion, tenant, nextLink);
+                    var message = CreateNextFragmentRequest(apiVersion, tenant, nextLink, context);
                     var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, context, "values", "odata.nextLink", cancellationToken).ConfigureAwait(false);
                     nextLink = page.ContinuationToken;
                     yield return page;
@@ -1347,7 +1347,7 @@ namespace paging_LowLevel
             {
                 do
                 {
-                    var message = CreateNextFragmentRequest(apiVersion, tenant, nextLink);
+                    var message = CreateNextFragmentRequest(apiVersion, tenant, nextLink, context);
                     var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, context, "values", "odata.nextLink");
                     nextLink = page.ContinuationToken;
                     yield return page;
@@ -1399,7 +1399,7 @@ namespace paging_LowLevel
             {
                 do
                 {
-                    var message = CreateNextFragmentWithGroupingRequest(apiVersion, tenant, nextLink);
+                    var message = CreateNextFragmentWithGroupingRequest(apiVersion, tenant, nextLink, context);
                     var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, context, "values", "odata.nextLink", cancellationToken).ConfigureAwait(false);
                     nextLink = page.ContinuationToken;
                     yield return page;
@@ -1451,7 +1451,7 @@ namespace paging_LowLevel
             {
                 do
                 {
-                    var message = CreateNextFragmentWithGroupingRequest(apiVersion, tenant, nextLink);
+                    var message = CreateNextFragmentWithGroupingRequest(apiVersion, tenant, nextLink, context);
                     var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, context, "values", "odata.nextLink");
                     nextLink = page.ContinuationToken;
                     yield return page;
@@ -1487,8 +1487,8 @@ namespace paging_LowLevel
                 do
                 {
                     var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateGetPagingModelWithItemNameWithXMSClientNameRequest()
-                        : CreateGetPagingModelWithItemNameWithXMSClientNameNextPageRequest(nextLink);
+                        ? CreateGetPagingModelWithItemNameWithXMSClientNameRequest(context)
+                        : CreateGetPagingModelWithItemNameWithXMSClientNameNextPageRequest(nextLink, context);
                     var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, context, "values", "nextLink", cancellationToken).ConfigureAwait(false);
                     nextLink = page.ContinuationToken;
                     yield return page;
@@ -1524,8 +1524,8 @@ namespace paging_LowLevel
                 do
                 {
                     var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateGetPagingModelWithItemNameWithXMSClientNameRequest()
-                        : CreateGetPagingModelWithItemNameWithXMSClientNameNextPageRequest(nextLink);
+                        ? CreateGetPagingModelWithItemNameWithXMSClientNameRequest(context)
+                        : CreateGetPagingModelWithItemNameWithXMSClientNameNextPageRequest(nextLink, context);
                     var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, context, "values", "nextLink");
                     nextLink = page.ContinuationToken;
                     yield return page;
@@ -1562,7 +1562,7 @@ namespace paging_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetMultiplePagesLRORequest(clientRequestId, maxresults, timeout);
+                using HttpMessage message = CreateGetMultiplePagesLRORequest(clientRequestId, maxresults, timeout, context);
                 return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "PagingClient.GetMultiplePagesLRO", OperationFinalStateVia.Location, context, CreateEnumerableAsync).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -1582,7 +1582,7 @@ namespace paging_LowLevel
                 }
                 while (!string.IsNullOrEmpty(nextLink))
                 {
-                    var message = CreateGetMultiplePagesLRONextPageRequest(nextLink, clientRequestId, maxresults, timeout);
+                    var message = CreateGetMultiplePagesLRONextPageRequest(nextLink, clientRequestId, maxresults, timeout, context);
                     page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, context, "values", "nextLink", cancellationToken).ConfigureAwait(false);
                     nextLink = page.ContinuationToken;
                     yield return page;
@@ -1619,7 +1619,7 @@ namespace paging_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetMultiplePagesLRORequest(clientRequestId, maxresults, timeout);
+                using HttpMessage message = CreateGetMultiplePagesLRORequest(clientRequestId, maxresults, timeout, context);
                 return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "PagingClient.GetMultiplePagesLRO", OperationFinalStateVia.Location, context, CreateEnumerable);
             }
             catch (Exception e)
@@ -1639,7 +1639,7 @@ namespace paging_LowLevel
                 }
                 while (!string.IsNullOrEmpty(nextLink))
                 {
-                    var message = CreateGetMultiplePagesLRONextPageRequest(nextLink, clientRequestId, maxresults, timeout);
+                    var message = CreateGetMultiplePagesLRONextPageRequest(nextLink, clientRequestId, maxresults, timeout, context);
                     page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, context, "values", "nextLink");
                     nextLink = page.ContinuationToken;
                     yield return page;
@@ -1647,9 +1647,9 @@ namespace paging_LowLevel
             }
         }
 
-        internal HttpMessage CreateGetNoItemNamePagesRequest()
+        internal HttpMessage CreateGetNoItemNamePagesRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1661,9 +1661,9 @@ namespace paging_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetNullNextLinkNamePagesRequest()
+        internal HttpMessage CreateGetNullNextLinkNamePagesRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1675,9 +1675,9 @@ namespace paging_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetSinglePagesRequest()
+        internal HttpMessage CreateGetSinglePagesRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1689,9 +1689,9 @@ namespace paging_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateFirstResponseEmptyRequest()
+        internal HttpMessage CreateFirstResponseEmptyRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1703,9 +1703,9 @@ namespace paging_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetMultiplePagesRequest(string clientRequestId, int? maxresults, int? timeout)
+        internal HttpMessage CreateGetMultiplePagesRequest(string clientRequestId, int? maxresults, int? timeout, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1729,9 +1729,9 @@ namespace paging_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetWithQueryParamsRequest(int requiredQueryParameter)
+        internal HttpMessage CreateGetWithQueryParamsRequest(int requiredQueryParameter, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1745,9 +1745,9 @@ namespace paging_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateNextOperationWithQueryParamsRequest()
+        internal HttpMessage CreateNextOperationWithQueryParamsRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1760,9 +1760,9 @@ namespace paging_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetOdataMultiplePagesRequest(string clientRequestId, int? maxresults, int? timeout)
+        internal HttpMessage CreateGetOdataMultiplePagesRequest(string clientRequestId, int? maxresults, int? timeout, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1786,9 +1786,9 @@ namespace paging_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetMultiplePagesWithOffsetRequest(int offset, string clientRequestId, int? maxresults, int? timeout)
+        internal HttpMessage CreateGetMultiplePagesWithOffsetRequest(int offset, string clientRequestId, int? maxresults, int? timeout, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1813,9 +1813,9 @@ namespace paging_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetMultiplePagesRetryFirstRequest()
+        internal HttpMessage CreateGetMultiplePagesRetryFirstRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1827,9 +1827,9 @@ namespace paging_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetMultiplePagesRetrySecondRequest()
+        internal HttpMessage CreateGetMultiplePagesRetrySecondRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1841,9 +1841,9 @@ namespace paging_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetSinglePagesFailureRequest()
+        internal HttpMessage CreateGetSinglePagesFailureRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1855,9 +1855,9 @@ namespace paging_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetMultiplePagesFailureRequest()
+        internal HttpMessage CreateGetMultiplePagesFailureRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1869,9 +1869,9 @@ namespace paging_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetMultiplePagesFailureUriRequest()
+        internal HttpMessage CreateGetMultiplePagesFailureUriRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1883,9 +1883,9 @@ namespace paging_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetMultiplePagesFragmentNextLinkRequest(string apiVersion, string tenant)
+        internal HttpMessage CreateGetMultiplePagesFragmentNextLinkRequest(string apiVersion, string tenant, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1899,9 +1899,9 @@ namespace paging_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetMultiplePagesFragmentWithGroupingNextLinkRequest(string apiVersion, string tenant)
+        internal HttpMessage CreateGetMultiplePagesFragmentWithGroupingNextLinkRequest(string apiVersion, string tenant, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1915,9 +1915,9 @@ namespace paging_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetMultiplePagesLRORequest(string clientRequestId, int? maxresults, int? timeout)
+        internal HttpMessage CreateGetMultiplePagesLRORequest(string clientRequestId, int? maxresults, int? timeout, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1941,9 +1941,9 @@ namespace paging_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateNextFragmentRequest(string apiVersion, string tenant, string nextLink)
+        internal HttpMessage CreateNextFragmentRequest(string apiVersion, string tenant, string nextLink, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1959,9 +1959,9 @@ namespace paging_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateNextFragmentWithGroupingRequest(string apiVersion, string tenant, string nextLink)
+        internal HttpMessage CreateNextFragmentWithGroupingRequest(string apiVersion, string tenant, string nextLink, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1977,9 +1977,9 @@ namespace paging_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetPagingModelWithItemNameWithXMSClientNameRequest()
+        internal HttpMessage CreateGetPagingModelWithItemNameWithXMSClientNameRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1991,9 +1991,9 @@ namespace paging_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetNoItemNamePagesNextPageRequest(string nextLink)
+        internal HttpMessage CreateGetNoItemNamePagesNextPageRequest(string nextLink, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2005,9 +2005,9 @@ namespace paging_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetSinglePagesNextPageRequest(string nextLink)
+        internal HttpMessage CreateGetSinglePagesNextPageRequest(string nextLink, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2019,9 +2019,9 @@ namespace paging_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateFirstResponseEmptyNextPageRequest(string nextLink)
+        internal HttpMessage CreateFirstResponseEmptyNextPageRequest(string nextLink, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2033,35 +2033,9 @@ namespace paging_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetMultiplePagesNextPageRequest(string nextLink, string clientRequestId, int? maxresults, int? timeout)
+        internal HttpMessage CreateGetMultiplePagesNextPageRequest(string nextLink, string clientRequestId, int? maxresults, int? timeout, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendRawNextLink(nextLink, false);
-            request.Uri = uri;
-            if (clientRequestId != null)
-            {
-                request.Headers.Add("client-request-id", clientRequestId);
-            }
-            if (maxresults != null)
-            {
-                request.Headers.Add("maxresults", maxresults.Value);
-            }
-            if (timeout != null)
-            {
-                request.Headers.Add("timeout", timeout.Value);
-            }
-            request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
-            return message;
-        }
-
-        internal HttpMessage CreateGetOdataMultiplePagesNextPageRequest(string nextLink, string clientRequestId, int? maxresults, int? timeout)
-        {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2085,9 +2059,9 @@ namespace paging_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetMultiplePagesWithOffsetNextPageRequest(string nextLink, int offset, string clientRequestId, int? maxresults, int? timeout)
+        internal HttpMessage CreateGetOdataMultiplePagesNextPageRequest(string nextLink, string clientRequestId, int? maxresults, int? timeout, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2111,9 +2085,35 @@ namespace paging_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetMultiplePagesRetryFirstNextPageRequest(string nextLink)
+        internal HttpMessage CreateGetMultiplePagesWithOffsetNextPageRequest(string nextLink, int offset, string clientRequestId, int? maxresults, int? timeout, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRawNextLink(nextLink, false);
+            request.Uri = uri;
+            if (clientRequestId != null)
+            {
+                request.Headers.Add("client-request-id", clientRequestId);
+            }
+            if (maxresults != null)
+            {
+                request.Headers.Add("maxresults", maxresults.Value);
+            }
+            if (timeout != null)
+            {
+                request.Headers.Add("timeout", timeout.Value);
+            }
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetMultiplePagesRetryFirstNextPageRequest(string nextLink, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2125,9 +2125,9 @@ namespace paging_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetMultiplePagesRetrySecondNextPageRequest(string nextLink)
+        internal HttpMessage CreateGetMultiplePagesRetrySecondNextPageRequest(string nextLink, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2139,9 +2139,9 @@ namespace paging_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetSinglePagesFailureNextPageRequest(string nextLink)
+        internal HttpMessage CreateGetSinglePagesFailureNextPageRequest(string nextLink, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2153,9 +2153,9 @@ namespace paging_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetMultiplePagesFailureNextPageRequest(string nextLink)
+        internal HttpMessage CreateGetMultiplePagesFailureNextPageRequest(string nextLink, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2167,9 +2167,9 @@ namespace paging_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetMultiplePagesFailureUriNextPageRequest(string nextLink)
+        internal HttpMessage CreateGetMultiplePagesFailureUriNextPageRequest(string nextLink, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2181,9 +2181,9 @@ namespace paging_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetPagingModelWithItemNameWithXMSClientNameNextPageRequest(string nextLink)
+        internal HttpMessage CreateGetPagingModelWithItemNameWithXMSClientNameNextPageRequest(string nextLink, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2195,9 +2195,9 @@ namespace paging_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetMultiplePagesLRONextPageRequest(string nextLink, string clientRequestId, int? maxresults, int? timeout)
+        internal HttpMessage CreateGetMultiplePagesLRONextPageRequest(string nextLink, string clientRequestId, int? maxresults, int? timeout, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();

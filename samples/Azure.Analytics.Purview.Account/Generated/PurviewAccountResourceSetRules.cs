@@ -188,7 +188,7 @@ namespace Azure.Analytics.Purview.Account
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetResourceSetRuleRequest();
+                using HttpMessage message = CreateGetResourceSetRuleRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -322,7 +322,7 @@ namespace Azure.Analytics.Purview.Account
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetResourceSetRuleRequest();
+                using HttpMessage message = CreateGetResourceSetRuleRequest(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -552,7 +552,7 @@ namespace Azure.Analytics.Purview.Account
             scope.Start();
             try
             {
-                using HttpMessage message = CreateCreateOrUpdateResourceSetRuleRequest(content);
+                using HttpMessage message = CreateCreateOrUpdateResourceSetRuleRequest(content, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -782,7 +782,7 @@ namespace Azure.Analytics.Purview.Account
             scope.Start();
             try
             {
-                using HttpMessage message = CreateCreateOrUpdateResourceSetRuleRequest(content);
+                using HttpMessage message = CreateCreateOrUpdateResourceSetRuleRequest(content, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -822,7 +822,7 @@ namespace Azure.Analytics.Purview.Account
             scope.Start();
             try
             {
-                using HttpMessage message = CreateDeleteResourceSetRuleRequest();
+                using HttpMessage message = CreateDeleteResourceSetRuleRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -862,7 +862,7 @@ namespace Azure.Analytics.Purview.Account
             scope.Start();
             try
             {
-                using HttpMessage message = CreateDeleteResourceSetRuleRequest();
+                using HttpMessage message = CreateDeleteResourceSetRuleRequest(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -872,9 +872,9 @@ namespace Azure.Analytics.Purview.Account
             }
         }
 
-        internal HttpMessage CreateGetResourceSetRuleRequest()
+        internal HttpMessage CreateGetResourceSetRuleRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -887,9 +887,9 @@ namespace Azure.Analytics.Purview.Account
             return message;
         }
 
-        internal HttpMessage CreateCreateOrUpdateResourceSetRuleRequest(RequestContent content)
+        internal HttpMessage CreateCreateOrUpdateResourceSetRuleRequest(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -904,9 +904,9 @@ namespace Azure.Analytics.Purview.Account
             return message;
         }
 
-        internal HttpMessage CreateDeleteResourceSetRuleRequest()
+        internal HttpMessage CreateDeleteResourceSetRuleRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();

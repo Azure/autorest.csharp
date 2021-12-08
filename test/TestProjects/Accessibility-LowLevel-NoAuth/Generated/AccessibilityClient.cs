@@ -37,7 +37,7 @@ namespace Accessibility_LowLevel_NoAuth
             options ??= new AccessibilityClientOptions();
 
             _clientDiagnostics = new ClientDiagnostics(options);
-            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
+            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
             _endpoint = endpoint;
         }
 
@@ -51,7 +51,7 @@ namespace Accessibility_LowLevel_NoAuth
             scope.Start();
             try
             {
-                using HttpMessage message = CreateOperationRequest(content);
+                using HttpMessage message = CreateOperationRequest(content, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -71,7 +71,7 @@ namespace Accessibility_LowLevel_NoAuth
             scope.Start();
             try
             {
-                using HttpMessage message = CreateOperationRequest(content);
+                using HttpMessage message = CreateOperationRequest(content, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -91,7 +91,7 @@ namespace Accessibility_LowLevel_NoAuth
             scope.Start();
             try
             {
-                using HttpMessage message = CreateOperationInternalRequest(content);
+                using HttpMessage message = CreateOperationInternalRequest(content, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -111,7 +111,7 @@ namespace Accessibility_LowLevel_NoAuth
             scope.Start();
             try
             {
-                using HttpMessage message = CreateOperationInternalRequest(content);
+                using HttpMessage message = CreateOperationInternalRequest(content, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -121,9 +121,9 @@ namespace Accessibility_LowLevel_NoAuth
             }
         }
 
-        internal HttpMessage CreateOperationRequest(RequestContent content)
+        internal HttpMessage CreateOperationRequest(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -136,9 +136,9 @@ namespace Accessibility_LowLevel_NoAuth
             return message;
         }
 
-        internal HttpMessage CreateOperationInternalRequest(RequestContent content)
+        internal HttpMessage CreateOperationInternalRequest(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();

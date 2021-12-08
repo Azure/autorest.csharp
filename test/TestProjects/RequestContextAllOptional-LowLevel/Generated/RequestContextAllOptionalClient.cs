@@ -46,7 +46,7 @@ namespace RequestContextAllOptional_LowLevel
 
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
-            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
         }
 
@@ -64,7 +64,7 @@ namespace RequestContextAllOptional_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateNoRequestBodyResponseBodyRequest(id, top, skip, status);
+                using HttpMessage message = CreateNoRequestBodyResponseBodyRequest(id, top, skip, status, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -88,7 +88,7 @@ namespace RequestContextAllOptional_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateNoRequestBodyResponseBodyRequest(id, top, skip, status);
+                using HttpMessage message = CreateNoRequestBodyResponseBodyRequest(id, top, skip, status, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -124,7 +124,7 @@ namespace RequestContextAllOptional_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateRequestBodyResponseBodyRequest(content);
+                using HttpMessage message = CreateRequestBodyResponseBodyRequest(content, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -160,7 +160,7 @@ namespace RequestContextAllOptional_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateRequestBodyResponseBodyRequest(content);
+                using HttpMessage message = CreateRequestBodyResponseBodyRequest(content, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -182,7 +182,7 @@ namespace RequestContextAllOptional_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateDeleteNoRequestBodyResponseBodyRequest(resourceName);
+                using HttpMessage message = CreateDeleteNoRequestBodyResponseBodyRequest(resourceName, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -204,7 +204,7 @@ namespace RequestContextAllOptional_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateDeleteNoRequestBodyResponseBodyRequest(resourceName);
+                using HttpMessage message = CreateDeleteNoRequestBodyResponseBodyRequest(resourceName, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -224,7 +224,7 @@ namespace RequestContextAllOptional_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateNoRequestBodyNoResponseBodyRequest();
+                using HttpMessage message = CreateNoRequestBodyNoResponseBodyRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -244,7 +244,7 @@ namespace RequestContextAllOptional_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateNoRequestBodyNoResponseBodyRequest();
+                using HttpMessage message = CreateNoRequestBodyNoResponseBodyRequest(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -265,7 +265,7 @@ namespace RequestContextAllOptional_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateRequestBodyNoResponseBodyRequest(content);
+                using HttpMessage message = CreateRequestBodyNoResponseBodyRequest(content, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -286,7 +286,7 @@ namespace RequestContextAllOptional_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateRequestBodyNoResponseBodyRequest(content);
+                using HttpMessage message = CreateRequestBodyNoResponseBodyRequest(content, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -296,9 +296,9 @@ namespace RequestContextAllOptional_LowLevel
             }
         }
 
-        internal HttpMessage CreateNoRequestBodyResponseBodyRequest(int id, int? top, int skip, string status)
+        internal HttpMessage CreateNoRequestBodyResponseBodyRequest(int id, int? top, int skip, string status, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -320,9 +320,9 @@ namespace RequestContextAllOptional_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateRequestBodyResponseBodyRequest(RequestContent content)
+        internal HttpMessage CreateRequestBodyResponseBodyRequest(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -336,9 +336,9 @@ namespace RequestContextAllOptional_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateDeleteNoRequestBodyResponseBodyRequest(string resourceName)
+        internal HttpMessage CreateDeleteNoRequestBodyResponseBodyRequest(string resourceName, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
@@ -351,9 +351,9 @@ namespace RequestContextAllOptional_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateNoRequestBodyNoResponseBodyRequest()
+        internal HttpMessage CreateNoRequestBodyNoResponseBodyRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -364,9 +364,9 @@ namespace RequestContextAllOptional_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateRequestBodyNoResponseBodyRequest(RequestContent content)
+        internal HttpMessage CreateRequestBodyNoResponseBodyRequest(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();

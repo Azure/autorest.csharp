@@ -51,7 +51,7 @@ namespace custom_baseUrl_paging_LowLevel
 
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
-            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _host = host;
         }
 
@@ -90,8 +90,8 @@ namespace custom_baseUrl_paging_LowLevel
                 do
                 {
                     var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateGetPagesPartialUrlRequest(accountName)
-                        : CreateGetPagesPartialUrlNextPageRequest(nextLink, accountName);
+                        ? CreateGetPagesPartialUrlRequest(accountName, context)
+                        : CreateGetPagesPartialUrlNextPageRequest(nextLink, accountName, context);
                     var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, context, "values", "nextLink", cancellationToken).ConfigureAwait(false);
                     nextLink = page.ContinuationToken;
                     yield return page;
@@ -134,8 +134,8 @@ namespace custom_baseUrl_paging_LowLevel
                 do
                 {
                     var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateGetPagesPartialUrlRequest(accountName)
-                        : CreateGetPagesPartialUrlNextPageRequest(nextLink, accountName);
+                        ? CreateGetPagesPartialUrlRequest(accountName, context)
+                        : CreateGetPagesPartialUrlNextPageRequest(nextLink, accountName, context);
                     var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, context, "values", "nextLink");
                     nextLink = page.ContinuationToken;
                     yield return page;
@@ -178,8 +178,8 @@ namespace custom_baseUrl_paging_LowLevel
                 do
                 {
                     var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateGetPagesPartialUrlOperationRequest(accountName)
-                        : CreateGetPagesPartialUrlOperationNextRequest(accountName, nextLink);
+                        ? CreateGetPagesPartialUrlOperationRequest(accountName, context)
+                        : CreateGetPagesPartialUrlOperationNextRequest(accountName, nextLink, context);
                     var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, context, "values", "nextLink", cancellationToken).ConfigureAwait(false);
                     nextLink = page.ContinuationToken;
                     yield return page;
@@ -222,8 +222,8 @@ namespace custom_baseUrl_paging_LowLevel
                 do
                 {
                     var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateGetPagesPartialUrlOperationRequest(accountName)
-                        : CreateGetPagesPartialUrlOperationNextRequest(accountName, nextLink);
+                        ? CreateGetPagesPartialUrlOperationRequest(accountName, context)
+                        : CreateGetPagesPartialUrlOperationNextRequest(accountName, nextLink, context);
                     var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, context, "values", "nextLink");
                     nextLink = page.ContinuationToken;
                     yield return page;
@@ -270,7 +270,7 @@ namespace custom_baseUrl_paging_LowLevel
             {
                 do
                 {
-                    var message = CreateGetPagesPartialUrlOperationNextRequest(accountName, nextLink);
+                    var message = CreateGetPagesPartialUrlOperationNextRequest(accountName, nextLink, context);
                     var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, context, "values", "nextLink", cancellationToken).ConfigureAwait(false);
                     nextLink = page.ContinuationToken;
                     yield return page;
@@ -317,7 +317,7 @@ namespace custom_baseUrl_paging_LowLevel
             {
                 do
                 {
-                    var message = CreateGetPagesPartialUrlOperationNextRequest(accountName, nextLink);
+                    var message = CreateGetPagesPartialUrlOperationNextRequest(accountName, nextLink, context);
                     var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, context, "values", "nextLink");
                     nextLink = page.ContinuationToken;
                     yield return page;
@@ -325,9 +325,9 @@ namespace custom_baseUrl_paging_LowLevel
             }
         }
 
-        internal HttpMessage CreateGetPagesPartialUrlRequest(string accountName)
+        internal HttpMessage CreateGetPagesPartialUrlRequest(string accountName, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -341,9 +341,9 @@ namespace custom_baseUrl_paging_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetPagesPartialUrlOperationRequest(string accountName)
+        internal HttpMessage CreateGetPagesPartialUrlOperationRequest(string accountName, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -357,9 +357,9 @@ namespace custom_baseUrl_paging_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetPagesPartialUrlOperationNextRequest(string accountName, string nextLink)
+        internal HttpMessage CreateGetPagesPartialUrlOperationNextRequest(string accountName, string nextLink, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -374,9 +374,9 @@ namespace custom_baseUrl_paging_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetPagesPartialUrlNextPageRequest(string nextLink, string accountName)
+        internal HttpMessage CreateGetPagesPartialUrlNextPageRequest(string nextLink, string accountName, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();

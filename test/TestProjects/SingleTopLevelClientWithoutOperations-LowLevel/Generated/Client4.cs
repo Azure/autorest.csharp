@@ -63,7 +63,7 @@ namespace SingleTopLevelClientWithoutOperations_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateOperationRequest();
+                using HttpMessage message = CreateOperationRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -82,7 +82,7 @@ namespace SingleTopLevelClientWithoutOperations_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateOperationRequest();
+                using HttpMessage message = CreateOperationRequest(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -92,9 +92,9 @@ namespace SingleTopLevelClientWithoutOperations_LowLevel
             }
         }
 
-        internal HttpMessage CreateOperationRequest()
+        internal HttpMessage CreateOperationRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();

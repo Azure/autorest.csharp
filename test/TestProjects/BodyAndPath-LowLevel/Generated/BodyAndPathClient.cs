@@ -47,7 +47,7 @@ namespace BodyAndPath_LowLevel
 
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
-            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
         }
 
@@ -64,7 +64,7 @@ namespace BodyAndPath_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateCreateRequest(itemName, content);
+                using HttpMessage message = CreateCreateRequest(itemName, content, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -87,7 +87,7 @@ namespace BodyAndPath_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateCreateRequest(itemName, content);
+                using HttpMessage message = CreateCreateRequest(itemName, content, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -112,7 +112,7 @@ namespace BodyAndPath_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateCreateStreamRequest(itemNameStream, content, contentType, excluded);
+                using HttpMessage message = CreateCreateStreamRequest(itemNameStream, content, contentType, excluded, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -137,7 +137,7 @@ namespace BodyAndPath_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateCreateStreamRequest(itemNameStream, content, contentType, excluded);
+                using HttpMessage message = CreateCreateStreamRequest(itemNameStream, content, contentType, excluded, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -161,7 +161,7 @@ namespace BodyAndPath_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateCreateEnumRequest(enumName1, enumName2, content);
+                using HttpMessage message = CreateCreateEnumRequest(enumName1, enumName2, content, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -185,7 +185,7 @@ namespace BodyAndPath_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateCreateEnumRequest(enumName1, enumName2, content);
+                using HttpMessage message = CreateCreateEnumRequest(enumName1, enumName2, content, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -205,7 +205,7 @@ namespace BodyAndPath_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetBodyAndPathsRequest();
+                using HttpMessage message = CreateGetBodyAndPathsRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -225,7 +225,7 @@ namespace BodyAndPath_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetBodyAndPathsRequest();
+                using HttpMessage message = CreateGetBodyAndPathsRequest(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -245,7 +245,7 @@ namespace BodyAndPath_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetItemsRequest();
+                using HttpMessage message = CreateGetItemsRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -265,7 +265,7 @@ namespace BodyAndPath_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetItemsRequest();
+                using HttpMessage message = CreateGetItemsRequest(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -275,9 +275,9 @@ namespace BodyAndPath_LowLevel
             }
         }
 
-        internal HttpMessage CreateCreateRequest(string itemName, RequestContent content)
+        internal HttpMessage CreateCreateRequest(string itemName, RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -291,9 +291,9 @@ namespace BodyAndPath_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateCreateStreamRequest(string itemNameStream, RequestContent content, ContentType contentType, IEnumerable<string> excluded)
+        internal HttpMessage CreateCreateStreamRequest(string itemNameStream, RequestContent content, ContentType contentType, IEnumerable<string> excluded, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -314,9 +314,9 @@ namespace BodyAndPath_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateCreateEnumRequest(string enumName1, string enumName2, RequestContent content)
+        internal HttpMessage CreateCreateEnumRequest(string enumName1, string enumName2, RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -332,9 +332,9 @@ namespace BodyAndPath_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetBodyAndPathsRequest()
+        internal HttpMessage CreateGetBodyAndPathsRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -346,9 +346,9 @@ namespace BodyAndPath_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetItemsRequest()
+        internal HttpMessage CreateGetItemsRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
