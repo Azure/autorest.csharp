@@ -238,7 +238,7 @@ namespace AutoRest.CSharp.Output.Models
                 orderedParameters.Add(bodyParameter);
                 if (contentTypeRequestParameter != null)
                 {
-                    var parameter = BuildParameter(contentTypeRequestParameter, typeof(Azure.Core.ContentType));
+                    var parameter = BuildParameter(contentTypeRequestParameter, typeof(ContentType));
                     references[contentTypeRequestParameter] = CreateReference(contentTypeRequestParameter, parameter);
                     if (IsMethodParameter(contentTypeRequestParameter))
                     {
