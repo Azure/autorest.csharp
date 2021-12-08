@@ -59,7 +59,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
     <DefineConstants>$(DefineConstants);EXPERIMENTAL</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include=""Azure.Core.Experimental"" Version=""0.1.0-preview.16"" />
+    <PackageReference Include=""Azure.Core.Experimental"" Version=""0.1.0-preview.18"" />
   </ItemGroup>
 ";
 
