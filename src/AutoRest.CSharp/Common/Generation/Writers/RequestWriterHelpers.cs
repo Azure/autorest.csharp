@@ -279,7 +279,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.Append($"{request}.Headers.{method}({header.Name:L}, ");
                 }
 
-                if (header.Value.Type.Equals(typeof(Azure.Core.ContentType)))
+                if (header.Value.Type.Equals(typeof(ContentType)))
                 {
                     WriteConstantOrParameterAsString(writer, header.Value);
                 }
