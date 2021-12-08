@@ -26,6 +26,7 @@ namespace Azure.Core
 
         private string? _lastKnownLocation;
         private string _nextRequestUri;
+        private string? _apiVersion;
 
         public static IOperation Create(HttpPipeline pipeline, RequestMethod requestMethod, Uri startRequestUri, Response response, OperationFinalStateVia finalStateVia)
         {
@@ -54,6 +55,7 @@ namespace Azure.Core
             _lastKnownLocation = lastKnownLocation;
             _finalStateVia = finalStateVia;
             _pipeline = pipeline;
+            _apiVersion = startRequestUri.Query.Trim('?').Split('&').Select(s => s.Split('=')).Where(arr => arr[0].Equals("api-version")).Select(arr => arr[1]).FirstOrDefault();
         }
 
         public async ValueTask<OperationState> UpdateStateAsync(bool async, CancellationToken cancellationToken)
@@ -105,6 +107,11 @@ namespace Azure.Core
             {
                 case HeaderSource.OperationLocation when headers.TryGetValue("Operation-Location", out string? operationLocation):
                     _nextRequestUri = operationLocation;
+                    if (!_nextRequestUri.Contains("api-version") && _apiVersion != null)
+                    {
+                        var concatSymbol = _nextRequestUri.Contains("?") ? "&" : "?";
+                        _nextRequestUri = $"{_nextRequestUri}{concatSymbol}api-version={_apiVersion}";
+                    }
                     return;
                 case HeaderSource.AzureAsyncOperation when headers.TryGetValue("Azure-AsyncOperation", out string? azureAsyncOperation):
                     _nextRequestUri = azureAsyncOperation;
