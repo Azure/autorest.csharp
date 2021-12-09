@@ -7,7 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Azure;
 using Azure.Core.Pipeline;
 
 namespace Azure.Core
@@ -15,28 +14,48 @@ namespace Azure.Core
     internal static class LowLevelOperationHelpers
     {
 #if EXPERIMENTAL
-        public static async ValueTask<Operation<BinaryData>> ProcessMessageAsync(HttpPipeline pipeline, HttpMessage message, ClientDiagnostics clientDiagnostics, string scopeName, OperationFinalStateVia finalStateVia, RequestContext? requestContext)
+        public static async ValueTask<Operation<BinaryData>> ProcessMessageAsync(HttpPipeline pipeline, HttpMessage message, ClientDiagnostics clientDiagnostics, string scopeName, OperationFinalStateVia finalStateVia, RequestContext? requestContext, bool waitForCompletion)
         {
             var response = await pipeline.ProcessMessageAsync(message, clientDiagnostics, requestContext).ConfigureAwait(false);
-            return new LowLevelFuncOperation<BinaryData>(clientDiagnostics, pipeline, message.Request, response, finalStateVia, scopeName, r => r.Content);
+            var operation = new LowLevelFuncOperation<BinaryData>(clientDiagnostics, pipeline, message.Request, response, finalStateVia, scopeName, r => r.Content);
+            if (waitForCompletion)
+            {
+                await operation.WaitForCompletionAsync(requestContext?.CancellationToken ?? default).ConfigureAwait(false);
+            }
+            return operation;
         }
 
-        public static Operation<BinaryData> ProcessMessage(HttpPipeline pipeline, HttpMessage message, ClientDiagnostics clientDiagnostics, string scopeName, OperationFinalStateVia finalStateVia, RequestContext? requestContext)
+        public static Operation<BinaryData> ProcessMessage(HttpPipeline pipeline, HttpMessage message, ClientDiagnostics clientDiagnostics, string scopeName, OperationFinalStateVia finalStateVia, RequestContext? requestContext, bool waitForCompletion)
         {
             var response = pipeline.ProcessMessage(message, clientDiagnostics, requestContext);
-            return new LowLevelFuncOperation<BinaryData>(clientDiagnostics, pipeline, message.Request, response, finalStateVia, scopeName, r => r.Content);
+            var operation = new LowLevelFuncOperation<BinaryData>(clientDiagnostics, pipeline, message.Request, response, finalStateVia, scopeName, r => r.Content);
+            if (waitForCompletion)
+            {
+                operation.WaitForCompletion(requestContext?.CancellationToken ?? default);
+            }
+            return operation;
         }
 
-        public static async ValueTask<Operation<AsyncPageable<BinaryData>>> ProcessMessageAsync(HttpPipeline pipeline, HttpMessage message, ClientDiagnostics clientDiagnostics, string scopeName, OperationFinalStateVia finalStateVia, RequestContext? requestContext, Func<Response, string?, int?, CancellationToken, IAsyncEnumerable<Page<BinaryData>>> createEnumerable)
+        public static async ValueTask<Operation<AsyncPageable<BinaryData>>> ProcessMessageAsync(HttpPipeline pipeline, HttpMessage message, ClientDiagnostics clientDiagnostics, string scopeName, OperationFinalStateVia finalStateVia, RequestContext? requestContext, bool waitForCompletion, Func<Response, string?, int?, CancellationToken, IAsyncEnumerable<Page<BinaryData>>> createEnumerable)
         {
             var response = await pipeline.ProcessMessageAsync(message, clientDiagnostics, requestContext).ConfigureAwait(false);
-            return new LowLevelFuncOperation<AsyncPageable<BinaryData>>(clientDiagnostics, pipeline, message.Request, response, finalStateVia, scopeName, r => PageableHelpers.CreateAsyncPageable((nl, ps, ct) => createEnumerable(r, nl, ps, ct), clientDiagnostics, scopeName));
+            var operation = new LowLevelFuncOperation<AsyncPageable<BinaryData>>(clientDiagnostics, pipeline, message.Request, response, finalStateVia, scopeName, r => PageableHelpers.CreateAsyncPageable((nl, ps, ct) => createEnumerable(r, nl, ps, ct), clientDiagnostics, scopeName));
+            if (waitForCompletion)
+            {
+                await operation.WaitForCompletionAsync(requestContext?.CancellationToken ?? default).ConfigureAwait(false);
+            }
+            return operation;
         }
 
-        public static Operation<Pageable<BinaryData>> ProcessMessage(HttpPipeline pipeline, HttpMessage message, ClientDiagnostics clientDiagnostics, string scopeName, OperationFinalStateVia finalStateVia, RequestContext? requestContext, Func<Response, string?, int?, IEnumerable<Page<BinaryData>>> createEnumerable)
+        public static Operation<Pageable<BinaryData>> ProcessMessage(HttpPipeline pipeline, HttpMessage message, ClientDiagnostics clientDiagnostics, string scopeName, OperationFinalStateVia finalStateVia, RequestContext? requestContext, bool waitForCompletion, Func<Response, string?, int?, IEnumerable<Page<BinaryData>>> createEnumerable)
         {
             var response = pipeline.ProcessMessage(message, clientDiagnostics, requestContext);
-            return new LowLevelFuncOperation<Pageable<BinaryData>>(clientDiagnostics, pipeline, message.Request, response, finalStateVia, scopeName, r => PageableHelpers.CreatePageable((nl, ps) => createEnumerable(r, nl, ps), clientDiagnostics, scopeName));
+            var operation = new LowLevelFuncOperation<Pageable<BinaryData>>(clientDiagnostics, pipeline, message.Request, response, finalStateVia, scopeName, r => PageableHelpers.CreatePageable((nl, ps) => createEnumerable(r, nl, ps), clientDiagnostics, scopeName));
+            if (waitForCompletion)
+            {
+                operation.WaitForCompletion(requestContext?.CancellationToken ?? default);
+            }
+            return operation;
         }
 #endif
     }
