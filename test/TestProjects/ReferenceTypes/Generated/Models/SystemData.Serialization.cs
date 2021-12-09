@@ -31,7 +31,7 @@ namespace Azure.ResourceManager.Fake.Models
             if (Optional.IsDefined(CreatedAt))
             {
                 writer.WritePropertyName("createdAt");
-                writer.WriteStringValue(CreatedAt.Value, "O");
+                writer.WriteStringValue(CreatedAt.Value.ToUniversalTime(), "O");
             }
             if (Optional.IsDefined(LastModifiedBy))
             {
@@ -46,7 +46,7 @@ namespace Azure.ResourceManager.Fake.Models
             if (Optional.IsDefined(LastModifiedAt))
             {
                 writer.WritePropertyName("lastModifiedAt");
-                writer.WriteStringValue(LastModifiedAt.Value, "O");
+                writer.WriteStringValue(LastModifiedAt.Value.ToUniversalTime(), "O");
             }
             writer.WriteEndObject();
         }

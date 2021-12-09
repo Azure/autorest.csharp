@@ -2361,7 +2361,7 @@ namespace body_array
             content.JsonWriter.WriteStartArray();
             foreach (var item in arrayBody)
             {
-                content.JsonWriter.WriteStringValue(item, "D");
+                content.JsonWriter.WriteStringValue(item.ToUniversalTime(), "D");
             }
             content.JsonWriter.WriteEndArray();
             request.Content = content;
@@ -2616,7 +2616,7 @@ namespace body_array
             content.JsonWriter.WriteStartArray();
             foreach (var item in arrayBody)
             {
-                content.JsonWriter.WriteStringValue(item, "O");
+                content.JsonWriter.WriteStringValue(item.ToUniversalTime(), "O");
             }
             content.JsonWriter.WriteEndArray();
             request.Content = content;
@@ -2871,7 +2871,7 @@ namespace body_array
             content.JsonWriter.WriteStartArray();
             foreach (var item in arrayBody)
             {
-                content.JsonWriter.WriteStringValue(item, "R");
+                content.JsonWriter.WriteStringValue(item.ToUniversalTime(), "R");
             }
             content.JsonWriter.WriteEndArray();
             request.Content = content;

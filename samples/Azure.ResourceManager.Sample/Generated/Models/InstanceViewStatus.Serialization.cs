@@ -39,7 +39,7 @@ namespace Azure.ResourceManager.Sample.Models
             if (Optional.IsDefined(Time))
             {
                 writer.WritePropertyName("time");
-                writer.WriteStringValue(Time.Value, "O");
+                writer.WriteStringValue(Time.Value.ToUniversalTime(), "O");
             }
             writer.WriteEndObject();
         }

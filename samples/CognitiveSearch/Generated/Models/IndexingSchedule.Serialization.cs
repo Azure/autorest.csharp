@@ -21,7 +21,7 @@ namespace CognitiveSearch.Models
             if (Optional.IsDefined(StartTime))
             {
                 writer.WritePropertyName("startTime");
-                writer.WriteStringValue(StartTime.Value, "O");
+                writer.WriteStringValue(StartTime.Value.ToUniversalTime(), "O");
             }
             writer.WriteEndObject();
         }

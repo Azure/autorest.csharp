@@ -270,7 +270,7 @@ namespace body_datetime_rfc1123
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteStringValue(datetimeBody, "R");
+            content.JsonWriter.WriteStringValue(datetimeBody.ToUniversalTime(), "R");
             request.Content = content;
             return message;
         }
@@ -425,7 +425,7 @@ namespace body_datetime_rfc1123
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteStringValue(datetimeBody, "R");
+            content.JsonWriter.WriteStringValue(datetimeBody.ToUniversalTime(), "R");
             request.Content = content;
             return message;
         }

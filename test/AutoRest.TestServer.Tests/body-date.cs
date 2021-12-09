@@ -57,7 +57,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task PutDateMax() => TestStatus(async (host, pipeline) =>
         {
-            var value = DateTimeOffset.Parse("9999-12-31");
+            var value = DateTimeOffset.Parse("9999-12-31Z");
             return await new DateClient(ClientDiagnostics, pipeline, host).PutMaxDateAsync( value);
         });
 

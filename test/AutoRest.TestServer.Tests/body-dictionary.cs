@@ -572,9 +572,9 @@ namespace AutoRest.TestServer.Tests
         {
             var value = new Dictionary<string, DateTimeOffset>
             {
-                { "0", DateTimeOffset.Parse("2000-12-01") },
-                { "1", DateTimeOffset.Parse("1980-01-02") },
-                { "2", DateTimeOffset.Parse("1492-10-12") }
+                { "0", DateTimeOffset.Parse("2000-12-01Z") },
+                { "1", DateTimeOffset.Parse("1980-01-02Z") },
+                { "2", DateTimeOffset.Parse("1492-10-12Z") }
             };
             return await new DictionaryClient(ClientDiagnostics, pipeline, host).PutDateValidAsync(value);
         });

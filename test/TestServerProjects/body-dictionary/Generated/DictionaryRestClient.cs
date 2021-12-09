@@ -2094,7 +2094,7 @@ namespace body_dictionary
             foreach (var item in arrayBody)
             {
                 content.JsonWriter.WritePropertyName(item.Key);
-                content.JsonWriter.WriteStringValue(item.Value, "D");
+                content.JsonWriter.WriteStringValue(item.Value.ToUniversalTime(), "D");
             }
             content.JsonWriter.WriteEndObject();
             request.Content = content;
@@ -2350,7 +2350,7 @@ namespace body_dictionary
             foreach (var item in arrayBody)
             {
                 content.JsonWriter.WritePropertyName(item.Key);
-                content.JsonWriter.WriteStringValue(item.Value, "O");
+                content.JsonWriter.WriteStringValue(item.Value.ToUniversalTime(), "O");
             }
             content.JsonWriter.WriteEndObject();
             request.Content = content;
@@ -2606,7 +2606,7 @@ namespace body_dictionary
             foreach (var item in arrayBody)
             {
                 content.JsonWriter.WritePropertyName(item.Key);
-                content.JsonWriter.WriteStringValue(item.Value, "R");
+                content.JsonWriter.WriteStringValue(item.Value.ToUniversalTime(), "R");
             }
             content.JsonWriter.WriteEndObject();
             request.Content = content;

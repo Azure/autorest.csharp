@@ -270,7 +270,7 @@ namespace body_datetime
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteStringValue(datetimeBody, "O");
+            content.JsonWriter.WriteStringValue(datetimeBody.ToUniversalTime(), "O");
             request.Content = content;
             return message;
         }
@@ -319,7 +319,7 @@ namespace body_datetime
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteStringValue(datetimeBody, "O");
+            content.JsonWriter.WriteStringValue(datetimeBody.ToUniversalTime(), "O");
             request.Content = content;
             return message;
         }
@@ -527,7 +527,7 @@ namespace body_datetime
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteStringValue(datetimeBody, "O");
+            content.JsonWriter.WriteStringValue(datetimeBody.ToUniversalTime(), "O");
             request.Content = content;
             return message;
         }
@@ -682,7 +682,7 @@ namespace body_datetime
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteStringValue(datetimeBody, "O");
+            content.JsonWriter.WriteStringValue(datetimeBody.ToUniversalTime(), "O");
             request.Content = content;
             return message;
         }
@@ -837,7 +837,7 @@ namespace body_datetime
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteStringValue(datetimeBody, "O");
+            content.JsonWriter.WriteStringValue(datetimeBody.ToUniversalTime(), "O");
             request.Content = content;
             return message;
         }
@@ -939,7 +939,7 @@ namespace body_datetime
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteStringValue(datetimeBody, "O");
+            content.JsonWriter.WriteStringValue(datetimeBody.ToUniversalTime(), "O");
             request.Content = content;
             return message;
         }
@@ -1041,7 +1041,7 @@ namespace body_datetime
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteStringValue(datetimeBody, "O");
+            content.JsonWriter.WriteStringValue(datetimeBody.ToUniversalTime(), "O");
             request.Content = content;
             return message;
         }

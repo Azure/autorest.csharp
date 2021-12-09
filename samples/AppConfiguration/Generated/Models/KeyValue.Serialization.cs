@@ -40,7 +40,7 @@ namespace AppConfiguration.Models
             if (Optional.IsDefined(LastModified))
             {
                 writer.WritePropertyName("last_modified");
-                writer.WriteStringValue(LastModified.Value, "O");
+                writer.WriteStringValue(LastModified.Value.ToUniversalTime(), "O");
             }
             if (Optional.IsCollectionDefined(Tags))
             {

@@ -197,8 +197,16 @@ namespace AutoRest.CSharp.Generation.Writers
                             return;
                         }
 
-                        writer.Append($"({name}")
-                            .AppendNullableValue(valueSerialization.Type);
+                        if (frameworkType == typeof(DateTimeOffset))
+                        {
+                            writer.Append($"({name}.ToUniversalTime()")
+                                .AppendNullableValue(valueSerialization.Type);
+                        }
+                        else
+                        {
+                            writer.Append($"({name}")
+                                .AppendNullableValue(valueSerialization.Type);
+                        }
 
                         if (writeFormat && valueSerialization.Format.ToFormatSpecifier() is string formatString)
                         {

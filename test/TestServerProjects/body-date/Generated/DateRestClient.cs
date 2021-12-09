@@ -270,7 +270,7 @@ namespace body_date
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteStringValue(dateBody, "D");
+            content.JsonWriter.WriteStringValue(dateBody.ToUniversalTime(), "D");
             request.Content = content;
             return message;
         }
@@ -372,7 +372,7 @@ namespace body_date
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteStringValue(dateBody, "D");
+            content.JsonWriter.WriteStringValue(dateBody.ToUniversalTime(), "D");
             request.Content = content;
             return message;
         }

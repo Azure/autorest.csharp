@@ -19,12 +19,12 @@ namespace body_complex.Models
             if (Optional.IsDefined(Field))
             {
                 writer.WritePropertyName("field");
-                writer.WriteStringValue(Field.Value, "O");
+                writer.WriteStringValue(Field.Value.ToUniversalTime(), "O");
             }
             if (Optional.IsDefined(Now))
             {
                 writer.WritePropertyName("now");
-                writer.WriteStringValue(Now.Value, "O");
+                writer.WriteStringValue(Now.Value.ToUniversalTime(), "O");
             }
             writer.WriteEndObject();
         }

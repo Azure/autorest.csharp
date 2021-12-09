@@ -18,7 +18,7 @@ namespace Azure.Management.Storage.Models
         {
             writer.WriteStartObject();
             writer.WritePropertyName("timeToRestore");
-            writer.WriteStringValue(TimeToRestore, "O");
+            writer.WriteStringValue(TimeToRestore.ToUniversalTime(), "O");
             writer.WritePropertyName("blobRanges");
             writer.WriteStartArray();
             foreach (var item in BlobRanges)

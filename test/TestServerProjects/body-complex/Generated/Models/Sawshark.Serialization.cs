@@ -28,7 +28,7 @@ namespace body_complex.Models
                 writer.WriteNumberValue(Age.Value);
             }
             writer.WritePropertyName("birthday");
-            writer.WriteStringValue(Birthday, "O");
+            writer.WriteStringValue(Birthday.ToUniversalTime(), "O");
             writer.WritePropertyName("fishtype");
             writer.WriteStringValue(Fishtype);
             if (Optional.IsDefined(Species))

@@ -19,12 +19,12 @@ namespace Azure.Management.Storage.Models
             if (Optional.IsDefined(StartTime))
             {
                 writer.WritePropertyName("startTime");
-                writer.WriteStringValue(StartTime.Value, "O");
+                writer.WriteStringValue(StartTime.Value.ToUniversalTime(), "O");
             }
             if (Optional.IsDefined(ExpiryTime))
             {
                 writer.WritePropertyName("expiryTime");
-                writer.WriteStringValue(ExpiryTime.Value, "O");
+                writer.WriteStringValue(ExpiryTime.Value.ToUniversalTime(), "O");
             }
             if (Optional.IsDefined(Permission))
             {

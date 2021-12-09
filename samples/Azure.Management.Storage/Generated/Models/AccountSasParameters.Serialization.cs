@@ -34,10 +34,10 @@ namespace Azure.Management.Storage.Models
             if (Optional.IsDefined(SharedAccessStartTime))
             {
                 writer.WritePropertyName("signedStart");
-                writer.WriteStringValue(SharedAccessStartTime.Value, "O");
+                writer.WriteStringValue(SharedAccessStartTime.Value.ToUniversalTime(), "O");
             }
             writer.WritePropertyName("signedExpiry");
-            writer.WriteStringValue(SharedAccessExpiryTime, "O");
+            writer.WriteStringValue(SharedAccessExpiryTime.ToUniversalTime(), "O");
             if (Optional.IsDefined(KeyToSign))
             {
                 writer.WritePropertyName("keyToSign");
