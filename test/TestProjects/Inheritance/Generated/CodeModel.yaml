@@ -372,6 +372,7 @@ schemas: !Schemas
                     name: discriminatorProperty
                     description: ''
                 protocol: !Protocols {}
+            discriminatorValue: BaseClassWithDiscriminator
             parents: !Relations 
               all:
                 - *ref_2
