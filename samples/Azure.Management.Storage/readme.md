@@ -8,9 +8,9 @@
 azure-arm: true
 require: $(this-folder)/../../readme.md
 input-file:
-  - https://github.com/Azure/azure-rest-api-specs/blob/35ebd5881bab5377e72b90e0c241fc598da95d4f/specification/storage/resource-manager/Microsoft.Storage/stable/2021-06-01/blob.json
-  - https://github.com/Azure/azure-rest-api-specs/blob/35ebd5881bab5377e72b90e0c241fc598da95d4f/specification/storage/resource-manager/Microsoft.Storage/stable/2021-06-01/file.json
-  - https://github.com/Azure/azure-rest-api-specs/blob/35ebd5881bab5377e72b90e0c241fc598da95d4f/specification/storage/resource-manager/Microsoft.Storage/stable/2021-06-01/storage.json
+  - https://github.com/Azure/azure-rest-api-specs/blob/cfa9e0f3df4553767d7915ec8f471ff7d4931ed1/specification/storage/resource-manager/Microsoft.Storage/stable/2021-06-01/blob.json
+  - https://github.com/Azure/azure-rest-api-specs/blob/cfa9e0f3df4553767d7915ec8f471ff7d4931ed1/specification/storage/resource-manager/Microsoft.Storage/stable/2021-06-01/file.json
+  - https://github.com/Azure/azure-rest-api-specs/blob/cfa9e0f3df4553767d7915ec8f471ff7d4931ed1/specification/storage/resource-manager/Microsoft.Storage/stable/2021-06-01/storage.json
 namespace: Azure.Management.Storage
 
 modelerfour:

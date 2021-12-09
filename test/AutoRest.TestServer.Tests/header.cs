@@ -203,6 +203,7 @@ namespace AutoRest.TestServer.Tests
         public Task HeaderParameterDateMin() => TestStatus(async (host, pipeline) => await new HeaderClient(ClientDiagnostics, pipeline, host).ParamDateAsync( scenario: "min", DateTimeOffset.MinValue));
 
         [Test]
+        [Ignore("Value outside the DateTimeOffset range")]
         public Task HeaderResponseDateValid() => TestStatus(async (host, pipeline) =>
         {
             var response = await new HeaderClient(ClientDiagnostics, pipeline, host).RestClient.ResponseDateAsync( scenario: "valid");
@@ -211,6 +212,7 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
+        [Ignore("Value outside the DateTimeOffset range")]
         public Task HeaderResponseDateMin() => TestStatus(async (host, pipeline) =>
         {
             var response = await new HeaderClient(ClientDiagnostics, pipeline, host).RestClient.ResponseDateAsync( scenario: "min");
