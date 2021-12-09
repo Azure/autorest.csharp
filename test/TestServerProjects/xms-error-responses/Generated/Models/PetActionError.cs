@@ -22,7 +22,7 @@ namespace xms_error_responses.Models
         /// <param name="errorMessage"> the error message. </param>
         internal PetActionError(string actionResponse, string errorType, string errorMessage) : base(actionResponse)
         {
-            ErrorType = errorType;
+            ErrorType = errorType ?? "PetActionError";
             ErrorMessage = errorMessage;
         }
 
