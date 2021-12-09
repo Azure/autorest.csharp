@@ -13,7 +13,6 @@ namespace Azure.Core
 {
     internal static class LowLevelOperationHelpers
     {
-#if EXPERIMENTAL
         public static async ValueTask<Operation<BinaryData>> ProcessMessageAsync(HttpPipeline pipeline, HttpMessage message, ClientDiagnostics clientDiagnostics, string scopeName, OperationFinalStateVia finalStateVia, RequestContext? requestContext, bool waitForCompletion)
         {
             var response = await pipeline.ProcessMessageAsync(message, clientDiagnostics, requestContext).ConfigureAwait(false);
@@ -57,6 +56,5 @@ namespace Azure.Core
             }
             return operation;
         }
-#endif
     }
 }
