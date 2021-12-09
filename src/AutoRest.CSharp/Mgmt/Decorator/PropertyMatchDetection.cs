@@ -13,6 +13,7 @@ using AutoRest.CSharp.Mgmt.Generation;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Types;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
@@ -104,6 +105,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         /// <returns></returns>
         private static bool IsAssignable(System.Type parentPropertyType, CSharpType childPropertyType)
         {
+            if (parentPropertyType.Name == "ResourceIdentifier" && childPropertyType.IsFrameworkType && childPropertyType.FrameworkType == typeof(string))
+                return true;
+
             return parentPropertyType.GetMethods().Where(m => m.Name == "op_Implicit" &&
                 m.ReturnType == parentPropertyType &&
                 m.GetParameters().First().ParameterType.FullName == $"{childPropertyType.Namespace}.{childPropertyType.Name}").Count() > 0;

@@ -42,7 +42,7 @@ namespace CognitiveSearch
         /// <param name="index"> The definition of the index to create. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<Models.Index>> CreateAsync(Models.Index index, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Models.Index>> CreateAsync(Models.Index index, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("IndexesClient.Create");
             scope.Start();
@@ -61,7 +61,7 @@ namespace CognitiveSearch
         /// <param name="index"> The definition of the index to create. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<Models.Index> Create(Models.Index index, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response<Models.Index> Create(Models.Index index, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("IndexesClient.Create");
             scope.Start();
@@ -80,7 +80,7 @@ namespace CognitiveSearch
         /// <param name="select"> Selects which top-level properties of the index definitions to retrieve. Specified as a comma-separated list of JSON property names, or &apos;*&apos; for all properties. The default is all properties. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<ListIndexesResult>> ListAsync(string select = null, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<ListIndexesResult>> ListAsync(string select = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("IndexesClient.List");
             scope.Start();
@@ -99,7 +99,7 @@ namespace CognitiveSearch
         /// <param name="select"> Selects which top-level properties of the index definitions to retrieve. Specified as a comma-separated list of JSON property names, or &apos;*&apos; for all properties. The default is all properties. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<ListIndexesResult> List(string select = null, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response<ListIndexesResult> List(string select = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("IndexesClient.List");
             scope.Start();
@@ -122,7 +122,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<Models.Index>> CreateOrUpdateAsync(string indexName, Enum0 prefer, Models.Index index, bool? allowIndexDowntime = null, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Models.Index>> CreateOrUpdateAsync(string indexName, Enum0 prefer, Models.Index index, bool? allowIndexDowntime = null, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("IndexesClient.CreateOrUpdate");
             scope.Start();
@@ -145,7 +145,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<Models.Index> CreateOrUpdate(string indexName, Enum0 prefer, Models.Index index, bool? allowIndexDowntime = null, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
+        public virtual Response<Models.Index> CreateOrUpdate(string indexName, Enum0 prefer, Models.Index index, bool? allowIndexDowntime = null, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("IndexesClient.CreateOrUpdate");
             scope.Start();
@@ -165,7 +165,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> DeleteAsync(string indexName, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> DeleteAsync(string indexName, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("IndexesClient.Delete");
             scope.Start();
@@ -185,7 +185,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response Delete(string indexName, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
+        public virtual Response Delete(string indexName, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("IndexesClient.Delete");
             scope.Start();
@@ -204,7 +204,7 @@ namespace CognitiveSearch
         /// <param name="indexName"> The name of the index to retrieve. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<Models.Index>> GetAsync(string indexName, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Models.Index>> GetAsync(string indexName, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("IndexesClient.Get");
             scope.Start();
@@ -223,7 +223,7 @@ namespace CognitiveSearch
         /// <param name="indexName"> The name of the index to retrieve. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<Models.Index> Get(string indexName, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response<Models.Index> Get(string indexName, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("IndexesClient.Get");
             scope.Start();
@@ -242,7 +242,7 @@ namespace CognitiveSearch
         /// <param name="indexName"> The name of the index for which to retrieve statistics. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<GetIndexStatisticsResult>> GetStatisticsAsync(string indexName, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<GetIndexStatisticsResult>> GetStatisticsAsync(string indexName, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("IndexesClient.GetStatistics");
             scope.Start();
@@ -261,7 +261,7 @@ namespace CognitiveSearch
         /// <param name="indexName"> The name of the index for which to retrieve statistics. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<GetIndexStatisticsResult> GetStatistics(string indexName, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response<GetIndexStatisticsResult> GetStatistics(string indexName, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("IndexesClient.GetStatistics");
             scope.Start();
@@ -281,7 +281,7 @@ namespace CognitiveSearch
         /// <param name="request"> The text and analyzer or analysis components to test. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<AnalyzeResult>> AnalyzeAsync(string indexName, AnalyzeRequest request, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<AnalyzeResult>> AnalyzeAsync(string indexName, AnalyzeRequest request, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("IndexesClient.Analyze");
             scope.Start();
@@ -301,7 +301,7 @@ namespace CognitiveSearch
         /// <param name="request"> The text and analyzer or analysis components to test. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<AnalyzeResult> Analyze(string indexName, AnalyzeRequest request, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response<AnalyzeResult> Analyze(string indexName, AnalyzeRequest request, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("IndexesClient.Analyze");
             scope.Start();
