@@ -128,6 +128,12 @@ stages:
             - checkout: self
             - checkout: azure-sdk-for-net
             - checkout: azure-sdk-tools
+            - task: UseDotNet@2
+              displayName: 'Use .NET Core sdk'
+              inputs:
+                packageType: sdk
+                version: 6.0.100
+                installationPath: $(Agent.ToolsDirectory)/dotnet
             - pwsh: ./eng/UpdateAzureSdkForNet.ps1 -Version $(AutorestCSharpVersion) -SdkRepoRoot $(Build.SourcesDirectory)/azure-sdk-for-net
               failOnStderr: false
               workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
