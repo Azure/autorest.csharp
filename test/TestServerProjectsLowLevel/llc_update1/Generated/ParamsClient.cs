@@ -51,20 +51,19 @@ namespace llc_update1_LowLevel
         }
 
         /// <summary> Get true Boolean value on path. </summary>
-        /// <param name="parameter3"> I am a required parameter and I&apos;m last in Swagger. </param>
-        /// <param name="parameter1"> I am a required parameter with a client default value. </param>
-        /// <param name="parameter2"> I was a required parameter, but now I&apos;m optional. </param>
+        /// <param name="parameter"> I am a required parameter. </param>
+        /// <param name="newParameter"> I&apos;m a new input optional parameter. </param>
         /// <param name="context"> The request context. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameter3"/> or <paramref name="parameter1"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameter"/> is null. </exception>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetRequiredAsync(string parameter3, string parameter1 = "DefaultValue", string parameter2 = null, RequestContext context = null)
+        public virtual async Task<Response> GetRequiredAsync(string parameter, string newParameter = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ParamsClient.GetRequired");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetRequiredRequest(parameter3, parameter1, parameter2);
+                using HttpMessage message = CreateGetRequiredRequest(parameter, newParameter);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -75,20 +74,19 @@ namespace llc_update1_LowLevel
         }
 
         /// <summary> Get true Boolean value on path. </summary>
-        /// <param name="parameter3"> I am a required parameter and I&apos;m last in Swagger. </param>
-        /// <param name="parameter1"> I am a required parameter with a client default value. </param>
-        /// <param name="parameter2"> I was a required parameter, but now I&apos;m optional. </param>
+        /// <param name="parameter"> I am a required parameter. </param>
+        /// <param name="newParameter"> I&apos;m a new input optional parameter. </param>
         /// <param name="context"> The request context. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameter3"/> or <paramref name="parameter1"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameter"/> is null. </exception>
 #pragma warning disable AZC0002
-        public virtual Response GetRequired(string parameter3, string parameter1 = "DefaultValue", string parameter2 = null, RequestContext context = null)
+        public virtual Response GetRequired(string parameter, string newParameter = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ParamsClient.GetRequired");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetRequiredRequest(parameter3, parameter1, parameter2);
+                using HttpMessage message = CreateGetRequiredRequest(parameter, newParameter);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -98,20 +96,262 @@ namespace llc_update1_LowLevel
             }
         }
 
-        internal HttpMessage CreateGetRequiredRequest(string parameter3, string parameter1, string parameter2)
+        /// <summary> POST a JSON or a JPEG. </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> PostParametersAsync(RequestContent content, RequestContext context = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("ParamsClient.PostParameters");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreatePostParametersRequest(content);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> POST a JSON or a JPEG. </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+#pragma warning disable AZC0002
+        public virtual Response PostParameters(RequestContent content, RequestContext context = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("ParamsClient.PostParameters");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreatePostParametersRequest(content);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> POST a JSON or a JPEG. </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <code>{
+        ///   url: string (required)
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> PostParametersAsync(RequestContent content, RequestContext context = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("ParamsClient.PostParameters");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreatePostParametersRequest(content);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> POST a JSON or a JPEG. </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <code>{
+        ///   url: string (required)
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Response PostParameters(RequestContent content, RequestContext context = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("ParamsClient.PostParameters");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreatePostParametersRequest(content);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Delete something. </summary>
+        /// <param name="context"> The request context. </param>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> DeleteParametersAsync(RequestContext context = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("ParamsClient.DeleteParameters");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateDeleteParametersRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Delete something. </summary>
+        /// <param name="context"> The request context. </param>
+#pragma warning disable AZC0002
+        public virtual Response DeleteParameters(RequestContext context = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("ParamsClient.DeleteParameters");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateDeleteParametersRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> I&apos;m a new operation. </summary>
+        /// <param name="context"> The request context. </param>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> GetNewOperationAsync(RequestContext context = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("ParamsClient.GetNewOperation");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetNewOperationRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> I&apos;m a new operation. </summary>
+        /// <param name="context"> The request context. </param>
+#pragma warning disable AZC0002
+        public virtual Response GetNewOperation(RequestContext context = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("ParamsClient.GetNewOperation");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetNewOperationRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        internal HttpMessage CreateGetRequiredRequest(string parameter, string newParameter)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/llc/parameters", false);
-            uri.AppendQuery("parameter1", parameter1, true);
-            if (parameter2 != null)
+            uri.AppendPath("/servicedriven/parameters", false);
+            uri.AppendQuery("parameter", parameter, true);
+            if (newParameter != null)
             {
-                uri.AppendQuery("parameter2", parameter2, true);
+                uri.AppendQuery("new_parameter", newParameter, true);
             }
-            uri.AppendQuery("parameter3", parameter3, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreatePostParametersRequest(RequestContent content)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/servicedriven/parameters", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "image/jpeg");
+            request.Content = content;
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreatePostParametersRequest(RequestContent content)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/servicedriven/parameters", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateDeleteParametersRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Delete;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/servicedriven/parameters", false);
+            request.Uri = uri;
+            message.ResponseClassifier = ResponseClassifier204.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetNewOperationRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/servicedriven/newpath", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             message.ResponseClassifier = ResponseClassifier200.Instance;
@@ -127,6 +367,19 @@ namespace llc_update1_LowLevel
                 return message.Response.Status switch
                 {
                     200 => false,
+                    _ => true
+                };
+            }
+        }
+        private sealed class ResponseClassifier204 : ResponseClassifier
+        {
+            private static ResponseClassifier _instance;
+            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier204();
+            public override bool IsErrorResponse(HttpMessage message)
+            {
+                return message.Response.Status switch
+                {
+                    204 => false,
                     _ => true
                 };
             }

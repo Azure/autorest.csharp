@@ -11,7 +11,7 @@ schemas: !Schemas
           name: String
           description: simple string
       protocol: !Protocols {}
-    - !StringSchema &ref_2
+    - !StringSchema &ref_3
       type: string
       apiVersions:
         - !ApiVersion 
@@ -21,8 +21,18 @@ schemas: !Schemas
           name: String
           description: ''
       protocol: !Protocols {}
+    - !StringSchema &ref_1
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      language: !Languages 
+        default:
+          name: PostInputUrl
+          description: ''
+      protocol: !Protocols {}
   constants:
-    - !ConstantSchema &ref_3
+    - !ConstantSchema &ref_4
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -32,16 +42,52 @@ schemas: !Schemas
           name: Accept
           description: 'Accept: application/json'
       protocol: !Protocols {}
+    - !ConstantSchema &ref_7
+      type: constant
+      value: !ConstantValue 
+        value: application/json
+      valueType: *ref_0
+      language: !Languages 
+        default:
+          name: ApplicationJson
+          description: Content Type 'application/json'
+      protocol: !Protocols {}
   anyObjects:
-    - !AnyObjectSchema &ref_7
+    - !AnyObjectSchema &ref_6
       type: any-object
       language: !Languages 
         default:
           name: AnyObject
           description: Any object
       protocol: !Protocols {}
+  objects:
+    - !ObjectSchema &ref_8
+      type: object
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      properties:
+        - !Property 
+          schema: *ref_1
+          required: true
+          serializedName: url
+          language: !Languages 
+            default:
+              name: url
+              description: ''
+          protocol: !Protocols {}
+      serializationFormats:
+        - json
+      usage:
+        - input
+      language: !Languages 
+        default:
+          name: PostInput
+          description: ''
+          namespace: ''
+      protocol: !Protocols {}
 globalParameters:
-  - !Parameter &ref_1
+  - !Parameter &ref_2
     schema: *ref_0
     clientDefaultValue: http://localhost:3000
     implementation: Client
@@ -66,40 +112,16 @@ operationGroups:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_1
-          - !Parameter &ref_4
-            schema: *ref_2
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: parameter1
-                description: I am a required parameter
-                serializedName: parameter1
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: query
+          - *ref_2
           - !Parameter &ref_5
-            schema: *ref_2
+            schema: *ref_3
             implementation: Method
             required: true
             language: !Languages 
               default:
-                name: parameter2
+                name: parameter
                 description: I am a required parameter
-                serializedName: parameter2
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: query
-          - !Parameter &ref_6
-            schema: *ref_2
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: parameter3
-                description: I am a required parameter and I'm last in Swagger
-                serializedName: parameter3
+                serializedName: parameter
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
@@ -107,7 +129,7 @@ operationGroups:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_3
+                schema: *ref_4
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -126,16 +148,14 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpRequest 
-                path: /llc/parameters
+                path: /servicedriven/parameters
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_4
           - *ref_5
-          - *ref_6
         responses:
           - !SchemaResponse 
-            schema: *ref_7
+            schema: *ref_6
             language: !Languages 
               default:
                 name: ''
@@ -151,6 +171,87 @@ operationGroups:
           default:
             name: GetRequired
             description: Get true Boolean value on path
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: 1.0.0
+        parameters:
+          - *ref_2
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_7
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_9
+                schema: *ref_8
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: parameter
+                    description: 'I am a body parameter. My only valid JSON entry is { url: "http://example.org/myimage.jpeg" }'
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_4
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_9
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /servicedriven/parameters
+                method: post
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        signatureParameters: []
+        responses:
+          - !SchemaResponse 
+            schema: *ref_6
+            language: !Languages 
+              default:
+                name: ''
+                description: Answer from service
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: PostParameters
+            description: POST a JSON
         protocol: !Protocols {}
     language: !Languages 
       default:

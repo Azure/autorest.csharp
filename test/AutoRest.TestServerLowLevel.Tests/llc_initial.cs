@@ -18,7 +18,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetRequired() => Test(async (host) =>
         {
-            var result = await new ParamsClient(Key, host).GetRequiredAsync("a", "b", "c");
+            var result = await new ParamsClient(Key, host).GetRequiredAsync("a");
             var responseBody = JsonData.FromBytes(result.Content.ToMemory());
             Assert.AreEqual("An object was successfully returned", (string)responseBody["message"]);
         });
