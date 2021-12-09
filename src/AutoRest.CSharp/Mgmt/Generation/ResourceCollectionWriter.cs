@@ -118,7 +118,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             if (allPossibleTypes.Count() == 1)
                 validResourceType = GetResourceTypeExpression(allPossibleTypes.First());
             else
-                validResourceType = $"{typeof(ResourceIdentifier)}.RootResourceIdentifier.ResourceType";
+                validResourceType = $"{typeof(ResourceIdentifier)}.Root.ResourceType";
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Gets the valid resource type for this object");
             _writer.Line($"protected override {typeof(Azure.ResourceManager.ResourceType)} ValidResourceType => {validResourceType};");
