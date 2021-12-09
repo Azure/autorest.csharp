@@ -96,6 +96,8 @@ $testNamesLowLevel =
     'custom-baseUrl-paging',
     'header',
     'httpInfrastructure',
+    'llc_initial',
+    'llc_update1',
     'media_types',
     'lro',
     'paging',
