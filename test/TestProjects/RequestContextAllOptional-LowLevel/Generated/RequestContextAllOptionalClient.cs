@@ -55,7 +55,7 @@ namespace RequestContextAllOptional_LowLevel
         /// <param name="top"> Query parameter top. </param>
         /// <param name="skip"> Query parameter skip. </param>
         /// <param name="status"> Query parameter status. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> NoRequestBodyResponseBodyAsync(int id, int? top = null, int skip = 12, string status = "start", RequestContext context = null)
 #pragma warning restore AZC0002
@@ -79,7 +79,7 @@ namespace RequestContextAllOptional_LowLevel
         /// <param name="top"> Query parameter top. </param>
         /// <param name="skip"> Query parameter skip. </param>
         /// <param name="status"> Query parameter status. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
 #pragma warning disable AZC0002
         public virtual Response NoRequestBodyResponseBody(int id, int? top = null, int skip = 12, string status = "start", RequestContext context = null)
 #pragma warning restore AZC0002
@@ -100,7 +100,7 @@ namespace RequestContextAllOptional_LowLevel
 
         /// <summary> RequestBody and ResponseBody. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -136,7 +136,7 @@ namespace RequestContextAllOptional_LowLevel
 
         /// <summary> RequestBody and ResponseBody. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -172,7 +172,7 @@ namespace RequestContextAllOptional_LowLevel
 
         /// <summary> Delete. </summary>
         /// <param name="resourceName"> name. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceName"/> is null. </exception>
 #pragma warning disable AZC0002
         public virtual async Task<Response> DeleteNoRequestBodyResponseBodyAsync(string resourceName, RequestContext context = null)
@@ -194,7 +194,7 @@ namespace RequestContextAllOptional_LowLevel
 
         /// <summary> Delete. </summary>
         /// <param name="resourceName"> name. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceName"/> is null. </exception>
 #pragma warning disable AZC0002
         public virtual Response DeleteNoRequestBodyResponseBody(string resourceName, RequestContext context = null)
@@ -215,7 +215,7 @@ namespace RequestContextAllOptional_LowLevel
         }
 
         /// <summary> No RequestBody and No ResponseBody. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> NoRequestBodyNoResponseBodyAsync(RequestContext context = null)
 #pragma warning restore AZC0002
@@ -235,7 +235,7 @@ namespace RequestContextAllOptional_LowLevel
         }
 
         /// <summary> No RequestBody and No ResponseBody. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
 #pragma warning disable AZC0002
         public virtual Response NoRequestBodyNoResponseBody(RequestContext context = null)
 #pragma warning restore AZC0002
@@ -256,7 +256,7 @@ namespace RequestContextAllOptional_LowLevel
 
         /// <summary> RequestBody and No ResponseBody. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> RequestBodyNoResponseBodyAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
@@ -277,7 +277,7 @@ namespace RequestContextAllOptional_LowLevel
 
         /// <summary> RequestBody and No ResponseBody. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
 #pragma warning disable AZC0002
         public virtual Response RequestBodyNoResponseBody(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002

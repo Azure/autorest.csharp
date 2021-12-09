@@ -55,7 +55,7 @@ namespace SubClients_LowLevel
         }
 
         /// <param name="subParameter"> The String to use. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subParameter"/> is null. </exception>
 #pragma warning disable AZC0002
         public virtual async Task<Response> GetSubParameterAsync(string subParameter, RequestContext context = null)
@@ -76,7 +76,7 @@ namespace SubClients_LowLevel
         }
 
         /// <param name="subParameter"> The String to use. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subParameter"/> is null. </exception>
 #pragma warning disable AZC0002
         public virtual Response GetSubParameter(string subParameter, RequestContext context = null)
