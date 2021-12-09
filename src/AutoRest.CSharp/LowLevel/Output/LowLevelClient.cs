@@ -22,11 +22,6 @@ namespace AutoRest.CSharp.Output.Models
 {
     internal class LowLevelClient : TypeProvider
     {
-        public static readonly Parameter ClientDiagnosticsParameter = new("clientDiagnostics", "The ClientDiagnostics instance to use", new CSharpType(typeof(ClientDiagnostics)), null, true);
-        public static readonly Parameter PipelineParameter = new("pipeline", "The pipeline instance to use", new CSharpType(typeof(HttpPipeline)), null, true);
-        public static readonly Parameter KeyAuthParameter = new("keyCredential", "The key credential to copy", new CSharpType(typeof(AzureKeyCredential)), null, false);
-        public static readonly Parameter TokenAuthParameter = new("tokenCredential", "The token credential to copy", new CSharpType(typeof(TokenCredential)), null, false);
-
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility { get; } = "public";
 
@@ -175,7 +170,7 @@ namespace AutoRest.CSharp.Output.Models
 
         private MethodSignature BuildSubClientInternalConstructor()
         {
-            var constructorParameters = new[]{ClientDiagnosticsParameter, PipelineParameter, KeyAuthParameter, TokenAuthParameter}
+            var constructorParameters = new[]{ KnownParameters.ClientDiagnostics, KnownParameters.Pipeline, KnownParameters.KeyAuth, KnownParameters.TokenAuth }
                 .Concat(RestClientBuilder.GetConstructorParameters(Parameters, null, includeAPIVersion: true))
                 .Where(p => Fields.GetFieldByParameter(p) != null)
                 .ToArray();

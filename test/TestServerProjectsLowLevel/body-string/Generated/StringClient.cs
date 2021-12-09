@@ -46,12 +46,12 @@ namespace body_string_LowLevel
 
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
-            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
         }
 
         /// <summary> Get null string value value. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -69,7 +69,7 @@ namespace body_string_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetNullRequest();
+                using HttpMessage message = CreateGetNullRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -80,7 +80,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary> Get null string value value. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -98,7 +98,7 @@ namespace body_string_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetNullRequest();
+                using HttpMessage message = CreateGetNullRequest(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -110,7 +110,7 @@ namespace body_string_LowLevel
 
         /// <summary> Set string value null. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -128,7 +128,7 @@ namespace body_string_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutNullRequest(content);
+                using HttpMessage message = CreatePutNullRequest(content, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -140,7 +140,7 @@ namespace body_string_LowLevel
 
         /// <summary> Set string value null. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -158,7 +158,7 @@ namespace body_string_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutNullRequest(content);
+                using HttpMessage message = CreatePutNullRequest(content, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -169,7 +169,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary> Get empty string value value &apos;&apos;. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -187,7 +187,7 @@ namespace body_string_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetEmptyRequest();
+                using HttpMessage message = CreateGetEmptyRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -198,7 +198,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary> Get empty string value value &apos;&apos;. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -216,7 +216,7 @@ namespace body_string_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetEmptyRequest();
+                using HttpMessage message = CreateGetEmptyRequest(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -228,7 +228,7 @@ namespace body_string_LowLevel
 
         /// <summary> Set string value empty &apos;&apos;. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -247,7 +247,7 @@ namespace body_string_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutEmptyRequest(content);
+                using HttpMessage message = CreatePutEmptyRequest(content, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -259,7 +259,7 @@ namespace body_string_LowLevel
 
         /// <summary> Set string value empty &apos;&apos;. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -278,7 +278,7 @@ namespace body_string_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutEmptyRequest(content);
+                using HttpMessage message = CreatePutEmptyRequest(content, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -289,7 +289,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary> Get mbcs string value &apos;啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€&apos;. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -307,7 +307,7 @@ namespace body_string_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetMbcsRequest();
+                using HttpMessage message = CreateGetMbcsRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -318,7 +318,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary> Get mbcs string value &apos;啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€&apos;. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -336,7 +336,7 @@ namespace body_string_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetMbcsRequest();
+                using HttpMessage message = CreateGetMbcsRequest(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -348,7 +348,7 @@ namespace body_string_LowLevel
 
         /// <summary> Set string value mbcs &apos;啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€&apos;. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -367,7 +367,7 @@ namespace body_string_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutMbcsRequest(content);
+                using HttpMessage message = CreatePutMbcsRequest(content, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -379,7 +379,7 @@ namespace body_string_LowLevel
 
         /// <summary> Set string value mbcs &apos;啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€&apos;. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -398,7 +398,7 @@ namespace body_string_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutMbcsRequest(content);
+                using HttpMessage message = CreatePutMbcsRequest(content, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -409,7 +409,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary> Get string value with leading and trailing whitespace &apos;&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;&apos;. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -427,7 +427,7 @@ namespace body_string_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetWhitespaceRequest();
+                using HttpMessage message = CreateGetWhitespaceRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -438,7 +438,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary> Get string value with leading and trailing whitespace &apos;&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;&apos;. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -456,7 +456,7 @@ namespace body_string_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetWhitespaceRequest();
+                using HttpMessage message = CreateGetWhitespaceRequest(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -468,7 +468,7 @@ namespace body_string_LowLevel
 
         /// <summary> Set String value with leading and trailing whitespace &apos;&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;&apos;. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -487,7 +487,7 @@ namespace body_string_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutWhitespaceRequest(content);
+                using HttpMessage message = CreatePutWhitespaceRequest(content, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -499,7 +499,7 @@ namespace body_string_LowLevel
 
         /// <summary> Set String value with leading and trailing whitespace &apos;&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;&apos;. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -518,7 +518,7 @@ namespace body_string_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutWhitespaceRequest(content);
+                using HttpMessage message = CreatePutWhitespaceRequest(content, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -529,7 +529,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary> Get String value when no string value is sent in response payload. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -547,7 +547,7 @@ namespace body_string_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetNotProvidedRequest();
+                using HttpMessage message = CreateGetNotProvidedRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -558,7 +558,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary> Get String value when no string value is sent in response payload. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -576,7 +576,7 @@ namespace body_string_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetNotProvidedRequest();
+                using HttpMessage message = CreateGetNotProvidedRequest(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -587,7 +587,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary> Get value that is base64 encoded. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -605,7 +605,7 @@ namespace body_string_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetBase64EncodedRequest();
+                using HttpMessage message = CreateGetBase64EncodedRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -616,7 +616,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary> Get value that is base64 encoded. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -634,7 +634,7 @@ namespace body_string_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetBase64EncodedRequest();
+                using HttpMessage message = CreateGetBase64EncodedRequest(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -645,7 +645,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary> Get value that is base64url encoded. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -663,7 +663,7 @@ namespace body_string_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetBase64UrlEncodedRequest();
+                using HttpMessage message = CreateGetBase64UrlEncodedRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -674,7 +674,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary> Get value that is base64url encoded. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -692,7 +692,7 @@ namespace body_string_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetBase64UrlEncodedRequest();
+                using HttpMessage message = CreateGetBase64UrlEncodedRequest(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -704,7 +704,7 @@ namespace body_string_LowLevel
 
         /// <summary> Put value that is base64url encoded. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -723,7 +723,7 @@ namespace body_string_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutBase64UrlEncodedRequest(content);
+                using HttpMessage message = CreatePutBase64UrlEncodedRequest(content, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -735,7 +735,7 @@ namespace body_string_LowLevel
 
         /// <summary> Put value that is base64url encoded. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -754,7 +754,7 @@ namespace body_string_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutBase64UrlEncodedRequest(content);
+                using HttpMessage message = CreatePutBase64UrlEncodedRequest(content, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -765,7 +765,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary> Get null value that is expected to be base64url encoded. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -783,7 +783,7 @@ namespace body_string_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetNullBase64UrlEncodedRequest();
+                using HttpMessage message = CreateGetNullBase64UrlEncodedRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -794,7 +794,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary> Get null value that is expected to be base64url encoded. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -812,7 +812,7 @@ namespace body_string_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetNullBase64UrlEncodedRequest();
+                using HttpMessage message = CreateGetNullBase64UrlEncodedRequest(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -822,9 +822,9 @@ namespace body_string_LowLevel
             }
         }
 
-        internal HttpMessage CreateGetNullRequest()
+        internal HttpMessage CreateGetNullRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -836,9 +836,9 @@ namespace body_string_LowLevel
             return message;
         }
 
-        internal HttpMessage CreatePutNullRequest(RequestContent content)
+        internal HttpMessage CreatePutNullRequest(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -852,9 +852,9 @@ namespace body_string_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetEmptyRequest()
+        internal HttpMessage CreateGetEmptyRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -866,9 +866,9 @@ namespace body_string_LowLevel
             return message;
         }
 
-        internal HttpMessage CreatePutEmptyRequest(RequestContent content)
+        internal HttpMessage CreatePutEmptyRequest(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -882,9 +882,9 @@ namespace body_string_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetMbcsRequest()
+        internal HttpMessage CreateGetMbcsRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -896,9 +896,9 @@ namespace body_string_LowLevel
             return message;
         }
 
-        internal HttpMessage CreatePutMbcsRequest(RequestContent content)
+        internal HttpMessage CreatePutMbcsRequest(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -912,9 +912,9 @@ namespace body_string_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetWhitespaceRequest()
+        internal HttpMessage CreateGetWhitespaceRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -926,9 +926,9 @@ namespace body_string_LowLevel
             return message;
         }
 
-        internal HttpMessage CreatePutWhitespaceRequest(RequestContent content)
+        internal HttpMessage CreatePutWhitespaceRequest(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -942,9 +942,9 @@ namespace body_string_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetNotProvidedRequest()
+        internal HttpMessage CreateGetNotProvidedRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -956,9 +956,9 @@ namespace body_string_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetBase64EncodedRequest()
+        internal HttpMessage CreateGetBase64EncodedRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -970,9 +970,9 @@ namespace body_string_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetBase64UrlEncodedRequest()
+        internal HttpMessage CreateGetBase64UrlEncodedRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -984,9 +984,9 @@ namespace body_string_LowLevel
             return message;
         }
 
-        internal HttpMessage CreatePutBase64UrlEncodedRequest(RequestContent content)
+        internal HttpMessage CreatePutBase64UrlEncodedRequest(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -1000,9 +1000,9 @@ namespace body_string_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetNullBase64UrlEncodedRequest()
+        internal HttpMessage CreateGetNullBase64UrlEncodedRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();

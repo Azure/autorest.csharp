@@ -89,7 +89,7 @@ namespace AutoRest.CSharp.Output.Models
                 .Concat(serviceRequest.Parameters)
                 .Where(rp => !IsIgnoredHeaderParameter(rp));
 
-            var buildContext = CreateRequestMethodBuildContext(operation, requestParameters);
+            var buildContext = CreateRequestMethodBuildContext(requestParameters);
             Request request = BuildRequest(httpRequest, buildContext);
 
             var isHeadAsBoolean = request.HttpMethod == RequestMethod.Head && _context.Configuration.HeadAsBoolean;
@@ -176,7 +176,7 @@ namespace AutoRest.CSharp.Output.Models
             return clientResponse.ToArray();
         }
 
-        private RequestMethodBuildContext CreateRequestMethodBuildContext(Operation operation, IEnumerable<RequestParameter> requestParameters)
+        private RequestMethodBuildContext CreateRequestMethodBuildContext(IEnumerable<RequestParameter> requestParameters)
         {
             var references = new Dictionary<RequestParameter, ReferenceOrConstant>();
             var orderedParameters = new List<Parameter>();
@@ -233,8 +233,7 @@ namespace AutoRest.CSharp.Output.Models
 
             if (hasBody)
             {
-                var bodyType = new CSharpType(typeof(RequestContent), !isBodyRequired);
-                bodyParameter = new Parameter("content", "The content to send as the body of the request.", bodyType, null, isBodyRequired);
+                bodyParameter = isBodyRequired ? KnownParameters.RequestContent : KnownParameters.RequestContentNullable;
                 orderedParameters.Add(bodyParameter);
                 if (contentTypeRequestParameter != null)
                 {
@@ -268,6 +267,8 @@ namespace AutoRest.CSharp.Output.Models
                 }
                 orderedParameters.Add(requestConditionParameter);
             }
+
+            orderedParameters.Add(KnownParameters.RequestContext);
 
             return new RequestMethodBuildContext(orderedParameters, references, bodyParameter, requestConditionParameter, requestConditionSerializationFormat);
         }
