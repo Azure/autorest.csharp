@@ -345,6 +345,7 @@ schemas: !Schemas
               name: whatNotFound
               description: ''
           protocol: !Protocols {}
+      discriminatorValue: NotFoundErrorBase
       parents: !Relations 
         all:
           - *ref_7
@@ -480,6 +481,7 @@ schemas: !Schemas
               immediate:
                 PetSadError: *ref_15
               property: *ref_22
+            discriminatorValue: PetActionError
             parents: !Relations 
               all:
                 - *ref_17
