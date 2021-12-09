@@ -34,7 +34,7 @@ stages:
       - job: Build
         timeoutInMinutes: 120
         pool:
-          vmImage: windows-2019
+          vmImage: windows-2022
         steps:
           - checkout: self
           - checkout: azure-sdk-tools
@@ -121,7 +121,7 @@ stages:
       jobs:
         - job: Update
           pool:
-            vmImage: ubuntu-20.04
+            vmImage: windows-2022
           variables:
             AutorestCSharpVersion: $[stageDependencies.Build_and_Test.Build.outputs['Package.AutorestCSharpVersion']]
           steps:
