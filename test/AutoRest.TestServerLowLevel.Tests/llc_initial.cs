@@ -16,7 +16,7 @@ namespace AutoRest.TestServer.Tests
     public class LlcInitialTest : TestServerLowLevelTestBase
     {
         [Test]
-        public Task GetRequired() => Test(async (host) =>
+        public Task LLCAddOptionalInput() => Test(async (host) =>
         {
             var result = await new ParamsClient(Key, host).GetRequiredAsync("a");
             var responseBody = JsonData.FromBytes(result.Content.ToMemory());
