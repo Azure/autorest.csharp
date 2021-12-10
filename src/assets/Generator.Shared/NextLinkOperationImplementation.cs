@@ -26,7 +26,6 @@ namespace Azure.Core
 
         private string? _lastKnownLocation;
         private string _nextRequestUri;
-        private string? _apiVersion;
 
         public static IOperation Create(HttpPipeline pipeline, RequestMethod requestMethod, Uri startRequestUri, Response response, OperationFinalStateVia finalStateVia)
         {
@@ -55,7 +54,6 @@ namespace Azure.Core
             _lastKnownLocation = lastKnownLocation;
             _finalStateVia = finalStateVia;
             _pipeline = pipeline;
-            _apiVersion = startRequestUri.Query.Trim('?').Split('&').Select(s => s.Split('=')).Where(arr => arr[0].Equals("api-version")).Select(arr => arr[1]).FirstOrDefault();
         }
 
         public async ValueTask<OperationState> UpdateStateAsync(bool async, CancellationToken cancellationToken)
@@ -106,12 +104,7 @@ namespace Azure.Core
             switch (_headerSource)
             {
                 case HeaderSource.OperationLocation when headers.TryGetValue("Operation-Location", out string? operationLocation):
-                    _nextRequestUri = operationLocation;
-                    if (!_nextRequestUri.Contains("api-version") && _apiVersion != null)
-                    {
-                        var concatSymbol = _nextRequestUri.Contains("?") ? "&" : "?";
-                        _nextRequestUri = $"{_nextRequestUri}{concatSymbol}api-version={_apiVersion}";
-                    }
+                    _nextRequestUri = AppendApiVersion(operationLocation, _startRequestUri);
                     return;
                 case HeaderSource.AzureAsyncOperation when headers.TryGetValue("Azure-AsyncOperation", out string? azureAsyncOperation):
                     _nextRequestUri = azureAsyncOperation;
@@ -120,6 +113,17 @@ namespace Azure.Core
                     _nextRequestUri = location!;
                     return;
             }
+        }
+
+        private static string AppendApiVersion(string uri, Uri startRequestUri)
+        {
+            var apiVersion = startRequestUri.Query.Trim('?').Split('&').Select(s => s.Split('=')).Where(arr => arr[0].Equals("api-version")).Select(arr => arr[1]).FirstOrDefault();
+            if (!uri.Contains("api-version") && apiVersion != null)
+            {
+                var concatSymbol = uri.Contains("?") ? "&" : "?";
+                return $"{uri}{concatSymbol}api-version={apiVersion}";
+            }
+            return uri;
         }
 
         private string? GetFinalUri()
@@ -244,7 +248,7 @@ namespace Azure.Core
             var headers = response.Headers;
             if (headers.TryGetValue("Operation-Location", out var operationLocationUri))
             {
-                nextRequestUri = operationLocationUri;
+                nextRequestUri = AppendApiVersion(operationLocationUri, requestUri);
                 return HeaderSource.OperationLocation;
             }
 
