@@ -310,8 +310,8 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     var messageVariable = new CodeWriterDeclaration("message");
                     var processMessageParameters = isPageable
-                        ? (FormattableString)$"{fields.PipelineField.Name:I}, {messageVariable}, {fields.ClientDiagnosticsField.Name:I}, {scopeName:L}, {typeof(OperationFinalStateVia)}.{finalStateVia}, {KnownParameters.RequestContext.Name:I}, {createEnumerableMethod:D}"
-                        : (FormattableString)$"{fields.PipelineField.Name:I}, {messageVariable}, {fields.ClientDiagnosticsField.Name:I}, {scopeName:L}, {typeof(OperationFinalStateVia)}.{finalStateVia}, {KnownParameters.RequestContext.Name:I}";
+                        ? (FormattableString)$"{fields.PipelineField.Name:I}, {messageVariable}, {fields.ClientDiagnosticsField.Name:I}, {scopeName:L}, {typeof(OperationFinalStateVia)}.{finalStateVia}, {KnownParameters.RequestContext.Name:I}, {KnownParameters.WaitForCompletion.Name:I}, {createEnumerableMethod:D}"
+                        : (FormattableString)$"{fields.PipelineField.Name:I}, {messageVariable}, {fields.ClientDiagnosticsField.Name:I}, {scopeName:L}, {typeof(OperationFinalStateVia)}.{finalStateVia}, {KnownParameters.RequestContext.Name:I}, {KnownParameters.WaitForCompletion.Name:I}";
 
                     writer
                         .Line($"using {typeof(HttpMessage)} {messageVariable:D} = {RequestWriterHelpers.CreateRequestMethodName(startMethod.Name)}({startMethod.Parameters.GetIdentifiersFormattable()});")
@@ -466,7 +466,9 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static CodeWriter.CodeWriterScope WriteClientMethodDeclaration(CodeWriter writer, LowLevelClientMethod clientMethod, LowLevelOperationSchemaInfo operationSchemas, CSharpType returnType, bool async)
         {
-            var parameters = clientMethod.RequestMethod.Parameters;
+            var parameters = clientMethod.IsLongRunning
+                ? clientMethod.RequestMethod.Parameters.Prepend(KnownParameters.WaitForCompletion).ToArray()
+                : clientMethod.RequestMethod.Parameters;
             var asyncText = async && (clientMethod.PagingInfo == null || clientMethod.IsLongRunning) ? " async" : string.Empty;
             var methodSignature = new MethodSignature(CreateMethodName(clientMethod.RequestMethod.Name, async), clientMethod.RequestMethod.Description, $"{clientMethod.RequestMethod.Accessibility} virtual{asyncText}", returnType, null, parameters);
 
