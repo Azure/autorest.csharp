@@ -958,7 +958,7 @@ namespace Azure.Management.Storage
         /// <returns> Returns a <see cref="BlobService" /> object. </returns>
         public BlobService GetBlobService()
         {
-            return new BlobService(this, Id + "/blobServices/default");
+            return new BlobService(this, new ResourceIdentifier(Id.ToString() + "/blobServices/default"));
         }
         #endregion
 
@@ -968,7 +968,7 @@ namespace Azure.Management.Storage
         /// <returns> Returns a <see cref="FileService" /> object. </returns>
         public FileService GetFileService()
         {
-            return new FileService(this, Id + "/fileServices/default");
+            return new FileService(this, new ResourceIdentifier(Id.ToString() + "/fileServices/default"));
         }
         #endregion
 

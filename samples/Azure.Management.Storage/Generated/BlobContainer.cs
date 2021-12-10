@@ -464,7 +464,7 @@ namespace Azure.Management.Storage
         /// <returns> Returns a <see cref="ImmutabilityPolicy" /> object. </returns>
         public ImmutabilityPolicy GetImmutabilityPolicy()
         {
-            return new ImmutabilityPolicy(this, Id + "/immutabilityPolicies/default");
+            return new ImmutabilityPolicy(this, new ResourceIdentifier(Id.ToString() + "/immutabilityPolicies/default"));
         }
         #endregion
     }

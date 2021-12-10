@@ -2,19 +2,9 @@
 // Licensed under the MIT License.
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
-using AutoRest.CSharp.Output.Models.Shared;
-using Azure;
-using Azure.Core;
 using Azure.Core.Pipeline;
 
 namespace AutoRest.CSharp.Common.Generation.Writers
@@ -33,7 +23,7 @@ namespace AutoRest.CSharp.Common.Generation.Writers
 
         protected virtual string RestClientField => "RestClient";
 
-        protected static string CreateMethodName(string name, bool async) => $"{name}{(async ? "Async" : string.Empty)}";
+        protected static string CreateMethodName(string name, bool async) => async ? $"{name}Async" : name;
 
         protected void WriteClientFields(CodeWriter writer, RestClient client, bool writePipelineField)
         {
@@ -43,7 +33,7 @@ namespace AutoRest.CSharp.Common.Generation.Writers
             writer.Append($"{RestClientAccessibility} {client.Type} {RestClientField}").LineRaw(" { get; }");
         }
 
-        protected static IDisposable WriteDiagnosticScope(CodeWriter writer, Diagnostic diagnostic, string clientDiagnosticsParam, bool catch404 = false)
+        protected static IDisposable WriteDiagnosticScope(CodeWriter writer, Diagnostic diagnostic, string clientDiagnosticsParam)
         {
             var scopeVariable = new CodeWriterDeclaration("scope");
             writer.Line($"using var {scopeVariable:D} = {clientDiagnosticsParam}.CreateScope({diagnostic.ScopeName:L});");
@@ -55,7 +45,7 @@ namespace AutoRest.CSharp.Common.Generation.Writers
             }
 
             writer.Line($"{scopeVariable}.Start();");
-            return new DiagnosticScope(writer.Scope($"try"), scopeVariable, writer, catch404);
+            return new DiagnosticScope(writer.Scope($"try"), scopeVariable, writer);
         }
 
         private class DiagnosticScope : IDisposable
@@ -63,28 +53,17 @@ namespace AutoRest.CSharp.Common.Generation.Writers
             private readonly CodeWriter.CodeWriterScope _scope;
             private readonly CodeWriterDeclaration _scopeVariable;
             private readonly CodeWriter _writer;
-            private readonly bool _catch404;
 
-            public DiagnosticScope(CodeWriter.CodeWriterScope scope, CodeWriterDeclaration scopeVariable, CodeWriter writer, bool catch404)
+            public DiagnosticScope(CodeWriter.CodeWriterScope scope, CodeWriterDeclaration scopeVariable, CodeWriter writer)
             {
                 _scope = scope;
                 _scopeVariable = scopeVariable;
                 _writer = writer;
-                _catch404 = catch404;
             }
 
             public void Dispose()
             {
                 _scope.Dispose();
-
-                if (_catch404)
-                {
-                    using (_writer.Scope($"catch ({typeof(RequestFailedException)} e) when (e.Status == 404)"))
-                    {
-                        _writer.Line($"return null;");
-                    }
-                }
-
                 using (_writer.Scope($"catch ({typeof(Exception)} e)"))
                 {
                     _writer.Line($"{_scopeVariable}.Failed(e);");

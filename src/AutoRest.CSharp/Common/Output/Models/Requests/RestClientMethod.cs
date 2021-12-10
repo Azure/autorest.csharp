@@ -37,19 +37,6 @@ namespace AutoRest.CSharp.Output.Models.Requests
         public string Accessibility { get; }
         public Operation Operation { get; }
 
-        public List<Parameter> NonPathParameters
-        {
-            get
-            {
-                var pathSegments = this.Request.PathParameterSegments;
-
-                return this.Parameters.Where(parameter => !pathSegments.Any(
-                    pathSegment => pathSegment.Value.Reference.Type.Name == parameter.Type.Name &&
-                    pathSegment.Value.Reference.Name == parameter.Name)
-                ).ToList();
-            }
-        }
-
         public List<Parameter> PathParameters
         {
             get
@@ -58,7 +45,7 @@ namespace AutoRest.CSharp.Output.Models.Requests
 
                 return this.Parameters.Where(parameter => pathSegments.Any(
                     pathSegment => pathSegment.Value.Reference.Type.Name == parameter.Type.Name &&
-                    pathSegment.Value.Reference.Name == parameter.Name)
+                                   pathSegment.Value.Reference.Name == parameter.Name)
                 ).ToList();
             }
         }

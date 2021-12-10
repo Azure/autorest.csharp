@@ -150,6 +150,8 @@ operationGroups:
             schema: *ref_4
             implementation: Method
             required: true
+            extensions:
+              x-nullable: true
             language: !Languages 
               default:
                 name: id

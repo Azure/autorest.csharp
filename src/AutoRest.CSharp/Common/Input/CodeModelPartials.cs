@@ -133,33 +133,10 @@ namespace AutoRest.CSharp.Input
 
     internal partial class RequestParameter
     {
-        private static HashSet<string> ConditionRequstHeader = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
-        {
-            "If-Match",
-            "If-None-Match",
-            "If-Modified-Since",
-            "If-Unmodified-Since",
-        };
-        private static HashSet<string> MatchConditionRequstHeader = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
-        {
-            "If-Match",
-            "If-None-Match",
-        };
+        public bool IsResourceParameter => Convert.ToBoolean(Extensions.GetValue<string>("x-ms-resource-parameter"));
+
         public ParameterLocation In => Protocol.Http is HttpParameter httpParameter ? httpParameter.In : ParameterLocation.None;
-
-        public RequestParameter ShallowCopy()
-        {
-            return (RequestParameter)this.MemberwiseClone();
-        }
-
-        public bool IsRequestConditionHeader() {
-            return ConditionRequstHeader.Contains(Language.Default.SerializedName ?? Language.Default.Name) && In == ParameterLocation.Header;
-        }
-
-        public bool IsMatchConditionHeader()
-        {
-            return MatchConditionRequstHeader.Contains(Language.Default.SerializedName ?? Language.Default.Name) && In == ParameterLocation.Header;
-        }
+        public bool IsFlattened => Flattened ?? false;
     }
 
     internal partial class HttpResponse

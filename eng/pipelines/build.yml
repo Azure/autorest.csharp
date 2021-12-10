@@ -34,7 +34,7 @@ stages:
       - job: Build
         timeoutInMinutes: 120
         pool:
-          vmImage: windows-2019
+          vmImage: windows-2022
         steps:
           - checkout: self
           - checkout: azure-sdk-tools
@@ -128,6 +128,11 @@ stages:
             - checkout: self
             - checkout: azure-sdk-for-net
             - checkout: azure-sdk-tools
+            - task: UseDotNet@2
+              displayName: 'Use .NET Core SDK'
+              inputs:
+                useGlobalJson: true
+                performMultiLevelLookup: true
             - pwsh: ./eng/UpdateAzureSdkForNet.ps1 -Version $(AutorestCSharpVersion) -SdkRepoRoot $(Build.SourcesDirectory)/azure-sdk-for-net
               failOnStderr: false
               workingDirectory: $(Build.SourcesDirectory)/autorest.csharp

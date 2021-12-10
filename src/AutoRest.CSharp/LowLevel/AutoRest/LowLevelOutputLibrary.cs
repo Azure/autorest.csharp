@@ -13,29 +13,29 @@ namespace AutoRest.CSharp.Output.Models.Types
     {
         private readonly CodeModel _codeModel;
         private readonly BuildContext<LowLevelOutputLibrary> _context;
-        private readonly CachedDictionary<OperationGroup, LowLevelRestClient> _restClients;
+        private readonly CachedDictionary<OperationGroup, LowLevelClient> _restClients;
         public ClientOptionsTypeProvider ClientOptions { get; }
 
-        public LowLevelOutputLibrary(CodeModel codeModel, BuildContext<LowLevelOutputLibrary> context) : base(codeModel, context)
+        public LowLevelOutputLibrary(CodeModel codeModel, BuildContext<LowLevelOutputLibrary> context)
         {
             _codeModel = codeModel;
             _context = context;
             ClientOptions = new ClientOptionsTypeProvider(_context);
             UpdateListMethodNames();
-            _restClients = new CachedDictionary<OperationGroup, LowLevelRestClient>(EnsureRestClients);
+            _restClients = new CachedDictionary<OperationGroup, LowLevelClient>(EnsureRestClients);
         }
 
-        public ICollection<LowLevelRestClient> RestClients => _restClients.Values;
-        private Dictionary<OperationGroup, LowLevelRestClient> EnsureRestClients()
+        public ICollection<LowLevelClient> RestClients => _restClients.Values;
+        private Dictionary<OperationGroup, LowLevelClient> EnsureRestClients()
         {
-            var restClients = new Dictionary<OperationGroup, LowLevelRestClient>();
+            var restClients = new Dictionary<OperationGroup, LowLevelClient>();
 
             string? topLevelClientName = null;
             if (_context.Configuration.SingleTopLevelClient)
             {
                 var topLevelOperationGroup = _codeModel.OperationGroups.FirstOrDefault(og => string.IsNullOrEmpty(og.Key));
-                var topLevelClient = topLevelOperationGroup != null ? new LowLevelRestClient(topLevelOperationGroup, _context, ClientOptions, null) : LowLevelRestClient.CreateEmptyTopLevelClient(_context, ClientOptions);
-                restClients.Add(topLevelClient.OperationGroup, topLevelClient);
+                var topLevelClient = topLevelOperationGroup != null ? new LowLevelClient(topLevelOperationGroup, _context, ClientOptions, null) : LowLevelClient.CreateEmptyTopLevelClient(_context, ClientOptions);
+                restClients.Add(topLevelOperationGroup ?? new OperationGroup { Key = string.Empty }, topLevelClient);
                 topLevelClientName = topLevelClient.Declaration.Name;
             }
 
@@ -43,7 +43,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 if (!restClients.ContainsKey(operationGroup))
                 {
-                    restClients.Add(operationGroup, new LowLevelRestClient(operationGroup, _context, ClientOptions, topLevelClientName));
+                    restClients.Add(operationGroup, new LowLevelClient(operationGroup, _context, ClientOptions, topLevelClientName));
                 }
             }
 

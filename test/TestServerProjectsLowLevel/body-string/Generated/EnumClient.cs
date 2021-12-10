@@ -46,12 +46,12 @@ namespace body_string_LowLevel
 
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
-            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
         }
 
         /// <summary> Get enum value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -69,7 +69,7 @@ namespace body_string_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetNotExpandableRequest();
+                using HttpMessage message = CreateGetNotExpandableRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -80,7 +80,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary> Get enum value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -98,7 +98,7 @@ namespace body_string_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetNotExpandableRequest();
+                using HttpMessage message = CreateGetNotExpandableRequest(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -110,7 +110,7 @@ namespace body_string_LowLevel
 
         /// <summary> Sends value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -129,7 +129,7 @@ namespace body_string_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutNotExpandableRequest(content);
+                using HttpMessage message = CreatePutNotExpandableRequest(content, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -141,7 +141,7 @@ namespace body_string_LowLevel
 
         /// <summary> Sends value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -160,7 +160,7 @@ namespace body_string_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutNotExpandableRequest(content);
+                using HttpMessage message = CreatePutNotExpandableRequest(content, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -171,7 +171,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary> Get enum value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -189,7 +189,7 @@ namespace body_string_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetReferencedRequest();
+                using HttpMessage message = CreateGetReferencedRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -200,7 +200,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary> Get enum value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -218,7 +218,7 @@ namespace body_string_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetReferencedRequest();
+                using HttpMessage message = CreateGetReferencedRequest(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -230,7 +230,7 @@ namespace body_string_LowLevel
 
         /// <summary> Sends value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -249,7 +249,7 @@ namespace body_string_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutReferencedRequest(content);
+                using HttpMessage message = CreatePutReferencedRequest(content, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -261,7 +261,7 @@ namespace body_string_LowLevel
 
         /// <summary> Sends value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -280,7 +280,7 @@ namespace body_string_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutReferencedRequest(content);
+                using HttpMessage message = CreatePutReferencedRequest(content, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -291,7 +291,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary> Get value &apos;green-color&apos; from the constant. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -315,7 +315,7 @@ namespace body_string_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetReferencedConstantRequest();
+                using HttpMessage message = CreateGetReferencedConstantRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -326,7 +326,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary> Get value &apos;green-color&apos; from the constant. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -350,7 +350,7 @@ namespace body_string_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetReferencedConstantRequest();
+                using HttpMessage message = CreateGetReferencedConstantRequest(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -362,7 +362,7 @@ namespace body_string_LowLevel
 
         /// <summary> Sends value &apos;green-color&apos; from a constant. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -387,7 +387,7 @@ namespace body_string_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutReferencedConstantRequest(content);
+                using HttpMessage message = CreatePutReferencedConstantRequest(content, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -399,7 +399,7 @@ namespace body_string_LowLevel
 
         /// <summary> Sends value &apos;green-color&apos; from a constant. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -424,7 +424,7 @@ namespace body_string_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutReferencedConstantRequest(content);
+                using HttpMessage message = CreatePutReferencedConstantRequest(content, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -434,9 +434,9 @@ namespace body_string_LowLevel
             }
         }
 
-        internal HttpMessage CreateGetNotExpandableRequest()
+        internal HttpMessage CreateGetNotExpandableRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -448,9 +448,9 @@ namespace body_string_LowLevel
             return message;
         }
 
-        internal HttpMessage CreatePutNotExpandableRequest(RequestContent content)
+        internal HttpMessage CreatePutNotExpandableRequest(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -464,9 +464,9 @@ namespace body_string_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetReferencedRequest()
+        internal HttpMessage CreateGetReferencedRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -478,9 +478,9 @@ namespace body_string_LowLevel
             return message;
         }
 
-        internal HttpMessage CreatePutReferencedRequest(RequestContent content)
+        internal HttpMessage CreatePutReferencedRequest(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -494,9 +494,9 @@ namespace body_string_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetReferencedConstantRequest()
+        internal HttpMessage CreateGetReferencedConstantRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -508,9 +508,9 @@ namespace body_string_LowLevel
             return message;
         }
 
-        internal HttpMessage CreatePutReferencedConstantRequest(RequestContent content)
+        internal HttpMessage CreatePutReferencedConstantRequest(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
