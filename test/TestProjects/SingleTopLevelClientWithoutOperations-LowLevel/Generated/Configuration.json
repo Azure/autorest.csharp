@@ -8,6 +8,6 @@
   ],
   "public-clients": true,
   "skip-csproj-packagereference": true,
-  "low-level-client": true,
+  "data-plane": true,
   "single-top-level-client": true
 }
