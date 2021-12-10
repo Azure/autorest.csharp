@@ -138,7 +138,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             }
             else if (parentResources.Contains(Context.Library.SubscriptionExtensions))
             {
-                _writer.Line($"{resourceCollection.Type.Name} {collectionVariable} = GetArmClient().GetDefaultSubscription().Get{resourceCollection.Resource.Type.Name.ToPlural()}();");
+                _writer.Line($"{resourceCollection.Type.Name} {collectionVariable} = (await GetArmClient().GetDefaultSubscriptionAsync()).Get{resourceCollection.Resource.Type.Name.ToPlural()}();");
             }
             else if (parentResources.Contains(Context.Library.TenantExtensions))
             {
@@ -181,6 +181,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
         public void WriteCreateCollectionMethod(bool isAsync)
         {
+            clearVariableNames();
             EnsureCollectionInitiateParameters();
             _writer.Line();
             _writer.Append($"private {GetAsyncKeyword(isAsync)} {TypeOfCollection.WrapAsync(isAsync)} Get{TypeNameOfCollection}{GetAsyncSuffix(isAsync)}(");
@@ -305,21 +306,37 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 // var testMethodParameters = GenExampleInstanceMethodParameters(clientOperation);
                 var testMethodName = CreateMethodName(methodName, async);
 
-                WriteTestDecorator();
-                _writer.Append($"public {GetAsyncKeyword(async)} {MgmtBaseTestWriter.GetTaskOrVoid(async)} {testMethodName}()");
-                var paramNames = new List<string>();
-                using (_writer.Scope())
+                int exampleIdx = 0;
+                foreach (var exampleModel in (exampleGroup?.Examples ?? Enumerable.Empty<ExampleModel>()))
                 {
-                    foreach (var exampleModel in exampleGroup?.Examples ?? Enumerable.Empty<ExampleModel>())
+                    WriteTestDecorator();
+                    _writer.Append($"public {GetAsyncKeyword(async)} {MgmtBaseTestWriter.GetTaskOrVoid(async)} {testMethodName}{(exampleIdx>0?(exampleIdx+1).ToString():"")}()");
+                    using (_writer.Scope())
                     {
                         _writer.LineRaw($"// Example: {exampleModel.Name}");
                         clearVariableNames();
                         WriteGetCollection(clientOperation, exampleModel, async);
-                        WriteInvokeExampleInstanceMethod(clientOperation, async, methodName, exampleModel);
-                        break;
+                        if (exampleIdx == 0)
+                        {
+                            WriteInvokeExampleInstanceMethod(clientOperation, async, methodName, exampleModel);
+                        }
+                        else
+                        {
+                            List<string> paramNames = WriteOperationParameters(methodParameters, new List<Parameter>(), exampleModel);
+
+                            _writer.Line();
+                            _writer.Append($"{GetAwait(async && !clientOperation.IsPagingOperation(Context))} collection.{testMethodName}(");
+                            foreach (var paramName in paramNames)
+                            {
+                                _writer.Append($"{paramName},");
+                            }
+                            _writer.RemoveTrailingComma();
+                            _writer.LineRaw(");");
+                        }
                     }
+                    _writer.Line();
+                    exampleIdx++;
                 }
-                _writer.Line();
                 break; // TODO: need to create different type of resourceType of collection to test more operation!
             }
         }

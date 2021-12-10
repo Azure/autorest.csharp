@@ -12,6 +12,7 @@ using Azure.ResourceManager.Resources;
 using Azure.ResourceManager.Resources.Models;
 using Azure.ResourceManager.TestFramework;
 using MgmtKeyvault;
+using MgmtKeyvault.Models;
 using NUnit.Framework;
 
 namespace MgmtKeyvault.Tests.Mock
@@ -39,6 +40,28 @@ namespace MgmtKeyvault.Tests.Mock
             // Example: Create a new vault or update an existing vault
             var collection = await GetVaultCollectionAsync("sample-resource-group");
             await TestHelper.CreateOrUpdateExampleInstanceAsync(collection, "sample-vault");
+        }
+
+        [RecordedTest]
+        [Ignore("Generated TestCase")]
+        public async Task CreateOrUpdateAsync2()
+        {
+            // Example: Create or update a vault with network acls
+            var collection = await GetVaultCollectionAsync("sample-resource-group");
+            string vaultName = "sample-vault";
+            MgmtKeyvault.Models.VaultCreateOrUpdateParameters parameters = new MgmtKeyvault.Models.VaultCreateOrUpdateParameters("westus", new MgmtKeyvault.Models.VaultProperties(System.Guid.Parse("00000000-0000-0000-0000-000000000000"), new MgmtKeyvault.Models.Sku(new MgmtKeyvault.Models.SkuFamily("A"), MgmtKeyvault.Models.SkuName.Standard))
+            {
+                EnabledForDeployment = true,
+                EnabledForDiskEncryption = true,
+                EnabledForTemplateDeployment = true,
+                NetworkAcls = new MgmtKeyvault.Models.NetworkRuleSet()
+                {
+                    Bypass = new MgmtKeyvault.Models.NetworkRuleBypassOptions("AzureServices"),
+                    DefaultAction = new MgmtKeyvault.Models.NetworkRuleAction("Deny"),
+                },
+            });
+
+            await collection.CreateOrUpdateAsync(vaultName, parameters);
         }
 
         [RecordedTest]

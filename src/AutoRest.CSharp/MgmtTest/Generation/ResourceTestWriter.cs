@@ -181,12 +181,13 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     return;
                 var testMethodName = CreateMethodName(methodName, async);
 
-                WriteTestDecorator();
-                _writer.Append($"public {GetAsyncKeyword(async)} {MgmtBaseTestWriter.GetTaskOrVoid(async)} {(resource == _resource ? "" : resource.Type.Name)}{testMethodName}()");
-
-                using (_writer.Scope())
+                int exampleIdx = 0;
+                foreach (var exampleModel in exampleGroup?.Examples ?? Enumerable.Empty<ExampleModel>())
                 {
-                    foreach (var exampleModel in exampleGroup?.Examples ?? Enumerable.Empty<ExampleModel>())
+                    WriteTestDecorator();
+                    _writer.Append($"public {GetAsyncKeyword(async)} {MgmtBaseTestWriter.GetTaskOrVoid(async)} {(resource == _resource ? "" : resource.Type.Name)}{testMethodName}{(exampleIdx > 0 ? (exampleIdx + 1).ToString() : "")}()");
+
+                    using (_writer.Scope())
                     {
                         _writer.LineRaw($"// Example: {exampleModel.Name}");
                         clearVariableNames();
@@ -202,10 +203,10 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                         }
                         _writer.RemoveTrailingComma();
                         _writer.LineRaw(");");
-                        break;
                     }
+                    _writer.Line();
+                    exampleIdx++;
                 }
-                _writer.Line();
                 break;
             }
         }

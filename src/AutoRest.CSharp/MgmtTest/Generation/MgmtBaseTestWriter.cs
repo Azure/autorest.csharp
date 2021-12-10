@@ -285,7 +285,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             }
 
             var constructor = sot.Constructors[0];
-            // find the simplest constructor
+            // TODO: find constructor by exampleValues.
             foreach (var c in sot.Constructors)
             {
                 if (c.Signature.Parameters.Length < constructor.Signature.Parameters.Length)
