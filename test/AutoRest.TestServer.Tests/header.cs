@@ -200,7 +200,7 @@ namespace AutoRest.TestServer.Tests
         public Task HeaderParameterDateValid() => TestStatus(async (host, pipeline) => await new HeaderClient(ClientDiagnostics, pipeline, host).ParamDateAsync( scenario: "valid", new DateTime(2010, 1, 1)));
 
         [Test]
-        public Task HeaderParameterDateMin() => TestStatus(async (host, pipeline) => await new HeaderClient(ClientDiagnostics, pipeline, host).ParamDateAsync( scenario: "min", new DateTime(0001, 1, 1)));
+        public Task HeaderParameterDateMin() => TestStatus(async (host, pipeline) => await new HeaderClient(ClientDiagnostics, pipeline, host).ParamDateAsync( scenario: "min", new DateTime(0001, 1, 1, 0, 0, 0, DateTimeKind.Utc)));
 
         [Test]
         public Task HeaderResponseDateValid() => TestStatus(async (host, pipeline) =>
