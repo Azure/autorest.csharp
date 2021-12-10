@@ -162,6 +162,8 @@ operationGroups:
           - !Parameter &ref_8
             schema: *ref_6
             implementation: Method
+            extensions:
+              x-nullable: true
             language: !Languages 
               default:
                 name: arrayQuery
