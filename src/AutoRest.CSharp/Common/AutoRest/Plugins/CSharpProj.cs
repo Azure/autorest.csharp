@@ -105,7 +105,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 {
                   additionalContent += _armCsProjContent;
                 }
-                if (configuration.LowLevelClient)
+                if (configuration.DataPlane)
                 {
                   additionalContent += _llcProjectContent;
                 }
