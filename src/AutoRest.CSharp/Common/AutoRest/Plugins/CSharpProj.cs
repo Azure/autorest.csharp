@@ -29,7 +29,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 ";
         private string _coreCsProjContent = @"
   <ItemGroup>
-    <PackageReference Include=""Azure.Core"" Version=""1.21.0"" />
+    <PackageReference Include=""Azure.Core"" Version=""1.22.0-alpha.20211207.1"" />
   </ItemGroup>";
 
         private string _armCsProjContent = @"

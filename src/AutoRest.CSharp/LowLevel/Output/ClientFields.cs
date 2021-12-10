@@ -29,13 +29,13 @@ namespace AutoRest.CSharp.Output.Models
 
         public ClientFields(BuildContext<LowLevelOutputLibrary> context, IEnumerable<Parameter> parameters)
         {
-            ClientDiagnosticsField = new("private readonly", typeof(ClientDiagnostics), "_" + LowLevelClient.ClientDiagnosticsParameter.Name);
-            PipelineField = new("private readonly", typeof(HttpPipeline), "_" + LowLevelClient.PipelineParameter.Name);
+            ClientDiagnosticsField = new("private readonly", typeof(ClientDiagnostics), "_" + KnownParameters.ClientDiagnostics.Name);
+            PipelineField = new("private readonly", typeof(HttpPipeline), "_" + KnownParameters.Pipeline.Name);
 
             var parameterNamesToFields = new Dictionary<string, FieldDeclaration>
             {
-                [LowLevelClient.PipelineParameter.Name] = PipelineField,
-                [LowLevelClient.ClientDiagnosticsParameter.Name] = ClientDiagnosticsField
+                [KnownParameters.Pipeline.Name] = PipelineField,
+                [KnownParameters.ClientDiagnostics.Name] = ClientDiagnosticsField
             };
 
             var fields = new List<FieldDeclaration>();
@@ -46,21 +46,21 @@ namespace AutoRest.CSharp.Output.Models
                 {
                     case AzureKeySecurityScheme azureKeySecurityScheme:
                         AuthorizationHeaderConstant = new("private const", typeof(string), "AuthorizationHeader", $"{azureKeySecurityScheme.HeaderName:L}");
-                        _keyAuthField = new("private readonly", LowLevelClient.KeyAuthParameter.Type.WithNullable(true), "_" + LowLevelClient.KeyAuthParameter.Name);
+                        _keyAuthField = new("private readonly", KnownParameters.KeyAuth.Type.WithNullable(true), "_" + KnownParameters.KeyAuth.Name);
 
                         fields.Add(AuthorizationHeaderConstant);
                         fields.Add(_keyAuthField);
                         credentialFields.Add(_keyAuthField);
-                        parameterNamesToFields[LowLevelClient.KeyAuthParameter.Name] = _keyAuthField;
+                        parameterNamesToFields[KnownParameters.KeyAuth.Name] = _keyAuthField;
                         break;
                     case AADTokenSecurityScheme aadTokenSecurityScheme:
                         ScopesConstant = new("private static readonly", typeof(string[]), "AuthorizationScopes", $"new string[]{{ {aadTokenSecurityScheme.Scopes.GetLiteralsFormattable()} }}");
-                        _tokenAuthField = new("private readonly", LowLevelClient.TokenAuthParameter.Type.WithNullable(true), "_" + LowLevelClient.TokenAuthParameter.Name);
+                        _tokenAuthField = new("private readonly", KnownParameters.TokenAuth.Type.WithNullable(true), "_" + KnownParameters.TokenAuth.Name);
 
                         fields.Add(ScopesConstant);
                         fields.Add(_tokenAuthField);
                         credentialFields.Add(_tokenAuthField);
-                        parameterNamesToFields[LowLevelClient.TokenAuthParameter.Name] = _tokenAuthField;
+                        parameterNamesToFields[KnownParameters.TokenAuth.Name] = _tokenAuthField;
                         break;
                 }
             }

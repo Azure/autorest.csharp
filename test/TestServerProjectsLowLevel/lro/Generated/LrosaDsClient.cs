@@ -46,13 +46,13 @@ namespace lro_LowLevel
 
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
-            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
         }
 
         /// <summary> Long running put request, service returns a 400 to the initial request. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -96,7 +96,7 @@ namespace lro_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutNonRetry400Request(content);
+                using HttpMessage message = CreatePutNonRetry400Request(content, context);
                 return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LrosaDsClient.PutNonRetry400", OperationFinalStateVia.Location, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -108,7 +108,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 400 to the initial request. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -152,7 +152,7 @@ namespace lro_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutNonRetry400Request(content);
+                using HttpMessage message = CreatePutNonRetry400Request(content, context);
                 return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LrosaDsClient.PutNonRetry400", OperationFinalStateVia.Location, context);
             }
             catch (Exception e)
@@ -164,7 +164,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a Product with &apos;ProvisioningState&apos; = &apos;Creating&apos; and 201 response code. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -208,7 +208,7 @@ namespace lro_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutNonRetry201Creating400Request(content);
+                using HttpMessage message = CreatePutNonRetry201Creating400Request(content, context);
                 return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LrosaDsClient.PutNonRetry201Creating400", OperationFinalStateVia.Location, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -220,7 +220,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a Product with &apos;ProvisioningState&apos; = &apos;Creating&apos; and 201 response code. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -264,7 +264,7 @@ namespace lro_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutNonRetry201Creating400Request(content);
+                using HttpMessage message = CreatePutNonRetry201Creating400Request(content, context);
                 return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LrosaDsClient.PutNonRetry201Creating400", OperationFinalStateVia.Location, context);
             }
             catch (Exception e)
@@ -276,7 +276,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a Product with &apos;ProvisioningState&apos; = &apos;Creating&apos; and 201 response code. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -320,7 +320,7 @@ namespace lro_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutNonRetry201Creating400InvalidJsonRequest(content);
+                using HttpMessage message = CreatePutNonRetry201Creating400InvalidJsonRequest(content, context);
                 return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LrosaDsClient.PutNonRetry201Creating400InvalidJson", OperationFinalStateVia.Location, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -332,7 +332,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a Product with &apos;ProvisioningState&apos; = &apos;Creating&apos; and 201 response code. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -376,7 +376,7 @@ namespace lro_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutNonRetry201Creating400InvalidJsonRequest(content);
+                using HttpMessage message = CreatePutNonRetry201Creating400InvalidJsonRequest(content, context);
                 return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LrosaDsClient.PutNonRetry201Creating400InvalidJson", OperationFinalStateVia.Location, context);
             }
             catch (Exception e)
@@ -388,7 +388,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -432,7 +432,7 @@ namespace lro_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutAsyncRelativeRetry400Request(content);
+                using HttpMessage message = CreatePutAsyncRelativeRetry400Request(content, context);
                 return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LrosaDsClient.PutAsyncRelativeRetry400", OperationFinalStateVia.Location, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -444,7 +444,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -488,7 +488,7 @@ namespace lro_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutAsyncRelativeRetry400Request(content);
+                using HttpMessage message = CreatePutAsyncRelativeRetry400Request(content, context);
                 return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LrosaDsClient.PutAsyncRelativeRetry400", OperationFinalStateVia.Location, context);
             }
             catch (Exception e)
@@ -499,7 +499,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running delete request, service returns a 400 with an error body. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -517,7 +517,7 @@ namespace lro_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateDeleteNonRetry400Request();
+                using HttpMessage message = CreateDeleteNonRetry400Request(context);
                 return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LrosaDsClient.DeleteNonRetry400", OperationFinalStateVia.Location, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -528,7 +528,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running delete request, service returns a 400 with an error body. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -546,7 +546,7 @@ namespace lro_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateDeleteNonRetry400Request();
+                using HttpMessage message = CreateDeleteNonRetry400Request(context);
                 return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LrosaDsClient.DeleteNonRetry400", OperationFinalStateVia.Location, context);
             }
             catch (Exception e)
@@ -557,7 +557,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running delete request, service returns a 202 with a location header. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -575,7 +575,7 @@ namespace lro_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateDelete202NonRetry400Request();
+                using HttpMessage message = CreateDelete202NonRetry400Request(context);
                 return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LrosaDsClient.Delete202NonRetry400", OperationFinalStateVia.Location, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -586,7 +586,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running delete request, service returns a 202 with a location header. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -604,7 +604,7 @@ namespace lro_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateDelete202NonRetry400Request();
+                using HttpMessage message = CreateDelete202NonRetry400Request(context);
                 return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LrosaDsClient.Delete202NonRetry400", OperationFinalStateVia.Location, context);
             }
             catch (Exception e)
@@ -615,7 +615,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -633,7 +633,7 @@ namespace lro_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateDeleteAsyncRelativeRetry400Request();
+                using HttpMessage message = CreateDeleteAsyncRelativeRetry400Request(context);
                 return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LrosaDsClient.DeleteAsyncRelativeRetry400", OperationFinalStateVia.Location, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -644,7 +644,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -662,7 +662,7 @@ namespace lro_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateDeleteAsyncRelativeRetry400Request();
+                using HttpMessage message = CreateDeleteAsyncRelativeRetry400Request(context);
                 return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LrosaDsClient.DeleteAsyncRelativeRetry400", OperationFinalStateVia.Location, context);
             }
             catch (Exception e)
@@ -674,7 +674,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running post request, service returns a 400 with no error body. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -705,7 +705,7 @@ namespace lro_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePostNonRetry400Request(content);
+                using HttpMessage message = CreatePostNonRetry400Request(content, context);
                 return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LrosaDsClient.PostNonRetry400", OperationFinalStateVia.Location, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -717,7 +717,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running post request, service returns a 400 with no error body. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -748,7 +748,7 @@ namespace lro_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePostNonRetry400Request(content);
+                using HttpMessage message = CreatePostNonRetry400Request(content, context);
                 return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LrosaDsClient.PostNonRetry400", OperationFinalStateVia.Location, context);
             }
             catch (Exception e)
@@ -760,7 +760,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running post request, service returns a 202 with a location header. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -791,7 +791,7 @@ namespace lro_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePost202NonRetry400Request(content);
+                using HttpMessage message = CreatePost202NonRetry400Request(content, context);
                 return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LrosaDsClient.Post202NonRetry400", OperationFinalStateVia.Location, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -803,7 +803,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running post request, service returns a 202 with a location header. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -834,7 +834,7 @@ namespace lro_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePost202NonRetry400Request(content);
+                using HttpMessage message = CreatePost202NonRetry400Request(content, context);
                 return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LrosaDsClient.Post202NonRetry400", OperationFinalStateVia.Location, context);
             }
             catch (Exception e)
@@ -846,7 +846,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -877,7 +877,7 @@ namespace lro_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePostAsyncRelativeRetry400Request(content);
+                using HttpMessage message = CreatePostAsyncRelativeRetry400Request(content, context);
                 return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LrosaDsClient.PostAsyncRelativeRetry400", OperationFinalStateVia.Location, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -889,7 +889,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -920,7 +920,7 @@ namespace lro_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePostAsyncRelativeRetry400Request(content);
+                using HttpMessage message = CreatePostAsyncRelativeRetry400Request(content, context);
                 return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LrosaDsClient.PostAsyncRelativeRetry400", OperationFinalStateVia.Location, context);
             }
             catch (Exception e)
@@ -932,7 +932,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 201 to the initial request with no payload. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -976,7 +976,7 @@ namespace lro_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutError201NoProvisioningStatePayloadRequest(content);
+                using HttpMessage message = CreatePutError201NoProvisioningStatePayloadRequest(content, context);
                 return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LrosaDsClient.PutError201NoProvisioningStatePayload", OperationFinalStateVia.Location, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -988,7 +988,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 201 to the initial request with no payload. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -1032,7 +1032,7 @@ namespace lro_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutError201NoProvisioningStatePayloadRequest(content);
+                using HttpMessage message = CreatePutError201NoProvisioningStatePayloadRequest(content, context);
                 return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LrosaDsClient.PutError201NoProvisioningStatePayload", OperationFinalStateVia.Location, context);
             }
             catch (Exception e)
@@ -1044,7 +1044,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -1088,7 +1088,7 @@ namespace lro_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutAsyncRelativeRetryNoStatusRequest(content);
+                using HttpMessage message = CreatePutAsyncRelativeRetryNoStatusRequest(content, context);
                 return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LrosaDsClient.PutAsyncRelativeRetryNoStatus", OperationFinalStateVia.Location, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -1100,7 +1100,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -1144,7 +1144,7 @@ namespace lro_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutAsyncRelativeRetryNoStatusRequest(content);
+                using HttpMessage message = CreatePutAsyncRelativeRetryNoStatusRequest(content, context);
                 return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LrosaDsClient.PutAsyncRelativeRetryNoStatus", OperationFinalStateVia.Location, context);
             }
             catch (Exception e)
@@ -1156,7 +1156,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -1200,7 +1200,7 @@ namespace lro_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutAsyncRelativeRetryNoStatusPayloadRequest(content);
+                using HttpMessage message = CreatePutAsyncRelativeRetryNoStatusPayloadRequest(content, context);
                 return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LrosaDsClient.PutAsyncRelativeRetryNoStatusPayload", OperationFinalStateVia.Location, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -1212,7 +1212,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -1256,7 +1256,7 @@ namespace lro_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutAsyncRelativeRetryNoStatusPayloadRequest(content);
+                using HttpMessage message = CreatePutAsyncRelativeRetryNoStatusPayloadRequest(content, context);
                 return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LrosaDsClient.PutAsyncRelativeRetryNoStatusPayload", OperationFinalStateVia.Location, context);
             }
             catch (Exception e)
@@ -1267,7 +1267,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running delete request, service returns a 204 to the initial request, indicating success. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1285,7 +1285,7 @@ namespace lro_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateDelete204SucceededRequest();
+                using HttpMessage message = CreateDelete204SucceededRequest(context);
                 return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LrosaDsClient.Delete204Succeeded", OperationFinalStateVia.Location, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -1296,7 +1296,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running delete request, service returns a 204 to the initial request, indicating success. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1314,7 +1314,7 @@ namespace lro_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateDelete204SucceededRequest();
+                using HttpMessage message = CreateDelete204SucceededRequest(context);
                 return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LrosaDsClient.Delete204Succeeded", OperationFinalStateVia.Location, context);
             }
             catch (Exception e)
@@ -1325,7 +1325,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1343,7 +1343,7 @@ namespace lro_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateDeleteAsyncRelativeRetryNoStatusRequest();
+                using HttpMessage message = CreateDeleteAsyncRelativeRetryNoStatusRequest(context);
                 return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LrosaDsClient.DeleteAsyncRelativeRetryNoStatus", OperationFinalStateVia.Location, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -1354,7 +1354,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1372,7 +1372,7 @@ namespace lro_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateDeleteAsyncRelativeRetryNoStatusRequest();
+                using HttpMessage message = CreateDeleteAsyncRelativeRetryNoStatusRequest(context);
                 return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LrosaDsClient.DeleteAsyncRelativeRetryNoStatus", OperationFinalStateVia.Location, context);
             }
             catch (Exception e)
@@ -1384,7 +1384,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running post request, service returns a 202 to the initial request, without a location header. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -1415,7 +1415,7 @@ namespace lro_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePost202NoLocationRequest(content);
+                using HttpMessage message = CreatePost202NoLocationRequest(content, context);
                 return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LrosaDsClient.Post202NoLocation", OperationFinalStateVia.Location, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -1427,7 +1427,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running post request, service returns a 202 to the initial request, without a location header. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -1458,7 +1458,7 @@ namespace lro_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePost202NoLocationRequest(content);
+                using HttpMessage message = CreatePost202NoLocationRequest(content, context);
                 return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LrosaDsClient.Post202NoLocation", OperationFinalStateVia.Location, context);
             }
             catch (Exception e)
@@ -1470,7 +1470,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -1501,7 +1501,7 @@ namespace lro_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePostAsyncRelativeRetryNoPayloadRequest(content);
+                using HttpMessage message = CreatePostAsyncRelativeRetryNoPayloadRequest(content, context);
                 return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LrosaDsClient.PostAsyncRelativeRetryNoPayload", OperationFinalStateVia.Location, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -1513,7 +1513,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -1544,7 +1544,7 @@ namespace lro_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePostAsyncRelativeRetryNoPayloadRequest(content);
+                using HttpMessage message = CreatePostAsyncRelativeRetryNoPayloadRequest(content, context);
                 return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LrosaDsClient.PostAsyncRelativeRetryNoPayload", OperationFinalStateVia.Location, context);
             }
             catch (Exception e)
@@ -1556,7 +1556,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that is not a valid json. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -1600,7 +1600,7 @@ namespace lro_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePut200InvalidJsonRequest(content);
+                using HttpMessage message = CreatePut200InvalidJsonRequest(content, context);
                 return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LrosaDsClient.Put200InvalidJson", OperationFinalStateVia.Location, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -1612,7 +1612,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that is not a valid json. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -1656,7 +1656,7 @@ namespace lro_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePut200InvalidJsonRequest(content);
+                using HttpMessage message = CreatePut200InvalidJsonRequest(content, context);
                 return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LrosaDsClient.Put200InvalidJson", OperationFinalStateVia.Location, context);
             }
             catch (Exception e)
@@ -1668,7 +1668,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -1712,7 +1712,7 @@ namespace lro_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutAsyncRelativeRetryInvalidHeaderRequest(content);
+                using HttpMessage message = CreatePutAsyncRelativeRetryInvalidHeaderRequest(content, context);
                 return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LrosaDsClient.PutAsyncRelativeRetryInvalidHeader", OperationFinalStateVia.Location, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -1724,7 +1724,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -1768,7 +1768,7 @@ namespace lro_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutAsyncRelativeRetryInvalidHeaderRequest(content);
+                using HttpMessage message = CreatePutAsyncRelativeRetryInvalidHeaderRequest(content, context);
                 return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LrosaDsClient.PutAsyncRelativeRetryInvalidHeader", OperationFinalStateVia.Location, context);
             }
             catch (Exception e)
@@ -1780,7 +1780,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -1824,7 +1824,7 @@ namespace lro_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutAsyncRelativeRetryInvalidJsonPollingRequest(content);
+                using HttpMessage message = CreatePutAsyncRelativeRetryInvalidJsonPollingRequest(content, context);
                 return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LrosaDsClient.PutAsyncRelativeRetryInvalidJsonPolling", OperationFinalStateVia.Location, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -1836,7 +1836,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -1880,7 +1880,7 @@ namespace lro_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutAsyncRelativeRetryInvalidJsonPollingRequest(content);
+                using HttpMessage message = CreatePutAsyncRelativeRetryInvalidJsonPollingRequest(content, context);
                 return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LrosaDsClient.PutAsyncRelativeRetryInvalidJsonPolling", OperationFinalStateVia.Location, context);
             }
             catch (Exception e)
@@ -1891,7 +1891,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid &apos;Location&apos; and &apos;Retry-After&apos; headers. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1909,7 +1909,7 @@ namespace lro_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateDelete202RetryInvalidHeaderRequest();
+                using HttpMessage message = CreateDelete202RetryInvalidHeaderRequest(context);
                 return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LrosaDsClient.Delete202RetryInvalidHeader", OperationFinalStateVia.Location, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -1920,7 +1920,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid &apos;Location&apos; and &apos;Retry-After&apos; headers. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1938,7 +1938,7 @@ namespace lro_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateDelete202RetryInvalidHeaderRequest();
+                using HttpMessage message = CreateDelete202RetryInvalidHeaderRequest(context);
                 return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LrosaDsClient.Delete202RetryInvalidHeader", OperationFinalStateVia.Location, context);
             }
             catch (Exception e)
@@ -1949,7 +1949,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running delete request, service returns a 202 to the initial request. The endpoint indicated in the Azure-AsyncOperation header is invalid. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1967,7 +1967,7 @@ namespace lro_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateDeleteAsyncRelativeRetryInvalidHeaderRequest();
+                using HttpMessage message = CreateDeleteAsyncRelativeRetryInvalidHeaderRequest(context);
                 return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LrosaDsClient.DeleteAsyncRelativeRetryInvalidHeader", OperationFinalStateVia.Location, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -1978,7 +1978,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running delete request, service returns a 202 to the initial request. The endpoint indicated in the Azure-AsyncOperation header is invalid. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1996,7 +1996,7 @@ namespace lro_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateDeleteAsyncRelativeRetryInvalidHeaderRequest();
+                using HttpMessage message = CreateDeleteAsyncRelativeRetryInvalidHeaderRequest(context);
                 return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LrosaDsClient.DeleteAsyncRelativeRetryInvalidHeader", OperationFinalStateVia.Location, context);
             }
             catch (Exception e)
@@ -2007,7 +2007,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2025,7 +2025,7 @@ namespace lro_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateDeleteAsyncRelativeRetryInvalidJsonPollingRequest();
+                using HttpMessage message = CreateDeleteAsyncRelativeRetryInvalidJsonPollingRequest(context);
                 return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LrosaDsClient.DeleteAsyncRelativeRetryInvalidJsonPolling", OperationFinalStateVia.Location, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -2036,7 +2036,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2054,7 +2054,7 @@ namespace lro_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateDeleteAsyncRelativeRetryInvalidJsonPollingRequest();
+                using HttpMessage message = CreateDeleteAsyncRelativeRetryInvalidJsonPollingRequest(context);
                 return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LrosaDsClient.DeleteAsyncRelativeRetryInvalidJsonPolling", OperationFinalStateVia.Location, context);
             }
             catch (Exception e)
@@ -2066,7 +2066,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running post request, service returns a 202 to the initial request, with invalid &apos;Location&apos; and &apos;Retry-After&apos; headers. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -2097,7 +2097,7 @@ namespace lro_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePost202RetryInvalidHeaderRequest(content);
+                using HttpMessage message = CreatePost202RetryInvalidHeaderRequest(content, context);
                 return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LrosaDsClient.Post202RetryInvalidHeader", OperationFinalStateVia.Location, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -2109,7 +2109,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running post request, service returns a 202 to the initial request, with invalid &apos;Location&apos; and &apos;Retry-After&apos; headers. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -2140,7 +2140,7 @@ namespace lro_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePost202RetryInvalidHeaderRequest(content);
+                using HttpMessage message = CreatePost202RetryInvalidHeaderRequest(content, context);
                 return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LrosaDsClient.Post202RetryInvalidHeader", OperationFinalStateVia.Location, context);
             }
             catch (Exception e)
@@ -2152,7 +2152,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -2183,7 +2183,7 @@ namespace lro_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePostAsyncRelativeRetryInvalidHeaderRequest(content);
+                using HttpMessage message = CreatePostAsyncRelativeRetryInvalidHeaderRequest(content, context);
                 return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LrosaDsClient.PostAsyncRelativeRetryInvalidHeader", OperationFinalStateVia.Location, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -2195,7 +2195,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -2226,7 +2226,7 @@ namespace lro_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePostAsyncRelativeRetryInvalidHeaderRequest(content);
+                using HttpMessage message = CreatePostAsyncRelativeRetryInvalidHeaderRequest(content, context);
                 return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LrosaDsClient.PostAsyncRelativeRetryInvalidHeader", OperationFinalStateVia.Location, context);
             }
             catch (Exception e)
@@ -2238,7 +2238,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -2269,7 +2269,7 @@ namespace lro_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePostAsyncRelativeRetryInvalidJsonPollingRequest(content);
+                using HttpMessage message = CreatePostAsyncRelativeRetryInvalidJsonPollingRequest(content, context);
                 return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LrosaDsClient.PostAsyncRelativeRetryInvalidJsonPolling", OperationFinalStateVia.Location, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -2281,7 +2281,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -2312,7 +2312,7 @@ namespace lro_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePostAsyncRelativeRetryInvalidJsonPollingRequest(content);
+                using HttpMessage message = CreatePostAsyncRelativeRetryInvalidJsonPollingRequest(content, context);
                 return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LrosaDsClient.PostAsyncRelativeRetryInvalidJsonPolling", OperationFinalStateVia.Location, context);
             }
             catch (Exception e)
@@ -2322,9 +2322,9 @@ namespace lro_LowLevel
             }
         }
 
-        internal HttpMessage CreatePutNonRetry400Request(RequestContent content)
+        internal HttpMessage CreatePutNonRetry400Request(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -2338,9 +2338,9 @@ namespace lro_LowLevel
             return message;
         }
 
-        internal HttpMessage CreatePutNonRetry201Creating400Request(RequestContent content)
+        internal HttpMessage CreatePutNonRetry201Creating400Request(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -2354,9 +2354,9 @@ namespace lro_LowLevel
             return message;
         }
 
-        internal HttpMessage CreatePutNonRetry201Creating400InvalidJsonRequest(RequestContent content)
+        internal HttpMessage CreatePutNonRetry201Creating400InvalidJsonRequest(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -2370,9 +2370,9 @@ namespace lro_LowLevel
             return message;
         }
 
-        internal HttpMessage CreatePutAsyncRelativeRetry400Request(RequestContent content)
+        internal HttpMessage CreatePutAsyncRelativeRetry400Request(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -2386,9 +2386,9 @@ namespace lro_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateDeleteNonRetry400Request()
+        internal HttpMessage CreateDeleteNonRetry400Request(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
@@ -2400,9 +2400,9 @@ namespace lro_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateDelete202NonRetry400Request()
+        internal HttpMessage CreateDelete202NonRetry400Request(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
@@ -2414,9 +2414,9 @@ namespace lro_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateDeleteAsyncRelativeRetry400Request()
+        internal HttpMessage CreateDeleteAsyncRelativeRetry400Request(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
@@ -2428,9 +2428,9 @@ namespace lro_LowLevel
             return message;
         }
 
-        internal HttpMessage CreatePostNonRetry400Request(RequestContent content)
+        internal HttpMessage CreatePostNonRetry400Request(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -2444,9 +2444,9 @@ namespace lro_LowLevel
             return message;
         }
 
-        internal HttpMessage CreatePost202NonRetry400Request(RequestContent content)
+        internal HttpMessage CreatePost202NonRetry400Request(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -2460,9 +2460,9 @@ namespace lro_LowLevel
             return message;
         }
 
-        internal HttpMessage CreatePostAsyncRelativeRetry400Request(RequestContent content)
+        internal HttpMessage CreatePostAsyncRelativeRetry400Request(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -2476,9 +2476,9 @@ namespace lro_LowLevel
             return message;
         }
 
-        internal HttpMessage CreatePutError201NoProvisioningStatePayloadRequest(RequestContent content)
+        internal HttpMessage CreatePutError201NoProvisioningStatePayloadRequest(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -2492,9 +2492,9 @@ namespace lro_LowLevel
             return message;
         }
 
-        internal HttpMessage CreatePutAsyncRelativeRetryNoStatusRequest(RequestContent content)
+        internal HttpMessage CreatePutAsyncRelativeRetryNoStatusRequest(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -2508,9 +2508,9 @@ namespace lro_LowLevel
             return message;
         }
 
-        internal HttpMessage CreatePutAsyncRelativeRetryNoStatusPayloadRequest(RequestContent content)
+        internal HttpMessage CreatePutAsyncRelativeRetryNoStatusPayloadRequest(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -2524,9 +2524,9 @@ namespace lro_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateDelete204SucceededRequest()
+        internal HttpMessage CreateDelete204SucceededRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
@@ -2538,9 +2538,9 @@ namespace lro_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateDeleteAsyncRelativeRetryNoStatusRequest()
+        internal HttpMessage CreateDeleteAsyncRelativeRetryNoStatusRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
@@ -2552,9 +2552,9 @@ namespace lro_LowLevel
             return message;
         }
 
-        internal HttpMessage CreatePost202NoLocationRequest(RequestContent content)
+        internal HttpMessage CreatePost202NoLocationRequest(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -2568,9 +2568,9 @@ namespace lro_LowLevel
             return message;
         }
 
-        internal HttpMessage CreatePostAsyncRelativeRetryNoPayloadRequest(RequestContent content)
+        internal HttpMessage CreatePostAsyncRelativeRetryNoPayloadRequest(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -2584,9 +2584,9 @@ namespace lro_LowLevel
             return message;
         }
 
-        internal HttpMessage CreatePut200InvalidJsonRequest(RequestContent content)
+        internal HttpMessage CreatePut200InvalidJsonRequest(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -2600,9 +2600,9 @@ namespace lro_LowLevel
             return message;
         }
 
-        internal HttpMessage CreatePutAsyncRelativeRetryInvalidHeaderRequest(RequestContent content)
+        internal HttpMessage CreatePutAsyncRelativeRetryInvalidHeaderRequest(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -2616,9 +2616,9 @@ namespace lro_LowLevel
             return message;
         }
 
-        internal HttpMessage CreatePutAsyncRelativeRetryInvalidJsonPollingRequest(RequestContent content)
+        internal HttpMessage CreatePutAsyncRelativeRetryInvalidJsonPollingRequest(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -2632,9 +2632,9 @@ namespace lro_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateDelete202RetryInvalidHeaderRequest()
+        internal HttpMessage CreateDelete202RetryInvalidHeaderRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
@@ -2646,9 +2646,9 @@ namespace lro_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateDeleteAsyncRelativeRetryInvalidHeaderRequest()
+        internal HttpMessage CreateDeleteAsyncRelativeRetryInvalidHeaderRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
@@ -2660,9 +2660,9 @@ namespace lro_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateDeleteAsyncRelativeRetryInvalidJsonPollingRequest()
+        internal HttpMessage CreateDeleteAsyncRelativeRetryInvalidJsonPollingRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
@@ -2674,9 +2674,9 @@ namespace lro_LowLevel
             return message;
         }
 
-        internal HttpMessage CreatePost202RetryInvalidHeaderRequest(RequestContent content)
+        internal HttpMessage CreatePost202RetryInvalidHeaderRequest(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -2690,9 +2690,9 @@ namespace lro_LowLevel
             return message;
         }
 
-        internal HttpMessage CreatePostAsyncRelativeRetryInvalidHeaderRequest(RequestContent content)
+        internal HttpMessage CreatePostAsyncRelativeRetryInvalidHeaderRequest(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -2706,9 +2706,9 @@ namespace lro_LowLevel
             return message;
         }
 
-        internal HttpMessage CreatePostAsyncRelativeRetryInvalidJsonPollingRequest(RequestContent content)
+        internal HttpMessage CreatePostAsyncRelativeRetryInvalidJsonPollingRequest(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
