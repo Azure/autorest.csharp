@@ -62,6 +62,47 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             }
         }
 
+        public class TestModelerConfiguration
+        {
+            private const string TestModelerOptionsFormat = "testmodeler.{0}";
+
+            public string? IgnoreReason { get; }
+
+            public TestModelerConfiguration(JsonElement? ignoreReason = default)
+            {
+                IgnoreReason = ignoreReason is null ? null : ignoreReason.ToString();
+            }
+
+            internal static TestModelerConfiguration LoadConfiguration(JsonElement root)
+            {
+                if (root.ValueKind != JsonValueKind.Object)
+                    return new TestModelerConfiguration();
+
+                root.TryGetProperty(nameof(IgnoreReason), out var ignoreReason);
+
+                return new TestModelerConfiguration(ignoreReason: ignoreReason);
+            }
+
+            internal static TestModelerConfiguration GetConfiguration(IPluginCommunication autoRest)
+            {
+                return new TestModelerConfiguration(
+                    ignoreReason: autoRest.GetValue<JsonElement?>(string.Format(TestModelerOptionsFormat, "ignore-reason")).GetAwaiter().GetResult());
+            }
+
+            public void Write(Utf8JsonWriter writer, string settingName)
+            {
+                if (IgnoreReason is null)
+                    return;
+
+                writer.WriteStartObject(settingName);
+
+                if (IgnoreReason is not null)
+                    writer.WriteString(nameof(IgnoreReason), IgnoreReason);
+
+                writer.WriteEndObject();
+            }
+        }
+
         public MgmtConfiguration(
             IReadOnlyList<string> operationGroupsToOmit,
             IReadOnlyList<string> requestPathIsNonResource,
@@ -80,7 +121,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             JsonElement? resourceModelRequiresType = default,
             JsonElement? resourceModelRequiresName = default,
             JsonElement? singletonRequiresKeyword = default,
-            JsonElement? testmodeler = default)
+            TestModelerConfiguration? testmodeler = default)
         {
             RequestPathToParent = !IsValidJsonElement(requestPathToParent) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(requestPathToParent.ToString());
             RequestPathToResourceName = !IsValidJsonElement(requestPathToResourceName) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(requestPathToResourceName.ToString());
@@ -138,7 +179,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public IReadOnlyList<string> ListException { get; }
 
         public bool IsArmCore { get; }
-        public JsonElement? TestModeler { get; }
+        public TestModelerConfiguration? TestModeler { get; }
 
         internal static MgmtConfiguration GetConfiguration(IPluginCommunication autoRest)
         {
@@ -160,7 +201,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 resourceModelRequiresType: autoRest.GetValue<JsonElement?>("resource-model-requires-type").GetAwaiter().GetResult(),
                 resourceModelRequiresName: autoRest.GetValue<JsonElement?>("resource-model-requires-name").GetAwaiter().GetResult(),
                 singletonRequiresKeyword: autoRest.GetValue<JsonElement?>("singleton-resource-requires-keyword").GetAwaiter().GetResult(),
-                testmodeler: autoRest.GetValue<JsonElement?>("testmodeler").GetAwaiter().GetResult());
+                testmodeler: TestModelerConfiguration.GetConfiguration(autoRest));
         }
 
         internal void SaveConfiguration(Utf8JsonWriter writer)

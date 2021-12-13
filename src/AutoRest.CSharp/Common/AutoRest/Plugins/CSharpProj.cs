@@ -98,7 +98,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             var context = new BuildContext(codeModel, configuration, null);
 
-            var isTestProject = configuration.MgmtConfiguration.TestModeler?.ValueKind != JsonValueKind.Null;
+            var isTestProject = configuration.MgmtConfiguration.TestModeler is not null;
             if (isTestProject)
             {
                 _coreCsProjContent += string.Format(@"

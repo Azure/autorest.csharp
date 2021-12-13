@@ -37,12 +37,12 @@ namespace AutoRest.CSharp.MgmtTest.Generation
         {
             _writer.Line($"[RecordedTest]");
 
-            var testsConfiguration = Context.Configuration.MgmtConfiguration.TestModeler;
-            System.Text.Json.JsonElement ignoreReason = default;
-            if (testsConfiguration is not null && testsConfiguration.IsObject() && testsConfiguration?.TryGetProperty("ignore-reason", out ignoreReason) == true)
+            var testModelerConfig = Context.Configuration.MgmtConfiguration.TestModeler;
+            string? ignoreReason = testModelerConfig?.IgnoreReason;
+            if (ignoreReason is not null)
             {
                 _writer.UseNamespace("NUnit.Framework");
-                _writer.Line($"[Ignore(\"{ignoreReason.GetString()}\")]");
+                _writer.Line($"[Ignore(\"{ignoreReason}\")]");
             }
         }
 
