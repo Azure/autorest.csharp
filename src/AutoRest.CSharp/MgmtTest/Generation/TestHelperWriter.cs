@@ -4,6 +4,8 @@
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Output.Models.Types;
+using Azure.ResourceManager.Resources;
+using Azure.ResourceManager;
 
 namespace AutoRest.CSharp.MgmtTest.Generation
 {
@@ -62,16 +64,16 @@ namespace AutoRest.CSharp.MgmtTest.Generation
         public void WriteCreateResourceGroupMethod()
         {
             _writer.UseNamespace("Azure.ResourceManager");
-            using (_writer.Scope($"public static async Task<ResourceGroup> CreateResourceGroupAsync(string resourceGroupName, ArmClient client)"))
+            using (_writer.Scope($"public static async Task<{typeof(ResourceGroup)}> CreateResourceGroupAsync(string resourceGroupName, {typeof(ArmClient)} client)"))
             {
                 _writer.Line($"var defaultSubscription = await client.GetDefaultSubscriptionAsync();");
-                using (_writer.Scope($"var rgop = await defaultSubscription.GetResourceGroups().CreateOrUpdateAsync", start: "(", end: ")", newLine: false))
+                using (_writer.Scope($"var rgOp = await defaultSubscription.GetResourceGroups().CreateOrUpdateAsync", start: "(", end: ")", newLine: false))
                 {
                     _writer.Line($"resourceGroupName,");
                     _writer.Line($"new ResourceGroupData(defaultSubscription.ToString()) {{ Tags = {{ {{ \"test\", \"env\" }} }} }}");
                 }
                 _writer.Line($";");
-                _writer.Append($"return rgop.Value;");
+                _writer.Append($"return rgOp.Value;");
             }
             _writer.Line();
         }

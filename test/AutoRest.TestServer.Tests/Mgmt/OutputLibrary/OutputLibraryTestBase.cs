@@ -30,7 +30,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
             _subFolder = subFolder;
         }
 
-        internal static async Task<(CodeModel Model, BuildContext<MgmtOutputLibrary> Context)> Generate(string testProject, string subFolder=null)
+        internal static async Task<(CodeModel Model, BuildContext<MgmtOutputLibrary> Context)> Generate(string testProject, string subFolder = null)
         {
             var basePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             if (subFolder is null)

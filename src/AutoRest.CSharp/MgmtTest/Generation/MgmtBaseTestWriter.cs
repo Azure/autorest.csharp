@@ -99,7 +99,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             return null;
         }
 
-        public static SortedDictionary<RequestPath, MgmtRestOperation> getSortedOperationMappings(MgmtClientOperation clientOperation) {
+        public static SortedDictionary<RequestPath, MgmtRestOperation> GetSortedOperationMappings(MgmtClientOperation clientOperation) {
             var operationMappings = clientOperation.ToDictionary(
                 operation => operation.ContextualPath,
                 operation => operation);
@@ -127,7 +127,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 return false;
             }
 
-            foreach ((var branch, var operation) in getSortedOperationMappings(clientOperation))
+            foreach ((var branch, var operation) in GetSortedOperationMappings(clientOperation))
             {
                 var exampleGroup = MgmtBaseTestWriter.FindExampleGroup(context, operation);
                 if (exampleGroup is not null && exampleGroup.Examples.Count > 0)
@@ -151,14 +151,14 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             return HasExample(context, resourceCollection.GetOperation);
         }
 
-        public bool CanCreateResourceFromExample(BuildContext<MgmtOutputLibrary> context, ResourceCollection? resourceCollection)
+        public bool CanCreateResourceFromExample(ResourceCollection? resourceCollection)
         {
-            if (!HasCreateExample(context, resourceCollection))
+            if (!HasCreateExample(Context, resourceCollection))
             {
                 return false;
             }
 
-            foreach ((var branch, var operation) in getSortedOperationMappings(resourceCollection!.CreateOperation!))
+            foreach ((var branch, var operation) in GetSortedOperationMappings(resourceCollection!.CreateOperation!))
             {
                 CSharpType? resultType = null;
                 if (operation.Operation.IsLongRunning)
@@ -180,10 +180,10 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
             }
 
-            var parentResources = resourceCollection!.Resource.Parent(context);
-            if (parentResources.Contains(context.Library.ResourceGroupExtensions) ||
-                parentResources.Contains(context.Library.SubscriptionExtensions) ||
-                parentResources.Contains(context.Library.TenantExtensions))
+            var parentResources = resourceCollection!.Resource.Parent(Context);
+            if (parentResources.Contains(Context.Library.ResourceGroupExtensions) ||
+                parentResources.Contains(Context.Library.SubscriptionExtensions) ||
+                parentResources.Contains(Context.Library.TenantExtensions))
             {
                 return true;
             }
@@ -191,21 +191,21 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             {
                 if (parentResource is not null && parentResource is Resource)
                 {
-                    if (CanCreateResourceFromExample(context, ((Resource)parentResource).ResourceCollection))
+                    if (CanCreateResourceFromExample(((Resource)parentResource).ResourceCollection))
                         return true;
                 }
             }
             return false;
         }
 
-        public bool CanCreateParentResourceFromExample(BuildContext<MgmtOutputLibrary> context, ResourceCollection? resourceCollection)
+        public bool CanCreateParentResourceFromExample(ResourceCollection? resourceCollection)
         {
             if (resourceCollection is null)
                 return false;
-            var parentResources = resourceCollection!.Resource.Parent(context);
-            if (parentResources.Contains(context.Library.ResourceGroupExtensions) ||
-                parentResources.Contains(context.Library.SubscriptionExtensions) ||
-                parentResources.Contains(context.Library.TenantExtensions))
+            var parentResources = resourceCollection!.Resource.Parent(Context);
+            if (parentResources.Contains(Context.Library.ResourceGroupExtensions) ||
+                parentResources.Contains(Context.Library.SubscriptionExtensions) ||
+                parentResources.Contains(Context.Library.TenantExtensions))
             {
                 return true;
             }
@@ -214,7 +214,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             {
                 if (parentResource is not null && parentResource is Resource)
                 {
-                    if (CanCreateResourceFromExample(context, ((Resource)parentResource).ResourceCollection))
+                    if (CanCreateResourceFromExample(((Resource)parentResource).ResourceCollection))
                         return true;
                 }
             }

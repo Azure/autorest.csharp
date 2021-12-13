@@ -37,7 +37,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             if (!resource.IsSingleton)
             {
                 _collectionTestWriter = new ResourceCollectionTestWriter(writer, resource.ResourceCollection!, context);
-                if (CanCreateResourceFromExample(context, resource.ResourceCollection!))
+                if (CanCreateResourceFromExample(resource.ResourceCollection!))
                 {
                     _collectionTestWriter.EnsureCollectionInitiateParameters();
                 }
@@ -119,8 +119,8 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             _writer.Line();
             using (_writer.Scope($"private {GetAsyncKeyword(async)} {_resource.Type.WrapAsync(async)} Get{_resource.Type.Name}{GetAsyncSuffix(async)}()"))
             {
-                if (CanCreateResourceFromExample(Context,_resource.ResourceCollection)) {
-                    foreach ((var branch, var operation) in getSortedOperationMappings(_resource.ResourceCollection!.CreateOperation!))
+                if (CanCreateResourceFromExample(_resource.ResourceCollection)) {
+                    foreach ((var branch, var operation) in GetSortedOperationMappings(_resource.ResourceCollection!.CreateOperation!))
                     {
                         ExampleGroup exampleGroup = MgmtBaseTestWriter.FindExampleGroup(Context, operation)!;
                         MgmtClientOperation CreateOperation = HasGetExample(Context, _resource.ResourceCollection!) ? _resource.ResourceCollection!.GetOperation! : _resource.ResourceCollection!.CreateOperation!;
@@ -174,7 +174,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             var methodName = clientOperation.Name;
 
             BuildParameters(clientOperation, out var operationMappings, out var parameterMappings, out var methodParameters);
-            foreach ((var branch, var operation) in getSortedOperationMappings(clientOperation))
+            foreach ((var branch, var operation) in GetSortedOperationMappings(clientOperation))
             {
                 var exampleGroup = MgmtBaseTestWriter.FindExampleGroup(Context, operation);
                 if (exampleGroup is null || exampleGroup.Examples.Count() == 0)

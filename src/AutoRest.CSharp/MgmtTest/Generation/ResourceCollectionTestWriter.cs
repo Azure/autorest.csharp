@@ -110,7 +110,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     {
                         var parentResourceCollection = ((Resource)parentResource).ResourceCollection;
                         EnsureByCollection(parentResourceCollection!);
-                        if (CanCreateResourceFromExample(Context, parentResourceCollection))
+                        if (CanCreateResourceFromExample(parentResourceCollection))
                         {
                             collectionInitiateParameters.AddRange(from p in GenExampleInstanceMethodParameters(parentResourceCollection!.CreateOperation!) select new Tuple<Parameter, MgmtClientOperation?>(p, parentResourceCollection!.CreateOperation));
                             return;
@@ -298,7 +298,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             var methodName = clientOperation.Name;
 
             BuildParameters(clientOperation, out var operationMappings, out var parameterMappings, out var methodParameters);
-            foreach ((var branch, var operation) in getSortedOperationMappings(clientOperation))
+            foreach ((var branch, var operation) in GetSortedOperationMappings(clientOperation))
             {
                 var exampleGroup = MgmtBaseTestWriter.FindExampleGroup(Context, operation);
                 if (exampleGroup is null || exampleGroup.Examples.Count() == 0)
@@ -359,7 +359,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             var methodName = clientOperation.Name;
 
             BuildParameters(clientOperation, out var operationMappings, out var parameterMappings, out var methodParameters);
-            foreach ((var branch, var operation) in getSortedOperationMappings(clientOperation))
+            foreach ((var branch, var operation) in GetSortedOperationMappings(clientOperation))
             {
                 var exampleGroup = MgmtBaseTestWriter.FindExampleGroup(Context, operation);
                 if (exampleGroup is null || exampleGroup.Examples.Count() == 0)

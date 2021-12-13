@@ -22,7 +22,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             {
                 var codeWriter = new CodeWriter();
                 var collectionTestWriter = new ResourceCollectionTestWriter(codeWriter, resourceCollection, context);
-                if (!collectionTestWriter.CanCreateParentResourceFromExample(context, resourceCollection))
+                if (!collectionTestWriter.CanCreateParentResourceFromExample(resourceCollection))
                 {
                     continue;
                 }
@@ -48,7 +48,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             {
                 var codeWriter = new CodeWriter();
                 var resourceTestWriter = new ResourceTestWriter(codeWriter, resource, context);
-                if (!resourceTestWriter.CanCreateResourceFromExample(context, resource.ResourceCollection))
+                if (!resourceTestWriter.CanCreateResourceFromExample(resource.ResourceCollection))
                 {
                     continue;
                 }
