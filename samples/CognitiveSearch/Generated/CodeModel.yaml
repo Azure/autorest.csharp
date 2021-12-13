@@ -7999,7 +7999,8 @@ schemas: !Schemas
                     description: Parameter group
                 protocol: !Protocols {}
               implementation: Method
-              extensions: {}
+              extensions:
+                x-nullable: false
               language: !Languages 
                 default:
                   name: includeTotalResultCount
@@ -8219,7 +8220,8 @@ schemas: !Schemas
               schema: *ref_19
               groupedBy: *ref_14
               implementation: Method
-              extensions: {}
+              extensions:
+                x-nullable: false
               language: !Languages 
                 default:
                   name: queryType
@@ -8338,7 +8340,8 @@ schemas: !Schemas
               schema: *ref_24
               groupedBy: *ref_14
               implementation: Method
-              extensions: {}
+              extensions:
+                x-nullable: false
               language: !Languages 
                 default:
                   name: searchMode
@@ -8484,7 +8487,8 @@ schemas: !Schemas
               schema: *ref_10
               groupedBy: *ref_29
               implementation: Method
-              extensions: {}
+              extensions:
+                x-nullable: false
               language: !Languages 
                 default:
                   name: useFuzzyMatching
@@ -8724,7 +8728,8 @@ schemas: !Schemas
                     description: Parameter group
                 protocol: !Protocols {}
               implementation: Method
-              extensions: {}
+              extensions:
+                x-nullable: false
               language: !Languages 
                 default:
                   name: autocompleteMode

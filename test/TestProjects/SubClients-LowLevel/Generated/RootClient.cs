@@ -53,12 +53,12 @@ namespace SubClients_LowLevel
 
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
-            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _cachedParameter = cachedParameter;
             _endpoint = endpoint;
         }
 
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> GetCachedParameterAsync(RequestContext context = null)
 #pragma warning restore AZC0002
@@ -67,7 +67,7 @@ namespace SubClients_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetCachedParameterRequest();
+                using HttpMessage message = CreateGetCachedParameterRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -77,7 +77,7 @@ namespace SubClients_LowLevel
             }
         }
 
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
 #pragma warning disable AZC0002
         public virtual Response GetCachedParameter(RequestContext context = null)
 #pragma warning restore AZC0002
@@ -86,7 +86,7 @@ namespace SubClients_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetCachedParameterRequest();
+                using HttpMessage message = CreateGetCachedParameterRequest(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -104,9 +104,9 @@ namespace SubClients_LowLevel
             return Volatile.Read(ref _cachedParameter0) ?? Interlocked.CompareExchange(ref _cachedParameter0, new Parameter(_clientDiagnostics, _pipeline, _keyCredential, _endpoint), null) ?? _cachedParameter0;
         }
 
-        internal HttpMessage CreateGetCachedParameterRequest()
+        internal HttpMessage CreateGetCachedParameterRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();

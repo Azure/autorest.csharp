@@ -64,7 +64,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task PutDateMin() => TestStatus(async (host, pipeline) =>
         {
-            var value = DateTimeOffset.Parse("0001-01-01");
+            var value = DateTimeOffset.Parse("0001-01-01Z");
             return await new DateClient(ClientDiagnostics, pipeline, host).PutMinDateAsync( value);
         });
     }

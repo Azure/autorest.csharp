@@ -3066,6 +3066,8 @@ operationGroups:
           - !Parameter &ref_126
             schema: *ref_124
             implementation: Method
+            extensions:
+              x-nullable: false
             language: !Languages 
               default:
                 name: includeKeys
@@ -3275,6 +3277,8 @@ operationGroups:
           - !Parameter &ref_136
             schema: *ref_124
             implementation: Method
+            extensions:
+              x-nullable: false
             language: !Languages 
               default:
                 name: includeTextDetails
@@ -3933,6 +3937,8 @@ operationGroups:
           - !Parameter &ref_153
             schema: *ref_124
             implementation: Method
+            extensions:
+              x-nullable: false
             language: !Languages 
               default:
                 name: includeTextDetails

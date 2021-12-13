@@ -4,7 +4,7 @@
 ## Configuration
 ```yaml
 use-extension:
-  "@autorest/modelerfour": "4.21.1"
+  "@autorest/modelerfour": "4.22.2"
 modelerfour:
   always-create-content-type-parameter: true
 pipeline:
@@ -18,7 +18,7 @@ output-scope:
 shared-source-folders: $(this-folder)/Generator.Shared;$(this-folder)/Azure.Core.Shared
 ```
 
-```yaml !$(low-level-client)
+```yaml !$(data-plane)
 modelerfour:
   flatten-models: true
   flatten-payloads: true

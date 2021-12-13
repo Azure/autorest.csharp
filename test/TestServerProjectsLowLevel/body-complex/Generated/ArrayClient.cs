@@ -46,12 +46,12 @@ namespace body_complex_LowLevel
 
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
-            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
         }
 
         /// <summary> Get complex types with array property. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -74,7 +74,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetValidRequest();
+                using HttpMessage message = CreateGetValidRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -85,7 +85,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types with array property. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -108,7 +108,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetValidRequest();
+                using HttpMessage message = CreateGetValidRequest(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -120,7 +120,7 @@ namespace body_complex_LowLevel
 
         /// <summary> Put complex types with array property. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -144,7 +144,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutValidRequest(content);
+                using HttpMessage message = CreatePutValidRequest(content, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -156,7 +156,7 @@ namespace body_complex_LowLevel
 
         /// <summary> Put complex types with array property. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -180,7 +180,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutValidRequest(content);
+                using HttpMessage message = CreatePutValidRequest(content, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -191,7 +191,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types with array property which is empty. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -214,7 +214,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetEmptyRequest();
+                using HttpMessage message = CreateGetEmptyRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -225,7 +225,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types with array property which is empty. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -248,7 +248,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetEmptyRequest();
+                using HttpMessage message = CreateGetEmptyRequest(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -260,7 +260,7 @@ namespace body_complex_LowLevel
 
         /// <summary> Put complex types with array property which is empty. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -284,7 +284,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutEmptyRequest(content);
+                using HttpMessage message = CreatePutEmptyRequest(content, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -296,7 +296,7 @@ namespace body_complex_LowLevel
 
         /// <summary> Put complex types with array property which is empty. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -320,7 +320,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutEmptyRequest(content);
+                using HttpMessage message = CreatePutEmptyRequest(content, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -331,7 +331,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types with array property while server doesn&apos;t provide a response payload. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -354,7 +354,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetNotProvidedRequest();
+                using HttpMessage message = CreateGetNotProvidedRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -365,7 +365,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types with array property while server doesn&apos;t provide a response payload. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -388,7 +388,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetNotProvidedRequest();
+                using HttpMessage message = CreateGetNotProvidedRequest(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -398,9 +398,9 @@ namespace body_complex_LowLevel
             }
         }
 
-        internal HttpMessage CreateGetValidRequest()
+        internal HttpMessage CreateGetValidRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -412,9 +412,9 @@ namespace body_complex_LowLevel
             return message;
         }
 
-        internal HttpMessage CreatePutValidRequest(RequestContent content)
+        internal HttpMessage CreatePutValidRequest(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -428,9 +428,9 @@ namespace body_complex_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetEmptyRequest()
+        internal HttpMessage CreateGetEmptyRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -442,9 +442,9 @@ namespace body_complex_LowLevel
             return message;
         }
 
-        internal HttpMessage CreatePutEmptyRequest(RequestContent content)
+        internal HttpMessage CreatePutEmptyRequest(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -458,9 +458,9 @@ namespace body_complex_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetNotProvidedRequest()
+        internal HttpMessage CreateGetNotProvidedRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
