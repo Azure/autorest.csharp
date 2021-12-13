@@ -7,7 +7,7 @@ However a handful of configuration changes are needed to get started.
 2. Add the following key to the readme.md or autorest.md configuration file:
 
 ```yaml
-low-level-client: true
+data-plane: true
 ```
 
 3. Define the authentication in configuration 
