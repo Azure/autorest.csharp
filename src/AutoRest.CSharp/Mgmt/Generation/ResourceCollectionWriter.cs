@@ -135,7 +135,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             if (allPossibleTypes.Count() == 1)
                 validResourceType = GetResourceTypeExpression(allPossibleTypes.First());
             else
-                validResourceType = $"{typeof(ResourceIdentifier)}.RootResourceIdentifier.ResourceType";
+                validResourceType = $"{typeof(ResourceIdentifier)}.Root.ResourceType";
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Gets the valid resource type for this object");
             _writer.Line($"protected override {typeof(Azure.ResourceManager.ResourceType)} ValidResourceType => {validResourceType};");
@@ -291,9 +291,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
         /// <param name="inner">Main logic of the method writer.</param>
         /// <param name="async"></param>
         /// <param name="isOverride"></param>
-        /// <param name="catch404"></param>
         private void WriteCollectionMethodScope(CSharpType returnType, string methodName, IReadOnlyList<Parameter> methodParameters,
-            CodeWriterDelegate inner, bool async, bool isOverride = false, bool catch404 = false)
+            CodeWriterDelegate inner, bool async, bool isOverride = false)
         {
             methodName = CreateMethodName(methodName, async);
 
@@ -315,7 +314,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             using (_writer.Scope())
             {
                 _writer.WriteParameterNullChecks(methodParameters);
-                using (WriteDiagnosticScope(_writer, new Diagnostic($"{_resourceCollection.Type.Name}.{methodName}"), ClientDiagnosticsField, catch404))
+                using (WriteDiagnosticScope(_writer, new Diagnostic($"{_resourceCollection.Type.Name}.{methodName}"), ClientDiagnosticsField))
                 {
                     inner(_writer);
                 }

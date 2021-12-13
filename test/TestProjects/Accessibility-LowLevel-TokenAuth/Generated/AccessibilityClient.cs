@@ -46,12 +46,12 @@ namespace Accessibility_LowLevel_TokenAuth
 
             _clientDiagnostics = new ClientDiagnostics(options);
             _tokenCredential = credential;
-            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { new BearerTokenAuthenticationPolicy(_tokenCredential, AuthorizationScopes) }, new ResponseClassifier());
+            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new BearerTokenAuthenticationPolicy(_tokenCredential, AuthorizationScopes) }, new ResponseClassifier());
             _endpoint = endpoint;
         }
 
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> OperationAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
@@ -60,7 +60,7 @@ namespace Accessibility_LowLevel_TokenAuth
             scope.Start();
             try
             {
-                using HttpMessage message = CreateOperationRequest(content);
+                using HttpMessage message = CreateOperationRequest(content, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -71,7 +71,7 @@ namespace Accessibility_LowLevel_TokenAuth
         }
 
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
 #pragma warning disable AZC0002
         public virtual Response Operation(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
@@ -80,7 +80,7 @@ namespace Accessibility_LowLevel_TokenAuth
             scope.Start();
             try
             {
-                using HttpMessage message = CreateOperationRequest(content);
+                using HttpMessage message = CreateOperationRequest(content, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -91,7 +91,7 @@ namespace Accessibility_LowLevel_TokenAuth
         }
 
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
 #pragma warning disable AZC0002
         internal virtual async Task<Response> OperationInternalAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
@@ -100,7 +100,7 @@ namespace Accessibility_LowLevel_TokenAuth
             scope.Start();
             try
             {
-                using HttpMessage message = CreateOperationInternalRequest(content);
+                using HttpMessage message = CreateOperationInternalRequest(content, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -111,7 +111,7 @@ namespace Accessibility_LowLevel_TokenAuth
         }
 
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
 #pragma warning disable AZC0002
         internal virtual Response OperationInternal(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
@@ -120,7 +120,7 @@ namespace Accessibility_LowLevel_TokenAuth
             scope.Start();
             try
             {
-                using HttpMessage message = CreateOperationInternalRequest(content);
+                using HttpMessage message = CreateOperationInternalRequest(content, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -130,9 +130,9 @@ namespace Accessibility_LowLevel_TokenAuth
             }
         }
 
-        internal HttpMessage CreateOperationRequest(RequestContent content)
+        internal HttpMessage CreateOperationRequest(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -145,9 +145,9 @@ namespace Accessibility_LowLevel_TokenAuth
             return message;
         }
 
-        internal HttpMessage CreateOperationInternalRequest(RequestContent content)
+        internal HttpMessage CreateOperationInternalRequest(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
