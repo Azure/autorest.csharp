@@ -21,6 +21,7 @@ using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using System.Text.Json.Serialization;
 using Azure.Core.Serialization;
+using System.Runtime.InteropServices.WindowsRuntime;
 
 namespace AutoRest.CSharp.MgmtTest.Generation
 {
@@ -137,104 +138,22 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             return false;
         }
 
-        public static bool HasCreateExample(BuildContext<MgmtOutputLibrary> context, ResourceCollection? resourceCollection)
-        {
-            if (resourceCollection is null)
-                return false;
-            return HasExample(context, resourceCollection.CreateOperation);
-        }
-
-        public static bool HasGetExample(BuildContext<MgmtOutputLibrary> context, ResourceCollection? resourceCollection)
-        {
-            if (resourceCollection is null)
-                return false;
-            return HasExample(context, resourceCollection.GetOperation);
-        }
-
-        public bool CanCreateResourceFromExample(ResourceCollection? resourceCollection)
-        {
-            if (!HasCreateExample(Context, resourceCollection))
-            {
-                return false;
-            }
-
-            foreach ((var branch, var operation) in GetSortedOperationMappings(resourceCollection!.CreateOperation!))
-            {
-                CSharpType? resultType = null;
-                if (operation.Operation.IsLongRunning)
-                {
-                    LongRunningOperation lro = Context.Library.GetLongRunningOperation(operation.Operation);
-                    MgmtLongRunningOperation longRunningOperation = AsMgmtOperation(lro);
-                    resultType = longRunningOperation.ResultType;
-                }
-                else
-                {
-                    NonLongRunningOperation nonLongRunningOperation = Context.Library.GetNonLongRunningOperation(operation.Operation);
-                    resultType = nonLongRunningOperation.ResultType;
-                }
-                if (resultType is null)
-                {
-                    return false;
-                }
-                break;  // TODO: Currently only one rest operation is tested
-
-            }
-
-            var parentResources = resourceCollection!.Resource.Parent(Context);
-            if (parentResources.Contains(Context.Library.ResourceGroupExtensions) ||
-                parentResources.Contains(Context.Library.SubscriptionExtensions) ||
-                parentResources.Contains(Context.Library.TenantExtensions))
-            {
-                return true;
-            }
-            foreach (var parentResource in parentResources)
-            {
-                if (parentResource is not null && parentResource is Resource)
-                {
-                    if (CanCreateResourceFromExample(((Resource)parentResource).ResourceCollection))
-                        return true;
-                }
-            }
-            return false;
-        }
-
-        public bool CanCreateParentResourceFromExample(ResourceCollection? resourceCollection)
-        {
-            if (resourceCollection is null)
-                return false;
-            var parentResources = resourceCollection!.Resource.Parent(Context);
-            if (parentResources.Contains(Context.Library.ResourceGroupExtensions) ||
-                parentResources.Contains(Context.Library.SubscriptionExtensions) ||
-                parentResources.Contains(Context.Library.TenantExtensions))
-            {
-                return true;
-            }
-
-            foreach (var parentResource in parentResources)
-            {
-                if (parentResource is not null && parentResource is Resource)
-                {
-                    if (CanCreateResourceFromExample(((Resource)parentResource).ResourceCollection))
-                        return true;
-                }
-            }
-
-            return false;
-        }
-
-        public static ObjectTypeProperty? FindPropertyThroughSerialization(List<string> flattenedNames, JsonObjectSerialization obj)
+        public static ObjectTypeProperty? FindPropertyThroughSerialization(List<string> flattenedNames, JsonSerialization js)
         {
             if (flattenedNames.Count == 0)
             {
                 return null;
             }
-            foreach (JsonPropertySerialization property in obj.Properties)
+            if (js is JsonObjectSerialization obj)
             {
-                if (flattenedNames[0] == property.Name)
+                foreach (JsonPropertySerialization property in obj.Properties)
                 {
-                    if (flattenedNames.Count == 1)
-                        return property.Property;
-                    return FindPropertyThroughSerialization(flattenedNames.Skip(1).ToList(), (JsonObjectSerialization)property.ValueSerialization);
+                    if (flattenedNames[0] == property.Name)
+                    {
+                        if (flattenedNames.Count == 1)
+                            return property.Property;
+                        return FindPropertyThroughSerialization(flattenedNames.Skip(1).ToList(), property.ValueSerialization);
+                    }
                 }
             }
             return null;
@@ -242,10 +161,9 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
         public static ExampleValue? FindPropertyValue(ObjectType ot, ExampleValue ev, ObjectTypeProperty targetProperty)
         {
-            if (ot is SchemaObjectType)
+            if (ot is SchemaObjectType sot)
             {
-                var sot = (SchemaObjectType)ot;
-                var obj = (JsonObjectSerialization)sot.Serializations.Single(x => typeof(JsonSerialization).IsInstanceOfType(x));
+                var obj = (JsonSerialization)sot.Serializations.Single(x => typeof(JsonSerialization).IsInstanceOfType(x));
                 foreach (var exampleProperty in ev.Properties ?? new DictionaryOfExamplValue())
                 {
                     var property = FindPropertyThroughSerialization(exampleProperty.Value.FlattenedNames is not null ? exampleProperty.Value.FlattenedNames.ToList()! : new List<string> { exampleProperty.Key }, obj);
@@ -278,9 +196,9 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             if (sot is SchemaObjectType && Context.Library.SchemaMap.ContainsKey(ev.Schema))
             {
                 var mappedTypeProvider = Context.Library.SchemaMap[ev.Schema];
-                if (mappedTypeProvider is SchemaObjectType)
+                if (mappedTypeProvider is SchemaObjectType mappedSot)
                 {
-                    sot = (SchemaObjectType)mappedTypeProvider;
+                    sot = mappedSot;
                 }
             }
 
@@ -332,42 +250,46 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     if (paramValue is not null)
                     {
                         hasUnconsumedProperties = true;
-                        goto WriteProperties;
+                        break;
                     }
                 }
             }
 
-        WriteProperties:
             if (hasUnconsumedProperties)
-                using (writer.Scope($"", newLine: false))
+                WriteSchemaObjectExampleProperties(writer, sot, ev, variableName, consumedProperties);
+        }
+
+        private void WriteSchemaObjectExampleProperties(CodeWriter writer, ObjectType sot, ExampleValue ev, string variableName, HashSet<ObjectTypeProperty> consumedProperties)
+        {
+            using (writer.Scope($"", newLine: false))
+            {
+                foreach (var objectType in sot.EnumerateHierarchy())
                 {
-                    foreach (var objectType in sot.EnumerateHierarchy())
+                    foreach (var targetProperty in objectType.Properties)
                     {
-                        foreach (var targetProperty in objectType.Properties)
+                        if (consumedProperties.Contains(targetProperty) || targetProperty.IsReadOnly)
+                            continue;
+                        var paramValue = FindPropertyValue(sot, ev, targetProperty!);
+                        if (paramValue is not null)
                         {
-                            if (consumedProperties.Contains(targetProperty) || targetProperty.IsReadOnly)
-                                continue;
-                            var paramValue = FindPropertyValue(sot, ev, targetProperty!);
-                            if (paramValue is not null)
+                            var newVariableName = $"{variableName}.{targetProperty.Declaration.Name}";
+                            if (targetProperty.Declaration.Name == "Tags" && targetProperty.ValueType.Name == "IDictionary")
                             {
-                                var newVariableName = $"{variableName}.{targetProperty.Declaration.Name}";
-                                if (targetProperty.Declaration.Name == "Tags" && targetProperty.ValueType.Name== "IDictionary")
-                                {
-                                    MgmtBaseTestWriter._tagsWriter.Append($"{newVariableName}.ReplaceWith(");
-                                    WriteExampleValue(_tagsWriter, targetProperty.ValueType, paramValue!, newVariableName);
-                                    _tagsWriter.Append($");");
-                                }
-                                else
-                                {
-                                    writer.Append($"{targetProperty.Declaration.Name} = ");
-                                    WriteExampleValue(writer, targetProperty.ValueType, paramValue!, newVariableName);
-                                    writer.Append($", ");
-                                }
-                                consumedProperties.Add(targetProperty);
+                                MgmtBaseTestWriter._tagsWriter.Append($"{newVariableName}.ReplaceWith(");
+                                WriteExampleValue(_tagsWriter, targetProperty.ValueType, paramValue!, newVariableName);
+                                _tagsWriter.Append($");");
                             }
+                            else
+                            {
+                                writer.Append($"{targetProperty.Declaration.Name} = ");
+                                WriteExampleValue(writer, targetProperty.ValueType, paramValue!, newVariableName);
+                                writer.Append($", ");
+                            }
+                            consumedProperties.Add(targetProperty);
                         }
                     }
                 }
+            }
         }
 
         public class DictionaryObjectConverter : JsonConverter<Dictionary<object, object>>
@@ -486,6 +408,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 serializeOptions.Converters.Add(new DictionaryObjectConverter());
                 serializeOptions.Converters.Add(new ArrayConverter());
                 writer.Append($"System.Text.Json.JsonSerializer.Deserialize<object>({JsonSerializer.Serialize(MgmtBaseTestWriter.ConvertToStringDictionary(exampleValue.RawValue!), serializeOptions):L})");
+                // throw new Exception("!!!!!!!!!!!!");
             }
             else if (cst.Name == "ResourceIdentifier" || cst.Name == "ResourceType")
             {
@@ -708,6 +631,93 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 var returnType = WrapResourceDataType(clientOperation.ReturnType, clientOperation.First());
                 return GetResponseType(returnType, async);
             }
+        }
+
+        public string? ParseRequestPath(MgmtTypeProvider tp, string requestPath, ExampleModel exampleModel)
+        {
+            List<string> result = new List<string>();
+            var segements = requestPath.Split('/');
+            if (tp is Resource resource)
+                    {
+                        var resourceTypeSegments = resource.ResourceType.SerializedType.Split('/');
+                        bool inResourceType = false;
+                        int idxInResourceType = 1;
+                        bool odd = true;
+                        foreach (string segment in segements)
+                        {
+                            if (segment == resourceTypeSegments[0])
+                            {
+                                inResourceType = true;
+                            }
+                            if (segment.StartsWith("{") && segment.EndsWith("}"))
+                            {
+                                var v = FindParameterValueByName(exampleModel, segment.Substring(1, segment.Length - 2));
+                                if (v is null)
+                                {
+                                    return null;
+                                }
+                                result.Add(v);
+                            }
+                            else
+                            {
+                                if (inResourceType && !odd)
+                                {
+                                    if (idxInResourceType >= resourceTypeSegments.Length)
+                                    {
+                                        break;
+                                    }
+                                    if (segment.ToLower() != resourceTypeSegments[idxInResourceType++].ToLower())
+                                    {
+                                        break;
+                                    }
+                                }
+                                result.Add(segment);
+                            }
+                            odd = !odd;
+                        }
+                        return String.Join("/", result.ToArray());
+                    }
+            int maxSegment = 0;
+            if (tp is ResourceGroupExtensions)
+            {
+                maxSegment = 5;
+            }
+            else if (tp is SubscriptionExtensions)
+            {
+                maxSegment = 3;
+            }
+            int i = 0;
+            foreach (string segment in segements)
+            {
+                if (segment.StartsWith("{") && segment.EndsWith("}"))
+                {
+                    var v = FindParameterValueByName(exampleModel, segment.Substring(1, segment.Length - 2));
+                    if (v is null)
+                    {
+                         return null;
+                    }
+                    result.Add(v);
+                }
+                else
+                {
+                    result.Add(segment);
+                }
+                if (++i >= maxSegment)
+                    break;
+            }
+            return String.Join("/", result.ToArray());
+        }
+
+        public string? FindParameterValueByName(ExampleModel exampleModel, string parameterName)
+        {
+            foreach (var parameterValue in exampleModel.ClientParameters.Concat(exampleModel.MethodParameters))
+            {
+                if ((parameterValue.Parameter.Language.Default.SerializedName ?? parameterValue.Parameter.Language.Default.Name) == parameterName)
+                {
+                    return parameterValue.ExampleValue.RawValue?.ToString();
+                }
+            }
+            return null;
         }
     }
 }

@@ -5,13 +5,14 @@
 
 #nullable disable
 
+using System;
 using System.Net;
 using System.Threading.Tasks;
 using Azure.Core.TestFramework;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
 using Azure.ResourceManager.Resources.Models;
 using Azure.ResourceManager.TestFramework;
-using MgmtKeyvault;
 using MgmtKeyvault.Models;
 using NUnit.Framework;
 
@@ -23,14 +24,7 @@ namespace MgmtKeyvault.Tests.Mock
         public VaultCollectionMockTests(bool isAsync) : base(isAsync, RecordedTestMode.Record)
         {
             ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyErrors) => true;
-            System.Environment.SetEnvironmentVariable("RESOURCE_MANAGER_URL", $"https://localhost:8443");
-        }
-
-        private async Task<MgmtKeyvault.VaultCollection> GetVaultCollectionAsync(string resourceGroupName)
-        {
-            ResourceGroup resourceGroup = await TestHelper.CreateResourceGroupAsync(resourceGroupName, GetArmClient());
-            VaultCollection vaultCollection = resourceGroup.GetVaults();
-            return vaultCollection;
+            Environment.SetEnvironmentVariable("RESOURCE_MANAGER_URL", $"https://localhost:8443");
         }
 
         [RecordedTest]
@@ -38,8 +32,16 @@ namespace MgmtKeyvault.Tests.Mock
         public async Task CreateOrUpdateAsync()
         {
             // Example: Create a new vault or update an existing vault
-            var collection = await GetVaultCollectionAsync("sample-resource-group");
-            await TestHelper.CreateOrUpdateExampleInstanceAsync(collection, "sample-vault");
+            var collection = GetArmClient().GetResourceGroup(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group")).GetVaults();
+            string vaultName = "sample-vault";
+            MgmtKeyvault.Models.VaultCreateOrUpdateParameters parameters = new MgmtKeyvault.Models.VaultCreateOrUpdateParameters("westus", new MgmtKeyvault.Models.VaultProperties(Guid.Parse("00000000-0000-0000-0000-000000000000"), new MgmtKeyvault.Models.Sku(new MgmtKeyvault.Models.SkuFamily("A"), MgmtKeyvault.Models.SkuName.Standard))
+            {
+                EnabledForDeployment = true,
+                EnabledForDiskEncryption = true,
+                EnabledForTemplateDeployment = true,
+            });
+
+            await collection.CreateOrUpdateAsync(vaultName, parameters);
         }
 
         [RecordedTest]
@@ -47,9 +49,9 @@ namespace MgmtKeyvault.Tests.Mock
         public async Task CreateOrUpdateAsync2()
         {
             // Example: Create or update a vault with network acls
-            var collection = await GetVaultCollectionAsync("sample-resource-group");
+            var collection = GetArmClient().GetResourceGroup(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group")).GetVaults();
             string vaultName = "sample-vault";
-            MgmtKeyvault.Models.VaultCreateOrUpdateParameters parameters = new MgmtKeyvault.Models.VaultCreateOrUpdateParameters("westus", new MgmtKeyvault.Models.VaultProperties(System.Guid.Parse("00000000-0000-0000-0000-000000000000"), new MgmtKeyvault.Models.Sku(new MgmtKeyvault.Models.SkuFamily("A"), MgmtKeyvault.Models.SkuName.Standard))
+            MgmtKeyvault.Models.VaultCreateOrUpdateParameters parameters = new MgmtKeyvault.Models.VaultCreateOrUpdateParameters("westus", new MgmtKeyvault.Models.VaultProperties(Guid.Parse("00000000-0000-0000-0000-000000000000"), new MgmtKeyvault.Models.Sku(new MgmtKeyvault.Models.SkuFamily("A"), MgmtKeyvault.Models.SkuName.Standard))
             {
                 EnabledForDeployment = true,
                 EnabledForDiskEncryption = true,
@@ -69,17 +71,21 @@ namespace MgmtKeyvault.Tests.Mock
         public async Task GetAsync()
         {
             // Example: Retrieve a vault
-            var collection = await GetVaultCollectionAsync("sample-resource-group");
-            await TestHelper.GetExampleInstanceAsync(collection, "sample-vault");
+            var collection = GetArmClient().GetResourceGroup(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group")).GetVaults();
+            string vaultName = "sample-vault";
+
+            await collection.GetAsync(vaultName);
         }
 
         [RecordedTest]
         [Ignore("Generated TestCase")]
-        public async Task GetAllAsync()
+        public void GetAllAsync()
         {
             // Example: List vaults in the specified resource group
-            var collection = await GetVaultCollectionAsync("sample-group");
-            TestHelper.GetAllExampleInstanceAsync(collection).AsPages();
+            var collection = GetArmClient().GetResourceGroup(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group")).GetVaults();
+            int? top = 1;
+
+            collection.GetAllAsync(top);
         }
     }
 }

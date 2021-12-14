@@ -70,21 +70,26 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             public TestModelerConfiguration(JsonElement? ignoreReason = default)
             {
-                IgnoreReason = ignoreReason is null ? null : ignoreReason.ToString();
+                IgnoreReason = (ignoreReason is null || ignoreReason.Value.ValueKind == JsonValueKind.Null) ? null : ignoreReason.ToString();
             }
 
-            internal static TestModelerConfiguration LoadConfiguration(JsonElement root)
+            internal static TestModelerConfiguration? LoadConfiguration(JsonElement root)
             {
                 if (root.ValueKind != JsonValueKind.Object)
-                    return new TestModelerConfiguration();
+                    return null;
 
                 root.TryGetProperty(nameof(IgnoreReason), out var ignoreReason);
 
                 return new TestModelerConfiguration(ignoreReason: ignoreReason);
             }
 
-            internal static TestModelerConfiguration GetConfiguration(IPluginCommunication autoRest)
+            internal static TestModelerConfiguration? GetConfiguration(IPluginCommunication autoRest)
             {
+                var testModeler = autoRest.GetValue<JsonElement?>("testmodeler").GetAwaiter().GetResult();
+                if (testModeler is null || testModeler.Value.ValueKind == JsonValueKind.Null)
+                {
+                    return null;
+                }
                 return new TestModelerConfiguration(
                     ignoreReason: autoRest.GetValue<JsonElement?>(string.Format(TestModelerOptionsFormat, "ignore-reason")).GetAwaiter().GetResult());
             }
@@ -283,7 +288,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 armCore: isArmCore,
                 resourceModelRequiresType: resourceModelRequiresType,
                 resourceModelRequiresName: resourceModelRequiresName,
-                singletonRequiresKeyword: singletonRequiresKeyword);
+                singletonRequiresKeyword: singletonRequiresKeyword,
+                testmodeler: TestModelerConfiguration.LoadConfiguration(root));
         }
 
         private static bool IsValidJsonElement(JsonElement? element)

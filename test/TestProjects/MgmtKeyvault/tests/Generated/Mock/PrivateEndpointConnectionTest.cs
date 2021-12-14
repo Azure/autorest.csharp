@@ -5,14 +5,16 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 using Azure.Core.TestFramework;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
 using Azure.ResourceManager.Resources.Models;
 using Azure.ResourceManager.TestFramework;
-using MgmtKeyvault;
+using MgmtKeyvault.Models;
 using NUnit.Framework;
 
 namespace MgmtKeyvault.Tests.Mock
@@ -23,24 +25,7 @@ namespace MgmtKeyvault.Tests.Mock
         public PrivateEndpointConnectionMockTests(bool isAsync) : base(isAsync, RecordedTestMode.Record)
         {
             ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyErrors) => true;
-            System.Environment.SetEnvironmentVariable("RESOURCE_MANAGER_URL", $"https://localhost:8443");
-        }
-
-        private async Task<MgmtKeyvault.PrivateEndpointConnectionCollection> GetPrivateEndpointConnectionCollectionAsync(string resourceGroupName, string vaultName)
-        {
-            ResourceGroup resourceGroup = await TestHelper.CreateResourceGroupAsync(resourceGroupName, GetArmClient());
-            VaultCollection vaultCollection = resourceGroup.GetVaults();
-            var vaultOperation = await TestHelper.CreateOrUpdateExampleInstanceAsync(vaultCollection, vaultName);
-            Vault vault = vaultOperation.Value;
-            PrivateEndpointConnectionCollection privateEndpointConnectionCollection = vault.GetPrivateEndpointConnections();
-            return privateEndpointConnectionCollection;
-        }
-
-        private async Task<MgmtKeyvault.PrivateEndpointConnection> GetPrivateEndpointConnectionAsync()
-        {
-            var collection = await GetPrivateEndpointConnectionCollectionAsync("sample-group", "sample-vault");
-            var createOperation = await TestHelper.CreateOrUpdateExampleInstanceAsync(collection, "sample-pec");
-            return createOperation.Value;
+            Environment.SetEnvironmentVariable("RESOURCE_MANAGER_URL", $"https://localhost:8443");
         }
 
         [RecordedTest]
@@ -48,7 +33,7 @@ namespace MgmtKeyvault.Tests.Mock
         public async Task GetAsync()
         {
             // Example: KeyVaultGetPrivateEndpointConnection
-            var privateEndpointConnection = await GetPrivateEndpointConnectionAsync();
+            var privateEndpointConnection = GetArmClient().GetPrivateEndpointConnection(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/vaults/sample-vault/privateEndpointConnections/sample-pec"));
 
             await privateEndpointConnection.GetAsync();
         }
@@ -58,7 +43,7 @@ namespace MgmtKeyvault.Tests.Mock
         public async Task DeleteAsync()
         {
             // Example: KeyVaultDeletePrivateEndpointConnection
-            var privateEndpointConnection = await GetPrivateEndpointConnectionAsync();
+            var privateEndpointConnection = GetArmClient().GetPrivateEndpointConnection(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/vaults/sample-vault/privateEndpointConnections/sample-pec"));
 
             await privateEndpointConnection.DeleteAsync();
         }

@@ -22,15 +22,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             {
                 var codeWriter = new CodeWriter();
                 var collectionTestWriter = new ResourceCollectionTestWriter(codeWriter, resourceCollection, context);
-                if (!collectionTestWriter.CanCreateParentResourceFromExample(resourceCollection))
-                {
-                    continue;
-                }
-                if (!MgmtBaseTestWriter.HasCreateExample(context, resourceCollection)
-                    && !MgmtBaseTestWriter.HasGetExample(context, resourceCollection))
-                {
-                    continue;
-                }
                 collectionTestWriter.WriteCollectionTest();
 
                 project.AddGeneratedFile($"Mock/{resourceCollection.Type.Name}Test.cs", codeWriter.ToString());
@@ -48,11 +39,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             {
                 var codeWriter = new CodeWriter();
                 var resourceTestWriter = new ResourceTestWriter(codeWriter, resource, context);
-                if (!resourceTestWriter.CanCreateResourceFromExample(resource.ResourceCollection))
-                {
-                    continue;
-                }
-
                 resourceTestWriter.WriteCollectionTest();
 
                 project.AddGeneratedFile($"Mock/{resource.Type.Name}Test.cs", codeWriter.ToString());

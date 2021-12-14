@@ -5,13 +5,16 @@
 
 #nullable disable
 
+using System;
 using System.Net;
 using System.Threading.Tasks;
 using Azure.Core.TestFramework;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
 using Azure.ResourceManager.Resources.Models;
 using Azure.ResourceManager.TestFramework;
 using MgmtKeyvault;
+using MgmtKeyvault.Models;
 using NUnit.Framework;
 
 namespace MgmtKeyvault.Tests.Mock
@@ -22,14 +25,7 @@ namespace MgmtKeyvault.Tests.Mock
         public ManagedHsmCollectionMockTests(bool isAsync) : base(isAsync, RecordedTestMode.Record)
         {
             ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyErrors) => true;
-            System.Environment.SetEnvironmentVariable("RESOURCE_MANAGER_URL", $"https://localhost:8443");
-        }
-
-        private async Task<MgmtKeyvault.ManagedHsmCollection> GetManagedHsmCollectionAsync(string resourceGroupName)
-        {
-            ResourceGroup resourceGroup = await TestHelper.CreateResourceGroupAsync(resourceGroupName, GetArmClient());
-            ManagedHsmCollection managedHsmCollection = resourceGroup.GetManagedHsms();
-            return managedHsmCollection;
+            Environment.SetEnvironmentVariable("RESOURCE_MANAGER_URL", $"https://localhost:8443");
         }
 
         [RecordedTest]
@@ -37,8 +33,21 @@ namespace MgmtKeyvault.Tests.Mock
         public async Task CreateOrUpdateAsync()
         {
             // Example: Create a new managed HSM Pool or update an existing managed HSM Pool
-            var collection = await GetManagedHsmCollectionAsync("hsm-group");
-            await TestHelper.CreateOrUpdateExampleInstanceAsync(collection, "hsm1");
+            var collection = GetArmClient().GetResourceGroup(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hsm-group")).GetManagedHsms();
+            string name = "hsm1";
+            MgmtKeyvault.ManagedHsmData parameters = new MgmtKeyvault.ManagedHsmData("westus")
+            {
+                Properties = new MgmtKeyvault.Models.ManagedHsmProperties()
+                {
+                    TenantId = Guid.Parse("00000000-0000-0000-0000-000000000000"),
+                    EnableSoftDelete = true,
+                    SoftDeleteRetentionInDays = 90,
+                    EnablePurgeProtection = true,
+                },
+                Sku = new MgmtKeyvault.Models.ManagedHsmSku(new MgmtKeyvault.Models.ManagedHsmSkuFamily("B"), MgmtKeyvault.Models.ManagedHsmSkuName.StandardB1),
+            };
+            parameters.Tags.ReplaceWith(new System.Collections.Generic.Dictionary<string, string>() { { "Dept", "hsm" }, { "Environment", "dogfood" }, });
+            await collection.CreateOrUpdateAsync(name, parameters);
         }
 
         [RecordedTest]
@@ -46,17 +55,21 @@ namespace MgmtKeyvault.Tests.Mock
         public async Task GetAsync()
         {
             // Example: Retrieve a managed HSM Pool
-            var collection = await GetManagedHsmCollectionAsync("hsm-group");
-            await TestHelper.GetExampleInstanceAsync(collection, "hsm1");
+            var collection = GetArmClient().GetResourceGroup(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hsm-group")).GetManagedHsms();
+            string name = "hsm1";
+
+            await collection.GetAsync(name);
         }
 
         [RecordedTest]
         [Ignore("Generated TestCase")]
-        public async Task GetAllAsync()
+        public void GetAllAsync()
         {
             // Example: List managed HSM Pools in a resource group
-            var collection = await GetManagedHsmCollectionAsync("hsm-group");
-            TestHelper.GetAllExampleInstanceAsync(collection).AsPages();
+            var collection = GetArmClient().GetResourceGroup(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hsm-group")).GetManagedHsms();
+            int? top = null;
+
+            collection.GetAllAsync(top);
         }
     }
 }

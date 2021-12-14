@@ -26,11 +26,6 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
         public void WriteMockExtension()
         {
-            _writer.UseNamespace("System");
-            _writer.UseNamespace("System.Threading.Tasks");
-            _writer.UseNamespace($"{_context.DefaultNamespace}.Models");
-            _writer.UseNamespace("Azure.ResourceManager.Resources");
-            _writer.UseNamespace("Azure.ResourceManager.Resources.Models");
 
             using (_writer.Namespace(TestNamespace))
             {
@@ -38,44 +33,9 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 _writer.Append($"public static partial class {TypeNameOfThis:D}");
                 using (_writer.Scope())
                 {
-                    foreach (var resourceCollection in _context.Library.ResourceCollections)
-                    {
-                        var collectionWriter = new ResourceCollectionTestWriter(_writer, resourceCollection, _context);
-                        if (resourceCollection.CreateOperation is not null)
-                        {
-                            collectionWriter.WriteExampleInstanceMethod(resourceCollection.CreateOperation, true);
-                        }
-                        if (resourceCollection.GetOperation is not null)
-                        {
-                            collectionWriter.WriteExampleInstanceMethod(resourceCollection.GetOperation, true);
-                        }
-                        foreach (var clientOperation in resourceCollection.ClientOperations)
-                        {
-                            collectionWriter.WriteExampleInstanceMethod(clientOperation, true);
-                        }
-                    }
-
-                    WriteCreateResourceGroupMethod();
                     WriteReplaceWith();
                 }
             }
-        }
-
-        public void WriteCreateResourceGroupMethod()
-        {
-            _writer.UseNamespace("Azure.ResourceManager");
-            using (_writer.Scope($"public static async Task<{typeof(ResourceGroup)}> CreateResourceGroupAsync(string resourceGroupName, {typeof(ArmClient)} client)"))
-            {
-                _writer.Line($"var defaultSubscription = await client.GetDefaultSubscriptionAsync();");
-                using (_writer.Scope($"var rgOp = await defaultSubscription.GetResourceGroups().CreateOrUpdateAsync", start: "(", end: ")", newLine: false))
-                {
-                    _writer.Line($"resourceGroupName,");
-                    _writer.Line($"new ResourceGroupData(defaultSubscription.ToString()) {{ Tags = {{ {{ \"test\", \"env\" }} }} }}");
-                }
-                _writer.Line($";");
-                _writer.Append($"return rgOp.Value;");
-            }
-            _writer.Line();
         }
 
         public void WriteReplaceWith()

@@ -15,6 +15,7 @@ using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Utilities;
+using Azure.ResourceManager;
 
 namespace AutoRest.CSharp.MgmtTest.Generation
 {
@@ -29,30 +30,14 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
         protected string TestBaseName => $"MockTestBase";
 
-        protected ResourceCollectionTestWriter? _collectionTestWriter;
-
         public ResourceTestWriter(CodeWriter writer, Resource resource, BuildContext<MgmtOutputLibrary> context): base(writer, resource, context)
         {
             _resource = resource;
-            if (!resource.IsSingleton)
-            {
-                _collectionTestWriter = new ResourceCollectionTestWriter(writer, resource.ResourceCollection!, context);
-                if (CanCreateResourceFromExample(resource.ResourceCollection!))
-                {
-                    _collectionTestWriter.EnsureCollectionInitiateParameters();
-                }
-            }
         }
 
         public void WriteCollectionTest()
         {
             WriteUsings(_writer);
-            _writer.UseNamespace("System.Net");
-            _writer.UseNamespace("System.Collections.Generic");
-            _writer.UseNamespace("Azure.Core.TestFramework");
-            _writer.UseNamespace("Azure.ResourceManager.TestFramework");
-            _writer.UseNamespace("Azure.ResourceManager.Resources");
-            _writer.UseNamespace("Azure.ResourceManager.Resources.Models");
 
             using (_writer.Namespace(TestNamespace))
             {
@@ -62,22 +47,32 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 using (_writer.Scope())
                 {
                     WriteTesterCtors();
-                    if (!_resource.IsSingleton)
-                    {
-                        _collectionTestWriter!.WriteCreateCollectionMethod(true);
-                    }
-                    WriteCreateResourceMethod(true);
                     WriteMethodTestIfExist(_resource);
 
                     foreach (var childResource in This.ChildResources)
                     {
                         _writer.Line();
-                        if (childResource.IsSingleton) {
+                        if (childResource.IsSingleton)
+                        {
                             WriteMethodTestIfExist(childResource);
                         }
                     }
                 }
             }
+        }
+
+        protected override void WriteUsings(CodeWriter writer)
+        {
+            base.WriteUsings(writer);
+            writer.UseNamespace("System");
+            writer.UseNamespace("System.Threading.Tasks");
+            writer.UseNamespace("System.Net");
+            writer.UseNamespace("System.Collections.Generic");
+            writer.UseNamespace("Azure.Core.TestFramework");
+            writer.UseNamespace("Azure.ResourceManager.TestFramework");
+            writer.UseNamespace("Azure.ResourceManager.Resources");
+            writer.UseNamespace("Azure.ResourceManager.Resources.Models");
+            writer.UseNamespace($"{Context.DefaultNamespace}.Models");
         }
 
         protected void WriteMethodTestIfExist(Resource resource) {
@@ -114,45 +109,10 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             }
         }
 
-        protected void WriteCreateResourceMethod(bool async)
+        public void WriteGetResource(Resource resource, string requestPath, ExampleModel exampleModel)
         {
-            _writer.Line();
-            using (_writer.Scope($"private {GetAsyncKeyword(async)} {_resource.Type.WrapAsync(async)} Get{_resource.Type.Name}{GetAsyncSuffix(async)}()"))
-            {
-                if (CanCreateResourceFromExample(_resource.ResourceCollection)) {
-                    foreach ((var branch, var operation) in GetSortedOperationMappings(_resource.ResourceCollection!.CreateOperation!))
-                    {
-                        ExampleGroup exampleGroup = MgmtBaseTestWriter.FindExampleGroup(Context, operation)!;
-                        MgmtClientOperation CreateOperation = HasGetExample(Context, _resource.ResourceCollection!) ? _resource.ResourceCollection!.GetOperation! : _resource.ResourceCollection!.CreateOperation!;
-                        _collectionTestWriter!.WriteGetCollection(_resource.ResourceCollection!.CreateOperation!, exampleGroup.Examples.First(), async);
-                        _writer.Append($"var createOperation = ");
-                        _collectionTestWriter!.WriteInvokeExampleInstanceMethod(_resource.ResourceCollection!.CreateOperation!, async, "CreateOrUpdate", exampleGroup.Examples.First());
-                        var respType = GenResponseType(_resource.ResourceCollection!.CreateOperation!, true, "CreateOrUpdate");
-                        var resultTypeDataName = _resource.ResourceCollection!.CreateOperation!.IsLongRunningOperation() ? ((Mgmt.Output.MgmtLongRunningOperation)respType.Arguments[0].Implementation).ResultType?.Name : ((Mgmt.Output.NonLongRunningOperation)respType.Arguments[0].Implementation).ResultDataType?.Name;
-                        if (resultTypeDataName != $"{_resource.Type.Name}Data" && _resource.ResourceCollection!.GetOperation!.ReturnType?.Name == $"{_resource.Type.Name}Data") {
-                            _writer.Line($"return collection.Get(createOperation.Value.Name);");
-                        }
-                        else {
-                            _writer.Line($"return createOperation.Value;");
-                        }
-                        break;
-                    }
-                }
-                else
-                {
-                    throw new Exception("// TODO: create/get resource when there is no create example");
-                }
-            }
-        }
-
-        public void WriteGetResource(Resource resource, bool async)
-        {
-            var resourceVariableName = useVariableName(_resource.Type.Name.FirstCharToLowerCase());
-            _writer.Line($"var {resourceVariableName} = {GetAwait(async)} Get{_resource.Type.Name}{GetAsyncSuffix(async)}();");
-            if (resource != _resource) {
-                var childResourceVariableName = useVariableName(resource.Type.Name.FirstCharToLowerCase());
-                _writer.Line($"var {childResourceVariableName} = {resourceVariableName}.Get{resource.Type.Name}();");
-            }
+            var resourceVariableName = useVariableName(resource.Type.Name.FirstCharToLowerCase());
+            _writer.Line($"var {resourceVariableName} = GetArmClient().Get{resource.Type.Name}(new {typeof(ResourceIdentifier)}({requestPath:L}));");
         }
 
         protected override CSharpType? WrapResourceDataType(CSharpType? type, MgmtRestOperation operation)
@@ -174,6 +134,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             var methodName = clientOperation.Name;
 
             BuildParameters(clientOperation, out var operationMappings, out var parameterMappings, out var methodParameters);
+            int exampleIdx = 0;
             foreach ((var branch, var operation) in GetSortedOperationMappings(clientOperation))
             {
                 var exampleGroup = MgmtBaseTestWriter.FindExampleGroup(Context, operation);
@@ -181,9 +142,13 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     return;
                 var testMethodName = CreateMethodName(methodName, async);
 
-                int exampleIdx = 0;
                 foreach (var exampleModel in exampleGroup?.Examples ?? Enumerable.Empty<ExampleModel>())
                 {
+                    var realRequestPath = ParseRequestPath(resource, operation.RequestPath.SerializedPath, exampleModel);
+                    if (realRequestPath is null)
+                    {
+                        continue;
+                    }
                     WriteTestDecorator();
                     _writer.Append($"public {GetAsyncKeyword(async)} {MgmtBaseTestWriter.GetTaskOrVoid(async)} {(resource == _resource ? "" : resource.Type.Name)}{testMethodName}{(exampleIdx > 0 ? (exampleIdx + 1).ToString() : "")}()");
 
@@ -191,9 +156,9 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     {
                         _writer.LineRaw($"// Example: {exampleModel.Name}");
                         clearVariableNames();
-                        WriteGetResource(resource, async);
+                        WriteGetResource(resource, realRequestPath, exampleModel);
 
-                        List<string> paramNames = this._collectionTestWriter!.WriteOperationParameters(methodParameters, Enumerable.Empty<Parameter> (), exampleModel);
+                        List<string> paramNames = WriteOperationParameters(methodParameters, Enumerable.Empty<Parameter> (), exampleModel);
 
                         _writer.Line();
                         _writer.Append($"{GetAwait(async && !clientOperation.IsPagingOperation(Context))} {resource.Type.Name.FirstCharToLowerCase()}.{testMethodName}(");
@@ -207,7 +172,6 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     _writer.Line();
                     exampleIdx++;
                 }
-                break;
             }
         }
     }

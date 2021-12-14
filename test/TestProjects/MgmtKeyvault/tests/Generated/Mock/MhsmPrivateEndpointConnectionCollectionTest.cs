@@ -5,13 +5,16 @@
 
 #nullable disable
 
+using System;
 using System.Net;
 using System.Threading.Tasks;
 using Azure.Core.TestFramework;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
 using Azure.ResourceManager.Resources.Models;
 using Azure.ResourceManager.TestFramework;
 using MgmtKeyvault;
+using MgmtKeyvault.Models;
 using NUnit.Framework;
 
 namespace MgmtKeyvault.Tests.Mock
@@ -22,17 +25,7 @@ namespace MgmtKeyvault.Tests.Mock
         public MhsmPrivateEndpointConnectionCollectionMockTests(bool isAsync) : base(isAsync, RecordedTestMode.Record)
         {
             ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyErrors) => true;
-            System.Environment.SetEnvironmentVariable("RESOURCE_MANAGER_URL", $"https://localhost:8443");
-        }
-
-        private async Task<MgmtKeyvault.MhsmPrivateEndpointConnectionCollection> GetMhsmPrivateEndpointConnectionCollectionAsync(string resourceGroupName, string name)
-        {
-            ResourceGroup resourceGroup = await TestHelper.CreateResourceGroupAsync(resourceGroupName, GetArmClient());
-            ManagedHsmCollection managedHsmCollection = resourceGroup.GetManagedHsms();
-            var managedHsmOperation = await TestHelper.CreateOrUpdateExampleInstanceAsync(managedHsmCollection, name);
-            ManagedHsm managedHsm = managedHsmOperation.Value;
-            MhsmPrivateEndpointConnectionCollection mhsmPrivateEndpointConnectionCollection = managedHsm.GetMhsmPrivateEndpointConnections();
-            return mhsmPrivateEndpointConnectionCollection;
+            Environment.SetEnvironmentVariable("RESOURCE_MANAGER_URL", $"https://localhost:8443");
         }
 
         [RecordedTest]
@@ -40,8 +33,18 @@ namespace MgmtKeyvault.Tests.Mock
         public async Task CreateOrUpdateAsync()
         {
             // Example: ManagedHsmPutPrivateEndpointConnection
-            var collection = await GetMhsmPrivateEndpointConnectionCollectionAsync("sample-group", "sample-mhsm");
-            await TestHelper.CreateOrUpdateExampleInstanceAsync(collection, "sample-pec");
+            var collection = GetArmClient().GetManagedHsm(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/managedHSMs/sample-mhsm")).GetMhsmPrivateEndpointConnections();
+            string privateEndpointConnectionName = "sample-pec";
+            MgmtKeyvault.MhsmPrivateEndpointConnectionData properties = new MgmtKeyvault.MhsmPrivateEndpointConnectionData("westus")
+            {
+                PrivateLinkServiceConnectionState = new MgmtKeyvault.Models.MhsmPrivateLinkServiceConnectionState()
+                {
+                    Status = new MgmtKeyvault.Models.PrivateEndpointServiceConnectionStatus("Approved"),
+                    Description = "My name is Joe and I'm approving this.",
+                },
+            };
+
+            await collection.CreateOrUpdateAsync(privateEndpointConnectionName, properties);
         }
 
         [RecordedTest]
@@ -49,17 +52,20 @@ namespace MgmtKeyvault.Tests.Mock
         public async Task GetAsync()
         {
             // Example: ManagedHsmGetPrivateEndpointConnection
-            var collection = await GetMhsmPrivateEndpointConnectionCollectionAsync("sample-group", "sample-mhsm");
-            await TestHelper.GetExampleInstanceAsync(collection, "sample-pec");
+            var collection = GetArmClient().GetManagedHsm(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/managedHSMs/sample-mhsm")).GetMhsmPrivateEndpointConnections();
+            string privateEndpointConnectionName = "sample-pec";
+
+            await collection.GetAsync(privateEndpointConnectionName);
         }
 
         [RecordedTest]
         [Ignore("Generated TestCase")]
-        public async Task GetAllAsync()
+        public void GetAllAsync()
         {
             // Example: List managed HSM Pools in a subscription
-            var collection = await GetMhsmPrivateEndpointConnectionCollectionAsync("sample-group", "sample-mhsm");
-            TestHelper.GetAllExampleInstanceAsync(collection).AsPages();
+            var collection = GetArmClient().GetManagedHsm(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/managedHSMs/sample-mhsm")).GetMhsmPrivateEndpointConnections();
+
+            collection.GetAllAsync();
         }
     }
 }
