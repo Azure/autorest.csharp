@@ -304,11 +304,11 @@ namespace RequestContextAllOptional_LowLevel
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/test1", false);
+            uri.AppendQuery("id", id, true);
             if (top != null)
             {
                 uri.AppendQuery("$top", top.Value, true);
             }
-            uri.AppendQuery("id", id, true);
             uri.AppendQuery("skip", skip, true);
             if (status != null)
             {
