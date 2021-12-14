@@ -18,6 +18,8 @@ namespace AutoRest.CSharp.Utilities
         static StringExtensions()
         {
             Vocabularies.Default.AddUncountable("data");
+            // "S".Singularize() throws exception, github issue link: https://github.com/Humanizr/Humanizer/issues/1154
+            Vocabularies.Default.AddIrregular("S", "S");
         }
 
         public static bool IsNullOrEmpty(this string? text) => String.IsNullOrEmpty(text);
@@ -303,7 +305,7 @@ namespace AutoRest.CSharp.Utilities
         {
             var words = single.SplitByCamelCase();
             var lastWord = words.LastOrDefault();
-            var lastWordPlural = lastWord.Pluralize(inputIsKnownToBeSingular);
+            var lastWordPlural = lastWord.ToPlural(inputIsKnownToBeSingular);
             if (inputIsKnownToBeSingular || lastWord != lastWordPlural)
             {
                 return single.ReplaceLast(lastWord, lastWordPlural);
@@ -327,7 +329,7 @@ namespace AutoRest.CSharp.Utilities
         {
             var words = plural.SplitByCamelCase();
             var lastWord = words.LastOrDefault();
-            var lastWordSingular = lastWord.Singularize(inputIsKnownToBePlural);
+            var lastWordSingular = lastWord.ToSingular(inputIsKnownToBePlural);
             if (inputIsKnownToBePlural || lastWord != lastWordSingular)
             {
                 return plural.ReplaceLast(lastWord, lastWordSingular);

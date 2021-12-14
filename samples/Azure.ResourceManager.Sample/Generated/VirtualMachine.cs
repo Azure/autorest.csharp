@@ -1224,13 +1224,13 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        #region VirtualMachineExtension
+        #region VirtualMachineExtensions
 
         /// <summary> Gets a collection of VirtualMachineExtensions in the VirtualMachine. </summary>
         /// <returns> An object representing collection of VirtualMachineExtensions and their operations over a VirtualMachine. </returns>
-        public VirtualMachineExtensionCollection GetVirtualMachineExtensions()
+        public VirtualMachineExtensionsCollection GetVirtualMachineExtensions()
         {
-            return new VirtualMachineExtensionCollection(this);
+            return new VirtualMachineExtensionsCollection(this);
         }
         #endregion
     }

@@ -18,9 +18,9 @@ using MgmtMultipleParentResource;
 namespace MgmtMultipleParentResource.Models
 {
     /// <summary> The operation to create or update the VMSS VM run command. </summary>
-    public partial class ChildCreateOrUpdateOperation : Operation<ParentSubParentChild>, IOperationSource<ParentSubParentChild>
+    public partial class ChildCreateOrUpdateOperation : Operation<ParentsSubParentChildren>, IOperationSource<ParentsSubParentChildren>
     {
-        private readonly OperationInternals<ParentSubParentChild> _operation;
+        private readonly OperationInternals<ParentsSubParentChildren> _operation;
 
         private readonly ArmResource _operationBase;
 
@@ -31,7 +31,7 @@ namespace MgmtMultipleParentResource.Models
 
         internal ChildCreateOrUpdateOperation(ArmResource operationsBase, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new OperationInternals<ParentSubParentChild>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "ChildCreateOrUpdateOperation");
+            _operation = new OperationInternals<ParentsSubParentChildren>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "ChildCreateOrUpdateOperation");
             _operationBase = operationsBase;
         }
 
@@ -39,7 +39,7 @@ namespace MgmtMultipleParentResource.Models
         public override string Id => _operation.Id;
 
         /// <inheritdoc />
-        public override ParentSubParentChild Value => _operation.Value;
+        public override ParentsSubParentChildren Value => _operation.Value;
 
         /// <inheritdoc />
         public override bool HasCompleted => _operation.HasCompleted;
@@ -57,21 +57,21 @@ namespace MgmtMultipleParentResource.Models
         public override ValueTask<Response> UpdateStatusAsync(CancellationToken cancellationToken = default) => _operation.UpdateStatusAsync(cancellationToken);
 
         /// <inheritdoc />
-        public override ValueTask<Response<ParentSubParentChild>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(cancellationToken);
+        public override ValueTask<Response<ParentsSubParentChildren>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(cancellationToken);
 
         /// <inheritdoc />
-        public override ValueTask<Response<ParentSubParentChild>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(pollingInterval, cancellationToken);
+        public override ValueTask<Response<ParentsSubParentChildren>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(pollingInterval, cancellationToken);
 
-        ParentSubParentChild IOperationSource<ParentSubParentChild>.CreateResult(Response response, CancellationToken cancellationToken)
+        ParentsSubParentChildren IOperationSource<ParentsSubParentChildren>.CreateResult(Response response, CancellationToken cancellationToken)
         {
             using var document = JsonDocument.Parse(response.ContentStream);
-            return new ParentSubParentChild(_operationBase, ChildBodyData.DeserializeChildBodyData(document.RootElement));
+            return new ParentsSubParentChildren(_operationBase, ChildBodyData.DeserializeChildBodyData(document.RootElement));
         }
 
-        async ValueTask<ParentSubParentChild> IOperationSource<ParentSubParentChild>.CreateResultAsync(Response response, CancellationToken cancellationToken)
+        async ValueTask<ParentsSubParentChildren> IOperationSource<ParentsSubParentChildren>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-            return new ParentSubParentChild(_operationBase, ChildBodyData.DeserializeChildBodyData(document.RootElement));
+            return new ParentsSubParentChildren(_operationBase, ChildBodyData.DeserializeChildBodyData(document.RootElement));
         }
     }
 }

@@ -434,13 +434,13 @@ namespace MgmtMultipleParentResource
             }
         }
 
-        #region AnotherParentChild
+        #region AnotherParentChildren
 
-        /// <summary> Gets a collection of AnotherParentChildren in the AnotherParent. </summary>
-        /// <returns> An object representing collection of AnotherParentChildren and their operations over a AnotherParent. </returns>
-        public AnotherParentChildCollection GetAnotherParentChildren()
+        /// <summary> Gets a collection of AnotherParentChildrens in the AnotherParent. </summary>
+        /// <returns> An object representing collection of AnotherParentChildrens and their operations over a AnotherParent. </returns>
+        public AnotherParentChildrenCollection GetAnotherParentChildren()
         {
-            return new AnotherParentChildCollection(this);
+            return new AnotherParentChildrenCollection(this);
         }
         #endregion
     }

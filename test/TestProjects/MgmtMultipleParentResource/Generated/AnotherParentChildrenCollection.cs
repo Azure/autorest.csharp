@@ -21,20 +21,20 @@ using MgmtMultipleParentResource.Models;
 namespace MgmtMultipleParentResource
 {
     /// <summary> A class representing collection of ChildBody and their operations over its parent. </summary>
-    public partial class AnotherParentChildCollection : ArmCollection, IEnumerable<AnotherParentChild>, IAsyncEnumerable<AnotherParentChild>
+    public partial class AnotherParentChildrenCollection : ArmCollection, IEnumerable<AnotherParentChildren>, IAsyncEnumerable<AnotherParentChildren>
 
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly AnotherChildrenRestOperations _anotherChildrenRestClient;
 
-        /// <summary> Initializes a new instance of the <see cref="AnotherParentChildCollection"/> class for mocking. </summary>
-        protected AnotherParentChildCollection()
+        /// <summary> Initializes a new instance of the <see cref="AnotherParentChildrenCollection"/> class for mocking. </summary>
+        protected AnotherParentChildrenCollection()
         {
         }
 
-        /// <summary> Initializes a new instance of AnotherParentChildCollection class. </summary>
+        /// <summary> Initializes a new instance of AnotherParentChildrenCollection class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal AnotherParentChildCollection(ArmResource parent) : base(parent)
+        internal AnotherParentChildrenCollection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _anotherChildrenRestClient = new AnotherChildrenRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
@@ -65,7 +65,7 @@ namespace MgmtMultipleParentResource
                 throw new ArgumentNullException(nameof(childBody));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("AnotherParentChildCollection.CreateOrUpdate");
+            using var scope = _clientDiagnostics.CreateScope("AnotherParentChildrenCollection.CreateOrUpdate");
             scope.Start();
             try
             {
@@ -102,7 +102,7 @@ namespace MgmtMultipleParentResource
                 throw new ArgumentNullException(nameof(childBody));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("AnotherParentChildCollection.CreateOrUpdate");
+            using var scope = _clientDiagnostics.CreateScope("AnotherParentChildrenCollection.CreateOrUpdate");
             scope.Start();
             try
             {
@@ -127,21 +127,21 @@ namespace MgmtMultipleParentResource
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="childName"/> is null. </exception>
-        public virtual Response<AnotherParentChild> Get(string childName, string expand = null, CancellationToken cancellationToken = default)
+        public virtual Response<AnotherParentChildren> Get(string childName, string expand = null, CancellationToken cancellationToken = default)
         {
             if (childName == null)
             {
                 throw new ArgumentNullException(nameof(childName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("AnotherParentChildCollection.Get");
+            using var scope = _clientDiagnostics.CreateScope("AnotherParentChildrenCollection.Get");
             scope.Start();
             try
             {
                 var response = _anotherChildrenRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, childName, expand, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new AnotherParentChild(Parent, response.Value), response.GetRawResponse());
+                return Response.FromValue(new AnotherParentChildren(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -158,21 +158,21 @@ namespace MgmtMultipleParentResource
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="childName"/> is null. </exception>
-        public async virtual Task<Response<AnotherParentChild>> GetAsync(string childName, string expand = null, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<AnotherParentChildren>> GetAsync(string childName, string expand = null, CancellationToken cancellationToken = default)
         {
             if (childName == null)
             {
                 throw new ArgumentNullException(nameof(childName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("AnotherParentChildCollection.Get");
+            using var scope = _clientDiagnostics.CreateScope("AnotherParentChildrenCollection.Get");
             scope.Start();
             try
             {
                 var response = await _anotherChildrenRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, childName, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new AnotherParentChild(Parent, response.Value), response.GetRawResponse());
+                return Response.FromValue(new AnotherParentChildren(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -186,21 +186,21 @@ namespace MgmtMultipleParentResource
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="childName"/> is null. </exception>
-        public virtual Response<AnotherParentChild> GetIfExists(string childName, string expand = null, CancellationToken cancellationToken = default)
+        public virtual Response<AnotherParentChildren> GetIfExists(string childName, string expand = null, CancellationToken cancellationToken = default)
         {
             if (childName == null)
             {
                 throw new ArgumentNullException(nameof(childName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("AnotherParentChildCollection.GetIfExists");
+            using var scope = _clientDiagnostics.CreateScope("AnotherParentChildrenCollection.GetIfExists");
             scope.Start();
             try
             {
                 var response = _anotherChildrenRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, childName, expand, cancellationToken: cancellationToken);
                 return response.Value == null
-                    ? Response.FromValue<AnotherParentChild>(null, response.GetRawResponse())
-                    : Response.FromValue(new AnotherParentChild(this, response.Value), response.GetRawResponse());
+                    ? Response.FromValue<AnotherParentChildren>(null, response.GetRawResponse())
+                    : Response.FromValue(new AnotherParentChildren(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -214,21 +214,21 @@ namespace MgmtMultipleParentResource
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="childName"/> is null. </exception>
-        public async virtual Task<Response<AnotherParentChild>> GetIfExistsAsync(string childName, string expand = null, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<AnotherParentChildren>> GetIfExistsAsync(string childName, string expand = null, CancellationToken cancellationToken = default)
         {
             if (childName == null)
             {
                 throw new ArgumentNullException(nameof(childName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("AnotherParentChildCollection.GetIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("AnotherParentChildrenCollection.GetIfExistsAsync");
             scope.Start();
             try
             {
                 var response = await _anotherChildrenRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, childName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
-                    ? Response.FromValue<AnotherParentChild>(null, response.GetRawResponse())
-                    : Response.FromValue(new AnotherParentChild(this, response.Value), response.GetRawResponse());
+                    ? Response.FromValue<AnotherParentChildren>(null, response.GetRawResponse())
+                    : Response.FromValue(new AnotherParentChildren(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -249,7 +249,7 @@ namespace MgmtMultipleParentResource
                 throw new ArgumentNullException(nameof(childName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("AnotherParentChildCollection.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("AnotherParentChildrenCollection.CheckIfExists");
             scope.Start();
             try
             {
@@ -275,7 +275,7 @@ namespace MgmtMultipleParentResource
                 throw new ArgumentNullException(nameof(childName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("AnotherParentChildCollection.CheckIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("AnotherParentChildrenCollection.CheckIfExistsAsync");
             scope.Start();
             try
             {
@@ -295,17 +295,17 @@ namespace MgmtMultipleParentResource
         /// <summary> The operation to get all run commands of a Virtual Machine. </summary>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="AnotherParentChild" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<AnotherParentChild> GetAll(string expand = null, CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="AnotherParentChildren" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<AnotherParentChildren> GetAll(string expand = null, CancellationToken cancellationToken = default)
         {
-            Page<AnotherParentChild> FirstPageFunc(int? pageSizeHint)
+            Page<AnotherParentChildren> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("AnotherParentChildCollection.GetAll");
+                using var scope = _clientDiagnostics.CreateScope("AnotherParentChildrenCollection.GetAll");
                 scope.Start();
                 try
                 {
                     var response = _anotherChildrenRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, expand, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new AnotherParentChild(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new AnotherParentChildren(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -313,14 +313,14 @@ namespace MgmtMultipleParentResource
                     throw;
                 }
             }
-            Page<AnotherParentChild> NextPageFunc(string nextLink, int? pageSizeHint)
+            Page<AnotherParentChildren> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("AnotherParentChildCollection.GetAll");
+                using var scope = _clientDiagnostics.CreateScope("AnotherParentChildrenCollection.GetAll");
                 scope.Start();
                 try
                 {
                     var response = _anotherChildrenRestClient.ListNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, expand, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new AnotherParentChild(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new AnotherParentChildren(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -337,17 +337,17 @@ namespace MgmtMultipleParentResource
         /// <summary> The operation to get all run commands of a Virtual Machine. </summary>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="AnotherParentChild" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<AnotherParentChild> GetAllAsync(string expand = null, CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="AnotherParentChildren" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<AnotherParentChildren> GetAllAsync(string expand = null, CancellationToken cancellationToken = default)
         {
-            async Task<Page<AnotherParentChild>> FirstPageFunc(int? pageSizeHint)
+            async Task<Page<AnotherParentChildren>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("AnotherParentChildCollection.GetAll");
+                using var scope = _clientDiagnostics.CreateScope("AnotherParentChildrenCollection.GetAll");
                 scope.Start();
                 try
                 {
                     var response = await _anotherChildrenRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new AnotherParentChild(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new AnotherParentChildren(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -355,14 +355,14 @@ namespace MgmtMultipleParentResource
                     throw;
                 }
             }
-            async Task<Page<AnotherParentChild>> NextPageFunc(string nextLink, int? pageSizeHint)
+            async Task<Page<AnotherParentChildren>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("AnotherParentChildCollection.GetAll");
+                using var scope = _clientDiagnostics.CreateScope("AnotherParentChildrenCollection.GetAll");
                 scope.Start();
                 try
                 {
                     var response = await _anotherChildrenRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new AnotherParentChild(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new AnotherParentChildren(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -373,7 +373,7 @@ namespace MgmtMultipleParentResource
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
 
-        IEnumerator<AnotherParentChild> IEnumerable<AnotherParentChild>.GetEnumerator()
+        IEnumerator<AnotherParentChildren> IEnumerable<AnotherParentChildren>.GetEnumerator()
         {
             return GetAll().GetEnumerator();
         }
@@ -383,12 +383,12 @@ namespace MgmtMultipleParentResource
             return GetAll().GetEnumerator();
         }
 
-        IAsyncEnumerator<AnotherParentChild> IAsyncEnumerable<AnotherParentChild>.GetAsyncEnumerator(CancellationToken cancellationToken)
+        IAsyncEnumerator<AnotherParentChildren> IAsyncEnumerable<AnotherParentChildren>.GetAsyncEnumerator(CancellationToken cancellationToken)
         {
             return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, AnotherParentChild, ChildBodyData> Construct() { }
+        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, AnotherParentChildren, ChildBodyData> Construct() { }
     }
 }

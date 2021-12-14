@@ -77,12 +77,12 @@ namespace ExactMatchFlattenInheritance
         /// <summary> Get an AzureResourceFlattenModel2. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public static async Task<Response<IReadOnlyList<AzureResourceFlattenModel2>>> GetAzureResourceFlattenModel2sAsync(this ResourceGroup resourceGroup, CancellationToken cancellationToken = default)
+        public static async Task<Response<IReadOnlyList<AzureResourceFlattenModel2>>> GetAllAzureResourceFlattenModel2sAsync(this ResourceGroup resourceGroup, CancellationToken cancellationToken = default)
         {
             return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetAzureResourceFlattenModel2s");
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetAllAzureResourceFlattenModel2s");
                 scope.Start();
                 try
                 {
@@ -105,8 +105,158 @@ namespace ExactMatchFlattenInheritance
         /// <summary> Get an AzureResourceFlattenModel2. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public static Response<IReadOnlyList<AzureResourceFlattenModel2>> GetAzureResourceFlattenModel2s(this ResourceGroup resourceGroup, CancellationToken cancellationToken = default)
+        public static Response<IReadOnlyList<AzureResourceFlattenModel2>> GetAllAzureResourceFlattenModel2s(this ResourceGroup resourceGroup, CancellationToken cancellationToken = default)
         {
+            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetAllAzureResourceFlattenModel2s");
+                scope.Start();
+                try
+                {
+                    var restOperations = GetAzureResourceFlattenModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    var response = restOperations.List(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, cancellationToken);
+                    return Response.FromValue(response.Value.Value, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            );
+        }
+
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel2s/{name}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
+        /// OperationId: AzureResourceFlattenModel2s_Put
+        /// <summary> Create or update an AzureResourceFlattenModel2. </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="name"> The String to use. </param>
+        /// <param name="parameters"> The AzureResourceFlattenModel2 to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
+        public static async Task<Response<AzureResourceFlattenModel2>> PutAzureResourceFlattenModel2sAsync(this ResourceGroup resourceGroup, string name, AzureResourceFlattenModel2 parameters, CancellationToken cancellationToken = default)
+        {
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutAzureResourceFlattenModel2s");
+                scope.Start();
+                try
+                {
+                    var restOperations = GetAzureResourceFlattenModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    var response = await restOperations.PutAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, name, parameters, cancellationToken).ConfigureAwait(false);
+                    return response;
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            ).ConfigureAwait(false);
+        }
+
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel2s/{name}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
+        /// OperationId: AzureResourceFlattenModel2s_Put
+        /// <summary> Create or update an AzureResourceFlattenModel2. </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="name"> The String to use. </param>
+        /// <param name="parameters"> The AzureResourceFlattenModel2 to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
+        public static Response<AzureResourceFlattenModel2> PutAzureResourceFlattenModel2s(this ResourceGroup resourceGroup, string name, AzureResourceFlattenModel2 parameters, CancellationToken cancellationToken = default)
+        {
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutAzureResourceFlattenModel2s");
+                scope.Start();
+                try
+                {
+                    var restOperations = GetAzureResourceFlattenModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    var response = restOperations.Put(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, name, parameters, cancellationToken);
+                    return response;
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            );
+        }
+
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel2s/{name}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
+        /// OperationId: AzureResourceFlattenModel2s_Get
+        /// <summary> Get an AzureResourceFlattenModel2. </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="name"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        public static async Task<Response<AzureResourceFlattenModel2>> GetAzureResourceFlattenModel2sAsync(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
+        {
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
+            return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetAzureResourceFlattenModel2s");
+                scope.Start();
+                try
+                {
+                    var restOperations = GetAzureResourceFlattenModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    var response = await restOperations.GetAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, name, cancellationToken).ConfigureAwait(false);
+                    return response;
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            ).ConfigureAwait(false);
+        }
+
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel2s/{name}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
+        /// OperationId: AzureResourceFlattenModel2s_Get
+        /// <summary> Get an AzureResourceFlattenModel2. </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="name"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        public static Response<AzureResourceFlattenModel2> GetAzureResourceFlattenModel2s(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
+        {
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
@@ -115,156 +265,6 @@ namespace ExactMatchFlattenInheritance
                 try
                 {
                     var restOperations = GetAzureResourceFlattenModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
-                    var response = restOperations.List(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, cancellationToken);
-                    return Response.FromValue(response.Value.Value, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            );
-        }
-
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel2s/{name}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: AzureResourceFlattenModel2s_Put
-        /// <summary> Create or update an AzureResourceFlattenModel2. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <param name="name"> The String to use. </param>
-        /// <param name="parameters"> The AzureResourceFlattenModel2 to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public static async Task<Response<AzureResourceFlattenModel2>> PutAzureResourceFlattenModel2Async(this ResourceGroup resourceGroup, string name, AzureResourceFlattenModel2 parameters, CancellationToken cancellationToken = default)
-        {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutAzureResourceFlattenModel2");
-                scope.Start();
-                try
-                {
-                    var restOperations = GetAzureResourceFlattenModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
-                    var response = await restOperations.PutAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, name, parameters, cancellationToken).ConfigureAwait(false);
-                    return response;
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            ).ConfigureAwait(false);
-        }
-
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel2s/{name}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: AzureResourceFlattenModel2s_Put
-        /// <summary> Create or update an AzureResourceFlattenModel2. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <param name="name"> The String to use. </param>
-        /// <param name="parameters"> The AzureResourceFlattenModel2 to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public static Response<AzureResourceFlattenModel2> PutAzureResourceFlattenModel2(this ResourceGroup resourceGroup, string name, AzureResourceFlattenModel2 parameters, CancellationToken cancellationToken = default)
-        {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutAzureResourceFlattenModel2");
-                scope.Start();
-                try
-                {
-                    var restOperations = GetAzureResourceFlattenModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
-                    var response = restOperations.Put(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, name, parameters, cancellationToken);
-                    return response;
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            );
-        }
-
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel2s/{name}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: AzureResourceFlattenModel2s_Get
-        /// <summary> Get an AzureResourceFlattenModel2. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <param name="name"> The String to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public static async Task<Response<AzureResourceFlattenModel2>> GetAzureResourceFlattenModel2Async(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
-        {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-
-            return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetAzureResourceFlattenModel2");
-                scope.Start();
-                try
-                {
-                    var restOperations = GetAzureResourceFlattenModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
-                    var response = await restOperations.GetAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, name, cancellationToken).ConfigureAwait(false);
-                    return response;
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            ).ConfigureAwait(false);
-        }
-
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel2s/{name}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: AzureResourceFlattenModel2s_Get
-        /// <summary> Get an AzureResourceFlattenModel2. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <param name="name"> The String to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public static Response<AzureResourceFlattenModel2> GetAzureResourceFlattenModel2(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
-        {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-
-            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetAzureResourceFlattenModel2");
-                scope.Start();
-                try
-                {
-                    var restOperations = GetAzureResourceFlattenModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
                     var response = restOperations.Get(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, name, cancellationToken);
                     return response;
                 }
@@ -283,12 +283,12 @@ namespace ExactMatchFlattenInheritance
         /// <summary> Get an AzureResourceFlattenModel3. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public static async Task<Response<IReadOnlyList<AzureResourceFlattenModel3>>> GetAzureResourceFlattenModel3sAsync(this ResourceGroup resourceGroup, CancellationToken cancellationToken = default)
+        public static async Task<Response<IReadOnlyList<AzureResourceFlattenModel3>>> GetAllAzureResourceFlattenModel3sAsync(this ResourceGroup resourceGroup, CancellationToken cancellationToken = default)
         {
             return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetAzureResourceFlattenModel3s");
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetAllAzureResourceFlattenModel3s");
                 scope.Start();
                 try
                 {
@@ -311,12 +311,12 @@ namespace ExactMatchFlattenInheritance
         /// <summary> Get an AzureResourceFlattenModel3. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public static Response<IReadOnlyList<AzureResourceFlattenModel3>> GetAzureResourceFlattenModel3s(this ResourceGroup resourceGroup, CancellationToken cancellationToken = default)
+        public static Response<IReadOnlyList<AzureResourceFlattenModel3>> GetAllAzureResourceFlattenModel3s(this ResourceGroup resourceGroup, CancellationToken cancellationToken = default)
         {
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetAzureResourceFlattenModel3s");
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetAllAzureResourceFlattenModel3s");
                 scope.Start();
                 try
                 {
@@ -342,7 +342,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="parameters"> The AzureResourceFlattenModel3 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public static async Task<Response<AzureResourceFlattenModel3>> PutAzureResourceFlattenModel3Async(this ResourceGroup resourceGroup, string name, AzureResourceFlattenModel3 parameters, CancellationToken cancellationToken = default)
+        public static async Task<Response<AzureResourceFlattenModel3>> PutAzureResourceFlattenModel3sAsync(this ResourceGroup resourceGroup, string name, AzureResourceFlattenModel3 parameters, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
@@ -356,7 +356,7 @@ namespace ExactMatchFlattenInheritance
             return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutAzureResourceFlattenModel3");
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutAzureResourceFlattenModel3s");
                 scope.Start();
                 try
                 {
@@ -382,7 +382,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="parameters"> The AzureResourceFlattenModel3 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public static Response<AzureResourceFlattenModel3> PutAzureResourceFlattenModel3(this ResourceGroup resourceGroup, string name, AzureResourceFlattenModel3 parameters, CancellationToken cancellationToken = default)
+        public static Response<AzureResourceFlattenModel3> PutAzureResourceFlattenModel3s(this ResourceGroup resourceGroup, string name, AzureResourceFlattenModel3 parameters, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
@@ -396,7 +396,7 @@ namespace ExactMatchFlattenInheritance
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutAzureResourceFlattenModel3");
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutAzureResourceFlattenModel3s");
                 scope.Start();
                 try
                 {
@@ -421,7 +421,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public static async Task<Response<AzureResourceFlattenModel3>> GetAzureResourceFlattenModel3Async(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
+        public static async Task<Response<AzureResourceFlattenModel3>> GetAzureResourceFlattenModel3sAsync(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
@@ -431,7 +431,7 @@ namespace ExactMatchFlattenInheritance
             return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetAzureResourceFlattenModel3");
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetAzureResourceFlattenModel3s");
                 scope.Start();
                 try
                 {
@@ -456,7 +456,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public static Response<AzureResourceFlattenModel3> GetAzureResourceFlattenModel3(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
+        public static Response<AzureResourceFlattenModel3> GetAzureResourceFlattenModel3s(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
@@ -466,7 +466,7 @@ namespace ExactMatchFlattenInheritance
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetAzureResourceFlattenModel3");
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetAzureResourceFlattenModel3s");
                 scope.Start();
                 try
                 {
@@ -489,12 +489,12 @@ namespace ExactMatchFlattenInheritance
         /// <summary> Get an AzureResourceFlattenModel4. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public static async Task<Response<IReadOnlyList<AzureResourceFlattenModel4>>> GetAzureResourceFlattenModel4sAsync(this ResourceGroup resourceGroup, CancellationToken cancellationToken = default)
+        public static async Task<Response<IReadOnlyList<AzureResourceFlattenModel4>>> GetAllAzureResourceFlattenModel4sAsync(this ResourceGroup resourceGroup, CancellationToken cancellationToken = default)
         {
             return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetAzureResourceFlattenModel4s");
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetAllAzureResourceFlattenModel4s");
                 scope.Start();
                 try
                 {
@@ -517,12 +517,12 @@ namespace ExactMatchFlattenInheritance
         /// <summary> Get an AzureResourceFlattenModel4. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public static Response<IReadOnlyList<AzureResourceFlattenModel4>> GetAzureResourceFlattenModel4s(this ResourceGroup resourceGroup, CancellationToken cancellationToken = default)
+        public static Response<IReadOnlyList<AzureResourceFlattenModel4>> GetAllAzureResourceFlattenModel4s(this ResourceGroup resourceGroup, CancellationToken cancellationToken = default)
         {
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetAzureResourceFlattenModel4s");
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetAllAzureResourceFlattenModel4s");
                 scope.Start();
                 try
                 {
@@ -548,7 +548,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="parameters"> The AzureResourceFlattenModel4 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public static async Task<Response<AzureResourceFlattenModel4>> PutAzureResourceFlattenModel4Async(this ResourceGroup resourceGroup, string name, AzureResourceFlattenModel4 parameters, CancellationToken cancellationToken = default)
+        public static async Task<Response<AzureResourceFlattenModel4>> PutAzureResourceFlattenModel4sAsync(this ResourceGroup resourceGroup, string name, AzureResourceFlattenModel4 parameters, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
@@ -562,7 +562,7 @@ namespace ExactMatchFlattenInheritance
             return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutAzureResourceFlattenModel4");
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutAzureResourceFlattenModel4s");
                 scope.Start();
                 try
                 {
@@ -588,7 +588,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="parameters"> The AzureResourceFlattenModel4 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public static Response<AzureResourceFlattenModel4> PutAzureResourceFlattenModel4(this ResourceGroup resourceGroup, string name, AzureResourceFlattenModel4 parameters, CancellationToken cancellationToken = default)
+        public static Response<AzureResourceFlattenModel4> PutAzureResourceFlattenModel4s(this ResourceGroup resourceGroup, string name, AzureResourceFlattenModel4 parameters, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
@@ -602,7 +602,7 @@ namespace ExactMatchFlattenInheritance
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutAzureResourceFlattenModel4");
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutAzureResourceFlattenModel4s");
                 scope.Start();
                 try
                 {
@@ -627,7 +627,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public static async Task<Response<AzureResourceFlattenModel4>> GetAzureResourceFlattenModel4Async(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
+        public static async Task<Response<AzureResourceFlattenModel4>> GetAzureResourceFlattenModel4sAsync(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
@@ -637,7 +637,7 @@ namespace ExactMatchFlattenInheritance
             return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetAzureResourceFlattenModel4");
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetAzureResourceFlattenModel4s");
                 scope.Start();
                 try
                 {
@@ -662,7 +662,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public static Response<AzureResourceFlattenModel4> GetAzureResourceFlattenModel4(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
+        public static Response<AzureResourceFlattenModel4> GetAzureResourceFlattenModel4s(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
@@ -672,7 +672,7 @@ namespace ExactMatchFlattenInheritance
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetAzureResourceFlattenModel4");
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetAzureResourceFlattenModel4s");
                 scope.Start();
                 try
                 {
@@ -695,12 +695,12 @@ namespace ExactMatchFlattenInheritance
         /// <summary> Get an AzureResourceFlattenModel5. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public static async Task<Response<IReadOnlyList<AzureResourceFlattenModel5>>> GetAzureResourceFlattenModel5sAsync(this ResourceGroup resourceGroup, CancellationToken cancellationToken = default)
+        public static async Task<Response<IReadOnlyList<AzureResourceFlattenModel5>>> GetAllAzureResourceFlattenModel5sAsync(this ResourceGroup resourceGroup, CancellationToken cancellationToken = default)
         {
             return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetAzureResourceFlattenModel5s");
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetAllAzureResourceFlattenModel5s");
                 scope.Start();
                 try
                 {
@@ -723,12 +723,12 @@ namespace ExactMatchFlattenInheritance
         /// <summary> Get an AzureResourceFlattenModel5. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public static Response<IReadOnlyList<AzureResourceFlattenModel5>> GetAzureResourceFlattenModel5s(this ResourceGroup resourceGroup, CancellationToken cancellationToken = default)
+        public static Response<IReadOnlyList<AzureResourceFlattenModel5>> GetAllAzureResourceFlattenModel5s(this ResourceGroup resourceGroup, CancellationToken cancellationToken = default)
         {
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetAzureResourceFlattenModel5s");
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetAllAzureResourceFlattenModel5s");
                 scope.Start();
                 try
                 {
@@ -754,7 +754,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="foo"> New property. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public static async Task<Response<AzureResourceFlattenModel5>> PutAzureResourceFlattenModel5Async(this ResourceGroup resourceGroup, string name, int? foo = null, CancellationToken cancellationToken = default)
+        public static async Task<Response<AzureResourceFlattenModel5>> PutAzureResourceFlattenModel5sAsync(this ResourceGroup resourceGroup, string name, int? foo = null, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
@@ -764,7 +764,7 @@ namespace ExactMatchFlattenInheritance
             return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutAzureResourceFlattenModel5");
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutAzureResourceFlattenModel5s");
                 scope.Start();
                 try
                 {
@@ -790,7 +790,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="foo"> New property. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public static Response<AzureResourceFlattenModel5> PutAzureResourceFlattenModel5(this ResourceGroup resourceGroup, string name, int? foo = null, CancellationToken cancellationToken = default)
+        public static Response<AzureResourceFlattenModel5> PutAzureResourceFlattenModel5s(this ResourceGroup resourceGroup, string name, int? foo = null, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
@@ -800,7 +800,7 @@ namespace ExactMatchFlattenInheritance
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutAzureResourceFlattenModel5");
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutAzureResourceFlattenModel5s");
                 scope.Start();
                 try
                 {
@@ -825,7 +825,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public static async Task<Response<AzureResourceFlattenModel5>> GetAzureResourceFlattenModel5Async(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
+        public static async Task<Response<AzureResourceFlattenModel5>> GetAzureResourceFlattenModel5sAsync(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
@@ -835,7 +835,7 @@ namespace ExactMatchFlattenInheritance
             return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetAzureResourceFlattenModel5");
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetAzureResourceFlattenModel5s");
                 scope.Start();
                 try
                 {
@@ -860,7 +860,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public static Response<AzureResourceFlattenModel5> GetAzureResourceFlattenModel5(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
+        public static Response<AzureResourceFlattenModel5> GetAzureResourceFlattenModel5s(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
@@ -870,7 +870,7 @@ namespace ExactMatchFlattenInheritance
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetAzureResourceFlattenModel5");
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetAzureResourceFlattenModel5s");
                 scope.Start();
                 try
                 {
