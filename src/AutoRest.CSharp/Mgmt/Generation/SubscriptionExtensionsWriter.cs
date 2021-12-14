@@ -98,7 +98,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         private void WriteListResourceByNameMethod(Resource resource, bool async)
         {
             _writer.Line();
-            _writer.WriteXmlDocumentationSummary($"Filters the list of {resource.ResourceName.ToPlural()} for a <see cref=\"{typeof(Subscription)}\" /> represented as generic resources.");
+            _writer.WriteXmlDocumentationSummary($"Filters the list of {resource.ResourceName.LastWordToPlural()} for a <see cref=\"{typeof(Subscription)}\" /> represented as generic resources.");
             _writer.WriteXmlDocumentationParameter("subscription", $"The <see cref=\"{typeof(Subscription)}\" /> instance the method will execute against.");
             _writer.WriteXmlDocumentationParameter("filter", $"The string to filter the list.");
             _writer.WriteXmlDocumentationParameter("expand", $"Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`.");
