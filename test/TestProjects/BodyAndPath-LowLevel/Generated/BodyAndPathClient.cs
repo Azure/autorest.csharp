@@ -275,22 +275,23 @@ namespace BodyAndPath_LowLevel
             }
         }
 
-        /// <param name="item3"> First parameter. </param>
-        /// <param name="item2"> Second parameter. </param>
-        /// <param name="item4"> Third parameter. </param>
+        /// <param name="item3"> Expected to be the first parameter because of its position in the path. </param>
+        /// <param name="item2"> Expected to be the second parameter because of its position in the path. &apos;item4&apos; in the path isn&apos;t a parameter, it is a static part of the path. </param>
+        /// <param name="item4"> Expected to be the third parameter because it is a required query parameter. &apos;item4&apos; in the path isn&apos;t a parameter, it is a static part of the path. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="item1"> Forth parameter. </param>
+        /// <param name="item5"> Expected to be the fifth parameter because it is an optional query parameter which goes after RequestContent. </param>
+        /// <param name="item1"> Expected to be the sixth parameter because it is a query parameter and has a default value, so it is treated as optional despite &apos;required: true&apos;. &apos;item1&apos; in the path isn&apos;t a parameter, it is a static part of the path. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="item3"/>, <paramref name="item2"/>, <paramref name="item4"/>, or <paramref name="content"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="item3"/>, <paramref name="item2"/>, <paramref name="item4"/>, or <paramref name="item1"/> is null. </exception>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> UpdateAsync(string item3, string item2, string item4, RequestContent content, string item1 = null, RequestContext context = null)
+        public virtual async Task<Response> UpdateAsync(string item3, string item2, string item4, RequestContent content, string item5 = null, string item1 = "value", RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.Update");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateUpdateRequest(item3, item2, item4, content, item1, context);
+                using HttpMessage message = CreateUpdateRequest(item3, item2, item4, content, item5, item1, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -300,22 +301,23 @@ namespace BodyAndPath_LowLevel
             }
         }
 
-        /// <param name="item3"> First parameter. </param>
-        /// <param name="item2"> Second parameter. </param>
-        /// <param name="item4"> Third parameter. </param>
+        /// <param name="item3"> Expected to be the first parameter because of its position in the path. </param>
+        /// <param name="item2"> Expected to be the second parameter because of its position in the path. &apos;item4&apos; in the path isn&apos;t a parameter, it is a static part of the path. </param>
+        /// <param name="item4"> Expected to be the third parameter because it is a required query parameter. &apos;item4&apos; in the path isn&apos;t a parameter, it is a static part of the path. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="item1"> Forth parameter. </param>
+        /// <param name="item5"> Expected to be the fifth parameter because it is an optional query parameter which goes after RequestContent. </param>
+        /// <param name="item1"> Expected to be the sixth parameter because it is a query parameter and has a default value, so it is treated as optional despite &apos;required: true&apos;. &apos;item1&apos; in the path isn&apos;t a parameter, it is a static part of the path. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="item3"/>, <paramref name="item2"/>, <paramref name="item4"/>, or <paramref name="content"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="item3"/>, <paramref name="item2"/>, <paramref name="item4"/>, or <paramref name="item1"/> is null. </exception>
 #pragma warning disable AZC0002
-        public virtual Response Update(string item3, string item2, string item4, RequestContent content, string item1 = null, RequestContext context = null)
+        public virtual Response Update(string item3, string item2, string item4, RequestContent content, string item5 = null, string item1 = "value", RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.Update");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateUpdateRequest(item3, item2, item4, content, item1, context);
+                using HttpMessage message = CreateUpdateRequest(item3, item2, item4, content, item5, item1, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -410,7 +412,7 @@ namespace BodyAndPath_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateUpdateRequest(string item3, string item2, string item4, RequestContent content, string item1, RequestContext context)
+        internal HttpMessage CreateUpdateRequest(string item3, string item2, string item4, RequestContent content, string item5, string item1, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context);
             var request = message.Request;
@@ -423,10 +425,11 @@ namespace BodyAndPath_LowLevel
             uri.AppendPath(item2, true);
             uri.AppendPath("/item1", false);
             uri.AppendQuery("item4", item4, true);
-            if (item1 != null)
+            if (item5 != null)
             {
-                uri.AppendQuery("item1", item1, true);
+                uri.AppendQuery("item5", item5, true);
             }
+            uri.AppendQuery("item1", item1, true);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;

@@ -52,19 +52,19 @@ namespace RequestContextAllOptional_LowLevel
 
         /// <summary> No RequestBody and ResponseBody. </summary>
         /// <param name="id"> Query parameter Id. </param>
-        /// <param name="skip"> Query parameter skip. </param>
         /// <param name="top"> Query parameter top. </param>
+        /// <param name="skip"> Query parameter skip. </param>
         /// <param name="status"> Query parameter status. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> NoRequestBodyResponseBodyAsync(int id, int skip = 12, int? top = null, string status = "start", RequestContext context = null)
+        public virtual async Task<Response> NoRequestBodyResponseBodyAsync(int id, int? top = null, int skip = 12, string status = "start", RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("RequestContextAllOptionalClient.NoRequestBodyResponseBody");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateNoRequestBodyResponseBodyRequest(id, skip, top, status, context);
+                using HttpMessage message = CreateNoRequestBodyResponseBodyRequest(id, top, skip, status, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -76,19 +76,19 @@ namespace RequestContextAllOptional_LowLevel
 
         /// <summary> No RequestBody and ResponseBody. </summary>
         /// <param name="id"> Query parameter Id. </param>
-        /// <param name="skip"> Query parameter skip. </param>
         /// <param name="top"> Query parameter top. </param>
+        /// <param name="skip"> Query parameter skip. </param>
         /// <param name="status"> Query parameter status. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
 #pragma warning disable AZC0002
-        public virtual Response NoRequestBodyResponseBody(int id, int skip = 12, int? top = null, string status = "start", RequestContext context = null)
+        public virtual Response NoRequestBodyResponseBody(int id, int? top = null, int skip = 12, string status = "start", RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("RequestContextAllOptionalClient.NoRequestBodyResponseBody");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateNoRequestBodyResponseBodyRequest(id, skip, top, status, context);
+                using HttpMessage message = CreateNoRequestBodyResponseBodyRequest(id, top, skip, status, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -296,7 +296,7 @@ namespace RequestContextAllOptional_LowLevel
             }
         }
 
-        internal HttpMessage CreateNoRequestBodyResponseBodyRequest(int id, int skip, int? top, string status, RequestContext context)
+        internal HttpMessage CreateNoRequestBodyResponseBodyRequest(int id, int? top, int skip, string status, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context);
             var request = message.Request;
@@ -305,11 +305,11 @@ namespace RequestContextAllOptional_LowLevel
             uri.Reset(_endpoint);
             uri.AppendPath("/test1", false);
             uri.AppendQuery("id", id, true);
-            uri.AppendQuery("skip", skip, true);
             if (top != null)
             {
                 uri.AppendQuery("$top", top.Value, true);
             }
+            uri.AppendQuery("skip", skip, true);
             if (status != null)
             {
                 uri.AppendQuery("status", status, true);

@@ -2082,11 +2082,11 @@ namespace header_LowLevel
             uri.AppendPath("/header/param/prim/string", false);
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
-            request.Headers.Add("Accept", "application/json");
             if (value != null)
             {
                 request.Headers.Add("value", value);
             }
+            request.Headers.Add("Accept", "application/json");
             message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
@@ -2178,11 +2178,11 @@ namespace header_LowLevel
             uri.AppendPath("/header/param/prim/datetimerfc1123", false);
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
-            request.Headers.Add("Accept", "application/json");
             if (value != null)
             {
                 request.Headers.Add("value", value.Value, "R");
             }
+            request.Headers.Add("Accept", "application/json");
             message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
@@ -2274,11 +2274,11 @@ namespace header_LowLevel
             uri.AppendPath("/header/param/prim/enum", false);
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
-            request.Headers.Add("Accept", "application/json");
             if (value != null)
             {
                 request.Headers.Add("value", value);
             }
+            request.Headers.Add("Accept", "application/json");
             message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }

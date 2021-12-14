@@ -590,44 +590,59 @@ operationGroups:
             implementation: Method
             language: !Languages 
               default:
-                name: item1
-                description: Forth parameter.
-                serializedName: item1
+                name: item5
+                description: Expected to be the fifth parameter because it is an optional query parameter which goes after RequestContent.
+                serializedName: item5
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
           - !Parameter &ref_27
+            schema: *ref_3
+            clientDefaultValue: value
+            implementation: Method
+            required: true
+            extensions:
+              x-ms-client-default: value
+            language: !Languages 
+              default:
+                name: item1
+                description: 'Expected to be the sixth parameter because it is a query parameter and has a default value, so it is treated as optional despite ''required: true''. ''item1'' in the path isn''t a parameter, it is a static part of the path.'
+                serializedName: item1
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - !Parameter &ref_28
             schema: *ref_3
             implementation: Method
             required: true
             language: !Languages 
               default:
                 name: item2
-                description: Second parameter.
+                description: Expected to be the second parameter because of its position in the path. 'item4' in the path isn't a parameter, it is a static part of the path.
                 serializedName: item2
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_28
+          - !Parameter &ref_29
             schema: *ref_24
             implementation: Method
             required: true
             language: !Languages 
               default:
                 name: item3
-                description: First parameter.
+                description: Expected to be the first parameter because of its position in the path.
                 serializedName: item3
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_29
+          - !Parameter &ref_30
             schema: *ref_3
             implementation: Method
             required: true
             language: !Languages 
               default:
                 name: item4
-                description: Third parameter.
+                description: Expected to be the third parameter because it is a required query parameter. 'item4' in the path isn't a parameter, it is a static part of the path.
                 serializedName: item4
             protocol: !Protocols 
               http: !HttpParameter 
@@ -651,7 +666,7 @@ operationGroups:
               - !Parameter &ref_25
                 schema: *ref_6
                 implementation: Method
-                required: true
+                required: false
                 language: !Languages 
                   default:
                     name: bodyParameter
@@ -679,6 +694,7 @@ operationGroups:
           - *ref_27
           - *ref_28
           - *ref_29
+          - *ref_30
         responses:
           - !Response 
             language: !Languages 

@@ -47,5 +47,22 @@ namespace AutoRest.TestServer.Tests
             Assert.IsNull(m5);
             Assert.IsNull(m6);
         }
+
+        [Test]
+        public void Update([Values("Update", "UpdateAsync")] string methodName)
+        {
+            TypeAsserts.HasPublicInstanceMethod(
+                typeof(BodyAndPathClient),
+                methodName,
+                new TypeAsserts.Parameter[] {
+                    new("item3", typeof(string)),
+                    new("item2", typeof(string), null),
+                    new("item4", typeof(string), 12),
+                    new("content", typeof(RequestContent)),
+                    new("item5", typeof(string), null),
+                    new("item1", typeof(string), "value"),
+                    new("context", typeof(RequestContext), null)
+                });
+        }
     }
 }

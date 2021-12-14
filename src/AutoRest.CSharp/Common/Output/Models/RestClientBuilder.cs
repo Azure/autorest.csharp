@@ -26,7 +26,6 @@ namespace AutoRest.CSharp.Output.Models
 {
     internal class RestClientBuilder
     {
-
         private static readonly HashSet<string> IgnoredRequestHeader = new(StringComparer.OrdinalIgnoreCase)
         {
             "x-ms-client-request-id",
@@ -211,7 +210,7 @@ namespace AutoRest.CSharp.Output.Models
                     case { In: ParameterLocation.Uri or ParameterLocation.Path }:
                         pathParameters.Add(GetRequestParameterName(requestParameter), requestParameter);
                         break;
-                    case { Required: true }:
+                    case { Required: true } when !HasDefaultValue(requestParameter):
                         requiredRequestParameters.Add(requestParameter);
                         break;
                     default:
@@ -635,6 +634,9 @@ namespace AutoRest.CSharp.Output.Models
 
             return null;
         }
+
+        private static bool HasDefaultValue(RequestParameter parameter)
+            => parameter.ClientDefaultValue != null || parameter.Schema is ConstantSchema;
 
         private static string CreateDescription(OperationGroup operationGroup, string clientPrefix)
         {
