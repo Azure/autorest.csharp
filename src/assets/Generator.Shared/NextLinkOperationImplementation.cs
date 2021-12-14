@@ -4,10 +4,12 @@
 #nullable enable
 
 using System;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Web;
 using Azure.Core.Pipeline;
 
 namespace Azure.Core
@@ -117,11 +119,15 @@ namespace Azure.Core
 
         private static string AppendApiVersion(string uri, Uri startRequestUri)
         {
-            var apiVersion = startRequestUri.Query.Trim('?').Split('&').Select(s => s.Split('=')).Where(arr => arr[0].Equals("api-version")).Select(arr => arr[1]).FirstOrDefault();
-            if (!uri.Contains("api-version") && apiVersion != null)
+            if (!uri.Contains("api-version"))
             {
-                var concatSymbol = uri.Contains("?") ? "&" : "?";
-                return $"{uri}{concatSymbol}api-version={apiVersion}";
+                NameValueCollection nameValueCollection = HttpUtility.ParseQueryString(startRequestUri.Query);
+                var apiVersion = nameValueCollection.Get("api-version");
+                if (apiVersion != null)
+                {
+                    var concatSymbol = uri.IndexOf('?') > -1 ? "&" : "?";
+                    return $"{uri}{concatSymbol}api-version={apiVersion}";
+                }
             }
             return uri;
         }
