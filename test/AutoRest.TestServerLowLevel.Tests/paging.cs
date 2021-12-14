@@ -134,7 +134,7 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual(10, id);
 
             id = 1;
-            var pageable = new PagingClient(Key, endpoint).GetMultiplePagesFragmentNextLink("1.6", tenant, new());
+            var pageable = new PagingClient(Key, endpoint).GetMultiplePagesFragmentNextLink(tenant, "1.6", new());
             foreach (var page in pageable.AsPages())
             {
                 Assert.AreEqual(id, page.Values.First().ToObjectFromJson<Product>().Properties.Id);
