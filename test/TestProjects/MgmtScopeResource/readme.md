@@ -30,6 +30,12 @@ request-path-to-parent:
   /subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Resources/deployments/{deploymentName}/whatIf: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}
 request-path-to-resource-type:
   /{linkId}: Microsoft.Resources/links
+request-path-to-scope-resource-types:
+  /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}:
+    - subscriptions
+    - resourceGroups
+    - managementGroups
+    - tenant
 directive:
   - rename-operation:
       from: Deployments_WhatIfAtTenantScope

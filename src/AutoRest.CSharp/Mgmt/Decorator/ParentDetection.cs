@@ -80,7 +80,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             if (parameterizedScopeTypes.Contains(ResourceType.Tenant))
                 yield return context.Library.TenantExtensions;
             // tenant is not quite a concrete resource, therefore we do not include it here
-            // TODO -- if this scope could be anything, we need to add an extension for ArmResource
+            if (parameterizedScopeTypes.Contains(ResourceType.Any))
+                yield return context.Library.ArmResourceExtensions;
         }
 
         public static RequestPath ParentRequestPath(this OperationSet operationSet, BuildContext<MgmtOutputLibrary> context)
