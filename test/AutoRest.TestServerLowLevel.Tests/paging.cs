@@ -116,7 +116,7 @@ namespace AutoRest.TestServer.Tests
             var linkPart = "next?page=";
 
             id = 1;
-            var pageableAsync = new PagingClient(Key, endpoint).GetMultiplePagesFragmentNextLinkAsync("1.6", tenant, new());
+            var pageableAsync = new PagingClient(Key, endpoint).GetMultiplePagesFragmentNextLinkAsync(tenant, "1.6", new());
             await foreach (var page in pageableAsync.AsPages())
             {
                 Assert.AreEqual(id, page.Values.First().ToObjectFromJson<Product>().Properties.Id);

@@ -56,8 +56,8 @@ namespace AutoRest.TestServer.Tests
                 methodName,
                 new TypeAsserts.Parameter[] {
                     new("item3", typeof(string)),
-                    new("item2", typeof(string), null),
-                    new("item4", typeof(string), 12),
+                    new("item2", typeof(string)),
+                    new("item4", typeof(string)),
                     new("content", typeof(RequestContent)),
                     new("item5", typeof(string), null),
                     new("item1", typeof(string), "value"),
