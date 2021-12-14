@@ -98,7 +98,7 @@ namespace Azure.ResourceManager.Sample
         internal static VirtualMachineScaleSetVMData DeserializeVirtualMachineScaleSetVMData(JsonElement element)
         {
             Optional<string> instanceId = default;
-            Optional<Sku> sku = default;
+            Optional<Models.Sku> sku = default;
             Optional<Plan> plan = default;
             Optional<IReadOnlyList<VirtualMachineExtensionData>> resources = default;
             Optional<IReadOnlyList<string>> zones = default;
@@ -137,7 +137,7 @@ namespace Azure.ResourceManager.Sample
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    sku = Sku.DeserializeSku(property.Value);
+                    sku = Models.Sku.DeserializeSku(property.Value);
                     continue;
                 }
                 if (property.NameEquals("plan"))
