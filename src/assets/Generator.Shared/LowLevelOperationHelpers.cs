@@ -11,6 +11,7 @@ using Azure.Core.Pipeline;
 
 namespace Azure.Core
 {
+#if EXPERIMENTAL
     internal static class LowLevelOperationHelpers
     {
         public static async ValueTask<Operation<BinaryData>> ProcessMessageAsync(HttpPipeline pipeline, HttpMessage message, ClientDiagnostics clientDiagnostics, string scopeName, OperationFinalStateVia finalStateVia, RequestContext? requestContext, bool waitForCompletion)
@@ -57,4 +58,5 @@ namespace Azure.Core
             return operation;
         }
     }
+#endif
 }
