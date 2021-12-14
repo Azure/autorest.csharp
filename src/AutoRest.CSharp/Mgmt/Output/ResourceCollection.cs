@@ -55,8 +55,8 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             foreach (var operation in clientOperation)
             {
-                var diff = operation.RequestPath.IsAncestorOf(operation.ContextualPath) 
-                    ? operation.RequestPath.TrimAncestorFrom(operation.ContextualPath) 
+                var diff = operation.RequestPath.IsAncestorOf(operation.ContextualPath)
+                    ? operation.RequestPath.TrimAncestorFrom(operation.ContextualPath)
                     : operation.ContextualPath.TrimAncestorFrom(operation.RequestPath);
 
                 if (!diff.All(segment => segment.IsConstant))

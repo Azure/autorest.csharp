@@ -743,7 +743,7 @@ namespace AutoRest.CSharp.Output.Models
             return constructorParameters;
         }
 
-        private static RequestLocation GetRequestLocation(RequestParameter requestParameter) 
+        private static RequestLocation GetRequestLocation(RequestParameter requestParameter)
             => requestParameter.In switch
             {
                 ParameterLocation.Uri => RequestLocation.Uri,
