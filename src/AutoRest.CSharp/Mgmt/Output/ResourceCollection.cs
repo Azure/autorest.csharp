@@ -12,6 +12,7 @@ using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
+using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure.Core;
@@ -54,17 +55,18 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             foreach (var operation in clientOperation)
             {
-                RequestPath diff;
-                if (operation.RequestPath.IsAncestorOf(operation.ContextualPath))
-                    diff = operation.RequestPath.TrimAncestorFrom(operation.ContextualPath);
-                else
-                    diff = operation.ContextualPath.TrimAncestorFrom(operation.RequestPath);
+                var diff = operation.RequestPath.IsAncestorOf(operation.ContextualPath) 
+                    ? operation.RequestPath.TrimAncestorFrom(operation.ContextualPath) 
+                    : operation.ContextualPath.TrimAncestorFrom(operation.RequestPath);
+
                 if (!diff.All(segment => segment.IsConstant))
-                    return true;
-                foreach (var parameter in operation.Parameters)
                 {
-                    if (!parameter.IsInPathOf(operation.Method) && parameter.IsMandatory())
-                        return true;
+                    return true;
+                }
+
+                if (operation.Parameters.Any(parameter => parameter.RequestLocation != RequestLocation.Path && parameter.IsRequired))
+                {
+                    return true;
                 }
             }
             return false;

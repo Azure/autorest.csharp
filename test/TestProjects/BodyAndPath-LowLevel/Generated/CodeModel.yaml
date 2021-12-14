@@ -41,6 +41,17 @@ schemas: !Schemas
           name: Get200ApplicationJsonItemsItem
           description: ''
       protocol: !Protocols {}
+    - !StringSchema &ref_24
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: 2014-04-01-preview
+      defaultValue: xyz
+      language: !Languages 
+        default:
+          name: String
+          description: ''
+      protocol: !Protocols {}
   choices:
     - !ChoiceSchema &ref_17
       choices:
@@ -567,6 +578,121 @@ operationGroups:
             name: ListItems
             description: List all products.
             summary: List products
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: 2014-04-01-preview
+        parameters:
+          - *ref_4
+          - !Parameter &ref_26
+            schema: *ref_3
+            implementation: Method
+            language: !Languages 
+              default:
+                name: item1
+                description: Forth parameter.
+                serializedName: item1
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - !Parameter &ref_27
+            schema: *ref_3
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: item2
+                description: Second parameter.
+                serializedName: item2
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_28
+            schema: *ref_24
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: item3
+                description: First parameter.
+                serializedName: item3
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_29
+            schema: *ref_3
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: item4
+                description: Third parameter.
+                serializedName: item4
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_5
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_25
+                schema: *ref_6
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: bodyParameter
+                    description: Body parameter, should be replaced with RequestContent.
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+            signatureParameters:
+              - *ref_25
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /{item3}/item4/{item2}/item1
+                method: post
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_26
+          - *ref_27
+          - *ref_28
+          - *ref_29
+        responses:
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: ok
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: Update
+            description: ''
         protocol: !Protocols {}
     language: !Languages 
       default:

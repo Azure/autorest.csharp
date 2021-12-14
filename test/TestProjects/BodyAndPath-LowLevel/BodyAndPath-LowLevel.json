@@ -172,6 +172,54 @@
             }
           }
         }
+      },
+      "/{item3}/item4/{item2}/item1": {
+        "post": {
+          "operationId": "update",
+          "parameters": [
+            {
+              "name": "item1",
+              "in": "query",
+              "description": "Forth parameter.",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "item2",
+              "description": "Second parameter.",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "item3",
+              "description": "First parameter.",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "default": "xyz"            
+            },            
+            {
+              "name": "item4",
+              "description": "Third parameter.",
+              "in": "query",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "bodyParameter",
+              "description": "Body parameter, should be replaced with RequestContent.",
+              "in": "body",
+              "required": true,
+              "schema": {}
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "ok"
+            }
+          }
+        }
       }
     },
     "definitions": {},

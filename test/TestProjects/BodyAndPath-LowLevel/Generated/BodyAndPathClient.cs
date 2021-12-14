@@ -275,6 +275,56 @@ namespace BodyAndPath_LowLevel
             }
         }
 
+        /// <param name="item3"> First parameter. </param>
+        /// <param name="item2"> Second parameter. </param>
+        /// <param name="item4"> Third parameter. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="item1"> Forth parameter. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="item3"/>, <paramref name="item2"/>, <paramref name="item4"/>, or <paramref name="content"/> is null. </exception>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> UpdateAsync(string item3, string item2, string item4, RequestContent content, string item1 = null, RequestContext context = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.Update");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateUpdateRequest(item3, item2, item4, content, item1, context);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="item3"> First parameter. </param>
+        /// <param name="item2"> Second parameter. </param>
+        /// <param name="item4"> Third parameter. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="item1"> Forth parameter. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="item3"/>, <paramref name="item2"/>, <paramref name="item4"/>, or <paramref name="content"/> is null. </exception>
+#pragma warning disable AZC0002
+        public virtual Response Update(string item3, string item2, string item4, RequestContent content, string item1 = null, RequestContext context = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.Update");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateUpdateRequest(item3, item2, item4, content, item1, context);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         internal HttpMessage CreateCreateRequest(string itemName, RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context);
@@ -356,6 +406,30 @@ namespace BodyAndPath_LowLevel
             uri.AppendPath("/listItems", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateUpdateRequest(string item3, string item2, string item4, RequestContent content, string item1, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context);
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/", false);
+            uri.AppendPath(item3, true);
+            uri.AppendPath("/item4/", false);
+            uri.AppendPath(item2, true);
+            uri.AppendPath("/item1", false);
+            uri.AppendQuery("item4", item4, true);
+            if (item1 != null)
+            {
+                uri.AppendQuery("item1", item1, true);
+            }
+            request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
             message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
