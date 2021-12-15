@@ -301,6 +301,11 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 RawValue = rawValue;
             }
 
+            public bool IsNull()
+            {
+                return RawValue is null;
+            }
+
             public bool IsEnumerable()
             {
                 if (RawValue == null)
@@ -342,10 +347,11 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
         public void WriteJsonRawValue(CodeWriter writer, JsonRawValue jsonRawValue) {
             if (jsonRawValue.IsEnumerable()) {
-                using (writer.Scope($"new object[] ()"))
+                using (writer.Scope($"new object[]"))
                 {
                     foreach (var element in jsonRawValue.AsEnumerable()) {
                         WriteJsonRawValue(writer, new JsonRawValue(element));
+                        writer.Line($",");
                     }
                 }
             }
@@ -362,6 +368,10 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             }
             else if (jsonRawValue.IsString()) {
                 writer.Append($"{jsonRawValue.AsString():L}");
+            }
+            else if (jsonRawValue.IsNull())
+            {
+                writer.Append($"null");
             }
             else {
                 writer.Append($"{jsonRawValue.RawValue}");
