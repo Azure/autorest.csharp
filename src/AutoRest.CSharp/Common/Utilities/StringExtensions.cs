@@ -292,15 +292,6 @@ namespace AutoRest.CSharp.Utilities
             return single.Pluralize(inputIsKnownToBeSingular);
         }
 
-        public static string ResourceNameToPlural(this string resourceName)
-        {
-            var pluralResourceName = resourceName.LastWordToPlural(false);
-            var singularResourceName = resourceName.LastWordToSingular(false);
-            return pluralResourceName != singularResourceName ?
-                pluralResourceName :
-                $"All{pluralResourceName}";
-        }
-
         public static string LastWordToPlural(this string single, bool inputIsKnownToBeSingular = true)
         {
             var words = single.SplitByCamelCase();

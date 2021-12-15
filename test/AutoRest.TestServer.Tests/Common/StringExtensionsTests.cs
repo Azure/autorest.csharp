@@ -85,15 +85,6 @@ namespace AutoRest.CSharp.Utilities
             Assert.AreEqual(expected, result);
         }
 
-        [TestCase("MetadataRole", "MetadataRoles")]
-        [TestCase("KeyInformation", "AllKeyInformation")]
-        [TestCase("RoleMetadata", "RoleMetadata")]
-        public void ValidateResourceNameToPlural(string resourceName, string expected)
-        {
-            var result = resourceName.ResourceNameToPlural();
-            Assert.AreEqual(expected, result);
-        }
-
         [TestCase("MetadataRole", "MetadataRoles", true)]
         [TestCase("MetadataRole", "MetadataRoles", false)]
         [TestCase("MetadataRoles", "MetadataRoles", true)]
