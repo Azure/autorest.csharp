@@ -292,79 +292,79 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             }
         }
 
-        public class DictionaryObjectConverter : JsonConverter<Dictionary<object, object>>
+        internal readonly struct JsonRawValue
         {
-            public override Dictionary<object, object> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            public readonly object? RawValue;
+
+            public JsonRawValue(object? rawValue)
             {
-                if (reader.TokenType != JsonTokenType.StartObject)
-                {
-                    throw new JsonException();
-                }
-
-                var value = new Dictionary<object, object>();
-
-                while (reader.Read())
-                {
-                    if (reader.TokenType == JsonTokenType.EndObject)
-                    {
-                        return value;
-                    }
-
-                    string keyString = reader.GetString();
-
-                    reader.Read();
-
-                    string itemValue = reader.GetString();
-
-                    value.Add(keyString, itemValue);
-                }
-
-                throw new JsonException("Error Occured");
+                RawValue = rawValue;
             }
 
-            public override void Write(Utf8JsonWriter writer, Dictionary<object, object> value, JsonSerializerOptions options)
+            public bool IsEnumerable()
             {
-                writer.WriteStartObject();
+                if (RawValue == null)
+                    return false;
+                return typeof(IEnumerable<object>).IsAssignableFrom(RawValue.GetType());
+            }
+            public IEnumerable<object> AsEnumerable() {
+                return RawValue is null ? new List<object>() : (IEnumerable<object>)RawValue;
+            }
 
-                foreach (KeyValuePair<object, object> item in value)
+            public bool IsString()
+            {
+                if (RawValue == null)
+                    return false;
+                return RawValue is string;
+            }
+            public string? AsString() {
+                return RawValue?.ToString();
+            }
+
+            public bool IsDictionary()
+            {
+                if (RawValue == null)
+                    return false;
+                Type t = RawValue.GetType();
+                return t.IsGenericType && t.GetGenericTypeDefinition() == typeof(Dictionary<,>);
+            }
+            public Dictionary<string, object?> AsDictionary() {
+                var ret = new Dictionary<string, object?>();
+                if (RawValue is null)
+                    return ret;
+                foreach (KeyValuePair<object, object> entry in (IEnumerable< KeyValuePair<object, object>>)RawValue)
                 {
-                    writer.WriteString(item.Key.ToString(), item.Value.ToString());
+                    ret.Add(entry.Key.ToString()!, entry.Value);
                 }
-
-                writer.WriteEndObject();
+                return ret;
             }
         }
 
-        public class ArrayConverter : JsonConverter<List<object>>
-        {
-            public override List<object> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-            {
-                // Let's check we are dealing with a proper array format([]) adhering to the JSON spec.
-                if (reader.TokenType == JsonTokenType.StartArray)
+        public void WriteJsonRawValue(CodeWriter writer, JsonRawValue jsonRawValue) {
+            if (jsonRawValue.IsEnumerable()) {
+                using (writer.Scope($"new object[] ()"))
                 {
-                    // Proper array, we can deserialize from this token onwards.
-                    return JsonSerializer.Deserialize<List<object>>(ref reader, options);
+                    foreach (var element in jsonRawValue.AsEnumerable()) {
+                        WriteJsonRawValue(writer, new JsonRawValue(element));
+                    }
                 }
-
-                // If we reached here, it means we are dealing with the JSON array in non proper array form
-                // ie: using an object structure with "$type" and "$values" format like below
-                // We will go through each token and when we get the array type inside (for $values),
-                // We will deserialize that token. We exit when we reaches the next end object.
-                return new List<object>();
             }
-
-            public override void Write(Utf8JsonWriter writer, List<object> value, JsonSerializerOptions options)
-            {
-                // Nothing special to do in write operation. So use default serialize method.
-                // JsonSerializer.Serialize(writer, value, value.GetType(), options);
-
-                writer.WriteStartArray();
-                foreach (var item in value)
+            else if (jsonRawValue.IsDictionary()) {
+                using (writer.Scope($"new {typeof(Dictionary<string, object?>)}()"))
                 {
-                    JsonSerializer.Serialize(writer, item, item.GetType(), options);
+                    foreach (var entry in jsonRawValue.AsDictionary())
+                    {
+                        writer.Append($"[{entry.Key:L}] = ");
+                        WriteJsonRawValue(writer, new JsonRawValue(entry.Value));
+                        writer.Line($",");
+                    }
                 }
-
-                writer.WriteEndArray();
+            }
+            else if (jsonRawValue.IsString()) {
+                writer.Append($"{jsonRawValue.AsString():L}");
+            }
+            else {
+                writer.Append($"{jsonRawValue.RawValue}");
             }
         }
 
@@ -390,25 +390,15 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 {
                     foreach (var entry in exampleValue.Properties ?? new DictionaryOfExamplValue() { })
                     {
-                        using (writer.Scope())
-                        {
-                            writer.Append($"{entry.Key:L}");
-                            writer.Append($",");
-                            WriteExampleValue(writer, cst.Arguments[1], entry.Value, $"{variableName}[{entry.Key:L}]");
-                        }
+                        writer.Append($"[{entry.Key:L}] = ");
+                        WriteExampleValue(writer, cst.Arguments[1], entry.Value, $"{variableName}[{entry.Key:L}]");
                         writer.Append($",");
                     }
                 }
             }
             else if (cst.Name == "Object")
             {
-                writer.UseNamespace("System.Text.Json");
-
-                var serializeOptions = new JsonSerializerOptions();
-                serializeOptions.Converters.Add(new DictionaryObjectConverter());
-                serializeOptions.Converters.Add(new ArrayConverter());
-                writer.Append($"System.Text.Json.JsonSerializer.Deserialize<object>({JsonSerializer.Serialize(MgmtBaseTestWriter.ConvertToStringDictionary(exampleValue.RawValue!), serializeOptions):L})");
-                // throw new Exception("!!!!!!!!!!!!");
+                WriteJsonRawValue(writer, new JsonRawValue(exampleValue.RawValue));
             }
             else if (cst.Name == "ResourceIdentifier" || cst.Name == "ResourceType")
             {

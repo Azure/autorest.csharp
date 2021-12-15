@@ -58,7 +58,7 @@ namespace MgmtKeyvault.Tests.Mock
             MgmtKeyvault.ManagedHsmData parameters = new MgmtKeyvault.ManagedHsmData("westus")
             {
             };
-            parameters.Tags.ReplaceWith(new Dictionary<string, string>() { { "Dept", "hsm" }, { "Environment", "dogfood" }, { "Slice", "A" }, });
+            parameters.Tags.ReplaceWith(new Dictionary<string, string>() { ["Dept"] = "hsm", ["Environment"] = "dogfood", ["Slice"] = "A", });
             await managedHsm.UpdateAsync(parameters);
         }
 
