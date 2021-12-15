@@ -47,8 +47,8 @@ namespace AutoRest.CSharp.Output.Models
         private readonly Dictionary<string, Parameter> _parameters;
 
 
-        public RestClientBuilder(OperationGroup operationGroup, BuildContext context)
-            : this(GetParametersFromOperationGroups(operationGroup), context)
+        public RestClientBuilder(ICollection<Operation> operations, BuildContext context)
+            : this(GetParametersFromOperationGroups(operations), context)
         {
         }
 
@@ -65,8 +65,8 @@ namespace AutoRest.CSharp.Output.Models
             return OrderParameters(_parameters.Values);
         }
 
-        private static IEnumerable<RequestParameter> GetParametersFromOperationGroups(OperationGroup operationGroup) =>
-            operationGroup.Operations
+        private static IEnumerable<RequestParameter> GetParametersFromOperationGroups(ICollection<Operation> operations) =>
+            operations
                 .SelectMany(op => op.Parameters.Concat(op.Requests.SelectMany(r => r.Parameters)))
                 .Where(p => p.Implementation == ImplementationLocation.Client)
                 .Distinct();

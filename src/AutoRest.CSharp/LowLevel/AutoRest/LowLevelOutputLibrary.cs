@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
@@ -13,7 +14,6 @@ namespace AutoRest.CSharp.Output.Models.Types
     {
         private readonly CodeModel _codeModel;
         private readonly BuildContext<LowLevelOutputLibrary> _context;
-        private readonly CachedDictionary<OperationGroup, LowLevelClient> _restClients;
         public ClientOptionsTypeProvider ClientOptions { get; }
 
         public LowLevelOutputLibrary(CodeModel codeModel, BuildContext<LowLevelOutputLibrary> context)
@@ -22,28 +22,49 @@ namespace AutoRest.CSharp.Output.Models.Types
             _context = context;
             ClientOptions = new ClientOptionsTypeProvider(_context);
             UpdateListMethodNames();
-            _restClients = new CachedDictionary<OperationGroup, LowLevelClient>(EnsureRestClients);
+            RestClients = EnsureRestClients();
         }
 
-        public ICollection<LowLevelClient> RestClients => _restClients.Values;
-        private Dictionary<OperationGroup, LowLevelClient> EnsureRestClients()
+        public ICollection<LowLevelClient> RestClients { get; }
+
+        private ICollection<LowLevelClient> EnsureRestClients()
         {
-            var restClients = new Dictionary<OperationGroup, LowLevelClient>();
+            var restClients = new List<LowLevelClient>();
 
             string? topLevelClientName = null;
             if (_context.Configuration.SingleTopLevelClient)
             {
                 var topLevelOperationGroup = _codeModel.OperationGroups.FirstOrDefault(og => string.IsNullOrEmpty(og.Key));
-                var topLevelClient = topLevelOperationGroup != null ? new LowLevelClient(topLevelOperationGroup, _context, ClientOptions, null) : LowLevelClient.CreateEmptyTopLevelClient(_context, ClientOptions);
-                restClients.Add(topLevelOperationGroup ?? new OperationGroup { Key = string.Empty }, topLevelClient);
+                LowLevelClient topLevelClient;
+                if (topLevelOperationGroup != null)
+                {
+                    var language = topLevelOperationGroup.Language.Default;
+                    var name = language.Name;
+                    var description = language.Description;
+                    var operations = topLevelOperationGroup.Operations;
+                    topLevelClient = new LowLevelClient(name, description, null, operations, new RestClientBuilder(operations, _context), _context, ClientOptions);
+                }
+                else
+                {
+                    var endpointParameter = _context.CodeModel.GlobalParameters.FirstOrDefault(RestClientBuilder.IsEndpointParameter);
+                    var clientParameters = endpointParameter != null ? new[] { endpointParameter } : Array.Empty<RequestParameter>();
+                    topLevelClient = new LowLevelClient(string.Empty, string.Empty, null, Array.Empty<Operation>(), new RestClientBuilder(clientParameters, _context), _context, ClientOptions);
+                }
+
+                restClients.Add(topLevelClient);
                 topLevelClientName = topLevelClient.Declaration.Name;
             }
 
             foreach (var operationGroup in _codeModel.OperationGroups)
             {
-                if (!restClients.ContainsKey(operationGroup))
+                if (!string.IsNullOrEmpty(operationGroup.Key))
                 {
-                    restClients.Add(operationGroup, new LowLevelClient(operationGroup, _context, ClientOptions, topLevelClientName));
+                    var language = operationGroup.Language.Default;
+                    var name = language.Name;
+                    var description = language.Description;
+                    var operations = operationGroup.Operations;
+
+                    restClients.Add(new LowLevelClient(name, description, topLevelClientName, operations, new RestClientBuilder(operations, _context), _context, ClientOptions));
                 }
             }
 

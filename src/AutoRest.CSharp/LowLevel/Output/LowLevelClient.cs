@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Output.Builders;
-using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
@@ -13,9 +12,6 @@ using AutoRest.CSharp.Output.Models.Responses;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
-using Azure;
-using Azure.Core;
-using Azure.Core.Pipeline;
 using Operation = AutoRest.CSharp.Input.Operation;
 
 namespace AutoRest.CSharp.Output.Models
@@ -43,34 +39,23 @@ namespace AutoRest.CSharp.Output.Models
 
         public bool IsSubClient => ParentClientTypeName != null;
 
-        public static LowLevelClient CreateEmptyTopLevelClient(BuildContext<LowLevelOutputLibrary> context, ClientOptionsTypeProvider clientOptions)
-        {
-            var operationGroup = new OperationGroup { Key = string.Empty };
-            var endpointParameter = context.CodeModel.GlobalParameters.FirstOrDefault(RestClientBuilder.IsEndpointParameter);
-            var clientParameters = endpointParameter != null ? new[] { endpointParameter } : Array.Empty<RequestParameter>();
-            return new(operationGroup, new RestClientBuilder(clientParameters, context), context, clientOptions, null);
-        }
-
-        public LowLevelClient(OperationGroup operationGroup, BuildContext<LowLevelOutputLibrary> context, ClientOptionsTypeProvider clientOptions, string? parentClientTypeName)
-            : this(operationGroup, new RestClientBuilder(operationGroup, context), context, clientOptions, parentClientTypeName) { }
-
-        private LowLevelClient(OperationGroup operationGroup, RestClientBuilder builder, BuildContext<LowLevelOutputLibrary> context, ClientOptionsTypeProvider clientOptions, string? parentClientTypeName)
+        public LowLevelClient(string name, string description, string? parentClientTypeName, ICollection<Operation> operations, RestClientBuilder builder, BuildContext<LowLevelOutputLibrary> context, ClientOptionsTypeProvider clientOptions)
             : base(context)
         {
-            var clientPrefix = ClientBuilder.GetClientPrefix(operationGroup.Language.Default.Name, context);
+            var clientPrefix = ClientBuilder.GetClientPrefix(name, context);
             DefaultName = clientPrefix + (parentClientTypeName != null ? string.Empty : ClientBuilder.GetClientSuffix(context));
-            Description = BuilderHelpers.EscapeXmlDescription(ClientBuilder.CreateDescription(operationGroup, ClientBuilder.GetClientPrefix(Declaration.Name, context)));
+            Description = BuilderHelpers.EscapeXmlDescription(string.IsNullOrWhiteSpace(description) ? $"The {ClientBuilder.GetClientPrefix(Declaration.Name, context)} service client." : BuilderHelpers.EscapeXmlDescription(description));
 
-            ClientOptions = clientOptions;
             if (ExistingType != null && context.SourceInputModel != null && context.SourceInputModel.TryGetClientSourceInput(ExistingType, out var codeGenClientAttribute))
             {
                 ParentClientTypeName = codeGenClientAttribute.ParentClientType?.Name;
             }
-            else if (ParentClientTypeName == null && !string.IsNullOrEmpty(parentClientTypeName) && !string.IsNullOrEmpty(operationGroup.Language.Default.Name))
+            else if (ParentClientTypeName == null && !string.IsNullOrEmpty(parentClientTypeName) && !string.IsNullOrEmpty(name))
             {
                 ParentClientTypeName = parentClientTypeName;
             }
 
+            ClientOptions = clientOptions;
             _hasPublicConstructors = !IsSubClient;
 
             Parameters = builder.GetOrderedParameters();
@@ -78,7 +63,7 @@ namespace AutoRest.CSharp.Output.Models
 
             PublicConstructors = BuildPublicConstructors().ToArray();
 
-            var clientMethods = BuildMethods(builder, operationGroup.Operations, Declaration.Name).ToArray();
+            var clientMethods = BuildMethods(builder, operations, Declaration.Name).ToArray();
 
             ClientMethods = clientMethods
                 .OrderBy(m => m.IsLongRunning ? 2 : m.PagingInfo != null ? 1 : 0) // Temporary sorting to minimize amount of changed files. Will be removed when new LRO is implemented
