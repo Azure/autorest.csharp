@@ -232,14 +232,14 @@ namespace ExactMatchInheritance
         /// <param name="exactMatchModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel1SName"/> is null. </exception>
-        public virtual Response<bool> CheckIfExists(string exactMatchModel1SName, CancellationToken cancellationToken = default)
+        public virtual Response<bool> Exists(string exactMatchModel1SName, CancellationToken cancellationToken = default)
         {
             if (exactMatchModel1SName == null)
             {
                 throw new ArgumentNullException(nameof(exactMatchModel1SName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ExactMatchModel1Collection.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("ExactMatchModel1Collection.Exists");
             scope.Start();
             try
             {
@@ -257,14 +257,14 @@ namespace ExactMatchInheritance
         /// <param name="exactMatchModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel1SName"/> is null. </exception>
-        public async virtual Task<Response<bool>> CheckIfExistsAsync(string exactMatchModel1SName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> ExistsAsync(string exactMatchModel1SName, CancellationToken cancellationToken = default)
         {
             if (exactMatchModel1SName == null)
             {
                 throw new ArgumentNullException(nameof(exactMatchModel1SName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ExactMatchModel1Collection.CheckIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("ExactMatchModel1Collection.ExistsAsync");
             scope.Start();
             try
             {

@@ -232,14 +232,14 @@ namespace SupersetFlattenInheritance
         /// <param name="trackedResourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel1SName"/> is null. </exception>
-        public virtual Response<bool> CheckIfExists(string trackedResourceModel1SName, CancellationToken cancellationToken = default)
+        public virtual Response<bool> Exists(string trackedResourceModel1SName, CancellationToken cancellationToken = default)
         {
             if (trackedResourceModel1SName == null)
             {
                 throw new ArgumentNullException(nameof(trackedResourceModel1SName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("TrackedResourceModel1Collection.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("TrackedResourceModel1Collection.Exists");
             scope.Start();
             try
             {
@@ -257,14 +257,14 @@ namespace SupersetFlattenInheritance
         /// <param name="trackedResourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel1SName"/> is null. </exception>
-        public async virtual Task<Response<bool>> CheckIfExistsAsync(string trackedResourceModel1SName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> ExistsAsync(string trackedResourceModel1SName, CancellationToken cancellationToken = default)
         {
             if (trackedResourceModel1SName == null)
             {
                 throw new ArgumentNullException(nameof(trackedResourceModel1SName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("TrackedResourceModel1Collection.CheckIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("TrackedResourceModel1Collection.ExistsAsync");
             scope.Start();
             try
             {
