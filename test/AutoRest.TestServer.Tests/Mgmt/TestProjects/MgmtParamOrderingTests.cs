@@ -42,8 +42,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase("EnvironmentContainerResourceCollection", "GetAsync", "name")]
         [TestCase("EnvironmentContainerResourceCollection", "GetIfExists", "name")]
         [TestCase("EnvironmentContainerResourceCollection", "GetIfExistsAsync", "name")]
-        [TestCase("EnvironmentContainerResourceCollection", "CheckIfExists", "name")]
-        [TestCase("EnvironmentContainerResourceCollection", "CheckIfExistsAsync", "name")]
+        [TestCase("EnvironmentContainerResourceCollection", "Exists", "name")]
+        [TestCase("EnvironmentContainerResourceCollection", "ExistsAsync", "name")]
         public void ValidateCollectionCorrectFirstParameter(string collectionName, string methodName, string parameterName)
         {
             var method = FindAllCollections().Single(o => o.Name == collectionName).GetMethod(methodName);
