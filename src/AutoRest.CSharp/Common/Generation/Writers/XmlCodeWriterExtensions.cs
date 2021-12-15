@@ -10,6 +10,7 @@ using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure.Core;
+using Azure.ResourceManager;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -351,6 +352,18 @@ namespace AutoRest.CSharp.Generation.Writers
                 )
                 {
                     writer.Append($"({type}){element}");
+                    return;
+                }
+
+                if (frameworkType == typeof(ResourceIdentifier))
+                {
+                    writer.Append($"new {typeof(ResourceIdentifier)}(({typeof(string)}){element})");
+                    return;
+                }
+
+                if (frameworkType == typeof(ResourceType))
+                {
+                    writer.Append($"({typeof(string)}){element}");
                     return;
                 }
 
