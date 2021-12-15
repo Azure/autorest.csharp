@@ -94,6 +94,46 @@ namespace AutoRest.CSharp.Utilities
             Assert.AreEqual(expected, result);
         }
 
+        [TestCase("MetadataRole", "MetadataRoles", true)]
+        [TestCase("MetadataRole", "MetadataRoles", false)]
+        [TestCase("MetadataRoles", "MetadataRoles", true)]
+        [TestCase("MetadataRoles", "MetadataRoles", false)]
+        [TestCase("KeyInformation", "KeyInformation", true)]
+        [TestCase("KeyInformation", "KeyInformation", false)]
+        [TestCase("RoleMetadata", "RoleMetadata", true)]
+        [TestCase("RoleMetadata", "RoleMetadata", false)]
+        [TestCase("MetadataPolicy", "MetadataPolicies", true)]
+        [TestCase("MetadataPolicy", "MetadataPolicies", false)]
+        [TestCase("MetadataPolicies", "MetadataPolicies", true)]
+        [TestCase("MetadataPolicies", "MetadataPolicies", false)]
+        [TestCase("TipData", "TipData", true)]
+        [TestCase("TipData", "TipData", false)]
+        public void ValidateLastWordToPlural(string resourceName, string expected, bool inputKnownToBeSingular = true)
+        {
+            var result = resourceName.LastWordToPlural(inputKnownToBeSingular);
+            Assert.AreEqual(expected, result);
+        }
+
+        [TestCase("MetadataRoles", "MetadataRole", true)]
+        [TestCase("MetadataRoles", "MetadataRole", false)]
+        [TestCase("MetadataRoles", "MetadataRole", true)]
+        [TestCase("MetadataRoles", "MetadataRole", false)]
+        [TestCase("KeyInformation", "KeyInformation", true)]
+        [TestCase("KeyInformation", "KeyInformation", false)]
+        [TestCase("RoleMetadata", "RoleMetadata", true)]
+        [TestCase("RoleMetadata", "RoleMetadata", false)]
+        [TestCase("MetadataPolicy", "MetadataPolicy", true)]
+        [TestCase("MetadataPolicy", "MetadataPolicy", false)]
+        [TestCase("MetadataPolicies", "MetadataPolicy", true)]
+        [TestCase("MetadataPolicies", "MetadataPolicy", false)]
+        [TestCase("TipData", "TipData", true)]
+        [TestCase("TipData", "TipData", false)]
+        public void ValidateLastWordToSingular(string resourceName, string expected, bool inputKnownToBePlural = true)
+        {
+            var result = resourceName.LastWordToSingular(inputKnownToBePlural);
+            Assert.AreEqual(expected, result);
+        }
+
         [TestCase("List", "MetadataRoles", "GetMetadataRoles")]
         [TestCase("ListAll", "MetadataPolicy", "GetMetadataPolicies")]
         [TestCase("ListCollection", "Collections", "GetCollections")]

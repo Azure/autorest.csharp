@@ -19,7 +19,7 @@ namespace AutoRest.CSharp.Utilities
         {
             Vocabularies.Default.AddUncountable("data");
             // "S".Singularize() throws exception, github issue link: https://github.com/Humanizr/Humanizer/issues/1154
-            Vocabularies.Default.AddIrregular("S", "S");
+            Vocabularies.Default.AddUncountable("S");
         }
 
         public static bool IsNullOrEmpty(this string? text) => String.IsNullOrEmpty(text);
