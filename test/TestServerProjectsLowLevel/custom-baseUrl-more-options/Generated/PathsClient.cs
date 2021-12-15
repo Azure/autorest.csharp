@@ -55,7 +55,7 @@ namespace custom_baseUrl_more_options_LowLevel
 
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
-            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _subscriptionId = subscriptionId;
             _dnsSuffix = dnsSuffix;
         }
@@ -65,7 +65,7 @@ namespace custom_baseUrl_more_options_LowLevel
         /// <param name="secret"> Secret value. </param>
         /// <param name="keyName"> The key name with value &apos;key1&apos;. </param>
         /// <param name="keyVersion"> The key version. Default value &apos;v1&apos;. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="vault"/>, <paramref name="secret"/>, or <paramref name="keyName"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -84,7 +84,7 @@ namespace custom_baseUrl_more_options_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetEmptyRequest(vault, secret, keyName, keyVersion);
+                using HttpMessage message = CreateGetEmptyRequest(vault, secret, keyName, keyVersion, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -99,7 +99,7 @@ namespace custom_baseUrl_more_options_LowLevel
         /// <param name="secret"> Secret value. </param>
         /// <param name="keyName"> The key name with value &apos;key1&apos;. </param>
         /// <param name="keyVersion"> The key version. Default value &apos;v1&apos;. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="vault"/>, <paramref name="secret"/>, or <paramref name="keyName"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -118,7 +118,7 @@ namespace custom_baseUrl_more_options_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetEmptyRequest(vault, secret, keyName, keyVersion);
+                using HttpMessage message = CreateGetEmptyRequest(vault, secret, keyName, keyVersion, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -128,9 +128,9 @@ namespace custom_baseUrl_more_options_LowLevel
             }
         }
 
-        internal HttpMessage CreateGetEmptyRequest(string vault, string secret, string keyName, string keyVersion)
+        internal HttpMessage CreateGetEmptyRequest(string vault, string secret, string keyName, string keyVersion, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();

@@ -36,7 +36,7 @@ namespace ExactMatchFlattenInheritance
         internal AzureResourceFlattenModel1Collection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _azureResourceFlattenModel1sRestClient = new AzureResourceFlattenModel1SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _azureResourceFlattenModel1sRestClient = new AzureResourceFlattenModel1SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
@@ -68,7 +68,7 @@ namespace ExactMatchFlattenInheritance
             scope.Start();
             try
             {
-                var response = _azureResourceFlattenModel1sRestClient.Put(Id.ResourceGroupName, name, parameters, cancellationToken);
+                var response = _azureResourceFlattenModel1sRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, name, parameters, cancellationToken);
                 var operation = new AzureResourceFlattenModel1PutOperation(Parent, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
@@ -105,7 +105,7 @@ namespace ExactMatchFlattenInheritance
             scope.Start();
             try
             {
-                var response = await _azureResourceFlattenModel1sRestClient.PutAsync(Id.ResourceGroupName, name, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _azureResourceFlattenModel1sRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, name, parameters, cancellationToken).ConfigureAwait(false);
                 var operation = new AzureResourceFlattenModel1PutOperation(Parent, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -136,7 +136,7 @@ namespace ExactMatchFlattenInheritance
             scope.Start();
             try
             {
-                var response = _azureResourceFlattenModel1sRestClient.Get(Id.ResourceGroupName, name, cancellationToken);
+                var response = _azureResourceFlattenModel1sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new AzureResourceFlattenModel1(Parent, response.Value), response.GetRawResponse());
@@ -166,7 +166,7 @@ namespace ExactMatchFlattenInheritance
             scope.Start();
             try
             {
-                var response = await _azureResourceFlattenModel1sRestClient.GetAsync(Id.ResourceGroupName, name, cancellationToken).ConfigureAwait(false);
+                var response = await _azureResourceFlattenModel1sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new AzureResourceFlattenModel1(Parent, response.Value), response.GetRawResponse());
@@ -193,7 +193,7 @@ namespace ExactMatchFlattenInheritance
             scope.Start();
             try
             {
-                var response = _azureResourceFlattenModel1sRestClient.Get(Id.ResourceGroupName, name, cancellationToken: cancellationToken);
+                var response = _azureResourceFlattenModel1sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<AzureResourceFlattenModel1>(null, response.GetRawResponse())
                     : Response.FromValue(new AzureResourceFlattenModel1(this, response.Value), response.GetRawResponse());
@@ -220,7 +220,7 @@ namespace ExactMatchFlattenInheritance
             scope.Start();
             try
             {
-                var response = await _azureResourceFlattenModel1sRestClient.GetAsync(Id.ResourceGroupName, name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _azureResourceFlattenModel1sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<AzureResourceFlattenModel1>(null, response.GetRawResponse())
                     : Response.FromValue(new AzureResourceFlattenModel1(this, response.Value), response.GetRawResponse());
@@ -293,7 +293,7 @@ namespace ExactMatchFlattenInheritance
             scope.Start();
             try
             {
-                var response = _azureResourceFlattenModel1sRestClient.List(Id.ResourceGroupName, cancellationToken);
+                var response = _azureResourceFlattenModel1sRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken);
                 return Response.FromValue(response.Value.Value.Select(value => new AzureResourceFlattenModel1(Parent, value)).ToArray() as IReadOnlyList<AzureResourceFlattenModel1>, response.GetRawResponse());
             }
             catch (Exception e)
@@ -314,7 +314,7 @@ namespace ExactMatchFlattenInheritance
             scope.Start();
             try
             {
-                var response = await _azureResourceFlattenModel1sRestClient.ListAsync(Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
+                var response = await _azureResourceFlattenModel1sRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value.Value.Select(value => new AzureResourceFlattenModel1(Parent, value)).ToArray() as IReadOnlyList<AzureResourceFlattenModel1>, response.GetRawResponse());
             }
             catch (Exception e)

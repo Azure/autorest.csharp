@@ -19,7 +19,6 @@ namespace MgmtParamOrdering
 {
     internal partial class WorkspacesRestOperations
     {
-        private string subscriptionId;
         private Uri endpoint;
         private string apiVersion;
         private ClientDiagnostics _clientDiagnostics;
@@ -30,13 +29,11 @@ namespace MgmtParamOrdering
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="options"> The client options used to construct the current client. </param>
-        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="apiVersion"> Api Version. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="apiVersion"/> is null. </exception>
-        public WorkspacesRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ClientOptions options, string subscriptionId, Uri endpoint = null, string apiVersion = "2020-06-01")
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
+        public WorkspacesRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ClientOptions options, Uri endpoint = null, string apiVersion = "2020-06-01")
         {
-            this.subscriptionId = subscriptionId ?? throw new ArgumentNullException(nameof(subscriptionId));
             this.endpoint = endpoint ?? new Uri("https://management.azure.com");
             this.apiVersion = apiVersion ?? throw new ArgumentNullException(nameof(apiVersion));
             _clientDiagnostics = clientDiagnostics;
@@ -44,7 +41,7 @@ namespace MgmtParamOrdering
             _userAgent = HttpMessageUtilities.GetUserAgentName(this, options);
         }
 
-        internal HttpMessage CreateListRequest(string resourceGroupName)
+        internal HttpMessage CreateListRequest(string subscriptionId, string resourceGroupName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -64,17 +61,22 @@ namespace MgmtParamOrdering
         }
 
         /// <summary> Gets the properties of the specified machine learning workspace. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> is null. </exception>
-        public async Task<Response<WorkspaceListResult>> ListAsync(string resourceGroupName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
+        public async Task<Response<WorkspaceListResult>> ListAsync(string subscriptionId, string resourceGroupName, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
 
-            using var message = CreateListRequest(resourceGroupName);
+            using var message = CreateListRequest(subscriptionId, resourceGroupName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -91,17 +93,22 @@ namespace MgmtParamOrdering
         }
 
         /// <summary> Gets the properties of the specified machine learning workspace. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> is null. </exception>
-        public Response<WorkspaceListResult> List(string resourceGroupName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
+        public Response<WorkspaceListResult> List(string subscriptionId, string resourceGroupName, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
 
-            using var message = CreateListRequest(resourceGroupName);
+            using var message = CreateListRequest(subscriptionId, resourceGroupName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -117,7 +124,7 @@ namespace MgmtParamOrdering
             }
         }
 
-        internal HttpMessage CreateGetRequest(string resourceGroupName, string workspaceName)
+        internal HttpMessage CreateGetRequest(string subscriptionId, string resourceGroupName, string workspaceName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -138,12 +145,17 @@ namespace MgmtParamOrdering
         }
 
         /// <summary> Gets the properties of the specified machine learning workspace. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="workspaceName"> Name of Azure Machine Learning workspace. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="workspaceName"/> is null. </exception>
-        public async Task<Response<WorkspaceData>> GetAsync(string resourceGroupName, string workspaceName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="workspaceName"/> is null. </exception>
+        public async Task<Response<WorkspaceData>> GetAsync(string subscriptionId, string resourceGroupName, string workspaceName, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -153,7 +165,7 @@ namespace MgmtParamOrdering
                 throw new ArgumentNullException(nameof(workspaceName));
             }
 
-            using var message = CreateGetRequest(resourceGroupName, workspaceName);
+            using var message = CreateGetRequest(subscriptionId, resourceGroupName, workspaceName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -172,12 +184,17 @@ namespace MgmtParamOrdering
         }
 
         /// <summary> Gets the properties of the specified machine learning workspace. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="workspaceName"> Name of Azure Machine Learning workspace. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="workspaceName"/> is null. </exception>
-        public Response<WorkspaceData> Get(string resourceGroupName, string workspaceName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="workspaceName"/> is null. </exception>
+        public Response<WorkspaceData> Get(string subscriptionId, string resourceGroupName, string workspaceName, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -187,7 +204,7 @@ namespace MgmtParamOrdering
                 throw new ArgumentNullException(nameof(workspaceName));
             }
 
-            using var message = CreateGetRequest(resourceGroupName, workspaceName);
+            using var message = CreateGetRequest(subscriptionId, resourceGroupName, workspaceName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -205,7 +222,7 @@ namespace MgmtParamOrdering
             }
         }
 
-        internal HttpMessage CreateCreateOrUpdateRequest(string resourceGroupName, string workspaceName, WorkspaceData parameters)
+        internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string workspaceName, WorkspaceData parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -230,13 +247,18 @@ namespace MgmtParamOrdering
         }
 
         /// <summary> Creates or updates a workspace with the specified parameters. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="workspaceName"> Name of Azure Machine Learning workspace. </param>
         /// <param name="parameters"> The parameters for creating or updating a machine learning workspace. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="workspaceName"/>, or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response> CreateOrUpdateAsync(string resourceGroupName, string workspaceName, WorkspaceData parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="workspaceName"/>, or <paramref name="parameters"/> is null. </exception>
+        public async Task<Response> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string workspaceName, WorkspaceData parameters, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -250,7 +272,7 @@ namespace MgmtParamOrdering
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var message = CreateCreateOrUpdateRequest(resourceGroupName, workspaceName, parameters);
+            using var message = CreateCreateOrUpdateRequest(subscriptionId, resourceGroupName, workspaceName, parameters);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -264,13 +286,18 @@ namespace MgmtParamOrdering
         }
 
         /// <summary> Creates or updates a workspace with the specified parameters. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="workspaceName"> Name of Azure Machine Learning workspace. </param>
         /// <param name="parameters"> The parameters for creating or updating a machine learning workspace. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="workspaceName"/>, or <paramref name="parameters"/> is null. </exception>
-        public Response CreateOrUpdate(string resourceGroupName, string workspaceName, WorkspaceData parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="workspaceName"/>, or <paramref name="parameters"/> is null. </exception>
+        public Response CreateOrUpdate(string subscriptionId, string resourceGroupName, string workspaceName, WorkspaceData parameters, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -284,7 +311,7 @@ namespace MgmtParamOrdering
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var message = CreateCreateOrUpdateRequest(resourceGroupName, workspaceName, parameters);
+            using var message = CreateCreateOrUpdateRequest(subscriptionId, resourceGroupName, workspaceName, parameters);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -297,7 +324,7 @@ namespace MgmtParamOrdering
             }
         }
 
-        internal HttpMessage CreateDeleteRequest(string resourceGroupName, string workspaceName)
+        internal HttpMessage CreateDeleteRequest(string subscriptionId, string resourceGroupName, string workspaceName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -318,12 +345,17 @@ namespace MgmtParamOrdering
         }
 
         /// <summary> Deletes a machine learning workspace. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="workspaceName"> Name of Azure Machine Learning workspace. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="workspaceName"/> is null. </exception>
-        public async Task<Response> DeleteAsync(string resourceGroupName, string workspaceName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="workspaceName"/> is null. </exception>
+        public async Task<Response> DeleteAsync(string subscriptionId, string resourceGroupName, string workspaceName, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -333,7 +365,7 @@ namespace MgmtParamOrdering
                 throw new ArgumentNullException(nameof(workspaceName));
             }
 
-            using var message = CreateDeleteRequest(resourceGroupName, workspaceName);
+            using var message = CreateDeleteRequest(subscriptionId, resourceGroupName, workspaceName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -347,12 +379,17 @@ namespace MgmtParamOrdering
         }
 
         /// <summary> Deletes a machine learning workspace. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="workspaceName"> Name of Azure Machine Learning workspace. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="workspaceName"/> is null. </exception>
-        public Response Delete(string resourceGroupName, string workspaceName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="workspaceName"/> is null. </exception>
+        public Response Delete(string subscriptionId, string resourceGroupName, string workspaceName, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -362,7 +399,7 @@ namespace MgmtParamOrdering
                 throw new ArgumentNullException(nameof(workspaceName));
             }
 
-            using var message = CreateDeleteRequest(resourceGroupName, workspaceName);
+            using var message = CreateDeleteRequest(subscriptionId, resourceGroupName, workspaceName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -375,7 +412,7 @@ namespace MgmtParamOrdering
             }
         }
 
-        internal HttpMessage CreateUpdateRequest(string resourceGroupName, string workspaceName, WorkspaceUpdateParameters parameters)
+        internal HttpMessage CreateUpdateRequest(string subscriptionId, string resourceGroupName, string workspaceName, WorkspaceUpdateParameters parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -400,13 +437,18 @@ namespace MgmtParamOrdering
         }
 
         /// <summary> Updates a machine learning workspace with the specified parameters. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="workspaceName"> Name of Azure Machine Learning workspace. </param>
         /// <param name="parameters"> The parameters for updating a machine learning workspace. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="workspaceName"/>, or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<WorkspaceData>> UpdateAsync(string resourceGroupName, string workspaceName, WorkspaceUpdateParameters parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="workspaceName"/>, or <paramref name="parameters"/> is null. </exception>
+        public async Task<Response<WorkspaceData>> UpdateAsync(string subscriptionId, string resourceGroupName, string workspaceName, WorkspaceUpdateParameters parameters, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -420,7 +462,7 @@ namespace MgmtParamOrdering
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var message = CreateUpdateRequest(resourceGroupName, workspaceName, parameters);
+            using var message = CreateUpdateRequest(subscriptionId, resourceGroupName, workspaceName, parameters);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -437,13 +479,18 @@ namespace MgmtParamOrdering
         }
 
         /// <summary> Updates a machine learning workspace with the specified parameters. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="workspaceName"> Name of Azure Machine Learning workspace. </param>
         /// <param name="parameters"> The parameters for updating a machine learning workspace. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="workspaceName"/>, or <paramref name="parameters"/> is null. </exception>
-        public Response<WorkspaceData> Update(string resourceGroupName, string workspaceName, WorkspaceUpdateParameters parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="workspaceName"/>, or <paramref name="parameters"/> is null. </exception>
+        public Response<WorkspaceData> Update(string subscriptionId, string resourceGroupName, string workspaceName, WorkspaceUpdateParameters parameters, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -457,7 +504,7 @@ namespace MgmtParamOrdering
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var message = CreateUpdateRequest(resourceGroupName, workspaceName, parameters);
+            using var message = CreateUpdateRequest(subscriptionId, resourceGroupName, workspaceName, parameters);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

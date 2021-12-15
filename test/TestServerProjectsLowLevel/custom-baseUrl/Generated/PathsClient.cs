@@ -49,13 +49,13 @@ namespace custom_baseUrl_LowLevel
 
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
-            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _host = host;
         }
 
         /// <summary> Get a 200 to test a valid base uri. </summary>
         /// <param name="accountName"> Account Name. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -74,7 +74,7 @@ namespace custom_baseUrl_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetEmptyRequest(accountName);
+                using HttpMessage message = CreateGetEmptyRequest(accountName, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -86,7 +86,7 @@ namespace custom_baseUrl_LowLevel
 
         /// <summary> Get a 200 to test a valid base uri. </summary>
         /// <param name="accountName"> Account Name. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -105,7 +105,7 @@ namespace custom_baseUrl_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetEmptyRequest(accountName);
+                using HttpMessage message = CreateGetEmptyRequest(accountName, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -115,9 +115,9 @@ namespace custom_baseUrl_LowLevel
             }
         }
 
-        internal HttpMessage CreateGetEmptyRequest(string accountName)
+        internal HttpMessage CreateGetEmptyRequest(string accountName, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();

@@ -47,12 +47,12 @@ namespace url_LowLevel
 
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
-            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
         }
 
         /// <summary> Get true Boolean value on path. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -70,7 +70,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetBooleanTrueRequest();
+                using HttpMessage message = CreateGetBooleanTrueRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -81,7 +81,7 @@ namespace url_LowLevel
         }
 
         /// <summary> Get true Boolean value on path. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -99,7 +99,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetBooleanTrueRequest();
+                using HttpMessage message = CreateGetBooleanTrueRequest(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -110,7 +110,7 @@ namespace url_LowLevel
         }
 
         /// <summary> Get false Boolean value on path. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -128,7 +128,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetBooleanFalseRequest();
+                using HttpMessage message = CreateGetBooleanFalseRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -139,7 +139,7 @@ namespace url_LowLevel
         }
 
         /// <summary> Get false Boolean value on path. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -157,7 +157,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetBooleanFalseRequest();
+                using HttpMessage message = CreateGetBooleanFalseRequest(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -168,7 +168,7 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;1000000&apos; integer value. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -186,7 +186,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetIntOneMillionRequest();
+                using HttpMessage message = CreateGetIntOneMillionRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -197,7 +197,7 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;1000000&apos; integer value. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -215,7 +215,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetIntOneMillionRequest();
+                using HttpMessage message = CreateGetIntOneMillionRequest(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -226,7 +226,7 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;-1000000&apos; integer value. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -244,7 +244,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetIntNegativeOneMillionRequest();
+                using HttpMessage message = CreateGetIntNegativeOneMillionRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -255,7 +255,7 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;-1000000&apos; integer value. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -273,7 +273,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetIntNegativeOneMillionRequest();
+                using HttpMessage message = CreateGetIntNegativeOneMillionRequest(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -284,7 +284,7 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;10000000000&apos; 64 bit integer value. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -302,7 +302,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetTenBillionRequest();
+                using HttpMessage message = CreateGetTenBillionRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -313,7 +313,7 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;10000000000&apos; 64 bit integer value. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -331,7 +331,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetTenBillionRequest();
+                using HttpMessage message = CreateGetTenBillionRequest(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -342,7 +342,7 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;-10000000000&apos; 64 bit integer value. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -360,7 +360,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetNegativeTenBillionRequest();
+                using HttpMessage message = CreateGetNegativeTenBillionRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -371,7 +371,7 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;-10000000000&apos; 64 bit integer value. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -389,7 +389,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetNegativeTenBillionRequest();
+                using HttpMessage message = CreateGetNegativeTenBillionRequest(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -400,7 +400,7 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;1.034E+20&apos; numeric value. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -418,7 +418,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateFloatScientificPositiveRequest();
+                using HttpMessage message = CreateFloatScientificPositiveRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -429,7 +429,7 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;1.034E+20&apos; numeric value. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -447,7 +447,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateFloatScientificPositiveRequest();
+                using HttpMessage message = CreateFloatScientificPositiveRequest(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -458,7 +458,7 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;-1.034E-20&apos; numeric value. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -476,7 +476,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateFloatScientificNegativeRequest();
+                using HttpMessage message = CreateFloatScientificNegativeRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -487,7 +487,7 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;-1.034E-20&apos; numeric value. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -505,7 +505,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateFloatScientificNegativeRequest();
+                using HttpMessage message = CreateFloatScientificNegativeRequest(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -516,7 +516,7 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;9999999.999&apos; numeric value. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -534,7 +534,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateDoubleDecimalPositiveRequest();
+                using HttpMessage message = CreateDoubleDecimalPositiveRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -545,7 +545,7 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;9999999.999&apos; numeric value. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -563,7 +563,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateDoubleDecimalPositiveRequest();
+                using HttpMessage message = CreateDoubleDecimalPositiveRequest(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -574,7 +574,7 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;-9999999.999&apos; numeric value. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -592,7 +592,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateDoubleDecimalNegativeRequest();
+                using HttpMessage message = CreateDoubleDecimalNegativeRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -603,7 +603,7 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;-9999999.999&apos; numeric value. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -621,7 +621,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateDoubleDecimalNegativeRequest();
+                using HttpMessage message = CreateDoubleDecimalNegativeRequest(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -632,7 +632,7 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multi-byte string value. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -650,7 +650,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateStringUnicodeRequest();
+                using HttpMessage message = CreateStringUnicodeRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -661,7 +661,7 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multi-byte string value. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -679,7 +679,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateStringUnicodeRequest();
+                using HttpMessage message = CreateStringUnicodeRequest(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -690,7 +690,7 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -708,7 +708,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateStringUrlEncodedRequest();
+                using HttpMessage message = CreateStringUrlEncodedRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -719,7 +719,7 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -737,7 +737,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateStringUrlEncodedRequest();
+                using HttpMessage message = CreateStringUrlEncodedRequest(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -748,7 +748,7 @@ namespace url_LowLevel
         }
 
         /// <summary> https://tools.ietf.org/html/rfc3986#appendix-A &apos;path&apos; accept any &apos;pchar&apos; not encoded. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -766,7 +766,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateStringUrlNonEncodedRequest();
+                using HttpMessage message = CreateStringUrlNonEncodedRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -777,7 +777,7 @@ namespace url_LowLevel
         }
 
         /// <summary> https://tools.ietf.org/html/rfc3986#appendix-A &apos;path&apos; accept any &apos;pchar&apos; not encoded. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -795,7 +795,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateStringUrlNonEncodedRequest();
+                using HttpMessage message = CreateStringUrlNonEncodedRequest(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -806,7 +806,7 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;&apos;. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -824,7 +824,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateStringEmptyRequest();
+                using HttpMessage message = CreateStringEmptyRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -835,7 +835,7 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;&apos;. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -853,7 +853,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateStringEmptyRequest();
+                using HttpMessage message = CreateStringEmptyRequest(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -865,7 +865,7 @@ namespace url_LowLevel
 
         /// <summary> Get null (should throw). </summary>
         /// <param name="stringPath"> null string value. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="stringPath"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -884,7 +884,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateStringNullRequest(stringPath);
+                using HttpMessage message = CreateStringNullRequest(stringPath, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -896,7 +896,7 @@ namespace url_LowLevel
 
         /// <summary> Get null (should throw). </summary>
         /// <param name="stringPath"> null string value. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="stringPath"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -915,7 +915,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateStringNullRequest(stringPath);
+                using HttpMessage message = CreateStringNullRequest(stringPath, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -927,7 +927,7 @@ namespace url_LowLevel
 
         /// <summary> Get using uri with &apos;green color&apos; in path parameter. </summary>
         /// <param name="enumPath"> send the value green. Allowed values: &quot;red color&quot; | &quot;green color&quot; | &quot;blue color&quot;. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="enumPath"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -946,7 +946,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateEnumValidRequest(enumPath);
+                using HttpMessage message = CreateEnumValidRequest(enumPath, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -958,7 +958,7 @@ namespace url_LowLevel
 
         /// <summary> Get using uri with &apos;green color&apos; in path parameter. </summary>
         /// <param name="enumPath"> send the value green. Allowed values: &quot;red color&quot; | &quot;green color&quot; | &quot;blue color&quot;. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="enumPath"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -977,7 +977,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateEnumValidRequest(enumPath);
+                using HttpMessage message = CreateEnumValidRequest(enumPath, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -989,7 +989,7 @@ namespace url_LowLevel
 
         /// <summary> Get null (should throw on the client before the request is sent on wire). </summary>
         /// <param name="enumPath"> send null should throw. Allowed values: &quot;red color&quot; | &quot;green color&quot; | &quot;blue color&quot;. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="enumPath"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -1008,7 +1008,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateEnumNullRequest(enumPath);
+                using HttpMessage message = CreateEnumNullRequest(enumPath, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -1020,7 +1020,7 @@ namespace url_LowLevel
 
         /// <summary> Get null (should throw on the client before the request is sent on wire). </summary>
         /// <param name="enumPath"> send null should throw. Allowed values: &quot;red color&quot; | &quot;green color&quot; | &quot;blue color&quot;. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="enumPath"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -1039,7 +1039,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateEnumNullRequest(enumPath);
+                using HttpMessage message = CreateEnumNullRequest(enumPath, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -1051,7 +1051,7 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </summary>
         /// <param name="bytePath"> &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="bytePath"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -1070,7 +1070,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateByteMultiByteRequest(bytePath);
+                using HttpMessage message = CreateByteMultiByteRequest(bytePath, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -1082,7 +1082,7 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </summary>
         /// <param name="bytePath"> &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="bytePath"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -1101,7 +1101,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateByteMultiByteRequest(bytePath);
+                using HttpMessage message = CreateByteMultiByteRequest(bytePath, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -1112,7 +1112,7 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;&apos; as byte array. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1130,7 +1130,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateByteEmptyRequest();
+                using HttpMessage message = CreateByteEmptyRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -1141,7 +1141,7 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;&apos; as byte array. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1159,7 +1159,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateByteEmptyRequest();
+                using HttpMessage message = CreateByteEmptyRequest(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -1171,7 +1171,7 @@ namespace url_LowLevel
 
         /// <summary> Get null as byte array (should throw). </summary>
         /// <param name="bytePath"> null as byte array (should throw). </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="bytePath"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -1190,7 +1190,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateByteNullRequest(bytePath);
+                using HttpMessage message = CreateByteNullRequest(bytePath, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -1202,7 +1202,7 @@ namespace url_LowLevel
 
         /// <summary> Get null as byte array (should throw). </summary>
         /// <param name="bytePath"> null as byte array (should throw). </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="bytePath"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -1221,7 +1221,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateByteNullRequest(bytePath);
+                using HttpMessage message = CreateByteNullRequest(bytePath, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -1232,7 +1232,7 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;2012-01-01&apos; as date. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1250,7 +1250,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateDateValidRequest();
+                using HttpMessage message = CreateDateValidRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -1261,7 +1261,7 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;2012-01-01&apos; as date. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1279,7 +1279,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateDateValidRequest();
+                using HttpMessage message = CreateDateValidRequest(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -1291,7 +1291,7 @@ namespace url_LowLevel
 
         /// <summary> Get null as date - this should throw or be unusable on the client side, depending on date representation. </summary>
         /// <param name="datePath"> null as date (should throw). </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1309,7 +1309,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateDateNullRequest(datePath);
+                using HttpMessage message = CreateDateNullRequest(datePath, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -1321,7 +1321,7 @@ namespace url_LowLevel
 
         /// <summary> Get null as date - this should throw or be unusable on the client side, depending on date representation. </summary>
         /// <param name="datePath"> null as date (should throw). </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1339,7 +1339,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateDateNullRequest(datePath);
+                using HttpMessage message = CreateDateNullRequest(datePath, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -1350,7 +1350,7 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;2012-01-01T01:01:01Z&apos; as date-time. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1368,7 +1368,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateDateTimeValidRequest();
+                using HttpMessage message = CreateDateTimeValidRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -1379,7 +1379,7 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;2012-01-01T01:01:01Z&apos; as date-time. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1397,7 +1397,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateDateTimeValidRequest();
+                using HttpMessage message = CreateDateTimeValidRequest(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -1409,7 +1409,7 @@ namespace url_LowLevel
 
         /// <summary> Get null as date-time, should be disallowed or throw depending on representation of date-time. </summary>
         /// <param name="dateTimePath"> null as date-time. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1427,7 +1427,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateDateTimeNullRequest(dateTimePath);
+                using HttpMessage message = CreateDateTimeNullRequest(dateTimePath, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -1439,7 +1439,7 @@ namespace url_LowLevel
 
         /// <summary> Get null as date-time, should be disallowed or throw depending on representation of date-time. </summary>
         /// <param name="dateTimePath"> null as date-time. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1457,7 +1457,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateDateTimeNullRequest(dateTimePath);
+                using HttpMessage message = CreateDateTimeNullRequest(dateTimePath, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -1469,7 +1469,7 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;lorem&apos; encoded value as &apos;bG9yZW0&apos; (base64url). </summary>
         /// <param name="base64UrlPath"> base64url encoded value. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="base64UrlPath"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -1488,7 +1488,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateBase64UrlRequest(base64UrlPath);
+                using HttpMessage message = CreateBase64UrlRequest(base64UrlPath, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -1500,7 +1500,7 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;lorem&apos; encoded value as &apos;bG9yZW0&apos; (base64url). </summary>
         /// <param name="base64UrlPath"> base64url encoded value. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="base64UrlPath"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -1519,7 +1519,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateBase64UrlRequest(base64UrlPath);
+                using HttpMessage message = CreateBase64UrlRequest(base64UrlPath, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -1531,7 +1531,7 @@ namespace url_LowLevel
 
         /// <summary> Get an array of string [&apos;ArrayPath1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </summary>
         /// <param name="arrayPath"> an array of string [&apos;ArrayPath1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayPath"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -1550,7 +1550,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateArrayCsvInPathRequest(arrayPath);
+                using HttpMessage message = CreateArrayCsvInPathRequest(arrayPath, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -1562,7 +1562,7 @@ namespace url_LowLevel
 
         /// <summary> Get an array of string [&apos;ArrayPath1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </summary>
         /// <param name="arrayPath"> an array of string [&apos;ArrayPath1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayPath"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -1581,7 +1581,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateArrayCsvInPathRequest(arrayPath);
+                using HttpMessage message = CreateArrayCsvInPathRequest(arrayPath, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -1593,7 +1593,7 @@ namespace url_LowLevel
 
         /// <summary> Get the date 2016-04-13 encoded value as &apos;1460505600&apos; (Unix time). </summary>
         /// <param name="unixTimeUrlPath"> Unix time encoded value. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1611,7 +1611,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateUnixTimeUrlRequest(unixTimeUrlPath);
+                using HttpMessage message = CreateUnixTimeUrlRequest(unixTimeUrlPath, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -1623,7 +1623,7 @@ namespace url_LowLevel
 
         /// <summary> Get the date 2016-04-13 encoded value as &apos;1460505600&apos; (Unix time). </summary>
         /// <param name="unixTimeUrlPath"> Unix time encoded value. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1641,7 +1641,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateUnixTimeUrlRequest(unixTimeUrlPath);
+                using HttpMessage message = CreateUnixTimeUrlRequest(unixTimeUrlPath, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -1651,9 +1651,9 @@ namespace url_LowLevel
             }
         }
 
-        internal HttpMessage CreateGetBooleanTrueRequest()
+        internal HttpMessage CreateGetBooleanTrueRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1666,9 +1666,9 @@ namespace url_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetBooleanFalseRequest()
+        internal HttpMessage CreateGetBooleanFalseRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1681,9 +1681,9 @@ namespace url_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetIntOneMillionRequest()
+        internal HttpMessage CreateGetIntOneMillionRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1696,9 +1696,9 @@ namespace url_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetIntNegativeOneMillionRequest()
+        internal HttpMessage CreateGetIntNegativeOneMillionRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1711,9 +1711,9 @@ namespace url_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetTenBillionRequest()
+        internal HttpMessage CreateGetTenBillionRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1726,9 +1726,9 @@ namespace url_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetNegativeTenBillionRequest()
+        internal HttpMessage CreateGetNegativeTenBillionRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1741,9 +1741,9 @@ namespace url_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateFloatScientificPositiveRequest()
+        internal HttpMessage CreateFloatScientificPositiveRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1756,9 +1756,9 @@ namespace url_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateFloatScientificNegativeRequest()
+        internal HttpMessage CreateFloatScientificNegativeRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1771,9 +1771,9 @@ namespace url_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateDoubleDecimalPositiveRequest()
+        internal HttpMessage CreateDoubleDecimalPositiveRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1786,9 +1786,9 @@ namespace url_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateDoubleDecimalNegativeRequest()
+        internal HttpMessage CreateDoubleDecimalNegativeRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1801,9 +1801,9 @@ namespace url_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateStringUnicodeRequest()
+        internal HttpMessage CreateStringUnicodeRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1816,9 +1816,9 @@ namespace url_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateStringUrlEncodedRequest()
+        internal HttpMessage CreateStringUrlEncodedRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1831,9 +1831,9 @@ namespace url_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateStringUrlNonEncodedRequest()
+        internal HttpMessage CreateStringUrlNonEncodedRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1846,9 +1846,9 @@ namespace url_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateStringEmptyRequest()
+        internal HttpMessage CreateStringEmptyRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1861,9 +1861,9 @@ namespace url_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateStringNullRequest(string stringPath)
+        internal HttpMessage CreateStringNullRequest(string stringPath, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1876,9 +1876,9 @@ namespace url_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateEnumValidRequest(string enumPath)
+        internal HttpMessage CreateEnumValidRequest(string enumPath, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1891,9 +1891,9 @@ namespace url_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateEnumNullRequest(string enumPath)
+        internal HttpMessage CreateEnumNullRequest(string enumPath, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1906,9 +1906,9 @@ namespace url_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateByteMultiByteRequest(byte[] bytePath)
+        internal HttpMessage CreateByteMultiByteRequest(byte[] bytePath, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1921,9 +1921,9 @@ namespace url_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateByteEmptyRequest()
+        internal HttpMessage CreateByteEmptyRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1936,9 +1936,9 @@ namespace url_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateByteNullRequest(byte[] bytePath)
+        internal HttpMessage CreateByteNullRequest(byte[] bytePath, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1951,9 +1951,9 @@ namespace url_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateDateValidRequest()
+        internal HttpMessage CreateDateValidRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1966,9 +1966,9 @@ namespace url_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateDateNullRequest(DateTimeOffset datePath)
+        internal HttpMessage CreateDateNullRequest(DateTimeOffset datePath, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1981,9 +1981,9 @@ namespace url_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateDateTimeValidRequest()
+        internal HttpMessage CreateDateTimeValidRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1996,9 +1996,9 @@ namespace url_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateDateTimeNullRequest(DateTimeOffset dateTimePath)
+        internal HttpMessage CreateDateTimeNullRequest(DateTimeOffset dateTimePath, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2011,9 +2011,9 @@ namespace url_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateBase64UrlRequest(byte[] base64UrlPath)
+        internal HttpMessage CreateBase64UrlRequest(byte[] base64UrlPath, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2026,9 +2026,9 @@ namespace url_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateArrayCsvInPathRequest(IEnumerable<string> arrayPath)
+        internal HttpMessage CreateArrayCsvInPathRequest(IEnumerable<string> arrayPath, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2041,9 +2041,9 @@ namespace url_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateUnixTimeUrlRequest(DateTimeOffset unixTimeUrlPath)
+        internal HttpMessage CreateUnixTimeUrlRequest(DateTimeOffset unixTimeUrlPath, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();

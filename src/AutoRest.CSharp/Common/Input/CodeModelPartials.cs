@@ -141,12 +141,10 @@ namespace AutoRest.CSharp.Input
 
     internal partial class RequestParameter
     {
-        public ParameterLocation In => Protocol.Http is HttpParameter httpParameter ? httpParameter.In : ParameterLocation.None;
+        public bool IsResourceParameter => Convert.ToBoolean(Extensions.GetValue<string>("x-ms-resource-parameter"));
 
-        public RequestParameter ShallowCopy()
-        {
-            return (RequestParameter)this.MemberwiseClone();
-        }
+        public ParameterLocation In => Protocol.Http is HttpParameter httpParameter ? httpParameter.In : ParameterLocation.None;
+        public bool IsFlattened => Flattened ?? false;
     }
 
     internal partial class HttpResponse

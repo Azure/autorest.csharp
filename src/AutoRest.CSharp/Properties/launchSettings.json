@@ -160,6 +160,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\samples\\CognitiveServices.TextAnalytics\\Generated"
     },
+    "CollapseRequestCondition-LowLevel": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\CollapseRequestCondition-LowLevel\\Generated"
+    },
     "constants": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\constants\\Generated"
@@ -316,6 +320,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtSingleton\\Generated"
     },
+    "MgmtSubscriptionNameParameter": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtSubscriptionNameParameter\\Generated"
+    },
     "model-flattening": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\model-flattening\\Generated"
@@ -391,6 +399,10 @@
     "ResourceRename": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ResourceRename\\Generated"
+    },
+    "SingletonResource": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\SingletonResource\\Generated"
     },
     "SingleTopLevelClientWithOperations-LowLevel": {
       "commandName": "Project",

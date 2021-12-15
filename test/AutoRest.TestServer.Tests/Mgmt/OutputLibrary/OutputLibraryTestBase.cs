@@ -2,7 +2,6 @@
 // Licensed under the MIT License.
 
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -13,9 +12,6 @@ using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.AutoRest;
-using AutoRest.CSharp.Mgmt.Decorator;
-using AutoRest.CSharp.Output.Models.Requests;
-using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure.ResourceManager.Core;
 using NUnit.Framework;
@@ -108,6 +104,32 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
                 Assert.NotNull(getOperation);
                 var method = generatedResourceType.GetMethod(methodName);
                 Assert.NotNull(method, $"{generatedResourceType.Name} does not implement the {methodName} method.");
+            }
+        }
+
+        [Test]
+        public void ValidateEnumerable()
+        {
+            (_, var context) = Generate(_projectName).Result;
+
+            foreach (var collection in context.Library.ResourceCollections)
+            {
+                // skip this if this collection is in the list-exception configuration
+                if (collection.RequestPaths.Any(path => context.Configuration.MgmtConfiguration.ListException.Contains(path)))
+                    continue;
+                var name = $"{_projectName}.{collection.Type.Name}";
+                var generatedCollectionType = Assembly.GetExecutingAssembly().GetType(name);
+
+                Assert.NotNull(generatedCollectionType.GetInterface("IEnumerable"), $"{generatedCollectionType.Name} did not implement IEnumerable");
+                Assert.NotNull(generatedCollectionType.GetInterface("IEnumerable`1"), $"{generatedCollectionType.Name} did not implement IEnumerable<T>");
+
+                // see if this collection has a Pageable GetAll operation
+                var getAllMethod = generatedCollectionType.GetMethod("GetAll");
+                Assert.NotNull(getAllMethod, $"{collection.Type.Name} should have a GetAll operation");
+                if (getAllMethod.ReturnType.Name == typeof(Azure.Pageable<>).Name)
+                {
+                    Assert.NotNull(generatedCollectionType.GetInterface("IAsyncEnumerable`1"), $"{generatedCollectionType.Name} did not implement IAsyncEnumerable<T>");
+                }
             }
         }
 

@@ -36,7 +36,7 @@ namespace ExactMatchInheritance
         internal ExactMatchModel1Collection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _exactMatchModel1sRestClient = new ExactMatchModel1SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _exactMatchModel1sRestClient = new ExactMatchModel1SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
@@ -67,7 +67,7 @@ namespace ExactMatchInheritance
             scope.Start();
             try
             {
-                var response = _exactMatchModel1sRestClient.Put(Id.ResourceGroupName, exactMatchModel1SName, parameters, cancellationToken);
+                var response = _exactMatchModel1sRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, exactMatchModel1SName, parameters, cancellationToken);
                 var operation = new ExactMatchModel1PutOperation(Parent, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
@@ -103,7 +103,7 @@ namespace ExactMatchInheritance
             scope.Start();
             try
             {
-                var response = await _exactMatchModel1sRestClient.PutAsync(Id.ResourceGroupName, exactMatchModel1SName, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _exactMatchModel1sRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, exactMatchModel1SName, parameters, cancellationToken).ConfigureAwait(false);
                 var operation = new ExactMatchModel1PutOperation(Parent, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -133,7 +133,7 @@ namespace ExactMatchInheritance
             scope.Start();
             try
             {
-                var response = _exactMatchModel1sRestClient.Get(Id.ResourceGroupName, exactMatchModel1SName, cancellationToken);
+                var response = _exactMatchModel1sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, exactMatchModel1SName, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new ExactMatchModel1(Parent, response.Value), response.GetRawResponse());
@@ -162,7 +162,7 @@ namespace ExactMatchInheritance
             scope.Start();
             try
             {
-                var response = await _exactMatchModel1sRestClient.GetAsync(Id.ResourceGroupName, exactMatchModel1SName, cancellationToken).ConfigureAwait(false);
+                var response = await _exactMatchModel1sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, exactMatchModel1SName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new ExactMatchModel1(Parent, response.Value), response.GetRawResponse());
@@ -189,7 +189,7 @@ namespace ExactMatchInheritance
             scope.Start();
             try
             {
-                var response = _exactMatchModel1sRestClient.Get(Id.ResourceGroupName, exactMatchModel1SName, cancellationToken: cancellationToken);
+                var response = _exactMatchModel1sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, exactMatchModel1SName, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<ExactMatchModel1>(null, response.GetRawResponse())
                     : Response.FromValue(new ExactMatchModel1(this, response.Value), response.GetRawResponse());
@@ -216,7 +216,7 @@ namespace ExactMatchInheritance
             scope.Start();
             try
             {
-                var response = await _exactMatchModel1sRestClient.GetAsync(Id.ResourceGroupName, exactMatchModel1SName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _exactMatchModel1sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, exactMatchModel1SName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<ExactMatchModel1>(null, response.GetRawResponse())
                     : Response.FromValue(new ExactMatchModel1(this, response.Value), response.GetRawResponse());
@@ -288,7 +288,7 @@ namespace ExactMatchInheritance
             scope.Start();
             try
             {
-                var response = _exactMatchModel1sRestClient.List(Id.ResourceGroupName, cancellationToken);
+                var response = _exactMatchModel1sRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken);
                 return Response.FromValue(response.Value.Value.Select(value => new ExactMatchModel1(Parent, value)).ToArray() as IReadOnlyList<ExactMatchModel1>, response.GetRawResponse());
             }
             catch (Exception e)
@@ -308,7 +308,7 @@ namespace ExactMatchInheritance
             scope.Start();
             try
             {
-                var response = await _exactMatchModel1sRestClient.ListAsync(Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
+                var response = await _exactMatchModel1sRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value.Value.Select(value => new ExactMatchModel1(Parent, value)).ToArray() as IReadOnlyList<ExactMatchModel1>, response.GetRawResponse());
             }
             catch (Exception e)

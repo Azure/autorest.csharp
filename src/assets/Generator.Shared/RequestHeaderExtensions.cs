@@ -64,6 +64,47 @@ namespace Azure.Core
             }
         }
 
+        public static void Add(this RequestHeaders headers, string name, ETag value)
+        {
+            headers.Add(name, value.ToString());
+        }
+
+        public static void Add(this RequestHeaders headers, MatchConditions conditions)
+        {
+            if (conditions.IfMatch != null)
+            {
+                headers.Add("If-Match", conditions.IfMatch.Value);
+            }
+
+            if (conditions.IfNoneMatch != null)
+            {
+                headers.Add("If-None-Match", conditions.IfNoneMatch.Value);
+            }
+        }
+
+        public static void Add(this RequestHeaders headers, RequestConditions conditions, string format)
+        {
+            if (conditions.IfMatch != null)
+            {
+                headers.Add("If-Match", conditions.IfMatch.Value);
+            }
+
+            if (conditions.IfNoneMatch != null)
+            {
+                headers.Add("If-None-Match", conditions.IfNoneMatch.Value);
+            }
+
+            if (conditions.IfModifiedSince != null)
+            {
+                headers.Add("If-Modified-Since", conditions.IfModifiedSince.Value, format);
+            }
+
+            if (conditions.IfUnmodifiedSince != null)
+            {
+                headers.Add("If-Unmodified-Since", conditions.IfUnmodifiedSince.Value, format);
+            }
+        }
+
         public static void AddDelimited<T>(this RequestHeaders headers, string name, IEnumerable<T> value, string delimiter)
         {
             headers.Add(name, string.Join(delimiter, value));

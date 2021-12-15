@@ -14,6 +14,7 @@ using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
+using Azure.ResourceManager;
 using JsonElementExtensions = Azure.Core.JsonElementExtensions;
 
 namespace AutoRest.CSharp.Generation.Writers
@@ -517,6 +518,11 @@ namespace AutoRest.CSharp.Generation.Writers
             else if (frameworkType == typeof(Uri))
             {
                 writer.Append($"new {typeof(Uri)}({element}.GetString())");
+                return;
+            }
+            else if (frameworkType == typeof(ResourceIdentifier))
+            {
+                writer.Append($"new {typeof(ResourceIdentifier)}({element}.GetString())");
                 return;
             }
             else

@@ -36,7 +36,7 @@ namespace OmitOperationGroups
         internal Model2Collection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _model2sRestClient = new Model2SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _model2sRestClient = new Model2SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
@@ -67,7 +67,7 @@ namespace OmitOperationGroups
             scope.Start();
             try
             {
-                var response = _model2sRestClient.CreateOrUpdate(Id.ResourceGroupName, model2SName, parameters, cancellationToken);
+                var response = _model2sRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, model2SName, parameters, cancellationToken);
                 var operation = new Model2CreateOrUpdateOperation(Parent, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
@@ -103,7 +103,7 @@ namespace OmitOperationGroups
             scope.Start();
             try
             {
-                var response = await _model2sRestClient.CreateOrUpdateAsync(Id.ResourceGroupName, model2SName, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _model2sRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, model2SName, parameters, cancellationToken).ConfigureAwait(false);
                 var operation = new Model2CreateOrUpdateOperation(Parent, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -133,7 +133,7 @@ namespace OmitOperationGroups
             scope.Start();
             try
             {
-                var response = _model2sRestClient.Get(Id.ResourceGroupName, model2SName, cancellationToken);
+                var response = _model2sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, model2SName, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new Model2(Parent, response.Value), response.GetRawResponse());
@@ -162,7 +162,7 @@ namespace OmitOperationGroups
             scope.Start();
             try
             {
-                var response = await _model2sRestClient.GetAsync(Id.ResourceGroupName, model2SName, cancellationToken).ConfigureAwait(false);
+                var response = await _model2sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, model2SName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new Model2(Parent, response.Value), response.GetRawResponse());
@@ -189,7 +189,7 @@ namespace OmitOperationGroups
             scope.Start();
             try
             {
-                var response = _model2sRestClient.Get(Id.ResourceGroupName, model2SName, cancellationToken: cancellationToken);
+                var response = _model2sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, model2SName, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<Model2>(null, response.GetRawResponse())
                     : Response.FromValue(new Model2(this, response.Value), response.GetRawResponse());
@@ -216,7 +216,7 @@ namespace OmitOperationGroups
             scope.Start();
             try
             {
-                var response = await _model2sRestClient.GetAsync(Id.ResourceGroupName, model2SName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _model2sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, model2SName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<Model2>(null, response.GetRawResponse())
                     : Response.FromValue(new Model2(this, response.Value), response.GetRawResponse());
@@ -288,7 +288,7 @@ namespace OmitOperationGroups
             scope.Start();
             try
             {
-                var response = _model2sRestClient.List(Id.ResourceGroupName, cancellationToken);
+                var response = _model2sRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken);
                 return Response.FromValue(response.Value.Value.Select(value => new Model2(Parent, value)).ToArray() as IReadOnlyList<Model2>, response.GetRawResponse());
             }
             catch (Exception e)
@@ -308,7 +308,7 @@ namespace OmitOperationGroups
             scope.Start();
             try
             {
-                var response = await _model2sRestClient.ListAsync(Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
+                var response = await _model2sRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value.Value.Select(value => new Model2(Parent, value)).ToArray() as IReadOnlyList<Model2>, response.GetRawResponse());
             }
             catch (Exception e)

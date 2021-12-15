@@ -2,6 +2,7 @@
 // Licensed under the MIT License
 
 using System.Collections.Generic;
+using System.Linq;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Models;
@@ -20,5 +21,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         protected override string DefaultName => "ArmClientExtensions";
 
         protected override RequestPath ContextualPath => RequestPath.Tenant;
+
+        public override bool IsEmpty => !_context.Library.ArmResources.Any();
     }
 }

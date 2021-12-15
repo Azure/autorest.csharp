@@ -38,7 +38,7 @@ namespace NoTypeReplacement
             HasData = true;
             _data = resource;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _noTypeReplacementModel1sRestClient = new NoTypeReplacementModel1SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _noTypeReplacementModel1sRestClient = new NoTypeReplacementModel1SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="NoTypeReplacementModel1"/> class. </summary>
@@ -47,7 +47,7 @@ namespace NoTypeReplacement
         internal NoTypeReplacementModel1(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _noTypeReplacementModel1sRestClient = new NoTypeReplacementModel1SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _noTypeReplacementModel1sRestClient = new NoTypeReplacementModel1SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="NoTypeReplacementModel1"/> class. </summary>
@@ -59,7 +59,7 @@ namespace NoTypeReplacement
         internal NoTypeReplacementModel1(ArmClientOptions clientOptions, TokenCredential credential, Uri uri, HttpPipeline pipeline, ResourceIdentifier id) : base(clientOptions, credential, uri, pipeline, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _noTypeReplacementModel1sRestClient = new NoTypeReplacementModel1SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _noTypeReplacementModel1sRestClient = new NoTypeReplacementModel1SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
@@ -90,7 +90,7 @@ namespace NoTypeReplacement
             scope.Start();
             try
             {
-                var response = await _noTypeReplacementModel1sRestClient.GetAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _noTypeReplacementModel1sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new NoTypeReplacementModel1(this, response.Value), response.GetRawResponse());
@@ -109,7 +109,7 @@ namespace NoTypeReplacement
             scope.Start();
             try
             {
-                var response = _noTypeReplacementModel1sRestClient.Get(Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _noTypeReplacementModel1sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new NoTypeReplacementModel1(this, response.Value), response.GetRawResponse());

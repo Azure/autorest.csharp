@@ -36,7 +36,7 @@ namespace NoTypeReplacement
         internal NoTypeReplacementModel2Collection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _noTypeReplacementModel2sRestClient = new NoTypeReplacementModel2SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _noTypeReplacementModel2sRestClient = new NoTypeReplacementModel2SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
@@ -64,7 +64,7 @@ namespace NoTypeReplacement
             scope.Start();
             try
             {
-                var response = _noTypeReplacementModel2sRestClient.Put(Id.ResourceGroupName, noTypeReplacementModel2SName, parameters, cancellationToken);
+                var response = _noTypeReplacementModel2sRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, noTypeReplacementModel2SName, parameters, cancellationToken);
                 var operation = new NoTypeReplacementModel2PutOperation(Parent, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
@@ -97,7 +97,7 @@ namespace NoTypeReplacement
             scope.Start();
             try
             {
-                var response = await _noTypeReplacementModel2sRestClient.PutAsync(Id.ResourceGroupName, noTypeReplacementModel2SName, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _noTypeReplacementModel2sRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, noTypeReplacementModel2SName, parameters, cancellationToken).ConfigureAwait(false);
                 var operation = new NoTypeReplacementModel2PutOperation(Parent, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -124,7 +124,7 @@ namespace NoTypeReplacement
             scope.Start();
             try
             {
-                var response = _noTypeReplacementModel2sRestClient.Get(Id.ResourceGroupName, noTypeReplacementModel2SName, cancellationToken);
+                var response = _noTypeReplacementModel2sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, noTypeReplacementModel2SName, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new NoTypeReplacementModel2(Parent, response.Value), response.GetRawResponse());
@@ -150,7 +150,7 @@ namespace NoTypeReplacement
             scope.Start();
             try
             {
-                var response = await _noTypeReplacementModel2sRestClient.GetAsync(Id.ResourceGroupName, noTypeReplacementModel2SName, cancellationToken).ConfigureAwait(false);
+                var response = await _noTypeReplacementModel2sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, noTypeReplacementModel2SName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new NoTypeReplacementModel2(Parent, response.Value), response.GetRawResponse());
@@ -177,7 +177,7 @@ namespace NoTypeReplacement
             scope.Start();
             try
             {
-                var response = _noTypeReplacementModel2sRestClient.Get(Id.ResourceGroupName, noTypeReplacementModel2SName, cancellationToken: cancellationToken);
+                var response = _noTypeReplacementModel2sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, noTypeReplacementModel2SName, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<NoTypeReplacementModel2>(null, response.GetRawResponse())
                     : Response.FromValue(new NoTypeReplacementModel2(this, response.Value), response.GetRawResponse());
@@ -204,7 +204,7 @@ namespace NoTypeReplacement
             scope.Start();
             try
             {
-                var response = await _noTypeReplacementModel2sRestClient.GetAsync(Id.ResourceGroupName, noTypeReplacementModel2SName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _noTypeReplacementModel2sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, noTypeReplacementModel2SName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<NoTypeReplacementModel2>(null, response.GetRawResponse())
                     : Response.FromValue(new NoTypeReplacementModel2(this, response.Value), response.GetRawResponse());
@@ -273,7 +273,7 @@ namespace NoTypeReplacement
             scope.Start();
             try
             {
-                var response = _noTypeReplacementModel2sRestClient.List(Id.ResourceGroupName, cancellationToken);
+                var response = _noTypeReplacementModel2sRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken);
                 return Response.FromValue(response.Value.Value.Select(value => new NoTypeReplacementModel2(Parent, value)).ToArray() as IReadOnlyList<NoTypeReplacementModel2>, response.GetRawResponse());
             }
             catch (Exception e)
@@ -290,7 +290,7 @@ namespace NoTypeReplacement
             scope.Start();
             try
             {
-                var response = await _noTypeReplacementModel2sRestClient.ListAsync(Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
+                var response = await _noTypeReplacementModel2sRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value.Value.Select(value => new NoTypeReplacementModel2(Parent, value)).ToArray() as IReadOnlyList<NoTypeReplacementModel2>, response.GetRawResponse());
             }
             catch (Exception e)

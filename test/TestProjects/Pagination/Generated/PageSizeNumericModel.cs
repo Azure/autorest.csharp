@@ -33,12 +33,12 @@ namespace Pagination
         /// <summary> Initializes a new instance of the <see cref = "PageSizeNumericModel"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal PageSizeNumericModel(ArmResource options, PageSizeNumericModelData resource) : base(options, resource.Id)
+        internal PageSizeNumericModel(ArmResource options, PageSizeNumericModelData resource) : base(options, new ResourceIdentifier(resource.Id))
         {
             HasData = true;
             _data = resource;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _pageSizeNumericModelsRestClient = new PageSizeNumericModelsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _pageSizeNumericModelsRestClient = new PageSizeNumericModelsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="PageSizeNumericModel"/> class. </summary>
@@ -47,7 +47,7 @@ namespace Pagination
         internal PageSizeNumericModel(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _pageSizeNumericModelsRestClient = new PageSizeNumericModelsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _pageSizeNumericModelsRestClient = new PageSizeNumericModelsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="PageSizeNumericModel"/> class. </summary>
@@ -59,7 +59,7 @@ namespace Pagination
         internal PageSizeNumericModel(ArmClientOptions clientOptions, TokenCredential credential, Uri uri, HttpPipeline pipeline, ResourceIdentifier id) : base(clientOptions, credential, uri, pipeline, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _pageSizeNumericModelsRestClient = new PageSizeNumericModelsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _pageSizeNumericModelsRestClient = new PageSizeNumericModelsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
@@ -90,7 +90,7 @@ namespace Pagination
             scope.Start();
             try
             {
-                var response = await _pageSizeNumericModelsRestClient.GetAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _pageSizeNumericModelsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new PageSizeNumericModel(this, response.Value), response.GetRawResponse());
@@ -109,7 +109,7 @@ namespace Pagination
             scope.Start();
             try
             {
-                var response = _pageSizeNumericModelsRestClient.Get(Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _pageSizeNumericModelsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new PageSizeNumericModel(this, response.Value), response.GetRawResponse());

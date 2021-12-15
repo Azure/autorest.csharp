@@ -46,7 +46,7 @@ namespace RequestContextAllOptional_LowLevel
 
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
-            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
         }
 
@@ -55,7 +55,7 @@ namespace RequestContextAllOptional_LowLevel
         /// <param name="top"> Query parameter top. </param>
         /// <param name="skip"> Query parameter skip. </param>
         /// <param name="status"> Query parameter status. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> NoRequestBodyResponseBodyAsync(int id, int? top = null, int skip = 12, string status = "start", RequestContext context = null)
 #pragma warning restore AZC0002
@@ -64,7 +64,7 @@ namespace RequestContextAllOptional_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateNoRequestBodyResponseBodyRequest(id, top, skip, status);
+                using HttpMessage message = CreateNoRequestBodyResponseBodyRequest(id, top, skip, status, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -79,7 +79,7 @@ namespace RequestContextAllOptional_LowLevel
         /// <param name="top"> Query parameter top. </param>
         /// <param name="skip"> Query parameter skip. </param>
         /// <param name="status"> Query parameter status. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
 #pragma warning disable AZC0002
         public virtual Response NoRequestBodyResponseBody(int id, int? top = null, int skip = 12, string status = "start", RequestContext context = null)
 #pragma warning restore AZC0002
@@ -88,7 +88,7 @@ namespace RequestContextAllOptional_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateNoRequestBodyResponseBodyRequest(id, top, skip, status);
+                using HttpMessage message = CreateNoRequestBodyResponseBodyRequest(id, top, skip, status, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -100,7 +100,7 @@ namespace RequestContextAllOptional_LowLevel
 
         /// <summary> RequestBody and ResponseBody. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -124,7 +124,7 @@ namespace RequestContextAllOptional_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateRequestBodyResponseBodyRequest(content);
+                using HttpMessage message = CreateRequestBodyResponseBodyRequest(content, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -136,7 +136,7 @@ namespace RequestContextAllOptional_LowLevel
 
         /// <summary> RequestBody and ResponseBody. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -160,7 +160,7 @@ namespace RequestContextAllOptional_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateRequestBodyResponseBodyRequest(content);
+                using HttpMessage message = CreateRequestBodyResponseBodyRequest(content, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -172,7 +172,7 @@ namespace RequestContextAllOptional_LowLevel
 
         /// <summary> Delete. </summary>
         /// <param name="resourceName"> name. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceName"/> is null. </exception>
 #pragma warning disable AZC0002
         public virtual async Task<Response> DeleteNoRequestBodyResponseBodyAsync(string resourceName, RequestContext context = null)
@@ -182,7 +182,7 @@ namespace RequestContextAllOptional_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateDeleteNoRequestBodyResponseBodyRequest(resourceName);
+                using HttpMessage message = CreateDeleteNoRequestBodyResponseBodyRequest(resourceName, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -194,7 +194,7 @@ namespace RequestContextAllOptional_LowLevel
 
         /// <summary> Delete. </summary>
         /// <param name="resourceName"> name. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceName"/> is null. </exception>
 #pragma warning disable AZC0002
         public virtual Response DeleteNoRequestBodyResponseBody(string resourceName, RequestContext context = null)
@@ -204,7 +204,7 @@ namespace RequestContextAllOptional_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateDeleteNoRequestBodyResponseBodyRequest(resourceName);
+                using HttpMessage message = CreateDeleteNoRequestBodyResponseBodyRequest(resourceName, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -215,7 +215,7 @@ namespace RequestContextAllOptional_LowLevel
         }
 
         /// <summary> No RequestBody and No ResponseBody. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> NoRequestBodyNoResponseBodyAsync(RequestContext context = null)
 #pragma warning restore AZC0002
@@ -224,7 +224,7 @@ namespace RequestContextAllOptional_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateNoRequestBodyNoResponseBodyRequest();
+                using HttpMessage message = CreateNoRequestBodyNoResponseBodyRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -235,7 +235,7 @@ namespace RequestContextAllOptional_LowLevel
         }
 
         /// <summary> No RequestBody and No ResponseBody. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
 #pragma warning disable AZC0002
         public virtual Response NoRequestBodyNoResponseBody(RequestContext context = null)
 #pragma warning restore AZC0002
@@ -244,7 +244,7 @@ namespace RequestContextAllOptional_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateNoRequestBodyNoResponseBodyRequest();
+                using HttpMessage message = CreateNoRequestBodyNoResponseBodyRequest(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -256,7 +256,7 @@ namespace RequestContextAllOptional_LowLevel
 
         /// <summary> RequestBody and No ResponseBody. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> RequestBodyNoResponseBodyAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
@@ -265,7 +265,7 @@ namespace RequestContextAllOptional_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateRequestBodyNoResponseBodyRequest(content);
+                using HttpMessage message = CreateRequestBodyNoResponseBodyRequest(content, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -277,7 +277,7 @@ namespace RequestContextAllOptional_LowLevel
 
         /// <summary> RequestBody and No ResponseBody. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
 #pragma warning disable AZC0002
         public virtual Response RequestBodyNoResponseBody(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
@@ -286,7 +286,7 @@ namespace RequestContextAllOptional_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateRequestBodyNoResponseBodyRequest(content);
+                using HttpMessage message = CreateRequestBodyNoResponseBodyRequest(content, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -296,19 +296,19 @@ namespace RequestContextAllOptional_LowLevel
             }
         }
 
-        internal HttpMessage CreateNoRequestBodyResponseBodyRequest(int id, int? top, int skip, string status)
+        internal HttpMessage CreateNoRequestBodyResponseBodyRequest(int id, int? top, int skip, string status, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/test1", false);
+            uri.AppendQuery("id", id, true);
             if (top != null)
             {
                 uri.AppendQuery("$top", top.Value, true);
             }
-            uri.AppendQuery("id", id, true);
             uri.AppendQuery("skip", skip, true);
             if (status != null)
             {
@@ -320,9 +320,9 @@ namespace RequestContextAllOptional_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateRequestBodyResponseBodyRequest(RequestContent content)
+        internal HttpMessage CreateRequestBodyResponseBodyRequest(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -336,9 +336,9 @@ namespace RequestContextAllOptional_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateDeleteNoRequestBodyResponseBodyRequest(string resourceName)
+        internal HttpMessage CreateDeleteNoRequestBodyResponseBodyRequest(string resourceName, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
@@ -351,9 +351,9 @@ namespace RequestContextAllOptional_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateNoRequestBodyNoResponseBodyRequest()
+        internal HttpMessage CreateNoRequestBodyNoResponseBodyRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -364,9 +364,9 @@ namespace RequestContextAllOptional_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateRequestBodyNoResponseBodyRequest(RequestContent content)
+        internal HttpMessage CreateRequestBodyNoResponseBodyRequest(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();

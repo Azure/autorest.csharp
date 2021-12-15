@@ -19,7 +19,6 @@ namespace Pagination
 {
     internal partial class PageSizeIntegerModelsRestOperations
     {
-        private string subscriptionId;
         private Uri endpoint;
         private string apiVersion;
         private ClientDiagnostics _clientDiagnostics;
@@ -30,13 +29,11 @@ namespace Pagination
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="options"> The client options used to construct the current client. </param>
-        /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="apiVersion"> Api Version. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="apiVersion"/> is null. </exception>
-        public PageSizeIntegerModelsRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ClientOptions options, string subscriptionId, Uri endpoint = null, string apiVersion = "2020-06-01")
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
+        public PageSizeIntegerModelsRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ClientOptions options, Uri endpoint = null, string apiVersion = "2020-06-01")
         {
-            this.subscriptionId = subscriptionId ?? throw new ArgumentNullException(nameof(subscriptionId));
             this.endpoint = endpoint ?? new Uri("https://management.azure.com");
             this.apiVersion = apiVersion ?? throw new ArgumentNullException(nameof(apiVersion));
             _clientDiagnostics = clientDiagnostics;
@@ -44,7 +41,7 @@ namespace Pagination
             _userAgent = HttpMessageUtilities.GetUserAgentName(this, options);
         }
 
-        internal HttpMessage CreateListRequest(string resourceGroupName, int? maxpagesize)
+        internal HttpMessage CreateListRequest(string subscriptionId, string resourceGroupName, int? maxpagesize)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -67,18 +64,23 @@ namespace Pagination
             return message;
         }
 
+        /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="maxpagesize"> Optional. Specified maximum number of containers that can be included in the list. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> is null. </exception>
-        public async Task<Response<PageSizeIntegerModelListResult>> ListAsync(string resourceGroupName, int? maxpagesize = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
+        public async Task<Response<PageSizeIntegerModelListResult>> ListAsync(string subscriptionId, string resourceGroupName, int? maxpagesize = null, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
 
-            using var message = CreateListRequest(resourceGroupName, maxpagesize);
+            using var message = CreateListRequest(subscriptionId, resourceGroupName, maxpagesize);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -94,18 +96,23 @@ namespace Pagination
             }
         }
 
+        /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="maxpagesize"> Optional. Specified maximum number of containers that can be included in the list. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> is null. </exception>
-        public Response<PageSizeIntegerModelListResult> List(string resourceGroupName, int? maxpagesize = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
+        public Response<PageSizeIntegerModelListResult> List(string subscriptionId, string resourceGroupName, int? maxpagesize = null, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
 
-            using var message = CreateListRequest(resourceGroupName, maxpagesize);
+            using var message = CreateListRequest(subscriptionId, resourceGroupName, maxpagesize);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -121,7 +128,7 @@ namespace Pagination
             }
         }
 
-        internal HttpMessage CreatePutRequest(string resourceGroupName, string name, PageSizeIntegerModelData parameters)
+        internal HttpMessage CreatePutRequest(string subscriptionId, string resourceGroupName, string name, PageSizeIntegerModelData parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -145,13 +152,18 @@ namespace Pagination
             return message;
         }
 
+        /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="name"> The String to use. </param>
         /// <param name="parameters"> The PageSizeIntegerModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="name"/>, or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<PageSizeIntegerModelData>> PutAsync(string resourceGroupName, string name, PageSizeIntegerModelData parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="name"/>, or <paramref name="parameters"/> is null. </exception>
+        public async Task<Response<PageSizeIntegerModelData>> PutAsync(string subscriptionId, string resourceGroupName, string name, PageSizeIntegerModelData parameters, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -165,7 +177,7 @@ namespace Pagination
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var message = CreatePutRequest(resourceGroupName, name, parameters);
+            using var message = CreatePutRequest(subscriptionId, resourceGroupName, name, parameters);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -181,13 +193,18 @@ namespace Pagination
             }
         }
 
+        /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="name"> The String to use. </param>
         /// <param name="parameters"> The PageSizeIntegerModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="name"/>, or <paramref name="parameters"/> is null. </exception>
-        public Response<PageSizeIntegerModelData> Put(string resourceGroupName, string name, PageSizeIntegerModelData parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="name"/>, or <paramref name="parameters"/> is null. </exception>
+        public Response<PageSizeIntegerModelData> Put(string subscriptionId, string resourceGroupName, string name, PageSizeIntegerModelData parameters, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -201,7 +218,7 @@ namespace Pagination
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var message = CreatePutRequest(resourceGroupName, name, parameters);
+            using var message = CreatePutRequest(subscriptionId, resourceGroupName, name, parameters);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -217,7 +234,7 @@ namespace Pagination
             }
         }
 
-        internal HttpMessage CreateGetRequest(string resourceGroupName, string name)
+        internal HttpMessage CreateGetRequest(string subscriptionId, string resourceGroupName, string name)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -237,12 +254,17 @@ namespace Pagination
             return message;
         }
 
+        /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="name"/> is null. </exception>
-        public async Task<Response<PageSizeIntegerModelData>> GetAsync(string resourceGroupName, string name, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="name"/> is null. </exception>
+        public async Task<Response<PageSizeIntegerModelData>> GetAsync(string subscriptionId, string resourceGroupName, string name, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -252,7 +274,7 @@ namespace Pagination
                 throw new ArgumentNullException(nameof(name));
             }
 
-            using var message = CreateGetRequest(resourceGroupName, name);
+            using var message = CreateGetRequest(subscriptionId, resourceGroupName, name);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -270,12 +292,17 @@ namespace Pagination
             }
         }
 
+        /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="name"/> is null. </exception>
-        public Response<PageSizeIntegerModelData> Get(string resourceGroupName, string name, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="name"/> is null. </exception>
+        public Response<PageSizeIntegerModelData> Get(string subscriptionId, string resourceGroupName, string name, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -285,7 +312,7 @@ namespace Pagination
                 throw new ArgumentNullException(nameof(name));
             }
 
-            using var message = CreateGetRequest(resourceGroupName, name);
+            using var message = CreateGetRequest(subscriptionId, resourceGroupName, name);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -303,7 +330,7 @@ namespace Pagination
             }
         }
 
-        internal HttpMessage CreateListNextPageRequest(string nextLink, string resourceGroupName, int? maxpagesize)
+        internal HttpMessage CreateListNextPageRequest(string nextLink, string subscriptionId, string resourceGroupName, int? maxpagesize)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -318,22 +345,27 @@ namespace Pagination
         }
 
         /// <param name="nextLink"> The URL to the next page of results. </param>
+        /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="maxpagesize"> Optional. Specified maximum number of containers that can be included in the list. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="resourceGroupName"/> is null. </exception>
-        public async Task<Response<PageSizeIntegerModelListResult>> ListNextPageAsync(string nextLink, string resourceGroupName, int? maxpagesize = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="subscriptionId"/>, or <paramref name="resourceGroupName"/> is null. </exception>
+        public async Task<Response<PageSizeIntegerModelListResult>> ListNextPageAsync(string nextLink, string subscriptionId, string resourceGroupName, int? maxpagesize = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
                 throw new ArgumentNullException(nameof(nextLink));
+            }
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
             }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
 
-            using var message = CreateListNextPageRequest(nextLink, resourceGroupName, maxpagesize);
+            using var message = CreateListNextPageRequest(nextLink, subscriptionId, resourceGroupName, maxpagesize);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -350,22 +382,27 @@ namespace Pagination
         }
 
         /// <param name="nextLink"> The URL to the next page of results. </param>
+        /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="maxpagesize"> Optional. Specified maximum number of containers that can be included in the list. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="resourceGroupName"/> is null. </exception>
-        public Response<PageSizeIntegerModelListResult> ListNextPage(string nextLink, string resourceGroupName, int? maxpagesize = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="subscriptionId"/>, or <paramref name="resourceGroupName"/> is null. </exception>
+        public Response<PageSizeIntegerModelListResult> ListNextPage(string nextLink, string subscriptionId, string resourceGroupName, int? maxpagesize = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
                 throw new ArgumentNullException(nameof(nextLink));
+            }
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
             }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
 
-            using var message = CreateListNextPageRequest(nextLink, resourceGroupName, maxpagesize);
+            using var message = CreateListNextPageRequest(nextLink, subscriptionId, resourceGroupName, maxpagesize);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

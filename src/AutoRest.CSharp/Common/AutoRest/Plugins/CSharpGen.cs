@@ -41,7 +41,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             var codeModel = await codeModelTask;
 
-            if (configuration.LowLevelClient)
+            if (configuration.DataPlane)
             {
                 LowLevelTarget.Execute(project, codeModel, sourceInputModel, configuration);
             }
@@ -58,9 +58,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
         private static void ValidateConfiguration (Configuration configuration)
         {
-            if (configuration.LowLevelClient && configuration.AzureArm)
+            if (configuration.DataPlane && configuration.AzureArm)
             {
-                throw new Exception("Enabling both 'low-level-client' and 'azure-arm' at the same time is not supported.");
+                throw new Exception("Enabling both 'data-plane' and 'azure-arm' at the same time is not supported.");
             }
         }
 

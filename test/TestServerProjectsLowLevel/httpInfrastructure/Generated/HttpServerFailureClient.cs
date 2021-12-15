@@ -46,12 +46,12 @@ namespace httpInfrastructure_LowLevel
 
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
-            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new Azure.Core.ResponseClassifier());
+            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new Azure.Core.ResponseClassifier());
             _endpoint = endpoint;
         }
 
         /// <summary> Return 501 status code - should be represented in the client as an error. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -69,7 +69,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateHead501Request();
+                using HttpMessage message = CreateHead501Request(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -80,7 +80,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 501 status code - should be represented in the client as an error. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -98,7 +98,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateHead501Request();
+                using HttpMessage message = CreateHead501Request(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -109,7 +109,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 501 status code - should be represented in the client as an error. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -127,7 +127,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGet501Request();
+                using HttpMessage message = CreateGet501Request(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -138,7 +138,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 501 status code - should be represented in the client as an error. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -156,7 +156,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGet501Request();
+                using HttpMessage message = CreateGet501Request(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -168,7 +168,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 505 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -186,7 +186,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePost505Request(content);
+                using HttpMessage message = CreatePost505Request(content, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -198,7 +198,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 505 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -216,7 +216,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePost505Request(content);
+                using HttpMessage message = CreatePost505Request(content, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -228,7 +228,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 505 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -246,7 +246,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateDelete505Request(content);
+                using HttpMessage message = CreateDelete505Request(content, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -258,7 +258,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 505 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -276,7 +276,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateDelete505Request(content);
+                using HttpMessage message = CreateDelete505Request(content, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -286,9 +286,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        internal HttpMessage CreateHead501Request()
+        internal HttpMessage CreateHead501Request(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
@@ -300,9 +300,9 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGet501Request()
+        internal HttpMessage CreateGet501Request(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -314,9 +314,9 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
-        internal HttpMessage CreatePost505Request(RequestContent content)
+        internal HttpMessage CreatePost505Request(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -330,9 +330,9 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateDelete505Request(RequestContent content)
+        internal HttpMessage CreateDelete505Request(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();

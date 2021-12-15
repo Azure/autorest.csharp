@@ -38,7 +38,7 @@ namespace MgmtListMethods
         internal ResGrpParentWithNonResChCollection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _resGrpParentWithNonResChesRestClient = new ResGrpParentWithNonResChesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _resGrpParentWithNonResChesRestClient = new ResGrpParentWithNonResChesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
@@ -70,7 +70,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = _resGrpParentWithNonResChesRestClient.CreateOrUpdate(Id.ResourceGroupName, resGrpParentWithNonResChName, parameters, cancellationToken);
+                var response = _resGrpParentWithNonResChesRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentWithNonResChName, parameters, cancellationToken);
                 var operation = new ResGrpParentWithNonResChCreateOrUpdateOperation(Parent, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
@@ -107,7 +107,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = await _resGrpParentWithNonResChesRestClient.CreateOrUpdateAsync(Id.ResourceGroupName, resGrpParentWithNonResChName, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _resGrpParentWithNonResChesRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentWithNonResChName, parameters, cancellationToken).ConfigureAwait(false);
                 var operation = new ResGrpParentWithNonResChCreateOrUpdateOperation(Parent, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -138,7 +138,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = _resGrpParentWithNonResChesRestClient.Get(Id.ResourceGroupName, resGrpParentWithNonResChName, cancellationToken);
+                var response = _resGrpParentWithNonResChesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentWithNonResChName, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new ResGrpParentWithNonResCh(Parent, response.Value), response.GetRawResponse());
@@ -168,7 +168,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = await _resGrpParentWithNonResChesRestClient.GetAsync(Id.ResourceGroupName, resGrpParentWithNonResChName, cancellationToken).ConfigureAwait(false);
+                var response = await _resGrpParentWithNonResChesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentWithNonResChName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new ResGrpParentWithNonResCh(Parent, response.Value), response.GetRawResponse());
@@ -195,7 +195,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = _resGrpParentWithNonResChesRestClient.Get(Id.ResourceGroupName, resGrpParentWithNonResChName, cancellationToken: cancellationToken);
+                var response = _resGrpParentWithNonResChesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentWithNonResChName, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<ResGrpParentWithNonResCh>(null, response.GetRawResponse())
                     : Response.FromValue(new ResGrpParentWithNonResCh(this, response.Value), response.GetRawResponse());
@@ -222,7 +222,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = await _resGrpParentWithNonResChesRestClient.GetAsync(Id.ResourceGroupName, resGrpParentWithNonResChName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _resGrpParentWithNonResChesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentWithNonResChName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<ResGrpParentWithNonResCh>(null, response.GetRawResponse())
                     : Response.FromValue(new ResGrpParentWithNonResCh(this, response.Value), response.GetRawResponse());
@@ -298,7 +298,7 @@ namespace MgmtListMethods
                 scope.Start();
                 try
                 {
-                    var response = _resGrpParentWithNonResChesRestClient.List(Id.ResourceGroupName, cancellationToken: cancellationToken);
+                    var response = _resGrpParentWithNonResChesRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentWithNonResCh(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -313,7 +313,7 @@ namespace MgmtListMethods
                 scope.Start();
                 try
                 {
-                    var response = _resGrpParentWithNonResChesRestClient.ListNextPage(nextLink, Id.ResourceGroupName, cancellationToken: cancellationToken);
+                    var response = _resGrpParentWithNonResChesRestClient.ListNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentWithNonResCh(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -339,7 +339,7 @@ namespace MgmtListMethods
                 scope.Start();
                 try
                 {
-                    var response = await _resGrpParentWithNonResChesRestClient.ListAsync(Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _resGrpParentWithNonResChesRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentWithNonResCh(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -354,7 +354,7 @@ namespace MgmtListMethods
                 scope.Start();
                 try
                 {
-                    var response = await _resGrpParentWithNonResChesRestClient.ListNextPageAsync(nextLink, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _resGrpParentWithNonResChesRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentWithNonResCh(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)

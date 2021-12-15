@@ -4,27 +4,30 @@
 #nullable enable
 
 using System;
-using System.Linq;
-using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure.Core.Pipeline;
 
 namespace Azure.Core
 {
-    internal class LowLevelFuncOperation<T> : Operation<T>, IOperationSource<T> where T : notnull
+    internal class LowLevelFuncOperation<T> : Operation<T>, IOperation<T> where T : notnull
     {
-        private readonly OperationInternals<T> _operation;
         private readonly Func<Response, T> _resultSelector;
+        private readonly OperationInternal<T> _operation;
+        private readonly IOperation _nextLinkOperation;
 
         internal LowLevelFuncOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia, string scopeName, Func<Response, T> resultSelector)
         {
-            _operation = new OperationInternals<T>(this, clientDiagnostics, pipeline, request, response, finalStateVia, scopeName);
             _resultSelector = resultSelector;
+            _nextLinkOperation = NextLinkOperationImplementation.Create(pipeline, request.Method, request.Uri.ToUri(), response, finalStateVia);
+            _operation = new OperationInternal<T>(clientDiagnostics, this, response, scopeName);
         }
 
+#pragma warning disable CA1822
+        //TODO: This is currently unused.
         /// <inheritdoc />
-        public override string Id => _operation.Id;
+        public override string Id => throw new NotImplementedException();
+#pragma warning restore CA1822
 
         /// <inheritdoc />
         public override T Value => _operation.Value;
@@ -36,7 +39,7 @@ namespace Azure.Core
         public override bool HasValue => _operation.HasValue;
 
         /// <inheritdoc />
-        public override Response GetRawResponse() => _operation.GetRawResponse();
+        public override Response GetRawResponse() => _operation.RawResponse;
 
         /// <inheritdoc />
         public override Response UpdateStatus(CancellationToken cancellationToken = default) => _operation.UpdateStatus(cancellationToken);
@@ -50,8 +53,20 @@ namespace Azure.Core
         /// <inheritdoc />
         public override ValueTask<Response<T>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(pollingInterval, cancellationToken);
 
-        T IOperationSource<T>.CreateResult(Response response, CancellationToken cancellationToken) => _resultSelector(response);
+        async ValueTask<OperationState<T>> IOperation<T>.UpdateStateAsync(bool async, CancellationToken cancellationToken)
+        {
+            var state = await _nextLinkOperation.UpdateStateAsync(async, cancellationToken).ConfigureAwait(false);
+            if (state.HasSucceeded)
+            {
+                return OperationState<T>.Success(state.RawResponse, _resultSelector(state.RawResponse));
+            }
 
-        ValueTask<T> IOperationSource<T>.CreateResultAsync(Response response, CancellationToken cancellationToken) => new ValueTask<T>(_resultSelector(response));
+            if (state.HasCompleted)
+            {
+                return OperationState<T>.Failure(state.RawResponse, state.OperationFailedException);
+            }
+
+            return OperationState<T>.Pending(state.RawResponse);
+        }
     }
 }
