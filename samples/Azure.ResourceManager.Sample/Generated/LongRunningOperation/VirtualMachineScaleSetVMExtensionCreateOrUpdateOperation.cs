@@ -18,9 +18,9 @@ using Azure.ResourceManager.Sample;
 namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> The operation to create or update the VMSS VM extension. </summary>
-    public partial class VirtualMachineScaleSetVMExtensionCreateOrUpdateOperation : Operation<VirtualMachineScaleSetVirtualMachineExtensions>, IOperationSource<VirtualMachineScaleSetVirtualMachineExtensions>
+    public partial class VirtualMachineScaleSetVMExtensionCreateOrUpdateOperation : Operation<VirtualMachineScaleSetVirtualMachineExtension>, IOperationSource<VirtualMachineScaleSetVirtualMachineExtension>
     {
-        private readonly OperationInternals<VirtualMachineScaleSetVirtualMachineExtensions> _operation;
+        private readonly OperationInternals<VirtualMachineScaleSetVirtualMachineExtension> _operation;
 
         private readonly ArmResource _operationBase;
 
@@ -31,7 +31,7 @@ namespace Azure.ResourceManager.Sample.Models
 
         internal VirtualMachineScaleSetVMExtensionCreateOrUpdateOperation(ArmResource operationsBase, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new OperationInternals<VirtualMachineScaleSetVirtualMachineExtensions>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "VirtualMachineScaleSetVMExtensionCreateOrUpdateOperation");
+            _operation = new OperationInternals<VirtualMachineScaleSetVirtualMachineExtension>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "VirtualMachineScaleSetVMExtensionCreateOrUpdateOperation");
             _operationBase = operationsBase;
         }
 
@@ -39,7 +39,7 @@ namespace Azure.ResourceManager.Sample.Models
         public override string Id => _operation.Id;
 
         /// <inheritdoc />
-        public override VirtualMachineScaleSetVirtualMachineExtensions Value => _operation.Value;
+        public override VirtualMachineScaleSetVirtualMachineExtension Value => _operation.Value;
 
         /// <inheritdoc />
         public override bool HasCompleted => _operation.HasCompleted;
@@ -57,21 +57,21 @@ namespace Azure.ResourceManager.Sample.Models
         public override ValueTask<Response> UpdateStatusAsync(CancellationToken cancellationToken = default) => _operation.UpdateStatusAsync(cancellationToken);
 
         /// <inheritdoc />
-        public override ValueTask<Response<VirtualMachineScaleSetVirtualMachineExtensions>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(cancellationToken);
+        public override ValueTask<Response<VirtualMachineScaleSetVirtualMachineExtension>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(cancellationToken);
 
         /// <inheritdoc />
-        public override ValueTask<Response<VirtualMachineScaleSetVirtualMachineExtensions>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(pollingInterval, cancellationToken);
+        public override ValueTask<Response<VirtualMachineScaleSetVirtualMachineExtension>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(pollingInterval, cancellationToken);
 
-        VirtualMachineScaleSetVirtualMachineExtensions IOperationSource<VirtualMachineScaleSetVirtualMachineExtensions>.CreateResult(Response response, CancellationToken cancellationToken)
+        VirtualMachineScaleSetVirtualMachineExtension IOperationSource<VirtualMachineScaleSetVirtualMachineExtension>.CreateResult(Response response, CancellationToken cancellationToken)
         {
             using var document = JsonDocument.Parse(response.ContentStream);
-            return new VirtualMachineScaleSetVirtualMachineExtensions(_operationBase, VirtualMachineExtensionData.DeserializeVirtualMachineExtensionData(document.RootElement));
+            return new VirtualMachineScaleSetVirtualMachineExtension(_operationBase, VirtualMachineExtensionData.DeserializeVirtualMachineExtensionData(document.RootElement));
         }
 
-        async ValueTask<VirtualMachineScaleSetVirtualMachineExtensions> IOperationSource<VirtualMachineScaleSetVirtualMachineExtensions>.CreateResultAsync(Response response, CancellationToken cancellationToken)
+        async ValueTask<VirtualMachineScaleSetVirtualMachineExtension> IOperationSource<VirtualMachineScaleSetVirtualMachineExtension>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-            return new VirtualMachineScaleSetVirtualMachineExtensions(_operationBase, VirtualMachineExtensionData.DeserializeVirtualMachineExtensionData(document.RootElement));
+            return new VirtualMachineScaleSetVirtualMachineExtension(_operationBase, VirtualMachineExtensionData.DeserializeVirtualMachineExtensionData(document.RootElement));
         }
     }
 }

@@ -119,6 +119,8 @@ namespace AutoRest.CSharp.Utilities
         [TestCase("MetadataPolicies", "MetadataPolicy", false)]
         [TestCase("TipData", "TipData", true)]
         [TestCase("TipData", "TipData", false)]
+        [TestCase("Extensions", "Extension", true)]
+        [TestCase("Extensions", "Extension", false)]
         public void ValidateLastWordToSingular(string resourceName, string expected, bool inputKnownToBePlural = true)
         {
             var result = resourceName.LastWordToSingular(inputKnownToBePlural);

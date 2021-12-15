@@ -299,7 +299,7 @@ namespace AutoRest.CSharp.Utilities
             var lastWordPlural = lastWord.ToPlural(inputIsKnownToBeSingular);
             if (inputIsKnownToBeSingular || lastWord != lastWordPlural)
             {
-                return single.ReplaceLast(lastWord, lastWordPlural);
+                return $"{string.Join("", words.SkipLast(1))}{lastWordPlural}";
             }
             return single;
         }
@@ -323,7 +323,7 @@ namespace AutoRest.CSharp.Utilities
             var lastWordSingular = lastWord.ToSingular(inputIsKnownToBePlural);
             if (inputIsKnownToBePlural || lastWord != lastWordSingular)
             {
-                return plural.ReplaceLast(lastWord, lastWordSingular);
+                return $"{string.Join("", words.SkipLast(1))}{lastWordSingular}";
             }
             return plural;
         }

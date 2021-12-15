@@ -900,13 +900,13 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        #region VirtualMachineScaleSetVirtualMachineExtensions
+        #region VirtualMachineScaleSetVirtualMachineExtension
 
         /// <summary> Gets a collection of VirtualMachineScaleSetVirtualMachineExtensions in the VirtualMachineScaleSetVM. </summary>
         /// <returns> An object representing collection of VirtualMachineScaleSetVirtualMachineExtensions and their operations over a VirtualMachineScaleSetVM. </returns>
-        public VirtualMachineScaleSetVirtualMachineExtensionsCollection GetVirtualMachineScaleSetVirtualMachineExtensions()
+        public VirtualMachineScaleSetVirtualMachineExtensionCollection GetVirtualMachineScaleSetVirtualMachineExtensions()
         {
-            return new VirtualMachineScaleSetVirtualMachineExtensionsCollection(this);
+            return new VirtualMachineScaleSetVirtualMachineExtensionCollection(this);
         }
         #endregion
     }
