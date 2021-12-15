@@ -1056,10 +1056,10 @@ namespace paging_LowLevel
         }
 
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
-        /// <param name="apiVersion"> Sets the api version to use. </param>
         /// <param name="tenant"> Sets the tenant to use. </param>
+        /// <param name="apiVersion"> Sets the api version to use. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> or <paramref name="tenant"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenant"/> or <paramref name="apiVersion"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -1077,16 +1077,16 @@ namespace paging_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual AsyncPageable<BinaryData> GetMultiplePagesFragmentNextLinkAsync(string apiVersion, string tenant, RequestContext context = null)
+        public virtual AsyncPageable<BinaryData> GetMultiplePagesFragmentNextLinkAsync(string tenant, string apiVersion, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            if (apiVersion == null)
-            {
-                throw new ArgumentNullException(nameof(apiVersion));
-            }
             if (tenant == null)
             {
                 throw new ArgumentNullException(nameof(tenant));
+            }
+            if (apiVersion == null)
+            {
+                throw new ArgumentNullException(nameof(apiVersion));
             }
 
             return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingClient.GetMultiplePagesFragmentNextLink");
@@ -1095,8 +1095,8 @@ namespace paging_LowLevel
                 do
                 {
                     var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateGetMultiplePagesFragmentNextLinkRequest(apiVersion, tenant, context)
-                        : CreateNextFragmentRequest(apiVersion, tenant, nextLink, context);
+                        ? CreateGetMultiplePagesFragmentNextLinkRequest(tenant, apiVersion, context)
+                        : CreateNextFragmentRequest(tenant, nextLink, apiVersion, context);
                     var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, context, "values", "odata.nextLink", cancellationToken).ConfigureAwait(false);
                     nextLink = page.ContinuationToken;
                     yield return page;
@@ -1105,10 +1105,10 @@ namespace paging_LowLevel
         }
 
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
-        /// <param name="apiVersion"> Sets the api version to use. </param>
         /// <param name="tenant"> Sets the tenant to use. </param>
+        /// <param name="apiVersion"> Sets the api version to use. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> or <paramref name="tenant"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenant"/> or <paramref name="apiVersion"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -1126,16 +1126,16 @@ namespace paging_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Pageable<BinaryData> GetMultiplePagesFragmentNextLink(string apiVersion, string tenant, RequestContext context = null)
+        public virtual Pageable<BinaryData> GetMultiplePagesFragmentNextLink(string tenant, string apiVersion, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            if (apiVersion == null)
-            {
-                throw new ArgumentNullException(nameof(apiVersion));
-            }
             if (tenant == null)
             {
                 throw new ArgumentNullException(nameof(tenant));
+            }
+            if (apiVersion == null)
+            {
+                throw new ArgumentNullException(nameof(apiVersion));
             }
 
             return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingClient.GetMultiplePagesFragmentNextLink");
@@ -1144,8 +1144,8 @@ namespace paging_LowLevel
                 do
                 {
                     var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateGetMultiplePagesFragmentNextLinkRequest(apiVersion, tenant, context)
-                        : CreateNextFragmentRequest(apiVersion, tenant, nextLink, context);
+                        ? CreateGetMultiplePagesFragmentNextLinkRequest(tenant, apiVersion, context)
+                        : CreateNextFragmentRequest(tenant, nextLink, apiVersion, context);
                     var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, context, "values", "odata.nextLink");
                     nextLink = page.ContinuationToken;
                     yield return page;
@@ -1154,10 +1154,10 @@ namespace paging_LowLevel
         }
 
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment with parameters grouped. </summary>
-        /// <param name="apiVersion"> Sets the api version to use. </param>
         /// <param name="tenant"> Sets the tenant to use. </param>
+        /// <param name="apiVersion"> Sets the api version to use. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> or <paramref name="tenant"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenant"/> or <paramref name="apiVersion"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -1175,16 +1175,16 @@ namespace paging_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual AsyncPageable<BinaryData> GetMultiplePagesFragmentWithGroupingNextLinkAsync(string apiVersion, string tenant, RequestContext context = null)
+        public virtual AsyncPageable<BinaryData> GetMultiplePagesFragmentWithGroupingNextLinkAsync(string tenant, string apiVersion, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            if (apiVersion == null)
-            {
-                throw new ArgumentNullException(nameof(apiVersion));
-            }
             if (tenant == null)
             {
                 throw new ArgumentNullException(nameof(tenant));
+            }
+            if (apiVersion == null)
+            {
+                throw new ArgumentNullException(nameof(apiVersion));
             }
 
             return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingClient.GetMultiplePagesFragmentWithGroupingNextLink");
@@ -1193,8 +1193,8 @@ namespace paging_LowLevel
                 do
                 {
                     var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateGetMultiplePagesFragmentWithGroupingNextLinkRequest(apiVersion, tenant, context)
-                        : CreateNextFragmentWithGroupingRequest(apiVersion, tenant, nextLink, context);
+                        ? CreateGetMultiplePagesFragmentWithGroupingNextLinkRequest(tenant, apiVersion, context)
+                        : CreateNextFragmentWithGroupingRequest(tenant, nextLink, apiVersion, context);
                     var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, context, "values", "odata.nextLink", cancellationToken).ConfigureAwait(false);
                     nextLink = page.ContinuationToken;
                     yield return page;
@@ -1203,10 +1203,10 @@ namespace paging_LowLevel
         }
 
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment with parameters grouped. </summary>
-        /// <param name="apiVersion"> Sets the api version to use. </param>
         /// <param name="tenant"> Sets the tenant to use. </param>
+        /// <param name="apiVersion"> Sets the api version to use. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> or <paramref name="tenant"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenant"/> or <paramref name="apiVersion"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -1224,16 +1224,16 @@ namespace paging_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Pageable<BinaryData> GetMultiplePagesFragmentWithGroupingNextLink(string apiVersion, string tenant, RequestContext context = null)
+        public virtual Pageable<BinaryData> GetMultiplePagesFragmentWithGroupingNextLink(string tenant, string apiVersion, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            if (apiVersion == null)
-            {
-                throw new ArgumentNullException(nameof(apiVersion));
-            }
             if (tenant == null)
             {
                 throw new ArgumentNullException(nameof(tenant));
+            }
+            if (apiVersion == null)
+            {
+                throw new ArgumentNullException(nameof(apiVersion));
             }
 
             return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingClient.GetMultiplePagesFragmentWithGroupingNextLink");
@@ -1242,8 +1242,8 @@ namespace paging_LowLevel
                 do
                 {
                     var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateGetMultiplePagesFragmentWithGroupingNextLinkRequest(apiVersion, tenant, context)
-                        : CreateNextFragmentWithGroupingRequest(apiVersion, tenant, nextLink, context);
+                        ? CreateGetMultiplePagesFragmentWithGroupingNextLinkRequest(tenant, apiVersion, context)
+                        : CreateNextFragmentWithGroupingRequest(tenant, nextLink, apiVersion, context);
                     var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, context, "values", "odata.nextLink");
                     nextLink = page.ContinuationToken;
                     yield return page;
@@ -1252,11 +1252,11 @@ namespace paging_LowLevel
         }
 
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
-        /// <param name="apiVersion"> Sets the api version to use. </param>
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="nextLink"> Next link for list operation. </param>
+        /// <param name="apiVersion"> Sets the api version to use. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/>, <paramref name="tenant"/>, or <paramref name="nextLink"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenant"/>, <paramref name="nextLink"/>, or <paramref name="apiVersion"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -1274,13 +1274,9 @@ namespace paging_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual AsyncPageable<BinaryData> NextFragmentAsync(string apiVersion, string tenant, string nextLink, RequestContext context = null)
+        public virtual AsyncPageable<BinaryData> NextFragmentAsync(string tenant, string nextLink, string apiVersion, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            if (apiVersion == null)
-            {
-                throw new ArgumentNullException(nameof(apiVersion));
-            }
             if (tenant == null)
             {
                 throw new ArgumentNullException(nameof(tenant));
@@ -1288,6 +1284,10 @@ namespace paging_LowLevel
             if (nextLink == null)
             {
                 throw new ArgumentNullException(nameof(nextLink));
+            }
+            if (apiVersion == null)
+            {
+                throw new ArgumentNullException(nameof(apiVersion));
             }
 
             return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingClient.NextFragment");
@@ -1295,7 +1295,7 @@ namespace paging_LowLevel
             {
                 do
                 {
-                    var message = CreateNextFragmentRequest(apiVersion, tenant, nextLink, context);
+                    var message = CreateNextFragmentRequest(tenant, nextLink, apiVersion, context);
                     var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, context, "values", "odata.nextLink", cancellationToken).ConfigureAwait(false);
                     nextLink = page.ContinuationToken;
                     yield return page;
@@ -1304,11 +1304,11 @@ namespace paging_LowLevel
         }
 
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
-        /// <param name="apiVersion"> Sets the api version to use. </param>
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="nextLink"> Next link for list operation. </param>
+        /// <param name="apiVersion"> Sets the api version to use. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/>, <paramref name="tenant"/>, or <paramref name="nextLink"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenant"/>, <paramref name="nextLink"/>, or <paramref name="apiVersion"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -1326,13 +1326,9 @@ namespace paging_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Pageable<BinaryData> NextFragment(string apiVersion, string tenant, string nextLink, RequestContext context = null)
+        public virtual Pageable<BinaryData> NextFragment(string tenant, string nextLink, string apiVersion, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            if (apiVersion == null)
-            {
-                throw new ArgumentNullException(nameof(apiVersion));
-            }
             if (tenant == null)
             {
                 throw new ArgumentNullException(nameof(tenant));
@@ -1341,13 +1337,17 @@ namespace paging_LowLevel
             {
                 throw new ArgumentNullException(nameof(nextLink));
             }
+            if (apiVersion == null)
+            {
+                throw new ArgumentNullException(nameof(apiVersion));
+            }
 
             return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingClient.NextFragment");
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do
                 {
-                    var message = CreateNextFragmentRequest(apiVersion, tenant, nextLink, context);
+                    var message = CreateNextFragmentRequest(tenant, nextLink, apiVersion, context);
                     var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, context, "values", "odata.nextLink");
                     nextLink = page.ContinuationToken;
                     yield return page;
@@ -1356,11 +1356,11 @@ namespace paging_LowLevel
         }
 
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
-        /// <param name="apiVersion"> Sets the api version to use. </param>
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="nextLink"> Next link for list operation. </param>
+        /// <param name="apiVersion"> Sets the api version to use. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/>, <paramref name="tenant"/>, or <paramref name="nextLink"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenant"/>, <paramref name="nextLink"/>, or <paramref name="apiVersion"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -1378,13 +1378,9 @@ namespace paging_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual AsyncPageable<BinaryData> NextFragmentWithGroupingAsync(string apiVersion, string tenant, string nextLink, RequestContext context = null)
+        public virtual AsyncPageable<BinaryData> NextFragmentWithGroupingAsync(string tenant, string nextLink, string apiVersion, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            if (apiVersion == null)
-            {
-                throw new ArgumentNullException(nameof(apiVersion));
-            }
             if (tenant == null)
             {
                 throw new ArgumentNullException(nameof(tenant));
@@ -1393,13 +1389,17 @@ namespace paging_LowLevel
             {
                 throw new ArgumentNullException(nameof(nextLink));
             }
+            if (apiVersion == null)
+            {
+                throw new ArgumentNullException(nameof(apiVersion));
+            }
 
             return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingClient.NextFragmentWithGrouping");
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
                 {
-                    var message = CreateNextFragmentWithGroupingRequest(apiVersion, tenant, nextLink, context);
+                    var message = CreateNextFragmentWithGroupingRequest(tenant, nextLink, apiVersion, context);
                     var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, context, "values", "odata.nextLink", cancellationToken).ConfigureAwait(false);
                     nextLink = page.ContinuationToken;
                     yield return page;
@@ -1408,11 +1408,11 @@ namespace paging_LowLevel
         }
 
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
-        /// <param name="apiVersion"> Sets the api version to use. </param>
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="nextLink"> Next link for list operation. </param>
+        /// <param name="apiVersion"> Sets the api version to use. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/>, <paramref name="tenant"/>, or <paramref name="nextLink"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenant"/>, <paramref name="nextLink"/>, or <paramref name="apiVersion"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -1430,13 +1430,9 @@ namespace paging_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Pageable<BinaryData> NextFragmentWithGrouping(string apiVersion, string tenant, string nextLink, RequestContext context = null)
+        public virtual Pageable<BinaryData> NextFragmentWithGrouping(string tenant, string nextLink, string apiVersion, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            if (apiVersion == null)
-            {
-                throw new ArgumentNullException(nameof(apiVersion));
-            }
             if (tenant == null)
             {
                 throw new ArgumentNullException(nameof(tenant));
@@ -1445,13 +1441,17 @@ namespace paging_LowLevel
             {
                 throw new ArgumentNullException(nameof(nextLink));
             }
+            if (apiVersion == null)
+            {
+                throw new ArgumentNullException(nameof(apiVersion));
+            }
 
             return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingClient.NextFragmentWithGrouping");
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do
                 {
-                    var message = CreateNextFragmentWithGroupingRequest(apiVersion, tenant, nextLink, context);
+                    var message = CreateNextFragmentWithGroupingRequest(tenant, nextLink, apiVersion, context);
                     var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, context, "values", "odata.nextLink");
                     nextLink = page.ContinuationToken;
                     yield return page;
@@ -1885,7 +1885,7 @@ namespace paging_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetMultiplePagesFragmentNextLinkRequest(string apiVersion, string tenant, RequestContext context)
+        internal HttpMessage CreateGetMultiplePagesFragmentNextLinkRequest(string tenant, string apiVersion, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context);
             var request = message.Request;
@@ -1901,7 +1901,7 @@ namespace paging_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetMultiplePagesFragmentWithGroupingNextLinkRequest(string apiVersion, string tenant, RequestContext context)
+        internal HttpMessage CreateGetMultiplePagesFragmentWithGroupingNextLinkRequest(string tenant, string apiVersion, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context);
             var request = message.Request;
@@ -1943,7 +1943,7 @@ namespace paging_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateNextFragmentRequest(string apiVersion, string tenant, string nextLink, RequestContext context)
+        internal HttpMessage CreateNextFragmentRequest(string tenant, string nextLink, string apiVersion, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context);
             var request = message.Request;
@@ -1961,7 +1961,7 @@ namespace paging_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateNextFragmentWithGroupingRequest(string apiVersion, string tenant, string nextLink, RequestContext context)
+        internal HttpMessage CreateNextFragmentWithGroupingRequest(string tenant, string nextLink, string apiVersion, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context);
             var request = message.Request;

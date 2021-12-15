@@ -145,10 +145,6 @@ namespace CollapseRequestCondition_LowLevel
             {
                 request.Headers.Add("If-Match", ifMatch.Value);
             }
-            if (ifMatch != null)
-            {
-                request.Headers.Add("conditions", ifMatch.Value);
-            }
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             message.ResponseClassifier = ResponseClassifier200.Instance;
