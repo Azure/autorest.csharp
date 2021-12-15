@@ -17,7 +17,7 @@ namespace: MgmtScopeResource
 mgmt-debug:
   show-request-path: true
 list-exception:
-- /{linkId}
+  - /{linkId}
 request-path-to-resource-data:
   # model of this has id, type and name, but its type has the type of `object` instead of `string`
   /{linkId}: ResourceLink
@@ -32,6 +32,11 @@ request-path-to-resource-type:
   /{linkId}: Microsoft.Resources/links
 request-path-to-scope-resource-types:
   /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}:
+    - subscriptions
+    - resourceGroups
+    - managementGroups
+    - tenant
+  /{scope}/providers/Microsoft.Resources/deployments:
     - subscriptions
     - resourceGroups
     - managementGroups

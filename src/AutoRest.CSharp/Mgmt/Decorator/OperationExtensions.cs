@@ -152,7 +152,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         public static string GetHttpPath(this Operation operation)
         {
-            return operation.GetHttpRequest()?.Path ??
+            return operation.GetHttpRequest()?.Path.TrimEnd('/') ??
                 throw new InvalidOperationException($"Cannot get HTTP path from operation {operation.CSharpName()}");
         }
 

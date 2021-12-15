@@ -21,15 +21,5 @@ namespace MgmtScopeResource
             return new PolicyAssignmentCollection(armResource);
         }
         #endregion
-
-        #region DeploymentExtended
-        /// <summary> Gets an object representing a DeploymentExtendedCollection along with the instance operations that can be performed on it. </summary>
-        /// <param name="armResource"> The <see cref="ArmResource" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="DeploymentExtendedCollection" /> object. </returns>
-        public static DeploymentExtendedCollection GetDeploymentExtendeds(this ArmResource armResource)
-        {
-            return new DeploymentExtendedCollection(armResource);
-        }
-        #endregion
     }
 }
