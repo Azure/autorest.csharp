@@ -153,8 +153,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 WriteGetMethod(_resourceCollection.GetOperation, true);
                 WriteGetIfExists(_resourceCollection.GetOperation, false);
                 WriteGetIfExists(_resourceCollection.GetOperation, true);
-                WriteCheckIfExists(_resourceCollection.GetOperation, false);
-                WriteCheckIfExists(_resourceCollection.GetOperation, true);
+                WriteExists(_resourceCollection.GetOperation, false);
+                WriteExists(_resourceCollection.GetOperation, true);
             }
 
             // write all the methods that should belong to this resouce collection
@@ -180,7 +180,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             return branch.GetResourceType(Config);
         }
 
-        private void WriteCheckIfExists(MgmtClientOperation clientOperation, bool async)
+        private void WriteExists(MgmtClientOperation clientOperation, bool async)
         {
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Tries to get details for this resource from the service.");
@@ -199,13 +199,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 pair => pair.Value.BuildParameterMapping(contextualParameterMappings[pair.Key]));
             // we have ensured the operations corresponding to different OperationSet have the same method parameters, therefore here we just need to use the first operation to get the method parameters
             var methodParameters = parameterMappings.Values.First().GetPassThroughParameters();
-            WriteCollectionMethodScope(typeof(bool).WrapResponse(async), "CheckIfExists", methodParameters, writer =>
+            WriteCollectionMethodScope(typeof(bool).WrapResponse(async), "Exists", methodParameters, writer =>
             {
-                WriteCheckIfExistsBody(methodParameters, async);
+                WriteExistsBody(methodParameters, async);
             }, async, isOverride: false);
         }
 
-        private void WriteCheckIfExistsBody(IEnumerable<Parameter> passThruParameters, bool async)
+        private void WriteExistsBody(IEnumerable<Parameter> passThruParameters, bool async)
         {
             _writer.Append($"var response = {GetAwait(async)} {CreateMethodName("GetIfExists", async)}(");
             foreach (var parameter in passThruParameters)
