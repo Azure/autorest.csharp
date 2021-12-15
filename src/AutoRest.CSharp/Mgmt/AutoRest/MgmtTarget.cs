@@ -17,15 +17,29 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 {
     internal class MgmtTarget
     {
-        private static ISet<string> _addedFilenames = new HashSet<string>();
-        private static IList<string> _overridenFilenames = new List<string>();
+        private static IDictionary<GeneratedCodeWorkspace, ISet<string>> _addedProjectFilenames = new Dictionary<GeneratedCodeWorkspace, ISet<string>>();
+        private static IDictionary<GeneratedCodeWorkspace, IList<string>> _overriddenProjectFilenames = new Dictionary<GeneratedCodeWorkspace, IList<string>>();
 
         private static void AddGeneratedFile(GeneratedCodeWorkspace project, string filename, string text)
         {
-            if (_addedFilenames.Contains(filename))
-                _overridenFilenames.Add(filename);
+            if (!_addedProjectFilenames.TryGetValue(project, out var addedFileNames))
+            {
+                addedFileNames = new HashSet<string>();
+                _addedProjectFilenames.Add(project, addedFileNames);
+            }
+            if (addedFileNames.Contains(filename))
+            {
+                if (!_overriddenProjectFilenames.TryGetValue(project, out var overriddenFileNames))
+                {
+                    overriddenFileNames = new List<string>();
+                    _overriddenProjectFilenames.Add(project, overriddenFileNames);
+                }
+                overriddenFileNames.Add(filename);
+            }
             else
-                _addedFilenames.Add(filename);
+            {
+                addedFileNames.Add(filename);
+            }
             project.AddGeneratedFile(filename, text);
         }
 
@@ -141,8 +155,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 AddGeneratedFile(project, $"Extensions/{context.Library.ArmClientExtensions.Type.Name}.cs", armClientExtensionsCodeWriter.ToString());
             }
 
-            if (_overridenFilenames.Count != 0)
-                throw new InvalidOperationException($"At least one file was overridden during the generation process. Filenames are: {string.Join(", ", _overridenFilenames)}");
+            if (_overriddenProjectFilenames.TryGetValue(project, out var overriddenFilenames))
+                throw new InvalidOperationException($"At least one file was overridden during the generation process. Filenames are: {string.Join(", ", overriddenFilenames)}");
         }
 
         private static bool ShouldSkipModelGeneration(TypeProvider model, BuildContext<MgmtOutputLibrary> context)
