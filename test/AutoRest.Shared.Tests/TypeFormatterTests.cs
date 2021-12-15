@@ -55,5 +55,26 @@ namespace Azure.Core.Tests
             Assert.AreEqual(expected, formatted.ToString());
             Assert.AreEqual(date, formatted.GetDateTimeOffset(format));
         }
+
+        [TestCase("2020-05-04T03:02:01.1230000+08:00")]
+        [TestCase("2020-05-04T03:02:01.1230000-08:00")]
+        [TestCase("2020-05-04T03:02:01.1230000+00:00")]
+        [TestCase("2020-05-04T03:02:01.1230000")]
+        [TestCase("Mon, 04 May 2020 03:02:01 GMT")]
+        [TestCase("Mon, 04 May 2020 03:02:01")]
+        public void TestEqualAfterConvertingToUtc(string dateString)
+        {
+            string[] formats = { "O", "o" };
+
+            foreach (string format in formats)
+            {
+                var originalDate = DateTimeOffset.Parse(dateString);
+                var originalTimeMillis = originalDate.ToUnixTimeMilliseconds();
+
+                var formatted = TypeFormatters.ToString(originalDate, format);
+                var utcDate = DateTimeOffset.Parse(formatted);
+                Assert.AreEqual(originalTimeMillis, utcDate.ToUnixTimeMilliseconds());
+            }
+        }
     }
 }
