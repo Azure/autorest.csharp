@@ -70,6 +70,11 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         private static IEnumerable<MgmtTypeProvider> FindScopeParents(ResourceType[] parameterizedScopeTypes, BuildContext<MgmtOutputLibrary> context)
         {
+            if (parameterizedScopeTypes.Contains(ResourceType.Any))
+            {
+                yield return context.Library.ArmResourceExtensions;
+                yield break;
+            }
             // try all the possible extensions one by one
             if (parameterizedScopeTypes.Contains(ResourceType.ManagementGroup))
                 yield return context.Library.ManagementGroupExtensions;
@@ -80,7 +85,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             if (parameterizedScopeTypes.Contains(ResourceType.Tenant))
                 yield return context.Library.TenantExtensions;
             // tenant is not quite a concrete resource, therefore we do not include it here
-            // TODO -- if this scope could be anything, we need to add an extension for ArmResource
         }
 
         public static RequestPath ParentRequestPath(this OperationSet operationSet, BuildContext<MgmtOutputLibrary> context)
