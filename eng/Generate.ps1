@@ -190,7 +190,12 @@ $settings = @{
 foreach ($key in Sort-FileSafe ($swaggerDefinitions.Keys))
 {
     $definition = $swaggerDefinitions[$key];
-    $outputPath = (Join-Path $definition.output "Generated").Replace($repoRoot, '$(SolutionDir)')
+    $outputPath = Join-Path $definition.output "Generated"
+    if ($key -eq "TypeSchemaMapping")
+    {
+        $outputPath = Join-Path $definition.output "SomeFolder" "Generated"
+    }
+    $outputPath = $outputPath.Replace($repoRoot, '$(SolutionDir)')
 
     $settings.profiles[$key] = [ordered]@{
         'commandName'='Project';
