@@ -108,7 +108,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
                 // if we have the unique resource type, we just use the resource type to construct our resource type name
                 var types = ResourceType.Types;
-                var name = string.Join("", types.Select(segment => segment.ConstantValue.ToSingular().FirstCharToUpperCase()));
+                var name = string.Join("", types.Select(segment => segment.ConstantValue.LastWordToSingular().FirstCharToUpperCase()));
                 if (countOfSameResourceTypeName == 1)
                     return name;
 

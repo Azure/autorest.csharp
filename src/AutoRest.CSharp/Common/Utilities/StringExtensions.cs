@@ -18,6 +18,8 @@ namespace AutoRest.CSharp.Utilities
         static StringExtensions()
         {
             Vocabularies.Default.AddUncountable("data");
+            // "S".Singularize() throws exception, github issue link: https://github.com/Humanizr/Humanizer/issues/1154
+            Vocabularies.Default.AddUncountable("S");
         }
 
         public static bool IsNullOrEmpty(this string? text) => String.IsNullOrEmpty(text);
@@ -278,37 +280,50 @@ namespace AutoRest.CSharp.Utilities
             }
         }
 
-
+        /// <summary>
+        /// Change a word to its plural form.
+        /// Notice that this function will treat this word as a whole word instead of only changing the last word if it contains multiple words. Please use <see cref="LastWordToPlural(string, bool)"/> instead.
+        /// </summary>
+        /// <param name="single"></param>
+        /// <param name="inputIsKnownToBeSingular"></param>
+        /// <returns></returns>
         public static string ToPlural(this string single, bool inputIsKnownToBeSingular = true)
         {
             return single.Pluralize(inputIsKnownToBeSingular);
         }
 
-        private static string LastWordToPlural(this string single, bool inputIsKnownToBeSingular = true)
+        public static string LastWordToPlural(this string single, bool inputIsKnownToBeSingular = true)
         {
             var words = single.SplitByCamelCase();
             var lastWord = words.LastOrDefault();
-            var lastWordPlural = lastWord.Pluralize(inputIsKnownToBeSingular);
+            var lastWordPlural = lastWord.ToPlural(inputIsKnownToBeSingular);
             if (inputIsKnownToBeSingular || lastWord != lastWordPlural)
             {
-                return single.ReplaceLast(lastWord, lastWordPlural);
+                return $"{string.Join("", words.SkipLast(1))}{lastWordPlural}";
             }
             return single;
         }
 
+        /// <summary>
+        /// Change a word to its singular form.
+        /// Notice that this function will treat this word as a whole word instead of only changing the last word if it contains multiple words. Please use <see cref="LastWordToSingular(string, bool)"/> instead.
+        /// </summary>
+        /// <param name="plural"></param>
+        /// <param name="inputIsKnownToBePlural"></param>
+        /// <returns></returns>
         public static string ToSingular(this string plural, bool inputIsKnownToBePlural = true)
         {
             return plural.Singularize(inputIsKnownToBePlural);
         }
 
-        private static string LastWordToSingular(this string plural, bool inputIsKnownToBePlural = true)
+        public static string LastWordToSingular(this string plural, bool inputIsKnownToBePlural = true)
         {
             var words = plural.SplitByCamelCase();
             var lastWord = words.LastOrDefault();
-            var lastWordSingular = lastWord.Singularize(inputIsKnownToBePlural);
+            var lastWordSingular = lastWord.ToSingular(inputIsKnownToBePlural);
             if (inputIsKnownToBePlural || lastWord != lastWordSingular)
             {
-                return plural.ReplaceLast(lastWord, lastWordSingular);
+                return $"{string.Join("", words.SkipLast(1))}{lastWordSingular}";
             }
             return plural;
         }
