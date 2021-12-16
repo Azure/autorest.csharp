@@ -14,7 +14,6 @@ using Azure.ResourceManager.Resources;
 using Azure.ResourceManager.Resources.Models;
 using Azure.ResourceManager.TestFramework;
 using MgmtKeyvault.Models;
-using NUnit.Framework;
 
 namespace MgmtKeyvault.Tests.Mock
 {
@@ -28,7 +27,6 @@ namespace MgmtKeyvault.Tests.Mock
         }
 
         [RecordedTest]
-        [Ignore("Generated TestCase")]
         public async Task CreateOrUpdateAsync()
         {
             // Example: Create a new vault or update an existing vault
@@ -45,7 +43,6 @@ namespace MgmtKeyvault.Tests.Mock
         }
 
         [RecordedTest]
-        [Ignore("Generated TestCase")]
         public async Task CreateOrUpdateAsync2()
         {
             // Example: Create or update a vault with network acls
@@ -67,7 +64,6 @@ namespace MgmtKeyvault.Tests.Mock
         }
 
         [RecordedTest]
-        [Ignore("Generated TestCase")]
         public async Task GetAsync()
         {
             // Example: Retrieve a vault
@@ -78,7 +74,6 @@ namespace MgmtKeyvault.Tests.Mock
         }
 
         [RecordedTest]
-        [Ignore("Generated TestCase")]
         public void GetAllAsync()
         {
             // Example: List vaults in the specified resource group

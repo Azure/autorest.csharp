@@ -16,7 +16,6 @@ using Azure.ResourceManager.Resources.Models;
 using Azure.ResourceManager.TestFramework;
 using MgmtKeyvault;
 using MgmtKeyvault.Models;
-using NUnit.Framework;
 
 namespace MgmtKeyvault.Tests.Mock
 {
@@ -30,7 +29,6 @@ namespace MgmtKeyvault.Tests.Mock
         }
 
         [RecordedTest]
-        [Ignore("Generated TestCase")]
         public async Task GetAsync()
         {
             // Example: Retrieve a managed HSM Pool
@@ -40,7 +38,6 @@ namespace MgmtKeyvault.Tests.Mock
         }
 
         [RecordedTest]
-        [Ignore("Generated TestCase")]
         public async Task DeleteAsync()
         {
             // Example: Delete a managed HSM Pool
@@ -50,7 +47,6 @@ namespace MgmtKeyvault.Tests.Mock
         }
 
         [RecordedTest]
-        [Ignore("Generated TestCase")]
         public async Task UpdateAsync()
         {
             // Example: Update an existing managed HSM Pool
@@ -63,7 +59,6 @@ namespace MgmtKeyvault.Tests.Mock
         }
 
         [RecordedTest]
-        [Ignore("Generated TestCase")]
         public async Task GetMHSMPrivateLinkResourcesByMhsmResourceAsync()
         {
             // Example: KeyVaultListPrivateLinkResources

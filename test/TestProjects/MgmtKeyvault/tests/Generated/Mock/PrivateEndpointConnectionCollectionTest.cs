@@ -15,7 +15,6 @@ using Azure.ResourceManager.Resources.Models;
 using Azure.ResourceManager.TestFramework;
 using MgmtKeyvault;
 using MgmtKeyvault.Models;
-using NUnit.Framework;
 
 namespace MgmtKeyvault.Tests.Mock
 {
@@ -29,7 +28,6 @@ namespace MgmtKeyvault.Tests.Mock
         }
 
         [RecordedTest]
-        [Ignore("Generated TestCase")]
         public async Task CreateOrUpdateAsync()
         {
             // Example: KeyVaultPutPrivateEndpointConnection
@@ -49,7 +47,6 @@ namespace MgmtKeyvault.Tests.Mock
         }
 
         [RecordedTest]
-        [Ignore("Generated TestCase")]
         public async Task GetAsync()
         {
             // Example: KeyVaultGetPrivateEndpointConnection
@@ -60,7 +57,6 @@ namespace MgmtKeyvault.Tests.Mock
         }
 
         [RecordedTest]
-        [Ignore("Generated TestCase")]
         public void GetAllAsync()
         {
             // Example: KeyVaultListPrivateEndpointConnection

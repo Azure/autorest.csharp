@@ -15,7 +15,6 @@ using Azure.ResourceManager.Resources.Models;
 using Azure.ResourceManager.TestFramework;
 using MgmtKeyvault;
 using MgmtKeyvault.Models;
-using NUnit.Framework;
 
 namespace MgmtKeyvault.Tests.Mock
 {
@@ -29,7 +28,6 @@ namespace MgmtKeyvault.Tests.Mock
         }
 
         [RecordedTest]
-        [Ignore("Generated TestCase")]
         public async Task CreateOrUpdateAsync()
         {
             // Example: Create a new managed HSM Pool or update an existing managed HSM Pool
@@ -51,7 +49,6 @@ namespace MgmtKeyvault.Tests.Mock
         }
 
         [RecordedTest]
-        [Ignore("Generated TestCase")]
         public async Task GetAsync()
         {
             // Example: Retrieve a managed HSM Pool
@@ -62,7 +59,6 @@ namespace MgmtKeyvault.Tests.Mock
         }
 
         [RecordedTest]
-        [Ignore("Generated TestCase")]
         public void GetAllAsync()
         {
             // Example: List managed HSM Pools in a resource group

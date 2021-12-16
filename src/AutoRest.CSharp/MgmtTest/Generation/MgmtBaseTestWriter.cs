@@ -507,7 +507,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
         public static string useVariableName(string variableName)
         {
-            if (StringExtensions.IsCSharpKeyword(variableName))
+            if (Utilities.StringExtensions.IsCSharpKeyword(variableName))
             {
                 variableName = $"@{variableName}";
             }

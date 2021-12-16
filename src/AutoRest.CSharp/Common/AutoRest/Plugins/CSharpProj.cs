@@ -138,7 +138,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 csProjContent = string.Format(_csProjContent, csProjPackageReference, _coreCsProjContent);
             }
 
-            var projectFile = $"{Configuration.ProjectFolder}{context.DefaultNamespace}";
+            var projectFile = $"{configuration.ProjectFolder}{context.DefaultNamespace}";
             if (isTestProject)
             {
                 projectFile += "Test";
