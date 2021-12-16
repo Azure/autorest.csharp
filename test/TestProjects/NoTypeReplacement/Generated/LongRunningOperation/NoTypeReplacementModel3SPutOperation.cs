@@ -15,16 +15,16 @@ using NoTypeReplacement;
 
 namespace NoTypeReplacement.Models
 {
-    public partial class NoTypeReplacementModel3PutOperation : Operation<NoTypeReplacementModel3>
+    public partial class NoTypeReplacementModel3SPutOperation : Operation<NoTypeReplacementModel3>
     {
         private readonly OperationOrResponseInternals<NoTypeReplacementModel3> _operation;
 
-        /// <summary> Initializes a new instance of NoTypeReplacementModel3PutOperation for mocking. </summary>
-        protected NoTypeReplacementModel3PutOperation()
+        /// <summary> Initializes a new instance of NoTypeReplacementModel3SPutOperation for mocking. </summary>
+        protected NoTypeReplacementModel3SPutOperation()
         {
         }
 
-        internal NoTypeReplacementModel3PutOperation(ArmResource operationsBase, Response<NoTypeReplacementModel3Data> response)
+        internal NoTypeReplacementModel3SPutOperation(ArmResource operationsBase, Response<NoTypeReplacementModel3Data> response)
         {
             _operation = new OperationOrResponseInternals<NoTypeReplacementModel3>(Response.FromValue(new NoTypeReplacementModel3(operationsBase, response.Value), response.GetRawResponse()));
         }

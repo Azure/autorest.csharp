@@ -16,16 +16,16 @@ using ExactMatchFlattenInheritance;
 namespace ExactMatchFlattenInheritance.Models
 {
     /// <summary> Create or update an AzureResourceFlattenModel1. </summary>
-    public partial class AzureResourceFlattenModel1PutOperation : Operation<AzureResourceFlattenModel1>
+    public partial class AzureResourceFlattenModel1SPutOperation : Operation<AzureResourceFlattenModel1>
     {
         private readonly OperationOrResponseInternals<AzureResourceFlattenModel1> _operation;
 
-        /// <summary> Initializes a new instance of AzureResourceFlattenModel1PutOperation for mocking. </summary>
-        protected AzureResourceFlattenModel1PutOperation()
+        /// <summary> Initializes a new instance of AzureResourceFlattenModel1SPutOperation for mocking. </summary>
+        protected AzureResourceFlattenModel1SPutOperation()
         {
         }
 
-        internal AzureResourceFlattenModel1PutOperation(ArmResource operationsBase, Response<AzureResourceFlattenModel1Data> response)
+        internal AzureResourceFlattenModel1SPutOperation(ArmResource operationsBase, Response<AzureResourceFlattenModel1Data> response)
         {
             _operation = new OperationOrResponseInternals<AzureResourceFlattenModel1>(Response.FromValue(new AzureResourceFlattenModel1(operationsBase, response.Value), response.GetRawResponse()));
         }
