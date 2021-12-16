@@ -434,13 +434,13 @@ namespace MgmtMultipleParentResource
             }
         }
 
-        #region ParentsSubParentChildren
+        #region ParentSubParentChild
 
-        /// <summary> Gets a collection of ParentsSubParentChildrens in the SubParent. </summary>
-        /// <returns> An object representing collection of ParentsSubParentChildrens and their operations over a SubParent. </returns>
-        public ParentsSubParentChildrenCollection GetParentsSubParentChildren()
+        /// <summary> Gets a collection of ParentSubParentChildren in the SubParent. </summary>
+        /// <returns> An object representing collection of ParentSubParentChildren and their operations over a SubParent. </returns>
+        public ParentSubParentChildCollection GetParentSubParentChildren()
         {
-            return new ParentsSubParentChildrenCollection(this);
+            return new ParentSubParentChildCollection(this);
         }
         #endregion
     }
