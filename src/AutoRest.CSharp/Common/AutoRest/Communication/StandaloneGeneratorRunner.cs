@@ -46,6 +46,19 @@ namespace AutoRest.CSharp.AutoRest.Communication
             }
         }
 
+        private static void WriteIfNotDefault(Utf8JsonWriter writer, string option, string? value)
+        {
+            if (value == null)
+            {
+                return;
+            }
+            var defaultValue = Configuration.GetDefaultOptionStringValue(option);
+            if (defaultValue == null || defaultValue != value)
+            {
+                writer.WriteString(option, value);
+            }
+        }
+
         internal static string SaveConfiguration(Configuration configuration)
         {
             using (var memoryStream = new MemoryStream())
@@ -71,6 +84,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
                     WriteIfNotDefault(writer, Configuration.Options.SkipCSProjPackageReference, configuration.SkipCSProjPackageReference);
                     WriteIfNotDefault(writer, Configuration.Options.DataPlane, configuration.DataPlane);
                     WriteIfNotDefault(writer, Configuration.Options.SingleTopLevelClient, configuration.SingleTopLevelClient);
+                    WriteIfNotDefault(writer, Configuration.Options.ProjectFolder, configuration.ProjectFolder);
 
                     configuration.MgmtConfiguration.SaveConfiguration(writer);
 
@@ -98,6 +112,18 @@ namespace AutoRest.CSharp.AutoRest.Communication
             }
         }
 
+        private static string ReadStringOption(JsonElement root, string option)
+        {
+            if (root.TryGetProperty(option, out JsonElement value))
+            {
+                return value.GetString();
+            }
+            else
+            {
+                return Configuration.GetDefaultOptionStringValue(option)!;
+            }
+        }
+
         internal static Configuration LoadConfiguration(string basePath, string json)
         {
             JsonDocument document = JsonDocument.Parse(json);
@@ -122,6 +148,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 ReadOption(root, Configuration.Options.SkipCSProjPackageReference),
                 ReadOption(root, Configuration.Options.DataPlane),
                 ReadOption(root, Configuration.Options.SingleTopLevelClient),
+                ReadStringOption(root, Configuration.Options.ProjectFolder),
                 MgmtConfiguration.LoadConfiguration(root)
             );
         }

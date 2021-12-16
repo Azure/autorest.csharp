@@ -38,7 +38,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include=""Azure.ResourceManager"" Version=""1.0.0-alpha.20211207.4"" />
+    <PackageReference Include=""Azure.ResourceManager"" Version=""1.0.0-alpha.20211214.3"" />
   </ItemGroup>
 ";
 
@@ -118,8 +118,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 var csProjPackageReference = string.Format(_csProjPackageReference, version);
                 csProjContent = string.Format(_csProjContent, csProjPackageReference, _coreCsProjContent);
             }
-
-            await autoRest.WriteFile($"{Configuration.ProjectRelativeDirectory}{context.DefaultNamespace}.csproj", csProjContent, "source-file-csharp");
+            await autoRest.WriteFile($"{configuration.ProjectFolder}{context.DefaultNamespace}.csproj", csProjContent, "source-file-csharp");
 
             return true;
         }

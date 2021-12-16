@@ -441,11 +441,11 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
             if (collection == null)
                 throw new InvalidOperationException($"We are about to write a {resource.Type.Name} resource entry in {_resource.Type.Name} resource, but it does not have a collection, this cannot happen");
             _writer.Line();
-            _writer.WriteXmlDocumentationSummary($"Gets a collection of {resource.Type.Name.ToPlural()} in the {_resource.Type.Name}.");
-            _writer.WriteXmlDocumentationReturns($"An object representing collection of {resource.Type.Name.ToPlural()} and their operations over a {_resource.Type.Name}.");
+            _writer.WriteXmlDocumentationSummary($"Gets a collection of {resource.Type.Name.LastWordToPlural()} in the {_resource.Type.Name}.");
+            _writer.WriteXmlDocumentationReturns($"An object representing collection of {resource.Type.Name.LastWordToPlural()} and their operations over a {_resource.Type.Name}.");
             _writer.WriteXmlDocumentationParameters(collection.ExtraConstructorParameters);
             var extraConstructorParameters = collection.ExtraConstructorParameters;
-            _writer.Append($"public {collection.Type.Name} Get{resource.Type.Name.ToPlural()}(");
+            _writer.Append($"public {collection.Type.Name} Get{resource.Type.Name.ResourceNameToPlural()}(");
             foreach (var parameter in collection.ExtraConstructorParameters)
             {
                 _writer.WriteParameter(parameter);

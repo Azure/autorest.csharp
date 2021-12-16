@@ -8,9 +8,14 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
     {
         public MgmtScopeResourceTests() : base("MgmtScopeResource") { }
 
-        [TestCase("ManagementGroupExtensions", "GetPolicyAssignments", true)]
-        [TestCase("SubscriptionExtensions", "GetPolicyAssignments", true)]
-        [TestCase("ResourceGroupExtensions", "GetPolicyAssignments", true)]
+        [TestCase("ManagementGroupExtensions", "GetPolicyAssignments", false)]
+        [TestCase("SubscriptionExtensions", "GetPolicyAssignments", false)]
+        [TestCase("ResourceGroupExtensions", "GetPolicyAssignments", false)]
+        [TestCase("ArmResourceExtensions", "GetPolicyAssignments", true)]
+        [TestCase("ManagementGroupExtensions", "GetDeploymentExtendeds", true)]
+        [TestCase("SubscriptionExtensions", "GetDeploymentExtendeds", true)]
+        [TestCase("ResourceGroupExtensions", "GetDeploymentExtendeds", true)]
+        [TestCase("ArmResourceExtensions", "GetDeploymentExtendeds", false)]
         [TestCase("PolicyAssignmentCollection", "CreateOrUpdate", true)]
         [TestCase("PolicyAssignmentCollection", "Get", true)]
         [TestCase("PolicyAssignmentCollection", "GetAll", true)]
@@ -39,7 +44,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             var managementGroupExtensions = Assembly.GetExecutingAssembly().GetType("MgmtScopeResource.ManagementGroupExtensions");
             var subscriptionExtensions = Assembly.GetExecutingAssembly().GetType("MgmtScopeResource.SubscriptionExtensions");
             var resourceGroupExtensions = Assembly.GetExecutingAssembly().GetType("MgmtScopeResource.ResourceGroupExtensions");
-            var classesToCheck = FindAllCollections().Concat(FindAllResources()).Append(managementGroupExtensions).Append(subscriptionExtensions).Append(resourceGroupExtensions);
+            var armResourceExtensions = Assembly.GetExecutingAssembly().GetType("MgmtScopeResource.ArmResourceExtensions");
+            var classesToCheck = FindAllCollections().Concat(FindAllResources()).Append(managementGroupExtensions).Append(subscriptionExtensions).Append(resourceGroupExtensions).Append(armResourceExtensions);
             var classToCheck = classesToCheck.First(t => t.Name == className);
             Assert.AreEqual(exist, classToCheck.GetMethod(methodName) != null, $"can{(exist ? "not" : string.Empty)} find {className}.{methodName}");
         }

@@ -10,6 +10,8 @@ namespace AutoRest.CSharp.Output.Models.Shared
 {
     internal static class KnownParameters
     {
+        private static readonly CSharpType MatchConditionsType = new(typeof(MatchConditions), true);
+        private static readonly CSharpType RequestConditionsType = new(typeof(RequestConditions), true);
         private static readonly CSharpType RequestContentType = new(typeof(RequestContent));
         private static readonly CSharpType RequestContentNullableType = new(typeof(RequestContent), true);
         private static readonly CSharpType RequestContextNullableType = new(typeof(RequestContext), true);
@@ -19,8 +21,11 @@ namespace AutoRest.CSharp.Output.Models.Shared
         public static readonly Parameter KeyAuth = new("keyCredential", "The key credential to copy", new CSharpType(typeof(AzureKeyCredential)), null, false);
         public static readonly Parameter TokenAuth = new("tokenCredential", "The token credential to copy", new CSharpType(typeof(TokenCredential)), null, false);
 
-        public static readonly Parameter RequestContent = new("content", "The content to send as the body of the request.", RequestContentType, null, true);
-        public static readonly Parameter RequestContentNullable = new("content", "The content to send as the body of the request.", RequestContentNullableType, /*Constant.Default(RequestContentNullableType)*/null, false);
+        public static readonly Parameter RequestContent = new("content", "The content to send as the body of the request.", RequestContentType, null, true, RequestLocation: RequestLocation.Body);
+        public static readonly Parameter RequestContentNullable = new("content", "The content to send as the body of the request.", RequestContentNullableType, /*Constant.Default(RequestContentNullableType)*/null, false, RequestLocation: RequestLocation.Body);
+
+        public static readonly Parameter MatchConditionsParameter = new("matchConditions", "The content to send as the request conditions of the request.", MatchConditionsType, Constant.Default(RequestConditionsType), false, RequestLocation: RequestLocation.Header);
+        public static readonly Parameter RequestConditionsParameter = new("requestConditions", "The content to send as the request conditions of the request.", RequestConditionsType, Constant.Default(RequestConditionsType), false, RequestLocation: RequestLocation.Header);
 
         public static readonly Parameter RequestContext = new("context", "The request context, which can override default behaviors on the request on a per-call basis.", RequestContextNullableType, Constant.Default(RequestContextNullableType), false);
 

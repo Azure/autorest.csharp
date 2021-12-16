@@ -86,7 +86,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.WriteXmlDocumentationParameters(collection.ExtraConstructorParameters);
             _writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{collection.Type}\" /> object.");
 
-            _writer.Append($"public static {collection.Type.Name} Get{resource.Type.Name.ToPlural()}(this {ExtensionOperationVariableType} {ExtensionOperationVariableName}, ");
+            _writer.Append($"public static {collection.Type.Name} Get{resource.Type.Name.ResourceNameToPlural()}(this {ExtensionOperationVariableType} {ExtensionOperationVariableName}, ");
             foreach (var parameter in collection.ExtraConstructorParameters)
             {
                 _writer.WriteParameter(parameter);
@@ -187,7 +187,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var itemType = pagingMethod.PagingResponse.ItemType;
             var actualItemType = WrapResourceDataType(itemType, clientOperation.First())!;
 
-            _writer.WriteXmlDocumentationSummary($"Lists the {actualItemType.Name.ToPlural()} for this <see cref=\"{ExtensionOperationVariableType}\" />.");
+            _writer.WriteXmlDocumentationSummary($"Lists the {actualItemType.Name.LastWordToPlural()} for this <see cref=\"{ExtensionOperationVariableType}\" />.");
             _writer.WriteXmlDocumentationParameter($"{ExtensionOperationVariableName}", $"The <see cref=\"{ExtensionOperationVariableType}\" /> instance the method will execute against.");
             foreach (var parameter in methodParameters)
             {

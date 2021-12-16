@@ -193,6 +193,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public ManagementGroupExtensions ManagementGroupExtensions => EnsureManagementExtensions();
 
+        public ArmResourceExtensions ArmResourceExtensions => EnsureArmResourceExtensions();
+
         private ResourceGroupExtensions? _resourceGroupsExtensions;
         private ResourceGroupExtensions EnsureResourceGroupExtensions()
         {
@@ -244,6 +246,16 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
             _armClientExtensions = new ArmClientExtensions(GetChildOperations(RequestPath.Tenant), _context);
             return _armClientExtensions;
+        }
+
+        private ArmResourceExtensions? _armResourceExtensions;
+        private ArmResourceExtensions EnsureArmResourceExtensions()
+        {
+            if (_armResourceExtensions != null)
+                return _armResourceExtensions;
+
+            _armResourceExtensions = new ArmResourceExtensions(Enumerable.Empty<Operation>(), _context);
+            return _armResourceExtensions;
         }
 
         private IEnumerable<ResourceData>? _resourceDatas;
