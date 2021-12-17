@@ -26,6 +26,20 @@
   "RequestPathToResourceType": {
     "/{linkId}": "Microsoft.Resources/links"
   },
+  "RequestPathToScopeResourceTypes": {
+    "/{scope}/providers/Microsoft.Resources/deployments/{deploymentName}": [
+      "subscriptions",
+      "resourceGroups",
+      "managementGroups",
+      "tenant"
+    ],
+    "/{scope}/providers/Microsoft.Resources/deployments": [
+      "subscriptions",
+      "resourceGroups",
+      "managementGroups",
+      "tenant"
+    ]
+  },
   "MgmtDebug": {
     "ShowRequestPath": true
   }

@@ -15,25 +15,25 @@ using NoTypeReplacement;
 
 namespace NoTypeReplacement.Models
 {
-    public partial class NoTypeReplacementModel1PutOperation : Operation<NoTypeReplacementModel1>
+    public partial class NoTypeReplacementModel2SPutOperation : Operation<NoTypeReplacementModel2>
     {
-        private readonly OperationOrResponseInternals<NoTypeReplacementModel1> _operation;
+        private readonly OperationOrResponseInternals<NoTypeReplacementModel2> _operation;
 
-        /// <summary> Initializes a new instance of NoTypeReplacementModel1PutOperation for mocking. </summary>
-        protected NoTypeReplacementModel1PutOperation()
+        /// <summary> Initializes a new instance of NoTypeReplacementModel2SPutOperation for mocking. </summary>
+        protected NoTypeReplacementModel2SPutOperation()
         {
         }
 
-        internal NoTypeReplacementModel1PutOperation(ArmResource operationsBase, Response<NoTypeReplacementModel1Data> response)
+        internal NoTypeReplacementModel2SPutOperation(ArmResource operationsBase, Response<NoTypeReplacementModel2Data> response)
         {
-            _operation = new OperationOrResponseInternals<NoTypeReplacementModel1>(Response.FromValue(new NoTypeReplacementModel1(operationsBase, response.Value), response.GetRawResponse()));
+            _operation = new OperationOrResponseInternals<NoTypeReplacementModel2>(Response.FromValue(new NoTypeReplacementModel2(operationsBase, response.Value), response.GetRawResponse()));
         }
 
         /// <inheritdoc />
         public override string Id => _operation.Id;
 
         /// <inheritdoc />
-        public override NoTypeReplacementModel1 Value => _operation.Value;
+        public override NoTypeReplacementModel2 Value => _operation.Value;
 
         /// <inheritdoc />
         public override bool HasCompleted => _operation.HasCompleted;
@@ -51,9 +51,9 @@ namespace NoTypeReplacement.Models
         public override ValueTask<Response> UpdateStatusAsync(CancellationToken cancellationToken = default) => _operation.UpdateStatusAsync(cancellationToken);
 
         /// <inheritdoc />
-        public override ValueTask<Response<NoTypeReplacementModel1>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(cancellationToken);
+        public override ValueTask<Response<NoTypeReplacementModel2>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(cancellationToken);
 
         /// <inheritdoc />
-        public override ValueTask<Response<NoTypeReplacementModel1>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(pollingInterval, cancellationToken);
+        public override ValueTask<Response<NoTypeReplacementModel2>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(pollingInterval, cancellationToken);
     }
 }

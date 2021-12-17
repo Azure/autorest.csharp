@@ -15,16 +15,16 @@ using SupersetFlattenInheritance;
 
 namespace SupersetFlattenInheritance.Models
 {
-    public partial class ResourceModel1PutOperation : Operation<ResourceModel1>
+    public partial class ResourceModel1SPutOperation : Operation<ResourceModel1>
     {
         private readonly OperationOrResponseInternals<ResourceModel1> _operation;
 
-        /// <summary> Initializes a new instance of ResourceModel1PutOperation for mocking. </summary>
-        protected ResourceModel1PutOperation()
+        /// <summary> Initializes a new instance of ResourceModel1SPutOperation for mocking. </summary>
+        protected ResourceModel1SPutOperation()
         {
         }
 
-        internal ResourceModel1PutOperation(ArmResource operationsBase, Response<ResourceModel1Data> response)
+        internal ResourceModel1SPutOperation(ArmResource operationsBase, Response<ResourceModel1Data> response)
         {
             _operation = new OperationOrResponseInternals<ResourceModel1>(Response.FromValue(new ResourceModel1(operationsBase, response.Value), response.GetRawResponse()));
         }

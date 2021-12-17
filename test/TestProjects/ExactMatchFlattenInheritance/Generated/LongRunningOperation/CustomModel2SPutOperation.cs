@@ -16,16 +16,16 @@ using ExactMatchFlattenInheritance;
 namespace ExactMatchFlattenInheritance.Models
 {
     /// <summary> Create or update an CustomModel2. </summary>
-    public partial class CustomModel2PutOperation : Operation<CustomModel2>
+    public partial class CustomModel2SPutOperation : Operation<CustomModel2>
     {
         private readonly OperationOrResponseInternals<CustomModel2> _operation;
 
-        /// <summary> Initializes a new instance of CustomModel2PutOperation for mocking. </summary>
-        protected CustomModel2PutOperation()
+        /// <summary> Initializes a new instance of CustomModel2SPutOperation for mocking. </summary>
+        protected CustomModel2SPutOperation()
         {
         }
 
-        internal CustomModel2PutOperation(ArmResource operationsBase, Response<CustomModel2Data> response)
+        internal CustomModel2SPutOperation(ArmResource operationsBase, Response<CustomModel2Data> response)
         {
             _operation = new OperationOrResponseInternals<CustomModel2>(Response.FromValue(new CustomModel2(operationsBase, response.Value), response.GetRawResponse()));
         }

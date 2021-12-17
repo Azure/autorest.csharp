@@ -11,10 +11,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
     {
         public MgmtScopeResourceTests() : base("MgmtScopeResource") { }
 
-        [TestCase("PolicyAssignment", "SubscriptionExtensions")]
-        [TestCase("PolicyAssignment", "ResourceGroupExtensions")]
-        [TestCase("PolicyAssignment", "ManagementGroupExtensions")]
-        [TestCase("PolicyAssignment", "TenantExtensions")]
+        [TestCase("PolicyAssignment", "ArmResourceExtensions")]
         [TestCase("DeploymentExtended", "SubscriptionExtensions")]
         [TestCase("DeploymentExtended", "ResourceGroupExtensions")]
         [TestCase("DeploymentExtended", "ManagementGroupExtensions")]
