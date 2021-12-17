@@ -172,6 +172,62 @@
             }
           }
         }
+      },
+      "/{item3}/item4/{item2}/item1": {
+        "post": {
+          "operationId": "update",
+          "parameters": [
+            {
+              "name": "item5",
+              "in": "query",
+              "description": "Expected to be the fifth parameter because it is an optional query parameter which goes after RequestContent.",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "item1",
+              "in": "query",
+              "description": "Expected to be the sixth parameter because it is a query parameter and has a default value, so it is treated as optional despite 'required: true'. 'item1' in the path isn't a parameter, it is a static part of the path.",
+              "required": true,
+              "type": "string",
+              "x-ms-client-default": "value"
+            },
+            {
+              "name": "item2",
+              "description": "Expected to be the second parameter because of its position in the path. 'item4' in the path isn't a parameter, it is a static part of the path.",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "item3",
+              "description": "Expected to be the first parameter because of its position in the path.",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "default": "xyz"            
+            },            
+            {
+              "name": "item4",
+              "description": "Expected to be the third parameter because it is a required query parameter. 'item4' in the path isn't a parameter, it is a static part of the path.",
+              "in": "query",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "bodyParameter",
+              "description": "Body parameter, should be replaced with RequestContent.",
+              "in": "body",
+              "required": false,
+              "schema": {}
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "ok"
+            }
+          }
+        }
       }
     },
     "definitions": {},

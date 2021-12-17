@@ -84,7 +84,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.WriteXmlDocumentationSummary($"Gets an object representing a {collection.Type.Name} along with the instance operations that can be performed on it.");
             _writer.WriteXmlDocumentationParameter($"{ExtensionOperationVariableName}", $"The <see cref=\"{ExtensionOperationVariableType}\" /> instance the method will execute against.");
             _writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{collection.Type}\" /> object.");
-            using (_writer.Scope($"public static {collection.Type.Name} Get{resource.Type.Name.ToPlural()}(this {ExtensionOperationVariableType} {ExtensionOperationVariableName})"))
+            using (_writer.Scope($"public static {collection.Type.Name} Get{resource.Type.Name.ResourceNameToPlural()}(this {ExtensionOperationVariableType} {ExtensionOperationVariableName})"))
             {
                 _writer.Line($"return new {collection.Type.Name}({ExtensionOperationVariableName});");
             }
@@ -172,7 +172,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var itemType = pagingMethod.PagingResponse.ItemType;
             var actualItemType = WrapResourceDataType(itemType, clientOperation.First())!;
 
-            _writer.WriteXmlDocumentationSummary($"Lists the {actualItemType.Name.ToPlural()} for this <see cref=\"{ExtensionOperationVariableType}\" />.");
+            _writer.WriteXmlDocumentationSummary($"Lists the {actualItemType.Name.LastWordToPlural()} for this <see cref=\"{ExtensionOperationVariableType}\" />.");
             _writer.WriteXmlDocumentationParameter($"{ExtensionOperationVariableName}", $"The <see cref=\"{ExtensionOperationVariableType}\" /> instance the method will execute against.");
             foreach (var parameter in methodParameters)
             {

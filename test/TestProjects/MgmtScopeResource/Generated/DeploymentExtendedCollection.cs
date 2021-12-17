@@ -289,7 +289,7 @@ namespace MgmtScopeResource
             }
         }
 
-        /// RequestPath: /{scope}/providers/Microsoft.Resources/deployments/
+        /// RequestPath: /{scope}/providers/Microsoft.Resources/deployments
         /// ContextualPath: /{scope}
         /// OperationId: Deployments_ListAtScope
         /// <summary> Get all the deployments at the given scope. </summary>
@@ -332,7 +332,7 @@ namespace MgmtScopeResource
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
-        /// RequestPath: /{scope}/providers/Microsoft.Resources/deployments/
+        /// RequestPath: /{scope}/providers/Microsoft.Resources/deployments
         /// ContextualPath: /{scope}
         /// OperationId: Deployments_ListAtScope
         /// <summary> Get all the deployments at the given scope. </summary>

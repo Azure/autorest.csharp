@@ -55,7 +55,7 @@ namespace Azure.Management.Storage
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/skus
         /// ContextualPath: /subscriptions/{subscriptionId}
         /// OperationId: Skus_List
-        /// <summary> Lists the SkuInformations for this <see cref="Subscription" />. </summary>
+        /// <summary> Lists the SkuInformation for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
@@ -88,7 +88,7 @@ namespace Azure.Management.Storage
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/skus
         /// ContextualPath: /subscriptions/{subscriptionId}
         /// OperationId: Skus_List
-        /// <summary> Lists the SkuInformations for this <see cref="Subscription" />. </summary>
+        /// <summary> Lists the SkuInformation for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
@@ -315,7 +315,7 @@ namespace Azure.Management.Storage
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/deletedAccounts
         /// ContextualPath: /subscriptions/{subscriptionId}
         /// OperationId: DeletedAccounts_List
-        /// <summary> Lists the DeletedAccountDatas for this <see cref="Subscription" />. </summary>
+        /// <summary> Lists the DeletedAccountData for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
@@ -363,7 +363,7 @@ namespace Azure.Management.Storage
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/deletedAccounts
         /// ContextualPath: /subscriptions/{subscriptionId}
         /// OperationId: DeletedAccounts_List
-        /// <summary> Lists the DeletedAccountDatas for this <see cref="Subscription" />. </summary>
+        /// <summary> Lists the DeletedAccountData for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>

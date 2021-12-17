@@ -15,16 +15,16 @@ using ExactMatchInheritance;
 
 namespace ExactMatchInheritance.Models
 {
-    public partial class ExactMatchModel1PutOperation : Operation<ExactMatchModel1>
+    public partial class ExactMatchModel1SPutOperation : Operation<ExactMatchModel1>
     {
         private readonly OperationOrResponseInternals<ExactMatchModel1> _operation;
 
-        /// <summary> Initializes a new instance of ExactMatchModel1PutOperation for mocking. </summary>
-        protected ExactMatchModel1PutOperation()
+        /// <summary> Initializes a new instance of ExactMatchModel1SPutOperation for mocking. </summary>
+        protected ExactMatchModel1SPutOperation()
         {
         }
 
-        internal ExactMatchModel1PutOperation(ArmResource operationsBase, Response<ExactMatchModel1Data> response)
+        internal ExactMatchModel1SPutOperation(ArmResource operationsBase, Response<ExactMatchModel1Data> response)
         {
             _operation = new OperationOrResponseInternals<ExactMatchModel1>(Response.FromValue(new ExactMatchModel1(operationsBase, response.Value), response.GetRawResponse()));
         }

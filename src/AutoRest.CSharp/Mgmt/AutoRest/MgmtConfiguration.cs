@@ -78,7 +78,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             JsonElement? mergeOperations = default,
             JsonElement? armCore = default,
             JsonElement? resourceModelRequiresType = default,
-            JsonElement? resourceModelRequiresName = default)
+            JsonElement? resourceModelRequiresName = default,
+            JsonElement? singletonRequiresKeyword = default)
         {
             RequestPathToParent = !IsValidJsonElement(requestPathToParent) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(requestPathToParent.ToString());
             RequestPathToResourceName = !IsValidJsonElement(requestPathToResourceName) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(requestPathToResourceName.ToString());
@@ -105,6 +106,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             IsArmCore = !IsValidJsonElement(armCore) ? false : Convert.ToBoolean(armCore.ToString());
             DoesResourceModelRequireType = !IsValidJsonElement(resourceModelRequiresType) ? true : Convert.ToBoolean(resourceModelRequiresType.ToString());
             DoesResourceModelRequireName = !IsValidJsonElement(resourceModelRequiresName) ? true : Convert.ToBoolean(resourceModelRequiresName.ToString());
+            DoesSingletonRequiresKeyword = !IsValidJsonElement(singletonRequiresKeyword) ? false : Convert.ToBoolean(singletonRequiresKeyword.ToString());
         }
 
         public MgmtDebugConfiguration MgmtDebug { get; }
@@ -116,6 +118,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         /// Will the resource model detection require name property? Defaults to true
         /// </summary>
         public bool DoesResourceModelRequireName { get; }
+        /// <summary>
+        /// Will we only see the resource name to be in the dictionary to make a resource singleton? Defaults to false
+        /// </summary>
+        public bool DoesSingletonRequiresKeyword { get; }
         public IReadOnlyDictionary<string, string> RequestPathToParent { get; }
         public IReadOnlyDictionary<string, string> RequestPathToResourceName { get; }
         public IReadOnlyDictionary<string, string> RequestPathToResourceData { get; }
@@ -149,7 +155,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 mergeOperations: autoRest.GetValue<JsonElement?>("merge-operations").GetAwaiter().GetResult(),
                 armCore: autoRest.GetValue<JsonElement?>("arm-core").GetAwaiter().GetResult(),
                 resourceModelRequiresType: autoRest.GetValue<JsonElement?>("resource-model-requires-type").GetAwaiter().GetResult(),
-                resourceModelRequiresName: autoRest.GetValue<JsonElement?>("resource-model-requires-name").GetAwaiter().GetResult());
+                resourceModelRequiresName: autoRest.GetValue<JsonElement?>("resource-model-requires-name").GetAwaiter().GetResult(),
+                singletonRequiresKeyword: autoRest.GetValue<JsonElement?>("singleton-resource-requires-keyword").GetAwaiter().GetResult());
         }
 
         internal void SaveConfiguration(Utf8JsonWriter writer)
@@ -173,6 +180,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 writer.WriteBoolean(nameof(DoesResourceModelRequireType), DoesResourceModelRequireType);
             if (!DoesResourceModelRequireName)
                 writer.WriteBoolean(nameof(DoesResourceModelRequireName), DoesResourceModelRequireName);
+            if (DoesSingletonRequiresKeyword)
+                writer.WriteBoolean(nameof(DoesSingletonRequiresKeyword), DoesSingletonRequiresKeyword);
         }
 
         internal static MgmtConfiguration LoadConfiguration(JsonElement root)
@@ -210,6 +219,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             root.TryGetProperty(nameof(MgmtDebug), out var mgmtDebugRoot);
             root.TryGetProperty(nameof(DoesResourceModelRequireType), out var resourceModelRequiresType);
             root.TryGetProperty(nameof(DoesResourceModelRequireName), out var resourceModelRequiresName);
+            root.TryGetProperty(nameof(DoesSingletonRequiresKeyword), out var singletonRequiresKeyword);
 
             return new MgmtConfiguration(
                 operationGroupsToOmit: operationGroupList,
@@ -227,7 +237,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 mergeOperations: mergeOperations,
                 armCore: isArmCore,
                 resourceModelRequiresType: resourceModelRequiresType,
-                resourceModelRequiresName: resourceModelRequiresName);
+                resourceModelRequiresName: resourceModelRequiresName,
+                singletonRequiresKeyword: singletonRequiresKeyword);
         }
 
         private static bool IsValidJsonElement(JsonElement? element)

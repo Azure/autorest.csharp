@@ -72,25 +72,25 @@ namespace AutoRest.CSharp.Mgmt.Output
                 return operation.MgmtCSharpName(false);
             }
 
-            var suffix = string.Empty;
+            var resourceName = string.Empty;
             if (_context.Library.RestClientMethods[operation].IsListMethod(out _))
             {
-                suffix = operationGroup.Key.IsNullOrEmpty() ? string.Empty : operationGroup.Key.ToPlural();
-                var opName = operation.MgmtCSharpName(!suffix.IsNullOrEmpty());
+                resourceName = operationGroup.Key.IsNullOrEmpty() ? string.Empty : operationGroup.Key.ResourceNameToPlural();
+                var opName = operation.MgmtCSharpName(!resourceName.IsNullOrEmpty());
                 // Remove 'By[Resource]' if the method is put in the [Resource] class. For instance, GetByDatabaseDatabaseColumns now becomes GetDatabaseColumns under Database resource class.
-                if (opName.EndsWith($"By{clientResourceName.ToSingular()}"))
+                if (opName.EndsWith($"By{clientResourceName.LastWordToSingular()}"))
                 {
-                    opName = opName.Substring(0, opName.IndexOf($"By{clientResourceName.ToSingular()}"));
+                    opName = opName.Substring(0, opName.IndexOf($"By{clientResourceName.LastWordToSingular()}"));
                 }
                 // For other variants, move By[Resource] to the end. For instance, GetByInstanceServerTrustGroups becomes GetServerTrustGroupsByInstance.
                 else if (opName.StartsWith("GetBy") && opName.SplitByCamelCase().ToList()[1] == "By")
                 {
-                    return $"Get{suffix}{opName.Substring(opName.IndexOf("By"))}";
+                    return $"Get{resourceName}{opName.Substring(opName.IndexOf("By"))}";
                 }
-                return $"{opName}{suffix}";
+                return $"{opName}{resourceName}";
             }
-            suffix = operationGroup.Key.IsNullOrEmpty() ? string.Empty : operationGroup.Key.ToSingular();
-            return $"{operation.MgmtCSharpName(!suffix.IsNullOrEmpty())}{suffix}";
+            resourceName = operationGroup.Key.IsNullOrEmpty() ? string.Empty : operationGroup.Key.LastWordToSingular();
+            return $"{operation.MgmtCSharpName(!resourceName.IsNullOrEmpty())}{resourceName}";
         }
     }
 }

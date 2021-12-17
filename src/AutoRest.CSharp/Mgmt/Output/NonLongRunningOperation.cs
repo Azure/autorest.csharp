@@ -39,7 +39,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 ResultDataType = context.Library.GetResourceData(operation.GetHttpPath()).Type;
             }
 
-            DefaultName = lroInfo.ClientPrefix.ToSingular() + operation.CSharpName() + "Operation";
+            DefaultName = lroInfo.ClientPrefix.LastWordToSingular() + operation.CSharpName() + "Operation";
             DefaultNamespace = $"{context.DefaultNamespace}.Models";
             Description = BuilderHelpers.EscapeXmlDescription(operation.Language.Default.Description);
             DefaultAccessibility = lroInfo.Accessibility;
