@@ -70,6 +70,11 @@ namespace custom_baseUrl_LowLevel
         public virtual async Task<Response> GetEmptyAsync(string accountName, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            if (accountName == null)
+            {
+                throw new ArgumentNullException(nameof(accountName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetEmpty");
             scope.Start();
             try
@@ -101,6 +106,11 @@ namespace custom_baseUrl_LowLevel
         public virtual Response GetEmpty(string accountName, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            if (accountName == null)
+            {
+                throw new ArgumentNullException(nameof(accountName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetEmpty");
             scope.Start();
             try

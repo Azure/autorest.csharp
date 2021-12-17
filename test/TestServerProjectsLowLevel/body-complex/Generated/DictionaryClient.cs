@@ -140,6 +140,11 @@ namespace body_complex_LowLevel
         public virtual async Task<Response> PutValidAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutValid");
             scope.Start();
             try
@@ -176,6 +181,11 @@ namespace body_complex_LowLevel
         public virtual Response PutValid(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutValid");
             scope.Start();
             try
@@ -280,6 +290,11 @@ namespace body_complex_LowLevel
         public virtual async Task<Response> PutEmptyAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutEmpty");
             scope.Start();
             try
@@ -316,6 +331,11 @@ namespace body_complex_LowLevel
         public virtual Response PutEmpty(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutEmpty");
             scope.Start();
             try

@@ -369,6 +369,11 @@ namespace Azure.Analytics.Purview.Account
         public virtual async Task<Response> UpdateAccountPropertiesAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("PurviewAccountsClient.UpdateAccountProperties");
             scope.Start();
             try
@@ -482,6 +487,11 @@ namespace Azure.Analytics.Purview.Account
         public virtual Response UpdateAccountProperties(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("PurviewAccountsClient.UpdateAccountProperties");
             scope.Start();
             try
@@ -627,6 +637,11 @@ namespace Azure.Analytics.Purview.Account
         public virtual async Task<Response> RegenerateAccessKeyAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("PurviewAccountsClient.RegenerateAccessKey");
             scope.Start();
             try
@@ -680,6 +695,11 @@ namespace Azure.Analytics.Purview.Account
         public virtual Response RegenerateAccessKey(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("PurviewAccountsClient.RegenerateAccessKey");
             scope.Start();
             try

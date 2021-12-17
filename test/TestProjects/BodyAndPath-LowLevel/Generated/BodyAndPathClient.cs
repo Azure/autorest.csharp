@@ -60,6 +60,15 @@ namespace BodyAndPath_LowLevel
         public virtual async Task<Response> CreateAsync(string itemName, RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            if (itemName == null)
+            {
+                throw new ArgumentNullException(nameof(itemName));
+            }
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.Create");
             scope.Start();
             try
@@ -83,6 +92,15 @@ namespace BodyAndPath_LowLevel
         public virtual Response Create(string itemName, RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            if (itemName == null)
+            {
+                throw new ArgumentNullException(nameof(itemName));
+            }
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.Create");
             scope.Start();
             try
@@ -108,6 +126,15 @@ namespace BodyAndPath_LowLevel
         public virtual async Task<Response> CreateStreamAsync(string itemNameStream, RequestContent content, ContentType contentType, IEnumerable<string> excluded = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            if (itemNameStream == null)
+            {
+                throw new ArgumentNullException(nameof(itemNameStream));
+            }
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.CreateStream");
             scope.Start();
             try
@@ -133,6 +160,15 @@ namespace BodyAndPath_LowLevel
         public virtual Response CreateStream(string itemNameStream, RequestContent content, ContentType contentType, IEnumerable<string> excluded = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            if (itemNameStream == null)
+            {
+                throw new ArgumentNullException(nameof(itemNameStream));
+            }
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.CreateStream");
             scope.Start();
             try
@@ -157,6 +193,19 @@ namespace BodyAndPath_LowLevel
         public virtual async Task<Response> CreateEnumAsync(string enumName1, string enumName2, RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            if (enumName1 == null)
+            {
+                throw new ArgumentNullException(nameof(enumName1));
+            }
+            if (enumName2 == null)
+            {
+                throw new ArgumentNullException(nameof(enumName2));
+            }
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.CreateEnum");
             scope.Start();
             try
@@ -181,6 +230,19 @@ namespace BodyAndPath_LowLevel
         public virtual Response CreateEnum(string enumName1, string enumName2, RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            if (enumName1 == null)
+            {
+                throw new ArgumentNullException(nameof(enumName1));
+            }
+            if (enumName2 == null)
+            {
+                throw new ArgumentNullException(nameof(enumName2));
+            }
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.CreateEnum");
             scope.Start();
             try
@@ -287,6 +349,23 @@ namespace BodyAndPath_LowLevel
         public virtual async Task<Response> UpdateAsync(string item3, string item2, string item4, RequestContent content, string item5 = null, string item1 = "value", RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            if (item3 == null)
+            {
+                throw new ArgumentNullException(nameof(item3));
+            }
+            if (item2 == null)
+            {
+                throw new ArgumentNullException(nameof(item2));
+            }
+            if (item4 == null)
+            {
+                throw new ArgumentNullException(nameof(item4));
+            }
+            if (item1 == null)
+            {
+                throw new ArgumentNullException(nameof(item1));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.Update");
             scope.Start();
             try
@@ -313,6 +392,23 @@ namespace BodyAndPath_LowLevel
         public virtual Response Update(string item3, string item2, string item4, RequestContent content, string item5 = null, string item1 = "value", RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            if (item3 == null)
+            {
+                throw new ArgumentNullException(nameof(item3));
+            }
+            if (item2 == null)
+            {
+                throw new ArgumentNullException(nameof(item2));
+            }
+            if (item4 == null)
+            {
+                throw new ArgumentNullException(nameof(item4));
+            }
+            if (item1 == null)
+            {
+                throw new ArgumentNullException(nameof(item1));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.Update");
             scope.Start();
             try

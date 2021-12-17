@@ -61,6 +61,11 @@ namespace SubClients_LowLevel
         public virtual async Task<Response> GetSubParameterAsync(string subParameter, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            if (subParameter == null)
+            {
+                throw new ArgumentNullException(nameof(subParameter));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("Parameter.GetSubParameter");
             scope.Start();
             try
@@ -82,6 +87,11 @@ namespace SubClients_LowLevel
         public virtual Response GetSubParameter(string subParameter, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            if (subParameter == null)
+            {
+                throw new ArgumentNullException(nameof(subParameter));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("Parameter.GetSubParameter");
             scope.Start();
             try

@@ -212,8 +212,6 @@ namespace AutoRest.CSharp.Generation.Writers
 
             using (WriteClientMethodDeclaration(writer, clientMethod, clientMethod.OperationSchemas, returnType, async))
             {
-                writer.WriteParameterNullChecks(clientMethod.RestMethod.Parameters);
-
                 using (WriteDiagnosticScope(writer, clientMethod.Diagnostic, client.Fields.ClientDiagnosticsField.Name))
                 {
                     var messageVariable = new CodeWriterDeclaration("message");
@@ -240,7 +238,6 @@ namespace AutoRest.CSharp.Generation.Writers
 
             using (WriteClientMethodDeclaration(writer, clientMethod, clientMethod.OperationSchemas, returnType, async))
             {
-                writer.WriteParameterNullChecks(method.Parameters);
                 var createEnumerableMethod = new CodeWriterDeclaration(CreateMethodName("CreateEnumerable", async));
                 var createEnumerableParameters = async ? new[] { NextLinkParameter, PageSizeHintParameter, EnumeratorCancellationTokenParameter } : new[] { NextLinkParameter, PageSizeHintParameter };
                 var createEnumerableReturnType = async ? typeof(IAsyncEnumerable<Page<BinaryData>>) : typeof(IEnumerable<Page<BinaryData>>);
@@ -307,7 +304,6 @@ namespace AutoRest.CSharp.Generation.Writers
 
             using (WriteClientMethodDeclaration(writer, clientMethod, clientMethod.OperationSchemas, returnType, async))
             {
-                writer.WriteParameterNullChecks(clientMethod.StartMethod.Parameters);
                 var createEnumerableMethod = new CodeWriterDeclaration(CreateMethodName("CreateEnumerable", async));
                 using (WriteDiagnosticScope(writer, clientMethod.Diagnostic, fields.ClientDiagnosticsField.Name))
                 {
@@ -477,7 +473,9 @@ namespace AutoRest.CSharp.Generation.Writers
 
             writer.WriteMethodDocumentation(methodSignature);
             WriteSchemaDocumentationRemarks(writer, operationSchemas);
-            return writer.WriteMethodDeclaration(methodSignature, "AZC0002");
+            var declaration = writer.WriteMethodDeclaration(methodSignature, "AZC0002");
+            writer.WriteParameterNullChecks(parameters);
+            return declaration;
         }
 
         private static ResponseClassifierType CreateResponseClassifierType(RestClientMethod method)

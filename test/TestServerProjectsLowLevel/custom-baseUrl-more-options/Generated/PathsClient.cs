@@ -80,6 +80,19 @@ namespace custom_baseUrl_more_options_LowLevel
         public virtual async Task<Response> GetEmptyAsync(string vault, string secret, string keyName, string keyVersion = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            if (vault == null)
+            {
+                throw new ArgumentNullException(nameof(vault));
+            }
+            if (secret == null)
+            {
+                throw new ArgumentNullException(nameof(secret));
+            }
+            if (keyName == null)
+            {
+                throw new ArgumentNullException(nameof(keyName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetEmpty");
             scope.Start();
             try
@@ -114,6 +127,19 @@ namespace custom_baseUrl_more_options_LowLevel
         public virtual Response GetEmpty(string vault, string secret, string keyName, string keyVersion = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            if (vault == null)
+            {
+                throw new ArgumentNullException(nameof(vault));
+            }
+            if (secret == null)
+            {
+                throw new ArgumentNullException(nameof(secret));
+            }
+            if (keyName == null)
+            {
+                throw new ArgumentNullException(nameof(keyName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetEmpty");
             scope.Start();
             try

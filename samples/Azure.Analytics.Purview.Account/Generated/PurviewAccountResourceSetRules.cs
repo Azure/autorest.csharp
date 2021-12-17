@@ -548,6 +548,11 @@ namespace Azure.Analytics.Purview.Account
         public virtual async Task<Response> CreateOrUpdateResourceSetRuleAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("PurviewAccountResourceSetRules.CreateOrUpdateResourceSetRule");
             scope.Start();
             try
@@ -778,6 +783,11 @@ namespace Azure.Analytics.Purview.Account
         public virtual Response CreateOrUpdateResourceSetRule(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("PurviewAccountResourceSetRules.CreateOrUpdateResourceSetRule");
             scope.Start();
             try

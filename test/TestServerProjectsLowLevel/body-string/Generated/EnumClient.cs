@@ -125,6 +125,11 @@ namespace body_string_LowLevel
         public virtual async Task<Response> PutNotExpandableAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("EnumClient.PutNotExpandable");
             scope.Start();
             try
@@ -156,6 +161,11 @@ namespace body_string_LowLevel
         public virtual Response PutNotExpandable(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("EnumClient.PutNotExpandable");
             scope.Start();
             try
@@ -245,6 +255,11 @@ namespace body_string_LowLevel
         public virtual async Task<Response> PutReferencedAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("EnumClient.PutReferenced");
             scope.Start();
             try
@@ -276,6 +291,11 @@ namespace body_string_LowLevel
         public virtual Response PutReferenced(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("EnumClient.PutReferenced");
             scope.Start();
             try
@@ -383,6 +403,11 @@ namespace body_string_LowLevel
         public virtual async Task<Response> PutReferencedConstantAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("EnumClient.PutReferencedConstant");
             scope.Start();
             try
@@ -420,6 +445,11 @@ namespace body_string_LowLevel
         public virtual Response PutReferencedConstant(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("EnumClient.PutReferencedConstant");
             scope.Start();
             try

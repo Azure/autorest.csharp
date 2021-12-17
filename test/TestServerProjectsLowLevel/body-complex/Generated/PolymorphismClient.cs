@@ -149,6 +149,11 @@ namespace body_complex_LowLevel
         public virtual async Task<Response> PutValidAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.PutValid");
             scope.Start();
             try
@@ -188,6 +193,11 @@ namespace body_complex_LowLevel
         public virtual Response PutValid(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.PutValid");
             scope.Start();
             try
@@ -578,6 +588,11 @@ namespace body_complex_LowLevel
         public virtual async Task<Response> PutComplicatedAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.PutComplicated");
             scope.Start();
             try
@@ -626,6 +641,11 @@ namespace body_complex_LowLevel
         public virtual Response PutComplicated(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.PutComplicated");
             scope.Start();
             try
@@ -691,6 +711,11 @@ namespace body_complex_LowLevel
         public virtual async Task<Response> PutMissingDiscriminatorAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.PutMissingDiscriminator");
             scope.Start();
             try
@@ -756,6 +781,11 @@ namespace body_complex_LowLevel
         public virtual Response PutMissingDiscriminator(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.PutMissingDiscriminator");
             scope.Start();
             try
@@ -795,6 +825,11 @@ namespace body_complex_LowLevel
         public virtual async Task<Response> PutValidMissingRequiredAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.PutValidMissingRequired");
             scope.Start();
             try
@@ -834,6 +869,11 @@ namespace body_complex_LowLevel
         public virtual Response PutValidMissingRequired(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.PutValidMissingRequired");
             scope.Start();
             try

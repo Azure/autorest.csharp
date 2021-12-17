@@ -149,6 +149,11 @@ namespace body_complex_LowLevel
         public virtual async Task<Response> PutValidAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("PolymorphicrecursiveClient.PutValid");
             scope.Start();
             try
@@ -188,6 +193,11 @@ namespace body_complex_LowLevel
         public virtual Response PutValid(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("PolymorphicrecursiveClient.PutValid");
             scope.Start();
             try

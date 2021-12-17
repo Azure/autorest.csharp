@@ -178,6 +178,11 @@ namespace RequestContextAllOptional_LowLevel
         public virtual async Task<Response> DeleteNoRequestBodyResponseBodyAsync(string resourceName, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            if (resourceName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("RequestContextAllOptionalClient.DeleteNoRequestBodyResponseBody");
             scope.Start();
             try
@@ -200,6 +205,11 @@ namespace RequestContextAllOptional_LowLevel
         public virtual Response DeleteNoRequestBodyResponseBody(string resourceName, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            if (resourceName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("RequestContextAllOptionalClient.DeleteNoRequestBodyResponseBody");
             scope.Start();
             try

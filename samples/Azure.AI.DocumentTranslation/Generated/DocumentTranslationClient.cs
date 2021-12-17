@@ -1319,6 +1319,11 @@ namespace Azure.AI.DocumentTranslation
         public virtual async Task<Operation<BinaryData>> StartTranslationAsync(bool waitForCompletion, RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.StartTranslation");
             scope.Start();
             try
@@ -1404,6 +1409,11 @@ namespace Azure.AI.DocumentTranslation
         public virtual Operation<BinaryData> StartTranslation(bool waitForCompletion, RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.StartTranslation");
             scope.Start();
             try

@@ -262,6 +262,11 @@ namespace Azure.Analytics.Purview.Account
         public virtual async Task<Response> CreateOrUpdateCollectionAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("PurviewAccountCollections.CreateOrUpdateCollection");
             scope.Start();
             try
@@ -344,6 +349,11 @@ namespace Azure.Analytics.Purview.Account
         public virtual Response CreateOrUpdateCollection(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("PurviewAccountCollections.CreateOrUpdateCollection");
             scope.Start();
             try
