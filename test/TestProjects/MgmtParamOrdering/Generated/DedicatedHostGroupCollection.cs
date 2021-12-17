@@ -12,6 +12,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
+using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
@@ -21,7 +22,7 @@ using MgmtParamOrdering.Models;
 namespace MgmtParamOrdering
 {
     /// <summary> A class representing collection of DedicatedHostGroup and their operations over its parent. </summary>
-    public partial class DedicatedHostGroupCollection : ArmCollection, IEnumerable<DedicatedHostGroup>
+    public partial class DedicatedHostGroupCollection : ArmCollection, IEnumerable<DedicatedHostGroup>, IAsyncEnumerable<DedicatedHostGroup>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly DedicatedHostGroupsRestOperations _dedicatedHostGroupsRestClient;
@@ -287,20 +288,25 @@ namespace MgmtParamOrdering
         /// OperationId: DedicatedHostGroups_List
         /// <summary> Retrieves information about a dedicated host group. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IReadOnlyList<DedicatedHostGroup>> GetAll(CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="DedicatedHostGroup" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<DedicatedHostGroup> GetAll(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupCollection.GetAll");
-            scope.Start();
-            try
+            Page<DedicatedHostGroup> FirstPageFunc(int? pageSizeHint)
             {
-                var response = _dedicatedHostGroupsRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken);
-                return Response.FromValue(response.Value.Value.Select(value => new DedicatedHostGroup(Parent, value)).ToArray() as IReadOnlyList<DedicatedHostGroup>, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupCollection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = _dedicatedHostGroupsRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new DedicatedHostGroup(Parent, value)), null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups
@@ -308,20 +314,25 @@ namespace MgmtParamOrdering
         /// OperationId: DedicatedHostGroups_List
         /// <summary> Retrieves information about a dedicated host group. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<IReadOnlyList<DedicatedHostGroup>>> GetAllAsync(CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="DedicatedHostGroup" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<DedicatedHostGroup> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupCollection.GetAll");
-            scope.Start();
-            try
+            async Task<Page<DedicatedHostGroup>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await _dedicatedHostGroupsRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(response.Value.Value.Select(value => new DedicatedHostGroup(Parent, value)).ToArray() as IReadOnlyList<DedicatedHostGroup>, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupCollection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = await _dedicatedHostGroupsRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new DedicatedHostGroup(Parent, value)), null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
         /// <summary> Filters the list of <see cref="DedicatedHostGroup" /> for this resource group represented as generic resources. </summary>
@@ -372,12 +383,17 @@ namespace MgmtParamOrdering
 
         IEnumerator<DedicatedHostGroup> IEnumerable<DedicatedHostGroup>.GetEnumerator()
         {
-            return GetAll().Value.GetEnumerator();
+            return GetAll().GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return GetAll().Value.GetEnumerator();
+            return GetAll().GetEnumerator();
+        }
+
+        IAsyncEnumerator<DedicatedHostGroup> IAsyncEnumerable<DedicatedHostGroup>.GetAsyncEnumerator(CancellationToken cancellationToken)
+        {
+            return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
 
         // Builders.

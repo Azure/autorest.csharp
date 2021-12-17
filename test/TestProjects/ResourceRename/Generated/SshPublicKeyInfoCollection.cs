@@ -23,7 +23,6 @@ namespace ResourceRename
 {
     /// <summary> A class representing collection of SshPublicKeyInfo and their operations over its parent. </summary>
     public partial class SshPublicKeyInfoCollection : ArmCollection, IEnumerable<SshPublicKeyInfo>, IAsyncEnumerable<SshPublicKeyInfo>
-
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly SshPublicKeysRestOperations _sshPublicKeysRestClient;

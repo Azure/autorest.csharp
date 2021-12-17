@@ -22,7 +22,6 @@ namespace MgmtListMethods
 {
     /// <summary> A class representing collection of FakeParent and their operations over its parent. </summary>
     public partial class FakeParentCollection : ArmCollection, IEnumerable<FakeParent>, IAsyncEnumerable<FakeParent>
-
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly FakeParentsRestOperations _fakeParentsRestClient;

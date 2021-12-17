@@ -23,7 +23,6 @@ namespace MgmtListMethods
 {
     /// <summary> A class representing collection of MgmtGrpParentWithLoc and their operations over its parent. </summary>
     public partial class MgmtGrpParentWithLocCollection : ArmCollection, IEnumerable<MgmtGrpParentWithLoc>, IAsyncEnumerable<MgmtGrpParentWithLoc>
-
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly MgmtGrpParentWithLocsRestOperations _mgmtGrpParentWithLocsRestClient;

@@ -23,7 +23,6 @@ namespace MgmtListMethods
 {
     /// <summary> A class representing collection of TenantTest and their operations over its parent. </summary>
     public partial class TenantTestCollection : ArmCollection, IEnumerable<TenantTest>, IAsyncEnumerable<TenantTest>
-
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly TenantTestsRestOperations _tenantTestsRestClient;

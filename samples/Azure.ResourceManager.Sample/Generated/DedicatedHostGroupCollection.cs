@@ -23,7 +23,6 @@ namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing collection of DedicatedHostGroup and their operations over its parent. </summary>
     public partial class DedicatedHostGroupCollection : ArmCollection, IEnumerable<DedicatedHostGroup>, IAsyncEnumerable<DedicatedHostGroup>
-
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly DedicatedHostGroupsRestOperations _dedicatedHostGroupsRestClient;

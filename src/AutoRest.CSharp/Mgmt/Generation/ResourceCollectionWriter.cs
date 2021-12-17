@@ -15,6 +15,7 @@ using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
+using Azure;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
@@ -64,9 +65,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.Append($"{_resourceCollection.Declaration.Accessibility} partial class {TypeNameOfThis} : {BaseClass}");
                 if (_getAllOperation != null)
                 {
-                    _writer.Append($", {new CSharpType(typeof(IEnumerable<>), _resource.Type)}");
-                    var asyncEnum = _getAllOperation.IsPagingOperation(Context) ? $", {new CSharpType(typeof(IAsyncEnumerable<>), _resource.Type)}" : string.Empty;
-                    _writer.Line($"{asyncEnum}");
+                    _writer.Append($", {new CSharpType(typeof(IEnumerable<>), _resource.Type)}, {new CSharpType(typeof(IAsyncEnumerable<>), _resource.Type)}");
                 }
                 using (_writer.Scope())
                 {
@@ -185,20 +184,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Tries to get details for this resource from the service.");
 
-            // get the corresponding MgmtClientOperation mapping
-            var operationMappings = clientOperation.ToDictionary(
-                operation => operation.ContextualPath,
-                operation => operation);
-            // build contextual parameters
-            var contextualParameterMappings = operationMappings.Keys.ToDictionary(
-                contextualPath => contextualPath,
-                contextualPath => contextualPath.BuildContextualParameters(Context, IdVariableName));
-            // build parameter mapping
-            var parameterMappings = operationMappings.ToDictionary(
-                pair => pair.Key,
-                pair => pair.Value.BuildParameterMapping(contextualParameterMappings[pair.Key]));
-            // we have ensured the operations corresponding to different OperationSet have the same method parameters, therefore here we just need to use the first operation to get the method parameters
-            var methodParameters = parameterMappings.Values.First().GetPassThroughParameters();
+            BuildParameters(clientOperation, out var operationMappings, out _, out var methodParameters);
             WriteCollectionMethodScope(typeof(bool).WrapResponse(async), "CheckIfExists", methodParameters, writer =>
             {
                 WriteCheckIfExistsBody(methodParameters, async);
@@ -222,20 +208,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Tries to get details for this resource from the service.");
 
-            // get the corresponding MgmtClientOperation mapping
-            var operationMappings = clientOperation.ToDictionary(
-                operation => operation.ContextualPath,
-                operation => operation);
-            // build contextual parameters
-            var contextualParameterMappings = operationMappings.Keys.ToDictionary(
-                contextualPath => contextualPath,
-                contextualPath => contextualPath.BuildContextualParameters(Context, IdVariableName));
-            // build parameter mapping
-            var parameterMappings = operationMappings.ToDictionary(
-                pair => pair.Key,
-                pair => pair.Value.BuildParameterMapping(contextualParameterMappings[pair.Key]));
-            // we have ensured the operations corresponding to different OperationSet have the same method parameters, therefore here we just need to use the first operation to get the method parameters
-            var methodParameters = parameterMappings.Values.First().GetPassThroughParameters();
+            BuildParameters(clientOperation, out var operationMappings, out var parameterMappings, out var methodParameters);
             WriteCollectionMethodScope(_resource.Type.WrapResponse(async), "GetIfExists", methodParameters, writer =>
             {
                 WriteGetMethodBody(writer, operationMappings, parameterMappings, async);
@@ -267,8 +240,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.Line($"cancellationToken: cancellationToken){GetConfigureAwait(async)};");
 
             writer.Line($"return response.Value == null");
-            writer.Line($"\t? Response.FromValue<{_resource.Type.Name}>(null, response.GetRawResponse())");
-            writer.Line($"\t: Response.FromValue(new {_resource.Type.Name}(this, response.Value), response.GetRawResponse());");
+            writer.Line($"\t? {typeof(Response)}.FromValue<{_resource.Type.Name}>(null, response.GetRawResponse())");
+            writer.Line($"\t: {typeof(Response)}.FromValue(new {_resource.Type.Name}(this, response.Value), response.GetRawResponse());");
         }
 
         /// <summary>
@@ -346,30 +319,26 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             if (_getAllOperation == null)
                 return;
-            var isPaging = _getAllOperation.IsPagingOperation(Context);
-            string value = isPaging ? string.Empty : ".Value";
 
+            // if this collection has a GetAll function, we could have all kinds of IEnumerable implemented since we have wrapped non-pageable list functions to pageable
             _writer.Line();
             _writer.Line($"{new CSharpType(typeof(IEnumerator<>), _resource.Type)} {new CSharpType(typeof(IEnumerable<>), _resource.Type)}.GetEnumerator()");
             using (_writer.Scope())
             {
-                _writer.Line($"return GetAll(){value}.GetEnumerator();");
+                _writer.Line($"return GetAll().GetEnumerator();");
             }
             _writer.Line();
             _writer.Line($"{typeof(IEnumerator)} {typeof(IEnumerable)}.GetEnumerator()");
             using (_writer.Scope())
             {
-                _writer.Line($"return GetAll(){value}.GetEnumerator();");
+                _writer.Line($"return GetAll().GetEnumerator();");
             }
 
-            if (isPaging)
+            _writer.Line();
+            _writer.Line($"{new CSharpType(typeof(IAsyncEnumerator<>), _resource.Type)} {new CSharpType(typeof(IAsyncEnumerable<>), _resource.Type)}.GetAsyncEnumerator({typeof(CancellationToken)} cancellationToken)");
+            using (_writer.Scope())
             {
-                _writer.Line();
-                _writer.Line($"{new CSharpType(typeof(IAsyncEnumerator<>), _resource.Type)} {new CSharpType(typeof(IAsyncEnumerable<>), _resource.Type)}.GetAsyncEnumerator({typeof(CancellationToken)} cancellationToken)");
-                using (_writer.Scope())
-                {
-                    _writer.Line($"return GetAllAsync(cancellationToken: cancellationToken){value}.GetAsyncEnumerator(cancellationToken);");
-                }
+                _writer.Line($"return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);");
             }
         }
 

@@ -23,7 +23,6 @@ namespace MgmtMultipleParentResource
 {
     /// <summary> A class representing collection of AnotherParent and their operations over its parent. </summary>
     public partial class AnotherParentCollection : ArmCollection, IEnumerable<AnotherParent>, IAsyncEnumerable<AnotherParent>
-
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly AnotherParentsRestOperations _anotherParentsRestClient;

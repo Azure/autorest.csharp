@@ -6,11 +6,11 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
+using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
@@ -303,8 +303,8 @@ namespace MgmtParamOrdering
         /// <param name="location"> The name of a supported Azure region. </param>
         /// <param name="publisherName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="publisherName"/> is null. </exception>
-        public virtual Response<IReadOnlyList<VirtualMachineExtensionImage>> GetAll(string location, string publisherName, CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="VirtualMachineExtensionImage" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<VirtualMachineExtensionImage> GetAll(string location, string publisherName, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -315,18 +315,22 @@ namespace MgmtParamOrdering
                 throw new ArgumentNullException(nameof(publisherName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageCollection.GetAll");
-            scope.Start();
-            try
+            Page<VirtualMachineExtensionImage> FirstPageFunc(int? pageSizeHint)
             {
-                var response = _virtualMachineExtensionImagesRestClient.ListTypes(Id.SubscriptionId, location, publisherName, cancellationToken);
-                return Response.FromValue(response.Value.Select(value => new VirtualMachineExtensionImage(Parent, value)).ToArray() as IReadOnlyList<VirtualMachineExtensionImage>, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageCollection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = _virtualMachineExtensionImagesRestClient.ListTypes(Id.SubscriptionId, location, publisherName, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Select(value => new VirtualMachineExtensionImage(Parent, value)), null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types
@@ -336,8 +340,8 @@ namespace MgmtParamOrdering
         /// <param name="location"> The name of a supported Azure region. </param>
         /// <param name="publisherName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="publisherName"/> is null. </exception>
-        public async virtual Task<Response<IReadOnlyList<VirtualMachineExtensionImage>>> GetAllAsync(string location, string publisherName, CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="VirtualMachineExtensionImage" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<VirtualMachineExtensionImage> GetAllAsync(string location, string publisherName, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -348,18 +352,22 @@ namespace MgmtParamOrdering
                 throw new ArgumentNullException(nameof(publisherName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageCollection.GetAll");
-            scope.Start();
-            try
+            async Task<Page<VirtualMachineExtensionImage>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await _virtualMachineExtensionImagesRestClient.ListTypesAsync(Id.SubscriptionId, location, publisherName, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(response.Value.Select(value => new VirtualMachineExtensionImage(Parent, value)).ToArray() as IReadOnlyList<VirtualMachineExtensionImage>, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageCollection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = await _virtualMachineExtensionImagesRestClient.ListTypesAsync(Id.SubscriptionId, location, publisherName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Select(value => new VirtualMachineExtensionImage(Parent, value)), null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types/{type}/versions
@@ -373,8 +381,8 @@ namespace MgmtParamOrdering
         /// <param name="top"> The Integer to use. </param>
         /// <param name="orderby"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="location"/>, <paramref name="publisherName"/>, or <paramref name="type"/> is null. </exception>
-        public virtual Response<IReadOnlyList<VirtualMachineExtensionImage>> GetAll(string location, string publisherName, string type, string filter = null, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="VirtualMachineExtensionImage" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<VirtualMachineExtensionImage> GetAll(string location, string publisherName, string type, string filter = null, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -389,18 +397,22 @@ namespace MgmtParamOrdering
                 throw new ArgumentNullException(nameof(type));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageCollection.GetAll");
-            scope.Start();
-            try
+            Page<VirtualMachineExtensionImage> FirstPageFunc(int? pageSizeHint)
             {
-                var response = _virtualMachineExtensionImagesRestClient.ListVersions(Id.SubscriptionId, location, publisherName, type, filter, top, orderby, cancellationToken);
-                return Response.FromValue(response.Value.Select(value => new VirtualMachineExtensionImage(Parent, value)).ToArray() as IReadOnlyList<VirtualMachineExtensionImage>, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageCollection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = _virtualMachineExtensionImagesRestClient.ListVersions(Id.SubscriptionId, location, publisherName, type, filter, top, orderby, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Select(value => new VirtualMachineExtensionImage(Parent, value)), null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types/{type}/versions
@@ -414,8 +426,8 @@ namespace MgmtParamOrdering
         /// <param name="top"> The Integer to use. </param>
         /// <param name="orderby"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="location"/>, <paramref name="publisherName"/>, or <paramref name="type"/> is null. </exception>
-        public async virtual Task<Response<IReadOnlyList<VirtualMachineExtensionImage>>> GetAllAsync(string location, string publisherName, string type, string filter = null, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="VirtualMachineExtensionImage" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<VirtualMachineExtensionImage> GetAllAsync(string location, string publisherName, string type, string filter = null, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -430,18 +442,22 @@ namespace MgmtParamOrdering
                 throw new ArgumentNullException(nameof(type));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageCollection.GetAll");
-            scope.Start();
-            try
+            async Task<Page<VirtualMachineExtensionImage>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await _virtualMachineExtensionImagesRestClient.ListVersionsAsync(Id.SubscriptionId, location, publisherName, type, filter, top, orderby, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(response.Value.Select(value => new VirtualMachineExtensionImage(Parent, value)).ToArray() as IReadOnlyList<VirtualMachineExtensionImage>, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageCollection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = await _virtualMachineExtensionImagesRestClient.ListVersionsAsync(Id.SubscriptionId, location, publisherName, type, filter, top, orderby, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Select(value => new VirtualMachineExtensionImage(Parent, value)), null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
         /// <summary> Filters the list of <see cref="VirtualMachineExtensionImage" /> for this subscription represented as generic resources. </summary>

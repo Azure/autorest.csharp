@@ -24,7 +24,6 @@ namespace MgmtScopeResource
 {
     /// <summary> A class representing collection of PolicyAssignment and their operations over its parent. </summary>
     public partial class PolicyAssignmentCollection : ArmCollection, IEnumerable<PolicyAssignment>, IAsyncEnumerable<PolicyAssignment>
-
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly PolicyAssignmentsRestOperations _policyAssignmentsRestClient;

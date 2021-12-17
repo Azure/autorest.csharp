@@ -164,12 +164,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
             WriteLROResponse(lroObjectType, ClientDiagnosticsVariable, "pipeline", operation, parameterMapping, async);
         }
 
-        protected override void WritePagingMethod(MgmtClientOperation clientOperation, Dictionary<RequestPath, MgmtRestOperation> operationMappings,
+        protected override void WritePagingMethod(MgmtClientOperation clientOperation, CSharpType itemType, Dictionary<RequestPath, MgmtRestOperation> operationMappings,
             Dictionary<RequestPath, IEnumerable<ParameterMapping>> parameterMappings, IReadOnlyList<Parameter> methodParameters,
             string methodName, bool async)
         {
-            var pagingMethod = clientOperation.First().GetPagingMethod(Context)!;
-            var itemType = pagingMethod.PagingResponse.ItemType;
             var actualItemType = WrapResourceDataType(itemType, clientOperation.First())!;
 
             _writer.WriteXmlDocumentationSummary($"Lists the {actualItemType.Name.LastWordToPlural()} for this <see cref=\"{ExtensionOperationVariableType}\" />.");
@@ -198,44 +196,20 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Line();
         }
 
-        protected override void WritePagingMethodBranch(CSharpType itemType, Diagnostic diagnostic, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMappings,
-            bool async)
+        protected override void WritePagingMethodBody(CSharpType itemType, Diagnostic diagnostic, IDictionary<RequestPath, MgmtRestOperation> operationMappings, IDictionary<RequestPath, IEnumerable<ParameterMapping>> parameterMappings, bool async)
         {
-            var pagingMethod = operation.GetPagingMethod(Context)!;
-            var returnType = new CSharpType(typeof(Page<>), WrapResourceDataType(itemType, operation)!).WrapAsync(async);
+            // if we only have one branch, we would not need those if-else statements
+            var branch = operationMappings.Keys.First();
+            WritePagingMethodBranch(itemType, diagnostic, ClientDiagnosticsVariable, operationMappings[branch], parameterMappings[branch], async);
+        }
 
-            var nextLinkName = pagingMethod.PagingResponse.NextLinkProperty?.Declaration.Name;
-            var itemName = pagingMethod.PagingResponse.ItemProperty.Declaration.Name;
-
-            var continuationTokenText = nextLinkName != null ? $"response.Value.{nextLinkName}" : "null";
-
+        protected override void WritePagingMethodBranch(CSharpType itemType, Diagnostic diagnostic, string diagnosticVariable, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMappings, bool async)
+        {
             WriteClientDiagnosticsAssignment("options");
 
             WriteRestOperationAssignment(operation.RestClient);
 
-            using (_writer.Scope($"{GetAsyncKeyword(async)} {returnType} FirstPageFunc({typeof(int?)} pageSizeHint)"))
-            {
-                // no null-checks because all are optional
-                using (WriteDiagnosticScope(_writer, diagnostic, ClientDiagnosticsVariable))
-                {
-                    WritePageFunctionBody(itemType, pagingMethod, operation, parameterMappings, async, false);
-                }
-            }
-
-            var nextPageFunctionName = "null";
-            if (pagingMethod.NextPageMethod != null)
-            {
-                nextPageFunctionName = "NextPageFunc";
-                var nextPageParameters = pagingMethod.NextPageMethod.Parameters;
-                using (_writer.Scope($"{GetAsyncKeyword(async)} {returnType} {nextPageFunctionName}({typeof(string)} nextLink, {typeof(int?)} pageSizeHint)"))
-                {
-                    using (WriteDiagnosticScope(_writer, diagnostic, ClientDiagnosticsVariable))
-                    {
-                        WritePageFunctionBody(itemType, pagingMethod, operation, parameterMappings, async, true);
-                    }
-                }
-            }
-            _writer.Line($"return {typeof(PageableHelpers)}.{CreateMethodName("Create", async)}Enumerable(FirstPageFunc, {nextPageFunctionName});");
+            base.WritePagingMethodBranch(itemType, diagnostic, diagnosticVariable, operation, parameterMappings, async);
         }
 
         protected override void WritePagingMethodSignature(CSharpType responseType, string methodName, IEnumerable<Parameter> methodParameters,

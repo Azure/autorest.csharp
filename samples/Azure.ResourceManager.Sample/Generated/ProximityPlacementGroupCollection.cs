@@ -23,7 +23,6 @@ namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing collection of ProximityPlacementGroup and their operations over its parent. </summary>
     public partial class ProximityPlacementGroupCollection : ArmCollection, IEnumerable<ProximityPlacementGroup>, IAsyncEnumerable<ProximityPlacementGroup>
-
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly ProximityPlacementGroupsRestOperations _proximityPlacementGroupsRestClient;

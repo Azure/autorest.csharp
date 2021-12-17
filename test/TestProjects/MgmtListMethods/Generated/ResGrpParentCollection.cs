@@ -12,6 +12,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
+using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
@@ -21,7 +22,7 @@ using MgmtListMethods.Models;
 namespace MgmtListMethods
 {
     /// <summary> A class representing collection of ResGrpParent and their operations over its parent. </summary>
-    public partial class ResGrpParentCollection : ArmCollection, IEnumerable<ResGrpParent>
+    public partial class ResGrpParentCollection : ArmCollection, IEnumerable<ResGrpParent>, IAsyncEnumerable<ResGrpParent>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly ResGrpParentsRestOperations _resGrpParentsRestClient;
@@ -287,20 +288,25 @@ namespace MgmtListMethods
         /// OperationId: ResGrpParents_List
         /// <summary> Lists all in a resource group. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IReadOnlyList<ResGrpParent>> GetAll(CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="ResGrpParent" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<ResGrpParent> GetAll(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ResGrpParentCollection.GetAll");
-            scope.Start();
-            try
+            Page<ResGrpParent> FirstPageFunc(int? pageSizeHint)
             {
-                var response = _resGrpParentsRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken);
-                return Response.FromValue(response.Value.Value.Select(value => new ResGrpParent(Parent, value)).ToArray() as IReadOnlyList<ResGrpParent>, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("ResGrpParentCollection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = _resGrpParentsRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new ResGrpParent(Parent, value)), null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MgmtListMethods/resGrpParents
@@ -308,20 +314,25 @@ namespace MgmtListMethods
         /// OperationId: ResGrpParents_List
         /// <summary> Lists all in a resource group. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<IReadOnlyList<ResGrpParent>>> GetAllAsync(CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="ResGrpParent" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<ResGrpParent> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ResGrpParentCollection.GetAll");
-            scope.Start();
-            try
+            async Task<Page<ResGrpParent>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await _resGrpParentsRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(response.Value.Value.Select(value => new ResGrpParent(Parent, value)).ToArray() as IReadOnlyList<ResGrpParent>, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("ResGrpParentCollection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = await _resGrpParentsRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new ResGrpParent(Parent, value)), null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
         /// <summary> Filters the list of <see cref="ResGrpParent" /> for this resource group represented as generic resources. </summary>
@@ -372,12 +383,17 @@ namespace MgmtListMethods
 
         IEnumerator<ResGrpParent> IEnumerable<ResGrpParent>.GetEnumerator()
         {
-            return GetAll().Value.GetEnumerator();
+            return GetAll().GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return GetAll().Value.GetEnumerator();
+            return GetAll().GetEnumerator();
+        }
+
+        IAsyncEnumerator<ResGrpParent> IAsyncEnumerable<ResGrpParent>.GetAsyncEnumerator(CancellationToken cancellationToken)
+        {
+            return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
 
         // Builders.

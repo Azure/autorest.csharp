@@ -23,7 +23,6 @@ namespace MgmtListMethods
 {
     /// <summary> A class representing collection of SubParent and their operations over its parent. </summary>
     public partial class SubParentCollection : ArmCollection, IEnumerable<SubParent>, IAsyncEnumerable<SubParent>
-
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly SubParentsRestOperations _subParentsRestClient;

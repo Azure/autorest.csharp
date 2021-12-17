@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -1293,55 +1292,65 @@ namespace MgmtListMethods
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/resGrpParentWithAncestors
         /// ContextualPath: /subscriptions/{subscriptionId}
         /// OperationId: ResGrpParentWithAncestors_NonPageableListBySubscription
-        /// <summary> Lists all in a subscription. </summary>
+        /// <summary> Lists the ResGrpParentWithAncestors for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public static async Task<Response<IReadOnlyList<ResGrpParentWithAncestor>>> NonPageableListResGrpParentWithAncestorsAsync(this Subscription subscription, CancellationToken cancellationToken = default)
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        public static AsyncPageable<ResGrpParentWithAncestor> NonPageableListResGrpParentWithAncestorsAsync(this Subscription subscription, CancellationToken cancellationToken = default)
         {
-            return await subscription.UseClientContext(async (baseUri, credential, options, pipeline) =>
+            return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.NonPageableListResGrpParentWithAncestors");
-                scope.Start();
-                try
+                var restOperations = GetResGrpParentWithAncestorsRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                async Task<Page<ResGrpParentWithAncestor>> FirstPageFunc(int? pageSizeHint)
                 {
-                    var restOperations = GetResGrpParentWithAncestorsRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
-                    var response = await restOperations.NonPageableListBySubscriptionAsync(subscription.Id.SubscriptionId, cancellationToken).ConfigureAwait(false);
-                    return Response.FromValue(response.Value.Value.Select(value => new ResGrpParentWithAncestor(subscription, value)).ToArray() as IReadOnlyList<ResGrpParentWithAncestor>, response.GetRawResponse());
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.NonPageableListResGrpParentWithAncestors");
+                    scope.Start();
+                    try
+                    {
+                        var response = await restOperations.NonPageableListBySubscriptionAsync(subscription.Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentWithAncestor(subscription, value)), null, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
                 }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
             }
-            ).ConfigureAwait(false);
+            );
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/resGrpParentWithAncestors
         /// ContextualPath: /subscriptions/{subscriptionId}
         /// OperationId: ResGrpParentWithAncestors_NonPageableListBySubscription
-        /// <summary> Lists all in a subscription. </summary>
+        /// <summary> Lists the ResGrpParentWithAncestors for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public static Response<IReadOnlyList<ResGrpParentWithAncestor>> NonPageableListResGrpParentWithAncestors(this Subscription subscription, CancellationToken cancellationToken = default)
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        public static Pageable<ResGrpParentWithAncestor> NonPageableListResGrpParentWithAncestors(this Subscription subscription, CancellationToken cancellationToken = default)
         {
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.NonPageableListResGrpParentWithAncestors");
-                scope.Start();
-                try
+                var restOperations = GetResGrpParentWithAncestorsRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                Page<ResGrpParentWithAncestor> FirstPageFunc(int? pageSizeHint)
                 {
-                    var restOperations = GetResGrpParentWithAncestorsRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
-                    var response = restOperations.NonPageableListBySubscription(subscription.Id.SubscriptionId, cancellationToken);
-                    return Response.FromValue(response.Value.Value.Select(value => new ResGrpParentWithAncestor(subscription, value)).ToArray() as IReadOnlyList<ResGrpParentWithAncestor>, response.GetRawResponse());
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.NonPageableListResGrpParentWithAncestors");
+                    scope.Start();
+                    try
+                    {
+                        var response = restOperations.NonPageableListBySubscription(subscription.Id.SubscriptionId, cancellationToken: cancellationToken);
+                        return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentWithAncestor(subscription, value)), null, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
                 }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
             }
             );
         }
@@ -1377,53 +1386,14 @@ namespace MgmtListMethods
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/locations/{location}/updateQuotas
         /// ContextualPath: /subscriptions/{subscriptionId}
         /// OperationId: Quotas_Update
-        /// <summary> Update quota for each VM family in workspace. </summary>
+        /// <summary> Lists the UpdateWorkspaceQuotas for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="location"> The location for update quota is queried. </param>
         /// <param name="parameters"> Quota update parameters. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="parameters"/> is null. </exception>
-        public static async Task<Response<IReadOnlyList<UpdateWorkspaceQuotas>>> UpdateQuotasAsync(this Subscription subscription, string location, QuotaUpdateParameters parameters, CancellationToken cancellationToken = default)
-        {
-            if (location == null)
-            {
-                throw new ArgumentNullException(nameof(location));
-            }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            return await subscription.UseClientContext(async (baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.UpdateQuotas");
-                scope.Start();
-                try
-                {
-                    var restOperations = GetQuotasRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
-                    var response = await restOperations.UpdateAsync(subscription.Id.SubscriptionId, location, parameters, cancellationToken).ConfigureAwait(false);
-                    return Response.FromValue(response.Value.Value, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            ).ConfigureAwait(false);
-        }
-
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/locations/{location}/updateQuotas
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: Quotas_Update
-        /// <summary> Update quota for each VM family in workspace. </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <param name="location"> The location for update quota is queried. </param>
-        /// <param name="parameters"> Quota update parameters. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="parameters"/> is null. </exception>
-        public static Response<IReadOnlyList<UpdateWorkspaceQuotas>> UpdateQuotas(this Subscription subscription, string location, QuotaUpdateParameters parameters, CancellationToken cancellationToken = default)
+        public static AsyncPageable<UpdateWorkspaceQuotas> UpdateQuotasAsync(this Subscription subscription, string location, QuotaUpdateParameters parameters, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -1437,19 +1407,68 @@ namespace MgmtListMethods
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.UpdateQuotas");
-                scope.Start();
-                try
+                var restOperations = GetQuotasRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                async Task<Page<UpdateWorkspaceQuotas>> FirstPageFunc(int? pageSizeHint)
                 {
-                    var restOperations = GetQuotasRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
-                    var response = restOperations.Update(subscription.Id.SubscriptionId, location, parameters, cancellationToken);
-                    return Response.FromValue(response.Value.Value, response.GetRawResponse());
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.UpdateQuotas");
+                    scope.Start();
+                    try
+                    {
+                        var response = await restOperations.UpdateAsync(subscription.Id.SubscriptionId, location, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
                 }
-                catch (Exception e)
+                return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
+            }
+            );
+        }
+
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/locations/{location}/updateQuotas
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: Quotas_Update
+        /// <summary> Lists the UpdateWorkspaceQuotas for this <see cref="Subscription" />. </summary>
+        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="location"> The location for update quota is queried. </param>
+        /// <param name="parameters"> Quota update parameters. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="parameters"/> is null. </exception>
+        public static Pageable<UpdateWorkspaceQuotas> UpdateQuotas(this Subscription subscription, string location, QuotaUpdateParameters parameters, CancellationToken cancellationToken = default)
+        {
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                var restOperations = GetQuotasRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                Page<UpdateWorkspaceQuotas> FirstPageFunc(int? pageSizeHint)
                 {
-                    scope.Failed(e);
-                    throw;
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.UpdateQuotas");
+                    scope.Start();
+                    try
+                    {
+                        var response = restOperations.Update(subscription.Id.SubscriptionId, location, parameters, cancellationToken: cancellationToken);
+                        return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
                 }
+                return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
             }
             );
         }

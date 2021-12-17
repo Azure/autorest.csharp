@@ -23,7 +23,6 @@ namespace Azure.Management.Storage
 {
     /// <summary> A class representing collection of StorageAccount and their operations over its parent. </summary>
     public partial class StorageAccountCollection : ArmCollection, IEnumerable<StorageAccount>, IAsyncEnumerable<StorageAccount>
-
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly StorageAccountsRestOperations _storageAccountsRestClient;

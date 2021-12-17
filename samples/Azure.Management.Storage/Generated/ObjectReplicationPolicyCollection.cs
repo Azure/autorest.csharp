@@ -22,7 +22,6 @@ namespace Azure.Management.Storage
 {
     /// <summary> A class representing collection of ObjectReplicationPolicy and their operations over its parent. </summary>
     public partial class ObjectReplicationPolicyCollection : ArmCollection, IEnumerable<ObjectReplicationPolicy>, IAsyncEnumerable<ObjectReplicationPolicy>
-
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly ObjectReplicationPoliciesRestOperations _objectReplicationPoliciesRestClient;

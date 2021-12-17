@@ -22,7 +22,6 @@ namespace MgmtParent
 {
     /// <summary> A class representing collection of DedicatedHost and their operations over its parent. </summary>
     public partial class DedicatedHostCollection : ArmCollection, IEnumerable<DedicatedHost>, IAsyncEnumerable<DedicatedHost>
-
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly DedicatedHostsRestOperations _dedicatedHostsRestClient;

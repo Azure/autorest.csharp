@@ -22,7 +22,6 @@ namespace Azure.Management.Storage
 {
     /// <summary> A class representing collection of BlobInventoryPolicy and their operations over its parent. </summary>
     public partial class BlobInventoryPolicyCollection : ArmCollection, IEnumerable<BlobInventoryPolicy>, IAsyncEnumerable<BlobInventoryPolicy>
-
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly BlobInventoryPoliciesRestOperations _blobInventoryPoliciesRestClient;

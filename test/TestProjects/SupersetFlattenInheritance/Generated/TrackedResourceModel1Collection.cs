@@ -12,6 +12,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
+using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
@@ -21,7 +22,7 @@ using SupersetFlattenInheritance.Models;
 namespace SupersetFlattenInheritance
 {
     /// <summary> A class representing collection of TrackedResourceModel1 and their operations over its parent. </summary>
-    public partial class TrackedResourceModel1Collection : ArmCollection, IEnumerable<TrackedResourceModel1>
+    public partial class TrackedResourceModel1Collection : ArmCollection, IEnumerable<TrackedResourceModel1>, IAsyncEnumerable<TrackedResourceModel1>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly TrackedResourceModel1SRestOperations _trackedResourceModel1sRestClient;
@@ -282,40 +283,50 @@ namespace SupersetFlattenInheritance
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
         /// OperationId: TrackedResourceModel1s_List
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IReadOnlyList<TrackedResourceModel1>> GetAll(CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="TrackedResourceModel1" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<TrackedResourceModel1> GetAll(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("TrackedResourceModel1Collection.GetAll");
-            scope.Start();
-            try
+            Page<TrackedResourceModel1> FirstPageFunc(int? pageSizeHint)
             {
-                var response = _trackedResourceModel1sRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken);
-                return Response.FromValue(response.Value.Value.Select(value => new TrackedResourceModel1(Parent, value)).ToArray() as IReadOnlyList<TrackedResourceModel1>, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("TrackedResourceModel1Collection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = _trackedResourceModel1sRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new TrackedResourceModel1(Parent, value)), null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/trackedResourceModel1s
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
         /// OperationId: TrackedResourceModel1s_List
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<IReadOnlyList<TrackedResourceModel1>>> GetAllAsync(CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="TrackedResourceModel1" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<TrackedResourceModel1> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("TrackedResourceModel1Collection.GetAll");
-            scope.Start();
-            try
+            async Task<Page<TrackedResourceModel1>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await _trackedResourceModel1sRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(response.Value.Value.Select(value => new TrackedResourceModel1(Parent, value)).ToArray() as IReadOnlyList<TrackedResourceModel1>, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("TrackedResourceModel1Collection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = await _trackedResourceModel1sRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new TrackedResourceModel1(Parent, value)), null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
         /// <summary> Filters the list of <see cref="TrackedResourceModel1" /> for this resource group represented as generic resources. </summary>
@@ -366,12 +377,17 @@ namespace SupersetFlattenInheritance
 
         IEnumerator<TrackedResourceModel1> IEnumerable<TrackedResourceModel1>.GetEnumerator()
         {
-            return GetAll().Value.GetEnumerator();
+            return GetAll().GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return GetAll().Value.GetEnumerator();
+            return GetAll().GetEnumerator();
+        }
+
+        IAsyncEnumerator<TrackedResourceModel1> IAsyncEnumerable<TrackedResourceModel1>.GetAsyncEnumerator(CancellationToken cancellationToken)
+        {
+            return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
 
         // Builders.
