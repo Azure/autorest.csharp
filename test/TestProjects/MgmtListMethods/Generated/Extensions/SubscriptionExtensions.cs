@@ -248,8 +248,8 @@ namespace MgmtListMethods
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<NonResourceChild> GetTestByLocationsFakeParentWithAncestorWithNonResChWithLocsAsync(this Subscription subscription, string location, CancellationToken cancellationToken = default)
         {
             if (location == null)
@@ -288,8 +288,8 @@ namespace MgmtListMethods
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static Pageable<NonResourceChild> GetTestByLocationsFakeParentWithAncestorWithNonResChWithLocs(this Subscription subscription, string location, CancellationToken cancellationToken = default)
         {
             if (location == null)
@@ -576,8 +576,8 @@ namespace MgmtListMethods
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<FakeParentWithAncestorWithLocData> GetTestByLocationsFakeParentWithAncestorWithLocsAsync(this Subscription subscription, string location, CancellationToken cancellationToken = default)
         {
             if (location == null)
@@ -631,8 +631,8 @@ namespace MgmtListMethods
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static Pageable<FakeParentWithAncestorWithLocData> GetTestByLocationsFakeParentWithAncestorWithLocs(this Subscription subscription, string location, CancellationToken cancellationToken = default)
         {
             if (location == null)
@@ -1186,8 +1186,8 @@ namespace MgmtListMethods
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<ResGrpParentWithAncestorWithNonResChWithLocData> GetResGrpParentWithAncestorWithLocsAsync(this Subscription subscription, string location, CancellationToken cancellationToken = default)
         {
             if (location == null)
@@ -1241,8 +1241,8 @@ namespace MgmtListMethods
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static Pageable<ResGrpParentWithAncestorWithNonResChWithLocData> GetResGrpParentWithAncestorWithLocs(this Subscription subscription, string location, CancellationToken cancellationToken = default)
         {
             if (location == null)
@@ -1391,8 +1391,8 @@ namespace MgmtListMethods
         /// <param name="location"> The location for update quota is queried. </param>
         /// <param name="parameters"> Quota update parameters. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="parameters"/> is null. </exception>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<UpdateWorkspaceQuotas> UpdateQuotasAsync(this Subscription subscription, string location, QuotaUpdateParameters parameters, CancellationToken cancellationToken = default)
         {
             if (location == null)
@@ -1436,8 +1436,8 @@ namespace MgmtListMethods
         /// <param name="location"> The location for update quota is queried. </param>
         /// <param name="parameters"> Quota update parameters. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="parameters"/> is null. </exception>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static Pageable<UpdateWorkspaceQuotas> UpdateQuotas(this Subscription subscription, string location, QuotaUpdateParameters parameters, CancellationToken cancellationToken = default)
         {
             if (location == null)

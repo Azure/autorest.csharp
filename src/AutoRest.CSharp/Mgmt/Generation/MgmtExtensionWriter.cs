@@ -120,19 +120,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
             methodName = isSLRO ? methodName : $"Start{methodName}";
 
             // TODO -- since we are combining multiple operations under different parents, which description should we leave here?
-            _writer.WriteXmlDocumentationSummary($"{clientOperation.Description}");
-            _writer.WriteXmlDocumentationParameter($"{ExtensionOperationVariableName}", $"The <see cref=\"{ExtensionOperationVariableType}\" /> instance the method will execute against.");
-            foreach (var parameter in methodParameters)
-            {
-                _writer.WriteXmlDocumentationParameter(parameter);
-            }
-            _writer.WriteXmlDocumentationParameter("waitForCompletion", $"Waits for the completion of the long running operations.");
-            _writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
-            _writer.WriteXmlDocumentationRequiredParametersException(methodParameters);
             // TODO -- find a way to properly get the LRO response type here. Temporarily we are using the first one
             var lroObjectType = GetLROObjectType(clientOperation.First().Operation, async);
             var responseType = lroObjectType.WrapAsync(async);
 
+            _writer.WriteXmlDocumentationSummary($"{clientOperation.Description}");
             WriteLROMethodSignature(responseType, methodName, methodParameters, async, isSLRO, clientOperation.Accessibility, true);
 
             using (_writer.Scope())
@@ -171,16 +163,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var actualItemType = WrapResourceDataType(itemType, clientOperation.First())!;
 
             _writer.WriteXmlDocumentationSummary($"Lists the {actualItemType.Name.LastWordToPlural()} for this <see cref=\"{ExtensionOperationVariableType}\" />.");
-            _writer.WriteXmlDocumentationParameter($"{ExtensionOperationVariableName}", $"The <see cref=\"{ExtensionOperationVariableType}\" /> instance the method will execute against.");
-            foreach (var parameter in methodParameters)
-            {
-                _writer.WriteXmlDocumentationParameter(parameter);
-            }
-            _writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
-            _writer.WriteXmlDocumentationReturns($"A collection of resource operations that may take multiple service requests to iterate over.");
-            _writer.WriteXmlDocumentationRequiredParametersException(methodParameters);
-
-            WritePagingMethodSignature(actualItemType.WrapPageable(async), methodName, methodParameters, async, clientOperation.Accessibility, false);
+            WritePagingMethodSignature(actualItemType, methodName, methodParameters, async, clientOperation.Accessibility, false);
 
             using (_writer.Scope())
             {
@@ -212,9 +195,19 @@ namespace AutoRest.CSharp.Mgmt.Generation
             base.WritePagingMethodBranch(itemType, diagnostic, diagnosticVariable, operation, parameterMappings, async);
         }
 
-        protected override void WritePagingMethodSignature(CSharpType responseType, string methodName, IEnumerable<Parameter> methodParameters,
+        protected override void WritePagingMethodSignature(CSharpType actualItemType, string methodName, IReadOnlyList<Parameter> methodParameters,
             bool async, string accessibility = "public", bool isVirtual = true)
         {
+            _writer.WriteXmlDocumentationParameter($"{ExtensionOperationVariableName}", $"The <see cref=\"{ExtensionOperationVariableType}\" /> instance the method will execute against.");
+            foreach (var parameter in methodParameters)
+            {
+                _writer.WriteXmlDocumentationParameter(parameter);
+            }
+            _writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
+            _writer.WriteXmlDocumentationRequiredParametersException(methodParameters);
+            _writer.WriteXmlDocumentationReturns($"A collection of resource operations that may take multiple service requests to iterate over.");
+
+            var responseType = actualItemType.WrapPageable(async);
             _writer.Append($"{accessibility} static {responseType} {CreateMethodName(methodName, async)}(this {ExtensionOperationVariableType} {ExtensionOperationVariableName}, ");
             foreach (var parameter in methodParameters)
             {
@@ -223,9 +216,17 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Line($"{typeof(CancellationToken)} cancellationToken = default)");
         }
 
-        protected override void WriteLROMethodSignature(CSharpType responseType, string methodName, IEnumerable<Parameter> methodParameters, bool async,
+        protected override void WriteLROMethodSignature(CSharpType responseType, string methodName, IReadOnlyList<Parameter> methodParameters, bool async,
             bool isSLRO, string accessibility = "public", bool isVirtual = true)
         {
+            _writer.WriteXmlDocumentationParameter($"{ExtensionOperationVariableName}", $"The <see cref=\"{ExtensionOperationVariableType}\" /> instance the method will execute against.");
+            foreach (var parameter in methodParameters)
+            {
+                _writer.WriteXmlDocumentationParameter(parameter);
+            }
+            _writer.WriteXmlDocumentationParameter("waitForCompletion", $"Waits for the completion of the long running operations.");
+            _writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
+            _writer.WriteXmlDocumentationRequiredParametersException(methodParameters);
             _writer.Append($"{accessibility} static {GetAsyncKeyword(async)} {responseType} {CreateMethodName(methodName, async)}(this {ExtensionOperationVariableType} {ExtensionOperationVariableName}, ");
             foreach (var parameter in methodParameters)
             {
@@ -236,9 +237,16 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Line($"bool waitForCompletion = {defaultWaitForCompletion}, {typeof(CancellationToken)} cancellationToken = default)");
         }
 
-        protected override void WriteNormalMethodSignature(CSharpType responseType, string methodName, IEnumerable<Parameter> methodParameters,
+        protected override void WriteNormalMethodSignature(CSharpType responseType, string methodName, IReadOnlyList<Parameter> methodParameters,
             bool async, string accessibility = "public", bool isVirtual = true)
         {
+            _writer.WriteXmlDocumentationParameter($"{ExtensionOperationVariableName}", $"The <see cref=\"{ExtensionOperationVariableType}\" /> instance the method will execute against.");
+            foreach (var parameter in methodParameters)
+            {
+                _writer.WriteXmlDocumentationParameter(parameter);
+            }
+            _writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
+            _writer.WriteXmlDocumentationRequiredParametersException(methodParameters);
             _writer.Append($"{accessibility} static {GetAsyncKeyword(async)} {responseType} {CreateMethodName(methodName, async)}(this {ExtensionOperationVariableType} {ExtensionOperationVariableName}, ");
 
             foreach (var parameter in methodParameters)
@@ -248,63 +256,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Line($"{typeof(CancellationToken)} cancellationToken = default)");
         }
 
-        protected override void WriteNormalListMethod(MgmtClientOperation clientOperation, Dictionary<RequestPath, MgmtRestOperation> operationMappings,
-            Dictionary<RequestPath, IEnumerable<ParameterMapping>> parameterMappings, IReadOnlyList<Parameter> methodParameters,
-            CSharpType itemType, string methodName, bool async)
-        {
-            // TODO -- since we are combining multiple operations under different parents, which description should we leave here?
-            _writer.WriteXmlDocumentationSummary($"{clientOperation.Description}");
-            _writer.WriteXmlDocumentationParameter($"{ExtensionOperationVariableName}", $"The <see cref=\"{ExtensionOperationVariableType}\" /> instance the method will execute against.");
-            foreach (var parameter in methodParameters)
-            {
-                _writer.WriteXmlDocumentationParameter(parameter);
-            }
-            _writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
-            _writer.WriteXmlDocumentationRequiredParametersException(methodParameters);
-            var returnType = new CSharpType(typeof(IReadOnlyList<>), WrapResourceDataType(itemType, clientOperation.First())!);
-
-            WriteNormalMethodSignature(GetResponseType(returnType, async), methodName, methodParameters, async, clientOperation.Accessibility, true);
-
-            using (_writer.Scope())
-            {
-                _writer.WriteParameterNullChecks(methodParameters);
-
-                using (WriteExtensionContextScope(_writer, ExtensionOperationVariableName, async))
-                {
-                    var diagnostic = new Diagnostic($"{TypeOfThis.Name}.{methodName}", Array.Empty<DiagnosticAttribute>());
-                    WriteClientDiagnosticsAssignment("options");
-
-                    using (WriteDiagnosticScope(_writer, diagnostic, ClientDiagnosticsVariable))
-                    {
-                        WriteNormalListMethodBody(_writer, itemType, operationMappings, parameterMappings, async);
-                    }
-                    _writer.Line();
-                }
-            }
-        }
-
-        protected override void WriteNormalListMethodBranch(CodeWriter writer, CSharpType itemType, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMappings, bool async)
-        {
-            WriteRestOperationAssignment(operation.RestClient);
-
-            base.WriteNormalListMethodBranch(writer, itemType, operation, parameterMappings, async);
-        }
-
         protected override void WriteNormalMethod(MgmtClientOperation clientOperation, Dictionary<RequestPath, MgmtRestOperation> operationMappings,
             Dictionary<RequestPath, IEnumerable<ParameterMapping>> parameterMappings, IReadOnlyList<Parameter> methodParameters,
             string methodName, bool async, bool shouldThrowExceptionWhenNull = false)
         {
             // TODO -- since we are combining multiple operations under different parents, which description should we leave here?
-            _writer.WriteXmlDocumentationSummary($"{clientOperation.Description}");
-            _writer.WriteXmlDocumentationParameter($"{ExtensionOperationVariableName}", $"The <see cref=\"{ExtensionOperationVariableType}\" /> instance the method will execute against.");
-            foreach (var parameter in methodParameters)
-            {
-                _writer.WriteXmlDocumentationParameter(parameter);
-            }
-            _writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
-            _writer.WriteXmlDocumentationRequiredParametersException(methodParameters);
             var returnType = WrapResourceDataType(clientOperation.ReturnType, clientOperation.First());
 
+            _writer.WriteXmlDocumentationSummary($"{clientOperation.Description}");
             WriteNormalMethodSignature(GetResponseType(returnType, async), methodName, methodParameters, async, clientOperation.Accessibility, true);
 
             using (_writer.Scope())

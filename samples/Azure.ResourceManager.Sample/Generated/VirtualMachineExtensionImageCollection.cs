@@ -303,6 +303,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="location"> The name of a supported Azure region. </param>
         /// <param name="publisherName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="publisherName"/> is null. </exception>
         /// <returns> A collection of <see cref="VirtualMachineExtensionImage" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<VirtualMachineExtensionImage> GetAll(string location, string publisherName, CancellationToken cancellationToken = default)
         {
@@ -340,6 +341,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="location"> The name of a supported Azure region. </param>
         /// <param name="publisherName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="publisherName"/> is null. </exception>
         /// <returns> An async collection of <see cref="VirtualMachineExtensionImage" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<VirtualMachineExtensionImage> GetAllAsync(string location, string publisherName, CancellationToken cancellationToken = default)
         {
@@ -381,6 +383,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="top"> The Integer to use. </param>
         /// <param name="orderby"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/>, <paramref name="publisherName"/>, or <paramref name="type"/> is null. </exception>
         /// <returns> A collection of <see cref="VirtualMachineExtensionImage" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<VirtualMachineExtensionImage> GetAll(string location, string publisherName, string type, string filter = null, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
         {
@@ -426,6 +429,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="top"> The Integer to use. </param>
         /// <param name="orderby"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/>, <paramref name="publisherName"/>, or <paramref name="type"/> is null. </exception>
         /// <returns> An async collection of <see cref="VirtualMachineExtensionImage" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<VirtualMachineExtensionImage> GetAllAsync(string location, string publisherName, string type, string filter = null, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
         {
