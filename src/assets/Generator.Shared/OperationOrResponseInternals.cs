@@ -28,13 +28,13 @@ namespace Azure.Core
             Response originalResponse,
             OperationFinalStateVia finalStateVia,
             string scopeName)
-            : this(new OperationInternal(clientDiagnostics, NextLinkOperationImplementation.Create(pipeline, originalRequest.Method, originalRequest.Uri.ToUri(), originalResponse, finalStateVia), originalResponse, scopeName))
+            : this(new OperationImplementation(clientDiagnostics, NextLinkOperationImplementation.Create(pipeline, originalRequest.Method, originalRequest.Uri.ToUri(), originalResponse, finalStateVia), originalResponse, scopeName))
         {
         }
 
-        protected OperationOrResponseInternals(OperationInternalBase operationInternal)
+        protected OperationOrResponseInternals(OperationImplementationBase operationInternal)
         {
-            Operation = operationInternal ?? throw new ArgumentNullException(nameof(operationInternal));
+            OperationImplementation = operationInternal ?? throw new ArgumentNullException(nameof(operationInternal));
         }
 
         public OperationOrResponseInternals(Response response)
@@ -45,7 +45,7 @@ namespace Azure.Core
             VoidResponse = response;
         }
 
-        protected OperationInternalBase? Operation { get; }
+        protected OperationImplementationBase? OperationImplementation { get; }
 
         protected Response? VoidResponse { get; }
 
@@ -56,22 +56,22 @@ namespace Azure.Core
         public string Id => throw new NotImplementedException();
 #pragma warning restore CA1822
 
-        public bool HasCompleted => DoesWrapOperation ? Operation!.HasCompleted : true;
+        public bool HasCompleted => DoesWrapOperation ? OperationImplementation!.HasCompleted : true;
 
         public Response GetRawResponse()
         {
-            return DoesWrapOperation ? Operation!.RawResponse : VoidResponse!;
+            return DoesWrapOperation ? OperationImplementation!.RawResponse : VoidResponse!;
         }
 
         public Response UpdateStatus(CancellationToken cancellationToken = default)
         {
-            return DoesWrapOperation ? Operation!.UpdateStatus(cancellationToken) : VoidResponse!;
+            return DoesWrapOperation ? OperationImplementation!.UpdateStatus(cancellationToken) : VoidResponse!;
         }
 
         public ValueTask<Response> UpdateStatusAsync(CancellationToken cancellationToken = default)
         {
             return DoesWrapOperation
-                ? Operation!.UpdateStatusAsync(cancellationToken)
+                ? OperationImplementation!.UpdateStatusAsync(cancellationToken)
                 : new ValueTask<Response>(VoidResponse!);
         }
 
@@ -86,7 +86,7 @@ namespace Azure.Core
             CancellationToken cancellationToken)
         {
             return DoesWrapOperation
-                ? await Operation!.WaitForCompletionResponseAsync(pollingInterval, cancellationToken).ConfigureAwait(false)
+                ? await OperationImplementation!.WaitForCompletionResponseAsync(pollingInterval, cancellationToken).ConfigureAwait(false)
                 : VoidResponse!;
         }
     }

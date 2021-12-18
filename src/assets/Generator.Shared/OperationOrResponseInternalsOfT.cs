@@ -14,17 +14,17 @@ namespace Azure.Core
 {
     /// <summary>
     /// This implements the ARM scenarios for LROs. It is highly recommended to read the ARM spec prior to modifying this code:
-    /// https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#asynchronous-operations
+    /// https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/async-api-reference.md
     /// Other reference documents include:
     /// https://github.com/Azure/autorest/blob/master/docs/extensions/readme.md#x-ms-long-running-operation
-    /// https://github.com/Azure/adx-documentation-pr/blob/master/sdks/LRO/LRO_AzureSDK.md
+    /// https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt
     /// </summary>
     /// <typeparam name="T">The final result of the LRO.</typeparam>
 #pragma warning disable SA1649 // File name should match first type name
     internal class OperationOrResponseInternals<T> : OperationOrResponseInternals
 #pragma warning restore SA1649 // File name should match first type name
     {
-        private readonly OperationInternal<T>? _operation;
+        private readonly OperationImplementation<T>? _operationImplementation;
         private readonly Response<T>? _valueResponse;
 
         public OperationOrResponseInternals(
@@ -37,7 +37,7 @@ namespace Azure.Core
             string scopeName)
             : base(new OperationInternals<T>(source, clientDiagnostics, pipeline, originalRequest, originalResponse, finalStateVia, scopeName).Internal)
         {
-            _operation = Operation as OperationInternal<T>;
+            _operationImplementation = OperationImplementation as OperationImplementation<T>;
         }
 
         public OperationOrResponseInternals(Response<T> response)
@@ -46,9 +46,9 @@ namespace Azure.Core
             _valueResponse = response;
         }
 
-        public T Value => DoesWrapOperation ? _operation!.Value : _valueResponse!.Value;
+        public T Value => DoesWrapOperation ? _operationImplementation!.Value : _valueResponse!.Value;
 
-        public bool HasValue => DoesWrapOperation ? _operation!.HasValue : true;
+        public bool HasValue => DoesWrapOperation ? _operationImplementation!.HasValue : true;
 
         public async ValueTask<Response<T>> WaitForCompletionAsync(
             CancellationToken cancellationToken = default)
@@ -61,7 +61,7 @@ namespace Azure.Core
             CancellationToken cancellationToken)
         {
             return DoesWrapOperation
-                ? await _operation!.WaitForCompletionAsync(pollingInterval, cancellationToken).ConfigureAwait(false)
+                ? await _operationImplementation!.WaitForCompletionAsync(pollingInterval, cancellationToken).ConfigureAwait(false)
                 : _valueResponse!;
         }
     }

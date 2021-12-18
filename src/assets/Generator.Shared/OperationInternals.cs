@@ -23,30 +23,30 @@ namespace Azure.Core
     {
         public static TimeSpan DefaultPollingInterval { get; private set; } = TimeSpan.FromSeconds(1);
 
-        private readonly OperationInternal _operationInternal;
+        private readonly OperationImplementation _operationImplementation;
 
         public OperationInternals(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request originalRequest, Response originalResponse, OperationFinalStateVia finalStateVia, string scopeName)
         {
             var nextLinkOperation = NextLinkOperationImplementation.Create(pipeline, originalRequest.Method, originalRequest.Uri.ToUri(), originalResponse, finalStateVia);
-            _operationInternal = new OperationInternal(clientDiagnostics, nextLinkOperation, originalResponse, scopeName);
-            _operationInternal.DefaultPollingInterval = OperationInternals.DefaultPollingInterval;
+            _operationImplementation = new OperationImplementation(clientDiagnostics, nextLinkOperation, originalResponse, scopeName);
+            _operationImplementation.DefaultPollingInterval = OperationInternals.DefaultPollingInterval;
         }
 
-        public Response GetRawResponse() => _operationInternal.RawResponse;
+        public Response GetRawResponse() => _operationImplementation.RawResponse;
 
-        public ValueTask<Response> WaitForCompletionResponseAsync(CancellationToken cancellationToken = default) => _operationInternal.WaitForCompletionResponseAsync(cancellationToken);
+        public ValueTask<Response> WaitForCompletionResponseAsync(CancellationToken cancellationToken = default) => _operationImplementation.WaitForCompletionResponseAsync(cancellationToken);
 
-        public ValueTask<Response> WaitForCompletionResponseAsync(TimeSpan pollingInterval, CancellationToken cancellationToken) => _operationInternal.WaitForCompletionResponseAsync(pollingInterval, cancellationToken);
+        public ValueTask<Response> WaitForCompletionResponseAsync(TimeSpan pollingInterval, CancellationToken cancellationToken) => _operationImplementation.WaitForCompletionResponseAsync(pollingInterval, cancellationToken);
 
-        public ValueTask<Response> UpdateStatusAsync(CancellationToken cancellationToken = default) => _operationInternal.UpdateStatusAsync(cancellationToken);
+        public ValueTask<Response> UpdateStatusAsync(CancellationToken cancellationToken = default) => _operationImplementation.UpdateStatusAsync(cancellationToken);
 
-        public Response UpdateStatus(CancellationToken cancellationToken = default) => _operationInternal.UpdateStatus(cancellationToken);
+        public Response UpdateStatus(CancellationToken cancellationToken = default) => _operationImplementation.UpdateStatus(cancellationToken);
 
 #pragma warning disable CA1822
         //TODO: This is currently unused.
         public string Id => throw new NotImplementedException();
 #pragma warning restore CA1822
 
-        public bool HasCompleted => _operationInternal.HasCompleted;
+        public bool HasCompleted => _operationImplementation.HasCompleted;
     }
 }

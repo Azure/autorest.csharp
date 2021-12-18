@@ -12,7 +12,7 @@ using Azure.Core.Pipeline;
 
 namespace Azure.Core
 {
-    internal abstract class OperationInternalBase
+    internal abstract class OperationImplementationBase
     {
         private readonly ClientDiagnostics _diagnostics;
         private readonly string _updateStatusScopeName;
@@ -21,7 +21,7 @@ namespace Azure.Core
         private const string RetryAfterMsHeaderName = "retry-after-ms";
         private const string XRetryAfterMsHeaderName = "x-ms-retry-after-ms";
 
-        protected OperationInternalBase(ClientDiagnostics clientDiagnostics, Response rawResponse, string operationTypeName, IEnumerable<KeyValuePair<string, string>>? scopeAttributes = null)
+        protected OperationImplementationBase(ClientDiagnostics clientDiagnostics, Response rawResponse, string operationTypeName, IEnumerable<KeyValuePair<string, string>>? scopeAttributes = null)
         {
             _diagnostics = clientDiagnostics;
             _updateStatusScopeName = $"{operationTypeName}.UpdateStatus";
@@ -170,7 +170,7 @@ namespace Azure.Core
 
             try
             {
-                return await UpdateStateAsync(async, cancellationToken).ConfigureAwait(false);
+                return await PollAndUpdateStateAsync(async, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -179,7 +179,7 @@ namespace Azure.Core
             }
         }
 
-        protected async ValueTask<Response> ApplyStateAsync(bool async, Response response, bool hasCompleted, bool hasSucceeded, RequestFailedException? requestFailedException, bool throwIfFailed = true)
+        protected async ValueTask<Response> UpdateStateAndCompleteAsync(bool async, Response response, bool hasCompleted, bool hasSucceeded, RequestFailedException? requestFailedException, bool throwIfFailed = true)
         {
             RawResponse = response;
 
@@ -231,6 +231,6 @@ namespace Azure.Core
                 : pollingInterval;
         }
 
-        protected abstract ValueTask<Response> UpdateStateAsync(bool async, CancellationToken cancellationToken);
+        protected abstract ValueTask<Response> PollAndUpdateStateAsync(bool async, CancellationToken cancellationToken);
     }
 }

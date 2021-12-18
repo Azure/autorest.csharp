@@ -21,12 +21,12 @@ namespace Azure.Core
     /// </summary>
     /// <typeparam name="T">The final result of the LRO.</typeparam>
 #pragma warning disable SA1649 // File name should match first type name
-    internal class OperationInternals<T>: IOperation<T>
+    internal class OperationInternals<T>: IOperationStatePoller<T>
 #pragma warning restore SA1649 // File name should match first type name
     {
         private readonly IOperationSource<T> _source;
-        private readonly OperationInternal<T> _operationInternal;
-        private readonly IOperation _nextLinkOperation;
+        private readonly OperationImplementation<T> operationImplementation;
+        private readonly IOperationStatePoller operationStatePoller;
 
         public OperationInternals(
             IOperationSource<T> source,
@@ -38,42 +38,42 @@ namespace Azure.Core
             string scopeName)
         {
             _source = source;
-            _nextLinkOperation = NextLinkOperationImplementation.Create(pipeline, originalRequest.Method, originalRequest.Uri.ToUri(), originalResponse, finalStateVia);
-            _operationInternal = new OperationInternal<T>(clientDiagnostics, this, originalResponse, scopeName);
-            _operationInternal.DefaultPollingInterval = OperationInternals.DefaultPollingInterval;
+            operationStatePoller = NextLinkOperationImplementation.Create(pipeline, originalRequest.Method, originalRequest.Uri.ToUri(), originalResponse, finalStateVia);
+            operationImplementation = new OperationImplementation<T>(clientDiagnostics, this, originalResponse, scopeName);
+            operationImplementation.DefaultPollingInterval = OperationInternals.DefaultPollingInterval;
         }
 
         public ValueTask<Response<T>> WaitForCompletionAsync(CancellationToken cancellationToken = default)
-            => _operationInternal.WaitForCompletionAsync(cancellationToken);
+            => operationImplementation.WaitForCompletionAsync(cancellationToken);
 
         public ValueTask<Response<T>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken)
-            => _operationInternal.WaitForCompletionAsync(pollingInterval, cancellationToken);
+            => operationImplementation.WaitForCompletionAsync(pollingInterval, cancellationToken);
 
-        public Response GetRawResponse() => _operationInternal.RawResponse;
+        public Response GetRawResponse() => operationImplementation.RawResponse;
 
-        public ValueTask<Response> WaitForCompletionResponseAsync(CancellationToken cancellationToken = default) => _operationInternal.WaitForCompletionResponseAsync(cancellationToken);
+        public ValueTask<Response> WaitForCompletionResponseAsync(CancellationToken cancellationToken = default) => operationImplementation.WaitForCompletionResponseAsync(cancellationToken);
 
-        public ValueTask<Response> WaitForCompletionResponseAsync(TimeSpan pollingInterval, CancellationToken cancellationToken) => _operationInternal.WaitForCompletionResponseAsync(pollingInterval, cancellationToken);
+        public ValueTask<Response> WaitForCompletionResponseAsync(TimeSpan pollingInterval, CancellationToken cancellationToken) => operationImplementation.WaitForCompletionResponseAsync(pollingInterval, cancellationToken);
 
-        public ValueTask<Response> UpdateStatusAsync(CancellationToken cancellationToken = default) => _operationInternal.UpdateStatusAsync(cancellationToken);
+        public ValueTask<Response> UpdateStatusAsync(CancellationToken cancellationToken = default) => operationImplementation.UpdateStatusAsync(cancellationToken);
 
-        public Response UpdateStatus(CancellationToken cancellationToken = default) => _operationInternal.UpdateStatus(cancellationToken);
+        public Response UpdateStatus(CancellationToken cancellationToken = default) => operationImplementation.UpdateStatus(cancellationToken);
 
 #pragma warning disable CA1822
         //TODO: This is currently unused.
         public string Id => throw new NotImplementedException();
 #pragma warning restore CA1822
 
-        public T Value => _operationInternal.Value;
-        public bool HasValue => _operationInternal.HasValue;
-        public bool HasCompleted => _operationInternal.HasCompleted;
+        public T Value => operationImplementation.Value;
+        public bool HasValue => operationImplementation.HasValue;
+        public bool HasCompleted => operationImplementation.HasCompleted;
 
         // Temporary, remove after OperationOrResponseInternals<T> is removed
-        public OperationInternal<T> Internal => _operationInternal;
+        public OperationImplementation<T> Internal => operationImplementation;
 
-        async ValueTask<OperationState<T>> IOperation<T>.UpdateStateAsync(bool async, CancellationToken cancellationToken)
+        async ValueTask<OperationState<T>> IOperationStatePoller<T>.PollOperationStateAsync(bool async, CancellationToken cancellationToken)
         {
-            var state = await _nextLinkOperation.UpdateStateAsync(async, cancellationToken).ConfigureAwait(false);
+            var state = await operationStatePoller.PollOperationStateAsync(async, cancellationToken).ConfigureAwait(false);
             if (state.HasSucceeded)
             {
                 var value = async

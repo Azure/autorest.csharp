@@ -12,7 +12,7 @@ using Azure.Core.Pipeline;
 
 namespace Azure.Core
 {
-    internal class NextLinkOperationImplementation : IOperation
+    internal class NextLinkOperationImplementation : IOperationStatePoller
     {
         private static readonly string[] FailureStates = { "failed", "canceled" };
         private static readonly string[] SuccessStates = { "succeeded" };
@@ -27,7 +27,7 @@ namespace Azure.Core
         private string? _lastKnownLocation;
         private string _nextRequestUri;
 
-        public static IOperation Create(HttpPipeline pipeline, RequestMethod requestMethod, Uri startRequestUri, Response response, OperationFinalStateVia finalStateVia)
+        public static IOperationStatePoller Create(HttpPipeline pipeline, RequestMethod requestMethod, Uri startRequestUri, Response response, OperationFinalStateVia finalStateVia)
         {
             var headerSource = GetHeaderSource(requestMethod, startRequestUri, response, out var nextRequestUri);
             if (headerSource == HeaderSource.None && IsFinalState(response, headerSource, out var failureState))
@@ -56,7 +56,7 @@ namespace Azure.Core
             _pipeline = pipeline;
         }
 
-        public async ValueTask<OperationState> UpdateStateAsync(bool async, CancellationToken cancellationToken)
+        public async ValueTask<OperationState> PollOperationStateAsync(bool async, CancellationToken cancellationToken)
         {
             Response response = await GetResponseAsync(async, _nextRequestUri, cancellationToken).ConfigureAwait(false);
 
@@ -265,7 +265,7 @@ namespace Azure.Core
             Location
         }
 
-        private class CompletedOperation : IOperation
+        private class CompletedOperation : IOperationStatePoller
         {
             private readonly OperationState _operationState;
 
@@ -274,7 +274,7 @@ namespace Azure.Core
                 _operationState = operationState;
             }
 
-            public ValueTask<OperationState> UpdateStateAsync(bool async, CancellationToken cancellationToken) => new(_operationState);
+            public ValueTask<OperationState> PollOperationStateAsync(bool async, CancellationToken cancellationToken) => new(_operationState);
         }
     }
 }

@@ -10,17 +10,17 @@ using Azure.Core.Pipeline;
 
 namespace Azure.Core
 {
-    internal class LowLevelFuncOperation<T> : Operation<T>, IOperation<T> where T : notnull
+    internal class LowLevelFuncOperation<T> : Operation<T>, IOperationStatePoller<T> where T : notnull
     {
         private readonly Func<Response, T> _resultSelector;
-        private readonly OperationInternal<T> _operation;
-        private readonly IOperation _nextLinkOperation;
+        private readonly OperationImplementation<T> _operationImplementation;
+        private readonly IOperationStatePoller _operationStatePoller;
 
         internal LowLevelFuncOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia, string scopeName, Func<Response, T> resultSelector)
         {
             _resultSelector = resultSelector;
-            _nextLinkOperation = NextLinkOperationImplementation.Create(pipeline, request.Method, request.Uri.ToUri(), response, finalStateVia);
-            _operation = new OperationInternal<T>(clientDiagnostics, this, response, scopeName);
+            _operationStatePoller = NextLinkOperationImplementation.Create(pipeline, request.Method, request.Uri.ToUri(), response, finalStateVia);
+            _operationImplementation = new OperationImplementation<T>(clientDiagnostics, this, response, scopeName);
         }
 
 #pragma warning disable CA1822
@@ -30,32 +30,31 @@ namespace Azure.Core
 #pragma warning restore CA1822
 
         /// <inheritdoc />
-        public override T Value => _operation.Value;
+        public override T Value => _operationImplementation.Value;
 
         /// <inheritdoc />
-        public override bool HasCompleted => _operation.HasCompleted;
+        public override bool HasCompleted => _operationImplementation.HasCompleted;
 
         /// <inheritdoc />
-        public override bool HasValue => _operation.HasValue;
+        public override bool HasValue => _operationImplementation.HasValue;
 
         /// <inheritdoc />
-        public override Response GetRawResponse() => _operation.RawResponse;
+        public override Response GetRawResponse() => _operationImplementation.RawResponse;
+        /// <inheritdoc />
+        public override Response UpdateStatus(CancellationToken cancellationToken = default) => _operationImplementation.UpdateStatus(cancellationToken);
 
         /// <inheritdoc />
-        public override Response UpdateStatus(CancellationToken cancellationToken = default) => _operation.UpdateStatus(cancellationToken);
+        public override ValueTask<Response> UpdateStatusAsync(CancellationToken cancellationToken = default) => _operationImplementation.UpdateStatusAsync(cancellationToken);
 
         /// <inheritdoc />
-        public override ValueTask<Response> UpdateStatusAsync(CancellationToken cancellationToken = default) => _operation.UpdateStatusAsync(cancellationToken);
+        public override ValueTask<Response<T>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => _operationImplementation.WaitForCompletionAsync(cancellationToken);
 
         /// <inheritdoc />
-        public override ValueTask<Response<T>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(cancellationToken);
+        public override ValueTask<Response<T>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operationImplementation.WaitForCompletionAsync(pollingInterval, cancellationToken);
 
-        /// <inheritdoc />
-        public override ValueTask<Response<T>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(pollingInterval, cancellationToken);
-
-        async ValueTask<OperationState<T>> IOperation<T>.UpdateStateAsync(bool async, CancellationToken cancellationToken)
+        async ValueTask<OperationState<T>> IOperationStatePoller<T>.PollOperationStateAsync(bool async, CancellationToken cancellationToken)
         {
-            var state = await _nextLinkOperation.UpdateStateAsync(async, cancellationToken).ConfigureAwait(false);
+            var state = await _operationStatePoller.PollOperationStateAsync(async, cancellationToken).ConfigureAwait(false);
             if (state.HasSucceeded)
             {
                 return OperationState<T>.Success(state.RawResponse, _resultSelector(state.RawResponse));
