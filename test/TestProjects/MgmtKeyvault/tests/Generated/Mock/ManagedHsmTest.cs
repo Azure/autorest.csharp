@@ -51,7 +51,7 @@ namespace MgmtKeyvault.Tests.Mock
         {
             // Example: Update an existing managed HSM Pool
             var managedHsm = GetArmClient().GetManagedHsm(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hsm-group/providers/Microsoft.KeyVault/managedHSMs/hsm1"));
-            MgmtKeyvault.ManagedHsmData parameters = new MgmtKeyvault.ManagedHsmData("westus")
+            MgmtKeyvault.ManagedHsmData parameters = new MgmtKeyvault.ManagedHsmData(location: "westus")
             {
             };
             parameters.Tags.ReplaceWith(new Dictionary<string, string>() { ["Dept"] = "hsm", ["Environment"] = "dogfood", ["Slice"] = "A", });

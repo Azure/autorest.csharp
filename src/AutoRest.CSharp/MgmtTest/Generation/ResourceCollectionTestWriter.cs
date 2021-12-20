@@ -161,17 +161,17 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             {
                 case Resource parentResource:
                     {
-                        _writer.Append($"var collection = GetArmClient().Get{parentResource.Type.Name}(new {typeof(Azure.ResourceManager.ResourceIdentifier)}({realRequestPath:L}))");
+                        _writer.Append($"var collection = GetArmClient().Get{parentResource.Type.Name}(new {typeof(Azure.ResourceManager.ResourceIdentifier)}({MgmtBaseTestWriter.FormatResourceId(realRequestPath):L}))");
                         break;
                     }
                 case ResourceGroupExtensions:
                     {
-                        _writer.Append($"var collection = GetArmClient().GetResourceGroup(new {typeof(Azure.ResourceManager.ResourceIdentifier)}({realRequestPath:L}))");
+                        _writer.Append($"var collection = GetArmClient().GetResourceGroup(new {typeof(Azure.ResourceManager.ResourceIdentifier)}({MgmtBaseTestWriter.FormatResourceId(realRequestPath):L}))");
                         break;
                     }
                 case SubscriptionExtensions:
                     {
-                        _writer.Append($"var collection = GetArmClient().GetSubscription(new {typeof(Azure.ResourceManager.ResourceIdentifier)}({realRequestPath:L}))");
+                        _writer.Append($"var collection = GetArmClient().GetSubscription(new {typeof(Azure.ResourceManager.ResourceIdentifier)}({MgmtBaseTestWriter.FormatResourceId(realRequestPath):L}))");
                         break;
                     }
                 case TenantExtensions:
@@ -250,31 +250,6 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 }
             }
             return null;
-        }
-
-        public void WriteInvokeExampleInstanceMethod(MgmtClientOperation clientOperation, bool async, string methodName, ExampleModel exampleModel)
-        {
-            var parameters = GenExampleInstanceMethodParameters(clientOperation);
-            _writer.Append($"{GetAwait(async && !clientOperation.IsPagingOperation(Context))} TestHelper.{GenExampleInstanceMethodName(methodName, async)}(collection, ");
-            foreach (var parameter in parameters)
-            {
-                foreach (var methodParameter in exampleModel.MethodParameters)
-                {
-                    if (methodParameter.Parameter.CSharpName() == parameter.Name)
-                    {
-                        WriteExampleValue(_writer, parameter.Type, methodParameter.ExampleValue, parameter.Name);
-                        _writer.Append($", ");
-                        break;
-                    }
-                }
-            }
-            _writer.RemoveTrailingComma();
-            _writer.Append($")");
-            if (clientOperation.IsPagingOperation(Context))
-            {
-                _writer.Append($".AsPages()");
-            }
-            _writer.Line($";");
         }
 
         protected void WriteMethodTest(MgmtClientOperation clientOperation, bool async)

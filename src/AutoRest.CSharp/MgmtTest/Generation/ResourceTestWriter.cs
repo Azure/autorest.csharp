@@ -112,7 +112,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
         public void WriteGetResource(Resource resource, string requestPath, ExampleModel exampleModel)
         {
             var resourceVariableName = useVariableName(resource.Type.Name.FirstCharToLowerCase());
-            _writer.Line($"var {resourceVariableName} = GetArmClient().Get{resource.Type.Name}(new {typeof(ResourceIdentifier)}({requestPath:L}));");
+            _writer.Line($"var {resourceVariableName} = GetArmClient().Get{resource.Type.Name}(new {typeof(ResourceIdentifier)}({MgmtBaseTestWriter.FormatResourceId(requestPath):L}));");
         }
 
         protected override CSharpType? WrapResourceDataType(CSharpType? type, MgmtRestOperation operation)
@@ -150,7 +150,14 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                         continue;
                     }
                     WriteTestDecorator();
-                    _writer.Append($"public {GetAsyncKeyword(async)} {MgmtBaseTestWriter.GetTaskOrVoid(async)} {(resource == _resource ? "" : resource.Type.Name)}{testMethodName}{(exampleIdx > 0 ? (exampleIdx + 1).ToString() : "")}()");
+                    if (clientOperation.IsPagingOperation(Context))
+                    {
+                        _writer.Append($"public void {(resource == _resource ? "" : resource.Type.Name)}{testMethodName}{(exampleIdx > 0 ? (exampleIdx + 1).ToString() : "")}()");
+                    }
+                    else
+                    {
+                        _writer.Append($"public {GetAsyncKeyword(async)} {MgmtBaseTestWriter.GetTaskOrVoid(async)} {(resource == _resource ? "" : resource.Type.Name)}{testMethodName}{(exampleIdx > 0 ? (exampleIdx + 1).ToString() : "")}()");
+                    }
 
                     using (_writer.Scope())
                     {

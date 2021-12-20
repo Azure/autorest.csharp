@@ -33,7 +33,7 @@ namespace MgmtKeyvault.Tests.Mock
             // Example: ManagedHsmPutPrivateEndpointConnection
             var collection = GetArmClient().GetManagedHsm(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/managedHSMs/sample-mhsm")).GetMhsmPrivateEndpointConnections();
             string privateEndpointConnectionName = "sample-pec";
-            MgmtKeyvault.MhsmPrivateEndpointConnectionData properties = new MgmtKeyvault.MhsmPrivateEndpointConnectionData("westus")
+            MgmtKeyvault.MhsmPrivateEndpointConnectionData properties = new MgmtKeyvault.MhsmPrivateEndpointConnectionData(location: "westus")
             {
                 PrivateLinkServiceConnectionState = new MgmtKeyvault.Models.MhsmPrivateLinkServiceConnectionState()
                 {

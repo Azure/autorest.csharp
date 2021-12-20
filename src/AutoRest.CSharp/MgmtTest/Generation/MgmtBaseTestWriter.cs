@@ -22,6 +22,7 @@ using AutoRest.CSharp.Output.Models.Requests;
 using System.Text.Json.Serialization;
 using Azure.Core.Serialization;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Text.RegularExpressions;
 
 namespace AutoRest.CSharp.MgmtTest.Generation
 {
@@ -69,13 +70,22 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
         public static string FormatResourceId(string resourceId)
         {
+            if (!resourceId.StartsWith('/'))
+            {
+                resourceId = '/' + resourceId;
+            }
             resourceId = resourceId.Replace("{", "{{").Replace("}", "}}");
             var elements = resourceId.Split("/");
             for (int i = 2; i< elements.Length; i+=2)
             {
                 if (elements[i-1].ToLower()== "subscriptions")
                 {
-                    elements[i] = "00000000-0000-0000-0000-000000000000";
+                    Regex regex = new Regex("^{[A-Z0-9]{8}-([A-Z0-9]{4}-){3}[A-Z0-9]{12}}$");
+                    Match match = regex.Match(elements[i]);
+                    if (!match.Success)
+                    {
+                        elements[i] = "00000000-0000-0000-0000-000000000000";
+                    }
                 }
             }
             return String.Join("/", elements);
@@ -190,6 +200,40 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             return null;
         }
 
+        private ObjectTypeConstructor FindSuitableConstructor(ObjectType sot, ExampleValue ev)
+        {
+            var constructor = sot.Constructors[0];
+            foreach (var c in sot.Constructors)
+            {
+                if (!c.Signature.Modifiers.Contains("public") && !(c.Signature.Modifiers.Contains("internal") && sot is SchemaObjectType))
+                    continue;
+                var missAnyRequiredParameter = false;
+                foreach (var p in c.Signature.Parameters)
+                {
+                    if (!p.IsRequired)
+                        continue;
+                    var targetProperty = constructor.FindPropertyInitializedByParameter(p);
+                    if (targetProperty is null)
+                    {
+                        missAnyRequiredParameter = true;
+                        break;
+                    }
+                    var paramValue = FindPropertyValue(sot, ev, targetProperty!);
+                    if (paramValue is null)
+                    {
+                        missAnyRequiredParameter = true;
+                        break;
+                    }
+                }
+                if (!missAnyRequiredParameter)
+                {
+                    if (c.Signature.Parameters.Length > constructor.Signature.Parameters.Length)
+                        constructor = c;
+                }
+            }
+            return constructor;
+        }
+
         public void WriteSchemaObjectExampleValue(CodeWriter writer, ObjectType sot, ExampleValue ev, string variableName)
         {
             // Find Polimophismed schema
@@ -202,13 +246,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 }
             }
 
-            var constructor = sot.Constructors[0];
-            // TODO: find constructor by exampleValues.
-            foreach (var c in sot.Constructors)
-            {
-                if (c.Signature.Parameters.Length < constructor.Signature.Parameters.Length)
-                    constructor = c;
-            }
+            var constructor = FindSuitableConstructor(sot, ev);
             HashSet<ObjectTypeProperty> consumedProperties = new HashSet<ObjectTypeProperty>();
             var signature = constructor.Signature;
 
@@ -217,6 +255,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             {
                 var targetProperty = constructor.FindPropertyInitializedByParameter(p);
                 var paramValue = FindPropertyValue(sot, ev, targetProperty!);
+                writer.Append($"{p.Name}: ");
                 if (paramValue is not null)
                 {
                     WriteExampleValue(writer, p.Type, paramValue!, $"{variableName}.{targetProperty!.Declaration.Name}");

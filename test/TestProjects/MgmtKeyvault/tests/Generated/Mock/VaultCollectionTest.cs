@@ -32,7 +32,7 @@ namespace MgmtKeyvault.Tests.Mock
             // Example: Create a new vault or update an existing vault
             var collection = GetArmClient().GetResourceGroup(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group")).GetVaults();
             string vaultName = "sample-vault";
-            MgmtKeyvault.Models.VaultCreateOrUpdateParameters parameters = new MgmtKeyvault.Models.VaultCreateOrUpdateParameters("westus", new MgmtKeyvault.Models.VaultProperties(Guid.Parse("00000000-0000-0000-0000-000000000000"), new MgmtKeyvault.Models.Sku(new MgmtKeyvault.Models.SkuFamily("A"), MgmtKeyvault.Models.SkuName.Standard))
+            MgmtKeyvault.Models.VaultCreateOrUpdateParameters parameters = new MgmtKeyvault.Models.VaultCreateOrUpdateParameters(location: "westus", properties: new MgmtKeyvault.Models.VaultProperties(tenantId: Guid.Parse("00000000-0000-0000-0000-000000000000"), sku: new MgmtKeyvault.Models.Sku(family: new MgmtKeyvault.Models.SkuFamily("A"), name: MgmtKeyvault.Models.SkuName.Standard))
             {
                 EnabledForDeployment = true,
                 EnabledForDiskEncryption = true,
@@ -48,7 +48,7 @@ namespace MgmtKeyvault.Tests.Mock
             // Example: Create or update a vault with network acls
             var collection = GetArmClient().GetResourceGroup(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group")).GetVaults();
             string vaultName = "sample-vault";
-            MgmtKeyvault.Models.VaultCreateOrUpdateParameters parameters = new MgmtKeyvault.Models.VaultCreateOrUpdateParameters("westus", new MgmtKeyvault.Models.VaultProperties(Guid.Parse("00000000-0000-0000-0000-000000000000"), new MgmtKeyvault.Models.Sku(new MgmtKeyvault.Models.SkuFamily("A"), MgmtKeyvault.Models.SkuName.Standard))
+            MgmtKeyvault.Models.VaultCreateOrUpdateParameters parameters = new MgmtKeyvault.Models.VaultCreateOrUpdateParameters(location: "westus", properties: new MgmtKeyvault.Models.VaultProperties(tenantId: Guid.Parse("00000000-0000-0000-0000-000000000000"), sku: new MgmtKeyvault.Models.Sku(family: new MgmtKeyvault.Models.SkuFamily("A"), name: MgmtKeyvault.Models.SkuName.Standard))
             {
                 EnabledForDeployment = true,
                 EnabledForDiskEncryption = true,
