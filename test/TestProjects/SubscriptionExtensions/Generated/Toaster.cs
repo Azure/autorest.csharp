@@ -21,6 +21,12 @@ namespace SubscriptionExtensions
     /// <summary> A Class representing a Toaster along with the instance operations that can be performed on it. </summary>
     public partial class Toaster : ArmResource
     {
+        /// <summary> Generate the resource identifier of a <see cref="Toaster"/> instance. </summary>
+        public static ResourceIdentifier BuildId(string subscriptionId, string toasterName)
+        {
+            var resourceId = $"/subscriptions/{subscriptionId}/providers/Microsoft.Compute/toasters/{toasterName}";
+            return new ResourceIdentifier(resourceId);
+        }
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly ToastersRestOperations _toastersRestClient;
         private readonly ToasterData _data;

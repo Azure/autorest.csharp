@@ -22,6 +22,12 @@ namespace MgmtListMethods
     /// <summary> A Class representing a MgmtGrpParentWithNonResChWithLoc along with the instance operations that can be performed on it. </summary>
     public partial class MgmtGrpParentWithNonResChWithLoc : ArmResource
     {
+        /// <summary> Generate the resource identifier of a <see cref="MgmtGrpParentWithNonResChWithLoc"/> instance. </summary>
+        public static ResourceIdentifier BuildId(string groupId, string mgmtGrpParentWithNonResChWithLocName)
+        {
+            var resourceId = $"/providers/Microsoft.Management/managementGroups/{groupId}/mgmtGrpParentWithNonResChWithLocs/{mgmtGrpParentWithNonResChWithLocName}";
+            return new ResourceIdentifier(resourceId);
+        }
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly MgmtGrpParentWithNonResChWithLocsRestOperations _mgmtGrpParentWithNonResChWithLocsRestClient;
         private readonly MgmtGrpParentWithNonResChWithLocData _data;

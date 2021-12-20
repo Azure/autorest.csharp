@@ -22,6 +22,12 @@ namespace MgmtMultipleParentResource
     /// <summary> A Class representing a AnotherParentChild along with the instance operations that can be performed on it. </summary>
     public partial class AnotherParentChild : ArmResource
     {
+        /// <summary> Generate the resource identifier of a <see cref="AnotherParentChild"/> instance. </summary>
+        public static ResourceIdentifier BuildId(string subscriptionId, string resourceGroupName, string anotherName, string childName)
+        {
+            var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/anotherParents/{anotherName}/children/{childName}";
+            return new ResourceIdentifier(resourceId);
+        }
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly AnotherChildrenRestOperations _anotherChildrenRestClient;
         private readonly ChildBodyData _data;

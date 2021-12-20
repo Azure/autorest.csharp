@@ -22,6 +22,12 @@ namespace MgmtListMethods
     /// <summary> A Class representing a SubParentWithNonResCh along with the instance operations that can be performed on it. </summary>
     public partial class SubParentWithNonResCh : ArmResource
     {
+        /// <summary> Generate the resource identifier of a <see cref="SubParentWithNonResCh"/> instance. </summary>
+        public static ResourceIdentifier BuildId(string subscriptionId, string subParentWithNonResChName)
+        {
+            var resourceId = $"/subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParentWithNonResChes/{subParentWithNonResChName}";
+            return new ResourceIdentifier(resourceId);
+        }
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly SubParentWithNonResChesRestOperations _subParentWithNonResChesRestClient;
         private readonly SubParentWithNonResChData _data;

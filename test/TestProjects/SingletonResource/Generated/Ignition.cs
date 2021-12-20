@@ -21,6 +21,12 @@ namespace SingletonResource
     /// <summary> A Class representing a Ignition along with the instance operations that can be performed on it. </summary>
     public partial class Ignition : ArmResource
     {
+        /// <summary> Generate the resource identifier of a <see cref="Ignition"/> instance. </summary>
+        public static ResourceIdentifier BuildId(string subscriptionId, string resourceGroupName, string carName)
+        {
+            var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cars/{carName}/ignitions/default";
+            return new ResourceIdentifier(resourceId);
+        }
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly IgnitionsRestOperations _ignitionsRestClient;
         private readonly IgnitionData _data;

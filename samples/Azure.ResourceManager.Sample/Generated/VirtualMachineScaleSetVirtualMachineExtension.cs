@@ -22,6 +22,12 @@ namespace Azure.ResourceManager.Sample
     /// <summary> A Class representing a VirtualMachineScaleSetVirtualMachineExtension along with the instance operations that can be performed on it. </summary>
     public partial class VirtualMachineScaleSetVirtualMachineExtension : ArmResource
     {
+        /// <summary> Generate the resource identifier of a <see cref="VirtualMachineScaleSetVirtualMachineExtension"/> instance. </summary>
+        public static ResourceIdentifier BuildId(string subscriptionId, string resourceGroupName, string vmScaleSetName, string instanceId, string vmExtensionName)
+        {
+            var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/extensions/{vmExtensionName}";
+            return new ResourceIdentifier(resourceId);
+        }
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly VirtualMachineScaleSetVMExtensionsRestOperations _virtualMachineScaleSetVMExtensionsRestClient;
         private readonly VirtualMachineExtensionData _data;

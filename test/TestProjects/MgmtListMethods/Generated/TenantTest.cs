@@ -21,6 +21,12 @@ namespace MgmtListMethods
     /// <summary> A Class representing a TenantTest along with the instance operations that can be performed on it. </summary>
     public partial class TenantTest : ArmResource
     {
+        /// <summary> Generate the resource identifier of a <see cref="TenantTest"/> instance. </summary>
+        public static ResourceIdentifier BuildId(string tenantTestName)
+        {
+            var resourceId = $"/providers/Microsoft.Tenant/tenantTests/{tenantTestName}";
+            return new ResourceIdentifier(resourceId);
+        }
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly TenantTestsRestOperations _tenantTestsRestClient;
         private readonly TenantTestData _data;

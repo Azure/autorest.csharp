@@ -22,6 +22,12 @@ namespace MgmtParamOrdering
     /// <summary> A Class representing a EnvironmentContainerResource along with the instance operations that can be performed on it. </summary>
     public partial class EnvironmentContainerResource : ArmResource
     {
+        /// <summary> Generate the resource identifier of a <see cref="EnvironmentContainerResource"/> instance. </summary>
+        public static ResourceIdentifier BuildId(string subscriptionId, string resourceGroupName, string workspaceName, string name)
+        {
+            var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{name}";
+            return new ResourceIdentifier(resourceId);
+        }
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly EnvironmentContainersRestOperations _environmentContainersRestClient;
         private readonly EnvironmentContainerResourceData _data;

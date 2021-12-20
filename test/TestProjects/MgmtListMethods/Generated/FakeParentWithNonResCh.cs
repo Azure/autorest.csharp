@@ -22,6 +22,12 @@ namespace MgmtListMethods
     /// <summary> A Class representing a FakeParentWithNonResCh along with the instance operations that can be performed on it. </summary>
     public partial class FakeParentWithNonResCh : ArmResource
     {
+        /// <summary> Generate the resource identifier of a <see cref="FakeParentWithNonResCh"/> instance. </summary>
+        public static ResourceIdentifier BuildId(string subscriptionId, string fakeName, string fakeParentWithNonResChName)
+        {
+            var resourceId = $"/subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes/{fakeName}/fakeParentWithNonResChes/{fakeParentWithNonResChName}";
+            return new ResourceIdentifier(resourceId);
+        }
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly FakeParentWithNonResChesRestOperations _fakeParentWithNonResChesRestClient;
         private readonly FakeParentWithNonResChData _data;

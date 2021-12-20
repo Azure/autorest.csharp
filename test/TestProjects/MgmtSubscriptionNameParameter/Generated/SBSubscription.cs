@@ -22,6 +22,12 @@ namespace MgmtSubscriptionNameParameter
     /// <summary> A Class representing a SBSubscription along with the instance operations that can be performed on it. </summary>
     public partial class SBSubscription : ArmResource
     {
+        /// <summary> Generate the resource identifier of a <see cref="SBSubscription"/> instance. </summary>
+        public static ResourceIdentifier BuildId(string subscriptionId, string resourceGroupName, string subscriptionName)
+        {
+            var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/subscriptions/{subscriptionName}";
+            return new ResourceIdentifier(resourceId);
+        }
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly SubscriptionsRestOperations _subscriptionsRestClient;
         private readonly SBSubscriptionData _data;

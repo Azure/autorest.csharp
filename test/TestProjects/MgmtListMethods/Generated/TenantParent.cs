@@ -21,6 +21,12 @@ namespace MgmtListMethods
     /// <summary> A Class representing a TenantParent along with the instance operations that can be performed on it. </summary>
     public partial class TenantParent : ArmResource
     {
+        /// <summary> Generate the resource identifier of a <see cref="TenantParent"/> instance. </summary>
+        public static ResourceIdentifier BuildId(string tenantTestName, string tenantParentName)
+        {
+            var resourceId = $"/providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParents/{tenantParentName}";
+            return new ResourceIdentifier(resourceId);
+        }
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly TenantParentsRestOperations _tenantParentsRestClient;
         private readonly TenantParentData _data;

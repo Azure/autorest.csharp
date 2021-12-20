@@ -21,6 +21,12 @@ namespace NoTypeReplacement
     /// <summary> A Class representing a NoTypeReplacementModel1 along with the instance operations that can be performed on it. </summary>
     public partial class NoTypeReplacementModel1 : ArmResource
     {
+        /// <summary> Generate the resource identifier of a <see cref="NoTypeReplacementModel1"/> instance. </summary>
+        public static ResourceIdentifier BuildId(string subscriptionId, string resourceGroupName, string noTypeReplacementModel1SName)
+        {
+            var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/noTypeReplacementModel1s/{noTypeReplacementModel1SName}";
+            return new ResourceIdentifier(resourceId);
+        }
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly NoTypeReplacementModel1SRestOperations _noTypeReplacementModel1sRestClient;
         private readonly NoTypeReplacementModel1Data _data;

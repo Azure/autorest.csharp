@@ -21,6 +21,12 @@ namespace MgmtListMethods
     /// <summary> A Class representing a FakeParent along with the instance operations that can be performed on it. </summary>
     public partial class FakeParent : ArmResource
     {
+        /// <summary> Generate the resource identifier of a <see cref="FakeParent"/> instance. </summary>
+        public static ResourceIdentifier BuildId(string subscriptionId, string fakeName, string fakeParentName)
+        {
+            var resourceId = $"/subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes/{fakeName}/fakeParents/{fakeParentName}";
+            return new ResourceIdentifier(resourceId);
+        }
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly FakeParentsRestOperations _fakeParentsRestClient;
         private readonly FakeParentData _data;

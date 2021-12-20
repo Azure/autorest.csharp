@@ -21,6 +21,12 @@ namespace Pagination
     /// <summary> A Class representing a PageSizeDecimalModel along with the instance operations that can be performed on it. </summary>
     public partial class PageSizeDecimalModel : ArmResource
     {
+        /// <summary> Generate the resource identifier of a <see cref="PageSizeDecimalModel"/> instance. </summary>
+        public static ResourceIdentifier BuildId(string subscriptionId, string resourceGroupName, string name)
+        {
+            var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/pageSizeDecimalModel/{name}";
+            return new ResourceIdentifier(resourceId);
+        }
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly PageSizeDecimalModelsRestOperations _pageSizeDecimalModelsRestClient;
         private readonly PageSizeDecimalModelData _data;
