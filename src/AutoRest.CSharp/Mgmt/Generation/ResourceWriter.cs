@@ -68,6 +68,7 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
 
                 using (_writer.Scope())
                 {
+                    WriteStaticMethods();
                     WriteFields();
                     WriteCtors();
                     WriteProperties();
@@ -75,6 +76,26 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
 
                     // write children
                     WriteChildResourceEntries();
+                }
+            }
+        }
+
+        private void WriteStaticMethods()
+        {
+            WriteBuildIdMethods();
+        }
+
+        private void WriteBuildIdMethods()
+        {
+            foreach (var requestPath in _resource.RequestPaths)
+            {
+                _writer.Line();
+                _writer.WriteXmlDocumentationSummary($"Generate the resource identifier of a <see cref=\"{TypeOfThis}\"/> instance.");
+                var parameterList = string.Join(", ", requestPath.Where(segment => segment.IsReference).Select(segment => $"string {segment.ReferenceName}"));
+                using (_writer.Scope($"public static ResourceIdentifier BuildId({parameterList})"))
+                {
+                    _writer.Line($"var resourceId = $\"{requestPath.SerializedPath}\";");
+                    _writer.Line($"return new ResourceIdentifier(resourceId);");
                 }
             }
         }
