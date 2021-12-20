@@ -47,13 +47,13 @@ namespace url_multi_collectionFormat_LowLevel
 
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
-            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
         }
 
         /// <summary> Get a null array of string using the multi-array format. </summary>
         /// <param name="arrayQuery"> a null array of string using the multi-array format. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -71,7 +71,7 @@ namespace url_multi_collectionFormat_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateArrayStringMultiNullRequest(arrayQuery);
+                using HttpMessage message = CreateArrayStringMultiNullRequest(arrayQuery, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -83,7 +83,7 @@ namespace url_multi_collectionFormat_LowLevel
 
         /// <summary> Get a null array of string using the multi-array format. </summary>
         /// <param name="arrayQuery"> a null array of string using the multi-array format. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -101,7 +101,7 @@ namespace url_multi_collectionFormat_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateArrayStringMultiNullRequest(arrayQuery);
+                using HttpMessage message = CreateArrayStringMultiNullRequest(arrayQuery, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -113,7 +113,7 @@ namespace url_multi_collectionFormat_LowLevel
 
         /// <summary> Get an empty array [] of string using the multi-array format. </summary>
         /// <param name="arrayQuery"> an empty array [] of string using the multi-array format. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -131,7 +131,7 @@ namespace url_multi_collectionFormat_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateArrayStringMultiEmptyRequest(arrayQuery);
+                using HttpMessage message = CreateArrayStringMultiEmptyRequest(arrayQuery, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -143,7 +143,7 @@ namespace url_multi_collectionFormat_LowLevel
 
         /// <summary> Get an empty array [] of string using the multi-array format. </summary>
         /// <param name="arrayQuery"> an empty array [] of string using the multi-array format. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -161,7 +161,7 @@ namespace url_multi_collectionFormat_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateArrayStringMultiEmptyRequest(arrayQuery);
+                using HttpMessage message = CreateArrayStringMultiEmptyRequest(arrayQuery, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -173,7 +173,7 @@ namespace url_multi_collectionFormat_LowLevel
 
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the mult-array format. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the mult-array format. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -191,7 +191,7 @@ namespace url_multi_collectionFormat_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateArrayStringMultiValidRequest(arrayQuery);
+                using HttpMessage message = CreateArrayStringMultiValidRequest(arrayQuery, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -203,7 +203,7 @@ namespace url_multi_collectionFormat_LowLevel
 
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the mult-array format. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the mult-array format. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -221,7 +221,7 @@ namespace url_multi_collectionFormat_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateArrayStringMultiValidRequest(arrayQuery);
+                using HttpMessage message = CreateArrayStringMultiValidRequest(arrayQuery, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -231,9 +231,9 @@ namespace url_multi_collectionFormat_LowLevel
             }
         }
 
-        internal HttpMessage CreateArrayStringMultiNullRequest(IEnumerable<string> arrayQuery)
+        internal HttpMessage CreateArrayStringMultiNullRequest(IEnumerable<string> arrayQuery, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -252,9 +252,9 @@ namespace url_multi_collectionFormat_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateArrayStringMultiEmptyRequest(IEnumerable<string> arrayQuery)
+        internal HttpMessage CreateArrayStringMultiEmptyRequest(IEnumerable<string> arrayQuery, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -273,9 +273,9 @@ namespace url_multi_collectionFormat_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateArrayStringMultiValidRequest(IEnumerable<string> arrayQuery)
+        internal HttpMessage CreateArrayStringMultiValidRequest(IEnumerable<string> arrayQuery, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();

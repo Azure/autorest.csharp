@@ -54,7 +54,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
             _endpoint = endpoint;
         }
 
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> OperationAsync(RequestContext context = null)
 #pragma warning restore AZC0002
@@ -63,7 +63,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateOperationRequest();
+                using HttpMessage message = CreateOperationRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -73,7 +73,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
             }
         }
 
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
 #pragma warning disable AZC0002
         public virtual Response Operation(RequestContext context = null)
 #pragma warning restore AZC0002
@@ -82,7 +82,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateOperationRequest();
+                using HttpMessage message = CreateOperationRequest(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -92,9 +92,9 @@ namespace SingleTopLevelClientWithOperations_LowLevel
             }
         }
 
-        internal HttpMessage CreateOperationRequest()
+        internal HttpMessage CreateOperationRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();

@@ -29,7 +29,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 ";
         private string _coreCsProjContent = @"
   <ItemGroup>
-    <PackageReference Include=""Azure.Core"" Version=""1.21.0"" />
+    <PackageReference Include=""Azure.Core"" Version=""1.22.0-alpha.20211207.1"" />
   </ItemGroup>";
 
         private string _armCsProjContent = @"
@@ -38,7 +38,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include=""Azure.ResourceManager"" Version=""1.0.0-alpha.20211207.4"" />
+    <PackageReference Include=""Azure.ResourceManager"" Version=""1.0.0-alpha.20211214.3"" />
   </ItemGroup>
 ";
 
@@ -105,7 +105,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 {
                   additionalContent += _armCsProjContent;
                 }
-                if (configuration.LowLevelClient)
+                if (configuration.DataPlane)
                 {
                   additionalContent += _llcProjectContent;
                 }
@@ -118,8 +118,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 var csProjPackageReference = string.Format(_csProjPackageReference, version);
                 csProjContent = string.Format(_csProjContent, csProjPackageReference, _coreCsProjContent);
             }
-
-            await autoRest.WriteFile($"{Configuration.ProjectRelativeDirectory}{context.DefaultNamespace}.csproj", csProjContent, "source-file-csharp");
+            await autoRest.WriteFile($"{configuration.ProjectFolder}{context.DefaultNamespace}.csproj", csProjContent, "source-file-csharp");
 
             return true;
         }

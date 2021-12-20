@@ -46,12 +46,12 @@ namespace httpInfrastructure_LowLevel
 
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
-            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new Azure.Core.ResponseClassifier());
+            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new Azure.Core.ResponseClassifier());
             _endpoint = endpoint;
         }
 
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -69,7 +69,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateHead400Request();
+                using HttpMessage message = CreateHead400Request(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -80,7 +80,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -98,7 +98,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateHead400Request();
+                using HttpMessage message = CreateHead400Request(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -109,7 +109,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -127,7 +127,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGet400Request();
+                using HttpMessage message = CreateGet400Request(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -138,7 +138,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -156,7 +156,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGet400Request();
+                using HttpMessage message = CreateGet400Request(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -167,7 +167,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -185,7 +185,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateOptions400Request();
+                using HttpMessage message = CreateOptions400Request(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -196,7 +196,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -214,7 +214,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateOptions400Request();
+                using HttpMessage message = CreateOptions400Request(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -226,7 +226,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -244,7 +244,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePut400Request(content);
+                using HttpMessage message = CreatePut400Request(content, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -256,7 +256,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -274,7 +274,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePut400Request(content);
+                using HttpMessage message = CreatePut400Request(content, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -286,7 +286,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -304,7 +304,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePatch400Request(content);
+                using HttpMessage message = CreatePatch400Request(content, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -316,7 +316,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -334,7 +334,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePatch400Request(content);
+                using HttpMessage message = CreatePatch400Request(content, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -346,7 +346,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -364,7 +364,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePost400Request(content);
+                using HttpMessage message = CreatePost400Request(content, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -376,7 +376,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -394,7 +394,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePost400Request(content);
+                using HttpMessage message = CreatePost400Request(content, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -406,7 +406,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -424,7 +424,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateDelete400Request(content);
+                using HttpMessage message = CreateDelete400Request(content, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -436,7 +436,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -454,7 +454,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateDelete400Request(content);
+                using HttpMessage message = CreateDelete400Request(content, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -465,7 +465,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 401 status code - should be represented in the client as an error. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -483,7 +483,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateHead401Request();
+                using HttpMessage message = CreateHead401Request(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -494,7 +494,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 401 status code - should be represented in the client as an error. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -512,7 +512,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateHead401Request();
+                using HttpMessage message = CreateHead401Request(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -523,7 +523,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 402 status code - should be represented in the client as an error. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -541,7 +541,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGet402Request();
+                using HttpMessage message = CreateGet402Request(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -552,7 +552,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 402 status code - should be represented in the client as an error. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -570,7 +570,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGet402Request();
+                using HttpMessage message = CreateGet402Request(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -581,7 +581,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 403 status code - should be represented in the client as an error. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -599,7 +599,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateOptions403Request();
+                using HttpMessage message = CreateOptions403Request(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -610,7 +610,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 403 status code - should be represented in the client as an error. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -628,7 +628,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateOptions403Request();
+                using HttpMessage message = CreateOptions403Request(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -639,7 +639,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 403 status code - should be represented in the client as an error. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -657,7 +657,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGet403Request();
+                using HttpMessage message = CreateGet403Request(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -668,7 +668,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 403 status code - should be represented in the client as an error. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -686,7 +686,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGet403Request();
+                using HttpMessage message = CreateGet403Request(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -698,7 +698,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 404 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -716,7 +716,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePut404Request(content);
+                using HttpMessage message = CreatePut404Request(content, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -728,7 +728,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 404 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -746,7 +746,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePut404Request(content);
+                using HttpMessage message = CreatePut404Request(content, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -758,7 +758,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 405 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -776,7 +776,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePatch405Request(content);
+                using HttpMessage message = CreatePatch405Request(content, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -788,7 +788,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 405 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -806,7 +806,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePatch405Request(content);
+                using HttpMessage message = CreatePatch405Request(content, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -818,7 +818,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 406 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -836,7 +836,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePost406Request(content);
+                using HttpMessage message = CreatePost406Request(content, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -848,7 +848,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 406 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -866,7 +866,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePost406Request(content);
+                using HttpMessage message = CreatePost406Request(content, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -878,7 +878,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 407 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -896,7 +896,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateDelete407Request(content);
+                using HttpMessage message = CreateDelete407Request(content, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -908,7 +908,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 407 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -926,7 +926,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateDelete407Request(content);
+                using HttpMessage message = CreateDelete407Request(content, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -938,7 +938,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 409 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -956,7 +956,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePut409Request(content);
+                using HttpMessage message = CreatePut409Request(content, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -968,7 +968,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 409 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -986,7 +986,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePut409Request(content);
+                using HttpMessage message = CreatePut409Request(content, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -997,7 +997,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 410 status code - should be represented in the client as an error. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1015,7 +1015,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateHead410Request();
+                using HttpMessage message = CreateHead410Request(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -1026,7 +1026,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 410 status code - should be represented in the client as an error. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1044,7 +1044,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateHead410Request();
+                using HttpMessage message = CreateHead410Request(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -1055,7 +1055,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 411 status code - should be represented in the client as an error. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1073,7 +1073,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGet411Request();
+                using HttpMessage message = CreateGet411Request(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -1084,7 +1084,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 411 status code - should be represented in the client as an error. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1102,7 +1102,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGet411Request();
+                using HttpMessage message = CreateGet411Request(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -1113,7 +1113,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 412 status code - should be represented in the client as an error. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1131,7 +1131,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateOptions412Request();
+                using HttpMessage message = CreateOptions412Request(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -1142,7 +1142,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 412 status code - should be represented in the client as an error. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1160,7 +1160,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateOptions412Request();
+                using HttpMessage message = CreateOptions412Request(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -1171,7 +1171,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 412 status code - should be represented in the client as an error. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1189,7 +1189,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGet412Request();
+                using HttpMessage message = CreateGet412Request(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -1200,7 +1200,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 412 status code - should be represented in the client as an error. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1218,7 +1218,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGet412Request();
+                using HttpMessage message = CreateGet412Request(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -1230,7 +1230,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 413 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1248,7 +1248,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePut413Request(content);
+                using HttpMessage message = CreatePut413Request(content, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -1260,7 +1260,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 413 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1278,7 +1278,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePut413Request(content);
+                using HttpMessage message = CreatePut413Request(content, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -1290,7 +1290,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 414 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1308,7 +1308,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePatch414Request(content);
+                using HttpMessage message = CreatePatch414Request(content, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -1320,7 +1320,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 414 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1338,7 +1338,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePatch414Request(content);
+                using HttpMessage message = CreatePatch414Request(content, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -1350,7 +1350,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 415 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1368,7 +1368,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePost415Request(content);
+                using HttpMessage message = CreatePost415Request(content, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -1380,7 +1380,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 415 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1398,7 +1398,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePost415Request(content);
+                using HttpMessage message = CreatePost415Request(content, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -1409,7 +1409,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 416 status code - should be represented in the client as an error. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1427,7 +1427,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGet416Request();
+                using HttpMessage message = CreateGet416Request(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -1438,7 +1438,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 416 status code - should be represented in the client as an error. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1456,7 +1456,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGet416Request();
+                using HttpMessage message = CreateGet416Request(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -1468,7 +1468,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 417 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1486,7 +1486,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateDelete417Request(content);
+                using HttpMessage message = CreateDelete417Request(content, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -1498,7 +1498,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 417 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1516,7 +1516,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateDelete417Request(content);
+                using HttpMessage message = CreateDelete417Request(content, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -1527,7 +1527,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 429 status code - should be represented in the client as an error. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1545,7 +1545,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateHead429Request();
+                using HttpMessage message = CreateHead429Request(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -1556,7 +1556,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 429 status code - should be represented in the client as an error. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1574,7 +1574,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateHead429Request();
+                using HttpMessage message = CreateHead429Request(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -1584,9 +1584,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        internal HttpMessage CreateHead400Request()
+        internal HttpMessage CreateHead400Request(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
@@ -1598,9 +1598,9 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGet400Request()
+        internal HttpMessage CreateGet400Request(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1612,9 +1612,9 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateOptions400Request()
+        internal HttpMessage CreateOptions400Request(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Options;
             var uri = new RawRequestUriBuilder();
@@ -1626,9 +1626,9 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
-        internal HttpMessage CreatePut400Request(RequestContent content)
+        internal HttpMessage CreatePut400Request(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -1642,9 +1642,9 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
-        internal HttpMessage CreatePatch400Request(RequestContent content)
+        internal HttpMessage CreatePatch400Request(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Patch;
             var uri = new RawRequestUriBuilder();
@@ -1658,9 +1658,9 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
-        internal HttpMessage CreatePost400Request(RequestContent content)
+        internal HttpMessage CreatePost400Request(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1674,9 +1674,9 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateDelete400Request(RequestContent content)
+        internal HttpMessage CreateDelete400Request(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
@@ -1690,9 +1690,9 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateHead401Request()
+        internal HttpMessage CreateHead401Request(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
@@ -1704,9 +1704,9 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGet402Request()
+        internal HttpMessage CreateGet402Request(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1718,9 +1718,9 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateOptions403Request()
+        internal HttpMessage CreateOptions403Request(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Options;
             var uri = new RawRequestUriBuilder();
@@ -1732,9 +1732,9 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGet403Request()
+        internal HttpMessage CreateGet403Request(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1746,9 +1746,9 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
-        internal HttpMessage CreatePut404Request(RequestContent content)
+        internal HttpMessage CreatePut404Request(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -1762,9 +1762,9 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
-        internal HttpMessage CreatePatch405Request(RequestContent content)
+        internal HttpMessage CreatePatch405Request(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Patch;
             var uri = new RawRequestUriBuilder();
@@ -1778,9 +1778,9 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
-        internal HttpMessage CreatePost406Request(RequestContent content)
+        internal HttpMessage CreatePost406Request(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1794,9 +1794,9 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateDelete407Request(RequestContent content)
+        internal HttpMessage CreateDelete407Request(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
@@ -1810,9 +1810,9 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
-        internal HttpMessage CreatePut409Request(RequestContent content)
+        internal HttpMessage CreatePut409Request(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -1826,9 +1826,9 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateHead410Request()
+        internal HttpMessage CreateHead410Request(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
@@ -1840,9 +1840,9 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGet411Request()
+        internal HttpMessage CreateGet411Request(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1854,9 +1854,9 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateOptions412Request()
+        internal HttpMessage CreateOptions412Request(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Options;
             var uri = new RawRequestUriBuilder();
@@ -1868,9 +1868,9 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGet412Request()
+        internal HttpMessage CreateGet412Request(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1882,9 +1882,9 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
-        internal HttpMessage CreatePut413Request(RequestContent content)
+        internal HttpMessage CreatePut413Request(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -1898,9 +1898,9 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
-        internal HttpMessage CreatePatch414Request(RequestContent content)
+        internal HttpMessage CreatePatch414Request(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Patch;
             var uri = new RawRequestUriBuilder();
@@ -1914,9 +1914,9 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
-        internal HttpMessage CreatePost415Request(RequestContent content)
+        internal HttpMessage CreatePost415Request(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1930,9 +1930,9 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGet416Request()
+        internal HttpMessage CreateGet416Request(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1944,9 +1944,9 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateDelete417Request(RequestContent content)
+        internal HttpMessage CreateDelete417Request(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
@@ -1960,9 +1960,9 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateHead429Request()
+        internal HttpMessage CreateHead429Request(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();

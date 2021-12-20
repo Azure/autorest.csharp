@@ -52,7 +52,7 @@ namespace SupersetInheritance
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel4SName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual SupersetModel4PutOperation CreateOrUpdate(string supersetModel4SName, SupersetModel4Data parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual SupersetModel4SPutOperation CreateOrUpdate(string supersetModel4SName, SupersetModel4Data parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (supersetModel4SName == null)
             {
@@ -68,7 +68,7 @@ namespace SupersetInheritance
             try
             {
                 var response = _supersetModel4sRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, supersetModel4SName, parameters, cancellationToken);
-                var operation = new SupersetModel4PutOperation(Parent, response);
+                var operation = new SupersetModel4SPutOperation(Parent, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -88,7 +88,7 @@ namespace SupersetInheritance
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel4SName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<SupersetModel4PutOperation> CreateOrUpdateAsync(string supersetModel4SName, SupersetModel4Data parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<SupersetModel4SPutOperation> CreateOrUpdateAsync(string supersetModel4SName, SupersetModel4Data parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (supersetModel4SName == null)
             {
@@ -104,7 +104,7 @@ namespace SupersetInheritance
             try
             {
                 var response = await _supersetModel4sRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, supersetModel4SName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new SupersetModel4PutOperation(Parent, response);
+                var operation = new SupersetModel4SPutOperation(Parent, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;

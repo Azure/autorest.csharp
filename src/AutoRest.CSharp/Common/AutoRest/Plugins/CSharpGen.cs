@@ -35,13 +35,13 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             ValidateConfiguration (configuration);
 
             Directory.CreateDirectory(configuration.OutputFolder);
-            var projectDirectory = Path.Combine(configuration.OutputFolder, Configuration.ProjectRelativeDirectory);
+            var projectDirectory = Path.Combine(configuration.OutputFolder, configuration.ProjectFolder);
             var project = await GeneratedCodeWorkspace.Create(projectDirectory, configuration.OutputFolder, configuration.SharedSourceFolders);
             var sourceInputModel = new SourceInputModel(await project.GetCompilationAsync());
 
             var codeModel = await codeModelTask;
 
-            if (configuration.LowLevelClient)
+            if (configuration.DataPlane)
             {
                 LowLevelTarget.Execute(project, codeModel, sourceInputModel, configuration);
             }
@@ -58,9 +58,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
         private static void ValidateConfiguration (Configuration configuration)
         {
-            if (configuration.LowLevelClient && configuration.AzureArm)
+            if (configuration.DataPlane && configuration.AzureArm)
             {
-                throw new Exception("Enabling both 'low-level-client' and 'azure-arm' at the same time is not supported.");
+                throw new Exception("Enabling both 'data-plane' and 'azure-arm' at the same time is not supported.");
             }
         }
 

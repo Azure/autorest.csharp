@@ -15,16 +15,16 @@ using SupersetInheritance;
 
 namespace SupersetInheritance.Models
 {
-    public partial class SupersetModel4PutOperation : Operation<SupersetModel4>
+    public partial class SupersetModel4SPutOperation : Operation<SupersetModel4>
     {
         private readonly OperationOrResponseInternals<SupersetModel4> _operation;
 
-        /// <summary> Initializes a new instance of SupersetModel4PutOperation for mocking. </summary>
-        protected SupersetModel4PutOperation()
+        /// <summary> Initializes a new instance of SupersetModel4SPutOperation for mocking. </summary>
+        protected SupersetModel4SPutOperation()
         {
         }
 
-        internal SupersetModel4PutOperation(ArmResource operationsBase, Response<SupersetModel4Data> response)
+        internal SupersetModel4SPutOperation(ArmResource operationsBase, Response<SupersetModel4Data> response)
         {
             _operation = new OperationOrResponseInternals<SupersetModel4>(Response.FromValue(new SupersetModel4(operationsBase, response.Value), response.GetRawResponse()));
         }

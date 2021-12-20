@@ -14,7 +14,6 @@ namespace Azure.Core
 {
     internal static class LowLevelPageableHelpers
     {
-#if EXPERIMENTAL
         public static async ValueTask<Page<BinaryData>> ProcessMessageAsync(HttpPipeline pipeline, HttpMessage message, ClientDiagnostics clientDiagnostics, RequestContext? requestContext, string itemPropertyName = "value", string? nextLinkPropertyName = "nextLink", CancellationToken cancellationToken = default)
         {
             var response = await pipeline.ProcessMessageAsync(message, clientDiagnostics, requestContext, cancellationToken).ConfigureAwait(false);
@@ -28,7 +27,6 @@ namespace Azure.Core
             var itemsAndNextLink = GetItemsAndNextLinkFromJson(response.Content, itemPropertyName, nextLinkPropertyName);
             return Page.FromValues(itemsAndNextLink.Items, itemsAndNextLink.NextLink!, response);
         }
-#endif
 
         /// <summary>
         /// Returns a <see cref="Page{T}"/> for a given response.

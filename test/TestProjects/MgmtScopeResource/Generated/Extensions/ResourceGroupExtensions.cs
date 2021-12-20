@@ -12,16 +12,6 @@ namespace MgmtScopeResource
     /// <summary> A class to add extension methods to ResourceGroup. </summary>
     public static partial class ResourceGroupExtensions
     {
-        #region PolicyAssignment
-        /// <summary> Gets an object representing a PolicyAssignmentCollection along with the instance operations that can be performed on it. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="PolicyAssignmentCollection" /> object. </returns>
-        public static PolicyAssignmentCollection GetPolicyAssignments(this ResourceGroup resourceGroup)
-        {
-            return new PolicyAssignmentCollection(resourceGroup);
-        }
-        #endregion
-
         #region DeploymentExtended
         /// <summary> Gets an object representing a DeploymentExtendedCollection along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
