@@ -94,7 +94,7 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
                 _writer.Line();
                 _writer.WriteXmlDocumentationSummary($"Generate the resource identifier of a <see cref=\"{TypeOfThis}\"/> instance.");
                 var parameterList = string.Join(", ", requestPath.Where(segment => segment.IsReference).Select(segment => $"string {segment.ReferenceName}"));
-                using (_writer.Scope($"public static ResourceIdentifier CreateResourceIdentifier({parameterList})"))
+                using (_writer.Scope($"public static {typeof(ResourceIdentifier)} Create{typeof(ResourceIdentifier)}({parameterList})"))
                 {
                     // Storage has inconsistent definitions:
                     // - https://github.com/Azure/azure-rest-api-specs/blob/719b74f77b92eb1ec3814be6c4488bcf6b651733/specification/storage/resource-manager/Microsoft.Storage/stable/2021-04-01/blob.json#L58
