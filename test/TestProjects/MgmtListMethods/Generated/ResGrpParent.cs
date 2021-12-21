@@ -21,6 +21,12 @@ namespace MgmtListMethods
     /// <summary> A Class representing a ResGrpParent along with the instance operations that can be performed on it. </summary>
     public partial class ResGrpParent : ArmResource
     {
+        /// <summary> Generate the resource identifier of a <see cref="ResGrpParent"/> instance. </summary>
+        public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string resGrpParentName)
+        {
+            var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MgmtListMethods/resGrpParents/{resGrpParentName}";
+            return new ResourceIdentifier(resourceId);
+        }
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly ResGrpParentsRestOperations _resGrpParentsRestClient;
         private readonly ResGrpParentData _data;

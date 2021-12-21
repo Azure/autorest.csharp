@@ -21,6 +21,12 @@ namespace Pagination
     /// <summary> A Class representing a PageSizeInt32Model along with the instance operations that can be performed on it. </summary>
     public partial class PageSizeInt32Model : ArmResource
     {
+        /// <summary> Generate the resource identifier of a <see cref="PageSizeInt32Model"/> instance. </summary>
+        public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string name)
+        {
+            var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/pageSizeInt32Model/{name}";
+            return new ResourceIdentifier(resourceId);
+        }
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly PageSizeInt32ModelsRestOperations _pageSizeInt32ModelsRestClient;
         private readonly PageSizeInt32ModelData _data;

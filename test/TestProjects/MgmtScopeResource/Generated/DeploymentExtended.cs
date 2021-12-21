@@ -24,6 +24,12 @@ namespace MgmtScopeResource
     /// <summary> A Class representing a DeploymentExtended along with the instance operations that can be performed on it. </summary>
     public partial class DeploymentExtended : ArmResource
     {
+        /// <summary> Generate the resource identifier of a <see cref="DeploymentExtended"/> instance. </summary>
+        public static ResourceIdentifier CreateResourceIdentifier(string scope, string deploymentName)
+        {
+            var resourceId = $"/{scope}/providers/Microsoft.Resources/deployments/{deploymentName}";
+            return new ResourceIdentifier(resourceId);
+        }
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly DeploymentsRestOperations _deploymentsRestClient;
         private readonly ResourceManagementRestOperations _restClient;

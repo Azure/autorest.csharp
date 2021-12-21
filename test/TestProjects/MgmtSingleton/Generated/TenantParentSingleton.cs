@@ -22,6 +22,12 @@ namespace MgmtSingleton
     /// <summary> A Class representing a TenantParentSingleton along with the instance operations that can be performed on it. </summary>
     public partial class TenantParentSingleton : ArmResource
     {
+        /// <summary> Generate the resource identifier of a <see cref="TenantParentSingleton"/> instance. </summary>
+        public static ResourceIdentifier CreateResourceIdentifier()
+        {
+            var resourceId = $"/providers/Microsoft.Billing/TenantParentSingleton/default";
+            return new ResourceIdentifier(resourceId);
+        }
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly TenantParentSingletonRestOperations _tenantParentSingletonRestClient;
         private readonly TenantParentSingletonData _data;
