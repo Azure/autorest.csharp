@@ -13,7 +13,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal class ResourceGroupExtensionsWriter : MgmtExtensionWriter
     {
-        public ResourceGroupExtensionsWriter(CodeWriter writer, ResourceGroupExtensions resourceGroupExtensions, BuildContext<MgmtOutputLibrary> context)
+        public ResourceGroupExtensionsWriter(CodeWriter writer, Output.ResourceGroupExtensions resourceGroupExtensions, BuildContext<MgmtOutputLibrary> context)
             : base(writer, resourceGroupExtensions, context)
         {
         }
