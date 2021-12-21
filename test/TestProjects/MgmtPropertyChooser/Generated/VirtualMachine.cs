@@ -23,7 +23,7 @@ namespace MgmtPropertyChooser
     public partial class VirtualMachine : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="VirtualMachine"/> instance. </summary>
-        public static ResourceIdentifier BuildId(string subscriptionId, string resourceGroupName, string vmName)
+        public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string vmName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}";
             return new ResourceIdentifier(resourceId);

@@ -23,7 +23,7 @@ namespace Azure.ResourceManager.Sample
     public partial class VirtualMachineScaleSetVM : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="VirtualMachineScaleSetVM"/> instance. </summary>
-        public static ResourceIdentifier BuildId(string subscriptionId, string resourceGroupName, string vmScaleSetName, string instanceId)
+        public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string vmScaleSetName, string instanceId)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}";
             return new ResourceIdentifier(resourceId);

@@ -22,7 +22,7 @@ namespace SubscriptionExtensions
     public partial class Toaster : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="Toaster"/> instance. </summary>
-        public static ResourceIdentifier BuildId(string subscriptionId, string toasterName)
+        public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string toasterName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/providers/Microsoft.Compute/toasters/{toasterName}";
             return new ResourceIdentifier(resourceId);

@@ -22,7 +22,7 @@ namespace MgmtListMethods
     public partial class TenantTest : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="TenantTest"/> instance. </summary>
-        public static ResourceIdentifier BuildId(string tenantTestName)
+        public static ResourceIdentifier CreateResourceIdentifier(string tenantTestName)
         {
             var resourceId = $"/providers/Microsoft.Tenant/tenantTests/{tenantTestName}";
             return new ResourceIdentifier(resourceId);

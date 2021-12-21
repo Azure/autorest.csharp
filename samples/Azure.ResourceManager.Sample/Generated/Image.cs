@@ -23,7 +23,7 @@ namespace Azure.ResourceManager.Sample
     public partial class Image : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="Image"/> instance. </summary>
-        public static ResourceIdentifier BuildId(string subscriptionId, string resourceGroupName, string imageName)
+        public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string imageName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/images/{imageName}";
             return new ResourceIdentifier(resourceId);

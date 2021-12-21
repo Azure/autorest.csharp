@@ -25,7 +25,7 @@ namespace MgmtScopeResource
     public partial class DeploymentExtended : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="DeploymentExtended"/> instance. </summary>
-        public static ResourceIdentifier BuildId(string scope, string deploymentName)
+        public static ResourceIdentifier CreateResourceIdentifier(string scope, string deploymentName)
         {
             var resourceId = $"/{scope}/providers/Microsoft.Resources/deployments/{deploymentName}";
             return new ResourceIdentifier(resourceId);

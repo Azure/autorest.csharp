@@ -22,7 +22,7 @@ namespace TenantOnly
     public partial class Agreement : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="Agreement"/> instance. </summary>
-        public static ResourceIdentifier BuildId(string billingAccountName, string agreementName)
+        public static ResourceIdentifier CreateResourceIdentifier(string billingAccountName, string agreementName)
         {
             var resourceId = $"/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements/{agreementName}";
             return new ResourceIdentifier(resourceId);

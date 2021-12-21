@@ -82,17 +82,19 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
 
         private void WriteStaticMethods()
         {
-            WriteBuildIdMethods();
+            WriteCreateResourceIdentifierMethods();
         }
 
-        private void WriteBuildIdMethods()
+        private void WriteCreateResourceIdentifierMethods()
         {
+            // Right now, `RequestPaths` contains only one path. But in the future when we start to support multiple context path per resource,
+            // we should implement the logic to avoid overload conflicts (e.g. /{A}/{B}/{C} v.s. /{D}/{E}/{F}, both context path contains 3 parameters).
             foreach (var requestPath in _resource.RequestPaths)
             {
                 _writer.Line();
                 _writer.WriteXmlDocumentationSummary($"Generate the resource identifier of a <see cref=\"{TypeOfThis}\"/> instance.");
-                var parameterList = string.Join(", ", requestPath.Where(segment => !segment.IsConstant).Select(segment => $"string {segment.ReferenceName}"));
-                using (_writer.Scope($"public static ResourceIdentifier BuildId({parameterList})"))
+                var parameterList = string.Join(", ", requestPath.Where(segment => segment.IsReference).Select(segment => $"string {segment.ReferenceName}"));
+                using (_writer.Scope($"public static ResourceIdentifier CreateResourceIdentifier({parameterList})"))
                 {
                     // Storage has inconsistent definitions:
                     // - https://github.com/Azure/azure-rest-api-specs/blob/719b74f77b92eb1ec3814be6c4488bcf6b651733/specification/storage/resource-manager/Microsoft.Storage/stable/2021-04-01/blob.json#L58

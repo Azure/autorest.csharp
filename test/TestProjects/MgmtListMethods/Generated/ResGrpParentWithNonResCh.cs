@@ -23,7 +23,7 @@ namespace MgmtListMethods
     public partial class ResGrpParentWithNonResCh : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="ResGrpParentWithNonResCh"/> instance. </summary>
-        public static ResourceIdentifier BuildId(string subscriptionId, string resourceGroupName, string resGrpParentWithNonResChName)
+        public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string resGrpParentWithNonResChName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MgmtListMethods/resGrpParentWithNonResChes/{resGrpParentWithNonResChName}";
             return new ResourceIdentifier(resourceId);

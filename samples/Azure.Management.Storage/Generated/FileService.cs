@@ -23,7 +23,7 @@ namespace Azure.Management.Storage
     public partial class FileService : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="FileService"/> instance. </summary>
-        public static ResourceIdentifier BuildId(string subscriptionId, string resourceGroupName, string accountName)
+        public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string accountName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/default";
             return new ResourceIdentifier(resourceId);

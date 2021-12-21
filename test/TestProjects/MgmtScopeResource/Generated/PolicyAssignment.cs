@@ -23,7 +23,7 @@ namespace MgmtScopeResource
     public partial class PolicyAssignment : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="PolicyAssignment"/> instance. </summary>
-        public static ResourceIdentifier BuildId(string scope, string policyAssignmentName)
+        public static ResourceIdentifier CreateResourceIdentifier(string scope, string policyAssignmentName)
         {
             var resourceId = $"/{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}";
             return new ResourceIdentifier(resourceId);

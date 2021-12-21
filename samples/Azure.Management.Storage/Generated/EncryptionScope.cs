@@ -22,7 +22,7 @@ namespace Azure.Management.Storage
     public partial class EncryptionScope : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="EncryptionScope"/> instance. </summary>
-        public static ResourceIdentifier BuildId(string subscriptionId, string resourceGroupName, string accountName, string encryptionScopeName)
+        public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string accountName, string encryptionScopeName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/encryptionScopes/{encryptionScopeName}";
             return new ResourceIdentifier(resourceId);

@@ -23,7 +23,7 @@ namespace Azure.Management.Storage
     public partial class StorageAccount : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="StorageAccount"/> instance. </summary>
-        public static ResourceIdentifier BuildId(string subscriptionId, string resourceGroupName, string accountName)
+        public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string accountName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}";
             return new ResourceIdentifier(resourceId);

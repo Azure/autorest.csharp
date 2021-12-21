@@ -22,7 +22,7 @@ namespace SingletonResource
     public partial class Car : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="Car"/> instance. </summary>
-        public static ResourceIdentifier BuildId(string subscriptionId, string resourceGroupName, string carName)
+        public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string carName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cars/{carName}";
             return new ResourceIdentifier(resourceId);

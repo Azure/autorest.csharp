@@ -23,7 +23,7 @@ namespace MgmtMultipleParentResource
     public partial class AnotherParentChild : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="AnotherParentChild"/> instance. </summary>
-        public static ResourceIdentifier BuildId(string subscriptionId, string resourceGroupName, string anotherName, string childName)
+        public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string anotherName, string childName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/anotherParents/{anotherName}/children/{childName}";
             return new ResourceIdentifier(resourceId);

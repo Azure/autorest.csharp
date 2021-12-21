@@ -23,7 +23,7 @@ namespace Azure.Management.Storage
     public partial class ManagementPolicy : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="ManagementPolicy"/> instance. </summary>
-        public static ResourceIdentifier BuildId(string subscriptionId, string resourceGroupName, string accountName, string managementPolicyName)
+        public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string accountName, string managementPolicyName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/managementPolicies/{managementPolicyName}";
             return new ResourceIdentifier(resourceId);

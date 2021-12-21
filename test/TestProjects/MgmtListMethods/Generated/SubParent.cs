@@ -22,7 +22,7 @@ namespace MgmtListMethods
     public partial class SubParent : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="SubParent"/> instance. </summary>
-        public static ResourceIdentifier BuildId(string subscriptionId, string subParentName)
+        public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string subParentName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParents/{subParentName}";
             return new ResourceIdentifier(resourceId);

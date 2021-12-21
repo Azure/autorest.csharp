@@ -23,7 +23,7 @@ namespace Azure.Management.Storage
     public partial class ObjectReplicationPolicy : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="ObjectReplicationPolicy"/> instance. </summary>
-        public static ResourceIdentifier BuildId(string subscriptionId, string resourceGroupName, string accountName, string objectReplicationPolicyId)
+        public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string accountName, string objectReplicationPolicyId)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/objectReplicationPolicies/{objectReplicationPolicyId}";
             return new ResourceIdentifier(resourceId);

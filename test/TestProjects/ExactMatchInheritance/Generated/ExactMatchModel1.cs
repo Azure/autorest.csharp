@@ -22,7 +22,7 @@ namespace ExactMatchInheritance
     public partial class ExactMatchModel1 : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="ExactMatchModel1"/> instance. </summary>
-        public static ResourceIdentifier BuildId(string subscriptionId, string resourceGroupName, string exactMatchModel1SName)
+        public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string exactMatchModel1SName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel1s/{exactMatchModel1SName}";
             return new ResourceIdentifier(resourceId);

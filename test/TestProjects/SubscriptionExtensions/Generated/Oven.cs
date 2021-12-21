@@ -22,7 +22,7 @@ namespace SubscriptionExtensions
     public partial class Oven : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="Oven"/> instance. </summary>
-        public static ResourceIdentifier BuildId(string subscriptionId, string resourceGroupName, string ovenName)
+        public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string ovenName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/ovens/{ovenName}";
             return new ResourceIdentifier(resourceId);

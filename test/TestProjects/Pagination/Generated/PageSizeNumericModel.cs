@@ -22,7 +22,7 @@ namespace Pagination
     public partial class PageSizeNumericModel : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="PageSizeNumericModel"/> instance. </summary>
-        public static ResourceIdentifier BuildId(string subscriptionId, string resourceGroupName, string name)
+        public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string name)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/pageSizeNumericModel/{name}";
             return new ResourceIdentifier(resourceId);

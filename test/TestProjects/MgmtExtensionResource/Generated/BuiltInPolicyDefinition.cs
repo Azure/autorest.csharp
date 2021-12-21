@@ -22,7 +22,7 @@ namespace MgmtExtensionResource
     public partial class BuiltInPolicyDefinition : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="BuiltInPolicyDefinition"/> instance. </summary>
-        public static ResourceIdentifier BuildId(string policyDefinitionName)
+        public static ResourceIdentifier CreateResourceIdentifier(string policyDefinitionName)
         {
             var resourceId = $"/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}";
             return new ResourceIdentifier(resourceId);

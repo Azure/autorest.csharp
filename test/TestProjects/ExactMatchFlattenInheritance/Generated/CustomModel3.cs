@@ -22,7 +22,7 @@ namespace ExactMatchFlattenInheritance
     public partial class CustomModel3 : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="CustomModel3"/> instance. </summary>
-        public static ResourceIdentifier BuildId(string subscriptionId, string resourceGroupName, string name)
+        public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string name)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel3s/{name}";
             return new ResourceIdentifier(resourceId);

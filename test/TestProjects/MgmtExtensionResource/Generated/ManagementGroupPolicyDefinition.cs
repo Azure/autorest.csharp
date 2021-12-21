@@ -23,7 +23,7 @@ namespace MgmtExtensionResource
     public partial class ManagementGroupPolicyDefinition : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="ManagementGroupPolicyDefinition"/> instance. </summary>
-        public static ResourceIdentifier BuildId(string managementGroupId, string policyDefinitionName)
+        public static ResourceIdentifier CreateResourceIdentifier(string managementGroupId, string policyDefinitionName)
         {
             var resourceId = $"/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}";
             return new ResourceIdentifier(resourceId);

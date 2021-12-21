@@ -23,7 +23,7 @@ namespace ResourceRename
     public partial class SshPublicKeyInfo : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="SshPublicKeyInfo"/> instance. </summary>
-        public static ResourceIdentifier BuildId(string subscriptionId, string resourceGroupName, string sshPublicKeyName)
+        public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string sshPublicKeyName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/sshPublicKeys/{sshPublicKeyName}";
             return new ResourceIdentifier(resourceId);

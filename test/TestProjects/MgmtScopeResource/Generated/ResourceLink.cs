@@ -23,7 +23,7 @@ namespace MgmtScopeResource
     public partial class ResourceLink : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="ResourceLink"/> instance. </summary>
-        public static ResourceIdentifier BuildId(string linkId)
+        public static ResourceIdentifier CreateResourceIdentifier(string linkId)
         {
             var resourceId = $"/{linkId}";
             return new ResourceIdentifier(resourceId);

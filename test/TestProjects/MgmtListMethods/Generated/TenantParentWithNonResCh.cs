@@ -23,7 +23,7 @@ namespace MgmtListMethods
     public partial class TenantParentWithNonResCh : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="TenantParentWithNonResCh"/> instance. </summary>
-        public static ResourceIdentifier BuildId(string tenantTestName, string tenantParentWithNonResChName)
+        public static ResourceIdentifier CreateResourceIdentifier(string tenantTestName, string tenantParentWithNonResChName)
         {
             var resourceId = $"/providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParentWithNonResChes/{tenantParentWithNonResChName}";
             return new ResourceIdentifier(resourceId);

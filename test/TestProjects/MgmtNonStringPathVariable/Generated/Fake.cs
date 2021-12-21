@@ -23,7 +23,7 @@ namespace MgmtNonStringPathVariable
     public partial class Fake : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="Fake"/> instance. </summary>
-        public static ResourceIdentifier BuildId(string subscriptionId, string resourceGroupName, string fakeName)
+        public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string fakeName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/fakes/{fakeName}";
             return new ResourceIdentifier(resourceId);

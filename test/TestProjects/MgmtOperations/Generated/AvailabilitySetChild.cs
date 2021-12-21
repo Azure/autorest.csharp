@@ -22,7 +22,7 @@ namespace MgmtOperations
     public partial class AvailabilitySetChild : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="AvailabilitySetChild"/> instance. </summary>
-        public static ResourceIdentifier BuildId(string subscriptionId, string resourceGroupName, string availabilitySetName, string availabilitySetChildName)
+        public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string availabilitySetName, string availabilitySetChildName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}/availabilitySetChildren/{availabilitySetChildName}";
             return new ResourceIdentifier(resourceId);

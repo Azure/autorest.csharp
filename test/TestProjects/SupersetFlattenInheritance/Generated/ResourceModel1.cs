@@ -22,7 +22,7 @@ namespace SupersetFlattenInheritance
     public partial class ResourceModel1 : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="ResourceModel1"/> instance. </summary>
-        public static ResourceIdentifier BuildId(string subscriptionId, string resourceGroupName, string resourceModel1SName)
+        public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string resourceModel1SName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/resourceModel1s/{resourceModel1SName}";
             return new ResourceIdentifier(resourceId);

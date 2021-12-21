@@ -23,7 +23,7 @@ namespace Azure.ResourceManager.Sample
     public partial class ProximityPlacementGroup : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="ProximityPlacementGroup"/> instance. </summary>
-        public static ResourceIdentifier BuildId(string subscriptionId, string resourceGroupName, string proximityPlacementGroupName)
+        public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string proximityPlacementGroupName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/proximityPlacementGroups/{proximityPlacementGroupName}";
             return new ResourceIdentifier(resourceId);

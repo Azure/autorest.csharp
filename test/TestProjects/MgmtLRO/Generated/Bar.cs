@@ -23,7 +23,7 @@ namespace MgmtLRO
     public partial class Bar : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="Bar"/> instance. </summary>
-        public static ResourceIdentifier BuildId(string subscriptionId, string resourceGroupName, string barName)
+        public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string barName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}";
             return new ResourceIdentifier(resourceId);

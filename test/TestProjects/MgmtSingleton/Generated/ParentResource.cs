@@ -23,7 +23,7 @@ namespace MgmtSingleton
     public partial class ParentResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="ParentResource"/> instance. </summary>
-        public static ResourceIdentifier BuildId(string subscriptionId, string resourceGroupName, string parentName)
+        public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string parentName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}";
             return new ResourceIdentifier(resourceId);

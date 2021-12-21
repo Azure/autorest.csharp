@@ -23,7 +23,7 @@ namespace MgmtSingleton
     public partial class SingletonConfig : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="SingletonConfig"/> instance. </summary>
-        public static ResourceIdentifier BuildId(string subscriptionId, string resourceGroupName, string parentName)
+        public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string parentName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}/singletonConfigs/web";
             return new ResourceIdentifier(resourceId);

@@ -23,7 +23,7 @@ namespace MgmtSubscriptionNameParameter
     public partial class SBSubscription : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="SBSubscription"/> instance. </summary>
-        public static ResourceIdentifier BuildId(string subscriptionId, string resourceGroupName, string subscriptionName)
+        public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string subscriptionName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/subscriptions/{subscriptionName}";
             return new ResourceIdentifier(resourceId);

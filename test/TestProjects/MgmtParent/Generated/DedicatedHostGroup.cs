@@ -23,7 +23,7 @@ namespace MgmtParent
     public partial class DedicatedHostGroup : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="DedicatedHostGroup"/> instance. </summary>
-        public static ResourceIdentifier BuildId(string subscriptionId, string resourceGroupName, string hostGroupName)
+        public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string hostGroupName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}";
             return new ResourceIdentifier(resourceId);

@@ -23,7 +23,7 @@ namespace MgmtParamOrdering
     public partial class Workspace : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="Workspace"/> instance. </summary>
-        public static ResourceIdentifier BuildId(string subscriptionId, string resourceGroupName, string workspaceName)
+        public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string workspaceName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}";
             return new ResourceIdentifier(resourceId);

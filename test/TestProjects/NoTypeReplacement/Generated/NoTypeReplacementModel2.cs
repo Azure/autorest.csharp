@@ -22,7 +22,7 @@ namespace NoTypeReplacement
     public partial class NoTypeReplacementModel2 : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="NoTypeReplacementModel2"/> instance. </summary>
-        public static ResourceIdentifier BuildId(string subscriptionId, string resourceGroupName, string noTypeReplacementModel2SName)
+        public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string noTypeReplacementModel2SName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/noTypeReplacementModel2s/{noTypeReplacementModel2SName}";
             return new ResourceIdentifier(resourceId);

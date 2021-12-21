@@ -23,7 +23,7 @@ namespace MgmtSingleton
     public partial class TenantParentSingleton : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="TenantParentSingleton"/> instance. </summary>
-        public static ResourceIdentifier BuildId()
+        public static ResourceIdentifier CreateResourceIdentifier()
         {
             var resourceId = $"/providers/Microsoft.Billing/TenantParentSingleton/default";
             return new ResourceIdentifier(resourceId);

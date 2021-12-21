@@ -23,7 +23,7 @@ namespace MgmtListMethods
     public partial class FakeParentWithNonResCh : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="FakeParentWithNonResCh"/> instance. </summary>
-        public static ResourceIdentifier BuildId(string subscriptionId, string fakeName, string fakeParentWithNonResChName)
+        public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string fakeName, string fakeParentWithNonResChName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes/{fakeName}/fakeParentWithNonResChes/{fakeParentWithNonResChName}";
             return new ResourceIdentifier(resourceId);

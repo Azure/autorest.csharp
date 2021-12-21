@@ -22,7 +22,7 @@ namespace SupersetInheritance
     public partial class SupersetModel4 : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="SupersetModel4"/> instance. </summary>
-        public static ResourceIdentifier BuildId(string subscriptionId, string resourceGroupName, string supersetModel4SName)
+        public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string supersetModel4SName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel4s/{supersetModel4SName}";
             return new ResourceIdentifier(resourceId);
