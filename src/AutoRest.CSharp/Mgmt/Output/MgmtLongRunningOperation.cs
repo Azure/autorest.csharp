@@ -23,9 +23,9 @@ namespace AutoRest.CSharp.Mgmt.Output
             : base(operation, context, lroInfo, lroInfo.ClientPrefix.LastWordToSingular() + operation.CSharpName() + "Operation")
         {
             DefaultNamespace = $"{context.DefaultNamespace}.Models";
-            if (operation.ShouldWrapResultType(ResultType, context))
+            if (operation.ShouldWrapResultType(ResultType, context, out var resource))
             {
-                WrapperType = context.Library.GetArmResources(operation.GetHttpPath()).First().Type;
+                WrapperType = resource.Type;
             }
         }
 
