@@ -205,7 +205,13 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             var constructor = sot.Constructors[0];
             foreach (var c in sot.Constructors)
             {
-                if (!c.Signature.Modifiers.Contains("public") && !(c.Signature.Modifiers.Contains("internal") && sot is SchemaObjectType))
+                if (c.Signature.Parameters.Length < constructor.Signature.Parameters.Length)
+                    constructor = c;
+            }
+
+            foreach (var c in sot.Constructors)
+            {
+                if (c.Signature.Modifiers != "public" && !(c.Signature.Modifiers == "internal" && sot is SchemaObjectType))
                     continue;
                 var missAnyRequiredParameter = false;
                 foreach (var p in c.Signature.Parameters)
