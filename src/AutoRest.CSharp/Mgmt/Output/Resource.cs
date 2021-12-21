@@ -166,7 +166,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         /// Finds the corresponding <see cref="ResourceCollection"/> of this <see cref="Resource"/>
         /// Return null when this resource is a singleton.
         /// </summary>
-        public ResourceCollection? ResourceCollection => _context.Library.GetResourceCollections(RequestPaths.First()).FirstOrDefault(collection => collection.ResourceType == ResourceType);
+        public ResourceCollection? ResourceCollection => _context.Library.GetResourceCollection(RequestPaths.First());
 
         /// <summary>
         /// Finds the corresponding <see cref="ResourceData"/> of this <see cref="Resource"/>

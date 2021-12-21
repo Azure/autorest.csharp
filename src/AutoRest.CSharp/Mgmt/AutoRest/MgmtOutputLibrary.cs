@@ -36,20 +36,15 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private Dictionary<string, HashSet<MgmtRestClient>>? _rawRequestPathToRestClient;
 
         /// <summary>
-        /// This is a map from raw request path to the corresponding <see cref="Resource"/>
-        /// </summary>
-        private Dictionary<string, Dictionary<ResourceType, Resource>>? _rawRequestPathToArmResource;
-
-        /// <summary>
-        /// This is a map from raw request path to the corresponding <see cref="ResourceCollection"/>
-        /// </summary>
-        private Dictionary<string, Dictionary<ResourceType, ResourceCollection>>? _rawRequestPathToResourceCollection;
-
-        /// <summary>
         /// This is a map from raw request path to the corresponding <see cref="ResourceData"/>
         /// This must be initialized before other maps
         /// </summary>
         private IDictionary<string, ResourceData>? _rawRequestPathToResourceData;
+
+        /// <summary>
+        /// TODO -- add description
+        /// </summary>
+        private Dictionary<RequestPath, ResourceBag>? _requestPathToResources;
 
         /// <summary>
         /// This is a map from resource name to a list of <see cref="OperationSet"/>
@@ -265,10 +260,10 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         public IEnumerable<MgmtRestClient> RestClients => _restClients ??= EnsureRestClients().Values.SelectMany(v => v).Distinct();
 
         private IEnumerable<Resource>? _armResources;
-        public IEnumerable<Resource> ArmResources => _armResources ??= EnsureRequestPathToArmResources().SelectMany(pair => pair.Value.Values).Distinct();
+        public IEnumerable<Resource> ArmResources => _armResources ??= EnsureRequestPathToResourcesMap().Values.Select(bag => bag.Resource).Distinct();
 
         private IEnumerable<ResourceCollection>? _resourceCollections;
-        public IEnumerable<ResourceCollection> ResourceCollections => _resourceCollections ??= EnsureRequestPathToResourceCollections().SelectMany(pair => pair.Value.Values).Distinct();
+        public IEnumerable<ResourceCollection> ResourceCollections => _resourceCollections ??= EnsureRequestPathToResourcesMap().Values.Select(bag => bag.ResourceCollection).WhereNotNull().Distinct();
 
         public IEnumerable<MgmtLongRunningOperation> LongRunningOperations => EnsureLongRunningOperations().Values;
 
@@ -327,40 +322,40 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return EnsureRequestPathToResourceData().TryGetValue(requestPath, out resourceData);
         }
 
-        public IEnumerable<Resource> GetArmResources(string requestPath)
+        public Resource GetArmResources(RequestPath requestPath)
         {
-            if (TryGetArmResources(requestPath, out var resources))
-                return resources;
+            if (TryGetArmResources(requestPath, out var resource))
+                return resource;
 
             throw new InvalidOperationException($"Cannot get Resource corresponding to {requestPath}");
         }
 
-        public bool TryGetArmResources(string requestPath, [MaybeNullWhen(false)] out IEnumerable<Resource> resources)
+        public bool TryGetArmResources(RequestPath requestPath, [MaybeNullWhen(false)] out Resource resource)
         {
-            resources = null;
-            if (EnsureRequestPathToArmResources().TryGetValue(requestPath, out var map))
+            resource = null;
+            if (EnsureRequestPathToResourcesMap().TryGetValue(requestPath, out var bag))
             {
-                resources = map.Values;
+                resource = bag.Resource;
                 return true;
             }
 
             return false;
         }
 
-        public IEnumerable<ResourceCollection> GetResourceCollections(string requestPath)
+        public ResourceCollection? GetResourceCollection(RequestPath requestPath)
         {
             if (TryGetResourceCollections(requestPath, out var collections))
                 return collections;
 
-            return Enumerable.Empty<ResourceCollection>();
+            throw new InvalidOperationException($"Cannot get ResourceCollection corresponding to {requestPath}");
         }
 
-        public bool TryGetResourceCollections(string requestPath, [MaybeNullWhen(false)] out IEnumerable<ResourceCollection> collections)
+        public bool TryGetResourceCollections(RequestPath requestPath, out ResourceCollection? collection)
         {
-            collections = null;
-            if (EnsureRequestPathToResourceCollections().TryGetValue(requestPath, out var map))
+            collection = null;
+            if (EnsureRequestPathToResourcesMap().TryGetValue(requestPath, out var bag))
             {
-                collections = map.Values;
+                collection = bag.ResourceCollection;
                 return true;
             }
 
@@ -411,10 +406,14 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return _rawRequestPathToRestClient;
         }
 
-        private void EnsureRequestPathToResourcesMap()
+        private Dictionary<RequestPath, ResourceBag> EnsureRequestPathToResourcesMap()
         {
-            _rawRequestPathToArmResource = new Dictionary<string, Dictionary<ResourceType, Resource>>();
-            _rawRequestPathToResourceCollection = new Dictionary<string, Dictionary<ResourceType, ResourceCollection>>();
+            if (_requestPathToResources != null)
+                return _requestPathToResources;
+
+            _requestPathToResources = new Dictionary<RequestPath, ResourceBag>();
+            //_rawRequestPathToArmResource = new Dictionary<string, Dictionary<ResourceType, Resource>>();
+            //_rawRequestPathToResourceCollection = new Dictionary<string, Dictionary<ResourceType, ResourceCollection>>();
             foreach ((var resourceName, var operationSets) in _resourceDataSchemaNameToOperationSets)
             {
                 var resourceOperationsList = FindResourceToChildOperationsMap(operationSets);
@@ -430,31 +429,14 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     {
                         var resourceType = resourcePath.GetResourceType(_mgmtConfiguration);
                         var resource = new Resource(resourceOperations, resourceName, resourceType, _context);
-                        // one resource might appear multiple times since one resource might corresponds to multiple request paths
-                        foreach (var resourceOperationSet in resourceOperations.Keys)
-                        {
-                            if (_rawRequestPathToArmResource.TryGetValue(resourceOperationSet.RequestPath, out var resources))
-                                resources.Add(resourceType, resource);
-                            else
-                                _rawRequestPathToArmResource.Add(resourceOperationSet.RequestPath, new Dictionary<ResourceType, Resource> { { resourceType, resource } });
-                        }
+                        var collection = isSingleton ? null : new ResourceCollection(resourceOperations, resource, _context);
 
-                        if (!isSingleton)
-                        {
-                            var collection = new ResourceCollection(resourceOperations, resource, _context);
-                            // one resource might appear multiple times since one resource might corresponds to multiple request paths
-                            foreach (var resourceOperationSet in resourceOperations.Keys)
-                            {
-                                if (_rawRequestPathToResourceCollection.TryGetValue(resourceOperationSet.RequestPath, out var collections))
-                                    collections.Add(resourceType, collection);
-                                else
-                                    _rawRequestPathToResourceCollection.Add(resourceOperationSet.RequestPath,
-                                        new Dictionary<ResourceType, ResourceCollection> { { resourceType, collection } });
-                            }
-                        }
+                        _requestPathToResources.Add(resourcePath, new ResourceBag(resourceType, resource, collection));
                     }
                 }
             }
+
+            return _requestPathToResources;
         }
 
         private struct EqualityComparer : IEqualityComparer<IEnumerable<RequestPath>>
@@ -472,26 +454,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             {
                 return obj.GetHashCode();
             }
-        }
-
-        private Dictionary<string, Dictionary<ResourceType, Resource>> EnsureRequestPathToArmResources()
-        {
-            if (_rawRequestPathToArmResource != null)
-                return _rawRequestPathToArmResource;
-
-            EnsureRequestPathToResourcesMap();
-
-            return _rawRequestPathToArmResource!;
-        }
-
-        private Dictionary<string, Dictionary<ResourceType, ResourceCollection>> EnsureRequestPathToResourceCollections()
-        {
-            if (_rawRequestPathToResourceCollection != null)
-                return _rawRequestPathToResourceCollection;
-
-            EnsureRequestPathToResourcesMap();
-
-            return _rawRequestPathToResourceCollection!;
         }
 
         private IEnumerable<Dictionary<OperationSet, IEnumerable<Operation>>> FindResourceToChildOperationsMap(IEnumerable<OperationSet> resourceOperationSets)
