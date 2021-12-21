@@ -425,10 +425,10 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                         || resourceOperations.Keys.All(operationSet => !operationSet.IsSingletonResource(_context)));
                     var isSingleton = resourceOperations.Keys.Any(operationSet => operationSet.IsSingletonResource(_context));
                     // we calculate the resource type of the resource
-                    var resourceTypes = resourceOperations.Keys.Select(operationSet => operationSet.GetRequestPath(_context))
-                        .GetResourceType(_context).Expand();
-                    foreach (var resourceType in resourceTypes)
+                    var resourcePaths = resourceOperations.Keys.Select(operationSet => operationSet.GetRequestPath(_context).Expand()).Distinct(new EqualityComparer()).Single();
+                    foreach (var resourcePath in resourcePaths)
                     {
+                        var resourceType = resourcePath.GetResourceType(_mgmtConfiguration);
                         var resource = new Resource(resourceOperations, resourceName, resourceType, _context);
                         // one resource might appear multiple times since one resource might corresponds to multiple request paths
                         foreach (var resourceOperationSet in resourceOperations.Keys)
@@ -449,11 +449,28 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                                     collections.Add(resourceType, collection);
                                 else
                                     _rawRequestPathToResourceCollection.Add(resourceOperationSet.RequestPath,
-                                        new Dictionary<ResourceType, ResourceCollection> { { resourceType, collection} });
+                                        new Dictionary<ResourceType, ResourceCollection> { { resourceType, collection } });
                             }
                         }
                     }
                 }
+            }
+        }
+
+        private struct EqualityComparer : IEqualityComparer<IEnumerable<RequestPath>>
+        {
+            public bool Equals([AllowNull] IEnumerable<RequestPath> x, [AllowNull] IEnumerable<RequestPath> y)
+            {
+                if (x == null && y == null)
+                    return true;
+                if (x == null || y == null)
+                    return false;
+                return x.SequenceEqual(y);
+            }
+
+            public int GetHashCode([DisallowNull] IEnumerable<RequestPath> obj)
+            {
+                return obj.GetHashCode();
             }
         }
 
