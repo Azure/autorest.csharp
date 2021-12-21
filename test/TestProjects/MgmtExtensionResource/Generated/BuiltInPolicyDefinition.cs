@@ -21,6 +21,12 @@ namespace MgmtExtensionResource
     /// <summary> A Class representing a BuiltInPolicyDefinition along with the instance operations that can be performed on it. </summary>
     public partial class BuiltInPolicyDefinition : ArmResource
     {
+        /// <summary> Generate the resource identifier of a <see cref="BuiltInPolicyDefinition"/> instance. </summary>
+        public static ResourceIdentifier CreateResourceIdentifier(string policyDefinitionName)
+        {
+            var resourceId = $"/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}";
+            return new ResourceIdentifier(resourceId);
+        }
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly PolicyDefinitionsRestOperations _policyDefinitionsRestClient;
         private readonly PolicyDefinitionData _data;

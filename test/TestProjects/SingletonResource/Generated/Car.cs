@@ -21,6 +21,12 @@ namespace SingletonResource
     /// <summary> A Class representing a Car along with the instance operations that can be performed on it. </summary>
     public partial class Car : ArmResource
     {
+        /// <summary> Generate the resource identifier of a <see cref="Car"/> instance. </summary>
+        public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string carName)
+        {
+            var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cars/{carName}";
+            return new ResourceIdentifier(resourceId);
+        }
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly CarsRestOperations _carsRestClient;
         private readonly CarData _data;

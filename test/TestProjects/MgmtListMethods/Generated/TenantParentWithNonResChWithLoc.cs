@@ -22,6 +22,12 @@ namespace MgmtListMethods
     /// <summary> A Class representing a TenantParentWithNonResChWithLoc along with the instance operations that can be performed on it. </summary>
     public partial class TenantParentWithNonResChWithLoc : ArmResource
     {
+        /// <summary> Generate the resource identifier of a <see cref="TenantParentWithNonResChWithLoc"/> instance. </summary>
+        public static ResourceIdentifier CreateResourceIdentifier(string tenantTestName, string tenantParentWithNonResChWithLocName)
+        {
+            var resourceId = $"/providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParentWithNonResChWithLocs/{tenantParentWithNonResChWithLocName}";
+            return new ResourceIdentifier(resourceId);
+        }
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly TenantParentWithNonResChWithLocsRestOperations _tenantParentWithNonResChWithLocsRestClient;
         private readonly TenantParentWithNonResChWithLocData _data;
