@@ -134,6 +134,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 }
             }
 
+            generatedCodeProject = generatedCodeProject.WithParseOptions(new CSharpParseOptions(preprocessorSymbols: new[] { "EXPERIMENTAL" }));
             return new GeneratedCodeWorkspace(generatedCodeProject);
         }
 

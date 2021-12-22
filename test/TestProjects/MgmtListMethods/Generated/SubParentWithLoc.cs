@@ -21,6 +21,12 @@ namespace MgmtListMethods
     /// <summary> A Class representing a SubParentWithLoc along with the instance operations that can be performed on it. </summary>
     public partial class SubParentWithLoc : ArmResource
     {
+        /// <summary> Generate the resource identifier of a <see cref="SubParentWithLoc"/> instance. </summary>
+        public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string subParentWithLocName)
+        {
+            var resourceId = $"/subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParentWithLocs/{subParentWithLocName}";
+            return new ResourceIdentifier(resourceId);
+        }
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly SubParentWithLocsRestOperations _subParentWithLocsRestClient;
         private readonly SubParentWithLocData _data;

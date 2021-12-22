@@ -313,7 +313,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             List<ContextualParameterMapping> contextualParameterMappings, RestClientMethod method)
         {
             // skip non-path parameters
-            if (!pathParameter.IsInPathOf(method))
+            if (pathParameter.RequestLocation != RequestLocation.Path)
                 return null;
             var result = contextualParameterMappings.FirstOrDefault(mapping => mapping.MatchesParameter(FindKeyOfParameter(pathParameter, requestPath), pathParameter));
             // if we match one parameter, we need to remove the matching ContextualParameterMapping from the list to avoid multiple matching

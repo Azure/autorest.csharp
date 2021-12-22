@@ -11,29 +11,29 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.ResourceManager.Core;
-using OmitOperationGroups;
+using SupersetInheritance;
 
-namespace OmitOperationGroups.Models
+namespace SupersetInheritance.Models
 {
-    public partial class Model2CreateOrUpdateOperation : Operation<Model2>
+    public partial class SupersetModel1SPutOperation : Operation<SupersetModel1>
     {
-        private readonly OperationOrResponseInternals<Model2> _operation;
+        private readonly OperationOrResponseInternals<SupersetModel1> _operation;
 
-        /// <summary> Initializes a new instance of Model2CreateOrUpdateOperation for mocking. </summary>
-        protected Model2CreateOrUpdateOperation()
+        /// <summary> Initializes a new instance of SupersetModel1SPutOperation for mocking. </summary>
+        protected SupersetModel1SPutOperation()
         {
         }
 
-        internal Model2CreateOrUpdateOperation(ArmResource operationsBase, Response<Model2Data> response)
+        internal SupersetModel1SPutOperation(ArmResource operationsBase, Response<SupersetModel1Data> response)
         {
-            _operation = new OperationOrResponseInternals<Model2>(Response.FromValue(new Model2(operationsBase, response.Value), response.GetRawResponse()));
+            _operation = new OperationOrResponseInternals<SupersetModel1>(Response.FromValue(new SupersetModel1(operationsBase, response.Value), response.GetRawResponse()));
         }
 
         /// <inheritdoc />
         public override string Id => _operation.Id;
 
         /// <inheritdoc />
-        public override Model2 Value => _operation.Value;
+        public override SupersetModel1 Value => _operation.Value;
 
         /// <inheritdoc />
         public override bool HasCompleted => _operation.HasCompleted;
@@ -51,9 +51,9 @@ namespace OmitOperationGroups.Models
         public override ValueTask<Response> UpdateStatusAsync(CancellationToken cancellationToken = default) => _operation.UpdateStatusAsync(cancellationToken);
 
         /// <inheritdoc />
-        public override ValueTask<Response<Model2>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(cancellationToken);
+        public override ValueTask<Response<SupersetModel1>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(cancellationToken);
 
         /// <inheritdoc />
-        public override ValueTask<Response<Model2>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(pollingInterval, cancellationToken);
+        public override ValueTask<Response<SupersetModel1>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(pollingInterval, cancellationToken);
     }
 }

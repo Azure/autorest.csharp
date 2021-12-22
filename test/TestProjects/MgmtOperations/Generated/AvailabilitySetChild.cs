@@ -21,6 +21,12 @@ namespace MgmtOperations
     /// <summary> A Class representing a AvailabilitySetChild along with the instance operations that can be performed on it. </summary>
     public partial class AvailabilitySetChild : ArmResource
     {
+        /// <summary> Generate the resource identifier of a <see cref="AvailabilitySetChild"/> instance. </summary>
+        public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string availabilitySetName, string availabilitySetChildName)
+        {
+            var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}/availabilitySetChildren/{availabilitySetChildName}";
+            return new ResourceIdentifier(resourceId);
+        }
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly AvailabilitySetChildRestOperations _availabilitySetChildRestClient;
         private readonly AvailabilitySetChildData _data;

@@ -21,6 +21,12 @@ namespace MgmtListMethods
     /// <summary> A Class representing a SubParent along with the instance operations that can be performed on it. </summary>
     public partial class SubParent : ArmResource
     {
+        /// <summary> Generate the resource identifier of a <see cref="SubParent"/> instance. </summary>
+        public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string subParentName)
+        {
+            var resourceId = $"/subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParents/{subParentName}";
+            return new ResourceIdentifier(resourceId);
+        }
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly SubParentsRestOperations _subParentsRestClient;
         private readonly SubParentData _data;

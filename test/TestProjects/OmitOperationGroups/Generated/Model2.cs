@@ -22,6 +22,12 @@ namespace OmitOperationGroups
     /// <summary> A Class representing a Model2 along with the instance operations that can be performed on it. </summary>
     public partial class Model2 : ArmResource
     {
+        /// <summary> Generate the resource identifier of a <see cref="Model2"/> instance. </summary>
+        public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string model2SName)
+        {
+            var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s/{model2SName}";
+            return new ResourceIdentifier(resourceId);
+        }
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly Model2SRestOperations _model2sRestClient;
         private readonly Model4SRestOperations _model4sRestClient;

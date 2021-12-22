@@ -34,7 +34,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
             basePath = Path.Combine(basePath.Substring(0, basePath.IndexOf("autorest.csharp")), "autorest.csharp", "test", "TestProjects", testProject, "Generated");
             var configuration = StandaloneGeneratorRunner.LoadConfiguration(basePath, File.ReadAllText(Path.Combine(basePath, "Configuration.json")));
             var codeModelTask = Task.Run(() => CodeModelSerialization.DeserializeCodeModel(File.ReadAllText(Path.Combine(basePath, "CodeModel.yaml"))));
-            var projectDirectory = Path.Combine(configuration.OutputFolder, Configuration.ProjectRelativeDirectory);
+            var projectDirectory = Path.Combine(configuration.OutputFolder, configuration.ProjectFolder);
             var project = await GeneratedCodeWorkspace.Create(projectDirectory, configuration.OutputFolder, configuration.SharedSourceFolders);
             var sourceInputModel = new SourceInputModel(await project.GetCompilationAsync());
             var model = await codeModelTask;

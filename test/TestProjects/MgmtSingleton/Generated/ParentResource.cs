@@ -22,6 +22,12 @@ namespace MgmtSingleton
     /// <summary> A Class representing a ParentResource along with the instance operations that can be performed on it. </summary>
     public partial class ParentResource : ArmResource
     {
+        /// <summary> Generate the resource identifier of a <see cref="ParentResource"/> instance. </summary>
+        public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string parentName)
+        {
+            var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}";
+            return new ResourceIdentifier(resourceId);
+        }
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly ParentResourcesRestOperations _parentResourcesRestClient;
         private readonly SingletonResources3RestOperations _singletonResources3RestClient;
@@ -395,6 +401,16 @@ namespace MgmtSingleton
         public SingletonResource2 GetSingletonResource2()
         {
             return new SingletonResource2(this, new ResourceIdentifier(Id.ToString() + "/singletonResources2/default"));
+        }
+        #endregion
+
+        #region SingletonConfig
+
+        /// <summary> Gets an object representing a SingletonConfig along with the instance operations that can be performed on it in the ParentResource. </summary>
+        /// <returns> Returns a <see cref="SingletonConfig" /> object. </returns>
+        public SingletonConfig GetSingletonConfig()
+        {
+            return new SingletonConfig(this, new ResourceIdentifier(Id.ToString() + "/singletonConfigs/web"));
         }
         #endregion
     }

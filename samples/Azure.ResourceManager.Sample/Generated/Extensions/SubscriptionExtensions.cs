@@ -1155,7 +1155,7 @@ namespace Azure.ResourceManager.Sample
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/virtualMachines
         /// ContextualPath: /subscriptions/{subscriptionId}
         /// OperationId: VirtualMachines_ListByLocation
-        /// <summary> Lists the VirtualMachineDatas for this <see cref="Subscription" />. </summary>
+        /// <summary> Lists the VirtualMachineData for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1210,7 +1210,7 @@ namespace Azure.ResourceManager.Sample
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/virtualMachines
         /// ContextualPath: /subscriptions/{subscriptionId}
         /// OperationId: VirtualMachines_ListByLocation
-        /// <summary> Lists the VirtualMachineDatas for this <see cref="Subscription" />. </summary>
+        /// <summary> Lists the VirtualMachineData for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

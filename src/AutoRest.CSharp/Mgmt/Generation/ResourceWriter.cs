@@ -68,6 +68,7 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
 
                 using (_writer.Scope())
                 {
+                    WriteStaticMethods();
                     WriteFields();
                     WriteCtors();
                     WriteProperties();
@@ -75,6 +76,32 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
 
                     // write children
                     WriteChildResourceEntries();
+                }
+            }
+        }
+
+        private void WriteStaticMethods()
+        {
+            WriteCreateResourceIdentifierMethods();
+        }
+
+        private void WriteCreateResourceIdentifierMethods()
+        {
+            // Right now, `RequestPaths` contains only one path. But in the future when we start to support multiple context path per resource,
+            // we should implement the logic to avoid overload conflicts (e.g. /{A}/{B}/{C} v.s. /{D}/{E}/{F}, both context path contains 3 parameters).
+            foreach (var requestPath in _resource.RequestPaths)
+            {
+                _writer.Line();
+                _writer.WriteXmlDocumentationSummary($"Generate the resource identifier of a <see cref=\"{TypeOfThis}\"/> instance.");
+                var parameterList = string.Join(", ", requestPath.Where(segment => segment.IsReference).Select(segment => $"string {segment.ReferenceName}"));
+                using (_writer.Scope($"public static {typeof(ResourceIdentifier)} CreateResourceIdentifier({parameterList})"))
+                {
+                    // Storage has inconsistent definitions:
+                    // - https://github.com/Azure/azure-rest-api-specs/blob/719b74f77b92eb1ec3814be6c4488bcf6b651733/specification/storage/resource-manager/Microsoft.Storage/stable/2021-04-01/blob.json#L58
+                    // - https://github.com/Azure/azure-rest-api-specs/blob/719b74f77b92eb1ec3814be6c4488bcf6b651733/specification/storage/resource-manager/Microsoft.Storage/stable/2021-04-01/blob.json#L146
+                    // so here we have to use `Seqment.BuildSerializedSegments` instead of `RequestPath.SerializedPath` which could be from `RestClientMethod.Operation.GetHttpPath`
+                    _writer.Line($"var resourceId = $\"{Segment.BuildSerializedSegments(requestPath)}\";");
+                    _writer.Line($"return new ResourceIdentifier(resourceId);");
                 }
             }
         }
@@ -450,9 +477,9 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
             if (collection == null)
                 throw new InvalidOperationException($"We are about to write a {resource.Type.Name} resource entry in {_resource.Type.Name} resource, but it does not have a collection, this cannot happen");
             _writer.Line();
-            _writer.WriteXmlDocumentationSummary($"Gets a collection of {resource.Type.Name.ToPlural()} in the {_resource.Type.Name}.");
-            _writer.WriteXmlDocumentationReturns($"An object representing collection of {resource.Type.Name.ToPlural()} and their operations over a {_resource.Type.Name}.");
-            using (_writer.Scope($"public {collection.Type.Name} Get{resource.Type.Name.ToPlural()}()"))
+            _writer.WriteXmlDocumentationSummary($"Gets a collection of {resource.Type.Name.LastWordToPlural()} in the {_resource.Type.Name}.");
+            _writer.WriteXmlDocumentationReturns($"An object representing collection of {resource.Type.Name.LastWordToPlural()} and their operations over a {_resource.Type.Name}.");
+            using (_writer.Scope($"public {collection.Type.Name} Get{resource.Type.Name.ResourceNameToPlural()}()"))
             {
                 _writer.Line($"return new {collection.Type.Name}(this);");
             }

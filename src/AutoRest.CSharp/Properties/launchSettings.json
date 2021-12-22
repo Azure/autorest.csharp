@@ -438,7 +438,7 @@
     },
     "TypeSchemaMapping": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\TypeSchemaMapping\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\TypeSchemaMapping\\SomeFolder\\Generated"
     },
     "url": {
       "commandName": "Project",
@@ -463,6 +463,10 @@
     "xml-service": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\xml-service\\Generated"
+    },
+    "XmlDeserialization": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\XmlDeserialization\\Generated"
     },
     "xms-error-responses": {
       "commandName": "Project",
