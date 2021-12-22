@@ -98,6 +98,42 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
+        protected void WriteRestClientConstructionForResource(
+            Resource resource,
+            IEnumerable<MgmtRestClient> restClients,
+            Func<MgmtRestClient, string> getSubId,
+            string clientDiagVariable,
+            string optionVariable,
+            string pipelineVariable,
+            string uriVariable,
+            string accessType,
+            bool writeVariable)
+        {
+            var nameSpace = $"{resource.Type.Namespace}.Models";
+            _writer.UseNamespace(nameSpace);
+            if (writeVariable)
+            {
+                foreach (var restClient in restClients)
+                {
+                    _writer.Line($"{restClient.Type.Name} {GetRestClientVariableName(restClient)};");
+                }
+            }
+            using (_writer.Scope($"if ({optionVariable}.ResourceApiVersionOverrides.TryGetValue({resource.Type.Name}.ResourceType, out string apiVersion))"))
+            {
+                foreach (var restClient in restClients)
+                {
+                    _writer.Line($"{GetRestClientVariableName(restClient)} = {accessType}{restClient.Type.Name}({clientDiagVariable}, {pipelineVariable}, {optionVariable}{getSubId(restClient)}, {uriVariable}, apiVersion);");
+                }
+            }
+            using (_writer.Scope($"else"))
+            {
+                foreach (var restClient in restClients)
+                {
+                    _writer.Line($"{GetRestClientVariableName(restClient)} = {accessType}{restClient.Type.Name}({clientDiagVariable}, {pipelineVariable}, {optionVariable}{getSubId(restClient)}, {uriVariable});");
+                }
+            }
+        }
+
         protected virtual string GetRestClientVariableName(RestClient client)
         {
             return client.OperationGroup.Key.IsNullOrEmpty()

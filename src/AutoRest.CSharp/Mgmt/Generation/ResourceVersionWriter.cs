@@ -18,7 +18,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         public ResourceVersionWriter(Resource resource)
         {
             _resource = resource;
-            VersionClassName = $"{resource.ResourceName}Version";
+            VersionClassName = $"{resource.ResourceName}ApiVersion";
         }
 
         public string VersionClassName { get; }

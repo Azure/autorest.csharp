@@ -17,22 +17,30 @@ namespace AutoRest.CSharp.Mgmt.Models
         {
         }
 
+        public string? DefaultVersion { get; private set; }
+
         public override Parameter BuildConstructorParameter(RequestParameter requestParameter)
         {
-            if (requestParameter.CSharpName() != "apiVersion")
-                return base.BuildConstructorParameter(requestParameter);
+            return base.BuildConstructorParameter(requestParameter);
 
-            CSharpType type = _context.TypeFactory.CreateType(requestParameter.Schema, true);
+            //    if (requestParameter.CSharpName() != "apiVersion")
+            //        return base.BuildConstructorParameter(requestParameter);
 
-            return new Parameter(
-                requestParameter.CSharpName(),
-                CreateDescription(requestParameter, type),
-                TypeFactory.GetInputType(type),
-                null,
-                true,
-                IsApiVersionParameter: requestParameter.Origin == "modelerfour:synthesized/api-version",
-                SkipUrlEncoding: requestParameter.Extensions?.SkipEncoding ?? false,
-                RequestLocation: GetRequestLocation(requestParameter));
+            //    CSharpType type = _context.TypeFactory.CreateType(requestParameter.Schema, true);
+
+            //    var defaultValue = ParseConstant(requestParameter);
+            //    DefaultVersion = defaultValue!.ToString();
+
+            //    return new Parameter(
+            //        requestParameter.CSharpName(),
+            //        CreateDescription(requestParameter, type),
+            //        TypeFactory.GetInputType(type),
+            //        null,
+            //        true,
+            //        IsApiVersionParameter: requestParameter.Origin == "modelerfour:synthesized/api-version",
+            //        SkipUrlEncoding: requestParameter.Extensions?.SkipEncoding ?? false,
+            //        RequestLocation: GetRequestLocation(requestParameter));
+            //}
         }
     }
 }

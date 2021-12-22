@@ -15,12 +15,16 @@ namespace AutoRest.CSharp.Mgmt.Output
     internal class MgmtRestClient : RestClient
     {
         private BuildContext<MgmtOutputLibrary> _context;
+        private MgmtRestClientBuilder _builder;
 
         public MgmtRestClient(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context)
             : base(operationGroup, context, operationGroup.Language.Default.Name, new MgmtRestClientBuilder(operationGroup, context))
         {
             _context = context;
+            _builder = (MgmtRestClientBuilder)Builder;
         }
+
+        public string DefaultVersion => _builder.DefaultVersion!;
 
         protected override Func<string?, bool> ShouldReturnNullOn404(Operation operation)
         {

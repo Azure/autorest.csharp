@@ -76,7 +76,8 @@ namespace AutoRest.CSharp.Mgmt.Output
                         _context.Library.GetRestClient(operation),
                         requestPath,
                         GetContextualPath(operationSet, requestPath),
-                        name);
+                        name,
+                        this);
                     result.Add(clientOperation);
                 }
             }
@@ -263,7 +264,8 @@ namespace AutoRest.CSharp.Mgmt.Output
                         _context.Library.GetRestClient(operation),
                         requestPath,
                         contextualPath,
-                        methodName);
+                        methodName,
+                        this);
 
                     if (result.TryGetValue(key, out var list))
                     {

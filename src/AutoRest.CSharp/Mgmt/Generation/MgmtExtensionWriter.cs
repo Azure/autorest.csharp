@@ -46,7 +46,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected void WriteGetRestOperations(MgmtRestClient restClient)
         {
             _writer.Line();
-            _writer.Append($"private static {restClient.Type} Get{restClient.Type.Name}({typeof(ClientDiagnostics)} clientDiagnostics, {typeof(TokenCredential)} credential, {typeof(ArmClientOptions)} clientOptions, {typeof(HttpPipeline)} pipeline, ");
+            _writer.Append($"private static {restClient.Type} Get{restClient.Type.Name}({typeof(ClientDiagnostics)} clientDiagnostics, {typeof(HttpPipeline)} pipeline, {typeof(ArmClientOptions)} clientOptions, ");
             // TODO: Use https://dev.azure.com/azure-mgmt-ex/DotNET%20Management%20SDK/_workitems/edit/5783 rest client parameters
             foreach (var parameter in restClient.Parameters)
             {
@@ -147,7 +147,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected override void WriteLROMethodBranch(CSharpType lroObjectType, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMapping, bool async)
         {
-            WriteRestOperationAssignment(operation.RestClient, lroObjectType);
+            WriteRestOperationAssignment(operation);
             _writer.Append($"var response = {GetAwait(async)} ");
             _writer.Append($"{GetRestClientVariableName(operation.RestClient)}.{CreateMethodName(operation.Method.Name, async)}(");
             WriteArguments(_writer, parameterMapping);
@@ -203,7 +203,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             WriteClientDiagnosticsAssignment("options");
 
-            WriteRestOperationAssignment(operation.RestClient, itemType);
+            WriteRestOperationAssignment(operation);
 
             using (_writer.Scope($"{GetAsyncKeyword(async)} {returnType} FirstPageFunc({typeof(int?)} pageSizeHint)"))
             {
@@ -303,7 +303,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected override void WriteNormalListMethodBranch(CodeWriter writer, CSharpType itemType, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMappings, bool async)
         {
-            WriteRestOperationAssignment(operation.RestClient, itemType);
+            WriteRestOperationAssignment(operation);
 
             base.WriteNormalListMethodBranch(writer, itemType, operation, parameterMappings, async);
         }
@@ -345,7 +345,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected override void WriteNormalMethodBranch(MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMappings, bool async, bool shouldThrowExceptionWhenNull = false)
         {
-            WriteRestOperationAssignment(operation.RestClient, operation.ReturnType!);
+            WriteRestOperationAssignment(operation);
 
             base.WriteNormalMethodBranch(operation, parameterMappings, async, shouldThrowExceptionWhenNull);
         }
@@ -403,14 +403,22 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Line($"var {ClientDiagnosticsVariable} = new {typeof(ClientDiagnostics)}({optionsVariable});");
         }
 
-        private void WriteRestOperationAssignment(MgmtRestClient restClient, CSharpType itemType)
+        private void WriteRestOperationAssignment(MgmtRestOperation operation)
         {
-            _writer.UseNamespace($"{itemType.Namespace}.Models");
-            var subIdIfNeeded = restClient.Parameters.FirstOrDefault()?.Name == "subscriptionId" ? $", {ExtensionOperationVariableName}.Id.SubscriptionId" : "";
-            string resourceName = itemType.Name.Replace("Data", string.Empty);
-            string versionClassName = $"{resourceName}Version";
-            _writer.Line($"string apiVersion = options.ResourceApiVersionOverrides.TryGetValue({resourceName}.ResourceType, out string version) ? version : {versionClassName}.Default.ToString();");
-            _writer.Line($"var {GetRestClientVariableName(restClient)} = Get{restClient.Type.Name}({ClientDiagnosticsVariable}, credential, options, pipeline{subIdIfNeeded}, apiVersion, baseUri);");
+            var resource = operation.Resource;
+            var restClient = operation.RestClient;
+            Func<MgmtRestClient, string> getSubId = (restClient) =>
+            {
+                return restClient.Parameters.FirstOrDefault()?.Name == "subscriptionId" ? $", {ExtensionOperationVariableName}.Id.SubscriptionId" : "";
+            };
+            if (resource != null)
+            {
+                WriteRestClientConstructionForResource(resource, new MgmtRestClient[] { restClient }, getSubId, ClientDiagnosticsVariable, "options", "pipeline", "baseUri", "Get", true);
+            }
+            else
+            {
+                _writer.Line($"{restClient.Type.Name} {GetRestClientVariableName(restClient)} = Get{restClient.Type.Name}({ClientDiagnosticsVariable}, pipeline, options{getSubId(restClient)}, baseUri);");
+            }
         }
 
         protected override Models.ResourceType GetBranchResourceType(RequestPath branch)

@@ -619,7 +619,7 @@ namespace AutoRest.CSharp.Output.Models
         private Constant ParseConstant(ConstantSchema constant) =>
             BuilderHelpers.ParseConstant(constant.Value.Value, _context.TypeFactory.CreateType(constant.ValueType, constant.Value.Value == null));
 
-        private Constant? ParseConstant(RequestParameter parameter)
+        protected Constant? ParseConstant(RequestParameter parameter)
         {
             if (parameter.ClientDefaultValue != null)
             {
