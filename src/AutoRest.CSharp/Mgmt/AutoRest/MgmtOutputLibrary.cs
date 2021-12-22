@@ -322,15 +322,15 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return EnsureRequestPathToResourceData().TryGetValue(requestPath, out resourceData);
         }
 
-        public Resource GetArmResources(RequestPath requestPath)
+        public Resource GetArmResource(RequestPath requestPath)
         {
-            if (TryGetArmResources(requestPath, out var resource))
+            if (TryGetArmResource(requestPath, out var resource))
                 return resource;
 
             throw new InvalidOperationException($"Cannot get Resource corresponding to {requestPath}");
         }
 
-        public bool TryGetArmResources(RequestPath requestPath, [MaybeNullWhen(false)] out Resource resource)
+        public bool TryGetArmResource(RequestPath requestPath, [MaybeNullWhen(false)] out Resource resource)
         {
             resource = null;
             if (EnsureRequestPathToResourcesMap().TryGetValue(requestPath, out var bag))
@@ -344,13 +344,13 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public ResourceCollection? GetResourceCollection(RequestPath requestPath)
         {
-            if (TryGetResourceCollections(requestPath, out var collections))
-                return collections;
+            if (TryGetResourceCollection(requestPath, out var collection))
+                return collection;
 
             throw new InvalidOperationException($"Cannot get ResourceCollection corresponding to {requestPath}");
         }
 
-        public bool TryGetResourceCollections(RequestPath requestPath, out ResourceCollection? collection)
+        public bool TryGetResourceCollection(RequestPath requestPath, out ResourceCollection? collection)
         {
             collection = null;
             if (EnsureRequestPathToResourcesMap().TryGetValue(requestPath, out var bag))
@@ -430,6 +430,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                         var resourceType = resourcePath.GetResourceType(_mgmtConfiguration);
                         var resource = new Resource(resourceOperations, resourceName, resourceType, _context);
                         var collection = isSingleton ? null : new ResourceCollection(resourceOperations, resource, _context);
+                        resource.ResourceCollection = collection;
 
                         _requestPathToResources.Add(resourcePath, new ResourceBag(resourceType, resource, collection));
                     }
@@ -625,7 +626,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         public IEnumerable<Resource> FindResources(ResourceData resourceData)
         {
             var requestPaths = EnsureRequestPathToResourceData().Where(pair => pair.Value == resourceData).Select(pair => pair.Key).ToHashSet();
-            return EnsureRequestPathToArmResources().Where(pair => requestPaths.Contains(pair.Key)).SelectMany(pair => pair.Value.Values);
+            return EnsureRequestPathToResourcesMap().Where(pair => requestPaths.Contains(pair.Key)).Select(pair => pair.Value.Resource);
         }
 
         private Dictionary<Schema, TypeProvider> BuildModels()

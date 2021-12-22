@@ -50,13 +50,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 if (!resultType.Name.Equals(resourceData.Type.Name))
                     return false;
                 // try to get the resource corresponds to the request path of this operation, and ensure the resource data of this resource is the same one if any
-                if (context.Library.TryGetArmResources(requestPath, out var resources))
+                if (context.Library.TryGetArmResource(requestPath, out resource))
                 {
-                    var matchedResources = resources.Where(r => r.ResourceData == resourceData);
-                    if (matchedResources.Count() != 1)
-                        return false;
-                    resource = matchedResources.Single();
-                    return true;
+                    return resource.ResourceData == resourceData;
                 }
             }
             return false;

@@ -403,7 +403,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             var selectedResourcePath = candidates.OrderBy(path => path.Count).First();
 
-            return Context.Library.GetArmResources(selectedResourcePath).First().Type;
+            return Context.Library.GetArmResource(selectedResourcePath).Type;
         }
 
         /// <summary>
