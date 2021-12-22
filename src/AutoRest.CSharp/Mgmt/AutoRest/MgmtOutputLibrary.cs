@@ -429,7 +429,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                         throw new InvalidOperationException($"We find {resourceDatas.Count()} ResourceData instances corresponding to the resource (RequestPath: [{string.Join(", ", originalResourcePaths)}]), please double confirm and separate them into different resources");
                     var resourceData = resourceDatas.Single();
                     // we calculate the resource type of the resource
-                    var resourcePaths = originalResourcePaths.Select(path => path.Expand()).Distinct(new EqualityComparer()).Single();
+                    var resourcePaths = originalResourcePaths.Select(path => path.Expand(_mgmtConfiguration)).Distinct(new EqualityComparer()).Single();
                     foreach (var resourcePath in resourcePaths)
                     {
                         var resourceType = resourcePath.GetResourceType(_mgmtConfiguration);

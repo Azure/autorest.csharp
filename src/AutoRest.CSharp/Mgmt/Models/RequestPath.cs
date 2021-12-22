@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Models;
@@ -167,10 +168,10 @@ namespace AutoRest.CSharp.Mgmt.Models
             return new RequestPath(this._segments.Concat(other._segments));
         }
 
-        public IEnumerable<RequestPath> Expand()
+        public IEnumerable<RequestPath> Expand(MgmtConfiguration config)
         {
             // we first get the resource type
-            var resourceType = ResourceType.ParseRequestPath(this);
+            var resourceType = this.GetResourceType(config);
 
             // if this resource type is a constant, we do not need to expand it
             if (resourceType.IsConstant)

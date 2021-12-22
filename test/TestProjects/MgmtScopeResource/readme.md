@@ -1,4 +1,4 @@
-# MgmtParent
+# MgmtScopeResource
 
 ## AutoRest Configuration
 
