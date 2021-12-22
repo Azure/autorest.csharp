@@ -23,6 +23,12 @@ namespace MgmtExpandResourceTypes
     /// <summary> A Class representing a RecordSetCaa along with the instance operations that can be performed on it. </summary>
     public partial class RecordSetCaa : ArmResource
     {
+        /// <summary> Generate the resource identifier of a <see cref="RecordSetCaa"/> instance. </summary>
+        public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string zoneName, string recordType, string relativeRecordSetName)
+        {
+            var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}";
+            return new ResourceIdentifier(resourceId);
+        }
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly RecordSetsRestOperations _recordSetsRestClient;
         private readonly RecordSetData _data;
