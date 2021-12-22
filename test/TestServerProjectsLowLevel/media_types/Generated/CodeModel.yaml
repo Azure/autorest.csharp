@@ -66,6 +66,27 @@ schemas: !Schemas
           name: ContentType
           description: Content type for upload
       protocol: !Protocols {}
+    - !SealedChoiceSchema &ref_18
+      choices:
+        - !ChoiceValue 
+          value: application/json
+          language:
+            default:
+              name: ApplicationJson
+              description: Content Type 'application/json'
+        - !ChoiceValue 
+          value: application/octet-stream
+          language:
+            default:
+              name: ApplicationOctetStream
+              description: Content Type 'application/octet-stream'
+      type: sealed-choice
+      choiceType: *ref_0
+      language: !Languages 
+        default:
+          name: ContentType1
+          description: Content type for upload
+      protocol: !Protocols {}
   constants:
     - !ConstantSchema &ref_8
       type: constant
@@ -88,6 +109,26 @@ schemas: !Schemas
           description: 'Accept: application/json'
       protocol: !Protocols {}
     - !ConstantSchema &ref_16
+      type: constant
+      value: !ConstantValue 
+        value: text/plain; charset=UTF-8
+      valueType: *ref_0
+      language: !Languages 
+        default:
+          name: TextPlainCharsetUTF8
+          description: Content Type 'text/plain; charset=UTF-8'
+      protocol: !Protocols {}
+    - !ConstantSchema &ref_20
+      type: constant
+      value: !ConstantValue 
+        value: text/plain
+      valueType: *ref_0
+      language: !Languages 
+        default:
+          name: Accept1
+          description: 'Accept: text/plain'
+      protocol: !Protocols {}
+    - !ConstantSchema &ref_26
       type: constant
       value: !ConstantValue 
         value: text/plain
@@ -117,6 +158,36 @@ schemas: !Schemas
         default:
           name: binary
           description: Uri or local path to source data.
+      protocol: !Protocols {}
+    - !BinarySchema &ref_19
+      type: binary
+      apiVersions:
+        - !ApiVersion 
+          version: 2.0-preview
+      language: !Languages 
+        default:
+          name: binary
+          description: ''
+      protocol: !Protocols {}
+    - !BinarySchema &ref_23
+      type: binary
+      apiVersions:
+        - !ApiVersion 
+          version: 2.0-preview
+      language: !Languages 
+        default:
+          name: binary
+          description: ''
+      protocol: !Protocols {}
+    - !BinarySchema &ref_28
+      type: binary
+      apiVersions:
+        - !ApiVersion 
+          version: 2.0-preview
+      language: !Languages 
+        default:
+          name: binary
+          description: ''
       protocol: !Protocols {}
   objects:
     - !ObjectSchema &ref_9
@@ -481,7 +552,7 @@ operationGroups:
                 binary: true
                 knownMediaType: text
                 mediaTypes:
-                  - text/plain
+                  - text/plain; charset=UTF-8
                 uri: '{$host}'
         signatureParameters: []
         responses:
@@ -490,7 +561,7 @@ operationGroups:
             language: !Languages 
               default:
                 name: ''
-                description: Received 'text/plain; encoding=UTF-8' as contentType
+                description: Received 'text/plain; charset=UTF-8' as contentType
             protocol: !Protocols 
               http: !HttpResponse 
                 knownMediaType: json
@@ -501,7 +572,367 @@ operationGroups:
         language: !Languages 
           default:
             name: ContentTypeWithEncoding
-            description: Pass in contentType 'text/plain; encoding=UTF-8' to pass test. Value for input does not matter
+            description: Pass in contentType 'text/plain; charset=UTF-8' to pass test. Value for input does not matter
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: 2.0-preview
+        parameters:
+          - *ref_2
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter &ref_21
+                schema: *ref_18
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Upload file type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_22
+                schema: *ref_19
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: message
+                    description: The payload body.
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: binary
+              - !Parameter 
+                schema: *ref_20
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_21
+              - *ref_22
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpBinaryRequest 
+                path: /mediatypes/binaryBodyTwoContentTypes
+                method: post
+                binary: true
+                knownMediaType: binary
+                mediaTypes:
+                  - application/json
+                  - application/octet-stream
+                uri: '{$host}'
+        signatureParameters: []
+        responses:
+          - !SchemaResponse 
+            schema: *ref_11
+            language: !Languages 
+              default:
+                name: ''
+                description: Received correct content type and body.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: text
+                mediaTypes:
+                  - text/plain
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: BinaryBodyWithTwoContentTypes
+            description: 'Binary body with two content types. Pass in of {''hello'': ''world''} for the application/json content type, and a byte stream of ''hello, world!'' for application/octet-stream.'
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: 2.0-preview
+        parameters:
+          - *ref_2
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter &ref_24
+                schema: *ref_18
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Upload file type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_25
+                schema: *ref_23
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: message
+                    description: The payload body.
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: binary
+              - !Parameter 
+                schema: *ref_20
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_24
+              - *ref_25
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpBinaryRequest 
+                path: /mediatypes/binaryBodyThreeContentTypes
+                method: post
+                binary: true
+                knownMediaType: binary
+                mediaTypes:
+                  - application/json
+                  - application/octet-stream
+                uri: '{$host}'
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_26
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Upload file type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_27
+                schema: *ref_0
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: message
+                    description: The payload body.
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: binary
+              - !Parameter 
+                schema: *ref_20
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_27
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpBinaryRequest 
+                path: /mediatypes/binaryBodyThreeContentTypes
+                method: post
+                binary: true
+                knownMediaType: text
+                mediaTypes:
+                  - text/plain
+                uri: '{$host}'
+        signatureParameters: []
+        responses:
+          - !SchemaResponse 
+            schema: *ref_11
+            language: !Languages 
+              default:
+                name: ''
+                description: Received correct content type and body.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: text
+                mediaTypes:
+                  - text/plain
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: BinaryBodyWithThreeContentTypes
+            description: 'Binary body with three content types. Pass in string ''hello, world'' with content type ''text/plain'', {''hello'': world''} with content type ''application/json'' and a byte string for ''application/octet-stream''.'
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: 2.0-preview
+        parameters:
+          - *ref_2
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_8
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Upload file type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_29
+                schema: *ref_28
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: message
+                    description: The payload body.
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: binary
+              - !Parameter 
+                schema: *ref_20
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_29
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpBinaryRequest 
+                path: /mediatypes/textAndJson
+                method: post
+                binary: true
+                knownMediaType: binary
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_26
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Upload file type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_30
+                schema: *ref_0
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: message
+                    description: The payload body.
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: binary
+              - !Parameter 
+                schema: *ref_20
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_30
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpBinaryRequest 
+                path: /mediatypes/textAndJson
+                method: post
+                binary: true
+                knownMediaType: text
+                mediaTypes:
+                  - text/plain
+                uri: '{$host}'
+        signatureParameters: []
+        responses:
+          - !SchemaResponse 
+            schema: *ref_11
+            language: !Languages 
+              default:
+                name: ''
+                description: Received correct content type and body.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: text
+                mediaTypes:
+                  - text/plain
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: PutTextAndJsonBody
+            description: Body that's either text/plain or application/json
         protocol: !Protocols {}
     language: !Languages 
       default:
