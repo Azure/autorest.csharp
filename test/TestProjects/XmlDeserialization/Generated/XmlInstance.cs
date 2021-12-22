@@ -22,6 +22,12 @@ namespace XmlDeserialization
     /// <summary> A Class representing a XmlInstance along with the instance operations that can be performed on it. </summary>
     public partial class XmlInstance : ArmResource
     {
+        /// <summary> Generate the resource identifier of a <see cref="XmlInstance"/> instance. </summary>
+        public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string xmlName)
+        {
+            var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.XmlDeserialization/xmls/{xmlName}";
+            return new ResourceIdentifier(resourceId);
+        }
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly XmlDeserializationRestOperations _xmlDeserializationRestClient;
         private readonly XmlInstanceData _data;
