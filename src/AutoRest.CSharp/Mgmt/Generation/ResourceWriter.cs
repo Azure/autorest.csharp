@@ -144,8 +144,17 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
             foreach (var client in This.RestClients)
             {
                 var subscriptionParamString = client.Parameters.Any(p => p.Name.Equals("subscriptionId")) ? ", Id.SubscriptionId" : string.Empty;
-                _writer.Line($"{GetRestClientVariableName(client)} = new {client.Type.Name}({ClientDiagnosticsField}, {PipelineProperty}, {ClientOptionsProperty}{subscriptionParamString}, {BaseUriField});");
+                string versionClassName = $"{_resource.ResourceName }Version";
+                string variableName = ConvertToVariableName(versionClassName);
+                _writer.UseNamespace($"{_resource.Declaration.Namespace}.Models");
+                _writer.Line($"string {variableName} = ClientOptions.ResourceApiVersionOverrides.TryGetValue({_resource.ResourceName}.ResourceType, out string version) ? version : {versionClassName}.Default.ToString();");
+                _writer.Line($"{GetRestClientVariableName(client)} = new {client.Type.Name}({ClientDiagnosticsField}, {PipelineProperty}, {ClientOptionsProperty}{subscriptionParamString}, {variableName}, {BaseUriField});");
             }
+        }
+
+        private string ConvertToVariableName(string str)
+        {
+            return char.ToLower(str[0]) + str.Substring(1);
         }
 
         protected virtual void WriteProperties()

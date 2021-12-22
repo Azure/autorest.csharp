@@ -25,12 +25,15 @@ namespace AutoRest.CSharp.Output.Models
         private RestClientMethod[]? _allMethods;
 
         protected RestClient(OperationGroup operationGroup, BuildContext context, string? clientName)
-            : this(operationGroup, null, context, ClientBuilder.GetClientPrefix(clientName ?? operationGroup.Language.Default.Name, context), "Rest" + ClientBuilder.GetClientSuffix(context)) { }
+            : this(operationGroup, null, context, ClientBuilder.GetClientPrefix(clientName ?? operationGroup.Language.Default.Name, context), "Rest" + ClientBuilder.GetClientSuffix(context), new RestClientBuilder(operationGroup, context)) { }
 
-        protected RestClient(OperationGroup operationGroup, IEnumerable<RequestParameter>? clientParameters, BuildContext context, string clientPrefix, string defaultClientSuffix) : base(context)
+        protected RestClient(OperationGroup operationGroup, BuildContext context, string? clientName, RestClientBuilder clientBuilder)
+            : this(operationGroup, null, context, ClientBuilder.GetClientPrefix(clientName ?? operationGroup.Language.Default.Name, context), "Rest" + ClientBuilder.GetClientSuffix(context), clientBuilder) { }
+
+        protected RestClient(OperationGroup operationGroup, IEnumerable<RequestParameter>? clientParameters, BuildContext context, string clientPrefix, string defaultClientSuffix, RestClientBuilder clientBuilder) : base(context)
         {
             OperationGroup = operationGroup;
-            Builder = new RestClientBuilder(operationGroup, context);
+            Builder = clientBuilder;
 
             _requestMethods = new CachedDictionary<ServiceRequest, RestClientMethod>(EnsureNormalMethods);
             _nextPageRequestMethods = new CachedDictionary<ServiceRequest, RestClientMethod>(EnsureGetNextPageMethods);

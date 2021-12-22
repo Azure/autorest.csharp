@@ -106,6 +106,12 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 new ResourceWriter(codeWriter, resource, context).Write();
 
                 AddGeneratedFile(project, $"{resource.Type.Name}.cs", codeWriter.ToString());
+
+                codeWriter = new CodeWriter();
+                var versionWriter = new ResourceVersionWriter(resource);
+                versionWriter.Write(codeWriter);
+
+                AddGeneratedFile(project, $"ResourceVersions/{versionWriter.VersionClassName}.cs", codeWriter.ToString());
             }
 
             foreach (var operation in context.Library.LongRunningOperations)
