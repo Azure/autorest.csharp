@@ -21,6 +21,12 @@ namespace ExactMatchInheritance
     /// <summary> A Class representing a ExactMatchModel1 along with the instance operations that can be performed on it. </summary>
     public partial class ExactMatchModel1 : ArmResource
     {
+        /// <summary> Generate the resource identifier of a <see cref="ExactMatchModel1"/> instance. </summary>
+        public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string exactMatchModel1SName)
+        {
+            var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel1s/{exactMatchModel1SName}";
+            return new ResourceIdentifier(resourceId);
+        }
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly ExactMatchModel1SRestOperations _exactMatchModel1sRestClient;
         private readonly ExactMatchModel1Data _data;

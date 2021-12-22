@@ -21,6 +21,12 @@ namespace SupersetFlattenInheritance
     /// <summary> A Class representing a TrackedResourceModel1 along with the instance operations that can be performed on it. </summary>
     public partial class TrackedResourceModel1 : ArmResource
     {
+        /// <summary> Generate the resource identifier of a <see cref="TrackedResourceModel1"/> instance. </summary>
+        public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string trackedResourceModel1SName)
+        {
+            var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/trackedResourceModel1s/{trackedResourceModel1SName}";
+            return new ResourceIdentifier(resourceId);
+        }
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly TrackedResourceModel1SRestOperations _trackedResourceModel1sRestClient;
         private readonly TrackedResourceModel1Data _data;

@@ -21,6 +21,12 @@ namespace TenantOnly
     /// <summary> A Class representing a BillingAccount along with the instance operations that can be performed on it. </summary>
     public partial class BillingAccount : ArmResource
     {
+        /// <summary> Generate the resource identifier of a <see cref="BillingAccount"/> instance. </summary>
+        public static ResourceIdentifier CreateResourceIdentifier(string billingAccountName)
+        {
+            var resourceId = $"/providers/Microsoft.Billing/billingAccounts/{billingAccountName}";
+            return new ResourceIdentifier(resourceId);
+        }
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly BillingAccountsRestOperations _billingAccountsRestClient;
         private readonly BillingAccountData _data;

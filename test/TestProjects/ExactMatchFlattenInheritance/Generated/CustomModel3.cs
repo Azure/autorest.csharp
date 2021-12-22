@@ -21,6 +21,12 @@ namespace ExactMatchFlattenInheritance
     /// <summary> A Class representing a CustomModel3 along with the instance operations that can be performed on it. </summary>
     public partial class CustomModel3 : ArmResource
     {
+        /// <summary> Generate the resource identifier of a <see cref="CustomModel3"/> instance. </summary>
+        public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string name)
+        {
+            var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel3s/{name}";
+            return new ResourceIdentifier(resourceId);
+        }
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly CustomModel3SRestOperations _customModel3sRestClient;
         private readonly CustomModel3Data _data;
