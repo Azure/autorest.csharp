@@ -412,8 +412,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 return _requestPathToResources;
 
             _requestPathToResources = new Dictionary<RequestPath, ResourceBag>();
-            //_rawRequestPathToArmResource = new Dictionary<string, Dictionary<ResourceType, Resource>>();
-            //_rawRequestPathToResourceCollection = new Dictionary<string, Dictionary<ResourceType, ResourceCollection>>();
+
             foreach ((var resourceName, var operationSets) in _resourceDataSchemaNameToOperationSets)
             {
                 var resourceOperationsList = FindResourceToChildOperationsMap(operationSets);
@@ -423,16 +422,22 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     Debug.Assert(resourceOperations.Keys.All(operationSet => operationSet.IsSingletonResource(_context))
                         || resourceOperations.Keys.All(operationSet => !operationSet.IsSingletonResource(_context)));
                     var isSingleton = resourceOperations.Keys.Any(operationSet => operationSet.IsSingletonResource(_context));
+                    // get the corresponding resource data
+                    var originalResourcePaths = resourceOperations.Keys.Select(operationSet => operationSet.GetRequestPath(_context));
+                    var resourceDatas = originalResourcePaths.Select(path => GetResourceData(path)).Distinct();
+                    if (resourceDatas.Count() != 1)
+                        throw new InvalidOperationException($"We find {resourceDatas.Count()} ResourceData instances corresponding to the resource (RequestPath: [{string.Join(", ", originalResourcePaths)}]), please double confirm and separate them into different resources");
+                    var resourceData = resourceDatas.Single();
                     // we calculate the resource type of the resource
-                    var resourcePaths = resourceOperations.Keys.Select(operationSet => operationSet.GetRequestPath(_context).Expand()).Distinct(new EqualityComparer()).Single();
+                    var resourcePaths = originalResourcePaths.Select(path => path.Expand()).Distinct(new EqualityComparer()).Single();
                     foreach (var resourcePath in resourcePaths)
                     {
                         var resourceType = resourcePath.GetResourceType(_mgmtConfiguration);
-                        var resource = new Resource(resourceOperations, resourceName, resourceType, _context);
+                        var resource = new Resource(resourceOperations, resourceName, resourceType, resourceData, _context);
                         var collection = isSingleton ? null : new ResourceCollection(resourceOperations, resource, _context);
                         resource.ResourceCollection = collection;
 
-                        _requestPathToResources.Add(resourcePath, new ResourceBag(resourceType, resource, collection));
+                        _requestPathToResources.Add(resourcePath, new ResourceBag(resourceType, resourceData, resource, collection));
                     }
                 }
             }

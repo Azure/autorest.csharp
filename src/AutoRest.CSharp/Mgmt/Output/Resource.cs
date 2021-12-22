@@ -27,12 +27,13 @@ namespace AutoRest.CSharp.Mgmt.Output
         private IEnumerable<RequestPath>? _requestPaths;
         public IEnumerable<RequestPath> RequestPaths => _requestPaths ??= OperationSets.Select(operationSet => operationSet.GetRequestPath(_context));
 
-        public Resource(IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> allOperations, string resourceName, ResourceType resourceType, BuildContext<MgmtOutputLibrary> context)
+        public Resource(IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> allOperations, string resourceName, ResourceType resourceType, ResourceData resourceData, BuildContext<MgmtOutputLibrary> context)
             : base(context, resourceName)
         {
             _context = context;
             OperationSets = allOperations.Keys;
             ResourceType = resourceType;
+            ResourceData = resourceData;
 
             if (OperationSets.First().TryGetSingletonResourceSuffix(context, out var singletonResourceIdSuffix))
                 SingletonResourceIdSuffix = singletonResourceIdSuffix;
@@ -171,7 +172,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         /// <summary>
         /// Finds the corresponding <see cref="ResourceData"/> of this <see cref="Resource"/>
         /// </summary>
-        public ResourceData ResourceData => _context.Library.GetResourceData(RequestPaths.First());
+        public ResourceData ResourceData { get; }
 
         public MgmtClientOperation? CreateOperation { get; }
         public virtual MgmtClientOperation? GetOperation { get; }

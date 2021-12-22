@@ -25,7 +25,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         private const string _suffixValue = "Collection";
 
         public ResourceCollection(IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> operationSets, Resource resource, BuildContext<MgmtOutputLibrary> context)
-            : base(operationSets, resource.ResourceName, resource.ResourceType, context)
+            : base(operationSets, resource.ResourceName, resource.ResourceType, resource.ResourceData, context)
         {
             Resource = resource;
             GetAllOperation = EnsureGetAllOperation();

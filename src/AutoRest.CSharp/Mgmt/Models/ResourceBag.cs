@@ -12,16 +12,16 @@ namespace AutoRest.CSharp.Mgmt.Models
     {
         public ResourceType ResourceType { get; }
 
-        //public ResourceData ResourceData { get; }
+        public ResourceData ResourceData { get; }
 
         public Resource Resource { get; }
 
         public ResourceCollection? ResourceCollection { get; }
 
-        public ResourceBag(ResourceType resourceType, Resource resource, ResourceCollection? resourceCollection)
+        public ResourceBag(ResourceType resourceType, ResourceData resourceData, Resource resource, ResourceCollection? resourceCollection)
         {
             ResourceType = resourceType;
-            //ResourceData = resourceData;
+            ResourceData = resourceData;
             Resource = resource;
             ResourceCollection = resourceCollection;
         }
