@@ -237,14 +237,14 @@ namespace MgmtLRO
         /// <param name="barName"> The name of the fake. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="barName"/> is null. </exception>
-        public virtual Response<bool> CheckIfExists(string barName, CancellationToken cancellationToken = default)
+        public virtual Response<bool> Exists(string barName, CancellationToken cancellationToken = default)
         {
             if (barName == null)
             {
                 throw new ArgumentNullException(nameof(barName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("BarCollection.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("BarCollection.Exists");
             scope.Start();
             try
             {
@@ -262,14 +262,14 @@ namespace MgmtLRO
         /// <param name="barName"> The name of the fake. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="barName"/> is null. </exception>
-        public async virtual Task<Response<bool>> CheckIfExistsAsync(string barName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> ExistsAsync(string barName, CancellationToken cancellationToken = default)
         {
             if (barName == null)
             {
                 throw new ArgumentNullException(nameof(barName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("BarCollection.CheckIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("BarCollection.ExistsAsync");
             scope.Start();
             try
             {

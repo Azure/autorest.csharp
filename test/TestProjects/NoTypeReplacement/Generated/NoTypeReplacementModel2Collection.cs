@@ -221,14 +221,14 @@ namespace NoTypeReplacement
         /// <param name="noTypeReplacementModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="noTypeReplacementModel2SName"/> is null. </exception>
-        public virtual Response<bool> CheckIfExists(string noTypeReplacementModel2SName, CancellationToken cancellationToken = default)
+        public virtual Response<bool> Exists(string noTypeReplacementModel2SName, CancellationToken cancellationToken = default)
         {
             if (noTypeReplacementModel2SName == null)
             {
                 throw new ArgumentNullException(nameof(noTypeReplacementModel2SName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("NoTypeReplacementModel2Collection.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("NoTypeReplacementModel2Collection.Exists");
             scope.Start();
             try
             {
@@ -246,14 +246,14 @@ namespace NoTypeReplacement
         /// <param name="noTypeReplacementModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="noTypeReplacementModel2SName"/> is null. </exception>
-        public async virtual Task<Response<bool>> CheckIfExistsAsync(string noTypeReplacementModel2SName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> ExistsAsync(string noTypeReplacementModel2SName, CancellationToken cancellationToken = default)
         {
             if (noTypeReplacementModel2SName == null)
             {
                 throw new ArgumentNullException(nameof(noTypeReplacementModel2SName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("NoTypeReplacementModel2Collection.CheckIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("NoTypeReplacementModel2Collection.ExistsAsync");
             scope.Start();
             try
             {

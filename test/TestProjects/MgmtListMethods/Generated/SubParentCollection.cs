@@ -237,14 +237,14 @@ namespace MgmtListMethods
         /// <param name="subParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subParentName"/> is null. </exception>
-        public virtual Response<bool> CheckIfExists(string subParentName, CancellationToken cancellationToken = default)
+        public virtual Response<bool> Exists(string subParentName, CancellationToken cancellationToken = default)
         {
             if (subParentName == null)
             {
                 throw new ArgumentNullException(nameof(subParentName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SubParentCollection.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("SubParentCollection.Exists");
             scope.Start();
             try
             {
@@ -262,14 +262,14 @@ namespace MgmtListMethods
         /// <param name="subParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subParentName"/> is null. </exception>
-        public async virtual Task<Response<bool>> CheckIfExistsAsync(string subParentName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> ExistsAsync(string subParentName, CancellationToken cancellationToken = default)
         {
             if (subParentName == null)
             {
                 throw new ArgumentNullException(nameof(subParentName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SubParentCollection.CheckIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("SubParentCollection.ExistsAsync");
             scope.Start();
             try
             {

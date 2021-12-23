@@ -237,14 +237,14 @@ namespace MgmtListMethods
         /// <param name="resGrpParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentName"/> is null. </exception>
-        public virtual Response<bool> CheckIfExists(string resGrpParentName, CancellationToken cancellationToken = default)
+        public virtual Response<bool> Exists(string resGrpParentName, CancellationToken cancellationToken = default)
         {
             if (resGrpParentName == null)
             {
                 throw new ArgumentNullException(nameof(resGrpParentName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ResGrpParentCollection.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("ResGrpParentCollection.Exists");
             scope.Start();
             try
             {
@@ -262,14 +262,14 @@ namespace MgmtListMethods
         /// <param name="resGrpParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentName"/> is null. </exception>
-        public async virtual Task<Response<bool>> CheckIfExistsAsync(string resGrpParentName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> ExistsAsync(string resGrpParentName, CancellationToken cancellationToken = default)
         {
             if (resGrpParentName == null)
             {
                 throw new ArgumentNullException(nameof(resGrpParentName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ResGrpParentCollection.CheckIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("ResGrpParentCollection.ExistsAsync");
             scope.Start();
             try
             {

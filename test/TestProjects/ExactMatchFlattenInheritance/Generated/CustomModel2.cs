@@ -21,6 +21,12 @@ namespace ExactMatchFlattenInheritance
     /// <summary> A Class representing a CustomModel2 along with the instance operations that can be performed on it. </summary>
     public partial class CustomModel2 : ArmResource
     {
+        /// <summary> Generate the resource identifier of a <see cref="CustomModel2"/> instance. </summary>
+        public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string name)
+        {
+            var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel2s/{name}";
+            return new ResourceIdentifier(resourceId);
+        }
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly CustomModel2SRestOperations _customModel2sRestClient;
         private readonly CustomModel2Data _data;

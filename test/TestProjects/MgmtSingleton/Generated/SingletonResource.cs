@@ -22,6 +22,12 @@ namespace MgmtSingleton
     /// <summary> A Class representing a SingletonResource along with the instance operations that can be performed on it. </summary>
     public partial class SingletonResource : ArmResource
     {
+        /// <summary> Generate the resource identifier of a <see cref="SingletonResource"/> instance. </summary>
+        public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string parentName)
+        {
+            var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}/singletonResources/default";
+            return new ResourceIdentifier(resourceId);
+        }
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly SingletonResourcesRestOperations _singletonResourcesRestClient;
         private readonly SingletonResourceData _data;

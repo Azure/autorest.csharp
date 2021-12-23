@@ -22,6 +22,12 @@ namespace MgmtListMethods
     /// <summary> A Class representing a ResGrpParentWithAncestorWithNonResCh along with the instance operations that can be performed on it. </summary>
     public partial class ResGrpParentWithAncestorWithNonResCh : ArmResource
     {
+        /// <summary> Generate the resource identifier of a <see cref="ResGrpParentWithAncestorWithNonResCh"/> instance. </summary>
+        public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string resGrpParentWithAncestorWithNonResChName)
+        {
+            var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MgmtListMethods/resGrpParentWithAncestorWithNonResChes/{resGrpParentWithAncestorWithNonResChName}";
+            return new ResourceIdentifier(resourceId);
+        }
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly ResGrpParentWithAncestorWithNonResChesRestOperations _resGrpParentWithAncestorWithNonResChesRestClient;
         private readonly ResGrpParentWithAncestorWithNonResChData _data;

@@ -229,14 +229,14 @@ namespace ResourceRename
         /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="sshPublicKeyName"/> is null. </exception>
-        public virtual Response<bool> CheckIfExists(string sshPublicKeyName, CancellationToken cancellationToken = default)
+        public virtual Response<bool> Exists(string sshPublicKeyName, CancellationToken cancellationToken = default)
         {
             if (sshPublicKeyName == null)
             {
                 throw new ArgumentNullException(nameof(sshPublicKeyName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyInfoCollection.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyInfoCollection.Exists");
             scope.Start();
             try
             {
@@ -254,14 +254,14 @@ namespace ResourceRename
         /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="sshPublicKeyName"/> is null. </exception>
-        public async virtual Task<Response<bool>> CheckIfExistsAsync(string sshPublicKeyName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> ExistsAsync(string sshPublicKeyName, CancellationToken cancellationToken = default)
         {
             if (sshPublicKeyName == null)
             {
                 throw new ArgumentNullException(nameof(sshPublicKeyName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyInfoCollection.CheckIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyInfoCollection.ExistsAsync");
             scope.Start();
             try
             {

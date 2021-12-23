@@ -22,6 +22,12 @@ namespace MgmtParamOrdering
     /// <summary> A Class representing a Workspace along with the instance operations that can be performed on it. </summary>
     public partial class Workspace : ArmResource
     {
+        /// <summary> Generate the resource identifier of a <see cref="Workspace"/> instance. </summary>
+        public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string workspaceName)
+        {
+            var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}";
+            return new ResourceIdentifier(resourceId);
+        }
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly WorkspacesRestOperations _workspacesRestClient;
         private readonly WorkspaceData _data;

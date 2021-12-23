@@ -233,14 +233,14 @@ namespace SupersetInheritance
         /// <param name="supersetModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel1SName"/> is null. </exception>
-        public virtual Response<bool> CheckIfExists(string supersetModel1SName, CancellationToken cancellationToken = default)
+        public virtual Response<bool> Exists(string supersetModel1SName, CancellationToken cancellationToken = default)
         {
             if (supersetModel1SName == null)
             {
                 throw new ArgumentNullException(nameof(supersetModel1SName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SupersetModel1Collection.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("SupersetModel1Collection.Exists");
             scope.Start();
             try
             {
@@ -258,14 +258,14 @@ namespace SupersetInheritance
         /// <param name="supersetModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel1SName"/> is null. </exception>
-        public async virtual Task<Response<bool>> CheckIfExistsAsync(string supersetModel1SName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> ExistsAsync(string supersetModel1SName, CancellationToken cancellationToken = default)
         {
             if (supersetModel1SName == null)
             {
                 throw new ArgumentNullException(nameof(supersetModel1SName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SupersetModel1Collection.CheckIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("SupersetModel1Collection.ExistsAsync");
             scope.Start();
             try
             {

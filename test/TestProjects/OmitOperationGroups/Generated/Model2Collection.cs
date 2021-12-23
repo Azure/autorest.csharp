@@ -233,14 +233,14 @@ namespace OmitOperationGroups
         /// <param name="model2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="model2SName"/> is null. </exception>
-        public virtual Response<bool> CheckIfExists(string model2SName, CancellationToken cancellationToken = default)
+        public virtual Response<bool> Exists(string model2SName, CancellationToken cancellationToken = default)
         {
             if (model2SName == null)
             {
                 throw new ArgumentNullException(nameof(model2SName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("Model2Collection.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("Model2Collection.Exists");
             scope.Start();
             try
             {
@@ -258,14 +258,14 @@ namespace OmitOperationGroups
         /// <param name="model2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="model2SName"/> is null. </exception>
-        public async virtual Task<Response<bool>> CheckIfExistsAsync(string model2SName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> ExistsAsync(string model2SName, CancellationToken cancellationToken = default)
         {
             if (model2SName == null)
             {
                 throw new ArgumentNullException(nameof(model2SName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("Model2Collection.CheckIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("Model2Collection.ExistsAsync");
             scope.Start();
             try
             {

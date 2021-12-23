@@ -236,14 +236,14 @@ namespace MgmtListMethods
         /// <param name="fakeParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentName"/> is null. </exception>
-        public virtual Response<bool> CheckIfExists(string fakeParentName, CancellationToken cancellationToken = default)
+        public virtual Response<bool> Exists(string fakeParentName, CancellationToken cancellationToken = default)
         {
             if (fakeParentName == null)
             {
                 throw new ArgumentNullException(nameof(fakeParentName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("FakeParentCollection.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("FakeParentCollection.Exists");
             scope.Start();
             try
             {
@@ -261,14 +261,14 @@ namespace MgmtListMethods
         /// <param name="fakeParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentName"/> is null. </exception>
-        public async virtual Task<Response<bool>> CheckIfExistsAsync(string fakeParentName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> ExistsAsync(string fakeParentName, CancellationToken cancellationToken = default)
         {
             if (fakeParentName == null)
             {
                 throw new ArgumentNullException(nameof(fakeParentName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("FakeParentCollection.CheckIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("FakeParentCollection.ExistsAsync");
             scope.Start();
             try
             {

@@ -22,6 +22,12 @@ namespace MgmtLRO
     /// <summary> A Class representing a Bar along with the instance operations that can be performed on it. </summary>
     public partial class Bar : ArmResource
     {
+        /// <summary> Generate the resource identifier of a <see cref="Bar"/> instance. </summary>
+        public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string barName)
+        {
+            var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}";
+            return new ResourceIdentifier(resourceId);
+        }
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly BarsRestOperations _barsRestClient;
         private readonly BarData _data;
