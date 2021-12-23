@@ -158,14 +158,14 @@ namespace MgmtExtensionResource
         /// <summary> This operation deletes the policy definition in the given management group with the given name. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<PolicyDefinitionDeleteAtManagementGroupOperation> DeleteAsync(bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<Models.PolicyDefinitionDeleteAtManagementGroupOperation> DeleteAsync(bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ManagementGroupPolicyDefinition.Delete");
             scope.Start();
             try
             {
                 var response = await _policyDefinitionsRestClient.DeleteAtManagementGroupAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
-                var operation = new PolicyDefinitionDeleteAtManagementGroupOperation(response);
+                var operation = new Models.PolicyDefinitionDeleteAtManagementGroupOperation(response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -183,14 +183,14 @@ namespace MgmtExtensionResource
         /// <summary> This operation deletes the policy definition in the given management group with the given name. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual PolicyDefinitionDeleteAtManagementGroupOperation Delete(bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual Models.PolicyDefinitionDeleteAtManagementGroupOperation Delete(bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ManagementGroupPolicyDefinition.Delete");
             scope.Start();
             try
             {
                 var response = _policyDefinitionsRestClient.DeleteAtManagementGroup(Id.Parent.Name, Id.Name, cancellationToken);
-                var operation = new PolicyDefinitionDeleteAtManagementGroupOperation(response);
+                var operation = new Models.PolicyDefinitionDeleteAtManagementGroupOperation(response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
