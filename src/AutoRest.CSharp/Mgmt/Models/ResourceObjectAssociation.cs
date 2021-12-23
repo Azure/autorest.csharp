@@ -8,7 +8,7 @@ using AutoRest.CSharp.Mgmt.Output;
 
 namespace AutoRest.CSharp.Mgmt.Models
 {
-    internal record ResourceBag
+    internal record ResourceObjectAssociation
     {
         public ResourceType ResourceType { get; }
 
@@ -18,7 +18,7 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         public ResourceCollection? ResourceCollection { get; }
 
-        public ResourceBag(ResourceType resourceType, ResourceData resourceData, Resource resource, ResourceCollection? resourceCollection)
+        public ResourceObjectAssociation(ResourceType resourceType, ResourceData resourceData, Resource resource, ResourceCollection? resourceCollection)
         {
             ResourceType = resourceType;
             ResourceData = resourceData;

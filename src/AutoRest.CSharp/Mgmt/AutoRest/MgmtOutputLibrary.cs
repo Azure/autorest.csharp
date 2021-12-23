@@ -44,7 +44,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         /// <summary>
         /// TODO -- add description
         /// </summary>
-        private Dictionary<RequestPath, ResourceBag>? _requestPathToResources;
+        private Dictionary<RequestPath, ResourceObjectAssociation>? _requestPathToResources;
 
         /// <summary>
         /// This is a map from resource name to a list of <see cref="OperationSet"/>
@@ -406,12 +406,12 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return _rawRequestPathToRestClient;
         }
 
-        private Dictionary<RequestPath, ResourceBag> EnsureRequestPathToResourcesMap()
+        private Dictionary<RequestPath, ResourceObjectAssociation> EnsureRequestPathToResourcesMap()
         {
             if (_requestPathToResources != null)
                 return _requestPathToResources;
 
-            _requestPathToResources = new Dictionary<RequestPath, ResourceBag>();
+            _requestPathToResources = new Dictionary<RequestPath, ResourceObjectAssociation>();
 
             foreach ((var resourceName, var operationSets) in _resourceDataSchemaNameToOperationSets)
             {
@@ -426,10 +426,10 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     var originalResourcePaths = resourceOperations.Keys.Select(operationSet => operationSet.GetRequestPath(_context));
                     var resourceDatas = originalResourcePaths.Select(path => GetResourceData(path)).Distinct();
                     if (resourceDatas.Count() != 1)
-                        throw new InvalidOperationException($"We find {resourceDatas.Count()} ResourceData instances corresponding to the resource (RequestPath: [{string.Join(", ", originalResourcePaths)}]), please double confirm and separate them into different resources");
+                        throw new InvalidOperationException($"{resourceDatas.Count()} ResourceData instances were found corresponding to the resource (RequestPath: [{string.Join(", ", originalResourcePaths)}]), please double confirm and separate them into different resources");
                     var resourceData = resourceDatas.Single();
                     // we calculate the resource type of the resource
-                    var resourcePaths = originalResourcePaths.Select(path => path.Expand(_mgmtConfiguration)).Distinct(new EqualityComparer()).Single();
+                    var resourcePaths = originalResourcePaths.Select(path => path.Expand(_mgmtConfiguration)).Distinct(new RequestPathCollectionEqualityComparer()).Single();
                     foreach (var resourcePath in resourcePaths)
                     {
                         var resourceType = resourcePath.GetResourceType(_mgmtConfiguration);
@@ -437,7 +437,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                         var collection = isSingleton ? null : new ResourceCollection(resourceOperations, resource, _context);
                         resource.ResourceCollection = collection;
 
-                        _requestPathToResources.Add(resourcePath, new ResourceBag(resourceType, resourceData, resource, collection));
+                        _requestPathToResources.Add(resourcePath, new ResourceObjectAssociation(resourceType, resourceData, resource, collection));
                     }
                 }
             }
@@ -445,7 +445,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return _requestPathToResources;
         }
 
-        private struct EqualityComparer : IEqualityComparer<IEnumerable<RequestPath>>
+        private struct RequestPathCollectionEqualityComparer : IEqualityComparer<IEnumerable<RequestPath>>
         {
             public bool Equals([AllowNull] IEnumerable<RequestPath> x, [AllowNull] IEnumerable<RequestPath> y)
             {
