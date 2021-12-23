@@ -427,6 +427,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
         {
             if (cst.Name == "IList" || cst.Name == "IEnumerable")
             {
+                writer.UseNamespace("System.Collections.Generic");
                 using (writer.Scope($"new List<{cst.Arguments[0]}>()", newLine: false))
                 {
                     var idx = 0;
