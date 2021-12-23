@@ -241,14 +241,14 @@ namespace MgmtExpandResourceTypes
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
-        public virtual Response<bool> CheckIfExists(string relativeRecordSetName, CancellationToken cancellationToken = default)
+        public virtual Response<bool> Exists(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
             if (relativeRecordSetName == null)
             {
                 throw new ArgumentNullException(nameof(relativeRecordSetName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("RecordSetCNameCollection.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("RecordSetCNameCollection.Exists");
             scope.Start();
             try
             {
@@ -266,14 +266,14 @@ namespace MgmtExpandResourceTypes
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
-        public async virtual Task<Response<bool>> CheckIfExistsAsync(string relativeRecordSetName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> ExistsAsync(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
             if (relativeRecordSetName == null)
             {
                 throw new ArgumentNullException(nameof(relativeRecordSetName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("RecordSetCNameCollection.CheckIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("RecordSetCNameCollection.ExistsAsync");
             scope.Start();
             try
             {
