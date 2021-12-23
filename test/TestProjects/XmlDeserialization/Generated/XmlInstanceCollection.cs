@@ -240,14 +240,14 @@ namespace XmlDeserialization
         /// <param name="xmlName"> The name of the API Management service. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="xmlName"/> is null. </exception>
-        public virtual Response<bool> CheckIfExists(string xmlName, CancellationToken cancellationToken = default)
+        public virtual Response<bool> Exists(string xmlName, CancellationToken cancellationToken = default)
         {
             if (xmlName == null)
             {
                 throw new ArgumentNullException(nameof(xmlName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("XmlInstanceCollection.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("XmlInstanceCollection.Exists");
             scope.Start();
             try
             {
@@ -265,14 +265,14 @@ namespace XmlDeserialization
         /// <param name="xmlName"> The name of the API Management service. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="xmlName"/> is null. </exception>
-        public async virtual Task<Response<bool>> CheckIfExistsAsync(string xmlName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> ExistsAsync(string xmlName, CancellationToken cancellationToken = default)
         {
             if (xmlName == null)
             {
                 throw new ArgumentNullException(nameof(xmlName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("XmlInstanceCollection.CheckIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("XmlInstanceCollection.ExistsAsync");
             scope.Start();
             try
             {
