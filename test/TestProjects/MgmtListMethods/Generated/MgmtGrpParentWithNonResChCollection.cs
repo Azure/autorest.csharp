@@ -238,14 +238,14 @@ namespace MgmtListMethods
         /// <param name="mgmtGrpParentWithNonResChName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="mgmtGrpParentWithNonResChName"/> is null. </exception>
-        public virtual Response<bool> CheckIfExists(string mgmtGrpParentWithNonResChName, CancellationToken cancellationToken = default)
+        public virtual Response<bool> Exists(string mgmtGrpParentWithNonResChName, CancellationToken cancellationToken = default)
         {
             if (mgmtGrpParentWithNonResChName == null)
             {
                 throw new ArgumentNullException(nameof(mgmtGrpParentWithNonResChName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("MgmtGrpParentWithNonResChCollection.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("MgmtGrpParentWithNonResChCollection.Exists");
             scope.Start();
             try
             {
@@ -263,14 +263,14 @@ namespace MgmtListMethods
         /// <param name="mgmtGrpParentWithNonResChName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="mgmtGrpParentWithNonResChName"/> is null. </exception>
-        public async virtual Task<Response<bool>> CheckIfExistsAsync(string mgmtGrpParentWithNonResChName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> ExistsAsync(string mgmtGrpParentWithNonResChName, CancellationToken cancellationToken = default)
         {
             if (mgmtGrpParentWithNonResChName == null)
             {
                 throw new ArgumentNullException(nameof(mgmtGrpParentWithNonResChName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("MgmtGrpParentWithNonResChCollection.CheckIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("MgmtGrpParentWithNonResChCollection.ExistsAsync");
             scope.Start();
             try
             {

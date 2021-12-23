@@ -234,14 +234,14 @@ namespace SingletonResource
         /// <param name="carName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="carName"/> is null. </exception>
-        public virtual Response<bool> CheckIfExists(string carName, CancellationToken cancellationToken = default)
+        public virtual Response<bool> Exists(string carName, CancellationToken cancellationToken = default)
         {
             if (carName == null)
             {
                 throw new ArgumentNullException(nameof(carName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("CarCollection.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("CarCollection.Exists");
             scope.Start();
             try
             {
@@ -259,14 +259,14 @@ namespace SingletonResource
         /// <param name="carName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="carName"/> is null. </exception>
-        public async virtual Task<Response<bool>> CheckIfExistsAsync(string carName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> ExistsAsync(string carName, CancellationToken cancellationToken = default)
         {
             if (carName == null)
             {
                 throw new ArgumentNullException(nameof(carName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("CarCollection.CheckIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("CarCollection.ExistsAsync");
             scope.Start();
             try
             {

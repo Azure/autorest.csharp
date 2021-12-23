@@ -235,14 +235,14 @@ namespace MgmtOperations
         /// <param name="availabilitySetGrandChildName"> The name of the availability set grand child. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetGrandChildName"/> is null. </exception>
-        public virtual Response<bool> CheckIfExists(string availabilitySetGrandChildName, CancellationToken cancellationToken = default)
+        public virtual Response<bool> Exists(string availabilitySetGrandChildName, CancellationToken cancellationToken = default)
         {
             if (availabilitySetGrandChildName == null)
             {
                 throw new ArgumentNullException(nameof(availabilitySetGrandChildName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChildCollection.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChildCollection.Exists");
             scope.Start();
             try
             {
@@ -260,14 +260,14 @@ namespace MgmtOperations
         /// <param name="availabilitySetGrandChildName"> The name of the availability set grand child. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetGrandChildName"/> is null. </exception>
-        public async virtual Task<Response<bool>> CheckIfExistsAsync(string availabilitySetGrandChildName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> ExistsAsync(string availabilitySetGrandChildName, CancellationToken cancellationToken = default)
         {
             if (availabilitySetGrandChildName == null)
             {
                 throw new ArgumentNullException(nameof(availabilitySetGrandChildName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChildCollection.CheckIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChildCollection.ExistsAsync");
             scope.Start();
             try
             {

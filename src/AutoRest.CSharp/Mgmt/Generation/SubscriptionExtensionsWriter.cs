@@ -49,7 +49,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         WriteGetRestOperations(restClient);
                     }
 
-                    var resourcesWithByNameMethod = new HashSet<Resource>();
+                    var resourcesWithGetAllAsGenericMethod = new HashSet<Resource>();
                     // Write other orphan operations with the parent of ResourceGroup
                     foreach (var clientOperation in _extensions.ClientOperations)
                     {
@@ -58,14 +58,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
                         // we only check if a resource needs a GetByName method when it has a List operation in the subscription extension.
                         // If its parent is Subscription, we will have a GetCollection method of that resource, which contains a GetAllAsGenericResource serves the same purpose.
-                        if (CheckGetByNameMethod(clientOperation, out var resource))
+                        if (CheckGetAllAsGenericMethod(clientOperation, out var resource))
                         {
                             // in case that a resource has multiple list methods at the subscription level (for instance one ListBySusbcription and one ListByLocation, location is not an available parent therefore it will show up here)
-                            if (resourcesWithByNameMethod.Contains(resource))
+                            if (resourcesWithGetAllAsGenericMethod.Contains(resource))
                                 continue;
-                            WriteListResourceByNameMethod(resource, true);
-                            WriteListResourceByNameMethod(resource, false);
-                            resourcesWithByNameMethod.Add(resource);
+                            WriteGetAllResourcesAsGenericMethod(resource, true);
+                            WriteGetAllResourcesAsGenericMethod(resource, false);
+                            resourcesWithGetAllAsGenericMethod.Add(resource);
                         }
                     }
                 }
@@ -73,7 +73,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         }
 
         // this method checks if the giving opertion corresponding to a list of resources. If it does, this resource will need a GetByName method.
-        private bool CheckGetByNameMethod(MgmtClientOperation clientOperation, [MaybeNullWhen(false)] out Resource resource)
+        private bool CheckGetAllAsGenericMethod(MgmtClientOperation clientOperation, [MaybeNullWhen(false)] out Resource resource)
         {
             resource = null;
             if (clientOperation.First().IsListMethod(out var itemType))
@@ -95,7 +95,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             return false;
         }
 
-        private void WriteListResourceByNameMethod(Resource resource, bool async)
+        private void WriteGetAllResourcesAsGenericMethod(Resource resource, bool async)
         {
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Filters the list of {resource.ResourceName.LastWordToPlural()} for a <see cref=\"{typeof(Subscription)}\" /> represented as generic resources.");
@@ -107,7 +107,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.WriteXmlDocumentationReturns($"A collection of resource operations that may take multiple service requests to iterate over.");
 
             var responseType = typeof(GenericResource).WrapPageable(async);
-            using (_writer.Scope($"public static {responseType} {CreateMethodName($"Get{resource.Type.Name}ByName", async)}(this {typeof(Subscription)} subscription, {typeof(string)} filter, {typeof(string)} expand, {typeof(int?)} top, {typeof(CancellationToken)} cancellationToken = default)"))
+            using (_writer.Scope($"public static {responseType} {CreateMethodName($"Get{resource.Type.Name.ResourceNameToPlural()}AsGenericResources", async)}(this {typeof(Subscription)} subscription, {typeof(string)} filter, {typeof(string)} expand, {typeof(int?)} top, {typeof(CancellationToken)} cancellationToken = default)"))
             {
                 var filters = new CodeWriterDeclaration("filters");
                 _writer.Line($"{typeof(ResourceFilterCollection)} {filters:D} = new({resource.Type}.ResourceType);");
