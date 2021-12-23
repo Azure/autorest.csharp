@@ -132,6 +132,206 @@ namespace CollapseRequestCondition_LowLevel
             }
         }
 
+        /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> MissIfNonMatchGetAsync(RequestConditions requestConditions = null, RequestContext context = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("RequestConditionCollapseClient.MissIfNonMatchGet");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateMissIfNonMatchGetRequest(requestConditions, context);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+#pragma warning disable AZC0002
+        public virtual Response MissIfNonMatchGet(RequestConditions requestConditions = null, RequestContext context = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("RequestConditionCollapseClient.MissIfNonMatchGet");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateMissIfNonMatchGetRequest(requestConditions, context);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> MissIfMatchGetAsync(RequestConditions requestConditions = null, RequestContext context = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("RequestConditionCollapseClient.MissIfMatchGet");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateMissIfMatchGetRequest(requestConditions, context);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+#pragma warning disable AZC0002
+        public virtual Response MissIfMatchGet(RequestConditions requestConditions = null, RequestContext context = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("RequestConditionCollapseClient.MissIfMatchGet");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateMissIfMatchGetRequest(requestConditions, context);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> MissIfModifiedSinceGetAsync(RequestConditions requestConditions = null, RequestContext context = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("RequestConditionCollapseClient.MissIfModifiedSinceGet");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateMissIfModifiedSinceGetRequest(requestConditions, context);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+#pragma warning disable AZC0002
+        public virtual Response MissIfModifiedSinceGet(RequestConditions requestConditions = null, RequestContext context = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("RequestConditionCollapseClient.MissIfModifiedSinceGet");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateMissIfModifiedSinceGetRequest(requestConditions, context);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> MissIfUnmodifiedSinceGetAsync(RequestConditions requestConditions = null, RequestContext context = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("RequestConditionCollapseClient.MissIfUnmodifiedSinceGet");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateMissIfUnmodifiedSinceGetRequest(requestConditions, context);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+#pragma warning disable AZC0002
+        public virtual Response MissIfUnmodifiedSinceGet(RequestConditions requestConditions = null, RequestContext context = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("RequestConditionCollapseClient.MissIfUnmodifiedSinceGet");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateMissIfUnmodifiedSinceGetRequest(requestConditions, context);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> MissIfMatchIfNonMatchGetAsync(RequestConditions requestConditions = null, RequestContext context = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("RequestConditionCollapseClient.MissIfMatchIfNonMatchGet");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateMissIfMatchIfNonMatchGetRequest(requestConditions, context);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+#pragma warning disable AZC0002
+        public virtual Response MissIfMatchIfNonMatchGet(RequestConditions requestConditions = null, RequestContext context = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("RequestConditionCollapseClient.MissIfMatchIfNonMatchGet");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateMissIfMatchIfNonMatchGetRequest(requestConditions, context);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         internal HttpMessage CreateCollapsePutRequest(RequestContent content, RequestConditions requestConditions, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context);
@@ -162,6 +362,97 @@ namespace CollapseRequestCondition_LowLevel
             request.Uri = uri;
             if (requestConditions != null)
             {
+                request.Headers.Add(requestConditions, "R");
+            }
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateMissIfNonMatchGetRequest(RequestConditions requestConditions, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context);
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/RequestConditionCollapse/missIfNonMatch", false);
+            request.Uri = uri;
+            if (requestConditions != null)
+            {
+                if (requestConditions.IfNoneMatch != null) throw new NotSupportedException($"IfNoneMatch head is not supported here");
+                request.Headers.Add(requestConditions, "R");
+            }
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateMissIfMatchGetRequest(RequestConditions requestConditions, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context);
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/RequestConditionCollapse/missIfMatch", false);
+            request.Uri = uri;
+            if (requestConditions != null)
+            {
+                if (requestConditions.IfMatch != null) throw new NotSupportedException($"IfMatch head is not supported here");
+                request.Headers.Add(requestConditions, "R");
+            }
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateMissIfModifiedSinceGetRequest(RequestConditions requestConditions, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context);
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/RequestConditionCollapse/missIfModifiedSince", false);
+            request.Uri = uri;
+            if (requestConditions != null)
+            {
+                if (requestConditions.IfModifiedSince != null) throw new NotSupportedException($"IfModifiedSince head is not supported here");
+                request.Headers.Add(requestConditions, "R");
+            }
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateMissIfUnmodifiedSinceGetRequest(RequestConditions requestConditions, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context);
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/RequestConditionCollapse/missIfUnmodifiedSince", false);
+            request.Uri = uri;
+            if (requestConditions != null)
+            {
+                if (requestConditions.IfUnmodifiedSince != null) throw new NotSupportedException($"IfUnmodifiedSince head is not supported here");
+                request.Headers.Add(requestConditions, "R");
+            }
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateMissIfMatchIfNonMatchGetRequest(RequestConditions requestConditions, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context);
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/RequestConditionCollapse/missIfMatchIfNonMatch", false);
+            request.Uri = uri;
+            if (requestConditions != null)
+            {
+                if (requestConditions.IfMatch != null) throw new NotSupportedException($"IfMatch head is not supported here");
+                if (requestConditions.IfNoneMatch != null) throw new NotSupportedException($"IfNoneMatch head is not supported here");
                 request.Headers.Add(requestConditions, "R");
             }
             message.ResponseClassifier = ResponseClassifier200.Instance;

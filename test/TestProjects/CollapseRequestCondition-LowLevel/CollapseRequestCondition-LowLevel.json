@@ -271,59 +271,9 @@
         }
       }
     },
-    "/MatchConditionCollapse/multi": {
-      "get": {
-        "operationId": "MatchConditionCollapse_MulticollapseGet",
-        "parameters": [
-	        {
-            "name": "If-Match",
-            "x-ms-client-name": "ifMatch",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "x-ms-parameter-location": "method",
-            "x-ms-parameter-grouping": {
-              "name": "modified-access-conditions"
-            },
-            "description": "Specify an ETag value to operate only on blobs with a matching value."
-          },
-          {
-            "name": "If-None-Match",
-            "x-ms-client-name": "ifNoneMatch",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "x-ms-parameter-location": "method",
-            "x-ms-parameter-grouping": {
-              "name": "modified-access-conditions"
-            },
-            "description": "Specify an ETag value to operate only on blobs without a matching value."
-          },
-          {
-            "name": "If-Modified-Since",
-            "x-ms-client-name": "ifModifiedSince",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc1123",
-            "x-ms-parameter-location": "method",
-            "x-ms-parameter-grouping": {
-              "name": "modified-access-conditions"
-            },
-            "description": "Specify this header value to operate only on a blob if it has been modified since the specified date/time."
-          }
-          
-        ],
-        "responses": {
-          "200": {
-            "description": "Received correct format"
-          }
-        }
-      }
-    },
-    "/NonCollapse/": {
+    "/NonCollapse/ifMatch": {
       "put": {
-        "operationId": "NonCollapse_collapsePut",
+        "operationId": "NonCollapse_IfMatchPut",
         "parameters": [
           {
             "name": "body",
@@ -350,9 +300,42 @@
             "description": "Received correct format"
           }
         }
-      },
+      }
+    },
+    "/NonCollapse/ifnonMatch": {
+      "put": {
+        "operationId": "NonCollapse_IfNonMatchPut",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "string"
+            }
+          },
+	        {
+            "name": "If-None-Match",
+            "x-ms-client-name": "ifNoneMatch",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "x-ms-parameter-location": "method",
+            "x-ms-parameter-grouping": {
+              "name": "modified-access-conditions"
+            },
+            "description": "Specify an ETag value to operate only on blobs without a matching value."
+          }  
+        ],
+        "responses": {
+          "200": {
+            "description": "Received correct format"
+          }
+        }
+      }
+    },
+    "/RequestConditionCollapse/missIfNonMatch": {
       "get": {
-        "operationId": "NonCollapse_collapseGet",
+        "operationId": "RequestConditionCollapse_MissIfNonMatchGet",
         "parameters": [
 	        {
             "name": "If-Match",
@@ -366,6 +349,195 @@
             },
             "description": "Specify an ETag value to operate only on blobs with a matching value."
           },
+          {
+            "name": "If-Modified-Since",
+            "x-ms-client-name": "ifModifiedSince",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc1123",
+            "x-ms-parameter-location": "method",
+            "x-ms-parameter-grouping": {
+              "name": "modified-access-conditions"
+            },
+            "description": "Specify this header value to operate only on a blob if it has been modified since the specified date/time."
+          },
+          {
+            "name": "If-Unmodified-Since",
+            "x-ms-client-name": "ifUnmodifiedSince",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc1123",
+            "x-ms-parameter-location": "method",
+            "x-ms-parameter-grouping": {
+              "name": "modified-access-conditions"
+            },
+            "description": "Specify this header value to operate only on a blob if it has not been modified since the specified date/time."
+          }
+          
+        ],
+        "responses": {
+          "200": {
+            "description": "Received correct format"
+          }
+        }
+      }
+    },
+    "/RequestConditionCollapse/missIfMatch": {
+      "get": {
+        "operationId": "RequestConditionCollapse_MissIfMatchGet",
+        "parameters": [
+	        {
+            "name": "If-None-Match",
+            "x-ms-client-name": "ifNoneMatch",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "x-ms-parameter-location": "method",
+            "x-ms-parameter-grouping": {
+              "name": "modified-access-conditions"
+            },
+            "description": "Specify an ETag value to operate only on blobs without a matching value."
+          },
+          {
+            "name": "If-Modified-Since",
+            "x-ms-client-name": "ifModifiedSince",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc1123",
+            "x-ms-parameter-location": "method",
+            "x-ms-parameter-grouping": {
+              "name": "modified-access-conditions"
+            },
+            "description": "Specify this header value to operate only on a blob if it has been modified since the specified date/time."
+          },
+          {
+            "name": "If-Unmodified-Since",
+            "x-ms-client-name": "ifUnmodifiedSince",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc1123",
+            "x-ms-parameter-location": "method",
+            "x-ms-parameter-grouping": {
+              "name": "modified-access-conditions"
+            },
+            "description": "Specify this header value to operate only on a blob if it has not been modified since the specified date/time."
+          }
+          
+        ],
+        "responses": {
+          "200": {
+            "description": "Received correct format"
+          }
+        }
+      }
+    },
+    "/RequestConditionCollapse/missIfModifiedSince": {
+      "get": {
+        "operationId": "RequestConditionCollapse_MissIfModifiedSinceGet",
+        "parameters": [
+          {
+            "name": "If-Match",
+            "x-ms-client-name": "ifMatch",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "x-ms-parameter-location": "method",
+            "x-ms-parameter-grouping": {
+              "name": "modified-access-conditions"
+            },
+            "description": "Specify an ETag value to operate only on blobs with a matching value."
+          },
+	        {
+            "name": "If-None-Match",
+            "x-ms-client-name": "ifNoneMatch",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "x-ms-parameter-location": "method",
+            "x-ms-parameter-grouping": {
+              "name": "modified-access-conditions"
+            },
+            "description": "Specify an ETag value to operate only on blobs without a matching value."
+          },
+          {
+            "name": "If-Unmodified-Since",
+            "x-ms-client-name": "ifUnmodifiedSince",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc1123",
+            "x-ms-parameter-location": "method",
+            "x-ms-parameter-grouping": {
+              "name": "modified-access-conditions"
+            },
+            "description": "Specify this header value to operate only on a blob if it has not been modified since the specified date/time."
+          }
+          
+        ],
+        "responses": {
+          "200": {
+            "description": "Received correct format"
+          }
+        }
+      }
+    },
+    "/RequestConditionCollapse/missIfUnmodifiedSince": {
+      "get": {
+        "operationId": "RequestConditionCollapse_MissIfUnmodifiedSinceGet",
+        "parameters": [
+          {
+            "name": "If-Match",
+            "x-ms-client-name": "ifMatch",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "x-ms-parameter-location": "method",
+            "x-ms-parameter-grouping": {
+              "name": "modified-access-conditions"
+            },
+            "description": "Specify an ETag value to operate only on blobs with a matching value."
+          },
+	        {
+            "name": "If-None-Match",
+            "x-ms-client-name": "ifNoneMatch",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "x-ms-parameter-location": "method",
+            "x-ms-parameter-grouping": {
+              "name": "modified-access-conditions"
+            },
+            "description": "Specify an ETag value to operate only on blobs without a matching value."
+          },
+          {
+            "name": "If-Modified-Since",
+            "x-ms-client-name": "ifModifiedSince",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc1123",
+            "x-ms-parameter-location": "method",
+            "x-ms-parameter-grouping": {
+              "name": "modified-access-conditions"
+            },
+            "description": "Specify this header value to operate only on a blob if it has been modified since the specified date/time."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Received correct format"
+          }
+        }
+      }
+    },
+    "/RequestConditionCollapse/missIfMatchIfNonMatch": {
+      "get": {
+        "operationId": "RequestConditionCollapse_MissIfMatchIfNonMatchGet",
+        "parameters": [
           {
             "name": "If-Modified-Since",
             "x-ms-client-name": "ifModifiedSince",
