@@ -188,7 +188,7 @@ namespace MgmtParamOrdering
         /// <param name="version"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="type"/> or <paramref name="version"/> is null. </exception>
-        public virtual Response<bool> CheckIfExists(string type, string version, CancellationToken cancellationToken = default)
+        public virtual Response<bool> Exists(string type, string version, CancellationToken cancellationToken = default)
         {
             if (type == null)
             {
@@ -199,7 +199,7 @@ namespace MgmtParamOrdering
                 throw new ArgumentNullException(nameof(version));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageCollection.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageCollection.Exists");
             scope.Start();
             try
             {
@@ -218,7 +218,7 @@ namespace MgmtParamOrdering
         /// <param name="version"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="type"/> or <paramref name="version"/> is null. </exception>
-        public async virtual Task<Response<bool>> CheckIfExistsAsync(string type, string version, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> ExistsAsync(string type, string version, CancellationToken cancellationToken = default)
         {
             if (type == null)
             {
@@ -229,7 +229,7 @@ namespace MgmtParamOrdering
                 throw new ArgumentNullException(nameof(version));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageCollection.CheckIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageCollection.ExistsAsync");
             scope.Start();
             try
             {
