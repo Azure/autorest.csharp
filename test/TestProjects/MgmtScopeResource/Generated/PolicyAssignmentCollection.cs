@@ -245,14 +245,14 @@ namespace MgmtScopeResource
         /// <param name="policyAssignmentName"> The name of the policy assignment to get. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="policyAssignmentName"/> is null. </exception>
-        public virtual Response<bool> CheckIfExists(string policyAssignmentName, CancellationToken cancellationToken = default)
+        public virtual Response<bool> Exists(string policyAssignmentName, CancellationToken cancellationToken = default)
         {
             if (policyAssignmentName == null)
             {
                 throw new ArgumentNullException(nameof(policyAssignmentName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("PolicyAssignmentCollection.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("PolicyAssignmentCollection.Exists");
             scope.Start();
             try
             {
@@ -270,14 +270,14 @@ namespace MgmtScopeResource
         /// <param name="policyAssignmentName"> The name of the policy assignment to get. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="policyAssignmentName"/> is null. </exception>
-        public async virtual Task<Response<bool>> CheckIfExistsAsync(string policyAssignmentName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> ExistsAsync(string policyAssignmentName, CancellationToken cancellationToken = default)
         {
             if (policyAssignmentName == null)
             {
                 throw new ArgumentNullException(nameof(policyAssignmentName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("PolicyAssignmentCollection.CheckIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("PolicyAssignmentCollection.ExistsAsync");
             scope.Start();
             try
             {
