@@ -11,11 +11,9 @@ namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class ManagementGroupExtensions : MgmtExtensions
     {
-        public ManagementGroupExtensions(IEnumerable<Operation> allOperations, BuildContext<MgmtOutputLibrary> context) : base(allOperations, context)
+        public ManagementGroupExtensions(IEnumerable<Operation> allOperations, BuildContext<MgmtOutputLibrary> context) : base(allOperations, "ManagementGroup", context)
         {
         }
-
-        public override string ResourceName => "ManagementGroup";
 
         protected override string DefaultName => "ManagementGroupExtensions";
 

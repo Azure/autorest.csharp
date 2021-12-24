@@ -8,8 +8,10 @@ using System.Linq;
 using System.Text;
 using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
+using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
@@ -50,6 +52,21 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             if (requestPath.IsParameterizedScope())
                 return ResourceType.Scope;
             return ResourceType.ParseRequestPath(requestPath);
+        }
+
+        public static ResourceType GetResourceType(this IEnumerable<RequestPath> requestPaths, BuildContext<MgmtOutputLibrary> context)
+        {
+            var resourceTypes = requestPaths.Select(path => path.GetResourceType(context.Configuration.MgmtConfiguration)).Distinct();
+
+            if (resourceTypes.Count() > 1)
+                throw new InvalidOperationException($"Request path(s) {string.Join(", ", requestPaths)} contain multiple resource types in it ({string.Join(", ", resourceTypes)}), please double check and override it in `request-path-to-resource-type` section.");
+
+            var resourceType = resourceTypes.First();
+
+            if (resourceType == ResourceType.Scope)
+                throw new InvalidOperationException($"Request path(s) {string.Join(", ", requestPaths)} is a 'ById' resource, we cannot derive a resource type from its request path, please double check and override it in `request-path-to-resource-type` section.");
+
+            return resourceType;
         }
     }
 }
