@@ -60,7 +60,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             return result;
         }
 
-        private bool IsById { get; }
+        protected bool IsById { get; }
 
         protected MgmtClientOperation? GetOperationWithVerb(HttpMethod method, string name)
         {

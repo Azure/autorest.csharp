@@ -54,6 +54,14 @@ namespace AutoRest.CSharp.Mgmt.Output
             if (getAllOperation == null)
                 return getAllOperation;
 
+            // skip the following transformations for `ById` resources.
+            // In ById resources, the required parameters of the GetAll operation is usually a scope, doing the following transform will require the constructor to accept a scope variable
+            // which is not reasonable and causes problems
+            if (IsById)
+            {
+                return ReferenceSegments(getAllOperation).Any() ? null : getAllOperation;
+            }
+
             // calculate the ResourceType from the RequestPath of this resource
             var resourceType = RequestPaths.GetResourceType(_context);
             var resourceTypeSegments = resourceType.Select((segment, index) => (segment, index)).Where(tuple => tuple.segment.IsReference).ToList();
