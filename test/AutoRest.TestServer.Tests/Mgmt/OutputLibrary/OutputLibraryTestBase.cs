@@ -22,16 +22,26 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
     internal abstract class OutputLibraryTestBase
     {
         private string _projectName;
+        private string? _subFolder;
 
-        public OutputLibraryTestBase(string projectName)
+        public OutputLibraryTestBase(string projectName, string subFolder = null)
         {
             _projectName = projectName;
+            _subFolder = subFolder;
         }
 
-        internal static async Task<(CodeModel Model, BuildContext<MgmtOutputLibrary> Context)> Generate(string testProject)
+        internal static async Task<(CodeModel Model, BuildContext<MgmtOutputLibrary> Context)> Generate(string testProject, string subFolder = null)
         {
             var basePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            basePath = Path.Combine(basePath.Substring(0, basePath.IndexOf("autorest.csharp")), "autorest.csharp", "test", "TestProjects", testProject, "Generated");
+            if (subFolder is null)
+            {
+                basePath = Path.Combine(basePath.Substring(0, basePath.IndexOf("autorest.csharp")), "autorest.csharp", "test", "TestProjects", testProject, "Generated");
+            }
+            else
+            {
+                basePath = Path.Combine(basePath.Substring(0, basePath.IndexOf("autorest.csharp")), "autorest.csharp", "test", "TestProjects", testProject, subFolder, "Generated");
+            }
+
             var configuration = StandaloneGeneratorRunner.LoadConfiguration(basePath, File.ReadAllText(Path.Combine(basePath, "Configuration.json")));
             var codeModelTask = Task.Run(() => CodeModelSerialization.DeserializeCodeModel(File.ReadAllText(Path.Combine(basePath, "CodeModel.yaml"))));
             var projectDirectory = Path.Combine(configuration.OutputFolder, configuration.ProjectFolder);
@@ -46,7 +56,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
         [Test]
         public void ValidateResourceDataCount()
         {
-            var result = Generate(_projectName).Result;
+            var result = Generate(_projectName, _subFolder).Result;
             var context = result.Context;
 
             var count = context.Library.ResourceSchemaMap.Count;
@@ -58,7 +68,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
         [TestCase("DeleteAsync")]
         public void ValidateDeleteMethodAsLRO(string methodName)
         {
-            var result = Generate(_projectName).Result;
+            var result = Generate(_projectName, _subFolder).Result;
             var context = result.Context;
 
             foreach (var resource in context.Library.ArmResources)
@@ -89,7 +99,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
         [TestCase("GetAsync")]
         public void ValidateGetOverloadMethod(string methodName)
         {
-            (_, var context) = Generate(_projectName).Result;
+            (_, var context) = Generate(_projectName, _subFolder).Result;
 
             foreach (var resource in context.Library.ArmResources)
             {
@@ -110,7 +120,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
         [Test]
         public void ValidateEnumerable()
         {
-            (_, var context) = Generate(_projectName).Result;
+            (_, var context) = Generate(_projectName, _subFolder).Result;
 
             foreach (var collection in context.Library.ResourceCollections)
             {

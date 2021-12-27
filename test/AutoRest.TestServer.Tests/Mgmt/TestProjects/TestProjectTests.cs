@@ -23,14 +23,16 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
     public class TestProjectTests
     {
         private string _projectName;
+        private string? _subFolder;
 
         public TestProjectTests() : this("")
         {
         }
 
-        public TestProjectTests(string projectName)
+        public TestProjectTests(string projectName, string subFolder = null)
         {
             _projectName = projectName;
+            _subFolder = subFolder;
         }
 
         protected HashSet<string> ListExceptions = new HashSet<string>();
@@ -427,7 +429,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 return;
             }
 
-            var output = await OutputLibraryTestBase.Generate(_projectName);
+            var output = await OutputLibraryTestBase.Generate(_projectName, _subFolder);
             var library = output.Context.Library;
             foreach (var mgmtObject in library.Models.OfType<MgmtObjectType>())
             {
@@ -498,6 +500,23 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             {
                 Assert.AreEqual(paramNames[i], parameters[i].Name);
                 Assert.AreEqual(paramTypes[i], parameters[i].ParameterType);
+            }
+        }
+
+        protected void ValidateMethodExist(string fullClassName, string methodName, params string[] argTypes)
+        {
+            var classToCheck = Assembly.GetExecutingAssembly().GetType(fullClassName);
+            var methods = classToCheck.GetMethods().Where(m => m.Name == methodName);
+            Assert.Greater(methods.Count(), 0, $"Can't find method {fullClassName}.{methodName}!");
+
+            for (int i = 0; i < argTypes.Length; i++)
+            {
+                methods = methods.Where(x =>
+                {
+                    var parameters = x.GetParameters();
+                    return parameters[i].ParameterType.Name == argTypes[i];
+                });
+                Assert.Greater(methods.Count(), 0, $"The {i + 1}nd parameter of {fullClassName}.{methodName}() is not of type {argTypes[i]}!");
             }
         }
     }
