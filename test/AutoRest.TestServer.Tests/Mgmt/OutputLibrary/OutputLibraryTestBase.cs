@@ -76,7 +76,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
                     var method = generatedResourceType.GetMethod(methodName);
                     Assert.NotNull(method, $"{generatedResourceType.Name} does not implement the {methodName} method.");
 
-                    Assert.AreEqual(2, method.GetParameters().Length);
+                    Assert.GreaterOrEqual(method.GetParameters().Length, 2);
                     var param1 = TypeAsserts.HasParameter(method, "waitForCompletion");
                     Assert.AreEqual(typeof(bool), param1.ParameterType);
                     var param2 = TypeAsserts.HasParameter(method, "cancellationToken");
@@ -124,7 +124,10 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
                 Assert.NotNull(generatedCollectionType.GetInterface("IEnumerable`1"), $"{generatedCollectionType.Name} did not implement IEnumerable<T>");
 
                 // see if this collection has a Pageable GetAll operation
-                var getAllMethod = generatedCollectionType.GetMethod("GetAll");
+                // first find the GetAll method without required parameters
+                var getAllMethods = generatedCollectionType.GetMethods().Where(method => method.Name == "GetAll")
+                    .Where(method => method.GetParameters().Where(p => !p.HasDefaultValue).Count() == 0);
+                var getAllMethod = getAllMethods.SingleOrDefault();
                 Assert.NotNull(getAllMethod, $"{collection.Type.Name} should have a GetAll operation");
                 if (getAllMethod.ReturnType.Name == typeof(Azure.Pageable<>).Name)
                 {

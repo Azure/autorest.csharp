@@ -307,7 +307,6 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 {
                     var methodInfo = subscriptionExtension.GetMethod($"Get{resourceName.ToPlural()}", BindingFlags.Static | BindingFlags.Public);
                     Assert.NotNull(methodInfo);
-                    Assert.AreEqual(1, methodInfo.GetParameters().Length);
                     var param = TypeAsserts.HasParameter(methodInfo, "subscription");
                     Assert.AreEqual(typeof(Subscription), param.ParameterType);
                 }

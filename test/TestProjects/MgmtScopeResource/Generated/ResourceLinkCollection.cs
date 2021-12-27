@@ -289,7 +289,7 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scope"/> is null. </exception>
         /// <returns> A collection of <see cref="ResourceLink" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<ResourceLink> GetAtSourceScope(string scope, CancellationToken cancellationToken = default)
+        public virtual Pageable<ResourceLink> GetAll(string scope, CancellationToken cancellationToken = default)
         {
             if (scope == null)
             {
@@ -298,7 +298,7 @@ namespace MgmtScopeResource
 
             Page<ResourceLink> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope0 = _clientDiagnostics.CreateScope("ResourceLinkCollection.GetAtSourceScope");
+                using var scope0 = _clientDiagnostics.CreateScope("ResourceLinkCollection.GetAll");
                 scope0.Start();
                 try
                 {
@@ -313,7 +313,7 @@ namespace MgmtScopeResource
             }
             Page<ResourceLink> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope0 = _clientDiagnostics.CreateScope("ResourceLinkCollection.GetAtSourceScope");
+                using var scope0 = _clientDiagnostics.CreateScope("ResourceLinkCollection.GetAll");
                 scope0.Start();
                 try
                 {
@@ -337,7 +337,7 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scope"/> is null. </exception>
         /// <returns> An async collection of <see cref="ResourceLink" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<ResourceLink> GetAtSourceScopeAsync(string scope, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<ResourceLink> GetAllAsync(string scope, CancellationToken cancellationToken = default)
         {
             if (scope == null)
             {
@@ -346,7 +346,7 @@ namespace MgmtScopeResource
 
             async Task<Page<ResourceLink>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope0 = _clientDiagnostics.CreateScope("ResourceLinkCollection.GetAtSourceScope");
+                using var scope0 = _clientDiagnostics.CreateScope("ResourceLinkCollection.GetAll");
                 scope0.Start();
                 try
                 {
@@ -361,7 +361,7 @@ namespace MgmtScopeResource
             }
             async Task<Page<ResourceLink>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope0 = _clientDiagnostics.CreateScope("ResourceLinkCollection.GetAtSourceScope");
+                using var scope0 = _clientDiagnostics.CreateScope("ResourceLinkCollection.GetAll");
                 scope0.Start();
                 try
                 {
