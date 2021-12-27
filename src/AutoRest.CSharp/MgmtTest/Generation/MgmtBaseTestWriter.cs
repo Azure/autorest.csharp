@@ -70,6 +70,10 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
         public static string FormatResourceId(string resourceId)
         {
+            if (resourceId.Length == 0)
+            {
+                return "/subscriptions/00000000-0000-0000-0000-000000000000";   // provide a fake resourceId to fullfill the ResourceIdentifier check
+            }
             if (!resourceId.StartsWith('/'))
             {
                 resourceId = '/' + resourceId;
