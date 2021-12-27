@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Linq;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Output.Builders;
@@ -24,11 +25,26 @@ namespace AutoRest.CSharp.Mgmt.Output
             return $"A class representing the {clientPrefix} data model.";
         }
 
+        /// <summary>
+        /// Get the <see cref="CSharpType"/> of the `Id` property of this ResourceData.
+        /// Return null if this resource data does not have an Id property.
+        /// </summary>
+        /// <returns></returns>
+        internal CSharpType? GetTypeOfId()
+        {
+            var baseTypes = EnumerateHierarchy().TakeLast(2).ToArray();
+            var baseType = baseTypes.Length == 1 || baseTypes[1].Declaration.Name == "Object" ? baseTypes[0] : baseTypes[1];
+            var idProperty = baseType.Properties.Where(p => p.Declaration.Name == "Id").FirstOrDefault();
+            return idProperty?.Declaration.Type;
+        }
+
         internal bool IsIdString()
         {
             var baseTypes = EnumerateHierarchy().TakeLast(2).ToArray();
             var baseType = baseTypes.Length == 1 || baseTypes[1].Declaration.Name == "Object" ? baseTypes[0] : baseTypes[1];
-            var idProperty = baseType.Properties.Where(p => p.Declaration.Name == "Id").First();
+            var idProperty = baseType.Properties.Where(p => p.Declaration.Name == "Id").FirstOrDefault();
+            if (idProperty == null)
+                return false; // TEMP
             var idType = idProperty.Declaration.Type;
             return (idType.IsFrameworkType && idType.FrameworkType == typeof(string));
         }
