@@ -164,17 +164,17 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                         _writer.Append($"var collection = GetArmClient().Get{parentResource.Type.Name}(new {typeof(Azure.ResourceManager.ResourceIdentifier)}({MgmtBaseTestWriter.FormatResourceId(realRequestPath):L}))");
                         break;
                     }
-                case ResourceGroupExtensions:
+                case Mgmt.Output.ResourceGroupExtensions:
                     {
                         _writer.Append($"var collection = GetArmClient().GetResourceGroup(new {typeof(Azure.ResourceManager.ResourceIdentifier)}({MgmtBaseTestWriter.FormatResourceId(realRequestPath):L}))");
                         break;
                     }
-                case SubscriptionExtensions:
+                case Mgmt.Output.SubscriptionExtensions:
                     {
                         _writer.Append($"var collection = GetArmClient().GetSubscription(new {typeof(Azure.ResourceManager.ResourceIdentifier)}({MgmtBaseTestWriter.FormatResourceId(realRequestPath):L}))");
                         break;
                     }
-                case TenantExtensions:
+                case Mgmt.Output.TenantExtensions:
                     {
                         _writer.Append($"var collection = GetArmClient().GetTenants().GetAll().GetEnumerator().Current");
                         break;
@@ -207,15 +207,15 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     {
                         return -1;
                     }
-                    else if (x1 is ResourceGroupExtensions)
+                    else if (x1 is Mgmt.Output.ResourceGroupExtensions)
                     {
                         return -1;
                     }
-                    else if (x1 is SubscriptionExtensions)
+                    else if (x1 is Mgmt.Output.SubscriptionExtensions)
                     {
                         return -1;
                     }
-                    else if (x1 is TenantExtensions)
+                    else if (x1 is Mgmt.Output.TenantExtensions)
                     {
                         return -1;
                     }
@@ -230,21 +230,21 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     return tp;
                 }
                 var segments = requestPath.Split('/');
-                if (tp is ResourceGroupExtensions)
+                if (tp is Mgmt.Output.ResourceGroupExtensions)
                 {
                     if (segments.Length > 5 && segments[3].ToLower() == "resourcegroups")
                     {
                         return tp;
                     }
                 }
-                if (tp is SubscriptionExtensions)
+                if (tp is Mgmt.Output.SubscriptionExtensions)
                 {
                     if (segments.Length > 3 && segments[1].ToLower() == "subscriptions")
                     {
                         return tp;
                     }
                 }
-                if (tp is TenantExtensions)
+                if (tp is Mgmt.Output.TenantExtensions)
                 {
                     return tp;
                 }
