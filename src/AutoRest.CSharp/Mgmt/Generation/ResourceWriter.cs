@@ -5,13 +5,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
+using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
+using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure;
@@ -116,23 +119,51 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
         {
             _writer.Line();
             // write protected default constructor
-            _writer.WriteXmlDocumentationSummary($"Initializes a new instance of the <see cref=\"{TypeOfThis}\"/> class for mocking.");
-            using (_writer.Scope($"protected {TypeOfThis.Name}()"))
+            var mockingConstructor = new MethodSignature(
+                name: TypeOfThis.Name,
+                description: $"Initializes a new instance of the <see cref=\"{TypeOfThis.Name}\"/> class for mocking.",
+                modifiers: "protected",
+                parameters: new Parameter[0]);
+            _writer.WriteMethodDocumentation(mockingConstructor);
+            using (_writer.WriteMethodDeclaration(mockingConstructor))
             { }
 
-            // write "resource + id" constructor
             _writer.Line();
-            _writer.WriteXmlDocumentationSummary($"Initializes a new instance of the <see cref = \"{TypeOfThis.Name}\"/> class.");
-            _writer.WriteXmlDocumentationParameter("options", $"The client parameters to use in these operations.");
-            _writer.WriteXmlDocumentationParameter("resource", $"The resource that is the target of operations.");
+            var optionsParameter = new Parameter(Name: "options", Description: $"The client parameters to use in these operations.",
+                            Type: typeof(ArmResource), DefaultValue: null, ValidateNotNull: false);
+            var dataParameter = new Parameter(Name: "data", Description: $"The resource that is the target of operations.",
+                            Type: _resourceData.Type, DefaultValue: null, ValidateNotNull: false);
 
-            var idPropString = _resourceData.IsIdString() ? "new ResourceIdentifier(resource.Id)" : "resource.Id";
-
-            // inherits the default constructor when it is not a resource
-            using (_writer.Scope($"internal {TypeOfThis.Name}({typeof(ArmResource)} options, {_resourceData.Type} resource) : base(options, {idPropString})"))
+            FormattableString idPropString;
+            if (_resourceData.IsIdString())
+                idPropString = $"new {typeof(ResourceIdentifier)}(resource.Id)";
+            else
+                idPropString = $"resource.Id";
+            // write "resource + ResourceData" constructor
+            var resourceDataConstructor = new MethodSignature(
+                name: TypeOfThis.Name,
+                description: $"Initializes a new instance of the <see cref = \"{TypeOfThis.Name}\"/> class.",
+                modifiers: "internal",
+                parameters: new[]
+                {
+                    optionsParameter,
+                    dataParameter
+                },
+                baseMethod: new MethodSignature(
+                    name: TypeOfThis.Name,
+                    description: null,
+                    modifiers: "protected",
+                    parameters: new[]
+                    {
+                        optionsParameter,
+                        new ParameterInvocation(dataParameter, idPropString)
+                    })
+                );
+            _writer.WriteMethodDocumentation(resourceDataConstructor);
+            using (_writer.WriteMethodDeclaration(resourceDataConstructor))
             {
                 _writer.Line($"HasData = true;");
-                _writer.Line($"_data = resource;");
+                _writer.Line($"_data = data;");
                 if (IsSingleton)
                     _writer.Line($"Parent = options;");
                 _writer.Line($"{ClientDiagnosticsField} = new {typeof(ClientDiagnostics)}(ClientOptions);");

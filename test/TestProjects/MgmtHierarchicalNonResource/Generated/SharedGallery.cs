@@ -41,11 +41,11 @@ namespace MgmtHierarchicalNonResource
 
         /// <summary> Initializes a new instance of the <see cref = "SharedGallery"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
-        /// <param name="resource"> The resource that is the target of operations. </param>
-        internal SharedGallery(ArmResource options, SharedGalleryData resource) : base(options, resource.Id)
+        /// <param name="data"> The resource that is the target of operations. </param>
+        internal SharedGallery(ArmResource options, SharedGalleryData data) : base(options, data)
         {
             HasData = true;
-            _data = resource;
+            _data = data;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _sharedGalleriesRestClient = new SharedGalleriesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
             _sharedGalleryImagesRestClient = new SharedGalleryImagesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
