@@ -85,10 +85,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 foreach (var parameter in method.BaseMethod.Parameters)
                 {
                     if (parameter is ParameterInvocation invocation && invocation.Invocation != null)
-                    {
-                        writer.Append($"I am here, ");
                         writer.Append($"{invocation.Invocation}, ");
-                    }
                     else
                         writer.Append($"{parameter.Name:I}, ");
                 }

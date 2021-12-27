@@ -32,6 +32,21 @@ namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal class ResourceWriter : MgmtClientBaseWriter
     {
+        protected Parameter OptionsParameter => new Parameter(Name: "options", Description: $"The client parameters to use in these operations.",
+                            Type: typeof(ArmResource), DefaultValue: null, ValidateNotNull: false);
+        protected Parameter DataParameter => new Parameter(Name: "resource", Description: $"The resource that is the target of operations.",
+                        Type: _resourceData.Type, DefaultValue: null, ValidateNotNull: false);
+        protected Parameter IdParameter => new Parameter(Name: "id", Description: $"The identifier of the resource that is the target of operations.",
+                        Type: typeof(ResourceIdentifier), DefaultValue: null, ValidateNotNull: false);
+        protected Parameter ClientOptionsParameter => new Parameter(Name: "clientOptions", Description: $"The client options to build client context.",
+                        Type: typeof(ArmClientOptions), DefaultValue: null, ValidateNotNull: false);
+        protected Parameter CredentialParameter => new Parameter(Name: "credential", Description: $"The credential to build client context.",
+                        Type: typeof(TokenCredential), DefaultValue: null, ValidateNotNull: false);
+        protected Parameter UriParameter => new Parameter(Name: "uri", Description: $"The uri to build client context.",
+                        Type: typeof(Uri), DefaultValue: null, ValidateNotNull: false);
+        protected Parameter PipelineParameter => new Parameter(Name: "pipeline", Description: $"The pipeline to build client context.",
+                        Type: typeof(HttpPipeline), DefaultValue: null, ValidateNotNull: false);
+
         protected Resource _resource;
         protected ResourceData _resourceData;
         private bool _isITaggableResource = false;
@@ -129,10 +144,6 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
             { }
 
             _writer.Line();
-            var optionsParameter = new Parameter(Name: "options", Description: $"The client parameters to use in these operations.",
-                            Type: typeof(ArmResource), DefaultValue: null, ValidateNotNull: false);
-            var dataParameter = new Parameter(Name: "data", Description: $"The resource that is the target of operations.",
-                            Type: _resourceData.Type, DefaultValue: null, ValidateNotNull: false);
 
             FormattableString idPropString;
             if (_resourceData.IsIdString())
@@ -144,26 +155,18 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
                 name: TypeOfThis.Name,
                 description: $"Initializes a new instance of the <see cref = \"{TypeOfThis.Name}\"/> class.",
                 modifiers: "internal",
-                parameters: new[]
-                {
-                    optionsParameter,
-                    dataParameter
-                },
+                parameters: new[] { OptionsParameter, DataParameter },
                 baseMethod: new MethodSignature(
                     name: TypeOfThis.Name,
                     description: null,
                     modifiers: "protected",
-                    parameters: new[]
-                    {
-                        optionsParameter,
-                        new ParameterInvocation(dataParameter, idPropString)
-                    })
+                    parameters: new[] { OptionsParameter, new ParameterInvocation(IdParameter, idPropString) })
                 );
             _writer.WriteMethodDocumentation(resourceDataConstructor);
             using (_writer.WriteMethodDeclaration(resourceDataConstructor))
             {
                 _writer.Line($"HasData = true;");
-                _writer.Line($"_data = data;");
+                _writer.Line($"_data = resource;");
                 if (IsSingleton)
                     _writer.Line($"Parent = options;");
                 _writer.Line($"{ClientDiagnosticsField} = new {typeof(ClientDiagnostics)}(ClientOptions);");
@@ -171,10 +174,20 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
             }
 
             _writer.Line();
-            _writer.WriteXmlDocumentationSummary($"Initializes a new instance of the <see cref=\"{TypeOfThis.Name}\"/> class.");
-            _writer.WriteXmlDocumentationParameter("options", $"The client parameters to use in these operations.");
-            _writer.WriteXmlDocumentationParameter("id", $"The identifier of the resource that is the target of operations.");
-            using (_writer.Scope($"internal {TypeOfThis.Name}({typeof(ArmResource)} options, {typeof(ResourceIdentifier)} id) : base(options, id)"))
+            // write "resource + ResourceIdentifier" constructor
+            var resourceIdConstructor = new MethodSignature(
+                name: TypeOfThis.Name,
+                description: $"Initializes a new instance of the <see cref=\"{TypeOfThis.Name}\"/> class.",
+                modifiers: "internal",
+                parameters: new[] { OptionsParameter, IdParameter },
+                baseMethod: new MethodSignature(
+                    name: TypeOfThis.Name,
+                    description: null,
+                    modifiers: "protected",
+                    parameters: new[] { OptionsParameter, IdParameter })
+            );
+            _writer.WriteMethodDocumentation(resourceIdConstructor);
+            using (_writer.WriteMethodDeclaration(resourceIdConstructor))
             {
                 if (IsSingleton)
                     _writer.Line($"Parent = options;");
@@ -183,13 +196,21 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
             }
 
             _writer.Line();
-            _writer.WriteXmlDocumentationSummary($"Initializes a new instance of the <see cref=\"{TypeOfThis.Name}\"/> class.");
-            _writer.WriteXmlDocumentationParameter("clientOptions", $"The client options to build client context.");
-            _writer.WriteXmlDocumentationParameter("credential", $"The credential to build client context.");
-            _writer.WriteXmlDocumentationParameter("uri", $"The uri to build client context.");
-            _writer.WriteXmlDocumentationParameter("pipeline", $"The pipeline to build client context.");
-            _writer.WriteXmlDocumentationParameter("id", $"The identifier of the resource that is the target of operations.");
-            using (_writer.Scope($"internal {TypeOfThis.Name}({typeof(ArmClientOptions)} clientOptions, {typeof(TokenCredential)} credential, {typeof(Uri)} uri, {typeof(HttpPipeline)} pipeline, {typeof(ResourceIdentifier)} id) : base(clientOptions, credential, uri, pipeline, id)"))
+            // write "clientOptions" constructor
+            var clientOptionsConstructor = new MethodSignature(
+                name: TypeOfThis.Name,
+                description: $"Initializes a new instance of the <see cref=\"{TypeOfThis.Name}\"/> class.",
+                modifiers: "internal",
+                parameters: new[] { ClientOptionsParameter, CredentialParameter, UriParameter, PipelineParameter, IdParameter },
+                baseMethod: new MethodSignature(
+                    name: TypeOfThis.Name,
+                    description: null,
+                    modifiers: "protected",
+                    parameters: new[] { ClientOptionsParameter, CredentialParameter, UriParameter, PipelineParameter, IdParameter })
+                );
+
+            _writer.WriteMethodDocumentation(clientOptionsConstructor);
+            using (_writer.WriteMethodDeclaration(clientOptionsConstructor))
             {
                 _writer.Line($"{ClientDiagnosticsField} = new {typeof(ClientDiagnostics)}(ClientOptions);");
                 WriteRestClientAssignments();
