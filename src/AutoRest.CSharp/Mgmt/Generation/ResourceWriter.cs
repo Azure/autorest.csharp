@@ -147,9 +147,9 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
 
             FormattableString idPropString;
             if (_resourceData.IsIdString())
-                idPropString = $"new {typeof(ResourceIdentifier)}(resource.Id)";
+                idPropString = $"new {typeof(ResourceIdentifier)}({DataParameter.Name}.Id)";
             else
-                idPropString = $"resource.Id";
+                idPropString = $"{DataParameter.Name}.Id";
             // write "resource + ResourceData" constructor
             var resourceDataConstructor = new MethodSignature(
                 name: TypeOfThis.Name,
@@ -166,9 +166,9 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
             using (_writer.WriteMethodDeclaration(resourceDataConstructor))
             {
                 _writer.Line($"HasData = true;");
-                _writer.Line($"_data = resource;");
+                _writer.Line($"_data = {DataParameter.Name};");
                 if (IsSingleton)
-                    _writer.Line($"Parent = options;");
+                    _writer.Line($"Parent = {OptionsParameter.Name};");
                 _writer.Line($"{ClientDiagnosticsField} = new {typeof(ClientDiagnostics)}(ClientOptions);");
                 WriteRestClientAssignments();
             }
