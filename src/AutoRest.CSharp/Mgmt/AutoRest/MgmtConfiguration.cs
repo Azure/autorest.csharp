@@ -270,6 +270,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             root.TryGetProperty(nameof(DoesResourceModelRequireType), out var resourceModelRequiresType);
             root.TryGetProperty(nameof(DoesResourceModelRequireName), out var resourceModelRequiresName);
             root.TryGetProperty(nameof(DoesSingletonRequiresKeyword), out var singletonRequiresKeyword);
+            root.TryGetProperty(nameof(TestModeler), out var testModelerRoot);
 
             return new MgmtConfiguration(
                 operationGroupsToOmit: operationGroupList,
@@ -289,7 +290,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 resourceModelRequiresType: resourceModelRequiresType,
                 resourceModelRequiresName: resourceModelRequiresName,
                 singletonRequiresKeyword: singletonRequiresKeyword,
-                testmodeler: TestModelerConfiguration.LoadConfiguration(root));
+                testmodeler: TestModelerConfiguration.LoadConfiguration(testModelerRoot));
         }
 
         private static bool IsValidJsonElement(JsonElement? element)
