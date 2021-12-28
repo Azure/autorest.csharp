@@ -434,18 +434,9 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
         private void WriteTaggableCommonMethod(bool async)
         {
             _writer.Line($"{GetAwait(async)} TagResource.{CreateMethodName("CreateOrUpdate", async)}(originalTags.Value.Data, cancellationToken: cancellationToken){GetConfigureAwait(async)};");
-            // get the corresponding MgmtClientOperation mapping
-            var operationMappings = _resource.GetOperation.ToDictionary(
-                clientOperation => clientOperation.ContextualPath,
-                clientOperation => clientOperation);
-            // build contextual parameters
-            var contextualParameterMappings = operationMappings.Keys.ToDictionary(
-                contextualPath => contextualPath,
-                contextualPath => contextualPath.BuildContextualParameters(Context, IdVariableName));
-            // build parameter mapping
-            var parameterMappings = operationMappings.ToDictionary(
-                pair => pair.Key,
-                pair => pair.Value.BuildParameterMapping(contextualParameterMappings[pair.Key]));
+
+            BuildParameters(_resource.GetOperation!, out var operationMappings, out var parameterMappings, out _);
+
             // we need to write multiple branches for a normal method
             if (operationMappings.Count == 1)
             {
@@ -479,9 +470,24 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Gets a collection of {resource.Type.Name.LastWordToPlural()} in the {_resource.Type.Name}.");
             _writer.WriteXmlDocumentationReturns($"An object representing collection of {resource.Type.Name.LastWordToPlural()} and their operations over a {_resource.Type.Name}.");
-            using (_writer.Scope($"public {collection.Type.Name} Get{resource.Type.Name.ResourceNameToPlural()}()"))
+            _writer.WriteXmlDocumentationParameters(collection.ExtraConstructorParameters);
+            var extraConstructorParameters = collection.ExtraConstructorParameters;
+            _writer.Append($"public {collection.Type.Name} Get{resource.Type.Name.ResourceNameToPlural()}(");
+            foreach (var parameter in collection.ExtraConstructorParameters)
             {
-                _writer.Line($"return new {collection.Type.Name}(this);");
+                _writer.WriteParameter(parameter);
+            }
+            _writer.RemoveTrailingComma();
+            _writer.Line($")");
+            using (_writer.Scope())
+            {
+                _writer.Append($"return new {collection.Type.Name}(this, ");
+                foreach (var parameter in collection.ExtraConstructorParameters)
+                {
+                    _writer.Append($"{parameter.Name}, ");
+                }
+                _writer.RemoveTrailingComma();
+                _writer.Line($");");
             }
         }
 
