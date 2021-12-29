@@ -156,7 +156,6 @@ if (!($Exclude -contains "TestProjects"))
         $testsFolder = Join-Path $directory "tests"
 
         if ((Test-Path -Path $srcFolder) -And (Test-Path -Path $testsFolder)) {
-            Write-Host "Found src&test subfolder in $directory"
             Add-Directory $testName $srcFolder $FALSE
             Add-Directory $testName $testsFolder $TRUE
             continue
