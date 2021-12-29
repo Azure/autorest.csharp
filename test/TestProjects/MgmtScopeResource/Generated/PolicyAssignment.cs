@@ -22,6 +22,12 @@ namespace MgmtScopeResource
     /// <summary> A Class representing a PolicyAssignment along with the instance operations that can be performed on it. </summary>
     public partial class PolicyAssignment : ArmResource
     {
+        /// <summary> Generate the resource identifier of a <see cref="PolicyAssignment"/> instance. </summary>
+        public static ResourceIdentifier CreateResourceIdentifier(string scope, string policyAssignmentName)
+        {
+            var resourceId = $"/{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}";
+            return new ResourceIdentifier(resourceId);
+        }
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly PolicyAssignmentsRestOperations _policyAssignmentsRestClient;
         private readonly PolicyAssignmentData _data;
@@ -152,14 +158,14 @@ namespace MgmtScopeResource
         /// <summary> This operation deletes a policy assignment, given its name and the scope it was created in. The scope of a policy assignment is the part of its ID preceding &apos;/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}&apos;. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<PolicyAssignmentDeleteOperation> DeleteAsync(bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<Models.PolicyAssignmentDeleteOperation> DeleteAsync(bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("PolicyAssignment.Delete");
             scope.Start();
             try
             {
                 var response = await _policyAssignmentsRestClient.DeleteAsync(Id.Parent, Id.Name, cancellationToken).ConfigureAwait(false);
-                var operation = new PolicyAssignmentDeleteOperation(response);
+                var operation = new Models.PolicyAssignmentDeleteOperation(response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -177,14 +183,14 @@ namespace MgmtScopeResource
         /// <summary> This operation deletes a policy assignment, given its name and the scope it was created in. The scope of a policy assignment is the part of its ID preceding &apos;/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}&apos;. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual PolicyAssignmentDeleteOperation Delete(bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual Models.PolicyAssignmentDeleteOperation Delete(bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("PolicyAssignment.Delete");
             scope.Start();
             try
             {
                 var response = _policyAssignmentsRestClient.Delete(Id.Parent, Id.Name, cancellationToken);
-                var operation = new PolicyAssignmentDeleteOperation(response);
+                var operation = new Models.PolicyAssignmentDeleteOperation(response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

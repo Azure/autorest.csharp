@@ -21,6 +21,12 @@ namespace MgmtListMethods
     /// <summary> A Class representing a MgmtGrpParentWithLoc along with the instance operations that can be performed on it. </summary>
     public partial class MgmtGrpParentWithLoc : ArmResource
     {
+        /// <summary> Generate the resource identifier of a <see cref="MgmtGrpParentWithLoc"/> instance. </summary>
+        public static ResourceIdentifier CreateResourceIdentifier(string groupId, string mgmtGrpParentWithLocName)
+        {
+            var resourceId = $"/providers/Microsoft.Management/managementGroups/{groupId}/mgmtGrpParentWithLocs/{mgmtGrpParentWithLocName}";
+            return new ResourceIdentifier(resourceId);
+        }
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly MgmtGrpParentWithLocsRestOperations _mgmtGrpParentWithLocsRestClient;
         private readonly MgmtGrpParentWithLocData _data;

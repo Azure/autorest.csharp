@@ -21,6 +21,12 @@ namespace TenantOnly
     /// <summary> A Class representing a Agreement along with the instance operations that can be performed on it. </summary>
     public partial class Agreement : ArmResource
     {
+        /// <summary> Generate the resource identifier of a <see cref="Agreement"/> instance. </summary>
+        public static ResourceIdentifier CreateResourceIdentifier(string billingAccountName, string agreementName)
+        {
+            var resourceId = $"/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements/{agreementName}";
+            return new ResourceIdentifier(resourceId);
+        }
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly AgreementsRestOperations _agreementsRestClient;
         private readonly AgreementData _data;

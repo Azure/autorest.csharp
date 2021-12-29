@@ -27,13 +27,13 @@ namespace AutoRest.CSharp.Mgmt.Output
         private IEnumerable<RequestPath>? _requestPaths;
         public IEnumerable<RequestPath> RequestPaths => _requestPaths ??= OperationSets.Select(operationSet => operationSet.GetRequestPath(_context));
 
-        public Resource(IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> allOperations, string resourceName, ResourceType resourceType, BuildContext<MgmtOutputLibrary> context)
-            : base(context)
+        public Resource(IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> allOperations, string resourceName, ResourceType resourceType, ResourceData resourceData, BuildContext<MgmtOutputLibrary> context)
+            : base(context, resourceName)
         {
             _context = context;
             OperationSets = allOperations.Keys;
-            ResourceName = resourceName;
             ResourceType = resourceType;
+            ResourceData = resourceData;
 
             if (OperationSets.First().TryGetSingletonResourceSuffix(context, out var singletonResourceIdSuffix))
                 SingletonResourceIdSuffix = singletonResourceIdSuffix;
@@ -60,7 +60,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             return result;
         }
 
-        private bool IsById { get; }
+        protected bool IsById { get; }
 
         protected MgmtClientOperation? GetOperationWithVerb(HttpMethod method, string name)
         {
@@ -144,6 +144,8 @@ namespace AutoRest.CSharp.Mgmt.Output
             {
                 if (_context.Configuration.MgmtConfiguration.RequestPathToResourceName.TryGetValue(operationSet.RequestPath, out var name))
                     return name;
+                if (_context.Configuration.MgmtConfiguration.RequestPathToResourceName.TryGetValue($"{operationSet.RequestPath}|{ResourceType}", out name))
+                    return name;
             }
 
             return null;
@@ -165,14 +167,12 @@ namespace AutoRest.CSharp.Mgmt.Output
         /// Finds the corresponding <see cref="ResourceCollection"/> of this <see cref="Resource"/>
         /// Return null when this resource is a singleton.
         /// </summary>
-        public ResourceCollection? ResourceCollection => _context.Library.GetResourceCollection(RequestPaths.First());
+        public ResourceCollection? ResourceCollection { get; internal set; }
 
         /// <summary>
         /// Finds the corresponding <see cref="ResourceData"/> of this <see cref="Resource"/>
         /// </summary>
-        public ResourceData ResourceData => _context.Library.GetResourceData(RequestPaths.First());
-
-        public override string ResourceName { get; }
+        public ResourceData ResourceData { get; }
 
         public MgmtClientOperation? CreateOperation { get; }
         public virtual MgmtClientOperation? GetOperation { get; }
@@ -319,7 +319,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             return resourceRestClients.Concat(childRestClients).Distinct();
         }
 
-        public virtual ResourceType ResourceType { get; }
+        public ResourceType ResourceType { get; }
 
         protected virtual string CreateDescription(string clientPrefix)
         {
