@@ -237,14 +237,14 @@ namespace MgmtListMethods
         /// <param name="fakeParentWithAncestorWithNonResChWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithAncestorWithNonResChWithLocName"/> is null. </exception>
-        public virtual Response<bool> CheckIfExists(string fakeParentWithAncestorWithNonResChWithLocName, CancellationToken cancellationToken = default)
+        public virtual Response<bool> Exists(string fakeParentWithAncestorWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
             if (fakeParentWithAncestorWithNonResChWithLocName == null)
             {
                 throw new ArgumentNullException(nameof(fakeParentWithAncestorWithNonResChWithLocName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("FakeParentWithAncestorWithNonResChWithLocCollection.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("FakeParentWithAncestorWithNonResChWithLocCollection.Exists");
             scope.Start();
             try
             {
@@ -262,14 +262,14 @@ namespace MgmtListMethods
         /// <param name="fakeParentWithAncestorWithNonResChWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithAncestorWithNonResChWithLocName"/> is null. </exception>
-        public async virtual Task<Response<bool>> CheckIfExistsAsync(string fakeParentWithAncestorWithNonResChWithLocName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> ExistsAsync(string fakeParentWithAncestorWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
             if (fakeParentWithAncestorWithNonResChWithLocName == null)
             {
                 throw new ArgumentNullException(nameof(fakeParentWithAncestorWithNonResChWithLocName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("FakeParentWithAncestorWithNonResChWithLocCollection.CheckIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("FakeParentWithAncestorWithNonResChWithLocCollection.ExistsAsync");
             scope.Start();
             try
             {

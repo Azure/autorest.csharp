@@ -83,6 +83,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected override void WriteFields()
         {
             WriteFields(_writer, _resourceCollection.RestClients);
+
+            foreach (var reference in _resourceCollection.ExtraConstructorParameters)
+            {
+                _writer.Line($"private readonly {reference.Type} {_resourceCollection.GetFieldName(reference)};");
+            }
         }
 
         protected override void WriteCtors()
@@ -97,10 +102,22 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Initializes a new instance of {TypeNameOfThis} class.");
             _writer.WriteXmlDocumentationParameter("parent", $"The resource representing the parent resource.");
-            using (_writer.Scope($"internal {TypeNameOfThis}({typeof(ArmResource)} parent) : base(parent)"))
+            _writer.WriteXmlDocumentationParameters(_resourceCollection.ExtraConstructorParameters);
+            _writer.Append($"internal {TypeNameOfThis}({typeof(ArmResource)} parent, ");
+            foreach (var reference in _resourceCollection.ExtraConstructorParameters)
+            {
+                _writer.Append($"{reference.Type} {reference.Name}, ");
+            }
+            _writer.RemoveTrailingComma();
+            _writer.Line($") : base(parent)");
+            using (_writer.Scope())
             {
                 _writer.Line($"{ClientDiagnosticsField} = new {typeof(ClientDiagnostics)}(ClientOptions);");
                 WriteRestClientAssignments();
+                foreach (var reference in _resourceCollection.ExtraConstructorParameters)
+                {
+                    _writer.Line($"{_resourceCollection.GetFieldName(reference)} = {reference.Name};");
+                }
             }
         }
 
@@ -153,8 +170,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 WriteGetMethod(_resourceCollection.GetOperation, true);
                 WriteGetIfExists(_resourceCollection.GetOperation, false);
                 WriteGetIfExists(_resourceCollection.GetOperation, true);
-                WriteCheckIfExists(_resourceCollection.GetOperation, false);
-                WriteCheckIfExists(_resourceCollection.GetOperation, true);
+                WriteExists(_resourceCollection.GetOperation, false);
+                WriteExists(_resourceCollection.GetOperation, true);
             }
 
             // write all the methods that should belong to this resouce collection
@@ -175,37 +192,43 @@ namespace AutoRest.CSharp.Mgmt.Generation
             WriteEnumerableImpl(_writer);
         }
 
-        protected override ResourceType GetBranchResourceType(RequestPath branch)
+        protected override void BuildParameters(MgmtClientOperation clientOperation, out Dictionary<RequestPath, MgmtRestOperation> operationMappings, out Dictionary<RequestPath, IEnumerable<ParameterMapping>> parameterMappings, out IReadOnlyList<Parameter> methodParameters)
         {
-            return branch.GetResourceType(Config);
-        }
-
-        private void WriteCheckIfExists(MgmtClientOperation clientOperation, bool async)
-        {
-            _writer.Line();
-            _writer.WriteXmlDocumentationSummary($"Tries to get details for this resource from the service.");
-
             // get the corresponding MgmtClientOperation mapping
-            var operationMappings = clientOperation.ToDictionary(
+            operationMappings = clientOperation.ToDictionary(
                 operation => operation.ContextualPath,
                 operation => operation);
             // build contextual parameters
             var contextualParameterMappings = operationMappings.Keys.ToDictionary(
                 contextualPath => contextualPath,
-                contextualPath => contextualPath.BuildContextualParameters(Context, IdVariableName));
+                contextualPath => contextualPath.BuildContextualParameters(Context, IdVariableName).Concat(_resourceCollection.ExtraContextualParameterMapping));
             // build parameter mapping
-            var parameterMappings = operationMappings.ToDictionary(
+            parameterMappings = operationMappings.ToDictionary(
                 pair => pair.Key,
                 pair => pair.Value.BuildParameterMapping(contextualParameterMappings[pair.Key]));
             // we have ensured the operations corresponding to different OperationSet have the same method parameters, therefore here we just need to use the first operation to get the method parameters
-            var methodParameters = parameterMappings.Values.First().GetPassThroughParameters();
-            WriteCollectionMethodScope(typeof(bool).WrapResponse(async), "CheckIfExists", methodParameters, writer =>
+            methodParameters = parameterMappings.Values.First().GetPassThroughParameters();
+        }
+
+        protected override ResourceType GetBranchResourceType(RequestPath branch)
+        {
+            return branch.GetResourceType(Config);
+        }
+
+        private void WriteExists(MgmtClientOperation clientOperation, bool async)
+        {
+            _writer.Line();
+            _writer.WriteXmlDocumentationSummary($"Tries to get details for this resource from the service.");
+
+            BuildParameters(clientOperation, out var operationMappings, out var parameterMappings, out var methodParameters);
+
+            WriteCollectionMethodScope(typeof(bool).WrapResponse(async), "Exists", methodParameters, writer =>
             {
-                WriteCheckIfExistsBody(methodParameters, async);
+                WriteExistsBody(methodParameters, async);
             }, async, isOverride: false);
         }
 
-        private void WriteCheckIfExistsBody(IEnumerable<Parameter> passThruParameters, bool async)
+        private void WriteExistsBody(IEnumerable<Parameter> passThruParameters, bool async)
         {
             _writer.Append($"var response = {GetAwait(async)} {CreateMethodName("GetIfExists", async)}(");
             foreach (var parameter in passThruParameters)
@@ -222,20 +245,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Tries to get details for this resource from the service.");
 
-            // get the corresponding MgmtClientOperation mapping
-            var operationMappings = clientOperation.ToDictionary(
-                operation => operation.ContextualPath,
-                operation => operation);
-            // build contextual parameters
-            var contextualParameterMappings = operationMappings.Keys.ToDictionary(
-                contextualPath => contextualPath,
-                contextualPath => contextualPath.BuildContextualParameters(Context, IdVariableName));
-            // build parameter mapping
-            var parameterMappings = operationMappings.ToDictionary(
-                pair => pair.Key,
-                pair => pair.Value.BuildParameterMapping(contextualParameterMappings[pair.Key]));
-            // we have ensured the operations corresponding to different OperationSet have the same method parameters, therefore here we just need to use the first operation to get the method parameters
-            var methodParameters = parameterMappings.Values.First().GetPassThroughParameters();
+            BuildParameters(clientOperation, out var operationMappings, out var parameterMappings, out var methodParameters);
+
             WriteCollectionMethodScope(_resource.Type.WrapResponse(async), "GetIfExists", methodParameters, writer =>
             {
                 WriteGetMethodBody(writer, operationMappings, parameterMappings, async);

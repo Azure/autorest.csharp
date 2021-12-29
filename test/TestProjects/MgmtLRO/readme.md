@@ -1,4 +1,4 @@
-# MgmtParent
+# MgmtLRO
 
 ## AutoRest Configuration
 

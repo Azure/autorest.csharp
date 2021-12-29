@@ -22,16 +22,26 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
     internal abstract class OutputLibraryTestBase
     {
         private string _projectName;
+        private string? _subFolder;
 
-        public OutputLibraryTestBase(string projectName)
+        public OutputLibraryTestBase(string projectName, string subFolder = null)
         {
             _projectName = projectName;
+            _subFolder = subFolder;
         }
 
-        internal static async Task<(CodeModel Model, BuildContext<MgmtOutputLibrary> Context)> Generate(string testProject)
+        internal static async Task<(CodeModel Model, BuildContext<MgmtOutputLibrary> Context)> Generate(string testProject, string subFolder = null)
         {
             var basePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            basePath = Path.Combine(basePath.Substring(0, basePath.IndexOf("autorest.csharp")), "autorest.csharp", "test", "TestProjects", testProject, "Generated");
+            if (subFolder is null)
+            {
+                basePath = Path.Combine(basePath.Substring(0, basePath.IndexOf("autorest.csharp")), "autorest.csharp", "test", "TestProjects", testProject, "Generated");
+            }
+            else
+            {
+                basePath = Path.Combine(basePath.Substring(0, basePath.IndexOf("autorest.csharp")), "autorest.csharp", "test", "TestProjects", testProject, subFolder, "Generated");
+            }
+
             var configuration = StandaloneGeneratorRunner.LoadConfiguration(basePath, File.ReadAllText(Path.Combine(basePath, "Configuration.json")));
             var codeModelTask = Task.Run(() => CodeModelSerialization.DeserializeCodeModel(File.ReadAllText(Path.Combine(basePath, "CodeModel.yaml"))));
             var projectDirectory = Path.Combine(configuration.OutputFolder, configuration.ProjectFolder);
@@ -46,7 +56,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
         [Test]
         public void ValidateResourceDataCount()
         {
-            var result = Generate(_projectName).Result;
+            var result = Generate(_projectName, _subFolder).Result;
             var context = result.Context;
 
             var count = context.Library.ResourceSchemaMap.Count;
@@ -58,7 +68,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
         [TestCase("DeleteAsync")]
         public void ValidateDeleteMethodAsLRO(string methodName)
         {
-            var result = Generate(_projectName).Result;
+            var result = Generate(_projectName, _subFolder).Result;
             var context = result.Context;
 
             foreach (var resource in context.Library.ArmResources)
@@ -76,7 +86,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
                     var method = generatedResourceType.GetMethod(methodName);
                     Assert.NotNull(method, $"{generatedResourceType.Name} does not implement the {methodName} method.");
 
-                    Assert.AreEqual(2, method.GetParameters().Length);
+                    Assert.GreaterOrEqual(method.GetParameters().Length, 2);
                     var param1 = TypeAsserts.HasParameter(method, "waitForCompletion");
                     Assert.AreEqual(typeof(bool), param1.ParameterType);
                     var param2 = TypeAsserts.HasParameter(method, "cancellationToken");
@@ -89,7 +99,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
         [TestCase("GetAsync")]
         public void ValidateGetOverloadMethod(string methodName)
         {
-            (_, var context) = Generate(_projectName).Result;
+            (_, var context) = Generate(_projectName, _subFolder).Result;
 
             foreach (var resource in context.Library.ArmResources)
             {
@@ -110,7 +120,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
         [Test]
         public void ValidateEnumerable()
         {
-            (_, var context) = Generate(_projectName).Result;
+            (_, var context) = Generate(_projectName, _subFolder).Result;
 
             foreach (var collection in context.Library.ResourceCollections)
             {
@@ -124,7 +134,10 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
                 Assert.NotNull(generatedCollectionType.GetInterface("IEnumerable`1"), $"{generatedCollectionType.Name} did not implement IEnumerable<T>");
 
                 // see if this collection has a Pageable GetAll operation
-                var getAllMethod = generatedCollectionType.GetMethod("GetAll");
+                // first find the GetAll method without required parameters
+                var getAllMethods = generatedCollectionType.GetMethods().Where(method => method.Name == "GetAll")
+                    .Where(method => method.GetParameters().Where(p => !p.HasDefaultValue).Count() == 0);
+                var getAllMethod = getAllMethods.SingleOrDefault();
                 Assert.NotNull(getAllMethod, $"{collection.Type.Name} should have a GetAll operation");
                 if (getAllMethod.ReturnType.Name == typeof(Azure.Pageable<>).Name)
                 {
