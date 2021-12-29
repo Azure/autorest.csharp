@@ -4,12 +4,15 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.Common.Output.Models;
+using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
+using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using ResourceType = AutoRest.CSharp.Mgmt.Models.ResourceType;
@@ -327,5 +330,37 @@ namespace AutoRest.CSharp.Mgmt.Output
         }
 
         private string ParentPrefix(Resource resource) => string.Join("", resource.Parent(_context).Select(p => p.ResourceName));
+
+        public CodeWriterDelegate NewInstanceExpression(IEnumerable<ParameterInvocation> parameterInvocations)
+        {
+            return w =>
+            {
+                w.Append($"new {Type.Name}(");
+                foreach (var parameter in parameterInvocations)
+                {
+                    if (parameter.Invocation != null)
+                        w.Append($"{parameter.Invocation}, ");
+                    else
+                        w.Append($"{parameter.Name:I}, ");
+                }
+                w.RemoveTrailingComma();
+                w.Append($")");
+            };
+        }
+
+        public Parameter OptionsParameter => new Parameter(Name: "options", Description: $"The client parameters to use in these operations.",
+                            Type: typeof(Azure.ResourceManager.Core.ArmResource), DefaultValue: null, ValidateNotNull: false);
+        public Parameter ResourceDataParameter => new Parameter(Name: "data", Description: $"The resource that is the target of operations.",
+                        Type: ResourceData.Type, DefaultValue: null, ValidateNotNull: false);
+        public Parameter ResourceIdentifierParameter => new Parameter(Name: "id", Description: $"The identifier of the resource that is the target of operations.",
+                        Type: typeof(Azure.ResourceManager.ResourceIdentifier), DefaultValue: null, ValidateNotNull: false);
+        public Parameter ClientOptionsParameter => new Parameter(Name: "clientOptions", Description: $"The client options to build client context.",
+                        Type: typeof(Azure.ResourceManager.ArmClientOptions), DefaultValue: null, ValidateNotNull: false);
+        public Parameter CredentialParameter => new Parameter(Name: "credential", Description: $"The credential to build client context.",
+                        Type: typeof(Azure.Core.TokenCredential), DefaultValue: null, ValidateNotNull: false);
+        public Parameter UriParameter => new Parameter(Name: "uri", Description: $"The uri to build client context.",
+                        Type: typeof(Uri), DefaultValue: null, ValidateNotNull: false);
+        public Parameter PipelineParameter => new Parameter(Name: "pipeline", Description: $"The pipeline to build client context.",
+                        Type: typeof(Azure.Core.Pipeline.HttpPipeline), DefaultValue: null, ValidateNotNull: false);
     }
 }

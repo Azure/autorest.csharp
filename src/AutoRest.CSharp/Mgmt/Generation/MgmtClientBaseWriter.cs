@@ -9,6 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Common.Generation.Writers;
+using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.AutoRest;
@@ -23,10 +24,12 @@ using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Management;
 using Azure.ResourceManager.Resources;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
 using Operation = AutoRest.CSharp.Input.Operation;
+using ResourceType = AutoRest.CSharp.Mgmt.Models.ResourceType;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
@@ -237,7 +240,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             // TODO -- find a better way to get this type
             var itemType = clientOperation.First(restOperation => restOperation.IsPagingOperation(Context)).GetPagingMethod(Context)!.PagingResponse.ItemType;
-            var actualItemType = WrapResourceDataType(itemType, clientOperation.First())!;
+            var actualItemType = WrapResourceDataType(itemType, clientOperation.First())?.Type ?? itemType;
             _writer.WriteXmlDocumentationReturns($"{(async ? "An async" : "A")} collection of <see cref=\"{actualItemType.Name}\" /> that may take multiple service requests to iterate over.");
 
             WritePagingMethodSignature(actualItemType.WrapPageable(async), methodName, methodParameters, async, clientOperation.Accessibility, true);
@@ -305,7 +308,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected virtual void WritePagingMethodBranch(CSharpType itemType, Diagnostic diagnostic, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMappings, bool async)
         {
             var pagingMethod = operation.GetPagingMethod(Context)!;
-            var returnType = new CSharpType(typeof(Page<>), WrapResourceDataType(itemType, operation)!).WrapAsync(async);
+            var actualType = WrapResourceDataType(itemType, operation)?.Type ?? itemType;
+            var returnType = new CSharpType(typeof(Page<>), actualType).WrapAsync(async);
 
             var nextLinkName = pagingMethod.PagingResponse.NextLinkProperty?.Declaration.Name;
             var itemName = pagingMethod.PagingResponse.ItemProperty.Declaration.Name;
@@ -339,7 +343,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected void WritePageFunctionBody(CSharpType itemType, PagingMethod pagingMethod, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMappings,
             bool isAsync, bool isNextPageFunc)
         {
-            var actualItemType = WrapResourceDataType(itemType, operation);
+            var wrapResource = WrapResourceDataType(itemType, operation);
             var nextLinkName = pagingMethod.PagingResponse.NextLinkProperty?.Declaration.Name;
             var itemName = pagingMethod.PagingResponse.ItemProperty.Declaration.Name;
             var continuationTokenText = nextLinkName != null ? $"response.Value.{nextLinkName}" : "null";
@@ -349,11 +353,22 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Line($"cancellationToken: cancellationToken){GetConfigureAwait(isAsync)};");
 
             // only when we are listing ourselves, we use Select to convert XXXResourceData to XXXResource
-            var converter = string.Empty;
-            if (actualItemType != itemType)
+            FormattableString converter = $"";
+            if (wrapResource != null)
             {
+                FormattableString dataExpression = $"value";
+                FormattableString idExpression = $"{dataExpression}.Id";
+                if (wrapResource.ResourceData.IsIdString())
+                    idExpression = $"new {typeof(ResourceIdentifier)}({idExpression})";
+
                 _writer.UseNamespace("System.Linq");
-                converter = $".Select(value => new {actualItemType!.Name}({ContextProperty}, value))";
+                var newInstanceExpression = wrapResource.NewInstanceExpression(new[]
+                {
+                    new ParameterInvocation(wrapResource.OptionsParameter, w => w.Append($"{ContextProperty}")),
+                    new ParameterInvocation(wrapResource.ResourceIdentifierParameter, w => w.Append(idExpression)),
+                    new ParameterInvocation(wrapResource.ResourceDataParameter, w => w.Append(dataExpression)),
+                });
+                converter = $".Select(value => {newInstanceExpression})";
             }
             _writer.Line($"return {typeof(Page)}.FromValues(response.Value.{itemName}{converter}, {continuationTokenText}, response.GetRawResponse());");
         }
@@ -407,7 +422,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
             _writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
             _writer.WriteXmlDocumentationRequiredParametersException(methodParameters);
-            var returnType = WrapResourceDataType(clientOperation.ReturnType, clientOperation.First());
+            var wrapResource = WrapResourceDataType(clientOperation.ReturnType, clientOperation.First());
+            var returnType = wrapResource?.Type ?? clientOperation.ReturnType;
 
             WriteNormalMethodSignature(GetResponseType(returnType, async), methodName, methodParameters, async, clientOperation.Accessibility, true);
 
@@ -446,7 +462,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
             _writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
             _writer.WriteXmlDocumentationRequiredParametersException(methodParameters);
-            var returnType = new CSharpType(typeof(IReadOnlyList<>), WrapResourceDataType(itemType, clientOperation.First())!);
+            var wrapResource = WrapResourceDataType(itemType, clientOperation.First());
+            var returnType = new CSharpType(typeof(IReadOnlyList<>), wrapResource?.Type ?? itemType);
 
             WriteNormalMethodSignature(GetResponseType(returnType, async), methodName, methodParameters, async, clientOperation.Accessibility, true);
 
@@ -492,12 +509,23 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected virtual void WriteNormalListMethodResponse(CodeWriter writer, CSharpType itemType, MgmtRestOperation operation, bool async)
         {
             // only when we are listing ourselves, we use Select to convert XXXResourceData to XXXResource
-            var actualItemType = WrapResourceDataType(itemType, operation);
-            var converter = string.Empty;
-            if (actualItemType != itemType)
+            var wrapResource = WrapResourceDataType(itemType, operation);
+            FormattableString converter = $"";
+            if (wrapResource != null)
             {
+                FormattableString dataExpression = $"value";
+                FormattableString idExpression = $"{dataExpression}.Id";
+                if (wrapResource.ResourceData.IsIdString())
+                    idExpression = $"new {typeof(ResourceIdentifier)}({idExpression})";
+
                 writer.UseNamespace("System.Linq");
-                converter = $".Select(value => new {actualItemType!.Name}({ContextProperty}, value)).ToArray() as IReadOnlyList<{actualItemType.Name}>";
+                var newInstanceExpression = wrapResource.NewInstanceExpression(new[]
+                {
+                    new ParameterInvocation(wrapResource.OptionsParameter, w => w.Append($"{ContextProperty}")),
+                    new ParameterInvocation(wrapResource.ResourceIdentifierParameter, w => w.Append($"value.Id")),
+                    new ParameterInvocation(wrapResource.ResourceDataParameter, w => w.Append($"value")),
+                });
+                converter = $".Select(value => {newInstanceExpression}).ToArray() as IReadOnlyList<{wrapResource.Type.Name}>";
             }
             var valueProperty = ".Value";
             if (operation.ReturnType!.IsFrameworkType && operation.ReturnType.FrameworkType == typeof(IReadOnlyList<>))
@@ -534,15 +562,27 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected virtual void WriteNormalMethodResponse(MgmtRestOperation operation, bool async, bool shouldThrowExceptionWhenNull = false)
         {
-            var actualReturnType = WrapResourceDataType(operation.ReturnType, operation);
-            if (actualReturnType != operation.ReturnType)
+            var wrapResource = WrapResourceDataType(operation.ReturnType, operation);
+            if (wrapResource != null)
             {
                 if (shouldThrowExceptionWhenNull)
                 {
                     _writer.Line($"if (response.Value == null)");
                     _writer.Line($"throw {GetAwait(async)} {ClientDiagnosticsField}.{CreateMethodName("CreateRequestFailedException", async)}(response.GetRawResponse()){GetConfigureAwait(async)};");
                 }
-                _writer.Line($"return {typeof(Response)}.FromValue(new {actualReturnType!.Name}({ContextProperty}, response.Value), response.GetRawResponse());");
+
+                FormattableString dataExpression = $"response.Value";
+                FormattableString idExpression = $"{dataExpression}.Id";
+                if (wrapResource.ResourceData.IsIdString())
+                    idExpression = $"new {typeof(ResourceIdentifier)}({idExpression})";
+
+                var newInstanceExpression = wrapResource.NewInstanceExpression(new[]
+                        {
+                            new ParameterInvocation(wrapResource.OptionsParameter, w => w.Append($"{ContextProperty}")),
+                            new ParameterInvocation(wrapResource.ResourceIdentifierParameter, w => w.Append(idExpression)),
+                            new ParameterInvocation(wrapResource.ResourceDataParameter, w => w.Append(dataExpression)),
+                        });
+                _writer.Line($"return {typeof(Response)}.FromValue({newInstanceExpression}, response.GetRawResponse());");
             }
             else
             {
@@ -681,7 +721,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             if (operation.Operation.IsLongRunning)
             {
                 var longRunningOperation = AsMgmtOperation(Context.Library.GetLongRunningOperation(operation.Operation));
-                if (longRunningOperation.WrapperType != null)
+                if (longRunningOperation.WrapperResource != null)
                 {
                     _writer.Append($"{ContextProperty}, ");
                 }
@@ -712,9 +752,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
         }
         #endregion
 
-        protected virtual CSharpType? WrapResourceDataType(CSharpType? type, MgmtRestOperation operation)
+        protected virtual Resource? WrapResourceDataType(CSharpType? type, MgmtRestOperation operation)
         {
-            return type;
+            return null;
         }
 
         protected virtual bool IsResourceDataType(CSharpType? type, MgmtRestOperation operation)
@@ -794,7 +834,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 LongRunningOperation lro = Context.Library.GetLongRunningOperation(operation);
                 MgmtLongRunningOperation longRunningOperation = AsMgmtOperation(lro);
-                returnType = longRunningOperation.WrapperType != null ? longRunningOperation.WrapperType : longRunningOperation.ResultType;
+                returnType = longRunningOperation.WrapperResource?.Type ?? longRunningOperation.ResultType;
             }
             else
             {

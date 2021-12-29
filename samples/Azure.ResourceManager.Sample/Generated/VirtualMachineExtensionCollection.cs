@@ -139,7 +139,7 @@ namespace Azure.ResourceManager.Sample
                 var response = _virtualMachineExtensionsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmExtensionName, expand, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new VirtualMachineExtension(Parent, response.Value), response.GetRawResponse());
+                return Response.FromValue(new VirtualMachineExtension(Parent, response.Value.Id, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -170,7 +170,7 @@ namespace Azure.ResourceManager.Sample
                 var response = await _virtualMachineExtensionsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmExtensionName, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new VirtualMachineExtension(Parent, response.Value), response.GetRawResponse());
+                return Response.FromValue(new VirtualMachineExtension(Parent, response.Value.Id, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -198,7 +198,7 @@ namespace Azure.ResourceManager.Sample
                 var response = _virtualMachineExtensionsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmExtensionName, expand, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<VirtualMachineExtension>(null, response.GetRawResponse())
-                    : Response.FromValue(new VirtualMachineExtension(this, response.Value), response.GetRawResponse());
+                    : Response.FromValue(new VirtualMachineExtension(this, response.Value.Id, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -226,7 +226,7 @@ namespace Azure.ResourceManager.Sample
                 var response = await _virtualMachineExtensionsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmExtensionName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<VirtualMachineExtension>(null, response.GetRawResponse())
-                    : Response.FromValue(new VirtualMachineExtension(this, response.Value), response.GetRawResponse());
+                    : Response.FromValue(new VirtualMachineExtension(this, response.Value.Id, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -300,7 +300,7 @@ namespace Azure.ResourceManager.Sample
             try
             {
                 var response = _virtualMachineExtensionsRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, expand, cancellationToken);
-                return Response.FromValue(response.Value.Value.Select(value => new VirtualMachineExtension(Parent, value)).ToArray() as IReadOnlyList<VirtualMachineExtension>, response.GetRawResponse());
+                return Response.FromValue(response.Value.Value.Select(value => new VirtualMachineExtension(Parent, value.Id, value)).ToArray() as IReadOnlyList<VirtualMachineExtension>, response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -322,7 +322,7 @@ namespace Azure.ResourceManager.Sample
             try
             {
                 var response = await _virtualMachineExtensionsRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, expand, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(response.Value.Value.Select(value => new VirtualMachineExtension(Parent, value)).ToArray() as IReadOnlyList<VirtualMachineExtension>, response.GetRawResponse());
+                return Response.FromValue(response.Value.Value.Select(value => new VirtualMachineExtension(Parent, value.Id, value)).ToArray() as IReadOnlyList<VirtualMachineExtension>, response.GetRawResponse());
             }
             catch (Exception e)
             {

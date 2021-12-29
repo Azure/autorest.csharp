@@ -39,11 +39,12 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Initializes a new instance of the <see cref = "DedicatedHost"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
-        /// <param name="resource"> The resource that is the target of operations. </param>
-        internal DedicatedHost(ArmResource options, DedicatedHostData resource) : base(options, resource.Id)
+        /// <param name="id"> The identifier of the resource that is the target of operations. </param>
+        /// <param name="data"> The resource that is the target of operations. </param>
+        internal DedicatedHost(ArmResource options, ResourceIdentifier id, DedicatedHostData data) : base(options, id)
         {
             HasData = true;
-            _data = resource;
+            _data = data;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _dedicatedHostsRestClient = new DedicatedHostsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
@@ -104,7 +105,7 @@ namespace Azure.ResourceManager.Sample
                 var response = await _dedicatedHostsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new DedicatedHost(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new DedicatedHost(this, response.Value.Id, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -127,7 +128,7 @@ namespace Azure.ResourceManager.Sample
                 var response = _dedicatedHostsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new DedicatedHost(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new DedicatedHost(this, response.Value.Id, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -222,7 +223,7 @@ namespace Azure.ResourceManager.Sample
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _dedicatedHostsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new DedicatedHost(this, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new DedicatedHost(this, originalResponse.Value.Id, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -251,7 +252,7 @@ namespace Azure.ResourceManager.Sample
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _dedicatedHostsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
-                return Response.FromValue(new DedicatedHost(this, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new DedicatedHost(this, originalResponse.Value.Id, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -280,7 +281,7 @@ namespace Azure.ResourceManager.Sample
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _dedicatedHostsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new DedicatedHost(this, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new DedicatedHost(this, originalResponse.Value.Id, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -309,7 +310,7 @@ namespace Azure.ResourceManager.Sample
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _dedicatedHostsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
-                return Response.FromValue(new DedicatedHost(this, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new DedicatedHost(this, originalResponse.Value.Id, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -337,7 +338,7 @@ namespace Azure.ResourceManager.Sample
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _dedicatedHostsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new DedicatedHost(this, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new DedicatedHost(this, originalResponse.Value.Id, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -365,7 +366,7 @@ namespace Azure.ResourceManager.Sample
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _dedicatedHostsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
-                return Response.FromValue(new DedicatedHost(this, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new DedicatedHost(this, originalResponse.Value.Id, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {

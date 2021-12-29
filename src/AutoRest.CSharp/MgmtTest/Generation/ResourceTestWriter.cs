@@ -115,12 +115,12 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             _writer.Line($"var {resourceVariableName} = GetArmClient().Get{resource.Type.Name}(new {typeof(ResourceIdentifier)}({MgmtBaseTestWriter.FormatResourceId(requestPath):L}));");
         }
 
-        protected override CSharpType? WrapResourceDataType(CSharpType? type, MgmtRestOperation operation)
+        protected override Resource? WrapResourceDataType(CSharpType? type, MgmtRestOperation operation)
         {
             if (!IsResourceDataType(type, operation))
-                return type;
+                return null;
 
-            return _resource.Type;
+            return _resource;
         }
 
         protected override bool IsResourceDataType(CSharpType? type, MgmtRestOperation operation)

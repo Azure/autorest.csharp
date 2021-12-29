@@ -140,7 +140,7 @@ namespace Azure.ResourceManager.Sample
                 var response = _dedicatedHostsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, hostName, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new DedicatedHost(Parent, response.Value), response.GetRawResponse());
+                return Response.FromValue(new DedicatedHost(Parent, response.Value.Id, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -170,7 +170,7 @@ namespace Azure.ResourceManager.Sample
                 var response = await _dedicatedHostsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, hostName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new DedicatedHost(Parent, response.Value), response.GetRawResponse());
+                return Response.FromValue(new DedicatedHost(Parent, response.Value.Id, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -197,7 +197,7 @@ namespace Azure.ResourceManager.Sample
                 var response = _dedicatedHostsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, hostName, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<DedicatedHost>(null, response.GetRawResponse())
-                    : Response.FromValue(new DedicatedHost(this, response.Value), response.GetRawResponse());
+                    : Response.FromValue(new DedicatedHost(this, response.Value.Id, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -224,7 +224,7 @@ namespace Azure.ResourceManager.Sample
                 var response = await _dedicatedHostsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, hostName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<DedicatedHost>(null, response.GetRawResponse())
-                    : Response.FromValue(new DedicatedHost(this, response.Value), response.GetRawResponse());
+                    : Response.FromValue(new DedicatedHost(this, response.Value.Id, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -298,7 +298,7 @@ namespace Azure.ResourceManager.Sample
                 try
                 {
                     var response = _dedicatedHostsRestClient.ListByHostGroup(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new DedicatedHost(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new DedicatedHost(Parent, value.Id, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -313,7 +313,7 @@ namespace Azure.ResourceManager.Sample
                 try
                 {
                     var response = _dedicatedHostsRestClient.ListByHostGroupNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new DedicatedHost(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new DedicatedHost(Parent, value.Id, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -339,7 +339,7 @@ namespace Azure.ResourceManager.Sample
                 try
                 {
                     var response = await _dedicatedHostsRestClient.ListByHostGroupAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new DedicatedHost(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new DedicatedHost(Parent, value.Id, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -354,7 +354,7 @@ namespace Azure.ResourceManager.Sample
                 try
                 {
                     var response = await _dedicatedHostsRestClient.ListByHostGroupNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new DedicatedHost(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new DedicatedHost(Parent, value.Id, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {

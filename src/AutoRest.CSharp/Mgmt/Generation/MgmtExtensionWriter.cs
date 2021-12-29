@@ -185,7 +185,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             var pagingMethod = clientOperation.First().GetPagingMethod(Context)!;
             var itemType = pagingMethod.PagingResponse.ItemType;
-            var actualItemType = WrapResourceDataType(itemType, clientOperation.First())!;
+            var wrapResource = WrapResourceDataType(itemType, clientOperation.First());
+            var actualItemType = wrapResource?.Type ?? itemType;
 
             _writer.WriteXmlDocumentationSummary($"Lists the {actualItemType.Name.LastWordToPlural()} for this <see cref=\"{ExtensionOperationVariableType}\" />.");
             _writer.WriteXmlDocumentationParameter($"{ExtensionOperationVariableName}", $"The <see cref=\"{ExtensionOperationVariableType}\" /> instance the method will execute against.");
@@ -217,7 +218,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
             bool async)
         {
             var pagingMethod = operation.GetPagingMethod(Context)!;
-            var returnType = new CSharpType(typeof(Page<>), WrapResourceDataType(itemType, operation)!).WrapAsync(async);
+            var wrapResource = WrapResourceDataType(itemType, operation);
+            var actualItemType = wrapResource?.Type ?? itemType;
+            var returnType = new CSharpType(typeof(Page<>), actualItemType).WrapAsync(async);
 
             var nextLinkName = pagingMethod.PagingResponse.NextLinkProperty?.Declaration.Name;
             var itemName = pagingMethod.PagingResponse.ItemProperty.Declaration.Name;
@@ -302,7 +305,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
             _writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
             _writer.WriteXmlDocumentationRequiredParametersException(methodParameters);
-            var returnType = new CSharpType(typeof(IReadOnlyList<>), WrapResourceDataType(itemType, clientOperation.First())!);
+            var wrapResource = WrapResourceDataType(itemType, clientOperation.First());
+            var actualItemType = wrapResource?.Type ?? itemType;
+            var returnType = new CSharpType(typeof(IReadOnlyList<>), actualItemType);
 
             WriteNormalMethodSignature(GetResponseType(returnType, async), methodName, methodParameters, async, clientOperation.Accessibility, true);
 
@@ -344,7 +349,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
             _writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
             _writer.WriteXmlDocumentationRequiredParametersException(methodParameters);
-            var returnType = WrapResourceDataType(clientOperation.ReturnType, clientOperation.First());
+            var returnType = WrapResourceDataType(clientOperation.ReturnType, clientOperation.First())?.Type ?? clientOperation.ReturnType;
 
             WriteNormalMethodSignature(GetResponseType(returnType, async), methodName, methodParameters, async, clientOperation.Accessibility, true);
 
@@ -379,10 +384,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
         /// <param name="type"></param>
         /// <param name="operation"></param>
         /// <returns></returns>
-        protected override CSharpType? WrapResourceDataType(CSharpType? type, MgmtRestOperation operation)
+        protected override Resource? WrapResourceDataType(CSharpType? type, MgmtRestOperation operation)
         {
             if (!IsResourceDataType(type, operation))
-                return type;
+                return null;
 
             // we need to find the correct resource type that links with this resource data
             var candidates = new List<RequestPath>();
@@ -399,11 +404,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             // we should have a list of candidates, return the original type if there is no candidates
             if (candidates.Count == 0)
-                return type;
+                return null;
 
             var selectedResourcePath = candidates.OrderBy(path => path.Count).First();
 
-            return Context.Library.GetArmResource(selectedResourcePath).Type;
+            return Context.Library.GetArmResource(selectedResourcePath);
         }
 
         /// <summary>

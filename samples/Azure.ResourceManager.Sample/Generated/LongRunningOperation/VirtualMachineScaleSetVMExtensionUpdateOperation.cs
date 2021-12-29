@@ -65,13 +65,15 @@ namespace Azure.ResourceManager.Sample.Models
         VirtualMachineScaleSetVirtualMachineExtension IOperationSource<VirtualMachineScaleSetVirtualMachineExtension>.CreateResult(Response response, CancellationToken cancellationToken)
         {
             using var document = JsonDocument.Parse(response.ContentStream);
-            return new VirtualMachineScaleSetVirtualMachineExtension(_operationBase, VirtualMachineExtensionData.DeserializeVirtualMachineExtensionData(document.RootElement));
+            var data = VirtualMachineExtensionData.DeserializeVirtualMachineExtensionData(document.RootElement);
+            return new VirtualMachineScaleSetVirtualMachineExtension(_operationBase, _operationBase.Id, data);
         }
 
         async ValueTask<VirtualMachineScaleSetVirtualMachineExtension> IOperationSource<VirtualMachineScaleSetVirtualMachineExtension>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-            return new VirtualMachineScaleSetVirtualMachineExtension(_operationBase, VirtualMachineExtensionData.DeserializeVirtualMachineExtensionData(document.RootElement));
+            var data = VirtualMachineExtensionData.DeserializeVirtualMachineExtensionData(document.RootElement);
+            return new VirtualMachineScaleSetVirtualMachineExtension(_operationBase, _operationBase.Id, data);
         }
     }
 }

@@ -32,21 +32,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal class ResourceWriter : MgmtClientBaseWriter
     {
-        protected Parameter OptionsParameter => new Parameter(Name: "options", Description: $"The client parameters to use in these operations.",
-                            Type: typeof(ArmResource), DefaultValue: null, ValidateNotNull: false);
-        protected Parameter DataParameter => new Parameter(Name: "resource", Description: $"The resource that is the target of operations.",
-                        Type: _resourceData.Type, DefaultValue: null, ValidateNotNull: false);
-        protected Parameter IdParameter => new Parameter(Name: "id", Description: $"The identifier of the resource that is the target of operations.",
-                        Type: typeof(ResourceIdentifier), DefaultValue: null, ValidateNotNull: false);
-        protected Parameter ClientOptionsParameter => new Parameter(Name: "clientOptions", Description: $"The client options to build client context.",
-                        Type: typeof(ArmClientOptions), DefaultValue: null, ValidateNotNull: false);
-        protected Parameter CredentialParameter => new Parameter(Name: "credential", Description: $"The credential to build client context.",
-                        Type: typeof(TokenCredential), DefaultValue: null, ValidateNotNull: false);
-        protected Parameter UriParameter => new Parameter(Name: "uri", Description: $"The uri to build client context.",
-                        Type: typeof(Uri), DefaultValue: null, ValidateNotNull: false);
-        protected Parameter PipelineParameter => new Parameter(Name: "pipeline", Description: $"The pipeline to build client context.",
-                        Type: typeof(HttpPipeline), DefaultValue: null, ValidateNotNull: false);
-
         protected Resource _resource;
         protected ResourceData _resourceData;
         private bool _isITaggableResource = false;
@@ -119,7 +104,7 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
                     // - https://github.com/Azure/azure-rest-api-specs/blob/719b74f77b92eb1ec3814be6c4488bcf6b651733/specification/storage/resource-manager/Microsoft.Storage/stable/2021-04-01/blob.json#L146
                     // so here we have to use `Seqment.BuildSerializedSegments` instead of `RequestPath.SerializedPath` which could be from `RestClientMethod.Operation.GetHttpPath`
                     _writer.Line($"var resourceId = $\"{Segment.BuildSerializedSegments(requestPath)}\";");
-                    _writer.Line($"return new ResourceIdentifier(resourceId);");
+                    _writer.Line($"return new {typeof(ResourceIdentifier)}(resourceId);");
                 }
             }
         }
@@ -144,47 +129,43 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
             { }
 
             _writer.Line();
-
-            FormattableString idPropString;
-            if (_resourceData.IsIdString())
-                idPropString = $"new {typeof(ResourceIdentifier)}({DataParameter.Name}.Id)";
-            else
-                idPropString = $"{DataParameter.Name}.Id";
             // write "resource + ResourceData" constructor
             var resourceDataConstructor = new MethodSignature(
                 name: TypeOfThis.Name,
                 description: $"Initializes a new instance of the <see cref = \"{TypeOfThis.Name}\"/> class.",
                 modifiers: "internal",
-                parameters: new[] { OptionsParameter, DataParameter },
+                parameters: new[] { _resource.OptionsParameter, _resource.ResourceIdentifierParameter, _resource.ResourceDataParameter },
                 baseMethod: new MethodSignature(
                     name: TypeOfThis.Name,
                     description: null,
                     modifiers: "protected",
-                    parameters: new[] { OptionsParameter, new ParameterInvocation(IdParameter, idPropString) })
+                    parameters: new[] { _resource.OptionsParameter, _resource.ResourceIdentifierParameter })
                 );
             _writer.WriteMethodDocumentation(resourceDataConstructor);
             using (_writer.WriteMethodDeclaration(resourceDataConstructor))
             {
                 _writer.Line($"HasData = true;");
-                _writer.Line($"_data = {DataParameter.Name};");
+                _writer.Line($"_data = {_resource.ResourceDataParameter.Name};");
                 if (IsSingleton)
-                    _writer.Line($"Parent = {OptionsParameter.Name};");
+                    _writer.Line($"Parent = {_resource.OptionsParameter.Name};");
                 _writer.Line($"{ClientDiagnosticsField} = new {typeof(ClientDiagnostics)}(ClientOptions);");
                 WriteRestClientAssignments();
             }
 
+            // we never use the following constructor inside the SDK, and it is internal, therefore omit this.
+            // uncomment the following if in the future we need this constructor again
             _writer.Line();
             // write "resource + ResourceIdentifier" constructor
             var resourceIdConstructor = new MethodSignature(
                 name: TypeOfThis.Name,
                 description: $"Initializes a new instance of the <see cref=\"{TypeOfThis.Name}\"/> class.",
                 modifiers: "internal",
-                parameters: new[] { OptionsParameter, IdParameter },
+                parameters: new[] { _resource.OptionsParameter, _resource.ResourceIdentifierParameter },
                 baseMethod: new MethodSignature(
                     name: TypeOfThis.Name,
                     description: null,
                     modifiers: "protected",
-                    parameters: new[] { OptionsParameter, IdParameter })
+                    parameters: new[] { _resource.OptionsParameter, _resource.ResourceIdentifierParameter })
             );
             _writer.WriteMethodDocumentation(resourceIdConstructor);
             using (_writer.WriteMethodDeclaration(resourceIdConstructor))
@@ -201,12 +182,12 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
                 name: TypeOfThis.Name,
                 description: $"Initializes a new instance of the <see cref=\"{TypeOfThis.Name}\"/> class.",
                 modifiers: "internal",
-                parameters: new[] { ClientOptionsParameter, CredentialParameter, UriParameter, PipelineParameter, IdParameter },
+                parameters: new[] { _resource.ClientOptionsParameter, _resource.CredentialParameter, _resource.UriParameter, _resource.PipelineParameter, _resource.ResourceIdentifierParameter },
                 baseMethod: new MethodSignature(
                     name: TypeOfThis.Name,
                     description: null,
                     modifiers: "protected",
-                    parameters: new[] { ClientOptionsParameter, CredentialParameter, UriParameter, PipelineParameter, IdParameter })
+                    parameters: new[] { _resource.ClientOptionsParameter, _resource.CredentialParameter, _resource.UriParameter, _resource.PipelineParameter, _resource.ResourceIdentifierParameter })
                 );
 
             _writer.WriteMethodDocumentation(clientOptionsConstructor);
@@ -344,12 +325,12 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
             WriteMethod(operation, async);
         }
 
-        protected override CSharpType? WrapResourceDataType(CSharpType? type, MgmtRestOperation operation)
+        protected override Resource? WrapResourceDataType(CSharpType? type, MgmtRestOperation operation)
         {
             if (!IsResourceDataType(type, operation))
-                return type;
+                return null;
 
-            return _resource.Type;
+            return _resource;
         }
 
         protected override bool IsResourceDataType(CSharpType? type, MgmtRestOperation clientOperation)
@@ -506,12 +487,22 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
         private void WriteTaggableCommonMethodBranch(MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMapping, bool async)
         {
             _writer.Append($"var originalResponse = {GetAwait(async)} ");
-            // TODO -- we need to implement the branches here as well
-            //var pathParamNames = GetPathParametersName(_resource.GetMethod!.RestClientMethod, _resource.OperationGroup, Context).ToList();
-            _writer.Append($"{GetRestClientVariableName(operation.RestClient)}.{CreateMethodName(operation.Method.Name, async)}( ");
+            _writer.Append($"{GetRestClientVariableName(operation.RestClient)}.{CreateMethodName(operation.Method.Name, async)}(");
             WriteArguments(_writer, parameterMapping, true);
             _writer.Line($"cancellationToken){GetConfigureAwait(async)};");
-            _writer.Line($"return {typeof(Response)}.FromValue(new {TypeOfThis}(this, originalResponse.Value), originalResponse.GetRawResponse());");
+
+            FormattableString dataExpression = $"originalResponse.Value";
+            FormattableString idExpression = $"{dataExpression}.Id";
+            if (_resource.ResourceData.IsIdString())
+                idExpression = $"new {typeof(ResourceIdentifier)}({idExpression})";
+
+            var newInstanceExpression = _resource.NewInstanceExpression(new[]
+            {
+                new ParameterInvocation(_resource.OptionsParameter, w => w.Append($"this")),
+                new ParameterInvocation(_resource.ResourceIdentifierParameter, w => w.Append(idExpression)),
+                new ParameterInvocation(_resource.ResourceDataParameter, w => w.Append(dataExpression)),
+            });
+            _writer.Line($"return {typeof(Response)}.FromValue({newInstanceExpression}, originalResponse.GetRawResponse());");
         }
 
         protected override void WriteResourceCollectionEntry(Resource resource)

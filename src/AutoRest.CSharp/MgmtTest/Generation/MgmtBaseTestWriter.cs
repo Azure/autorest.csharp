@@ -668,17 +668,18 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             else if (clientOperation.IsPagingOperation(Context))
             {
                 var itemType = clientOperation.First(restOperation => restOperation.IsPagingOperation(Context)).GetPagingMethod(Context)!.PagingResponse.ItemType;
-                var actualItemType = WrapResourceDataType(itemType, clientOperation.First())!;
+                var actualItemType = WrapResourceDataType(itemType, clientOperation.First())?.Type ?? itemType;
                 return actualItemType.WrapPageable(async);
             }
             else if (clientOperation.IsListOperation(Context, out var itemType) && methodName != "Get")
             {
-                var returnType = new CSharpType(typeof(IReadOnlyList<>), WrapResourceDataType(itemType, clientOperation.First())!);
+                var actualItemType = WrapResourceDataType(itemType, clientOperation.First())?.Type ?? itemType;
+                var returnType = new CSharpType(typeof(IReadOnlyList<>), actualItemType);
                 return GetResponseType(returnType, async);
             }
             else
             {
-                var returnType = WrapResourceDataType(clientOperation.ReturnType, clientOperation.First());
+                var returnType = WrapResourceDataType(clientOperation.ReturnType, clientOperation.First())?.Type ?? clientOperation.ReturnType;
                 return GetResponseType(returnType, async);
             }
         }
