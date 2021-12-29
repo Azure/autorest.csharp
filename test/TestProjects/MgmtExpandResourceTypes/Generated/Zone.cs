@@ -614,7 +614,7 @@ namespace MgmtExpandResourceTypes
 
         /// <summary> Gets a collection of RecordSetAs in the Zone. </summary>
         /// <returns> An object representing collection of RecordSetAs and their operations over a Zone. </returns>
-        public RecordSetACollection GetRecordSetAs()
+        public virtual RecordSetACollection GetRecordSetAs()
         {
             return new RecordSetACollection(this);
         }
@@ -624,7 +624,7 @@ namespace MgmtExpandResourceTypes
 
         /// <summary> Gets a collection of RecordSetAaaas in the Zone. </summary>
         /// <returns> An object representing collection of RecordSetAaaas and their operations over a Zone. </returns>
-        public RecordSetAaaaCollection GetRecordSetAaaas()
+        public virtual RecordSetAaaaCollection GetRecordSetAaaas()
         {
             return new RecordSetAaaaCollection(this);
         }
@@ -634,7 +634,7 @@ namespace MgmtExpandResourceTypes
 
         /// <summary> Gets a collection of RecordSetCaas in the Zone. </summary>
         /// <returns> An object representing collection of RecordSetCaas and their operations over a Zone. </returns>
-        public RecordSetCaaCollection GetRecordSetCaas()
+        public virtual RecordSetCaaCollection GetRecordSetCaas()
         {
             return new RecordSetCaaCollection(this);
         }
@@ -644,7 +644,7 @@ namespace MgmtExpandResourceTypes
 
         /// <summary> Gets a collection of RecordSetCNames in the Zone. </summary>
         /// <returns> An object representing collection of RecordSetCNames and their operations over a Zone. </returns>
-        public RecordSetCNameCollection GetRecordSetCNames()
+        public virtual RecordSetCNameCollection GetRecordSetCNames()
         {
             return new RecordSetCNameCollection(this);
         }
@@ -654,7 +654,7 @@ namespace MgmtExpandResourceTypes
 
         /// <summary> Gets a collection of RecordSetMxes in the Zone. </summary>
         /// <returns> An object representing collection of RecordSetMxes and their operations over a Zone. </returns>
-        public RecordSetMxCollection GetRecordSetMxes()
+        public virtual RecordSetMxCollection GetRecordSetMxes()
         {
             return new RecordSetMxCollection(this);
         }
@@ -664,7 +664,7 @@ namespace MgmtExpandResourceTypes
 
         /// <summary> Gets a collection of RecordSetNs in the Zone. </summary>
         /// <returns> An object representing collection of RecordSetNs and their operations over a Zone. </returns>
-        public RecordSetNsCollection GetRecordSetNs()
+        public virtual RecordSetNsCollection GetRecordSetNs()
         {
             return new RecordSetNsCollection(this);
         }
@@ -674,7 +674,7 @@ namespace MgmtExpandResourceTypes
 
         /// <summary> Gets a collection of RecordSetPtrs in the Zone. </summary>
         /// <returns> An object representing collection of RecordSetPtrs and their operations over a Zone. </returns>
-        public RecordSetPtrCollection GetRecordSetPtrs()
+        public virtual RecordSetPtrCollection GetRecordSetPtrs()
         {
             return new RecordSetPtrCollection(this);
         }
@@ -684,7 +684,7 @@ namespace MgmtExpandResourceTypes
 
         /// <summary> Gets a collection of RecordSetSoas in the Zone. </summary>
         /// <returns> An object representing collection of RecordSetSoas and their operations over a Zone. </returns>
-        public RecordSetSoaCollection GetRecordSetSoas()
+        public virtual RecordSetSoaCollection GetRecordSetSoas()
         {
             return new RecordSetSoaCollection(this);
         }
@@ -694,7 +694,7 @@ namespace MgmtExpandResourceTypes
 
         /// <summary> Gets a collection of RecordSetSrvs in the Zone. </summary>
         /// <returns> An object representing collection of RecordSetSrvs and their operations over a Zone. </returns>
-        public RecordSetSrvCollection GetRecordSetSrvs()
+        public virtual RecordSetSrvCollection GetRecordSetSrvs()
         {
             return new RecordSetSrvCollection(this);
         }
@@ -704,7 +704,7 @@ namespace MgmtExpandResourceTypes
 
         /// <summary> Gets a collection of RecordSetTxts in the Zone. </summary>
         /// <returns> An object representing collection of RecordSetTxts and their operations over a Zone. </returns>
-        public RecordSetTxtCollection GetRecordSetTxts()
+        public virtual RecordSetTxtCollection GetRecordSetTxts()
         {
             return new RecordSetTxtCollection(this);
         }

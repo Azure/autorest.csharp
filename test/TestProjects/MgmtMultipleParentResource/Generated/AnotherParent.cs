@@ -444,7 +444,7 @@ namespace MgmtMultipleParentResource
 
         /// <summary> Gets a collection of AnotherParentChildren in the AnotherParent. </summary>
         /// <returns> An object representing collection of AnotherParentChildren and their operations over a AnotherParent. </returns>
-        public AnotherParentChildCollection GetAnotherParentChildren()
+        public virtual AnotherParentChildCollection GetAnotherParentChildren()
         {
             return new AnotherParentChildCollection(this);
         }

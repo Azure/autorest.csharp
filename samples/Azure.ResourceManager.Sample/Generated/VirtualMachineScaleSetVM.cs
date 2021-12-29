@@ -910,7 +910,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Gets a collection of VirtualMachineScaleSetVirtualMachineExtensions in the VirtualMachineScaleSetVM. </summary>
         /// <returns> An object representing collection of VirtualMachineScaleSetVirtualMachineExtensions and their operations over a VirtualMachineScaleSetVM. </returns>
-        public VirtualMachineScaleSetVirtualMachineExtensionCollection GetVirtualMachineScaleSetVirtualMachineExtensions()
+        public virtual VirtualMachineScaleSetVirtualMachineExtensionCollection GetVirtualMachineScaleSetVirtualMachineExtensions()
         {
             return new VirtualMachineScaleSetVirtualMachineExtensionCollection(this);
         }

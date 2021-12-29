@@ -500,7 +500,7 @@ namespace MgmtOperations
 
         /// <summary> Gets a collection of AvailabilitySetChildren in the AvailabilitySet. </summary>
         /// <returns> An object representing collection of AvailabilitySetChildren and their operations over a AvailabilitySet. </returns>
-        public AvailabilitySetChildCollection GetAvailabilitySetChildren()
+        public virtual AvailabilitySetChildCollection GetAvailabilitySetChildren()
         {
             return new AvailabilitySetChildCollection(this);
         }

@@ -292,7 +292,7 @@ namespace MgmtKeyvault
 
         /// <summary> Gets a collection of MhsmPrivateEndpointConnections in the ManagedHsm. </summary>
         /// <returns> An object representing collection of MhsmPrivateEndpointConnections and their operations over a ManagedHsm. </returns>
-        public MhsmPrivateEndpointConnectionCollection GetMhsmPrivateEndpointConnections()
+        public virtual MhsmPrivateEndpointConnectionCollection GetMhsmPrivateEndpointConnections()
         {
             return new MhsmPrivateEndpointConnectionCollection(this);
         }
