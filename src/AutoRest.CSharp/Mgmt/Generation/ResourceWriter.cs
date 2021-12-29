@@ -472,7 +472,7 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
             _writer.WriteXmlDocumentationReturns($"An object representing collection of {resource.Type.Name.LastWordToPlural()} and their operations over a {_resource.Type.Name}.");
             _writer.WriteXmlDocumentationParameters(collection.ExtraConstructorParameters);
             var extraConstructorParameters = collection.ExtraConstructorParameters;
-            _writer.Append($"public {collection.Type.Name} Get{resource.Type.Name.ResourceNameToPlural()}(");
+            _writer.Append($"public {GetVirtual(true)} {collection.Type.Name} Get{resource.Type.Name.ResourceNameToPlural()}(");
             foreach (var parameter in collection.ExtraConstructorParameters)
             {
                 _writer.WriteParameter(parameter);
@@ -496,7 +496,7 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Gets an object representing a {resource.Type.Name} along with the instance operations that can be performed on it in the {_resource.Type.Name}.");
             _writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{resource.Type}\" /> object.");
-            using (_writer.Scope($"public {resource.Type.Name} Get{resource.Type.Name}()"))
+            using (_writer.Scope($"public {GetVirtual(true)} {resource.Type.Name} Get{resource.Type.Name}()"))
             {
                 // we cannot guarantee that the singleResourceSuffix can only have two segments (it has many different cases),
                 // therefore instead of using the extension method of ResourceIdentifier, we are just concatting this as a string
