@@ -57,6 +57,10 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase(typeof(SkuTier), ReferenceNamespace)]
         [TestCase(typeof(CreatedByType), ReferenceNamespace)]
         [TestCase(typeof(ResourceNon), ProjectNamespace)]
+        [TestCase(typeof(PrivateLinkResourceData), ReferenceNamespace)]
+        [TestCase(typeof(PrivateLinkResourceList), ReferenceNamespace)]
+        [TestCase(typeof(PrivateEndpointConnectionData), ReferenceNamespace)]
+        [TestCase(typeof(PrivateEndpointConnectionList), ReferenceNamespace)]
         public void ValidateNamespace(Type typeToTest, string expectedNamespace)
         {
             //all should be resources.models namespace from referencetype
@@ -67,7 +71,11 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase(typeof(Resource), typeof(ReferenceTypeAttribute))]
         [TestCase(typeof(TrackedResource), typeof(ReferenceTypeAttribute))]
         [TestCase(typeof(Sku), typeof(PropertyReferenceTypeAttribute))]
-        public void ValidateAttributes(Type referenceType, Type attributeType)
+        [TestCase(typeof(PrivateLinkResourceData), typeof(TypeReferenceTypeAttribute))]
+        [TestCase(typeof(PrivateLinkResourceList), typeof(TypeReferenceTypeAttribute))]
+        [TestCase(typeof(PrivateEndpointConnectionData), typeof(TypeReferenceTypeAttribute))]
+        [TestCase(typeof(PrivateEndpointConnectionList), typeof(TypeReferenceTypeAttribute))]
+        public void ValidateReferrenceTypeAttributes(Type referenceType, Type attributeType)
         {
             Assert.IsNotNull(referenceType.GetCustomAttribute(attributeType), $"ReferenceType attribute was not found for {referenceType.Name}");
             var ctors = referenceType.GetConstructors();
