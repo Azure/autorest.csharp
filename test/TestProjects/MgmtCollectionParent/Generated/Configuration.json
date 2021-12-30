@@ -1,0 +1,18 @@
+{
+  "OutputFolder": ".",
+  "Namespace": "MgmtCollectionParent",
+  "LibraryName": null,
+  "SharedSourceFolders": [
+    "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Generator.Shared",
+    "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Azure.Core.Shared"
+  ],
+  "azure-arm": true,
+  "public-clients": true,
+  "skip-csproj-packagereference": true,
+  "ListException": [
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EdgeOrder/locations/{location}/orders/{orderName}"
+  ],
+  "MgmtDebug": {
+    "ShowRequestPath": true
+  }
+}
