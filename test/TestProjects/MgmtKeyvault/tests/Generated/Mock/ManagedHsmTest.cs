@@ -32,7 +32,8 @@ namespace MgmtKeyvault.Tests.Mock
         public async Task GetAsync()
         {
             // Example: Retrieve a managed HSM Pool
-            var managedHsm = GetArmClient().GetManagedHsm(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hsm-group/providers/Microsoft.KeyVault/managedHSMs/hsm1"));
+            var managedHsmId = ManagedHsm.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "hsm-group", "hsm1");
+            var managedHsm = GetArmClient().GetManagedHsm(managedHsmId);
 
             await managedHsm.GetAsync();
         }
@@ -41,7 +42,8 @@ namespace MgmtKeyvault.Tests.Mock
         public async Task DeleteAsync()
         {
             // Example: Delete a managed HSM Pool
-            var managedHsm = GetArmClient().GetManagedHsm(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hsm-group/providers/Microsoft.KeyVault/managedHSMs/hsm1"));
+            var managedHsmId = ManagedHsm.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "hsm-group", "hsm1");
+            var managedHsm = GetArmClient().GetManagedHsm(managedHsmId);
 
             await managedHsm.DeleteAsync(true);
         }
@@ -50,8 +52,9 @@ namespace MgmtKeyvault.Tests.Mock
         public async Task UpdateAsync()
         {
             // Example: Update an existing managed HSM Pool
-            var managedHsm = GetArmClient().GetManagedHsm(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hsm-group/providers/Microsoft.KeyVault/managedHSMs/hsm1"));
-            MgmtKeyvault.ManagedHsmData parameters = new MgmtKeyvault.ManagedHsmData(location: AzureLocation.WestUS)
+            var managedHsmId = ManagedHsm.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "hsm-group", "hsm1");
+            var managedHsm = GetArmClient().GetManagedHsm(managedHsmId);
+            MgmtKeyvault.ManagedHsmData parameters = new MgmtKeyvault.ManagedHsmData(location: "westus")
             {
             };
             parameters.Tags.ReplaceWith(new Dictionary<string, string>() { ["Dept"] = "hsm", ["Environment"] = "dogfood", ["Slice"] = "A", });
@@ -62,7 +65,8 @@ namespace MgmtKeyvault.Tests.Mock
         public async Task GetMHSMPrivateLinkResourcesByMhsmResourceAsync()
         {
             // Example: KeyVaultListPrivateLinkResources
-            var managedHsm = GetArmClient().GetManagedHsm(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/managedHSMs/sample-mhsm"));
+            var managedHsmId = ManagedHsm.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-mhsm");
+            var managedHsm = GetArmClient().GetManagedHsm(managedHsmId);
 
             await foreach (var _ in managedHsm.GetMHSMPrivateLinkResourcesByMhsmResourceAsync())
             {

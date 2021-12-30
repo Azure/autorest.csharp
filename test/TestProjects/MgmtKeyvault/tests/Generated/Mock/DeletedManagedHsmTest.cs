@@ -31,7 +31,8 @@ namespace MgmtKeyvault.Tests.Mock
         public async Task GetAsync()
         {
             // Example: Retrieve a deleted managed HSM
-            var deletedManagedHsm = GetArmClient().GetDeletedManagedHsm(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.KeyVault/locations/westus/deletedManagedHSMs/hsm1"));
+            var deletedManagedHsmId = DeletedManagedHsm.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "westus", "hsm1");
+            var deletedManagedHsm = GetArmClient().GetDeletedManagedHsm(deletedManagedHsmId);
 
             await deletedManagedHsm.GetAsync();
         }
@@ -40,7 +41,8 @@ namespace MgmtKeyvault.Tests.Mock
         public async Task PurgeDeletedAsync()
         {
             // Example: Purge a managed HSM Pool
-            var deletedManagedHsm = GetArmClient().GetDeletedManagedHsm(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.KeyVault/locations/westus/deletedManagedHSMs/hsm1"));
+            var deletedManagedHsmId = DeletedManagedHsm.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "westus", "hsm1");
+            var deletedManagedHsm = GetArmClient().GetDeletedManagedHsm(deletedManagedHsmId);
 
             await deletedManagedHsm.PurgeDeletedAsync(true);
         }

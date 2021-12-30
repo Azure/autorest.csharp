@@ -31,7 +31,8 @@ namespace MgmtKeyvault.Tests.Mock
         public async Task GetAsync()
         {
             // Example: Retrieve a deleted vault
-            var deletedVault = GetArmClient().GetDeletedVault(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.KeyVault/locations/westus/deletedVaults/sample-vault"));
+            var deletedVaultId = DeletedVault.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "westus", "sample-vault");
+            var deletedVault = GetArmClient().GetDeletedVault(deletedVaultId);
 
             await deletedVault.GetAsync();
         }
@@ -40,7 +41,8 @@ namespace MgmtKeyvault.Tests.Mock
         public async Task PurgeDeletedAsync()
         {
             // Example: Purge a deleted vault
-            var deletedVault = GetArmClient().GetDeletedVault(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.KeyVault/locations/westus/deletedVaults/sample-vault"));
+            var deletedVaultId = DeletedVault.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "westus", "sample-vault");
+            var deletedVault = GetArmClient().GetDeletedVault(deletedVaultId);
 
             await deletedVault.PurgeDeletedAsync(true);
         }

@@ -110,10 +110,13 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             }
         }
 
-        public string WriteGetResource(Resource resource, string requestPath, ExampleModel exampleModel)
+        public string WriteGetResource(Resource resource, string resourceIdentifierParams, ExampleModel exampleModel)
         {
             var resourceVariableName = useVariableName(resource.Type.Name.FirstCharToLowerCase());
-            _writer.Line($"var {resourceVariableName} = GetArmClient().Get{resource.Type.Name}(new {typeof(Azure.Core.ResourceIdentifier)}({MgmtBaseTestWriter.FormatResourceId(requestPath):L}));");
+            var idVar = $"{resource.Type.Name.FirstCharToLowerCase()}Id";
+            idVar = useVariableName(idVar);
+            _writer.Line($"var {idVar} = {resource.Type}.CreateResourceIdentifier({resourceIdentifierParams});");
+            _writer.Line($"var {resourceVariableName} = GetArmClient().Get{resource.Type.Name}({idVar});");
             return resourceVariableName;
         }
 
@@ -147,11 +150,11 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
                 foreach (var exampleModel in exampleGroup?.Examples ?? Enumerable.Empty<ExampleModel>())
                 {
-                    var realRequestPath = ParseRequestPath(resource, operation.RequestPath.SerializedPath, exampleModel);
-                    if (realRequestPath is null)
+                    if (resource.RequestPaths is null || resource.RequestPaths.Count()==0)
                     {
                         continue;
                     }
+                    string resourceIdentifierParams = ComposeResourceIdentifierParams(resource.RequestPaths.First(), exampleModel);
                     WriteTestDecorator();
                     var testCaseSuffix = exampleIdx > 0 ? (exampleIdx + 1).ToString() : String.Empty;
                     _writer.Append($"public {GetAsyncKeyword(async)} {MgmtBaseTestWriter.GetTaskOrVoid(async)} {(resource == _resource ? "" : resource.Type.Name)}{testMethodName}{testCaseSuffix}()");

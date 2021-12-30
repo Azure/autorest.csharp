@@ -162,7 +162,10 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             {
                 case Resource parentResource:
                     {
-                        _writer.Append($"var collection = GetArmClient().Get{parentResource.Type.Name}(new {typeof(Azure.Core.ResourceIdentifier)}({MgmtBaseTestWriter.FormatResourceId(realRequestPath):L}))");
+                        var idVar = $"{parentResource.Type.Name.FirstCharToLowerCase()}Id";
+                        idVar = useVariableName(idVar);
+                        _writer.Line($"var {idVar} = {parentResource.Type}.CreateResourceIdentifier({ComposeResourceIdentifierParams(parentResource.RequestPaths.First(), exampleModel)});");
+                        _writer.Append($"var collection = GetArmClient().Get{parentResource.Type.Name}({idVar})");
                         break;
                     }
                 case Mgmt.Output.ResourceGroupExtensions:
@@ -226,7 +229,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
             foreach (var tp in mgmtParentResources)
             {
-                if (tp is Resource rt && ParseRequestPath(rt, requestPath, exampleModel) is not null)
+                if (tp is Resource rt && rt.RequestPaths is not null && rt.RequestPaths.Count() !=0)
                 {
                     return tp;
                 }
@@ -265,7 +268,6 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 var exampleGroup = MgmtBaseTestWriter.FindExampleGroup(Context, operation);
                 if (exampleGroup is null || exampleGroup.Examples.Count() == 0)
                     return;
-                // var testMethodParameters = GenExampleInstanceMethodParameters(clientOperation);
                 var testMethodName = CreateMethodName(methodName, async);
 
                 foreach (var exampleModel in (exampleGroup?.Examples ?? Enumerable.Empty<ExampleModel>()))
@@ -283,7 +285,6 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     {
                         _writer.Line($"// Example: {exampleModel.Name}");
                         clearVariableNames();
-                        // WriteGetCollection(clientOperation, exampleModel, async);
                         WriteGetCollection(parentTp, operation.RequestPath.SerializedPath, exampleModel);
 
                         List<string> paramNames = WriteOperationParameters(methodParameters, new List<Parameter>(), exampleModel);

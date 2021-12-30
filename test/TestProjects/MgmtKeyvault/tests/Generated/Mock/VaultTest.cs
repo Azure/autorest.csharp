@@ -31,7 +31,8 @@ namespace MgmtKeyvault.Tests.Mock
         public async Task GetAsync()
         {
             // Example: Retrieve a vault
-            var vault = GetArmClient().GetVault(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group/providers/Microsoft.KeyVault/vaults/sample-vault"));
+            var vaultId = Vault.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-resource-group", "sample-vault");
+            var vault = GetArmClient().GetVault(vaultId);
 
             await vault.GetAsync();
         }
@@ -40,7 +41,8 @@ namespace MgmtKeyvault.Tests.Mock
         public async Task DeleteAsync()
         {
             // Example: Delete a vault
-            var vault = GetArmClient().GetVault(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group/providers/Microsoft.KeyVault/vaults/sample-vault"));
+            var vaultId = Vault.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-resource-group", "sample-vault");
+            var vault = GetArmClient().GetVault(vaultId);
 
             await vault.DeleteAsync(true);
         }
@@ -49,7 +51,8 @@ namespace MgmtKeyvault.Tests.Mock
         public async Task UpdateAsync()
         {
             // Example: Update an existing vault
-            var vault = GetArmClient().GetVault(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group/providers/Microsoft.KeyVault/vaults/sample-vault"));
+            var vaultId = Vault.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-resource-group", "sample-vault");
+            var vault = GetArmClient().GetVault(vaultId);
             MgmtKeyvault.Models.VaultPatchParameters parameters = new MgmtKeyvault.Models.VaultPatchParameters()
             {
                 Properties = new MgmtKeyvault.Models.VaultPatchProperties()
@@ -69,7 +72,8 @@ namespace MgmtKeyvault.Tests.Mock
         public async Task UpdateAccessPolicyAsync()
         {
             // Example: Add an access policy, or update an access policy with new permissions
-            var vault = GetArmClient().GetVault(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/vaults/sample-vault"));
+            var vaultId = Vault.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-vault");
+            var vault = GetArmClient().GetVault(vaultId);
             MgmtKeyvault.Models.AccessPolicyUpdateKind operationKind = MgmtKeyvault.Models.AccessPolicyUpdateKind.Add;
             MgmtKeyvault.Models.VaultAccessPolicyParameters parameters = new MgmtKeyvault.Models.VaultAccessPolicyParameters(properties: new MgmtKeyvault.Models.VaultAccessPolicyProperties(accessPolicies: new List<MgmtKeyvault.Models.AccessPolicyEntry>()
 {
@@ -82,7 +86,8 @@ new MgmtKeyvault.Models.AccessPolicyEntry(tenantId: Guid.Parse("00000000-0000-00
         public async Task GetPrivateLinkResourcesAsync()
         {
             // Example: KeyVaultListPrivateLinkResources
-            var vault = GetArmClient().GetVault(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/vaults/sample-vault"));
+            var vaultId = Vault.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-vault");
+            var vault = GetArmClient().GetVault(vaultId);
 
             await foreach (var _ in vault.GetPrivateLinkResourcesAsync())
             {

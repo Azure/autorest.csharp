@@ -734,6 +734,31 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             return String.Join("/", result.ToArray());
         }
 
+        public string ComposeResourceIdentifierParams(RequestPath requestPath, ExampleModel exampleModel)
+        {
+            return string.Join(", ", requestPath.Where(segment => segment.IsReference).Select(segment => {
+                var value = "\"default\"";
+                foreach (var parameterValue in exampleModel.ClientParameters.Concat(exampleModel.MethodParameters))
+                {
+                    if (parameterValue.Parameter.CSharpName() == segment.ReferenceName)
+                    {
+                        value = $"\"{parameterValue.ExampleValue.RawValue}\"";
+                    }
+                }
+
+                if (segment.ReferenceName == "subscriptionId")
+                {
+                    Regex regex = new Regex("^{[A-Z0-9]{8}-([A-Z0-9]{4}-){3}[A-Z0-9]{12}}$");
+                    Match match = regex.Match(value);
+                    if (!match.Success)
+                    {
+                        value = "\"00000000-0000-0000-0000-000000000000\"";
+                    }
+                }
+                return value;
+            }));
+        }
+
         public string? FindParameterValueByName(ExampleModel exampleModel, string parameterName)
         {
             foreach (var parameterValue in exampleModel.ClientParameters.Concat(exampleModel.MethodParameters))

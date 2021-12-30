@@ -31,7 +31,8 @@ namespace MgmtKeyvault.Tests.Mock
         public async Task GetAsync()
         {
             // Example: ManagedHsmGetPrivateEndpointConnection
-            var mhsmPrivateEndpointConnection = GetArmClient().GetMhsmPrivateEndpointConnection(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/managedHSMs/sample-mhsm/privateEndpointConnections/sample-pec"));
+            var mhsmPrivateEndpointConnectionId = MhsmPrivateEndpointConnection.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-mhsm", "sample-pec");
+            var mhsmPrivateEndpointConnection = GetArmClient().GetMhsmPrivateEndpointConnection(mhsmPrivateEndpointConnectionId);
 
             await mhsmPrivateEndpointConnection.GetAsync();
         }
@@ -40,7 +41,8 @@ namespace MgmtKeyvault.Tests.Mock
         public async Task DeleteAsync()
         {
             // Example: ManagedHsmDeletePrivateEndpointConnection
-            var mhsmPrivateEndpointConnection = GetArmClient().GetMhsmPrivateEndpointConnection(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/managedHSMs/sample-mhsm/privateEndpointConnections/sample-pec"));
+            var mhsmPrivateEndpointConnectionId = MhsmPrivateEndpointConnection.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-mhsm", "sample-pec");
+            var mhsmPrivateEndpointConnection = GetArmClient().GetMhsmPrivateEndpointConnection(mhsmPrivateEndpointConnectionId);
 
             await mhsmPrivateEndpointConnection.DeleteAsync(true);
         }
