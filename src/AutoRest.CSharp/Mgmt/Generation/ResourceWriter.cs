@@ -472,7 +472,7 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
             _writer.WriteXmlDocumentationReturns($"An object representing collection of {resource.Type.Name.LastWordToPlural()} and their operations over a {_resource.Type.Name}.");
             _writer.WriteXmlDocumentationParameters(collection.ExtraConstructorParameters);
             var extraConstructorParameters = collection.ExtraConstructorParameters;
-            _writer.Append($"public {GetVirtual(true)} {collection.Type.Name} Get{resource.Type.Name.ResourceNameToPlural()}(");
+            _writer.Append($"public {GetVirtual(true)} {collection.Type} Get{resource.Type.Name.ResourceNameToPlural()}(");
             foreach (var parameter in collection.ExtraConstructorParameters)
             {
                 _writer.WriteParameter(parameter);
