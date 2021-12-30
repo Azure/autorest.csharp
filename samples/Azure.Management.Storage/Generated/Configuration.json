@@ -11,7 +11,8 @@
   "head-as-boolean": true,
   "skip-csproj-packagereference": true,
   "RequestPathToParent": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/deletedAccounts": "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/locations/{location}/deletedAccounts/{deletedAccountName}"
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/deletedAccounts": "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/locations/{location}/deletedAccounts/{deletedAccountName}",
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}"
   },
   "OperationPositions": {
     "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/deletedAccounts": [
