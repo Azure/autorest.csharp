@@ -9,9 +9,17 @@
   "azure-arm": true,
   "public-clients": true,
   "skip-csproj-packagereference": true,
-  "ListException": [
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EdgeOrder/locations/{location}/orders/{orderName}"
-  ],
+  "RequestPathToParent": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EdgeOrder/orders": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EdgeOrder/locations/{location}/orders/{orderName}"
+  },
+  "OperationPositions": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EdgeOrder/orders": [
+      "collection"
+    ]
+  },
+  "OverrideOperationName": {
+    "ListOrderAtResourceGroupLevel": "GetAll"
+  },
   "MgmtDebug": {
     "ShowRequestPath": true
   }

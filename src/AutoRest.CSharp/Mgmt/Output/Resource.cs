@@ -18,7 +18,12 @@ namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class Resource : MgmtTypeProvider
     {
+        protected static readonly string ResourcePosition = "resource";
+        protected static readonly string CollectionPosition = "collection";
+
         private static readonly HttpMethod[] MethodToExclude = new[] { HttpMethod.Put, HttpMethod.Get, HttpMethod.Delete, HttpMethod.Patch };
+
+        protected virtual string Position => ResourcePosition;
 
         public IEnumerable<OperationSet> OperationSets { get; }
 
@@ -181,6 +186,11 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected virtual bool ShouldIncludeOperation(Operation operation)
         {
+            var requestPath = operation.GetHttpPath();
+            if (Context.Configuration.MgmtConfiguration.OperationPositions.TryGetValue(requestPath, out var positions))
+            {
+                return positions.Contains(Position);
+            }
             // In the resource class, we need to exclude the List operations
             var restClientMethod = _context.Library.RestClientMethods[operation];
             if (restClientMethod.IsListMethod(out var valueType))
@@ -242,7 +252,8 @@ namespace AutoRest.CSharp.Mgmt.Output
                     if (IsListOperation(operation, operationSet))
                     {
                         // if this operation is a collection operation, it should be the parent of its corresponding resource request path
-                        var diff = requestTrimmedPath.TrimAncestorFrom(resourceTrimmedPath);
+                        if (!requestTrimmedPath.TryTrimAncestorFrom(resourceTrimmedPath, out var diff))
+                            diff = requestTrimmedPath;
                         // since in this case, the diff is a "minus" diff comparing with the other branch of the condition, we add a minus sign at the beginning of this key ti make sure this key would not collide with others
                         key = $"{method}-{diff}";
                         //contextualPath = GetContextualPath(operationSet);
@@ -252,7 +263,8 @@ namespace AutoRest.CSharp.Mgmt.Output
                     else
                     {
                         // for other child operations, they should be child of the corresponding resource request path
-                        var diff = resourceTrimmedPath.TrimAncestorFrom(requestTrimmedPath);
+                        if (!resourceTrimmedPath.TryTrimAncestorFrom(requestTrimmedPath, out var diff))
+                            diff = requestTrimmedPath;
                         key = $"{method}{diff}";
                         contextualPath = GetContextualPath(operationSet, requestPath);
                         methodName = GetOperationName(operation, resourceRestClient.OperationGroup.Key);

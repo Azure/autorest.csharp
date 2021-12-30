@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text.Json;
 using AutoRest.CSharp.AutoRest.Communication;
+using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
 {
@@ -137,7 +138,15 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             RequestPathToScopeResourceTypes = !IsValidJsonElement(requestPathToScopeResourceTypes) ? new Dictionary<string, string[]>() : JsonSerializer.Deserialize<Dictionary<string, string[]>>(requestPathToScopeResourceTypes.ToString());
             RequestPathToSingletonResource = !IsValidJsonElement(requestPathToSingletonResource) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(requestPathToSingletonResource.ToString());
             OverrideOperationName = !IsValidJsonElement(overrideOperationName) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(overrideOperationName.ToString());
-            OperationPositions = !IsValidJsonElement(operationPositions) ? new Dictionary<string, string[]>() : JsonSerializer.Deserialize<Dictionary<string, string[]>>(operationPositions.ToString());
+            try
+            {
+                OperationPositions = !IsValidJsonElement(operationPositions) ? new Dictionary<string, string[]>() : JsonSerializer.Deserialize<Dictionary<string, string[]>>(operationPositions.ToString());
+            }
+            catch (JsonException)
+            {
+                var operationPositionsStrDict = !IsValidJsonElement(operationPositions) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(operationPositions.ToString());
+                OperationPositions = operationPositionsStrDict.ToDictionary(kv => kv.Key, kv => kv.Value.Split(";"));
+            }
             MgmtDebug = mgmtDebug;
             // TODO: A unified way to load from both readme and configuration.json
             try

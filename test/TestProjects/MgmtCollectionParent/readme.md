@@ -21,6 +21,9 @@ operation-positions:
 request-path-to-parent:
   /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EdgeOrder/orders: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EdgeOrder/locations/{location}/orders/{orderName}
 
+override-operation-name:
+  ListOrderAtResourceGroupLevel: GetAll
+
 mgmt-debug:
   show-request-path: true
 ```
