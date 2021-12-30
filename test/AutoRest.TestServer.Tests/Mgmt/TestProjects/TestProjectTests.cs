@@ -307,7 +307,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
                 if (resourceType.Equals(Subscription.ResourceType))
                 {
-                    var methodInfos = subscriptionExtension.GetMethods(BindingFlags.Static | BindingFlags.Public).Where(m => m.Name == $"Get{resourceName.ToPlural()}" && m.ReturnType.Name == type.Name);
+                    var methodInfos = subscriptionExtension.GetMethods(BindingFlags.Static | BindingFlags.Public).Where(m => m.Name == $"Get{resourceName.ResourceNameToPlural()}" && m.ReturnType.Name == type.Name);
                     Assert.AreEqual(methodInfos.Count(), 1);
                     var param = TypeAsserts.HasParameter(methodInfos.First(), "subscription");
                     Assert.AreEqual(typeof(Subscription), param.ParameterType);
@@ -343,7 +343,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 if (resourceType.Equals(Subscription.ResourceType) &&
                    listAllMethod.Any())
                 {
-                    var listMethodInfos = subscriptionExtension.GetMethods(BindingFlags.Static | BindingFlags.Public).Where(m => m.Name == $"Get{resourceName.ToPlural()}" && m.GetParameters().Length >= 2);
+                    var listMethodInfos = subscriptionExtension.GetMethods(BindingFlags.Static | BindingFlags.Public).Where(m => m.Name == $"Get{resourceName.ResourceNameToPlural()}" && m.GetParameters().Length >= 2);
                     Assert.AreEqual(listMethodInfos.Count(), 1);
                     var listMethodInfo = listMethodInfos.First();
                     var listParam1 = TypeAsserts.HasParameter(listMethodInfo, "subscription");
@@ -351,7 +351,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                     var listParam2 = TypeAsserts.HasParameter(listMethodInfo, "cancellationToken");
                     Assert.AreEqual(typeof(CancellationToken), listParam2.ParameterType);
 
-                    var listAsyncMethodInfos = subscriptionExtension.GetMethods(BindingFlags.Static | BindingFlags.Public).Where(m => m.Name == $"Get{resourceName.ToPlural()}Async" && m.GetParameters().Length >= 2);
+                    var listAsyncMethodInfos = subscriptionExtension.GetMethods(BindingFlags.Static | BindingFlags.Public).Where(m => m.Name == $"Get{resourceName.ResourceNameToPlural()}Async" && m.GetParameters().Length >= 2);
                     Assert.AreEqual(listMethodInfos.Count(), 1);
                     var listAsyncMethodInfo = listAsyncMethodInfos.First();
                     var listAsyncParam1 = TypeAsserts.HasParameter(listAsyncMethodInfo, "subscription");
