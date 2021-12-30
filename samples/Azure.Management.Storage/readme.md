@@ -17,9 +17,17 @@ modelerfour:
   lenient-model-deduplication: true
   seal-single-value-enum-by-default: true
 
-list-exception:
-- /subscriptions/{subscriptionId}/providers/Microsoft.Storage/locations/{location}/deletedAccounts/{deletedAccountName}
-- /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/managementPolicies/{managementPolicyName}
+request-path-to-singleton-resource:
+  /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/managementPolicies/{managementPolicyName}: managementPolicies/default
+
+request-path-to-parent:
+  /subscriptions/{subscriptionId}/providers/Microsoft.Storage/deletedAccounts: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/locations/{location}/deletedAccounts/{deletedAccountName}
+
+operation-positions:
+  /subscriptions/{subscriptionId}/providers/Microsoft.Storage/deletedAccounts: collection
+
+override-operation-name:
+  DeletedAccounts_List: GetAll
 
 mgmt-debug:
   show-request-path: true

@@ -980,11 +980,11 @@ namespace Azure.Management.Storage
 
         #region ManagementPolicy
 
-        /// <summary> Gets a collection of ManagementPolicies in the StorageAccount. </summary>
-        /// <returns> An object representing collection of ManagementPolicies and their operations over a StorageAccount. </returns>
-        public ManagementPolicyCollection GetManagementPolicies()
+        /// <summary> Gets an object representing a ManagementPolicy along with the instance operations that can be performed on it in the StorageAccount. </summary>
+        /// <returns> Returns a <see cref="ManagementPolicy" /> object. </returns>
+        public ManagementPolicy GetManagementPolicy()
         {
-            return new ManagementPolicyCollection(this);
+            return new ManagementPolicy(this, new ResourceIdentifier(Id.ToString() + "/managementPolicies/default"));
         }
         #endregion
 
