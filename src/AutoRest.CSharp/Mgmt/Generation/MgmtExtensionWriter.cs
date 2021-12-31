@@ -392,7 +392,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     var resourceRequestPath = operationSet.GetRequestPath(Context);
                     // TODO -- verify if this has the same prefix after the scope is trimeed
-                    if (operation.RequestPath.TrimScope().IsAncestorOf(resourceRequestPath.TrimScope()))
+                    if (operation.RequestPath.TrimScope().IsPrefixPathOf(resourceRequestPath.TrimScope()))
                         candidates.Add(resourceRequestPath);
                 }
             }

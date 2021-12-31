@@ -32,11 +32,14 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 {
                     DetectSchemas(operationGroup, schemasToKeep);
                 }
+                AddDependantSchemasRecursively(schemasToKeep);
 
                 foreach (var operationGroup in omittedOGs)
                 {
                     DetectSchemas(operationGroup, schemasToOmit);
                 }
+                AddDependantSchemasRecursively(schemasToOmit);
+
                 RemoveSchemas(codeModel, schemasToOmit, schemasToKeep);
             }
         }
@@ -49,6 +52,14 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 {
                     codeModel.Schemas.Objects.Remove(objSchema);
                     RemoveRelations(objSchema);
+                }
+                else if (schema is ChoiceSchema choiceSchema && !schemasToKeep.Contains(choiceSchema))
+                {
+                    codeModel.Schemas.Choices.Remove(choiceSchema);
+                }
+                else if (schema is SealedChoiceSchema sealChoiceSchema && !schemasToKeep.Contains(sealChoiceSchema))
+                {
+                    codeModel.Schemas.SealedChoices.Remove(sealChoiceSchema);
                 }
             }
         }
@@ -79,7 +90,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 {
                     foreach (var property in curSchema.Properties)
                     {
-                        if (property.Schema is ObjectSchema propertySchema)
+                        var propertySchema = property.Schema;
+                        if (propertySchema is ObjectSchema || propertySchema is ChoiceSchema || propertySchema is SealedChoiceSchema)
                         {
                             if (!handledSchemas.Contains(propertySchema))
                             {
@@ -87,7 +99,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                                 setToProcess.Add(propertySchema);
                             }
                         }
-                        else if (property.Schema is ArraySchema arraySchema && arraySchema.ElementType is ObjectSchema arrayPropertySchema)
+                        else if (propertySchema is ArraySchema arraySchema && arraySchema.ElementType is ObjectSchema arrayPropertySchema)
                         {
                             if (!handledSchemas.Contains(arrayPropertySchema))
                             {
@@ -121,7 +133,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 AddResponseSchemas(operation, setToProcess);
                 AddRequestSchemas(operation, setToProcess);
             }
-            AddDependantSchemasRecursively(setToProcess);
         }
 
         private static void AddResponseSchemas(Operation operation, HashSet<Schema> setToProcess)

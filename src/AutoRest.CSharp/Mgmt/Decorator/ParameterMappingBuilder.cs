@@ -67,7 +67,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             else
             {
                 // get the diff between current and parent
-                var diffPath = parent.TrimAncestorFrom(current);
+                var diffPath = parent.TrimPrefixPathFrom(current);
                 // get the segment in pairs
                 var segmentPairs = SplitDiffIntoPairs(diffPath).ToList();
                 var indexOfProvidersPair = segmentPairs.FindIndex(pair => pair[0] == Segment.Providers);

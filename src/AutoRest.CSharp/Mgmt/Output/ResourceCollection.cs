@@ -100,10 +100,10 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             var operation = clientOperation.First();
             RequestPath diff;
-            if (operation.RequestPath.IsAncestorOf(operation.ContextualPath))
-                diff = operation.RequestPath.TrimAncestorFrom(operation.ContextualPath);
+            if (operation.RequestPath.IsPrefixPathOf(operation.ContextualPath))
+                diff = operation.RequestPath.TrimPrefixPathFrom(operation.ContextualPath);
             else
-                diff = operation.ContextualPath.TrimAncestorFrom(operation.RequestPath);
+                diff = operation.ContextualPath.TrimPrefixPathFrom(operation.RequestPath);
             return diff.Where(segment => segment.IsReference);
         }
 

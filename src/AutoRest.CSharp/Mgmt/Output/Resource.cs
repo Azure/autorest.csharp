@@ -242,7 +242,8 @@ namespace AutoRest.CSharp.Mgmt.Output
                     if (IsListOperation(operation, operationSet))
                     {
                         // if this operation is a collection operation, it should be the parent of its corresponding resource request path
-                        var diff = requestTrimmedPath.TrimAncestorFrom(resourceTrimmedPath);
+                        // In the case of /{scope}/providers/Microsoft.Resources/links being a list method for /{linkId}, we need to reverse the trim.
+                        var diff = requestTrimmedPath.SerializedPath.Length < resourceTrimmedPath.SerializedPath.Length ? requestTrimmedPath.TrimPrefixPathFrom(resourceTrimmedPath) : requestTrimmedPath.TrimPrefixPathFrom(requestTrimmedPath);
                         // since in this case, the diff is a "minus" diff comparing with the other branch of the condition, we add a minus sign at the beginning of this key ti make sure this key would not collide with others
                         key = $"{method}-{diff}";
                         //contextualPath = GetContextualPath(operationSet);
@@ -252,7 +253,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                     else
                     {
                         // for other child operations, they should be child of the corresponding resource request path
-                        var diff = resourceTrimmedPath.TrimAncestorFrom(requestTrimmedPath);
+                        var diff = resourceTrimmedPath.TrimPrefixPathFrom(requestTrimmedPath);
                         key = $"{method}{diff}";
                         contextualPath = GetContextualPath(operationSet, requestPath);
                         methodName = GetOperationName(operation, resourceRestClient.OperationGroup.Key);

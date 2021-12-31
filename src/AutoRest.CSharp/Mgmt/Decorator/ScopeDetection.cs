@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License
 
+using System;
 using System.Collections.Concurrent;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -58,10 +59,20 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         {
             var indexOfProvider = requestPath.ToList().LastIndexOf(Segment.Providers);
             // if there is no providers segment, myself should be a scope request path. Just return myself
-            if (indexOfProvider < 0)
-                return requestPath;
-
-            return new RequestPath(requestPath.Take(indexOfProvider));
+            if (indexOfProvider >= 0)
+            {
+                if (indexOfProvider == 0 && requestPath.SerializedPath.StartsWith("/providers/Microsoft.Management/managementGroups", StringComparison.InvariantCultureIgnoreCase))
+                    return RequestPath.ManagementGroup;
+                return new RequestPath(requestPath.Take(indexOfProvider));
+            }
+            // Returns RequestPath.ResourceGroup for the list path "/subscriptions/{subscriptionId}/resourceGroups" as well.
+            if (requestPath.SerializedPath.StartsWith("/subscriptions/{subscriptionId}/resourceGroups", StringComparison.InvariantCultureIgnoreCase))
+                return RequestPath.ResourceGroup;
+            if (requestPath.SerializedPath.StartsWith("/subscriptions", StringComparison.InvariantCultureIgnoreCase))
+                return RequestPath.Subscription;
+            if (requestPath.SerializedPath.Equals("/tenants"))
+                return RequestPath.Tenant;
+            return requestPath;
         }
 
         public static ResourceType[]? GetParameterizedScopeResourceTypes(this RequestPath requestPath, MgmtConfiguration config)

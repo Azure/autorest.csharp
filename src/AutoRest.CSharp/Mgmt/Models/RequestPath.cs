@@ -110,12 +110,12 @@ namespace AutoRest.CSharp.Mgmt.Models
         public string SerializedPath { get; }
 
         /// <summary>
-        /// Check if this <see cref="RequestPath"/> is the ancestor (aka prefix) of <code other/>
-        /// Note that this.IsAncestorOf(this) will return false which indicates that this method is testing the "proper ancestor" like a proper subset.
+        /// Check if this <see cref="RequestPath"/> is a prefix path of <code other/>
+        /// Note that this.IsPrefixPathOf(this) will return false which indicates that this method is testing the "proper ancestor" like a proper subset.
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
-        public bool IsAncestorOf(RequestPath other)
+        public bool IsPrefixPathOf(RequestPath other)
         {
             // To be the parent of other, you must at least be shorter than other.
             if (other.Count <= Count)
@@ -139,12 +139,12 @@ namespace AutoRest.CSharp.Mgmt.Models
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
-        /// <exception cref="InvalidOperationException">if this.IsAncestorOf(other) is false</exception>
-        public RequestPath TrimAncestorFrom(RequestPath other)
+        /// <exception cref="InvalidOperationException">if this.IsPrefixPathOf(other) is false</exception>
+        public RequestPath TrimPrefixPathFrom(RequestPath other)
         {
             if (this == other)
                 return RequestPath.Tenant;
-            if (!this.IsAncestorOf(other))
+            if (!this.IsPrefixPathOf(other))
                 throw new InvalidOperationException($"Request path {this} is not parent of {other}");
             // this is a parent, we can safely just return from the length of this
             return new RequestPath(other._segments.Skip(this.Count));
@@ -158,9 +158,10 @@ namespace AutoRest.CSharp.Mgmt.Models
         public RequestPath TrimScope()
         {
             var scope = this.GetScopePath();
-            if (scope == this)
+            // The scope for /subscriptions is /subscriptions/{subscriptionId}, we identify such case with scope.Count > this.Count.
+            if (scope == this || scope.Count > this.Count)
                 return Tenant; // if myself is a scope path, we return the empty path after the trim.
-            return scope.TrimAncestorFrom(this);
+            return scope.TrimPrefixPathFrom(this);
         }
 
         public RequestPath Append(RequestPath other)

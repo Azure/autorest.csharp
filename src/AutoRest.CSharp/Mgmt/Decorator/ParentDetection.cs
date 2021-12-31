@@ -156,30 +156,20 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         private static RequestPath GetParent(this RequestPath requestPath, BuildContext<MgmtOutputLibrary> context)
         {
-            // find a parent resource in the resource list
-            // we are taking the resource with a path that is the child of this operationSet and taking the longest candidate
-            // or null if none matched
-            // NOTE that we are always using fuzzy match in the IsAncestorOf method, we need to block the ById operations - they literally can be anyone's ancestor when there is no better choice.
-            // We will never want this
-            var candidates = context.Library.ResourceOperationSets.Select(operationSet => operationSet.GetRequestPath(context))
-                .Where(r => r.IsAncestorOf(requestPath)).OrderBy(r => r.Count);
-            if (candidates.Any())
-                return candidates.Last();
-            // if we cannot find one, we try the 4 extensions
-            // first try management group
-            if (RequestPath.ManagementGroup.IsAncestorOf(requestPath))
-                return RequestPath.ManagementGroup;
-            // then try resourceGroup
-            if (RequestPath.ResourceGroup.IsAncestorOf(requestPath))
-                return RequestPath.ResourceGroup;
-            // then try subscriptions
-            if (RequestPath.Subscription.IsAncestorOf(requestPath))
-                return RequestPath.Subscription;
-            // the only option left is the tenant. But we have our last chance that its parent could be the scope of this
             var scope = requestPath.GetScopePath();
             // if the scope of this request path is parameterized, we return the scope as its parent
             if (scope != requestPath && scope.IsParameterizedScope())
                 return scope;
+            // find a parent resource in the resource list
+            // we are taking the resource with a path that is the child of this operationSet and taking the longest candidate
+            // or null if none matched
+            // NOTE that we are always using fuzzy match in the IsPrefixPathOf method, we need to block the ById operations - they literally can be anyone's ancestor when there is no better choice.
+            // We will never want this
+            var candidates = context.Library.ResourceOperationSets.Select(operationSet => operationSet.GetRequestPath(context))
+                .Concat(new List<RequestPath>{RequestPath.ResourceGroup, RequestPath.Subscription, RequestPath.ManagementGroup}) // When generating management group in management.json, the path is /providers/Microsoft.Management/managementGroups/{groupId} while RequestPath.ManagementGroup is /providers/Microsoft.Management/managementGroups/{managementGroupId}. We pick the first one.
+                .Where(r => r.IsPrefixPathOf(requestPath)).OrderByDescending(r => r.Count);
+            if (candidates.Any())
+                return candidates.First();
             // we do not have much choice to make, return tenant as the parent
             return RequestPath.Tenant;
         }
