@@ -23,7 +23,11 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         private static readonly HttpMethod[] MethodToExclude = new[] { HttpMethod.Put, HttpMethod.Get, HttpMethod.Delete, HttpMethod.Patch };
 
-        protected virtual string Position => ResourcePosition;
+        /// <summary>
+        /// The position means which class an operation should go. Possible value of this property is `resource` or `collection`.
+        /// There is a configuration in <see cref="MgmtConfiguration"/> which assign values to operations.
+        /// </summary>
+        protected string Position { get; }
 
         public IEnumerable<OperationSet> OperationSets { get; }
 
@@ -32,8 +36,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         private IEnumerable<RequestPath>? _requestPaths;
         public IEnumerable<RequestPath> RequestPaths => _requestPaths ??= OperationSets.Select(operationSet => operationSet.GetRequestPath(_context));
 
-        public Resource(IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> allOperations, string resourceName, ResourceType resourceType, ResourceData resourceData, BuildContext<MgmtOutputLibrary> context)
-            : base(context, resourceName)
+        protected Resource(IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> allOperations, string resourceName, ResourceType resourceType, ResourceData resourceData, BuildContext<MgmtOutputLibrary> context, string position) : base(context, resourceName)
         {
             _context = context;
             OperationSets = allOperations.Keys;
@@ -51,7 +54,13 @@ namespace AutoRest.CSharp.Mgmt.Output
             _allOperationMap = GetAllOperationsMap(allOperations);
 
             IsById = OperationSets.Any(operationSet => operationSet.IsById(_context));
+
+            Position = position;
         }
+
+        public Resource(IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> allOperations, string resourceName, ResourceType resourceType, ResourceData resourceData, BuildContext<MgmtOutputLibrary> context)
+            : this(allOperations, resourceName, resourceType, resourceData, context, ResourcePosition)
+        { }
 
         private IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> GetAllOperationsMap(IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> allOperations)
         {

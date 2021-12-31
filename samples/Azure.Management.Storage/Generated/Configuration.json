@@ -17,6 +17,9 @@
   "OperationPositions": {
     "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/deletedAccounts": [
       "collection"
+    ],
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability": [
+      "collection"
     ]
   },
   "RequestPathToSingletonResource": {

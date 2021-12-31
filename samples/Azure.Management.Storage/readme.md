@@ -26,7 +26,7 @@ request-path-to-parent:
 
 operation-positions:
   /subscriptions/{subscriptionId}/providers/Microsoft.Storage/deletedAccounts: collection
-/subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability: collection
+  /subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability: collection
 
 override-operation-name:
   DeletedAccounts_List: GetAll
