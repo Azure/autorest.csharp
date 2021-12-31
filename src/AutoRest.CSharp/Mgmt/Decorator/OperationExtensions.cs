@@ -109,8 +109,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         private static OperationSet? FindOperationSetOfResource(RequestPath requestPath, BuildContext<MgmtOutputLibrary> context)
         {
-            if (context.Configuration.MgmtConfiguration.RequestPathToParent.TryGetValue(requestPath, out var rawPath))
-                return context.Library.GetOperationSet(rawPath);
             var candidates = new List<OperationSet>();
             // we need to iterate all resources to find if this is the parent of that
             foreach (var operationSet in context.Library.ResourceOperationSets)
@@ -125,9 +123,16 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 // check the remaining path
                 var trimmedRequestPath = requestPath.TrimScope();
                 var trimmedResourceRequestPath = resourceRequestPath.TrimScope();
-                // In the case that the full path of requestPath and resourceRequestPath are both scopes, we should not compare the remaining paths as both will be empty path and Tenant.IsPrefixPathOf(Tenant) always returns false.
-                if ( !(trimmedRequestPath.Count == 0 && trimmedResourceRequestPath.Count == 0) && !trimmedRequestPath.IsPrefixPathOf(trimmedResourceRequestPath))
+                // For a path of a scope like /subscriptions/{subscriptionId}/resourcegroups, the trimmed path is empty. The path of its resource should also be a scope, its trimmed path should also be empty.
+                if (trimmedRequestPath.Count == 0 && trimmedResourceRequestPath.Count != 0)
                     continue;
+                // In the case that the full path of requestPath and resourceRequestPath are both scopes (trimmed path is empty), comparing the scope part is enough.
+                // We should not compare the remaining paths as both will be empty path and Tenant.IsPrefixPathOf(Tenant) always returns false.
+                else if ( trimmedRequestPath.Count != 0 || trimmedResourceRequestPath.Count != 0)
+                {
+                    if (!trimmedRequestPath.IsPrefixPathOf(trimmedResourceRequestPath))
+                        continue;
+                }
                 candidates.Add(operationSet);
             }
 
