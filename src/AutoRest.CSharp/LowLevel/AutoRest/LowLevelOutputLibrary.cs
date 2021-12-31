@@ -15,6 +15,7 @@ namespace AutoRest.CSharp.Output.Models.Types
     {
         private readonly CodeModel _codeModel;
         private readonly BuildContext<LowLevelOutputLibrary> _context;
+        private readonly Lazy<IReadOnlyList<LowLevelClient>> _restClients;
         public ClientOptionsTypeProvider ClientOptions { get; }
 
         public LowLevelOutputLibrary(CodeModel codeModel, BuildContext<LowLevelOutputLibrary> context)
@@ -23,10 +24,10 @@ namespace AutoRest.CSharp.Output.Models.Types
             _context = context;
             ClientOptions = new ClientOptionsTypeProvider(_context);
             UpdateListMethodNames();
-            RestClients = LowLevelClientHierarchyResolver.BuildClientHierarchy(_codeModel.OperationGroups, _context, ClientOptions);
+            _restClients = new Lazy<IReadOnlyList<LowLevelClient>>(() => LowLevelClientHierarchyResolver.BuildClientHierarchy(_codeModel.OperationGroups, _context, ClientOptions));
         }
 
-        public IReadOnlyList<LowLevelClient> RestClients { get; }
+        public IReadOnlyList<LowLevelClient> RestClients => _restClients.Value;
 
         private void UpdateListMethodNames()
         {
