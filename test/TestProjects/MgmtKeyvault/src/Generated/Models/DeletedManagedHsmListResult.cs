@@ -7,6 +7,7 @@
 
 using System.Collections.Generic;
 using Azure.Core;
+using MgmtKeyvault;
 
 namespace MgmtKeyvault.Models
 {
@@ -16,11 +17,20 @@ namespace MgmtKeyvault.Models
         /// <summary> Initializes a new instance of DeletedManagedHsmListResult. </summary>
         internal DeletedManagedHsmListResult()
         {
-            Value = new ChangeTrackingList<DeletedManagedHsm>();
+            Value = new ChangeTrackingList<DeletedManagedHsmData>();
+        }
+
+        /// <summary> Initializes a new instance of DeletedManagedHsmListResult. </summary>
+        /// <param name="value"> The list of deleted managed HSM Pools. </param>
+        /// <param name="nextLink"> The URL to get the next set of deleted managed HSM Pools. </param>
+        internal DeletedManagedHsmListResult(IReadOnlyList<DeletedManagedHsmData> value, string nextLink)
+        {
+            Value = value;
+            NextLink = nextLink;
         }
 
         /// <summary> The list of deleted managed HSM Pools. </summary>
-        public IReadOnlyList<DeletedManagedHsm> Value { get; }
+        public IReadOnlyList<DeletedManagedHsmData> Value { get; }
         /// <summary> The URL to get the next set of deleted managed HSM Pools. </summary>
         public string NextLink { get; }
     }
