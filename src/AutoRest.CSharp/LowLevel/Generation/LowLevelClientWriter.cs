@@ -41,7 +41,7 @@ namespace AutoRest.CSharp.Generation.Writers
         private static readonly FormattableString CreatePageableMethodName = $"{typeof(PageableHelpers)}.{nameof(PageableHelpers.CreatePageable)}";
         private static readonly FormattableString CreateAsyncPageableMethodName = $"{typeof(PageableHelpers)}.{nameof(PageableHelpers.CreateAsyncPageable)}";
 
-        public void WriteClient(CodeWriter writer, LowLevelClient client, LowLevelClient[] subClients, BuildContext<LowLevelOutputLibrary> context)
+        public void WriteClient(CodeWriter writer, LowLevelClient client, BuildContext<LowLevelOutputLibrary> context)
         {
             var cs = client.Type;
             using (writer.Namespace(cs.Namespace))
@@ -71,7 +71,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         }
                     }
 
-                    WriteSubClientFactoryMethod(writer, context, client, subClients);
+                    WriteSubClientFactoryMethod(writer, context, client);
 
                     var responseClassifierTypes = new List<ResponseClassifierType>();
                     foreach (var method in client.RequestMethods)
@@ -361,10 +361,10 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        private void WriteSubClientFactoryMethod(CodeWriter writer, BuildContext context, LowLevelClient parentClient, LowLevelClient[] subClients)
+        private void WriteSubClientFactoryMethod(CodeWriter writer, BuildContext context, LowLevelClient parentClient)
         {
             var factoryMethods = new List<(FieldDeclaration?, MethodSignature, List<Reference>)>();
-            foreach (var subClient in subClients)
+            foreach (var subClient in parentClient.SubClients)
             {
                 var methodParameters = new List<Parameter>();
                 var constructorCallParameters = new List<Reference>();

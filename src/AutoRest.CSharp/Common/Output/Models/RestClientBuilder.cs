@@ -48,7 +48,7 @@ namespace AutoRest.CSharp.Output.Models
 
 
         public RestClientBuilder(ICollection<Operation> operations, BuildContext context)
-            : this(GetParametersFromOperationGroups(operations), context)
+            : this(GetParametersFromOperations(operations), context)
         {
         }
 
@@ -65,7 +65,7 @@ namespace AutoRest.CSharp.Output.Models
             return OrderParameters(_parameters.Values);
         }
 
-        private static IEnumerable<RequestParameter> GetParametersFromOperationGroups(ICollection<Operation> operations) =>
+        public static IEnumerable<RequestParameter> GetParametersFromOperations(ICollection<Operation> operations) =>
             operations
                 .SelectMany(op => op.Parameters.Concat(op.Requests.SelectMany(r => r.Parameters)))
                 .Where(p => p.Implementation == ImplementationLocation.Client)
@@ -551,7 +551,7 @@ namespace AutoRest.CSharp.Output.Models
             };
         }
 
-        public Parameter BuildConstructorParameter(RequestParameter requestParameter)
+        private Parameter BuildConstructorParameter(RequestParameter requestParameter)
         {
             var parameter = BuildParameter(requestParameter);
             if (IsEndpointParameter(requestParameter))

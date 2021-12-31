@@ -19,6 +19,7 @@ namespace AutoRest.CSharp.Output.Models
     internal class LowLevelClient : TypeProvider
     {
         protected override string DefaultName { get; }
+        protected override string DefaultNamespace { get; }
         protected override string DefaultAccessibility { get; } = "public";
 
         private readonly bool _hasPublicConstructors;
@@ -28,32 +29,25 @@ namespace AutoRest.CSharp.Output.Models
         public MethodSignature[] PublicConstructors { get; }
         public MethodSignature SubClientInternalConstructor => _subClientInternalConstructor ??= BuildSubClientInternalConstructor();
 
+        public IReadOnlyList<LowLevelClient> SubClients;
         public IReadOnlyList<RestClientMethod> RequestMethods;
         public IReadOnlyList<LowLevelClientMethod> ClientMethods { get; }
 
         public ClientOptionsTypeProvider ClientOptions { get; }
         public IReadOnlyList<Parameter> Parameters { get; }
         public ClientFields Fields { get; }
+        public bool IsSubClient { get; }
 
-        public string? ParentClientTypeName { get; }
-
-        public bool IsSubClient => ParentClientTypeName != null;
-
-        public LowLevelClient(string name, string description, string? parentClientTypeName, ICollection<Operation> operations, RestClientBuilder builder, BuildContext<LowLevelOutputLibrary> context, ClientOptionsTypeProvider clientOptions)
+        public LowLevelClient(string name, string ns, string description, bool isSubClient, IReadOnlyList<LowLevelClient> subClients, IEnumerable<(ServiceRequest ServiceRequest, Operation Operation)> serviceRequests, RestClientBuilder builder, BuildContext<LowLevelOutputLibrary> context, ClientOptionsTypeProvider clientOptions)
             : base(context)
         {
-            var clientPrefix = ClientBuilder.GetClientPrefix(name, context);
-            DefaultName = clientPrefix + (parentClientTypeName != null ? string.Empty : ClientBuilder.GetClientSuffix(context));
-            Description = BuilderHelpers.EscapeXmlDescription(string.IsNullOrWhiteSpace(description) ? $"The {ClientBuilder.GetClientPrefix(Declaration.Name, context)} service client." : BuilderHelpers.EscapeXmlDescription(description));
-
-            if (ExistingType != null && context.SourceInputModel != null && context.SourceInputModel.TryGetClientSourceInput(ExistingType, out var codeGenClientAttribute))
-            {
-                ParentClientTypeName = codeGenClientAttribute.ParentClientType?.Name;
-            }
-            else if (ParentClientTypeName == null && !string.IsNullOrEmpty(parentClientTypeName) && !string.IsNullOrEmpty(name))
-            {
-                ParentClientTypeName = parentClientTypeName;
-            }
+            DefaultName = name;
+            DefaultNamespace = ns;
+            Description = BuilderHelpers.EscapeXmlDescription(string.IsNullOrWhiteSpace(description)
+                ? $"The {ClientBuilder.GetClientPrefix(Declaration.Name, context)} service client."
+                : BuilderHelpers.EscapeXmlDescription(description));
+            IsSubClient = isSubClient;
+            SubClients = subClients;
 
             ClientOptions = clientOptions;
             _hasPublicConstructors = !IsSubClient;
@@ -63,7 +57,7 @@ namespace AutoRest.CSharp.Output.Models
 
             PublicConstructors = BuildPublicConstructors().ToArray();
 
-            var clientMethods = BuildMethods(builder, operations, Declaration.Name).ToArray();
+            var clientMethods = BuildMethods(builder, serviceRequests, Declaration.Name).ToArray();
 
             ClientMethods = clientMethods
                 .OrderBy(m => m.IsLongRunning ? 2 : m.PagingInfo != null ? 1 : 0) // Temporary sorting to minimize amount of changed files. Will be removed when new LRO is implemented
@@ -75,21 +69,18 @@ namespace AutoRest.CSharp.Output.Models
                 .ToArray();
         }
 
-        private static IEnumerable<LowLevelClientMethod> BuildMethods(RestClientBuilder builder, IEnumerable<Operation> operations, string clientName)
+        private static IEnumerable<LowLevelClientMethod> BuildMethods(RestClientBuilder builder, IEnumerable<(ServiceRequest ServiceRequest, Operation Operation)> serviceRequests, string clientName)
         {
             var requestMethods = new Dictionary<ServiceRequest, RestClientMethod>();
-            foreach (var operation in operations)
+            foreach (var (serviceRequest, operation) in serviceRequests)
             {
-                foreach (ServiceRequest serviceRequest in operation.Requests)
+                // See also DataPlaneRestClient::EnsureNormalMethods if changing
+                if (serviceRequest.Protocol.Http is not HttpRequest httpRequest)
                 {
-                    // See also DataPlaneRestClient::EnsureNormalMethods if changing
-                    if (serviceRequest.Protocol.Http is not HttpRequest httpRequest)
-                    {
-                        continue;
-                    }
-
-                    requestMethods.Add(serviceRequest, builder.BuildRequestMethod(operation, serviceRequest, httpRequest));
+                    continue;
                 }
+
+                requestMethods.Add(serviceRequest, builder.BuildRequestMethod(operation, serviceRequest, httpRequest));
             }
 
             foreach (var (request, method) in requestMethods)
