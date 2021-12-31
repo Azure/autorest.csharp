@@ -36,7 +36,15 @@ namespace AutoRest.CSharp.Mgmt.Output
         private IEnumerable<RequestPath>? _requestPaths;
         public IEnumerable<RequestPath> RequestPaths => _requestPaths ??= OperationSets.Select(operationSet => operationSet.GetRequestPath(_context));
 
-        protected Resource(IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> allOperations, string resourceName, ResourceType resourceType, ResourceData resourceData, BuildContext<MgmtOutputLibrary> context, string position) : base(context, resourceName)
+        /// <summary>
+        /// </summary>
+        /// <param name="allOperations">The map that contains all possible operations in this resource and its corresponding resource collection class (if any)</param>
+        /// <param name="resourceName">The name of the corresponding resource data model</param>
+        /// <param name="resourceType">The type of this resource instance represents</param>
+        /// <param name="resourceData">The corresponding resource data model</param>
+        /// <param name="context">The build context of this resource instance</param>
+        /// <param name="position">The position of operations of this class. <see cref="Position"/> for more information</param>
+        protected internal Resource(IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> allOperations, string resourceName, ResourceType resourceType, ResourceData resourceData, BuildContext<MgmtOutputLibrary> context, string position) : base(context, resourceName)
         {
             _context = context;
             OperationSets = allOperations.Keys;
