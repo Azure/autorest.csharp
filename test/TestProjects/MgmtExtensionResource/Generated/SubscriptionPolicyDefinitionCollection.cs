@@ -284,6 +284,70 @@ namespace MgmtExtensionResource
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: PolicyDefinitions_Delete
+        /// <summary> This operation deletes the policy definition in the given subscription with the given name. </summary>
+        /// <param name="policyDefinitionName"> The name of the policy definition to delete. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
+        public virtual PolicyDefinitionDeleteOperation Delete(string policyDefinitionName, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        {
+            if (policyDefinitionName == null)
+            {
+                throw new ArgumentNullException(nameof(policyDefinitionName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("SubscriptionPolicyDefinitionCollection.Delete");
+            scope.Start();
+            try
+            {
+                var response = _policyDefinitionsRestClient.Delete(Id.SubscriptionId, policyDefinitionName, cancellationToken);
+                var operation = new PolicyDefinitionDeleteOperation(response);
+                if (waitForCompletion)
+                    operation.WaitForCompletion(cancellationToken);
+                return operation;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: PolicyDefinitions_Delete
+        /// <summary> This operation deletes the policy definition in the given subscription with the given name. </summary>
+        /// <param name="policyDefinitionName"> The name of the policy definition to delete. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
+        public async virtual Task<PolicyDefinitionDeleteOperation> DeleteAsync(string policyDefinitionName, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        {
+            if (policyDefinitionName == null)
+            {
+                throw new ArgumentNullException(nameof(policyDefinitionName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("SubscriptionPolicyDefinitionCollection.Delete");
+            scope.Start();
+            try
+            {
+                var response = await _policyDefinitionsRestClient.DeleteAsync(Id.SubscriptionId, policyDefinitionName, cancellationToken).ConfigureAwait(false);
+                var operation = new PolicyDefinitionDeleteOperation(response);
+                if (waitForCompletion)
+                    await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
+                return operation;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policyDefinitions
         /// ContextualPath: /subscriptions/{subscriptionId}
         /// OperationId: PolicyDefinitions_List

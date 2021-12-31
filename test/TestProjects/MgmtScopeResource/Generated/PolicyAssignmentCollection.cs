@@ -291,6 +291,70 @@ namespace MgmtScopeResource
             }
         }
 
+        /// RequestPath: /{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}
+        /// ContextualPath: /{scope}
+        /// OperationId: PolicyAssignments_Delete
+        /// <summary> This operation deletes a policy assignment, given its name and the scope it was created in. The scope of a policy assignment is the part of its ID preceding &apos;/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}&apos;. </summary>
+        /// <param name="policyAssignmentName"> The name of the policy assignment to delete. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="policyAssignmentName"/> is null. </exception>
+        public virtual PolicyAssignmentDeleteOperation Delete(string policyAssignmentName, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        {
+            if (policyAssignmentName == null)
+            {
+                throw new ArgumentNullException(nameof(policyAssignmentName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("PolicyAssignmentCollection.Delete");
+            scope.Start();
+            try
+            {
+                var response = _policyAssignmentsRestClient.Delete(Id, policyAssignmentName, cancellationToken);
+                var operation = new PolicyAssignmentDeleteOperation(response);
+                if (waitForCompletion)
+                    operation.WaitForCompletion(cancellationToken);
+                return operation;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// RequestPath: /{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}
+        /// ContextualPath: /{scope}
+        /// OperationId: PolicyAssignments_Delete
+        /// <summary> This operation deletes a policy assignment, given its name and the scope it was created in. The scope of a policy assignment is the part of its ID preceding &apos;/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}&apos;. </summary>
+        /// <param name="policyAssignmentName"> The name of the policy assignment to delete. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="policyAssignmentName"/> is null. </exception>
+        public async virtual Task<PolicyAssignmentDeleteOperation> DeleteAsync(string policyAssignmentName, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        {
+            if (policyAssignmentName == null)
+            {
+                throw new ArgumentNullException(nameof(policyAssignmentName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("PolicyAssignmentCollection.Delete");
+            scope.Start();
+            try
+            {
+                var response = await _policyAssignmentsRestClient.DeleteAsync(Id, policyAssignmentName, cancellationToken).ConfigureAwait(false);
+                var operation = new PolicyAssignmentDeleteOperation(response);
+                if (waitForCompletion)
+                    await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
+                return operation;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Authorization/policyAssignments
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
         /// OperationId: PolicyAssignments_ListForResourceGroup

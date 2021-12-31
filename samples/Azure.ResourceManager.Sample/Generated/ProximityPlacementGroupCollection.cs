@@ -290,6 +290,70 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/proximityPlacementGroups/{proximityPlacementGroupName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
+        /// OperationId: ProximityPlacementGroups_Delete
+        /// <summary> Delete a proximity placement group. </summary>
+        /// <param name="proximityPlacementGroupName"> The name of the proximity placement group. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="proximityPlacementGroupName"/> is null. </exception>
+        public virtual ProximityPlacementGroupDeleteOperation Delete(string proximityPlacementGroupName, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        {
+            if (proximityPlacementGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(proximityPlacementGroupName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("ProximityPlacementGroupCollection.Delete");
+            scope.Start();
+            try
+            {
+                var response = _proximityPlacementGroupsRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, proximityPlacementGroupName, cancellationToken);
+                var operation = new ProximityPlacementGroupDeleteOperation(response);
+                if (waitForCompletion)
+                    operation.WaitForCompletion(cancellationToken);
+                return operation;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/proximityPlacementGroups/{proximityPlacementGroupName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
+        /// OperationId: ProximityPlacementGroups_Delete
+        /// <summary> Delete a proximity placement group. </summary>
+        /// <param name="proximityPlacementGroupName"> The name of the proximity placement group. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="proximityPlacementGroupName"/> is null. </exception>
+        public async virtual Task<ProximityPlacementGroupDeleteOperation> DeleteAsync(string proximityPlacementGroupName, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        {
+            if (proximityPlacementGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(proximityPlacementGroupName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("ProximityPlacementGroupCollection.Delete");
+            scope.Start();
+            try
+            {
+                var response = await _proximityPlacementGroupsRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, proximityPlacementGroupName, cancellationToken).ConfigureAwait(false);
+                var operation = new ProximityPlacementGroupDeleteOperation(response);
+                if (waitForCompletion)
+                    await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
+                return operation;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/proximityPlacementGroups
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
         /// OperationId: ProximityPlacementGroups_ListByResourceGroup

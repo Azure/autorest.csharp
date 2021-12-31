@@ -284,6 +284,70 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
+        /// OperationId: AvailabilitySets_Delete
+        /// <summary> Delete an availability set. </summary>
+        /// <param name="availabilitySetName"> The name of the availability set. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetName"/> is null. </exception>
+        public virtual AvailabilitySetDeleteOperation Delete(string availabilitySetName, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        {
+            if (availabilitySetName == null)
+            {
+                throw new ArgumentNullException(nameof(availabilitySetName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetCollection.Delete");
+            scope.Start();
+            try
+            {
+                var response = _availabilitySetsRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, availabilitySetName, cancellationToken);
+                var operation = new AvailabilitySetDeleteOperation(response);
+                if (waitForCompletion)
+                    operation.WaitForCompletion(cancellationToken);
+                return operation;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
+        /// OperationId: AvailabilitySets_Delete
+        /// <summary> Delete an availability set. </summary>
+        /// <param name="availabilitySetName"> The name of the availability set. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetName"/> is null. </exception>
+        public async virtual Task<AvailabilitySetDeleteOperation> DeleteAsync(string availabilitySetName, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        {
+            if (availabilitySetName == null)
+            {
+                throw new ArgumentNullException(nameof(availabilitySetName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetCollection.Delete");
+            scope.Start();
+            try
+            {
+                var response = await _availabilitySetsRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, availabilitySetName, cancellationToken).ConfigureAwait(false);
+                var operation = new AvailabilitySetDeleteOperation(response);
+                if (waitForCompletion)
+                    await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
+                return operation;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
         /// OperationId: AvailabilitySets_List

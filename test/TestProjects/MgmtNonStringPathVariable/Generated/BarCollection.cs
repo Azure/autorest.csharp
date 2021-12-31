@@ -235,6 +235,58 @@ namespace MgmtNonStringPathVariable
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
+        /// OperationId: Bars_Delete
+        /// <summary> Retrieves information about an fake. </summary>
+        /// <param name="barName"> The name of the fake. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual BarDeleteOperation StartDelete(int barName, bool waitForCompletion = false, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("BarCollection.StartDelete");
+            scope.Start();
+            try
+            {
+                var response = _barsRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, barName, cancellationToken);
+                var operation = new BarDeleteOperation(_clientDiagnostics, Pipeline, _barsRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, barName).Request, response);
+                if (waitForCompletion)
+                    operation.WaitForCompletion(cancellationToken);
+                return operation;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
+        /// OperationId: Bars_Delete
+        /// <summary> Retrieves information about an fake. </summary>
+        /// <param name="barName"> The name of the fake. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async virtual Task<BarDeleteOperation> StartDeleteAsync(int barName, bool waitForCompletion = false, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("BarCollection.StartDelete");
+            scope.Start();
+            try
+            {
+                var response = await _barsRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, barName, cancellationToken).ConfigureAwait(false);
+                var operation = new BarDeleteOperation(_clientDiagnostics, Pipeline, _barsRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, barName).Request, response);
+                if (waitForCompletion)
+                    await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
+                return operation;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         /// <summary> Filters the list of <see cref="Bar" /> for this resource group represented as generic resources. </summary>
         /// <param name="nameFilter"> The filter used in this operation. </param>
         /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>

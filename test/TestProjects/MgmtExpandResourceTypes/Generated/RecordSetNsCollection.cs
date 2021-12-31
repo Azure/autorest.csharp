@@ -287,6 +287,72 @@ namespace MgmtExpandResourceTypes
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}
+        /// OperationId: RecordSets_Delete
+        /// <summary> Deletes a record set from a DNS zone. This operation cannot be undone. </summary>
+        /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
+        /// <param name="ifMatch"> The etag of the record set. Omit this value to always delete the current record set. Specify the last-seen etag value to prevent accidentally deleting any concurrent changes. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
+        public virtual RecordSetDeleteOperation Delete(string relativeRecordSetName, string ifMatch = null, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        {
+            if (relativeRecordSetName == null)
+            {
+                throw new ArgumentNullException(nameof(relativeRecordSetName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("RecordSetNsCollection.Delete");
+            scope.Start();
+            try
+            {
+                var response = _recordSetsRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "NS".ToRecordType(), relativeRecordSetName, ifMatch, cancellationToken);
+                var operation = new RecordSetDeleteOperation(response);
+                if (waitForCompletion)
+                    operation.WaitForCompletion(cancellationToken);
+                return operation;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}
+        /// OperationId: RecordSets_Delete
+        /// <summary> Deletes a record set from a DNS zone. This operation cannot be undone. </summary>
+        /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
+        /// <param name="ifMatch"> The etag of the record set. Omit this value to always delete the current record set. Specify the last-seen etag value to prevent accidentally deleting any concurrent changes. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
+        public async virtual Task<RecordSetDeleteOperation> DeleteAsync(string relativeRecordSetName, string ifMatch = null, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        {
+            if (relativeRecordSetName == null)
+            {
+                throw new ArgumentNullException(nameof(relativeRecordSetName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("RecordSetNsCollection.Delete");
+            scope.Start();
+            try
+            {
+                var response = await _recordSetsRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "NS".ToRecordType(), relativeRecordSetName, ifMatch, cancellationToken).ConfigureAwait(false);
+                var operation = new RecordSetDeleteOperation(response);
+                if (waitForCompletion)
+                    await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
+                return operation;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}
         /// OperationId: RecordSets_ListByType

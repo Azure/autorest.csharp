@@ -289,6 +289,70 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/extensions/{vmssExtensionName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}
+        /// OperationId: VirtualMachineScaleSetExtensions_Delete
+        /// <summary> The operation to delete the extension. </summary>
+        /// <param name="vmssExtensionName"> The name of the VM scale set extension. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="vmssExtensionName"/> is null. </exception>
+        public virtual VirtualMachineScaleSetExtensionDeleteOperation Delete(string vmssExtensionName, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        {
+            if (vmssExtensionName == null)
+            {
+                throw new ArgumentNullException(nameof(vmssExtensionName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetExtensionCollection.Delete");
+            scope.Start();
+            try
+            {
+                var response = _virtualMachineScaleSetExtensionsRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmssExtensionName, cancellationToken);
+                var operation = new VirtualMachineScaleSetExtensionDeleteOperation(_clientDiagnostics, Pipeline, _virtualMachineScaleSetExtensionsRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmssExtensionName).Request, response);
+                if (waitForCompletion)
+                    operation.WaitForCompletion(cancellationToken);
+                return operation;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/extensions/{vmssExtensionName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}
+        /// OperationId: VirtualMachineScaleSetExtensions_Delete
+        /// <summary> The operation to delete the extension. </summary>
+        /// <param name="vmssExtensionName"> The name of the VM scale set extension. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="vmssExtensionName"/> is null. </exception>
+        public async virtual Task<VirtualMachineScaleSetExtensionDeleteOperation> DeleteAsync(string vmssExtensionName, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        {
+            if (vmssExtensionName == null)
+            {
+                throw new ArgumentNullException(nameof(vmssExtensionName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetExtensionCollection.Delete");
+            scope.Start();
+            try
+            {
+                var response = await _virtualMachineScaleSetExtensionsRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmssExtensionName, cancellationToken).ConfigureAwait(false);
+                var operation = new VirtualMachineScaleSetExtensionDeleteOperation(_clientDiagnostics, Pipeline, _virtualMachineScaleSetExtensionsRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmssExtensionName).Request, response);
+                if (waitForCompletion)
+                    await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
+                return operation;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/extensions
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}
         /// OperationId: VirtualMachineScaleSetExtensions_List

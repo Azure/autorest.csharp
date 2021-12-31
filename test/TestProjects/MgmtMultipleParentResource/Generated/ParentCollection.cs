@@ -290,6 +290,70 @@ namespace MgmtMultipleParentResource
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/parents/{parentName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
+        /// OperationId: Parents_Delete
+        /// <summary> The operation to delete the VMSS VM run command. </summary>
+        /// <param name="parentName"> The name of the VM scale set. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="parentName"/> is null. </exception>
+        public virtual ParentDeleteOperation Delete(string parentName, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        {
+            if (parentName == null)
+            {
+                throw new ArgumentNullException(nameof(parentName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("ParentCollection.Delete");
+            scope.Start();
+            try
+            {
+                var response = _parentsRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, parentName, cancellationToken);
+                var operation = new ParentDeleteOperation(_clientDiagnostics, Pipeline, _parentsRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, parentName).Request, response);
+                if (waitForCompletion)
+                    operation.WaitForCompletion(cancellationToken);
+                return operation;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/parents/{parentName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
+        /// OperationId: Parents_Delete
+        /// <summary> The operation to delete the VMSS VM run command. </summary>
+        /// <param name="parentName"> The name of the VM scale set. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="parentName"/> is null. </exception>
+        public async virtual Task<ParentDeleteOperation> DeleteAsync(string parentName, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        {
+            if (parentName == null)
+            {
+                throw new ArgumentNullException(nameof(parentName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("ParentCollection.Delete");
+            scope.Start();
+            try
+            {
+                var response = await _parentsRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, parentName, cancellationToken).ConfigureAwait(false);
+                var operation = new ParentDeleteOperation(_clientDiagnostics, Pipeline, _parentsRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, parentName).Request, response);
+                if (waitForCompletion)
+                    await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
+                return operation;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/parents
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
         /// OperationId: Parents_List

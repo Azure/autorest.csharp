@@ -284,6 +284,70 @@ namespace MgmtExtensionResource
             }
         }
 
+        /// RequestPath: /providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}
+        /// ContextualPath: /providers/Microsoft.Management/managementGroups/{managementGroupId}
+        /// OperationId: PolicyDefinitions_DeleteAtManagementGroup
+        /// <summary> This operation deletes the policy definition in the given management group with the given name. </summary>
+        /// <param name="policyDefinitionName"> The name of the policy definition to delete. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
+        public virtual PolicyDefinitionDeleteAtManagementGroupOperation Delete(string policyDefinitionName, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        {
+            if (policyDefinitionName == null)
+            {
+                throw new ArgumentNullException(nameof(policyDefinitionName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("ManagementGroupPolicyDefinitionCollection.Delete");
+            scope.Start();
+            try
+            {
+                var response = _policyDefinitionsRestClient.DeleteAtManagementGroup(Id.Name, policyDefinitionName, cancellationToken);
+                var operation = new PolicyDefinitionDeleteAtManagementGroupOperation(response);
+                if (waitForCompletion)
+                    operation.WaitForCompletion(cancellationToken);
+                return operation;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// RequestPath: /providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}
+        /// ContextualPath: /providers/Microsoft.Management/managementGroups/{managementGroupId}
+        /// OperationId: PolicyDefinitions_DeleteAtManagementGroup
+        /// <summary> This operation deletes the policy definition in the given management group with the given name. </summary>
+        /// <param name="policyDefinitionName"> The name of the policy definition to delete. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
+        public async virtual Task<PolicyDefinitionDeleteAtManagementGroupOperation> DeleteAsync(string policyDefinitionName, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        {
+            if (policyDefinitionName == null)
+            {
+                throw new ArgumentNullException(nameof(policyDefinitionName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("ManagementGroupPolicyDefinitionCollection.Delete");
+            scope.Start();
+            try
+            {
+                var response = await _policyDefinitionsRestClient.DeleteAtManagementGroupAsync(Id.Name, policyDefinitionName, cancellationToken).ConfigureAwait(false);
+                var operation = new PolicyDefinitionDeleteAtManagementGroupOperation(response);
+                if (waitForCompletion)
+                    await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
+                return operation;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         /// RequestPath: /providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Authorization/policyDefinitions
         /// ContextualPath: /providers/Microsoft.Management/managementGroups/{managementGroupId}
         /// OperationId: PolicyDefinitions_ListByManagementGroup

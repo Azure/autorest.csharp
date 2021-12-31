@@ -288,6 +288,72 @@ namespace MgmtExpandResourceTypes
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
+        /// OperationId: Zones_Delete
+        /// <summary> Deletes a DNS zone. WARNING: All DNS records in the zone will also be deleted. This operation cannot be undone. </summary>
+        /// <param name="zoneName"> The name of the DNS zone (without a terminating dot). </param>
+        /// <param name="ifMatch"> The etag of the DNS zone. Omit this value to always delete the current zone. Specify the last-seen etag value to prevent accidentally deleting any concurrent changes. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="zoneName"/> is null. </exception>
+        public virtual ZoneDeleteOperation Delete(string zoneName, string ifMatch = null, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        {
+            if (zoneName == null)
+            {
+                throw new ArgumentNullException(nameof(zoneName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("ZoneCollection.Delete");
+            scope.Start();
+            try
+            {
+                var response = _zonesRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, zoneName, ifMatch, cancellationToken);
+                var operation = new ZoneDeleteOperation(_clientDiagnostics, Pipeline, _zonesRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, zoneName, ifMatch).Request, response);
+                if (waitForCompletion)
+                    operation.WaitForCompletion(cancellationToken);
+                return operation;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
+        /// OperationId: Zones_Delete
+        /// <summary> Deletes a DNS zone. WARNING: All DNS records in the zone will also be deleted. This operation cannot be undone. </summary>
+        /// <param name="zoneName"> The name of the DNS zone (without a terminating dot). </param>
+        /// <param name="ifMatch"> The etag of the DNS zone. Omit this value to always delete the current zone. Specify the last-seen etag value to prevent accidentally deleting any concurrent changes. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="zoneName"/> is null. </exception>
+        public async virtual Task<ZoneDeleteOperation> DeleteAsync(string zoneName, string ifMatch = null, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        {
+            if (zoneName == null)
+            {
+                throw new ArgumentNullException(nameof(zoneName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("ZoneCollection.Delete");
+            scope.Start();
+            try
+            {
+                var response = await _zonesRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, zoneName, ifMatch, cancellationToken).ConfigureAwait(false);
+                var operation = new ZoneDeleteOperation(_clientDiagnostics, Pipeline, _zonesRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, zoneName, ifMatch).Request, response);
+                if (waitForCompletion)
+                    await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
+                return operation;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
         /// OperationId: Zones_ListByResourceGroup

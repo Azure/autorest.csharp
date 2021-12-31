@@ -19,6 +19,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase("PolicyAssignmentCollection", "CreateOrUpdate", true)]
         [TestCase("PolicyAssignmentCollection", "Get", true)]
         [TestCase("PolicyAssignmentCollection", "GetAll", true)]
+        [TestCase("PolicyAssignmentCollection", "Delete", true)]
         [TestCase("PolicyAssignmentCollection", "GetForResourceGroup", false)]
         [TestCase("PolicyAssignmentCollection", "GetForResource", false)]
         [TestCase("PolicyAssignmentCollection", "GetForManagementGroup", false)]
@@ -28,6 +29,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase("DeploymentExtendedCollection", "CreateOrUpdate", true)]
         [TestCase("DeploymentExtendedCollection", "Get", true)]
         [TestCase("DeploymentExtendedCollection", "GetAll", true)]
+        [TestCase("DeploymentExtendedCollection", "Delete", true)]
         [TestCase("DeploymentExtendedCollection", "GetAllAsGenericResources", false)]
         [TestCase("DeploymentExtended", "WhatIf", true)]
         [TestCase("DeploymentExtended", "WhatIfAtTenantScope", false)]
@@ -36,6 +38,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase("ResourceLinkCollection", "CreateOrUpdate", true)]
         [TestCase("ResourceLinkCollection", "Get", true)]
         //[TestCase("ResourceLinkCollection", "GetAll", true)] // TODO -- restore this when this is fixed
+        [TestCase("ResourceLinkCollection", "Delete", true)]
         [TestCase("ResourceLinkCollection", "GetAllAsGenericResources", false)]
         [TestCase("ResourceLink", "Get", true)]
         [TestCase("ResourceLink", "Delete", true)]

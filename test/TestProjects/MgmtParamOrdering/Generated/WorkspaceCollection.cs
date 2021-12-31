@@ -282,6 +282,70 @@ namespace MgmtParamOrdering
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
+        /// OperationId: Workspaces_Delete
+        /// <summary> Deletes a machine learning workspace. </summary>
+        /// <param name="workspaceName"> Name of Azure Machine Learning workspace. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="workspaceName"/> is null. </exception>
+        public virtual WorkspaceDeleteOperation Delete(string workspaceName, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        {
+            if (workspaceName == null)
+            {
+                throw new ArgumentNullException(nameof(workspaceName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("WorkspaceCollection.Delete");
+            scope.Start();
+            try
+            {
+                var response = _workspacesRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, workspaceName, cancellationToken);
+                var operation = new WorkspaceDeleteOperation(_clientDiagnostics, Pipeline, _workspacesRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, workspaceName).Request, response);
+                if (waitForCompletion)
+                    operation.WaitForCompletion(cancellationToken);
+                return operation;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
+        /// OperationId: Workspaces_Delete
+        /// <summary> Deletes a machine learning workspace. </summary>
+        /// <param name="workspaceName"> Name of Azure Machine Learning workspace. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="workspaceName"/> is null. </exception>
+        public async virtual Task<WorkspaceDeleteOperation> DeleteAsync(string workspaceName, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        {
+            if (workspaceName == null)
+            {
+                throw new ArgumentNullException(nameof(workspaceName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("WorkspaceCollection.Delete");
+            scope.Start();
+            try
+            {
+                var response = await _workspacesRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, workspaceName, cancellationToken).ConfigureAwait(false);
+                var operation = new WorkspaceDeleteOperation(_clientDiagnostics, Pipeline, _workspacesRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, workspaceName).Request, response);
+                if (waitForCompletion)
+                    await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
+                return operation;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
         /// OperationId: Workspaces_List

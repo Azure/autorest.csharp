@@ -289,6 +289,70 @@ namespace MgmtMultipleParentResource
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/anotherParents/{anotherName}/children/{childName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/anotherParents/{anotherName}
+        /// OperationId: AnotherChildren_Delete
+        /// <summary> The operation to delete the run command. </summary>
+        /// <param name="childName"> The name of the virtual machine run command. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="childName"/> is null. </exception>
+        public virtual AnotherChildDeleteOperation Delete(string childName, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        {
+            if (childName == null)
+            {
+                throw new ArgumentNullException(nameof(childName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("AnotherParentChildCollection.Delete");
+            scope.Start();
+            try
+            {
+                var response = _anotherChildrenRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, childName, cancellationToken);
+                var operation = new AnotherChildDeleteOperation(_clientDiagnostics, Pipeline, _anotherChildrenRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, childName).Request, response);
+                if (waitForCompletion)
+                    operation.WaitForCompletion(cancellationToken);
+                return operation;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/anotherParents/{anotherName}/children/{childName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/anotherParents/{anotherName}
+        /// OperationId: AnotherChildren_Delete
+        /// <summary> The operation to delete the run command. </summary>
+        /// <param name="childName"> The name of the virtual machine run command. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="childName"/> is null. </exception>
+        public async virtual Task<AnotherChildDeleteOperation> DeleteAsync(string childName, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        {
+            if (childName == null)
+            {
+                throw new ArgumentNullException(nameof(childName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("AnotherParentChildCollection.Delete");
+            scope.Start();
+            try
+            {
+                var response = await _anotherChildrenRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, childName, cancellationToken).ConfigureAwait(false);
+                var operation = new AnotherChildDeleteOperation(_clientDiagnostics, Pipeline, _anotherChildrenRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, childName).Request, response);
+                if (waitForCompletion)
+                    await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
+                return operation;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/anotherParents/{anotherName}/children
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/anotherParents/{anotherName}
         /// OperationId: AnotherChildren_List

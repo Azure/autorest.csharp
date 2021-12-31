@@ -287,6 +287,70 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/extensions/{vmExtensionName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}
+        /// OperationId: VirtualMachineExtensions_Delete
+        /// <summary> The operation to delete the extension. </summary>
+        /// <param name="vmExtensionName"> The name of the virtual machine extension. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="vmExtensionName"/> is null. </exception>
+        public virtual VirtualMachineExtensionDeleteOperation Delete(string vmExtensionName, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        {
+            if (vmExtensionName == null)
+            {
+                throw new ArgumentNullException(nameof(vmExtensionName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionCollection.Delete");
+            scope.Start();
+            try
+            {
+                var response = _virtualMachineExtensionsRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmExtensionName, cancellationToken);
+                var operation = new VirtualMachineExtensionDeleteOperation(_clientDiagnostics, Pipeline, _virtualMachineExtensionsRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmExtensionName).Request, response);
+                if (waitForCompletion)
+                    operation.WaitForCompletion(cancellationToken);
+                return operation;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/extensions/{vmExtensionName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}
+        /// OperationId: VirtualMachineExtensions_Delete
+        /// <summary> The operation to delete the extension. </summary>
+        /// <param name="vmExtensionName"> The name of the virtual machine extension. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="vmExtensionName"/> is null. </exception>
+        public async virtual Task<VirtualMachineExtensionDeleteOperation> DeleteAsync(string vmExtensionName, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        {
+            if (vmExtensionName == null)
+            {
+                throw new ArgumentNullException(nameof(vmExtensionName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionCollection.Delete");
+            scope.Start();
+            try
+            {
+                var response = await _virtualMachineExtensionsRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmExtensionName, cancellationToken).ConfigureAwait(false);
+                var operation = new VirtualMachineExtensionDeleteOperation(_clientDiagnostics, Pipeline, _virtualMachineExtensionsRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmExtensionName).Request, response);
+                if (waitForCompletion)
+                    await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
+                return operation;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/extensions
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}
         /// OperationId: VirtualMachineExtensions_List

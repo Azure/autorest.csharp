@@ -174,6 +174,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 WriteExists(_resourceCollection.GetOperation, true);
             }
 
+            if (_resourceCollection.DeleteOperation != null)
+            {
+                WriteDeleteMethod(_resourceCollection.DeleteOperation, false);
+                WriteDeleteMethod(_resourceCollection.DeleteOperation, true);
+            }
+
             // write all the methods that should belong to this resouce collection
             foreach (var clientOperation in _resourceCollection.ClientOperations)
             {
