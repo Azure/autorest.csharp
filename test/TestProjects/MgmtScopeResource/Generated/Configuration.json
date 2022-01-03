@@ -40,6 +40,9 @@
       "tenant"
     ]
   },
+  "OverrideOperationName": {
+    "ResourceLinks_ListAtSourceScope": "GetAll"
+  },
   "MgmtDebug": {
     "ShowRequestPath": true
   }

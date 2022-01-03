@@ -22,6 +22,12 @@ namespace MgmtScopeResource
     /// <summary> A Class representing a ResourceLink along with the instance operations that can be performed on it. </summary>
     public partial class ResourceLink : ArmResource
     {
+        /// <summary> Generate the resource identifier of a <see cref="ResourceLink"/> instance. </summary>
+        public static ResourceIdentifier CreateResourceIdentifier(string linkId)
+        {
+            var resourceId = $"/{linkId}";
+            return new ResourceIdentifier(resourceId);
+        }
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly ResourceLinksRestOperations _resourceLinksRestClient;
         private readonly ResourceLinkData _data;
@@ -152,14 +158,14 @@ namespace MgmtScopeResource
         /// <summary> Deletes a resource link with the specified ID. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<ResourceLinkDeleteOperation> DeleteAsync(bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<Models.ResourceLinkDeleteOperation> DeleteAsync(bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ResourceLink.Delete");
             scope.Start();
             try
             {
                 var response = await _resourceLinksRestClient.DeleteAsync(Id, cancellationToken).ConfigureAwait(false);
-                var operation = new ResourceLinkDeleteOperation(response);
+                var operation = new Models.ResourceLinkDeleteOperation(response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -177,14 +183,14 @@ namespace MgmtScopeResource
         /// <summary> Deletes a resource link with the specified ID. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual ResourceLinkDeleteOperation Delete(bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual Models.ResourceLinkDeleteOperation Delete(bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ResourceLink.Delete");
             scope.Start();
             try
             {
                 var response = _resourceLinksRestClient.Delete(Id, cancellationToken);
-                var operation = new ResourceLinkDeleteOperation(response);
+                var operation = new Models.ResourceLinkDeleteOperation(response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

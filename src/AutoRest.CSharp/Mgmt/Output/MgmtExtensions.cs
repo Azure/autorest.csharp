@@ -18,7 +18,7 @@ namespace AutoRest.CSharp.Mgmt.Output
     {
         protected IEnumerable<Operation> _allOperations;
 
-        public MgmtExtensions(IEnumerable<Operation> allOperations, BuildContext<MgmtOutputLibrary> context) : base(context)
+        public MgmtExtensions(IEnumerable<Operation> allOperations, string resourceName, BuildContext<MgmtOutputLibrary> context) : base(context, resourceName)
         {
             _context = context;
             _allOperations = allOperations;

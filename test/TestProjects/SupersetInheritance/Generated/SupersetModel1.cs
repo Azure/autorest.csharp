@@ -21,6 +21,12 @@ namespace SupersetInheritance
     /// <summary> A Class representing a SupersetModel1 along with the instance operations that can be performed on it. </summary>
     public partial class SupersetModel1 : ArmResource
     {
+        /// <summary> Generate the resource identifier of a <see cref="SupersetModel1"/> instance. </summary>
+        public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string supersetModel1SName)
+        {
+            var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel1s/{supersetModel1SName}";
+            return new ResourceIdentifier(resourceId);
+        }
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly SupersetModel1SRestOperations _supersetModel1sRestClient;
         private readonly SupersetModel1Data _data;

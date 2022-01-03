@@ -21,6 +21,12 @@ namespace SubscriptionExtensions
     /// <summary> A Class representing a Oven along with the instance operations that can be performed on it. </summary>
     public partial class Oven : ArmResource
     {
+        /// <summary> Generate the resource identifier of a <see cref="Oven"/> instance. </summary>
+        public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string ovenName)
+        {
+            var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/ovens/{ovenName}";
+            return new ResourceIdentifier(resourceId);
+        }
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly OvensRestOperations _ovensRestClient;
         private readonly OvenData _data;

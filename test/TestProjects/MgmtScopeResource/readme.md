@@ -1,4 +1,4 @@
-# MgmtParent
+# MgmtScopeResource
 
 ## AutoRest Configuration
 
@@ -41,6 +41,8 @@ request-path-to-scope-resource-types:
     - resourceGroups
     - managementGroups
     - tenant
+override-operation-name:
+  ResourceLinks_ListAtSourceScope: GetAll
 directive:
   - rename-operation:
       from: Deployments_WhatIfAtTenantScope

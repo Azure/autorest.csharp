@@ -68,6 +68,7 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
 
                 using (_writer.Scope())
                 {
+                    WriteStaticMethods();
                     WriteFields();
                     WriteCtors();
                     WriteProperties();
@@ -75,6 +76,32 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
 
                     // write children
                     WriteChildResourceEntries();
+                }
+            }
+        }
+
+        private void WriteStaticMethods()
+        {
+            WriteCreateResourceIdentifierMethods();
+        }
+
+        private void WriteCreateResourceIdentifierMethods()
+        {
+            // Right now, `RequestPaths` contains only one path. But in the future when we start to support multiple context path per resource,
+            // we should implement the logic to avoid overload conflicts (e.g. /{A}/{B}/{C} v.s. /{D}/{E}/{F}, both context path contains 3 parameters).
+            foreach (var requestPath in _resource.RequestPaths)
+            {
+                _writer.Line();
+                _writer.WriteXmlDocumentationSummary($"Generate the resource identifier of a <see cref=\"{TypeOfThis}\"/> instance.");
+                var parameterList = string.Join(", ", requestPath.Where(segment => segment.IsReference).Select(segment => $"string {segment.ReferenceName}"));
+                using (_writer.Scope($"public static {typeof(ResourceIdentifier)} CreateResourceIdentifier({parameterList})"))
+                {
+                    // Storage has inconsistent definitions:
+                    // - https://github.com/Azure/azure-rest-api-specs/blob/719b74f77b92eb1ec3814be6c4488bcf6b651733/specification/storage/resource-manager/Microsoft.Storage/stable/2021-04-01/blob.json#L58
+                    // - https://github.com/Azure/azure-rest-api-specs/blob/719b74f77b92eb1ec3814be6c4488bcf6b651733/specification/storage/resource-manager/Microsoft.Storage/stable/2021-04-01/blob.json#L146
+                    // so here we have to use `Seqment.BuildSerializedSegments` instead of `RequestPath.SerializedPath` which could be from `RestClientMethod.Operation.GetHttpPath`
+                    _writer.Line($"var resourceId = $\"{Segment.BuildSerializedSegments(requestPath)}\";");
+                    _writer.Line($"return new ResourceIdentifier(resourceId);");
                 }
             }
         }
@@ -408,18 +435,9 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
         private void WriteTaggableCommonMethod(bool async)
         {
             _writer.Line($"{GetAwait(async)} TagResource.{CreateMethodName("CreateOrUpdate", async)}(originalTags.Value.Data, cancellationToken: cancellationToken){GetConfigureAwait(async)};");
-            // get the corresponding MgmtClientOperation mapping
-            var operationMappings = _resource.GetOperation.ToDictionary(
-                clientOperation => clientOperation.ContextualPath,
-                clientOperation => clientOperation);
-            // build contextual parameters
-            var contextualParameterMappings = operationMappings.Keys.ToDictionary(
-                contextualPath => contextualPath,
-                contextualPath => contextualPath.BuildContextualParameters(Context, IdVariableName));
-            // build parameter mapping
-            var parameterMappings = operationMappings.ToDictionary(
-                pair => pair.Key,
-                pair => pair.Value.BuildParameterMapping(contextualParameterMappings[pair.Key]));
+
+            BuildParameters(_resource.GetOperation!, out var operationMappings, out var parameterMappings, out _);
+
             // we need to write multiple branches for a normal method
             if (operationMappings.Count == 1)
             {
@@ -453,9 +471,24 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Gets a collection of {resource.Type.Name.LastWordToPlural()} in the {_resource.Type.Name}.");
             _writer.WriteXmlDocumentationReturns($"An object representing collection of {resource.Type.Name.LastWordToPlural()} and their operations over a {_resource.Type.Name}.");
-            using (_writer.Scope($"public {collection.Type.Name} Get{resource.Type.Name.ResourceNameToPlural()}()"))
+            _writer.WriteXmlDocumentationParameters(collection.ExtraConstructorParameters);
+            var extraConstructorParameters = collection.ExtraConstructorParameters;
+            _writer.Append($"public {collection.Type.Name} Get{resource.Type.Name.ResourceNameToPlural()}(");
+            foreach (var parameter in collection.ExtraConstructorParameters)
             {
-                _writer.Line($"return new {collection.Type.Name}(this);");
+                _writer.WriteParameter(parameter);
+            }
+            _writer.RemoveTrailingComma();
+            _writer.Line($")");
+            using (_writer.Scope())
+            {
+                _writer.Append($"return new {collection.Type.Name}(this, ");
+                foreach (var parameter in collection.ExtraConstructorParameters)
+                {
+                    _writer.Append($"{parameter.Name}, ");
+                }
+                _writer.RemoveTrailingComma();
+                _writer.Line($");");
             }
         }
 

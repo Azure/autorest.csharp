@@ -21,6 +21,12 @@ namespace Pagination
     /// <summary> A Class representing a PageSizeFloatModel along with the instance operations that can be performed on it. </summary>
     public partial class PageSizeFloatModel : ArmResource
     {
+        /// <summary> Generate the resource identifier of a <see cref="PageSizeFloatModel"/> instance. </summary>
+        public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string name)
+        {
+            var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/pageSizeFloatModel/{name}";
+            return new ResourceIdentifier(resourceId);
+        }
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly PageSizeFloatModelsRestOperations _pageSizeFloatModelsRestClient;
         private readonly PageSizeFloatModelData _data;

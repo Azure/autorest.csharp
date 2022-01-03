@@ -22,6 +22,12 @@ namespace MgmtExtensionResource
     /// <summary> A Class representing a SubscriptionPolicyDefinition along with the instance operations that can be performed on it. </summary>
     public partial class SubscriptionPolicyDefinition : ArmResource
     {
+        /// <summary> Generate the resource identifier of a <see cref="SubscriptionPolicyDefinition"/> instance. </summary>
+        public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string policyDefinitionName)
+        {
+            var resourceId = $"/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}";
+            return new ResourceIdentifier(resourceId);
+        }
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly PolicyDefinitionsRestOperations _policyDefinitionsRestClient;
         private readonly PolicyDefinitionData _data;
@@ -152,14 +158,14 @@ namespace MgmtExtensionResource
         /// <summary> This operation deletes the policy definition in the given subscription with the given name. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<PolicyDefinitionDeleteOperation> DeleteAsync(bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<Models.PolicyDefinitionDeleteOperation> DeleteAsync(bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SubscriptionPolicyDefinition.Delete");
             scope.Start();
             try
             {
                 var response = await _policyDefinitionsRestClient.DeleteAsync(Id.SubscriptionId, Id.Name, cancellationToken).ConfigureAwait(false);
-                var operation = new PolicyDefinitionDeleteOperation(response);
+                var operation = new Models.PolicyDefinitionDeleteOperation(response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -177,14 +183,14 @@ namespace MgmtExtensionResource
         /// <summary> This operation deletes the policy definition in the given subscription with the given name. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual PolicyDefinitionDeleteOperation Delete(bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual Models.PolicyDefinitionDeleteOperation Delete(bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SubscriptionPolicyDefinition.Delete");
             scope.Start();
             try
             {
                 var response = _policyDefinitionsRestClient.Delete(Id.SubscriptionId, Id.Name, cancellationToken);
-                var operation = new PolicyDefinitionDeleteOperation(response);
+                var operation = new Models.PolicyDefinitionDeleteOperation(response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
