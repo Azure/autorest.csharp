@@ -1,0 +1,142 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-10-19",
+    "title": "LlcResourceClients"
+  },
+  "host": "localhost:3000",
+  "schemes": [
+    "http"
+  ],
+  "produces": [ "application/json" ],
+  "consumes": [ "application/json" ],
+  "paths": {
+    "/": {
+      "get": {
+        "description": "Method that belongs to the top level service",
+        "operationId": "Service_GetParameters",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type":"string"
+            }
+          }
+        }
+      }
+    },
+    "/groups": {
+      "get": {
+        "description": "Get all groups. It is defined in `Group` subclient, but must be promoted to the `Service` client.",
+        "operationId": "Group_ListGroups",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type":"string"
+            }
+          }
+        }
+      }
+    },
+    "/groups/{groupId}": {
+      "get": {
+        "description": "Get a group. Method should stay in `Group` subclient.",
+        "operationId": "Group_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/groupId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type":"string"
+            }
+          }
+        }
+      }
+    },
+    "/items": {
+      "get": {
+        "description": "Get all groups. It is defined in `Item` subclient, but must be promoted to the `Service` client, because it has neither `groupId` nor `itemId` parameters.",
+        "operationId": "Item_ListAllItems",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type":"string"
+            }
+          }
+        }
+      }
+    },
+    "/items/{groupId}": {
+      "get": {
+        "description": "Get items in group. It is defined in `Item` subclient, but must be promoted to the `Group` subclient.",
+        "operationId": "Item_ListItems",
+        "parameters": [
+          {
+            "$ref": "#/parameters/groupId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type":"string"
+            }
+          }
+        }
+      }
+    },
+    "/items/{groupId}/{itemId}": {
+      "get": {
+        "description": "Get an item. Method should stay in `Item` subclient.",
+        "operationId": "Item_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/groupId"
+          },
+          {
+            "$ref": "#/parameters/itemId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type":"string"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": { },
+  "parameters": { 
+    "groupId": {
+      "in": "path",
+      "name": "groupId",
+      "required": true,
+      "type": "string",
+      "x-ms-resource-parameter": true,
+      "x-ms-parameter-location": "client"
+    },
+    "itemId": {
+      "in": "path",
+      "name": "itemId",
+      "required": true,
+      "type": "string",
+      "x-ms-resource-parameter": true,
+      "x-ms-parameter-location": "client"
+    }
+  },
+  "securityDefinitions": {},
+  "security": [],
+  "tags": []
+}

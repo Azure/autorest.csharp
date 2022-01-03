@@ -8,23 +8,54 @@ using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Utilities;
 using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.Output.Models
 {
-    internal static class LowLevelClientHierarchyResolver
+    internal static class LowLevelOutputLibraryFactory
     {
-        public static IReadOnlyList<LowLevelClient> BuildClientHierarchy(ICollection<OperationGroup> operationGroups, BuildContext<LowLevelOutputLibrary> context, ClientOptionsTypeProvider clientOptions)
+        public static LowLevelOutputLibrary Create(CodeModel codeModel, BuildContext<LowLevelOutputLibrary> context)
         {
-            var clientInfosByName = operationGroups
+            UpdateListMethodNames(codeModel);
+
+            var clientInfosByName = codeModel.OperationGroups
                 .Select(og => CreateClientInfo(og, context))
                 .ToDictionary(ci => ci.Name);
 
             var topLevelClientInfos = SetHierarchy(clientInfosByName, context);
+            var clientOptions = new ClientOptionsTypeProvider(context, GetTopLevelClientPrefix(topLevelClientInfos, context));
             SetRequestsToClients(clientInfosByName.Values);
-            var topLevelClients = CreateClients(topLevelClientInfos, context, clientOptions);
 
-            return EnumerateAllClients(topLevelClients);
+            return new LowLevelOutputLibrary(context, () =>
+            {
+                var topLevelClients = CreateClients(topLevelClientInfos, context, clientOptions);
+                return EnumerateAllClients(topLevelClients);
+            }, clientOptions);
+        }
+
+        private static void UpdateListMethodNames(CodeModel codeModel)
+        {
+            var defaultName = codeModel.Language.Default.Name.ReplaceLast("Client", "");
+            foreach (var operationGroup in codeModel.OperationGroups)
+            {
+                foreach (var operation in operationGroup.Operations)
+                {
+                    var resourceName = operationGroup.Key.IsNullOrEmpty() ? defaultName : operationGroup.Key;
+                    operation.Language.Default.Name = operation.Language.Default.Name.RenameGetMethod(resourceName).RenameListToGet(resourceName);
+                }
+            }
+        }
+
+        private static string GetTopLevelClientPrefix(IReadOnlyList<ClientInfo> topLevelClientInfos, BuildContext<LowLevelOutputLibrary> context)
+        {
+            if (topLevelClientInfos.Count == 1)
+            {
+                return topLevelClientInfos[0].Name;
+            }
+
+            var noGroupKeyClient = topLevelClientInfos.SingleOrDefault(c => string.IsNullOrEmpty(c.OperationGroupKey));
+            return noGroupKeyClient?.Name ?? ClientBuilder.GetClientPrefix(context.DefaultLibraryName, context);
         }
 
         /// <summary>
@@ -71,10 +102,7 @@ namespace AutoRest.CSharp.Output.Models
             {
                 foreach (var clientInfo in clientInfosByName.Values)
                 {
-                    if (clientInfo.Parent == null && clientInfo.ExistingType != null)
-                    {
-                        AssignParents(clientInfo, clientInfosByName, sourceInputModel);
-                    }
+                    AssignParents(clientInfo, clientInfosByName, sourceInputModel);
                 }
             }
 
@@ -87,7 +115,7 @@ namespace AutoRest.CSharp.Output.Models
             var topLevelClientInfo = topLevelClients.FirstOrDefault(c => string.IsNullOrEmpty(c.OperationGroupKey));
             if (topLevelClientInfo == null)
             {
-                var clientName = ClientBuilder.GetClientPrefix(string.Empty, context) + ClientBuilder.GetClientSuffix(context);
+                var clientName = ClientBuilder.GetClientPrefix(context.DefaultLibraryName, context) + ClientBuilder.GetClientSuffix(context);
                 var clientNamespace = context.DefaultNamespace;
                 var endpointParameter = context.CodeModel.GlobalParameters.FirstOrDefault(RestClientBuilder.IsEndpointParameter);
                 var clientParameters = endpointParameter != null ? new[] { endpointParameter } : Array.Empty<RequestParameter>();
@@ -110,7 +138,7 @@ namespace AutoRest.CSharp.Output.Models
         private static void AssignParents(in ClientInfo clientInfo, IReadOnlyDictionary<string, ClientInfo> clientInfosByName, SourceInputModel sourceInputModel)
         {
             var child = clientInfo;
-            while (child.ExistingType != null && sourceInputModel.TryGetClientSourceInput(child.ExistingType, out var clientSourceInput) && clientSourceInput.ParentClientType != null)
+            while (child.Parent == null && child.ExistingType != null && sourceInputModel.TryGetClientSourceInput(child.ExistingType, out var clientSourceInput) && clientSourceInput.ParentClientType != null)
             {
                 var parent = clientInfosByName[clientSourceInput.ParentClientType.Name];
                 if (clientInfo == parent)
@@ -167,9 +195,9 @@ namespace AutoRest.CSharp.Output.Models
             clientInfo.Requests.Add((request, operation));
         }
 
-        private static IEnumerable<LowLevelClient> CreateClients(IEnumerable<ClientInfo> clientInfos, BuildContext<LowLevelOutputLibrary> context, ClientOptionsTypeProvider clientOptions)
+        private static IEnumerable<LowLevelClient> CreateClients(IEnumerable<ClientInfo> topLevelClientInfos, BuildContext<LowLevelOutputLibrary> context, ClientOptionsTypeProvider clientOptions)
         {
-            foreach (var clientInfo in clientInfos)
+            foreach (var clientInfo in topLevelClientInfos)
             {
                 var subClients = clientInfo.Children.Count > 0
                     ? CreateClients(clientInfo.Children, context, clientOptions).ToArray()

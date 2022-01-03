@@ -3,43 +3,24 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
     internal class LowLevelOutputLibrary : OutputLibrary
     {
-        private readonly CodeModel _codeModel;
         private readonly BuildContext<LowLevelOutputLibrary> _context;
         private readonly Lazy<IReadOnlyList<LowLevelClient>> _restClients;
-        public ClientOptionsTypeProvider ClientOptions { get; }
-
-        public LowLevelOutputLibrary(CodeModel codeModel, BuildContext<LowLevelOutputLibrary> context)
-        {
-            _codeModel = codeModel;
-            _context = context;
-            ClientOptions = new ClientOptionsTypeProvider(_context);
-            UpdateListMethodNames();
-            _restClients = new Lazy<IReadOnlyList<LowLevelClient>>(() => LowLevelClientHierarchyResolver.BuildClientHierarchy(_codeModel.OperationGroups, _context, ClientOptions));
-        }
 
         public IReadOnlyList<LowLevelClient> RestClients => _restClients.Value;
+        public ClientOptionsTypeProvider ClientOptions { get; }
 
-        private void UpdateListMethodNames()
+        public LowLevelOutputLibrary(BuildContext<LowLevelOutputLibrary> context, Func<IReadOnlyList<LowLevelClient>> restClientsFactory, ClientOptionsTypeProvider clientOptions)
         {
-            var defaultName = _codeModel.Language.Default.Name.ReplaceLast("Client", "");
-            foreach (var operationGroup in _codeModel.OperationGroups)
-            {
-                foreach (var operation in operationGroup.Operations)
-                {
-                    var resourceName = operationGroup.Key.IsNullOrEmpty() ? defaultName : operationGroup.Key;
-                    operation.Language.Default.Name = operation.Language.Default.Name.RenameGetMethod(resourceName).RenameListToGet(resourceName);
-                }
-            }
+            _context = context;
+            _restClients = new Lazy<IReadOnlyList<LowLevelClient>>(restClientsFactory);
+            ClientOptions = clientOptions;
         }
 
         public override CSharpType FindTypeForSchema(Schema schema)

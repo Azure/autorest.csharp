@@ -3,8 +3,6 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using AutoRest.CSharp.Common.Output.Builders;
-using AutoRest.CSharp.Output.Models.Shared;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
@@ -15,9 +13,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility { get; }
 
-        public ClientOptionsTypeProvider(BuildContext context) : this(context, ClientBuilder.GetClientPrefix(context.DefaultLibraryName, context)) { }
-
-        private ClientOptionsTypeProvider(BuildContext context, string defaultClientName) : base(context)
+        public ClientOptionsTypeProvider(BuildContext context, string defaultClientName) : base(context)
         {
             DefaultName = $"{defaultClientName}ClientOptions";
             DefaultClientName = defaultClientName;
