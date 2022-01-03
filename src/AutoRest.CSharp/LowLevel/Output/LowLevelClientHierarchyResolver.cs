@@ -87,7 +87,7 @@ namespace AutoRest.CSharp.Output.Models
             var topLevelClientInfo = topLevelClients.FirstOrDefault(c => string.IsNullOrEmpty(c.OperationGroupKey));
             if (topLevelClientInfo == null)
             {
-                var clientName = ClientBuilder.GetClientPrefix(string.Empty, context);
+                var clientName = ClientBuilder.GetClientPrefix(string.Empty, context) + ClientBuilder.GetClientSuffix(context);
                 var clientNamespace = context.DefaultNamespace;
                 var endpointParameter = context.CodeModel.GlobalParameters.FirstOrDefault(RestClientBuilder.IsEndpointParameter);
                 var clientParameters = endpointParameter != null ? new[] { endpointParameter } : Array.Empty<RequestParameter>();
