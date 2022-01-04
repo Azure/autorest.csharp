@@ -30,6 +30,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     writer.Line($"[{ReferenceTypePropertyChooser.PropertyReferenceAttribute}]");
                 }
+                else if (extensions.MgmtTypeReferenceType)
+                {
+                    writer.Line($"[{TypeReferenceTypeChooser.TyepReferenceTypeAttribute}]");
+                }
             }
         }
 

@@ -19,9 +19,16 @@ namespace AutoRest.CSharp.Mgmt.Output
         private readonly BuildContext<MgmtOutputLibrary> _context;
 
         public MgmtObjectType(ObjectSchema objectSchema, BuildContext<MgmtOutputLibrary> context)
+            : this(objectSchema, context, default, default)
+        {
+        }
+
+        public MgmtObjectType(ObjectSchema objectSchema, BuildContext<MgmtOutputLibrary> context, string? name = default, string? nameSpace = default)
             : base(objectSchema, context)
         {
             _context = context;
+            _defaultName = name;
+            _defaultNamespace = nameSpace;
         }
 
         protected virtual bool IsResourceType => false;

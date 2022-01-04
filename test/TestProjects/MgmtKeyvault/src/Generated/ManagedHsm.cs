@@ -94,6 +94,9 @@ namespace MgmtKeyvault
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/managedHSMs/{name}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/managedHSMs/{name}
+        /// OperationId: ManagedHsms_Get
         /// <summary> Gets the specified managed HSM Pool. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<ManagedHsm>> GetAsync(CancellationToken cancellationToken = default)
@@ -114,6 +117,9 @@ namespace MgmtKeyvault
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/managedHSMs/{name}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/managedHSMs/{name}
+        /// OperationId: ManagedHsms_Get
         /// <summary> Gets the specified managed HSM Pool. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<ManagedHsm> Get(CancellationToken cancellationToken = default)
@@ -150,6 +156,9 @@ namespace MgmtKeyvault
             return ListAvailableLocations(ResourceType, cancellationToken);
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/managedHSMs/{name}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/managedHSMs/{name}
+        /// OperationId: ManagedHsms_Delete
         /// <summary> Deletes the specified managed HSM Pool. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -172,6 +181,9 @@ namespace MgmtKeyvault
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/managedHSMs/{name}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/managedHSMs/{name}
+        /// OperationId: ManagedHsms_Delete
         /// <summary> Deletes the specified managed HSM Pool. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -194,6 +206,9 @@ namespace MgmtKeyvault
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/managedHSMs/{name}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/managedHSMs/{name}
+        /// OperationId: ManagedHsms_Update
         /// <summary> Update a managed HSM Pool in the specified subscription. </summary>
         /// <param name="parameters"> Parameters to patch the managed HSM Pool. </param>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
@@ -223,6 +238,9 @@ namespace MgmtKeyvault
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/managedHSMs/{name}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/managedHSMs/{name}
+        /// OperationId: ManagedHsms_Update
         /// <summary> Update a managed HSM Pool in the specified subscription. </summary>
         /// <param name="parameters"> Parameters to patch the managed HSM Pool. </param>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
@@ -252,6 +270,9 @@ namespace MgmtKeyvault
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/managedHSMs/{name}/privateLinkResources
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/managedHSMs/{name}
+        /// OperationId: MHSMPrivateLinkResources_ListByMhsmResource
         /// <summary> Gets the private link resources supported for the managed hsm pool. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<IReadOnlyList<MhsmPrivateLinkResource>>> GetMHSMPrivateLinkResourcesByMhsmResourceAsync(CancellationToken cancellationToken = default)
@@ -270,6 +291,9 @@ namespace MgmtKeyvault
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/managedHSMs/{name}/privateLinkResources
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/managedHSMs/{name}
+        /// OperationId: MHSMPrivateLinkResources_ListByMhsmResource
         /// <summary> Gets the private link resources supported for the managed hsm pool. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyList<MhsmPrivateLinkResource>> GetMHSMPrivateLinkResourcesByMhsmResource(CancellationToken cancellationToken = default)

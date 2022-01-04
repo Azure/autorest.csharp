@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace MgmtKeyvault.Models
 {
-    internal partial class VaultPatchParameters : IUtf8JsonSerializable
+    public partial class VaultPatchParameters : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
