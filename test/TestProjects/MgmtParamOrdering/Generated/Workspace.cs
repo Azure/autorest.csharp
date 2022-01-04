@@ -434,7 +434,7 @@ namespace MgmtParamOrdering
 
         /// <summary> Gets a collection of EnvironmentContainerResources in the Workspace. </summary>
         /// <returns> An object representing collection of EnvironmentContainerResources and their operations over a Workspace. </returns>
-        public EnvironmentContainerResourceCollection GetEnvironmentContainerResources()
+        public virtual EnvironmentContainerResourceCollection GetEnvironmentContainerResources()
         {
             return new EnvironmentContainerResourceCollection(this);
         }

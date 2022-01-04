@@ -468,7 +468,7 @@ namespace Azure.Management.Storage
 
         /// <summary> Gets an object representing a ImmutabilityPolicy along with the instance operations that can be performed on it in the BlobContainer. </summary>
         /// <returns> Returns a <see cref="ImmutabilityPolicy" /> object. </returns>
-        public ImmutabilityPolicy GetImmutabilityPolicy()
+        public virtual ImmutabilityPolicy GetImmutabilityPolicy()
         {
             return new ImmutabilityPolicy(this, new ResourceIdentifier(Id.ToString() + "/immutabilityPolicies/default"));
         }

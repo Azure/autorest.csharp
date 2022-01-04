@@ -366,7 +366,7 @@ namespace MgmtKeyvault
 
         /// <summary> Gets a collection of PrivateEndpointConnections in the Vault. </summary>
         /// <returns> An object representing collection of PrivateEndpointConnections and their operations over a Vault. </returns>
-        public PrivateEndpointConnectionCollection GetPrivateEndpointConnections()
+        public virtual PrivateEndpointConnectionCollection GetPrivateEndpointConnections()
         {
             return new PrivateEndpointConnectionCollection(this);
         }
