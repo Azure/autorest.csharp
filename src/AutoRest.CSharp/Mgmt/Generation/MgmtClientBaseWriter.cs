@@ -83,7 +83,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected abstract void WriteResourceCollectionEntry(Resource resource);
 
-        protected void WriteUsings(CodeWriter writer)
+        protected virtual void WriteUsings(CodeWriter writer)
         {
             writer.UseNamespace(typeof(Task).Namespace!);
         }
