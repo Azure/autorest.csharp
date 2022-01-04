@@ -262,30 +262,12 @@ namespace AutoRest.CSharp.Mgmt.Output
                     var requestPath = operation.GetRequestPath(_context);
                     var requestTrimmedPath = requestPath.TrimScope();
                     var resourceTrimmedPath = resourceRequestPath.TrimScope();
-                    string key;
-                    RequestPath contextualPath;
-                    string methodName;
-                    // first we need to see if this operation is a collection operation. Collection operation is not literally a child of the corresponding resource
-                    if (IsListOperation(operation, operationSet))
-                    {
-                        // if this operation is a collection operation, it should be the parent of its corresponding resource request path
-                        if (!requestTrimmedPath.TryTrimAncestorFrom(resourceTrimmedPath, out var diff))
-                            diff = requestTrimmedPath;
-                        // since in this case, the diff is a "minus" diff comparing with the other branch of the condition, we add a minus sign at the beginning of this key ti make sure this key would not collide with others
-                        key = $"{method}-{diff}";
-                        //contextualPath = GetContextualPath(operationSet);
-                        contextualPath = GetContextualPath(operationSet, requestPath);
-                        methodName = "GetAll"; // hard-code the name of a resource collection operation to "GetAll"
-                    }
-                    else
-                    {
-                        // for other child operations, they should be child of the corresponding resource request path
-                        if (!resourceTrimmedPath.TryTrimAncestorFrom(requestTrimmedPath, out var diff))
-                            diff = requestTrimmedPath;
-                        key = $"{method}{diff}";
-                        contextualPath = GetContextualPath(operationSet, requestPath);
-                        methodName = GetOperationName(operation, resourceRestClient.OperationGroup.Key);
-                    }
+                    // the operations are grouped by the following key
+                    var key = $"{method}{resourceTrimmedPath.Minus(requestTrimmedPath)}";
+                    var contextualPath = GetContextualPath(operationSet, requestPath);
+                    var methodName = IsListOperation(operation, operationSet) ?
+                        "GetAll" :// hard-code the name of a resource collection operation to "GetAll"
+                        GetOperationName(operation, resourceRestClient.OperationGroup.Key);
                     // get the MgmtRestOperation with a proper name
                     var restOperation = new MgmtRestOperation(
                         _context.Library.RestClientMethods[operation],

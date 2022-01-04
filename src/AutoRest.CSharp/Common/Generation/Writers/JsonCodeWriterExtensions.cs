@@ -8,6 +8,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Mgmt.Decorator;
+using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Types;
@@ -604,6 +605,10 @@ namespace AutoRest.CSharp.Generation.Writers
                     {
                         var systemObjectType = objectType as SystemObjectType;
                         if (systemObjectType != null && IsCustomJsonConverterAdded(systemObjectType))
+                        {
+                            writer.Append($"JsonSerializer.Deserialize<{implementation.Type}>({element}.ToString())");
+                        }
+                        else if (objectType is MgmtObjectType mgmtObjectType && TypeReferenceTypeChooser.HasMatch(mgmtObjectType.ObjectSchema))
                         {
                             writer.Append($"JsonSerializer.Deserialize<{implementation.Type}>({element}.ToString())");
                         }
