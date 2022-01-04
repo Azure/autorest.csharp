@@ -23,7 +23,6 @@ namespace MgmtKeyvault
 {
     /// <summary> A class representing collection of Vault and their operations over its parent. </summary>
     public partial class VaultCollection : ArmCollection, IEnumerable<Vault>, IAsyncEnumerable<Vault>
-
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly VaultsRestOperations _vaultsRestClient;
