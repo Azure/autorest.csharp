@@ -225,7 +225,7 @@ namespace Azure.Management.Storage
 
         /// <summary> Gets a collection of FileShares in the FileService. </summary>
         /// <returns> An object representing collection of FileShares and their operations over a FileService. </returns>
-        public FileShareCollection GetFileShares()
+        public virtual FileShareCollection GetFileShares()
         {
             return new FileShareCollection(this);
         }

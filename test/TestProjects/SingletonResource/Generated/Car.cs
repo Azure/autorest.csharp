@@ -153,7 +153,7 @@ namespace SingletonResource
 
         /// <summary> Gets an object representing a Ignition along with the instance operations that can be performed on it in the Car. </summary>
         /// <returns> Returns a <see cref="Ignition" /> object. </returns>
-        public Ignition GetIgnition()
+        public virtual Ignition GetIgnition()
         {
             return new Ignition(this, new ResourceIdentifier(Id.ToString() + "/ignitions/default"));
         }

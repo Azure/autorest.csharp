@@ -329,7 +329,7 @@ namespace MgmtListMethods
 
         /// <summary> Gets a collection of FakeParentWithAncestorWithNonResChWithLocs in the Fake. </summary>
         /// <returns> An object representing collection of FakeParentWithAncestorWithNonResChWithLocs and their operations over a Fake. </returns>
-        public FakeParentWithAncestorWithNonResChWithLocCollection GetFakeParentWithAncestorWithNonResChWithLocs()
+        public virtual FakeParentWithAncestorWithNonResChWithLocCollection GetFakeParentWithAncestorWithNonResChWithLocs()
         {
             return new FakeParentWithAncestorWithNonResChWithLocCollection(this);
         }
@@ -339,7 +339,7 @@ namespace MgmtListMethods
 
         /// <summary> Gets a collection of FakeParentWithAncestorWithNonResChes in the Fake. </summary>
         /// <returns> An object representing collection of FakeParentWithAncestorWithNonResChes and their operations over a Fake. </returns>
-        public FakeParentWithAncestorWithNonResChCollection GetFakeParentWithAncestorWithNonResChes()
+        public virtual FakeParentWithAncestorWithNonResChCollection GetFakeParentWithAncestorWithNonResChes()
         {
             return new FakeParentWithAncestorWithNonResChCollection(this);
         }
@@ -349,7 +349,7 @@ namespace MgmtListMethods
 
         /// <summary> Gets a collection of FakeParentWithAncestorWithLocs in the Fake. </summary>
         /// <returns> An object representing collection of FakeParentWithAncestorWithLocs and their operations over a Fake. </returns>
-        public FakeParentWithAncestorWithLocCollection GetFakeParentWithAncestorWithLocs()
+        public virtual FakeParentWithAncestorWithLocCollection GetFakeParentWithAncestorWithLocs()
         {
             return new FakeParentWithAncestorWithLocCollection(this);
         }
@@ -359,7 +359,7 @@ namespace MgmtListMethods
 
         /// <summary> Gets a collection of FakeParentWithAncestors in the Fake. </summary>
         /// <returns> An object representing collection of FakeParentWithAncestors and their operations over a Fake. </returns>
-        public FakeParentWithAncestorCollection GetFakeParentWithAncestors()
+        public virtual FakeParentWithAncestorCollection GetFakeParentWithAncestors()
         {
             return new FakeParentWithAncestorCollection(this);
         }
@@ -369,7 +369,7 @@ namespace MgmtListMethods
 
         /// <summary> Gets a collection of FakeParentWithNonResChes in the Fake. </summary>
         /// <returns> An object representing collection of FakeParentWithNonResChes and their operations over a Fake. </returns>
-        public FakeParentWithNonResChCollection GetFakeParentWithNonResChes()
+        public virtual FakeParentWithNonResChCollection GetFakeParentWithNonResChes()
         {
             return new FakeParentWithNonResChCollection(this);
         }
@@ -379,7 +379,7 @@ namespace MgmtListMethods
 
         /// <summary> Gets a collection of FakeParents in the Fake. </summary>
         /// <returns> An object representing collection of FakeParents and their operations over a Fake. </returns>
-        public FakeParentCollection GetFakeParents()
+        public virtual FakeParentCollection GetFakeParents()
         {
             return new FakeParentCollection(this);
         }
