@@ -91,7 +91,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
             }
         }
 
-        /// <summary> Operation defined in resource client, but must be promoted to the top level client because it doesn&apos;t have a parameter with `x-ms-resource-parameter: true`. </summary>
+        /// <summary> Operation defined in resource client, but must be promoted to the top level client because it doesn&apos;t have a parameter with `x-ms-resource-identifier: true`. </summary>
         /// <param name="filter"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="filter"/> is null. </exception>
@@ -119,7 +119,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
             }
         }
 
-        /// <summary> Operation defined in resource client, but must be promoted to the top level client because it doesn&apos;t have a parameter with `x-ms-resource-parameter: true`. </summary>
+        /// <summary> Operation defined in resource client, but must be promoted to the top level client because it doesn&apos;t have a parameter with `x-ms-resource-identifier: true`. </summary>
         /// <param name="filter"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="filter"/> is null. </exception>

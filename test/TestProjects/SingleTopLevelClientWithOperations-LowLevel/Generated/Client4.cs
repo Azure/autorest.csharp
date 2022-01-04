@@ -61,7 +61,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
             _endpoint = endpoint;
         }
 
-        /// <summary> Operation has a parameter with `x-ms-resource-parameter: true`, hence `Client4` will be codegen&apos;ed as a resource client. </summary>
+        /// <summary> Operation has a parameter with `x-ms-resource-identifier: true`, hence `Client4` will be codegen&apos;ed as a resource client. </summary>
         /// <param name="filter"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="filter"/> is null. </exception>
@@ -83,7 +83,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
             }
         }
 
-        /// <summary> Operation has a parameter with `x-ms-resource-parameter: true`, hence `Client4` will be codegen&apos;ed as a resource client. </summary>
+        /// <summary> Operation has a parameter with `x-ms-resource-identifier: true`, hence `Client4` will be codegen&apos;ed as a resource client. </summary>
         /// <param name="filter"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="filter"/> is null. </exception>

@@ -32,7 +32,7 @@ directive:
         "name": "collectionName",
         "required": true,
         "type": "string",
-        "x-ms-resource-parameter": true,
+        "x-ms-resource-identifier": true,
         "x-ms-parameter-location": "client"
       };
 

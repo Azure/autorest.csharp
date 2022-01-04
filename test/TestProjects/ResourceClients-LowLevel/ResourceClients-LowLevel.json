@@ -134,7 +134,7 @@
       "name": "groupId",
       "required": true,
       "type": "string",
-      "x-ms-resource-parameter": true,
+      "x-ms-resource-identifier": true,
       "x-ms-parameter-location": "client"
     },
     "itemId": {
@@ -142,7 +142,7 @@
       "name": "itemId",
       "required": true,
       "type": "string",
-      "x-ms-resource-parameter": true,
+      "x-ms-resource-identifier": true,
       "x-ms-parameter-location": "client"
     }
   },

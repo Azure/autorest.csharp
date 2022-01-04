@@ -3650,7 +3650,7 @@ globalParameters:
     required: true
     extensions:
       x-ms-priority: 2
-      x-ms-resource-parameter: true
+      x-ms-resource-identifier: true
     language: !Languages 
       default:
         name: CollectionName

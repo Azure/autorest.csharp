@@ -41,7 +41,7 @@ globalParameters:
     required: true
     extensions:
       x-ms-priority: 0
-      x-ms-resource-parameter: true
+      x-ms-resource-identifier: true
     language: !Languages 
       default:
         name: GroupId
@@ -56,7 +56,7 @@ globalParameters:
     required: true
     extensions:
       x-ms-priority: 1
-      x-ms-resource-parameter: true
+      x-ms-resource-identifier: true
     language: !Languages 
       default:
         name: ItemId
