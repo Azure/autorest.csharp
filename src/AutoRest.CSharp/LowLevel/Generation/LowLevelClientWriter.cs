@@ -389,7 +389,12 @@ namespace AutoRest.CSharp.Generation.Writers
                     ? subClientName[libraryName.Length..]
                     : subClientName;
 
-                var methodSignature = new MethodSignature($"Get{methodName}{ClientBuilder.GetClientSuffix(context)}", $"Initializes a new instance of {subClient.Type.Name}", "public virtual", subClient.Type, null, methodParameters.ToArray());
+                if (!subClient.IsResourceClient)
+                {
+                    methodName += ClientBuilder.GetClientSuffix(context);
+                }
+
+                var methodSignature = new MethodSignature($"Get{methodName}", $"Initializes a new instance of {subClient.Type.Name}", "public virtual", subClient.Type, null, methodParameters.ToArray());
                 if (methodParameters.Any())
                 {
                     factoryMethods.Add((null, methodSignature, constructorCallParameters));

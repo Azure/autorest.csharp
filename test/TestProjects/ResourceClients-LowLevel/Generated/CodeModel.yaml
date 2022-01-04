@@ -1,5 +1,8 @@
 !CodeModel 
 info: !Info 
+  description: >-
+    Based on this swagger, autorest.csharp in data-plane:true mode should generate three clients: top level client `ServiceClient`, `Group` resource client which is subclient of `ServiceClient`, and `Item` resource client which is subclient
+    of `Group`. However, with respect to the partial classes added in `Customizations.cs`, the names of the generated types must be `ResourceServiceClient`, `ResourceGroup` and `Resource`.
   title: LlcResourceClients
 schemas: !Schemas 
   strings:
@@ -302,10 +305,15 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - '200'
+        extensions:
+          x-ms-pageable:
+            nextLinkName: nextLink
         language: !Languages 
           default:
             name: ListAllItems
-            description: Get all groups. It is defined in `Item` subclient, but must be promoted to the `Service` client, because it has neither `groupId` nor `itemId` parameters.
+            description: Get all items. It is defined in `Item` subclient, but must be promoted to the `Service` client, because it has neither `groupId` nor `itemId` parameters.
+            paging:
+              nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
         apiVersions:
@@ -355,10 +363,15 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - '200'
+        extensions:
+          x-ms-pageable:
+            nextLinkName: nextLink
         language: !Languages 
           default:
             name: ListItems
             description: Get items in group. It is defined in `Item` subclient, but must be promoted to the `Group` subclient.
+            paging:
+              nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
         apiVersions:

@@ -20,7 +20,7 @@ namespace AutoRest.CSharp.Output.Models
     {
         protected override string DefaultName { get; }
         protected override string DefaultNamespace { get; }
-        protected override string DefaultAccessibility { get; } = "public";
+        protected override string DefaultAccessibility => "public";
 
         private readonly bool _hasPublicConstructors;
         private MethodSignature? _subClientInternalConstructor;
@@ -37,8 +37,9 @@ namespace AutoRest.CSharp.Output.Models
         public IReadOnlyList<Parameter> Parameters { get; }
         public ClientFields Fields { get; }
         public bool IsSubClient { get; }
+        public bool IsResourceClient { get; }
 
-        public LowLevelClient(string name, string ns, string description, bool isSubClient, IReadOnlyList<LowLevelClient> subClients, IEnumerable<(ServiceRequest ServiceRequest, Operation Operation)> serviceRequests, RestClientBuilder builder, BuildContext<LowLevelOutputLibrary> context, ClientOptionsTypeProvider clientOptions)
+        public LowLevelClient(string name, string ns, string description, bool isSubClient, bool isResourceClient, IReadOnlyList<LowLevelClient> subClients, IEnumerable<(ServiceRequest ServiceRequest, Operation Operation)> serviceRequests, RestClientBuilder builder, BuildContext<LowLevelOutputLibrary> context, ClientOptionsTypeProvider clientOptions)
             : base(context)
         {
             DefaultName = name;
@@ -47,6 +48,7 @@ namespace AutoRest.CSharp.Output.Models
                 ? $"The {ClientBuilder.GetClientPrefix(Declaration.Name, context)} service client."
                 : BuilderHelpers.EscapeXmlDescription(description));
             IsSubClient = isSubClient;
+            IsResourceClient = isResourceClient;
             SubClients = subClients;
 
             ClientOptions = clientOptions;

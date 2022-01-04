@@ -6,6 +6,9 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -130,50 +133,52 @@ namespace ResourceClients_LowLevel
             }
         }
 
-        /// <summary> Get all groups. It is defined in `Item` subclient, but must be promoted to the `Service` client, because it has neither `groupId` nor `itemId` parameters. </summary>
+        /// <summary> Get all items. It is defined in `Item` subclient, but must be promoted to the `Service` client, because it has neither `groupId` nor `itemId` parameters. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetAllItemsAsync(RequestContext context = null)
+        public virtual AsyncPageable<BinaryData> GetAllItemsAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ResourceServiceClient.GetAllItems");
-            scope.Start();
-            try
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "ResourceServiceClient.GetAllItems");
+            async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
-                using HttpMessage message = CreateGetAllItemsRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                do
+                {
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateGetAllItemsRequest(context)
+                        : CreateGetAllItemsNextPageRequest(nextLink, context);
+                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, context, "value", "nextLink", cancellationToken).ConfigureAwait(false);
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
             }
         }
 
-        /// <summary> Get all groups. It is defined in `Item` subclient, but must be promoted to the `Service` client, because it has neither `groupId` nor `itemId` parameters. </summary>
+        /// <summary> Get all items. It is defined in `Item` subclient, but must be promoted to the `Service` client, because it has neither `groupId` nor `itemId` parameters. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
 #pragma warning disable AZC0002
-        public virtual Response GetAllItems(RequestContext context = null)
+        public virtual Pageable<BinaryData> GetAllItems(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ResourceServiceClient.GetAllItems");
-            scope.Start();
-            try
+            return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "ResourceServiceClient.GetAllItems");
+            IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
-                using HttpMessage message = CreateGetAllItemsRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                do
+                {
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateGetAllItemsRequest(context)
+                        : CreateGetAllItemsNextPageRequest(nextLink, context);
+                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, context, "value", "nextLink");
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
             }
         }
 
         /// <summary> Initializes a new instance of ResourceGroup. </summary>
         /// <param name="groupId"> The String to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="groupId"/> is null. </exception>
-        public virtual ResourceGroup GetResourceGroupClient(string groupId)
+        public virtual ResourceGroup GetResourceGroup(string groupId)
         {
             if (groupId == null)
             {
@@ -219,6 +224,20 @@ namespace ResourceClients_LowLevel
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/items", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetAllItemsNextPageRequest(string nextLink, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context);
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             message.ResponseClassifier = ResponseClassifier200.Instance;
