@@ -39,7 +39,7 @@ namespace Azure.Analytics.Purview.Account
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
-        public PurviewAccountsClient(Uri endpoint, TokenCredential credential, PurviewAccountClientOptions options = null)
+        public PurviewAccountsClient(Uri endpoint, TokenCredential credential, PurviewAccountsClientOptions options = null)
         {
             if (endpoint == null)
             {
@@ -49,7 +49,7 @@ namespace Azure.Analytics.Purview.Account
             {
                 throw new ArgumentNullException(nameof(credential));
             }
-            options ??= new PurviewAccountClientOptions();
+            options ??= new PurviewAccountsClientOptions();
 
             _clientDiagnostics = new ClientDiagnostics(options);
             _tokenCredential = credential;
@@ -694,142 +694,6 @@ namespace Azure.Analytics.Purview.Account
             }
         }
 
-        /// <summary> List the collections in the account. </summary>
-        /// <param name="skipToken"> The String to use. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Body</c>:
-        /// <code>{
-        ///   count: number,
-        ///   nextLink: string,
-        ///   value: [
-        ///     {
-        ///       collectionProvisioningState: &quot;Unknown&quot; | &quot;Creating&quot; | &quot;Moving&quot; | &quot;Deleting&quot; | &quot;Failed&quot; | &quot;Succeeded&quot;,
-        ///       description: string,
-        ///       friendlyName: string,
-        ///       name: string,
-        ///       parentCollection: {
-        ///         referenceName: string,
-        ///         type: string
-        ///       },
-        ///       systemData: {
-        ///         createdAt: string (ISO 8601 Format),
-        ///         createdBy: string,
-        ///         createdByType: &quot;User&quot; | &quot;Application&quot; | &quot;ManagedIdentity&quot; | &quot;Key&quot;,
-        ///         lastModifiedAt: string (ISO 8601 Format),
-        ///         lastModifiedBy: string,
-        ///         lastModifiedByType: &quot;User&quot; | &quot;Application&quot; | &quot;ManagedIdentity&quot; | &quot;Key&quot;
-        ///       }
-        ///     }
-        ///   ]
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   error: {
-        ///     code: string,
-        ///     details: [
-        ///       {
-        ///         code: string,
-        ///         details: [ErrorModel],
-        ///         message: string,
-        ///         target: string
-        ///       }
-        ///     ],
-        ///     message: string,
-        ///     target: string
-        ///   }
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-#pragma warning disable AZC0002
-        public virtual AsyncPageable<BinaryData> GetCollectionsAsync(string skipToken = null, RequestContext context = null)
-#pragma warning restore AZC0002
-        {
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PurviewAccountsClient.GetCollections");
-            async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
-            {
-                do
-                {
-                    var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateGetCollectionsRequest(skipToken, context)
-                        : CreateGetCollectionsNextPageRequest(nextLink, skipToken, context);
-                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, context, "value", "nextLink", cancellationToken).ConfigureAwait(false);
-                    nextLink = page.ContinuationToken;
-                    yield return page;
-                } while (!string.IsNullOrEmpty(nextLink));
-            }
-        }
-
-        /// <summary> List the collections in the account. </summary>
-        /// <param name="skipToken"> The String to use. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Body</c>:
-        /// <code>{
-        ///   count: number,
-        ///   nextLink: string,
-        ///   value: [
-        ///     {
-        ///       collectionProvisioningState: &quot;Unknown&quot; | &quot;Creating&quot; | &quot;Moving&quot; | &quot;Deleting&quot; | &quot;Failed&quot; | &quot;Succeeded&quot;,
-        ///       description: string,
-        ///       friendlyName: string,
-        ///       name: string,
-        ///       parentCollection: {
-        ///         referenceName: string,
-        ///         type: string
-        ///       },
-        ///       systemData: {
-        ///         createdAt: string (ISO 8601 Format),
-        ///         createdBy: string,
-        ///         createdByType: &quot;User&quot; | &quot;Application&quot; | &quot;ManagedIdentity&quot; | &quot;Key&quot;,
-        ///         lastModifiedAt: string (ISO 8601 Format),
-        ///         lastModifiedBy: string,
-        ///         lastModifiedByType: &quot;User&quot; | &quot;Application&quot; | &quot;ManagedIdentity&quot; | &quot;Key&quot;
-        ///       }
-        ///     }
-        ///   ]
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   error: {
-        ///     code: string,
-        ///     details: [
-        ///       {
-        ///         code: string,
-        ///         details: [ErrorModel],
-        ///         message: string,
-        ///         target: string
-        ///       }
-        ///     ],
-        ///     message: string,
-        ///     target: string
-        ///   }
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-#pragma warning disable AZC0002
-        public virtual Pageable<BinaryData> GetCollections(string skipToken = null, RequestContext context = null)
-#pragma warning restore AZC0002
-        {
-            return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PurviewAccountsClient.GetCollections");
-            IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
-            {
-                do
-                {
-                    var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateGetCollectionsRequest(skipToken, context)
-                        : CreateGetCollectionsNextPageRequest(nextLink, skipToken, context);
-                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, context, "value", "nextLink");
-                    nextLink = page.ContinuationToken;
-                    yield return page;
-                } while (!string.IsNullOrEmpty(nextLink));
-            }
-        }
-
         /// <summary> Get a resource set config service model. </summary>
         /// <param name="skipToken"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
@@ -1114,6 +978,142 @@ namespace Azure.Analytics.Purview.Account
             }
         }
 
+        /// <summary> List the collections in the account. </summary>
+        /// <param name="skipToken"> The String to use. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   count: number,
+        ///   nextLink: string,
+        ///   value: [
+        ///     {
+        ///       collectionProvisioningState: &quot;Unknown&quot; | &quot;Creating&quot; | &quot;Moving&quot; | &quot;Deleting&quot; | &quot;Failed&quot; | &quot;Succeeded&quot;,
+        ///       description: string,
+        ///       friendlyName: string,
+        ///       name: string,
+        ///       parentCollection: {
+        ///         referenceName: string,
+        ///         type: string
+        ///       },
+        ///       systemData: {
+        ///         createdAt: string (ISO 8601 Format),
+        ///         createdBy: string,
+        ///         createdByType: &quot;User&quot; | &quot;Application&quot; | &quot;ManagedIdentity&quot; | &quot;Key&quot;,
+        ///         lastModifiedAt: string (ISO 8601 Format),
+        ///         lastModifiedBy: string,
+        ///         lastModifiedByType: &quot;User&quot; | &quot;Application&quot; | &quot;ManagedIdentity&quot; | &quot;Key&quot;
+        ///       }
+        ///     }
+        ///   ]
+        /// }
+        /// </code>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   error: {
+        ///     code: string,
+        ///     details: [
+        ///       {
+        ///         code: string,
+        ///         details: [ErrorModel],
+        ///         message: string,
+        ///         target: string
+        ///       }
+        ///     ],
+        ///     message: string,
+        ///     target: string
+        ///   }
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual AsyncPageable<BinaryData> GetCollectionsAsync(string skipToken = null, RequestContext context = null)
+#pragma warning restore AZC0002
+        {
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PurviewAccountsClient.GetCollections");
+            async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
+            {
+                do
+                {
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateGetCollectionsRequest(skipToken, context)
+                        : CreateGetCollectionsNextPageRequest(nextLink, skipToken, context);
+                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, context, "value", "nextLink", cancellationToken).ConfigureAwait(false);
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
+            }
+        }
+
+        /// <summary> List the collections in the account. </summary>
+        /// <param name="skipToken"> The String to use. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   count: number,
+        ///   nextLink: string,
+        ///   value: [
+        ///     {
+        ///       collectionProvisioningState: &quot;Unknown&quot; | &quot;Creating&quot; | &quot;Moving&quot; | &quot;Deleting&quot; | &quot;Failed&quot; | &quot;Succeeded&quot;,
+        ///       description: string,
+        ///       friendlyName: string,
+        ///       name: string,
+        ///       parentCollection: {
+        ///         referenceName: string,
+        ///         type: string
+        ///       },
+        ///       systemData: {
+        ///         createdAt: string (ISO 8601 Format),
+        ///         createdBy: string,
+        ///         createdByType: &quot;User&quot; | &quot;Application&quot; | &quot;ManagedIdentity&quot; | &quot;Key&quot;,
+        ///         lastModifiedAt: string (ISO 8601 Format),
+        ///         lastModifiedBy: string,
+        ///         lastModifiedByType: &quot;User&quot; | &quot;Application&quot; | &quot;ManagedIdentity&quot; | &quot;Key&quot;
+        ///       }
+        ///     }
+        ///   ]
+        /// }
+        /// </code>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   error: {
+        ///     code: string,
+        ///     details: [
+        ///       {
+        ///         code: string,
+        ///         details: [ErrorModel],
+        ///         message: string,
+        ///         target: string
+        ///       }
+        ///     ],
+        ///     message: string,
+        ///     target: string
+        ///   }
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Pageable<BinaryData> GetCollections(string skipToken = null, RequestContext context = null)
+#pragma warning restore AZC0002
+        {
+            return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PurviewAccountsClient.GetCollections");
+            IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
+            {
+                do
+                {
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateGetCollectionsRequest(skipToken, context)
+                        : CreateGetCollectionsNextPageRequest(nextLink, skipToken, context);
+                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, context, "value", "nextLink");
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
+            }
+        }
+
         private PurviewAccountResourceSetRules _cachedPurviewAccountResourceSetRules;
 
         /// <summary> Initializes a new instance of PurviewAccountCollections. </summary>
@@ -1199,25 +1199,6 @@ namespace Azure.Analytics.Purview.Account
             return message;
         }
 
-        internal HttpMessage CreateGetCollectionsRequest(string skipToken, RequestContext context)
-        {
-            var message = _pipeline.CreateMessage(context);
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/collections", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            if (skipToken != null)
-            {
-                uri.AppendQuery("$skipToken", skipToken, true);
-            }
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
-            return message;
-        }
-
         internal HttpMessage CreateGetResourceSetRulesRequest(string skipToken, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context);
@@ -1237,7 +1218,26 @@ namespace Azure.Analytics.Purview.Account
             return message;
         }
 
-        internal HttpMessage CreateGetCollectionsNextPageRequest(string nextLink, string skipToken, RequestContext context)
+        internal HttpMessage CreateGetCollectionsRequest(string skipToken, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context);
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/collections", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            if (skipToken != null)
+            {
+                uri.AppendQuery("$skipToken", skipToken, true);
+            }
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetResourceSetRulesNextPageRequest(string nextLink, string skipToken, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context);
             var request = message.Request;
@@ -1251,7 +1251,7 @@ namespace Azure.Analytics.Purview.Account
             return message;
         }
 
-        internal HttpMessage CreateGetResourceSetRulesNextPageRequest(string nextLink, string skipToken, RequestContext context)
+        internal HttpMessage CreateGetCollectionsNextPageRequest(string nextLink, string skipToken, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context);
             var request = message.Request;

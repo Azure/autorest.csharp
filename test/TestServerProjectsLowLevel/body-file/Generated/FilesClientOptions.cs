@@ -8,10 +8,10 @@
 using System;
 using Azure.Core;
 
-namespace url_multi_collectionFormat_LowLevel
+namespace body_file_LowLevel
 {
-    /// <summary> Client options for AutoRestUrlMutliCollectionFormatTestServiceClient. </summary>
-    public partial class AutoRestUrlMutliCollectionFormatTestServiceClientOptions : ClientOptions
+    /// <summary> Client options for FilesClient. </summary>
+    public partial class FilesClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V1_0_0;
 
@@ -24,8 +24,8 @@ namespace url_multi_collectionFormat_LowLevel
 
         internal string Version { get; }
 
-        /// <summary> Initializes new instance of AutoRestUrlMutliCollectionFormatTestServiceClientOptions. </summary>
-        public AutoRestUrlMutliCollectionFormatTestServiceClientOptions(ServiceVersion version = LatestVersion)
+        /// <summary> Initializes new instance of FilesClientOptions. </summary>
+        public FilesClientOptions(ServiceVersion version = LatestVersion)
         {
             Version = version switch
             {

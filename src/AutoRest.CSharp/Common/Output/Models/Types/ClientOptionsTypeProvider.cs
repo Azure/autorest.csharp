@@ -3,21 +3,22 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.Common.Output.Builders;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
     internal sealed class ClientOptionsTypeProvider : TypeProvider
     {
-        public string DefaultClientName { get; }
+        public string ClientName { get; }
         public IReadOnlyList<ApiVersion> ApiVersions { get;}
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility { get; }
 
-        public ClientOptionsTypeProvider(BuildContext context, string defaultClientName) : base(context)
+        public ClientOptionsTypeProvider(BuildContext context, string name, string clientName) : base(context)
         {
-            DefaultName = $"{defaultClientName}ClientOptions";
-            DefaultClientName = defaultClientName;
+            DefaultName = name;
             DefaultAccessibility = "public";
+            ClientName = clientName;
 
             ApiVersions = context.CodeModel.OperationGroups
                 .SelectMany(g => g.Operations.SelectMany(o => o.ApiVersions))

@@ -8,10 +8,10 @@
 using System;
 using Azure.Core;
 
-namespace body_file_LowLevel
+namespace body_array_LowLevel
 {
-    /// <summary> Client options for AutoRestSwaggerBATFileServiceClient. </summary>
-    public partial class AutoRestSwaggerBATFileServiceClientOptions : ClientOptions
+    /// <summary> Client options for ArrayClient. </summary>
+    public partial class ArrayClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V1_0_0;
 
@@ -24,8 +24,8 @@ namespace body_file_LowLevel
 
         internal string Version { get; }
 
-        /// <summary> Initializes new instance of AutoRestSwaggerBATFileServiceClientOptions. </summary>
-        public AutoRestSwaggerBATFileServiceClientOptions(ServiceVersion version = LatestVersion)
+        /// <summary> Initializes new instance of ArrayClientOptions. </summary>
+        public ArrayClientOptions(ServiceVersion version = LatestVersion)
         {
             Version = version switch
             {

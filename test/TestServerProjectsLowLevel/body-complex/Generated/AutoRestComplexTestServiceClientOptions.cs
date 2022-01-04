@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace body_complex_LowLevel
 {
-    /// <summary> Client options for AutoRestComplexTestServiceClient. </summary>
+    /// <summary> Client options for AutoRestComplexTestService. </summary>
     public partial class AutoRestComplexTestServiceClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V2016_02_29;

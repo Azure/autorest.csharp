@@ -14,7 +14,7 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             using (writer.Namespace(clientOptions.Type.Namespace))
             {
-                writer.WriteXmlDocumentationSummary($"Client options for {clientOptions.DefaultClientName}Client.");
+                writer.WriteXmlDocumentationSummary($"Client options for {clientOptions.ClientName}.");
                 using (writer.Scope($"{clientOptions.Declaration.Accessibility} partial class {clientOptions.Type.Name}: {typeof(ClientOptions)}"))
                 {
                     writer.Line($"private const ServiceVersion LatestVersion = ServiceVersion.{clientOptions.ApiVersions.Last().Name};");

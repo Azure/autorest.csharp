@@ -2521,7 +2521,7 @@ schemas: !Schemas
       protocol: !Protocols {}
     - *ref_70
     - *ref_38
-    - !ObjectSchema &ref_173
+    - !ObjectSchema &ref_177
       type: object
       apiVersions:
         - !ApiVersion 
@@ -3554,7 +3554,7 @@ schemas: !Schemas
     - *ref_138
     - *ref_139
     - *ref_140
-    - !ObjectSchema &ref_175
+    - !ObjectSchema &ref_173
       type: object
       apiVersions:
         - !ApiVersion 
@@ -3644,12 +3644,13 @@ globalParameters:
     protocol: !Protocols 
       http: !HttpParameter 
         in: uri
-  - !Parameter &ref_176
+  - !Parameter &ref_174
     schema: *ref_1
     implementation: Client
     required: true
     extensions:
       x-ms-priority: 2
+      x-ms-resource-parameter: true
     language: !Languages 
       default:
         name: CollectionName
@@ -4183,7 +4184,7 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpRequest 
-                path: /collections
+                path: /resourceSetRuleConfigs
                 method: get
                 uri: '{endpoint}'
         signatureParameters:
@@ -4191,110 +4192,6 @@ operationGroups:
         responses:
           - !SchemaResponse 
             schema: *ref_173
-            language: !Languages 
-              default:
-                name: ''
-                description: Success
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-        exceptions:
-          - !SchemaResponse 
-            schema: *ref_165
-            language: !Languages 
-              default:
-                name: ''
-                description: An error response received from the provider.
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - default
-        extensions:
-          x-ms-examples:
-            Collections_ListCollections:
-              parameters:
-                api-version: 2019-11-01-preview
-                endpoint: '{endpoint}'
-              responses:
-                '200':
-                  body:
-                    value:
-                      - name: mycollection1
-                        collectionProvisioningState: Succeeded
-                        friendlyName: Finance
-                        parentCollection:
-                          type: CollectionReference
-                          referenceName: accountName
-                  headers:
-                    Date: Wed, 13 Sep 2017 18:04:32 GMT
-                    X-Content-Type-Options: nosniff
-                    x-ms-correlation-request-id: 25c78f97-0b0a-4fe9-ad39-883a482265cd
-                    x-ms-request-id: d5496da4-9c52-402f-b067-83cc9ddea888
-          x-ms-pageable:
-            nextLinkName: nextLink
-        language: !Languages 
-          default:
-            name: GetCollections
-            description: List the collections in the account.
-            paging:
-              nextLinkName: nextLink
-        protocol: !Protocols {}
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: 2019-11-01-preview
-        parameters:
-          - *ref_161
-          - *ref_162
-          - !Parameter &ref_174
-            schema: *ref_1
-            implementation: Method
-            language: !Languages 
-              default:
-                name: skipToken
-                description: ''
-                serializedName: $skipToken
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: query
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_163
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters: []
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpRequest 
-                path: /resourceSetRuleConfigs
-                method: get
-                uri: '{endpoint}'
-        signatureParameters:
-          - *ref_174
-        responses:
-          - !SchemaResponse 
-            schema: *ref_175
             language: !Languages 
               default:
                 name: ''
@@ -4541,7 +4438,7 @@ operationGroups:
             version: 2019-11-01-preview
         parameters:
           - *ref_161
-          - *ref_176
+          - *ref_174
           - *ref_162
         requests:
           - !Request 
@@ -4630,7 +4527,7 @@ operationGroups:
             version: 2019-11-01-preview
         parameters:
           - *ref_161
-          - *ref_176
+          - *ref_174
           - *ref_162
         requests:
           - !Request 
@@ -4648,7 +4545,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_177
+              - !Parameter &ref_175
                 schema: *ref_73
                 implementation: Method
                 required: true
@@ -4674,7 +4571,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_177
+              - *ref_175
             language: !Languages 
               default:
                 name: ''
@@ -4751,7 +4648,7 @@ operationGroups:
             version: 2019-11-01-preview
         parameters:
           - *ref_161
-          - *ref_176
+          - *ref_174
           - *ref_162
         requests:
           - !Request 
@@ -4829,7 +4726,111 @@ operationGroups:
             version: 2019-11-01-preview
         parameters:
           - *ref_161
+          - *ref_162
+          - !Parameter &ref_176
+            schema: *ref_1
+            implementation: Method
+            language: !Languages 
+              default:
+                name: skipToken
+                description: ''
+                serializedName: $skipToken
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_163
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /collections
+                method: get
+                uri: '{endpoint}'
+        signatureParameters:
           - *ref_176
+        responses:
+          - !SchemaResponse 
+            schema: *ref_177
+            language: !Languages 
+              default:
+                name: ''
+                description: Success
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_165
+            language: !Languages 
+              default:
+                name: ''
+                description: An error response received from the provider.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        extensions:
+          x-ms-examples:
+            Collections_ListCollections:
+              parameters:
+                api-version: 2019-11-01-preview
+                endpoint: '{endpoint}'
+              responses:
+                '200':
+                  body:
+                    value:
+                      - name: mycollection1
+                        collectionProvisioningState: Succeeded
+                        friendlyName: Finance
+                        parentCollection:
+                          type: CollectionReference
+                          referenceName: accountName
+                  headers:
+                    Date: Wed, 13 Sep 2017 18:04:32 GMT
+                    X-Content-Type-Options: nosniff
+                    x-ms-correlation-request-id: 25c78f97-0b0a-4fe9-ad39-883a482265cd
+                    x-ms-request-id: d5496da4-9c52-402f-b067-83cc9ddea888
+          x-ms-pageable:
+            nextLinkName: nextLink
+        language: !Languages 
+          default:
+            name: ListCollections
+            description: List the collections in the account.
+            paging:
+              nextLinkName: nextLink
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: 2019-11-01-preview
+        parameters:
+          - *ref_161
+          - *ref_174
           - *ref_162
           - !Parameter &ref_178
             schema: *ref_1
@@ -4936,7 +4937,7 @@ operationGroups:
             version: 2019-11-01-preview
         parameters:
           - *ref_161
-          - *ref_176
+          - *ref_174
           - *ref_162
         requests:
           - !Request 

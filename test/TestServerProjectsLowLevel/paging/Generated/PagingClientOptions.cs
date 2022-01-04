@@ -8,10 +8,10 @@
 using System;
 using Azure.Core;
 
-namespace custom_baseUrl_LowLevel
+namespace paging_LowLevel
 {
-    /// <summary> Client options for AutoRestParameterizedHostTestClient. </summary>
-    public partial class AutoRestParameterizedHostTestClientOptions : ClientOptions
+    /// <summary> Client options for PagingClient. </summary>
+    public partial class PagingClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V1_0_0;
 
@@ -24,8 +24,8 @@ namespace custom_baseUrl_LowLevel
 
         internal string Version { get; }
 
-        /// <summary> Initializes new instance of AutoRestParameterizedHostTestClientOptions. </summary>
-        public AutoRestParameterizedHostTestClientOptions(ServiceVersion version = LatestVersion)
+        /// <summary> Initializes new instance of PagingClientOptions. </summary>
+        public PagingClientOptions(ServiceVersion version = LatestVersion)
         {
             Version = version switch
             {

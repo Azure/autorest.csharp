@@ -8,10 +8,10 @@
 using System;
 using Azure.Core;
 
-namespace SubClients_LowLevel
+namespace ResourceClients_LowLevel
 {
-    /// <summary> Client options for LlcSubClientsClient. </summary>
-    public partial class LlcSubClientsClientOptions : ClientOptions
+    /// <summary> Client options for ResourceServiceClient. </summary>
+    public partial class ResourceServiceClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V2021_10_19;
 
@@ -24,8 +24,8 @@ namespace SubClients_LowLevel
 
         internal string Version { get; }
 
-        /// <summary> Initializes new instance of LlcSubClientsClientOptions. </summary>
-        public LlcSubClientsClientOptions(ServiceVersion version = LatestVersion)
+        /// <summary> Initializes new instance of ResourceServiceClientOptions. </summary>
+        public ResourceServiceClientOptions(ServiceVersion version = LatestVersion)
         {
             Version = version switch
             {

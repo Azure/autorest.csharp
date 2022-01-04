@@ -24,7 +24,8 @@ namespace AutoRest.CSharp.Output.Models
                 .ToDictionary(ci => ci.Name);
 
             var topLevelClientInfos = SetHierarchy(clientInfosByName, context);
-            var clientOptions = new ClientOptionsTypeProvider(context, GetTopLevelClientPrefix(topLevelClientInfos, context));
+
+            var clientOptions = CreateClientOptions(topLevelClientInfos, context);
             SetRequestsToClients(clientInfosByName.Values);
 
             return new LowLevelOutputLibrary(context, () =>
@@ -47,15 +48,14 @@ namespace AutoRest.CSharp.Output.Models
             }
         }
 
-        private static string GetTopLevelClientPrefix(IReadOnlyList<ClientInfo> topLevelClientInfos, BuildContext<LowLevelOutputLibrary> context)
+        private static ClientOptionsTypeProvider CreateClientOptions(IReadOnlyList<ClientInfo> topLevelClientInfos, BuildContext context)
         {
-            if (topLevelClientInfos.Count == 1)
-            {
-                return topLevelClientInfos[0].Name;
-            }
+            var clientName = topLevelClientInfos.Count == 1
+                ? topLevelClientInfos[0].Name
+                : topLevelClientInfos.SingleOrDefault(c => string.IsNullOrEmpty(c.OperationGroupKey))?.Name ??
+                  context.DefaultLibraryName;
 
-            var noGroupKeyClient = topLevelClientInfos.SingleOrDefault(c => string.IsNullOrEmpty(c.OperationGroupKey));
-            return noGroupKeyClient?.Name ?? ClientBuilder.GetClientPrefix(context.DefaultLibraryName, context);
+            return new ClientOptionsTypeProvider(context, $"{ClientBuilder.GetClientPrefix(clientName, context)}ClientOptions", clientName);
         }
 
         /// <summary>

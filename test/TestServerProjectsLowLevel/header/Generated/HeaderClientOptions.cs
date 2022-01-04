@@ -8,10 +8,10 @@
 using System;
 using Azure.Core;
 
-namespace HeadAsBooleanTrue_LowLevel
+namespace header_LowLevel
 {
-    /// <summary> Client options for HeadAsBooleanTrueClient. </summary>
-    public partial class HeadAsBooleanTrueClientOptions : ClientOptions
+    /// <summary> Client options for HeaderClient. </summary>
+    public partial class HeaderClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V1_0_0;
 
@@ -24,8 +24,8 @@ namespace HeadAsBooleanTrue_LowLevel
 
         internal string Version { get; }
 
-        /// <summary> Initializes new instance of HeadAsBooleanTrueClientOptions. </summary>
-        public HeadAsBooleanTrueClientOptions(ServiceVersion version = LatestVersion)
+        /// <summary> Initializes new instance of HeaderClientOptions. </summary>
+        public HeaderClientOptions(ServiceVersion version = LatestVersion)
         {
             Version = version switch
             {

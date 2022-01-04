@@ -64,7 +64,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             if (configuration.PublicClients && context.Library.Clients.Any())
             {
-                var clientOptionsType = new ClientOptionsTypeProvider(context, ClientBuilder.GetClientPrefix(context.DefaultLibraryName, context));
+                var clientPrefix = ClientBuilder.GetClientPrefix(context.DefaultLibraryName, context);
+                var clientOptionsType = new ClientOptionsTypeProvider(context, $"{clientPrefix}ClientOptions", $"{clientPrefix}Client");
                 var codeWriter = new CodeWriter();
                 ClientOptionsWriter.WriteClientOptions(codeWriter, clientOptionsType);
 

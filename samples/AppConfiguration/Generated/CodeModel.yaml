@@ -2087,27 +2087,6 @@ operationGroups:
                   - default
         extensions:
           x-ms-examples:
-            GetKeyValue:
-              parameters:
-                api-version: '1.0'
-                endpoint: https://{exampleAppConfigurationName}.azconfig.io
-                key: Message
-              responses:
-                '200':
-                  body:
-                    content_type: null
-                    etag: 7XpB48ET4VAlB9068ft6fKMyA3m
-                    key: Message
-                    label: null
-                    last_modified: '2019-08-27T16:52:32+00:00'
-                    locked: false
-                    tags: {}
-                    value: Hello World!
-                  headers:
-                    Content-Type: application/vnd.microsoft.appconfig.kv+json
-                    ETag: W/"7XpB48ET4VAlB9068ft6fKMyA3m"
-                    Last-Modified: Tue, 27 Aug 2019 16:52:32 GMT
-                    Sync-Token: zAJw6V16=NjotMSM3ODk3NjM=;sn=789763
             GetKeyValue_IfMatch:
               parameters:
                 If-Match: '"L10qpBghN693OaxydgTkLmrBbV5"'
