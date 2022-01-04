@@ -1119,7 +1119,7 @@ namespace Azure.Analytics.Purview.Account
         /// <summary> Initializes a new instance of PurviewAccountCollections. </summary>
         /// <param name="collectionName"> The String to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="collectionName"/> is null. </exception>
-        public virtual PurviewAccountCollections GetCollectionsClient(string collectionName)
+        public virtual PurviewAccountCollections GetCollections(string collectionName)
         {
             if (collectionName == null)
             {
