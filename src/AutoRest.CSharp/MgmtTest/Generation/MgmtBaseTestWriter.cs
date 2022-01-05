@@ -618,7 +618,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             throw new NotImplementedException();
         }
 
-        protected override ResourceType GetBranchResourceType(RequestPath branch)
+        protected override ResourceTypeSegment GetBranchResourceType(RequestPath branch)
         {
             throw new NotImplementedException();
         }
