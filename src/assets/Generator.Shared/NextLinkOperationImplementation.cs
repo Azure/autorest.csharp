@@ -115,23 +115,33 @@ namespace Azure.Core
             }
         }
 
+        /// <summary>
+        /// This function is used to get the final request uri after the lro has completed.
+        /// </summary>
         private string? GetFinalUri()
         {
+            // Set final uri as null if the response header doesn't contain "Operation-Location" or "Azure-AsyncOperation".
             if (_headerSource is not (HeaderSource.OperationLocation or HeaderSource.AzureAsyncOperation))
             {
                 return null;
             }
 
+            // Set final uri as null if original request is a delete method.
             if (_requestMethod == RequestMethod.Delete)
             {
                 return null;
             }
 
+            // Set final uri as original request's uri if one of these requirements are met:
+            // 1.Original request is a put method;
+            // 2.Original request is a patch method;
+            // 3.Originsl response header contains "Location" and FinalStateVia is configured to OriginalUri.
             if (_requestMethod == RequestMethod.Put || _requestMethod == RequestMethod.Patch || _originalResponseHasLocation && _finalStateVia == OperationFinalStateVia.OriginalUri)
             {
                 return _startRequestUri.AbsoluteUri;
             }
 
+            // Set final uri as last known location header if originsl response header contains "Location" and FinalStateVia is configured to Location.
             if (_originalResponseHasLocation && _finalStateVia == OperationFinalStateVia.Location)
             {
                 return _lastKnownLocation;
