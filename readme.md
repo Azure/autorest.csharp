@@ -1234,3 +1234,17 @@ request-path-to-scope-resource-types:
 ```
 
 This configuration add the constraint that the scope can only be subscription, resource group, management group or tenant. Other resources cannot be the scope of this resource `Deployment`.
+
+### Management debug options
+
+A debug configuration is also introduced to show some extra information in the generated code. Usage:
+
+```
+mgmt-debug:
+  show-request-path: true
+  suppress-list-exception: true
+```
+
+The configuration `show-request-path` will add comments in front of every operation with the request path and operation Id, which is useful when you are making customization to the generated SDK.
+
+The configuration `suppress-list-exception` will suppress all the exceptions about the collection class without a `GetAll` method.
