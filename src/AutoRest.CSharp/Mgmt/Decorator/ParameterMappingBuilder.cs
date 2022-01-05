@@ -106,7 +106,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                         }
                         if (keySegment.IsReference)
                         {
-                            parameterMappingStack.Push(new ContextualParameterMapping(string.Empty, keySegment, $"{idVariableName}{invocationSuffix}.ResourceType.Types.Last()", new[] { "System.Linq" }));
+                            parameterMappingStack.Push(new ContextualParameterMapping(string.Empty, keySegment, $"{idVariableName}{invocationSuffix}.ResourceType.GetLastType()", new[] { "System.Linq" }));
                             appendParent = true;
                         }
                         // add .Parent suffix
