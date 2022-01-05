@@ -100,7 +100,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             // write "parent resource" constructor
             _writer.Line();
-            _writer.WriteXmlDocumentationSummary($"Initializes a new instance of {TypeNameOfThis} class.");
+            _writer.WriteXmlDocumentationSummary($"Initializes a new instance of the <see cref=\"{TypeNameOfThis}\"/> class class.");
             _writer.WriteXmlDocumentationParameter("parent", $"The resource representing the parent resource.");
             _writer.WriteXmlDocumentationParameters(_resourceCollection.ExtraConstructorParameters);
             _writer.Append($"internal {TypeNameOfThis}({typeof(ArmResource)} parent, ");

@@ -32,7 +32,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             new Segment("subscriptions"),
             new Segment(new Reference("subscriptionId", typeof(string)), true, true),
             new Segment("resourceGroups"),
-            new Segment(new Reference("resourceGroupName", typeof(string)), true, true)
+            new Segment(new Reference("resourceGroupName", typeof(string)), true, false)
         });
 
         /// <summary>
@@ -144,6 +144,11 @@ namespace AutoRest.CSharp.Mgmt.Models
         {
             if (this == other)
                 return RequestPath.Tenant;
+            // Handle the special case of trim provider from feature
+            if (this.SerializedPath == "/subscriptions/{subscriptionId}/providers/{resourceProviderNamespace}" && other.SerializedPath.StartsWith("/subscriptions/{subscriptionId}/providers/Microsoft.Features/providers/{resourceProviderNamespace}/features"))
+            {
+                return new RequestPath(other._segments.Skip(this.Count + 2));
+            }
             if (!this.IsPrefixPathOf(other))
                 throw new InvalidOperationException($"Request path {this} is not parent of {other}");
             // this is a parent, we can safely just return from the length of this

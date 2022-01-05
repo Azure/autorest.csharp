@@ -109,6 +109,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         private static OperationSet? FindOperationSetOfResource(RequestPath requestPath, BuildContext<MgmtOutputLibrary> context)
         {
+            if (context.Configuration.MgmtConfiguration.RequestPathToParent.TryGetValue(requestPath, out var rawPath))
+                return context.Library.GetOperationSet(rawPath);
             var candidates = new List<OperationSet>();
             // we need to iterate all resources to find if this is the parent of that
             foreach (var operationSet in context.Library.ResourceOperationSets)

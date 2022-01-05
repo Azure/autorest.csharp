@@ -87,7 +87,14 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                         {
                             if (keySegment == Segment.Providers) // if the key is providers and the value is a parameter
                             {
-                                parameterMappingStack.Push(new ContextualParameterMapping(keySegment.ConstantValue, valueSegment, $"{idVariableName}.ResourceType.Namespace"));
+                                if (current.Count <= 4) // path is /providers/{resourceProviderNamespace} or /subscriptions/{subscriptionId}/providers/{resourceProviderNamespace}
+                                {
+                                    parameterMappingStack.Push(new ContextualParameterMapping(keySegment.ConstantValue, valueSegment, $"{idVariableName}.Provider"));
+                                }
+                                else
+                                {
+                                    parameterMappingStack.Push(new ContextualParameterMapping(keySegment.ConstantValue, valueSegment, $"{idVariableName}.ResourceType.Namespace"));
+                                }
                                 // do not append a new .Parent to the id
                             }
                             else // for all other normal keys
