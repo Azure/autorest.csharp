@@ -1108,11 +1108,14 @@ The mgmt .Net SDK requires the resources to be generated hierarchical, therefore
 In general, mgmt generator needs to determine which request path corresponds to a resource class first, and then generates the hierarchical structure based on that. By default, the generator will first check if the request path has even segments starting from the last `providers` segment (for instance, `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{name}` meets this requirement, but `/{scope}/providers/Microsoft.Authorization/policyAssignments` does not), then check if it has a `GET` request, and its response schema is compatible to ARM's resource definition - it must have `id`, `type` and `name`. If all these conditions are met, the request path is identified as a resource class path, and the response schema of the `GET` request will be the corresponding `ResourceData`.
 
 You can change this behavior by using the configuration `request-path-to-resource-data`, which is a dictionary from request paths to a name of schema, for instance
+
 ```
 request-path-to-resource-data:
   /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{name}: Something
 ```
+
 This configuration will do two things:
+
 1. It marks this request path as a resource class. This will let the generator to generate a class inheriting from `ArmResource` to include the operations under it.
 2. The schema with the name `Something` will become a resource data with the name `SomethingData`, and it will be the type of the `Data` property in the corresponding resource.
 
@@ -1121,8 +1124,46 @@ This configuration will do two things:
 We have multiple strategy to make sure that our generated code could compile, therefore we need to make sure the resource classes all have unique names. If there are no collisions, a resource class will have the same name as the schema name of its resource data. If there are collisions, like multiple resources are sharing the same resource data, the generator will generate the resource name from its resource types to make sure they are all unique. In this case, usually the auto-generated names are not ideal, but you can use the `request-path-to-resource-name` configuration to customize.
 
 For instance
+
 ```
 request-path-to-resource-name:
   /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{name}: Something
 ```
+
 Now the resource class generates from the request path `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{name}` will be `Something` instead of `AvailabilitySet`.
+
+### Changing the criteria of ARM resources
+
+By default, we will only mark a request path as resource, if its schema meets ARM's resource criteria, the model must have `id`, `type` and `name`. You can use the `resource-model-requires-type` and `resource-model-requires-name` configuration to loose this criteria.
+
+For instance
+
+```
+resource-model-requires-type: false
+```
+
+This configuration will globally change the criteria of a resource model to only have `id` and `name`.
+
+### Mark a request path is a non-resource
+
+By default the generator will mark all the request paths that meet the criteria as resources. If there is a path you suppose it should be pure data instead of an ARM resource, you can use the `request-path-is-non-resource` configuration.
+
+For instance,
+
+```
+request-path-is-non-resource:
+- /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{name}
+```
+
+This configuration will mark the availability set request paths as a non-resource. The operations of non-resources will append to their corresponding parent.
+
+### Resource collection should have a `GetAll` method
+
+From .Net convention, a resource collection class needs to implement the `IEnumerable<>` interface since the name of them ends with the word `Collection`. This will require resource collection classes to have a `GetAll` method to provider the `Enumerator` to the caller. If there is a collection without `GetAll` method, the generator will throw an error.
+
+If you are sure this collection really do not have a `GetAll` method and want to proceed the generation, you can add the corresponding request path of the resource collection which can be found in the error message, to the `list-exception` configuration, like
+
+```
+list-exception:
+- /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{name}
+```
