@@ -1144,6 +1144,17 @@ resource-model-requires-type: false
 
 This configuration will globally change the criteria of a resource model to only have `id` and `name`.
 
+### Changing the resource type
+
+The .Net mgmt plane SDK requires a resource to have its own resource type, and the generator will automatically calculate the corresponding resource type from the request path of that resource. There is situations that the resource type cannot be calculated, in this case, you need to use the `request-path-to-resource-type` configuration to assign a resource type to the resource. For instance
+
+```
+request-path-to-resource-type:
+  /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{name}: Microsoft.Compute/virtualNetworks
+```
+
+This will change the resource type of the `AvailabilitySet` from the default `Microsoft.Compute/availabilitySets` to `Microsoft.Compute/virtualNetworks`.
+
 ### Mark a request path is a non-resource
 
 By default the generator will mark all the request paths that meet the criteria as resources. If there is a path you suppose it should be pure data instead of an ARM resource, you can use the `request-path-is-non-resource` configuration.
@@ -1157,16 +1168,18 @@ request-path-is-non-resource:
 
 This configuration will mark the availability set request paths as a non-resource. The operations of non-resources will append to their corresponding parent.
 
-### Resource collection should have a `GetAll` method
+### Changing parent of the request paths
 
-From .Net convention, a resource collection class needs to implement the `IEnumerable<>` interface since the name of them ends with the word `Collection`. This will require resource collection classes to have a `GetAll` method to provider the `Enumerator` to the caller. If there is a collection without `GetAll` method, the generator will throw an error.
+By default, the generator will automatically find the parent of a request path, and append the operations of a non-resource to their corresponding parents.
 
-If you are sure this collection really do not have a `GetAll` method and want to proceed the generation, you can add the corresponding request path of the resource collection which can be found in the error message, to the `list-exception` configuration, like
+You can manually assign the parent of an operation using the configuration `request-path-to-parent` which is a dictionary from the request path of you want to change, to the request path you want to be the new parent. For instance
 
 ```
-list-exception:
-- /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{name}
+request-path-to-parent:
+  /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/managementPolicies/{managementPolicyName}: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
 ```
+
+This configuration will change the parent of `ManagementPolicy` from its default parent `StorageAccount` to the new parent `ResourceGroup`.
 
 ### Singleton resources
 
@@ -1192,4 +1205,15 @@ We provide a new configuration `override-operation-name` to assign new names to 
 override-operation-name:
   RecordSets_ListByDnsZone: GetRecordSets
   RecordSets_ListAllByDnsZone: GetAllRecordSets
+```
+
+### Resource collection should have a `GetAll` method
+
+From .Net convention, a resource collection class needs to implement the `IEnumerable<>` interface since the name of them ends with the word `Collection`. This will require resource collection classes to have a `GetAll` method to provider the `Enumerator` to the caller. If there is a collection without `GetAll` method, the generator will throw an error.
+
+If you are sure this collection really do not have a `GetAll` method and want to proceed the generation, you can add the corresponding request path of the resource collection which can be found in the error message, to the `list-exception` configuration, like
+
+```
+list-exception:
+- /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{name}
 ```
