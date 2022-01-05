@@ -1217,3 +1217,20 @@ If you are sure this collection really do not have a `GetAll` method and want to
 list-exception:
 - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{name}
 ```
+
+### Scope resources
+
+Some resources are scope resources, which means that these resources can be created under different scopes, like subscriptions, resource groups, management groups, etc. In the swagger, we currently do not have an extension which assigns which type of resources can be the scope of this resource, therefore we add a configuration in our generator `request-path-to-scope-resource-types` for this new information.
+
+By default, the generator will recognize the first parameter in request path as a scope parameter if the parameter has `x-ms-skip-url-encoding: true` on it, and the generator will generate the resource assuming the scope can be anything. To assign specific resource types to this scope, you can use the following configuration:
+
+```
+request-path-to-scope-resource-types:
+  /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}:
+    - subscriptions
+    - resourceGroups
+    - managementGroups
+    - tenant
+```
+
+This configuration add the constraint that the scope can only be subscription, resource group, management group or tenant. Other resources cannot be the scope of this resource `Deployment`.
