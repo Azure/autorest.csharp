@@ -1167,3 +1167,29 @@ If you are sure this collection really do not have a `GetAll` method and want to
 list-exception:
 - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{name}
 ```
+
+### Singleton resources
+
+Some resources are automatically recognized as singleton resources. If a resource is generated as a singleton resource, it will not have a corresponding collection class.
+
+By default the generator will make a resource as a singleton, if it finds the extra part of its request path comparing to its parent is a constant.
+
+Sometimes, you might need to manually make a resource singleton due to some issues in the swagger, you need to add the corresponding entries into the `request-path-to-singleton-resource` configuration. This configuration is a map from the request path to the extra segments of the resource identifier of the singleton resource.
+
+For instance,
+```
+request-path-to-singleton-resource:
+  /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/managementPolicies/{managementPolicyName}: managementPolicies/default
+```
+
+This will mark the resource with path of `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/managementPolicies/{managementPolicyName}` as singleton resource, and its ID will be its parent's ID appending `managementPolicies/default`.
+
+### Changing the name of operations
+
+We provide a new configuration `override-operation-name` to assign new names to operations, which is a dictionary from the operationId of the operation to its new name. For instance,
+
+```
+override-operation-name:
+  RecordSets_ListByDnsZone: GetRecordSets
+  RecordSets_ListAllByDnsZone: GetAllRecordSets
+```
