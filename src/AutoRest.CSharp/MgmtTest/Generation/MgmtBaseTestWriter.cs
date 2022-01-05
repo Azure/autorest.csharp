@@ -769,5 +769,33 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             }
             return null;
         }
+
+        protected static CodeWriterDelegate WriteMethodInvocation(string methodName, IEnumerable<string> paramNames)
+        {
+            return new CodeWriterDelegate(writer =>
+            {
+                writer.Append($"{methodName}(");
+                foreach (var paramName in paramNames)
+                {
+                    writer.Append($"{paramName},");
+                }
+                writer.RemoveTrailingComma();
+                writer.Append($")");
+            });
+        }
+
+        protected void WriteMethodTestInvocation(bool async, bool isPagingOperation, string methodName, IEnumerable<string> paramNames)
+        {
+            _writer.Append($"{GetAwait(async)}");
+            if (isPagingOperation)
+            {
+                using (_writer.Scope($"foreach (var _ in {WriteMethodInvocation($"{methodName}", paramNames)})"))
+                { }
+            }
+            else
+            {
+                _writer.Line($"{WriteMethodInvocation($"{methodName}", paramNames)};");
+            }
+        }
     }
 }

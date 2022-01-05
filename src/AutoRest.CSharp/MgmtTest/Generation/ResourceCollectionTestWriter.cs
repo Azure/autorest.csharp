@@ -276,30 +276,18 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     }
 
                     WriteTestDecorator();
-                    if (clientOperation.IsPagingOperation(Context))
-                    {
-                        _writer.Append($"public void {testMethodName}{(exampleIdx > 0 ? (exampleIdx + 1).ToString() : "")}()");
-                    }
-                    else
-                    {
-                        _writer.Append($"public {GetAsyncKeyword(async)} {MgmtBaseTestWriter.GetTaskOrVoid(async)} {testMethodName}{(exampleIdx > 0 ? (exampleIdx + 1).ToString() : "")}()");
-                    }
+                    var testCaseSuffix = exampleIdx > 0 ? (exampleIdx + 1).ToString() : String.Empty;
+                    _writer.Append($"public {GetAsyncKeyword(async)} {MgmtBaseTestWriter.GetTaskOrVoid(async)} {testMethodName}{testCaseSuffix}()");
                     using (_writer.Scope())
                     {
-                        _writer.LineRaw($"// Example: {exampleModel.Name}");
+                        _writer.Line($"// Example: {exampleModel.Name}");
                         clearVariableNames();
                         // WriteGetCollection(clientOperation, exampleModel, async);
                         WriteGetCollection(parentTp, operation.RequestPath.SerializedPath, exampleModel);
 
                         List<string> paramNames = WriteOperationParameters(methodParameters, new List<Parameter>(), exampleModel);
                         _writer.Line();
-                        _writer.Append($"{GetAwait(async && !clientOperation.IsPagingOperation(Context))} collection.{testMethodName}(");
-                        foreach (var paramName in paramNames)
-                        {
-                            _writer.Append($"{paramName},");
-                        }
-                        _writer.RemoveTrailingComma();
-                        _writer.LineRaw(");");
+                        WriteMethodTestInvocation(async, clientOperation.IsPagingOperation(Context)|| clientOperation.IsListOperation(Context, out var _), $"collection.{testMethodName}", paramNames);
                     }
                     _writer.Line();
                     exampleIdx++;

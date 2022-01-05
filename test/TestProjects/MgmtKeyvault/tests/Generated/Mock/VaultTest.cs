@@ -84,7 +84,9 @@ new MgmtKeyvault.Models.AccessPolicyEntry(tenantId: Guid.Parse("00000000-0000-00
             // Example: KeyVaultListPrivateLinkResources
             var vault = GetArmClient().GetVault(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/vaults/sample-vault"));
 
-            await vault.GetPrivateLinkResourcesAsync();
+            await foreach (var _ in vault.GetPrivateLinkResourcesAsync())
+            {
+            }
         }
     }
 }

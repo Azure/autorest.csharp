@@ -56,12 +56,14 @@ namespace MgmtKeyvault.Tests.Mock
         }
 
         [RecordedTest]
-        public void GetAllAsync()
+        public async Task GetAllAsync()
         {
             // Example: List managed HSM Pools in a subscription
             var collection = GetArmClient().GetManagedHsm(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/managedHSMs/sample-mhsm")).GetMhsmPrivateEndpointConnections();
 
-            collection.GetAllAsync();
+            await foreach (var _ in collection.GetAllAsync())
+            {
+            }
         }
     }
 }

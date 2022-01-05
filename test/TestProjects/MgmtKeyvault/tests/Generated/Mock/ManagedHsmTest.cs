@@ -64,7 +64,9 @@ namespace MgmtKeyvault.Tests.Mock
             // Example: KeyVaultListPrivateLinkResources
             var managedHsm = GetArmClient().GetManagedHsm(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/managedHSMs/sample-mhsm"));
 
-            await managedHsm.GetMHSMPrivateLinkResourcesByMhsmResourceAsync();
+            await foreach (var _ in managedHsm.GetMHSMPrivateLinkResourcesByMhsmResourceAsync())
+            {
+            }
         }
     }
 }
