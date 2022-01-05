@@ -436,6 +436,6 @@ namespace XmlDeserialization
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, XmlInstance, XmlInstanceData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, XmlInstance, XmlInstanceData> Construct() { }
     }
 }

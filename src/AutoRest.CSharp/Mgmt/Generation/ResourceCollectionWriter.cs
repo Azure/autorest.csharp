@@ -20,7 +20,6 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
-using ResourceType = AutoRest.CSharp.Mgmt.Models.ResourceType;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
@@ -135,10 +134,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
             if (allPossibleTypes.Count() == 1)
                 validResourceType = GetResourceTypeExpression(allPossibleTypes.First());
             else
-                validResourceType = $"{typeof(ResourceIdentifier)}.Root.ResourceType";
+                validResourceType = $"{typeof(Azure.Core.ResourceIdentifier)}.Root.ResourceType";
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Gets the valid resource type for this object");
-            _writer.Line($"protected override {typeof(Azure.ResourceManager.ResourceType)} ValidResourceType => {validResourceType};");
+            _writer.Line($"protected override {typeof(Azure.Core.ResourceType)} ValidResourceType => {validResourceType};");
 
             if (allPossibleTypes.Count() != 1)
             {
@@ -146,7 +145,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.Line();
                 _writer.WriteXmlDocumentationSummary($"Verify that the input resource Id is a valid collection for this type.");
                 _writer.WriteXmlDocumentationParameter("identifier", $"The input resource Id to check.");
-                _writer.Line($"protected override void ValidateResourceType({typeof(ResourceIdentifier)} identifier)");
+                _writer.Line($"protected override void ValidateResourceType({typeof(Azure.Core.ResourceIdentifier)} identifier)");
                 using (_writer.Scope())
                 {
                 }
@@ -183,7 +182,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             var validResourceTypes = _resourceCollection.ResourceTypes.SelectMany(p => p.Value).Distinct();
             var resourceType = validResourceTypes.First();
-            if (validResourceTypes.Count() == 1 && (resourceType == ResourceType.ResourceGroup || resourceType == ResourceType.Subscription))
+            if (validResourceTypes.Count() == 1 && (resourceType == ResourceTypeSegment.ResourceGroup || resourceType == ResourceTypeSegment.Subscription))
             {
                 WriteListAsGenericResource(resourceType, false);
                 WriteListAsGenericResource(resourceType, true);
@@ -210,7 +209,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             methodParameters = parameterMappings.Values.First().GetPassThroughParameters();
         }
 
-        protected override ResourceType GetBranchResourceType(RequestPath branch)
+        protected override ResourceTypeSegment GetBranchResourceType(RequestPath branch)
         {
             return branch.GetResourceType(Config);
         }
@@ -321,10 +320,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        private void WriteListAsGenericResource(ResourceType resourceType, bool async)
+        private void WriteListAsGenericResource(ResourceTypeSegment resourceType, bool async)
         {
             const string syncMethodName = "GetAllAsGenericResources";
-            var listScope = resourceType == ResourceType.ResourceGroup ? "resource group" : "subscription";
+            var listScope = resourceType == ResourceTypeSegment.ResourceGroup ? "resource group" : "subscription";
             var methodName = CreateMethodName(syncMethodName, async);
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Filters the list of <see cref=\"{_resource.Type}\" /> for this {listScope} represented as generic resources.");
@@ -340,7 +339,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     _writer.Line($"var filters = new {typeof(ResourceFilterCollection)}({_resource.Type}.ResourceType);");
                     _writer.Line($"filters.SubstringFilter = nameFilter;");
-                    if (resourceType == ResourceType.ResourceGroup)
+                    if (resourceType == ResourceTypeSegment.ResourceGroup)
                     {
                         _writer.Line($"return {typeof(ResourceListOperations)}.{CreateMethodName("GetAtContext", async)}({ContextProperty} as {typeof(ResourceGroup)}, filters, expand, top, cancellationToken);");
                     }
@@ -388,7 +387,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             _writer.Line();
             _writer.Line($"// Builders.");
-            _writer.LineRaw($"// public ArmBuilder<{typeof(ResourceIdentifier)}, {_resource.Type.Name}, {_resourceData.Type.Name}> Construct() {{ }}");
+            _writer.LineRaw($"// public ArmBuilder<{typeof(Azure.Core.ResourceIdentifier)}, {_resource.Type.Name}, {_resourceData.Type.Name}> Construct() {{ }}");
         }
     }
 }

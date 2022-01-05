@@ -434,6 +434,6 @@ namespace MgmtExpandResourceTypes
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, Zone, ZoneData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, Zone, ZoneData> Construct() { }
     }
 }

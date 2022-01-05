@@ -13,92 +13,92 @@ using AutoRest.CSharp.Output.Models.Types;
 namespace AutoRest.CSharp.Mgmt.Models
 {
     /// <summary>
-    /// A <see cref="ResourceType"/> represents the resource type that derives from a <see cref="RequestPath"/>. It can contain variables in it.
+    /// A <see cref="ResourceTypeSegment"/> represents the resource type that derives from a <see cref="RequestPath"/>. It can contain variables in it.
     /// </summary>
-    internal struct ResourceType : IEquatable<ResourceType>, IReadOnlyList<Segment>
+    internal struct ResourceTypeSegment : IEquatable<ResourceTypeSegment>, IReadOnlyList<Segment>
     {
-        public static readonly ResourceType Scope = new(new Segment[0]);
+        public static readonly ResourceTypeSegment Scope = new(new Segment[0]);
 
-        public static readonly ResourceType Any = new(new[] { new Segment("*") });
+        public static readonly ResourceTypeSegment Any = new(new[] { new Segment("*") });
 
         /// <summary>
-        /// The <see cref="ResourceType"/> of the resource group resource
+        /// The <see cref="ResourceTypeSegment"/> of the resource group resource
         /// </summary>
-        public static readonly ResourceType ResourceGroup = new(new[] {
+        public static readonly ResourceTypeSegment ResourceGroup = new(new[] {
             new Segment("Microsoft.Resources"),
             new Segment("resourceGroups")
         });
 
         /// <summary>
-        /// The <see cref="ResourceType"/> of the subscription resource
+        /// The <see cref="ResourceTypeSegment"/> of the subscription resource
         /// </summary>
-        public static readonly ResourceType Subscription = new(new[] {
+        public static readonly ResourceTypeSegment Subscription = new(new[] {
             new Segment("Microsoft.Resources"),
             new Segment("subscriptions")
         });
 
         /// <summary>
-        /// The <see cref="ResourceType"/> of the tenant resource
+        /// The <see cref="ResourceTypeSegment"/> of the tenant resource
         /// </summary>
-        public static readonly ResourceType Tenant = new(new Segment[] {
+        public static readonly ResourceTypeSegment Tenant = new(new Segment[] {
             new Segment("Microsoft.Resources"),
             new Segment("tenants")
         });
 
         /// <summary>
-        /// The <see cref="ResourceType"/> of the management group resource
+        /// The <see cref="ResourceTypeSegment"/> of the management group resource
         /// </summary>
-        public static readonly ResourceType ManagementGroup = new(new[] {
+        public static readonly ResourceTypeSegment ManagementGroup = new(new[] {
             new Segment("Microsoft.Management"),
             new Segment("managementGroups")
         });
 
         private IReadOnlyList<Segment> _segments;
 
-        public static ResourceType ParseRequestPath(RequestPath path)
+        public static ResourceTypeSegment ParseRequestPath(RequestPath path)
         {
             // first try our built-in resources
             if (path == RequestPath.Subscription)
-                return ResourceType.Subscription;
+                return ResourceTypeSegment.Subscription;
             if (path == RequestPath.ResourceGroup)
-                return ResourceType.ResourceGroup;
+                return ResourceTypeSegment.ResourceGroup;
             if (path == RequestPath.ManagementGroup)
-                return ResourceType.ManagementGroup;
+                return ResourceTypeSegment.ManagementGroup;
             if (path == RequestPath.Tenant)
-                return ResourceType.Tenant;
+                return ResourceTypeSegment.Tenant;
             if (path == RequestPath.Any)
-                return ResourceType.Any;
+                return ResourceTypeSegment.Any;
 
             return Parse(path);
         }
 
-        public ResourceType(string path)
+        public ResourceTypeSegment(string path)
             : this(path.Split('/', StringSplitOptions.RemoveEmptyEntries).Select(segment => new Segment(segment)).ToList())
         {
         }
 
-        private ResourceType(IReadOnlyList<Segment> segments)
+        private ResourceTypeSegment(IReadOnlyList<Segment> segments)
         {
             _segments = segments;
             SerializedType = Segment.BuildSerializedSegments(segments, false);
             IsConstant = _segments.All(segment => segment.IsConstant);
         }
 
-        private static ResourceType Parse(RequestPath path)
+        private static ResourceTypeSegment Parse(RequestPath path)
         {
             var segment = new List<Segment>();
             // find providers
             int index = path.ToList().LastIndexOf(Segment.Providers);
             if (index < 0)
-                throw new ArgumentException($"Could not set ResourceType for operations group {path}. No {Segment.Providers} string found in the URI");
+                throw new ArgumentException($"Could not set ResourceTypeSegment for operations group {path}. No {Segment.Providers} string found in the URI");
             segment.Add(path[index + 1]);
             segment.AddRange(path.Skip(index + 1).Where((_, index) => index % 2 != 0));
 
-            return new ResourceType(segment);
+            return new ResourceTypeSegment(segment);
         }
 
         /// <summary>
-        /// Returns true if every <see cref="Segment"/> in this <see cref="ResourceType"/> is constant
+        /// Returns true if every <see cref="Segment"/> in this <see cref="ResourceTypeSegment"/> is constant
         /// </summary>
         public bool IsConstant { get; }
 
@@ -112,7 +112,7 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         public int Count => _segments.Count;
 
-        public bool Equals(ResourceType other) => SerializedType.Equals(other.SerializedType, StringComparison.InvariantCultureIgnoreCase);
+        public bool Equals(ResourceTypeSegment other) => SerializedType.Equals(other.SerializedType, StringComparison.InvariantCultureIgnoreCase);
 
         public IEnumerator<Segment> GetEnumerator() => _segments.GetEnumerator();
 
@@ -122,7 +122,7 @@ namespace AutoRest.CSharp.Mgmt.Models
         {
             if (obj == null)
                 return false;
-            var other = (ResourceType)obj;
+            var other = (ResourceTypeSegment)obj;
             return other.Equals(this);
         }
 
@@ -130,12 +130,12 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         public override string? ToString() => SerializedType;
 
-        public static bool operator ==(ResourceType left, ResourceType right)
+        public static bool operator ==(ResourceTypeSegment left, ResourceTypeSegment right)
         {
             return left.Equals(right);
         }
 
-        public static bool operator !=(ResourceType left, ResourceType right)
+        public static bool operator !=(ResourceTypeSegment left, ResourceTypeSegment right)
         {
             return !(left == right);
         }
