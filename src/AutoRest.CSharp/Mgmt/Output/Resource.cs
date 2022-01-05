@@ -71,13 +71,13 @@ namespace AutoRest.CSharp.Mgmt.Output
                 if (operation is not null)
                 {
                     var requestPath = operation.GetRequestPath(_context);
-                    var clientOperation = new MgmtRestOperation(
+                    var restOperation = new MgmtRestOperation(
                         _context.Library.RestClientMethods[operation],
                         _context.Library.GetRestClient(operation),
                         requestPath,
                         GetContextualPath(operationSet, requestPath),
                         name);
-                    result.Add(clientOperation);
+                    result.Add(restOperation);
                 }
             }
 
