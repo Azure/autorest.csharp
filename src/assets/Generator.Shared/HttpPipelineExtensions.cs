@@ -11,7 +11,6 @@ namespace Azure.Core
 {
     internal static class HttpPipelineExtensions
     {
-#if EXPERIMENTAL
         public static async ValueTask<Response> ProcessMessageAsync(this HttpPipeline pipeline, HttpMessage message, ClientDiagnostics clientDiagnostics, RequestContext? requestContext, CancellationToken cancellationToken = default)
         {
             var (userCt, statusOption) = ApplyRequestContext(requestContext);
@@ -93,6 +92,5 @@ namespace Azure.Core
 
             return (requestContext.CancellationToken, requestContext.ErrorOptions);
         }
-#endif
     }
 }

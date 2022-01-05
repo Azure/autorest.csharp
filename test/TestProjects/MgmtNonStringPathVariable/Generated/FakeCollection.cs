@@ -12,6 +12,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
+using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
@@ -208,9 +209,9 @@ namespace MgmtNonStringPathVariable
         /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<bool> CheckIfExists(FakeNameAsEnum fakeName, string expand = null, CancellationToken cancellationToken = default)
+        public virtual Response<bool> Exists(FakeNameAsEnum fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("FakeCollection.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("FakeCollection.Exists");
             scope.Start();
             try
             {
@@ -228,9 +229,9 @@ namespace MgmtNonStringPathVariable
         /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<bool>> CheckIfExistsAsync(FakeNameAsEnum fakeName, string expand = null, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> ExistsAsync(FakeNameAsEnum fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("FakeCollection.CheckIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("FakeCollection.ExistsAsync");
             scope.Start();
             try
             {
@@ -345,6 +346,6 @@ namespace MgmtNonStringPathVariable
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, Fake, FakeData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, Fake, FakeData> Construct() { }
     }
 }

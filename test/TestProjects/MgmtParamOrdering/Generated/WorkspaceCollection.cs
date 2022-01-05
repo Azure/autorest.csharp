@@ -12,6 +12,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
+using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
@@ -236,14 +237,14 @@ namespace MgmtParamOrdering
         /// <param name="workspaceName"> Name of Azure Machine Learning workspace. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="workspaceName"/> is null. </exception>
-        public virtual Response<bool> CheckIfExists(string workspaceName, CancellationToken cancellationToken = default)
+        public virtual Response<bool> Exists(string workspaceName, CancellationToken cancellationToken = default)
         {
             if (workspaceName == null)
             {
                 throw new ArgumentNullException(nameof(workspaceName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WorkspaceCollection.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("WorkspaceCollection.Exists");
             scope.Start();
             try
             {
@@ -261,14 +262,14 @@ namespace MgmtParamOrdering
         /// <param name="workspaceName"> Name of Azure Machine Learning workspace. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="workspaceName"/> is null. </exception>
-        public async virtual Task<Response<bool>> CheckIfExistsAsync(string workspaceName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> ExistsAsync(string workspaceName, CancellationToken cancellationToken = default)
         {
             if (workspaceName == null)
             {
                 throw new ArgumentNullException(nameof(workspaceName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WorkspaceCollection.CheckIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("WorkspaceCollection.ExistsAsync");
             scope.Start();
             try
             {
@@ -381,6 +382,6 @@ namespace MgmtParamOrdering
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, Workspace, WorkspaceData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, Workspace, WorkspaceData> Construct() { }
     }
 }

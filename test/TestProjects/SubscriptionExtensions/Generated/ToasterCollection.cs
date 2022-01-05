@@ -12,6 +12,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
+using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
@@ -234,14 +235,14 @@ namespace SubscriptionExtensions
         /// <param name="toasterName"> The name of the availability set. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="toasterName"/> is null. </exception>
-        public virtual Response<bool> CheckIfExists(string toasterName, CancellationToken cancellationToken = default)
+        public virtual Response<bool> Exists(string toasterName, CancellationToken cancellationToken = default)
         {
             if (toasterName == null)
             {
                 throw new ArgumentNullException(nameof(toasterName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ToasterCollection.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("ToasterCollection.Exists");
             scope.Start();
             try
             {
@@ -259,14 +260,14 @@ namespace SubscriptionExtensions
         /// <param name="toasterName"> The name of the availability set. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="toasterName"/> is null. </exception>
-        public async virtual Task<Response<bool>> CheckIfExistsAsync(string toasterName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> ExistsAsync(string toasterName, CancellationToken cancellationToken = default)
         {
             if (toasterName == null)
             {
                 throw new ArgumentNullException(nameof(toasterName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ToasterCollection.CheckIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("ToasterCollection.ExistsAsync");
             scope.Start();
             try
             {
@@ -377,6 +378,6 @@ namespace SubscriptionExtensions
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, Toaster, ToasterData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, Toaster, ToasterData> Construct() { }
     }
 }

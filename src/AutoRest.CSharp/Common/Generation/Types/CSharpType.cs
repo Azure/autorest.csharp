@@ -116,7 +116,7 @@ namespace AutoRest.CSharp.Generation.Types
                 systemObjectType,
                 type.Namespace ?? context.DefaultNamespace,
                 systemObjectType.Declaration.Name,
-                false,
+                type.IsValueType,
                 false,
                 genericTypes.ToArray());
         }

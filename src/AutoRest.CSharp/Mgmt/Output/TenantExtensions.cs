@@ -11,11 +11,9 @@ namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class TenantExtensions : MgmtExtensions
     {
-        public TenantExtensions(IEnumerable<Operation> allOperations, BuildContext<MgmtOutputLibrary> context) : base(allOperations, context)
+        public TenantExtensions(IEnumerable<Operation> allOperations, BuildContext<MgmtOutputLibrary> context) : base(allOperations, "Tenant", context)
         {
         }
-
-        public override string ResourceName => "Tenant";
 
         protected override string DefaultName => "TenantExtensions";
 

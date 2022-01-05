@@ -23,7 +23,6 @@ using Azure.ResourceManager.Models;
 using Azure.ResourceManager.Resources.Models;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
 using Resource = AutoRest.CSharp.Mgmt.Output.Resource;
-using ResourceType = Azure.ResourceManager.ResourceType;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
@@ -68,6 +67,7 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
 
                 using (_writer.Scope())
                 {
+                    WriteStaticMethods();
                     WriteFields();
                     WriteCtors();
                     WriteProperties();
@@ -75,6 +75,32 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
 
                     // write children
                     WriteChildResourceEntries();
+                }
+            }
+        }
+
+        private void WriteStaticMethods()
+        {
+            WriteCreateResourceIdentifierMethods();
+        }
+
+        private void WriteCreateResourceIdentifierMethods()
+        {
+            // Right now, `RequestPaths` contains only one path. But in the future when we start to support multiple context path per resource,
+            // we should implement the logic to avoid overload conflicts (e.g. /{A}/{B}/{C} v.s. /{D}/{E}/{F}, both context path contains 3 parameters).
+            foreach (var requestPath in _resource.RequestPaths)
+            {
+                _writer.Line();
+                _writer.WriteXmlDocumentationSummary($"Generate the resource identifier of a <see cref=\"{TypeOfThis}\"/> instance.");
+                var parameterList = string.Join(", ", requestPath.Where(segment => segment.IsReference).Select(segment => $"string {segment.ReferenceName}"));
+                using (_writer.Scope($"public static {typeof(Azure.Core.ResourceIdentifier)} CreateResourceIdentifier({parameterList})"))
+                {
+                    // Storage has inconsistent definitions:
+                    // - https://github.com/Azure/azure-rest-api-specs/blob/719b74f77b92eb1ec3814be6c4488bcf6b651733/specification/storage/resource-manager/Microsoft.Storage/stable/2021-04-01/blob.json#L58
+                    // - https://github.com/Azure/azure-rest-api-specs/blob/719b74f77b92eb1ec3814be6c4488bcf6b651733/specification/storage/resource-manager/Microsoft.Storage/stable/2021-04-01/blob.json#L146
+                    // so here we have to use `Seqment.BuildSerializedSegments` instead of `RequestPath.SerializedPath` which could be from `RestClientMethod.Operation.GetHttpPath`
+                    _writer.Line($"var resourceId = $\"{Segment.BuildSerializedSegments(requestPath)}\";");
+                    _writer.Line($"return new {typeof(Azure.Core.ResourceIdentifier)}(resourceId);");
                 }
             }
         }
@@ -98,8 +124,11 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
             _writer.WriteXmlDocumentationSummary($"Initializes a new instance of the <see cref = \"{TypeOfThis.Name}\"/> class.");
             _writer.WriteXmlDocumentationParameter("options", $"The client parameters to use in these operations.");
             _writer.WriteXmlDocumentationParameter("resource", $"The resource that is the target of operations.");
+
+            var idPropString = _resourceData.IsIdString() ? $"new {typeof(Azure.Core.ResourceIdentifier)}(resource.Id)" : "resource.Id";
+
             // inherits the default constructor when it is not a resource
-            using (_writer.Scope($"internal {TypeOfThis.Name}({typeof(ArmResource)} options, {_resourceData.Type} resource) : base(options, resource.Id)"))
+            using (_writer.Scope($"internal {TypeOfThis.Name}({typeof(ArmResource)} options, {_resourceData.Type} resource) : base(options, {idPropString})"))
             {
                 _writer.Line($"HasData = true;");
                 _writer.Line($"_data = resource;");
@@ -113,7 +142,7 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
             _writer.WriteXmlDocumentationSummary($"Initializes a new instance of the <see cref=\"{TypeOfThis.Name}\"/> class.");
             _writer.WriteXmlDocumentationParameter("options", $"The client parameters to use in these operations.");
             _writer.WriteXmlDocumentationParameter("id", $"The identifier of the resource that is the target of operations.");
-            using (_writer.Scope($"internal {TypeOfThis.Name}({typeof(ArmResource)} options, {typeof(ResourceIdentifier)} id) : base(options, id)"))
+            using (_writer.Scope($"internal {TypeOfThis.Name}({typeof(ArmResource)} options, {typeof(Azure.Core.ResourceIdentifier)} id) : base(options, id)"))
             {
                 if (IsSingleton)
                     _writer.Line($"Parent = options;");
@@ -128,7 +157,7 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
             _writer.WriteXmlDocumentationParameter("uri", $"The uri to build client context.");
             _writer.WriteXmlDocumentationParameter("pipeline", $"The pipeline to build client context.");
             _writer.WriteXmlDocumentationParameter("id", $"The identifier of the resource that is the target of operations.");
-            using (_writer.Scope($"internal {TypeOfThis.Name}({typeof(ArmClientOptions)} clientOptions, {typeof(TokenCredential)} credential, {typeof(Uri)} uri, {typeof(HttpPipeline)} pipeline, {typeof(ResourceIdentifier)} id) : base(clientOptions, credential, uri, pipeline, id)"))
+            using (_writer.Scope($"internal {TypeOfThis.Name}({typeof(ArmClientOptions)} clientOptions, {typeof(TokenCredential)} credential, {typeof(Uri)} uri, {typeof(HttpPipeline)} pipeline, {typeof(Azure.Core.ResourceIdentifier)} id) : base(clientOptions, credential, uri, pipeline, id)"))
             {
                 _writer.Line($"{ClientDiagnosticsField} = new {typeof(ClientDiagnostics)}(ClientOptions);");
                 WriteRestClientAssignments();
@@ -231,7 +260,7 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
             //}
         }
 
-        protected override Models.ResourceType GetBranchResourceType(RequestPath branch)
+        protected override ResourceTypeSegment GetBranchResourceType(RequestPath branch)
         {
             return branch.ParentRequestPath(Context).GetResourceType(Config);
         }
@@ -282,7 +311,7 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
             _writer.WriteXmlDocumentationParameter("cancellationToken", $"A token to allow the caller to cancel the call to the service. The default value is <see cref=\"CancellationToken.None\" />.");
             _writer.WriteXmlDocumentationReturns($"A collection of locations that may take multiple service requests to iterate over.");
 
-            var responseType = new CSharpType(typeof(IEnumerable<Location>)).WrapAsync(async);
+            var responseType = new CSharpType(typeof(IEnumerable<AzureLocation>)).WrapAsync(async);
 
             using (_writer.Scope($"public {GetAsyncKeyword(async)} {GetVirtual(true)} {responseType} {CreateMethodName("GetAvailableLocations", async)}({typeof(CancellationToken)} cancellationToken = default)"))
             {
@@ -404,18 +433,9 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
         private void WriteTaggableCommonMethod(bool async)
         {
             _writer.Line($"{GetAwait(async)} TagResource.{CreateMethodName("CreateOrUpdate", async)}(originalTags.Value.Data, cancellationToken: cancellationToken){GetConfigureAwait(async)};");
-            // get the corresponding MgmtClientOperation mapping
-            var operationMappings = _resource.GetOperation.ToDictionary(
-                clientOperation => clientOperation.ContextualPath,
-                clientOperation => clientOperation);
-            // build contextual parameters
-            var contextualParameterMappings = operationMappings.Keys.ToDictionary(
-                contextualPath => contextualPath,
-                contextualPath => contextualPath.BuildContextualParameters(Context, IdVariableName));
-            // build parameter mapping
-            var parameterMappings = operationMappings.ToDictionary(
-                pair => pair.Key,
-                pair => pair.Value.BuildParameterMapping(contextualParameterMappings[pair.Key]));
+
+            BuildParameters(_resource.GetOperation!, out var operationMappings, out var parameterMappings, out _);
+
             // we need to write multiple branches for a normal method
             if (operationMappings.Count == 1)
             {
@@ -447,11 +467,26 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
             if (collection == null)
                 throw new InvalidOperationException($"We are about to write a {resource.Type.Name} resource entry in {_resource.Type.Name} resource, but it does not have a collection, this cannot happen");
             _writer.Line();
-            _writer.WriteXmlDocumentationSummary($"Gets a collection of {resource.Type.Name.ToPlural()} in the {_resource.Type.Name}.");
-            _writer.WriteXmlDocumentationReturns($"An object representing collection of {resource.Type.Name.ToPlural()} and their operations over a {_resource.Type.Name}.");
-            using (_writer.Scope($"public {collection.Type.Name} Get{resource.Type.Name.ToPlural()}()"))
+            _writer.WriteXmlDocumentationSummary($"Gets a collection of {resource.Type.Name.LastWordToPlural()} in the {_resource.Type.Name}.");
+            _writer.WriteXmlDocumentationReturns($"An object representing collection of {resource.Type.Name.LastWordToPlural()} and their operations over a {_resource.Type.Name}.");
+            _writer.WriteXmlDocumentationParameters(collection.ExtraConstructorParameters);
+            var extraConstructorParameters = collection.ExtraConstructorParameters;
+            _writer.Append($"public {GetVirtual(true)} {collection.Type} Get{resource.Type.Name.ResourceNameToPlural()}(");
+            foreach (var parameter in collection.ExtraConstructorParameters)
             {
-                _writer.Line($"return new {collection.Type.Name}(this);");
+                _writer.WriteParameter(parameter);
+            }
+            _writer.RemoveTrailingComma();
+            _writer.Line($")");
+            using (_writer.Scope())
+            {
+                _writer.Append($"return new {collection.Type.Name}(this, ");
+                foreach (var parameter in collection.ExtraConstructorParameters)
+                {
+                    _writer.Append($"{parameter.Name}, ");
+                }
+                _writer.RemoveTrailingComma();
+                _writer.Line($");");
             }
         }
 
@@ -460,11 +495,11 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Gets an object representing a {resource.Type.Name} along with the instance operations that can be performed on it in the {_resource.Type.Name}.");
             _writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{resource.Type}\" /> object.");
-            using (_writer.Scope($"public {resource.Type.Name} Get{resource.Type.Name}()"))
+            using (_writer.Scope($"public {GetVirtual(true)} {resource.Type.Name} Get{resource.Type.Name}()"))
             {
                 // we cannot guarantee that the singleResourceSuffix can only have two segments (it has many different cases),
                 // therefore instead of using the extension method of ResourceIdentifier, we are just concatting this as a string
-                _writer.Line($"return new {resource.Type.Name}(this, Id + \"/{singletonResourceIdSuffix}\");");
+                _writer.Line($"return new {resource.Type.Name}(this, new {typeof(Azure.Core.ResourceIdentifier)}(Id.ToString() + \"/{singletonResourceIdSuffix}\"));");
             }
         }
     }

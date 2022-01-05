@@ -2,8 +2,8 @@
 // Licensed under the MIT License.
 
 using System;
+using Azure.Core;
 using Azure.ResourceManager.Models;
-using Azure.ResourceManager.Resources.Models;
 using NUnit.Framework;
 using SupersetFlattenInheritance;
 using SupersetFlattenInheritance.Models;
@@ -58,8 +58,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase(typeof(WritableSubResourceModel2), new string[] { "id", "foo" }, new Type[] { typeof(string), typeof(string) })]
         [TestCase(typeof(ResourceModel1Data), new string[] { "id", "name", "type", "foo"}, new Type[] { typeof(string), typeof(string), typeof(string), typeof(string) })]
         [TestCase(typeof(ResourceModel1Data), new string[] { "id", "name", "type", "foo"}, new Type[] { typeof(string), typeof(string), typeof(string), typeof(string) })]
-        [TestCase(typeof(TrackedResourceModel1Data), new string[] { "location" }, new Type[] { typeof(Location) })]
-        [TestCase(typeof(TrackedResourceModel2), new string[] { "location" }, new Type[] { typeof(Location) })]
+        [TestCase(typeof(TrackedResourceModel1Data), new string[] { "location" }, new Type[] { typeof(AzureLocation) })]
+        [TestCase(typeof(TrackedResourceModel2), new string[] { "location" }, new Type[] { typeof(AzureLocation) })]
         [TestCase(typeof(NonResourceModel1), new string[] { "foo", "bar" }, new Type[] { typeof(string), typeof(string) })]
         public void ValidateCtor(Type model, string[] paramNames, Type[] paramTypes) => ValidatePublicCtor(model, paramNames, paramTypes);
     }

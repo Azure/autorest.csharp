@@ -238,14 +238,14 @@ namespace MgmtListMethods
         /// <param name="subParentWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subParentWithLocName"/> is null. </exception>
-        public virtual Response<bool> CheckIfExists(string subParentWithLocName, CancellationToken cancellationToken = default)
+        public virtual Response<bool> Exists(string subParentWithLocName, CancellationToken cancellationToken = default)
         {
             if (subParentWithLocName == null)
             {
                 throw new ArgumentNullException(nameof(subParentWithLocName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SubParentWithLocCollection.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("SubParentWithLocCollection.Exists");
             scope.Start();
             try
             {
@@ -263,14 +263,14 @@ namespace MgmtListMethods
         /// <param name="subParentWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subParentWithLocName"/> is null. </exception>
-        public async virtual Task<Response<bool>> CheckIfExistsAsync(string subParentWithLocName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> ExistsAsync(string subParentWithLocName, CancellationToken cancellationToken = default)
         {
             if (subParentWithLocName == null)
             {
                 throw new ArgumentNullException(nameof(subParentWithLocName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SubParentWithLocCollection.CheckIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("SubParentWithLocCollection.ExistsAsync");
             scope.Start();
             try
             {
@@ -428,6 +428,6 @@ namespace MgmtListMethods
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, SubParentWithLoc, SubParentWithLocData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, SubParentWithLoc, SubParentWithLocData> Construct() { }
     }
 }

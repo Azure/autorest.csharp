@@ -17,15 +17,29 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 {
     internal class MgmtTarget
     {
-        private static ISet<string> _addedFilenames = new HashSet<string>();
-        private static IList<string> _overridenFilenames = new List<string>();
+        private static IDictionary<GeneratedCodeWorkspace, ISet<string>> _addedProjectFilenames = new Dictionary<GeneratedCodeWorkspace, ISet<string>>();
+        private static IDictionary<GeneratedCodeWorkspace, IList<string>> _overriddenProjectFilenames = new Dictionary<GeneratedCodeWorkspace, IList<string>>();
 
         private static void AddGeneratedFile(GeneratedCodeWorkspace project, string filename, string text)
         {
-            if (_addedFilenames.Contains(filename))
-                _overridenFilenames.Add(filename);
+            if (!_addedProjectFilenames.TryGetValue(project, out var addedFileNames))
+            {
+                addedFileNames = new HashSet<string>();
+                _addedProjectFilenames.Add(project, addedFileNames);
+            }
+            if (addedFileNames.Contains(filename))
+            {
+                if (!_overriddenProjectFilenames.TryGetValue(project, out var overriddenFileNames))
+                {
+                    overriddenFileNames = new List<string>();
+                    _overriddenProjectFilenames.Add(project, overriddenFileNames);
+                }
+                overriddenFileNames.Add(filename);
+            }
             else
-                _addedFilenames.Add(filename);
+            {
+                addedFileNames.Add(filename);
+            }
             project.AddGeneratedFile(filename, text);
         }
 
@@ -75,6 +89,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             foreach (var model in context.Library.ResourceData)
             {
+                if (TypeReferenceTypeChooser.HasMatch(model.ObjectSchema))
+                    continue;
+
                 var codeWriter = new CodeWriter();
                 ReferenceTypeWriter.GetWriter(model).WriteModel(codeWriter, model);
 
@@ -141,8 +158,15 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 AddGeneratedFile(project, $"Extensions/{context.Library.ArmClientExtensions.Type.Name}.cs", armClientExtensionsCodeWriter.ToString());
             }
 
-            if (_overridenFilenames.Count != 0)
-                throw new InvalidOperationException($"At least one file was overridden during the generation process. Filenames are: {string.Join(", ", _overridenFilenames)}");
+            if (!context.Library.ArmResourceExtensions.IsEmpty)
+            {
+                var armResourceExtensionsCodeWriter = new CodeWriter();
+                new ArmResourceExtensionsWriter(armResourceExtensionsCodeWriter, context.Library.ArmResourceExtensions, context).Write();
+                AddGeneratedFile(project, $"Extensions/{context.Library.ArmResourceExtensions.Type.Name}.cs", armResourceExtensionsCodeWriter.ToString());
+            }
+
+            if (_overriddenProjectFilenames.TryGetValue(project, out var overriddenFilenames))
+                throw new InvalidOperationException($"At least one file was overridden during the generation process. Filenames are: {string.Join(", ", overriddenFilenames)}");
         }
 
         private static bool ShouldSkipModelGeneration(TypeProvider model, BuildContext<MgmtOutputLibrary> context)
@@ -154,11 +178,24 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             {
                 return true;
             }
+
+            // do not skip generation of reference types in resource manager
+            // some common types (like `PrivateEndpointConnectionData`) will inherit `Resource`
+            // it will cause `Resource` not being generated since `Resource` is `usedAsInheritance`
+            if (model is MgmtReferenceType)
+            {
+                return false;
+            }
+
             if (model is SchemaObjectType objSchema)
             {
                 //TODO: we need to add logic to replace SubResource with ResourceIdentifier where appropriate until then we won't remove these types
                 if (objSchema.ObjectSchema.Name.StartsWith("SubResource"))
                     return false;
+
+                if (TypeReferenceTypeChooser.HasMatch(objSchema.ObjectSchema))
+                    return true;
+
                 //skip things that had exact match replacements
                 //TODO: Can go away after full orphan fix https://dev.azure.com/azure-mgmt-ex/DotNET%20Management%20SDK/_workitems/edit/6000
                 //Since we forced the evaluation of inheritance and property match for all models before, here we can use the fully loaded cache to

@@ -14,7 +14,6 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using MgmtListMethods.Models;
 
@@ -237,14 +236,14 @@ namespace MgmtListMethods
         /// <param name="tenantParentWithNonResChWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithNonResChWithLocName"/> is null. </exception>
-        public virtual Response<bool> CheckIfExists(string tenantParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
+        public virtual Response<bool> Exists(string tenantParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
             if (tenantParentWithNonResChWithLocName == null)
             {
                 throw new ArgumentNullException(nameof(tenantParentWithNonResChWithLocName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("TenantParentWithNonResChWithLocCollection.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("TenantParentWithNonResChWithLocCollection.Exists");
             scope.Start();
             try
             {
@@ -262,14 +261,14 @@ namespace MgmtListMethods
         /// <param name="tenantParentWithNonResChWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithNonResChWithLocName"/> is null. </exception>
-        public async virtual Task<Response<bool>> CheckIfExistsAsync(string tenantParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> ExistsAsync(string tenantParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
             if (tenantParentWithNonResChWithLocName == null)
             {
                 throw new ArgumentNullException(nameof(tenantParentWithNonResChWithLocName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("TenantParentWithNonResChWithLocCollection.CheckIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("TenantParentWithNonResChWithLocCollection.ExistsAsync");
             scope.Start();
             try
             {
@@ -381,6 +380,6 @@ namespace MgmtListMethods
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, TenantParentWithNonResChWithLoc, TenantParentWithNonResChWithLocData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, TenantParentWithNonResChWithLoc, TenantParentWithNonResChWithLocData> Construct() { }
     }
 }

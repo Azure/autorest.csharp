@@ -19,7 +19,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public BuildContext(CodeModel codeModel, Configuration configuration, SourceInputModel? sourceInputModel) : base(codeModel, configuration, sourceInputModel)
         {
-            if (configuration.LowLevelClient)
+            if (configuration.DataPlane)
             {
                 Library = (T)(object)new LowLevelOutputLibrary(codeModel, (BuildContext<LowLevelOutputLibrary>)(object)this);
             }

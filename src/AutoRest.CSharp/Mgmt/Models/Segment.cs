@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 
@@ -60,6 +61,8 @@ namespace AutoRest.CSharp.Mgmt.Models
         public bool IsConstant => _value.IsConstant;
 
         public bool IsReference => !IsConstant;
+
+        public CSharpType Type => _value.Type;
 
         /// <summary>
         /// Returns the <see cref="Constant"/> of this segment

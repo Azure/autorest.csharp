@@ -243,14 +243,14 @@ namespace Azure.Management.Storage
         /// <param name="expand"> May be used to expand the properties within account&apos;s properties. By default, data is not included when fetching properties. Currently we only support geoReplicationStats and blobRestoreStatus. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
-        public virtual Response<bool> CheckIfExists(string accountName, StorageAccountExpand? expand = null, CancellationToken cancellationToken = default)
+        public virtual Response<bool> Exists(string accountName, StorageAccountExpand? expand = null, CancellationToken cancellationToken = default)
         {
             if (accountName == null)
             {
                 throw new ArgumentNullException(nameof(accountName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("StorageAccountCollection.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountCollection.Exists");
             scope.Start();
             try
             {
@@ -269,14 +269,14 @@ namespace Azure.Management.Storage
         /// <param name="expand"> May be used to expand the properties within account&apos;s properties. By default, data is not included when fetching properties. Currently we only support geoReplicationStats and blobRestoreStatus. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
-        public async virtual Task<Response<bool>> CheckIfExistsAsync(string accountName, StorageAccountExpand? expand = null, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> ExistsAsync(string accountName, StorageAccountExpand? expand = null, CancellationToken cancellationToken = default)
         {
             if (accountName == null)
             {
                 throw new ArgumentNullException(nameof(accountName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("StorageAccountCollection.CheckIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountCollection.ExistsAsync");
             scope.Start();
             try
             {
@@ -434,6 +434,6 @@ namespace Azure.Management.Storage
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, StorageAccount, StorageAccountData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, StorageAccount, StorageAccountData> Construct() { }
     }
 }

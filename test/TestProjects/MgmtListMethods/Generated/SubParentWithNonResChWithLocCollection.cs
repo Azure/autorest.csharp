@@ -238,14 +238,14 @@ namespace MgmtListMethods
         /// <param name="subParentWithNonResChWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subParentWithNonResChWithLocName"/> is null. </exception>
-        public virtual Response<bool> CheckIfExists(string subParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
+        public virtual Response<bool> Exists(string subParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
             if (subParentWithNonResChWithLocName == null)
             {
                 throw new ArgumentNullException(nameof(subParentWithNonResChWithLocName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SubParentWithNonResChWithLocCollection.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("SubParentWithNonResChWithLocCollection.Exists");
             scope.Start();
             try
             {
@@ -263,14 +263,14 @@ namespace MgmtListMethods
         /// <param name="subParentWithNonResChWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subParentWithNonResChWithLocName"/> is null. </exception>
-        public async virtual Task<Response<bool>> CheckIfExistsAsync(string subParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> ExistsAsync(string subParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
             if (subParentWithNonResChWithLocName == null)
             {
                 throw new ArgumentNullException(nameof(subParentWithNonResChWithLocName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SubParentWithNonResChWithLocCollection.CheckIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("SubParentWithNonResChWithLocCollection.ExistsAsync");
             scope.Start();
             try
             {
@@ -428,6 +428,6 @@ namespace MgmtListMethods
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, SubParentWithNonResChWithLoc, SubParentWithNonResChWithLocData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, SubParentWithNonResChWithLoc, SubParentWithNonResChWithLocData> Construct() { }
     }
 }

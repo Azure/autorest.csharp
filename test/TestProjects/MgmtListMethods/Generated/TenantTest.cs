@@ -14,13 +14,18 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
-using Azure.ResourceManager.Resources.Models;
 
 namespace MgmtListMethods
 {
     /// <summary> A Class representing a TenantTest along with the instance operations that can be performed on it. </summary>
     public partial class TenantTest : ArmResource
     {
+        /// <summary> Generate the resource identifier of a <see cref="TenantTest"/> instance. </summary>
+        public static ResourceIdentifier CreateResourceIdentifier(string tenantTestName)
+        {
+            var resourceId = $"/providers/Microsoft.Tenant/tenantTests/{tenantTestName}";
+            return new ResourceIdentifier(resourceId);
+        }
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly TenantTestsRestOperations _tenantTestsRestClient;
         private readonly TenantTestData _data;
@@ -134,7 +139,7 @@ namespace MgmtListMethods
         /// <summary> Lists all available geo-locations. </summary>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
-        public async virtual Task<IEnumerable<Location>> GetAvailableLocationsAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<IEnumerable<AzureLocation>> GetAvailableLocationsAsync(CancellationToken cancellationToken = default)
         {
             return await ListAvailableLocationsAsync(ResourceType, cancellationToken).ConfigureAwait(false);
         }
@@ -142,7 +147,7 @@ namespace MgmtListMethods
         /// <summary> Lists all available geo-locations. </summary>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
-        public virtual IEnumerable<Location> GetAvailableLocations(CancellationToken cancellationToken = default)
+        public virtual IEnumerable<AzureLocation> GetAvailableLocations(CancellationToken cancellationToken = default)
         {
             return ListAvailableLocations(ResourceType, cancellationToken);
         }
@@ -323,7 +328,7 @@ namespace MgmtListMethods
 
         /// <summary> Gets a collection of TenantParentWithNonResChWithLocs in the TenantTest. </summary>
         /// <returns> An object representing collection of TenantParentWithNonResChWithLocs and their operations over a TenantTest. </returns>
-        public TenantParentWithNonResChWithLocCollection GetTenantParentWithNonResChWithLocs()
+        public virtual TenantParentWithNonResChWithLocCollection GetTenantParentWithNonResChWithLocs()
         {
             return new TenantParentWithNonResChWithLocCollection(this);
         }
@@ -333,7 +338,7 @@ namespace MgmtListMethods
 
         /// <summary> Gets a collection of TenantParentWithNonResChes in the TenantTest. </summary>
         /// <returns> An object representing collection of TenantParentWithNonResChes and their operations over a TenantTest. </returns>
-        public TenantParentWithNonResChCollection GetTenantParentWithNonResChes()
+        public virtual TenantParentWithNonResChCollection GetTenantParentWithNonResChes()
         {
             return new TenantParentWithNonResChCollection(this);
         }
@@ -343,7 +348,7 @@ namespace MgmtListMethods
 
         /// <summary> Gets a collection of TenantParentWithLocs in the TenantTest. </summary>
         /// <returns> An object representing collection of TenantParentWithLocs and their operations over a TenantTest. </returns>
-        public TenantParentWithLocCollection GetTenantParentWithLocs()
+        public virtual TenantParentWithLocCollection GetTenantParentWithLocs()
         {
             return new TenantParentWithLocCollection(this);
         }
@@ -353,7 +358,7 @@ namespace MgmtListMethods
 
         /// <summary> Gets a collection of TenantParents in the TenantTest. </summary>
         /// <returns> An object representing collection of TenantParents and their operations over a TenantTest. </returns>
-        public TenantParentCollection GetTenantParents()
+        public virtual TenantParentCollection GetTenantParents()
         {
             return new TenantParentCollection(this);
         }

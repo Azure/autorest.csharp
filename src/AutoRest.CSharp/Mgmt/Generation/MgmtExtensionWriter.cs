@@ -83,10 +83,25 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 throw new InvalidOperationException($"We are about to write a {resource.Type.Name} resource entry, but it does not have a collection, this cannot happen");
             _writer.WriteXmlDocumentationSummary($"Gets an object representing a {collection.Type.Name} along with the instance operations that can be performed on it.");
             _writer.WriteXmlDocumentationParameter($"{ExtensionOperationVariableName}", $"The <see cref=\"{ExtensionOperationVariableType}\" /> instance the method will execute against.");
+            _writer.WriteXmlDocumentationParameters(collection.ExtraConstructorParameters);
             _writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{collection.Type}\" /> object.");
-            using (_writer.Scope($"public static {collection.Type.Name} Get{resource.Type.Name.ToPlural()}(this {ExtensionOperationVariableType} {ExtensionOperationVariableName})"))
+
+            _writer.Append($"public static {collection.Type.Name} Get{resource.Type.Name.ResourceNameToPlural()}(this {ExtensionOperationVariableType} {ExtensionOperationVariableName}, ");
+            foreach (var parameter in collection.ExtraConstructorParameters)
             {
-                _writer.Line($"return new {collection.Type.Name}({ExtensionOperationVariableName});");
+                _writer.WriteParameter(parameter);
+            }
+            _writer.RemoveTrailingComma();
+            _writer.Line($")");
+            using (_writer.Scope())
+            {
+                _writer.Append($"return new {collection.Type.Name}({ExtensionOperationVariableName}, ");
+                foreach (var parameter in collection.ExtraConstructorParameters)
+                {
+                    _writer.Append($"{parameter.Name}, ");
+                }
+                _writer.RemoveTrailingComma();
+                _writer.Line($");");
             }
         }
 
@@ -97,7 +112,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{resource.Type.Name}\" /> object.");
             using (_writer.Scope($"public static {resource.Type.Name} Get{resource.Type.Name}(this {ExtensionOperationVariableType} {ExtensionOperationVariableName})"))
             {
-                _writer.Line($"return new {resource.Type.Name}({ExtensionOperationVariableName}, {ExtensionOperationVariableName}.Id + \"/{singletonResourceSuffix}\");");
+                _writer.Line($"return new {resource.Type.Name}({ExtensionOperationVariableName}, new {typeof(Azure.Core.ResourceIdentifier)}({ExtensionOperationVariableName}.Id + \"/{singletonResourceSuffix}\"));");
             }
         }
 
@@ -172,7 +187,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var itemType = pagingMethod.PagingResponse.ItemType;
             var actualItemType = WrapResourceDataType(itemType, clientOperation.First())!;
 
-            _writer.WriteXmlDocumentationSummary($"Lists the {actualItemType.Name.ToPlural()} for this <see cref=\"{ExtensionOperationVariableType}\" />.");
+            _writer.WriteXmlDocumentationSummary($"Lists the {actualItemType.Name.LastWordToPlural()} for this <see cref=\"{ExtensionOperationVariableType}\" />.");
             _writer.WriteXmlDocumentationParameter($"{ExtensionOperationVariableName}", $"The <see cref=\"{ExtensionOperationVariableType}\" /> instance the method will execute against.");
             foreach (var parameter in methodParameters)
             {
@@ -417,7 +432,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Line($"var {GetRestClientVariableName(restClient)} = Get{restClient.Type.Name}({ClientDiagnosticsVariable}, credential, options, pipeline{subIdIfNeeded}, baseUri);");
         }
 
-        protected override Models.ResourceType GetBranchResourceType(RequestPath branch)
+        protected override ResourceTypeSegment GetBranchResourceType(RequestPath branch)
         {
             // we should never have a branch in the operations in an extension class, therefore throwing an exception here
             throw new InvalidOperationException();

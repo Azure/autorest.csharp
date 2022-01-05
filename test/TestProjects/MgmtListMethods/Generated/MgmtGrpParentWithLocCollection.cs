@@ -14,7 +14,6 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Management;
 using MgmtListMethods.Models;
@@ -238,14 +237,14 @@ namespace MgmtListMethods
         /// <param name="mgmtGrpParentWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="mgmtGrpParentWithLocName"/> is null. </exception>
-        public virtual Response<bool> CheckIfExists(string mgmtGrpParentWithLocName, CancellationToken cancellationToken = default)
+        public virtual Response<bool> Exists(string mgmtGrpParentWithLocName, CancellationToken cancellationToken = default)
         {
             if (mgmtGrpParentWithLocName == null)
             {
                 throw new ArgumentNullException(nameof(mgmtGrpParentWithLocName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("MgmtGrpParentWithLocCollection.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("MgmtGrpParentWithLocCollection.Exists");
             scope.Start();
             try
             {
@@ -263,14 +262,14 @@ namespace MgmtListMethods
         /// <param name="mgmtGrpParentWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="mgmtGrpParentWithLocName"/> is null. </exception>
-        public async virtual Task<Response<bool>> CheckIfExistsAsync(string mgmtGrpParentWithLocName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> ExistsAsync(string mgmtGrpParentWithLocName, CancellationToken cancellationToken = default)
         {
             if (mgmtGrpParentWithLocName == null)
             {
                 throw new ArgumentNullException(nameof(mgmtGrpParentWithLocName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("MgmtGrpParentWithLocCollection.CheckIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("MgmtGrpParentWithLocCollection.ExistsAsync");
             scope.Start();
             try
             {
@@ -382,6 +381,6 @@ namespace MgmtListMethods
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, MgmtGrpParentWithLoc, MgmtGrpParentWithLocData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, MgmtGrpParentWithLoc, MgmtGrpParentWithLocData> Construct() { }
     }
 }

@@ -12,6 +12,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
+using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
@@ -52,7 +53,7 @@ namespace SupersetFlattenInheritance
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel1SName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual TrackedResourceModel1PutOperation CreateOrUpdate(string trackedResourceModel1SName, TrackedResourceModel1Data parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual TrackedResourceModel1SPutOperation CreateOrUpdate(string trackedResourceModel1SName, TrackedResourceModel1Data parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (trackedResourceModel1SName == null)
             {
@@ -68,7 +69,7 @@ namespace SupersetFlattenInheritance
             try
             {
                 var response = _trackedResourceModel1sRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, trackedResourceModel1SName, parameters, cancellationToken);
-                var operation = new TrackedResourceModel1PutOperation(Parent, response);
+                var operation = new TrackedResourceModel1SPutOperation(Parent, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -88,7 +89,7 @@ namespace SupersetFlattenInheritance
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel1SName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<TrackedResourceModel1PutOperation> CreateOrUpdateAsync(string trackedResourceModel1SName, TrackedResourceModel1Data parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<TrackedResourceModel1SPutOperation> CreateOrUpdateAsync(string trackedResourceModel1SName, TrackedResourceModel1Data parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (trackedResourceModel1SName == null)
             {
@@ -104,7 +105,7 @@ namespace SupersetFlattenInheritance
             try
             {
                 var response = await _trackedResourceModel1sRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, trackedResourceModel1SName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new TrackedResourceModel1PutOperation(Parent, response);
+                var operation = new TrackedResourceModel1SPutOperation(Parent, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -232,14 +233,14 @@ namespace SupersetFlattenInheritance
         /// <param name="trackedResourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel1SName"/> is null. </exception>
-        public virtual Response<bool> CheckIfExists(string trackedResourceModel1SName, CancellationToken cancellationToken = default)
+        public virtual Response<bool> Exists(string trackedResourceModel1SName, CancellationToken cancellationToken = default)
         {
             if (trackedResourceModel1SName == null)
             {
                 throw new ArgumentNullException(nameof(trackedResourceModel1SName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("TrackedResourceModel1Collection.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("TrackedResourceModel1Collection.Exists");
             scope.Start();
             try
             {
@@ -257,14 +258,14 @@ namespace SupersetFlattenInheritance
         /// <param name="trackedResourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel1SName"/> is null. </exception>
-        public async virtual Task<Response<bool>> CheckIfExistsAsync(string trackedResourceModel1SName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> ExistsAsync(string trackedResourceModel1SName, CancellationToken cancellationToken = default)
         {
             if (trackedResourceModel1SName == null)
             {
                 throw new ArgumentNullException(nameof(trackedResourceModel1SName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("TrackedResourceModel1Collection.CheckIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("TrackedResourceModel1Collection.ExistsAsync");
             scope.Start();
             try
             {
@@ -375,6 +376,6 @@ namespace SupersetFlattenInheritance
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, TrackedResourceModel1, TrackedResourceModel1Data> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, TrackedResourceModel1, TrackedResourceModel1Data> Construct() { }
     }
 }

@@ -12,6 +12,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
+using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
@@ -49,7 +50,7 @@ namespace NoTypeReplacement
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="noTypeReplacementModel3SName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual NoTypeReplacementModel3PutOperation CreateOrUpdate(string noTypeReplacementModel3SName, NoTypeReplacementModel3Data parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual NoTypeReplacementModel3SPutOperation CreateOrUpdate(string noTypeReplacementModel3SName, NoTypeReplacementModel3Data parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (noTypeReplacementModel3SName == null)
             {
@@ -65,7 +66,7 @@ namespace NoTypeReplacement
             try
             {
                 var response = _noTypeReplacementModel3sRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, noTypeReplacementModel3SName, parameters, cancellationToken);
-                var operation = new NoTypeReplacementModel3PutOperation(Parent, response);
+                var operation = new NoTypeReplacementModel3SPutOperation(Parent, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -82,7 +83,7 @@ namespace NoTypeReplacement
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="noTypeReplacementModel3SName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<NoTypeReplacementModel3PutOperation> CreateOrUpdateAsync(string noTypeReplacementModel3SName, NoTypeReplacementModel3Data parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<NoTypeReplacementModel3SPutOperation> CreateOrUpdateAsync(string noTypeReplacementModel3SName, NoTypeReplacementModel3Data parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (noTypeReplacementModel3SName == null)
             {
@@ -98,7 +99,7 @@ namespace NoTypeReplacement
             try
             {
                 var response = await _noTypeReplacementModel3sRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, noTypeReplacementModel3SName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new NoTypeReplacementModel3PutOperation(Parent, response);
+                var operation = new NoTypeReplacementModel3SPutOperation(Parent, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -220,14 +221,14 @@ namespace NoTypeReplacement
         /// <param name="noTypeReplacementModel3SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="noTypeReplacementModel3SName"/> is null. </exception>
-        public virtual Response<bool> CheckIfExists(string noTypeReplacementModel3SName, CancellationToken cancellationToken = default)
+        public virtual Response<bool> Exists(string noTypeReplacementModel3SName, CancellationToken cancellationToken = default)
         {
             if (noTypeReplacementModel3SName == null)
             {
                 throw new ArgumentNullException(nameof(noTypeReplacementModel3SName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("NoTypeReplacementModel3Collection.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("NoTypeReplacementModel3Collection.Exists");
             scope.Start();
             try
             {
@@ -245,14 +246,14 @@ namespace NoTypeReplacement
         /// <param name="noTypeReplacementModel3SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="noTypeReplacementModel3SName"/> is null. </exception>
-        public async virtual Task<Response<bool>> CheckIfExistsAsync(string noTypeReplacementModel3SName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> ExistsAsync(string noTypeReplacementModel3SName, CancellationToken cancellationToken = default)
         {
             if (noTypeReplacementModel3SName == null)
             {
                 throw new ArgumentNullException(nameof(noTypeReplacementModel3SName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("NoTypeReplacementModel3Collection.CheckIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("NoTypeReplacementModel3Collection.ExistsAsync");
             scope.Start();
             try
             {
@@ -357,6 +358,6 @@ namespace NoTypeReplacement
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, NoTypeReplacementModel3, NoTypeReplacementModel3Data> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, NoTypeReplacementModel3, NoTypeReplacementModel3Data> Construct() { }
     }
 }

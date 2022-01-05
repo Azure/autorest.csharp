@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using Azure.Core;
 using Azure.ResourceManager.Resources;
 
 namespace MgmtSingleton
@@ -18,7 +19,7 @@ namespace MgmtSingleton
         /// <returns> Returns a <see cref="SubscriptionParentSingleton" /> object. </returns>
         public static SubscriptionParentSingleton GetSubscriptionParentSingleton(this Subscription subscription)
         {
-            return new SubscriptionParentSingleton(subscription, subscription.Id + "/providers/Microsoft.Billing/SubscriptionParentSingleton/default");
+            return new SubscriptionParentSingleton(subscription, new ResourceIdentifier(subscription.Id + "/providers/Microsoft.Billing/SubscriptionParentSingleton/default"));
         }
         #endregion
     }

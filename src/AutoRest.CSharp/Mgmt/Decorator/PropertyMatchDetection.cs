@@ -13,6 +13,7 @@ using AutoRest.CSharp.Mgmt.Generation;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Types;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
@@ -37,6 +38,20 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
 
             return true;
+        }
+
+        /// <summary>
+        /// Check if a <c>System.Type</c> has the same properties as our own <c>MgmtObjectType</c>.
+        /// </summary>
+        /// <param name="sourceType"><c>System.Type</c> from reflection.</param>
+        /// <param name="targetType">A <c>MgmtObjectType</c> from M4 output.</param>
+        /// <returns></returns>
+        internal static bool IsEqual(Type sourceType, MgmtObjectType targetType)
+        {
+            var sourceTypeProperties = sourceType.GetProperties(BindingFlags.Public | BindingFlags.Instance).ToList();
+            var targetTypeProperties = targetType.MyProperties.ToList();
+
+            return IsEqual(sourceTypeProperties, targetTypeProperties, new Dictionary<Type, CSharpType> { { sourceType, targetType.Type } });
         }
 
         internal static bool DoesPropertyExistInParent(ObjectTypeProperty childProperty, Dictionary<string, PropertyInfo> parentDict, Dictionary<Type, CSharpType>? propertiesInComparison = null)
@@ -104,6 +119,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         /// <returns></returns>
         private static bool IsAssignable(System.Type parentPropertyType, CSharpType childPropertyType)
         {
+            if (parentPropertyType.Name == "ResourceIdentifier" && childPropertyType.IsFrameworkType && childPropertyType.FrameworkType == typeof(string))
+                return true;
+
             return parentPropertyType.GetMethods().Where(m => m.Name == "op_Implicit" &&
                 m.ReturnType == parentPropertyType &&
                 m.GetParameters().First().ParameterType.FullName == $"{childPropertyType.Namespace}.{childPropertyType.Name}").Count() > 0;
@@ -156,7 +174,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             {
                 var mgmtObjectType = childPropertyType.Implementation as MgmtObjectType;
                 if (mgmtObjectType != null)
-                    isArgMatches = IsEqual(parentPropertyType.GetProperties().ToList(), mgmtObjectType.MyProperties.ToList(), new Dictionary<Type, CSharpType>{{parentPropertyType, childPropertyType}});
+                    isArgMatches = IsEqual(parentPropertyType.GetProperties().ToList(), mgmtObjectType.MyProperties.ToList(), new Dictionary<Type, CSharpType> { { parentPropertyType, childPropertyType } });
             }
             else if (!childPropertyType.IsFrameworkType && childPropertyType.Implementation as EnumType != null)
             {

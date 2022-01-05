@@ -12,6 +12,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
+using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
@@ -241,14 +242,14 @@ namespace MgmtOperations
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetName"/> is null. </exception>
-        public virtual Response<bool> CheckIfExists(string availabilitySetName, string expand = null, CancellationToken cancellationToken = default)
+        public virtual Response<bool> Exists(string availabilitySetName, string expand = null, CancellationToken cancellationToken = default)
         {
             if (availabilitySetName == null)
             {
                 throw new ArgumentNullException(nameof(availabilitySetName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetCollection.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetCollection.Exists");
             scope.Start();
             try
             {
@@ -267,14 +268,14 @@ namespace MgmtOperations
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetName"/> is null. </exception>
-        public async virtual Task<Response<bool>> CheckIfExistsAsync(string availabilitySetName, string expand = null, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> ExistsAsync(string availabilitySetName, string expand = null, CancellationToken cancellationToken = default)
         {
             if (availabilitySetName == null)
             {
                 throw new ArgumentNullException(nameof(availabilitySetName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetCollection.CheckIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetCollection.ExistsAsync");
             scope.Start();
             try
             {
@@ -389,6 +390,6 @@ namespace MgmtOperations
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, AvailabilitySet, AvailabilitySetData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, AvailabilitySet, AvailabilitySetData> Construct() { }
     }
 }

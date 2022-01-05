@@ -12,6 +12,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
+using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
@@ -236,14 +237,14 @@ namespace MgmtParamOrdering
         /// <param name="hostGroupName"> The name of the dedicated host group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="hostGroupName"/> is null. </exception>
-        public virtual Response<bool> CheckIfExists(string hostGroupName, CancellationToken cancellationToken = default)
+        public virtual Response<bool> Exists(string hostGroupName, CancellationToken cancellationToken = default)
         {
             if (hostGroupName == null)
             {
                 throw new ArgumentNullException(nameof(hostGroupName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupCollection.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupCollection.Exists");
             scope.Start();
             try
             {
@@ -261,14 +262,14 @@ namespace MgmtParamOrdering
         /// <param name="hostGroupName"> The name of the dedicated host group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="hostGroupName"/> is null. </exception>
-        public async virtual Task<Response<bool>> CheckIfExistsAsync(string hostGroupName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> ExistsAsync(string hostGroupName, CancellationToken cancellationToken = default)
         {
             if (hostGroupName == null)
             {
                 throw new ArgumentNullException(nameof(hostGroupName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupCollection.CheckIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupCollection.ExistsAsync");
             scope.Start();
             try
             {
@@ -381,6 +382,6 @@ namespace MgmtParamOrdering
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, DedicatedHostGroup, DedicatedHostGroupData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, DedicatedHostGroup, DedicatedHostGroupData> Construct() { }
     }
 }

@@ -14,7 +14,6 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using MgmtScopeResource.Models;
 
@@ -41,7 +40,7 @@ namespace MgmtScopeResource
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
-        protected override ResourceType ValidResourceType => ResourceIdentifier.RootResourceIdentifier.ResourceType;
+        protected override ResourceType ValidResourceType => ResourceIdentifier.Root.ResourceType;
 
         /// <summary> Verify that the input resource Id is a valid collection for this type. </summary>
         /// <param name="identifier"> The input resource Id to check. </param>
@@ -243,14 +242,14 @@ namespace MgmtScopeResource
         /// <param name="deploymentName"> The name of the deployment. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> is null. </exception>
-        public virtual Response<bool> CheckIfExists(string deploymentName, CancellationToken cancellationToken = default)
+        public virtual Response<bool> Exists(string deploymentName, CancellationToken cancellationToken = default)
         {
             if (deploymentName == null)
             {
                 throw new ArgumentNullException(nameof(deploymentName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DeploymentExtendedCollection.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("DeploymentExtendedCollection.Exists");
             scope.Start();
             try
             {
@@ -268,14 +267,14 @@ namespace MgmtScopeResource
         /// <param name="deploymentName"> The name of the deployment. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> is null. </exception>
-        public async virtual Task<Response<bool>> CheckIfExistsAsync(string deploymentName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> ExistsAsync(string deploymentName, CancellationToken cancellationToken = default)
         {
             if (deploymentName == null)
             {
                 throw new ArgumentNullException(nameof(deploymentName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DeploymentExtendedCollection.CheckIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("DeploymentExtendedCollection.ExistsAsync");
             scope.Start();
             try
             {
@@ -289,7 +288,7 @@ namespace MgmtScopeResource
             }
         }
 
-        /// RequestPath: /{scope}/providers/Microsoft.Resources/deployments/
+        /// RequestPath: /{scope}/providers/Microsoft.Resources/deployments
         /// ContextualPath: /{scope}
         /// OperationId: Deployments_ListAtScope
         /// <summary> Get all the deployments at the given scope. </summary>
@@ -332,7 +331,7 @@ namespace MgmtScopeResource
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
-        /// RequestPath: /{scope}/providers/Microsoft.Resources/deployments/
+        /// RequestPath: /{scope}/providers/Microsoft.Resources/deployments
         /// ContextualPath: /{scope}
         /// OperationId: Deployments_ListAtScope
         /// <summary> Get all the deployments at the given scope. </summary>
@@ -391,6 +390,6 @@ namespace MgmtScopeResource
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, DeploymentExtended, DeploymentExtendedData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, DeploymentExtended, DeploymentExtendedData> Construct() { }
     }
 }

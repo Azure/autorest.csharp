@@ -243,14 +243,14 @@ namespace MgmtListMethods
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> is null. </exception>
-        public virtual Response<bool> CheckIfExists(string fakeName, string expand = null, CancellationToken cancellationToken = default)
+        public virtual Response<bool> Exists(string fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
             if (fakeName == null)
             {
                 throw new ArgumentNullException(nameof(fakeName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("FakeCollection.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("FakeCollection.Exists");
             scope.Start();
             try
             {
@@ -269,14 +269,14 @@ namespace MgmtListMethods
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> is null. </exception>
-        public async virtual Task<Response<bool>> CheckIfExistsAsync(string fakeName, string expand = null, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> ExistsAsync(string fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
             if (fakeName == null)
             {
                 throw new ArgumentNullException(nameof(fakeName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("FakeCollection.CheckIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("FakeCollection.ExistsAsync");
             scope.Start();
             try
             {
@@ -436,6 +436,6 @@ namespace MgmtListMethods
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, Fake, FakeData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, Fake, FakeData> Construct() { }
     }
 }

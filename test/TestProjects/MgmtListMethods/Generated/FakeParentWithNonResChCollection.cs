@@ -14,7 +14,6 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using MgmtListMethods.Models;
 
@@ -237,14 +236,14 @@ namespace MgmtListMethods
         /// <param name="fakeParentWithNonResChName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithNonResChName"/> is null. </exception>
-        public virtual Response<bool> CheckIfExists(string fakeParentWithNonResChName, CancellationToken cancellationToken = default)
+        public virtual Response<bool> Exists(string fakeParentWithNonResChName, CancellationToken cancellationToken = default)
         {
             if (fakeParentWithNonResChName == null)
             {
                 throw new ArgumentNullException(nameof(fakeParentWithNonResChName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("FakeParentWithNonResChCollection.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("FakeParentWithNonResChCollection.Exists");
             scope.Start();
             try
             {
@@ -262,14 +261,14 @@ namespace MgmtListMethods
         /// <param name="fakeParentWithNonResChName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithNonResChName"/> is null. </exception>
-        public async virtual Task<Response<bool>> CheckIfExistsAsync(string fakeParentWithNonResChName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> ExistsAsync(string fakeParentWithNonResChName, CancellationToken cancellationToken = default)
         {
             if (fakeParentWithNonResChName == null)
             {
                 throw new ArgumentNullException(nameof(fakeParentWithNonResChName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("FakeParentWithNonResChCollection.CheckIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("FakeParentWithNonResChCollection.ExistsAsync");
             scope.Start();
             try
             {
@@ -381,6 +380,6 @@ namespace MgmtListMethods
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, FakeParentWithNonResCh, FakeParentWithNonResChData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, FakeParentWithNonResCh, FakeParentWithNonResChData> Construct() { }
     }
 }

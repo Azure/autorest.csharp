@@ -276,9 +276,17 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\media_types\\Generated"
     },
+    "MgmtExpandResourceTypes": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtExpandResourceTypes\\Generated"
+    },
     "MgmtExtensionResource": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtExtensionResource\\Generated"
+    },
+    "MgmtKeyvault": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtKeyvault\\src\\Generated"
     },
     "MgmtListMethods": {
       "commandName": "Project",
@@ -400,6 +408,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ResourceRename\\Generated"
     },
+    "SingletonResource": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\SingletonResource\\Generated"
+    },
     "SingleTopLevelClientWithOperations-LowLevel": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\SingleTopLevelClientWithOperations-LowLevel\\Generated"
@@ -434,7 +446,7 @@
     },
     "TypeSchemaMapping": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\TypeSchemaMapping\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\TypeSchemaMapping\\SomeFolder\\Generated"
     },
     "url": {
       "commandName": "Project",
@@ -459,6 +471,10 @@
     "xml-service": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\xml-service\\Generated"
+    },
+    "XmlDeserialization": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\XmlDeserialization\\Generated"
     },
     "xms-error-responses": {
       "commandName": "Project",

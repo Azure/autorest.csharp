@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using AutoRest.CSharp.AutoRest.Communication;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Types;
+using System.Text.Json;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
 {
@@ -29,7 +30,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 ";
         private string _coreCsProjContent = @"
   <ItemGroup>
-    <PackageReference Include=""Azure.Core"" Version=""1.21.0-alpha.20211029.1"" />
+    <PackageReference Include=""Azure.Core"" Version=""1.22.0-alpha.20220104.6"" />
   </ItemGroup>";
 
         private string _armCsProjContent = @"
@@ -38,7 +39,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include=""Azure.ResourceManager"" Version=""1.0.0-beta.5"" />
+    <PackageReference Include=""Azure.ResourceManager"" Version=""1.0.0-alpha.20220104.6"" />
   </ItemGroup>
 ";
 
@@ -59,7 +60,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
     <DefineConstants>$(DefineConstants);EXPERIMENTAL</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include=""Azure.Core.Experimental"" Version=""0.1.0-preview.16"" />
+    <PackageReference Include=""Azure.Core.Experimental"" Version=""0.1.0-preview.18"" />
   </ItemGroup>
 ";
 
@@ -97,6 +98,24 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             var context = new BuildContext(codeModel, configuration, null);
 
+            var isTestProject = configuration.MgmtConfiguration.TestModeler is not null;
+            if (isTestProject)
+            {
+                _coreCsProjContent += string.Format(@"
+
+  <ItemGroup>
+    <ProjectReference Include=""..\src\{0}.csproj"" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include = ""NUnit"" Version = ""3.12.0"" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include = ""..\..\..\..\src\assets\TestFramework\*.cs"" />
+  </ItemGroup>", context.DefaultNamespace);
+            }
+
             string csProjContent;
             if (configuration.SkipCSProjPackageReference)
             {
@@ -105,7 +124,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 {
                   additionalContent += _armCsProjContent;
                 }
-                if (configuration.LowLevelClient)
+                if (configuration.DataPlane)
                 {
                   additionalContent += _llcProjectContent;
                 }
@@ -119,7 +138,12 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 csProjContent = string.Format(_csProjContent, csProjPackageReference, _coreCsProjContent);
             }
 
-            await autoRest.WriteFile($"{Configuration.ProjectRelativeDirectory}{context.DefaultNamespace}.csproj", csProjContent, "source-file-csharp");
+            var projectFile = $"{configuration.ProjectFolder}{context.DefaultNamespace}";
+            if (isTestProject)
+            {
+                projectFile += "Test";
+            }
+            await autoRest.WriteFile($"{projectFile}.csproj", csProjContent, "source-file-csharp");
 
             return true;
         }

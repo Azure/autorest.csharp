@@ -26,7 +26,7 @@ namespace AutoRest.CSharp.Output.Models
             {
                 foreach (var serviceRequest in operation.Requests)
                 {
-                    // See also LowLevelRestClient::EnsureNormalMethods if changing
+                    // See also LowLevelClient::EnsureNormalMethods if changing
                     if (!(serviceRequest.Protocol.Http is HttpRequest httpRequest))
                     {
                         continue;

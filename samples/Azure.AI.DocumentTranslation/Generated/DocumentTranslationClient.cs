@@ -52,14 +52,14 @@ namespace Azure.AI.DocumentTranslation
 
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
-            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
         }
 
         /// <summary> Returns the translation status for a specific document based on the request Id and document Id. </summary>
         /// <param name="id"> Format - uuid.  The batch id. </param>
         /// <param name="documentId"> Format - uuid.  The document id. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -110,7 +110,7 @@ namespace Azure.AI.DocumentTranslation
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetDocumentStatusRequest(id, documentId);
+                using HttpMessage message = CreateGetDocumentStatusRequest(id, documentId, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -123,7 +123,7 @@ namespace Azure.AI.DocumentTranslation
         /// <summary> Returns the translation status for a specific document based on the request Id and document Id. </summary>
         /// <param name="id"> Format - uuid.  The batch id. </param>
         /// <param name="documentId"> Format - uuid.  The document id. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -174,7 +174,7 @@ namespace Azure.AI.DocumentTranslation
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetDocumentStatusRequest(id, documentId);
+                using HttpMessage message = CreateGetDocumentStatusRequest(id, documentId, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -189,7 +189,7 @@ namespace Azure.AI.DocumentTranslation
         /// The status includes the overall request status, as well as the status for documents that are being translated as part of that request.
         /// </summary>
         /// <param name="id"> Format - uuid.  The operation id. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -244,7 +244,7 @@ namespace Azure.AI.DocumentTranslation
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetTranslationStatusRequest(id);
+                using HttpMessage message = CreateGetTranslationStatusRequest(id, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -259,7 +259,7 @@ namespace Azure.AI.DocumentTranslation
         /// The status includes the overall request status, as well as the status for documents that are being translated as part of that request.
         /// </summary>
         /// <param name="id"> Format - uuid.  The operation id. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -314,7 +314,7 @@ namespace Azure.AI.DocumentTranslation
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetTranslationStatusRequest(id);
+                using HttpMessage message = CreateGetTranslationStatusRequest(id, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -332,7 +332,7 @@ namespace Azure.AI.DocumentTranslation
         /// All pending documents will be cancelled if possible.
         /// </summary>
         /// <param name="id"> Format - uuid.  The operation-id. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -387,7 +387,7 @@ namespace Azure.AI.DocumentTranslation
             scope.Start();
             try
             {
-                using HttpMessage message = CreateCancelTranslationRequest(id);
+                using HttpMessage message = CreateCancelTranslationRequest(id, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -405,7 +405,7 @@ namespace Azure.AI.DocumentTranslation
         /// All pending documents will be cancelled if possible.
         /// </summary>
         /// <param name="id"> Format - uuid.  The operation-id. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -460,7 +460,7 @@ namespace Azure.AI.DocumentTranslation
             scope.Start();
             try
             {
-                using HttpMessage message = CreateCancelTranslationRequest(id);
+                using HttpMessage message = CreateCancelTranslationRequest(id, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -474,7 +474,7 @@ namespace Azure.AI.DocumentTranslation
         /// The list of supported document formats supported by the Document Translation service.
         /// The list includes the common file extension, as well as the content-type if using the upload API.
         /// </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -514,7 +514,7 @@ namespace Azure.AI.DocumentTranslation
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetSupportedDocumentFormatsRequest();
+                using HttpMessage message = CreateGetSupportedDocumentFormatsRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -528,7 +528,7 @@ namespace Azure.AI.DocumentTranslation
         /// The list of supported document formats supported by the Document Translation service.
         /// The list includes the common file extension, as well as the content-type if using the upload API.
         /// </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -568,7 +568,7 @@ namespace Azure.AI.DocumentTranslation
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetSupportedDocumentFormatsRequest();
+                using HttpMessage message = CreateGetSupportedDocumentFormatsRequest(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -582,7 +582,7 @@ namespace Azure.AI.DocumentTranslation
         /// The list of supported glossary formats supported by the Document Translation service.
         /// The list includes the common file extension used.
         /// </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -622,7 +622,7 @@ namespace Azure.AI.DocumentTranslation
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetSupportedGlossaryFormatsRequest();
+                using HttpMessage message = CreateGetSupportedGlossaryFormatsRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -636,7 +636,7 @@ namespace Azure.AI.DocumentTranslation
         /// The list of supported glossary formats supported by the Document Translation service.
         /// The list includes the common file extension used.
         /// </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -676,7 +676,7 @@ namespace Azure.AI.DocumentTranslation
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetSupportedGlossaryFormatsRequest();
+                using HttpMessage message = CreateGetSupportedGlossaryFormatsRequest(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -687,7 +687,7 @@ namespace Azure.AI.DocumentTranslation
         }
 
         /// <summary> Returns a list of storage sources/options supported by the Document Translation service. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -719,7 +719,7 @@ namespace Azure.AI.DocumentTranslation
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetSupportedStorageSourcesRequest();
+                using HttpMessage message = CreateGetSupportedStorageSourcesRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -730,7 +730,7 @@ namespace Azure.AI.DocumentTranslation
         }
 
         /// <summary> Returns a list of storage sources/options supported by the Document Translation service. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -762,7 +762,7 @@ namespace Azure.AI.DocumentTranslation
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetSupportedStorageSourcesRequest();
+                using HttpMessage message = CreateGetSupportedStorageSourcesRequest(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -823,7 +823,7 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="createdDateTimeUtcStart"> the start datetime to get items after. </param>
         /// <param name="createdDateTimeUtcEnd"> the end datetime to get items before. </param>
         /// <param name="orderBy"> the sorting query for the collection (ex: &apos;CreatedDateTimeUtc asc&apos;, &apos;CreatedDateTimeUtc desc&apos;). </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -885,8 +885,8 @@ namespace Azure.AI.DocumentTranslation
                 do
                 {
                     var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateGetTranslationsStatusRequest(top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy)
-                        : CreateGetTranslationsStatusNextPageRequest(nextLink, top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy);
+                        ? CreateGetTranslationsStatusRequest(top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy, context)
+                        : CreateGetTranslationsStatusNextPageRequest(nextLink, top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy, context);
                     var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, context, "value", "@nextLink", cancellationToken).ConfigureAwait(false);
                     nextLink = page.ContinuationToken;
                     yield return page;
@@ -945,7 +945,7 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="createdDateTimeUtcStart"> the start datetime to get items after. </param>
         /// <param name="createdDateTimeUtcEnd"> the end datetime to get items before. </param>
         /// <param name="orderBy"> the sorting query for the collection (ex: &apos;CreatedDateTimeUtc asc&apos;, &apos;CreatedDateTimeUtc desc&apos;). </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -1007,8 +1007,8 @@ namespace Azure.AI.DocumentTranslation
                 do
                 {
                     var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateGetTranslationsStatusRequest(top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy)
-                        : CreateGetTranslationsStatusNextPageRequest(nextLink, top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy);
+                        ? CreateGetTranslationsStatusRequest(top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy, context)
+                        : CreateGetTranslationsStatusNextPageRequest(nextLink, top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy, context);
                     var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, context, "value", "@nextLink");
                     nextLink = page.ContinuationToken;
                     yield return page;
@@ -1065,7 +1065,7 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="createdDateTimeUtcStart"> the start datetime to get items after. </param>
         /// <param name="createdDateTimeUtcEnd"> the end datetime to get items before. </param>
         /// <param name="orderBy"> the sorting query for the collection (ex: &apos;CreatedDateTimeUtc asc&apos;, &apos;CreatedDateTimeUtc desc&apos;). </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -1123,8 +1123,8 @@ namespace Azure.AI.DocumentTranslation
                 do
                 {
                     var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateGetDocumentsStatusRequest(id, top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy)
-                        : CreateGetDocumentsStatusNextPageRequest(nextLink, id, top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy);
+                        ? CreateGetDocumentsStatusRequest(id, top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy, context)
+                        : CreateGetDocumentsStatusNextPageRequest(nextLink, id, top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy, context);
                     var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, context, "value", "@nextLink", cancellationToken).ConfigureAwait(false);
                     nextLink = page.ContinuationToken;
                     yield return page;
@@ -1181,7 +1181,7 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="createdDateTimeUtcStart"> the start datetime to get items after. </param>
         /// <param name="createdDateTimeUtcEnd"> the end datetime to get items before. </param>
         /// <param name="orderBy"> the sorting query for the collection (ex: &apos;CreatedDateTimeUtc asc&apos;, &apos;CreatedDateTimeUtc desc&apos;). </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -1239,8 +1239,8 @@ namespace Azure.AI.DocumentTranslation
                 do
                 {
                     var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateGetDocumentsStatusRequest(id, top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy)
-                        : CreateGetDocumentsStatusNextPageRequest(nextLink, id, top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy);
+                        ? CreateGetDocumentsStatusRequest(id, top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy, context)
+                        : CreateGetDocumentsStatusNextPageRequest(nextLink, id, top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy, context);
                     var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, context, "value", "@nextLink");
                     nextLink = page.ContinuationToken;
                     yield return page;
@@ -1259,8 +1259,9 @@ namespace Azure.AI.DocumentTranslation
         /// If the glossary is invalid or unreachable during translation, an error is indicated in the document status.
         /// If a file with the same name already exists at the destination, it will be overwritten. The targetUrl for each target language must be unique.
         /// </summary>
+        /// <param name="waitForCompletion"> true if the method should wait to return until the long-running operation has completed on the service; false if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -1315,15 +1316,15 @@ namespace Azure.AI.DocumentTranslation
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Operation<BinaryData>> StartTranslationAsync(RequestContent content, RequestContext context = null)
+        public virtual async Task<Operation<BinaryData>> StartTranslationAsync(bool waitForCompletion, RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.StartTranslation");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateStartTranslationRequest(content);
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "DocumentTranslationClient.StartTranslation", OperationFinalStateVia.Location, context).ConfigureAwait(false);
+                using HttpMessage message = CreateStartTranslationRequest(content, context);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "DocumentTranslationClient.StartTranslation", OperationFinalStateVia.Location, context, waitForCompletion).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1343,8 +1344,9 @@ namespace Azure.AI.DocumentTranslation
         /// If the glossary is invalid or unreachable during translation, an error is indicated in the document status.
         /// If a file with the same name already exists at the destination, it will be overwritten. The targetUrl for each target language must be unique.
         /// </summary>
+        /// <param name="waitForCompletion"> true if the method should wait to return until the long-running operation has completed on the service; false if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -1399,15 +1401,15 @@ namespace Azure.AI.DocumentTranslation
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Operation<BinaryData> StartTranslation(RequestContent content, RequestContext context = null)
+        public virtual Operation<BinaryData> StartTranslation(bool waitForCompletion, RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.StartTranslation");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateStartTranslationRequest(content);
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "DocumentTranslationClient.StartTranslation", OperationFinalStateVia.Location, context);
+                using HttpMessage message = CreateStartTranslationRequest(content, context);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "DocumentTranslationClient.StartTranslation", OperationFinalStateVia.Location, context, waitForCompletion);
             }
             catch (Exception e)
             {
@@ -1416,9 +1418,9 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        internal HttpMessage CreateStartTranslationRequest(RequestContent content)
+        internal HttpMessage CreateStartTranslationRequest(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1433,9 +1435,9 @@ namespace Azure.AI.DocumentTranslation
             return message;
         }
 
-        internal HttpMessage CreateGetTranslationsStatusRequest(int? top, int? skip, int? maxpagesize, IEnumerable<Guid> ids, IEnumerable<string> statuses, DateTimeOffset? createdDateTimeUtcStart, DateTimeOffset? createdDateTimeUtcEnd, IEnumerable<string> orderBy)
+        internal HttpMessage CreateGetTranslationsStatusRequest(int? top, int? skip, int? maxpagesize, IEnumerable<Guid> ids, IEnumerable<string> statuses, DateTimeOffset? createdDateTimeUtcStart, DateTimeOffset? createdDateTimeUtcEnd, IEnumerable<string> orderBy, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1480,9 +1482,9 @@ namespace Azure.AI.DocumentTranslation
             return message;
         }
 
-        internal HttpMessage CreateGetDocumentStatusRequest(Guid id, Guid documentId)
+        internal HttpMessage CreateGetDocumentStatusRequest(Guid id, Guid documentId, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1498,9 +1500,9 @@ namespace Azure.AI.DocumentTranslation
             return message;
         }
 
-        internal HttpMessage CreateGetTranslationStatusRequest(Guid id)
+        internal HttpMessage CreateGetTranslationStatusRequest(Guid id, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1514,9 +1516,9 @@ namespace Azure.AI.DocumentTranslation
             return message;
         }
 
-        internal HttpMessage CreateCancelTranslationRequest(Guid id)
+        internal HttpMessage CreateCancelTranslationRequest(Guid id, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
@@ -1530,9 +1532,9 @@ namespace Azure.AI.DocumentTranslation
             return message;
         }
 
-        internal HttpMessage CreateGetDocumentsStatusRequest(Guid id, int? top, int? skip, int? maxpagesize, IEnumerable<Guid> ids, IEnumerable<string> statuses, DateTimeOffset? createdDateTimeUtcStart, DateTimeOffset? createdDateTimeUtcEnd, IEnumerable<string> orderBy)
+        internal HttpMessage CreateGetDocumentsStatusRequest(Guid id, int? top, int? skip, int? maxpagesize, IEnumerable<Guid> ids, IEnumerable<string> statuses, DateTimeOffset? createdDateTimeUtcStart, DateTimeOffset? createdDateTimeUtcEnd, IEnumerable<string> orderBy, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1579,9 +1581,9 @@ namespace Azure.AI.DocumentTranslation
             return message;
         }
 
-        internal HttpMessage CreateGetSupportedDocumentFormatsRequest()
+        internal HttpMessage CreateGetSupportedDocumentFormatsRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1594,9 +1596,9 @@ namespace Azure.AI.DocumentTranslation
             return message;
         }
 
-        internal HttpMessage CreateGetSupportedGlossaryFormatsRequest()
+        internal HttpMessage CreateGetSupportedGlossaryFormatsRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1609,9 +1611,9 @@ namespace Azure.AI.DocumentTranslation
             return message;
         }
 
-        internal HttpMessage CreateGetSupportedStorageSourcesRequest()
+        internal HttpMessage CreateGetSupportedStorageSourcesRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1624,9 +1626,9 @@ namespace Azure.AI.DocumentTranslation
             return message;
         }
 
-        internal HttpMessage CreateGetTranslationsStatusNextPageRequest(string nextLink, int? top, int? skip, int? maxpagesize, IEnumerable<Guid> ids, IEnumerable<string> statuses, DateTimeOffset? createdDateTimeUtcStart, DateTimeOffset? createdDateTimeUtcEnd, IEnumerable<string> orderBy)
+        internal HttpMessage CreateGetTranslationsStatusNextPageRequest(string nextLink, int? top, int? skip, int? maxpagesize, IEnumerable<Guid> ids, IEnumerable<string> statuses, DateTimeOffset? createdDateTimeUtcStart, DateTimeOffset? createdDateTimeUtcEnd, IEnumerable<string> orderBy, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1639,9 +1641,9 @@ namespace Azure.AI.DocumentTranslation
             return message;
         }
 
-        internal HttpMessage CreateGetDocumentsStatusNextPageRequest(string nextLink, Guid id, int? top, int? skip, int? maxpagesize, IEnumerable<Guid> ids, IEnumerable<string> statuses, DateTimeOffset? createdDateTimeUtcStart, DateTimeOffset? createdDateTimeUtcEnd, IEnumerable<string> orderBy)
+        internal HttpMessage CreateGetDocumentsStatusNextPageRequest(string nextLink, Guid id, int? top, int? skip, int? maxpagesize, IEnumerable<Guid> ids, IEnumerable<string> statuses, DateTimeOffset? createdDateTimeUtcStart, DateTimeOffset? createdDateTimeUtcEnd, IEnumerable<string> orderBy, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();

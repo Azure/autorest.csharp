@@ -238,14 +238,14 @@ namespace MgmtSubscriptionNameParameter
         /// <param name="subscriptionName"> The subscription name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionName"/> is null. </exception>
-        public virtual Response<bool> CheckIfExists(string subscriptionName, CancellationToken cancellationToken = default)
+        public virtual Response<bool> Exists(string subscriptionName, CancellationToken cancellationToken = default)
         {
             if (subscriptionName == null)
             {
                 throw new ArgumentNullException(nameof(subscriptionName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SBSubscriptionCollection.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("SBSubscriptionCollection.Exists");
             scope.Start();
             try
             {
@@ -263,14 +263,14 @@ namespace MgmtSubscriptionNameParameter
         /// <param name="subscriptionName"> The subscription name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionName"/> is null. </exception>
-        public async virtual Task<Response<bool>> CheckIfExistsAsync(string subscriptionName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> ExistsAsync(string subscriptionName, CancellationToken cancellationToken = default)
         {
             if (subscriptionName == null)
             {
                 throw new ArgumentNullException(nameof(subscriptionName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SBSubscriptionCollection.CheckIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("SBSubscriptionCollection.ExistsAsync");
             scope.Start();
             try
             {
@@ -432,6 +432,6 @@ namespace MgmtSubscriptionNameParameter
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, SBSubscription, SBSubscriptionData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, SBSubscription, SBSubscriptionData> Construct() { }
     }
 }

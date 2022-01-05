@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using Azure.Core;
 using Azure.ResourceManager.Resources;
 
 namespace MgmtSingleton
@@ -18,7 +19,7 @@ namespace MgmtSingleton
         /// <returns> Returns a <see cref="TenantParentSingleton" /> object. </returns>
         public static TenantParentSingleton GetTenantParentSingleton(this Tenant tenant)
         {
-            return new TenantParentSingleton(tenant, tenant.Id + "/providers/Microsoft.Billing/TenantParentSingleton/default");
+            return new TenantParentSingleton(tenant, new ResourceIdentifier(tenant.Id + "/providers/Microsoft.Billing/TenantParentSingleton/default"));
         }
         #endregion
     }

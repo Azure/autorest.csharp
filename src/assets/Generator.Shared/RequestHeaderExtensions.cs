@@ -104,6 +104,7 @@ namespace Azure.Core
                 headers.Add("If-Unmodified-Since", conditions.IfUnmodifiedSince.Value, format);
             }
         }
+
         public static void AddDelimited<T>(this RequestHeaders headers, string name, IEnumerable<T> value, string delimiter)
         {
             headers.Add(name, string.Join(delimiter, value));

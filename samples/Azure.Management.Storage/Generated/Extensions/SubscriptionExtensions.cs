@@ -55,7 +55,7 @@ namespace Azure.Management.Storage
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/skus
         /// ContextualPath: /subscriptions/{subscriptionId}
         /// OperationId: Skus_List
-        /// <summary> Lists the SkuInformations for this <see cref="Subscription" />. </summary>
+        /// <summary> Lists the SkuInformation for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
@@ -88,7 +88,7 @@ namespace Azure.Management.Storage
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/skus
         /// ContextualPath: /subscriptions/{subscriptionId}
         /// OperationId: Skus_List
-        /// <summary> Lists the SkuInformations for this <see cref="Subscription" />. </summary>
+        /// <summary> Lists the SkuInformation for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
@@ -291,7 +291,7 @@ namespace Azure.Management.Storage
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<GenericResource> GetStorageAccountByNameAsync(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
+        public static AsyncPageable<GenericResource> GetStorageAccountsAsGenericResourcesAsync(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
         {
             ResourceFilterCollection filters = new(StorageAccount.ResourceType);
             filters.SubstringFilter = filter;
@@ -305,7 +305,7 @@ namespace Azure.Management.Storage
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static Pageable<GenericResource> GetStorageAccountByName(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
+        public static Pageable<GenericResource> GetStorageAccountsAsGenericResources(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
         {
             ResourceFilterCollection filters = new(StorageAccount.ResourceType);
             filters.SubstringFilter = filter;
@@ -315,7 +315,7 @@ namespace Azure.Management.Storage
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/deletedAccounts
         /// ContextualPath: /subscriptions/{subscriptionId}
         /// OperationId: DeletedAccounts_List
-        /// <summary> Lists the DeletedAccountDatas for this <see cref="Subscription" />. </summary>
+        /// <summary> Lists the DeletedAccountData for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
@@ -363,7 +363,7 @@ namespace Azure.Management.Storage
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/deletedAccounts
         /// ContextualPath: /subscriptions/{subscriptionId}
         /// OperationId: DeletedAccounts_List
-        /// <summary> Lists the DeletedAccountDatas for this <see cref="Subscription" />. </summary>
+        /// <summary> Lists the DeletedAccountData for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
@@ -415,7 +415,7 @@ namespace Azure.Management.Storage
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<GenericResource> GetDeletedAccountByNameAsync(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
+        public static AsyncPageable<GenericResource> GetDeletedAccountsAsGenericResourcesAsync(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
         {
             ResourceFilterCollection filters = new(DeletedAccount.ResourceType);
             filters.SubstringFilter = filter;
@@ -429,7 +429,7 @@ namespace Azure.Management.Storage
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static Pageable<GenericResource> GetDeletedAccountByName(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
+        public static Pageable<GenericResource> GetDeletedAccountsAsGenericResources(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
         {
             ResourceFilterCollection filters = new(DeletedAccount.ResourceType);
             filters.SubstringFilter = filter;

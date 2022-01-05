@@ -9,6 +9,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
+using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
@@ -200,9 +201,9 @@ namespace MgmtNonStringPathVariable
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="barName"> The name of the fake. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<bool> CheckIfExists(int barName, CancellationToken cancellationToken = default)
+        public virtual Response<bool> Exists(int barName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BarCollection.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("BarCollection.Exists");
             scope.Start();
             try
             {
@@ -219,9 +220,9 @@ namespace MgmtNonStringPathVariable
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="barName"> The name of the fake. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<bool>> CheckIfExistsAsync(int barName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> ExistsAsync(int barName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BarCollection.CheckIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("BarCollection.ExistsAsync");
             scope.Start();
             try
             {
@@ -282,6 +283,6 @@ namespace MgmtNonStringPathVariable
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, Bar, BarData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, Bar, BarData> Construct() { }
     }
 }

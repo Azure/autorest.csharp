@@ -238,14 +238,14 @@ namespace MgmtListMethods
         /// <param name="resGrpParentWithAncestorWithNonResChWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithAncestorWithNonResChWithLocName"/> is null. </exception>
-        public virtual Response<bool> CheckIfExists(string resGrpParentWithAncestorWithNonResChWithLocName, CancellationToken cancellationToken = default)
+        public virtual Response<bool> Exists(string resGrpParentWithAncestorWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
             if (resGrpParentWithAncestorWithNonResChWithLocName == null)
             {
                 throw new ArgumentNullException(nameof(resGrpParentWithAncestorWithNonResChWithLocName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ResGrpParentWithAncestorWithNonResChWithLocCollection.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("ResGrpParentWithAncestorWithNonResChWithLocCollection.Exists");
             scope.Start();
             try
             {
@@ -263,14 +263,14 @@ namespace MgmtListMethods
         /// <param name="resGrpParentWithAncestorWithNonResChWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithAncestorWithNonResChWithLocName"/> is null. </exception>
-        public async virtual Task<Response<bool>> CheckIfExistsAsync(string resGrpParentWithAncestorWithNonResChWithLocName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> ExistsAsync(string resGrpParentWithAncestorWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
             if (resGrpParentWithAncestorWithNonResChWithLocName == null)
             {
                 throw new ArgumentNullException(nameof(resGrpParentWithAncestorWithNonResChWithLocName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ResGrpParentWithAncestorWithNonResChWithLocCollection.CheckIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("ResGrpParentWithAncestorWithNonResChWithLocCollection.ExistsAsync");
             scope.Start();
             try
             {
@@ -428,6 +428,6 @@ namespace MgmtListMethods
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, ResGrpParentWithAncestorWithNonResChWithLoc, ResGrpParentWithAncestorWithNonResChWithLocData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, ResGrpParentWithAncestorWithNonResChWithLoc, ResGrpParentWithAncestorWithNonResChWithLocData> Construct() { }
     }
 }

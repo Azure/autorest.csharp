@@ -238,14 +238,14 @@ namespace MgmtListMethods
         /// <param name="subParentWithNonResChName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subParentWithNonResChName"/> is null. </exception>
-        public virtual Response<bool> CheckIfExists(string subParentWithNonResChName, CancellationToken cancellationToken = default)
+        public virtual Response<bool> Exists(string subParentWithNonResChName, CancellationToken cancellationToken = default)
         {
             if (subParentWithNonResChName == null)
             {
                 throw new ArgumentNullException(nameof(subParentWithNonResChName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SubParentWithNonResChCollection.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("SubParentWithNonResChCollection.Exists");
             scope.Start();
             try
             {
@@ -263,14 +263,14 @@ namespace MgmtListMethods
         /// <param name="subParentWithNonResChName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subParentWithNonResChName"/> is null. </exception>
-        public async virtual Task<Response<bool>> CheckIfExistsAsync(string subParentWithNonResChName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> ExistsAsync(string subParentWithNonResChName, CancellationToken cancellationToken = default)
         {
             if (subParentWithNonResChName == null)
             {
                 throw new ArgumentNullException(nameof(subParentWithNonResChName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SubParentWithNonResChCollection.CheckIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("SubParentWithNonResChCollection.ExistsAsync");
             scope.Start();
             try
             {
@@ -428,6 +428,6 @@ namespace MgmtListMethods
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, SubParentWithNonResCh, SubParentWithNonResChData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, SubParentWithNonResCh, SubParentWithNonResChData> Construct() { }
     }
 }

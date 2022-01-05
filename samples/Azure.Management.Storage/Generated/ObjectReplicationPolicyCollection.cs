@@ -15,7 +15,6 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.Management.Storage.Models;
-using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 
 namespace Azure.Management.Storage
@@ -237,14 +236,14 @@ namespace Azure.Management.Storage
         /// <param name="objectReplicationPolicyId"> For the destination account, provide the value &apos;default&apos;. Configure the policy on the destination account first. For the source account, provide the value of the policy ID that is returned when you download the policy that was defined on the destination account. The policy is downloaded as a JSON file. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="objectReplicationPolicyId"/> is null. </exception>
-        public virtual Response<bool> CheckIfExists(string objectReplicationPolicyId, CancellationToken cancellationToken = default)
+        public virtual Response<bool> Exists(string objectReplicationPolicyId, CancellationToken cancellationToken = default)
         {
             if (objectReplicationPolicyId == null)
             {
                 throw new ArgumentNullException(nameof(objectReplicationPolicyId));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ObjectReplicationPolicyCollection.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("ObjectReplicationPolicyCollection.Exists");
             scope.Start();
             try
             {
@@ -262,14 +261,14 @@ namespace Azure.Management.Storage
         /// <param name="objectReplicationPolicyId"> For the destination account, provide the value &apos;default&apos;. Configure the policy on the destination account first. For the source account, provide the value of the policy ID that is returned when you download the policy that was defined on the destination account. The policy is downloaded as a JSON file. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="objectReplicationPolicyId"/> is null. </exception>
-        public async virtual Task<Response<bool>> CheckIfExistsAsync(string objectReplicationPolicyId, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> ExistsAsync(string objectReplicationPolicyId, CancellationToken cancellationToken = default)
         {
             if (objectReplicationPolicyId == null)
             {
                 throw new ArgumentNullException(nameof(objectReplicationPolicyId));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ObjectReplicationPolicyCollection.CheckIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("ObjectReplicationPolicyCollection.ExistsAsync");
             scope.Start();
             try
             {
@@ -351,6 +350,6 @@ namespace Azure.Management.Storage
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, ObjectReplicationPolicy, ObjectReplicationPolicyData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, ObjectReplicationPolicy, ObjectReplicationPolicyData> Construct() { }
     }
 }

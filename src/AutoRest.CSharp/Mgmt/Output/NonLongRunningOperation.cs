@@ -33,13 +33,13 @@ namespace AutoRest.CSharp.Mgmt.Output
                 ResultType = TypeFactory.GetOutputType(context.TypeFactory.CreateType(responseSchema, false));
             }
 
-            if (operation.ShouldWrapResultType(ResultType, context))
+            if (operation.ShouldWrapResultType(ResultType, context, out var resource))
             {
-                ResultType = context.Library.GetArmResource(operation.GetHttpPath()).Type;
-                ResultDataType = context.Library.GetResourceData(operation.GetHttpPath()).Type;
+                ResultType = resource.Type;
+                ResultDataType = resource.ResourceData.Type;
             }
 
-            DefaultName = lroInfo.ClientPrefix.ToSingular() + operation.CSharpName() + "Operation";
+            DefaultName = lroInfo.ClientPrefix.LastWordToSingular() + operation.CSharpName() + "Operation";
             DefaultNamespace = $"{context.DefaultNamespace}.Models";
             Description = BuilderHelpers.EscapeXmlDescription(operation.Language.Default.Description);
             DefaultAccessibility = lroInfo.Accessibility;

@@ -12,6 +12,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
+using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
@@ -236,14 +237,14 @@ namespace MgmtPropertyChooser
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="vmName"/> is null. </exception>
-        public virtual Response<bool> CheckIfExists(string vmName, CancellationToken cancellationToken = default)
+        public virtual Response<bool> Exists(string vmName, CancellationToken cancellationToken = default)
         {
             if (vmName == null)
             {
                 throw new ArgumentNullException(nameof(vmName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineCollection.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineCollection.Exists");
             scope.Start();
             try
             {
@@ -261,14 +262,14 @@ namespace MgmtPropertyChooser
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="vmName"/> is null. </exception>
-        public async virtual Task<Response<bool>> CheckIfExistsAsync(string vmName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> ExistsAsync(string vmName, CancellationToken cancellationToken = default)
         {
             if (vmName == null)
             {
                 throw new ArgumentNullException(nameof(vmName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineCollection.CheckIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineCollection.ExistsAsync");
             scope.Start();
             try
             {
@@ -381,6 +382,6 @@ namespace MgmtPropertyChooser
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, VirtualMachine, VirtualMachineData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, VirtualMachine, VirtualMachineData> Construct() { }
     }
 }

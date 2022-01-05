@@ -12,8 +12,8 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
+using Azure.Core;
 using Azure.Core.Pipeline;
-using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources;
 using TenantOnly.Models;
@@ -241,14 +241,14 @@ namespace TenantOnly
         /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="billingAccountName"/> is null. </exception>
-        public virtual Response<bool> CheckIfExists(string billingAccountName, string expand = null, CancellationToken cancellationToken = default)
+        public virtual Response<bool> Exists(string billingAccountName, string expand = null, CancellationToken cancellationToken = default)
         {
             if (billingAccountName == null)
             {
                 throw new ArgumentNullException(nameof(billingAccountName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("BillingAccountCollection.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("BillingAccountCollection.Exists");
             scope.Start();
             try
             {
@@ -267,14 +267,14 @@ namespace TenantOnly
         /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="billingAccountName"/> is null. </exception>
-        public async virtual Task<Response<bool>> CheckIfExistsAsync(string billingAccountName, string expand = null, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> ExistsAsync(string billingAccountName, string expand = null, CancellationToken cancellationToken = default)
         {
             if (billingAccountName == null)
             {
                 throw new ArgumentNullException(nameof(billingAccountName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("BillingAccountCollection.CheckIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("BillingAccountCollection.ExistsAsync");
             scope.Start();
             try
             {
@@ -343,6 +343,6 @@ namespace TenantOnly
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, BillingAccount, BillingAccountData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, BillingAccount, BillingAccountData> Construct() { }
     }
 }

@@ -12,8 +12,8 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
+using Azure.Core;
 using Azure.Core.Pipeline;
-using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 
 namespace TenantOnly
@@ -165,14 +165,14 @@ namespace TenantOnly
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="agreementName"/> is null. </exception>
-        public virtual Response<bool> CheckIfExists(string agreementName, string expand = null, CancellationToken cancellationToken = default)
+        public virtual Response<bool> Exists(string agreementName, string expand = null, CancellationToken cancellationToken = default)
         {
             if (agreementName == null)
             {
                 throw new ArgumentNullException(nameof(agreementName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("AgreementCollection.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("AgreementCollection.Exists");
             scope.Start();
             try
             {
@@ -191,14 +191,14 @@ namespace TenantOnly
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="agreementName"/> is null. </exception>
-        public async virtual Task<Response<bool>> CheckIfExistsAsync(string agreementName, string expand = null, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> ExistsAsync(string agreementName, string expand = null, CancellationToken cancellationToken = default)
         {
             if (agreementName == null)
             {
                 throw new ArgumentNullException(nameof(agreementName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("AgreementCollection.CheckIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("AgreementCollection.ExistsAsync");
             scope.Start();
             try
             {
@@ -267,6 +267,6 @@ namespace TenantOnly
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, Agreement, AgreementData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, Agreement, AgreementData> Construct() { }
     }
 }

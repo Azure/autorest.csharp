@@ -28,7 +28,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             {
                 var codeWriter = new CodeWriter();
                 var lowLevelClientWriter = new LowLevelClientWriter();
-                lowLevelClientWriter.WriteClient(codeWriter, client, subClientsMap.TryGetValue(client.Type.Name, out var subClients) ? subClients : Array.Empty<LowLevelRestClient>(), context);
+                lowLevelClientWriter.WriteClient(codeWriter, client, subClientsMap.TryGetValue(client.Type.Name, out var subClients) ? subClients : Array.Empty<LowLevelClient>(), context);
                 project.AddGeneratedFile($"{client.Type.Name}.cs", codeWriter.ToString());
             }
 
