@@ -7,9 +7,8 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.ResourceManager;
+using Azure.Core;
 using Azure.ResourceManager.Models;
-using Azure.ResourceManager.Resources.Models;
 
 namespace MgmtOperations.Models
 {
@@ -20,7 +19,7 @@ namespace MgmtOperations.Models
         /// <param name="location"> The location. </param>
         /// <param name="value"> The virtual network connection shared key value. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
-        public ConnectionSharedKey(Location location, string value) : base(location)
+        public ConnectionSharedKey(AzureLocation location, string value) : base(location)
         {
             if (value == null)
             {
@@ -37,7 +36,7 @@ namespace MgmtOperations.Models
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
         /// <param name="value"> The virtual network connection shared key value. </param>
-        internal ConnectionSharedKey(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, Location location, string value) : base(id, name, type, tags, location)
+        internal ConnectionSharedKey(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, AzureLocation location, string value) : base(id, name, type, tags, location)
         {
             Value = value;
         }
