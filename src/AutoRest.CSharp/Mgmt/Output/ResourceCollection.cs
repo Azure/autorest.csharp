@@ -160,12 +160,12 @@ namespace AutoRest.CSharp.Mgmt.Output
             return result;
         }
 
-        private IDictionary<RequestPath, ISet<ResourceType>>? _resourceTypes;
-        public IDictionary<RequestPath, ISet<ResourceType>> ResourceTypes => _resourceTypes ??= EnsureResourceTypes();
+        private IDictionary<RequestPath, ISet<ResourceTypeSegment>>? _resourceTypes;
+        public IDictionary<RequestPath, ISet<ResourceTypeSegment>> ResourceTypes => _resourceTypes ??= EnsureResourceTypes();
 
-        private IDictionary<RequestPath, ISet<ResourceType>> EnsureResourceTypes()
+        private IDictionary<RequestPath, ISet<ResourceTypeSegment>> EnsureResourceTypes()
         {
-            var result = new Dictionary<RequestPath, ISet<ResourceType>>();
+            var result = new Dictionary<RequestPath, ISet<ResourceTypeSegment>>();
             foreach (var operation in AllOperations.SelectMany(o => o))
             {
                 var resourceTypes = GetResourceTypes(operation.RequestPath, operation.ContextualPath);
@@ -175,7 +175,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 }
                 else
                 {
-                    set = new HashSet<ResourceType>();
+                    set = new HashSet<ResourceTypeSegment>();
                     set.UnionWith(resourceTypes);
                     result.Add(operation.ContextualPath, set);
                 }
@@ -183,10 +183,10 @@ namespace AutoRest.CSharp.Mgmt.Output
             return result;
         }
 
-        private IEnumerable<ResourceType> GetResourceTypes(RequestPath requestPath, RequestPath contextualPath)
+        private IEnumerable<ResourceTypeSegment> GetResourceTypes(RequestPath requestPath, RequestPath contextualPath)
         {
             var type = contextualPath.GetResourceType(_context.Configuration.MgmtConfiguration);
-            if (type == ResourceType.Scope)
+            if (type == ResourceTypeSegment.Scope)
                 return requestPath.GetParameterizedScopeResourceTypes(_context.Configuration.MgmtConfiguration)!;
 
             return type.AsIEnumerable();

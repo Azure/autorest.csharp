@@ -420,6 +420,6 @@ namespace ResourceRename
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, SshPublicKeyInfo, SshPublicKeyInfoData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, SshPublicKeyInfo, SshPublicKeyInfoData> Construct() { }
     }
 }

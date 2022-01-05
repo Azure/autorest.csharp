@@ -6,9 +6,8 @@
 #nullable disable
 
 using System.Collections.Generic;
-using Azure.ResourceManager;
+using Azure.Core;
 using Azure.ResourceManager.Models;
-using Azure.ResourceManager.Resources.Models;
 using MgmtLRO.Models;
 
 namespace MgmtLRO
@@ -18,7 +17,7 @@ namespace MgmtLRO
     {
         /// <summary> Initializes a new instance of FakeData. </summary>
         /// <param name="location"> The location. </param>
-        public FakeData(Location location) : base(location)
+        public FakeData(AzureLocation location) : base(location)
         {
         }
 
@@ -29,7 +28,7 @@ namespace MgmtLRO
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
         /// <param name="properties"> The instance view of a resource. </param>
-        internal FakeData(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, Location location, FakeProperties properties) : base(id, name, type, tags, location)
+        internal FakeData(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, AzureLocation location, FakeProperties properties) : base(id, name, type, tags, location)
         {
             Properties = properties;
         }

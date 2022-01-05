@@ -521,9 +521,9 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.Append($"new {typeof(Uri)}({element}.GetString())");
                 return;
             }
-            else if (frameworkType == typeof(ResourceIdentifier))
+            else if (frameworkType == typeof(Azure.Core.ResourceIdentifier))
             {
-                writer.Append($"new {typeof(ResourceIdentifier)}({element}.GetString())");
+                writer.Append($"new {typeof(Azure.Core.ResourceIdentifier)}({element}.GetString())");
                 return;
             }
             else

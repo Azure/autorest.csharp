@@ -430,6 +430,6 @@ namespace MgmtKeyvault
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, ManagedHsm, ManagedHsmData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, ManagedHsm, ManagedHsmData> Construct() { }
     }
 }
