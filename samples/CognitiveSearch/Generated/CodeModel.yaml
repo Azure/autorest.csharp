@@ -23231,6 +23231,31 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
+          x-ms-examples:
+            SearchServiceIndexAnalyze:
+              parameters:
+                api-version: 2019-05-06-Preview
+                endpoint: https://myservice.search.windows.net
+                indexName: hotels
+                request:
+                  analyzer: standard.lucene
+                  text: Text to analyze
+              responses:
+                '200':
+                  body:
+                    tokens:
+                      - endOffset: 4
+                        position: 0
+                        startOffset: 0
+                        token: text
+                      - endOffset: 7
+                        position: 1
+                        startOffset: 5
+                        token: to
+                      - endOffset: 15
+                        position: 2
+                        startOffset: 8
+                        token: analyze
           x-ms-request-id: request-id
         language: !Languages 
           default:

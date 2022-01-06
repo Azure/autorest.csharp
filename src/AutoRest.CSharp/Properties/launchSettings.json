@@ -278,7 +278,7 @@
     },
     "MgmtCollectionParent": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtCollectionParent\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)/test/TestProjects/MgmtCollectionParent/Generated"
     },
     "MgmtExpandResourceTypes": {
       "commandName": "Project",
