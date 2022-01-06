@@ -9,12 +9,10 @@ using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Utilities;
 using AutoRest.TestServer.Tests.Mgmt.OutputLibrary;
-using Azure;
-using Azure.ResourceManager;
+using Azure.Core;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Models;
 using Azure.ResourceManager.Resources;
-using Azure.ResourceManager.Resources.Models;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
@@ -285,7 +283,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         {
             var collectionObj = Activator.CreateInstance(collectionType, true);
             var validResourceTypeProperty = collectionObj.GetType().GetProperty("ValidResourceType", BindingFlags.NonPublic | BindingFlags.Instance);
-            ResourceType resourceType = validResourceTypeProperty.GetValue(collectionObj) as ResourceType;
+            ResourceType resourceType = (ResourceType)validResourceTypeProperty.GetValue(collectionObj);
             return resourceType;
         }
 
@@ -405,7 +403,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             foreach (var operation in FindAllResources())
             {
                 var operationTypeProperty = operation.GetField("ResourceType");
-                ResourceType operationType = operationTypeProperty.GetValue(operation) as ResourceType;
+                ResourceType operationType = (ResourceType)operationTypeProperty.GetValue(operation);
                 foreach (var collection in FindAllCollections())
                 {
                     ResourceType collectionType = GetCollectionValidResourceType(collection);
@@ -419,75 +417,6 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                     }
                 }
             }
-        }
-
-        [Test]
-        public async Task ValidateRequiredParamsInCtor()
-        {
-            if (_projectName.Equals("") || _projectName.Equals("ReferenceTypes"))
-            {
-                return;
-            }
-
-            var output = await OutputLibraryTestBase.Generate(_projectName, _subFolder);
-            var library = output.Context.Library;
-            foreach (var mgmtObject in library.Models.OfType<MgmtObjectType>())
-            {
-                if (ReferenceTypePropertyChooser.GetExactMatch(mgmtObject, output.Context) == null)
-                {
-                    ValidateModelRequiredCtorParams(mgmtObject.ObjectSchema);
-                }
-            }
-            foreach (var resourceData in library.ResourceData)
-            {
-                ValidateModelRequiredCtorParams(resourceData.ObjectSchema);
-            }
-        }
-
-        private void ValidateModelRequiredCtorParams(ObjectSchema objectSchema)
-        {
-            var requiredParams = objectSchema.Properties.Where(p => p.Schema is not ConstantSchema && p.Required.HasValue && p.Required.Value);
-
-            Type generatedModel = GetType(objectSchema.Name + "Data") ?? GetType(objectSchema.Name);
-            if (generatedModel == null)
-                return; //for some reason we are losing the cache during generation to know which models were removed
-            Assert.NotNull(generatedModel, $"Generated type not found for {objectSchema.Name}");
-            ConstructorInfo leastParamCtor = GetLeastParamCtor(generatedModel);
-            ConstructorInfo baseLeastParamCtor = GetLeastParamCtor(generatedModel.BaseType);
-            var fullRequiredParams = requiredParams.Select(p => p.SerializedName).Concat(baseLeastParamCtor?.GetParameters().Select(p => p.Name)).Distinct();
-            Assert.NotNull(leastParamCtor, $"Ctor not found for {objectSchema.Name}");
-            Assert.AreEqual(fullRequiredParams.Count(), leastParamCtor.GetParameters().Length, $"{objectSchema.Name} had a mismatch in required ctor params");
-            foreach (var param in fullRequiredParams)
-            {
-                Assert.NotNull(leastParamCtor.GetParameters().FirstOrDefault(p => string.Equals(p.Name, param, StringComparison.InvariantCultureIgnoreCase)), $"{param} was not found in {objectSchema.Name}'s ctor");
-            }
-        }
-
-        private ConstructorInfo GetLeastParamCtor(Type generatedModel)
-        {
-            ConstructorInfo leastParamCtor = null;
-
-            if (generatedModel == null)
-                return leastParamCtor;
-
-            if (generatedModel.GetCustomAttributes(false).Any(a => a.GetType().Name == ReferenceClassFinder.ReferenceTypeAttributeName))
-            {
-                var ctors = generatedModel.GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
-                var attrCtors = ctors.Where(c => HasInitializationAttribute(c));
-                return attrCtors.FirstOrDefault();
-            }
-
-            foreach (var ctor in generatedModel.GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public))
-            {
-                if (ctor.GetParameters().Length < (leastParamCtor == null ? int.MaxValue : leastParamCtor.GetParameters().Length))
-                    leastParamCtor = ctor;
-            }
-            return leastParamCtor;
-        }
-
-        private bool HasInitializationAttribute(ConstructorInfo c)
-        {
-            return c.GetCustomAttributes(false).Any(c => c.GetType().Name == ReferenceClassFinder.InitializationCtorAttributeName);
         }
 
         protected void ValidatePublicCtor(Type model, string[] paramNames, Type[] paramTypes)

@@ -23,7 +23,6 @@ namespace Pagination
 {
     /// <summary> A class representing collection of PageSizeFloatModel and their operations over its parent. </summary>
     public partial class PageSizeFloatModelCollection : ArmCollection, IEnumerable<PageSizeFloatModel>, IAsyncEnumerable<PageSizeFloatModel>
-
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly PageSizeFloatModelsRestOperations _pageSizeFloatModelsRestClient;
@@ -406,6 +405,6 @@ namespace Pagination
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, PageSizeFloatModel, PageSizeFloatModelData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, PageSizeFloatModel, PageSizeFloatModelData> Construct() { }
     }
 }

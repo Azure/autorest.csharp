@@ -23,7 +23,6 @@ namespace Pagination
 {
     /// <summary> A class representing collection of PageSizeDoubleModel and their operations over its parent. </summary>
     public partial class PageSizeDoubleModelCollection : ArmCollection, IEnumerable<PageSizeDoubleModel>, IAsyncEnumerable<PageSizeDoubleModel>
-
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly PageSizeDoubleModelsRestOperations _pageSizeDoubleModelsRestClient;
@@ -406,6 +405,6 @@ namespace Pagination
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, PageSizeDoubleModel, PageSizeDoubleModelData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, PageSizeDoubleModel, PageSizeDoubleModelData> Construct() { }
     }
 }

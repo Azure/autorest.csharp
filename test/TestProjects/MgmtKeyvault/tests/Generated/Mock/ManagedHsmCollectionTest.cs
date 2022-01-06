@@ -8,8 +8,8 @@
 using System;
 using System.Net;
 using System.Threading.Tasks;
+using Azure.Core;
 using Azure.Core.TestFramework;
-using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
 using Azure.ResourceManager.Resources.Models;
 using Azure.ResourceManager.TestFramework;
@@ -59,13 +59,15 @@ namespace MgmtKeyvault.Tests.Mock
         }
 
         [RecordedTest]
-        public void GetAllAsync()
+        public async Task GetAllAsync()
         {
             // Example: List managed HSM Pools in a resource group
             var collection = GetArmClient().GetResourceGroup(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hsm-group")).GetManagedHsms();
             int? top = null;
 
-            collection.GetAllAsync(top);
+            await foreach (var _ in collection.GetAllAsync(top))
+            {
+            }
         }
     }
 }

@@ -15,14 +15,12 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.Management.Storage.Models;
-using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing collection of FileShare and their operations over its parent. </summary>
     public partial class FileShareCollection : ArmCollection, IEnumerable<FileShare>, IAsyncEnumerable<FileShare>
-
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly FileSharesRestOperations _fileSharesRestClient;
@@ -401,6 +399,6 @@ namespace Azure.Management.Storage
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, FileShare, FileShareData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, FileShare, FileShareData> Construct() { }
     }
 }

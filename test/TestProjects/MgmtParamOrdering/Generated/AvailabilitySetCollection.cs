@@ -23,7 +23,6 @@ namespace MgmtParamOrdering
 {
     /// <summary> A class representing collection of AvailabilitySet and their operations over its parent. </summary>
     public partial class AvailabilitySetCollection : ArmCollection, IEnumerable<AvailabilitySet>, IAsyncEnumerable<AvailabilitySet>
-
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly AvailabilitySetsRestOperations _availabilitySetsRestClient;
@@ -428,6 +427,6 @@ namespace MgmtParamOrdering
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, AvailabilitySet, AvailabilitySetData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, AvailabilitySet, AvailabilitySetData> Construct() { }
     }
 }

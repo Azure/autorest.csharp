@@ -23,7 +23,6 @@ namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing collection of VirtualMachine and their operations over its parent. </summary>
     public partial class VirtualMachineCollection : ArmCollection, IEnumerable<VirtualMachine>, IAsyncEnumerable<VirtualMachine>
-
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly VirtualMachinesRestOperations _virtualMachinesRestClient;
@@ -428,6 +427,6 @@ namespace Azure.ResourceManager.Sample
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, VirtualMachine, VirtualMachineData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, VirtualMachine, VirtualMachineData> Construct() { }
     }
 }

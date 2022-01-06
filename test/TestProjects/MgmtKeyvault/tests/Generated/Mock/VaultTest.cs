@@ -9,8 +9,8 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
+using Azure.Core;
 using Azure.Core.TestFramework;
-using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
 using Azure.ResourceManager.Resources.Models;
 using Azure.ResourceManager.TestFramework;
@@ -84,7 +84,9 @@ new MgmtKeyvault.Models.AccessPolicyEntry(tenantId: Guid.Parse("00000000-0000-00
             // Example: KeyVaultListPrivateLinkResources
             var vault = GetArmClient().GetVault(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/vaults/sample-vault"));
 
-            await vault.GetPrivateLinkResourcesAsync();
+            await foreach (var _ in vault.GetPrivateLinkResourcesAsync())
+            {
+            }
         }
     }
 }

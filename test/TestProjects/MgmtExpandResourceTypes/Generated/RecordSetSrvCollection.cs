@@ -14,7 +14,6 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using MgmtExpandResourceTypes.Models;
 
@@ -22,7 +21,6 @@ namespace MgmtExpandResourceTypes
 {
     /// <summary> A class representing collection of RecordSet and their operations over its parent. </summary>
     public partial class RecordSetSrvCollection : ArmCollection, IEnumerable<RecordSetSrv>, IAsyncEnumerable<RecordSetSrv>
-
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly RecordSetsRestOperations _recordSetsRestClient;
@@ -389,6 +387,6 @@ namespace MgmtExpandResourceTypes
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, RecordSetSrv, RecordSetData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, RecordSetSrv, RecordSetData> Construct() { }
     }
 }

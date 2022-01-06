@@ -15,14 +15,12 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.Management.Storage.Models;
-using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing collection of BlobInventoryPolicy and their operations over its parent. </summary>
     public partial class BlobInventoryPolicyCollection : ArmCollection, IEnumerable<BlobInventoryPolicy>, IAsyncEnumerable<BlobInventoryPolicy>
-
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly BlobInventoryPoliciesRestOperations _blobInventoryPoliciesRestClient;
@@ -307,6 +305,6 @@ namespace Azure.Management.Storage
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, BlobInventoryPolicy, BlobInventoryPolicyData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, BlobInventoryPolicy, BlobInventoryPolicyData> Construct() { }
     }
 }

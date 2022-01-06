@@ -12,7 +12,6 @@ using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
-using ResourceType = AutoRest.CSharp.Mgmt.Models.ResourceType;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
@@ -27,7 +26,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         private IEnumerable<RequestPath>? _requestPaths;
         public IEnumerable<RequestPath> RequestPaths => _requestPaths ??= OperationSets.Select(operationSet => operationSet.GetRequestPath(_context));
 
-        public Resource(IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> allOperations, string resourceName, ResourceType resourceType, ResourceData resourceData, BuildContext<MgmtOutputLibrary> context)
+        public Resource(IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> allOperations, string resourceName, ResourceTypeSegment resourceType, ResourceData resourceData, BuildContext<MgmtOutputLibrary> context)
             : base(context, resourceName)
         {
             _context = context;
@@ -71,13 +70,13 @@ namespace AutoRest.CSharp.Mgmt.Output
                 if (operation is not null)
                 {
                     var requestPath = operation.GetRequestPath(_context);
-                    var clientOperation = new MgmtRestOperation(
+                    var restOperation = new MgmtRestOperation(
                         _context.Library.RestClientMethods[operation],
                         _context.Library.GetRestClient(operation),
                         requestPath,
                         GetContextualPath(operationSet, requestPath),
                         name);
-                    result.Add(clientOperation);
+                    result.Add(restOperation);
                 }
             }
 
@@ -303,7 +302,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             return resourceRestClients.Concat(childRestClients).Distinct();
         }
 
-        public ResourceType ResourceType { get; }
+        public ResourceTypeSegment ResourceType { get; }
 
         protected virtual string CreateDescription(string clientPrefix)
         {

@@ -6,9 +6,8 @@
 #nullable disable
 
 using System.Collections.Generic;
-using Azure.ResourceManager;
+using Azure.Core;
 using Azure.ResourceManager.Models;
-using Azure.ResourceManager.Resources.Models;
 
 namespace MgmtOperations
 {
@@ -17,7 +16,7 @@ namespace MgmtOperations
     {
         /// <summary> Initializes a new instance of AvailabilitySetData. </summary>
         /// <param name="location"> The location. </param>
-        public AvailabilitySetData(Location location) : base(location)
+        public AvailabilitySetData(AzureLocation location) : base(location)
         {
         }
 
@@ -28,7 +27,7 @@ namespace MgmtOperations
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
         /// <param name="bar"> specifies the bar. </param>
-        internal AvailabilitySetData(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, Location location, string bar) : base(id, name, type, tags, location)
+        internal AvailabilitySetData(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, AzureLocation location, string bar) : base(id, name, type, tags, location)
         {
             Bar = bar;
         }
