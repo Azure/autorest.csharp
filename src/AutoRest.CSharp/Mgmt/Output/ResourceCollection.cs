@@ -25,7 +25,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         private const string _suffixValue = "Collection";
 
         public ResourceCollection(IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> operationSets, Resource resource, BuildContext<MgmtOutputLibrary> context)
-            : base(operationSets, resource.ResourceName, resource.ResourceType, resource.ResourceData, context)
+            : base(operationSets, resource.ResourceName, resource.ResourceType, resource.ResourceData, context, CollectionPosition)
         {
             Resource = resource;
             GetAllOperation = EnsureGetAllOperation();
@@ -109,6 +109,12 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected override bool ShouldIncludeOperation(Operation operation)
         {
+            var requestPath = operation.GetHttpPath();
+            if (Context.Configuration.MgmtConfiguration.OperationPositions.TryGetValue(requestPath, out var positions))
+            {
+                return positions.Contains(Position);
+            }
+            // if the position of this operation is not set in the configuration, we just include those are excluded in the resource class
             return !base.ShouldIncludeOperation(operation);
         }
 
