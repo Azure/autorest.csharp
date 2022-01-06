@@ -397,6 +397,6 @@ namespace ExactMatchFlattenInheritance
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, AzureResourceFlattenModel1, AzureResourceFlattenModel1Data> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, AzureResourceFlattenModel1, AzureResourceFlattenModel1Data> Construct() { }
     }
 }

@@ -427,6 +427,6 @@ namespace SubscriptionExtensions
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, Oven, OvenData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, Oven, OvenData> Construct() { }
     }
 }

@@ -391,6 +391,6 @@ namespace ExactMatchInheritance
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, ExactMatchModel1, ExactMatchModel1Data> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, ExactMatchModel1, ExactMatchModel1Data> Construct() { }
     }
 }

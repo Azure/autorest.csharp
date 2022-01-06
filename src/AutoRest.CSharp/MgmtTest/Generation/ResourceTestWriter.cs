@@ -112,7 +112,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
         public string WriteGetResource(Resource resource, string requestPath, ExampleModel exampleModel)
         {
             var resourceVariableName = useVariableName(resource.Type.Name.FirstCharToLowerCase());
-            _writer.Line($"var {resourceVariableName} = GetArmClient().Get{resource.Type.Name}(new {typeof(ResourceIdentifier)}({MgmtBaseTestWriter.FormatResourceId(requestPath):L}));");
+            _writer.Line($"var {resourceVariableName} = GetArmClient().Get{resource.Type.Name}(new {typeof(Azure.Core.ResourceIdentifier)}({MgmtBaseTestWriter.FormatResourceId(requestPath):L}));");
             return resourceVariableName;
         }
 

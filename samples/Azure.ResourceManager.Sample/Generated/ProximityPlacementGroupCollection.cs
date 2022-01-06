@@ -433,6 +433,6 @@ namespace Azure.ResourceManager.Sample
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, ProximityPlacementGroup, ProximityPlacementGroupData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, ProximityPlacementGroup, ProximityPlacementGroupData> Construct() { }
     }
 }

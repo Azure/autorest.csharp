@@ -393,6 +393,6 @@ namespace SingletonResource
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, Car, CarData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, Car, CarData> Construct() { }
     }
 }

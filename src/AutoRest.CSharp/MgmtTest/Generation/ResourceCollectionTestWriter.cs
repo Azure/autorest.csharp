@@ -161,17 +161,17 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             {
                 case Resource parentResource:
                     {
-                        _writer.Append($"var collection = GetArmClient().Get{parentResource.Type.Name}(new {typeof(Azure.ResourceManager.ResourceIdentifier)}({MgmtBaseTestWriter.FormatResourceId(realRequestPath):L}))");
+                        _writer.Append($"var collection = GetArmClient().Get{parentResource.Type.Name}(new {typeof(Azure.Core.ResourceIdentifier)}({MgmtBaseTestWriter.FormatResourceId(realRequestPath):L}))");
                         break;
                     }
                 case Mgmt.Output.ResourceGroupExtensions:
                     {
-                        _writer.Append($"var collection = GetArmClient().GetResourceGroup(new {typeof(Azure.ResourceManager.ResourceIdentifier)}({MgmtBaseTestWriter.FormatResourceId(realRequestPath):L}))");
+                        _writer.Append($"var collection = GetArmClient().GetResourceGroup(new {typeof(Azure.Core.ResourceIdentifier)}({MgmtBaseTestWriter.FormatResourceId(realRequestPath):L}))");
                         break;
                     }
                 case Mgmt.Output.SubscriptionExtensions:
                     {
-                        _writer.Append($"var collection = GetArmClient().GetSubscription(new {typeof(Azure.ResourceManager.ResourceIdentifier)}({MgmtBaseTestWriter.FormatResourceId(realRequestPath):L}))");
+                        _writer.Append($"var collection = GetArmClient().GetSubscription(new {typeof(Azure.Core.ResourceIdentifier)}({MgmtBaseTestWriter.FormatResourceId(realRequestPath):L}))");
                         break;
                     }
                 case Mgmt.Output.TenantExtensions:

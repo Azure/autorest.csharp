@@ -14,7 +14,6 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 
 namespace TenantOnly
@@ -283,6 +282,6 @@ namespace TenantOnly
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, Agreement, AgreementData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, Agreement, AgreementData> Construct() { }
     }
 }

@@ -431,6 +431,6 @@ namespace MgmtSubscriptionNameParameter
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, SBSubscription, SBSubscriptionData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, SBSubscription, SBSubscriptionData> Construct() { }
     }
 }

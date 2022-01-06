@@ -158,15 +158,15 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        protected FormattableString GetResourceTypeExpression(ResourceType resourceType)
+        protected FormattableString GetResourceTypeExpression(ResourceTypeSegment resourceType)
         {
-            if (resourceType == ResourceType.ResourceGroup)
+            if (resourceType == ResourceTypeSegment.ResourceGroup)
                 return $"{typeof(ResourceGroup)}.ResourceType";
-            if (resourceType == ResourceType.Subscription)
+            if (resourceType == ResourceTypeSegment.Subscription)
                 return $"{typeof(Subscription)}.ResourceType";
-            if (resourceType == ResourceType.Tenant)
+            if (resourceType == ResourceTypeSegment.Tenant)
                 return $"{typeof(Tenant)}.ResourceType";
-            if (resourceType == ResourceType.ManagementGroup)
+            if (resourceType == ResourceTypeSegment.ManagementGroup)
                 return $"{typeof(ManagementGroup)}.ResourceType";
 
             if (!resourceType.IsConstant)
@@ -558,7 +558,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        protected abstract ResourceType GetBranchResourceType(RequestPath branch);
+        protected abstract ResourceTypeSegment GetBranchResourceType(RequestPath branch);
 
         protected virtual void WriteLROMethodBody(CSharpType lroObjectType, IDictionary<RequestPath, MgmtRestOperation> operationMappings, IDictionary<RequestPath, IEnumerable<ParameterMapping>> parameterMappings, bool async)
         {

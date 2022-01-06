@@ -373,6 +373,6 @@ namespace NoTypeReplacement
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, NoTypeReplacementModel3, NoTypeReplacementModel3Data> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, NoTypeReplacementModel3, NoTypeReplacementModel3Data> Construct() { }
     }
 }

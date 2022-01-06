@@ -397,6 +397,6 @@ namespace MgmtListMethods
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, ResGrpParent, ResGrpParentData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, ResGrpParent, ResGrpParentData> Construct() { }
     }
 }

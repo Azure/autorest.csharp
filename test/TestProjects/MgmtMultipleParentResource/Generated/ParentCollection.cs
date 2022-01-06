@@ -435,6 +435,6 @@ namespace MgmtMultipleParentResource
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, Parent, ParentData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, Parent, ParentData> Construct() { }
     }
 }

@@ -391,6 +391,6 @@ namespace SupersetFlattenInheritance
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, ResourceModel1, ResourceModel1Data> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, ResourceModel1, ResourceModel1Data> Construct() { }
     }
 }

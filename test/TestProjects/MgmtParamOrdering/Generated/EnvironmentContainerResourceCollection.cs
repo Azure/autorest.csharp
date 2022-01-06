@@ -14,7 +14,6 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using MgmtParamOrdering.Models;
 
@@ -350,6 +349,6 @@ namespace MgmtParamOrdering
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, EnvironmentContainerResource, EnvironmentContainerResourceData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, EnvironmentContainerResource, EnvironmentContainerResourceData> Construct() { }
     }
 }

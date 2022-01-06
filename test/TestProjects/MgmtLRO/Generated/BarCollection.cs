@@ -397,6 +397,6 @@ namespace MgmtLRO
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, Bar, BarData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, Bar, BarData> Construct() { }
     }
 }

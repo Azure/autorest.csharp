@@ -393,6 +393,6 @@ namespace SubscriptionExtensions
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, Toaster, ToasterData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, Toaster, ToasterData> Construct() { }
     }
 }

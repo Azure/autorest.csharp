@@ -14,7 +14,6 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using MgmtExpandResourceTypes.Models;
 
@@ -389,6 +388,6 @@ namespace MgmtExpandResourceTypes
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, RecordSetSoa, RecordSetData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, RecordSetSoa, RecordSetData> Construct() { }
     }
 }

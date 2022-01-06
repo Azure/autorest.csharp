@@ -405,6 +405,6 @@ namespace Pagination
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, PageSizeInt32Model, PageSizeInt32ModelData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, PageSizeInt32Model, PageSizeInt32ModelData> Construct() { }
     }
 }

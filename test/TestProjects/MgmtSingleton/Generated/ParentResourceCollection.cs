@@ -395,6 +395,6 @@ namespace MgmtSingleton
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, ParentResource, ParentResourceData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, ParentResource, ParentResourceData> Construct() { }
     }
 }

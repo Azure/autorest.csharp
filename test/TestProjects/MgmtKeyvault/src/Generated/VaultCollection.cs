@@ -429,6 +429,6 @@ namespace MgmtKeyvault
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, Vault, VaultData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, Vault, VaultData> Construct() { }
     }
 }

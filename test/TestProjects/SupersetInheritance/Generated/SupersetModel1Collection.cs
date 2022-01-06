@@ -391,6 +391,6 @@ namespace SupersetInheritance
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, SupersetModel1, SupersetModel1Data> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, SupersetModel1, SupersetModel1Data> Construct() { }
     }
 }

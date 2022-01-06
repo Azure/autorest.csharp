@@ -6,9 +6,8 @@
 #nullable disable
 
 using System.Collections.Generic;
-using Azure.ResourceManager;
+using Azure.Core;
 using Azure.ResourceManager.Models;
-using Azure.ResourceManager.Resources.Models;
 
 namespace ExactMatchFlattenInheritance
 {
@@ -17,7 +16,7 @@ namespace ExactMatchFlattenInheritance
     {
         /// <summary> Initializes a new instance of AzureResourceFlattenModel1Data. </summary>
         /// <param name="location"> The location. </param>
-        public AzureResourceFlattenModel1Data(Location location) : base(location)
+        public AzureResourceFlattenModel1Data(AzureLocation location) : base(location)
         {
         }
 
@@ -30,7 +29,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="foo"> New property. </param>
         /// <param name="fooPropertiesFoo"></param>
         /// <param name="idPropertiesId"> ID in CustomModel1. </param>
-        internal AzureResourceFlattenModel1Data(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, Location location, int? foo, string fooPropertiesFoo, string idPropertiesId) : base(id, name, type, tags, location)
+        internal AzureResourceFlattenModel1Data(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, AzureLocation location, int? foo, string fooPropertiesFoo, string idPropertiesId) : base(id, name, type, tags, location)
         {
             Foo = foo;
             FooPropertiesFoo = fooPropertiesFoo;

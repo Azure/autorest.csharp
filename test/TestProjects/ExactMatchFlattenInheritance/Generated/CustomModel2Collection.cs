@@ -389,6 +389,6 @@ namespace ExactMatchFlattenInheritance
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, CustomModel2, CustomModel2Data> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, CustomModel2, CustomModel2Data> Construct() { }
     }
 }
