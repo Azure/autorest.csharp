@@ -97,7 +97,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
 
         private static string NormalizePath(Configuration configuration, string sharedSourceFolder)
         {
-            return Path.GetRelativePath(configuration.OutputFolder, sharedSourceFolder);
+            return Path.GetRelativePath(configuration.OutputFolder, sharedSourceFolder).Replace("\\", "/");
         }
 
         private static bool ReadOption(JsonElement root, string option)
