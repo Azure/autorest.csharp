@@ -10,8 +10,8 @@ using Azure.Core;
 
 namespace CollapseRequestCondition_LowLevel
 {
-    /// <summary> Client options for CollapseRequestConditions. </summary>
-    public partial class CollapseRequestConditionsClientOptions : ClientOptions
+    /// <summary> Client options for CollapseRequestConditions library clients. </summary>
+    public partial class CollapseRequestConditionsClientsOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V1_0_0;
 
@@ -24,8 +24,8 @@ namespace CollapseRequestCondition_LowLevel
 
         internal string Version { get; }
 
-        /// <summary> Initializes new instance of CollapseRequestConditionsClientOptions. </summary>
-        public CollapseRequestConditionsClientOptions(ServiceVersion version = LatestVersion)
+        /// <summary> Initializes new instance of CollapseRequestConditionsClientsOptions. </summary>
+        public CollapseRequestConditionsClientsOptions(ServiceVersion version = LatestVersion)
         {
             Version = version switch
             {

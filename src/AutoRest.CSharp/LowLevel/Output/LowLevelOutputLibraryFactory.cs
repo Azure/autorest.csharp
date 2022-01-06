@@ -52,10 +52,13 @@ namespace AutoRest.CSharp.Output.Models
         {
             var clientName = topLevelClientInfos.Count == 1
                 ? topLevelClientInfos[0].Name
-                : topLevelClientInfos.SingleOrDefault(c => string.IsNullOrEmpty(c.OperationGroupKey))?.Name ??
-                  context.DefaultLibraryName;
+                : topLevelClientInfos.SingleOrDefault(c => string.IsNullOrEmpty(c.OperationGroupKey))?.Name;
 
-            return new ClientOptionsTypeProvider(context, $"{ClientBuilder.GetClientPrefix(clientName, context)}ClientOptions", clientName);
+            var clientOptionsName = clientName != null
+                ? $"{ClientBuilder.GetClientPrefix(clientName, context)}ClientOptions"
+                : $"{ClientBuilder.GetClientPrefix(context.DefaultLibraryName, context)}ClientsOptions";
+
+            return new ClientOptionsTypeProvider(context, clientOptionsName, clientName);
         }
 
         /// <summary>

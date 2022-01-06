@@ -1,24 +1,31 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using AutoRest.CSharp.Common.Output.Builders;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
     internal sealed class ClientOptionsTypeProvider : TypeProvider
     {
-        public string ClientName { get; }
+        public FormattableString Description { get; }
         public IReadOnlyList<ApiVersion> ApiVersions { get;}
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility { get; }
 
-        public ClientOptionsTypeProvider(BuildContext context, string name, string clientName) : base(context)
+        public ClientOptionsTypeProvider(BuildContext context, string name, string? clientName) : base(context)
         {
             DefaultName = name;
             DefaultAccessibility = "public";
-            ClientName = clientName;
+            if (clientName != null)
+            {
+                Description = $"Client options for {clientName}.";
+            }
+            else
+            {
+                Description = $"Client options for {context.DefaultLibraryName} library clients.";
+            }
 
             ApiVersions = context.CodeModel.OperationGroups
                 .SelectMany(g => g.Operations.SelectMany(o => o.ApiVersions))
