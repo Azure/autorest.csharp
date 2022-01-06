@@ -401,7 +401,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
                 else
                 {
-                    var field = new FieldDeclaration("private", subClient.Type, $"_cached{subClient.Type.Name}");
+                    var field = new FieldDeclaration(FieldModifiers.Private, subClient.Type, $"_cached{subClient.Type.Name}");
                     factoryMethods.Add((field, methodSignature, constructorCallParameters));
                 }
             }

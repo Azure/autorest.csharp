@@ -20,10 +20,12 @@ namespace ResourceClients_LowLevel
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly string _groupId;
-        private readonly string _itemId;
         private readonly Uri _endpoint;
 
+        /// <summary> Group identifier. </summary>
+        public virtual string GroupId { get; }
+        /// <summary> Item identifier. </summary>
+        public virtual string ItemId { get; }
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
@@ -36,8 +38,8 @@ namespace ResourceClients_LowLevel
         /// <param name="clientDiagnostics"> The ClientDiagnostics instance to use. </param>
         /// <param name="pipeline"> The pipeline instance to use. </param>
         /// <param name="keyCredential"> The key credential to copy. </param>
-        /// <param name="groupId"> The String to use. </param>
-        /// <param name="itemId"> The String to use. </param>
+        /// <param name="groupId"> Group identifier. </param>
+        /// <param name="itemId"> Item identifier. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/>, <paramref name="pipeline"/>, <paramref name="groupId"/>, or <paramref name="itemId"/> is null. </exception>
         internal Resource(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, AzureKeyCredential keyCredential, string groupId, string itemId, Uri endpoint = null)
@@ -63,8 +65,8 @@ namespace ResourceClients_LowLevel
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
             _keyCredential = keyCredential;
-            _groupId = groupId;
-            _itemId = itemId;
+            GroupId = groupId;
+            ItemId = itemId;
             _endpoint = endpoint;
         }
 
@@ -116,9 +118,9 @@ namespace ResourceClients_LowLevel
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/items/", false);
-            uri.AppendPath(_groupId, true);
+            uri.AppendPath(GroupId, true);
             uri.AppendPath("/", false);
-            uri.AppendPath(_itemId, true);
+            uri.AppendPath(ItemId, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             message.ResponseClassifier = ResponseClassifier200.Instance;

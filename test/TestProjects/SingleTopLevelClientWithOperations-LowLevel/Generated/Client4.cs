@@ -20,9 +20,10 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly string _clientParameter;
         private readonly Uri _endpoint;
 
+        /// <summary> The String to use. </summary>
+        public virtual string ClientParameter { get; }
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
@@ -57,7 +58,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
             _keyCredential = keyCredential;
-            _clientParameter = clientParameter;
+            ClientParameter = clientParameter;
             _endpoint = endpoint;
         }
 
@@ -114,7 +115,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
             uri.Reset(_endpoint);
             uri.AppendPath("/client4", false);
             uri.AppendQuery("filter", filter, true);
-            uri.AppendQuery("clientParameter", _clientParameter, true);
+            uri.AppendQuery("clientParameter", ClientParameter, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             message.ResponseClassifier = ResponseClassifier200.Instance;

@@ -612,6 +612,7 @@ namespace AutoRest.CSharp.Output.Models
                 defaultValue,
                 requestParameter.IsRequired,
                 IsApiVersionParameter: requestParameter.Origin == "modelerfour:synthesized/api-version",
+                IsResourceIdentifier: requestParameter.IsResourceParameter,
                 SkipUrlEncoding: requestParameter.Extensions?.SkipEncoding ?? false,
                 RequestLocation: GetRequestLocation(requestParameter));
         }

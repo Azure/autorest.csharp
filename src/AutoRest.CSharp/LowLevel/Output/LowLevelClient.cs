@@ -39,7 +39,7 @@ namespace AutoRest.CSharp.Output.Models
         public bool IsSubClient { get; }
         public bool IsResourceClient { get; }
 
-        public LowLevelClient(string name, string ns, string description, bool isSubClient, bool isResourceClient, IReadOnlyList<LowLevelClient> subClients, IEnumerable<(ServiceRequest ServiceRequest, Operation Operation)> serviceRequests, RestClientBuilder builder, BuildContext<LowLevelOutputLibrary> context, ClientOptionsTypeProvider clientOptions)
+        public LowLevelClient(string name, string ns, string description, bool isSubClient, IReadOnlyList<LowLevelClient> subClients, IEnumerable<(ServiceRequest ServiceRequest, Operation Operation)> serviceRequests, RestClientBuilder builder, BuildContext<LowLevelOutputLibrary> context, ClientOptionsTypeProvider clientOptions)
             : base(context)
         {
             DefaultName = name;
@@ -48,13 +48,13 @@ namespace AutoRest.CSharp.Output.Models
                 ? $"The {ClientBuilder.GetClientPrefix(Declaration.Name, context)} service client."
                 : BuilderHelpers.EscapeXmlDescription(description));
             IsSubClient = isSubClient;
-            IsResourceClient = isResourceClient;
             SubClients = subClients;
 
             ClientOptions = clientOptions;
             _hasPublicConstructors = !IsSubClient;
 
             Parameters = builder.GetOrderedParameters();
+            IsResourceClient = Parameters.Any(p => p.IsResourceIdentifier);
             Fields = new ClientFields(context, Parameters);
 
             PublicConstructors = BuildPublicConstructors().ToArray();

@@ -204,13 +204,11 @@ namespace AutoRest.CSharp.Output.Models
                     : Array.Empty<LowLevelClient>();
 
                 var isSubClient = clientInfo.Parent != null;
-                var isResourceClient = isSubClient && clientInfo.ResourceParameters.Any();
                 yield return new LowLevelClient(
                     clientInfo.Name,
                     clientInfo.Namespace,
                     clientInfo.Description,
                     isSubClient,
-                    isResourceClient,
                     subClients,
                     clientInfo.Requests,
                     new RestClientBuilder(clientInfo.ClientParameters, context),

@@ -45,7 +45,7 @@ globalParameters:
     language: !Languages 
       default:
         name: GroupId
-        description: ''
+        description: Group identifier
         serializedName: groupId
     protocol: !Protocols 
       http: !HttpParameter 
@@ -60,7 +60,7 @@ globalParameters:
     language: !Languages 
       default:
         name: ItemId
-        description: ''
+        description: Item identifier
         serializedName: itemId
     protocol: !Protocols 
       http: !HttpParameter 

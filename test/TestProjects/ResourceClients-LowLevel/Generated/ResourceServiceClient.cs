@@ -176,7 +176,7 @@ namespace ResourceClients_LowLevel
         }
 
         /// <summary> Initializes a new instance of ResourceGroup. </summary>
-        /// <param name="groupId"> The String to use. </param>
+        /// <param name="groupId"> Group identifier. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="groupId"/> is null. </exception>
         public virtual ResourceGroup GetResourceGroup(string groupId)
         {

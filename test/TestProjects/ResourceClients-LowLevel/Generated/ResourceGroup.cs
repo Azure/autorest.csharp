@@ -23,9 +23,10 @@ namespace ResourceClients_LowLevel
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly string _groupId;
         private readonly Uri _endpoint;
 
+        /// <summary> Group identifier. </summary>
+        public virtual string GroupId { get; }
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
@@ -38,7 +39,7 @@ namespace ResourceClients_LowLevel
         /// <param name="clientDiagnostics"> The ClientDiagnostics instance to use. </param>
         /// <param name="pipeline"> The pipeline instance to use. </param>
         /// <param name="keyCredential"> The key credential to copy. </param>
-        /// <param name="groupId"> The String to use. </param>
+        /// <param name="groupId"> Group identifier. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/>, <paramref name="pipeline"/>, or <paramref name="groupId"/> is null. </exception>
         internal ResourceGroup(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, AzureKeyCredential keyCredential, string groupId, Uri endpoint = null)
@@ -60,7 +61,7 @@ namespace ResourceClients_LowLevel
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
             _keyCredential = keyCredential;
-            _groupId = groupId;
+            GroupId = groupId;
             _endpoint = endpoint;
         }
 
@@ -147,7 +148,7 @@ namespace ResourceClients_LowLevel
         }
 
         /// <summary> Initializes a new instance of Resource. </summary>
-        /// <param name="itemId"> The String to use. </param>
+        /// <param name="itemId"> Item identifier. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="itemId"/> is null. </exception>
         public virtual Resource GetResource(string itemId)
         {
@@ -156,7 +157,7 @@ namespace ResourceClients_LowLevel
                 throw new ArgumentNullException(nameof(itemId));
             }
 
-            return new Resource(_clientDiagnostics, _pipeline, _keyCredential, _groupId, itemId, _endpoint);
+            return new Resource(_clientDiagnostics, _pipeline, _keyCredential, GroupId, itemId, _endpoint);
         }
 
         internal HttpMessage CreateGetGroupRequest(RequestContext context)
@@ -167,7 +168,7 @@ namespace ResourceClients_LowLevel
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/groups/", false);
-            uri.AppendPath(_groupId, true);
+            uri.AppendPath(GroupId, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             message.ResponseClassifier = ResponseClassifier200.Instance;
@@ -182,7 +183,7 @@ namespace ResourceClients_LowLevel
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/items/", false);
-            uri.AppendPath(_groupId, true);
+            uri.AppendPath(GroupId, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             message.ResponseClassifier = ResponseClassifier200.Instance;

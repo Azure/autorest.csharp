@@ -132,6 +132,7 @@
     "groupId": {
       "in": "path",
       "name": "groupId",
+      "description": "Group identifier",
       "required": true,
       "type": "string",
       "x-ms-resource-identifier": true,
@@ -140,6 +141,7 @@
     "itemId": {
       "in": "path",
       "name": "itemId",
+      "description": "Item identifier",
       "required": true,
       "type": "string",
       "x-ms-resource-identifier": true,
