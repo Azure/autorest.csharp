@@ -55,7 +55,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
             return (model, context);
         }
 
-        [Test, Ignore("Temporary skip to avoid OOM")]
+        [Test]
         public void ValidateRequiredParamsInCtor()
         {
             if (_projectName.Equals("") || _projectName.Equals("ReferenceTypes"))
