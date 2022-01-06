@@ -23,7 +23,6 @@ namespace MgmtExpandResourceTypes
 {
     /// <summary> A class representing collection of Zone and their operations over its parent. </summary>
     public partial class ZoneCollection : ArmCollection, IEnumerable<Zone>, IAsyncEnumerable<Zone>
-
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly ZonesRestOperations _zonesRestClient;

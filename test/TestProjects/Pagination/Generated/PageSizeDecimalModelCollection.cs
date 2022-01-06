@@ -23,7 +23,6 @@ namespace Pagination
 {
     /// <summary> A class representing collection of PageSizeDecimalModel and their operations over its parent. </summary>
     public partial class PageSizeDecimalModelCollection : ArmCollection, IEnumerable<PageSizeDecimalModel>, IAsyncEnumerable<PageSizeDecimalModel>
-
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly PageSizeDecimalModelsRestOperations _pageSizeDecimalModelsRestClient;
