@@ -112,7 +112,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{resource.Type.Name}\" /> object.");
             using (_writer.Scope($"public static {resource.Type.Name} Get{resource.Type.Name}(this {ExtensionOperationVariableType} {ExtensionOperationVariableName})"))
             {
-                _writer.Line($"return new {resource.Type.Name}({ExtensionOperationVariableName}, new {typeof(ResourceIdentifier)}({ExtensionOperationVariableName}.Id + \"/{singletonResourceSuffix}\"));");
+                _writer.Line($"return new {resource.Type.Name}({ExtensionOperationVariableName}, new {typeof(Azure.Core.ResourceIdentifier)}({ExtensionOperationVariableName}.Id + \"/{singletonResourceSuffix}\"));");
             }
         }
 
@@ -437,7 +437,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Line($"var {GetRestClientVariableName(restClient)} = Get{restClient.Type.Name}({ClientDiagnosticsVariable}, credential, options, pipeline{subIdIfNeeded}, baseUri);");
         }
 
-        protected override Models.ResourceType GetBranchResourceType(RequestPath branch)
+        protected override ResourceTypeSegment GetBranchResourceType(RequestPath branch)
         {
             // we should never have a branch in the operations in an extension class, therefore throwing an exception here
             throw new InvalidOperationException();

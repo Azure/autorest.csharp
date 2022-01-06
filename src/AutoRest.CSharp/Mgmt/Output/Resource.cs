@@ -15,7 +15,6 @@ using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
-using ResourceType = AutoRest.CSharp.Mgmt.Models.ResourceType;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
@@ -30,7 +29,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         private IEnumerable<RequestPath>? _requestPaths;
         public IEnumerable<RequestPath> RequestPaths => _requestPaths ??= OperationSets.Select(operationSet => operationSet.GetRequestPath(_context));
 
-        public Resource(IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> allOperations, string resourceName, ResourceType resourceType, ResourceData resourceData, BuildContext<MgmtOutputLibrary> context)
+        public Resource(IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> allOperations, string resourceName, ResourceTypeSegment resourceType, ResourceData resourceData, BuildContext<MgmtOutputLibrary> context)
             : base(context, resourceName)
         {
             _context = context;
@@ -238,28 +237,12 @@ namespace AutoRest.CSharp.Mgmt.Output
                     var requestPath = operation.GetRequestPath(_context);
                     var requestTrimmedPath = requestPath.TrimScope();
                     var resourceTrimmedPath = resourceRequestPath.TrimScope();
-                    string key;
-                    RequestPath contextualPath;
-                    string methodName;
-                    // first we need to see if this operation is a collection operation. Collection operation is not literally a child of the corresponding resource
-                    if (IsListOperation(operation, operationSet))
-                    {
-                        // if this operation is a collection operation, it should be the parent of its corresponding resource request path
-                        var diff = requestTrimmedPath.TrimAncestorFrom(resourceTrimmedPath);
-                        // since in this case, the diff is a "minus" diff comparing with the other branch of the condition, we add a minus sign at the beginning of this key ti make sure this key would not collide with others
-                        key = $"{method}-{diff}";
-                        //contextualPath = GetContextualPath(operationSet);
-                        contextualPath = GetContextualPath(operationSet, requestPath);
-                        methodName = "GetAll"; // hard-code the name of a resource collection operation to "GetAll"
-                    }
-                    else
-                    {
-                        // for other child operations, they should be child of the corresponding resource request path
-                        var diff = resourceTrimmedPath.TrimAncestorFrom(requestTrimmedPath);
-                        key = $"{method}{diff}";
-                        contextualPath = GetContextualPath(operationSet, requestPath);
-                        methodName = GetOperationName(operation, resourceRestClient.OperationGroup.Key);
-                    }
+                    // the operations are grouped by the following key
+                    var key = $"{method}{resourceTrimmedPath.Minus(requestTrimmedPath)}";
+                    var contextualPath = GetContextualPath(operationSet, requestPath);
+                    var methodName = IsListOperation(operation, operationSet) ?
+                        "GetAll" :// hard-code the name of a resource collection operation to "GetAll"
+                        GetOperationName(operation, resourceRestClient.OperationGroup.Key);
                     // get the MgmtRestOperation with a proper name
                     var restOperation = new MgmtRestOperation(
                         _context.Library.RestClientMethods[operation],
@@ -322,7 +305,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             return resourceRestClients.Concat(childRestClients).Distinct();
         }
 
-        public ResourceType ResourceType { get; }
+        public ResourceTypeSegment ResourceType { get; }
 
         protected virtual string CreateDescription(string clientPrefix)
         {
@@ -353,7 +336,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         public Parameter ResourceDataParameter => new Parameter(Name: "data", Description: $"The resource that is the target of operations.",
                         Type: ResourceData.Type, DefaultValue: null, ValidateNotNull: false);
         public Parameter ResourceIdentifierParameter => new Parameter(Name: "id", Description: $"The identifier of the resource that is the target of operations.",
-                        Type: typeof(Azure.ResourceManager.ResourceIdentifier), DefaultValue: null, ValidateNotNull: false);
+                        Type: typeof(Azure.Core.ResourceIdentifier), DefaultValue: null, ValidateNotNull: false);
         public Parameter ClientOptionsParameter => new Parameter(Name: "clientOptions", Description: $"The client options to build client context.",
                         Type: typeof(Azure.ResourceManager.ArmClientOptions), DefaultValue: null, ValidateNotNull: false);
         public Parameter CredentialParameter => new Parameter(Name: "credential", Description: $"The credential to build client context.",

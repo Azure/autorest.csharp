@@ -12,6 +12,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
+using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
@@ -377,6 +378,6 @@ namespace SingletonResource
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, Car, CarData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, Car, CarData> Construct() { }
     }
 }

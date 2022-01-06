@@ -37,6 +37,7 @@ namespace MgmtHierarchicalNonResource
         /// <summary> Initializes a new instance of SharedGalleryCollection class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         /// <param name="location"> Resource location. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
         internal SharedGalleryCollection(ArmResource parent, string location) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
@@ -70,7 +71,7 @@ namespace MgmtHierarchicalNonResource
                 var response = _sharedGalleriesRestClient.Get(Id.SubscriptionId, _location, galleryUniqueName, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new SharedGallery(Parent, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SharedGallery(Parent, response.Value.Id, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -100,7 +101,7 @@ namespace MgmtHierarchicalNonResource
                 var response = await _sharedGalleriesRestClient.GetAsync(Id.SubscriptionId, _location, galleryUniqueName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new SharedGallery(Parent, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SharedGallery(Parent, response.Value.Id, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -127,7 +128,7 @@ namespace MgmtHierarchicalNonResource
                 var response = _sharedGalleriesRestClient.Get(Id.SubscriptionId, _location, galleryUniqueName, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<SharedGallery>(null, response.GetRawResponse())
-                    : Response.FromValue(new SharedGallery(this, response.Value), response.GetRawResponse());
+                    : Response.FromValue(new SharedGallery(this, response.Value.Id, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -154,7 +155,7 @@ namespace MgmtHierarchicalNonResource
                 var response = await _sharedGalleriesRestClient.GetAsync(Id.SubscriptionId, _location, galleryUniqueName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<SharedGallery>(null, response.GetRawResponse())
-                    : Response.FromValue(new SharedGallery(this, response.Value), response.GetRawResponse());
+                    : Response.FromValue(new SharedGallery(this, response.Value.Id, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -229,7 +230,7 @@ namespace MgmtHierarchicalNonResource
                 try
                 {
                     var response = _sharedGalleriesRestClient.List(Id.SubscriptionId, _location, sharedTo, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new SharedGallery(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new SharedGallery(Parent, value.Id, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -244,7 +245,7 @@ namespace MgmtHierarchicalNonResource
                 try
                 {
                     var response = _sharedGalleriesRestClient.ListNextPage(nextLink, Id.SubscriptionId, _location, sharedTo, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new SharedGallery(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new SharedGallery(Parent, value.Id, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -271,7 +272,7 @@ namespace MgmtHierarchicalNonResource
                 try
                 {
                     var response = await _sharedGalleriesRestClient.ListAsync(Id.SubscriptionId, _location, sharedTo, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new SharedGallery(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new SharedGallery(Parent, value.Id, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -286,7 +287,7 @@ namespace MgmtHierarchicalNonResource
                 try
                 {
                     var response = await _sharedGalleriesRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, _location, sharedTo, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new SharedGallery(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new SharedGallery(Parent, value.Id, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -359,6 +360,6 @@ namespace MgmtHierarchicalNonResource
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, SharedGallery, SharedGalleryData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, SharedGallery, SharedGalleryData> Construct() { }
     }
 }

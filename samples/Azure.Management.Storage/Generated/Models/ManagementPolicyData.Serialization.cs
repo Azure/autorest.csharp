@@ -9,7 +9,6 @@ using System;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Management.Storage.Models;
-using Azure.ResourceManager;
 
 namespace Azure.Management.Storage
 {
