@@ -34,7 +34,8 @@ stages:
       - job: Build
         timeoutInMinutes: 120
         pool:
-          vmImage: windows-2022
+          name: azsdk-pool-mms-ubuntu-2004-general
+          vmImage: "MMSUbuntu20.04"
         steps:
           - checkout: self
           - checkout: azure-sdk-tools
