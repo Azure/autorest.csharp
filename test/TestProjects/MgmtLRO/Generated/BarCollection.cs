@@ -22,7 +22,7 @@ using MgmtLRO.Models;
 namespace MgmtLRO
 {
     /// <summary> A class representing collection of Bar and their operations over its parent. </summary>
-    public partial class BarCollection : ArmCollection, IEnumerable<Bar>
+    public partial class BarCollection : ArmCollection, IEnumerable<Bar>, IAsyncEnumerable<Bar>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly BarsRestOperations _barsRestClient;
@@ -288,20 +288,25 @@ namespace MgmtLRO
         /// OperationId: Bars_List
         /// <summary> Retrieves information about an fake. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IReadOnlyList<Bar>> GetAll(CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="Bar" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<Bar> GetAll(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BarCollection.GetAll");
-            scope.Start();
-            try
+            Page<Bar> FirstPageFunc(int? pageSizeHint)
             {
-                var response = _barsRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken);
-                return Response.FromValue(response.Value.Value.Select(value => new Bar(Parent, value)).ToArray() as IReadOnlyList<Bar>, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("BarCollection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = _barsRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new Bar(Parent, value)), null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars
@@ -309,20 +314,25 @@ namespace MgmtLRO
         /// OperationId: Bars_List
         /// <summary> Retrieves information about an fake. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<IReadOnlyList<Bar>>> GetAllAsync(CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="Bar" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<Bar> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BarCollection.GetAll");
-            scope.Start();
-            try
+            async Task<Page<Bar>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await _barsRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(response.Value.Value.Select(value => new Bar(Parent, value)).ToArray() as IReadOnlyList<Bar>, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("BarCollection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = await _barsRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new Bar(Parent, value)), null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
         /// <summary> Filters the list of <see cref="Bar" /> for this resource group represented as generic resources. </summary>
@@ -373,12 +383,17 @@ namespace MgmtLRO
 
         IEnumerator<Bar> IEnumerable<Bar>.GetEnumerator()
         {
-            return GetAll().Value.GetEnumerator();
+            return GetAll().GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return GetAll().Value.GetEnumerator();
+            return GetAll().GetEnumerator();
+        }
+
+        IAsyncEnumerator<Bar> IAsyncEnumerable<Bar>.GetAsyncEnumerator(CancellationToken cancellationToken)
+        {
+            return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
 
         // Builders.

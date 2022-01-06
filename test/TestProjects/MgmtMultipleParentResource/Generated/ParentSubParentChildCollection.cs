@@ -21,7 +21,6 @@ namespace MgmtMultipleParentResource
 {
     /// <summary> A class representing collection of ChildBody and their operations over its parent. </summary>
     public partial class ParentSubParentChildCollection : ArmCollection, IEnumerable<ParentSubParentChild>, IAsyncEnumerable<ParentSubParentChild>
-
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly ChildrenRestOperations _childrenRestClient;

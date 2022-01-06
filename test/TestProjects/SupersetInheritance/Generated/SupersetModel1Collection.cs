@@ -22,7 +22,7 @@ using SupersetInheritance.Models;
 namespace SupersetInheritance
 {
     /// <summary> A class representing collection of SupersetModel1 and their operations over its parent. </summary>
-    public partial class SupersetModel1Collection : ArmCollection, IEnumerable<SupersetModel1>
+    public partial class SupersetModel1Collection : ArmCollection, IEnumerable<SupersetModel1>, IAsyncEnumerable<SupersetModel1>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly SupersetModel1SRestOperations _supersetModel1sRestClient;
@@ -283,40 +283,50 @@ namespace SupersetInheritance
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
         /// OperationId: SupersetModel1s_List
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IReadOnlyList<SupersetModel1>> GetAll(CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="SupersetModel1" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<SupersetModel1> GetAll(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SupersetModel1Collection.GetAll");
-            scope.Start();
-            try
+            Page<SupersetModel1> FirstPageFunc(int? pageSizeHint)
             {
-                var response = _supersetModel1sRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken);
-                return Response.FromValue(response.Value.Value.Select(value => new SupersetModel1(Parent, value)).ToArray() as IReadOnlyList<SupersetModel1>, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("SupersetModel1Collection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = _supersetModel1sRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new SupersetModel1(Parent, value)), null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel1s
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
         /// OperationId: SupersetModel1s_List
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<IReadOnlyList<SupersetModel1>>> GetAllAsync(CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="SupersetModel1" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<SupersetModel1> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SupersetModel1Collection.GetAll");
-            scope.Start();
-            try
+            async Task<Page<SupersetModel1>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await _supersetModel1sRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(response.Value.Value.Select(value => new SupersetModel1(Parent, value)).ToArray() as IReadOnlyList<SupersetModel1>, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("SupersetModel1Collection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = await _supersetModel1sRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new SupersetModel1(Parent, value)), null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
         /// <summary> Filters the list of <see cref="SupersetModel1" /> for this resource group represented as generic resources. </summary>
@@ -367,12 +377,17 @@ namespace SupersetInheritance
 
         IEnumerator<SupersetModel1> IEnumerable<SupersetModel1>.GetEnumerator()
         {
-            return GetAll().Value.GetEnumerator();
+            return GetAll().GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return GetAll().Value.GetEnumerator();
+            return GetAll().GetEnumerator();
+        }
+
+        IAsyncEnumerator<SupersetModel1> IAsyncEnumerable<SupersetModel1>.GetAsyncEnumerator(CancellationToken cancellationToken)
+        {
+            return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
 
         // Builders.

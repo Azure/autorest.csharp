@@ -57,12 +57,14 @@ namespace MgmtKeyvault.Tests.Mock
         }
 
         [RecordedTest]
-        public void GetAllAsync()
+        public async Task GetAllAsync()
         {
             // Example: KeyVaultListPrivateEndpointConnection
             var collection = GetArmClient().GetVault(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/vaults/sample-vault")).GetPrivateEndpointConnections();
 
-            collection.GetAllAsync();
+            await foreach (var _ in collection.GetAllAsync())
+            {
+            }
         }
     }
 }

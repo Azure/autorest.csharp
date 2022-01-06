@@ -12,6 +12,8 @@ using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Mgmt.Decorator;
+using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure.ResourceManager.Core;
 using NUnit.Framework;
@@ -54,10 +56,78 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
         }
 
         [Test]
+        public void ValidateRequiredParamsInCtor()
+        {
+            if (_projectName.Equals("") || _projectName.Equals("ReferenceTypes"))
+            {
+                return;
+            }
+
+            (_, var context) = Generate(_projectName, _subFolder).Result;
+            var library = context.Library;
+            foreach (var mgmtObject in library.Models.OfType<MgmtObjectType>())
+            {
+                if (ReferenceTypePropertyChooser.GetExactMatch(mgmtObject, context) == null)
+                {
+                    ValidateModelRequiredCtorParams(mgmtObject.ObjectSchema, mgmtObject.Type.Name);
+                }
+            }
+            foreach (var resourceData in library.ResourceData)
+            {
+                ValidateModelRequiredCtorParams(resourceData.ObjectSchema, resourceData.Type.Name);
+            }
+        }
+
+        private void ValidateModelRequiredCtorParams(ObjectSchema objectSchema, string typeName)
+        {
+            var requiredParams = objectSchema.Properties.Where(p => p.Schema is not ConstantSchema && p.Required.HasValue && p.Required.Value);
+
+            Type generatedModel = Assembly.GetExecutingAssembly().GetType(typeName);
+            if (generatedModel == null)
+                return; //for some reason we are losing the cache during generation to know which models were removed
+            Assert.NotNull(generatedModel, $"Generated type not found for {objectSchema.Name}");
+            ConstructorInfo leastParamCtor = GetLeastParamCtor(generatedModel);
+            ConstructorInfo baseLeastParamCtor = GetLeastParamCtor(generatedModel.BaseType);
+            var fullRequiredParams = requiredParams.Select(p => p.SerializedName).Concat(baseLeastParamCtor?.GetParameters().Select(p => p.Name)).Distinct();
+            Assert.NotNull(leastParamCtor, $"Ctor not found for {objectSchema.Name}");
+            Assert.AreEqual(fullRequiredParams.Count(), leastParamCtor.GetParameters().Length, $"{objectSchema.Name} had a mismatch in required ctor params");
+            foreach (var param in fullRequiredParams)
+            {
+                Assert.NotNull(leastParamCtor.GetParameters().FirstOrDefault(p => string.Equals(p.Name, param, StringComparison.InvariantCultureIgnoreCase)), $"{param} was not found in {objectSchema.Name}'s ctor");
+            }
+        }
+
+        private bool HasInitializationAttribute(ConstructorInfo c)
+        {
+            return c.GetCustomAttributes(false).Any(c => c.GetType().Name == ReferenceClassFinder.InitializationCtorAttributeName);
+        }
+
+        private ConstructorInfo GetLeastParamCtor(Type generatedModel)
+        {
+            ConstructorInfo leastParamCtor = null;
+
+            if (generatedModel == null)
+                return leastParamCtor;
+
+            if (generatedModel.GetCustomAttributes(false).Any(a => a.GetType().Name == ReferenceClassFinder.ReferenceTypeAttributeName))
+            {
+                var ctors = generatedModel.GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+                var attrCtors = ctors.Where(c => HasInitializationAttribute(c));
+                return attrCtors.FirstOrDefault();
+            }
+
+            foreach (var ctor in generatedModel.GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public))
+            {
+                if (ctor.GetParameters().Length < (leastParamCtor == null ? int.MaxValue : leastParamCtor.GetParameters().Length))
+                    leastParamCtor = ctor;
+            }
+            return leastParamCtor;
+        }
+
+        [Test]
         public void ValidateResourceDataCount()
         {
-            var result = Generate(_projectName, _subFolder).Result;
-            var context = result.Context;
+            (_, var context) = Generate(_projectName, _subFolder).Result;
 
             var count = context.Library.ResourceSchemaMap.Count;
 

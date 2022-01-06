@@ -20,7 +20,7 @@ using MgmtOperations.Models;
 namespace MgmtOperations
 {
     /// <summary> A class representing collection of AvailabilitySetChild and their operations over its parent. </summary>
-    public partial class AvailabilitySetChildCollection : ArmCollection, IEnumerable<AvailabilitySetChild>
+    public partial class AvailabilitySetChildCollection : ArmCollection, IEnumerable<AvailabilitySetChild>, IAsyncEnumerable<AvailabilitySetChild>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly AvailabilitySetChildRestOperations _availabilitySetChildRestClient;
@@ -286,20 +286,25 @@ namespace MgmtOperations
         /// OperationId: availabilitySetChild_List
         /// <summary> Retrieves information about an availability set. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IReadOnlyList<AvailabilitySetChild>> GetAll(CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="AvailabilitySetChild" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<AvailabilitySetChild> GetAll(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetChildCollection.GetAll");
-            scope.Start();
-            try
+            Page<AvailabilitySetChild> FirstPageFunc(int? pageSizeHint)
             {
-                var response = _availabilitySetChildRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
-                return Response.FromValue(response.Value.Value.Select(value => new AvailabilitySetChild(Parent, value)).ToArray() as IReadOnlyList<AvailabilitySetChild>, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("AvailabilitySetChildCollection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = _availabilitySetChildRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new AvailabilitySetChild(Parent, value)), null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}/availabilitySetChildren
@@ -307,30 +312,40 @@ namespace MgmtOperations
         /// OperationId: availabilitySetChild_List
         /// <summary> Retrieves information about an availability set. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<IReadOnlyList<AvailabilitySetChild>>> GetAllAsync(CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="AvailabilitySetChild" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<AvailabilitySetChild> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetChildCollection.GetAll");
-            scope.Start();
-            try
+            async Task<Page<AvailabilitySetChild>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await _availabilitySetChildRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(response.Value.Value.Select(value => new AvailabilitySetChild(Parent, value)).ToArray() as IReadOnlyList<AvailabilitySetChild>, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("AvailabilitySetChildCollection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = await _availabilitySetChildRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new AvailabilitySetChild(Parent, value)), null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
         IEnumerator<AvailabilitySetChild> IEnumerable<AvailabilitySetChild>.GetEnumerator()
         {
-            return GetAll().Value.GetEnumerator();
+            return GetAll().GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return GetAll().Value.GetEnumerator();
+            return GetAll().GetEnumerator();
+        }
+
+        IAsyncEnumerator<AvailabilitySetChild> IAsyncEnumerable<AvailabilitySetChild>.GetAsyncEnumerator(CancellationToken cancellationToken)
+        {
+            return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
 
         // Builders.
