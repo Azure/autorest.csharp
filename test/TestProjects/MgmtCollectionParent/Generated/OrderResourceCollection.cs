@@ -385,6 +385,6 @@ namespace MgmtCollectionParent
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, OrderResource, OrderResourceData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, OrderResource, OrderResourceData> Construct() { }
     }
 }
