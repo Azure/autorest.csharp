@@ -22,7 +22,6 @@ namespace Azure.Management.Storage
 {
     /// <summary> A class representing collection of DeletedAccount and their operations over its parent. </summary>
     public partial class DeletedAccountCollection : ArmCollection, IEnumerable<DeletedAccount>, IAsyncEnumerable<DeletedAccount>
-
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly DeletedAccountsRestOperations _deletedAccountsRestClient;

@@ -22,7 +22,6 @@ namespace MgmtCollectionParent
 {
     /// <summary> A class representing collection of OrderResource and their operations over its parent. </summary>
     public partial class OrderResourceCollection : ArmCollection, IEnumerable<OrderResource>, IAsyncEnumerable<OrderResource>
-
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly ComputeManagementRestOperations _restClient;
