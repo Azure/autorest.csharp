@@ -132,11 +132,11 @@ namespace AutoRest.CSharp.AutoRest.Communication
 
             foreach (var sharedSourceFolder in root.GetProperty(nameof(Configuration.SharedSourceFolders)).EnumerateArray())
             {
-                sharedSourceFolders.Add(Path.Combine(basePath, sharedSourceFolder.GetString()));
+                sharedSourceFolders.Add(Path.GetFullPath(Path.Combine(basePath, sharedSourceFolder.GetString())));
             }
 
             return new Configuration(
-                Path.Combine(basePath, root.GetProperty(nameof(Configuration.OutputFolder)).GetString()),
+                Path.GetFullPath(Path.Combine(basePath, root.GetProperty(nameof(Configuration.OutputFolder)).GetString())),
                 root.GetProperty(nameof(Configuration.Namespace)).GetString(),
                 root.GetProperty(nameof(Configuration.LibraryName)).GetString(),
                 sharedSourceFolders.ToArray(),
