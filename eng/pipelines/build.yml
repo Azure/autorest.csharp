@@ -39,6 +39,7 @@ stages:
         steps:
           - checkout: self
           - checkout: azure-sdk-tools
+          - task: UseDotNet@2
           - task: NodeTool@0
             displayName: "Install Node 16.x"
             inputs:
