@@ -142,12 +142,26 @@ namespace AutoRest.CSharp.Mgmt.Models
         /// <exception cref="InvalidOperationException">if this.IsAncestorOf(other) is false</exception>
         public RequestPath TrimAncestorFrom(RequestPath other)
         {
+            if (TryTrimAncestorFrom(other, out var diff))
+                return diff;
+
+            throw new InvalidOperationException($"Request path {this} is not parent of {other}");
+        }
+
+        public bool TryTrimAncestorFrom(RequestPath other, [MaybeNullWhen(false)] out RequestPath diff)
+        {
+            diff = default;
             if (this == other)
-                return RequestPath.Tenant;
-            if (!this.IsAncestorOf(other))
-                throw new InvalidOperationException($"Request path {this} is not parent of {other}");
-            // this is a parent, we can safely just return from the length of this
-            return new RequestPath(other._segments.Skip(this.Count));
+            {
+                diff = RequestPath.Tenant;
+                return true;
+            }
+            if (this.IsAncestorOf(other))
+            {
+                diff = new RequestPath(other._segments.Skip(this.Count));
+                return true;
+            }
+            return false;
         }
 
         /// <summary>
