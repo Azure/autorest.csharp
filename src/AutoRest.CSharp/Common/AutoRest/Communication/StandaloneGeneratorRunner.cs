@@ -84,7 +84,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
                     WriteIfNotDefault(writer, Configuration.Options.SkipCSProjPackageReference, configuration.SkipCSProjPackageReference);
                     WriteIfNotDefault(writer, Configuration.Options.DataPlane, configuration.DataPlane);
                     WriteIfNotDefault(writer, Configuration.Options.SingleTopLevelClient, configuration.SingleTopLevelClient);
-                    WriteIfNotDefault(writer, Configuration.Options.ProjectFolder, configuration.ProjectFolder);
+                    WriteIfNotDefault(writer, Configuration.Options.ProjectFolder, configuration.ProjectFolder.Replace("\\", "/"));
 
                     configuration.MgmtConfiguration.SaveConfiguration(writer);
 
