@@ -9,11 +9,11 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
-using Azure.Core;
 using Azure.Core.TestFramework;
 using Azure.ResourceManager.Resources;
 using Azure.ResourceManager.Resources.Models;
 using Azure.ResourceManager.TestFramework;
+using MgmtKeyvault;
 using MgmtKeyvault.Models;
 
 namespace MgmtKeyvault.Tests.Mock
@@ -28,20 +28,20 @@ namespace MgmtKeyvault.Tests.Mock
         }
 
         [RecordedTest]
-        public async Task GetAsync()
+        public async Task Get()
         {
             // Example: Retrieve a deleted vault
-            var deletedVaultId = DeletedVault.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "westus", "sample-vault");
+            var deletedVaultId = MgmtKeyvault.DeletedVault.CreateResourceIdentifier(/ subscriptions /{ subscriptionId}/ providers / Microsoft.KeyVault / locations /{ location}/ deletedVaults /{ vaultName});
             var deletedVault = GetArmClient().GetDeletedVault(deletedVaultId);
 
             await deletedVault.GetAsync();
         }
 
         [RecordedTest]
-        public async Task PurgeDeletedAsync()
+        public async Task PurgeDeleted()
         {
             // Example: Purge a deleted vault
-            var deletedVaultId = DeletedVault.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "westus", "sample-vault");
+            var deletedVaultId = MgmtKeyvault.DeletedVault.CreateResourceIdentifier(/ subscriptions /{ subscriptionId}/ providers / Microsoft.KeyVault / locations /{ location}/ deletedVaults /{ vaultName});
             var deletedVault = GetArmClient().GetDeletedVault(deletedVaultId);
 
             await deletedVault.PurgeDeletedAsync(true);

@@ -157,13 +157,13 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     string resourceIdentifierParams = ComposeResourceIdentifierParams(resource.RequestPaths.First(), exampleModel);
                     WriteTestDecorator();
                     var testCaseSuffix = exampleIdx > 0 ? (exampleIdx + 1).ToString() : String.Empty;
-                    _writer.Append($"public {GetAsyncKeyword(async)} {MgmtBaseTestWriter.GetTaskOrVoid(async)} {(resource == _resource ? "" : resource.Type.Name)}{testMethodName}{testCaseSuffix}()");
+                    _writer.Append($"public {GetAsyncKeyword(async)} {MgmtBaseTestWriter.GetTaskOrVoid(async)} {(resource == _resource ? "" : resource.Type.Name)}{methodName}{testCaseSuffix}()");
 
                     using (_writer.Scope())
                     {
                         _writer.LineRaw($"// Example: {exampleModel.Name}");
                         clearVariableNames();
-                        var resourceVariableName = WriteGetResource(resource, realRequestPath, exampleModel);
+                        var resourceVariableName = WriteGetResource(resource, resource.RequestPaths.First(), exampleModel);
 
                         List<string> paramNames = WriteOperationParameters(methodParameters, Enumerable.Empty<Parameter> (), exampleModel);
 

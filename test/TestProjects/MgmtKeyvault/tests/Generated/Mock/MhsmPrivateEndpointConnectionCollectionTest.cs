@@ -28,11 +28,9 @@ namespace MgmtKeyvault.Tests.Mock
         }
 
         [RecordedTest]
-        public async Task CreateOrUpdateAsync()
+        public async Task CreateOrUpdate()
         {
             // Example: ManagedHsmPutPrivateEndpointConnection
-            var managedHsmId = ManagedHsm.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-mhsm");
-            var collection = GetArmClient().GetManagedHsm(managedHsmId).GetMhsmPrivateEndpointConnections();
             string privateEndpointConnectionName = "sample-pec";
             MgmtKeyvault.MhsmPrivateEndpointConnectionData properties = new MgmtKeyvault.MhsmPrivateEndpointConnectionData(location: AzureLocation.WestUS)
             {
@@ -43,27 +41,29 @@ namespace MgmtKeyvault.Tests.Mock
                 },
             };
 
+            var managedHsmId = MgmtKeyvault.ManagedHsm.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-mhsm");
+            var collection = GetArmClient().GetManagedHsm(managedHsmId).GetMhsmPrivateEndpointConnections();
             await collection.CreateOrUpdateAsync(true, privateEndpointConnectionName, properties);
         }
 
         [RecordedTest]
-        public async Task GetAsync()
+        public async Task Get()
         {
             // Example: ManagedHsmGetPrivateEndpointConnection
-            var managedHsmId = ManagedHsm.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-mhsm");
-            var collection = GetArmClient().GetManagedHsm(managedHsmId).GetMhsmPrivateEndpointConnections();
             string privateEndpointConnectionName = "sample-pec";
 
+            var managedHsmId = MgmtKeyvault.ManagedHsm.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-mhsm");
+            var collection = GetArmClient().GetManagedHsm(managedHsmId).GetMhsmPrivateEndpointConnections();
             await collection.GetAsync(privateEndpointConnectionName);
         }
 
         [RecordedTest]
-        public async Task GetAllAsync()
+        public async Task GetAll()
         {
             // Example: List managed HSM Pools in a subscription
-            var managedHsmId = ManagedHsm.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-mhsm");
-            var collection = GetArmClient().GetManagedHsm(managedHsmId).GetMhsmPrivateEndpointConnections();
 
+            var managedHsmId = MgmtKeyvault.ManagedHsm.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-mhsm");
+            var collection = GetArmClient().GetManagedHsm(managedHsmId).GetMhsmPrivateEndpointConnections();
             await foreach (var _ in collection.GetAllAsync())
             {
             }

@@ -29,8 +29,8 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 {
     internal partial class MgmtBaseTestWriter: MgmtClientBaseWriter<MgmtTypeProvider>
     {
-        public static CodeWriter _tagsWriter = new CodeWriter();
-        public static HashSet<string>  variableNames = new HashSet<string>();
+        public CodeWriter _tagsWriter = new CodeWriter();
+        public HashSet<string>  variableNames = new HashSet<string>();
 
         public MgmtBaseTestWriter(CodeWriter writer, MgmtTypeProvider provider, BuildContext<MgmtOutputLibrary> context) : base(writer, provider, context)
         {
@@ -325,7 +325,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                             var newVariableName = $"{variableName}.{targetProperty.Declaration.Name}";
                             if (targetProperty.Declaration.Name == "Tags" && targetProperty.ValueType.Name == "IDictionary")
                             {
-                                MgmtBaseTestWriter._tagsWriter.Append($"{newVariableName}.ReplaceWith(");
+                                _tagsWriter.Append($"{newVariableName}.ReplaceWith(");
                                 WriteExampleValue(_tagsWriter, targetProperty.ValueType, paramValue!, newVariableName);
                                 _tagsWriter.Append($");");
                             }
@@ -556,7 +556,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             }
         }
 
-        public static string useVariableName(string variableName)
+        public string useVariableName(string variableName)
         {
             if (Utilities.StringExtensions.IsCSharpKeyword(variableName))
             {
@@ -580,7 +580,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             throw new Exception($"Can't find a valid variable name start with {variableName}");
         }
 
-        public static void clearVariableNames() {
+        public void clearVariableNames() {
             variableNames = new HashSet<string>();
         }
 
