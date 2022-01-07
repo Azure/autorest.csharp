@@ -1,6 +1,6 @@
 {
   "OutputFolder": ".",
-  "Namespace": "custom_baseUrl_paging",
+  "Namespace": "Custom_BaseUrl_Paging",
   "LibraryName": null,
   "SharedSourceFolders": [
     "../../../../artifacts/bin/AutoRest.CSharp/Debug/netcoreapp3.1/Generator.Shared",

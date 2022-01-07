@@ -12,7 +12,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace lro
+namespace Lro
 {
     /// <summary> Long running post request, service returns a 400 with no error body. </summary>
     public partial class LrosaDsPostNonRetry400Operation : Operation

@@ -1,6 +1,6 @@
 {
   "OutputFolder": ".",
-  "Namespace": "media_types",
+  "Namespace": "Media_Types",
   "LibraryName": null,
   "SharedSourceFolders": [
     "../../../../artifacts/bin/AutoRest.CSharp/Debug/netcoreapp3.1/Generator.Shared",

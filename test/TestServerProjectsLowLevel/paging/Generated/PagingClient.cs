@@ -14,7 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace paging_LowLevel
+namespace Paging_LowLevel
 {
     /// <summary> The Paging service client. </summary>
     public partial class PagingClient

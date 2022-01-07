@@ -13,7 +13,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace url_multi_collectionFormat
+namespace Url_Multi_CollectionFormat
 {
     internal partial class QueriesRestClient
     {

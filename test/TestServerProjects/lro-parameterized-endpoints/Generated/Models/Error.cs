@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace lro_parameterized_endpoints.Models
+namespace Lro_Parameterized_Endpoints.Models
 {
     /// <summary> The Error. </summary>
     internal partial class Error

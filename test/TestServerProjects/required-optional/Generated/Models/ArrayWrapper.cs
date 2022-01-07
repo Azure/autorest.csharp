@@ -9,7 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace required_optional.Models
+namespace Required_Optional.Models
 {
     /// <summary> The ArrayWrapper. </summary>
     public partial class ArrayWrapper

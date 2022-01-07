@@ -8,7 +8,7 @@
 using Azure;
 using Azure.Core;
 
-namespace httpInfrastructure
+namespace HttpInfrastructure
 {
     internal partial class HttpRedirectsHead307Headers
     {

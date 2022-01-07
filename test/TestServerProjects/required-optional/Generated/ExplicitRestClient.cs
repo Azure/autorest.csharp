@@ -13,9 +13,9 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using required_optional.Models;
+using Required_Optional.Models;
 
-namespace required_optional
+namespace Required_Optional
 {
     internal partial class ExplicitRestClient
     {

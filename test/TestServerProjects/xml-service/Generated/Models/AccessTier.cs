@@ -8,7 +8,7 @@
 using System;
 using System.ComponentModel;
 
-namespace xml_service.Models
+namespace Xml_Service.Models
 {
     /// <summary> The AccessTier. </summary>
     public readonly partial struct AccessTier : IEquatable<AccessTier>

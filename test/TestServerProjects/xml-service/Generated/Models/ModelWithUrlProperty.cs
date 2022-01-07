@@ -7,7 +7,7 @@
 
 using System;
 
-namespace xml_service.Models
+namespace Xml_Service.Models
 {
     /// <summary> The ModelWithUrlProperty. </summary>
     public partial class ModelWithUrlProperty

@@ -7,7 +7,7 @@
 
 using System;
 
-namespace multiple_inheritance.Models
+namespace Multiple_Inheritance.Models
 {
     /// <summary> The Pet. </summary>
     public partial class Pet

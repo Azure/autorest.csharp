@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace body_number
+namespace Body_Number
 {
     /// <summary> Client options for AutoRestNumberTestServiceClient. </summary>
     public partial class AutoRestNumberTestServiceClientOptions : ClientOptions

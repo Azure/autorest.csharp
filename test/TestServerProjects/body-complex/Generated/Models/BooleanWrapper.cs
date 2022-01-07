@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace body_complex.Models
+namespace Body_Complex.Models
 {
     /// <summary> The BooleanWrapper. </summary>
     public partial class BooleanWrapper

@@ -8,7 +8,7 @@
 using System.Collections.Generic;
 using Azure.Core;
 
-namespace paging.Models
+namespace Paging.Models
 {
     /// <summary> The OdataProductResult. </summary>
     internal partial class OdataProductResult

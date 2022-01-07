@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
 
-namespace required_optional
+namespace Required_Optional
 {
     /// <summary> The Implicit service client. </summary>
     public partial class ImplicitClient

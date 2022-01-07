@@ -8,7 +8,7 @@
 using System.Text.Json;
 using Azure.Core;
 
-namespace body_array.Models
+namespace Body_Array.Models
 {
     internal partial class Error
     {

@@ -1,6 +1,6 @@
 {
   "OutputFolder": ".",
-  "Namespace": "lro_parameterized_endpoints",
+  "Namespace": "Lro_Parameterized_Endpoints",
   "LibraryName": null,
   "SharedSourceFolders": [
     "../../../../artifacts/bin/AutoRest.CSharp/Debug/netcoreapp3.1/Generator.Shared",

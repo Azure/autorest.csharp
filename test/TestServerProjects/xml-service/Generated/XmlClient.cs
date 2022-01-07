@@ -11,9 +11,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
-using xml_service.Models;
+using Xml_Service.Models;
 
-namespace xml_service
+namespace Xml_Service
 {
     /// <summary> The Xml service client. </summary>
     public partial class XmlClient

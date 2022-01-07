@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace subscriptionId_apiVersion
+namespace SubscriptionId_ApiVersion
 {
     /// <summary> Client options for MicrosoftAzureTestUrlClient. </summary>
     public partial class MicrosoftAzureTestUrlClientOptions : ClientOptions

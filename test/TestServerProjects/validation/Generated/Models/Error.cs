@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace validation.Models
+namespace Validation.Models
 {
     /// <summary> The Error. </summary>
     internal partial class Error

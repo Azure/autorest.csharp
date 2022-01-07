@@ -8,7 +8,7 @@
 using System;
 using System.ComponentModel;
 
-namespace model_flattening.Models
+namespace Model_Flattening.Models
 {
     /// <summary> The FlattenedProductPropertiesProvisioningStateValues. </summary>
     public readonly partial struct FlattenedProductPropertiesProvisioningStateValues : IEquatable<FlattenedProductPropertiesProvisioningStateValues>

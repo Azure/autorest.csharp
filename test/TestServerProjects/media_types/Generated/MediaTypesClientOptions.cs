@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace media_types
+namespace Media_Types
 {
     /// <summary> Client options for MediaTypesClient. </summary>
     public partial class MediaTypesClientOptions : ClientOptions

@@ -8,7 +8,7 @@
 using System.Collections.Generic;
 using Azure.Core;
 
-namespace xml_service.Models
+namespace Xml_Service.Models
 {
     /// <summary> The Blobs. </summary>
     public partial class Blobs

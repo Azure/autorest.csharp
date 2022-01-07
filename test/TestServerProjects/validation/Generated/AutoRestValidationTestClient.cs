@@ -10,9 +10,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
-using validation.Models;
+using Validation.Models;
 
-namespace validation
+namespace Validation
 {
     /// <summary> The AutoRestValidationTest service client. </summary>
     public partial class AutoRestValidationTestClient

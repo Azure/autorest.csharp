@@ -7,7 +7,7 @@
 
 using System;
 
-namespace header.Models
+namespace Header.Models
 {
     internal static partial class GreyscaleColorsExtensions
     {

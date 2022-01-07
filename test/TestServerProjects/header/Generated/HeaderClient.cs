@@ -10,9 +10,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
-using header.Models;
+using Header.Models;
 
-namespace header
+namespace Header
 {
     /// <summary> The Header service client. </summary>
     public partial class HeaderClient

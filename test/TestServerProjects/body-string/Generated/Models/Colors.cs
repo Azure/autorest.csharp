@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace body_string.Models
+namespace Body_String.Models
 {
     /// <summary> Referenced Color Enum Description. </summary>
     public enum Colors

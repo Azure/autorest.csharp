@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace azure_parameter_grouping.Models
+namespace Azure_Parameter_Grouping.Models
 {
     /// <summary> The Error. </summary>
     internal partial class Error

@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace head_LowLevel
+namespace Head_LowLevel
 {
     /// <summary> Client options for AutoRestHeadTestServiceClient. </summary>
     public partial class AutoRestHeadTestServiceClientOptions : ClientOptions

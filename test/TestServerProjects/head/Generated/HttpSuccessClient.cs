@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
 
-namespace head
+namespace Head
 {
     /// <summary> The HttpSuccess service client. </summary>
     public partial class HttpSuccessClient

@@ -13,7 +13,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace body_duration
+namespace Body_Duration
 {
     internal partial class DurationRestClient
     {

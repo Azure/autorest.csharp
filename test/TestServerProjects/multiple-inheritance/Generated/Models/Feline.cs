@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace multiple_inheritance.Models
+namespace Multiple_Inheritance.Models
 {
     /// <summary> The Feline. </summary>
     public partial class Feline

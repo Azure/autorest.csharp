@@ -7,7 +7,7 @@
 
 using System.Collections.Generic;
 
-namespace lro.Models
+namespace Lro.Models
 {
     /// <summary> Model factory for read-only models. </summary>
     public static partial class AutoRestLongRunningOperationTestServiceModelFactory

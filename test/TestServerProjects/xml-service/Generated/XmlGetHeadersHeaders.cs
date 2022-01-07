@@ -8,7 +8,7 @@
 using Azure;
 using Azure.Core;
 
-namespace xml_service
+namespace Xml_Service
 {
     internal partial class XmlGetHeadersHeaders
     {

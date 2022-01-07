@@ -8,7 +8,7 @@
 using Azure;
 using Azure.Core;
 
-namespace azure_special_properties
+namespace Azure_Special_Properties
 {
     internal partial class HeaderCustomNamedRequestIdHeadHeaders
     {

@@ -7,7 +7,7 @@
 
 using System;
 
-namespace body_formdata_urlencoded.Models
+namespace Body_Formdata_Urlencoded.Models
 {
     internal static partial class PetTypeExtensions
     {

@@ -7,7 +7,7 @@
 
 using System;
 
-namespace xml_service.Models
+namespace Xml_Service.Models
 {
     /// <summary> Azure Analytics Logging settings. </summary>
     public partial class Logging

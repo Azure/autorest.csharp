@@ -9,7 +9,7 @@ using System;
 using System.Collections.Generic;
 using Azure.Core;
 
-namespace xml_service.Models
+namespace Xml_Service.Models
 {
     /// <summary> An enumeration of containers. </summary>
     public partial class ListContainersResponse

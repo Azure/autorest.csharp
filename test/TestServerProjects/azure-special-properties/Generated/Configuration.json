@@ -1,6 +1,6 @@
 {
   "OutputFolder": ".",
-  "Namespace": "azure_special_properties",
+  "Namespace": "Azure_Special_Properties",
   "LibraryName": null,
   "SharedSourceFolders": [
     "../../../../artifacts/bin/AutoRest.CSharp/Debug/netcoreapp3.1/Generator.Shared",

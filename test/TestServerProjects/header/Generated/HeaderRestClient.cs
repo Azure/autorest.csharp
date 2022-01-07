@@ -11,9 +11,9 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using header.Models;
+using Header.Models;
 
-namespace header
+namespace Header
 {
     internal partial class HeaderRestClient
     {

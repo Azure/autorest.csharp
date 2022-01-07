@@ -13,7 +13,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace custom_baseUrl_paging_LowLevel
+namespace Custom_BaseUrl_Paging_LowLevel
 {
     /// <summary> The Paging service client. </summary>
     public partial class PagingClient

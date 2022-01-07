@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace body_dictionary.Models
+namespace Body_Dictionary.Models
 {
     /// <summary> The Widget. </summary>
     public partial class Widget

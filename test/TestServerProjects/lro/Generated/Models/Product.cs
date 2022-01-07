@@ -7,7 +7,7 @@
 
 using System.Collections.Generic;
 
-namespace lro.Models
+namespace Lro.Models
 {
     /// <summary> The Product. </summary>
     public partial class Product : Resource

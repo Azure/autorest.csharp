@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace multiple_inheritance
+namespace Multiple_Inheritance
 {
     /// <summary> Client options for MultipleInheritanceServiceClient. </summary>
     public partial class MultipleInheritanceServiceClientOptions : ClientOptions

@@ -7,7 +7,7 @@
 
 using System;
 
-namespace body_array.Models
+namespace Body_Array.Models
 {
     internal static partial class FooEnumExtensions
     {

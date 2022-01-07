@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace lro.Models
+namespace Lro.Models
 {
     /// <summary> The Sku. </summary>
     public partial class Sku

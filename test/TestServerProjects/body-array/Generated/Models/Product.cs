@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace body_array.Models
+namespace Body_Array.Models
 {
     /// <summary> The Product. </summary>
     public partial class Product

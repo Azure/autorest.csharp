@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
 
-namespace body_number
+namespace Body_Number
 {
     /// <summary> The Number service client. </summary>
     public partial class NumberClient

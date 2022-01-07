@@ -13,7 +13,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace body_boolean
+namespace Body_Boolean
 {
     internal partial class BoolRestClient
     {

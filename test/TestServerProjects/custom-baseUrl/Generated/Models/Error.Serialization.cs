@@ -8,7 +8,7 @@
 using System.Text.Json;
 using Azure.Core;
 
-namespace custom_baseUrl.Models
+namespace Custom_BaseUrl.Models
 {
     internal partial class Error
     {

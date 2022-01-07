@@ -13,7 +13,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace body_string
+namespace Body_String
 {
     internal partial class StringRestClient
     {

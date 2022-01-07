@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
 
-namespace url_multi_collectionFormat
+namespace Url_Multi_CollectionFormat
 {
     /// <summary> The Queries service client. </summary>
     public partial class QueriesClient

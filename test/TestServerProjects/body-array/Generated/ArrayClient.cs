@@ -11,9 +11,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
-using body_array.Models;
+using Body_Array.Models;
 
-namespace body_array
+namespace Body_Array
 {
     /// <summary> The Array service client. </summary>
     public partial class ArrayClient

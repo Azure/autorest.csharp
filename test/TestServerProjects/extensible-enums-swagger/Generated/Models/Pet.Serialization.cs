@@ -8,7 +8,7 @@
 using System.Text.Json;
 using Azure.Core;
 
-namespace extensible_enums_swagger.Models
+namespace Extensible_Enums_Swagger.Models
 {
     public partial class Pet : IUtf8JsonSerializable
     {

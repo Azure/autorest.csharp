@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace body_formdata_urlencoded.Models
+namespace Body_Formdata_Urlencoded.Models
 {
     /// <summary> Can take a value of dog, or cat, or fish. </summary>
     public enum PetType

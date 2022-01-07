@@ -8,7 +8,7 @@
 using System.Text.Json;
 using Azure.Core;
 
-namespace azure_parameter_grouping.Models
+namespace Azure_Parameter_Grouping.Models
 {
     internal partial class Error
     {

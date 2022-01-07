@@ -11,9 +11,9 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using paging.Models;
+using Paging.Models;
 
-namespace paging
+namespace Paging
 {
     /// <summary> The Paging service client. </summary>
     public partial class PagingClient

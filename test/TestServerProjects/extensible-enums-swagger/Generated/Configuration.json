@@ -1,6 +1,6 @@
 {
   "OutputFolder": ".",
-  "Namespace": "extensible_enums_swagger",
+  "Namespace": "Extensible_Enums_Swagger",
   "LibraryName": null,
   "SharedSourceFolders": [
     "../../../../artifacts/bin/AutoRest.CSharp/Debug/netcoreapp3.1/Generator.Shared",

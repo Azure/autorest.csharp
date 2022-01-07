@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace body_formdata_urlencoded
+namespace Body_Formdata_Urlencoded
 {
     /// <summary> Client options for BodyFormsDataURLEncodedClient. </summary>
     public partial class BodyFormsDataURLEncodedClientOptions : ClientOptions

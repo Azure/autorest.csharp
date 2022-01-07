@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace body_duration.Models
+namespace Body_Duration.Models
 {
     /// <summary> The Error. </summary>
     internal partial class Error

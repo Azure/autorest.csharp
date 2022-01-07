@@ -12,7 +12,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace lro
+namespace Lro
 {
     /// <summary> Long running delete request, service returns a 400 with an error body. </summary>
     public partial class LrosaDsDeleteNonRetry400Operation : Operation

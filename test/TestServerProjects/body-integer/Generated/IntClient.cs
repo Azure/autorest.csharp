@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
 
-namespace body_integer
+namespace Body_Integer
 {
     /// <summary> The Int service client. </summary>
     public partial class IntClient

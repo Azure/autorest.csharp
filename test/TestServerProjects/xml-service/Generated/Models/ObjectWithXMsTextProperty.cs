@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace xml_service.Models
+namespace Xml_Service.Models
 {
     /// <summary> Contans property. </summary>
     public partial class ObjectWithXMsTextProperty

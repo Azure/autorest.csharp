@@ -12,9 +12,9 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using subscriptionId_apiVersion.Models;
+using SubscriptionId_ApiVersion.Models;
 
-namespace subscriptionId_apiVersion
+namespace SubscriptionId_ApiVersion
 {
     internal partial class GroupRestClient
     {

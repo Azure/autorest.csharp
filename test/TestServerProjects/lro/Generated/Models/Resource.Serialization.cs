@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
-namespace lro.Models
+namespace Lro.Models
 {
     public partial class Resource : IUtf8JsonSerializable
     {

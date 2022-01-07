@@ -8,7 +8,7 @@
 using System.Text.Json;
 using Azure.Core;
 
-namespace validation.Models
+namespace Validation.Models
 {
     internal partial class Error
     {

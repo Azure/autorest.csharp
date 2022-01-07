@@ -1,6 +1,6 @@
 {
   "OutputFolder": ".",
-  "Namespace": "body_datetime_rfc1123",
+  "Namespace": "Body_Datetime_Rfc1123",
   "LibraryName": null,
   "SharedSourceFolders": [
     "../../../../artifacts/bin/AutoRest.CSharp/Debug/netcoreapp3.1/Generator.Shared",

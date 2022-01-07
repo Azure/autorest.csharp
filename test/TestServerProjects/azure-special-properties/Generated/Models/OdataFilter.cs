@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace azure_special_properties.Models
+namespace Azure_Special_Properties.Models
 {
     /// <summary> The OdataFilter. </summary>
     internal partial class OdataFilter

@@ -10,9 +10,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
-using azure_parameter_grouping.Models;
+using Azure_Parameter_Grouping.Models;
 
-namespace azure_parameter_grouping
+namespace Azure_Parameter_Grouping
 {
     /// <summary> The ParameterGrouping service client. </summary>
     public partial class ParameterGroupingClient

@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace httpInfrastructure
+namespace HttpInfrastructure
 {
     internal partial class HttpRedirectsRestClient
     {

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
 
-namespace azure_special_properties
+namespace Azure_Special_Properties
 {
     /// <summary> The SubscriptionInMethod service client. </summary>
     public partial class SubscriptionInMethodClient

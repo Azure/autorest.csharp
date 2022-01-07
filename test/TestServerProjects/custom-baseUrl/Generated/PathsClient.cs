@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
 
-namespace custom_baseUrl
+namespace Custom_BaseUrl
 {
     /// <summary> The Paths service client. </summary>
     public partial class PathsClient

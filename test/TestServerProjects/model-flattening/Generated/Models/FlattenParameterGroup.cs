@@ -7,7 +7,7 @@
 
 using System;
 
-namespace model_flattening.Models
+namespace Model_Flattening.Models
 {
     /// <summary> Parameter group. </summary>
     public partial class FlattenParameterGroup

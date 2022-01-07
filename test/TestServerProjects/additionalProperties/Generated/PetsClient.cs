@@ -8,11 +8,11 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using additionalProperties.Models;
+using AdditionalProperties.Models;
 using Azure;
 using Azure.Core.Pipeline;
 
-namespace additionalProperties
+namespace AdditionalProperties
 {
     /// <summary> The Pets service client. </summary>
     public partial class PetsClient

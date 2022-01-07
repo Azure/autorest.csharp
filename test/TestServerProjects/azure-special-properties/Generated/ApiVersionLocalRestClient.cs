@@ -12,7 +12,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace azure_special_properties
+namespace Azure_Special_Properties
 {
     internal partial class ApiVersionLocalRestClient
     {

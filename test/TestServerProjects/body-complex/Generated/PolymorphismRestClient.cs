@@ -12,9 +12,9 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using body_complex.Models;
+using Body_Complex.Models;
 
-namespace body_complex
+namespace Body_Complex
 {
     internal partial class PolymorphismRestClient
     {

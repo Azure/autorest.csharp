@@ -7,7 +7,7 @@
 
 using System;
 
-namespace model_flattening.Models
+namespace Model_Flattening.Models
 {
     /// <summary> The product documentation. </summary>
     public partial class BaseProduct

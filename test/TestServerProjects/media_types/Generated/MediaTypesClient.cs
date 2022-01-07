@@ -11,9 +11,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
-using media_types.Models;
+using Media_Types.Models;
 
-namespace media_types
+namespace Media_Types
 {
     /// <summary> The MediaTypes service client. </summary>
     public partial class MediaTypesClient

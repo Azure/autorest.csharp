@@ -7,7 +7,7 @@
 
 using System;
 
-namespace media_types.Models
+namespace Media_Types.Models
 {
     internal static partial class ContentTypeExtensions
     {

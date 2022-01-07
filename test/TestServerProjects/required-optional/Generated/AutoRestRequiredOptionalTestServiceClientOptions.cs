@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace required_optional
+namespace Required_Optional
 {
     /// <summary> Client options for AutoRestRequiredOptionalTestServiceClient. </summary>
     public partial class AutoRestRequiredOptionalTestServiceClientOptions : ClientOptions

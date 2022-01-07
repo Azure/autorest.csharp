@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace body_time
+namespace Body_Time
 {
     /// <summary> Client options for AutoRestTimeTestServiceClient. </summary>
     public partial class AutoRestTimeTestServiceClientOptions : ClientOptions

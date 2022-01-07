@@ -10,9 +10,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
-using multiple_inheritance.Models;
+using Multiple_Inheritance.Models;
 
-namespace multiple_inheritance
+namespace Multiple_Inheritance
 {
     /// <summary> The MultipleInheritanceService service client. </summary>
     public partial class MultipleInheritanceServiceClient

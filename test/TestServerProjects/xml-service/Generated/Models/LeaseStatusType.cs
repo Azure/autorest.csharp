@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace xml_service.Models
+namespace Xml_Service.Models
 {
     /// <summary> The LeaseStatusType. </summary>
     public enum LeaseStatusType

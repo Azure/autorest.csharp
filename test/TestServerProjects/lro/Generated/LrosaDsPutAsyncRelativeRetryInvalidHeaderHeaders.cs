@@ -8,7 +8,7 @@
 using Azure;
 using Azure.Core;
 
-namespace lro
+namespace Lro
 {
     internal partial class LrosaDsPutAsyncRelativeRetryInvalidHeaderHeaders
     {

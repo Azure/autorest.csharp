@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace custom_baseUrl_paging_LowLevel
+namespace Custom_BaseUrl_Paging_LowLevel
 {
     /// <summary> Client options for AutoRestParameterizedHostTestPagingClient. </summary>
     public partial class AutoRestParameterizedHostTestPagingClientOptions : ClientOptions

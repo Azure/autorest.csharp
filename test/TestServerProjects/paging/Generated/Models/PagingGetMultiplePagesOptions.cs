@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace paging.Models
+namespace Paging.Models
 {
     /// <summary> Parameter group. </summary>
     public partial class PagingGetMultiplePagesOptions

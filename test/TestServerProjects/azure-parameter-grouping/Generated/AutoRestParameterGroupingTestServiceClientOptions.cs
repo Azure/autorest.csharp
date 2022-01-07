@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace azure_parameter_grouping
+namespace Azure_Parameter_Grouping
 {
     /// <summary> Client options for AutoRestParameterGroupingTestServiceClient. </summary>
     public partial class AutoRestParameterGroupingTestServiceClientOptions : ClientOptions

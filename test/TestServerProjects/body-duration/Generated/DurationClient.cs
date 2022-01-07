@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
 
-namespace body_duration
+namespace Body_Duration
 {
     /// <summary> The Duration service client. </summary>
     public partial class DurationClient

@@ -8,7 +8,7 @@
 using System;
 using System.ComponentModel;
 
-namespace lro.Models
+namespace Lro.Models
 {
     /// <summary> The ProductPropertiesProvisioningStateValues. </summary>
     public readonly partial struct ProductPropertiesProvisioningStateValues : IEquatable<ProductPropertiesProvisioningStateValues>

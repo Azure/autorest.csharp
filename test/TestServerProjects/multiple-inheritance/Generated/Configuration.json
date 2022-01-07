@@ -1,6 +1,6 @@
 {
   "OutputFolder": ".",
-  "Namespace": "multiple_inheritance",
+  "Namespace": "Multiple_Inheritance",
   "LibraryName": null,
   "SharedSourceFolders": [
     "../../../../artifacts/bin/AutoRest.CSharp/Debug/netcoreapp3.1/Generator.Shared",

@@ -12,9 +12,9 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using extensible_enums_swagger.Models;
+using Extensible_Enums_Swagger.Models;
 
-namespace extensible_enums_swagger
+namespace Extensible_Enums_Swagger
 {
     internal partial class PetRestClient
     {

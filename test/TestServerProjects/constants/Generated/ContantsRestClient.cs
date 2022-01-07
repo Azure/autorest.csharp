@@ -11,9 +11,9 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using constants.Models;
+using Constants.Models;
 
-namespace constants
+namespace Constants
 {
     internal partial class ContantsRestClient
     {

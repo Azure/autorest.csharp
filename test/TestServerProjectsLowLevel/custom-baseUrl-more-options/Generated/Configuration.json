@@ -1,6 +1,6 @@
 {
   "OutputFolder": ".",
-  "Namespace": "custom_baseUrl_more_options_LowLevel",
+  "Namespace": "Custom_BaseUrl_More_Options_LowLevel",
   "LibraryName": null,
   "SharedSourceFolders": [
     "../../../../artifacts/bin/AutoRest.CSharp/Debug/netcoreapp3.1/Generator.Shared",

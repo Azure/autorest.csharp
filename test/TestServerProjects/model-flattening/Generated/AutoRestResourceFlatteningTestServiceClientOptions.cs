@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace model_flattening
+namespace Model_Flattening
 {
     /// <summary> Client options for AutoRestResourceFlatteningTestServiceClient. </summary>
     public partial class AutoRestResourceFlatteningTestServiceClientOptions : ClientOptions

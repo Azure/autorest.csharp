@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
-namespace additionalProperties.Models
+namespace AdditionalProperties.Models
 {
     public partial class CatAPTrue : IUtf8JsonSerializable
     {

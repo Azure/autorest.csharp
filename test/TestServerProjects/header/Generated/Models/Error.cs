@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace header.Models
+namespace Header.Models
 {
     /// <summary> The Error. </summary>
     internal partial class Error

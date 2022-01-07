@@ -1,6 +1,6 @@
 {
   "OutputFolder": ".",
-  "Namespace": "body_formdata_urlencoded",
+  "Namespace": "Body_Formdata_Urlencoded",
   "LibraryName": null,
   "SharedSourceFolders": [
     "../../../../artifacts/bin/AutoRest.CSharp/Debug/netcoreapp3.1/Generator.Shared",

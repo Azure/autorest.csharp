@@ -8,7 +8,7 @@
 using System.Text.Json;
 using Azure.Core;
 
-namespace xml_service.Models
+namespace Xml_Service.Models
 {
     public partial class JsonOutput
     {

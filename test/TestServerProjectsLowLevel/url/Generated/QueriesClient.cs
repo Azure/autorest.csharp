@@ -12,7 +12,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace url_LowLevel
+namespace Url_LowLevel
 {
     /// <summary> The Queries service client. </summary>
     public partial class QueriesClient

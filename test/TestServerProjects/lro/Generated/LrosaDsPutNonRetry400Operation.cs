@@ -12,9 +12,9 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using lro.Models;
+using Lro.Models;
 
-namespace lro
+namespace Lro
 {
     /// <summary> Long running put request, service returns a 400 to the initial request. </summary>
     public partial class LrosaDsPutNonRetry400Operation : Operation<Product>, IOperationSource<Product>

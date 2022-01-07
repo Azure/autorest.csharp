@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace head
+namespace Head
 {
     /// <summary> Client options for AutoRestHeadTestServiceClient. </summary>
     public partial class AutoRestHeadTestServiceClientOptions : ClientOptions

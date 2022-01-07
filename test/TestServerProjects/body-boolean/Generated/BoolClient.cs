@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
 
-namespace body_boolean
+namespace Body_Boolean
 {
     /// <summary> The Bool service client. </summary>
     public partial class BoolClient

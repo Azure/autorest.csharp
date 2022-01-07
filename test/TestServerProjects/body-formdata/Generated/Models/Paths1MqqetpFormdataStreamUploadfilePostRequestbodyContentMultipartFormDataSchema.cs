@@ -8,7 +8,7 @@
 using System;
 using System.IO;
 
-namespace body_formdata.Models
+namespace Body_Formdata.Models
 {
     /// <summary> The Paths1MqqetpFormdataStreamUploadfilePostRequestbodyContentMultipartFormDataSchema. </summary>
     internal partial class Paths1MqqetpFormdataStreamUploadfilePostRequestbodyContentMultipartFormDataSchema

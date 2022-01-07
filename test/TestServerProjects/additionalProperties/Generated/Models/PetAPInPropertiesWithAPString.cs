@@ -9,7 +9,7 @@ using System;
 using System.Collections.Generic;
 using Azure.Core;
 
-namespace additionalProperties.Models
+namespace AdditionalProperties.Models
 {
     /// <summary> The PetAPInPropertiesWithAPString. </summary>
     public partial class PetAPInPropertiesWithAPString

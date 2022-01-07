@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
 
-namespace httpInfrastructure
+namespace HttpInfrastructure
 {
     /// <summary> The HttpFailure service client. </summary>
     public partial class HttpFailureClient

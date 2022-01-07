@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace lro.Models
+namespace Lro.Models
 {
     /// <summary> The SubResource. </summary>
     public partial class SubResource

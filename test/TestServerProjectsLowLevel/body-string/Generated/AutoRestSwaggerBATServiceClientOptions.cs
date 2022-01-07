@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace body_string_LowLevel
+namespace Body_String_LowLevel
 {
     /// <summary> Client options for AutoRestSwaggerBATServiceClient. </summary>
     public partial class AutoRestSwaggerBATServiceClientOptions : ClientOptions

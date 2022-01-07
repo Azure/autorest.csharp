@@ -11,9 +11,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
-using model_flattening.Models;
+using Model_Flattening.Models;
 
-namespace model_flattening
+namespace Model_Flattening
 {
     /// <summary> The AutoRestResourceFlatteningTestService service client. </summary>
     public partial class AutoRestResourceFlatteningTestServiceClient

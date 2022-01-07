@@ -12,7 +12,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace lro
+namespace Lro
 {
     /// <summary> Long running delete request, service returns a 204 to the initial request, indicating success. </summary>
     public partial class LrosaDsDelete204SucceededOperation : Operation

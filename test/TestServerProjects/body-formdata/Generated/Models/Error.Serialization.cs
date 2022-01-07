@@ -8,7 +8,7 @@
 using System.Text.Json;
 using Azure.Core;
 
-namespace body_formdata.Models
+namespace Body_Formdata.Models
 {
     internal partial class Error
     {

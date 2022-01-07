@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
 
-namespace object_type
+namespace Object_Type
 {
     /// <summary> The ObjectType service client. </summary>
     public partial class ObjectTypeClient

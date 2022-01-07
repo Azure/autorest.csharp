@@ -14,7 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace body_formdata
+namespace Body_Formdata
 {
     internal partial class FormdataRestClient
     {

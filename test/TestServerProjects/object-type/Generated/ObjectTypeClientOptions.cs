@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace object_type
+namespace Object_Type
 {
     /// <summary> Client options for ObjectTypeClient. </summary>
     public partial class ObjectTypeClientOptions : ClientOptions

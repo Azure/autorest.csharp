@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace lro
+namespace Lro
 {
     /// <summary> Client options for AutoRestLongRunningOperationTestServiceClient. </summary>
     public partial class AutoRestLongRunningOperationTestServiceClientOptions : ClientOptions

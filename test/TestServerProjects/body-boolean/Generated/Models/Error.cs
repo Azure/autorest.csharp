@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace body_boolean.Models
+namespace Body_Boolean.Models
 {
     /// <summary> The Error. </summary>
     internal partial class Error

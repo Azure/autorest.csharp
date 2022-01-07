@@ -12,7 +12,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace custom_baseUrl_more_options
+namespace Custom_BaseUrl_More_Options
 {
     internal partial class PathsRestClient
     {

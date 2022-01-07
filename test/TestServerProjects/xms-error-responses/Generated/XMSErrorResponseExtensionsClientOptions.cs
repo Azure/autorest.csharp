@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace xms_error_responses
+namespace Xms_Error_Responses
 {
     /// <summary> Client options for XMSErrorResponseExtensionsClient. </summary>
     public partial class XMSErrorResponseExtensionsClientOptions : ClientOptions

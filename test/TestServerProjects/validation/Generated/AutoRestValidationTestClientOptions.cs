@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace validation
+namespace Validation
 {
     /// <summary> Client options for AutoRestValidationTestClient. </summary>
     public partial class AutoRestValidationTestClientOptions : ClientOptions

@@ -11,7 +11,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace body_complex_LowLevel
+namespace Body_Complex_LowLevel
 {
     /// <summary> The Readonlyproperty service client. </summary>
     public partial class ReadonlypropertyClient

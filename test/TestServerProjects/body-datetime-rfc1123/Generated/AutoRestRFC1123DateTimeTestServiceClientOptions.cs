@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace body_datetime_rfc1123
+namespace Body_Datetime_Rfc1123
 {
     /// <summary> Client options for AutoRestRFC1123DateTimeTestServiceClient. </summary>
     public partial class AutoRestRFC1123DateTimeTestServiceClientOptions : ClientOptions

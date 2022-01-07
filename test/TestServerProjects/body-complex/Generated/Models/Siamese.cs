@@ -7,7 +7,7 @@
 
 using System.Collections.Generic;
 
-namespace body_complex.Models
+namespace Body_Complex.Models
 {
     /// <summary> The Siamese. </summary>
     public partial class Siamese : Cat

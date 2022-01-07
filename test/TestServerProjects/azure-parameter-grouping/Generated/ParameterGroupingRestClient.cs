@@ -11,9 +11,9 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using azure_parameter_grouping.Models;
+using Azure_Parameter_Grouping.Models;
 
-namespace azure_parameter_grouping
+namespace Azure_Parameter_Grouping
 {
     internal partial class ParameterGroupingRestClient
     {

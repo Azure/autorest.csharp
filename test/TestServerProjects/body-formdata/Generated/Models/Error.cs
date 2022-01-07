@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace body_formdata.Models
+namespace Body_Formdata.Models
 {
     /// <summary> The Error. </summary>
     internal partial class Error

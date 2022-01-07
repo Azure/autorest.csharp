@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace body_boolean
+namespace Body_Boolean
 {
     /// <summary> Client options for AutoRestBoolTestServiceClient. </summary>
     public partial class AutoRestBoolTestServiceClientOptions : ClientOptions

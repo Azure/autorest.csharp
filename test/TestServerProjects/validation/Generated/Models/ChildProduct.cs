@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace validation.Models
+namespace Validation.Models
 {
     /// <summary> The product documentation. </summary>
     public partial class ChildProduct

@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
 
-namespace body_file
+namespace Body_File
 {
     /// <summary> The Files service client. </summary>
     public partial class FilesClient

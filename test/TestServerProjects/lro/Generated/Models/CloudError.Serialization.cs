@@ -8,7 +8,7 @@
 using System.Text.Json;
 using Azure.Core;
 
-namespace lro.Models
+namespace Lro.Models
 {
     internal partial class CloudError
     {

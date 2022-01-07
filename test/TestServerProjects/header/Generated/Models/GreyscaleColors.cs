@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace header.Models
+namespace Header.Models
 {
     /// <summary> The GreyscaleColors. </summary>
     public enum GreyscaleColors

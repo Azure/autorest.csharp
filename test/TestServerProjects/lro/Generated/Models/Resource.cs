@@ -8,7 +8,7 @@
 using System.Collections.Generic;
 using Azure.Core;
 
-namespace lro.Models
+namespace Lro.Models
 {
     /// <summary> The Resource. </summary>
     public partial class Resource

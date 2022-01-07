@@ -1,6 +1,6 @@
 {
   "OutputFolder": ".",
-  "Namespace": "subscriptionId_apiVersion",
+  "Namespace": "SubscriptionId_ApiVersion",
   "LibraryName": null,
   "SharedSourceFolders": [
     "../../../../artifacts/bin/AutoRest.CSharp/Debug/netcoreapp3.1/Generator.Shared",

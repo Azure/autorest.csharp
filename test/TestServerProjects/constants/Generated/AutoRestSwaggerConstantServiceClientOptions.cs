@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace constants
+namespace Constants
 {
     /// <summary> Client options for AutoRestSwaggerConstantServiceClient. </summary>
     public partial class AutoRestSwaggerConstantServiceClientOptions : ClientOptions

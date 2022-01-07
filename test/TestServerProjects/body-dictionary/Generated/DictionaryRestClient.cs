@@ -13,9 +13,9 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using body_dictionary.Models;
+using Body_Dictionary.Models;
 
-namespace body_dictionary
+namespace Body_Dictionary
 {
     internal partial class DictionaryRestClient
     {

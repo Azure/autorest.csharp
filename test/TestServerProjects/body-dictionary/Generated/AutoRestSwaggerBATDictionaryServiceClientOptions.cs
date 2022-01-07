@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace body_dictionary
+namespace Body_Dictionary
 {
     /// <summary> Client options for AutoRestSwaggerBATDictionaryServiceClient. </summary>
     public partial class AutoRestSwaggerBATDictionaryServiceClientOptions : ClientOptions
