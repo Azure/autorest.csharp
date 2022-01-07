@@ -163,7 +163,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     {
                         _writer.LineRaw($"// Example: {exampleModel.Name}");
                         clearVariableNames();
-                        var resourceVariableName = WriteGetResource(resource, resource.RequestPaths.First(), exampleModel);
+                        var resourceVariableName = WriteGetResource(resource, resourceIdentifierParams, exampleModel);
 
                         List<string> paramNames = WriteOperationParameters(methodParameters, Enumerable.Empty<Parameter> (), exampleModel);
 
