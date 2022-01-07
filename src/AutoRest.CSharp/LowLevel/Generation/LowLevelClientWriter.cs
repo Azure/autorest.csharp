@@ -138,8 +138,8 @@ namespace AutoRest.CSharp.Generation.Writers
                 var clientOptionsParameter = signature.Parameters.Last(p => p.Type.EqualsIgnoreNullable(client.ClientOptions.Type));
                 writer.Line($"{client.Fields.ClientDiagnosticsField.Name:I} = new {client.Fields.ClientDiagnosticsField.Type}({clientOptionsParameter.Name:I});");
 
-                FormattableString perCallPolicies = $"Array.Empty<{typeof(HttpPipelinePolicy)}>()";
-                FormattableString perRetryPolicies = $"Array.Empty<{typeof(HttpPipelinePolicy)}>()";
+                FormattableString perCallPolicies = $"{typeof(Array)}.Empty<{typeof(HttpPipelinePolicy)}>()";
+                FormattableString perRetryPolicies = $"{typeof(Array)}.Empty<{typeof(HttpPipelinePolicy)}>()";
 
                 var credentialParameter = signature.Parameters.FirstOrDefault(p => p.Name == "credential");
                 if (credentialParameter != null)
