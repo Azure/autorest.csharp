@@ -68,19 +68,23 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return context.Library.TenantExtensions.AsIEnumerable();
         }
 
-        private static IEnumerable<MgmtTypeProvider> FindScopeParents(ResourceType[] parameterizedScopeTypes, BuildContext<MgmtOutputLibrary> context)
+        private static IEnumerable<MgmtTypeProvider> FindScopeParents(ResourceTypeSegment[] parameterizedScopeTypes, BuildContext<MgmtOutputLibrary> context)
         {
+            if (parameterizedScopeTypes.Contains(ResourceTypeSegment.Any))
+            {
+                yield return context.Library.ArmResourceExtensions;
+                yield break;
+            }
             // try all the possible extensions one by one
-            if (parameterizedScopeTypes.Contains(ResourceType.ManagementGroup))
+            if (parameterizedScopeTypes.Contains(ResourceTypeSegment.ManagementGroup))
                 yield return context.Library.ManagementGroupExtensions;
-            if (parameterizedScopeTypes.Contains(ResourceType.ResourceGroup))
+            if (parameterizedScopeTypes.Contains(ResourceTypeSegment.ResourceGroup))
                 yield return context.Library.ResourceGroupExtensions;
-            if (parameterizedScopeTypes.Contains(ResourceType.Subscription))
+            if (parameterizedScopeTypes.Contains(ResourceTypeSegment.Subscription))
                 yield return context.Library.SubscriptionExtensions;
-            if (parameterizedScopeTypes.Contains(ResourceType.Tenant))
+            if (parameterizedScopeTypes.Contains(ResourceTypeSegment.Tenant))
                 yield return context.Library.TenantExtensions;
             // tenant is not quite a concrete resource, therefore we do not include it here
-            // TODO -- if this scope could be anything, we need to add an extension for ArmResource
         }
 
         public static RequestPath ParentRequestPath(this OperationSet operationSet, BuildContext<MgmtOutputLibrary> context)

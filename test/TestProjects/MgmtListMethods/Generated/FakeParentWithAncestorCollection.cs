@@ -14,7 +14,6 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using MgmtListMethods.Models;
 
@@ -22,7 +21,6 @@ namespace MgmtListMethods
 {
     /// <summary> A class representing collection of FakeParentWithAncestor and their operations over its parent. </summary>
     public partial class FakeParentWithAncestorCollection : ArmCollection, IEnumerable<FakeParentWithAncestor>, IAsyncEnumerable<FakeParentWithAncestor>
-
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly FakeParentWithAncestorsRestOperations _fakeParentWithAncestorsRestClient;
@@ -237,14 +235,14 @@ namespace MgmtListMethods
         /// <param name="fakeParentWithAncestorName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithAncestorName"/> is null. </exception>
-        public virtual Response<bool> CheckIfExists(string fakeParentWithAncestorName, CancellationToken cancellationToken = default)
+        public virtual Response<bool> Exists(string fakeParentWithAncestorName, CancellationToken cancellationToken = default)
         {
             if (fakeParentWithAncestorName == null)
             {
                 throw new ArgumentNullException(nameof(fakeParentWithAncestorName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("FakeParentWithAncestorCollection.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("FakeParentWithAncestorCollection.Exists");
             scope.Start();
             try
             {
@@ -262,14 +260,14 @@ namespace MgmtListMethods
         /// <param name="fakeParentWithAncestorName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithAncestorName"/> is null. </exception>
-        public async virtual Task<Response<bool>> CheckIfExistsAsync(string fakeParentWithAncestorName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> ExistsAsync(string fakeParentWithAncestorName, CancellationToken cancellationToken = default)
         {
             if (fakeParentWithAncestorName == null)
             {
                 throw new ArgumentNullException(nameof(fakeParentWithAncestorName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("FakeParentWithAncestorCollection.CheckIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("FakeParentWithAncestorCollection.ExistsAsync");
             scope.Start();
             try
             {
@@ -381,6 +379,6 @@ namespace MgmtListMethods
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, FakeParentWithAncestor, FakeParentWithAncestorData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, FakeParentWithAncestor, FakeParentWithAncestorData> Construct() { }
     }
 }

@@ -14,7 +14,6 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Management;
 using MgmtListMethods.Models;
@@ -23,7 +22,6 @@ namespace MgmtListMethods
 {
     /// <summary> A class representing collection of MgmtGrpParentWithNonResChWithLoc and their operations over its parent. </summary>
     public partial class MgmtGrpParentWithNonResChWithLocCollection : ArmCollection, IEnumerable<MgmtGrpParentWithNonResChWithLoc>, IAsyncEnumerable<MgmtGrpParentWithNonResChWithLoc>
-
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly MgmtGrpParentWithNonResChWithLocsRestOperations _mgmtGrpParentWithNonResChWithLocsRestClient;
@@ -238,14 +236,14 @@ namespace MgmtListMethods
         /// <param name="mgmtGrpParentWithNonResChWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="mgmtGrpParentWithNonResChWithLocName"/> is null. </exception>
-        public virtual Response<bool> CheckIfExists(string mgmtGrpParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
+        public virtual Response<bool> Exists(string mgmtGrpParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
             if (mgmtGrpParentWithNonResChWithLocName == null)
             {
                 throw new ArgumentNullException(nameof(mgmtGrpParentWithNonResChWithLocName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("MgmtGrpParentWithNonResChWithLocCollection.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("MgmtGrpParentWithNonResChWithLocCollection.Exists");
             scope.Start();
             try
             {
@@ -263,14 +261,14 @@ namespace MgmtListMethods
         /// <param name="mgmtGrpParentWithNonResChWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="mgmtGrpParentWithNonResChWithLocName"/> is null. </exception>
-        public async virtual Task<Response<bool>> CheckIfExistsAsync(string mgmtGrpParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> ExistsAsync(string mgmtGrpParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
             if (mgmtGrpParentWithNonResChWithLocName == null)
             {
                 throw new ArgumentNullException(nameof(mgmtGrpParentWithNonResChWithLocName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("MgmtGrpParentWithNonResChWithLocCollection.CheckIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("MgmtGrpParentWithNonResChWithLocCollection.ExistsAsync");
             scope.Start();
             try
             {
@@ -382,6 +380,6 @@ namespace MgmtListMethods
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, MgmtGrpParentWithNonResChWithLoc, MgmtGrpParentWithNonResChWithLocData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, MgmtGrpParentWithNonResChWithLoc, MgmtGrpParentWithNonResChWithLocData> Construct() { }
     }
 }

@@ -1,0 +1,143 @@
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
+using System.Text;
+using AutoRest.CSharp.Mgmt.Decorator;
+using AutoRest.CSharp.Output.Models.Types;
+
+namespace AutoRest.CSharp.Mgmt.Models
+{
+    /// <summary>
+    /// A <see cref="ResourceTypeSegment"/> represents the resource type that derives from a <see cref="RequestPath"/>. It can contain variables in it.
+    /// </summary>
+    internal struct ResourceTypeSegment : IEquatable<ResourceTypeSegment>, IReadOnlyList<Segment>
+    {
+        public static readonly ResourceTypeSegment Scope = new(new Segment[0]);
+
+        public static readonly ResourceTypeSegment Any = new(new[] { new Segment("*") });
+
+        /// <summary>
+        /// The <see cref="ResourceTypeSegment"/> of the resource group resource
+        /// </summary>
+        public static readonly ResourceTypeSegment ResourceGroup = new(new[] {
+            new Segment("Microsoft.Resources"),
+            new Segment("resourceGroups")
+        });
+
+        /// <summary>
+        /// The <see cref="ResourceTypeSegment"/> of the subscription resource
+        /// </summary>
+        public static readonly ResourceTypeSegment Subscription = new(new[] {
+            new Segment("Microsoft.Resources"),
+            new Segment("subscriptions")
+        });
+
+        /// <summary>
+        /// The <see cref="ResourceTypeSegment"/> of the tenant resource
+        /// </summary>
+        public static readonly ResourceTypeSegment Tenant = new(new Segment[] {
+            new Segment("Microsoft.Resources"),
+            new Segment("tenants")
+        });
+
+        /// <summary>
+        /// The <see cref="ResourceTypeSegment"/> of the management group resource
+        /// </summary>
+        public static readonly ResourceTypeSegment ManagementGroup = new(new[] {
+            new Segment("Microsoft.Management"),
+            new Segment("managementGroups")
+        });
+
+        private IReadOnlyList<Segment> _segments;
+
+        public static ResourceTypeSegment ParseRequestPath(RequestPath path)
+        {
+            // first try our built-in resources
+            if (path == RequestPath.Subscription)
+                return ResourceTypeSegment.Subscription;
+            if (path == RequestPath.ResourceGroup)
+                return ResourceTypeSegment.ResourceGroup;
+            if (path == RequestPath.ManagementGroup)
+                return ResourceTypeSegment.ManagementGroup;
+            if (path == RequestPath.Tenant)
+                return ResourceTypeSegment.Tenant;
+            if (path == RequestPath.Any)
+                return ResourceTypeSegment.Any;
+
+            return Parse(path);
+        }
+
+        public ResourceTypeSegment(string path)
+            : this(path.Split('/', StringSplitOptions.RemoveEmptyEntries).Select(segment => new Segment(segment)).ToList())
+        {
+        }
+
+        private ResourceTypeSegment(IReadOnlyList<Segment> segments)
+        {
+            _segments = segments;
+            SerializedType = Segment.BuildSerializedSegments(segments, false);
+            IsConstant = _segments.All(segment => segment.IsConstant);
+        }
+
+        private static ResourceTypeSegment Parse(RequestPath path)
+        {
+            var segment = new List<Segment>();
+            // find providers
+            int index = path.ToList().LastIndexOf(Segment.Providers);
+            if (index < 0)
+                throw new ArgumentException($"Could not set ResourceTypeSegment for operations group {path}. No {Segment.Providers} string found in the URI");
+            segment.Add(path[index + 1]);
+            segment.AddRange(path.Skip(index + 1).Where((_, index) => index % 2 != 0));
+
+            return new ResourceTypeSegment(segment);
+        }
+
+        /// <summary>
+        /// Returns true if every <see cref="Segment"/> in this <see cref="ResourceTypeSegment"/> is constant
+        /// </summary>
+        public bool IsConstant { get; }
+
+        public string SerializedType { get; }
+
+        public Segment Namespace => this[0];
+
+        public IEnumerable<Segment> Types => _segments.Skip(1);
+
+        public Segment this[int index] => _segments[index];
+
+        public int Count => _segments.Count;
+
+        public bool Equals(ResourceTypeSegment other) => SerializedType.Equals(other.SerializedType, StringComparison.InvariantCultureIgnoreCase);
+
+        public IEnumerator<Segment> GetEnumerator() => _segments.GetEnumerator();
+
+        IEnumerator IEnumerable.GetEnumerator() => _segments.GetEnumerator();
+
+        public override bool Equals(object? obj)
+        {
+            if (obj == null)
+                return false;
+            var other = (ResourceTypeSegment)obj;
+            return other.Equals(this);
+        }
+
+        public override int GetHashCode() => SerializedType.GetHashCode();
+
+        public override string? ToString() => SerializedType;
+
+        public static bool operator ==(ResourceTypeSegment left, ResourceTypeSegment right)
+        {
+            return left.Equals(right);
+        }
+
+        public static bool operator !=(ResourceTypeSegment left, ResourceTypeSegment right)
+        {
+            return !(left == right);
+        }
+    }
+}

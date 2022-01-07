@@ -23,7 +23,6 @@ namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing collection of SshPublicKey and their operations over its parent. </summary>
     public partial class SshPublicKeyCollection : ArmCollection, IEnumerable<SshPublicKey>, IAsyncEnumerable<SshPublicKey>
-
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly SshPublicKeysRestOperations _sshPublicKeysRestClient;
@@ -238,14 +237,14 @@ namespace Azure.ResourceManager.Sample
         /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="sshPublicKeyName"/> is null. </exception>
-        public virtual Response<bool> CheckIfExists(string sshPublicKeyName, CancellationToken cancellationToken = default)
+        public virtual Response<bool> Exists(string sshPublicKeyName, CancellationToken cancellationToken = default)
         {
             if (sshPublicKeyName == null)
             {
                 throw new ArgumentNullException(nameof(sshPublicKeyName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyCollection.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyCollection.Exists");
             scope.Start();
             try
             {
@@ -263,14 +262,14 @@ namespace Azure.ResourceManager.Sample
         /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="sshPublicKeyName"/> is null. </exception>
-        public async virtual Task<Response<bool>> CheckIfExistsAsync(string sshPublicKeyName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> ExistsAsync(string sshPublicKeyName, CancellationToken cancellationToken = default)
         {
             if (sshPublicKeyName == null)
             {
                 throw new ArgumentNullException(nameof(sshPublicKeyName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyCollection.CheckIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyCollection.ExistsAsync");
             scope.Start();
             try
             {
@@ -428,6 +427,6 @@ namespace Azure.ResourceManager.Sample
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, SshPublicKey, SshPublicKeyData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, SshPublicKey, SshPublicKeyData> Construct() { }
     }
 }

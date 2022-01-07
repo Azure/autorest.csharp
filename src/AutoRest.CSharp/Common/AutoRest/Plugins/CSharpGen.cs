@@ -35,7 +35,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             ValidateConfiguration (configuration);
 
             Directory.CreateDirectory(configuration.OutputFolder);
-            var projectDirectory = Path.Combine(configuration.OutputFolder, Configuration.ProjectRelativeDirectory);
+            var projectDirectory = Path.Combine(configuration.OutputFolder, configuration.ProjectFolder);
             var project = await GeneratedCodeWorkspace.Create(projectDirectory, configuration.OutputFolder, configuration.SharedSourceFolders);
             var sourceInputModel = new SourceInputModel(await project.GetCompilationAsync());
 
@@ -47,7 +47,14 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             }
             else if (configuration.AzureArm)
             {
-                MgmtTarget.Execute(project, codeModel, sourceInputModel, configuration);
+                if (configuration.MgmtConfiguration.TestModeler is not null)
+                {
+                    MgmtTestTarget.Execute(project, codeModel, sourceInputModel, configuration);
+                }
+                else
+                {
+                    MgmtTarget.Execute(project, codeModel, sourceInputModel, configuration);
+                }
             }
             else
             {

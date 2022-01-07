@@ -14,7 +14,6 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using MgmtMultipleParentResource.Models;
 
@@ -22,7 +21,6 @@ namespace MgmtMultipleParentResource
 {
     /// <summary> A class representing collection of SubParent and their operations over its parent. </summary>
     public partial class SubParentCollection : ArmCollection, IEnumerable<SubParent>, IAsyncEnumerable<SubParent>
-
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly SubParentsRestOperations _subParentsRestClient;
@@ -242,14 +240,14 @@ namespace MgmtMultipleParentResource
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="instanceId"/> is null. </exception>
-        public virtual Response<bool> CheckIfExists(string instanceId, string expand = null, CancellationToken cancellationToken = default)
+        public virtual Response<bool> Exists(string instanceId, string expand = null, CancellationToken cancellationToken = default)
         {
             if (instanceId == null)
             {
                 throw new ArgumentNullException(nameof(instanceId));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SubParentCollection.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("SubParentCollection.Exists");
             scope.Start();
             try
             {
@@ -268,14 +266,14 @@ namespace MgmtMultipleParentResource
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="instanceId"/> is null. </exception>
-        public async virtual Task<Response<bool>> CheckIfExistsAsync(string instanceId, string expand = null, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> ExistsAsync(string instanceId, string expand = null, CancellationToken cancellationToken = default)
         {
             if (instanceId == null)
             {
                 throw new ArgumentNullException(nameof(instanceId));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SubParentCollection.CheckIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("SubParentCollection.ExistsAsync");
             scope.Start();
             try
             {
@@ -389,6 +387,6 @@ namespace MgmtMultipleParentResource
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, SubParent, SubParentData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, SubParent, SubParentData> Construct() { }
     }
 }

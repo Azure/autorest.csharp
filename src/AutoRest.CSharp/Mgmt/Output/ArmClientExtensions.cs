@@ -12,11 +12,9 @@ namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class ArmClientExtensions : MgmtExtensions
     {
-        public ArmClientExtensions(IEnumerable<Operation> allOperations, BuildContext<MgmtOutputLibrary> context) : base(allOperations, context)
+        public ArmClientExtensions(IEnumerable<Operation> allOperations, BuildContext<MgmtOutputLibrary> context) : base(allOperations, "ArmClient", context)
         {
         }
-
-        public override string ResourceName => "ArmClient";
 
         protected override string DefaultName => "ArmClientExtensions";
 

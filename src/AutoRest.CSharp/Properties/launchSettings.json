@@ -276,9 +276,21 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\media_types\\Generated"
     },
+    "MgmtCollectionParent": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtCollectionParent\\Generated"
+    },
+    "MgmtExpandResourceTypes": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtExpandResourceTypes\\Generated"
+    },
     "MgmtExtensionResource": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtExtensionResource\\Generated"
+    },
+    "MgmtKeyvault": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtKeyvault\\src\\Generated"
     },
     "MgmtListMethods": {
       "commandName": "Project",
@@ -438,7 +450,7 @@
     },
     "TypeSchemaMapping": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\TypeSchemaMapping\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\TypeSchemaMapping\\SomeFolder\\Generated"
     },
     "url": {
       "commandName": "Project",
@@ -463,6 +475,10 @@
     "xml-service": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\xml-service\\Generated"
+    },
+    "XmlDeserialization": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\XmlDeserialization\\Generated"
     },
     "xms-error-responses": {
       "commandName": "Project",

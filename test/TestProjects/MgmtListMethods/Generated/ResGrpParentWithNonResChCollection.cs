@@ -23,7 +23,6 @@ namespace MgmtListMethods
 {
     /// <summary> A class representing collection of ResGrpParentWithNonResCh and their operations over its parent. </summary>
     public partial class ResGrpParentWithNonResChCollection : ArmCollection, IEnumerable<ResGrpParentWithNonResCh>, IAsyncEnumerable<ResGrpParentWithNonResCh>
-
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly ResGrpParentWithNonResChesRestOperations _resGrpParentWithNonResChesRestClient;
@@ -238,14 +237,14 @@ namespace MgmtListMethods
         /// <param name="resGrpParentWithNonResChName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithNonResChName"/> is null. </exception>
-        public virtual Response<bool> CheckIfExists(string resGrpParentWithNonResChName, CancellationToken cancellationToken = default)
+        public virtual Response<bool> Exists(string resGrpParentWithNonResChName, CancellationToken cancellationToken = default)
         {
             if (resGrpParentWithNonResChName == null)
             {
                 throw new ArgumentNullException(nameof(resGrpParentWithNonResChName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ResGrpParentWithNonResChCollection.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("ResGrpParentWithNonResChCollection.Exists");
             scope.Start();
             try
             {
@@ -263,14 +262,14 @@ namespace MgmtListMethods
         /// <param name="resGrpParentWithNonResChName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithNonResChName"/> is null. </exception>
-        public async virtual Task<Response<bool>> CheckIfExistsAsync(string resGrpParentWithNonResChName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> ExistsAsync(string resGrpParentWithNonResChName, CancellationToken cancellationToken = default)
         {
             if (resGrpParentWithNonResChName == null)
             {
                 throw new ArgumentNullException(nameof(resGrpParentWithNonResChName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ResGrpParentWithNonResChCollection.CheckIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("ResGrpParentWithNonResChCollection.ExistsAsync");
             scope.Start();
             try
             {
@@ -428,6 +427,6 @@ namespace MgmtListMethods
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, ResGrpParentWithNonResCh, ResGrpParentWithNonResChData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, ResGrpParentWithNonResCh, ResGrpParentWithNonResChData> Construct() { }
     }
 }

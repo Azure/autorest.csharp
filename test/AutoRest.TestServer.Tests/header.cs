@@ -207,7 +207,7 @@ namespace AutoRest.TestServer.Tests
         public Task HeaderResponseDateValid() => TestStatus(async (host, pipeline) =>
         {
             var response = await new HeaderClient(ClientDiagnostics, pipeline, host).RestClient.ResponseDateAsync( scenario: "valid");
-            Assert.AreEqual(DateTimeOffset.Parse("2010-01-01T00:00:00Z"), response.Headers.Value);
+            Assert.AreEqual(DateTimeOffset.Parse("2010-01-01Z"), response.Headers.Value);
             return response.GetRawResponse();
         });
 
@@ -216,7 +216,7 @@ namespace AutoRest.TestServer.Tests
         public Task HeaderResponseDateMin() => TestStatus(async (host, pipeline) =>
         {
             var response = await new HeaderClient(ClientDiagnostics, pipeline, host).RestClient.ResponseDateAsync( scenario: "min");
-            Assert.AreEqual(DateTimeOffset.Parse("0001-01-01T00:00:00Z"), response.Headers.Value);
+            Assert.AreEqual(DateTimeOffset.Parse("0001-01-01Z"), response.Headers.Value);
             return response.GetRawResponse();
         });
 

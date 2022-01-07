@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using Azure.Core;
 using Azure.ResourceManager;
 
 namespace MgmtSingleton
@@ -64,6 +65,17 @@ namespace MgmtSingleton
         public static TenantParentSingleton GetTenantParentSingleton(this ArmClient armClient, ResourceIdentifier id)
         {
             return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new TenantParentSingleton(clientOptions, credential, uri, pipeline, id));
+        }
+        #endregion
+
+        #region SingletonConfig
+        /// <summary> Gets an object representing a SingletonConfig along with the instance operations that can be performed on it but with no data. </summary>
+        /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="SingletonConfig" /> object. </returns>
+        public static SingletonConfig GetSingletonConfig(this ArmClient armClient, ResourceIdentifier id)
+        {
+            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new SingletonConfig(clientOptions, credential, uri, pipeline, id));
         }
         #endregion
     }

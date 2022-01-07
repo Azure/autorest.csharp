@@ -23,7 +23,6 @@ namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing collection of VirtualMachineScaleSet and their operations over its parent. </summary>
     public partial class VirtualMachineScaleSetCollection : ArmCollection, IEnumerable<VirtualMachineScaleSet>, IAsyncEnumerable<VirtualMachineScaleSet>
-
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly VirtualMachineScaleSetsRestOperations _virtualMachineScaleSetsRestClient;
@@ -238,14 +237,14 @@ namespace Azure.ResourceManager.Sample
         /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="vmScaleSetName"/> is null. </exception>
-        public virtual Response<bool> CheckIfExists(string vmScaleSetName, CancellationToken cancellationToken = default)
+        public virtual Response<bool> Exists(string vmScaleSetName, CancellationToken cancellationToken = default)
         {
             if (vmScaleSetName == null)
             {
                 throw new ArgumentNullException(nameof(vmScaleSetName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetCollection.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetCollection.Exists");
             scope.Start();
             try
             {
@@ -263,14 +262,14 @@ namespace Azure.ResourceManager.Sample
         /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="vmScaleSetName"/> is null. </exception>
-        public async virtual Task<Response<bool>> CheckIfExistsAsync(string vmScaleSetName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> ExistsAsync(string vmScaleSetName, CancellationToken cancellationToken = default)
         {
             if (vmScaleSetName == null)
             {
                 throw new ArgumentNullException(nameof(vmScaleSetName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetCollection.CheckIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetCollection.ExistsAsync");
             scope.Start();
             try
             {
@@ -428,6 +427,6 @@ namespace Azure.ResourceManager.Sample
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, VirtualMachineScaleSet, VirtualMachineScaleSetData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, VirtualMachineScaleSet, VirtualMachineScaleSetData> Construct() { }
     }
 }

@@ -11,23 +11,18 @@ namespace AutoRest.TestServer.Tests
     public class RequestContextAllOptionalTests
     {
         [Test]
-        public void NoRequestBodyResponseBody()
+        public void NoRequestBodyResponseBody([Values("NoRequestBodyResponseBody", "NoRequestBodyResponseBodyAsync")] string methodName)
         {
-            var client = typeof(RequestContextAllOptionalClient);
-            var method = client.GetMethod("NoRequestBodyResponseBody");
-            var parameters = method.GetParameters();
-
-            Assert.AreEqual(5, parameters.Length);
-            Assert.AreEqual(parameters[0].ParameterType, typeof(int));
-            Assert.AreEqual(parameters[0].IsOptional, false);
-            Assert.AreEqual(parameters[1].ParameterType, typeof(int?));
-            Assert.AreEqual(parameters[1].IsOptional, true);
-            Assert.AreEqual(parameters[2].ParameterType, typeof(int));
-            Assert.AreEqual(parameters[2].IsOptional, true);
-            Assert.AreEqual(parameters[3].ParameterType, typeof(string));
-            Assert.AreEqual(parameters[3].IsOptional, true);
-            Assert.AreEqual(parameters[4].ParameterType, typeof(RequestContext));
-            Assert.AreEqual(parameters[4].IsOptional, true);
+            TypeAsserts.HasPublicInstanceMethod(
+                typeof(RequestContextAllOptionalClient),
+                methodName,
+                new TypeAsserts.Parameter[] {
+                    new("id", typeof(int)),
+                    new("top", typeof(int?), null),
+                    new("skip", typeof(int), 12),
+                    new("status", typeof(string), "start"),
+                    new("context", typeof(RequestContext), null)
+                });
         }
 
         [Test]

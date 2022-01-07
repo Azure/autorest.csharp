@@ -23,7 +23,6 @@ namespace Azure.Management.Storage
 {
     /// <summary> A class representing collection of StorageAccount and their operations over its parent. </summary>
     public partial class StorageAccountCollection : ArmCollection, IEnumerable<StorageAccount>, IAsyncEnumerable<StorageAccount>
-
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly StorageAccountsRestOperations _storageAccountsRestClient;
@@ -243,14 +242,14 @@ namespace Azure.Management.Storage
         /// <param name="expand"> May be used to expand the properties within account&apos;s properties. By default, data is not included when fetching properties. Currently we only support geoReplicationStats and blobRestoreStatus. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
-        public virtual Response<bool> CheckIfExists(string accountName, StorageAccountExpand? expand = null, CancellationToken cancellationToken = default)
+        public virtual Response<bool> Exists(string accountName, StorageAccountExpand? expand = null, CancellationToken cancellationToken = default)
         {
             if (accountName == null)
             {
                 throw new ArgumentNullException(nameof(accountName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("StorageAccountCollection.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountCollection.Exists");
             scope.Start();
             try
             {
@@ -269,19 +268,75 @@ namespace Azure.Management.Storage
         /// <param name="expand"> May be used to expand the properties within account&apos;s properties. By default, data is not included when fetching properties. Currently we only support geoReplicationStats and blobRestoreStatus. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
-        public async virtual Task<Response<bool>> CheckIfExistsAsync(string accountName, StorageAccountExpand? expand = null, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> ExistsAsync(string accountName, StorageAccountExpand? expand = null, CancellationToken cancellationToken = default)
         {
             if (accountName == null)
             {
                 throw new ArgumentNullException(nameof(accountName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("StorageAccountCollection.CheckIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountCollection.ExistsAsync");
             scope.Start();
             try
             {
                 var response = await GetIfExistsAsync(accountName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
+        /// OperationId: StorageAccounts_CheckNameAvailability
+        /// <summary> Checks that the storage account name is valid and is not already in use. </summary>
+        /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
+        public virtual Response<CheckNameAvailabilityResult> CheckNameAvailability(StorageAccountCheckNameAvailabilityParameters accountName, CancellationToken cancellationToken = default)
+        {
+            if (accountName == null)
+            {
+                throw new ArgumentNullException(nameof(accountName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountCollection.CheckNameAvailability");
+            scope.Start();
+            try
+            {
+                var response = _storageAccountsRestClient.CheckNameAvailability(Id.SubscriptionId, accountName, cancellationToken);
+                return response;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
+        /// OperationId: StorageAccounts_CheckNameAvailability
+        /// <summary> Checks that the storage account name is valid and is not already in use. </summary>
+        /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
+        public async virtual Task<Response<CheckNameAvailabilityResult>> CheckNameAvailabilityAsync(StorageAccountCheckNameAvailabilityParameters accountName, CancellationToken cancellationToken = default)
+        {
+            if (accountName == null)
+            {
+                throw new ArgumentNullException(nameof(accountName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountCollection.CheckNameAvailability");
+            scope.Start();
+            try
+            {
+                var response = await _storageAccountsRestClient.CheckNameAvailabilityAsync(Id.SubscriptionId, accountName, cancellationToken).ConfigureAwait(false);
+                return response;
             }
             catch (Exception e)
             {
@@ -434,6 +489,6 @@ namespace Azure.Management.Storage
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, StorageAccount, StorageAccountData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, StorageAccount, StorageAccountData> Construct() { }
     }
 }

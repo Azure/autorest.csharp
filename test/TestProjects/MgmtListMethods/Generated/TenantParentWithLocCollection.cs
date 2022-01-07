@@ -14,7 +14,6 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using MgmtListMethods.Models;
 
@@ -22,7 +21,6 @@ namespace MgmtListMethods
 {
     /// <summary> A class representing collection of TenantParentWithLoc and their operations over its parent. </summary>
     public partial class TenantParentWithLocCollection : ArmCollection, IEnumerable<TenantParentWithLoc>, IAsyncEnumerable<TenantParentWithLoc>
-
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly TenantParentWithLocsRestOperations _tenantParentWithLocsRestClient;
@@ -237,14 +235,14 @@ namespace MgmtListMethods
         /// <param name="tenantParentWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithLocName"/> is null. </exception>
-        public virtual Response<bool> CheckIfExists(string tenantParentWithLocName, CancellationToken cancellationToken = default)
+        public virtual Response<bool> Exists(string tenantParentWithLocName, CancellationToken cancellationToken = default)
         {
             if (tenantParentWithLocName == null)
             {
                 throw new ArgumentNullException(nameof(tenantParentWithLocName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("TenantParentWithLocCollection.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("TenantParentWithLocCollection.Exists");
             scope.Start();
             try
             {
@@ -262,14 +260,14 @@ namespace MgmtListMethods
         /// <param name="tenantParentWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithLocName"/> is null. </exception>
-        public async virtual Task<Response<bool>> CheckIfExistsAsync(string tenantParentWithLocName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> ExistsAsync(string tenantParentWithLocName, CancellationToken cancellationToken = default)
         {
             if (tenantParentWithLocName == null)
             {
                 throw new ArgumentNullException(nameof(tenantParentWithLocName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("TenantParentWithLocCollection.CheckIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("TenantParentWithLocCollection.ExistsAsync");
             scope.Start();
             try
             {
@@ -381,6 +379,6 @@ namespace MgmtListMethods
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, TenantParentWithLoc, TenantParentWithLocData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, TenantParentWithLoc, TenantParentWithLocData> Construct() { }
     }
 }

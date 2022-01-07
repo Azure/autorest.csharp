@@ -23,7 +23,6 @@ namespace MgmtListMethods
 {
     /// <summary> A class representing collection of ResGrpParentWithAncestorWithLoc and their operations over its parent. </summary>
     public partial class ResGrpParentWithAncestorWithLocCollection : ArmCollection, IEnumerable<ResGrpParentWithAncestorWithLoc>, IAsyncEnumerable<ResGrpParentWithAncestorWithLoc>
-
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly ResGrpParentWithAncestorWithLocsRestOperations _resGrpParentWithAncestorWithLocsRestClient;
@@ -238,14 +237,14 @@ namespace MgmtListMethods
         /// <param name="resGrpParentWithAncestorWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithAncestorWithLocName"/> is null. </exception>
-        public virtual Response<bool> CheckIfExists(string resGrpParentWithAncestorWithLocName, CancellationToken cancellationToken = default)
+        public virtual Response<bool> Exists(string resGrpParentWithAncestorWithLocName, CancellationToken cancellationToken = default)
         {
             if (resGrpParentWithAncestorWithLocName == null)
             {
                 throw new ArgumentNullException(nameof(resGrpParentWithAncestorWithLocName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ResGrpParentWithAncestorWithLocCollection.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("ResGrpParentWithAncestorWithLocCollection.Exists");
             scope.Start();
             try
             {
@@ -263,14 +262,14 @@ namespace MgmtListMethods
         /// <param name="resGrpParentWithAncestorWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithAncestorWithLocName"/> is null. </exception>
-        public async virtual Task<Response<bool>> CheckIfExistsAsync(string resGrpParentWithAncestorWithLocName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> ExistsAsync(string resGrpParentWithAncestorWithLocName, CancellationToken cancellationToken = default)
         {
             if (resGrpParentWithAncestorWithLocName == null)
             {
                 throw new ArgumentNullException(nameof(resGrpParentWithAncestorWithLocName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ResGrpParentWithAncestorWithLocCollection.CheckIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("ResGrpParentWithAncestorWithLocCollection.ExistsAsync");
             scope.Start();
             try
             {
@@ -428,6 +427,6 @@ namespace MgmtListMethods
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, ResGrpParentWithAncestorWithLoc, ResGrpParentWithAncestorWithLocData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, ResGrpParentWithAncestorWithLoc, ResGrpParentWithAncestorWithLocData> Construct() { }
     }
 }

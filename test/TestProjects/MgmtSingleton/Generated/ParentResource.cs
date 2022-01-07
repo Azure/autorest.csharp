@@ -14,7 +14,6 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
-using Azure.ResourceManager.Resources.Models;
 using MgmtSingleton.Models;
 
 namespace MgmtSingleton
@@ -22,6 +21,12 @@ namespace MgmtSingleton
     /// <summary> A Class representing a ParentResource along with the instance operations that can be performed on it. </summary>
     public partial class ParentResource : ArmResource
     {
+        /// <summary> Generate the resource identifier of a <see cref="ParentResource"/> instance. </summary>
+        public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string parentName)
+        {
+            var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}";
+            return new ResourceIdentifier(resourceId);
+        }
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly ParentResourcesRestOperations _parentResourcesRestClient;
         private readonly SingletonResources3RestOperations _singletonResources3RestClient;
@@ -137,7 +142,7 @@ namespace MgmtSingleton
         /// <summary> Lists all available geo-locations. </summary>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
-        public async virtual Task<IEnumerable<Location>> GetAvailableLocationsAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<IEnumerable<AzureLocation>> GetAvailableLocationsAsync(CancellationToken cancellationToken = default)
         {
             return await ListAvailableLocationsAsync(ResourceType, cancellationToken).ConfigureAwait(false);
         }
@@ -145,7 +150,7 @@ namespace MgmtSingleton
         /// <summary> Lists all available geo-locations. </summary>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
-        public virtual IEnumerable<Location> GetAvailableLocations(CancellationToken cancellationToken = default)
+        public virtual IEnumerable<AzureLocation> GetAvailableLocations(CancellationToken cancellationToken = default)
         {
             return ListAvailableLocations(ResourceType, cancellationToken);
         }
@@ -382,7 +387,7 @@ namespace MgmtSingleton
 
         /// <summary> Gets an object representing a SingletonResource along with the instance operations that can be performed on it in the ParentResource. </summary>
         /// <returns> Returns a <see cref="SingletonResource" /> object. </returns>
-        public SingletonResource GetSingletonResource()
+        public virtual SingletonResource GetSingletonResource()
         {
             return new SingletonResource(this, new ResourceIdentifier(Id.ToString() + "/singletonResources/default"));
         }
@@ -392,9 +397,19 @@ namespace MgmtSingleton
 
         /// <summary> Gets an object representing a SingletonResource2 along with the instance operations that can be performed on it in the ParentResource. </summary>
         /// <returns> Returns a <see cref="SingletonResource2" /> object. </returns>
-        public SingletonResource2 GetSingletonResource2()
+        public virtual SingletonResource2 GetSingletonResource2()
         {
             return new SingletonResource2(this, new ResourceIdentifier(Id.ToString() + "/singletonResources2/default"));
+        }
+        #endregion
+
+        #region SingletonConfig
+
+        /// <summary> Gets an object representing a SingletonConfig along with the instance operations that can be performed on it in the ParentResource. </summary>
+        /// <returns> Returns a <see cref="SingletonConfig" /> object. </returns>
+        public virtual SingletonConfig GetSingletonConfig()
+        {
+            return new SingletonConfig(this, new ResourceIdentifier(Id.ToString() + "/singletonConfigs/web"));
         }
         #endregion
     }

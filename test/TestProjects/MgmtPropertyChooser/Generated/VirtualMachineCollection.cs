@@ -12,6 +12,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
+using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
@@ -21,7 +22,7 @@ using MgmtPropertyChooser.Models;
 namespace MgmtPropertyChooser
 {
     /// <summary> A class representing collection of VirtualMachine and their operations over its parent. </summary>
-    public partial class VirtualMachineCollection : ArmCollection, IEnumerable<VirtualMachine>
+    public partial class VirtualMachineCollection : ArmCollection, IEnumerable<VirtualMachine>, IAsyncEnumerable<VirtualMachine>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly VirtualMachinesRestOperations _virtualMachinesRestClient;
@@ -236,14 +237,14 @@ namespace MgmtPropertyChooser
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="vmName"/> is null. </exception>
-        public virtual Response<bool> CheckIfExists(string vmName, CancellationToken cancellationToken = default)
+        public virtual Response<bool> Exists(string vmName, CancellationToken cancellationToken = default)
         {
             if (vmName == null)
             {
                 throw new ArgumentNullException(nameof(vmName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineCollection.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineCollection.Exists");
             scope.Start();
             try
             {
@@ -261,14 +262,14 @@ namespace MgmtPropertyChooser
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="vmName"/> is null. </exception>
-        public async virtual Task<Response<bool>> CheckIfExistsAsync(string vmName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> ExistsAsync(string vmName, CancellationToken cancellationToken = default)
         {
             if (vmName == null)
             {
                 throw new ArgumentNullException(nameof(vmName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineCollection.CheckIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineCollection.ExistsAsync");
             scope.Start();
             try
             {
@@ -287,20 +288,25 @@ namespace MgmtPropertyChooser
         /// OperationId: VirtualMachines_List
         /// <summary> Retrieves information about the model view or the instance view of a virtual machine. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IReadOnlyList<VirtualMachine>> GetAll(CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="VirtualMachine" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<VirtualMachine> GetAll(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineCollection.GetAll");
-            scope.Start();
-            try
+            Page<VirtualMachine> FirstPageFunc(int? pageSizeHint)
             {
-                var response = _virtualMachinesRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken);
-                return Response.FromValue(response.Value.Value.Select(value => new VirtualMachine(Parent, value)).ToArray() as IReadOnlyList<VirtualMachine>, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("VirtualMachineCollection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = _virtualMachinesRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new VirtualMachine(Parent, value)), null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines
@@ -308,20 +314,25 @@ namespace MgmtPropertyChooser
         /// OperationId: VirtualMachines_List
         /// <summary> Retrieves information about the model view or the instance view of a virtual machine. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<IReadOnlyList<VirtualMachine>>> GetAllAsync(CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="VirtualMachine" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<VirtualMachine> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineCollection.GetAll");
-            scope.Start();
-            try
+            async Task<Page<VirtualMachine>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await _virtualMachinesRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(response.Value.Value.Select(value => new VirtualMachine(Parent, value)).ToArray() as IReadOnlyList<VirtualMachine>, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("VirtualMachineCollection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = await _virtualMachinesRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new VirtualMachine(Parent, value)), null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
         /// <summary> Filters the list of <see cref="VirtualMachine" /> for this resource group represented as generic resources. </summary>
@@ -372,15 +383,20 @@ namespace MgmtPropertyChooser
 
         IEnumerator<VirtualMachine> IEnumerable<VirtualMachine>.GetEnumerator()
         {
-            return GetAll().Value.GetEnumerator();
+            return GetAll().GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return GetAll().Value.GetEnumerator();
+            return GetAll().GetEnumerator();
+        }
+
+        IAsyncEnumerator<VirtualMachine> IAsyncEnumerable<VirtualMachine>.GetAsyncEnumerator(CancellationToken cancellationToken)
+        {
+            return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, VirtualMachine, VirtualMachineData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, VirtualMachine, VirtualMachineData> Construct() { }
     }
 }

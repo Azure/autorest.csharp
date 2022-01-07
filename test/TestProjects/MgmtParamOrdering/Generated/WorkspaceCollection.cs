@@ -12,6 +12,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
+using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
@@ -21,7 +22,7 @@ using MgmtParamOrdering.Models;
 namespace MgmtParamOrdering
 {
     /// <summary> A class representing collection of Workspace and their operations over its parent. </summary>
-    public partial class WorkspaceCollection : ArmCollection, IEnumerable<Workspace>
+    public partial class WorkspaceCollection : ArmCollection, IEnumerable<Workspace>, IAsyncEnumerable<Workspace>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly WorkspacesRestOperations _workspacesRestClient;
@@ -236,14 +237,14 @@ namespace MgmtParamOrdering
         /// <param name="workspaceName"> Name of Azure Machine Learning workspace. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="workspaceName"/> is null. </exception>
-        public virtual Response<bool> CheckIfExists(string workspaceName, CancellationToken cancellationToken = default)
+        public virtual Response<bool> Exists(string workspaceName, CancellationToken cancellationToken = default)
         {
             if (workspaceName == null)
             {
                 throw new ArgumentNullException(nameof(workspaceName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WorkspaceCollection.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("WorkspaceCollection.Exists");
             scope.Start();
             try
             {
@@ -261,14 +262,14 @@ namespace MgmtParamOrdering
         /// <param name="workspaceName"> Name of Azure Machine Learning workspace. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="workspaceName"/> is null. </exception>
-        public async virtual Task<Response<bool>> CheckIfExistsAsync(string workspaceName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> ExistsAsync(string workspaceName, CancellationToken cancellationToken = default)
         {
             if (workspaceName == null)
             {
                 throw new ArgumentNullException(nameof(workspaceName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WorkspaceCollection.CheckIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("WorkspaceCollection.ExistsAsync");
             scope.Start();
             try
             {
@@ -287,20 +288,25 @@ namespace MgmtParamOrdering
         /// OperationId: Workspaces_List
         /// <summary> Gets the properties of the specified machine learning workspace. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IReadOnlyList<Workspace>> GetAll(CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="Workspace" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<Workspace> GetAll(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("WorkspaceCollection.GetAll");
-            scope.Start();
-            try
+            Page<Workspace> FirstPageFunc(int? pageSizeHint)
             {
-                var response = _workspacesRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken);
-                return Response.FromValue(response.Value.Value.Select(value => new Workspace(Parent, value)).ToArray() as IReadOnlyList<Workspace>, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("WorkspaceCollection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = _workspacesRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new Workspace(Parent, value)), null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces
@@ -308,20 +314,25 @@ namespace MgmtParamOrdering
         /// OperationId: Workspaces_List
         /// <summary> Gets the properties of the specified machine learning workspace. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<IReadOnlyList<Workspace>>> GetAllAsync(CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="Workspace" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<Workspace> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("WorkspaceCollection.GetAll");
-            scope.Start();
-            try
+            async Task<Page<Workspace>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await _workspacesRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(response.Value.Value.Select(value => new Workspace(Parent, value)).ToArray() as IReadOnlyList<Workspace>, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("WorkspaceCollection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = await _workspacesRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new Workspace(Parent, value)), null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
         /// <summary> Filters the list of <see cref="Workspace" /> for this resource group represented as generic resources. </summary>
@@ -372,15 +383,20 @@ namespace MgmtParamOrdering
 
         IEnumerator<Workspace> IEnumerable<Workspace>.GetEnumerator()
         {
-            return GetAll().Value.GetEnumerator();
+            return GetAll().GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return GetAll().Value.GetEnumerator();
+            return GetAll().GetEnumerator();
+        }
+
+        IAsyncEnumerator<Workspace> IAsyncEnumerable<Workspace>.GetAsyncEnumerator(CancellationToken cancellationToken)
+        {
+            return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, Workspace, WorkspaceData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, Workspace, WorkspaceData> Construct() { }
     }
 }

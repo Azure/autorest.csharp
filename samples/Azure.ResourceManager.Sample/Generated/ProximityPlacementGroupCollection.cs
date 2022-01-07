@@ -23,7 +23,6 @@ namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing collection of ProximityPlacementGroup and their operations over its parent. </summary>
     public partial class ProximityPlacementGroupCollection : ArmCollection, IEnumerable<ProximityPlacementGroup>, IAsyncEnumerable<ProximityPlacementGroup>
-
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly ProximityPlacementGroupsRestOperations _proximityPlacementGroupsRestClient;
@@ -243,14 +242,14 @@ namespace Azure.ResourceManager.Sample
         /// <param name="includeColocationStatus"> includeColocationStatus=true enables fetching the colocation status of all the resources in the proximity placement group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="proximityPlacementGroupName"/> is null. </exception>
-        public virtual Response<bool> CheckIfExists(string proximityPlacementGroupName, string includeColocationStatus = null, CancellationToken cancellationToken = default)
+        public virtual Response<bool> Exists(string proximityPlacementGroupName, string includeColocationStatus = null, CancellationToken cancellationToken = default)
         {
             if (proximityPlacementGroupName == null)
             {
                 throw new ArgumentNullException(nameof(proximityPlacementGroupName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ProximityPlacementGroupCollection.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("ProximityPlacementGroupCollection.Exists");
             scope.Start();
             try
             {
@@ -269,14 +268,14 @@ namespace Azure.ResourceManager.Sample
         /// <param name="includeColocationStatus"> includeColocationStatus=true enables fetching the colocation status of all the resources in the proximity placement group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="proximityPlacementGroupName"/> is null. </exception>
-        public async virtual Task<Response<bool>> CheckIfExistsAsync(string proximityPlacementGroupName, string includeColocationStatus = null, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> ExistsAsync(string proximityPlacementGroupName, string includeColocationStatus = null, CancellationToken cancellationToken = default)
         {
             if (proximityPlacementGroupName == null)
             {
                 throw new ArgumentNullException(nameof(proximityPlacementGroupName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ProximityPlacementGroupCollection.CheckIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("ProximityPlacementGroupCollection.ExistsAsync");
             scope.Start();
             try
             {
@@ -434,6 +433,6 @@ namespace Azure.ResourceManager.Sample
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, ProximityPlacementGroup, ProximityPlacementGroupData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, ProximityPlacementGroup, ProximityPlacementGroupData> Construct() { }
     }
 }
