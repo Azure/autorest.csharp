@@ -43,15 +43,12 @@ namespace AutoRest.CSharp.Mgmt.Output
             return idProperty?.Declaration.Type;
         }
 
-        internal bool IsIdString()
+        internal CSharpType? GetTypeOfName()
         {
             var baseTypes = EnumerateHierarchy().TakeLast(2).ToArray();
             var baseType = baseTypes.Length == 1 || baseTypes[1].Declaration.Name == "Object" ? baseTypes[0] : baseTypes[1];
-            var idProperty = baseType.Properties.Where(p => p.Declaration.Name == "Id").FirstOrDefault();
-            if (idProperty == null)
-                return false; // TEMP
-            var idType = idProperty.Declaration.Type;
-            return (idType.IsFrameworkType && idType.FrameworkType == typeof(string));
+            var nameProperty = baseType.Properties.Where(p => p.Declaration.Name == "Name").FirstOrDefault();
+            return nameProperty?.Declaration.Type;
         }
     }
 }

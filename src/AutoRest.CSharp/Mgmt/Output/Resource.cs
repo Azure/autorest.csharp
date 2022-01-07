@@ -11,9 +11,11 @@ using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Output.Builders;
+using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
+using Azure.Core;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
@@ -341,6 +343,22 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         private string ParentPrefix(Resource resource) => string.Join("", resource.Parent(_context).Select(p => p.ResourceName));
 
+        /// <summary>
+        /// Returns the different method signature for different base path of this resource
+        /// </summary>
+        /// <returns></returns>
+        public IDictionary<RequestPath, MethodSignature> CreateResourceIdentifierMethodSignature()
+        {
+            return RequestPaths.ToDictionary(requestPath => requestPath,
+                requestPath => new MethodSignature(
+                    name: "CreateResourceIdentifier",
+                    description: $"Generate the resource identifier of a <see cref=\"{Type.Name}\"/> instance.",
+                    modifiers: "public static",
+                    returnType: typeof(Azure.Core.ResourceIdentifier),
+                    returnDescription: null,
+                    parameters: requestPath.Where(segment => segment.IsReference).Select(segment => new Parameter(segment.Reference.Name, null, segment.Reference.Type, null, true)).ToArray()));
+        }
+
         public CodeWriterDelegate NewInstanceExpression(IEnumerable<ParameterInvocation> parameterInvocations)
         {
             return w =>
@@ -356,6 +374,27 @@ namespace AutoRest.CSharp.Mgmt.Output
                 w.RemoveTrailingComma();
                 w.Append($")");
             };
+        }
+
+        public CodeWriterDelegate ResourceDataIdExpression(CodeWriterDelegate dataExpression, CodeWriterDelegate createResourceIdentifierExpression)
+        {
+            var typeOfId = ResourceData.GetTypeOfId();
+            if (typeOfId != null && typeOfId.Equals(typeof(ResourceIdentifier)))
+            {
+                return w => w.Append($"{dataExpression}.Id");
+            }
+            else if (typeOfId != null && typeOfId.Equals(typeof(string)))
+            {
+                return w => w.Append($"new {typeof(ResourceIdentifier)}({dataExpression}.Id)");
+            }
+            else
+            {
+                // this resource data does not have an ID property, or the ID is not ResourceIdentifier or string
+                return w =>
+                {
+                    w.Append($"{createResourceIdentifierExpression}");
+                };
+            }
         }
 
         public Parameter OptionsParameter => new Parameter(Name: "options", Description: $"The client parameters to use in these operations.",

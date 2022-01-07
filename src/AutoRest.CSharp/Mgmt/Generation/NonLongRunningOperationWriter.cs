@@ -74,11 +74,16 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         {
                             var resource = operation.WrapperResource;
                             writer.Append($"{typeof(Response)}.FromValue(");
+
+                            CodeWriterDelegate optionsExpression = w => w.Append($"operationsBase");
+                            CodeWriterDelegate dataExpression = w => w.Append($"{responseVariable}.Value");
+                            CodeWriterDelegate idExpression = resource.ResourceDataIdExpression(dataExpression, w => w.Append($"{optionsExpression}.Id"));
+
                             var newInstanceExpression = operation.WrapperResource.NewInstanceExpression(new[]
                             {
-                                new ParameterInvocation(resource.OptionsParameter, w => w.Append($"operationsBase")),
-                                new ParameterInvocation(resource.ResourceIdentifierParameter, w => w.Append($"operationsBase.Id")),
-                                new ParameterInvocation(resource.ResourceDataParameter, w => w.Append($"{responseVariable}.Value")),
+                                new ParameterInvocation(resource.OptionsParameter, optionsExpression),
+                                new ParameterInvocation(resource.ResourceIdentifierParameter, idExpression),
+                                new ParameterInvocation(resource.ResourceDataParameter, dataExpression),
                             });
                             writer.Append($"{newInstanceExpression}, ");
                             writer.Append($"{responseVariable}.GetRawResponse()");

@@ -483,23 +483,21 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
             }
         }
 
-        private void WriteTaggableCommonMethodBranch(MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMapping, bool async)
+        private void WriteTaggableCommonMethodBranch(MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMappings, bool async)
         {
             _writer.Append($"var originalResponse = {GetAwait(async)} ");
             _writer.Append($"{GetRestClientVariableName(operation.RestClient)}.{CreateMethodName(operation.Method.Name, async)}(");
-            WriteArguments(_writer, parameterMapping, true);
+            WriteArguments(_writer, parameterMappings, true);
             _writer.Line($"cancellationToken){GetConfigureAwait(async)};");
 
-            FormattableString dataExpression = $"originalResponse.Value";
-            FormattableString idExpression = $"{dataExpression}.Id";
-            if (_resource.ResourceData.IsIdString())
-                idExpression = $"new {typeof(ResourceIdentifier)}({idExpression})";
+            CodeWriterDelegate dataExpression = w => w.Append($"originalResponse.Value");
+            CodeWriterDelegate idExpression = _resource.ResourceDataIdExpression(dataExpression, CreateResourceIdentifierExpression(_resource, operation.RequestPath, parameterMappings, dataExpression));
 
             var newInstanceExpression = _resource.NewInstanceExpression(new[]
             {
                 new ParameterInvocation(_resource.OptionsParameter, w => w.Append($"this")),
-                new ParameterInvocation(_resource.ResourceIdentifierParameter, w => w.Append(idExpression)),
-                new ParameterInvocation(_resource.ResourceDataParameter, w => w.Append(dataExpression)),
+                new ParameterInvocation(_resource.ResourceIdentifierParameter, idExpression),
+                new ParameterInvocation(_resource.ResourceDataParameter, dataExpression),
             });
             _writer.Line($"return {typeof(Response)}.FromValue({newInstanceExpression}, originalResponse.GetRawResponse());");
         }

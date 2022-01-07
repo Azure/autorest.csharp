@@ -286,16 +286,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.Line($"return response.Value == null");
             writer.Line($"\t? {typeof(Response)}.FromValue<{_resource.Type.Name}>(null, response.GetRawResponse())");
 
-            FormattableString dataExpression = $"response.Value";
-            FormattableString idExpression = $"{dataExpression}.Id";
-            if (_resource.ResourceData.IsIdString())
-                idExpression = $"new {typeof(Azure.Core.ResourceIdentifier)}({idExpression})";
+            CodeWriterDelegate dataExpression = w => w.Append($"response.Value");
+            CodeWriterDelegate idExpression = _resource.ResourceDataIdExpression(dataExpression, CreateResourceIdentifierExpression(_resource, operation.RequestPath, parameterMappings, dataExpression));
 
             var newInstanceExpression = _resource.NewInstanceExpression(new[]
             {
                 new ParameterInvocation(_resource.OptionsParameter, w => w.Append($"this")),
-                new ParameterInvocation(_resource.ResourceIdentifierParameter, w => w.Append(idExpression)),
-                new ParameterInvocation(_resource.ResourceDataParameter, w => w.Append(dataExpression)),
+                new ParameterInvocation(_resource.ResourceIdentifierParameter, idExpression),
+                new ParameterInvocation(_resource.ResourceDataParameter, dataExpression),
             });
             writer.Line($"\t: {typeof(Response)}.FromValue({newInstanceExpression}, response.GetRawResponse());");
         }

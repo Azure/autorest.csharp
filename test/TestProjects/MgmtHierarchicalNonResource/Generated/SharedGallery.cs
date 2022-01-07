@@ -112,7 +112,7 @@ namespace MgmtHierarchicalNonResource
                 var response = await _sharedGalleriesRestClient.GetAsync(Id.SubscriptionId, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new SharedGallery(this, response.Value.Id, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SharedGallery(this, CreateResourceIdentifier(Id.SubscriptionId, Id.Parent.Name, Id.Name), response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -135,7 +135,7 @@ namespace MgmtHierarchicalNonResource
                 var response = _sharedGalleriesRestClient.Get(Id.SubscriptionId, Id.Parent.Name, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new SharedGallery(this, response.Value.Id, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SharedGallery(this, CreateResourceIdentifier(Id.SubscriptionId, Id.Parent.Name, Id.Name), response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -307,6 +307,7 @@ namespace MgmtHierarchicalNonResource
         /// <param name="galleryImageName"> The name of the Shared Gallery Image Definition from which the Image Versions are to be listed. </param>
         /// <param name="sharedTo"> The query parameter to decide what shared galleries to fetch when doing listing operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="galleryImageName"/> is null. </exception>
         /// <returns> An async collection of <see cref="SharedGalleryImageVersion" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<SharedGalleryImageVersion> GetSharedGalleryImageVersionsAsync(string galleryImageName, SharedToValues? sharedTo = null, CancellationToken cancellationToken = default)
         {
@@ -355,6 +356,7 @@ namespace MgmtHierarchicalNonResource
         /// <param name="galleryImageName"> The name of the Shared Gallery Image Definition from which the Image Versions are to be listed. </param>
         /// <param name="sharedTo"> The query parameter to decide what shared galleries to fetch when doing listing operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="galleryImageName"/> is null. </exception>
         /// <returns> A collection of <see cref="SharedGalleryImageVersion" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<SharedGalleryImageVersion> GetSharedGalleryImageVersions(string galleryImageName, SharedToValues? sharedTo = null, CancellationToken cancellationToken = default)
         {

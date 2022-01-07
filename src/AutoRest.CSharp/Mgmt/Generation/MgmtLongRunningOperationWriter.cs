@@ -121,12 +121,15 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 Action<CodeWriter, CodeWriterDelegate> valueCallback = (w, v) =>
                 {
-                    w.Line($"var data = {v};");
+                    CodeWriterDelegate optionsExpression = w => w.Append($"{_operationBaseField}");
+                    CodeWriterDelegate dataExpression = w => w.Append($"data");
+                    CodeWriterDelegate idExpression = mgmtOperation.WrapperResource.ResourceDataIdExpression(dataExpression, w => w.Append($"{optionsExpression}.Id"));
+                    w.Line($"var {dataExpression} = {v};");
                     var newInstanceExpression = mgmtOperation.WrapperResource.NewInstanceExpression(new[]
                     {
-                        new ParameterInvocation(mgmtOperation.WrapperResource.OptionsParameter, r => r.Append($"{_operationBaseField}")),
-                        new ParameterInvocation(mgmtOperation.WrapperResource.ResourceIdentifierParameter, r => r.Append($"{_operationBaseField}.Id")),
-                        new ParameterInvocation(mgmtOperation.WrapperResource.ResourceDataParameter, r => r.Append($"data")),
+                        new ParameterInvocation(mgmtOperation.WrapperResource.OptionsParameter, optionsExpression),
+                        new ParameterInvocation(mgmtOperation.WrapperResource.ResourceIdentifierParameter, idExpression),
+                        new ParameterInvocation(mgmtOperation.WrapperResource.ResourceDataParameter, dataExpression),
                     });
                     w.Line($"return {newInstanceExpression};");
                 };

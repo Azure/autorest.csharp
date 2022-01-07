@@ -350,19 +350,17 @@ namespace AutoRest.CSharp.Mgmt.Generation
             FormattableString converter = $"";
             if (wrapResource != null)
             {
-                FormattableString dataExpression = $"value";
-                FormattableString idExpression = $"{dataExpression}.Id";
-                if (wrapResource.ResourceData.IsIdString())
-                    idExpression = $"new {typeof(ResourceIdentifier)}({idExpression})";
+                CodeWriterDelegate dataExpression = w => w.Append($"value");
+                CodeWriterDelegate idExpression = wrapResource.ResourceDataIdExpression(dataExpression, CreateResourceIdentifierExpression(wrapResource, operation.RequestPath, parameterMappings, dataExpression));
 
                 _writer.UseNamespace("System.Linq");
                 var newInstanceExpression = wrapResource.NewInstanceExpression(new[]
                 {
                     new ParameterInvocation(wrapResource.OptionsParameter, w => w.Append($"{ContextProperty}")),
-                    new ParameterInvocation(wrapResource.ResourceIdentifierParameter, w => w.Append(idExpression)),
-                    new ParameterInvocation(wrapResource.ResourceDataParameter, w => w.Append(dataExpression)),
+                    new ParameterInvocation(wrapResource.ResourceIdentifierParameter, idExpression),
+                    new ParameterInvocation(wrapResource.ResourceDataParameter, dataExpression),
                 });
-                converter = $".Select(value => {newInstanceExpression})";
+                converter = $".Select({dataExpression} => {newInstanceExpression})";
             }
             var itemName = pagingMethod.ItemName.IsNullOrEmpty() ? string.Empty : $".{pagingMethod.ItemName}";
             _writer.Line($"return {typeof(Page)}.FromValues(response.Value{itemName}{converter}, {continuationTokenText}, response.GetRawResponse());");
@@ -387,6 +385,31 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.WriteParameter(parameter);
             }
             _writer.Line($"{typeof(CancellationToken)} cancellationToken = default)");
+        }
+
+        protected CodeWriterDelegate CreateResourceIdentifierExpression(Resource resource, RequestPath requestPath, IEnumerable<ParameterMapping> parameterMappings, CodeWriterDelegate dataExpression)
+        {
+            var methodWithLeastParameters = resource.CreateResourceIdentifierMethodSignature().Values.OrderBy(method => method.Parameters.Length).First();
+            var cache = new List<ParameterMapping>(parameterMappings);
+            return w =>
+            {
+                w.Append($"{resource.Type.Name}.CreateResourceIdentifier(");
+                var parameterInvocations = new List<CodeWriterDelegate>();
+                foreach (var reference in requestPath.Where(s => s.IsReference).Select(s => s.Reference))
+                {
+                    var match = cache.First(p => reference.Name.Equals(p.Parameter.Name, StringComparison.InvariantCultureIgnoreCase) && reference.Type.Equals(p.Parameter.Type));
+                    cache.Remove(match);
+                    parameterInvocations.Add(match.IsPassThru ? w => w.Append($"{match.Parameter.Name}") : w => w.Append(match.ValueExpression));
+                }
+                if (parameterInvocations.Count < methodWithLeastParameters.Parameters.Length)
+                {
+                    parameterInvocations.Add(w => w.Append($"{dataExpression}.Name"));
+                }
+                foreach (var invocation in parameterInvocations)
+                    w.Append($"{invocation}, ");
+                w.RemoveTrailingCharacter();
+                w.Append($")");
+            };
         }
 
         protected class PagingMethodWrapper
@@ -508,11 +531,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
             WriteArguments(_writer, parameterMappings);
             _writer.Line($"cancellationToken){GetConfigureAwait(async)};");
 
-            WriteNormalMethodResponse(operation, async, shouldThrowExceptionWhenNull: shouldThrowExceptionWhenNull);
-        }
-
-        protected virtual void WriteNormalMethodResponse(MgmtRestOperation operation, bool async, bool shouldThrowExceptionWhenNull = false)
-        {
             var wrapResource = WrapResourceDataType(operation.ReturnType, operation);
             if (wrapResource != null)
             {
@@ -522,16 +540,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     _writer.Line($"throw {GetAwait(async)} {ClientDiagnosticsField}.{CreateMethodName("CreateRequestFailedException", async)}(response.GetRawResponse()){GetConfigureAwait(async)};");
                 }
 
-                FormattableString dataExpression = $"response.Value";
-                FormattableString idExpression = $"{dataExpression}.Id";
-                if (wrapResource.ResourceData.IsIdString())
-                    idExpression = $"new {typeof(ResourceIdentifier)}({idExpression})";
+                CodeWriterDelegate dataExpression = w => w.Append($"response.Value");
+                CodeWriterDelegate idExpression = wrapResource.ResourceDataIdExpression(dataExpression, CreateResourceIdentifierExpression(wrapResource, operation.RequestPath, parameterMappings, dataExpression));
 
                 var newInstanceExpression = wrapResource.NewInstanceExpression(new[]
                         {
                             new ParameterInvocation(wrapResource.OptionsParameter, w => w.Append($"{ContextProperty}")),
-                            new ParameterInvocation(wrapResource.ResourceIdentifierParameter, w => w.Append(idExpression)),
-                            new ParameterInvocation(wrapResource.ResourceDataParameter, w => w.Append(dataExpression)),
+                            new ParameterInvocation(wrapResource.ResourceIdentifierParameter, idExpression),
+                            new ParameterInvocation(wrapResource.ResourceDataParameter, dataExpression),
                         });
                 _writer.Line($"return {typeof(Response)}.FromValue({newInstanceExpression}, response.GetRawResponse());");
             }
