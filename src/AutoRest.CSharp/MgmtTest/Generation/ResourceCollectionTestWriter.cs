@@ -14,9 +14,7 @@ using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
-using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Mgmt.Models;
-using Azure.ResourceManager.Resources;
 using System.Diagnostics.CodeAnalysis;
 
 namespace AutoRest.CSharp.MgmtTest.Generation
@@ -74,9 +72,6 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             writer.UseNamespace("System.Net");
             writer.UseNamespace("Azure.Core.TestFramework");
             writer.UseNamespace("Azure.ResourceManager.TestFramework");
-            writer.UseNamespace("Azure.ResourceManager.Resources");
-            writer.UseNamespace("Azure.ResourceManager.Resources.Models");
-            writer.UseNamespace($"{Context.DefaultNamespace}.Models");
         }
 
         protected void WriteTesterCtors()

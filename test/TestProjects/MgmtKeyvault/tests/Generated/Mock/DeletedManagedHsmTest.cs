@@ -10,11 +10,8 @@ using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 using Azure.Core.TestFramework;
-using Azure.ResourceManager.Resources;
-using Azure.ResourceManager.Resources.Models;
 using Azure.ResourceManager.TestFramework;
 using MgmtKeyvault;
-using MgmtKeyvault.Models;
 
 namespace MgmtKeyvault.Tests.Mock
 {
@@ -31,11 +28,7 @@ namespace MgmtKeyvault.Tests.Mock
         public async Task Get()
         {
             // Example: Retrieve a deleted managed HSM
-<<<<<<< HEAD
-            var deletedManagedHsmId = MgmtKeyvault.DeletedManagedHsm.CreateResourceIdentifier(/ subscriptions /{ subscriptionId}/ providers / Microsoft.KeyVault / locations /{ location}/ deletedManagedHSMs /{ name});
-=======
             var deletedManagedHsmId = MgmtKeyvault.DeletedManagedHsm.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "westus", "hsm1");
->>>>>>> generate-test
             var deletedManagedHsm = GetArmClient().GetDeletedManagedHsm(deletedManagedHsmId);
 
             await deletedManagedHsm.GetAsync();
@@ -45,11 +38,7 @@ namespace MgmtKeyvault.Tests.Mock
         public async Task PurgeDeleted()
         {
             // Example: Purge a managed HSM Pool
-<<<<<<< HEAD
-            var deletedManagedHsmId = MgmtKeyvault.DeletedManagedHsm.CreateResourceIdentifier(/ subscriptions /{ subscriptionId}/ providers / Microsoft.KeyVault / locations /{ location}/ deletedManagedHSMs /{ name});
-=======
             var deletedManagedHsmId = MgmtKeyvault.DeletedManagedHsm.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "westus", "hsm1");
->>>>>>> generate-test
             var deletedManagedHsm = GetArmClient().GetDeletedManagedHsm(deletedManagedHsmId);
 
             await deletedManagedHsm.PurgeDeletedAsync(true);

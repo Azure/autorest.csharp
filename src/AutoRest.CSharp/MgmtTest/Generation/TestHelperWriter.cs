@@ -4,8 +4,6 @@
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Output.Models.Types;
-using Azure.ResourceManager.Resources;
-using Azure.ResourceManager;
 
 namespace AutoRest.CSharp.MgmtTest.Generation
 {

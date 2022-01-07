@@ -10,11 +10,8 @@ using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 using Azure.Core.TestFramework;
-using Azure.ResourceManager.Resources;
-using Azure.ResourceManager.Resources.Models;
 using Azure.ResourceManager.TestFramework;
 using MgmtKeyvault;
-using MgmtKeyvault.Models;
 
 namespace MgmtKeyvault.Tests.Mock
 {
@@ -31,11 +28,7 @@ namespace MgmtKeyvault.Tests.Mock
         public async Task Get()
         {
             // Example: KeyVaultGetPrivateEndpointConnection
-<<<<<<< HEAD
-            var privateEndpointConnectionId = MgmtKeyvault.PrivateEndpointConnection.CreateResourceIdentifier(/ subscriptions /{ subscriptionId}/ resourceGroups /{ resourceGroupName}/ providers / Microsoft.KeyVault / vaults /{ vaultName}/ privateEndpointConnections /{ privateEndpointConnectionName});
-=======
             var privateEndpointConnectionId = MgmtKeyvault.PrivateEndpointConnection.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-vault", "sample-pec");
->>>>>>> generate-test
             var privateEndpointConnection = GetArmClient().GetPrivateEndpointConnection(privateEndpointConnectionId);
 
             await privateEndpointConnection.GetAsync();
@@ -45,11 +38,7 @@ namespace MgmtKeyvault.Tests.Mock
         public async Task Delete()
         {
             // Example: KeyVaultDeletePrivateEndpointConnection
-<<<<<<< HEAD
-            var privateEndpointConnectionId = MgmtKeyvault.PrivateEndpointConnection.CreateResourceIdentifier(/ subscriptions /{ subscriptionId}/ resourceGroups /{ resourceGroupName}/ providers / Microsoft.KeyVault / vaults /{ vaultName}/ privateEndpointConnections /{ privateEndpointConnectionName});
-=======
             var privateEndpointConnectionId = MgmtKeyvault.PrivateEndpointConnection.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-vault", "sample-pec");
->>>>>>> generate-test
             var privateEndpointConnection = GetArmClient().GetPrivateEndpointConnection(privateEndpointConnectionId);
 
             await privateEndpointConnection.DeleteAsync(true);
