@@ -43,7 +43,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private IDictionary<string, ResourceData>? _rawRequestPathToResourceData;
 
         /// <summary>
-        /// TODO -- add description
+        /// This is a map from request path to the <see cref="ResourceObjectAssociation"/> which consists from <see cref="ResourceTypeSegment"/>, <see cref="Output.ResourceData"/>, <see cref="Resource"/> and <see cref="ResouColl"/>
         /// </summary>
         private Dictionary<RequestPath, ResourceObjectAssociation>? _requestPathToResources;
 
@@ -207,7 +207,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return _rawRequestPathToOperationSets[requestPath];
         }
 
-        public IDictionary<Operation, RestClientMethod> RestClientMethods => EnsureRestClientMethods();
+        public RestClientMethod GetRestClientMethod(Operation operation) => EnsureRestClientMethods()[operation];
 
         public IDictionary<RestClientMethod, PagingMethod> PagingMethods => EnsurePagingMethods();
 

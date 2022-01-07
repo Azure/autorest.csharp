@@ -59,7 +59,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             if (_operationToRequestPathCache.TryGetValue(operation, out var requestPath))
                 return requestPath;
 
-            requestPath = new RequestPath(context.Library.RestClientMethods[operation]);
+            requestPath = new RequestPath(context.Library.GetRestClientMethod(operation));
             _operationToRequestPathCache.TryAdd(operation, requestPath);
             return requestPath;
         }
@@ -68,7 +68,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         {
             operationSetOfResource = null;
             // first we need to ensure this operation at least returns a collection of something
-            var restClientMethod = context.Library.RestClientMethods[operation];
+            var restClientMethod = context.Library.GetRestClientMethod(operation);
             if (!restClientMethod.IsListMethod(out var valueType))
                 return false;
 

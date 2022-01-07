@@ -98,7 +98,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 {
                     var requestPath = operation.GetRequestPath(_context);
                     var restOperation = new MgmtRestOperation(
-                        _context.Library.RestClientMethods[operation],
+                        _context.Library.GetRestClientMethod(operation),
                         _context.Library.GetRestClient(operation),
                         requestPath,
                         GetContextualPath(operationSet, requestPath),
@@ -213,7 +213,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 return positions.Contains(Position);
             }
             // In the resource class, we need to exclude the List operations
-            var restClientMethod = _context.Library.RestClientMethods[operation];
+            var restClientMethod = _context.Library.GetRestClientMethod(operation);
             if (restClientMethod.IsListMethod(out var valueType))
                 return !valueType.EqualsByName(ResourceData.Type);
             return true;
@@ -274,7 +274,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                         GetOperationName(operation, resourceRestClient.OperationGroup.Key);
                     // get the MgmtRestOperation with a proper name
                     var restOperation = new MgmtRestOperation(
-                        _context.Library.RestClientMethods[operation],
+                        _context.Library.GetRestClientMethod(operation),
                         _context.Library.GetRestClient(operation),
                         requestPath,
                         contextualPath,
