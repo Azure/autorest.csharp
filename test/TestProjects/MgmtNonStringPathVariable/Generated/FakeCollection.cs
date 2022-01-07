@@ -127,7 +127,7 @@ namespace MgmtNonStringPathVariable
                 var response = _fakesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, fakeName, expand, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new Fake(Parent, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Fake(Parent, response.Value.Id, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -152,7 +152,7 @@ namespace MgmtNonStringPathVariable
                 var response = await _fakesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, fakeName, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new Fake(Parent, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Fake(Parent, response.Value.Id, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -174,7 +174,7 @@ namespace MgmtNonStringPathVariable
                 var response = _fakesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, fakeName, expand, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<Fake>(null, response.GetRawResponse())
-                    : Response.FromValue(new Fake(this, response.Value), response.GetRawResponse());
+                    : Response.FromValue(new Fake(this, response.Value.Id, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -196,7 +196,7 @@ namespace MgmtNonStringPathVariable
                 var response = await _fakesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, fakeName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<Fake>(null, response.GetRawResponse())
-                    : Response.FromValue(new Fake(this, response.Value), response.GetRawResponse());
+                    : Response.FromValue(new Fake(this, response.Value.Id, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -261,7 +261,7 @@ namespace MgmtNonStringPathVariable
                 try
                 {
                     var response = _fakesRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, optionalParam, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new Fake(Parent, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new Fake(Parent, value.Id, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -288,7 +288,7 @@ namespace MgmtNonStringPathVariable
                 try
                 {
                     var response = await _fakesRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, optionalParam, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new Fake(Parent, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new Fake(Parent, value.Id, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {

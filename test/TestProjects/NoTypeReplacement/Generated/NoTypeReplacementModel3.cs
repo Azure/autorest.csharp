@@ -37,11 +37,12 @@ namespace NoTypeReplacement
 
         /// <summary> Initializes a new instance of the <see cref = "NoTypeReplacementModel3"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
-        /// <param name="resource"> The resource that is the target of operations. </param>
-        internal NoTypeReplacementModel3(ArmResource options, NoTypeReplacementModel3Data resource) : base(options, resource.Id)
+        /// <param name="id"> The identifier of the resource that is the target of operations. </param>
+        /// <param name="data"> The resource that is the target of operations. </param>
+        internal NoTypeReplacementModel3(ArmResource options, ResourceIdentifier id, NoTypeReplacementModel3Data data) : base(options, id)
         {
             HasData = true;
-            _data = resource;
+            _data = data;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _noTypeReplacementModel3sRestClient = new NoTypeReplacementModel3SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
@@ -98,7 +99,7 @@ namespace NoTypeReplacement
                 var response = await _noTypeReplacementModel3sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new NoTypeReplacementModel3(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new NoTypeReplacementModel3(this, response.Value.Id, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -117,7 +118,7 @@ namespace NoTypeReplacement
                 var response = _noTypeReplacementModel3sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new NoTypeReplacementModel3(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new NoTypeReplacementModel3(this, response.Value.Id, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

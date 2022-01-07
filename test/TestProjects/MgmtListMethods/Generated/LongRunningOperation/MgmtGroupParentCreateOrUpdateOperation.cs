@@ -27,7 +27,7 @@ namespace MgmtListMethods.Models
 
         internal MgmtGroupParentCreateOrUpdateOperation(ArmResource operationsBase, Response<MgmtGroupParentData> response)
         {
-            _operation = new OperationOrResponseInternals<MgmtGroupParent>(Response.FromValue(new MgmtGroupParent(operationsBase, response.Value), response.GetRawResponse()));
+            _operation = new OperationOrResponseInternals<MgmtGroupParent>(Response.FromValue(new MgmtGroupParent(operationsBase, response.Value.Id, response.Value), response.GetRawResponse()));
         }
 
         /// <inheritdoc />

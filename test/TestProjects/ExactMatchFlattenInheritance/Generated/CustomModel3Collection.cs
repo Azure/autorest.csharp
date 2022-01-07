@@ -140,7 +140,7 @@ namespace ExactMatchFlattenInheritance
                 var response = _customModel3sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new CustomModel3(Parent, response.Value), response.GetRawResponse());
+                return Response.FromValue(new CustomModel3(Parent, new ResourceIdentifier(response.Value.Id), response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -170,7 +170,7 @@ namespace ExactMatchFlattenInheritance
                 var response = await _customModel3sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new CustomModel3(Parent, response.Value), response.GetRawResponse());
+                return Response.FromValue(new CustomModel3(Parent, new ResourceIdentifier(response.Value.Id), response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -197,7 +197,7 @@ namespace ExactMatchFlattenInheritance
                 var response = _customModel3sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<CustomModel3>(null, response.GetRawResponse())
-                    : Response.FromValue(new CustomModel3(this, response.Value), response.GetRawResponse());
+                    : Response.FromValue(new CustomModel3(this, new ResourceIdentifier(response.Value.Id), response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -224,7 +224,7 @@ namespace ExactMatchFlattenInheritance
                 var response = await _customModel3sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<CustomModel3>(null, response.GetRawResponse())
-                    : Response.FromValue(new CustomModel3(this, response.Value), response.GetRawResponse());
+                    : Response.FromValue(new CustomModel3(this, new ResourceIdentifier(response.Value.Id), response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -298,7 +298,7 @@ namespace ExactMatchFlattenInheritance
                 try
                 {
                     var response = _customModel3sRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new CustomModel3(Parent, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new CustomModel3(Parent, new ResourceIdentifier(value.Id), value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -324,7 +324,7 @@ namespace ExactMatchFlattenInheritance
                 try
                 {
                     var response = await _customModel3sRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new CustomModel3(Parent, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new CustomModel3(Parent, new ResourceIdentifier(value.Id), value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {

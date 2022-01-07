@@ -38,11 +38,12 @@ namespace Azure.Management.Storage
 
         /// <summary> Initializes a new instance of the <see cref = "ManagementPolicy"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
-        /// <param name="resource"> The resource that is the target of operations. </param>
-        internal ManagementPolicy(ArmResource options, ManagementPolicyData resource) : base(options, resource.Id)
+        /// <param name="id"> The identifier of the resource that is the target of operations. </param>
+        /// <param name="data"> The resource that is the target of operations. </param>
+        internal ManagementPolicy(ArmResource options, ResourceIdentifier id, ManagementPolicyData data) : base(options, id)
         {
             HasData = true;
-            _data = resource;
+            _data = data;
             Parent = options;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _managementPoliciesRestClient = new ManagementPoliciesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
@@ -108,7 +109,7 @@ namespace Azure.Management.Storage
                 var response = await _managementPoliciesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new ManagementPolicy(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ManagementPolicy(this, response.Value.Id, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -131,7 +132,7 @@ namespace Azure.Management.Storage
                 var response = _managementPoliciesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new ManagementPolicy(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ManagementPolicy(this, response.Value.Id, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

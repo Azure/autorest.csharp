@@ -27,7 +27,7 @@ namespace Azure.Management.Storage.Models
 
         internal FileServiceSetServicePropertiesOperation(ArmResource operationsBase, Response<FileServiceData> response)
         {
-            _operation = new OperationOrResponseInternals<FileService>(Response.FromValue(new FileService(operationsBase, response.Value), response.GetRawResponse()));
+            _operation = new OperationOrResponseInternals<FileService>(Response.FromValue(new FileService(operationsBase, response.Value.Id, response.Value), response.GetRawResponse()));
         }
 
         /// <inheritdoc />

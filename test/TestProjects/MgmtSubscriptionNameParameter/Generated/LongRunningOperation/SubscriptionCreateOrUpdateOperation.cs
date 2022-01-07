@@ -27,7 +27,7 @@ namespace MgmtSubscriptionNameParameter.Models
 
         internal SubscriptionCreateOrUpdateOperation(ArmResource operationsBase, Response<SBSubscriptionData> response)
         {
-            _operation = new OperationOrResponseInternals<SBSubscription>(Response.FromValue(new SBSubscription(operationsBase, response.Value), response.GetRawResponse()));
+            _operation = new OperationOrResponseInternals<SBSubscription>(Response.FromValue(new SBSubscription(operationsBase, response.Value.Id, response.Value), response.GetRawResponse()));
         }
 
         /// <inheritdoc />

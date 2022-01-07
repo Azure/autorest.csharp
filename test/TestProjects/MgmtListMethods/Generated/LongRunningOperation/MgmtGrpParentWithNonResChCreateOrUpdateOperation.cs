@@ -27,7 +27,7 @@ namespace MgmtListMethods.Models
 
         internal MgmtGrpParentWithNonResChCreateOrUpdateOperation(ArmResource operationsBase, Response<MgmtGrpParentWithNonResChData> response)
         {
-            _operation = new OperationOrResponseInternals<MgmtGrpParentWithNonResCh>(Response.FromValue(new MgmtGrpParentWithNonResCh(operationsBase, response.Value), response.GetRawResponse()));
+            _operation = new OperationOrResponseInternals<MgmtGrpParentWithNonResCh>(Response.FromValue(new MgmtGrpParentWithNonResCh(operationsBase, response.Value.Id, response.Value), response.GetRawResponse()));
         }
 
         /// <inheritdoc />

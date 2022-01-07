@@ -27,7 +27,7 @@ namespace Azure.Management.Storage.Models
 
         internal BlobContainerCreateOrUpdateImmutabilityPolicyOperation(ArmResource operationsBase, Response<ImmutabilityPolicyData> response)
         {
-            _operation = new OperationOrResponseInternals<ImmutabilityPolicy>(Response.FromValue(new ImmutabilityPolicy(operationsBase, response.Value), response.GetRawResponse()));
+            _operation = new OperationOrResponseInternals<ImmutabilityPolicy>(Response.FromValue(new ImmutabilityPolicy(operationsBase, response.Value.Id, response.Value), response.GetRawResponse()));
         }
 
         /// <inheritdoc />

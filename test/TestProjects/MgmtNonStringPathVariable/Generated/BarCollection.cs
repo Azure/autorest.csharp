@@ -123,7 +123,7 @@ namespace MgmtNonStringPathVariable
                 var response = _barsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, barName, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new Bar(Parent, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Bar(Parent, response.Value.Id, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -147,7 +147,7 @@ namespace MgmtNonStringPathVariable
                 var response = await _barsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, barName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new Bar(Parent, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Bar(Parent, response.Value.Id, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -168,7 +168,7 @@ namespace MgmtNonStringPathVariable
                 var response = _barsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, barName, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<Bar>(null, response.GetRawResponse())
-                    : Response.FromValue(new Bar(this, response.Value), response.GetRawResponse());
+                    : Response.FromValue(new Bar(this, response.Value.Id, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -189,7 +189,7 @@ namespace MgmtNonStringPathVariable
                 var response = await _barsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, barName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<Bar>(null, response.GetRawResponse())
-                    : Response.FromValue(new Bar(this, response.Value), response.GetRawResponse());
+                    : Response.FromValue(new Bar(this, response.Value.Id, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

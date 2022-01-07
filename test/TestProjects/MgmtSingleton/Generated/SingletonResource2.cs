@@ -38,11 +38,12 @@ namespace MgmtSingleton
 
         /// <summary> Initializes a new instance of the <see cref = "SingletonResource2"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
-        /// <param name="resource"> The resource that is the target of operations. </param>
-        internal SingletonResource2(ArmResource options, SingletonResource2Data resource) : base(options, resource.Id)
+        /// <param name="id"> The identifier of the resource that is the target of operations. </param>
+        /// <param name="data"> The resource that is the target of operations. </param>
+        internal SingletonResource2(ArmResource options, ResourceIdentifier id, SingletonResource2Data data) : base(options, id)
         {
             HasData = true;
-            _data = resource;
+            _data = data;
             Parent = options;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _singletonResources2RestClient = new SingletonResources2RestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
@@ -108,7 +109,7 @@ namespace MgmtSingleton
                 var response = await _singletonResources2RestClient.GetDefaultAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new SingletonResource2(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SingletonResource2(this, response.Value.Id, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -131,7 +132,7 @@ namespace MgmtSingleton
                 var response = _singletonResources2RestClient.GetDefault(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new SingletonResource2(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SingletonResource2(this, response.Value.Id, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -287,7 +288,7 @@ namespace MgmtSingleton
             try
             {
                 var response = await _singletonResources2RestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new SingletonResource2(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SingletonResource2(this, response.Value.Id, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -315,7 +316,7 @@ namespace MgmtSingleton
             try
             {
                 var response = _singletonResources2RestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
-                return Response.FromValue(new SingletonResource2(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SingletonResource2(this, response.Value.Id, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

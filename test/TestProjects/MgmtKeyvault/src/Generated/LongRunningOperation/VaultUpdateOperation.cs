@@ -27,7 +27,7 @@ namespace MgmtKeyvault.Models
 
         internal VaultUpdateOperation(ArmResource operationsBase, Response<VaultData> response)
         {
-            _operation = new OperationOrResponseInternals<Vault>(Response.FromValue(new Vault(operationsBase, response.Value), response.GetRawResponse()));
+            _operation = new OperationOrResponseInternals<Vault>(Response.FromValue(new Vault(operationsBase, response.Value.Id, response.Value), response.GetRawResponse()));
         }
 
         /// <inheritdoc />

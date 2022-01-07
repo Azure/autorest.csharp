@@ -38,11 +38,12 @@ namespace MgmtSingleton
 
         /// <summary> Initializes a new instance of the <see cref = "SingletonConfig"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
-        /// <param name="resource"> The resource that is the target of operations. </param>
-        internal SingletonConfig(ArmResource options, SingletonConfigData resource) : base(options, resource.Id)
+        /// <param name="id"> The identifier of the resource that is the target of operations. </param>
+        /// <param name="data"> The resource that is the target of operations. </param>
+        internal SingletonConfig(ArmResource options, ResourceIdentifier id, SingletonConfigData data) : base(options, id)
         {
             HasData = true;
-            _data = resource;
+            _data = data;
             Parent = options;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _singletonConfigsRestClient = new SingletonConfigsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
@@ -108,7 +109,7 @@ namespace MgmtSingleton
                 var response = await _singletonConfigsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new SingletonConfig(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SingletonConfig(this, response.Value.Id, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -131,7 +132,7 @@ namespace MgmtSingleton
                 var response = _singletonConfigsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new SingletonConfig(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SingletonConfig(this, response.Value.Id, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

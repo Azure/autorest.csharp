@@ -26,7 +26,7 @@ namespace MgmtSingleton.Models
 
         internal TenantParentSingletonCreateOrUpdateOperation(ArmResource operationsBase, Response<TenantParentSingletonData> response)
         {
-            _operation = new OperationOrResponseInternals<TenantParentSingleton>(Response.FromValue(new TenantParentSingleton(operationsBase, response.Value), response.GetRawResponse()));
+            _operation = new OperationOrResponseInternals<TenantParentSingleton>(Response.FromValue(new TenantParentSingleton(operationsBase, response.Value.Id, response.Value), response.GetRawResponse()));
         }
 
         /// <inheritdoc />

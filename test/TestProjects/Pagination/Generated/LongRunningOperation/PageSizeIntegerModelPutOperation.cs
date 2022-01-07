@@ -26,7 +26,7 @@ namespace Pagination.Models
 
         internal PageSizeIntegerModelPutOperation(ArmResource operationsBase, Response<PageSizeIntegerModelData> response)
         {
-            _operation = new OperationOrResponseInternals<PageSizeIntegerModel>(Response.FromValue(new PageSizeIntegerModel(operationsBase, response.Value), response.GetRawResponse()));
+            _operation = new OperationOrResponseInternals<PageSizeIntegerModel>(Response.FromValue(new PageSizeIntegerModel(operationsBase, new ResourceIdentifier(response.Value.Id), response.Value), response.GetRawResponse()));
         }
 
         /// <inheritdoc />

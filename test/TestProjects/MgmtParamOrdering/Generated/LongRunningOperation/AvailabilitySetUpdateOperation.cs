@@ -27,7 +27,7 @@ namespace MgmtParamOrdering.Models
 
         internal AvailabilitySetUpdateOperation(ArmResource operationsBase, Response<AvailabilitySetData> response)
         {
-            _operation = new OperationOrResponseInternals<AvailabilitySet>(Response.FromValue(new AvailabilitySet(operationsBase, response.Value), response.GetRawResponse()));
+            _operation = new OperationOrResponseInternals<AvailabilitySet>(Response.FromValue(new AvailabilitySet(operationsBase, response.Value.Id, response.Value), response.GetRawResponse()));
         }
 
         /// <inheritdoc />

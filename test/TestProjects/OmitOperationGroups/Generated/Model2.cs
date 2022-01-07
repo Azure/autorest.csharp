@@ -39,11 +39,12 @@ namespace OmitOperationGroups
 
         /// <summary> Initializes a new instance of the <see cref = "Model2"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
-        /// <param name="resource"> The resource that is the target of operations. </param>
-        internal Model2(ArmResource options, Model2Data resource) : base(options, resource.Id)
+        /// <param name="id"> The identifier of the resource that is the target of operations. </param>
+        /// <param name="data"> The resource that is the target of operations. </param>
+        internal Model2(ArmResource options, ResourceIdentifier id, Model2Data data) : base(options, id)
         {
             HasData = true;
-            _data = resource;
+            _data = data;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _model2sRestClient = new Model2SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
             _model4sRestClient = new Model4SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
@@ -106,7 +107,7 @@ namespace OmitOperationGroups
                 var response = await _model2sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new Model2(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Model2(this, response.Value.Id, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -128,7 +129,7 @@ namespace OmitOperationGroups
                 var response = _model2sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new Model2(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Model2(this, response.Value.Id, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

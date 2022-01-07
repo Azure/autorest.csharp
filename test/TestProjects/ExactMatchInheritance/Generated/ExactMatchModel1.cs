@@ -37,11 +37,12 @@ namespace ExactMatchInheritance
 
         /// <summary> Initializes a new instance of the <see cref = "ExactMatchModel1"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
-        /// <param name="resource"> The resource that is the target of operations. </param>
-        internal ExactMatchModel1(ArmResource options, ExactMatchModel1Data resource) : base(options, resource.Id)
+        /// <param name="id"> The identifier of the resource that is the target of operations. </param>
+        /// <param name="data"> The resource that is the target of operations. </param>
+        internal ExactMatchModel1(ArmResource options, ResourceIdentifier id, ExactMatchModel1Data data) : base(options, id)
         {
             HasData = true;
-            _data = resource;
+            _data = data;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _exactMatchModel1sRestClient = new ExactMatchModel1SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
@@ -101,7 +102,7 @@ namespace ExactMatchInheritance
                 var response = await _exactMatchModel1sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new ExactMatchModel1(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ExactMatchModel1(this, response.Value.Id, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -123,7 +124,7 @@ namespace ExactMatchInheritance
                 var response = _exactMatchModel1sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new ExactMatchModel1(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ExactMatchModel1(this, response.Value.Id, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

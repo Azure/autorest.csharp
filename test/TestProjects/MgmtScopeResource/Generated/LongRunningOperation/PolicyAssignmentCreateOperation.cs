@@ -27,7 +27,7 @@ namespace MgmtScopeResource.Models
 
         internal PolicyAssignmentCreateOperation(ArmResource operationsBase, Response<PolicyAssignmentData> response)
         {
-            _operation = new OperationOrResponseInternals<PolicyAssignment>(Response.FromValue(new PolicyAssignment(operationsBase, response.Value), response.GetRawResponse()));
+            _operation = new OperationOrResponseInternals<PolicyAssignment>(Response.FromValue(new PolicyAssignment(operationsBase, response.Value.Id, response.Value), response.GetRawResponse()));
         }
 
         /// <inheritdoc />

@@ -27,7 +27,7 @@ namespace MgmtScopeResource.Models
 
         internal ResourceLinkCreateOrUpdateOperation(ArmResource operationsBase, Response<ResourceLinkData> response)
         {
-            _operation = new OperationOrResponseInternals<ResourceLink>(Response.FromValue(new ResourceLink(operationsBase, response.Value), response.GetRawResponse()));
+            _operation = new OperationOrResponseInternals<ResourceLink>(Response.FromValue(new ResourceLink(operationsBase, new ResourceIdentifier(response.Value.Id), response.Value), response.GetRawResponse()));
         }
 
         /// <inheritdoc />

@@ -38,11 +38,12 @@ namespace MgmtSingleton
 
         /// <summary> Initializes a new instance of the <see cref = "SubscriptionParentSingleton"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
-        /// <param name="resource"> The resource that is the target of operations. </param>
-        internal SubscriptionParentSingleton(ArmResource options, SubscriptionParentSingletonData resource) : base(options, resource.Id)
+        /// <param name="id"> The identifier of the resource that is the target of operations. </param>
+        /// <param name="data"> The resource that is the target of operations. </param>
+        internal SubscriptionParentSingleton(ArmResource options, ResourceIdentifier id, SubscriptionParentSingletonData data) : base(options, id)
         {
             HasData = true;
-            _data = resource;
+            _data = data;
             Parent = options;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _subscriptionParentSingletonRestClient = new SubscriptionParentSingletonRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
@@ -107,7 +108,7 @@ namespace MgmtSingleton
                 var response = await _subscriptionParentSingletonRestClient.GetDefaultAsync(Id.SubscriptionId, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new SubscriptionParentSingleton(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SubscriptionParentSingleton(this, response.Value.Id, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -129,7 +130,7 @@ namespace MgmtSingleton
                 var response = _subscriptionParentSingletonRestClient.GetDefault(Id.SubscriptionId, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new SubscriptionParentSingleton(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SubscriptionParentSingleton(this, response.Value.Id, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -285,7 +286,7 @@ namespace MgmtSingleton
             try
             {
                 var response = await _subscriptionParentSingletonRestClient.UpdateAsync(Id.SubscriptionId, parameters, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new SubscriptionParentSingleton(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SubscriptionParentSingleton(this, response.Value.Id, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -313,7 +314,7 @@ namespace MgmtSingleton
             try
             {
                 var response = _subscriptionParentSingletonRestClient.Update(Id.SubscriptionId, parameters, cancellationToken);
-                return Response.FromValue(new SubscriptionParentSingleton(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SubscriptionParentSingleton(this, response.Value.Id, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

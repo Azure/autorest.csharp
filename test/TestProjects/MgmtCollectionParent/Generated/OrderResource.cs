@@ -37,11 +37,12 @@ namespace MgmtCollectionParent
 
         /// <summary> Initializes a new instance of the <see cref = "OrderResource"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
-        /// <param name="resource"> The resource that is the target of operations. </param>
-        internal OrderResource(ArmResource options, OrderResourceData resource) : base(options, resource.Id)
+        /// <param name="id"> The identifier of the resource that is the target of operations. </param>
+        /// <param name="data"> The resource that is the target of operations. </param>
+        internal OrderResource(ArmResource options, ResourceIdentifier id, OrderResourceData data) : base(options, id)
         {
             HasData = true;
-            _data = resource;
+            _data = data;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new ComputeManagementRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
@@ -102,7 +103,7 @@ namespace MgmtCollectionParent
                 var response = await _restClient.GetOrderByNameAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new OrderResource(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new OrderResource(this, response.Value.Id, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -125,7 +126,7 @@ namespace MgmtCollectionParent
                 var response = _restClient.GetOrderByName(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new OrderResource(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new OrderResource(this, response.Value.Id, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

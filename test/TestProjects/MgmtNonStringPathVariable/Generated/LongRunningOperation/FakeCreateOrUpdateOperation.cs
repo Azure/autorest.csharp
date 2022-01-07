@@ -65,13 +65,15 @@ namespace MgmtNonStringPathVariable.Models
         Fake IOperationSource<Fake>.CreateResult(Response response, CancellationToken cancellationToken)
         {
             using var document = JsonDocument.Parse(response.ContentStream);
-            return new Fake(_operationBase, FakeData.DeserializeFakeData(document.RootElement));
+            var data = FakeData.DeserializeFakeData(document.RootElement);
+            return new Fake(_operationBase, data.Id, data);
         }
 
         async ValueTask<Fake> IOperationSource<Fake>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-            return new Fake(_operationBase, FakeData.DeserializeFakeData(document.RootElement));
+            var data = FakeData.DeserializeFakeData(document.RootElement);
+            return new Fake(_operationBase, data.Id, data);
         }
     }
 }

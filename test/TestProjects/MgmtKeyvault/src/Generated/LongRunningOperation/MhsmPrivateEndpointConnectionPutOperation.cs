@@ -27,7 +27,7 @@ namespace MgmtKeyvault.Models
 
         internal MhsmPrivateEndpointConnectionPutOperation(ArmResource operationsBase, Response<MhsmPrivateEndpointConnectionData> response)
         {
-            _operation = new OperationOrResponseInternals<MhsmPrivateEndpointConnection>(Response.FromValue(new MhsmPrivateEndpointConnection(operationsBase, response.Value), response.GetRawResponse()));
+            _operation = new OperationOrResponseInternals<MhsmPrivateEndpointConnection>(Response.FromValue(new MhsmPrivateEndpointConnection(operationsBase, response.Value.Id, response.Value), response.GetRawResponse()));
         }
 
         /// <inheritdoc />

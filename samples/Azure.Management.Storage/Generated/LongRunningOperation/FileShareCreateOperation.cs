@@ -27,7 +27,7 @@ namespace Azure.Management.Storage.Models
 
         internal FileShareCreateOperation(ArmResource operationsBase, Response<FileShareData> response)
         {
-            _operation = new OperationOrResponseInternals<FileShare>(Response.FromValue(new FileShare(operationsBase, response.Value), response.GetRawResponse()));
+            _operation = new OperationOrResponseInternals<FileShare>(Response.FromValue(new FileShare(operationsBase, response.Value.Id, response.Value), response.GetRawResponse()));
         }
 
         /// <inheritdoc />

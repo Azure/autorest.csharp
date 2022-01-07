@@ -38,11 +38,12 @@ namespace MgmtExtensionResource
 
         /// <summary> Initializes a new instance of the <see cref = "SubscriptionPolicyDefinition"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
-        /// <param name="resource"> The resource that is the target of operations. </param>
-        internal SubscriptionPolicyDefinition(ArmResource options, PolicyDefinitionData resource) : base(options, resource.Id)
+        /// <param name="id"> The identifier of the resource that is the target of operations. </param>
+        /// <param name="data"> The resource that is the target of operations. </param>
+        internal SubscriptionPolicyDefinition(ArmResource options, ResourceIdentifier id, PolicyDefinitionData data) : base(options, id)
         {
             HasData = true;
-            _data = resource;
+            _data = data;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _policyDefinitionsRestClient = new PolicyDefinitionsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
@@ -103,7 +104,7 @@ namespace MgmtExtensionResource
                 var response = await _policyDefinitionsRestClient.GetAsync(Id.SubscriptionId, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new SubscriptionPolicyDefinition(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SubscriptionPolicyDefinition(this, response.Value.Id, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -126,7 +127,7 @@ namespace MgmtExtensionResource
                 var response = _policyDefinitionsRestClient.Get(Id.SubscriptionId, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new SubscriptionPolicyDefinition(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SubscriptionPolicyDefinition(this, response.Value.Id, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

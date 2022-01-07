@@ -26,7 +26,7 @@ namespace NoTypeReplacement.Models
 
         internal NoTypeReplacementModel3SPutOperation(ArmResource operationsBase, Response<NoTypeReplacementModel3Data> response)
         {
-            _operation = new OperationOrResponseInternals<NoTypeReplacementModel3>(Response.FromValue(new NoTypeReplacementModel3(operationsBase, response.Value), response.GetRawResponse()));
+            _operation = new OperationOrResponseInternals<NoTypeReplacementModel3>(Response.FromValue(new NoTypeReplacementModel3(operationsBase, response.Value.Id, response.Value), response.GetRawResponse()));
         }
 
         /// <inheritdoc />
