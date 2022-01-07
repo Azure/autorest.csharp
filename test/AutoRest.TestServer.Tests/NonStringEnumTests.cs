@@ -3,8 +3,8 @@
 
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
-using non_string_enum;
-using non_string_enum.Models;
+using Non_String_Enum;
+using Non_String_Enum.Models;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests

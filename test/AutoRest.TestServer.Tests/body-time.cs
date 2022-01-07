@@ -5,8 +5,8 @@ using System;
 using System.Text.Json;
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
-using body_date;
-using body_time;
+using Body_Date;
+using Body_Time;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests

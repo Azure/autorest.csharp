@@ -6,8 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
-using additionalProperties;
-using additionalProperties.Models;
+using AdditionalProperties;
+using AdditionalProperties.Models;
 using AutoRest.TestServer.Tests.Infrastructure;
 using NUnit.Framework;
 

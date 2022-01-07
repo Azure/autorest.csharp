@@ -9,8 +9,8 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using System.Xml;
 using AutoRest.TestServer.Tests.Infrastructure;
-using body_array;
-using body_array.Models;
+using Body_Array;
+using Body_Array.Models;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests

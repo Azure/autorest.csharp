@@ -11,8 +11,8 @@ using AutoRest.TestServer.Tests.Infrastructure;
 using Azure;
 using Azure.Core;
 using NUnit.Framework;
-using paging_LowLevel;
-using CustomPagingClient = custom_baseUrl_paging_LowLevel.PagingClient;
+using Paging_LowLevel;
+using CustomPagingClient = Custom_BaseUrl_Paging_LowLevel.PagingClient;
 
 namespace AutoRest.TestServer.Tests
 {

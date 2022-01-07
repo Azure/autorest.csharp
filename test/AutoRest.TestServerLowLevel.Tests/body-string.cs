@@ -2,13 +2,10 @@
 // Licensed under the MIT License.
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure.Core;
 using AutoRest.TestServer.Tests.Infrastructure;
-using body_string_LowLevel;
+using Body_String_LowLevel;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests

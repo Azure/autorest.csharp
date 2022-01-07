@@ -10,9 +10,9 @@ using AutoRest.TestServer.Tests.Infrastructure;
 using Azure;
 using Azure.Core;
 using NUnit.Framework;
-using paging;
-using paging.Models;
-using CustomPagingClient = custom_baseUrl_paging.PagingClient;
+using Paging;
+using Paging.Models;
+using CustomPagingClient = Custom_BaseUrl_Paging.PagingClient;
 
 namespace AutoRest.TestServer.Tests
 {

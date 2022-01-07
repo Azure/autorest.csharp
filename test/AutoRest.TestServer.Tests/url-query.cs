@@ -5,8 +5,8 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
 using NUnit.Framework;
-using url;
-using url.Models;
+using Url;
+using Url.Models;
 
 namespace AutoRest.TestServer.Tests
 {
@@ -118,13 +118,13 @@ namespace AutoRest.TestServer.Tests
         public Task UrlQueriesArrayPipesValid() => TestStatus(async (host, pipeline) => await new QueriesClient(ClientDiagnostics, pipeline, host).ArrayStringPipesValidAsync( new[] { "ArrayQuery1", "begin!*'();:@ &=+$,/?#[]end", "", "" }));
 
         [Test]
-        public Task UrlQueriesArrayMultiNull() => TestStatus(async (host, pipeline) => await new url_multi_collectionFormat.QueriesClient(ClientDiagnostics, pipeline, host).ArrayStringMultiNullAsync( null));
+        public Task UrlQueriesArrayMultiNull() => TestStatus(async (host, pipeline) => await new Url_Multi_CollectionFormat.QueriesClient(ClientDiagnostics, pipeline, host).ArrayStringMultiNullAsync( null));
 
         [Test]
-        public Task UrlQueriesArrayMultiEmpty() => TestStatus(async (host, pipeline) => await new url_multi_collectionFormat.QueriesClient(ClientDiagnostics, pipeline, host).ArrayStringMultiEmptyAsync( new string[] { }));
+        public Task UrlQueriesArrayMultiEmpty() => TestStatus(async (host, pipeline) => await new Url_Multi_CollectionFormat.QueriesClient(ClientDiagnostics, pipeline, host).ArrayStringMultiEmptyAsync( new string[] { }));
 
         [Test]
-        public Task UrlQueriesArrayMultiValid() => TestStatus(async (host, pipeline) => await new url_multi_collectionFormat.QueriesClient(ClientDiagnostics, pipeline, host).ArrayStringMultiValidAsync( new[] { "ArrayQuery1", "begin!*'();:@ &=+$,/?#[]end", "", "" }));
+        public Task UrlQueriesArrayMultiValid() => TestStatus(async (host, pipeline) => await new Url_Multi_CollectionFormat.QueriesClient(ClientDiagnostics, pipeline, host).ArrayStringMultiValidAsync( new[] { "ArrayQuery1", "begin!*'();:@ &=+$,/?#[]end", "", "" }));
 
         [Test]
         public async Task UrlQueriesLongMaxValue()

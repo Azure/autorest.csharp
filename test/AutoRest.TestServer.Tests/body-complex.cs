@@ -11,8 +11,8 @@ using System.Threading.Tasks;
 using System.Xml;
 using AutoRest.TestServer.Tests.Infrastructure;
 using Azure.Core.Pipeline;
-using body_complex;
-using body_complex.Models;
+using Body_Complex;
+using Body_Complex.Models;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests

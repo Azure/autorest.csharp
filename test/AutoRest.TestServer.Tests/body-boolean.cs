@@ -4,7 +4,7 @@
 using System.Text.Json;
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
-using body_boolean;
+using Body_Boolean;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests

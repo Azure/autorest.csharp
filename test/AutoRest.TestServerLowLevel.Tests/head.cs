@@ -4,7 +4,7 @@
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
 using Azure;
-using head_LowLevel;
+using Head_LowLevel;
 using NUnit.Framework;
 using static System.Reflection.BindingFlags;
 

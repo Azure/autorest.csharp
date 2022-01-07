@@ -5,7 +5,7 @@ using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
-using body_formdata;
+using Body_Formdata;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests

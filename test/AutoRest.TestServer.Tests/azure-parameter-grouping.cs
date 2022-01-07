@@ -5,9 +5,8 @@ using System;
 using System.Text.Json;
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
-using azure_parameter_grouping;
-using azure_parameter_grouping.Models;
-using body_integer;
+using Azure_Parameter_Grouping;
+using Azure_Parameter_Grouping.Models;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests

@@ -4,7 +4,7 @@
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
 using NUnit.Framework;
-using subscriptionId_apiVersion;
+using SubscriptionId_ApiVersion;
 
 namespace AutoRest.TestServer.Tests
 {

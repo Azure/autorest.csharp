@@ -7,8 +7,8 @@ using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
-using body_string;
-using body_string.Models;
+using Body_String;
+using Body_String.Models;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests

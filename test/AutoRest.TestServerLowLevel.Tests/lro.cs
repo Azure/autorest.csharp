@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
 using Azure;
 using Azure.Core;
-using lro_LowLevel;
+using Lro_LowLevel;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests

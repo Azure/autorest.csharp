@@ -12,7 +12,7 @@ using System.Xml;
 using AutoRest.TestServer.Tests.Infrastructure;
 using Azure;
 using NUnit.Framework;
-using url_LowLevel;
+using Url_LowLevel;
 
 namespace AutoRest.TestServer.Tests
 {

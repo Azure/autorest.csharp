@@ -6,8 +6,8 @@ using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
-using body_formdata_urlencoded;
-using body_formdata_urlencoded.Models;
+using Body_Formdata_Urlencoded;
+using Body_Formdata_Urlencoded.Models;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests

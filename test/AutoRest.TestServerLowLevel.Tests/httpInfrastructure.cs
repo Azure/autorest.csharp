@@ -4,7 +4,7 @@
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
 using Azure;
-using httpInfrastructure_LowLevel;
+using HttpInfrastructure_LowLevel;
 using NUnit.Framework;
 using Azure.Core;
 

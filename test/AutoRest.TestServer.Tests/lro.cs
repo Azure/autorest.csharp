@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
 using Azure;
 using Azure.Core;
-using lro;
-using lro.Models;
+using Lro;
+using Lro.Models;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests

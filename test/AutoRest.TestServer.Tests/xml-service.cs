@@ -8,8 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
 using NUnit.Framework;
-using xml_service;
-using xml_service.Models;
+using Xml_Service;
+using Xml_Service.Models;
 
 namespace AutoRest.TestServer.Tests
 {

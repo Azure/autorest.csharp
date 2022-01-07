@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
 using NUnit.Framework;
-using url_LowLevel;
+using Url_LowLevel;
 
 namespace AutoRest.TestServer.Tests
 {
@@ -117,13 +117,13 @@ namespace AutoRest.TestServer.Tests
         public Task UrlQueriesArrayPipesValid() => TestStatus(async (host) => await new QueriesClient(Key, host).ArrayStringPipesValidAsync( new[] { "ArrayQuery1", "begin!*'();:@ &=+$,/?#[]end", "", "" }));
 
         [Test]
-        public Task UrlQueriesArrayMultiNull() => TestStatus(async (host) => await new url_multi_collectionFormat_LowLevel.QueriesClient(Key, host).ArrayStringMultiNullAsync( null));
+        public Task UrlQueriesArrayMultiNull() => TestStatus(async (host) => await new Url_Multi_CollectionFormat_LowLevel.QueriesClient(Key, host).ArrayStringMultiNullAsync( null));
 
         [Test]
         [Ignore("https://github.com/Azure/autorest.csharp/issues/1161")]
-        public Task UrlQueriesArrayMultiEmpty() => TestStatus(async (host) => await new url_multi_collectionFormat_LowLevel.QueriesClient(Key, host).ArrayStringMultiEmptyAsync( new string[] { }));
+        public Task UrlQueriesArrayMultiEmpty() => TestStatus(async (host) => await new Url_Multi_CollectionFormat_LowLevel.QueriesClient(Key, host).ArrayStringMultiEmptyAsync( new string[] { }));
 
         [Test]
-        public Task UrlQueriesArrayMultiValid() => TestStatus(async (host) => await new url_multi_collectionFormat_LowLevel.QueriesClient(Key, host).ArrayStringMultiValidAsync( new[] { "ArrayQuery1", "begin!*'();:@ &=+$,/?#[]end", "", "" }));
+        public Task UrlQueriesArrayMultiValid() => TestStatus(async (host) => await new Url_Multi_CollectionFormat_LowLevel.QueriesClient(Key, host).ArrayStringMultiValidAsync( new[] { "ArrayQuery1", "begin!*'();:@ &=+$,/?#[]end", "", "" }));
     }
 }

@@ -5,8 +5,8 @@ using System;
 using System.Threading.Tasks;
 using System.Xml;
 using AutoRest.TestServer.Tests.Infrastructure;
-using header;
-using header.Models;
+using Header;
+using Header.Models;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests

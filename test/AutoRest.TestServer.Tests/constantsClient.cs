@@ -1,8 +1,6 @@
-﻿using System;
-using System.Reflection;
-using AutoRest.TestServer.Tests.Infrastructure;
-using constants;
-using constants.Models;
+﻿using System.Reflection;
+using Constants;
+using Constants.Models;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests
