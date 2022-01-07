@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace xml_service.Models
+namespace Xml_Service.Models
 {
     /// <summary> I am root, and I ref a model with no meta. </summary>
     public partial class RootWithRefAndNoMeta

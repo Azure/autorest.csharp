@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace body_complex
+namespace Body_Complex
 {
     /// <summary> Client options for AutoRestComplexTestServiceClient. </summary>
     public partial class AutoRestComplexTestServiceClientOptions : ClientOptions

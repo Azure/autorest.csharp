@@ -7,7 +7,7 @@
 
 using System;
 
-namespace body_string.Models
+namespace Body_String.Models
 {
     internal static partial class ColorsExtensions
     {

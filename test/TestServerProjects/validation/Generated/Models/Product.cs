@@ -9,7 +9,7 @@ using System;
 using System.Collections.Generic;
 using Azure.Core;
 
-namespace validation.Models
+namespace Validation.Models
 {
     /// <summary> The product documentation. </summary>
     public partial class Product

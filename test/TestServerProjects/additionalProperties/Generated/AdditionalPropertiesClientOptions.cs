@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace additionalProperties
+namespace AdditionalProperties
 {
     /// <summary> Client options for AdditionalPropertiesClient. </summary>
     public partial class AdditionalPropertiesClientOptions : ClientOptions

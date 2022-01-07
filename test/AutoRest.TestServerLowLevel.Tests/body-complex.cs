@@ -12,7 +12,7 @@ using System.Xml;
 using AutoRest.TestServer.Tests.Infrastructure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using body_complex_LowLevel;
+using Body_Complex_LowLevel;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests

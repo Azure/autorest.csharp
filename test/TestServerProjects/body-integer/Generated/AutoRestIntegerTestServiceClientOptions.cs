@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace body_integer
+namespace Body_Integer
 {
     /// <summary> Client options for AutoRestIntegerTestServiceClient. </summary>
     public partial class AutoRestIntegerTestServiceClientOptions : ClientOptions

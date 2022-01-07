@@ -8,7 +8,7 @@
 using System.Text.Json;
 using Azure.Core;
 
-namespace body_time.Models
+namespace Body_Time.Models
 {
     internal partial class Error
     {

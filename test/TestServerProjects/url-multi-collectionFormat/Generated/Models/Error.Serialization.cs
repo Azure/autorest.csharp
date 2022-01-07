@@ -8,7 +8,7 @@
 using System.Text.Json;
 using Azure.Core;
 
-namespace url_multi_collectionFormat.Models
+namespace Url_Multi_CollectionFormat.Models
 {
     internal partial class Error
     {

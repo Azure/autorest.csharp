@@ -8,7 +8,7 @@
 using System;
 using System.ComponentModel;
 
-namespace constants.Models
+namespace Constants.Models
 {
     /// <summary> The Enum10. </summary>
     public readonly partial struct Enum10 : IEquatable<Enum10>

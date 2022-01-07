@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace lro.Models
+namespace Lro.Models
 {
     /// <summary> The OperationResultError. </summary>
     internal partial class OperationResultError

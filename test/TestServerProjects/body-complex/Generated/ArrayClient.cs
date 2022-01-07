@@ -10,9 +10,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
-using body_complex.Models;
+using Body_Complex.Models;
 
-namespace body_complex
+namespace Body_Complex
 {
     /// <summary> The Array service client. </summary>
     public partial class ArrayClient

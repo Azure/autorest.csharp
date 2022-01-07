@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace extensible_enums_swagger.Models
+namespace Extensible_Enums_Swagger.Models
 {
     /// <summary> The Pet. </summary>
     public partial class Pet

@@ -11,9 +11,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
-using url.Models;
+using Url.Models;
 
-namespace url
+namespace Url
 {
     /// <summary> The Paths service client. </summary>
     public partial class PathsClient

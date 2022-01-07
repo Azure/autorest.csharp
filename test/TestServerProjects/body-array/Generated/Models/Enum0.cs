@@ -8,7 +8,7 @@
 using System;
 using System.ComponentModel;
 
-namespace body_array.Models
+namespace Body_Array.Models
 {
     /// <summary> The Enum0. </summary>
     public readonly partial struct Enum0 : IEquatable<Enum0>

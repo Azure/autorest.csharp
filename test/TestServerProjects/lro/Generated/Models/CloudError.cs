@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace lro.Models
+namespace Lro.Models
 {
     /// <summary> The CloudError. </summary>
     internal partial class CloudError

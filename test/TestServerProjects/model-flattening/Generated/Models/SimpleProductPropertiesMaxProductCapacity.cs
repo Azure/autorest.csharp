@@ -8,7 +8,7 @@
 using System;
 using System.ComponentModel;
 
-namespace model_flattening.Models
+namespace Model_Flattening.Models
 {
     /// <summary> Capacity of product. For example, 4 people. </summary>
     public readonly partial struct SimpleProductPropertiesMaxProductCapacity : IEquatable<SimpleProductPropertiesMaxProductCapacity>

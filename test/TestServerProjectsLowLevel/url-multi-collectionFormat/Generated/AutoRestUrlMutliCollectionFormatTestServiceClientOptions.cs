@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace url_multi_collectionFormat_LowLevel
+namespace Url_Multi_CollectionFormat_LowLevel
 {
     /// <summary> Client options for AutoRestUrlMutliCollectionFormatTestServiceClient. </summary>
     public partial class AutoRestUrlMutliCollectionFormatTestServiceClientOptions : ClientOptions

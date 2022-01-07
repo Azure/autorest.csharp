@@ -8,7 +8,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace body_complex.Models
+namespace Body_Complex.Models
 {
     /// <summary> Model factory for read-only models. </summary>
     public static partial class AutoRestComplexTestServiceModelFactory

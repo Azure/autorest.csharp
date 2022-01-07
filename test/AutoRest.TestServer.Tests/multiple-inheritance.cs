@@ -3,8 +3,8 @@
 
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
-using multiple_inheritance;
-using multiple_inheritance.Models;
+using Multiple_Inheritance;
+using Multiple_Inheritance.Models;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests

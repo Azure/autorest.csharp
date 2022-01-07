@@ -8,7 +8,7 @@
 using System;
 using System.ComponentModel;
 
-namespace lro.Models
+namespace Lro.Models
 {
     /// <summary> The status of the request. </summary>
     internal readonly partial struct OperationResultStatus : IEquatable<OperationResultStatus>

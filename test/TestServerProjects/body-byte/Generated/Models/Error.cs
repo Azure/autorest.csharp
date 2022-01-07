@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace body_byte.Models
+namespace Body_Byte.Models
 {
     /// <summary> The Error. </summary>
     internal partial class Error

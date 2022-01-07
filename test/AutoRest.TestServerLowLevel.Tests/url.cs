@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
 using NUnit.Framework;
-using url_LowLevel;
+using Url_LowLevel;
 
 namespace AutoRest.TestServer.Tests
 {

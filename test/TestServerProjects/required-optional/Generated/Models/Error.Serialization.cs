@@ -8,7 +8,7 @@
 using System.Text.Json;
 using Azure.Core;
 
-namespace required_optional.Models
+namespace Required_Optional.Models
 {
     internal partial class Error
     {

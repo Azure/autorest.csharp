@@ -12,9 +12,9 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using lro.Models;
+using Lro.Models;
 
-namespace lro
+namespace Lro
 {
     /// <summary> Long running post request, service returns a 202 to the initial request, with &apos;Location&apos; header, 204 with noresponse body after success. </summary>
     public partial class LROsPost202NoRetry204Operation : Operation<Product>, IOperationSource<Product>

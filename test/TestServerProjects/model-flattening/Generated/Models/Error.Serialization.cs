@@ -8,7 +8,7 @@
 using System.Text.Json;
 using Azure.Core;
 
-namespace model_flattening.Models
+namespace Model_Flattening.Models
 {
     internal partial class Error
     {

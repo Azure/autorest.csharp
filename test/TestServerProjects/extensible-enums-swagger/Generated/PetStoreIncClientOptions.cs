@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace extensible_enums_swagger
+namespace Extensible_Enums_Swagger
 {
     /// <summary> Client options for PetStoreIncClient. </summary>
     public partial class PetStoreIncClientOptions : ClientOptions

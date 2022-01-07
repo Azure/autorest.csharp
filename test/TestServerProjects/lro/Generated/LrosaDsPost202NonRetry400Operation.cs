@@ -12,7 +12,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace lro
+namespace Lro
 {
     /// <summary> Long running post request, service returns a 202 with a location header. </summary>
     public partial class LrosaDsPost202NonRetry400Operation : Operation

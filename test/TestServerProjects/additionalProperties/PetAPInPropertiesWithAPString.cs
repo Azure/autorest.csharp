@@ -4,7 +4,7 @@
 using System.Collections.Generic;
 using Azure.Core;
 
-namespace additionalProperties.Models
+namespace AdditionalProperties.Models
 {
     [CodeGenModel("PetAPInPropertiesWithAPString")]
     public partial class PetAPInPropertiesWithAPString

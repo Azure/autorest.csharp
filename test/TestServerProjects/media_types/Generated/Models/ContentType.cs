@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace media_types.Models
+namespace Media_Types.Models
 {
     /// <summary> Content type for upload. </summary>
     public enum ContentType

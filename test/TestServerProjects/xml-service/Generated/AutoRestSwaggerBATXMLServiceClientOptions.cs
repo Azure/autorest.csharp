@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace xml_service
+namespace Xml_Service
 {
     /// <summary> Client options for AutoRestSwaggerBATXMLServiceClient. </summary>
     public partial class AutoRestSwaggerBATXMLServiceClientOptions : ClientOptions

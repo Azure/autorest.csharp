@@ -12,9 +12,9 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using lro.Models;
+using Lro.Models;
 
-namespace lro
+namespace Lro
 {
     /// <summary> Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header. </summary>
     public partial class LROsPutAsyncNoHeaderInRetryOperation : Operation<Product>, IOperationSource<Product>

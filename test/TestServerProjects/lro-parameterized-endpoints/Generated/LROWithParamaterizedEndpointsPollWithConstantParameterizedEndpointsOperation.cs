@@ -13,7 +13,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace lro_parameterized_endpoints
+namespace Lro_Parameterized_Endpoints
 {
     /// <summary> Poll with method and client level parameters in endpoint, with a constant value. </summary>
     public partial class LROWithParamaterizedEndpointsPollWithConstantParameterizedEndpointsOperation : Operation<string>, IOperationSource<string>

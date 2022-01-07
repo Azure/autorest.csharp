@@ -11,7 +11,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace url_LowLevel
+namespace Url_LowLevel
 {
     /// <summary> The PathItems service client. </summary>
     public partial class PathItemsClient

@@ -7,7 +7,7 @@
 
 using System;
 
-namespace xml_service.Models
+namespace Xml_Service.Models
 {
     /// <summary> An enumeration of blobs. </summary>
     public partial class ListBlobsResponse

@@ -7,7 +7,7 @@
 
 using System;
 
-namespace constants.Models
+namespace Constants.Models
 {
     internal static partial class NoModelAsStringNoRequiredTwoValueNoDefaultOpEnumExtensions
     {

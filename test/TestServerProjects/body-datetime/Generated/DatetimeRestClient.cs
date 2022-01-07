@@ -13,7 +13,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace body_datetime
+namespace Body_Datetime
 {
     internal partial class DatetimeRestClient
     {

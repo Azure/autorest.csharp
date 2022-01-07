@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace url_multi_collectionFormat.Models
+namespace Url_Multi_CollectionFormat.Models
 {
     /// <summary> The Error. </summary>
     internal partial class Error

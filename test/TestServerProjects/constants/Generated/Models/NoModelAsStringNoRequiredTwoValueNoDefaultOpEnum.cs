@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace constants.Models
+namespace Constants.Models
 {
     /// <summary> The NoModelAsStringNoRequiredTwoValueNoDefaultOpEnum. </summary>
     public enum NoModelAsStringNoRequiredTwoValueNoDefaultOpEnum

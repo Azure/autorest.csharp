@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
 using Azure;
 using NUnit.Framework;
-using xms_error_responses;
+using Xms_Error_Responses;
 
 namespace AutoRest.TestServer.Tests
 {

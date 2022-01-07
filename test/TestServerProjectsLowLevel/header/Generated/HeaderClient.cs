@@ -11,7 +11,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace header_LowLevel
+namespace Header_LowLevel
 {
     /// <summary> The Header service client. </summary>
     public partial class HeaderClient

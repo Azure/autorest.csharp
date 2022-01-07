@@ -7,7 +7,7 @@
 
 using System;
 
-namespace required_optional.Models
+namespace Required_Optional.Models
 {
     /// <summary> The ClassWrapper. </summary>
     public partial class ClassWrapper

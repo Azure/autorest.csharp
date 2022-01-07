@@ -5,7 +5,7 @@ using System;
 using System.Text.Json;
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
-using body_integer;
+using Body_Integer;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests

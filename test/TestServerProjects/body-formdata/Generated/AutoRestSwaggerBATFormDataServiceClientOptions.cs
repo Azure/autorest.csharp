@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace body_formdata
+namespace Body_Formdata
 {
     /// <summary> Client options for AutoRestSwaggerBATFormDataServiceClient. </summary>
     public partial class AutoRestSwaggerBATFormDataServiceClientOptions : ClientOptions

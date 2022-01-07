@@ -7,7 +7,7 @@
 
 using System.Collections.Generic;
 
-namespace additionalProperties.Models
+namespace AdditionalProperties.Models
 {
     /// <summary> The CatAPTrue. </summary>
     public partial class CatAPTrue : PetAPTrue

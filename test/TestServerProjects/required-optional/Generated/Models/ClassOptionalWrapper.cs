@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace required_optional.Models
+namespace Required_Optional.Models
 {
     /// <summary> The ClassOptionalWrapper. </summary>
     public partial class ClassOptionalWrapper

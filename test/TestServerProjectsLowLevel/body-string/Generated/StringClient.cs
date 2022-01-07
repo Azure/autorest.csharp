@@ -11,7 +11,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace body_string_LowLevel
+namespace Body_String_LowLevel
 {
     /// <summary> The String service client. </summary>
     public partial class StringClient

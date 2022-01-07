@@ -8,7 +8,7 @@
 using System.Text.Json;
 using Azure.Core;
 
-namespace lro_parameterized_endpoints.Models
+namespace Lro_Parameterized_Endpoints.Models
 {
     internal partial class Error
     {

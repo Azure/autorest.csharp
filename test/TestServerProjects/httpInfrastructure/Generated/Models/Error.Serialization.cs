@@ -8,7 +8,7 @@
 using System.Text.Json;
 using Azure.Core;
 
-namespace httpInfrastructure.Models
+namespace HttpInfrastructure.Models
 {
     internal partial class Error
     {

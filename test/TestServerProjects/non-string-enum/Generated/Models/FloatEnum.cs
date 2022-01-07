@@ -9,7 +9,7 @@ using System;
 using System.ComponentModel;
 using System.Globalization;
 
-namespace non_string_enum.Models
+namespace Non_String_Enum.Models
 {
     /// <summary> List of float enums. </summary>
     public readonly partial struct FloatEnum : IEquatable<FloatEnum>

@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace xml_service.Models
+namespace Xml_Service.Models
 {
     /// <summary> The CopyStatusType. </summary>
     public enum CopyStatusType

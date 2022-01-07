@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
 
-namespace body_time
+namespace Body_Time
 {
     /// <summary> The Time service client. </summary>
     public partial class TimeClient

@@ -10,9 +10,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
-using constants.Models;
+using Constants.Models;
 
-namespace constants
+namespace Constants
 {
     /// <summary> The Contants service client. </summary>
     public partial class ContantsClient

@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
 using Azure;
 using NUnit.Framework;
-using required_optional;
-using required_optional.Models;
+using Required_Optional;
+using Required_Optional.Models;
 
 namespace AutoRest.TestServer.Tests
 {

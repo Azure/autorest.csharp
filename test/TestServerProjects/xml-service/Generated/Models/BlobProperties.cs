@@ -7,7 +7,7 @@
 
 using System;
 
-namespace xml_service.Models
+namespace Xml_Service.Models
 {
     /// <summary> Properties of a blob. </summary>
     public partial class BlobProperties

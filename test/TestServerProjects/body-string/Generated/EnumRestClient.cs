@@ -12,9 +12,9 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using body_string.Models;
+using Body_String.Models;
 
-namespace body_string
+namespace Body_String
 {
     internal partial class EnumRestClient
     {

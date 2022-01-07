@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace body_date
+namespace Body_Date
 {
     /// <summary> Client options for AutoRestDateTestServiceClient. </summary>
     public partial class AutoRestDateTestServiceClientOptions : ClientOptions

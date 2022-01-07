@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace xms_error_responses.Models
+namespace Xms_Error_Responses.Models
 {
     /// <summary> The PetActionError. </summary>
     public partial class PetActionError : PetAction

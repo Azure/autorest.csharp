@@ -13,7 +13,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace body_datetime_rfc1123
+namespace Body_Datetime_Rfc1123
 {
     internal partial class Datetimerfc1123RestClient
     {

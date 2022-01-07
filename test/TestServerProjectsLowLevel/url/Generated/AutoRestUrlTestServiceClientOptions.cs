@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace url_LowLevel
+namespace Url_LowLevel
 {
     /// <summary> Client options for AutoRestUrlTestServiceClient. </summary>
     public partial class AutoRestUrlTestServiceClientOptions : ClientOptions

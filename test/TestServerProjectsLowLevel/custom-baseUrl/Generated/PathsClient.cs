@@ -11,7 +11,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace custom_baseUrl_LowLevel
+namespace Custom_BaseUrl_LowLevel
 {
     /// <summary> The Paths service client. </summary>
     public partial class PathsClient

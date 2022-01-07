@@ -8,7 +8,7 @@
 using System.Text.Json;
 using Azure.Core;
 
-namespace body_dictionary.Models
+namespace Body_Dictionary.Models
 {
     public partial class Widget : IUtf8JsonSerializable
     {

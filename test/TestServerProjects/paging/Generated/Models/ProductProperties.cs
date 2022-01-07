@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace paging.Models
+namespace Paging.Models
 {
     /// <summary> The ProductProperties. </summary>
     public partial class ProductProperties

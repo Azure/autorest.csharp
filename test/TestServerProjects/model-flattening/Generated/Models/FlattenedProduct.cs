@@ -7,7 +7,7 @@
 
 using System.Collections.Generic;
 
-namespace model_flattening.Models
+namespace Model_Flattening.Models
 {
     /// <summary> Flattened product. </summary>
     public partial class FlattenedProduct : Resource

@@ -12,9 +12,9 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using lro.Models;
+using Lro.Models;
 
-namespace lro
+namespace Lro
 {
     /// <summary> Long running put request, service returns a 200 to the initial request with location header. We should not have any subsequent calls after receiving this first response. </summary>
     public partial class LROsPatch200SucceededIgnoreHeadersOperation : Operation<Product>, IOperationSource<Product>

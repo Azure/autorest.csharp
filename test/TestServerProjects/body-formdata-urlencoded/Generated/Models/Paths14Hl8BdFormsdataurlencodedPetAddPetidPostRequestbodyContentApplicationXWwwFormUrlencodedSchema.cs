@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace body_formdata_urlencoded.Models
+namespace Body_Formdata_Urlencoded.Models
 {
     /// <summary> The Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema. </summary>
     internal partial class Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema

@@ -11,9 +11,9 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using custom_baseUrl_paging.Models;
+using Custom_BaseUrl_Paging.Models;
 
-namespace custom_baseUrl_paging
+namespace Custom_BaseUrl_Paging
 {
     /// <summary> The Paging service client. </summary>
     public partial class PagingClient

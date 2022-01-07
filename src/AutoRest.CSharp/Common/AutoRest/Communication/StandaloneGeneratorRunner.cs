@@ -84,7 +84,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
                     WriteIfNotDefault(writer, Configuration.Options.SkipCSProjPackageReference, configuration.SkipCSProjPackageReference);
                     WriteIfNotDefault(writer, Configuration.Options.DataPlane, configuration.DataPlane);
                     WriteIfNotDefault(writer, Configuration.Options.SingleTopLevelClient, configuration.SingleTopLevelClient);
-                    WriteIfNotDefault(writer, Configuration.Options.ProjectFolder, configuration.ProjectFolder);
+                    WriteIfNotDefault(writer, Configuration.Options.ProjectFolder, configuration.ProjectFolder.Replace("\\", "/"));
 
                     configuration.MgmtConfiguration.SaveConfiguration(writer);
 
@@ -97,7 +97,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
 
         private static string NormalizePath(Configuration configuration, string sharedSourceFolder)
         {
-            return Path.GetRelativePath(configuration.OutputFolder, sharedSourceFolder);
+            return Path.GetRelativePath(configuration.OutputFolder, sharedSourceFolder).Replace("\\", "/");
         }
 
         private static bool ReadOption(JsonElement root, string option)
@@ -132,11 +132,11 @@ namespace AutoRest.CSharp.AutoRest.Communication
 
             foreach (var sharedSourceFolder in root.GetProperty(nameof(Configuration.SharedSourceFolders)).EnumerateArray())
             {
-                sharedSourceFolders.Add(Path.Combine(basePath, sharedSourceFolder.GetString()));
+                sharedSourceFolders.Add(Path.GetFullPath(Path.Combine(basePath, sharedSourceFolder.GetString())));
             }
 
             return new Configuration(
-                Path.Combine(basePath, root.GetProperty(nameof(Configuration.OutputFolder)).GetString()),
+                Path.GetFullPath(Path.Combine(basePath, root.GetProperty(nameof(Configuration.OutputFolder)).GetString())),
                 root.GetProperty(nameof(Configuration.Namespace)).GetString(),
                 root.GetProperty(nameof(Configuration.LibraryName)).GetString(),
                 sharedSourceFolders.ToArray(),

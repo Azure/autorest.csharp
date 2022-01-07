@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
 
-namespace body_string
+namespace Body_String
 {
     /// <summary> The String service client. </summary>
     public partial class StringClient

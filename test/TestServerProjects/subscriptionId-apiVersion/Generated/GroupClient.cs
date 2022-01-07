@@ -10,9 +10,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
-using subscriptionId_apiVersion.Models;
+using SubscriptionId_ApiVersion.Models;
 
-namespace subscriptionId_apiVersion
+namespace SubscriptionId_ApiVersion
 {
     /// <summary> The Group service client. </summary>
     public partial class GroupClient

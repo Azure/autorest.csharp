@@ -11,7 +11,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace media_types_LowLevel
+namespace Media_Types_LowLevel
 {
     /// <summary> The MediaTypes service client. </summary>
     public partial class MediaTypesClient

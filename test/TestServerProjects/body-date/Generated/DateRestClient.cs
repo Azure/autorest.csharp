@@ -13,7 +13,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace body_date
+namespace Body_Date
 {
     internal partial class DateRestClient
     {

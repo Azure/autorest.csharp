@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace body_datetime_rfc1123.Models
+namespace Body_Datetime_Rfc1123.Models
 {
     /// <summary> The Error. </summary>
     internal partial class Error

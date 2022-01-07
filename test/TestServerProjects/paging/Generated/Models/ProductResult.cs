@@ -8,7 +8,7 @@
 using System.Collections.Generic;
 using Azure.Core;
 
-namespace paging.Models
+namespace Paging.Models
 {
     /// <summary> The ProductResult. </summary>
     internal partial class ProductResult

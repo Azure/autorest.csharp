@@ -234,7 +234,7 @@ foreach ($key in Sort-FileSafe ($swaggerDefinitions.Keys))
     {
         $outputPath = Join-Path $definition.output "SomeFolder" "Generated"
     }
-    $outputPath = $outputPath.Replace($repoRoot, '$(SolutionDir)')
+    $outputPath = $outputPath.Replace($repoRoot, '$(SolutionDir)').Replace('\', '/');
 
     $settings.profiles[$key] = [ordered]@{
         'commandName'='Project';

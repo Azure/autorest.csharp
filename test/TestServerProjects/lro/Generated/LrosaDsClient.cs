@@ -9,9 +9,9 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure.Core.Pipeline;
-using lro.Models;
+using Lro.Models;
 
-namespace lro
+namespace Lro
 {
     /// <summary> The LrosaDs service client. </summary>
     public partial class LrosaDsClient

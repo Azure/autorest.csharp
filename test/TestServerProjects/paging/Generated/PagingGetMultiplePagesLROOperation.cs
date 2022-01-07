@@ -12,9 +12,9 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using paging.Models;
+using Paging.Models;
 
-namespace paging
+namespace Paging
 {
     /// <summary> A long-running paging operation that includes a nextLink that has 10 pages. </summary>
     public partial class PagingGetMultiplePagesLROOperation : Operation<AsyncPageable<Product>>, IOperationSource<AsyncPageable<Product>>

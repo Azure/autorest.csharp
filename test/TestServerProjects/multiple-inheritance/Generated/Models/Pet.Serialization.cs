@@ -8,7 +8,7 @@
 using System.Text.Json;
 using Azure.Core;
 
-namespace multiple_inheritance.Models
+namespace Multiple_Inheritance.Models
 {
     public partial class Pet : IUtf8JsonSerializable
     {

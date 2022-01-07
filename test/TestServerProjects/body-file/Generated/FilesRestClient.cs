@@ -13,7 +13,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace body_file
+namespace Body_File
 {
     internal partial class FilesRestClient
     {

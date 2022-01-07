@@ -12,9 +12,9 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using httpInfrastructure.Models;
+using HttpInfrastructure.Models;
 
-namespace httpInfrastructure
+namespace HttpInfrastructure
 {
     internal partial class MultipleResponsesRestClient
     {

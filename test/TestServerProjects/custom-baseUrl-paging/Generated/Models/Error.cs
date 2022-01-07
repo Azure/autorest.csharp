@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace custom_baseUrl_paging.Models
+namespace Custom_BaseUrl_Paging.Models
 {
     /// <summary> The Error. </summary>
     internal partial class Error

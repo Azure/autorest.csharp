@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Xml;
 using AutoRest.TestServer.Tests.Infrastructure;
 using Azure.Core;
-using media_types_LowLevel;
+using Media_Types_LowLevel;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests

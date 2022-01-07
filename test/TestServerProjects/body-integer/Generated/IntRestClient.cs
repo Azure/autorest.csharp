@@ -13,7 +13,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace body_integer
+namespace Body_Integer
 {
     internal partial class IntRestClient
     {

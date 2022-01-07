@@ -1,10 +1,10 @@
 {
   "OutputFolder": ".",
-  "Namespace": "multiple_inheritance",
+  "Namespace": "Multiple_Inheritance",
   "LibraryName": null,
   "SharedSourceFolders": [
-    "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Generator.Shared",
-    "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Azure.Core.Shared"
+    "../../../../artifacts/bin/AutoRest.CSharp/Debug/netcoreapp3.1/Generator.Shared",
+    "../../../../artifacts/bin/AutoRest.CSharp/Debug/netcoreapp3.1/Azure.Core.Shared"
   ],
   "public-clients": true,
   "skip-csproj-packagereference": true

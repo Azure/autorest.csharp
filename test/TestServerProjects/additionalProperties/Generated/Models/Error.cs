@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace additionalProperties.Models
+namespace AdditionalProperties.Models
 {
     /// <summary> The Error. </summary>
     internal partial class Error

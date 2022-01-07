@@ -11,7 +11,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace lro_LowLevel
+namespace Lro_LowLevel
 {
     /// <summary> The LRORetrys service client. </summary>
     public partial class LRORetrysClient

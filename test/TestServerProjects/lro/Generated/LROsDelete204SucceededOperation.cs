@@ -12,7 +12,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace lro
+namespace Lro
 {
     /// <summary> Long running delete succeeds and returns right away. </summary>
     public partial class LROsDelete204SucceededOperation : Operation

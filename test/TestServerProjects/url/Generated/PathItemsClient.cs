@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
 
-namespace url
+namespace Url
 {
     /// <summary> The PathItems service client. </summary>
     public partial class PathItemsClient

@@ -5,8 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
-using model_flattening;
-using model_flattening.Models;
+using Model_Flattening;
+using Model_Flattening.Models;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests

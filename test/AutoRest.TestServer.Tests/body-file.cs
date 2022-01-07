@@ -4,7 +4,7 @@
 using System.IO;
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
-using body_file;
+using Body_File;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests

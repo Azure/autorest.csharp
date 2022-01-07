@@ -7,7 +7,7 @@
 
 using System;
 
-namespace xml_service.Models
+namespace Xml_Service.Models
 {
     /// <summary> signed identifier. </summary>
     public partial class SignedIdentifier

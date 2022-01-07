@@ -7,7 +7,7 @@
 
 using System;
 
-namespace required_optional.Models
+namespace Required_Optional.Models
 {
     /// <summary> The StringWrapper. </summary>
     public partial class StringWrapper

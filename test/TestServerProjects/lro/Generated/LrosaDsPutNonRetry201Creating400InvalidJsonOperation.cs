@@ -12,9 +12,9 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using lro.Models;
+using Lro.Models;
 
-namespace lro
+namespace Lro
 {
     /// <summary> Long running put request, service returns a Product with &apos;ProvisioningState&apos; = &apos;Creating&apos; and 201 response code. </summary>
     public partial class LrosaDsPutNonRetry201Creating400InvalidJsonOperation : Operation<Product>, IOperationSource<Product>

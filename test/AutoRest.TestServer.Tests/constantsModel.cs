@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Reflection;
-using constants.Models;
+using Constants.Models;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests

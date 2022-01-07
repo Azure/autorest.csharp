@@ -13,7 +13,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace required_optional
+namespace Required_Optional
 {
     internal partial class ImplicitRestClient
     {

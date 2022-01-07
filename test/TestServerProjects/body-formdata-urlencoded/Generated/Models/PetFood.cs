@@ -8,7 +8,7 @@
 using System;
 using System.ComponentModel;
 
-namespace body_formdata_urlencoded.Models
+namespace Body_Formdata_Urlencoded.Models
 {
     /// <summary> Can take a value of meat, or fish, or plant. </summary>
     public readonly partial struct PetFood : IEquatable<PetFood>

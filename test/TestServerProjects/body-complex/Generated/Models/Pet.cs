@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace body_complex.Models
+namespace Body_Complex.Models
 {
     /// <summary> The Pet. </summary>
     public partial class Pet

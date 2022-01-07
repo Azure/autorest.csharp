@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
-namespace model_flattening.Models
+namespace Model_Flattening.Models
 {
     public partial class Resource : IUtf8JsonSerializable
     {

@@ -13,7 +13,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace body_time
+namespace Body_Time
 {
     internal partial class TimeRestClient
     {

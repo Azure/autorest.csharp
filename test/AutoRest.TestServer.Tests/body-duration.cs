@@ -6,7 +6,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using System.Xml;
 using AutoRest.TestServer.Tests.Infrastructure;
-using body_duration;
+using Body_Duration;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests

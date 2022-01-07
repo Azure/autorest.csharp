@@ -7,7 +7,7 @@
 
 using System;
 
-namespace azure_parameter_grouping.Models
+namespace Azure_Parameter_Grouping.Models
 {
     /// <summary> Parameter group. </summary>
     public partial class ParameterGroupingPostRequiredParameters

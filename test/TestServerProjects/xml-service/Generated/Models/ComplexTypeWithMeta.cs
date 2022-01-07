@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace xml_service.Models
+namespace Xml_Service.Models
 {
     /// <summary> I am a complex type with XML node. </summary>
     public partial class ComplexTypeWithMeta

@@ -7,8 +7,8 @@ using System.Reflection;
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
 using Azure;
-using azure_special_properties;
-using azure_special_properties.Models;
+using Azure_Special_Properties;
+using Azure_Special_Properties.Models;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests

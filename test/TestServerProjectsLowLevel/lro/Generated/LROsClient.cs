@@ -11,7 +11,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace lro_LowLevel
+namespace Lro_LowLevel
 {
     /// <summary> The LROs service client. </summary>
     public partial class LROsClient

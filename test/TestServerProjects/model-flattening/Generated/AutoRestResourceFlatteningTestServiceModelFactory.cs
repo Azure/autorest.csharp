@@ -7,7 +7,7 @@
 
 using System.Collections.Generic;
 
-namespace model_flattening.Models
+namespace Model_Flattening.Models
 {
     /// <summary> Model factory for read-only models. </summary>
     public static partial class AutoRestResourceFlatteningTestServiceModelFactory

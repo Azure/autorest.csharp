@@ -3,7 +3,7 @@
 
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
-using lro_parameterized_endpoints;
+using Lro_Parameterized_Endpoints;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests

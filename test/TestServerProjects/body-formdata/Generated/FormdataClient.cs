@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
 
-namespace body_formdata
+namespace Body_Formdata
 {
     /// <summary> The Formdata service client. </summary>
     public partial class FormdataClient

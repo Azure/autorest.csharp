@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace constants.Models
+namespace Constants.Models
 {
     /// <summary> The ModelAsStringNoRequiredTwoValueDefault. </summary>
     internal partial class ModelAsStringNoRequiredTwoValueDefault

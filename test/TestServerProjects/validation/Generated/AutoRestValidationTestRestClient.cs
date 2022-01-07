@@ -12,9 +12,9 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using validation.Models;
+using Validation.Models;
 
-namespace validation
+namespace Validation
 {
     internal partial class AutoRestValidationTestRestClient
     {

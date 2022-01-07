@@ -9,7 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace xml_service.Models
+namespace Xml_Service.Models
 {
     /// <summary> Model factory for read-only models. </summary>
     public static partial class AutoRestSwaggerBATXMLServiceModelFactory

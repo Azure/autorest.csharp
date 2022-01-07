@@ -10,9 +10,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
-using xms_error_responses.Models;
+using Xms_Error_Responses.Models;
 
-namespace xms_error_responses
+namespace Xms_Error_Responses
 {
     /// <summary> The Pet service client. </summary>
     public partial class PetClient

@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace httpInfrastructure.Models
+namespace HttpInfrastructure.Models
 {
     /// <summary> The C. </summary>
     public partial class C

@@ -8,7 +8,7 @@
 using System.Collections.Generic;
 using Azure.Core;
 
-namespace model_flattening.Models
+namespace Model_Flattening.Models
 {
     /// <summary> The Resource. </summary>
     public partial class Resource

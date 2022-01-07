@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
 using Azure;
 using NUnit.Framework;
-using object_type;
+using Object_Type;
 
 namespace AutoRest.TestServer.Tests
 {

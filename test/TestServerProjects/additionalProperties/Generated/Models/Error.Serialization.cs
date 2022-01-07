@@ -8,7 +8,7 @@
 using System.Text.Json;
 using Azure.Core;
 
-namespace additionalProperties.Models
+namespace AdditionalProperties.Models
 {
     internal partial class Error
     {

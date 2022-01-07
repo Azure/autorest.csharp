@@ -8,7 +8,7 @@
 using System.Text.Json;
 using Azure.Core;
 
-namespace xms_error_responses.Models
+namespace Xms_Error_Responses.Models
 {
     internal partial class LinkNotFound
     {

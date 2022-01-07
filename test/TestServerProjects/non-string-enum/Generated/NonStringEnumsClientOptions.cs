@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace non_string_enum
+namespace Non_String_Enum
 {
     /// <summary> Client options for NonStringEnumsClient. </summary>
     public partial class NonStringEnumsClientOptions : ClientOptions

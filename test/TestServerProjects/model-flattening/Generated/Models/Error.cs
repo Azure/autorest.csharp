@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace model_flattening.Models
+namespace Model_Flattening.Models
 {
     /// <summary> The Error. </summary>
     internal partial class Error

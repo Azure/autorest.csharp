@@ -12,9 +12,9 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using xms_error_responses.Models;
+using Xms_Error_Responses.Models;
 
-namespace xms_error_responses
+namespace Xms_Error_Responses
 {
     internal partial class PetRestClient
     {

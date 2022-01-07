@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace body_byte
+namespace Body_Byte
 {
     /// <summary> Client options for AutoRestSwaggerBATByteServiceClient. </summary>
     public partial class AutoRestSwaggerBATByteServiceClientOptions : ClientOptions

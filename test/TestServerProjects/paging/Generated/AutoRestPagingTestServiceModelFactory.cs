@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace paging.Models
+namespace Paging.Models
 {
     /// <summary> Model factory for read-only models. </summary>
     public static partial class AutoRestPagingTestServiceModelFactory

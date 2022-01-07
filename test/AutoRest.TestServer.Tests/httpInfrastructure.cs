@@ -7,8 +7,8 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
 using Azure;
-using httpInfrastructure;
-using httpInfrastructure.Models;
+using HttpInfrastructure;
+using HttpInfrastructure.Models;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests

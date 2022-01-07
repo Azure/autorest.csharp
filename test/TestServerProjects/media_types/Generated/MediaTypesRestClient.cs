@@ -13,9 +13,9 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using media_types.Models;
+using Media_Types.Models;
 
-namespace media_types
+namespace Media_Types
 {
     internal partial class MediaTypesRestClient
     {

@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace azure_special_properties
+namespace Azure_Special_Properties
 {
     /// <summary> Client options for AutoRestAzureSpecialParametersTestClient. </summary>
     public partial class AutoRestAzureSpecialParametersTestClientOptions : ClientOptions

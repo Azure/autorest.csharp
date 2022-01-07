@@ -9,12 +9,12 @@ using System;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using additionalProperties.Models;
+using AdditionalProperties.Models;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace additionalProperties
+namespace AdditionalProperties
 {
     internal partial class PetsRestClient
     {

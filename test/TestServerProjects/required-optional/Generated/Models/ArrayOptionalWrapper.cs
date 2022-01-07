@@ -8,7 +8,7 @@
 using System.Collections.Generic;
 using Azure.Core;
 
-namespace required_optional.Models
+namespace Required_Optional.Models
 {
     /// <summary> The ArrayOptionalWrapper. </summary>
     public partial class ArrayOptionalWrapper

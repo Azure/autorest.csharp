@@ -8,7 +8,7 @@
 using Azure;
 using Azure.Core;
 
-namespace lro_parameterized_endpoints
+namespace Lro_Parameterized_Endpoints
 {
     internal partial class LROWithParamaterizedEndpointsPollWithConstantParameterizedEndpointsHeaders
     {

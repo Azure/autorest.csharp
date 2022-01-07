@@ -12,9 +12,9 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using non_string_enum.Models;
+using Non_String_Enum.Models;
 
-namespace non_string_enum
+namespace Non_String_Enum
 {
     internal partial class FloatRestClient
     {

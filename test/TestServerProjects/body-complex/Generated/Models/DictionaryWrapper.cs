@@ -8,7 +8,7 @@
 using System.Collections.Generic;
 using Azure.Core;
 
-namespace body_complex.Models
+namespace Body_Complex.Models
 {
     /// <summary> The DictionaryWrapper. </summary>
     public partial class DictionaryWrapper

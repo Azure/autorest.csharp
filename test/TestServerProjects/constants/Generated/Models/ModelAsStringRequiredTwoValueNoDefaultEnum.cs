@@ -8,7 +8,7 @@
 using System;
 using System.ComponentModel;
 
-namespace constants.Models
+namespace Constants.Models
 {
     /// <summary> The ModelAsStringRequiredTwoValueNoDefaultEnum. </summary>
     internal readonly partial struct ModelAsStringRequiredTwoValueNoDefaultEnum : IEquatable<ModelAsStringRequiredTwoValueNoDefaultEnum>

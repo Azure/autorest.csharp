@@ -12,9 +12,9 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using lro.Models;
+using Lro.Models;
 
-namespace lro
+namespace Lro
 {
     /// <summary> Long running put request with non resource. </summary>
     public partial class LROsPutAsyncNonResourceOperation : Operation<Sku>, IOperationSource<Sku>

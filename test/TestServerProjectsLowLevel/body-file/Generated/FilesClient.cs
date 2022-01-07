@@ -11,7 +11,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace body_file_LowLevel
+namespace Body_File_LowLevel
 {
     /// <summary> The Files service client. </summary>
     public partial class FilesClient

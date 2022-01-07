@@ -11,7 +11,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace httpInfrastructure_LowLevel
+namespace HttpInfrastructure_LowLevel
 {
     /// <summary> The HttpClientFailure service client. </summary>
     public partial class HttpClientFailureClient

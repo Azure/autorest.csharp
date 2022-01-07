@@ -12,9 +12,9 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using url.Models;
+using Url.Models;
 
-namespace url
+namespace Url
 {
     internal partial class PathsRestClient
     {

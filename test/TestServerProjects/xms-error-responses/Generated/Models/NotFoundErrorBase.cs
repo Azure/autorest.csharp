@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace xms_error_responses.Models
+namespace Xms_Error_Responses.Models
 {
     /// <summary> The NotFoundErrorBase. </summary>
     internal partial class NotFoundErrorBase : BaseError

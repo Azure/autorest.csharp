@@ -11,9 +11,9 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using body_formdata_urlencoded.Models;
+using Body_Formdata_Urlencoded.Models;
 
-namespace body_formdata_urlencoded
+namespace Body_Formdata_Urlencoded
 {
     internal partial class FormdataurlencodedRestClient
     {

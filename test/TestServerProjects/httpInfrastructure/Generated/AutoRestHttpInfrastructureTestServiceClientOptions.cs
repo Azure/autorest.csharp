@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace httpInfrastructure
+namespace HttpInfrastructure
 {
     /// <summary> Client options for AutoRestHttpInfrastructureTestServiceClient. </summary>
     public partial class AutoRestHttpInfrastructureTestServiceClientOptions : ClientOptions

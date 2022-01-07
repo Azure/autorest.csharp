@@ -7,7 +7,7 @@
 
 using System;
 
-namespace azure_special_properties.Models
+namespace Azure_Special_Properties.Models
 {
     /// <summary> Parameter group. </summary>
     public partial class HeaderCustomNamedRequestIdParamGroupingParameters

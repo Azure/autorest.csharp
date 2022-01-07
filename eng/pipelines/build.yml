@@ -34,10 +34,24 @@ stages:
       - job: Build
         timeoutInMinutes: 120
         pool:
-          vmImage: windows-2022
+          name: azsdk-pool-mms-ubuntu-2004-general
+          vmImage: "MMSUbuntu20.04"
         steps:
           - checkout: self
           - checkout: azure-sdk-tools
+          - task: UseDotNet@2
+            displayName: 'Use .NET Core SDK'
+            retryCountOnTaskFailure: 3
+            inputs:
+              useGlobalJson: true
+              performMultiLevelLookup: true
+          - task: UseDotNet@2
+            displayName: 'Use .NET Core 3.1 SDK'
+            retryCountOnTaskFailure: 3
+            inputs:
+              packageType: sdk
+              performMultiLevelLookup: true
+              version: "3.1.x"
           - task: NodeTool@0
             displayName: "Install Node 16.x"
             inputs:

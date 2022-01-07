@@ -8,7 +8,7 @@
 using System.Text.Json;
 using Azure.Core;
 
-namespace subscriptionId_apiVersion.Models
+namespace SubscriptionId_ApiVersion.Models
 {
     public partial class SampleResourceGroup
     {

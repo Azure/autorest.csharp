@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace lro_parameterized_endpoints
+namespace Lro_Parameterized_Endpoints
 {
     /// <summary> Client options for LROWithParamaterizedEndpointsClient. </summary>
     public partial class LROWithParamaterizedEndpointsClientOptions : ClientOptions

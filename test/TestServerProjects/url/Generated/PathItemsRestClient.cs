@@ -12,7 +12,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace url
+namespace Url
 {
     internal partial class PathItemsRestClient
     {

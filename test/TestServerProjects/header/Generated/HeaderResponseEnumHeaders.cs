@@ -7,9 +7,9 @@
 
 using Azure;
 using Azure.Core;
-using header.Models;
+using Header.Models;
 
-namespace header
+namespace Header
 {
     internal partial class HeaderResponseEnumHeaders
     {

@@ -12,9 +12,9 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using lro.Models;
+using Lro.Models;
 
-namespace lro
+namespace Lro
 {
     /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that is not a valid json. </summary>
     public partial class LrosaDsPut200InvalidJsonOperation : Operation<Product>, IOperationSource<Product>

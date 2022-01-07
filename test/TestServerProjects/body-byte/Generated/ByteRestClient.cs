@@ -13,7 +13,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace body_byte
+namespace Body_Byte
 {
     internal partial class ByteRestClient
     {

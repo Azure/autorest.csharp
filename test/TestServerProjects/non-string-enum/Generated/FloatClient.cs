@@ -10,9 +10,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
-using non_string_enum.Models;
+using Non_String_Enum.Models;
 
-namespace non_string_enum
+namespace Non_String_Enum
 {
     /// <summary> The Float service client. </summary>
     public partial class FloatClient

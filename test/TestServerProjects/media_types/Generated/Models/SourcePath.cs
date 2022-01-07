@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace media_types.Models
+namespace Media_Types.Models
 {
     /// <summary> Uri or local path to source data. </summary>
     public partial class SourcePath

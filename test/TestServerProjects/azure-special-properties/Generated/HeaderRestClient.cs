@@ -10,9 +10,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using azure_special_properties.Models;
+using Azure_Special_Properties.Models;
 
-namespace azure_special_properties
+namespace Azure_Special_Properties
 {
     internal partial class HeaderRestClient
     {

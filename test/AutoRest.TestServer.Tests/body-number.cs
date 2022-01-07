@@ -6,7 +6,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
 using Azure;
-using body_number;
+using Body_Number;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests

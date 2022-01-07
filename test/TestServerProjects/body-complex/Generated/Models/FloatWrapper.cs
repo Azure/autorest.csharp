@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace body_complex.Models
+namespace Body_Complex.Models
 {
     /// <summary> The FloatWrapper. </summary>
     public partial class FloatWrapper

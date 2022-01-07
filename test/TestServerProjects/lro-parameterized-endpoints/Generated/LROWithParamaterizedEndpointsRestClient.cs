@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace lro_parameterized_endpoints
+namespace Lro_Parameterized_Endpoints
 {
     internal partial class LROWithParamaterizedEndpointsRestClient
     {

@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace custom_baseUrl_LowLevel
+namespace Custom_BaseUrl_LowLevel
 {
     /// <summary> Client options for AutoRestParameterizedHostTestClient. </summary>
     public partial class AutoRestParameterizedHostTestClientOptions : ClientOptions

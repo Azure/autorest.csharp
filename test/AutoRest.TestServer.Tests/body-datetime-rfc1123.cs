@@ -5,7 +5,7 @@ using System;
 using System.Text.Json;
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
-using body_datetime_rfc1123;
+using Body_Datetime_Rfc1123;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests

@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
-namespace paging.Models
+namespace Paging.Models
 {
     internal partial class ProductResultValueWithXMSClientName
     {

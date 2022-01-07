@@ -10,7 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure.Core.Pipeline;
 
-namespace lro_parameterized_endpoints
+namespace Lro_Parameterized_Endpoints
 {
     /// <summary> The LROWithParamaterizedEndpoints service client. </summary>
     public partial class LROWithParamaterizedEndpointsClient

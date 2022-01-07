@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
 
-namespace httpInfrastructure
+namespace HttpInfrastructure
 {
     /// <summary> The HttpRedirects service client. </summary>
     public partial class HttpRedirectsClient

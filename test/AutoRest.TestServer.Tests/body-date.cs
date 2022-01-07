@@ -6,7 +6,7 @@ using System.Globalization;
 using System.Text.Json;
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
-using body_date;
+using Body_Date;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests

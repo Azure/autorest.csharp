@@ -8,7 +8,7 @@
 using Azure;
 using Azure.Core;
 
-namespace header
+namespace Header
 {
     internal partial class HeaderResponseDoubleHeaders
     {

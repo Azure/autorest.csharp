@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace custom_baseUrl_more_options.Models
+namespace Custom_BaseUrl_More_Options.Models
 {
     /// <summary> The Error. </summary>
     internal partial class Error

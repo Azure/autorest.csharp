@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
 using Azure.Core.Pipeline;
 using NUnit.Framework;
-using validation;
-using validation.Models;
+using Validation;
+using Validation.Models;
 
 namespace AutoRest.TestServer.Tests
 {

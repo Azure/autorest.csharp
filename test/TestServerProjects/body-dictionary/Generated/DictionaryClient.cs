@@ -11,9 +11,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
-using body_dictionary.Models;
+using Body_Dictionary.Models;
 
-namespace body_dictionary
+namespace Body_Dictionary
 {
     /// <summary> The Dictionary service client. </summary>
     public partial class DictionaryClient

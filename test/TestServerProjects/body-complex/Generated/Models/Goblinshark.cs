@@ -8,7 +8,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace body_complex.Models
+namespace Body_Complex.Models
 {
     /// <summary> The Goblinshark. </summary>
     public partial class Goblinshark : Shark

@@ -10,9 +10,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
-using httpInfrastructure.Models;
+using HttpInfrastructure.Models;
 
-namespace httpInfrastructure
+namespace HttpInfrastructure
 {
     /// <summary> The MultipleResponses service client. </summary>
     public partial class MultipleResponsesClient

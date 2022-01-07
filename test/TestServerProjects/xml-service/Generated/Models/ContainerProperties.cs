@@ -7,7 +7,7 @@
 
 using System;
 
-namespace xml_service.Models
+namespace Xml_Service.Models
 {
     /// <summary> Properties of a container. </summary>
     public partial class ContainerProperties

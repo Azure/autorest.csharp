@@ -8,7 +8,7 @@
 using System.Xml.Linq;
 using Azure.Core;
 
-namespace xml_service.Models
+namespace Xml_Service.Models
 {
     public partial class ListBlobsResponse
     {

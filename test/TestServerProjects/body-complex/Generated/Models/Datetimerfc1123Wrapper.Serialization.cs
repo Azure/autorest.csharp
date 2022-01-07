@@ -9,7 +9,7 @@ using System;
 using System.Text.Json;
 using Azure.Core;
 
-namespace body_complex.Models
+namespace Body_Complex.Models
 {
     public partial class Datetimerfc1123Wrapper : IUtf8JsonSerializable
     {

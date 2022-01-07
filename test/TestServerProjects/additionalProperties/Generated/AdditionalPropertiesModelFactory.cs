@@ -7,7 +7,7 @@
 
 using System.Collections.Generic;
 
-namespace additionalProperties.Models
+namespace AdditionalProperties.Models
 {
     /// <summary> Model factory for read-only models. </summary>
     public static partial class AdditionalPropertiesModelFactory

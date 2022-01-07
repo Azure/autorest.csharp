@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace paging_LowLevel
+namespace Paging_LowLevel
 {
     /// <summary> Client options for AutoRestPagingTestServiceClient. </summary>
     public partial class AutoRestPagingTestServiceClientOptions : ClientOptions

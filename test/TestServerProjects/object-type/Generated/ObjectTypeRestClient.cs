@@ -13,7 +13,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace object_type
+namespace Object_Type
 {
     internal partial class ObjectTypeRestClient
     {

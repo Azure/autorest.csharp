@@ -7,7 +7,7 @@
 
 using System;
 
-namespace xml_service.Models
+namespace Xml_Service.Models
 {
     /// <summary> The BlobPrefix. </summary>
     public partial class BlobPrefix

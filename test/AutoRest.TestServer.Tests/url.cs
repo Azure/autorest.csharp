@@ -7,8 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
 using NUnit.Framework;
-using url;
-using url.Models;
+using Url;
+using Url.Models;
 
 namespace AutoRest.TestServer.Tests
 {

@@ -8,7 +8,7 @@
 using System;
 using System.ComponentModel;
 
-namespace extensible_enums_swagger.Models
+namespace Extensible_Enums_Swagger.Models
 {
     /// <summary> The IntEnum. </summary>
     public readonly partial struct IntEnum : IEquatable<IntEnum>

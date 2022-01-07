@@ -8,7 +8,7 @@
 using System.Collections.Generic;
 using Azure.Core;
 
-namespace additionalProperties.Models
+namespace AdditionalProperties.Models
 {
     /// <summary> The PetAPTrue. </summary>
     public partial class PetAPTrue

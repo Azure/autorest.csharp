@@ -11,7 +11,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace body_array_LowLevel
+namespace Body_Array_LowLevel
 {
     /// <summary> The Array service client. </summary>
     public partial class ArrayClient

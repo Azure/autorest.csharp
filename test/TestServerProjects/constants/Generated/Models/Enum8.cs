@@ -9,7 +9,7 @@ using System;
 using System.ComponentModel;
 using System.Globalization;
 
-namespace constants.Models
+namespace Constants.Models
 {
     /// <summary> The Enum8. </summary>
     public readonly partial struct Enum8 : IEquatable<Enum8>

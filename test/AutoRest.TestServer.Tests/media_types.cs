@@ -7,8 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using AutoRest.TestServer.Tests.Infrastructure;
-using media_types;
-using media_types.Models;
+using Media_Types;
+using Media_Types.Models;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests

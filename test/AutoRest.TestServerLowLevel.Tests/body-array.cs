@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using System.Xml;
 using AutoRest.TestServer.Tests.Infrastructure;
 using Azure.Core;
-using body_array_LowLevel;
+using Body_Array_LowLevel;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests

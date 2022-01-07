@@ -14,9 +14,9 @@ using System.Xml.Linq;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using xml_service.Models;
+using Xml_Service.Models;
 
-namespace xml_service
+namespace Xml_Service
 {
     internal partial class XmlRestClient
     {

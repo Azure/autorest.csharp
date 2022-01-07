@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
 
-namespace body_date
+namespace Body_Date
 {
     /// <summary> The Date service client. </summary>
     public partial class DateClient

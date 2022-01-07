@@ -8,7 +8,7 @@
 using System.Text.Json;
 using Azure.Core;
 
-namespace paging.Models
+namespace Paging.Models
 {
     public partial class ProductProperties
     {

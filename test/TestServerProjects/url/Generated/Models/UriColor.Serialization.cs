@@ -7,7 +7,7 @@
 
 using System;
 
-namespace url.Models
+namespace Url.Models
 {
     internal static partial class UriColorExtensions
     {

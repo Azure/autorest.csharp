@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace xms_error_responses.Models
+namespace Xms_Error_Responses.Models
 {
     /// <summary> The AnimalNotFound. </summary>
     internal partial class AnimalNotFound : NotFoundErrorBase

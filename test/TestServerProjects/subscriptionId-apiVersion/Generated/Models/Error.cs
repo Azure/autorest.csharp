@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace subscriptionId_apiVersion.Models
+namespace SubscriptionId_ApiVersion.Models
 {
     /// <summary> The Error. </summary>
     internal partial class Error

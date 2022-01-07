@@ -12,9 +12,9 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using lro.Models;
+using Lro.Models;
 
-namespace lro
+namespace Lro
 {
     /// <summary> Long running put request, service returns a 201 to the initial request with no payload. </summary>
     public partial class LrosaDsPutError201NoProvisioningStatePayloadOperation : Operation<Product>, IOperationSource<Product>

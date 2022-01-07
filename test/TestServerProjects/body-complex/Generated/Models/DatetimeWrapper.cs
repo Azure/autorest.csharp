@@ -7,7 +7,7 @@
 
 using System;
 
-namespace body_complex.Models
+namespace Body_Complex.Models
 {
     /// <summary> The DatetimeWrapper. </summary>
     public partial class DatetimeWrapper

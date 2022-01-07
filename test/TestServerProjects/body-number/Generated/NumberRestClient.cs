@@ -13,7 +13,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace body_number
+namespace Body_Number
 {
     internal partial class NumberRestClient
     {
