@@ -45,6 +45,13 @@ stages:
             inputs:
               useGlobalJson: true
               performMultiLevelLookup: true
+          - task: UseDotNet@2
+            displayName: 'Use .NET Core 3.1 SDK'
+            retryCountOnTaskFailure: 3
+            inputs:
+              packageType: sdk
+              performMultiLevelLookup: true
+              version: "3.1.x"
           - task: NodeTool@0
             displayName: "Install Node 16.x"
             inputs:
