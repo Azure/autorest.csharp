@@ -21,7 +21,6 @@ namespace Azure.Management.Storage
 {
     /// <summary> A class representing collection of BlobContainer and their operations over its parent. </summary>
     public partial class BlobContainerCollection : ArmCollection, IEnumerable<BlobContainer>, IAsyncEnumerable<BlobContainer>
-
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly BlobContainersRestOperations _blobContainersRestClient;

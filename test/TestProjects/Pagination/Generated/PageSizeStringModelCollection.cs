@@ -23,7 +23,6 @@ namespace Pagination
 {
     /// <summary> A class representing collection of PageSizeStringModel and their operations over its parent. </summary>
     public partial class PageSizeStringModelCollection : ArmCollection, IEnumerable<PageSizeStringModel>, IAsyncEnumerable<PageSizeStringModel>
-
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly PageSizeStringModelsRestOperations _pageSizeStringModelsRestClient;

@@ -198,12 +198,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
             else if (clientOperation.IsPagingOperation(Context))
             {
                 // this is a paging operation
-                WritePagingMethod(clientOperation, async);
+                var itemType = clientOperation.First(restOperation => restOperation.IsPagingOperation(Context)).GetPagingMethod(Context)!.PagingResponse.ItemType;
+                WritePagingMethod(clientOperation, itemType, async);
             }
             else if (clientOperation.IsListOperation(Context, out var itemType))
             {
                 // this is a normal list operation
-                WriteNormalListMethod(clientOperation, itemType, async);
+                WritePagingMethod(clientOperation, itemType, async);
             }
             else
             {
@@ -213,7 +214,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         }
 
         #region PagingMethod
-        protected void WritePagingMethod(MgmtClientOperation clientOperation, bool async)
+        protected void WritePagingMethod(MgmtClientOperation clientOperation, CSharpType itemType, bool async)
         {
             _writer.Line();
             // write the extra information about the request path, operation id, etc
@@ -221,27 +222,19 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 WriteRequestPathAndOperationId(clientOperation);
             BuildParameters(clientOperation, out var operationMappings, out var parameterMappings, out var methodParameters);
 
-            WritePagingMethod(clientOperation, operationMappings, parameterMappings, methodParameters, clientOperation.Name, async);
+            WritePagingMethod(clientOperation, itemType, operationMappings, parameterMappings, methodParameters, clientOperation.Name, async);
         }
 
-        protected virtual void WritePagingMethod(MgmtClientOperation clientOperation, Dictionary<RequestPath, MgmtRestOperation> operationMappings,
+        protected virtual void WritePagingMethod(MgmtClientOperation clientOperation, CSharpType itemType, Dictionary<RequestPath, MgmtRestOperation> operationMappings,
             Dictionary<RequestPath, IEnumerable<ParameterMapping>> parameterMappings, IReadOnlyList<Parameter> methodParameters,
             string methodName, bool async)
         {
-            // TODO -- since we are combining multiple operations under different parents, which description should we leave here?
-            _writer.WriteXmlDocumentationSummary($"{clientOperation.Description}");
-            foreach (var parameter in methodParameters)
-            {
-                _writer.WriteXmlDocumentationParameter(parameter);
-            }
-            _writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
-
+            // TODO -- since we are combining multiple operations under different parents, which description should we leave here
             // TODO -- find a better way to get this type
-            var itemType = clientOperation.First(restOperation => restOperation.IsPagingOperation(Context)).GetPagingMethod(Context)!.PagingResponse.ItemType;
             var actualItemType = WrapResourceDataType(itemType, clientOperation.First())?.Type ?? itemType;
-            _writer.WriteXmlDocumentationReturns($"{(async ? "An async" : "A")} collection of <see cref=\"{actualItemType.Name}\" /> that may take multiple service requests to iterate over.");
 
-            WritePagingMethodSignature(actualItemType.WrapPageable(async), methodName, methodParameters, async, clientOperation.Accessibility, true);
+            _writer.WriteXmlDocumentationSummary($"{clientOperation.Description}");
+            WritePagingMethodSignature(actualItemType, methodName, methodParameters, async, clientOperation.Accessibility, true);
 
             using (_writer.Scope())
             {
@@ -252,7 +245,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        protected void WritePagingMethodBody(CSharpType itemType, Diagnostic diagnostic, IDictionary<RequestPath, MgmtRestOperation> operationMappings,
+        protected virtual void WritePagingMethodBody(CSharpType itemType, Diagnostic diagnostic, IDictionary<RequestPath, MgmtRestOperation> operationMappings,
             IDictionary<RequestPath, IEnumerable<ParameterMapping>> parameterMappings, bool async)
         {
             // we need to write multiple branches for a paging method
@@ -260,7 +253,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 // if we only have one branch, we would not need those if-else statements
                 var branch = operationMappings.Keys.First();
-                WritePagingMethodBranch(itemType, diagnostic, operationMappings[branch], parameterMappings[branch], async);
+                WritePagingMethodBranch(itemType, diagnostic, ClientDiagnosticsField, operationMappings[branch], parameterMappings[branch], async);
             }
             else
             {
@@ -277,7 +270,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     }
                     using (_writer.Scope($"{keyword} ({BranchIdVariableName}.ResourceType == {GetResourceTypeExpression(resourceType)})"))
                     {
-                        WritePagingMethodBranch(itemType, diagnostic, operation, parameterMappings[branch], async);
+                        WritePagingMethodBranch(itemType, diagnostic, ClientDiagnosticsField, operation, parameterMappings[branch], async);
                     }
                     keyword = "else if";
                 }
@@ -293,7 +286,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     var branch = escapeBranches.First();
                     using (_writer.Scope($"else"))
                     {
-                        WritePagingMethodBranch(itemType, diagnostic, operationMappings[branch], parameterMappings[branch], async);
+                        WritePagingMethodBranch(itemType, diagnostic, ClientDiagnosticsField, operationMappings[branch], parameterMappings[branch], async);
                     }
                 }
                 else
@@ -303,20 +296,16 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        protected virtual void WritePagingMethodBranch(CSharpType itemType, Diagnostic diagnostic, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMappings, bool async)
+        protected virtual void WritePagingMethodBranch(CSharpType itemType, Diagnostic diagnostic, string diagnosticVariable, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMappings, bool async)
         {
-            var pagingMethod = operation.GetPagingMethod(Context)!;
+            var pagingMethod = GetPagingMethod(operation);
             var actualType = WrapResourceDataType(itemType, operation)?.Type ?? itemType;
             var returnType = new CSharpType(typeof(Page<>), actualType).WrapAsync(async);
 
-            var nextLinkName = pagingMethod.PagingResponse.NextLinkProperty?.Declaration.Name;
-            var itemName = pagingMethod.PagingResponse.ItemProperty.Declaration.Name;
-
-            var continuationTokenText = nextLinkName != null ? $"response.Value.{nextLinkName}" : "null";
             using (_writer.Scope($"{GetAsyncKeyword(async)} {returnType} FirstPageFunc({typeof(int?)} pageSizeHint)"))
             {
                 // no null-checks because all are optional
-                using (WriteDiagnosticScope(_writer, diagnostic, ClientDiagnosticsField))
+                using (WriteDiagnosticScope(_writer, diagnostic, diagnosticVariable))
                 {
                     WritePageFunctionBody(itemType, pagingMethod, operation, parameterMappings, async, false);
                 }
@@ -329,7 +318,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 var nextPageParameters = pagingMethod.NextPageMethod.Parameters;
                 using (_writer.Scope($"{GetAsyncKeyword(async)} {returnType} {nextPageFunctionName}({typeof(string)} nextLink, {typeof(int?)} pageSizeHint)"))
                 {
-                    using (WriteDiagnosticScope(_writer, diagnostic, ClientDiagnosticsField))
+                    using (WriteDiagnosticScope(_writer, diagnostic, diagnosticVariable))
                     {
                         WritePageFunctionBody(itemType, pagingMethod, operation, parameterMappings, async, true);
                     }
@@ -338,13 +327,20 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Line($"return {typeof(PageableHelpers)}.{CreateMethodName("Create", async)}Enumerable(FirstPageFunc, {nextPageFunctionName});");
         }
 
-        protected void WritePageFunctionBody(CSharpType itemType, PagingMethod pagingMethod, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMappings,
+        protected PagingMethodWrapper GetPagingMethod(MgmtRestOperation operation)
+        {
+            var pagingMethod = operation.GetPagingMethod(Context);
+            if (pagingMethod == null)
+                return new PagingMethodWrapper(operation.Method);
+
+            return new PagingMethodWrapper(pagingMethod);
+        }
+
+        protected void WritePageFunctionBody(CSharpType itemType, PagingMethodWrapper pagingMethod, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMappings,
             bool isAsync, bool isNextPageFunc)
         {
             var wrapResource = WrapResourceDataType(itemType, operation);
-            var nextLinkName = pagingMethod.PagingResponse.NextLinkProperty?.Declaration.Name;
-            var itemName = pagingMethod.PagingResponse.ItemProperty.Declaration.Name;
-            var continuationTokenText = nextLinkName != null ? $"response.Value.{nextLinkName}" : "null";
+            var continuationTokenText = pagingMethod.NextLinkName != null ? $"response.Value.{pagingMethod.NextLinkName}" : "null";
 
             _writer.Append($"var response = {GetAwait(isAsync)} {GetRestClientVariableName(operation.RestClient)}.{CreateMethodName(isNextPageFunc ? pagingMethod.NextPageMethod!.Name : pagingMethod.Method.Name, isAsync)}({GetNextLink(isNextPageFunc)}");
             WriteArguments(_writer, parameterMappings);
@@ -368,12 +364,22 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 });
                 converter = $".Select(value => {newInstanceExpression})";
             }
-            _writer.Line($"return {typeof(Page)}.FromValues(response.Value.{itemName}{converter}, {continuationTokenText}, response.GetRawResponse());");
+            var itemName = pagingMethod.ItemName.IsNullOrEmpty() ? string.Empty : $".{pagingMethod.ItemName}";
+            _writer.Line($"return {typeof(Page)}.FromValues(response.Value{itemName}{converter}, {continuationTokenText}, response.GetRawResponse());");
         }
 
-        protected virtual void WritePagingMethodSignature(CSharpType responseType, string methodName, IEnumerable<Parameter> methodParameters, bool async,
+        protected virtual void WritePagingMethodSignature(CSharpType actualItemType, string methodName, IReadOnlyList<Parameter> methodParameters, bool async,
             string accessibility = "public", bool isVirtual = true)
         {
+            foreach (var parameter in methodParameters)
+            {
+                _writer.WriteXmlDocumentationParameter(parameter);
+            }
+            _writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
+            _writer.WriteXmlDocumentationRequiredParametersException(methodParameters);
+            _writer.WriteXmlDocumentationReturns($"{(async ? "An async" : "A")} collection of <see cref=\"{actualItemType.Name}\" /> that may take multiple service requests to iterate over.");
+
+            var responseType = actualItemType.WrapPageable(async);
             _writer.Append($"{accessibility} {GetVirtual(isVirtual)} {responseType} {CreateMethodName(methodName, async)}(");
 
             foreach (var parameter in methodParameters)
@@ -382,12 +388,60 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
             _writer.Line($"{typeof(CancellationToken)} cancellationToken = default)");
         }
+
+        protected class PagingMethodWrapper
+        {
+            public PagingMethodWrapper(PagingMethod pagingMethod)
+            {
+                Method = pagingMethod.Method;
+                NextPageMethod = pagingMethod.NextPageMethod;
+                NextLinkName = pagingMethod.PagingResponse.NextLinkProperty?.Declaration.Name;
+                ItemName = pagingMethod.PagingResponse.ItemProperty.Declaration.Name;
+            }
+
+            public PagingMethodWrapper(RestClientMethod method)
+            {
+                Method = method;
+                NextPageMethod = null;
+                NextLinkName = null;
+                var valueProperty = "Value";
+                if (method.ReturnType!.IsFrameworkType && method.ReturnType.FrameworkType == typeof(IReadOnlyList<>))
+                    valueProperty = string.Empty;
+                ItemName = valueProperty;
+            }
+
+            /// <summary>
+            /// This is the underlying <see cref="RestClientMethod"/> of this paging method
+            /// </summary>
+            public RestClientMethod Method { get; }
+
+            /// <summary>
+            /// This is the REST method for getting next page if there is one
+            /// </summary>
+            public RestClientMethod? NextPageMethod { get; }
+
+            /// <summary>
+            /// This is the property name in the response body, usually the value of this is `Value`
+            /// </summary>
+            public string ItemName { get; }
+
+            /// <summary>
+            /// This is the name of the nextLink property if there is one.
+            /// </summary>
+            public string? NextLinkName { get; }
+        }
         #endregion
 
         #region NormalMethod
-        protected virtual void WriteNormalMethodSignature(CSharpType responseType, string methodName, IEnumerable<Parameter> methodParameters, bool async,
+        protected virtual void WriteNormalMethodSignature(CSharpType responseType, string methodName, IReadOnlyList<Parameter> methodParameters, bool async,
             string accessibility = "public", bool isVirtual = true)
         {
+            foreach (var parameter in methodParameters)
+            {
+                _writer.WriteXmlDocumentationParameter(parameter);
+            }
+            _writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
+            _writer.WriteXmlDocumentationRequiredParametersException(methodParameters);
             _writer.Append($"{accessibility} {GetAsyncKeyword(async)} {GetVirtual(isVirtual)} {responseType} {CreateMethodName(methodName, async)}(");
 
             foreach (var parameter in methodParameters)
@@ -413,16 +467,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
             string methodName, bool async, bool shouldThrowExceptionWhenNull = false)
         {
             // TODO -- since we are combining multiple operations under different parents, which description should we leave here?
-            _writer.WriteXmlDocumentationSummary($"{clientOperation.Description}");
-            foreach (var parameter in methodParameters)
-            {
-                _writer.WriteXmlDocumentationParameter(parameter);
-            }
-            _writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
-            _writer.WriteXmlDocumentationRequiredParametersException(methodParameters);
-            var wrapResource = WrapResourceDataType(clientOperation.ReturnType, clientOperation.First());
-            var returnType = wrapResource?.Type ?? clientOperation.ReturnType;
+            var returnType = WrapResourceDataType(clientOperation.ReturnType, clientOperation.First())?.Type ?? clientOperation.ReturnType;
 
+            _writer.WriteXmlDocumentationSummary($"{clientOperation.Description}");
             WriteNormalMethodSignature(GetResponseType(returnType, async), methodName, methodParameters, async, clientOperation.Accessibility, true);
 
             using (_writer.Scope())
@@ -435,100 +482,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 }
                 _writer.Line();
             }
-        }
-
-        protected void WriteNormalListMethod(MgmtClientOperation clientOperation, CSharpType itemType, bool async)
-        {
-            _writer.Line();
-            // write the extra information about the request path, operation id, etc
-            if (ShowRequestPathAndOperationId)
-                WriteRequestPathAndOperationId(clientOperation);
-            BuildParameters(clientOperation, out var operationMappings, out var parameterMappings, out var methodParameters);
-
-            WriteNormalListMethod(clientOperation, operationMappings, parameterMappings, methodParameters, itemType, clientOperation.Name, async);
-        }
-
-        protected virtual void WriteNormalListMethod(MgmtClientOperation clientOperation, Dictionary<RequestPath, MgmtRestOperation> operationMappings,
-            Dictionary<RequestPath, IEnumerable<ParameterMapping>> parameterMappings, IReadOnlyList<Parameter> methodParameters,
-            CSharpType itemType, string methodName, bool async)
-        {
-            // TODO -- since we are combining multiple operations under different parents, which description should we leave here?
-            _writer.WriteXmlDocumentationSummary($"{clientOperation.Description}");
-            foreach (var parameter in methodParameters)
-            {
-                _writer.WriteXmlDocumentationParameter(parameter);
-            }
-            _writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
-            _writer.WriteXmlDocumentationRequiredParametersException(methodParameters);
-            var wrapResource = WrapResourceDataType(itemType, clientOperation.First());
-            var returnType = new CSharpType(typeof(IReadOnlyList<>), wrapResource?.Type ?? itemType);
-
-            WriteNormalMethodSignature(GetResponseType(returnType, async), methodName, methodParameters, async, clientOperation.Accessibility, true);
-
-            using (_writer.Scope())
-            {
-                _writer.WriteParameterNullChecks(methodParameters);
-                var diagnostic = new Diagnostic($"{TypeOfThis.Name}.{methodName}", Array.Empty<DiagnosticAttribute>());
-                using (WriteDiagnosticScope(_writer, diagnostic, ClientDiagnosticsField))
-                {
-                    WriteNormalListMethodBody(_writer, itemType, operationMappings, parameterMappings, async);
-                }
-                _writer.Line();
-            }
-        }
-
-        protected virtual void WriteNormalListMethodBody(CodeWriter writer, CSharpType itemType, IDictionary<RequestPath, MgmtRestOperation> operationMappings,
-            IDictionary<RequestPath, IEnumerable<ParameterMapping>> parameterMappings, bool async)
-        {
-            // we need to write multiple branches for a normal method
-            if (operationMappings.Count == 1)
-            {
-                // if we only have one branch, we would not need those if-else statements
-                var branch = operationMappings.Keys.First();
-                WriteNormalListMethodBranch(writer, itemType, operationMappings[branch], parameterMappings[branch], async);
-            }
-            else
-            {
-                // branches go here
-                throw new NotImplementedException("multi-branch normal method not supported yet");
-            }
-        }
-
-        protected virtual void WriteNormalListMethodBranch(CodeWriter writer, CSharpType itemType, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMappings, bool async)
-        {
-            writer.Append($"var response = {GetAwait(async)} ");
-            writer.Append($"{GetRestClientVariableName(operation.RestClient)}.{CreateMethodName(operation.Method.Name, async)}(");
-            WriteArguments(writer, parameterMappings);
-            writer.Line($"cancellationToken){GetConfigureAwait(async)};");
-
-            WriteNormalListMethodResponse(writer, itemType, operation, async);
-        }
-
-        protected virtual void WriteNormalListMethodResponse(CodeWriter writer, CSharpType itemType, MgmtRestOperation operation, bool async)
-        {
-            // only when we are listing ourselves, we use Select to convert XXXResourceData to XXXResource
-            var wrapResource = WrapResourceDataType(itemType, operation);
-            FormattableString converter = $"";
-            if (wrapResource != null)
-            {
-                FormattableString dataExpression = $"value";
-                FormattableString idExpression = $"{dataExpression}.Id";
-                if (wrapResource.ResourceData.IsIdString())
-                    idExpression = $"new {typeof(ResourceIdentifier)}({idExpression})";
-
-                writer.UseNamespace("System.Linq");
-                var newInstanceExpression = wrapResource.NewInstanceExpression(new[]
-                {
-                    new ParameterInvocation(wrapResource.OptionsParameter, w => w.Append($"{ContextProperty}")),
-                    new ParameterInvocation(wrapResource.ResourceIdentifierParameter, w => w.Append($"value.Id")),
-                    new ParameterInvocation(wrapResource.ResourceDataParameter, w => w.Append($"value")),
-                });
-                converter = $".Select(value => {newInstanceExpression}).ToArray() as IReadOnlyList<{wrapResource.Type.Name}>";
-            }
-            var valueProperty = ".Value";
-            if (operation.ReturnType!.IsFrameworkType && operation.ReturnType.FrameworkType == typeof(IReadOnlyList<>))
-                valueProperty = string.Empty;
-            writer.Line($"return {typeof(Response)}.FromValue(response.Value{valueProperty}{converter}, response.GetRawResponse());");
         }
 
         protected virtual void WriteNormalMethodBody(IDictionary<RequestPath, MgmtRestOperation> operationMappings, IDictionary<RequestPath, IEnumerable<ParameterMapping>> parameterMappings,
@@ -610,18 +563,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
             methodName = isSLRO ? methodName : $"Start{methodName}";
 
             // TODO -- since we are combining multiple operations under different parents, which description should we leave here?
-            _writer.WriteXmlDocumentationSummary($"{clientOperation.Description}");
-            foreach (var parameter in methodParameters)
-            {
-                _writer.WriteXmlDocumentationParameter(parameter);
-            }
-            _writer.WriteXmlDocumentationParameter("waitForCompletion", $"Waits for the completion of the long running operations.");
-            _writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
-            _writer.WriteXmlDocumentationRequiredParametersException(methodParameters);
             // TODO -- find a way to properly get the LRO response type here. Temporarily we are using the first one
             var lroObjectType = GetLROObjectType(clientOperation.First().Operation, async);
             var responseType = lroObjectType.WrapAsync(async);
 
+            _writer.WriteXmlDocumentationSummary($"{clientOperation.Description}");
             WriteLROMethodSignature(responseType, methodName, methodParameters, async, isSLRO, clientOperation.Accessibility, true);
 
             using (_writer.Scope())
@@ -699,9 +645,16 @@ namespace AutoRest.CSharp.Mgmt.Generation
             WriteLROResponse(lroObjectType, ClientDiagnosticsField, PipelineProperty, operation, parameterMapping, async);
         }
 
-        protected virtual void WriteLROMethodSignature(CSharpType responseType, string methodName, IEnumerable<Parameter> methodParameters, bool async,
+        protected virtual void WriteLROMethodSignature(CSharpType responseType, string methodName, IReadOnlyList<Parameter> methodParameters, bool async,
             bool isSLRO, string accessibility = "public", bool isVirtual = true)
         {
+            foreach (var parameter in methodParameters)
+            {
+                _writer.WriteXmlDocumentationParameter(parameter);
+            }
+            _writer.WriteXmlDocumentationParameter("waitForCompletion", $"Waits for the completion of the long running operations.");
+            _writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
+            _writer.WriteXmlDocumentationRequiredParametersException(methodParameters);
             _writer.Append($"{accessibility} {GetAsyncKeyword(async)} {GetVirtual(isVirtual)} {responseType} {CreateMethodName(methodName, async)}(");
             foreach (var parameter in methodParameters)
             {

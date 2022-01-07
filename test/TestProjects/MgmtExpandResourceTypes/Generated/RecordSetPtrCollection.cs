@@ -21,7 +21,6 @@ namespace MgmtExpandResourceTypes
 {
     /// <summary> A class representing collection of RecordSet and their operations over its parent. </summary>
     public partial class RecordSetPtrCollection : ArmCollection, IEnumerable<RecordSetPtr>, IAsyncEnumerable<RecordSetPtr>
-
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly RecordSetsRestOperations _recordSetsRestClient;

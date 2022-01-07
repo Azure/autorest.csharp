@@ -22,7 +22,7 @@ using MgmtSingleton.Models;
 namespace MgmtSingleton
 {
     /// <summary> A class representing collection of ParentResource and their operations over its parent. </summary>
-    public partial class ParentResourceCollection : ArmCollection, IEnumerable<ParentResource>
+    public partial class ParentResourceCollection : ArmCollection, IEnumerable<ParentResource>, IAsyncEnumerable<ParentResource>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly ParentResourcesRestOperations _parentResourcesRestClient;
@@ -286,20 +286,25 @@ namespace MgmtSingleton
         /// OperationId: ParentResources_List
         /// <summary> Singleton Test Parent Example. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IReadOnlyList<ParentResource>> GetAll(CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="ParentResource" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<ParentResource> GetAll(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ParentResourceCollection.GetAll");
-            scope.Start();
-            try
+            Page<ParentResource> FirstPageFunc(int? pageSizeHint)
             {
-                var response = _parentResourcesRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken);
-                return Response.FromValue(response.Value.Value.Select(value => new ParentResource(Parent, value)).ToArray() as IReadOnlyList<ParentResource>, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("ParentResourceCollection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = _parentResourcesRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new ParentResource(Parent, value)), null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources
@@ -307,20 +312,25 @@ namespace MgmtSingleton
         /// OperationId: ParentResources_List
         /// <summary> Singleton Test Parent Example. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<IReadOnlyList<ParentResource>>> GetAllAsync(CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="ParentResource" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<ParentResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ParentResourceCollection.GetAll");
-            scope.Start();
-            try
+            async Task<Page<ParentResource>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await _parentResourcesRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(response.Value.Value.Select(value => new ParentResource(Parent, value)).ToArray() as IReadOnlyList<ParentResource>, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("ParentResourceCollection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = await _parentResourcesRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new ParentResource(Parent, value)), null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
         /// <summary> Filters the list of <see cref="ParentResource" /> for this resource group represented as generic resources. </summary>
@@ -371,12 +381,17 @@ namespace MgmtSingleton
 
         IEnumerator<ParentResource> IEnumerable<ParentResource>.GetEnumerator()
         {
-            return GetAll().Value.GetEnumerator();
+            return GetAll().GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return GetAll().Value.GetEnumerator();
+            return GetAll().GetEnumerator();
+        }
+
+        IAsyncEnumerator<ParentResource> IAsyncEnumerable<ParentResource>.GetAsyncEnumerator(CancellationToken cancellationToken)
+        {
+            return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
 
         // Builders.

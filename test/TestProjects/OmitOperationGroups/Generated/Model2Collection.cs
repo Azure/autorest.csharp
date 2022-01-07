@@ -22,7 +22,7 @@ using OmitOperationGroups.Models;
 namespace OmitOperationGroups
 {
     /// <summary> A class representing collection of Model2 and their operations over its parent. </summary>
-    public partial class Model2Collection : ArmCollection, IEnumerable<Model2>
+    public partial class Model2Collection : ArmCollection, IEnumerable<Model2>, IAsyncEnumerable<Model2>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly Model2SRestOperations _model2sRestClient;
@@ -283,40 +283,50 @@ namespace OmitOperationGroups
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
         /// OperationId: Model2s_List
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IReadOnlyList<Model2>> GetAll(CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="Model2" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<Model2> GetAll(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("Model2Collection.GetAll");
-            scope.Start();
-            try
+            Page<Model2> FirstPageFunc(int? pageSizeHint)
             {
-                var response = _model2sRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken);
-                return Response.FromValue(response.Value.Value.Select(value => new Model2(Parent, value)).ToArray() as IReadOnlyList<Model2>, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("Model2Collection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = _model2sRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new Model2(Parent, value)), null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
         /// OperationId: Model2s_List
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<IReadOnlyList<Model2>>> GetAllAsync(CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="Model2" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<Model2> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("Model2Collection.GetAll");
-            scope.Start();
-            try
+            async Task<Page<Model2>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await _model2sRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(response.Value.Value.Select(value => new Model2(Parent, value)).ToArray() as IReadOnlyList<Model2>, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("Model2Collection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = await _model2sRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new Model2(Parent, value)), null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
         /// <summary> Filters the list of <see cref="Model2" /> for this resource group represented as generic resources. </summary>
@@ -367,12 +377,17 @@ namespace OmitOperationGroups
 
         IEnumerator<Model2> IEnumerable<Model2>.GetEnumerator()
         {
-            return GetAll().Value.GetEnumerator();
+            return GetAll().GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return GetAll().Value.GetEnumerator();
+            return GetAll().GetEnumerator();
+        }
+
+        IAsyncEnumerator<Model2> IAsyncEnumerable<Model2>.GetAsyncEnumerator(CancellationToken cancellationToken)
+        {
+            return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
 
         // Builders.

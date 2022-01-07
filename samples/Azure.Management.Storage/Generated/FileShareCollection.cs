@@ -21,7 +21,6 @@ namespace Azure.Management.Storage
 {
     /// <summary> A class representing collection of FileShare and their operations over its parent. </summary>
     public partial class FileShareCollection : ArmCollection, IEnumerable<FileShare>, IAsyncEnumerable<FileShare>
-
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly FileSharesRestOperations _fileSharesRestClient;
