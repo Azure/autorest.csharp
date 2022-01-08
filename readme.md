@@ -1099,13 +1099,13 @@ skip-csproj-packagereference: true
 
 </details>
 
-## Mgmt plane configurations
+## Management plane configurations
 
-The mgmt .Net SDK requires the resources to be generated hierarchical, therefore mgmt generator makes quite a few modification on the code model inout from the modelerfour. To better recognize the hierarchical structure of resources, the mgmt generator will generate everything from the point of view of request paths, instead of operation groups. Therefore quite a few new configurations are introduced to tweak the behavior how we identify the resource classes as well as the hierarchy.
+The management .Net SDK requires the resources to be generated hierarchical, therefore the code generator makes quite a few modification on the code model input from the `modelerfour`. To better recognize the hierarchical structure of resources, the the code generator will generate everything from the point of view of request paths, instead of operation groups. Therefore quite a few new configurations are introduced to tweak the behavior how we identify the resource classes as well as the hierarchy.
 
 ### Changing resource data
 
-In general, mgmt generator needs to determine which request path corresponds to a resource class first, and then generates the hierarchical structure based on that. By default, the generator will first check if the request path has even segments starting from the last `providers` segment (for instance, `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{name}` meets this requirement, but `/{scope}/providers/Microsoft.Authorization/policyAssignments` does not), then check if it has a `GET` request, and its response schema is compatible to ARM's resource definition - it must have `id`, `type` and `name`. If all these conditions are met, the request path is identified as a resource class path, and the response schema of the `GET` request will be the corresponding `ResourceData`.
+In general, the code generator needs to determine which request path corresponds to a resource class first, and then generates the hierarchical structure based on that. By default, the generator will first check if the request path has even segments starting from the last `providers` segment (for instance, `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{name}` meets this requirement, but `/{scope}/providers/Microsoft.Authorization/policyAssignments` does not), then check if it has a `GET` request, and its response schema is compatible to ARM's resource definition - it must have `id`, `type` and `name`. If all these conditions are met, the request path is identified as a resource class path, and the response schema of the `GET` request will be the corresponding `ResourceData`.
 
 You can change this behavior by using the configuration `request-path-to-resource-data`, which is a dictionary from request paths to a name of schema, for instance
 
@@ -1117,7 +1117,7 @@ request-path-to-resource-data:
 This configuration will do two things:
 
 1. It marks this request path as a resource class. This will let the generator to generate a class inheriting from `ArmResource` to include the operations under it.
-2. The schema with the name `Something` will become a resource data with the name `SomethingData`, and it will be the type of the `Data` property in the corresponding resource.
+2. The schema with the name `Something` will become a resource data with the name `SomethingData`, and it will be the type of the `Data` property in the corresponding resource. 
 
 ### Changing resource name
 
@@ -1146,7 +1146,7 @@ This configuration will globally change the criteria of a resource model to only
 
 ### Changing the resource type
 
-The .Net mgmt plane SDK requires a resource to have its own resource type, and the generator will automatically calculate the corresponding resource type from the request path of that resource. There is situations that the resource type cannot be calculated, in this case, you need to use the `request-path-to-resource-type` configuration to assign a resource type to the resource. For instance
+The .Net management plane SDK requires a resource to have its own resource type, and the generator will automatically calculate the corresponding resource type from the request path of that resource. There are situations that the resource type cannot be calculated, in this case, you need to use the `request-path-to-resource-type` configuration to assign a resource type to the resource. For instance
 
 ```
 request-path-to-resource-type:
