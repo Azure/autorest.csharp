@@ -23,7 +23,6 @@ namespace XmlDeserialization
 {
     /// <summary> A class representing collection of XmlInstance and their operations over its parent. </summary>
     public partial class XmlInstanceCollection : ArmCollection, IEnumerable<XmlInstance>, IAsyncEnumerable<XmlInstance>
-
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly XmlDeserializationRestOperations _xmlDeserializationRestClient;

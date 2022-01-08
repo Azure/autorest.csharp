@@ -23,7 +23,6 @@ namespace MgmtKeyvault
 {
     /// <summary> A class representing collection of ManagedHsm and their operations over its parent. </summary>
     public partial class ManagedHsmCollection : ArmCollection, IEnumerable<ManagedHsm>, IAsyncEnumerable<ManagedHsm>
-
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly ManagedHsmsRestOperations _managedHsmsRestClient;

@@ -21,7 +21,6 @@ namespace MgmtKeyvault
 {
     /// <summary> A class representing collection of PrivateEndpointConnection and their operations over its parent. </summary>
     public partial class PrivateEndpointConnectionCollection : ArmCollection, IEnumerable<PrivateEndpointConnection>, IAsyncEnumerable<PrivateEndpointConnection>
-
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly PrivateEndpointConnectionsRestOperations _privateEndpointConnectionsRestClient;

@@ -328,20 +328,25 @@ namespace MgmtListMethods
         /// OperationId: FakeParentWithNonResChes_ListNonResourceChild
         /// <summary> Lists all. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<IReadOnlyList<NonResourceChild>>> GetNonResourceChildAsync(CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="NonResourceChild" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<NonResourceChild> GetNonResourceChildAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("FakeParentWithNonResCh.GetNonResourceChild");
-            scope.Start();
-            try
+            async Task<Page<NonResourceChild>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await _fakeParentWithNonResChesRestClient.ListNonResourceChildAsync(Id.SubscriptionId, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(response.Value.Value, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("FakeParentWithNonResCh.GetNonResourceChild");
+                scope.Start();
+                try
+                {
+                    var response = await _fakeParentWithNonResChesRestClient.ListNonResourceChildAsync(Id.SubscriptionId, Id.Parent.Name, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes/{fakeName}/fakeParentWithNonResChes/{fakeParentWithNonResChName}/nonResourceChild
@@ -349,20 +354,25 @@ namespace MgmtListMethods
         /// OperationId: FakeParentWithNonResChes_ListNonResourceChild
         /// <summary> Lists all. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IReadOnlyList<NonResourceChild>> GetNonResourceChild(CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="NonResourceChild" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<NonResourceChild> GetNonResourceChild(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("FakeParentWithNonResCh.GetNonResourceChild");
-            scope.Start();
-            try
+            Page<NonResourceChild> FirstPageFunc(int? pageSizeHint)
             {
-                var response = _fakeParentWithNonResChesRestClient.ListNonResourceChild(Id.SubscriptionId, Id.Parent.Name, Id.Name, cancellationToken);
-                return Response.FromValue(response.Value.Value, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("FakeParentWithNonResCh.GetNonResourceChild");
+                scope.Start();
+                try
+                {
+                    var response = _fakeParentWithNonResChesRestClient.ListNonResourceChild(Id.SubscriptionId, Id.Parent.Name, Id.Name, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
     }
 }

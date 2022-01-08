@@ -19,7 +19,7 @@ using Azure.ResourceManager.Core;
 namespace TenantOnly
 {
     /// <summary> A class representing collection of Agreement and their operations over its parent. </summary>
-    public partial class AgreementCollection : ArmCollection, IEnumerable<Agreement>
+    public partial class AgreementCollection : ArmCollection, IEnumerable<Agreement>, IAsyncEnumerable<Agreement>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly AgreementsRestOperations _agreementsRestClient;
@@ -218,20 +218,25 @@ namespace TenantOnly
         /// <summary> Gets an agreement by ID. </summary>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IReadOnlyList<Agreement>> GetAll(string expand = null, CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="Agreement" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<Agreement> GetAll(string expand = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AgreementCollection.GetAll");
-            scope.Start();
-            try
+            Page<Agreement> FirstPageFunc(int? pageSizeHint)
             {
-                var response = _agreementsRestClient.List(Id.Name, expand, cancellationToken);
-                return Response.FromValue(response.Value.Value.Select(value => new Agreement(Parent, value)).ToArray() as IReadOnlyList<Agreement>, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("AgreementCollection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = _agreementsRestClient.List(Id.Name, expand, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new Agreement(Parent, value)), null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
 
         /// RequestPath: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements
@@ -240,30 +245,40 @@ namespace TenantOnly
         /// <summary> Gets an agreement by ID. </summary>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<IReadOnlyList<Agreement>>> GetAllAsync(string expand = null, CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="Agreement" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<Agreement> GetAllAsync(string expand = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AgreementCollection.GetAll");
-            scope.Start();
-            try
+            async Task<Page<Agreement>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await _agreementsRestClient.ListAsync(Id.Name, expand, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(response.Value.Value.Select(value => new Agreement(Parent, value)).ToArray() as IReadOnlyList<Agreement>, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("AgreementCollection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = await _agreementsRestClient.ListAsync(Id.Name, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new Agreement(Parent, value)), null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
         IEnumerator<Agreement> IEnumerable<Agreement>.GetEnumerator()
         {
-            return GetAll().Value.GetEnumerator();
+            return GetAll().GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return GetAll().Value.GetEnumerator();
+            return GetAll().GetEnumerator();
+        }
+
+        IAsyncEnumerator<Agreement> IAsyncEnumerable<Agreement>.GetAsyncEnumerator(CancellationToken cancellationToken)
+        {
+            return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
 
         // Builders.

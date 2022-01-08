@@ -21,7 +21,6 @@ namespace MgmtListMethods
 {
     /// <summary> A class representing collection of TenantParentWithNonResCh and their operations over its parent. </summary>
     public partial class TenantParentWithNonResChCollection : ArmCollection, IEnumerable<TenantParentWithNonResCh>, IAsyncEnumerable<TenantParentWithNonResCh>
-
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly TenantParentWithNonResChesRestOperations _tenantParentWithNonResChesRestClient;

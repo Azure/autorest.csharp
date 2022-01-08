@@ -22,7 +22,7 @@ using NoTypeReplacement.Models;
 namespace NoTypeReplacement
 {
     /// <summary> A class representing collection of NoTypeReplacementModel1 and their operations over its parent. </summary>
-    public partial class NoTypeReplacementModel1Collection : ArmCollection, IEnumerable<NoTypeReplacementModel1>
+    public partial class NoTypeReplacementModel1Collection : ArmCollection, IEnumerable<NoTypeReplacementModel1>, IAsyncEnumerable<NoTypeReplacementModel1>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly NoTypeReplacementModel1SRestOperations _noTypeReplacementModel1sRestClient;
@@ -268,37 +268,47 @@ namespace NoTypeReplacement
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IReadOnlyList<NoTypeReplacementModel1>> GetAll(CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="NoTypeReplacementModel1" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<NoTypeReplacementModel1> GetAll(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("NoTypeReplacementModel1Collection.GetAll");
-            scope.Start();
-            try
+            Page<NoTypeReplacementModel1> FirstPageFunc(int? pageSizeHint)
             {
-                var response = _noTypeReplacementModel1sRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken);
-                return Response.FromValue(response.Value.Value.Select(value => new NoTypeReplacementModel1(Parent, value)).ToArray() as IReadOnlyList<NoTypeReplacementModel1>, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("NoTypeReplacementModel1Collection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = _noTypeReplacementModel1sRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new NoTypeReplacementModel1(Parent, value)), null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<IReadOnlyList<NoTypeReplacementModel1>>> GetAllAsync(CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="NoTypeReplacementModel1" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<NoTypeReplacementModel1> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("NoTypeReplacementModel1Collection.GetAll");
-            scope.Start();
-            try
+            async Task<Page<NoTypeReplacementModel1>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await _noTypeReplacementModel1sRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(response.Value.Value.Select(value => new NoTypeReplacementModel1(Parent, value)).ToArray() as IReadOnlyList<NoTypeReplacementModel1>, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("NoTypeReplacementModel1Collection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = await _noTypeReplacementModel1sRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new NoTypeReplacementModel1(Parent, value)), null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
         /// <summary> Filters the list of <see cref="NoTypeReplacementModel1" /> for this resource group represented as generic resources. </summary>
@@ -349,12 +359,17 @@ namespace NoTypeReplacement
 
         IEnumerator<NoTypeReplacementModel1> IEnumerable<NoTypeReplacementModel1>.GetEnumerator()
         {
-            return GetAll().Value.GetEnumerator();
+            return GetAll().GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return GetAll().Value.GetEnumerator();
+            return GetAll().GetEnumerator();
+        }
+
+        IAsyncEnumerator<NoTypeReplacementModel1> IAsyncEnumerable<NoTypeReplacementModel1>.GetAsyncEnumerator(CancellationToken cancellationToken)
+        {
+            return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
 
         // Builders.

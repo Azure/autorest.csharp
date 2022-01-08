@@ -74,13 +74,15 @@ namespace MgmtKeyvault.Tests.Mock
         }
 
         [RecordedTest]
-        public void GetAllAsync()
+        public async Task GetAllAsync()
         {
             // Example: List vaults in the specified resource group
             var collection = GetArmClient().GetResourceGroup(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group")).GetVaults();
             int? top = 1;
 
-            collection.GetAllAsync(top);
+            await foreach (var _ in collection.GetAllAsync(top))
+            {
+            }
         }
     }
 }

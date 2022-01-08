@@ -21,7 +21,6 @@ namespace Azure.Management.Storage
 {
     /// <summary> A class representing collection of EncryptionScope and their operations over its parent. </summary>
     public partial class EncryptionScopeCollection : ArmCollection, IEnumerable<EncryptionScope>, IAsyncEnumerable<EncryptionScope>
-
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly EncryptionScopesRestOperations _encryptionScopesRestClient;
