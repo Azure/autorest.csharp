@@ -41,6 +41,19 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return string.Join("", replacedWords);
         }
 
+        /// <summary>
+        /// Search the configuration for an overridden of this operation's name
+        /// </summary>
+        /// <param name="operation"></param>
+        /// <param name="context"></param>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public static bool TryGetConfigOperationName(this Operation operation, BuildContext<MgmtOutputLibrary> context, [MaybeNullWhen(false)] out string name)
+        {
+            var operationId = operation.OperationId(context.Library.GetRestClient(operation).OperationGroup);
+            return context.Configuration.MgmtConfiguration.OverrideOperationName.TryGetValue(operationId, out name);
+        }
+
         public static string OperationId(this Operation operation, OperationGroup operationGroup)
         {
             if (_operationIdCache.TryGetValue(operation, out var result))

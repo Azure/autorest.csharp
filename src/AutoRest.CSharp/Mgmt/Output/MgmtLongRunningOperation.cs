@@ -19,14 +19,12 @@ namespace AutoRest.CSharp.Mgmt.Output
     /// </summary>
     internal class MgmtLongRunningOperation : LongRunningOperation
     {
-        public MgmtLongRunningOperation(Input.Operation operation, LongRunningOperationInfo lroInfo, BuildContext<MgmtOutputLibrary> context)
-            : base(operation, context, lroInfo, lroInfo.ClientPrefix.LastWordToSingular() + operation.CSharpName() + "Operation")
+        public MgmtLongRunningOperation(Input.Operation operation, LongRunningOperationInfo lroInfo, Resource? resource, string defaultName, BuildContext<MgmtOutputLibrary> context)
+            : base(operation, context, lroInfo, defaultName)
         {
             DefaultNamespace = $"{context.DefaultNamespace}.Models";
-            if (operation.ShouldWrapResultType(ResultType, context, out var resource))
-            {
+            if (operation.ShouldWrapResultType(ResultType, resource))
                 WrapperResource = resource;
-            }
         }
 
         /// <summary>

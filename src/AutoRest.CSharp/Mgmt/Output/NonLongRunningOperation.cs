@@ -19,7 +19,7 @@ namespace AutoRest.CSharp.Mgmt.Output
     /// </summary>
     internal class NonLongRunningOperation : TypeProvider
     {
-        public NonLongRunningOperation(Operation operation, LongRunningOperationInfo lroInfo, BuildContext<MgmtOutputLibrary> context)
+        public NonLongRunningOperation(Operation operation, LongRunningOperationInfo lroInfo, Resource? resource, string defaultName, BuildContext<MgmtOutputLibrary> context)
             : base(context)
         {
             Debug.Assert(!operation.IsLongRunning);
@@ -33,13 +33,13 @@ namespace AutoRest.CSharp.Mgmt.Output
                 ResultType = TypeFactory.GetOutputType(context.TypeFactory.CreateType(responseSchema, false));
             }
 
-            if (operation.ShouldWrapResultType(ResultType, context, out var resource))
+            if (operation.ShouldWrapResultType(ResultType, resource))
             {
                 WrapperResource = resource;
-                ResultType = resource.Type;
+                ResultType = resource?.Type;
             }
 
-            DefaultName = lroInfo.ClientPrefix.LastWordToSingular() + operation.CSharpName() + "Operation";
+            DefaultName = defaultName;
             DefaultNamespace = $"{context.DefaultNamespace}.Models";
             Description = BuilderHelpers.EscapeXmlDescription(operation.Language.Default.Description);
             DefaultAccessibility = lroInfo.Accessibility;

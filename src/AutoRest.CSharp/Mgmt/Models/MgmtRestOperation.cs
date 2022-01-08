@@ -63,12 +63,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             RequestPath = requestPath;
             ContextualPath = contextualPath;
             Name = methodName;
-            ReturnType = returnType;
-        }
-
-        public MgmtRestOperation(RestClientMethod method, MgmtRestClient restClient, RequestPath requestPath, RequestPath contextualPath, string methodName) : this(method, restClient, requestPath, contextualPath, methodName, method.ReturnType)
-        {
-
+            ReturnType = returnType ?? method.ReturnType;
         }
     }
 }
