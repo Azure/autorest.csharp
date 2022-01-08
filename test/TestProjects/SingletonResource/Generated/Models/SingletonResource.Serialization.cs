@@ -8,9 +8,9 @@
 using System.Text.Json;
 using Azure.Core;
 
-namespace MgmtSingleton
+namespace SingletonResource.Models
 {
-    public partial class SingletonResourceData : IUtf8JsonSerializable
+    public partial class SingletonResource : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -23,7 +23,7 @@ namespace MgmtSingleton
             writer.WriteEndObject();
         }
 
-        internal static SingletonResourceData DeserializeSingletonResourceData(JsonElement element)
+        internal static SingletonResource DeserializeSingletonResource(JsonElement element)
         {
             Optional<string> @new = default;
             ResourceIdentifier id = default;
@@ -52,7 +52,7 @@ namespace MgmtSingleton
                     continue;
                 }
             }
-            return new SingletonResourceData(id, name, type, @new.Value);
+            return new SingletonResource(id, name, type, @new.Value);
         }
     }
 }

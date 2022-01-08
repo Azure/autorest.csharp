@@ -13,9 +13,9 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager.Core;
-using MgmtSingleton.Models;
+using SingletonResource.Models;
 
-namespace MgmtSingleton
+namespace SingletonResource
 {
     internal partial class SingletonResources3RestOperations
     {
@@ -41,7 +41,7 @@ namespace MgmtSingleton
             _userAgent = HttpMessageUtilities.GetUserAgentName(this, options);
         }
 
-        internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string parentName, SingletonResource3 parameters)
+        internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string parentName, Models.SingletonResource parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -71,10 +71,10 @@ namespace MgmtSingleton
         /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="parentName"> The String to use. </param>
-        /// <param name="parameters"> The SingletonResource3 to use. </param>
+        /// <param name="parameters"> The SingletonResource to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="parentName"/>, or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<SingletonResource3>> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string parentName, SingletonResource3 parameters, CancellationToken cancellationToken = default)
+        public async Task<Response<Models.SingletonResource>> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string parentName, Models.SingletonResource parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -99,9 +99,9 @@ namespace MgmtSingleton
             {
                 case 200:
                     {
-                        SingletonResource3 value = default;
+                        Models.SingletonResource value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = SingletonResource3.DeserializeSingletonResource3(document.RootElement);
+                        value = Models.SingletonResource.DeserializeSingletonResource(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -113,10 +113,10 @@ namespace MgmtSingleton
         /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="parentName"> The String to use. </param>
-        /// <param name="parameters"> The SingletonResource3 to use. </param>
+        /// <param name="parameters"> The SingletonResource to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="parentName"/>, or <paramref name="parameters"/> is null. </exception>
-        public Response<SingletonResource3> CreateOrUpdate(string subscriptionId, string resourceGroupName, string parentName, SingletonResource3 parameters, CancellationToken cancellationToken = default)
+        public Response<Models.SingletonResource> CreateOrUpdate(string subscriptionId, string resourceGroupName, string parentName, Models.SingletonResource parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -141,9 +141,9 @@ namespace MgmtSingleton
             {
                 case 200:
                     {
-                        SingletonResource3 value = default;
+                        Models.SingletonResource value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = SingletonResource3.DeserializeSingletonResource3(document.RootElement);
+                        value = Models.SingletonResource.DeserializeSingletonResource(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:

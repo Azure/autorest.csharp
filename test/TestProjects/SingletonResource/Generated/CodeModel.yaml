@@ -3,7 +3,7 @@ info: !Info
   title: SingletonResource
 schemas: !Schemas 
   booleans:
-    - !BooleanSchema &ref_10
+    - !BooleanSchema &ref_11
       type: boolean
       language: !Languages 
         default:
@@ -18,7 +18,7 @@ schemas: !Schemas
           name: String
           description: simple string
       protocol: !Protocols {}
-    - !StringSchema &ref_12
+    - !StringSchema &ref_1
       type: string
       apiVersions:
         - !ApiVersion 
@@ -28,7 +28,7 @@ schemas: !Schemas
           name: String
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_1
+    - !StringSchema &ref_2
       type: string
       apiVersions:
         - !ApiVersion 
@@ -38,7 +38,7 @@ schemas: !Schemas
           name: CarId
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_2
+    - !StringSchema &ref_3
       type: string
       apiVersions:
         - !ApiVersion 
@@ -48,7 +48,7 @@ schemas: !Schemas
           name: CarName
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_3
+    - !StringSchema &ref_4
       type: string
       apiVersions:
         - !ApiVersion 
@@ -58,7 +58,7 @@ schemas: !Schemas
           name: CarType
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_4
+    - !StringSchema &ref_5
       type: string
       apiVersions:
         - !ApiVersion 
@@ -68,7 +68,7 @@ schemas: !Schemas
           name: CarHorsepower
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_5
+    - !StringSchema &ref_6
       type: string
       apiVersions:
         - !ApiVersion 
@@ -78,7 +78,7 @@ schemas: !Schemas
           name: CarListResultNextLink
           description: Request URL that can be used to query next page of storage accounts. Returned when total number of requested storage accounts exceed maximum page size.
       protocol: !Protocols {}
-    - !StringSchema &ref_7
+    - !StringSchema &ref_8
       type: string
       apiVersions:
         - !ApiVersion 
@@ -88,7 +88,7 @@ schemas: !Schemas
           name: IgnitionId
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_8
+    - !StringSchema &ref_9
       type: string
       apiVersions:
         - !ApiVersion 
@@ -98,7 +98,7 @@ schemas: !Schemas
           name: IgnitionName
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_9
+    - !StringSchema &ref_10
       type: string
       apiVersions:
         - !ApiVersion 
@@ -108,8 +108,82 @@ schemas: !Schemas
           name: IgnitionType
           description: ''
       protocol: !Protocols {}
+    - !StringSchema &ref_22
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: SingletonResourceNew
+          description: ''
+      protocol: !Protocols {}
+    - !StringSchema &ref_19
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: ResourceId
+          description: Resource Id.
+      protocol: !Protocols {}
+    - !StringSchema &ref_20
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: ResourceName
+          description: Resource name.
+      protocol: !Protocols {}
+    - !StringSchema &ref_21
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: ResourceType
+          description: Resource type.
+      protocol: !Protocols {}
+    - !StringSchema &ref_15
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: ParentResourceNew
+          description: ''
+      protocol: !Protocols {}
+    - !StringSchema &ref_18
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      extensions:
+        x-ms-mutability:
+          - read
+          - create
+      language: !Languages 
+        default:
+          name: TrackedResourceLocation
+          description: The geo-location where the resource lives
+      protocol: !Protocols {}
+    - !StringSchema &ref_23
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: ParentResourceListResultNextLink
+          description: The URI to fetch the next page
+      protocol: !Protocols {}
   constants:
-    - !ConstantSchema &ref_13
+    - !ConstantSchema &ref_26
       type: constant
       value: !ConstantValue 
         value: '2020-06-01'
@@ -119,7 +193,7 @@ schemas: !Schemas
           name: ApiVersion20200601
           description: Api Version (2020-06-01)
       protocol: !Protocols {}
-    - !ConstantSchema &ref_17
+    - !ConstantSchema &ref_30
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -129,7 +203,7 @@ schemas: !Schemas
           name: Accept
           description: 'Accept: application/json'
       protocol: !Protocols {}
-    - !ConstantSchema &ref_20
+    - !ConstantSchema &ref_33
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -139,27 +213,46 @@ schemas: !Schemas
           name: ApplicationJson
           description: Content Type 'application/json'
       protocol: !Protocols {}
+    - !ConstantSchema &ref_42
+      type: constant
+      value: !ConstantValue 
+        value: current
+      valueType: *ref_0
+      language: !Languages 
+        default:
+          name: ResourceName
+          description: ''
+      protocol: !Protocols {}
+  dictionaries:
+    - !DictionarySchema &ref_17
+      type: dictionary
+      elementType: *ref_1
+      language: !Languages 
+        default:
+          name: TrackedResourceTags
+          description: Resource tags.
+      protocol: !Protocols {}
   objects:
-    - !ObjectSchema &ref_19
+    - !ObjectSchema &ref_32
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
       properties:
         - !Property 
-          schema: !ArraySchema &ref_11
+          schema: !ArraySchema &ref_24
             type: array
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
-            elementType: !ObjectSchema &ref_6
+            elementType: !ObjectSchema &ref_7
               type: object
               apiVersions:
                 - !ApiVersion 
                   version: '2020-06-01'
               properties:
                 - !Property 
-                  schema: *ref_1
+                  schema: *ref_2
                   readOnly: true
                   serializedName: id
                   language: !Languages 
@@ -168,7 +261,7 @@ schemas: !Schemas
                       description: ''
                   protocol: !Protocols {}
                 - !Property 
-                  schema: *ref_2
+                  schema: *ref_3
                   readOnly: true
                   serializedName: name
                   language: !Languages 
@@ -177,7 +270,7 @@ schemas: !Schemas
                       description: ''
                   protocol: !Protocols {}
                 - !Property 
-                  schema: *ref_3
+                  schema: *ref_4
                   readOnly: true
                   serializedName: type
                   language: !Languages 
@@ -186,7 +279,7 @@ schemas: !Schemas
                       description: ''
                   protocol: !Protocols {}
                 - !Property 
-                  schema: *ref_4
+                  schema: *ref_5
                   serializedName: horsepower
                   language: !Languages 
                     default:
@@ -217,7 +310,7 @@ schemas: !Schemas
               description: Gets the list of storage accounts and their properties.
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_5
+          schema: *ref_6
           readOnly: true
           serializedName: nextLink
           language: !Languages 
@@ -235,15 +328,15 @@ schemas: !Schemas
           description: The response from the List Storage Accounts operation.
           namespace: ''
       protocol: !Protocols {}
-    - *ref_6
-    - !ObjectSchema &ref_28
+    - *ref_7
+    - !ObjectSchema &ref_41
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
       properties:
         - !Property 
-          schema: *ref_7
+          schema: *ref_8
           readOnly: true
           serializedName: id
           language: !Languages 
@@ -252,7 +345,7 @@ schemas: !Schemas
               description: ''
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_8
+          schema: *ref_9
           readOnly: true
           serializedName: name
           language: !Languages 
@@ -261,7 +354,7 @@ schemas: !Schemas
               description: ''
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_9
+          schema: *ref_10
           readOnly: true
           serializedName: type
           language: !Languages 
@@ -270,7 +363,7 @@ schemas: !Schemas
               description: ''
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_10
+          schema: *ref_11
           serializedName: pushButton
           language: !Languages 
             default:
@@ -287,11 +380,227 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
+    - !ObjectSchema &ref_12
+      type: object
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      parents: !Relations 
+        all:
+          - !ObjectSchema &ref_14
+            type: object
+            apiVersions:
+              - !ApiVersion 
+                version: '2020-06-01'
+            children: !Relations 
+              all:
+                - *ref_12
+                - !ObjectSchema &ref_13
+                  type: object
+                  apiVersions:
+                    - !ApiVersion 
+                      version: '2020-06-01'
+                  children: !Relations 
+                    all:
+                      - !ObjectSchema &ref_16
+                        type: object
+                        apiVersions:
+                          - !ApiVersion 
+                            version: '2020-06-01'
+                        parents: !Relations 
+                          all:
+                            - *ref_13
+                            - *ref_14
+                          immediate:
+                            - *ref_13
+                        properties:
+                          - !Property 
+                            schema: *ref_15
+                            serializedName: new
+                            language: !Languages 
+                              default:
+                                name: new
+                                description: ''
+                            protocol: !Protocols {}
+                        serializationFormats:
+                          - json
+                        usage:
+                          - output
+                          - input
+                        language: !Languages 
+                          default:
+                            name: ParentResource
+                            description: A parent resource.
+                            namespace: ''
+                        protocol: !Protocols {}
+                    immediate:
+                      - *ref_16
+                  parents: !Relations 
+                    all:
+                      - *ref_14
+                    immediate:
+                      - *ref_14
+                  properties:
+                    - !Property 
+                      schema: *ref_17
+                      required: false
+                      serializedName: tags
+                      extensions:
+                        x-ms-mutability:
+                          - read
+                          - create
+                          - update
+                      language: !Languages 
+                        default:
+                          name: tags
+                          description: Resource tags.
+                      protocol: !Protocols {}
+                    - !Property 
+                      schema: *ref_18
+                      required: true
+                      serializedName: location
+                      extensions:
+                        x-ms-mutability:
+                          - read
+                          - create
+                      language: !Languages 
+                        default:
+                          name: location
+                          description: The geo-location where the resource lives
+                      protocol: !Protocols {}
+                  serializationFormats:
+                    - json
+                  summary: Tracked Resource
+                  usage:
+                    - input
+                    - output
+                  language: !Languages 
+                    default:
+                      name: TrackedResource
+                      description: The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'
+                      namespace: ''
+                      summary: Tracked Resource
+                  protocol: !Protocols {}
+                - *ref_16
+              immediate:
+                - *ref_12
+                - *ref_13
+            properties:
+              - !Property 
+                schema: *ref_19
+                readOnly: true
+                serializedName: id
+                language: !Languages 
+                  default:
+                    name: id
+                    description: Resource Id.
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_20
+                readOnly: true
+                serializedName: name
+                language: !Languages 
+                  default:
+                    name: name
+                    description: Resource name.
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_21
+                readOnly: true
+                serializedName: type
+                language: !Languages 
+                  default:
+                    name: type
+                    description: Resource type.
+                protocol: !Protocols {}
+            serializationFormats:
+              - json
+            usage:
+              - input
+              - output
+            extensions:
+              x-ms-azure-resource: true
+            language: !Languages 
+              default:
+                name: Resource
+                description: The Resource model definition.
+                namespace: ''
+            protocol: !Protocols {}
+        immediate:
+          - *ref_14
+      properties:
+        - !Property 
+          schema: *ref_22
+          serializedName: new
+          language: !Languages 
+            default:
+              name: new
+              description: ''
+          protocol: !Protocols {}
+      serializationFormats:
+        - json
+      usage:
+        - input
+        - output
+      language: !Languages 
+        default:
+          name: SingletonResource
+          description: A singleton resource.
+          namespace: ''
+      protocol: !Protocols {}
+    - *ref_14
+    - !ObjectSchema &ref_47
+      type: object
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      properties:
+        - !Property 
+          schema: !ArraySchema &ref_25
+            type: array
+            apiVersions:
+              - !ApiVersion 
+                version: '2020-06-01'
+            elementType: *ref_16
+            language: !Languages 
+              default:
+                name: ParentResourceListResultValue
+                description: The list of parent resource
+            protocol: !Protocols {}
+          required: true
+          serializedName: value
+          language: !Languages 
+            default:
+              name: value
+              description: The list of parent resource
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_23
+          required: false
+          serializedName: nextLink
+          language: !Languages 
+            default:
+              name: nextLink
+              description: The URI to fetch the next page
+          protocol: !Protocols {}
+      serializationFormats:
+        - json
+      usage:
+        - output
+      language: !Languages 
+        default:
+          name: ParentResourceListResult
+          description: The List Availability Set operation response.
+          namespace: ''
+      protocol: !Protocols {}
+    - *ref_16
+    - *ref_13
   arrays:
-    - *ref_11
+    - *ref_24
+    - *ref_25
 globalParameters:
-  - !Parameter &ref_16
-    schema: *ref_12
+  - !Parameter &ref_29
+    schema: *ref_1
     implementation: Client
     required: true
     extensions:
@@ -304,7 +613,7 @@ globalParameters:
     protocol: !Protocols 
       http: !HttpParameter 
         in: path
-  - !Parameter &ref_14
+  - !Parameter &ref_27
     schema: *ref_0
     clientDefaultValue: https://management.azure.com
     implementation: Client
@@ -320,8 +629,8 @@ globalParameters:
     protocol: !Protocols 
       http: !HttpParameter 
         in: uri
-  - !Parameter &ref_15
-    schema: *ref_13
+  - !Parameter &ref_28
+    schema: *ref_26
     implementation: Client
     origin: modelerfour:synthesized/api-version
     required: true
@@ -342,9 +651,9 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_14
-          - !Parameter &ref_18
-            schema: *ref_12
+          - *ref_27
+          - !Parameter &ref_31
+            schema: *ref_1
             implementation: Method
             required: true
             language: !Languages 
@@ -355,13 +664,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_15
-          - *ref_16
+          - *ref_28
+          - *ref_29
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_17
+                schema: *ref_30
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -384,10 +693,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_18
+          - *ref_31
         responses:
           - !SchemaResponse 
-            schema: *ref_19
+            schema: *ref_32
             language: !Languages 
               default:
                 name: ''
@@ -417,9 +726,9 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_14
-          - !Parameter &ref_22
-            schema: *ref_12
+          - *ref_27
+          - !Parameter &ref_35
+            schema: *ref_1
             implementation: Method
             required: true
             language: !Languages 
@@ -430,8 +739,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_23
-            schema: *ref_12
+          - !Parameter &ref_36
+            schema: *ref_1
             implementation: Method
             required: true
             language: !Languages 
@@ -442,13 +751,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_15
-          - *ref_16
+          - *ref_28
+          - *ref_29
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_20
+                schema: *ref_33
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -460,8 +769,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_21
-                schema: *ref_6
+              - !Parameter &ref_34
+                schema: *ref_7
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -473,7 +782,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_17
+                schema: *ref_30
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -486,7 +795,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_21
+              - *ref_34
             language: !Languages 
               default:
                 name: ''
@@ -500,11 +809,11 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_22
-          - *ref_23
+          - *ref_35
+          - *ref_36
         responses:
           - !SchemaResponse 
-            schema: *ref_6
+            schema: *ref_7
             language: !Languages 
               default:
                 name: ''
@@ -526,9 +835,9 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_14
-          - !Parameter &ref_24
-            schema: *ref_12
+          - *ref_27
+          - !Parameter &ref_37
+            schema: *ref_1
             implementation: Method
             required: true
             language: !Languages 
@@ -539,8 +848,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_25
-            schema: *ref_12
+          - !Parameter &ref_38
+            schema: *ref_1
             implementation: Method
             required: true
             language: !Languages 
@@ -551,13 +860,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_15
-          - *ref_16
+          - *ref_28
+          - *ref_29
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_17
+                schema: *ref_30
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -580,11 +889,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_24
-          - *ref_25
+          - *ref_37
+          - *ref_38
         responses:
           - !SchemaResponse 
-            schema: *ref_6
+            schema: *ref_7
             language: !Languages 
               default:
                 name: ''
@@ -614,9 +923,9 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_14
-          - !Parameter &ref_26
-            schema: *ref_12
+          - *ref_27
+          - !Parameter &ref_39
+            schema: *ref_1
             implementation: Method
             required: true
             language: !Languages 
@@ -627,8 +936,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_27
-            schema: *ref_12
+          - !Parameter &ref_40
+            schema: *ref_1
             implementation: Method
             required: true
             language: !Languages 
@@ -639,13 +948,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_15
-          - *ref_16
+          - *ref_28
+          - *ref_29
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_17
+                schema: *ref_30
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -668,11 +977,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_26
-          - *ref_27
+          - *ref_39
+          - *ref_40
         responses:
           - !SchemaResponse 
-            schema: *ref_28
+            schema: *ref_41
             language: !Languages 
               default:
                 name: ''
@@ -692,6 +1001,399 @@ operationGroups:
     language: !Languages 
       default:
         name: Ignitions
+        description: ''
+    protocol: !Protocols {}
+  - !OperationGroup 
+    $key: SingletonResources3
+    operations:
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_27
+          - *ref_29
+          - !Parameter &ref_44
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: ''
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_45
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: parentName
+                description: ''
+                serializedName: parentName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter 
+            schema: *ref_42
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceName
+                description: ''
+                serializedName: resourceName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_28
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_33
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_43
+                schema: *ref_12
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: parameters
+                    description: ''
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_30
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_43
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}/singletonResources3/{resourceName}
+                method: put
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_44
+          - *ref_45
+        responses:
+          - !SchemaResponse 
+            schema: *ref_12
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: CreateOrUpdate
+            description: Singleton non-resource test example with a single-value enum name parameter.
+        protocol: !Protocols {}
+    language: !Languages 
+      default:
+        name: SingletonResources3
+        description: ''
+    protocol: !Protocols {}
+  - !OperationGroup 
+    $key: ParentResources
+    operations:
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_27
+          - *ref_29
+          - !Parameter &ref_46
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: ''
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_28
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_30
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_46
+        responses:
+          - !SchemaResponse 
+            schema: *ref_47
+            language: !Languages 
+              default:
+                name: ''
+                description: OK. The request has succeeded.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: List
+            description: Singleton Test Parent Example.
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_27
+          - *ref_29
+          - !Parameter &ref_48
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: ''
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_49
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: parentName
+                description: ''
+                serializedName: parentName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_28
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_30
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_48
+          - *ref_49
+        responses:
+          - !SchemaResponse 
+            schema: *ref_16
+            language: !Languages 
+              default:
+                name: ''
+                description: OK. The request has succeeded.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: Get
+            description: Singleton Test Parent Example.
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_27
+          - *ref_29
+          - !Parameter &ref_51
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: ''
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_52
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: parentName
+                description: ''
+                serializedName: parentName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_28
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_33
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_50
+                schema: *ref_16
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: parameters
+                    description: ''
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_30
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_50
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}
+                method: put
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_51
+          - *ref_52
+        responses:
+          - !SchemaResponse 
+            schema: *ref_16
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: CreateOrUpdate
+            description: ''
+        protocol: !Protocols {}
+    language: !Languages 
+      default:
+        name: ParentResources
         description: ''
     protocol: !Protocols {}
 security: !Security 

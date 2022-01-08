@@ -8,22 +8,22 @@
 using Azure.Core;
 using Azure.ResourceManager.Models;
 
-namespace MgmtSingleton
+namespace SingletonResource.Models
 {
-    /// <summary> A class representing the SingletonResource data model. </summary>
-    public partial class SingletonResourceData : Resource
+    /// <summary> A singleton resource. </summary>
+    public partial class SingletonResource : Resource
     {
-        /// <summary> Initializes a new instance of SingletonResourceData. </summary>
-        public SingletonResourceData()
+        /// <summary> Initializes a new instance of SingletonResource. </summary>
+        public SingletonResource()
         {
         }
 
-        /// <summary> Initializes a new instance of SingletonResourceData. </summary>
+        /// <summary> Initializes a new instance of SingletonResource. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="type"> The type. </param>
         /// <param name="new"></param>
-        internal SingletonResourceData(ResourceIdentifier id, string name, ResourceType type, string @new) : base(id, name, type)
+        internal SingletonResource(ResourceIdentifier id, string name, ResourceType type, string @new) : base(id, name, type)
         {
             New = @new;
         }

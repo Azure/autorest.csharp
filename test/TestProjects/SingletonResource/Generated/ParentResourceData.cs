@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Models;
 
-namespace MgmtSingleton
+namespace SingletonResource
 {
     /// <summary> A class representing the ParentResource data model. </summary>
     public partial class ParentResourceData : TrackedResource

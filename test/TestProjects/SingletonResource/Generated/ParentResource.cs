@@ -14,9 +14,9 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
-using MgmtSingleton.Models;
+using SingletonResource.Models;
 
-namespace MgmtSingleton
+namespace SingletonResource
 {
     /// <summary> A Class representing a ParentResource along with the instance operations that can be performed on it. </summary>
     public partial class ParentResource : ArmResource
@@ -331,10 +331,10 @@ namespace MgmtSingleton
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}
         /// OperationId: SingletonResources3_CreateOrUpdate
         /// <summary> Singleton non-resource test example with a single-value enum name parameter. </summary>
-        /// <param name="parameters"> The SingletonResource3 to use. </param>
+        /// <param name="parameters"> The SingletonResource to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<Response<SingletonResource3>> CreateOrUpdateSingletonResources3Async(SingletonResource3 parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<Models.SingletonResource>> CreateOrUpdateSingletonResources3Async(Models.SingletonResource parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -359,10 +359,10 @@ namespace MgmtSingleton
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}
         /// OperationId: SingletonResources3_CreateOrUpdate
         /// <summary> Singleton non-resource test example with a single-value enum name parameter. </summary>
-        /// <param name="parameters"> The SingletonResource3 to use. </param>
+        /// <param name="parameters"> The SingletonResource to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual Response<SingletonResource3> CreateOrUpdateSingletonResources3(SingletonResource3 parameters, CancellationToken cancellationToken = default)
+        public virtual Response<Models.SingletonResource> CreateOrUpdateSingletonResources3(Models.SingletonResource parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -382,35 +382,5 @@ namespace MgmtSingleton
                 throw;
             }
         }
-
-        #region SingletonResource
-
-        /// <summary> Gets an object representing a SingletonResource along with the instance operations that can be performed on it in the ParentResource. </summary>
-        /// <returns> Returns a <see cref="SingletonResource" /> object. </returns>
-        public virtual SingletonResource GetSingletonResource()
-        {
-            return new SingletonResource(this, new ResourceIdentifier(Id.ToString() + "/singletonResources/default"));
-        }
-        #endregion
-
-        #region SingletonResource2
-
-        /// <summary> Gets an object representing a SingletonResource2 along with the instance operations that can be performed on it in the ParentResource. </summary>
-        /// <returns> Returns a <see cref="SingletonResource2" /> object. </returns>
-        public virtual SingletonResource2 GetSingletonResource2()
-        {
-            return new SingletonResource2(this, new ResourceIdentifier(Id.ToString() + "/singletonResources2/default"));
-        }
-        #endregion
-
-        #region SingletonConfig
-
-        /// <summary> Gets an object representing a SingletonConfig along with the instance operations that can be performed on it in the ParentResource. </summary>
-        /// <returns> Returns a <see cref="SingletonConfig" /> object. </returns>
-        public virtual SingletonConfig GetSingletonConfig()
-        {
-            return new SingletonConfig(this, new ResourceIdentifier(Id.ToString() + "/singletonConfigs/web"));
-        }
-        #endregion
     }
 }
