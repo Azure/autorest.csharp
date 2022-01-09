@@ -61,7 +61,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 Check the swagger definition, and use 'request-path-to-resource-name' or 'request-path-is-non-resource' directive to specify the correct resource if necessary.");
 
                 var inheritType = new CSharpType(typeof(TrackedResource));
-                if (_resourceData.Inherits != null && _resourceData.Inherits.Name == inheritType.Name)
+                if (_resourceData.Inherits != null && (_resourceData.Inherits.Name == inheritType.Name || _resourceData.Inherits.Name == "TrackedResourceExtended")) // TODO: use type.Name after upgrading resourcemanager version
                 {
                     _isITaggableResource = true;
                 }
@@ -340,7 +340,7 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
             {
                 using (_writer.Scope($"if (string.IsNullOrWhiteSpace(key))"))
                 {
-                    _writer.Line($"throw new {typeof(ArgumentNullException)}($\"{{nameof(key)}} provided cannot be null or a whitespace.\", nameof(key));");
+                    _writer.Line($"throw new {typeof(ArgumentNullException)}(nameof(key), $\"{{nameof(key)}} provided cannot be null or a whitespace.\");");
                 }
                 _writer.Line();
 
@@ -375,7 +375,7 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
             {
                 using (_writer.Scope($"if (tags == null)"))
                 {
-                    _writer.Line($"throw new {typeof(ArgumentNullException)}($\"{{nameof(tags)}} provided cannot be null.\", nameof(tags));");
+                    _writer.Line($"throw new {typeof(ArgumentNullException)}(nameof(tags), $\"{{nameof(tags)}} provided cannot be null.\");");
                 }
                 _writer.Line();
 
@@ -415,7 +415,7 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
             {
                 using (_writer.Scope($"if (string.IsNullOrWhiteSpace(key))"))
                 {
-                    _writer.Line($"throw new {typeof(ArgumentNullException)}($\"{{nameof(key)}} provided cannot be null or a whitespace.\", nameof(key));");
+                    _writer.Line($"throw new {typeof(ArgumentNullException)}(nameof(key), $\"{{nameof(key)}} provided cannot be null or a whitespace.\");");
                 }
                 _writer.Line();
 
