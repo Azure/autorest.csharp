@@ -14,7 +14,6 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Management;
 using MgmtListMethods.Models;
@@ -23,7 +22,6 @@ namespace MgmtListMethods
 {
     /// <summary> A class representing collection of MgmtGrpParentWithNonResChWithLoc and their operations over its parent. </summary>
     public partial class MgmtGrpParentWithNonResChWithLocCollection : ArmCollection, IEnumerable<MgmtGrpParentWithNonResChWithLoc>, IAsyncEnumerable<MgmtGrpParentWithNonResChWithLoc>
-
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly MgmtGrpParentWithNonResChWithLocsRestOperations _mgmtGrpParentWithNonResChWithLocsRestClient;
@@ -382,6 +380,6 @@ namespace MgmtListMethods
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, MgmtGrpParentWithNonResChWithLoc, MgmtGrpParentWithNonResChWithLocData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, MgmtGrpParentWithNonResChWithLoc, MgmtGrpParentWithNonResChWithLocData> Construct() { }
     }
 }

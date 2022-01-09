@@ -10,7 +10,7 @@ namespace AutoRest.CSharp.Mgmt.Models
 {
     internal record ResourceObjectAssociation
     {
-        public ResourceType ResourceType { get; }
+        public ResourceTypeSegment ResourceType { get; }
 
         public ResourceData ResourceData { get; }
 
@@ -18,7 +18,7 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         public ResourceCollection? ResourceCollection { get; }
 
-        public ResourceObjectAssociation(ResourceType resourceType, ResourceData resourceData, Resource resource, ResourceCollection? resourceCollection)
+        public ResourceObjectAssociation(ResourceTypeSegment resourceType, ResourceData resourceData, Resource resource, ResourceCollection? resourceCollection)
         {
             ResourceType = resourceType;
             ResourceData = resourceData;

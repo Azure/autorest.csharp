@@ -12,6 +12,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
+using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
@@ -21,7 +22,7 @@ using SubscriptionExtensions.Models;
 namespace SubscriptionExtensions
 {
     /// <summary> A class representing collection of Toaster and their operations over its parent. </summary>
-    public partial class ToasterCollection : ArmCollection, IEnumerable<Toaster>
+    public partial class ToasterCollection : ArmCollection, IEnumerable<Toaster>, IAsyncEnumerable<Toaster>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly ToastersRestOperations _toastersRestClient;
@@ -284,40 +285,50 @@ namespace SubscriptionExtensions
         /// ContextualPath: /subscriptions/{subscriptionId}
         /// OperationId: Toasters_List
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IReadOnlyList<Toaster>> GetAll(CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="Toaster" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<Toaster> GetAll(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ToasterCollection.GetAll");
-            scope.Start();
-            try
+            Page<Toaster> FirstPageFunc(int? pageSizeHint)
             {
-                var response = _toastersRestClient.List(Id.SubscriptionId, cancellationToken);
-                return Response.FromValue(response.Value.Value.Select(value => new Toaster(Parent, value)).ToArray() as IReadOnlyList<Toaster>, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("ToasterCollection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = _toastersRestClient.List(Id.SubscriptionId, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new Toaster(Parent, value)), null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/toasters
         /// ContextualPath: /subscriptions/{subscriptionId}
         /// OperationId: Toasters_List
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<IReadOnlyList<Toaster>>> GetAllAsync(CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="Toaster" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<Toaster> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ToasterCollection.GetAll");
-            scope.Start();
-            try
+            async Task<Page<Toaster>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await _toastersRestClient.ListAsync(Id.SubscriptionId, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(response.Value.Value.Select(value => new Toaster(Parent, value)).ToArray() as IReadOnlyList<Toaster>, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("ToasterCollection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = await _toastersRestClient.ListAsync(Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new Toaster(Parent, value)), null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
         /// <summary> Filters the list of <see cref="Toaster" /> for this subscription represented as generic resources. </summary>
@@ -368,15 +379,20 @@ namespace SubscriptionExtensions
 
         IEnumerator<Toaster> IEnumerable<Toaster>.GetEnumerator()
         {
-            return GetAll().Value.GetEnumerator();
+            return GetAll().GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return GetAll().Value.GetEnumerator();
+            return GetAll().GetEnumerator();
+        }
+
+        IAsyncEnumerator<Toaster> IAsyncEnumerable<Toaster>.GetAsyncEnumerator(CancellationToken cancellationToken)
+        {
+            return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, Toaster, ToasterData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, Toaster, ToasterData> Construct() { }
     }
 }

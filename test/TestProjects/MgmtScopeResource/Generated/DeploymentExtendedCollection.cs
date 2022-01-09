@@ -14,7 +14,6 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using MgmtScopeResource.Models;
 
@@ -22,7 +21,6 @@ namespace MgmtScopeResource
 {
     /// <summary> A class representing collection of DeploymentExtended and their operations over its parent. </summary>
     public partial class DeploymentExtendedCollection : ArmCollection, IEnumerable<DeploymentExtended>, IAsyncEnumerable<DeploymentExtended>
-
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly DeploymentsRestOperations _deploymentsRestClient;
@@ -391,6 +389,6 @@ namespace MgmtScopeResource
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, DeploymentExtended, DeploymentExtendedData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, DeploymentExtended, DeploymentExtendedData> Construct() { }
     }
 }

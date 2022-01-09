@@ -23,7 +23,6 @@ namespace MgmtListMethods
 {
     /// <summary> A class representing collection of SubParentWithLoc and their operations over its parent. </summary>
     public partial class SubParentWithLocCollection : ArmCollection, IEnumerable<SubParentWithLoc>, IAsyncEnumerable<SubParentWithLoc>
-
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly SubParentWithLocsRestOperations _subParentWithLocsRestClient;
@@ -428,6 +427,6 @@ namespace MgmtListMethods
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, SubParentWithLoc, SubParentWithLocData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, SubParentWithLoc, SubParentWithLocData> Construct() { }
     }
 }

@@ -68,21 +68,21 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return context.Library.TenantExtensions.AsIEnumerable();
         }
 
-        private static IEnumerable<MgmtTypeProvider> FindScopeParents(ResourceType[] parameterizedScopeTypes, BuildContext<MgmtOutputLibrary> context)
+        private static IEnumerable<MgmtTypeProvider> FindScopeParents(ResourceTypeSegment[] parameterizedScopeTypes, BuildContext<MgmtOutputLibrary> context)
         {
-            if (parameterizedScopeTypes.Contains(ResourceType.Any))
+            if (parameterizedScopeTypes.Contains(ResourceTypeSegment.Any))
             {
                 yield return context.Library.ArmResourceExtensions;
                 yield break;
             }
             // try all the possible extensions one by one
-            if (parameterizedScopeTypes.Contains(ResourceType.ManagementGroup))
+            if (parameterizedScopeTypes.Contains(ResourceTypeSegment.ManagementGroup))
                 yield return context.Library.ManagementGroupExtensions;
-            if (parameterizedScopeTypes.Contains(ResourceType.ResourceGroup))
+            if (parameterizedScopeTypes.Contains(ResourceTypeSegment.ResourceGroup))
                 yield return context.Library.ResourceGroupExtensions;
-            if (parameterizedScopeTypes.Contains(ResourceType.Subscription))
+            if (parameterizedScopeTypes.Contains(ResourceTypeSegment.Subscription))
                 yield return context.Library.SubscriptionExtensions;
-            if (parameterizedScopeTypes.Contains(ResourceType.Tenant))
+            if (parameterizedScopeTypes.Contains(ResourceTypeSegment.Tenant))
                 yield return context.Library.TenantExtensions;
             // tenant is not quite a concrete resource, therefore we do not include it here
         }
@@ -159,12 +159,12 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             // find a parent resource in the resource list
             // we are taking the resource with a path that is the child of this operationSet and taking the longest candidate
             // or null if none matched
-            // NOTE that we are always using fuzzy match in the IsPrefixPathOf method, we need to block the ById operations - they literally can be anyone's ancestor when there is no better choice.
+            // NOTE that we are always using fuzzy match in the IsAncestorOf method, we need to block the ById operations - they literally can be anyone's ancestor when there is no better choice.
             // We will never want this
             var scope = requestPath.GetScopePath();
             var candidates = context.Library.ResourceOperationSets.Select(operationSet => operationSet.GetRequestPath(context))
                 .Concat(new List<RequestPath>{RequestPath.ResourceGroup, RequestPath.Subscription, RequestPath.ManagementGroup}) // When generating management group in management.json, the path is /providers/Microsoft.Management/managementGroups/{groupId} while RequestPath.ManagementGroup is /providers/Microsoft.Management/managementGroups/{managementGroupId}. We pick the first one.
-                .Where(r => r.IsPrefixPathOf(requestPath)).OrderByDescending(r => r.Count);
+                .Where(r => r.IsAncestorOf(requestPath)).OrderByDescending(r => r.Count);
             if (candidates.Any())
             {
                 var parent = candidates.First();

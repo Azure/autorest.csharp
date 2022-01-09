@@ -23,7 +23,6 @@ namespace MgmtMultipleParentResource
 {
     /// <summary> A class representing collection of Parent and their operations over its parent. </summary>
     public partial class ParentCollection : ArmCollection, IEnumerable<Parent>, IAsyncEnumerable<Parent>
-
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly ParentsRestOperations _parentsRestClient;
@@ -436,6 +435,6 @@ namespace MgmtMultipleParentResource
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, Parent, ParentData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, Parent, ParentData> Construct() { }
     }
 }

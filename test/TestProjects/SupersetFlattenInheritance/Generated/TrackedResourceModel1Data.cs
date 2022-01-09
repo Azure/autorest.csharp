@@ -6,9 +6,8 @@
 #nullable disable
 
 using System.Collections.Generic;
-using Azure.ResourceManager;
+using Azure.Core;
 using Azure.ResourceManager.Models;
-using Azure.ResourceManager.Resources.Models;
 
 namespace SupersetFlattenInheritance
 {
@@ -17,7 +16,7 @@ namespace SupersetFlattenInheritance
     {
         /// <summary> Initializes a new instance of TrackedResourceModel1Data. </summary>
         /// <param name="location"> The location. </param>
-        public TrackedResourceModel1Data(Location location) : base(location)
+        public TrackedResourceModel1Data(AzureLocation location) : base(location)
         {
         }
 
@@ -28,7 +27,7 @@ namespace SupersetFlattenInheritance
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
         /// <param name="foo"></param>
-        internal TrackedResourceModel1Data(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, Location location, string foo) : base(id, name, type, tags, location)
+        internal TrackedResourceModel1Data(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, AzureLocation location, string foo) : base(id, name, type, tags, location)
         {
             Foo = foo;
         }

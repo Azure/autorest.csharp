@@ -14,7 +14,6 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using MgmtMultipleParentResource.Models;
 
@@ -22,7 +21,6 @@ namespace MgmtMultipleParentResource
 {
     /// <summary> A class representing collection of ChildBody and their operations over its parent. </summary>
     public partial class AnotherParentChildCollection : ArmCollection, IEnumerable<AnotherParentChild>, IAsyncEnumerable<AnotherParentChild>
-
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly AnotherChildrenRestOperations _anotherChildrenRestClient;
@@ -389,6 +387,6 @@ namespace MgmtMultipleParentResource
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, AnotherParentChild, ChildBodyData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, AnotherParentChild, ChildBodyData> Construct() { }
     }
 }

@@ -111,11 +111,11 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         /// <summary>
         /// Check if this <see cref="RequestPath"/> is a prefix path of <code other/>
-        /// Note that this.IsPrefixPathOf(this) will return false which indicates that this method is testing the "proper ancestor" like a proper subset.
+        /// Note that this.IsAncestorOf(this) will return false which indicates that this method is testing the "proper ancestor" like a proper subset.
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
-        public bool IsPrefixPathOf(RequestPath other)
+        public bool IsAncestorOf(RequestPath other)
         {
             // To be the parent of other, you must at least be shorter than other.
             if (other.Count <= Count)
@@ -139,20 +139,35 @@ namespace AutoRest.CSharp.Mgmt.Models
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
-        /// <exception cref="InvalidOperationException">if this.IsPrefixPathOf(other) is false</exception>
-        public RequestPath TrimPrefixPathFrom(RequestPath other)
+        /// <exception cref="InvalidOperationException">if this.IsAncestorOf(other) is false</exception>
+        public RequestPath TrimAncestorFrom(RequestPath other)
         {
+            if (TryTrimAncestorFrom(other, out var diff))
+                return diff;
+
+            throw new InvalidOperationException($"Request path {this} is not parent of {other}");
+        }
+
+        public bool TryTrimAncestorFrom(RequestPath other, [MaybeNullWhen(false)] out RequestPath diff)
+        {
+            diff = default;
             if (this == other)
-                return RequestPath.Tenant;
-            // Handle the special case of trim provider from feature
-            if (this.SerializedPath == "/subscriptions/{subscriptionId}/providers/{resourceProviderNamespace}" && other.SerializedPath.StartsWith("/subscriptions/{subscriptionId}/providers/Microsoft.Features/providers/{resourceProviderNamespace}/features"))
             {
-                return new RequestPath(other._segments.Skip(this.Count + 2));
+                diff = RequestPath.Tenant;
+                return true;
             }
-            if (!this.IsPrefixPathOf(other))
-                throw new InvalidOperationException($"Request path {this} is not parent of {other}");
-            // this is a parent, we can safely just return from the length of this
-            return new RequestPath(other._segments.Skip(this.Count));
+            if (this.IsAncestorOf(other))
+            {
+                diff = new RequestPath(other._segments.Skip(this.Count));
+                return true;
+            }
+            // Handle the special case of trim provider from feature
+            else if (this.SerializedPath == "/subscriptions/{subscriptionId}/providers/{resourceProviderNamespace}" && other.SerializedPath.StartsWith("/subscriptions/{subscriptionId}/providers/Microsoft.Features/providers/{resourceProviderNamespace}/features"))
+            {
+                diff = new RequestPath(other._segments.Skip(this.Count + 2));
+                return true;
+            }
+            return false;
         }
 
         /// <summary>
@@ -166,7 +181,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             // The scope for /subscriptions is /subscriptions/{subscriptionId}, we identify such case with scope.Count > this.Count.
             if (scope == this || scope.Count > this.Count)
                 return Tenant; // if myself is a scope path, we return the empty path after the trim.
-            return scope.TrimPrefixPathFrom(this);
+            return scope.TrimAncestorFrom(this);
         }
 
         public RequestPath Append(RequestPath other)

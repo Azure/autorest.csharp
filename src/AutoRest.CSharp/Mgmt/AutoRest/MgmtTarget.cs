@@ -89,6 +89,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             foreach (var model in context.Library.ResourceData)
             {
+                if (TypeReferenceTypeChooser.HasMatch(model.ObjectSchema))
+                    continue;
+
                 var codeWriter = new CodeWriter();
                 ReferenceTypeWriter.GetWriter(model).WriteModel(codeWriter, model);
 
@@ -178,11 +181,24 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             {
                 return true;
             }
+
+            // do not skip generation of reference types in resource manager
+            // some common types (like `PrivateEndpointConnectionData`) will inherit `Resource`
+            // it will cause `Resource` not being generated since `Resource` is `usedAsInheritance`
+            if (model is MgmtReferenceType)
+            {
+                return false;
+            }
+
             if (model is SchemaObjectType objSchema)
             {
                 //TODO: we need to add logic to replace SubResource with ResourceIdentifier where appropriate until then we won't remove these types
                 if (objSchema.ObjectSchema.Name.StartsWith("SubResource"))
                     return false;
+
+                if (TypeReferenceTypeChooser.HasMatch(objSchema.ObjectSchema))
+                    return true;
+
                 //skip things that had exact match replacements
                 //TODO: Can go away after full orphan fix https://dev.azure.com/azure-mgmt-ex/DotNET%20Management%20SDK/_workitems/edit/6000
                 //Since we forced the evaluation of inheritance and property match for all models before, here we can use the fully loaded cache to

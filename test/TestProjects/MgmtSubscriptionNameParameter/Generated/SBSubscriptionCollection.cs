@@ -23,7 +23,6 @@ namespace MgmtSubscriptionNameParameter
 {
     /// <summary> A class representing collection of SBSubscription and their operations over its parent. </summary>
     public partial class SBSubscriptionCollection : ArmCollection, IEnumerable<SBSubscription>, IAsyncEnumerable<SBSubscription>
-
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly SubscriptionsRestOperations _subscriptionsRestClient;
@@ -432,6 +431,6 @@ namespace MgmtSubscriptionNameParameter
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, SBSubscription, SBSubscriptionData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, SBSubscription, SBSubscriptionData> Construct() { }
     }
 }

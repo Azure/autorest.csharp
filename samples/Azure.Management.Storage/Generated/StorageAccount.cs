@@ -15,7 +15,6 @@ using Azure.Core.Pipeline;
 using Azure.Management.Storage.Models;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
-using Azure.ResourceManager.Resources.Models;
 
 namespace Azure.Management.Storage
 {
@@ -145,7 +144,7 @@ namespace Azure.Management.Storage
         /// <summary> Lists all available geo-locations. </summary>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
-        public async virtual Task<IEnumerable<Location>> GetAvailableLocationsAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<IEnumerable<AzureLocation>> GetAvailableLocationsAsync(CancellationToken cancellationToken = default)
         {
             return await ListAvailableLocationsAsync(ResourceType, cancellationToken).ConfigureAwait(false);
         }
@@ -153,7 +152,7 @@ namespace Azure.Management.Storage
         /// <summary> Lists all available geo-locations. </summary>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
-        public virtual IEnumerable<Location> GetAvailableLocations(CancellationToken cancellationToken = default)
+        public virtual IEnumerable<AzureLocation> GetAvailableLocations(CancellationToken cancellationToken = default)
         {
             return ListAvailableLocations(ResourceType, cancellationToken);
         }
@@ -921,20 +920,25 @@ namespace Azure.Management.Storage
         /// OperationId: PrivateLinkResources_ListByStorageAccount
         /// <summary> Gets the private link resources that need to be created for a storage account. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<IReadOnlyList<PrivateLinkResource>>> GetPrivateLinkResourcesAsync(CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="PrivateLinkResource" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<PrivateLinkResource> GetPrivateLinkResourcesAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("StorageAccount.GetPrivateLinkResources");
-            scope.Start();
-            try
+            async Task<Page<PrivateLinkResource>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await _privateLinkResourcesRestClient.ListByStorageAccountAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(response.Value.Value, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("StorageAccount.GetPrivateLinkResources");
+                scope.Start();
+                try
+                {
+                    var response = await _privateLinkResourcesRestClient.ListByStorageAccountAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/privateLinkResources
@@ -942,27 +946,32 @@ namespace Azure.Management.Storage
         /// OperationId: PrivateLinkResources_ListByStorageAccount
         /// <summary> Gets the private link resources that need to be created for a storage account. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IReadOnlyList<PrivateLinkResource>> GetPrivateLinkResources(CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="PrivateLinkResource" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<PrivateLinkResource> GetPrivateLinkResources(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("StorageAccount.GetPrivateLinkResources");
-            scope.Start();
-            try
+            Page<PrivateLinkResource> FirstPageFunc(int? pageSizeHint)
             {
-                var response = _privateLinkResourcesRestClient.ListByStorageAccount(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
-                return Response.FromValue(response.Value.Value, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("StorageAccount.GetPrivateLinkResources");
+                scope.Start();
+                try
+                {
+                    var response = _privateLinkResourcesRestClient.ListByStorageAccount(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
 
         #region BlobService
 
         /// <summary> Gets an object representing a BlobService along with the instance operations that can be performed on it in the StorageAccount. </summary>
         /// <returns> Returns a <see cref="BlobService" /> object. </returns>
-        public BlobService GetBlobService()
+        public virtual BlobService GetBlobService()
         {
             return new BlobService(this, new ResourceIdentifier(Id.ToString() + "/blobServices/default"));
         }
@@ -972,7 +981,7 @@ namespace Azure.Management.Storage
 
         /// <summary> Gets an object representing a FileService along with the instance operations that can be performed on it in the StorageAccount. </summary>
         /// <returns> Returns a <see cref="FileService" /> object. </returns>
-        public FileService GetFileService()
+        public virtual FileService GetFileService()
         {
             return new FileService(this, new ResourceIdentifier(Id.ToString() + "/fileServices/default"));
         }
@@ -980,11 +989,11 @@ namespace Azure.Management.Storage
 
         #region ManagementPolicy
 
-        /// <summary> Gets a collection of ManagementPolicies in the StorageAccount. </summary>
-        /// <returns> An object representing collection of ManagementPolicies and their operations over a StorageAccount. </returns>
-        public ManagementPolicyCollection GetManagementPolicies()
+        /// <summary> Gets an object representing a ManagementPolicy along with the instance operations that can be performed on it in the StorageAccount. </summary>
+        /// <returns> Returns a <see cref="ManagementPolicy" /> object. </returns>
+        public virtual ManagementPolicy GetManagementPolicy()
         {
-            return new ManagementPolicyCollection(this);
+            return new ManagementPolicy(this, new ResourceIdentifier(Id.ToString() + "/managementPolicies/default"));
         }
         #endregion
 
@@ -992,7 +1001,7 @@ namespace Azure.Management.Storage
 
         /// <summary> Gets a collection of BlobInventoryPolicies in the StorageAccount. </summary>
         /// <returns> An object representing collection of BlobInventoryPolicies and their operations over a StorageAccount. </returns>
-        public BlobInventoryPolicyCollection GetBlobInventoryPolicies()
+        public virtual BlobInventoryPolicyCollection GetBlobInventoryPolicies()
         {
             return new BlobInventoryPolicyCollection(this);
         }
@@ -1002,7 +1011,7 @@ namespace Azure.Management.Storage
 
         /// <summary> Gets a collection of PrivateEndpointConnections in the StorageAccount. </summary>
         /// <returns> An object representing collection of PrivateEndpointConnections and their operations over a StorageAccount. </returns>
-        public PrivateEndpointConnectionCollection GetPrivateEndpointConnections()
+        public virtual PrivateEndpointConnectionCollection GetPrivateEndpointConnections()
         {
             return new PrivateEndpointConnectionCollection(this);
         }
@@ -1012,7 +1021,7 @@ namespace Azure.Management.Storage
 
         /// <summary> Gets a collection of ObjectReplicationPolicies in the StorageAccount. </summary>
         /// <returns> An object representing collection of ObjectReplicationPolicies and their operations over a StorageAccount. </returns>
-        public ObjectReplicationPolicyCollection GetObjectReplicationPolicies()
+        public virtual ObjectReplicationPolicyCollection GetObjectReplicationPolicies()
         {
             return new ObjectReplicationPolicyCollection(this);
         }
@@ -1022,7 +1031,7 @@ namespace Azure.Management.Storage
 
         /// <summary> Gets a collection of EncryptionScopes in the StorageAccount. </summary>
         /// <returns> An object representing collection of EncryptionScopes and their operations over a StorageAccount. </returns>
-        public EncryptionScopeCollection GetEncryptionScopes()
+        public virtual EncryptionScopeCollection GetEncryptionScopes()
         {
             return new EncryptionScopeCollection(this);
         }

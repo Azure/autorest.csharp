@@ -14,7 +14,6 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources;
 using MgmtListMethods.Models;
@@ -23,7 +22,6 @@ namespace MgmtListMethods
 {
     /// <summary> A class representing collection of TenantTest and their operations over its parent. </summary>
     public partial class TenantTestCollection : ArmCollection, IEnumerable<TenantTest>, IAsyncEnumerable<TenantTest>
-
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly TenantTestsRestOperations _tenantTestsRestClient;
@@ -390,6 +388,6 @@ namespace MgmtListMethods
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, TenantTest, TenantTestData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, TenantTest, TenantTestData> Construct() { }
     }
 }

@@ -86,15 +86,15 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return valueType.EqualsByName(resourceData.Type);
         }
 
-        private static ISet<ResourceType> GetScopeResourceTypes(RequestPath requestPath, MgmtConfiguration config)
+        private static ISet<ResourceTypeSegment> GetScopeResourceTypes(RequestPath requestPath, MgmtConfiguration config)
         {
             var scope = requestPath.GetScopePath();
             if (scope.IsParameterizedScope())
             {
-                return new HashSet<ResourceType>(requestPath.GetParameterizedScopeResourceTypes(config)!);
+                return new HashSet<ResourceTypeSegment>(requestPath.GetParameterizedScopeResourceTypes(config)!);
             }
 
-            return new HashSet<ResourceType> { scope.GetResourceType(config) };
+            return new HashSet<ResourceTypeSegment> { scope.GetResourceType(config) };
         }
 
         private static bool IsScopeCompatible(RequestPath requestPath, RequestPath resourcePath, MgmtConfiguration config)
@@ -102,7 +102,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             // get scope types
             var requestScopeTypes = GetScopeResourceTypes(requestPath, config);
             var resourceScopeTypes = GetScopeResourceTypes(resourcePath, config);
-            if (resourceScopeTypes.Contains(ResourceType.Any))
+            if (resourceScopeTypes.Contains(ResourceTypeSegment.Any))
                 return true;
             return requestScopeTypes.IsSubsetOf(resourceScopeTypes);
         }
@@ -129,10 +129,10 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 if (trimmedRequestPath.Count == 0 && trimmedResourceRequestPath.Count != 0)
                     continue;
                 // In the case that the full path of requestPath and resourceRequestPath are both scopes (trimmed path is empty), comparing the scope part is enough.
-                // We should not compare the remaining paths as both will be empty path and Tenant.IsPrefixPathOf(Tenant) always returns false.
+                // We should not compare the remaining paths as both will be empty path and Tenant.IsAncestorOf(Tenant) always returns false.
                 else if ( trimmedRequestPath.Count != 0 || trimmedResourceRequestPath.Count != 0)
                 {
-                    if (!trimmedRequestPath.IsPrefixPathOf(trimmedResourceRequestPath))
+                    if (!trimmedRequestPath.IsAncestorOf(trimmedResourceRequestPath))
                         continue;
                 }
                 candidates.Add(operationSet);

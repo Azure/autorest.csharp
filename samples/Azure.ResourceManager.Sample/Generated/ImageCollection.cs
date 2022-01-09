@@ -23,7 +23,6 @@ namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing collection of Image and their operations over its parent. </summary>
     public partial class ImageCollection : ArmCollection, IEnumerable<Image>, IAsyncEnumerable<Image>
-
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly ImagesRestOperations _imagesRestClient;
@@ -434,6 +433,6 @@ namespace Azure.ResourceManager.Sample
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, Image, ImageData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, Image, ImageData> Construct() { }
     }
 }

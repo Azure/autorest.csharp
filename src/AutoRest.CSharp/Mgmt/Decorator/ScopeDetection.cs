@@ -23,7 +23,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         public const string Any = "*";
 
         private static ConcurrentDictionary<RequestPath, RequestPath> _scopePathCache = new ConcurrentDictionary<RequestPath, RequestPath>();
-        private static ConcurrentDictionary<RequestPath, ResourceType[]?> _scopeTypesCache = new ConcurrentDictionary<RequestPath, ResourceType[]?>();
+        private static ConcurrentDictionary<RequestPath, ResourceTypeSegment[]?> _scopeTypesCache = new ConcurrentDictionary<RequestPath, ResourceTypeSegment[]?>();
 
         public static RequestPath GetScopePath(this RequestPath requestPath)
         {
@@ -75,7 +75,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return requestPath;
         }
 
-        public static ResourceType[]? GetParameterizedScopeResourceTypes(this RequestPath requestPath, MgmtConfiguration config)
+        public static ResourceTypeSegment[]? GetParameterizedScopeResourceTypes(this RequestPath requestPath, MgmtConfiguration config)
         {
             if (_scopeTypesCache.TryGetValue(requestPath, out var result))
                 return result;
@@ -85,24 +85,24 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return result;
         }
 
-        private static ResourceType[]? CalculateScopeResourceTypes(this RequestPath requestPath, MgmtConfiguration config)
+        private static ResourceTypeSegment[]? CalculateScopeResourceTypes(this RequestPath requestPath, MgmtConfiguration config)
         {
             if (!requestPath.GetScopePath().IsParameterizedScope())
                 return null;
             if (config.RequestPathToScopeResourceTypes.TryGetValue(requestPath, out var resourceTypes))
                 return resourceTypes.Select(v => BuildResourceType(v)).ToArray();
             // otherwise we just assume this is scope and this scope could be anything
-            return new[] { ResourceType.Subscription, ResourceType.ResourceGroup, ResourceType.ManagementGroup, ResourceType.Tenant, ResourceType.Any };
+            return new[] { ResourceTypeSegment.Subscription, ResourceTypeSegment.ResourceGroup, ResourceTypeSegment.ManagementGroup, ResourceTypeSegment.Tenant, ResourceTypeSegment.Any };
         }
 
-        private static ResourceType BuildResourceType(string resourceType) => resourceType switch
+        private static ResourceTypeSegment BuildResourceType(string resourceType) => resourceType switch
         {
-            Subscriptions => ResourceType.Subscription,
-            ResourceGroups => ResourceType.ResourceGroup,
-            ManagementGroups => ResourceType.ManagementGroup,
-            Tenant => ResourceType.Tenant,
-            Any => ResourceType.Any,
-            _ => new ResourceType(resourceType)
+            Subscriptions => ResourceTypeSegment.Subscription,
+            ResourceGroups => ResourceTypeSegment.ResourceGroup,
+            ManagementGroups => ResourceTypeSegment.ManagementGroup,
+            Tenant => ResourceTypeSegment.Tenant,
+            Any => ResourceTypeSegment.Any,
+            _ => new ResourceTypeSegment(resourceType)
         };
     }
 }
