@@ -8,10 +8,10 @@
 using System;
 using Azure.Core;
 
-namespace body_array_LowLevel
+namespace custom_baseUrl_paging_LowLevel
 {
-    /// <summary> Client options for AutoRestSwaggerBATArrayServiceClient. </summary>
-    public partial class AutoRestSwaggerBATArrayServiceClientOptions : ClientOptions
+    /// <summary> Client options for PagingClient. </summary>
+    public partial class PagingClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V1_0_0;
 
@@ -24,8 +24,8 @@ namespace body_array_LowLevel
 
         internal string Version { get; }
 
-        /// <summary> Initializes new instance of AutoRestSwaggerBATArrayServiceClientOptions. </summary>
-        public AutoRestSwaggerBATArrayServiceClientOptions(ServiceVersion version = LatestVersion)
+        /// <summary> Initializes new instance of PagingClientOptions. </summary>
+        public PagingClientOptions(ServiceVersion version = LatestVersion)
         {
             Version = version switch
             {

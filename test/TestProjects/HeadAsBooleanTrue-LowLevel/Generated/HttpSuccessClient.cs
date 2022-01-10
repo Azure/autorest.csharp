@@ -35,14 +35,14 @@ namespace HeadAsBooleanTrue_LowLevel
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public HttpSuccessClient(AzureKeyCredential credential, Uri endpoint = null, HeadAsBooleanTrueClientOptions options = null)
+        public HttpSuccessClient(AzureKeyCredential credential, Uri endpoint = null, HttpSuccessClientOptions options = null)
         {
             if (credential == null)
             {
                 throw new ArgumentNullException(nameof(credential));
             }
             endpoint ??= new Uri("http://localhost:3000");
-            options ??= new HeadAsBooleanTrueClientOptions();
+            options ??= new HttpSuccessClientOptions();
 
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;

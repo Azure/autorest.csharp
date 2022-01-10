@@ -38,7 +38,7 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
-        public DocumentTranslationClient(string endpoint, AzureKeyCredential credential, AzureAIDocumentTranslationClientOptions options = null)
+        public DocumentTranslationClient(string endpoint, AzureKeyCredential credential, DocumentTranslationClientOptions options = null)
         {
             if (endpoint == null)
             {
@@ -48,7 +48,7 @@ namespace Azure.AI.DocumentTranslation
             {
                 throw new ArgumentNullException(nameof(credential));
             }
-            options ??= new AzureAIDocumentTranslationClientOptions();
+            options ??= new DocumentTranslationClientOptions();
 
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;

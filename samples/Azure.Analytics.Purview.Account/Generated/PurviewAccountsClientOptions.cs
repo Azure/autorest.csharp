@@ -10,8 +10,8 @@ using Azure.Core;
 
 namespace Azure.Analytics.Purview.Account
 {
-    /// <summary> Client options for PurviewAccountClient. </summary>
-    public partial class PurviewAccountClientOptions : ClientOptions
+    /// <summary> Client options for PurviewAccountsClient. </summary>
+    public partial class PurviewAccountsClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V2019_11_01_preview;
 
@@ -24,8 +24,8 @@ namespace Azure.Analytics.Purview.Account
 
         internal string Version { get; }
 
-        /// <summary> Initializes new instance of PurviewAccountClientOptions. </summary>
-        public PurviewAccountClientOptions(ServiceVersion version = LatestVersion)
+        /// <summary> Initializes new instance of PurviewAccountsClientOptions. </summary>
+        public PurviewAccountsClientOptions(ServiceVersion version = LatestVersion)
         {
             Version = version switch
             {

@@ -8,10 +8,10 @@
 using System;
 using Azure.Core;
 
-namespace CollapseRequestCondition_LowLevel
+namespace custom_baseUrl_LowLevel
 {
-    /// <summary> Client options for CollapseRequestConditionsClient. </summary>
-    public partial class CollapseRequestConditionsClientOptions : ClientOptions
+    /// <summary> Client options for PathsClient. </summary>
+    public partial class PathsClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V1_0_0;
 
@@ -24,8 +24,8 @@ namespace CollapseRequestCondition_LowLevel
 
         internal string Version { get; }
 
-        /// <summary> Initializes new instance of CollapseRequestConditionsClientOptions. </summary>
-        public CollapseRequestConditionsClientOptions(ServiceVersion version = LatestVersion)
+        /// <summary> Initializes new instance of PathsClientOptions. </summary>
+        public PathsClientOptions(ServiceVersion version = LatestVersion)
         {
             Version = version switch
             {

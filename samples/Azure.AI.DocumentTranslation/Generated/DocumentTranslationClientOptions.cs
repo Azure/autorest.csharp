@@ -10,8 +10,8 @@ using Azure.Core;
 
 namespace Azure.AI.DocumentTranslation
 {
-    /// <summary> Client options for AzureAIDocumentTranslationClient. </summary>
-    public partial class AzureAIDocumentTranslationClientOptions : ClientOptions
+    /// <summary> Client options for DocumentTranslationClient. </summary>
+    public partial class DocumentTranslationClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.Vv1_0_preview_1;
 
@@ -24,8 +24,8 @@ namespace Azure.AI.DocumentTranslation
 
         internal string Version { get; }
 
-        /// <summary> Initializes new instance of AzureAIDocumentTranslationClientOptions. </summary>
-        public AzureAIDocumentTranslationClientOptions(ServiceVersion version = LatestVersion)
+        /// <summary> Initializes new instance of DocumentTranslationClientOptions. </summary>
+        public DocumentTranslationClientOptions(ServiceVersion version = LatestVersion)
         {
             Version = version switch
             {

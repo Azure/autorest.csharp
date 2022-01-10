@@ -8,10 +8,10 @@
 using System;
 using Azure.Core;
 
-namespace head_LowLevel
+namespace url_multi_collectionFormat_LowLevel
 {
-    /// <summary> Client options for AutoRestHeadTestServiceClient. </summary>
-    public partial class AutoRestHeadTestServiceClientOptions : ClientOptions
+    /// <summary> Client options for QueriesClient. </summary>
+    public partial class QueriesClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V1_0_0;
 
@@ -24,8 +24,8 @@ namespace head_LowLevel
 
         internal string Version { get; }
 
-        /// <summary> Initializes new instance of AutoRestHeadTestServiceClientOptions. </summary>
-        public AutoRestHeadTestServiceClientOptions(ServiceVersion version = LatestVersion)
+        /// <summary> Initializes new instance of QueriesClientOptions. </summary>
+        public QueriesClientOptions(ServiceVersion version = LatestVersion)
         {
             Version = version switch
             {
