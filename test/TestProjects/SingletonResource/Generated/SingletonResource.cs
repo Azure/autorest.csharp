@@ -14,64 +14,64 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
-using MgmtSingleton.Models;
+using SingletonResource.Models;
 
-namespace MgmtSingleton
+namespace SingletonResource
 {
-    /// <summary> A Class representing a SingletonConfig along with the instance operations that can be performed on it. </summary>
-    public partial class SingletonConfig : ArmResource
+    /// <summary> A Class representing a SingletonResource along with the instance operations that can be performed on it. </summary>
+    public partial class SingletonResource : ArmResource
     {
-        /// <summary> Generate the resource identifier of a <see cref="SingletonConfig"/> instance. </summary>
+        /// <summary> Generate the resource identifier of a <see cref="SingletonResource"/> instance. </summary>
         public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string parentName)
         {
-            var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}/singletonConfigs/web";
+            var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}/singletonResources/current";
             return new ResourceIdentifier(resourceId);
         }
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly SingletonConfigsRestOperations _singletonConfigsRestClient;
-        private readonly SingletonConfigData _data;
+        private readonly SingletonResourcesRestOperations _singletonResourcesRestClient;
+        private readonly SingletonResourceData _data;
 
-        /// <summary> Initializes a new instance of the <see cref="SingletonConfig"/> class for mocking. </summary>
-        protected SingletonConfig()
+        /// <summary> Initializes a new instance of the <see cref="SingletonResource"/> class for mocking. </summary>
+        protected SingletonResource()
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "SingletonConfig"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref = "SingletonResource"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal SingletonConfig(ArmResource options, SingletonConfigData resource) : base(options, resource.Id)
+        internal SingletonResource(ArmResource options, SingletonResourceData resource) : base(options, resource.Id)
         {
             HasData = true;
             _data = resource;
             Parent = options;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _singletonConfigsRestClient = new SingletonConfigsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            _singletonResourcesRestClient = new SingletonResourcesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
-        /// <summary> Initializes a new instance of the <see cref="SingletonConfig"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="SingletonResource"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal SingletonConfig(ArmResource options, ResourceIdentifier id) : base(options, id)
+        internal SingletonResource(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
             Parent = options;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _singletonConfigsRestClient = new SingletonConfigsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            _singletonResourcesRestClient = new SingletonResourcesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
-        /// <summary> Initializes a new instance of the <see cref="SingletonConfig"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="SingletonResource"/> class. </summary>
         /// <param name="clientOptions"> The client options to build client context. </param>
         /// <param name="credential"> The credential to build client context. </param>
         /// <param name="uri"> The uri to build client context. </param>
         /// <param name="pipeline"> The pipeline to build client context. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal SingletonConfig(ArmClientOptions clientOptions, TokenCredential credential, Uri uri, HttpPipeline pipeline, ResourceIdentifier id) : base(clientOptions, credential, uri, pipeline, id)
+        internal SingletonResource(ArmClientOptions clientOptions, TokenCredential credential, Uri uri, HttpPipeline pipeline, ResourceIdentifier id) : base(clientOptions, credential, uri, pipeline, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _singletonConfigsRestClient = new SingletonConfigsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            _singletonResourcesRestClient = new SingletonResourcesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Billing/parentResources/singletonConfigs";
+        public static readonly ResourceType ResourceType = "Microsoft.Billing/parentResources/singletonResources";
 
         /// <summary> Gets the valid resource type for the operations. </summary>
         protected override ResourceType ValidResourceType => ResourceType;
@@ -81,7 +81,7 @@ namespace MgmtSingleton
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual SingletonConfigData Data
+        public virtual SingletonResourceData Data
         {
             get
             {
@@ -94,21 +94,21 @@ namespace MgmtSingleton
         /// <summary> Gets the parent resource of this resource. </summary>
         public ArmResource Parent { get; }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}/singletonConfigs/web
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}/singletonConfigs/web
-        /// OperationId: SingletonConfigs_Get
-        /// <summary> Singleton Test Example. See /providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/policies/default GET,PUT. </summary>
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}/singletonResources/{resourceName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}/singletonResources/{resourceName}
+        /// OperationId: SingletonResources_Get
+        /// <summary> Singleton non-resource test example with a single-value enum name parameter. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<SingletonConfig>> GetAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<Response<SingletonResource>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SingletonConfig.Get");
+            using var scope = _clientDiagnostics.CreateScope("SingletonResource.Get");
             scope.Start();
             try
             {
-                var response = await _singletonConfigsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _singletonResourcesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new SingletonConfig(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SingletonResource(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -117,21 +117,21 @@ namespace MgmtSingleton
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}/singletonConfigs/web
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}/singletonConfigs/web
-        /// OperationId: SingletonConfigs_Get
-        /// <summary> Singleton Test Example. See /providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/policies/default GET,PUT. </summary>
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}/singletonResources/{resourceName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}/singletonResources/{resourceName}
+        /// OperationId: SingletonResources_Get
+        /// <summary> Singleton non-resource test example with a single-value enum name parameter. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<SingletonConfig> Get(CancellationToken cancellationToken = default)
+        public virtual Response<SingletonResource> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SingletonConfig.Get");
+            using var scope = _clientDiagnostics.CreateScope("SingletonResource.Get");
             scope.Start();
             try
             {
-                var response = _singletonConfigsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, cancellationToken);
+                var response = _singletonResourcesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new SingletonConfig(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SingletonResource(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -156,26 +156,27 @@ namespace MgmtSingleton
             return ListAvailableLocations(ResourceType, cancellationToken);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}/singletonConfigs/web
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}/singletonConfigs/web
-        /// OperationId: SingletonConfigs_CreateOrUpdate
-        /// <param name="parameters"> The SingletonConfig to use. </param>
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}/singletonResources/{resourceName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}/singletonResources/{resourceName}
+        /// OperationId: SingletonResources_CreateOrUpdate
+        /// <summary> Singleton non-resource test example with a single-value enum name parameter. </summary>
+        /// <param name="parameters"> The SingletonResource to use. </param>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<SingletonConfigCreateOrUpdateOperation> CreateOrUpdateAsync(SingletonConfigData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<SingletonResourceCreateOrUpdateOperation> CreateOrUpdateAsync(SingletonResourceData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SingletonConfig.CreateOrUpdate");
+            using var scope = _clientDiagnostics.CreateScope("SingletonResource.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _singletonConfigsRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new SingletonConfigCreateOrUpdateOperation(this, response);
+                var response = await _singletonResourcesRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, parameters, cancellationToken).ConfigureAwait(false);
+                var operation = new SingletonResourceCreateOrUpdateOperation(this, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -187,26 +188,27 @@ namespace MgmtSingleton
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}/singletonConfigs/web
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}/singletonConfigs/web
-        /// OperationId: SingletonConfigs_CreateOrUpdate
-        /// <param name="parameters"> The SingletonConfig to use. </param>
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}/singletonResources/{resourceName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}/singletonResources/{resourceName}
+        /// OperationId: SingletonResources_CreateOrUpdate
+        /// <summary> Singleton non-resource test example with a single-value enum name parameter. </summary>
+        /// <param name="parameters"> The SingletonResource to use. </param>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual SingletonConfigCreateOrUpdateOperation CreateOrUpdate(SingletonConfigData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual SingletonResourceCreateOrUpdateOperation CreateOrUpdate(SingletonResourceData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SingletonConfig.CreateOrUpdate");
+            using var scope = _clientDiagnostics.CreateScope("SingletonResource.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _singletonConfigsRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, parameters, cancellationToken);
-                var operation = new SingletonConfigCreateOrUpdateOperation(this, response);
+                var response = _singletonResourcesRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, parameters, cancellationToken);
+                var operation = new SingletonResourceCreateOrUpdateOperation(this, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
