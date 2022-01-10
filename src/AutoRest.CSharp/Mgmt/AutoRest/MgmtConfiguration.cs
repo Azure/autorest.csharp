@@ -80,9 +80,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 if (root.ValueKind != JsonValueKind.Object)
                     return null;
 
-                root.TryGetProperty(nameof(IgnoreReason), out var ignoreReason);
+                var hasIgnoreReason = root.TryGetProperty(nameof(IgnoreReason), out var ignoreReason);
 
-                return new TestModelerConfiguration(ignoreReason: ignoreReason);
+                return new TestModelerConfiguration(ignoreReason: hasIgnoreReason ? ignoreReason: null);
             }
 
             internal static TestModelerConfiguration? GetConfiguration(IPluginCommunication autoRest)
@@ -98,9 +98,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             public void Write(Utf8JsonWriter writer, string settingName)
             {
-                if (IgnoreReason is null)
-                    return;
-
                 writer.WriteStartObject(settingName);
 
                 if (IgnoreReason is not null)
@@ -247,6 +244,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 writer.WriteBoolean(nameof(DoesResourceModelRequireName), DoesResourceModelRequireName);
             if (DoesSingletonRequiresKeyword)
                 writer.WriteBoolean(nameof(DoesSingletonRequiresKeyword), DoesSingletonRequiresKeyword);
+            if (TestModeler is not null)
+            {
+                TestModeler.Write(writer, nameof(TestModeler));
+            }
         }
 
         internal static MgmtConfiguration LoadConfiguration(JsonElement root)

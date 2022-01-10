@@ -16,5 +16,7 @@
   ],
   "MgmtDebug": {
     "ShowRequestPath": true
-  }
+  },
+  "DoesSingletonRequiresKeyword": false,
+  "TestModeler": {}
 }
