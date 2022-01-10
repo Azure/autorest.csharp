@@ -33,7 +33,7 @@ function Invoke-AutoRest($baseOutput, $projectName, $autoRestArguments, $sharedS
     $command = "$script:autoRestBinary $autoRestArguments  --skip-upgrade-check  --namespace=$namespace --output-folder=$outputPath"
 
     # A temporary work around for autorest csharo issue #1826
-    if ($fast -Or $projectName -eq "media_types" -Or $projectName -eq "media_types-LowLevel")
+    if ($fast)
     {
         $command = "dotnet run --project $script:AutoRestPluginProject --no-build -- --standalone $outputPath"
     }
