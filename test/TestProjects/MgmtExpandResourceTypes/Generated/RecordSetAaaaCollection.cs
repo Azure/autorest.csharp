@@ -30,7 +30,7 @@ namespace MgmtExpandResourceTypes
         {
         }
 
-        /// <summary> Initializes a new instance of RecordSetAaaaCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="RecordSetAaaaCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal RecordSetAaaaCollection(ArmResource parent) : base(parent)
         {

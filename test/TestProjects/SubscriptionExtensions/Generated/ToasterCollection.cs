@@ -32,7 +32,7 @@ namespace SubscriptionExtensions
         {
         }
 
-        /// <summary> Initializes a new instance of ToasterCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="ToasterCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal ToasterCollection(ArmResource parent) : base(parent)
         {

@@ -31,7 +31,7 @@ namespace MgmtListMethods
         {
         }
 
-        /// <summary> Initializes a new instance of MgmtGroupParentCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="MgmtGroupParentCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal MgmtGroupParentCollection(ArmResource parent) : base(parent)
         {

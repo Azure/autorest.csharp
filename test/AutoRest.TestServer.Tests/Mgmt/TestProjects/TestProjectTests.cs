@@ -181,7 +181,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [Test]
         public void ValidateResourceGroupExtensions()
         {
-            if (_projectName.Equals(""))
+            if (_projectName.Equals("") || _projectName.Equals("ReferenceTypes")) // arm-core is true for ReferenceTypes and it has no ResourceGroupExtension.
             {
                 return;
             }
@@ -290,7 +290,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [Test]
         public void ValidateSubscriptionExtensionsGetResourceCollection()
         {
-            if (_projectName.Equals(""))
+            if (_projectName.Equals("") || _projectName.Equals("ReferenceTypes")) // arm-core is true for ReferenceTypes and it has no SubscriptionExtension.
             {
                 return;
             }
@@ -322,7 +322,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [Test]
         public void ValidateSubscriptionExtensionsListResource()
         {
-            if (_projectName.Equals(""))
+            if (_projectName.Equals("") || _projectName.Equals("ReferenceTypes")) // arm-core is true for ReferenceTypes and it has no SubscriptionExtension.
             {
                 return;
             }
@@ -363,7 +363,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [Test]
         public void ValidateSubscriptionExtensionsListResourceByName()
         {
-            if (_projectName.Equals(""))
+            if (_projectName.Equals("") || _projectName.Equals("ReferenceTypes")) // arm-core is true for ReferenceTypes and it has no SubscriptionExtension.
             {
                 return;
             }

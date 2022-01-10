@@ -31,7 +31,7 @@ namespace MgmtListMethods
         {
         }
 
-        /// <summary> Initializes a new instance of TenantTestCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="TenantTestCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal TenantTestCollection(ArmResource parent) : base(parent)
         {

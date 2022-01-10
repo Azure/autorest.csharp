@@ -32,7 +32,7 @@ namespace MgmtSingleton
         {
         }
 
-        /// <summary> Initializes a new instance of ParentResourceCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="ParentResourceCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal ParentResourceCollection(ArmResource parent) : base(parent)
         {

@@ -28,7 +28,7 @@ namespace MgmtKeyvault
         {
         }
 
-        /// <summary> Initializes a new instance of DeletedManagedHsmCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="DeletedManagedHsmCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal DeletedManagedHsmCollection(ArmResource parent) : base(parent)
         {

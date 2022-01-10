@@ -30,7 +30,7 @@ namespace Azure.Management.Storage
         {
         }
 
-        /// <summary> Initializes a new instance of BlobContainerCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="BlobContainerCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal BlobContainerCollection(ArmResource parent) : base(parent)
         {

@@ -32,7 +32,7 @@ namespace MgmtParamOrdering
         {
         }
 
-        /// <summary> Initializes a new instance of WorkspaceCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="WorkspaceCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal WorkspaceCollection(ArmResource parent) : base(parent)
         {

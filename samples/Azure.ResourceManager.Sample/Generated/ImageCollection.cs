@@ -32,7 +32,7 @@ namespace Azure.ResourceManager.Sample
         {
         }
 
-        /// <summary> Initializes a new instance of ImageCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="ImageCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal ImageCollection(ArmResource parent) : base(parent)
         {

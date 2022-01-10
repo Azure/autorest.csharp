@@ -33,7 +33,7 @@ namespace SingletonResource
         {
         }
 
-        /// <summary> Initializes a new instance of CarCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="CarCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal CarCollection(ArmResource parent) : base(parent)
         {

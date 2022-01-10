@@ -32,7 +32,7 @@ namespace SupersetInheritance
         {
         }
 
-        /// <summary> Initializes a new instance of SupersetModel1Collection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="SupersetModel1Collection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal SupersetModel1Collection(ArmResource parent) : base(parent)
         {

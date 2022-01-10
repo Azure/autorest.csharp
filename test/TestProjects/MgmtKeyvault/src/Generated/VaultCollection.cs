@@ -32,7 +32,7 @@ namespace MgmtKeyvault
         {
         }
 
-        /// <summary> Initializes a new instance of VaultCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="VaultCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal VaultCollection(ArmResource parent) : base(parent)
         {

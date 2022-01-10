@@ -32,7 +32,7 @@ namespace OmitOperationGroups
         {
         }
 
-        /// <summary> Initializes a new instance of Model2Collection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="Model2Collection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal Model2Collection(ArmResource parent) : base(parent)
         {

@@ -29,7 +29,7 @@ namespace MgmtNonStringPathVariable
         {
         }
 
-        /// <summary> Initializes a new instance of BarCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="BarCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal BarCollection(ArmResource parent) : base(parent)
         {

@@ -30,7 +30,7 @@ namespace Azure.Management.Storage
         {
         }
 
-        /// <summary> Initializes a new instance of FileShareCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="FileShareCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal FileShareCollection(ArmResource parent) : base(parent)
         {

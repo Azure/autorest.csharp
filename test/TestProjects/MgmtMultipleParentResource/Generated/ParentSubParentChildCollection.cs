@@ -30,7 +30,7 @@ namespace MgmtMultipleParentResource
         {
         }
 
-        /// <summary> Initializes a new instance of ParentSubParentChildCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="ParentSubParentChildCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal ParentSubParentChildCollection(ArmResource parent) : base(parent)
         {

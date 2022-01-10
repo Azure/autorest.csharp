@@ -32,7 +32,7 @@ namespace Azure.Management.Storage
         {
         }
 
-        /// <summary> Initializes a new instance of StorageAccountCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="StorageAccountCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal StorageAccountCollection(ArmResource parent) : base(parent)
         {

@@ -32,7 +32,7 @@ namespace MgmtParent
         {
         }
 
-        /// <summary> Initializes a new instance of AvailabilitySetCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="AvailabilitySetCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal AvailabilitySetCollection(ArmResource parent) : base(parent)
         {

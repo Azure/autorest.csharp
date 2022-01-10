@@ -30,7 +30,7 @@ namespace MgmtExtensionResource
         {
         }
 
-        /// <summary> Initializes a new instance of BuiltInPolicyDefinitionCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="BuiltInPolicyDefinitionCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal BuiltInPolicyDefinitionCollection(ArmResource parent) : base(parent)
         {

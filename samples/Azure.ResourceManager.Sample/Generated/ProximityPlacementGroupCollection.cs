@@ -32,7 +32,7 @@ namespace Azure.ResourceManager.Sample
         {
         }
 
-        /// <summary> Initializes a new instance of ProximityPlacementGroupCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="ProximityPlacementGroupCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal ProximityPlacementGroupCollection(ArmResource parent) : base(parent)
         {

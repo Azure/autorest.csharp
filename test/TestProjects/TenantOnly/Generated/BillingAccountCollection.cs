@@ -31,7 +31,7 @@ namespace TenantOnly
         {
         }
 
-        /// <summary> Initializes a new instance of BillingAccountCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="BillingAccountCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal BillingAccountCollection(ArmResource parent) : base(parent)
         {

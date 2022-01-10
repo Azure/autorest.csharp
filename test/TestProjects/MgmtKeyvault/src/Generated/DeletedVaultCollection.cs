@@ -28,7 +28,7 @@ namespace MgmtKeyvault
         {
         }
 
-        /// <summary> Initializes a new instance of DeletedVaultCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="DeletedVaultCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal DeletedVaultCollection(ArmResource parent) : base(parent)
         {
