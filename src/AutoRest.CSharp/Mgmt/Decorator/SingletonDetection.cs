@@ -57,6 +57,12 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             // if not all of the segment in difference are constant, we cannot be a singleton resource
             if (!diff.Any() || !diff.All(s => s.IsConstant))
                 return false;
+            // see if the configuration says that we need to honor the dictionary for singletons
+            if (!context.Configuration.MgmtConfiguration.DoesSingletonRequiresKeyword)
+            {
+                singletonIdSuffix = string.Join('/', diff.Select(s => s.ConstantValue));
+                return true;
+            }
             // now we can ensure the last segment of the path is a constant
             var lastSegment = currentRequestPath.Last();
             if (lastSegment.Constant.Type.Equals(typeof(string)) && SingletonKeywords.Any(w => lastSegment.ConstantValue == w))

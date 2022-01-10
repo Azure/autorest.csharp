@@ -46,12 +46,12 @@ namespace body_complex_LowLevel
 
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
-            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
         }
 
         /// <summary> Get complex types that are polymorphic. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -77,7 +77,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetValidRequest();
+                using HttpMessage message = CreateGetValidRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -88,7 +88,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types that are polymorphic. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -114,7 +114,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetValidRequest();
+                using HttpMessage message = CreateGetValidRequest(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -126,7 +126,7 @@ namespace body_complex_LowLevel
 
         /// <summary> Put complex types that are polymorphic. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -153,7 +153,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutValidRequest(content);
+                using HttpMessage message = CreatePutValidRequest(content, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -165,7 +165,7 @@ namespace body_complex_LowLevel
 
         /// <summary> Put complex types that are polymorphic. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -192,7 +192,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutValidRequest(content);
+                using HttpMessage message = CreatePutValidRequest(content, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -203,7 +203,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types that are polymorphic, JSON key contains a dot. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -227,7 +227,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetDotSyntaxRequest();
+                using HttpMessage message = CreateGetDotSyntaxRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -238,7 +238,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types that are polymorphic, JSON key contains a dot. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -262,7 +262,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetDotSyntaxRequest();
+                using HttpMessage message = CreateGetDotSyntaxRequest(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -273,7 +273,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex object composing a polymorphic scalar property and array property with polymorphic element type, with discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the wire. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -307,7 +307,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetComposedWithDiscriminatorRequest();
+                using HttpMessage message = CreateGetComposedWithDiscriminatorRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -318,7 +318,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex object composing a polymorphic scalar property and array property with polymorphic element type, with discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the wire. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -352,7 +352,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetComposedWithDiscriminatorRequest();
+                using HttpMessage message = CreateGetComposedWithDiscriminatorRequest(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -363,7 +363,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex object composing a polymorphic scalar property and array property with polymorphic element type, without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the property. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -397,7 +397,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetComposedWithoutDiscriminatorRequest();
+                using HttpMessage message = CreateGetComposedWithoutDiscriminatorRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -408,7 +408,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex object composing a polymorphic scalar property and array property with polymorphic element type, without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the property. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -442,7 +442,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetComposedWithoutDiscriminatorRequest();
+                using HttpMessage message = CreateGetComposedWithoutDiscriminatorRequest(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -453,7 +453,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -488,7 +488,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetComplicatedRequest();
+                using HttpMessage message = CreateGetComplicatedRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -499,7 +499,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -534,7 +534,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetComplicatedRequest();
+                using HttpMessage message = CreateGetComplicatedRequest(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -546,7 +546,7 @@ namespace body_complex_LowLevel
 
         /// <summary> Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -582,7 +582,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutComplicatedRequest(content);
+                using HttpMessage message = CreatePutComplicatedRequest(content, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -594,7 +594,7 @@ namespace body_complex_LowLevel
 
         /// <summary> Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -630,7 +630,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutComplicatedRequest(content);
+                using HttpMessage message = CreatePutComplicatedRequest(content, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -642,7 +642,7 @@ namespace body_complex_LowLevel
 
         /// <summary> Put complex types that are polymorphic, omitting the discriminator. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -695,7 +695,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutMissingDiscriminatorRequest(content);
+                using HttpMessage message = CreatePutMissingDiscriminatorRequest(content, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -707,7 +707,7 @@ namespace body_complex_LowLevel
 
         /// <summary> Put complex types that are polymorphic, omitting the discriminator. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -760,7 +760,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutMissingDiscriminatorRequest(content);
+                using HttpMessage message = CreatePutMissingDiscriminatorRequest(content, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -772,7 +772,7 @@ namespace body_complex_LowLevel
 
         /// <summary> Put complex types that are polymorphic, attempting to omit required &apos;birthday&apos; field - the request should not be allowed from the client. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -799,7 +799,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutValidMissingRequiredRequest(content);
+                using HttpMessage message = CreatePutValidMissingRequiredRequest(content, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -811,7 +811,7 @@ namespace body_complex_LowLevel
 
         /// <summary> Put complex types that are polymorphic, attempting to omit required &apos;birthday&apos; field - the request should not be allowed from the client. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -838,7 +838,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutValidMissingRequiredRequest(content);
+                using HttpMessage message = CreatePutValidMissingRequiredRequest(content, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -848,9 +848,9 @@ namespace body_complex_LowLevel
             }
         }
 
-        internal HttpMessage CreateGetValidRequest()
+        internal HttpMessage CreateGetValidRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -862,9 +862,9 @@ namespace body_complex_LowLevel
             return message;
         }
 
-        internal HttpMessage CreatePutValidRequest(RequestContent content)
+        internal HttpMessage CreatePutValidRequest(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -878,9 +878,9 @@ namespace body_complex_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetDotSyntaxRequest()
+        internal HttpMessage CreateGetDotSyntaxRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -892,9 +892,9 @@ namespace body_complex_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetComposedWithDiscriminatorRequest()
+        internal HttpMessage CreateGetComposedWithDiscriminatorRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -906,9 +906,9 @@ namespace body_complex_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetComposedWithoutDiscriminatorRequest()
+        internal HttpMessage CreateGetComposedWithoutDiscriminatorRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -920,9 +920,9 @@ namespace body_complex_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetComplicatedRequest()
+        internal HttpMessage CreateGetComplicatedRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -934,9 +934,9 @@ namespace body_complex_LowLevel
             return message;
         }
 
-        internal HttpMessage CreatePutComplicatedRequest(RequestContent content)
+        internal HttpMessage CreatePutComplicatedRequest(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -950,9 +950,9 @@ namespace body_complex_LowLevel
             return message;
         }
 
-        internal HttpMessage CreatePutMissingDiscriminatorRequest(RequestContent content)
+        internal HttpMessage CreatePutMissingDiscriminatorRequest(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -966,9 +966,9 @@ namespace body_complex_LowLevel
             return message;
         }
 
-        internal HttpMessage CreatePutValidMissingRequiredRequest(RequestContent content)
+        internal HttpMessage CreatePutValidMissingRequiredRequest(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();

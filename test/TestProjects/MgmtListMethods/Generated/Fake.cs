@@ -14,13 +14,18 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
-using Azure.ResourceManager.Resources.Models;
 
 namespace MgmtListMethods
 {
     /// <summary> A Class representing a Fake along with the instance operations that can be performed on it. </summary>
     public partial class Fake : ArmResource
     {
+        /// <summary> Generate the resource identifier of a <see cref="Fake"/> instance. </summary>
+        public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string fakeName)
+        {
+            var resourceId = $"/subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes/{fakeName}";
+            return new ResourceIdentifier(resourceId);
+        }
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly FakesRestOperations _fakesRestClient;
         private readonly FakeData _data;
@@ -134,7 +139,7 @@ namespace MgmtListMethods
         /// <summary> Lists all available geo-locations. </summary>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
-        public async virtual Task<IEnumerable<Location>> GetAvailableLocationsAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<IEnumerable<AzureLocation>> GetAvailableLocationsAsync(CancellationToken cancellationToken = default)
         {
             return await ListAvailableLocationsAsync(ResourceType, cancellationToken).ConfigureAwait(false);
         }
@@ -142,7 +147,7 @@ namespace MgmtListMethods
         /// <summary> Lists all available geo-locations. </summary>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
-        public virtual IEnumerable<Location> GetAvailableLocations(CancellationToken cancellationToken = default)
+        public virtual IEnumerable<AzureLocation> GetAvailableLocations(CancellationToken cancellationToken = default)
         {
             return ListAvailableLocations(ResourceType, cancellationToken);
         }
@@ -323,7 +328,7 @@ namespace MgmtListMethods
 
         /// <summary> Gets a collection of FakeParentWithAncestorWithNonResChWithLocs in the Fake. </summary>
         /// <returns> An object representing collection of FakeParentWithAncestorWithNonResChWithLocs and their operations over a Fake. </returns>
-        public FakeParentWithAncestorWithNonResChWithLocCollection GetFakeParentWithAncestorWithNonResChWithLocs()
+        public virtual FakeParentWithAncestorWithNonResChWithLocCollection GetFakeParentWithAncestorWithNonResChWithLocs()
         {
             return new FakeParentWithAncestorWithNonResChWithLocCollection(this);
         }
@@ -333,7 +338,7 @@ namespace MgmtListMethods
 
         /// <summary> Gets a collection of FakeParentWithAncestorWithNonResChes in the Fake. </summary>
         /// <returns> An object representing collection of FakeParentWithAncestorWithNonResChes and their operations over a Fake. </returns>
-        public FakeParentWithAncestorWithNonResChCollection GetFakeParentWithAncestorWithNonResChes()
+        public virtual FakeParentWithAncestorWithNonResChCollection GetFakeParentWithAncestorWithNonResChes()
         {
             return new FakeParentWithAncestorWithNonResChCollection(this);
         }
@@ -343,7 +348,7 @@ namespace MgmtListMethods
 
         /// <summary> Gets a collection of FakeParentWithAncestorWithLocs in the Fake. </summary>
         /// <returns> An object representing collection of FakeParentWithAncestorWithLocs and their operations over a Fake. </returns>
-        public FakeParentWithAncestorWithLocCollection GetFakeParentWithAncestorWithLocs()
+        public virtual FakeParentWithAncestorWithLocCollection GetFakeParentWithAncestorWithLocs()
         {
             return new FakeParentWithAncestorWithLocCollection(this);
         }
@@ -353,7 +358,7 @@ namespace MgmtListMethods
 
         /// <summary> Gets a collection of FakeParentWithAncestors in the Fake. </summary>
         /// <returns> An object representing collection of FakeParentWithAncestors and their operations over a Fake. </returns>
-        public FakeParentWithAncestorCollection GetFakeParentWithAncestors()
+        public virtual FakeParentWithAncestorCollection GetFakeParentWithAncestors()
         {
             return new FakeParentWithAncestorCollection(this);
         }
@@ -363,7 +368,7 @@ namespace MgmtListMethods
 
         /// <summary> Gets a collection of FakeParentWithNonResChes in the Fake. </summary>
         /// <returns> An object representing collection of FakeParentWithNonResChes and their operations over a Fake. </returns>
-        public FakeParentWithNonResChCollection GetFakeParentWithNonResChes()
+        public virtual FakeParentWithNonResChCollection GetFakeParentWithNonResChes()
         {
             return new FakeParentWithNonResChCollection(this);
         }
@@ -373,7 +378,7 @@ namespace MgmtListMethods
 
         /// <summary> Gets a collection of FakeParents in the Fake. </summary>
         /// <returns> An object representing collection of FakeParents and their operations over a Fake. </returns>
-        public FakeParentCollection GetFakeParents()
+        public virtual FakeParentCollection GetFakeParents()
         {
             return new FakeParentCollection(this);
         }

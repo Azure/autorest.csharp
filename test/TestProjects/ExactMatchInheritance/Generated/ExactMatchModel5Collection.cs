@@ -12,6 +12,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
+using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
@@ -21,7 +22,7 @@ using ExactMatchInheritance.Models;
 namespace ExactMatchInheritance
 {
     /// <summary> A class representing collection of ExactMatchModel5 and their operations over its parent. </summary>
-    public partial class ExactMatchModel5Collection : ArmCollection, IEnumerable<ExactMatchModel5>
+    public partial class ExactMatchModel5Collection : ArmCollection, IEnumerable<ExactMatchModel5>, IAsyncEnumerable<ExactMatchModel5>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly ExactMatchModel5SRestOperations _exactMatchModel5sRestClient;
@@ -52,7 +53,7 @@ namespace ExactMatchInheritance
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel5SName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ExactMatchModel5PutOperation CreateOrUpdate(string exactMatchModel5SName, ExactMatchModel5Data parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual ExactMatchModel5SPutOperation CreateOrUpdate(string exactMatchModel5SName, ExactMatchModel5Data parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (exactMatchModel5SName == null)
             {
@@ -68,7 +69,7 @@ namespace ExactMatchInheritance
             try
             {
                 var response = _exactMatchModel5sRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, exactMatchModel5SName, parameters, cancellationToken);
-                var operation = new ExactMatchModel5PutOperation(Parent, response);
+                var operation = new ExactMatchModel5SPutOperation(Parent, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -88,7 +89,7 @@ namespace ExactMatchInheritance
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel5SName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<ExactMatchModel5PutOperation> CreateOrUpdateAsync(string exactMatchModel5SName, ExactMatchModel5Data parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<ExactMatchModel5SPutOperation> CreateOrUpdateAsync(string exactMatchModel5SName, ExactMatchModel5Data parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (exactMatchModel5SName == null)
             {
@@ -104,7 +105,7 @@ namespace ExactMatchInheritance
             try
             {
                 var response = await _exactMatchModel5sRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, exactMatchModel5SName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new ExactMatchModel5PutOperation(Parent, response);
+                var operation = new ExactMatchModel5SPutOperation(Parent, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -232,14 +233,14 @@ namespace ExactMatchInheritance
         /// <param name="exactMatchModel5SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel5SName"/> is null. </exception>
-        public virtual Response<bool> CheckIfExists(string exactMatchModel5SName, CancellationToken cancellationToken = default)
+        public virtual Response<bool> Exists(string exactMatchModel5SName, CancellationToken cancellationToken = default)
         {
             if (exactMatchModel5SName == null)
             {
                 throw new ArgumentNullException(nameof(exactMatchModel5SName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ExactMatchModel5Collection.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("ExactMatchModel5Collection.Exists");
             scope.Start();
             try
             {
@@ -257,14 +258,14 @@ namespace ExactMatchInheritance
         /// <param name="exactMatchModel5SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel5SName"/> is null. </exception>
-        public async virtual Task<Response<bool>> CheckIfExistsAsync(string exactMatchModel5SName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> ExistsAsync(string exactMatchModel5SName, CancellationToken cancellationToken = default)
         {
             if (exactMatchModel5SName == null)
             {
                 throw new ArgumentNullException(nameof(exactMatchModel5SName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ExactMatchModel5Collection.CheckIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("ExactMatchModel5Collection.ExistsAsync");
             scope.Start();
             try
             {
@@ -278,44 +279,54 @@ namespace ExactMatchInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel5s/
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel5s
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
         /// OperationId: ExactMatchModel5s_List
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IReadOnlyList<ExactMatchModel5>> GetAll(CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="ExactMatchModel5" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<ExactMatchModel5> GetAll(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ExactMatchModel5Collection.GetAll");
-            scope.Start();
-            try
+            Page<ExactMatchModel5> FirstPageFunc(int? pageSizeHint)
             {
-                var response = _exactMatchModel5sRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken);
-                return Response.FromValue(response.Value.Value.Select(value => new ExactMatchModel5(Parent, value)).ToArray() as IReadOnlyList<ExactMatchModel5>, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("ExactMatchModel5Collection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = _exactMatchModel5sRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new ExactMatchModel5(Parent, value)), null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel5s/
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel5s
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
         /// OperationId: ExactMatchModel5s_List
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<IReadOnlyList<ExactMatchModel5>>> GetAllAsync(CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="ExactMatchModel5" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<ExactMatchModel5> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ExactMatchModel5Collection.GetAll");
-            scope.Start();
-            try
+            async Task<Page<ExactMatchModel5>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await _exactMatchModel5sRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(response.Value.Value.Select(value => new ExactMatchModel5(Parent, value)).ToArray() as IReadOnlyList<ExactMatchModel5>, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("ExactMatchModel5Collection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = await _exactMatchModel5sRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new ExactMatchModel5(Parent, value)), null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
         /// <summary> Filters the list of <see cref="ExactMatchModel5" /> for this resource group represented as generic resources. </summary>
@@ -366,15 +377,20 @@ namespace ExactMatchInheritance
 
         IEnumerator<ExactMatchModel5> IEnumerable<ExactMatchModel5>.GetEnumerator()
         {
-            return GetAll().Value.GetEnumerator();
+            return GetAll().GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return GetAll().Value.GetEnumerator();
+            return GetAll().GetEnumerator();
+        }
+
+        IAsyncEnumerator<ExactMatchModel5> IAsyncEnumerable<ExactMatchModel5>.GetAsyncEnumerator(CancellationToken cancellationToken)
+        {
+            return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, ExactMatchModel5, ExactMatchModel5Data> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, ExactMatchModel5, ExactMatchModel5Data> Construct() { }
     }
 }

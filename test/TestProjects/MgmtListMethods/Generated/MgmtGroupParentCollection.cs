@@ -14,7 +14,6 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Management;
 using MgmtListMethods.Models;
@@ -23,7 +22,6 @@ namespace MgmtListMethods
 {
     /// <summary> A class representing collection of MgmtGroupParent and their operations over its parent. </summary>
     public partial class MgmtGroupParentCollection : ArmCollection, IEnumerable<MgmtGroupParent>, IAsyncEnumerable<MgmtGroupParent>
-
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly MgmtGroupParentsRestOperations _mgmtGroupParentsRestClient;
@@ -238,14 +236,14 @@ namespace MgmtListMethods
         /// <param name="mgmtGroupParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="mgmtGroupParentName"/> is null. </exception>
-        public virtual Response<bool> CheckIfExists(string mgmtGroupParentName, CancellationToken cancellationToken = default)
+        public virtual Response<bool> Exists(string mgmtGroupParentName, CancellationToken cancellationToken = default)
         {
             if (mgmtGroupParentName == null)
             {
                 throw new ArgumentNullException(nameof(mgmtGroupParentName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("MgmtGroupParentCollection.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("MgmtGroupParentCollection.Exists");
             scope.Start();
             try
             {
@@ -263,14 +261,14 @@ namespace MgmtListMethods
         /// <param name="mgmtGroupParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="mgmtGroupParentName"/> is null. </exception>
-        public async virtual Task<Response<bool>> CheckIfExistsAsync(string mgmtGroupParentName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> ExistsAsync(string mgmtGroupParentName, CancellationToken cancellationToken = default)
         {
             if (mgmtGroupParentName == null)
             {
                 throw new ArgumentNullException(nameof(mgmtGroupParentName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("MgmtGroupParentCollection.CheckIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("MgmtGroupParentCollection.ExistsAsync");
             scope.Start();
             try
             {
@@ -382,6 +380,6 @@ namespace MgmtListMethods
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, MgmtGroupParent, MgmtGroupParentData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, MgmtGroupParent, MgmtGroupParentData> Construct() { }
     }
 }

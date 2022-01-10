@@ -23,7 +23,6 @@ namespace Pagination
 {
     /// <summary> A class representing collection of PageSizeDoubleModel and their operations over its parent. </summary>
     public partial class PageSizeDoubleModelCollection : ArmCollection, IEnumerable<PageSizeDoubleModel>, IAsyncEnumerable<PageSizeDoubleModel>
-
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly PageSizeDoubleModelsRestOperations _pageSizeDoubleModelsRestClient;
@@ -222,14 +221,14 @@ namespace Pagination
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public virtual Response<bool> CheckIfExists(string name, CancellationToken cancellationToken = default)
+        public virtual Response<bool> Exists(string name, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
                 throw new ArgumentNullException(nameof(name));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("PageSizeDoubleModelCollection.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("PageSizeDoubleModelCollection.Exists");
             scope.Start();
             try
             {
@@ -247,14 +246,14 @@ namespace Pagination
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public async virtual Task<Response<bool>> CheckIfExistsAsync(string name, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> ExistsAsync(string name, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
                 throw new ArgumentNullException(nameof(name));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("PageSizeDoubleModelCollection.CheckIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("PageSizeDoubleModelCollection.ExistsAsync");
             scope.Start();
             try
             {
@@ -406,6 +405,6 @@ namespace Pagination
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, PageSizeDoubleModel, PageSizeDoubleModelData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, PageSizeDoubleModel, PageSizeDoubleModelData> Construct() { }
     }
 }

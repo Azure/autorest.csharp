@@ -46,12 +46,12 @@ namespace HeadAsBooleanTrue_LowLevel
 
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
-            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
         }
 
         /// <summary> Return 200 status code if successful. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response<bool>> Head200Async(RequestContext context = null)
 #pragma warning restore AZC0002
@@ -60,7 +60,7 @@ namespace HeadAsBooleanTrue_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateHead200Request();
+                using HttpMessage message = CreateHead200Request(context);
                 return await _pipeline.ProcessHeadAsBoolMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -71,7 +71,7 @@ namespace HeadAsBooleanTrue_LowLevel
         }
 
         /// <summary> Return 200 status code if successful. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
 #pragma warning disable AZC0002
         public virtual Response<bool> Head200(RequestContext context = null)
 #pragma warning restore AZC0002
@@ -80,7 +80,7 @@ namespace HeadAsBooleanTrue_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateHead200Request();
+                using HttpMessage message = CreateHead200Request(context);
                 return _pipeline.ProcessHeadAsBoolMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -91,7 +91,7 @@ namespace HeadAsBooleanTrue_LowLevel
         }
 
         /// <summary> Return 204 status code if successful. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response<bool>> Head204Async(RequestContext context = null)
 #pragma warning restore AZC0002
@@ -100,7 +100,7 @@ namespace HeadAsBooleanTrue_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateHead204Request();
+                using HttpMessage message = CreateHead204Request(context);
                 return await _pipeline.ProcessHeadAsBoolMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -111,7 +111,7 @@ namespace HeadAsBooleanTrue_LowLevel
         }
 
         /// <summary> Return 204 status code if successful. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
 #pragma warning disable AZC0002
         public virtual Response<bool> Head204(RequestContext context = null)
 #pragma warning restore AZC0002
@@ -120,7 +120,7 @@ namespace HeadAsBooleanTrue_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateHead204Request();
+                using HttpMessage message = CreateHead204Request(context);
                 return _pipeline.ProcessHeadAsBoolMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -131,7 +131,7 @@ namespace HeadAsBooleanTrue_LowLevel
         }
 
         /// <summary> Return 404 status code if successful. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response<bool>> Head404Async(RequestContext context = null)
 #pragma warning restore AZC0002
@@ -140,7 +140,7 @@ namespace HeadAsBooleanTrue_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateHead404Request();
+                using HttpMessage message = CreateHead404Request(context);
                 return await _pipeline.ProcessHeadAsBoolMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -151,7 +151,7 @@ namespace HeadAsBooleanTrue_LowLevel
         }
 
         /// <summary> Return 404 status code if successful. </summary>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
 #pragma warning disable AZC0002
         public virtual Response<bool> Head404(RequestContext context = null)
 #pragma warning restore AZC0002
@@ -160,7 +160,7 @@ namespace HeadAsBooleanTrue_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateHead404Request();
+                using HttpMessage message = CreateHead404Request(context);
                 return _pipeline.ProcessHeadAsBoolMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -170,9 +170,9 @@ namespace HeadAsBooleanTrue_LowLevel
             }
         }
 
-        internal HttpMessage CreateHead200Request()
+        internal HttpMessage CreateHead200Request(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
@@ -183,9 +183,9 @@ namespace HeadAsBooleanTrue_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateHead204Request()
+        internal HttpMessage CreateHead204Request(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
@@ -196,9 +196,9 @@ namespace HeadAsBooleanTrue_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateHead404Request()
+        internal HttpMessage CreateHead404Request(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();

@@ -20,16 +20,6 @@ namespace MgmtScopeResource
     /// <summary> A class to add extension methods to Tenant. </summary>
     public static partial class TenantExtensions
     {
-        #region PolicyAssignment
-        /// <summary> Gets an object representing a PolicyAssignmentCollection along with the instance operations that can be performed on it. </summary>
-        /// <param name="tenant"> The <see cref="Tenant" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="PolicyAssignmentCollection" /> object. </returns>
-        public static PolicyAssignmentCollection GetPolicyAssignments(this Tenant tenant)
-        {
-            return new PolicyAssignmentCollection(tenant);
-        }
-        #endregion
-
         #region DeploymentExtended
         /// <summary> Gets an object representing a DeploymentExtendedCollection along with the instance operations that can be performed on it. </summary>
         /// <param name="tenant"> The <see cref="Tenant" /> instance the method will execute against. </param>

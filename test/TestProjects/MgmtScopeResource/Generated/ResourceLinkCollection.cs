@@ -12,7 +12,6 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources;
 using MgmtScopeResource.Models;
@@ -235,14 +234,14 @@ namespace MgmtScopeResource
         /// <param name="linkId"> The fully qualified Id of the resource link. For example, /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup/Microsoft.Web/sites/mySite/Microsoft.Resources/links/myLink. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="linkId"/> is null. </exception>
-        public virtual Response<bool> CheckIfExists(ResourceIdentifier linkId, CancellationToken cancellationToken = default)
+        public virtual Response<bool> Exists(ResourceIdentifier linkId, CancellationToken cancellationToken = default)
         {
             if (linkId == null)
             {
                 throw new ArgumentNullException(nameof(linkId));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ResourceLinkCollection.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("ResourceLinkCollection.Exists");
             scope.Start();
             try
             {
@@ -260,14 +259,14 @@ namespace MgmtScopeResource
         /// <param name="linkId"> The fully qualified Id of the resource link. For example, /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup/Microsoft.Web/sites/mySite/Microsoft.Resources/links/myLink. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="linkId"/> is null. </exception>
-        public async virtual Task<Response<bool>> CheckIfExistsAsync(ResourceIdentifier linkId, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> ExistsAsync(ResourceIdentifier linkId, CancellationToken cancellationToken = default)
         {
             if (linkId == null)
             {
                 throw new ArgumentNullException(nameof(linkId));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ResourceLinkCollection.CheckIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("ResourceLinkCollection.ExistsAsync");
             scope.Start();
             try
             {
@@ -287,8 +286,9 @@ namespace MgmtScopeResource
         /// <summary> Gets a list of resource links at and below the specified source scope. </summary>
         /// <param name="scope"> The fully qualified ID of the scope for getting the resource links. For example, to list resource links at and under a resource group, set the scope to /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scope"/> is null. </exception>
         /// <returns> A collection of <see cref="ResourceLink" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<ResourceLink> GetAtSourceScope(string scope, CancellationToken cancellationToken = default)
+        public virtual Pageable<ResourceLink> GetAll(string scope, CancellationToken cancellationToken = default)
         {
             if (scope == null)
             {
@@ -297,7 +297,7 @@ namespace MgmtScopeResource
 
             Page<ResourceLink> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope0 = _clientDiagnostics.CreateScope("ResourceLinkCollection.GetAtSourceScope");
+                using var scope0 = _clientDiagnostics.CreateScope("ResourceLinkCollection.GetAll");
                 scope0.Start();
                 try
                 {
@@ -312,7 +312,7 @@ namespace MgmtScopeResource
             }
             Page<ResourceLink> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope0 = _clientDiagnostics.CreateScope("ResourceLinkCollection.GetAtSourceScope");
+                using var scope0 = _clientDiagnostics.CreateScope("ResourceLinkCollection.GetAll");
                 scope0.Start();
                 try
                 {
@@ -334,8 +334,9 @@ namespace MgmtScopeResource
         /// <summary> Gets a list of resource links at and below the specified source scope. </summary>
         /// <param name="scope"> The fully qualified ID of the scope for getting the resource links. For example, to list resource links at and under a resource group, set the scope to /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scope"/> is null. </exception>
         /// <returns> An async collection of <see cref="ResourceLink" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<ResourceLink> GetAtSourceScopeAsync(string scope, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<ResourceLink> GetAllAsync(string scope, CancellationToken cancellationToken = default)
         {
             if (scope == null)
             {
@@ -344,7 +345,7 @@ namespace MgmtScopeResource
 
             async Task<Page<ResourceLink>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope0 = _clientDiagnostics.CreateScope("ResourceLinkCollection.GetAtSourceScope");
+                using var scope0 = _clientDiagnostics.CreateScope("ResourceLinkCollection.GetAll");
                 scope0.Start();
                 try
                 {
@@ -359,7 +360,7 @@ namespace MgmtScopeResource
             }
             async Task<Page<ResourceLink>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope0 = _clientDiagnostics.CreateScope("ResourceLinkCollection.GetAtSourceScope");
+                using var scope0 = _clientDiagnostics.CreateScope("ResourceLinkCollection.GetAll");
                 scope0.Start();
                 try
                 {
@@ -376,6 +377,6 @@ namespace MgmtScopeResource
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, ResourceLink, ResourceLinkData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, ResourceLink, ResourceLinkData> Construct() { }
     }
 }

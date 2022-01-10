@@ -200,13 +200,13 @@ namespace AutoRest.TestServer.Tests
         public Task HeaderParameterDateValid() => TestStatus(async (host, pipeline) => await new HeaderClient(ClientDiagnostics, pipeline, host).ParamDateAsync( scenario: "valid", new DateTime(2010, 1, 1)));
 
         [Test]
-        public Task HeaderParameterDateMin() => TestStatus(async (host, pipeline) => await new HeaderClient(ClientDiagnostics, pipeline, host).ParamDateAsync( scenario: "min", new DateTime(0001, 1, 1)));
+        public Task HeaderParameterDateMin() => TestStatus(async (host, pipeline) => await new HeaderClient(ClientDiagnostics, pipeline, host).ParamDateAsync( scenario: "min", new DateTime(0001, 1, 1, 0, 0, 0, DateTimeKind.Utc)));
 
         [Test]
         public Task HeaderResponseDateValid() => TestStatus(async (host, pipeline) =>
         {
             var response = await new HeaderClient(ClientDiagnostics, pipeline, host).RestClient.ResponseDateAsync( scenario: "valid");
-            Assert.AreEqual(DateTimeOffset.Parse("2010-01-01"), response.Headers.Value);
+            Assert.AreEqual(DateTimeOffset.Parse("2010-01-01Z"), response.Headers.Value);
             return response.GetRawResponse();
         });
 
@@ -214,7 +214,7 @@ namespace AutoRest.TestServer.Tests
         public Task HeaderResponseDateMin() => TestStatus(async (host, pipeline) =>
         {
             var response = await new HeaderClient(ClientDiagnostics, pipeline, host).RestClient.ResponseDateAsync( scenario: "min");
-            Assert.AreEqual(DateTimeOffset.Parse("0001-01-01"), response.Headers.Value);
+            Assert.AreEqual(DateTimeOffset.Parse("0001-01-01Z"), response.Headers.Value);
             return response.GetRawResponse();
         });
 

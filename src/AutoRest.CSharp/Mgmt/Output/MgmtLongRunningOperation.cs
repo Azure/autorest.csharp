@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System.Linq;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
@@ -18,13 +19,13 @@ namespace AutoRest.CSharp.Mgmt.Output
     /// </summary>
     internal class MgmtLongRunningOperation : LongRunningOperation
     {
-        public MgmtLongRunningOperation(Input.Operation operation, OperationGroup operationGroup, LongRunningOperationInfo lroInfo, BuildContext<MgmtOutputLibrary> context)
-            : base(operation, context, lroInfo, lroInfo.ClientPrefix.ToSingular() + operation.CSharpName() + "Operation")
+        public MgmtLongRunningOperation(Input.Operation operation, LongRunningOperationInfo lroInfo, BuildContext<MgmtOutputLibrary> context)
+            : base(operation, context, lroInfo, lroInfo.ClientPrefix.LastWordToSingular() + operation.CSharpName() + "Operation")
         {
             DefaultNamespace = $"{context.DefaultNamespace}.Models";
-            if (operation.ShouldWrapResultType(ResultType, context))
+            if (operation.ShouldWrapResultType(ResultType, context, out var resource))
             {
-                WrapperType = context.Library.GetArmResource(operation.GetHttpPath()).Type;
+                WrapperType = resource.Type;
             }
         }
 

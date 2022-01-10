@@ -9,12 +9,10 @@ using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Utilities;
 using AutoRest.TestServer.Tests.Mgmt.OutputLibrary;
-using Azure;
-using Azure.ResourceManager;
+using Azure.Core;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Models;
 using Azure.ResourceManager.Resources;
-using Azure.ResourceManager.Resources.Models;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
@@ -23,14 +21,16 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
     public class TestProjectTests
     {
         private string _projectName;
+        private string? _subFolder;
 
         public TestProjectTests() : this("")
         {
         }
 
-        public TestProjectTests(string projectName)
+        public TestProjectTests(string projectName, string subFolder = null)
         {
             _projectName = projectName;
+            _subFolder = subFolder;
         }
 
         protected HashSet<string> ListExceptions = new HashSet<string>();
@@ -283,7 +283,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         {
             var collectionObj = Activator.CreateInstance(collectionType, true);
             var validResourceTypeProperty = collectionObj.GetType().GetProperty("ValidResourceType", BindingFlags.NonPublic | BindingFlags.Instance);
-            ResourceType resourceType = validResourceTypeProperty.GetValue(collectionObj) as ResourceType;
+            ResourceType resourceType = (ResourceType)validResourceTypeProperty.GetValue(collectionObj);
             return resourceType;
         }
 
@@ -305,10 +305,9 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
                 if (resourceType.Equals(Subscription.ResourceType))
                 {
-                    var methodInfo = subscriptionExtension.GetMethod($"Get{resourceName.ToPlural()}", BindingFlags.Static | BindingFlags.Public);
-                    Assert.NotNull(methodInfo);
-                    Assert.AreEqual(1, methodInfo.GetParameters().Length);
-                    var param = TypeAsserts.HasParameter(methodInfo, "subscription");
+                    var methodInfos = subscriptionExtension.GetMethods(BindingFlags.Static | BindingFlags.Public).Where(m => m.Name == $"Get{resourceName.ResourceNameToPlural()}" && m.ReturnType.Name == type.Name);
+                    Assert.AreEqual(methodInfos.Count(), 1);
+                    var param = TypeAsserts.HasParameter(methodInfos.First(), "subscription");
                     Assert.AreEqual(typeof(Subscription), param.ParameterType);
                 }
             }
@@ -342,17 +341,17 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 if (resourceType.Equals(Subscription.ResourceType) &&
                    listAllMethod.Any())
                 {
-                    var listMethodInfo = subscriptionExtension.GetMethod($"List{resourceName}s", BindingFlags.Static | BindingFlags.Public);
-                    Assert.NotNull(listMethodInfo);
-                    Assert.True(listMethodInfo.GetParameters().Length >= 2);
+                    var listMethodInfos = subscriptionExtension.GetMethods(BindingFlags.Static | BindingFlags.Public).Where(m => m.Name == $"Get{resourceName.ResourceNameToPlural()}" && m.GetParameters().Length >= 2);
+                    Assert.AreEqual(listMethodInfos.Count(), 1);
+                    var listMethodInfo = listMethodInfos.First();
                     var listParam1 = TypeAsserts.HasParameter(listMethodInfo, "subscription");
                     Assert.AreEqual(typeof(Subscription), listParam1.ParameterType);
                     var listParam2 = TypeAsserts.HasParameter(listMethodInfo, "cancellationToken");
                     Assert.AreEqual(typeof(CancellationToken), listParam2.ParameterType);
 
-                    var listAsyncMethodInfo = subscriptionExtension.GetMethod($"List{resourceName}sAsync", BindingFlags.Static | BindingFlags.Public);
-                    Assert.NotNull(listAsyncMethodInfo);
-                    Assert.True(listMethodInfo.GetParameters().Length >= 2);
+                    var listAsyncMethodInfos = subscriptionExtension.GetMethods(BindingFlags.Static | BindingFlags.Public).Where(m => m.Name == $"Get{resourceName.ResourceNameToPlural()}Async" && m.GetParameters().Length >= 2);
+                    Assert.AreEqual(listMethodInfos.Count(), 1);
+                    var listAsyncMethodInfo = listAsyncMethodInfos.First();
                     var listAsyncParam1 = TypeAsserts.HasParameter(listAsyncMethodInfo, "subscription");
                     Assert.AreEqual(typeof(Subscription), listAsyncParam1.ParameterType);
                     var listAsyncParam2 = TypeAsserts.HasParameter(listAsyncMethodInfo, "cancellationToken");
@@ -404,7 +403,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             foreach (var operation in FindAllResources())
             {
                 var operationTypeProperty = operation.GetField("ResourceType");
-                ResourceType operationType = operationTypeProperty.GetValue(operation) as ResourceType;
+                ResourceType operationType = (ResourceType)operationTypeProperty.GetValue(operation);
                 foreach (var collection in FindAllCollections())
                 {
                     ResourceType collectionType = GetCollectionValidResourceType(collection);
@@ -420,75 +419,6 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             }
         }
 
-        [Test]
-        public async Task ValidateRequiredParamsInCtor()
-        {
-            if (_projectName.Equals("") || _projectName.Equals("ReferenceTypes"))
-            {
-                return;
-            }
-
-            var output = await OutputLibraryTestBase.Generate(_projectName);
-            var library = output.Context.Library;
-            foreach (var mgmtObject in library.Models.OfType<MgmtObjectType>())
-            {
-                if (ReferenceTypePropertyChooser.GetExactMatch(mgmtObject, output.Context) == null)
-                {
-                    ValidateModelRequiredCtorParams(mgmtObject.ObjectSchema);
-                }
-            }
-            foreach (var resourceData in library.ResourceData)
-            {
-                ValidateModelRequiredCtorParams(resourceData.ObjectSchema);
-            }
-        }
-
-        private void ValidateModelRequiredCtorParams(ObjectSchema objectSchema)
-        {
-            var requiredParams = objectSchema.Properties.Where(p => p.Schema is not ConstantSchema && p.Required.HasValue && p.Required.Value);
-
-            Type generatedModel = GetType(objectSchema.Name + "Data") ?? GetType(objectSchema.Name);
-            if (generatedModel == null)
-                return; //for some reason we are losing the cache during generation to know which models were removed
-            Assert.NotNull(generatedModel, $"Generated type not found for {objectSchema.Name}");
-            ConstructorInfo leastParamCtor = GetLeastParamCtor(generatedModel);
-            ConstructorInfo baseLeastParamCtor = GetLeastParamCtor(generatedModel.BaseType);
-            var fullRequiredParams = requiredParams.Select(p => p.SerializedName).Concat(baseLeastParamCtor?.GetParameters().Select(p => p.Name)).Distinct();
-            Assert.NotNull(leastParamCtor, $"Ctor not found for {objectSchema.Name}");
-            Assert.AreEqual(fullRequiredParams.Count(), leastParamCtor.GetParameters().Length, $"{objectSchema.Name} had a mismatch in required ctor params");
-            foreach (var param in fullRequiredParams)
-            {
-                Assert.NotNull(leastParamCtor.GetParameters().FirstOrDefault(p => string.Equals(p.Name, param, StringComparison.InvariantCultureIgnoreCase)), $"{param} was not found in {objectSchema.Name}'s ctor");
-            }
-        }
-
-        private ConstructorInfo GetLeastParamCtor(Type generatedModel)
-        {
-            ConstructorInfo leastParamCtor = null;
-
-            if (generatedModel == null)
-                return leastParamCtor;
-
-            if (generatedModel.GetCustomAttributes(false).Any(a => a.GetType().Name == ReferenceClassFinder.ReferenceTypeAttributeName))
-            {
-                var ctors = generatedModel.GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
-                var attrCtors = ctors.Where(c => HasInitializationAttribute(c));
-                return attrCtors.FirstOrDefault();
-            }
-
-            foreach (var ctor in generatedModel.GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public))
-            {
-                if (ctor.GetParameters().Length < (leastParamCtor == null ? int.MaxValue : leastParamCtor.GetParameters().Length))
-                    leastParamCtor = ctor;
-            }
-            return leastParamCtor;
-        }
-
-        private bool HasInitializationAttribute(ConstructorInfo c)
-        {
-            return c.GetCustomAttributes(false).Any(c => c.GetType().Name == ReferenceClassFinder.InitializationCtorAttributeName);
-        }
-
         protected void ValidatePublicCtor(Type model, string[] paramNames, Type[] paramTypes)
         {
             var ctors = model.GetConstructors(BindingFlags.Public | BindingFlags.Instance);
@@ -499,6 +429,23 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             {
                 Assert.AreEqual(paramNames[i], parameters[i].Name);
                 Assert.AreEqual(paramTypes[i], parameters[i].ParameterType);
+            }
+        }
+
+        protected void ValidateMethodExist(string fullClassName, string methodName, params string[] argTypes)
+        {
+            var classToCheck = Assembly.GetExecutingAssembly().GetType(fullClassName);
+            var methods = classToCheck.GetMethods().Where(m => m.Name == methodName);
+            Assert.Greater(methods.Count(), 0, $"Can't find method {fullClassName}.{methodName}!");
+
+            for (int i = 0; i < argTypes.Length; i++)
+            {
+                methods = methods.Where(x =>
+                {
+                    var parameters = x.GetParameters();
+                    return parameters[i].ParameterType.Name == argTypes[i];
+                });
+                Assert.Greater(methods.Count(), 0, $"The {i + 1}nd parameter of {fullClassName}.{methodName}() is not of type {argTypes[i]}!");
             }
         }
     }

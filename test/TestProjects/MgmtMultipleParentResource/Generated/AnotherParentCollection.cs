@@ -23,7 +23,6 @@ namespace MgmtMultipleParentResource
 {
     /// <summary> A class representing collection of AnotherParent and their operations over its parent. </summary>
     public partial class AnotherParentCollection : ArmCollection, IEnumerable<AnotherParent>, IAsyncEnumerable<AnotherParent>
-
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly AnotherParentsRestOperations _anotherParentsRestClient;
@@ -243,14 +242,14 @@ namespace MgmtMultipleParentResource
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="anotherName"/> is null. </exception>
-        public virtual Response<bool> CheckIfExists(string anotherName, string expand = null, CancellationToken cancellationToken = default)
+        public virtual Response<bool> Exists(string anotherName, string expand = null, CancellationToken cancellationToken = default)
         {
             if (anotherName == null)
             {
                 throw new ArgumentNullException(nameof(anotherName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("AnotherParentCollection.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("AnotherParentCollection.Exists");
             scope.Start();
             try
             {
@@ -269,14 +268,14 @@ namespace MgmtMultipleParentResource
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="anotherName"/> is null. </exception>
-        public async virtual Task<Response<bool>> CheckIfExistsAsync(string anotherName, string expand = null, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> ExistsAsync(string anotherName, string expand = null, CancellationToken cancellationToken = default)
         {
             if (anotherName == null)
             {
                 throw new ArgumentNullException(nameof(anotherName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("AnotherParentCollection.CheckIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("AnotherParentCollection.ExistsAsync");
             scope.Start();
             try
             {
@@ -436,6 +435,6 @@ namespace MgmtMultipleParentResource
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, AnotherParent, AnotherParentData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, AnotherParent, AnotherParentData> Construct() { }
     }
 }

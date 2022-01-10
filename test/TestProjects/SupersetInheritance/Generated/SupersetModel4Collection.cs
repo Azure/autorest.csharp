@@ -12,6 +12,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
+using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
@@ -21,7 +22,7 @@ using SupersetInheritance.Models;
 namespace SupersetInheritance
 {
     /// <summary> A class representing collection of SupersetModel4 and their operations over its parent. </summary>
-    public partial class SupersetModel4Collection : ArmCollection, IEnumerable<SupersetModel4>
+    public partial class SupersetModel4Collection : ArmCollection, IEnumerable<SupersetModel4>, IAsyncEnumerable<SupersetModel4>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly SupersetModel4SRestOperations _supersetModel4sRestClient;
@@ -52,7 +53,7 @@ namespace SupersetInheritance
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel4SName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual SupersetModel4PutOperation CreateOrUpdate(string supersetModel4SName, SupersetModel4Data parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual SupersetModel4SPutOperation CreateOrUpdate(string supersetModel4SName, SupersetModel4Data parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (supersetModel4SName == null)
             {
@@ -68,7 +69,7 @@ namespace SupersetInheritance
             try
             {
                 var response = _supersetModel4sRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, supersetModel4SName, parameters, cancellationToken);
-                var operation = new SupersetModel4PutOperation(Parent, response);
+                var operation = new SupersetModel4SPutOperation(Parent, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -88,7 +89,7 @@ namespace SupersetInheritance
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel4SName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<SupersetModel4PutOperation> CreateOrUpdateAsync(string supersetModel4SName, SupersetModel4Data parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<SupersetModel4SPutOperation> CreateOrUpdateAsync(string supersetModel4SName, SupersetModel4Data parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (supersetModel4SName == null)
             {
@@ -104,7 +105,7 @@ namespace SupersetInheritance
             try
             {
                 var response = await _supersetModel4sRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, supersetModel4SName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new SupersetModel4PutOperation(Parent, response);
+                var operation = new SupersetModel4SPutOperation(Parent, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -232,14 +233,14 @@ namespace SupersetInheritance
         /// <param name="supersetModel4SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel4SName"/> is null. </exception>
-        public virtual Response<bool> CheckIfExists(string supersetModel4SName, CancellationToken cancellationToken = default)
+        public virtual Response<bool> Exists(string supersetModel4SName, CancellationToken cancellationToken = default)
         {
             if (supersetModel4SName == null)
             {
                 throw new ArgumentNullException(nameof(supersetModel4SName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SupersetModel4Collection.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("SupersetModel4Collection.Exists");
             scope.Start();
             try
             {
@@ -257,14 +258,14 @@ namespace SupersetInheritance
         /// <param name="supersetModel4SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel4SName"/> is null. </exception>
-        public async virtual Task<Response<bool>> CheckIfExistsAsync(string supersetModel4SName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> ExistsAsync(string supersetModel4SName, CancellationToken cancellationToken = default)
         {
             if (supersetModel4SName == null)
             {
                 throw new ArgumentNullException(nameof(supersetModel4SName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SupersetModel4Collection.CheckIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("SupersetModel4Collection.ExistsAsync");
             scope.Start();
             try
             {
@@ -282,40 +283,50 @@ namespace SupersetInheritance
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
         /// OperationId: SupersetModel4s_List
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IReadOnlyList<SupersetModel4>> GetAll(CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="SupersetModel4" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<SupersetModel4> GetAll(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SupersetModel4Collection.GetAll");
-            scope.Start();
-            try
+            Page<SupersetModel4> FirstPageFunc(int? pageSizeHint)
             {
-                var response = _supersetModel4sRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken);
-                return Response.FromValue(response.Value.Value.Select(value => new SupersetModel4(Parent, value)).ToArray() as IReadOnlyList<SupersetModel4>, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("SupersetModel4Collection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = _supersetModel4sRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new SupersetModel4(Parent, value)), null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel4s
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
         /// OperationId: SupersetModel4s_List
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<IReadOnlyList<SupersetModel4>>> GetAllAsync(CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="SupersetModel4" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<SupersetModel4> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SupersetModel4Collection.GetAll");
-            scope.Start();
-            try
+            async Task<Page<SupersetModel4>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await _supersetModel4sRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(response.Value.Value.Select(value => new SupersetModel4(Parent, value)).ToArray() as IReadOnlyList<SupersetModel4>, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("SupersetModel4Collection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = await _supersetModel4sRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new SupersetModel4(Parent, value)), null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
         /// <summary> Filters the list of <see cref="SupersetModel4" /> for this resource group represented as generic resources. </summary>
@@ -366,15 +377,20 @@ namespace SupersetInheritance
 
         IEnumerator<SupersetModel4> IEnumerable<SupersetModel4>.GetEnumerator()
         {
-            return GetAll().Value.GetEnumerator();
+            return GetAll().GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return GetAll().Value.GetEnumerator();
+            return GetAll().GetEnumerator();
+        }
+
+        IAsyncEnumerator<SupersetModel4> IAsyncEnumerable<SupersetModel4>.GetAsyncEnumerator(CancellationToken cancellationToken)
+        {
+            return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, SupersetModel4, SupersetModel4Data> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, SupersetModel4, SupersetModel4Data> Construct() { }
     }
 }

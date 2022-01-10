@@ -23,7 +23,6 @@ namespace SubscriptionExtensions
 {
     /// <summary> A class representing collection of Oven and their operations over its parent. </summary>
     public partial class OvenCollection : ArmCollection, IEnumerable<Oven>, IAsyncEnumerable<Oven>
-
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly OvensRestOperations _ovensRestClient;
@@ -236,14 +235,14 @@ namespace SubscriptionExtensions
         /// <param name="ovenName"> The name of the virtual machine. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="ovenName"/> is null. </exception>
-        public virtual Response<bool> CheckIfExists(string ovenName, CancellationToken cancellationToken = default)
+        public virtual Response<bool> Exists(string ovenName, CancellationToken cancellationToken = default)
         {
             if (ovenName == null)
             {
                 throw new ArgumentNullException(nameof(ovenName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("OvenCollection.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("OvenCollection.Exists");
             scope.Start();
             try
             {
@@ -261,14 +260,14 @@ namespace SubscriptionExtensions
         /// <param name="ovenName"> The name of the virtual machine. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="ovenName"/> is null. </exception>
-        public async virtual Task<Response<bool>> CheckIfExistsAsync(string ovenName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> ExistsAsync(string ovenName, CancellationToken cancellationToken = default)
         {
             if (ovenName == null)
             {
                 throw new ArgumentNullException(nameof(ovenName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("OvenCollection.CheckIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("OvenCollection.ExistsAsync");
             scope.Start();
             try
             {
@@ -428,6 +427,6 @@ namespace SubscriptionExtensions
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, Oven, OvenData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, Oven, OvenData> Construct() { }
     }
 }

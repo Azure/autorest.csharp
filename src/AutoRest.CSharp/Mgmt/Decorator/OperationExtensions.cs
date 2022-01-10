@@ -86,15 +86,15 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return valueType.EqualsByName(resourceData.Type);
         }
 
-        private static ISet<ResourceType> GetScopeResourceTypes(RequestPath requestPath, MgmtConfiguration config)
+        private static ISet<ResourceTypeSegment> GetScopeResourceTypes(RequestPath requestPath, MgmtConfiguration config)
         {
             var scope = requestPath.GetScopePath();
             if (scope.IsParameterizedScope())
             {
-                return new HashSet<ResourceType>(requestPath.GetParameterizedScopeResourceTypes(config)!);
+                return new HashSet<ResourceTypeSegment>(requestPath.GetParameterizedScopeResourceTypes(config)!);
             }
 
-            return new HashSet<ResourceType> { scope.GetResourceType(config) };
+            return new HashSet<ResourceTypeSegment> { scope.GetResourceType(config) };
         }
 
         private static bool IsScopeCompatible(RequestPath requestPath, RequestPath resourcePath, MgmtConfiguration config)
@@ -102,7 +102,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             // get scope types
             var requestScopeTypes = GetScopeResourceTypes(requestPath, config);
             var resourceScopeTypes = GetScopeResourceTypes(resourcePath, config);
-            if (resourceScopeTypes.Contains(ResourceType.Any))
+            if (resourceScopeTypes.Contains(ResourceTypeSegment.Any))
                 return true;
             return requestScopeTypes.IsSubsetOf(resourceScopeTypes);
         }
@@ -152,7 +152,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         public static string GetHttpPath(this Operation operation)
         {
-            return operation.GetHttpRequest()?.Path ??
+            return operation.GetHttpRequest()?.Path.TrimEnd('/') ??
                 throw new InvalidOperationException($"Cannot get HTTP path from operation {operation.CSharpName()}");
         }
 

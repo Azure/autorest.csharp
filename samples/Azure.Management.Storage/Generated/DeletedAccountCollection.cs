@@ -6,9 +6,13 @@
 #nullable disable
 
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
+using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
@@ -17,7 +21,7 @@ using Azure.ResourceManager.Resources;
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing collection of DeletedAccount and their operations over its parent. </summary>
-    public partial class DeletedAccountCollection : ArmCollection
+    public partial class DeletedAccountCollection : ArmCollection, IEnumerable<DeletedAccount>, IAsyncEnumerable<DeletedAccount>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly DeletedAccountsRestOperations _deletedAccountsRestClient;
@@ -179,7 +183,7 @@ namespace Azure.Management.Storage
         /// <param name="deletedAccountName"> Name of the deleted storage account. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="deletedAccountName"/> is null. </exception>
-        public virtual Response<bool> CheckIfExists(string location, string deletedAccountName, CancellationToken cancellationToken = default)
+        public virtual Response<bool> Exists(string location, string deletedAccountName, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -190,7 +194,7 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(deletedAccountName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DeletedAccountCollection.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("DeletedAccountCollection.Exists");
             scope.Start();
             try
             {
@@ -209,7 +213,7 @@ namespace Azure.Management.Storage
         /// <param name="deletedAccountName"> Name of the deleted storage account. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="deletedAccountName"/> is null. </exception>
-        public async virtual Task<Response<bool>> CheckIfExistsAsync(string location, string deletedAccountName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> ExistsAsync(string location, string deletedAccountName, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -220,7 +224,7 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(deletedAccountName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DeletedAccountCollection.CheckIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("DeletedAccountCollection.ExistsAsync");
             scope.Start();
             try
             {
@@ -232,6 +236,88 @@ namespace Azure.Management.Storage
                 scope.Failed(e);
                 throw;
             }
+        }
+
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/deletedAccounts
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: DeletedAccounts_List
+        /// <summary> Lists deleted accounts under the subscription. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <returns> A collection of <see cref="DeletedAccount" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<DeletedAccount> GetAll(CancellationToken cancellationToken = default)
+        {
+            Page<DeletedAccount> FirstPageFunc(int? pageSizeHint)
+            {
+                using var scope = _clientDiagnostics.CreateScope("DeletedAccountCollection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = _deletedAccountsRestClient.List(Id.SubscriptionId, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new DeletedAccount(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            Page<DeletedAccount> NextPageFunc(string nextLink, int? pageSizeHint)
+            {
+                using var scope = _clientDiagnostics.CreateScope("DeletedAccountCollection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = _deletedAccountsRestClient.ListNextPage(nextLink, Id.SubscriptionId, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new DeletedAccount(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+        }
+
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/deletedAccounts
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: DeletedAccounts_List
+        /// <summary> Lists deleted accounts under the subscription. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <returns> An async collection of <see cref="DeletedAccount" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<DeletedAccount> GetAllAsync(CancellationToken cancellationToken = default)
+        {
+            async Task<Page<DeletedAccount>> FirstPageFunc(int? pageSizeHint)
+            {
+                using var scope = _clientDiagnostics.CreateScope("DeletedAccountCollection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = await _deletedAccountsRestClient.ListAsync(Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new DeletedAccount(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            async Task<Page<DeletedAccount>> NextPageFunc(string nextLink, int? pageSizeHint)
+            {
+                using var scope = _clientDiagnostics.CreateScope("DeletedAccountCollection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = await _deletedAccountsRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new DeletedAccount(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
 
         /// <summary> Filters the list of <see cref="DeletedAccount" /> for this subscription represented as generic resources. </summary>
@@ -280,7 +366,22 @@ namespace Azure.Management.Storage
             }
         }
 
+        IEnumerator<DeletedAccount> IEnumerable<DeletedAccount>.GetEnumerator()
+        {
+            return GetAll().GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetAll().GetEnumerator();
+        }
+
+        IAsyncEnumerator<DeletedAccount> IAsyncEnumerable<DeletedAccount>.GetAsyncEnumerator(CancellationToken cancellationToken)
+        {
+            return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
+        }
+
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, DeletedAccount, DeletedAccountData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, DeletedAccount, DeletedAccountData> Construct() { }
     }
 }

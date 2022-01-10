@@ -36,5 +36,6 @@ namespace AutoRest.CSharp.Output.Models.Requests
         public static implicit operator ReferenceOrConstant(Constant constant) => new ReferenceOrConstant(constant);
         public static implicit operator ReferenceOrConstant(Reference reference) => new ReferenceOrConstant(reference);
         public static implicit operator ReferenceOrConstant(Parameter parameter) => new ReferenceOrConstant(new Reference(parameter.Name, parameter.Type));
+        public static implicit operator ReferenceOrConstant(FieldDeclaration field) => new ReferenceOrConstant(new Reference(field.Name, field.Type));
     }
 }

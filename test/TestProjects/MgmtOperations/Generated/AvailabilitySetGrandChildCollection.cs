@@ -12,15 +12,15 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
+using Azure.Core;
 using Azure.Core.Pipeline;
-using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using MgmtOperations.Models;
 
 namespace MgmtOperations
 {
     /// <summary> A class representing collection of AvailabilitySetGrandChild and their operations over its parent. </summary>
-    public partial class AvailabilitySetGrandChildCollection : ArmCollection, IEnumerable<AvailabilitySetGrandChild>
+    public partial class AvailabilitySetGrandChildCollection : ArmCollection, IEnumerable<AvailabilitySetGrandChild>, IAsyncEnumerable<AvailabilitySetGrandChild>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly AvailabilitySetGrandChildRestOperations _availabilitySetGrandChildRestClient;
@@ -235,14 +235,14 @@ namespace MgmtOperations
         /// <param name="availabilitySetGrandChildName"> The name of the availability set grand child. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetGrandChildName"/> is null. </exception>
-        public virtual Response<bool> CheckIfExists(string availabilitySetGrandChildName, CancellationToken cancellationToken = default)
+        public virtual Response<bool> Exists(string availabilitySetGrandChildName, CancellationToken cancellationToken = default)
         {
             if (availabilitySetGrandChildName == null)
             {
                 throw new ArgumentNullException(nameof(availabilitySetGrandChildName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChildCollection.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChildCollection.Exists");
             scope.Start();
             try
             {
@@ -260,14 +260,14 @@ namespace MgmtOperations
         /// <param name="availabilitySetGrandChildName"> The name of the availability set grand child. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetGrandChildName"/> is null. </exception>
-        public async virtual Task<Response<bool>> CheckIfExistsAsync(string availabilitySetGrandChildName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> ExistsAsync(string availabilitySetGrandChildName, CancellationToken cancellationToken = default)
         {
             if (availabilitySetGrandChildName == null)
             {
                 throw new ArgumentNullException(nameof(availabilitySetGrandChildName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChildCollection.CheckIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChildCollection.ExistsAsync");
             scope.Start();
             try
             {
@@ -286,20 +286,25 @@ namespace MgmtOperations
         /// OperationId: availabilitySetGrandChild_List
         /// <summary> Retrieves information about an availability set. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IReadOnlyList<AvailabilitySetGrandChild>> GetAll(CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="AvailabilitySetGrandChild" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<AvailabilitySetGrandChild> GetAll(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChildCollection.GetAll");
-            scope.Start();
-            try
+            Page<AvailabilitySetGrandChild> FirstPageFunc(int? pageSizeHint)
             {
-                var response = _availabilitySetGrandChildRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
-                return Response.FromValue(response.Value.Value.Select(value => new AvailabilitySetGrandChild(Parent, value)).ToArray() as IReadOnlyList<AvailabilitySetGrandChild>, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChildCollection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = _availabilitySetGrandChildRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new AvailabilitySetGrandChild(Parent, value)), null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}/availabilitySetChildren/{availabilitySetChildName}/availabilitySetGrandChildren
@@ -307,33 +312,43 @@ namespace MgmtOperations
         /// OperationId: availabilitySetGrandChild_List
         /// <summary> Retrieves information about an availability set. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<IReadOnlyList<AvailabilitySetGrandChild>>> GetAllAsync(CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="AvailabilitySetGrandChild" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<AvailabilitySetGrandChild> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChildCollection.GetAll");
-            scope.Start();
-            try
+            async Task<Page<AvailabilitySetGrandChild>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await _availabilitySetGrandChildRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(response.Value.Value.Select(value => new AvailabilitySetGrandChild(Parent, value)).ToArray() as IReadOnlyList<AvailabilitySetGrandChild>, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChildCollection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = await _availabilitySetGrandChildRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new AvailabilitySetGrandChild(Parent, value)), null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
         IEnumerator<AvailabilitySetGrandChild> IEnumerable<AvailabilitySetGrandChild>.GetEnumerator()
         {
-            return GetAll().Value.GetEnumerator();
+            return GetAll().GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return GetAll().Value.GetEnumerator();
+            return GetAll().GetEnumerator();
+        }
+
+        IAsyncEnumerator<AvailabilitySetGrandChild> IAsyncEnumerable<AvailabilitySetGrandChild>.GetAsyncEnumerator(CancellationToken cancellationToken)
+        {
+            return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, AvailabilitySetGrandChild, AvailabilitySetGrandChildData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, AvailabilitySetGrandChild, AvailabilitySetGrandChildData> Construct() { }
     }
 }

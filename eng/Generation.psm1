@@ -25,6 +25,10 @@ function Invoke($command)
 function Invoke-AutoRest($baseOutput, $projectName, $autoRestArguments, $sharedSource, $fast)
 {
     $outputPath = Join-Path $baseOutput "Generated"
+    if ($projectName -eq "TypeSchemaMapping")
+    {
+        $outputPath = Join-Path $baseOutput "SomeFolder" "Generated"
+    }
     $namespace = $projectName.Replace('-', '_')
     $command = "$script:autoRestBinary $autoRestArguments  --skip-upgrade-check  --namespace=$namespace --output-folder=$outputPath"
 

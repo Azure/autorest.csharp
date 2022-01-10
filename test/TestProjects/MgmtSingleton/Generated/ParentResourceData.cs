@@ -6,9 +6,8 @@
 #nullable disable
 
 using System.Collections.Generic;
-using Azure.ResourceManager;
+using Azure.Core;
 using Azure.ResourceManager.Models;
-using Azure.ResourceManager.Resources.Models;
 
 namespace MgmtSingleton
 {
@@ -17,7 +16,7 @@ namespace MgmtSingleton
     {
         /// <summary> Initializes a new instance of ParentResourceData. </summary>
         /// <param name="location"> The location. </param>
-        public ParentResourceData(Location location) : base(location)
+        public ParentResourceData(AzureLocation location) : base(location)
         {
         }
 
@@ -28,7 +27,7 @@ namespace MgmtSingleton
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
         /// <param name="new"></param>
-        internal ParentResourceData(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, Location location, string @new) : base(id, name, type, tags, location)
+        internal ParentResourceData(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, AzureLocation location, string @new) : base(id, name, type, tags, location)
         {
             New = @new;
         }

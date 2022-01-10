@@ -46,13 +46,13 @@ namespace CollapseRequestCondition_LowLevel
 
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
-            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
         }
 
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="ifMatch"> Specify an ETag value to operate only on blobs with a matching value. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> CollapsePutAsync(RequestContent content, ETag? ifMatch = null, RequestContext context = null)
 #pragma warning restore AZC0002
@@ -61,7 +61,7 @@ namespace CollapseRequestCondition_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateCollapsePutRequest(content, ifMatch);
+                using HttpMessage message = CreateCollapsePutRequest(content, ifMatch, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -73,7 +73,7 @@ namespace CollapseRequestCondition_LowLevel
 
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="ifMatch"> Specify an ETag value to operate only on blobs with a matching value. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
 #pragma warning disable AZC0002
         public virtual Response CollapsePut(RequestContent content, ETag? ifMatch = null, RequestContext context = null)
 #pragma warning restore AZC0002
@@ -82,7 +82,7 @@ namespace CollapseRequestCondition_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateCollapsePutRequest(content, ifMatch);
+                using HttpMessage message = CreateCollapsePutRequest(content, ifMatch, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -92,19 +92,17 @@ namespace CollapseRequestCondition_LowLevel
             }
         }
 
-        /// <param name="ifMatch"> Specify an ETag value to operate only on blobs with a matching value. </param>
-        /// <param name="ifModifiedSince"> Specify this header value to operate only on a blob if it has been modified since the specified date/time. </param>
-        /// <param name="ifUnmodifiedSince"> Specify this header value to operate only on a blob if it has not been modified since the specified date/time. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> CollapseGetAsync(ETag? ifMatch = null, DateTimeOffset? ifModifiedSince = null, DateTimeOffset? ifUnmodifiedSince = null, RequestContext context = null)
+        public virtual async Task<Response> CollapseGetAsync(RequestConditions requestConditions = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("NonCollapseClient.CollapseGet");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateCollapseGetRequest(ifMatch, ifModifiedSince, ifUnmodifiedSince);
+                using HttpMessage message = CreateCollapseGetRequest(requestConditions, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -114,19 +112,17 @@ namespace CollapseRequestCondition_LowLevel
             }
         }
 
-        /// <param name="ifMatch"> Specify an ETag value to operate only on blobs with a matching value. </param>
-        /// <param name="ifModifiedSince"> Specify this header value to operate only on a blob if it has been modified since the specified date/time. </param>
-        /// <param name="ifUnmodifiedSince"> Specify this header value to operate only on a blob if it has not been modified since the specified date/time. </param>
-        /// <param name="context"> The request context. </param>
+        /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
 #pragma warning disable AZC0002
-        public virtual Response CollapseGet(ETag? ifMatch = null, DateTimeOffset? ifModifiedSince = null, DateTimeOffset? ifUnmodifiedSince = null, RequestContext context = null)
+        public virtual Response CollapseGet(RequestConditions requestConditions = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("NonCollapseClient.CollapseGet");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateCollapseGetRequest(ifMatch, ifModifiedSince, ifUnmodifiedSince);
+                using HttpMessage message = CreateCollapseGetRequest(requestConditions, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -136,9 +132,9 @@ namespace CollapseRequestCondition_LowLevel
             }
         }
 
-        internal HttpMessage CreateCollapsePutRequest(RequestContent content, ETag? ifMatch)
+        internal HttpMessage CreateCollapsePutRequest(RequestContent content, ETag? ifMatch, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -155,26 +151,18 @@ namespace CollapseRequestCondition_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateCollapseGetRequest(ETag? ifMatch, DateTimeOffset? ifModifiedSince, DateTimeOffset? ifUnmodifiedSince)
+        internal HttpMessage CreateCollapseGetRequest(RequestConditions requestConditions, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/NonCollapse/", false);
             request.Uri = uri;
-            if (ifMatch != null)
+            if (requestConditions != null)
             {
-                request.Headers.Add("If-Match", ifMatch.Value);
-            }
-            if (ifModifiedSince != null)
-            {
-                request.Headers.Add("If-Modified-Since", ifModifiedSince.Value, "R");
-            }
-            if (ifUnmodifiedSince != null)
-            {
-                request.Headers.Add("If-Unmodified-Since", ifUnmodifiedSince.Value, "R");
+                request.Headers.Add(requestConditions, "R");
             }
             message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
