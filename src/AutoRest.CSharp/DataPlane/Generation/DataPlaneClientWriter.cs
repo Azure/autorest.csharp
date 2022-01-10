@@ -456,14 +456,15 @@ namespace AutoRest.CSharp.Generation.Writers
                 obj switch
                 {
                     AzureKeySecurityScheme azure => HashCode.Combine(azure.Type, azure.HeaderName),
-                    AADTokenSecurityScheme aad => HashCode.Combine(aad.Type, GetHashCode(aad.Scopes)),
+                    AADTokenSecurityScheme aad => GetAADTokenSecurityHashCode(aad),
                     _ => HashCode.Combine(obj.Type)
                 };
 
-            private static int GetHashCode(IEnumerable<string> values)
+            private static int GetAADTokenSecurityHashCode(AADTokenSecurityScheme aad)
             {
                 var hashCode = new HashCode();
-                foreach (var value in values)
+                hashCode.Add(aad.Type);
+                foreach (var value in aad.Scopes)
                 {
                     hashCode.Add(value);
                 }

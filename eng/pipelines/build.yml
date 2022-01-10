@@ -26,7 +26,7 @@ resources:
     - repository: azure-sdk-build-tools
       type: git
       name: internal/azure-sdk-build-tools
-      ref: refs/tags/azure-sdk-build-tools_20211019.1
+      ref: refs/tags/azure-sdk-build-tools_20211215.1
 
 stages:
   - stage: 'Build_and_Test'
@@ -39,6 +39,12 @@ stages:
         steps:
           - checkout: self
           - checkout: azure-sdk-tools
+          - task: UseDotNet@2
+            displayName: 'Use .NET Core SDK'
+            retryCountOnTaskFailure: 3
+            inputs:
+              useGlobalJson: true
+              performMultiLevelLookup: true
           - task: NodeTool@0
             displayName: "Install Node 16.x"
             inputs:

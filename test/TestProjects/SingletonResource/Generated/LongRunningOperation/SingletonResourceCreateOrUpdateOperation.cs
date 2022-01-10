@@ -11,10 +11,11 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.ResourceManager.Core;
-using MgmtSingleton;
+using SingletonResource;
 
-namespace MgmtSingleton.Models
+namespace SingletonResource.Models
 {
+    /// <summary> Singleton non-resource test example with a single-value enum name parameter. </summary>
     public partial class SingletonResourceCreateOrUpdateOperation : Operation<SingletonResource>
     {
         private readonly OperationOrResponseInternals<SingletonResource> _operation;

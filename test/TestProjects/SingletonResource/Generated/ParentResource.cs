@@ -14,9 +14,8 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
-using MgmtSingleton.Models;
 
-namespace MgmtSingleton
+namespace SingletonResource
 {
     /// <summary> A Class representing a ParentResource along with the instance operations that can be performed on it. </summary>
     public partial class ParentResource : ArmResource
@@ -29,7 +28,6 @@ namespace MgmtSingleton
         }
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly ParentResourcesRestOperations _parentResourcesRestClient;
-        private readonly SingletonResources3RestOperations _singletonResources3RestClient;
         private readonly ParentResourceData _data;
 
         /// <summary> Initializes a new instance of the <see cref="ParentResource"/> class for mocking. </summary>
@@ -46,7 +44,6 @@ namespace MgmtSingleton
             _data = resource;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _parentResourcesRestClient = new ParentResourcesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
-            _singletonResources3RestClient = new SingletonResources3RestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="ParentResource"/> class. </summary>
@@ -56,7 +53,6 @@ namespace MgmtSingleton
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _parentResourcesRestClient = new ParentResourcesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
-            _singletonResources3RestClient = new SingletonResources3RestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="ParentResource"/> class. </summary>
@@ -69,7 +65,6 @@ namespace MgmtSingleton
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _parentResourcesRestClient = new ParentResourcesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
-            _singletonResources3RestClient = new SingletonResources3RestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
@@ -327,89 +322,13 @@ namespace MgmtSingleton
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}/singletonResources3/{resourceName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}
-        /// OperationId: SingletonResources3_CreateOrUpdate
-        /// <summary> Singleton non-resource test example with a single-value enum name parameter. </summary>
-        /// <param name="parameters"> The SingletonResource3 to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<Response<SingletonResource3>> CreateOrUpdateSingletonResources3Async(SingletonResource3 parameters, CancellationToken cancellationToken = default)
-        {
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("ParentResource.CreateOrUpdateSingletonResources3");
-            scope.Start();
-            try
-            {
-                var response = await _singletonResources3RestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
-                return response;
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}/singletonResources3/{resourceName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}
-        /// OperationId: SingletonResources3_CreateOrUpdate
-        /// <summary> Singleton non-resource test example with a single-value enum name parameter. </summary>
-        /// <param name="parameters"> The SingletonResource3 to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual Response<SingletonResource3> CreateOrUpdateSingletonResources3(SingletonResource3 parameters, CancellationToken cancellationToken = default)
-        {
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("ParentResource.CreateOrUpdateSingletonResources3");
-            scope.Start();
-            try
-            {
-                var response = _singletonResources3RestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
-                return response;
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
         #region SingletonResource
 
         /// <summary> Gets an object representing a SingletonResource along with the instance operations that can be performed on it in the ParentResource. </summary>
         /// <returns> Returns a <see cref="SingletonResource" /> object. </returns>
         public virtual SingletonResource GetSingletonResource()
         {
-            return new SingletonResource(this, new ResourceIdentifier(Id.ToString() + "/singletonResources/default"));
-        }
-        #endregion
-
-        #region SingletonResource2
-
-        /// <summary> Gets an object representing a SingletonResource2 along with the instance operations that can be performed on it in the ParentResource. </summary>
-        /// <returns> Returns a <see cref="SingletonResource2" /> object. </returns>
-        public virtual SingletonResource2 GetSingletonResource2()
-        {
-            return new SingletonResource2(this, new ResourceIdentifier(Id.ToString() + "/singletonResources2/default"));
-        }
-        #endregion
-
-        #region SingletonConfig
-
-        /// <summary> Gets an object representing a SingletonConfig along with the instance operations that can be performed on it in the ParentResource. </summary>
-        /// <returns> Returns a <see cref="SingletonConfig" /> object. </returns>
-        public virtual SingletonConfig GetSingletonConfig()
-        {
-            return new SingletonConfig(this, new ResourceIdentifier(Id.ToString() + "/singletonConfigs/web"));
+            return new SingletonResource(this, new ResourceIdentifier(Id.ToString() + "/singletonResources/current"));
         }
         #endregion
     }
