@@ -7,26 +7,27 @@ using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 {
-    public class MgmtSingletonTests : TestProjectTests
+    public class SingletonResourceTests : TestProjectTests
     {
-        public MgmtSingletonTests() : base("MgmtSingleton") { }
+        public SingletonResourceTests() : base("SingletonResource") { }
 
+        [TestCase("Car", true)]
+        [TestCase("Ignition", true)]
         [TestCase("ParentResource", true)]
         [TestCase("SingletonResource", true)]
-        [TestCase("SingletonResource2", true)]
-        [TestCase("SingletonResource3", false)]
+        [TestCase("SingletonResource2", false)]
         public void ValidateResources(string resource, bool isExists)
         {
             var resourceTypeExists = FindAllResources().Any(o => o.Name == resource);
             Assert.AreEqual(isExists, resourceTypeExists);
         }
 
+        [TestCase("Ignition", "Get", true)]
+        [TestCase("Ignition", "GetAsync", true)]
         [TestCase("SingletonResource", "Get", true)]
         [TestCase("SingletonResource", "GetAsync", true)]
-        [TestCase("SingletonResource2", "Get", true)]
-        [TestCase("SingletonResource2", "GetAsync", true)]
-        [TestCase("TenantParentSingleton", "Get", true)]
-        [TestCase("TenantParentSingleton", "GetAsync", true)]
+        [TestCase("SingletonResource", "Delete", false)]
+        [TestCase("SingletonResource", "DeleteAsync", false)]
         public void ValidateResourceMethods(string resourceName, string methodName, bool isExists)
         {
             var resource = FindAllResources().FirstOrDefault(r => r.Name == resourceName);
@@ -46,12 +47,12 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
         [TestCase("ParentResource", "GetSingletonResource", true)]
         [TestCase("ParentResource", "GetSingletonResources", false)]
-        [TestCase("ParentResource", "GetSingletonResource2", true)]
-        [TestCase("ParentResource", "GetSingletonResource2s", false)]
-        [TestCase("ParentResource", "CreateOrUpdateSingletonResources3", true)]
-        [TestCase("ParentResource", "GetSingletonResource3", false)]
-        [TestCase("SubscriptionExtensions", "GetSubscriptionParentSingleton", true)]
-        [TestCase("SubscriptionExtensions", "GetSubscriptionParentSingletons", false)]
+        [TestCase("Car", "GetIgnition", true)]
+        [TestCase("Car", "GetIgnitions", false)]
+        [TestCase("ResourceGroupExtensions", "GetCars", true)]
+        [TestCase("ResourceGroupExtensions", "GetCar", false)]
+        [TestCase("ResourceGroupExtensions", "GetParentResources", true)]
+        [TestCase("ResourceGroupExtensions", "GetParentResource", false)]
         public void ValidateEntranceOfGettingSingleton(string parent, string methodName, bool isExist)
         {
             var possibleTypesToFind = FindAllCollections().Concat(FindAllResources())
