@@ -135,13 +135,13 @@ namespace Azure.Core
             // Set final uri as original request's uri if one of these requirements are met:
             // 1.Original request is a put method;
             // 2.Original request is a patch method;
-            // 3.Originsl response header contains "Location" and FinalStateVia is configured to OriginalUri.
+            // 3.Original response header contains "Location" and FinalStateVia is configured to OriginalUri.
             if (_requestMethod == RequestMethod.Put || _requestMethod == RequestMethod.Patch || _originalResponseHasLocation && _finalStateVia == OperationFinalStateVia.OriginalUri)
             {
                 return _startRequestUri.AbsoluteUri;
             }
 
-            // Set final uri as last known location header if originsl response header contains "Location" and FinalStateVia is configured to Location.
+            // Set final uri as last known location header if original response header contains "Location" and FinalStateVia is configured to Location.
             if (_originalResponseHasLocation && _finalStateVia == OperationFinalStateVia.Location)
             {
                 return _lastKnownLocation;
