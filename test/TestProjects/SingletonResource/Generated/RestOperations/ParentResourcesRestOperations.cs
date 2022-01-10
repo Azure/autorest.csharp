@@ -52,7 +52,7 @@ namespace SingletonResource
             uri.AppendPath(subscriptionId, true);
             uri.AppendPath("/resourceGroups/", false);
             uri.AppendPath(resourceGroupName, true);
-            uri.AppendPath("/providers/Microsoft.Billing/parentResources/", false);
+            uri.AppendPath("/providers/Microsoft.Billing/parentResources", false);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");

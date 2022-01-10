@@ -177,12 +177,12 @@
                 }
             }
         },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}/singletonResources3/{resourceName}": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}/singletonResources/{resourceName}": {
             "put": {
                 "tags": [
-                    "SingletonResources3"
+                    "SingletonResources"
                 ],
-                "operationId": "SingletonResources3_CreateOrUpdate",
+                "operationId": "SingletonResources_CreateOrUpdate",
                 "description": "Singleton non-resource test example with a single-value enum name parameter.",
                 "parameters": [
                     {
@@ -233,9 +233,57 @@
                         }
                     }
                 }
+            },
+            "get": {
+                "tags": [
+                    "SingletonResources"
+                ],
+                "operationId": "SingletonResources_Get",
+                "description": "Singleton non-resource test example with a single-value enum name parameter.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "parentName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "resourceName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                          "current"
+                        ],
+                        "x-ms-enum": {
+                          "name": "ResourceName",
+                          "modelAsString": false
+                        }
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/SingletonResource"
+                        }
+                    }
+                }
             }
         },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources": {
             "get": {
                 "tags": [
                     "ParentResources"
