@@ -4,7 +4,7 @@ info: !Info
   title: Body Forms Data URLEncoded
 schemas: !Schemas 
   numbers:
-    - !NumberSchema &ref_7
+    - !NumberSchema &ref_10
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -54,6 +54,26 @@ schemas: !Schemas
           name: PostContentSchemaStatus
           description: Updated status of the pet
       protocol: !Protocols {}
+    - !StringSchema &ref_7
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      language: !Languages 
+        default:
+          name: PostContentSchemaService
+          description: Indicates the name of your Azure container registry.
+      protocol: !Protocols {}
+    - !StringSchema &ref_8
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      language: !Languages 
+        default:
+          name: PostContentSchemaAccessToken
+          description: AAD access token, mandatory when grant_type is access_token_refresh_token or access_token.
+      protocol: !Protocols {}
   choices:
     - !ChoiceSchema &ref_2
       choices:
@@ -84,6 +104,24 @@ schemas: !Schemas
         default:
           name: PetFood
           description: Can take a value of meat, or fish, or plant
+      protocol: !Protocols {}
+    - !ChoiceSchema &ref_6
+      choices:
+        - !ChoiceValue 
+          value: access_token
+          language:
+            default:
+              name: AccessToken
+              description: ''
+      type: choice
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      choiceType: *ref_0
+      language: !Languages 
+        default:
+          name: PostContentSchemaGrantType
+          description: Constant part of a formdata body.
       protocol: !Protocols {}
   sealedChoices:
     - !SealedChoiceSchema &ref_1
@@ -117,7 +155,7 @@ schemas: !Schemas
           description: Can take a value of dog, or cat, or fish
       protocol: !Protocols {}
   constants:
-    - !ConstantSchema &ref_8
+    - !ConstantSchema &ref_11
       type: constant
       value: !ConstantValue 
         value: application/x-www-form-urlencoded
@@ -185,8 +223,47 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
+    - !ObjectSchema 
+      type: object
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      properties:
+        - !Property 
+          schema: *ref_6
+          required: true
+          serializedName: grant_type
+          language: !Languages 
+            default:
+              name: grantType
+              description: Constant part of a formdata body.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_7
+          required: true
+          serializedName: service
+          language: !Languages 
+            default:
+              name: service
+              description: Indicates the name of your Azure container registry.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_8
+          required: true
+          serializedName: access_token
+          language: !Languages 
+            default:
+              name: aadAccessToken
+              description: AAD access token, mandatory when grant_type is access_token_refresh_token or access_token.
+          protocol: !Protocols {}
+      language: !Languages 
+        default:
+          name: PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema
+          description: ''
+          namespace: ''
+      protocol: !Protocols {}
 globalParameters:
-  - !Parameter &ref_6
+  - !Parameter &ref_9
     schema: *ref_0
     clientDefaultValue: http://localhost:3000
     implementation: Client
@@ -211,9 +288,9 @@ operationGroups:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_6
-          - !Parameter &ref_14
-            schema: *ref_7
+          - *ref_9
+          - !Parameter &ref_17
+            schema: *ref_10
             implementation: Method
             required: true
             language: !Languages 
@@ -228,7 +305,7 @@ operationGroups:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_8
+                schema: *ref_11
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -240,7 +317,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_9
+              - !Parameter &ref_12
                 schema: *ref_1
                 implementation: Method
                 isPartialBody: true
@@ -253,7 +330,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: body
-              - !Parameter &ref_10
+              - !Parameter &ref_13
                 schema: *ref_2
                 implementation: Method
                 isPartialBody: true
@@ -266,7 +343,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: body
-              - !Parameter &ref_11
+              - !Parameter &ref_14
                 schema: *ref_3
                 implementation: Method
                 isPartialBody: true
@@ -279,7 +356,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: body
-              - !Parameter &ref_12
+              - !Parameter &ref_15
                 schema: *ref_4
                 implementation: Method
                 isPartialBody: true
@@ -291,7 +368,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: body
-              - !Parameter &ref_13
+              - !Parameter &ref_16
                 schema: *ref_5
                 implementation: Method
                 isPartialBody: true
@@ -304,11 +381,11 @@ operationGroups:
                   http: !HttpParameter 
                     in: body
             signatureParameters:
-              - *ref_9
-              - *ref_10
-              - *ref_11
               - *ref_12
               - *ref_13
+              - *ref_14
+              - *ref_15
+              - *ref_16
             language: !Languages 
               default:
                 name: ''
@@ -322,7 +399,7 @@ operationGroups:
                   - application/x-www-form-urlencoded
                 uri: '{$host}'
         signatureParameters:
-          - *ref_14
+          - *ref_17
         responses:
           - !Response 
             language: !Languages 
@@ -347,6 +424,99 @@ operationGroups:
             name: UpdatePetWithForm
             description: Updates a pet in the store with form data
             summary: Updates a pet in the store with form data
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: 1.0.0
+        parameters:
+          - *ref_9
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_11
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_18
+                schema: *ref_6
+                implementation: Method
+                isPartialBody: true
+                required: true
+                language: !Languages 
+                  default:
+                    name: grantType
+                    description: Constant part of a formdata body.
+                    serializedName: grant_type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+              - !Parameter &ref_19
+                schema: *ref_7
+                implementation: Method
+                isPartialBody: true
+                required: true
+                language: !Languages 
+                  default:
+                    name: service
+                    description: Indicates the name of your Azure container registry.
+                    serializedName: service
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+              - !Parameter &ref_20
+                schema: *ref_8
+                implementation: Method
+                isPartialBody: true
+                required: true
+                language: !Languages 
+                  default:
+                    name: accessToken
+                    description: AAD access token, mandatory when grant_type is access_token_refresh_token or access_token.
+                    serializedName: access_token
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+            signatureParameters:
+              - *ref_18
+              - *ref_19
+              - *ref_20
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /formsdataurlencoded/partialConstantBody
+                method: post
+                knownMediaType: form
+                mediaTypes:
+                  - application/x-www-form-urlencoded
+                uri: '{$host}'
+        signatureParameters: []
+        responses:
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: Pet updated.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: PartialConstantBody
+            description: 'Test a partially constant formdata body. Pass in { grant_type: ''access_token'', access_token: ''foo'', service: ''bar'' } to pass the test.'
         protocol: !Protocols {}
     language: !Languages 
       default:
