@@ -108,8 +108,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
         public string WriteGetResource(Resource resource, string resourceIdentifierParams, ExampleModel exampleModel)
         {
             var resourceVariableName = useVariableName(resource.Type.Name.FirstCharToLowerCase());
-            var idVar = $"{resource.Type.Name.FirstCharToLowerCase()}Id";
-            idVar = useVariableName(idVar);
+            var idVar = useVariableName($"{resource.Type.Name.FirstCharToLowerCase()}Id");
             _writer.Line($"var {idVar} = {resource.Type}.CreateResourceIdentifier({resourceIdentifierParams});");
             _writer.Line($"var {resourceVariableName} = GetArmClient().Get{resource.Type.Name}({idVar});");
             return resourceVariableName;
@@ -149,7 +148,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     {
                         continue;
                     }
-                    string resourceIdentifierParams = ComposeResourceIdentifierParams(resource.RequestPaths.First(), exampleModel);
+
                     WriteTestDecorator();
                     var testCaseSuffix = exampleIdx > 0 ? (exampleIdx + 1).ToString() : String.Empty;
                     _writer.Append($"public {GetAsyncKeyword(async)} {MgmtBaseTestWriter.GetTaskOrVoid(async)} {(resource == _resource ? "" : resource.Type.Name)}{methodName}{testCaseSuffix}()");
@@ -158,10 +157,9 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     {
                         _writer.LineRaw($"// Example: {exampleModel.Name}");
                         clearVariableNames();
+                        string resourceIdentifierParams = ComposeResourceIdentifierParams(resource.RequestPaths.First(), exampleModel);
                         var resourceVariableName = WriteGetResource(resource, resourceIdentifierParams, exampleModel);
-
                         List<string> paramNames = WriteOperationParameters(methodParameters, Enumerable.Empty<Parameter> (), exampleModel);
-
                         _writer.Line();
                         WriteMethodTestInvocation(async, clientOperation, isLroOperation, $"{resourceVariableName}.{testMethodName}", paramNames);
                     }

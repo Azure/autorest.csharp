@@ -115,8 +115,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             {
                 case Resource parentResource:
                     {
-                        var idVar = $"{parentResource.Type.Name.FirstCharToLowerCase()}Id";
-                        idVar = useVariableName(idVar);
+                        var idVar = useVariableName($"{parentResource.Type.Name.FirstCharToLowerCase()}Id");
                         _writer.Line($"var {idVar} = {parentResource.Type}.CreateResourceIdentifier({ComposeResourceIdentifierParams(parentResource.RequestPaths.First(), exampleModel)});");
                         _writer.Append($"var collection = GetArmClient().Get{parentResource.Type.Name}({idVar})");
                         break;
