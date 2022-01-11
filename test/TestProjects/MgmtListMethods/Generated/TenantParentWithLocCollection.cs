@@ -36,10 +36,16 @@ namespace MgmtListMethods
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _tenantParentWithLocsRestClient = new TenantParentWithLocsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+#if DEBUG
+			ValidateResourceId(Id);
+#endif
         }
 
-        /// <summary> Gets the valid resource type for this object. </summary>
-        protected override ResourceType ValidResourceType => TenantTest.ResourceType;
+        internal static void ValidateResourceId(ResourceIdentifier id)
+        {
+            if (id.ResourceType != TenantTest.ResourceType)
+                throw new ArgumentException(nameof(id), string.Format("Invalid resource type {0} expected {1}", id.ResourceType, TenantTest.ResourceType));
+        }
 
         // Collection level operations.
 
