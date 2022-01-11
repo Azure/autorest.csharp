@@ -20,6 +20,7 @@ namespace MgmtParamOrdering
         /// <returns> Returns a <see cref="AvailabilitySet" /> object. </returns>
         public static AvailabilitySet GetAvailabilitySet(this ArmClient armClient, ResourceIdentifier id)
         {
+            AvailabilitySet.ValidateResourceId(id);
             return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new AvailabilitySet(clientOptions, credential, uri, pipeline, id));
         }
         #endregion
@@ -31,6 +32,7 @@ namespace MgmtParamOrdering
         /// <returns> Returns a <see cref="DedicatedHostGroup" /> object. </returns>
         public static DedicatedHostGroup GetDedicatedHostGroup(this ArmClient armClient, ResourceIdentifier id)
         {
+            DedicatedHostGroup.ValidateResourceId(id);
             return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new DedicatedHostGroup(clientOptions, credential, uri, pipeline, id));
         }
         #endregion
@@ -42,6 +44,7 @@ namespace MgmtParamOrdering
         /// <returns> Returns a <see cref="DedicatedHost" /> object. </returns>
         public static DedicatedHost GetDedicatedHost(this ArmClient armClient, ResourceIdentifier id)
         {
+            DedicatedHost.ValidateResourceId(id);
             return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new DedicatedHost(clientOptions, credential, uri, pipeline, id));
         }
         #endregion
@@ -53,6 +56,7 @@ namespace MgmtParamOrdering
         /// <returns> Returns a <see cref="VirtualMachineExtensionImage" /> object. </returns>
         public static VirtualMachineExtensionImage GetVirtualMachineExtensionImage(this ArmClient armClient, ResourceIdentifier id)
         {
+            VirtualMachineExtensionImage.ValidateResourceId(id);
             return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new VirtualMachineExtensionImage(clientOptions, credential, uri, pipeline, id));
         }
         #endregion
@@ -64,6 +68,7 @@ namespace MgmtParamOrdering
         /// <returns> Returns a <see cref="EnvironmentContainerResource" /> object. </returns>
         public static EnvironmentContainerResource GetEnvironmentContainerResource(this ArmClient armClient, ResourceIdentifier id)
         {
+            EnvironmentContainerResource.ValidateResourceId(id);
             return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new EnvironmentContainerResource(clientOptions, credential, uri, pipeline, id));
         }
         #endregion
@@ -75,6 +80,7 @@ namespace MgmtParamOrdering
         /// <returns> Returns a <see cref="Workspace" /> object. </returns>
         public static Workspace GetWorkspace(this ArmClient armClient, ResourceIdentifier id)
         {
+            Workspace.ValidateResourceId(id);
             return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new Workspace(clientOptions, credential, uri, pipeline, id));
         }
         #endregion

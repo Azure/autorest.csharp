@@ -37,10 +37,16 @@ namespace TenantOnly
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _billingAccountsRestClient = new BillingAccountsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+#if DEBUG
+			ValidateResourceId(Id);
+#endif
         }
 
-        /// <summary> Gets the valid resource type for this object. </summary>
-        protected override ResourceType ValidResourceType => Tenant.ResourceType;
+        internal static void ValidateResourceId(ResourceIdentifier id)
+        {
+            if (id.ResourceType != Tenant.ResourceType)
+                throw new ArgumentException(nameof(id), string.Format("Invalid resource type {0} expected {1}", id.ResourceType, Tenant.ResourceType));
+        }
 
         // Collection level operations.
 

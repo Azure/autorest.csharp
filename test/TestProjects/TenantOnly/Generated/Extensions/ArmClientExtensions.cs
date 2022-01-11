@@ -20,6 +20,7 @@ namespace TenantOnly
         /// <returns> Returns a <see cref="BillingAccount" /> object. </returns>
         public static BillingAccount GetBillingAccount(this ArmClient armClient, ResourceIdentifier id)
         {
+            BillingAccount.ValidateResourceId(id);
             return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new BillingAccount(clientOptions, credential, uri, pipeline, id));
         }
         #endregion
@@ -31,6 +32,7 @@ namespace TenantOnly
         /// <returns> Returns a <see cref="Agreement" /> object. </returns>
         public static Agreement GetAgreement(this ArmClient armClient, ResourceIdentifier id)
         {
+            Agreement.ValidateResourceId(id);
             return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new Agreement(clientOptions, credential, uri, pipeline, id));
         }
         #endregion
