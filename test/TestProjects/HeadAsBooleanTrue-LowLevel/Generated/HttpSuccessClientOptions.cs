@@ -8,10 +8,10 @@
 using System;
 using Azure.Core;
 
-namespace paging_LowLevel
+namespace HeadAsBooleanTrue_LowLevel
 {
-    /// <summary> Client options for AutoRestPagingTestServiceClient. </summary>
-    public partial class AutoRestPagingTestServiceClientOptions : ClientOptions
+    /// <summary> Client options for HttpSuccessClient. </summary>
+    public partial class HttpSuccessClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V1_0_0;
 
@@ -24,8 +24,8 @@ namespace paging_LowLevel
 
         internal string Version { get; }
 
-        /// <summary> Initializes new instance of AutoRestPagingTestServiceClientOptions. </summary>
-        public AutoRestPagingTestServiceClientOptions(ServiceVersion version = LatestVersion)
+        /// <summary> Initializes new instance of HttpSuccessClientOptions. </summary>
+        public HttpSuccessClientOptions(ServiceVersion version = LatestVersion)
         {
             Version = version switch
             {

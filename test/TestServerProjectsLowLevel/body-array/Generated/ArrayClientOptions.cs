@@ -8,10 +8,10 @@
 using System;
 using Azure.Core;
 
-namespace url_LowLevel
+namespace body_array_LowLevel
 {
-    /// <summary> Client options for AutoRestUrlTestServiceClient. </summary>
-    public partial class AutoRestUrlTestServiceClientOptions : ClientOptions
+    /// <summary> Client options for ArrayClient. </summary>
+    public partial class ArrayClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V1_0_0;
 
@@ -24,8 +24,8 @@ namespace url_LowLevel
 
         internal string Version { get; }
 
-        /// <summary> Initializes new instance of AutoRestUrlTestServiceClientOptions. </summary>
-        public AutoRestUrlTestServiceClientOptions(ServiceVersion version = LatestVersion)
+        /// <summary> Initializes new instance of ArrayClientOptions. </summary>
+        public ArrayClientOptions(ServiceVersion version = LatestVersion)
         {
             Version = version switch
             {

@@ -37,7 +37,7 @@ namespace custom_baseUrl_paging_LowLevel
         /// <param name="host"> A string value that is used as a global part of the parameterized host. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> or <paramref name="host"/> is null. </exception>
-        public PagingClient(AzureKeyCredential credential, string host = "host", AutoRestParameterizedHostTestPagingClientOptions options = null)
+        public PagingClient(AzureKeyCredential credential, string host = "host", PagingClientOptions options = null)
         {
             if (credential == null)
             {
@@ -47,7 +47,7 @@ namespace custom_baseUrl_paging_LowLevel
             {
                 throw new ArgumentNullException(nameof(host));
             }
-            options ??= new AutoRestParameterizedHostTestPagingClientOptions();
+            options ??= new PagingClientOptions();
 
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;

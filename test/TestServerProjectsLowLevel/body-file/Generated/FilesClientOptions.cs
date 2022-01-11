@@ -8,10 +8,10 @@
 using System;
 using Azure.Core;
 
-namespace lro_LowLevel
+namespace body_file_LowLevel
 {
-    /// <summary> Client options for AutoRestLongRunningOperationTestServiceClient. </summary>
-    public partial class AutoRestLongRunningOperationTestServiceClientOptions : ClientOptions
+    /// <summary> Client options for FilesClient. </summary>
+    public partial class FilesClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V1_0_0;
 
@@ -24,8 +24,8 @@ namespace lro_LowLevel
 
         internal string Version { get; }
 
-        /// <summary> Initializes new instance of AutoRestLongRunningOperationTestServiceClientOptions. </summary>
-        public AutoRestLongRunningOperationTestServiceClientOptions(ServiceVersion version = LatestVersion)
+        /// <summary> Initializes new instance of FilesClientOptions. </summary>
+        public FilesClientOptions(ServiceVersion version = LatestVersion)
         {
             Version = version switch
             {

@@ -30,7 +30,7 @@ namespace AutoRest.CSharp.Output.Models
         protected RestClient(OperationGroup operationGroup, IEnumerable<RequestParameter>? clientParameters, BuildContext context, string clientPrefix, string defaultClientSuffix) : base(context)
         {
             OperationGroup = operationGroup;
-            Builder = new RestClientBuilder(operationGroup, context);
+            Builder = new RestClientBuilder(operationGroup.Operations, context);
 
             _requestMethods = new CachedDictionary<ServiceRequest, RestClientMethod>(EnsureNormalMethods);
             _nextPageRequestMethods = new CachedDictionary<ServiceRequest, RestClientMethod>(EnsureGetNextPageMethods);
