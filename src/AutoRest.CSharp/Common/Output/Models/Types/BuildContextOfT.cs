@@ -21,7 +21,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             if (configuration.DataPlane)
             {
-                Library = (T)(object)new LowLevelOutputLibrary(codeModel, (BuildContext<LowLevelOutputLibrary>)(object)this);
+                Library = (T)(object)LowLevelOutputLibraryFactory.Create(codeModel, (BuildContext<LowLevelOutputLibrary>)(object)this);
             }
             else if (configuration.AzureArm)
             {

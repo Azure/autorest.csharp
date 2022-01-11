@@ -10,9 +10,9 @@ namespace AutoRest.CSharp.Common.Output.Models
 {
     internal record ParameterInvocation : Parameter
     {
-        public ParameterInvocation(Parameter parameter, CodeWriterDelegate? Invocation = default) : this(parameter.Name, parameter.Description, parameter.Type, parameter.DefaultValue, parameter.ValidateNotNull, parameter.IsApiVersionParameter, parameter.SkipUrlEncoding, parameter.RequestLocation, Invocation) { }
+        public ParameterInvocation(Parameter parameter, CodeWriterDelegate? Invocation = default) : this(parameter.Name, parameter.Description, parameter.Type, parameter.DefaultValue, parameter.ValidateNotNull, IsApiVersionParameter: parameter.IsApiVersionParameter, IsResourceIdentifier: parameter.IsResourceIdentifier, SkipUrlEncoding: parameter.SkipUrlEncoding, RequestLocation: parameter.RequestLocation, Invocation: Invocation) { }
 
-        public ParameterInvocation(string Name, string? Description, CSharpType Type, Constant? DefaultValue, bool ValidateNotNull, bool IsApiVersionParameter = false, bool SkipUrlEncoding = false, RequestLocation RequestLocation = RequestLocation.None, CodeWriterDelegate? Invocation = default) : base(Name, Description, Type, DefaultValue, ValidateNotNull, IsApiVersionParameter, SkipUrlEncoding, RequestLocation)
+        public ParameterInvocation(string Name, string? Description, CSharpType Type, Constant? DefaultValue, bool ValidateNotNull, bool IsApiVersionParameter = false, bool IsResourceIdentifier = false, bool SkipUrlEncoding = false, RequestLocation RequestLocation = RequestLocation.None, CodeWriterDelegate? Invocation = default) : base(Name, Description, Type, DefaultValue, ValidateNotNull, IsApiVersionParameter: IsApiVersionParameter, IsResourceIdentifier: IsResourceIdentifier, SkipUrlEncoding: SkipUrlEncoding, RequestLocation: RequestLocation)
         {
             this.Invocation = Invocation;
         }

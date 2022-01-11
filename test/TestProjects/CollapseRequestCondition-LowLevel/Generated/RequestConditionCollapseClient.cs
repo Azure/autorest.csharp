@@ -35,14 +35,14 @@ namespace CollapseRequestCondition_LowLevel
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public RequestConditionCollapseClient(AzureKeyCredential credential, Uri endpoint = null, CollapseRequestConditionsClientOptions options = null)
+        public RequestConditionCollapseClient(AzureKeyCredential credential, Uri endpoint = null, CollapseRequestConditionsClientsOptions options = null)
         {
             if (credential == null)
             {
                 throw new ArgumentNullException(nameof(credential));
             }
             endpoint ??= new Uri("http://localhost:3000");
-            options ??= new CollapseRequestConditionsClientOptions();
+            options ??= new CollapseRequestConditionsClientsOptions();
 
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
