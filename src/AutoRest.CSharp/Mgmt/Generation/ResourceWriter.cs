@@ -200,7 +200,7 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
             }
 
             _writer.Line();
-            WriteStaticValidate(false, $"ResourceType", _writer);
+            WriteStaticValidate($"ResourceType", _writer);
 
             if (IsSingleton)
             {

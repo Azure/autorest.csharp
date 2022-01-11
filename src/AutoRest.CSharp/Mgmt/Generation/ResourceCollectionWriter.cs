@@ -108,6 +108,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
             _writer.RemoveTrailingComma();
             _writer.Line($") : base(parent)");
+            var allPossibleTypes = _resourceCollection.ResourceTypes.SelectMany(p => p.Value).Distinct();
             using (_writer.Scope())
             {
                 _writer.Line($"{ClientDiagnosticsField} = new {typeof(ClientDiagnostics)}(ClientOptions);");
@@ -116,7 +117,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     _writer.Line($"{_resourceCollection.GetFieldName(reference)} = {reference.Name};");
                 }
-                WriteDebugValidate(_writer);
+                if (allPossibleTypes.Count() == 1)
+                    WriteDebugValidate(_writer);
             }
         }
 
@@ -135,7 +137,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 : validResourceType = $"{typeof(Azure.Core.ResourceIdentifier)}.Root.ResourceType";
             _writer.Line();
 
-            WriteStaticValidate(allPossibleTypes.Count() != 1, validResourceType, _writer);
+            if (allPossibleTypes.Count() == 1)
+                WriteStaticValidate(validResourceType, _writer);
         }
 
         protected override void WriteMethods()
