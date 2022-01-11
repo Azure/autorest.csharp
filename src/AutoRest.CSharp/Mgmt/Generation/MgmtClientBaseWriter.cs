@@ -93,7 +93,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             using (writer.Scope($"internal static void ValidateResourceId({typeof(Azure.Core.ResourceIdentifier)} id)"))
             {
                 writer.Line($"if (id.ResourceType != {validResourceType})");
-                writer.Line($"throw new {typeof(ArgumentException)}(nameof(id), string.Format(\"Invalid resource type {{0}} expected {{1}}\", id.ResourceType, {validResourceType}));");
+                writer.Line($"throw new {typeof(ArgumentException)}(string.Format(\"Invalid resource type {{0}} expected {{1}}\", id.ResourceType, {validResourceType}), nameof(id));");
             }
         }
 

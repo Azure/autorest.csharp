@@ -44,7 +44,7 @@ namespace MgmtListMethods
         internal static void ValidateResourceId(ResourceIdentifier id)
         {
             if (id.ResourceType != TenantTest.ResourceType)
-                throw new ArgumentException(nameof(id), string.Format("Invalid resource type {0} expected {1}", id.ResourceType, TenantTest.ResourceType));
+                throw new ArgumentException(string.Format("Invalid resource type {0} expected {1}", id.ResourceType, TenantTest.ResourceType), nameof(id));
         }
 
         // Collection level operations.
