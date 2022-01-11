@@ -23,7 +23,6 @@ namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing collection of SshPublicKey and their operations over its parent. </summary>
     public partial class SshPublicKeyCollection : ArmCollection, IEnumerable<SshPublicKey>, IAsyncEnumerable<SshPublicKey>
-
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly SshPublicKeysRestOperations _sshPublicKeysRestClient;
@@ -428,6 +427,6 @@ namespace Azure.ResourceManager.Sample
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, SshPublicKey, SshPublicKeyData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, SshPublicKey, SshPublicKeyData> Construct() { }
     }
 }

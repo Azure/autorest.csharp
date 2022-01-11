@@ -23,7 +23,6 @@ namespace SubscriptionExtensions
 {
     /// <summary> A class representing collection of Oven and their operations over its parent. </summary>
     public partial class OvenCollection : ArmCollection, IEnumerable<Oven>, IAsyncEnumerable<Oven>
-
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly OvensRestOperations _ovensRestClient;
@@ -428,6 +427,6 @@ namespace SubscriptionExtensions
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, Oven, OvenData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, Oven, OvenData> Construct() { }
     }
 }

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using Azure.Core;
 using Azure.ResourceManager;
 
 namespace SingletonResource
@@ -31,6 +32,28 @@ namespace SingletonResource
         public static Ignition GetIgnition(this ArmClient armClient, ResourceIdentifier id)
         {
             return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new Ignition(clientOptions, credential, uri, pipeline, id));
+        }
+        #endregion
+
+        #region SingletonResource
+        /// <summary> Gets an object representing a SingletonResource along with the instance operations that can be performed on it but with no data. </summary>
+        /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="SingletonResource" /> object. </returns>
+        public static SingletonResource GetSingletonResource(this ArmClient armClient, ResourceIdentifier id)
+        {
+            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new SingletonResource(clientOptions, credential, uri, pipeline, id));
+        }
+        #endregion
+
+        #region ParentResource
+        /// <summary> Gets an object representing a ParentResource along with the instance operations that can be performed on it but with no data. </summary>
+        /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="ParentResource" /> object. </returns>
+        public static ParentResource GetParentResource(this ArmClient armClient, ResourceIdentifier id)
+        {
+            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new ParentResource(clientOptions, credential, uri, pipeline, id));
         }
         #endregion
     }

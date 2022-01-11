@@ -16,5 +16,6 @@
   ],
   "MgmtDebug": {
     "ShowRequestPath": true
-  }
+  },
+  "TestModeler": {}
 }

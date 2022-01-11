@@ -12,6 +12,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
+using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
@@ -21,7 +22,7 @@ using SupersetFlattenInheritance.Models;
 namespace SupersetFlattenInheritance
 {
     /// <summary> A class representing collection of ResourceModel1 and their operations over its parent. </summary>
-    public partial class ResourceModel1Collection : ArmCollection, IEnumerable<ResourceModel1>
+    public partial class ResourceModel1Collection : ArmCollection, IEnumerable<ResourceModel1>, IAsyncEnumerable<ResourceModel1>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly ResourceModel1SRestOperations _resourceModel1sRestClient;
@@ -282,40 +283,50 @@ namespace SupersetFlattenInheritance
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
         /// OperationId: ResourceModel1s_List
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IReadOnlyList<ResourceModel1>> GetAll(CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="ResourceModel1" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<ResourceModel1> GetAll(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ResourceModel1Collection.GetAll");
-            scope.Start();
-            try
+            Page<ResourceModel1> FirstPageFunc(int? pageSizeHint)
             {
-                var response = _resourceModel1sRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken);
-                return Response.FromValue(response.Value.Value.Select(value => new ResourceModel1(Parent, value)).ToArray() as IReadOnlyList<ResourceModel1>, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("ResourceModel1Collection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = _resourceModel1sRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new ResourceModel1(Parent, value)), null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/resourceModel1s
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
         /// OperationId: ResourceModel1s_List
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<IReadOnlyList<ResourceModel1>>> GetAllAsync(CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="ResourceModel1" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<ResourceModel1> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ResourceModel1Collection.GetAll");
-            scope.Start();
-            try
+            async Task<Page<ResourceModel1>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await _resourceModel1sRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(response.Value.Value.Select(value => new ResourceModel1(Parent, value)).ToArray() as IReadOnlyList<ResourceModel1>, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("ResourceModel1Collection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = await _resourceModel1sRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new ResourceModel1(Parent, value)), null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
         /// <summary> Filters the list of <see cref="ResourceModel1" /> for this resource group represented as generic resources. </summary>
@@ -366,15 +377,20 @@ namespace SupersetFlattenInheritance
 
         IEnumerator<ResourceModel1> IEnumerable<ResourceModel1>.GetEnumerator()
         {
-            return GetAll().Value.GetEnumerator();
+            return GetAll().GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return GetAll().Value.GetEnumerator();
+            return GetAll().GetEnumerator();
+        }
+
+        IAsyncEnumerator<ResourceModel1> IAsyncEnumerable<ResourceModel1>.GetAsyncEnumerator(CancellationToken cancellationToken)
+        {
+            return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, ResourceModel1, ResourceModel1Data> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, ResourceModel1, ResourceModel1Data> Construct() { }
     }
 }

@@ -23,7 +23,6 @@ namespace MgmtListMethods
 {
     /// <summary> A class representing collection of ResGrpParentWithNonResCh and their operations over its parent. </summary>
     public partial class ResGrpParentWithNonResChCollection : ArmCollection, IEnumerable<ResGrpParentWithNonResCh>, IAsyncEnumerable<ResGrpParentWithNonResCh>
-
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly ResGrpParentWithNonResChesRestOperations _resGrpParentWithNonResChesRestClient;
@@ -428,6 +427,6 @@ namespace MgmtListMethods
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, ResGrpParentWithNonResCh, ResGrpParentWithNonResChData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, ResGrpParentWithNonResCh, ResGrpParentWithNonResChData> Construct() { }
     }
 }

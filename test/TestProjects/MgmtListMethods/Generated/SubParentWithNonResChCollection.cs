@@ -23,7 +23,6 @@ namespace MgmtListMethods
 {
     /// <summary> A class representing collection of SubParentWithNonResCh and their operations over its parent. </summary>
     public partial class SubParentWithNonResChCollection : ArmCollection, IEnumerable<SubParentWithNonResCh>, IAsyncEnumerable<SubParentWithNonResCh>
-
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly SubParentWithNonResChesRestOperations _subParentWithNonResChesRestClient;
@@ -428,6 +427,6 @@ namespace MgmtListMethods
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, SubParentWithNonResCh, SubParentWithNonResChData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, SubParentWithNonResCh, SubParentWithNonResChData> Construct() { }
     }
 }

@@ -14,7 +14,6 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using MgmtListMethods.Models;
 
@@ -22,7 +21,6 @@ namespace MgmtListMethods
 {
     /// <summary> A class representing collection of FakeParentWithNonResCh and their operations over its parent. </summary>
     public partial class FakeParentWithNonResChCollection : ArmCollection, IEnumerable<FakeParentWithNonResCh>, IAsyncEnumerable<FakeParentWithNonResCh>
-
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly FakeParentWithNonResChesRestOperations _fakeParentWithNonResChesRestClient;
@@ -381,6 +379,6 @@ namespace MgmtListMethods
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, FakeParentWithNonResCh, FakeParentWithNonResChData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, FakeParentWithNonResCh, FakeParentWithNonResChData> Construct() { }
     }
 }

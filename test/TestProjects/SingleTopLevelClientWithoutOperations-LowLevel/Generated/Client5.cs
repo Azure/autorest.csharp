@@ -99,7 +99,7 @@ namespace SingleTopLevelClientWithoutOperations_LowLevel
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/client3", false);
+            uri.AppendPath("/client5", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             message.ResponseClassifier = ResponseClassifier200.Instance;

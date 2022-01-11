@@ -7,7 +7,6 @@
 
 using System.Collections.Generic;
 using Azure.Core;
-using Azure.ResourceManager;
 using Azure.ResourceManager.Models;
 using Azure.ResourceManager.Resources.Models;
 using MgmtExpandResourceTypes.Models;
@@ -19,7 +18,7 @@ namespace MgmtExpandResourceTypes
     {
         /// <summary> Initializes a new instance of ZoneData. </summary>
         /// <param name="location"> The location. </param>
-        public ZoneData(Location location) : base(location)
+        public ZoneData(AzureLocation location) : base(location)
         {
             NameServers = new ChangeTrackingList<string>();
             RegistrationVirtualNetworks = new ChangeTrackingList<WritableSubResource>();
@@ -40,7 +39,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="zoneType"> The type of this DNS zone (Public or Private). </param>
         /// <param name="registrationVirtualNetworks"> A list of references to virtual networks that register hostnames in this DNS zone. This is a only when ZoneType is Private. </param>
         /// <param name="resolutionVirtualNetworks"> A list of references to virtual networks that resolve records in this DNS zone. This is a only when ZoneType is Private. </param>
-        internal ZoneData(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, Location location, string etag, long? maxNumberOfRecordSets, long? maxNumberOfRecordsPerRecordSet, long? numberOfRecordSets, IReadOnlyList<string> nameServers, ZoneType? zoneType, IList<WritableSubResource> registrationVirtualNetworks, IList<WritableSubResource> resolutionVirtualNetworks) : base(id, name, type, tags, location)
+        internal ZoneData(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, AzureLocation location, string etag, long? maxNumberOfRecordSets, long? maxNumberOfRecordsPerRecordSet, long? numberOfRecordSets, IReadOnlyList<string> nameServers, ZoneType? zoneType, IList<WritableSubResource> registrationVirtualNetworks, IList<WritableSubResource> resolutionVirtualNetworks) : base(id, name, type, tags, location)
         {
             Etag = etag;
             MaxNumberOfRecordSets = maxNumberOfRecordSets;

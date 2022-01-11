@@ -23,7 +23,6 @@ namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing collection of VirtualMachineScaleSet and their operations over its parent. </summary>
     public partial class VirtualMachineScaleSetCollection : ArmCollection, IEnumerable<VirtualMachineScaleSet>, IAsyncEnumerable<VirtualMachineScaleSet>
-
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly VirtualMachineScaleSetsRestOperations _virtualMachineScaleSetsRestClient;
@@ -428,6 +427,6 @@ namespace Azure.ResourceManager.Sample
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, VirtualMachineScaleSet, VirtualMachineScaleSetData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, VirtualMachineScaleSet, VirtualMachineScaleSetData> Construct() { }
     }
 }

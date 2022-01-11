@@ -15,14 +15,12 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.Management.Storage.Models;
-using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing collection of EncryptionScope and their operations over its parent. </summary>
     public partial class EncryptionScopeCollection : ArmCollection, IEnumerable<EncryptionScope>, IAsyncEnumerable<EncryptionScope>
-
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly EncryptionScopesRestOperations _encryptionScopesRestClient;
@@ -381,6 +379,6 @@ namespace Azure.Management.Storage
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, EncryptionScope, EncryptionScopeData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, EncryptionScope, EncryptionScopeData> Construct() { }
     }
 }

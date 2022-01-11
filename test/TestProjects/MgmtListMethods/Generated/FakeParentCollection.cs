@@ -14,7 +14,6 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using MgmtListMethods.Models;
 
@@ -22,7 +21,6 @@ namespace MgmtListMethods
 {
     /// <summary> A class representing collection of FakeParent and their operations over its parent. </summary>
     public partial class FakeParentCollection : ArmCollection, IEnumerable<FakeParent>, IAsyncEnumerable<FakeParent>
-
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly FakeParentsRestOperations _fakeParentsRestClient;
@@ -381,6 +379,6 @@ namespace MgmtListMethods
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, FakeParent, FakeParentData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, FakeParent, FakeParentData> Construct() { }
     }
 }

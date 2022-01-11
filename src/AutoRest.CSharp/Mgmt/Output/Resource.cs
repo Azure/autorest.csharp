@@ -9,16 +9,23 @@ using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Output.Builders;
-using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
-using ResourceType = AutoRest.CSharp.Mgmt.Models.ResourceType;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class Resource : MgmtTypeProvider
     {
+        protected static readonly string ResourcePosition = "resource";
+        protected static readonly string CollectionPosition = "collection";
+
         private static readonly HttpMethod[] MethodToExclude = new[] { HttpMethod.Put, HttpMethod.Get, HttpMethod.Delete, HttpMethod.Patch };
+
+        /// <summary>
+        /// The position means which class an operation should go. Possible value of this property is `resource` or `collection`.
+        /// There is a configuration in <see cref="MgmtConfiguration"/> which assign values to operations.
+        /// </summary>
+        protected string Position { get; }
 
         public IEnumerable<OperationSet> OperationSets { get; }
 
@@ -27,7 +34,15 @@ namespace AutoRest.CSharp.Mgmt.Output
         private IEnumerable<RequestPath>? _requestPaths;
         public IEnumerable<RequestPath> RequestPaths => _requestPaths ??= OperationSets.Select(operationSet => operationSet.GetRequestPath(_context));
 
-        public Resource(IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> allOperations, string resourceName, ResourceType resourceType, ResourceData resourceData, BuildContext<MgmtOutputLibrary> context)
+        /// <summary>
+        /// </summary>
+        /// <param name="allOperations">The map that contains all possible operations in this resource and its corresponding resource collection class (if any)</param>
+        /// <param name="resourceName">The name of the corresponding resource data model</param>
+        /// <param name="resourceType">The type of this resource instance represents</param>
+        /// <param name="resourceData">The corresponding resource data model</param>
+        /// <param name="context">The build context of this resource instance</param>
+        /// <param name="position">The position of operations of this class. <see cref="Position"/> for more information</param>
+        protected internal Resource(IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> allOperations, string resourceName, ResourceTypeSegment resourceType, ResourceData resourceData, BuildContext<MgmtOutputLibrary> context, string position)
             : base(context, resourceName)
         {
             _context = context;
@@ -46,7 +61,13 @@ namespace AutoRest.CSharp.Mgmt.Output
             _allOperationMap = GetAllOperationsMap(allOperations);
 
             IsById = OperationSets.Any(operationSet => operationSet.IsById(_context));
+
+            Position = position;
         }
+
+        public Resource(IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> allOperations, string resourceName, ResourceTypeSegment resourceType, ResourceData resourceData, BuildContext<MgmtOutputLibrary> context)
+            : this(allOperations, resourceName, resourceType, resourceData, context, ResourcePosition)
+        { }
 
         private IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> GetAllOperationsMap(IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> allOperations)
         {
@@ -71,13 +92,13 @@ namespace AutoRest.CSharp.Mgmt.Output
                 if (operation is not null)
                 {
                     var requestPath = operation.GetRequestPath(_context);
-                    var clientOperation = new MgmtRestOperation(
+                    var restOperation = new MgmtRestOperation(
                         _context.Library.RestClientMethods[operation],
                         _context.Library.GetRestClient(operation),
                         requestPath,
                         GetContextualPath(operationSet, requestPath),
                         name);
-                    result.Add(clientOperation);
+                    result.Add(restOperation);
                 }
             }
 
@@ -181,6 +202,11 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected virtual bool ShouldIncludeOperation(Operation operation)
         {
+            var requestPath = operation.GetHttpPath();
+            if (Context.Configuration.MgmtConfiguration.OperationPositions.TryGetValue(requestPath, out var positions))
+            {
+                return positions.Contains(Position);
+            }
             // In the resource class, we need to exclude the List operations
             var restClientMethod = _context.Library.RestClientMethods[operation];
             if (restClientMethod.IsListMethod(out var valueType))
@@ -303,7 +329,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             return resourceRestClients.Concat(childRestClients).Distinct();
         }
 
-        public ResourceType ResourceType { get; }
+        public ResourceTypeSegment ResourceType { get; }
 
         protected virtual string CreateDescription(string clientPrefix)
         {

@@ -23,7 +23,6 @@ namespace XmlDeserialization
 {
     /// <summary> A class representing collection of XmlInstance and their operations over its parent. </summary>
     public partial class XmlInstanceCollection : ArmCollection, IEnumerable<XmlInstance>, IAsyncEnumerable<XmlInstance>
-
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly XmlDeserializationRestOperations _xmlDeserializationRestClient;
@@ -436,6 +435,6 @@ namespace XmlDeserialization
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, XmlInstance, XmlInstanceData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, XmlInstance, XmlInstanceData> Construct() { }
     }
 }

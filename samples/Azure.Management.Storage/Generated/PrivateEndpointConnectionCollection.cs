@@ -15,14 +15,12 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.Management.Storage.Models;
-using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing collection of PrivateEndpointConnection and their operations over its parent. </summary>
     public partial class PrivateEndpointConnectionCollection : ArmCollection, IEnumerable<PrivateEndpointConnection>, IAsyncEnumerable<PrivateEndpointConnection>
-
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly PrivateEndpointConnectionsRestOperations _privateEndpointConnectionsRestClient;
@@ -351,6 +349,6 @@ namespace Azure.Management.Storage
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, PrivateEndpointConnection, PrivateEndpointConnectionData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, PrivateEndpointConnection, PrivateEndpointConnectionData> Construct() { }
     }
 }

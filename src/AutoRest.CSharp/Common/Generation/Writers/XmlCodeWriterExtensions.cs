@@ -355,13 +355,13 @@ namespace AutoRest.CSharp.Generation.Writers
                     return;
                 }
 
-                if (frameworkType == typeof(ResourceIdentifier))
+                if (frameworkType == typeof(Azure.Core.ResourceIdentifier))
                 {
-                    writer.Append($"new {typeof(ResourceIdentifier)}(({typeof(string)}){element})");
+                    writer.Append($"new {typeof(Azure.Core.ResourceIdentifier)}(({typeof(string)}){element})");
                     return;
                 }
 
-                if (frameworkType == typeof(ResourceType))
+                if (frameworkType == typeof(Azure.Core.ResourceType))
                 {
                     writer.Append($"({typeof(string)}){element}");
                     return;
