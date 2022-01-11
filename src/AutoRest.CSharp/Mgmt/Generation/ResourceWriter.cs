@@ -136,6 +136,7 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
                     _writer.Line($"Parent = options;");
                 _writer.Line($"{ClientDiagnosticsField} = new {typeof(ClientDiagnostics)}(ClientOptions);");
                 WriteRestClientAssignments();
+                WriteDebugValidate(_writer);
             }
 
             _writer.Line();
@@ -148,6 +149,7 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
                     _writer.Line($"Parent = options;");
                 _writer.Line($"{ClientDiagnosticsField} = new {typeof(ClientDiagnostics)}(ClientOptions);");
                 WriteRestClientAssignments();
+                WriteDebugValidate(_writer);
             }
 
             _writer.Line();
@@ -161,6 +163,7 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
             {
                 _writer.Line($"{ClientDiagnosticsField} = new {typeof(ClientDiagnostics)}(ClientOptions);");
                 WriteRestClientAssignments();
+                WriteDebugValidate(_writer);
             }
         }
 
@@ -181,9 +184,6 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
 
             _writer.Line($"public static readonly {typeof(ResourceType)} ResourceType = \"{_resource.ResourceType}\";");
             _writer.Line();
-            _writer.WriteXmlDocumentationSummary($"Gets the valid resource type for the operations");
-            _writer.Line($"protected override {typeof(ResourceType)} ValidResourceType => ResourceType;");
-            _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Gets whether or not the current instance has data.");
             _writer.Line($"public virtual bool HasData {{ get; }}");
             _writer.Line();
@@ -198,6 +198,9 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
                     _writer.Line($"return _data;");
                 }
             }
+
+            _writer.Line();
+            WriteStaticValidate(false, $"ResourceType", _writer);
 
             if (IsSingleton)
             {

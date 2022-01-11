@@ -116,6 +116,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     _writer.Line($"{_resourceCollection.GetFieldName(reference)} = {reference.Name};");
                 }
+                WriteDebugValidate(_writer);
             }
         }
 
@@ -129,26 +130,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             var allPossibleTypes = _resourceCollection.ResourceTypes.SelectMany(p => p.Value).Distinct();
 
-            FormattableString validResourceType;
-            if (allPossibleTypes.Count() == 1)
-                validResourceType = GetResourceTypeExpression(allPossibleTypes.First());
-            else
-                validResourceType = $"{typeof(Azure.Core.ResourceIdentifier)}.Root.ResourceType";
+            FormattableString validResourceType = allPossibleTypes.Count() == 1
+                ? validResourceType = GetResourceTypeExpression(allPossibleTypes.First())
+                : validResourceType = $"{typeof(Azure.Core.ResourceIdentifier)}.Root.ResourceType";
             _writer.Line();
-            _writer.WriteXmlDocumentationSummary($"Gets the valid resource type for this object");
-            _writer.Line($"protected override {typeof(Azure.Core.ResourceType)} ValidResourceType => {validResourceType};");
 
-            if (allPossibleTypes.Count() != 1)
-            {
-                // TODO -- if the collection has a limited list of possible resource types, we need to verify them one by one
-                _writer.Line();
-                _writer.WriteXmlDocumentationSummary($"Verify that the input resource Id is a valid collection for this type.");
-                _writer.WriteXmlDocumentationParameter("identifier", $"The input resource Id to check.");
-                _writer.Line($"protected override void ValidateResourceType({typeof(Azure.Core.ResourceIdentifier)} identifier)");
-                using (_writer.Scope())
-                {
-                }
-            }
+            WriteStaticValidate(allPossibleTypes.Count() != 1, validResourceType, _writer);
         }
 
         protected override void WriteMethods()

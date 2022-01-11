@@ -88,6 +88,25 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.UseNamespace(typeof(Task).Namespace!);
         }
 
+        protected void WriteStaticValidate(bool useEmptyBody, FormattableString validResourceType, CodeWriter writer)
+        {
+            using (writer.Scope($"internal static void ValidateResourceId({typeof(Azure.Core.ResourceIdentifier)} id)"))
+            {
+                if (!useEmptyBody)
+                {
+                    writer.Line($"if (id.ResourceType != {validResourceType})");
+                    writer.Line($"throw new {typeof(ArgumentException)}(nameof(id), string.Format(\"Invalid resource type {{0}} expected {{1}}\", id.ResourceType, {validResourceType}));");
+                }
+            }
+        }
+
+        protected void WriteDebugValidate(CodeWriter writer)
+        {
+            writer.Line($"#if DEBUG");
+            writer.Line($"\t\t\tValidateResourceId(Id);");
+            writer.Line($"#endif");
+        }
+
         protected void WriteFields(CodeWriter writer, IEnumerable<RestClient> clients)
         {
             writer.Line($"private readonly {typeof(ClientDiagnostics)} {ClientDiagnosticsField};");
