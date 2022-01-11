@@ -40,9 +40,8 @@ namespace MgmtHierarchicalNonResource
 
         /// <summary> Initializes a new instance of the <see cref = "SharedGallery"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
-        /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal SharedGallery(ArmResource options, ResourceIdentifier id, SharedGalleryData data) : base(options, id)
+        internal SharedGallery(ArmResource options, SharedGalleryData data) : base(options, data.Id)
         {
             HasData = true;
             _data = data;
@@ -112,7 +111,8 @@ namespace MgmtHierarchicalNonResource
                 var response = await _sharedGalleriesRestClient.GetAsync(Id.SubscriptionId, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new SharedGallery(this, CreateResourceIdentifier(Id.SubscriptionId, Id.Parent.Name, Id.Name), response.Value), response.GetRawResponse());
+                response.Value.Id = CreateResourceIdentifier(Id.SubscriptionId, Id.Parent.Name, Id.Name);
+                return Response.FromValue(new SharedGallery(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -135,7 +135,8 @@ namespace MgmtHierarchicalNonResource
                 var response = _sharedGalleriesRestClient.Get(Id.SubscriptionId, Id.Parent.Name, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new SharedGallery(this, CreateResourceIdentifier(Id.SubscriptionId, Id.Parent.Name, Id.Name), response.Value), response.GetRawResponse());
+                response.Value.Id = CreateResourceIdentifier(Id.SubscriptionId, Id.Parent.Name, Id.Name);
+                return Response.FromValue(new SharedGallery(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

@@ -351,16 +351,27 @@ namespace AutoRest.CSharp.Mgmt.Generation
             if (wrapResource != null)
             {
                 CodeWriterDelegate dataExpression = w => w.Append($"value");
-                CodeWriterDelegate idExpression = wrapResource.ResourceDataIdExpression(dataExpression, CreateResourceIdentifierExpression(wrapResource, operation.RequestPath, parameterMappings, dataExpression));
 
-                _writer.UseNamespace("System.Linq");
                 var newInstanceExpression = wrapResource.NewInstanceExpression(new[]
                 {
                     new ParameterInvocation(wrapResource.OptionsParameter, w => w.Append($"{ContextProperty}")),
-                    new ParameterInvocation(wrapResource.ResourceIdentifierParameter, idExpression),
                     new ParameterInvocation(wrapResource.ResourceDataParameter, dataExpression),
                 });
-                converter = $".Select({dataExpression} => {newInstanceExpression})";
+                CodeWriterDelegate selectBody;
+                if (wrapResource.ResourceData.ShouldSetResourceIdentifier)
+                    selectBody = w =>
+                    {
+                        using (w.Scope())
+                        {
+                            w.Line($"{dataExpression}.Id = {CreateResourceIdentifierExpression(wrapResource, operation.RequestPath, parameterMappings, dataExpression)};");
+                            w.Line($"return {newInstanceExpression};");
+                        }
+                    };
+                else
+                    selectBody = newInstanceExpression;
+
+                _writer.UseNamespace("System.Linq");
+                converter = $".Select({dataExpression} => {selectBody})";
             }
             var itemName = pagingMethod.ItemName.IsNullOrEmpty() ? string.Empty : $".{pagingMethod.ItemName}";
             _writer.Line($"return {typeof(Page)}.FromValues(response.Value{itemName}{converter}, {continuationTokenText}, response.GetRawResponse());");
@@ -544,14 +555,17 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 }
 
                 CodeWriterDelegate dataExpression = w => w.Append($"response.Value");
-                CodeWriterDelegate idExpression = wrapResource.ResourceDataIdExpression(dataExpression, CreateResourceIdentifierExpression(wrapResource, operation.RequestPath, parameterMappings, dataExpression));
+
+                if (wrapResource.ResourceData.ShouldSetResourceIdentifier)
+                    _writer.Line($"{dataExpression}.Id = {CreateResourceIdentifierExpression(wrapResource, operation.RequestPath, parameterMappings, dataExpression)};");
 
                 var newInstanceExpression = wrapResource.NewInstanceExpression(new[]
-                        {
-                            new ParameterInvocation(wrapResource.OptionsParameter, w => w.Append($"{ContextProperty}")),
-                            new ParameterInvocation(wrapResource.ResourceIdentifierParameter, idExpression),
-                            new ParameterInvocation(wrapResource.ResourceDataParameter, dataExpression),
-                        });
+                    {
+                        new ParameterInvocation(wrapResource.OptionsParameter, w => w.Append($"{ContextProperty}")),
+                        //new ParameterInvocation(wrapResource.ResourceIdentifierParameter, idExpression),
+                        new ParameterInvocation(wrapResource.ResourceDataParameter, dataExpression),
+                    });
+
                 _writer.Line($"return {typeof(Response)}.FromValue({newInstanceExpression}, response.GetRawResponse());");
             }
             else

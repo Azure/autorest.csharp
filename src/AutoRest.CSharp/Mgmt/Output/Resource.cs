@@ -376,24 +376,17 @@ namespace AutoRest.CSharp.Mgmt.Output
             };
         }
 
-        public CodeWriterDelegate ResourceDataIdExpression(CodeWriterDelegate dataExpression, CodeWriterDelegate createResourceIdentifierExpression)
+        public CodeWriterDelegate ResourceDataIdExpression(CodeWriterDelegate dataExpression)
         {
-            var typeOfId = ResourceData.GetTypeOfId();
-            if (typeOfId != null && typeOfId.Equals(typeof(ResourceIdentifier)))
-            {
-                return w => w.Append($"{dataExpression}.Id");
-            }
-            else if (typeOfId != null && typeOfId.Equals(typeof(string)))
+            var typeOfId = ResourceData.TypeOfId;
+            if (typeOfId != null && typeOfId.Equals(typeof(string)))
             {
                 return w => w.Append($"new {typeof(ResourceIdentifier)}({dataExpression}.Id)");
             }
             else
             {
-                // this resource data does not have an ID property, or the ID is not ResourceIdentifier or string
-                return w =>
-                {
-                    w.Append($"{createResourceIdentifierExpression}");
-                };
+                // we have ensured other cases we would have an Id of Azure.Core.ResourceIdentifier type
+                return w => w.Append($"{dataExpression}.Id");
             }
         }
 

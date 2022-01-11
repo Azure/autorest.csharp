@@ -283,19 +283,20 @@ namespace AutoRest.CSharp.Mgmt.Generation
             WriteArguments(writer, parameterMappings);
             writer.Line($"cancellationToken: cancellationToken){GetConfigureAwait(async)};");
 
-            writer.Line($"return response.Value == null");
-            writer.Line($"\t? {typeof(Response)}.FromValue<{_resource.Type.Name}>(null, response.GetRawResponse())");
-
             CodeWriterDelegate dataExpression = w => w.Append($"response.Value");
-            CodeWriterDelegate idExpression = _resource.ResourceDataIdExpression(dataExpression, CreateResourceIdentifierExpression(_resource, operation.RequestPath, parameterMappings, dataExpression));
+
+            writer.Line($"if ({dataExpression} == null)");
+            writer.Line($"return {typeof(Response)}.FromValue<{_resource.Type.Name}>(null, response.GetRawResponse());");
+
+            if (_resource.ResourceData.ShouldSetResourceIdentifier)
+                writer.Line($"{dataExpression}.Id = {CreateResourceIdentifierExpression(_resource, operation.RequestPath, parameterMappings, dataExpression)};");
 
             var newInstanceExpression = _resource.NewInstanceExpression(new[]
             {
                 new ParameterInvocation(_resource.OptionsParameter, w => w.Append($"this")),
-                new ParameterInvocation(_resource.ResourceIdentifierParameter, idExpression),
                 new ParameterInvocation(_resource.ResourceDataParameter, dataExpression),
             });
-            writer.Line($"\t: {typeof(Response)}.FromValue({newInstanceExpression}, response.GetRawResponse());");
+            writer.Line($"return {typeof(Response)}.FromValue({newInstanceExpression}, response.GetRawResponse());");
         }
 
         /// <summary>

@@ -133,12 +133,12 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
                 name: TypeOfThis.Name,
                 description: $"Initializes a new instance of the <see cref = \"{TypeOfThis.Name}\"/> class.",
                 modifiers: "internal",
-                parameters: new[] { _resource.OptionsParameter, _resource.ResourceIdentifierParameter, _resource.ResourceDataParameter },
+                parameters: new[] { _resource.OptionsParameter, _resource.ResourceDataParameter },
                 baseMethod: new MethodSignature(
                     name: TypeOfThis.Name,
                     description: null,
                     modifiers: "protected",
-                    parameters: new[] { _resource.OptionsParameter, _resource.ResourceIdentifierParameter })
+                    parameters: new[] { _resource.OptionsParameter, new ParameterInvocation(_resource.ResourceIdentifierParameter, _resource.ResourceDataIdExpression(w => w.Append($"{_resource.ResourceDataParameter.Name}"))) })
                 );
             _writer.WriteMethodDocumentation(resourceDataConstructor);
             using (_writer.WriteMethodDeclaration(resourceDataConstructor))
@@ -491,12 +491,13 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
             _writer.Line($"cancellationToken){GetConfigureAwait(async)};");
 
             CodeWriterDelegate dataExpression = w => w.Append($"originalResponse.Value");
-            CodeWriterDelegate idExpression = _resource.ResourceDataIdExpression(dataExpression, CreateResourceIdentifierExpression(_resource, operation.RequestPath, parameterMappings, dataExpression));
+
+            if (_resource.ResourceData.ShouldSetResourceIdentifier)
+                _writer.Line($"{dataExpression}.Id = {CreateResourceIdentifierExpression(_resource, operation.RequestPath, parameterMappings, dataExpression)};");
 
             var newInstanceExpression = _resource.NewInstanceExpression(new[]
             {
                 new ParameterInvocation(_resource.OptionsParameter, w => w.Append($"this")),
-                new ParameterInvocation(_resource.ResourceIdentifierParameter, idExpression),
                 new ParameterInvocation(_resource.ResourceDataParameter, dataExpression),
             });
             _writer.Line($"return {typeof(Response)}.FromValue({newInstanceExpression}, originalResponse.GetRawResponse());");

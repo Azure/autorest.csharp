@@ -123,12 +123,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     CodeWriterDelegate optionsExpression = w => w.Append($"{_operationBaseField}");
                     CodeWriterDelegate dataExpression = w => w.Append($"data");
-                    CodeWriterDelegate idExpression = mgmtOperation.WrapperResource.ResourceDataIdExpression(dataExpression, w => w.Append($"{optionsExpression}.Id"));
+
                     w.Line($"var {dataExpression} = {v};");
+                    if (mgmtOperation.WrapperResource.ResourceData.ShouldSetResourceIdentifier)
+                        w.Line($"{dataExpression}.Id = {optionsExpression}.Id;");
+
                     var newInstanceExpression = mgmtOperation.WrapperResource.NewInstanceExpression(new[]
                     {
                         new ParameterInvocation(mgmtOperation.WrapperResource.OptionsParameter, optionsExpression),
-                        new ParameterInvocation(mgmtOperation.WrapperResource.ResourceIdentifierParameter, idExpression),
                         new ParameterInvocation(mgmtOperation.WrapperResource.ResourceDataParameter, dataExpression),
                     });
                     w.Line($"return {newInstanceExpression};");

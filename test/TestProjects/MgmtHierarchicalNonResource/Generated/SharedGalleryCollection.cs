@@ -70,7 +70,8 @@ namespace MgmtHierarchicalNonResource
                 var response = _sharedGalleriesRestClient.Get(Id.SubscriptionId, _location, galleryUniqueName, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new SharedGallery(Parent, SharedGallery.CreateResourceIdentifier(Id.SubscriptionId, _location, galleryUniqueName), response.Value), response.GetRawResponse());
+                response.Value.Id = SharedGallery.CreateResourceIdentifier(Id.SubscriptionId, _location, galleryUniqueName);
+                return Response.FromValue(new SharedGallery(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -100,7 +101,8 @@ namespace MgmtHierarchicalNonResource
                 var response = await _sharedGalleriesRestClient.GetAsync(Id.SubscriptionId, _location, galleryUniqueName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new SharedGallery(Parent, SharedGallery.CreateResourceIdentifier(Id.SubscriptionId, _location, galleryUniqueName), response.Value), response.GetRawResponse());
+                response.Value.Id = SharedGallery.CreateResourceIdentifier(Id.SubscriptionId, _location, galleryUniqueName);
+                return Response.FromValue(new SharedGallery(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -125,9 +127,10 @@ namespace MgmtHierarchicalNonResource
             try
             {
                 var response = _sharedGalleriesRestClient.Get(Id.SubscriptionId, _location, galleryUniqueName, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<SharedGallery>(null, response.GetRawResponse())
-                    : Response.FromValue(new SharedGallery(this, SharedGallery.CreateResourceIdentifier(Id.SubscriptionId, _location, galleryUniqueName), response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<SharedGallery>(null, response.GetRawResponse());
+                response.Value.Id = SharedGallery.CreateResourceIdentifier(Id.SubscriptionId, _location, galleryUniqueName);
+                return Response.FromValue(new SharedGallery(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -152,9 +155,10 @@ namespace MgmtHierarchicalNonResource
             try
             {
                 var response = await _sharedGalleriesRestClient.GetAsync(Id.SubscriptionId, _location, galleryUniqueName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<SharedGallery>(null, response.GetRawResponse())
-                    : Response.FromValue(new SharedGallery(this, SharedGallery.CreateResourceIdentifier(Id.SubscriptionId, _location, galleryUniqueName), response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<SharedGallery>(null, response.GetRawResponse());
+                response.Value.Id = SharedGallery.CreateResourceIdentifier(Id.SubscriptionId, _location, galleryUniqueName);
+                return Response.FromValue(new SharedGallery(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -229,7 +233,12 @@ namespace MgmtHierarchicalNonResource
                 try
                 {
                     var response = _sharedGalleriesRestClient.List(Id.SubscriptionId, _location, sharedTo, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new SharedGallery(Parent, SharedGallery.CreateResourceIdentifier(Id.SubscriptionId, _location, value.Name), value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value =>
+                    {
+                        value.Id = SharedGallery.CreateResourceIdentifier(Id.SubscriptionId, _location, value.Name);
+                        return new SharedGallery(Parent, value);
+                    }
+                    ), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -244,7 +253,12 @@ namespace MgmtHierarchicalNonResource
                 try
                 {
                     var response = _sharedGalleriesRestClient.ListNextPage(nextLink, Id.SubscriptionId, _location, sharedTo, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new SharedGallery(Parent, SharedGallery.CreateResourceIdentifier(Id.SubscriptionId, _location, value.Name), value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value =>
+                    {
+                        value.Id = SharedGallery.CreateResourceIdentifier(Id.SubscriptionId, _location, value.Name);
+                        return new SharedGallery(Parent, value);
+                    }
+                    ), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -271,7 +285,12 @@ namespace MgmtHierarchicalNonResource
                 try
                 {
                     var response = await _sharedGalleriesRestClient.ListAsync(Id.SubscriptionId, _location, sharedTo, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new SharedGallery(Parent, SharedGallery.CreateResourceIdentifier(Id.SubscriptionId, _location, value.Name), value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value =>
+                    {
+                        value.Id = SharedGallery.CreateResourceIdentifier(Id.SubscriptionId, _location, value.Name);
+                        return new SharedGallery(Parent, value);
+                    }
+                    ), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -286,7 +305,12 @@ namespace MgmtHierarchicalNonResource
                 try
                 {
                     var response = await _sharedGalleriesRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, _location, sharedTo, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new SharedGallery(Parent, SharedGallery.CreateResourceIdentifier(Id.SubscriptionId, _location, value.Name), value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value =>
+                    {
+                        value.Id = SharedGallery.CreateResourceIdentifier(Id.SubscriptionId, _location, value.Name);
+                        return new SharedGallery(Parent, value);
+                    }
+                    ), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {

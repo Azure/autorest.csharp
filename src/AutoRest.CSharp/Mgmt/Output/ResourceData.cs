@@ -30,12 +30,15 @@ namespace AutoRest.CSharp.Mgmt.Output
             return $"A class representing the {clientPrefix} data model.";
         }
 
+        private CSharpType? typeOfId;
+        internal CSharpType? TypeOfId => typeOfId ??= GetTypeOfId();
+
         /// <summary>
         /// Get the <see cref="CSharpType"/> of the `Id` property of this ResourceData.
         /// Return null if this resource data does not have an Id property.
         /// </summary>
         /// <returns></returns>
-        internal CSharpType? GetTypeOfId()
+        private CSharpType? GetTypeOfId()
         {
             var baseTypes = EnumerateHierarchy().TakeLast(2).ToArray();
             var baseType = baseTypes.Length == 1 || baseTypes[1].Declaration.Name == "Object" ? baseTypes[0] : baseTypes[1];
@@ -50,5 +53,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             var nameProperty = baseType.Properties.Where(p => p.Declaration.Name == "Name").FirstOrDefault();
             return nameProperty?.Declaration.Type;
         }
+
+        internal bool ShouldSetResourceIdentifier => TypeOfId == null;
     }
 }

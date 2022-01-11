@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using Azure.Core;
 using MgmtHierarchicalNonResource.Models;
 
 namespace MgmtHierarchicalNonResource
@@ -24,5 +25,8 @@ namespace MgmtHierarchicalNonResource
         internal SharedGalleryData(string name, string location, string uniqueId) : base(name, location, uniqueId)
         {
         }
+
+        /// <summary> The resource identifier. </summary>
+        public ResourceIdentifier Id { get; internal set; }
     }
 }
