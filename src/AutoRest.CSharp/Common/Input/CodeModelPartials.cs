@@ -139,7 +139,7 @@ namespace AutoRest.CSharp.Input
 
     internal partial class RequestParameter
     {
-        public bool IsResourceParameter => Convert.ToBoolean(Extensions.GetValue<string>("x-ms-resource-parameter"));
+        public bool IsResourceParameter => Convert.ToBoolean(Extensions.GetValue<string>("x-ms-resource-identifier"));
 
         public ParameterLocation In => Protocol.Http is HttpParameter httpParameter ? httpParameter.In : ParameterLocation.None;
         public bool IsFlattened => Flattened ?? false;

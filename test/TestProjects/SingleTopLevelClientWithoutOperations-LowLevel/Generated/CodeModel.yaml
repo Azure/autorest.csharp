@@ -50,126 +50,6 @@ globalParameters:
         in: uri
 operationGroups:
   - !OperationGroup 
-    $key: Client3
-    operations:
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: '2021-10-19'
-        parameters:
-          - *ref_1
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_2
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters: []
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpRequest 
-                path: /client1
-                method: get
-                uri: '{$host}'
-        signatureParameters: []
-        responses:
-          - !SchemaResponse 
-            schema: *ref_3
-            language: !Languages 
-              default:
-                name: ''
-                description: Success
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-        language: !Languages 
-          default:
-            name: Operation
-            description: ''
-        protocol: !Protocols {}
-    language: !Languages 
-      default:
-        name: Client3
-        description: ''
-    protocol: !Protocols {}
-  - !OperationGroup 
-    $key: Client4
-    operations:
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: '2021-10-19'
-        parameters:
-          - *ref_1
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_2
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters: []
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpRequest 
-                path: /client2
-                method: get
-                uri: '{$host}'
-        signatureParameters: []
-        responses:
-          - !SchemaResponse 
-            schema: *ref_3
-            language: !Languages 
-              default:
-                name: ''
-                description: Success
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-        language: !Languages 
-          default:
-            name: Operation
-            description: ''
-        protocol: !Protocols {}
-    language: !Languages 
-      default:
-        name: Client4
-        description: ''
-    protocol: !Protocols {}
-  - !OperationGroup 
     $key: Client5
     operations:
       - !Operation 
@@ -201,7 +81,7 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpRequest 
-                path: /client3
+                path: /client5
                 method: get
                 uri: '{$host}'
         signatureParameters: []
@@ -227,6 +107,126 @@ operationGroups:
     language: !Languages 
       default:
         name: Client5
+        description: ''
+    protocol: !Protocols {}
+  - !OperationGroup 
+    $key: Client6
+    operations:
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2021-10-19'
+        parameters:
+          - *ref_1
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_2
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /client6
+                method: get
+                uri: '{$host}'
+        signatureParameters: []
+        responses:
+          - !SchemaResponse 
+            schema: *ref_3
+            language: !Languages 
+              default:
+                name: ''
+                description: Success
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: Operation
+            description: ''
+        protocol: !Protocols {}
+    language: !Languages 
+      default:
+        name: Client6
+        description: ''
+    protocol: !Protocols {}
+  - !OperationGroup 
+    $key: Client7
+    operations:
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2021-10-19'
+        parameters:
+          - *ref_1
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_2
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /client7
+                method: get
+                uri: '{$host}'
+        signatureParameters: []
+        responses:
+          - !SchemaResponse 
+            schema: *ref_3
+            language: !Languages 
+              default:
+                name: ''
+                description: Success
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: Operation
+            description: ''
+        protocol: !Protocols {}
+    language: !Languages 
+      default:
+        name: Client7
         description: ''
     protocol: !Protocols {}
 security: !Security 

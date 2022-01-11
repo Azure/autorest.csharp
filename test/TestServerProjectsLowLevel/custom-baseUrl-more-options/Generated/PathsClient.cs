@@ -37,7 +37,7 @@ namespace custom_baseUrl_more_options_LowLevel
         /// <param name="dnsSuffix"> A string value that is used as a global part of the parameterized host. Default value &apos;host&apos;. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="credential"/>, or <paramref name="dnsSuffix"/> is null. </exception>
-        public PathsClient(string subscriptionId, AzureKeyCredential credential, string dnsSuffix = "host", AutoRestParameterizedCustomHostTestClientOptions options = null)
+        public PathsClient(string subscriptionId, AzureKeyCredential credential, string dnsSuffix = "host", PathsClientOptions options = null)
         {
             if (subscriptionId == null)
             {
@@ -51,7 +51,7 @@ namespace custom_baseUrl_more_options_LowLevel
             {
                 throw new ArgumentNullException(nameof(dnsSuffix));
             }
-            options ??= new AutoRestParameterizedCustomHostTestClientOptions();
+            options ??= new PathsClientOptions();
 
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;

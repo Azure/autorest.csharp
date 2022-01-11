@@ -20,7 +20,7 @@ directive:
       }
 ```
 
-# Promote collectionName to be a client parameter.
+# Promote collectionName to be a resource parameter.
 
 ```yaml
 directive:
@@ -32,6 +32,7 @@ directive:
         "name": "collectionName",
         "required": true,
         "type": "string",
+        "x-ms-resource-identifier": true,
         "x-ms-parameter-location": "client"
       };
 
@@ -46,12 +47,6 @@ directive:
 ```yaml
 directive:
   - from: swagger-document
-    where: $..[?(@.operationId !== undefined)]
+    where: $..[?(@.operationId == "ResourceSetRules_ListResourceSetRules")]
     transform: >
-      const mappingTable = {
-        "Collections_ListCollections": "Accounts_GetCollections",
-        "ResourceSetRules_ListResourceSetRules": "Accounts_GetResourceSetRules"
-      };
-
-      $.operationId = (mappingTable[$.operationId] ?? $.operationId);
-```
+      $.operationId = "Accounts_GetResourceSetRules";

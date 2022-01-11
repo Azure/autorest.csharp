@@ -10,7 +10,7 @@ schemas: !Schemas
           name: String
           description: simple string
       protocol: !Protocols {}
-    - !StringSchema &ref_3
+    - !StringSchema &ref_1
       type: string
       apiVersions:
         - !ApiVersion 
@@ -21,7 +21,7 @@ schemas: !Schemas
           description: ''
       protocol: !Protocols {}
   constants:
-    - !ConstantSchema &ref_2
+    - !ConstantSchema &ref_3
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -32,7 +32,22 @@ schemas: !Schemas
           description: 'Accept: application/json'
       protocol: !Protocols {}
 globalParameters:
-  - !Parameter &ref_1
+  - !Parameter &ref_5
+    schema: *ref_1
+    implementation: Client
+    required: true
+    extensions:
+      x-ms-priority: 0
+      x-ms-resource-identifier: true
+    language: !Languages 
+      default:
+        name: ClientParameter
+        description: ''
+        serializedName: clientParameter
+    protocol: !Protocols 
+      http: !HttpParameter 
+        in: query
+  - !Parameter &ref_2
     schema: *ref_0
     clientDefaultValue: http://localhost:3000
     implementation: Client
@@ -57,12 +72,12 @@ operationGroups:
           - !ApiVersion 
             version: '2021-10-19'
         parameters:
-          - *ref_1
+          - *ref_2
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_2
+                schema: *ref_3
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -87,7 +102,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_3
+            schema: *ref_1
             language: !Languages 
               default:
                 name: ''
@@ -117,12 +132,12 @@ operationGroups:
           - !ApiVersion 
             version: '2021-10-19'
         parameters:
-          - *ref_1
+          - *ref_2
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_2
+                schema: *ref_3
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -147,7 +162,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_3
+            schema: *ref_1
             language: !Languages 
               default:
                 name: ''
@@ -177,12 +192,12 @@ operationGroups:
           - !ApiVersion 
             version: '2021-10-19'
         parameters:
-          - *ref_1
+          - *ref_2
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_2
+                schema: *ref_3
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -207,7 +222,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_3
+            schema: *ref_1
             language: !Languages 
               default:
                 name: ''
@@ -227,6 +242,150 @@ operationGroups:
     language: !Languages 
       default:
         name: ''
+        description: ''
+    protocol: !Protocols {}
+  - !OperationGroup 
+    $key: Client4
+    operations:
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2021-10-19'
+        parameters:
+          - *ref_2
+          - !Parameter &ref_4
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: filter
+                description: ''
+                serializedName: filter
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_3
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /client4
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_4
+        responses:
+          - !SchemaResponse 
+            schema: *ref_1
+            language: !Languages 
+              default:
+                name: ''
+                description: Success
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        extensions:
+          x-ms-pageable:
+            nextLinkName: nextLink
+        language: !Languages 
+          default:
+            name: GetAll
+            description: 'Operation defined in resource client, but must be promoted to the top level client because it doesn''t have a parameter with `x-ms-resource-identifier: true`.'
+            paging:
+              nextLinkName: nextLink
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2021-10-19'
+        parameters:
+          - *ref_2
+          - !Parameter &ref_6
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: filter
+                description: ''
+                serializedName: filter
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - *ref_5
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_3
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /client4
+                method: patch
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_6
+        responses:
+          - !SchemaResponse 
+            schema: *ref_1
+            language: !Languages 
+              default:
+                name: ''
+                description: Success
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: Patch
+            description: 'Operation has a parameter with `x-ms-resource-identifier: true`, hence `Client4` will be codegen''ed as a resource client.'
+        protocol: !Protocols {}
+    language: !Languages 
+      default:
+        name: Client4
         description: ''
     protocol: !Protocols {}
 security: !Security 

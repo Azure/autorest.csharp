@@ -55,7 +55,7 @@ namespace MgmtKeyvault.Tests.Mock
             {
             };
             parameters.Tags.ReplaceWith(new Dictionary<string, string>() { ["Dept"] = "hsm", ["Environment"] = "dogfood", ["Slice"] = "A", });
-            await managedHsm.UpdateAsync(true,parameters);
+            await managedHsm.UpdateAsync(true, parameters);
         }
 
         [RecordedTest]
