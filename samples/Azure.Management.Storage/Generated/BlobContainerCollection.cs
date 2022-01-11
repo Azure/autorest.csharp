@@ -44,7 +44,7 @@ namespace Azure.Management.Storage
         internal static void ValidateResourceId(ResourceIdentifier id)
         {
             if (id.ResourceType != BlobService.ResourceType)
-                throw new ArgumentException(nameof(id), string.Format("Invalid resource type {0} expected {1}", id.ResourceType, BlobService.ResourceType));
+                throw new ArgumentException(string.Format("Invalid resource type {0} expected {1}", id.ResourceType, BlobService.ResourceType), nameof(id));
         }
 
         // Collection level operations.

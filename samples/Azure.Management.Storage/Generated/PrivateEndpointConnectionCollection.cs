@@ -44,7 +44,7 @@ namespace Azure.Management.Storage
         internal static void ValidateResourceId(ResourceIdentifier id)
         {
             if (id.ResourceType != StorageAccount.ResourceType)
-                throw new ArgumentException(nameof(id), string.Format("Invalid resource type {0} expected {1}", id.ResourceType, StorageAccount.ResourceType));
+                throw new ArgumentException(string.Format("Invalid resource type {0} expected {1}", id.ResourceType, StorageAccount.ResourceType), nameof(id));
         }
 
         // Collection level operations.

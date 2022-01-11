@@ -44,7 +44,7 @@ namespace MgmtOperations
         internal static void ValidateResourceId(ResourceIdentifier id)
         {
             if (id.ResourceType != AvailabilitySet.ResourceType)
-                throw new ArgumentException(nameof(id), string.Format("Invalid resource type {0} expected {1}", id.ResourceType, AvailabilitySet.ResourceType));
+                throw new ArgumentException(string.Format("Invalid resource type {0} expected {1}", id.ResourceType, AvailabilitySet.ResourceType), nameof(id));
         }
 
         // Collection level operations.
