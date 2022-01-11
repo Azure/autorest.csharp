@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -43,7 +44,7 @@ namespace MgmtScopeResource
         internal static void ValidateResourceId(ResourceIdentifier id)
         {
             if (id.ResourceType != Tenant.ResourceType)
-                throw new ArgumentException(string.Format("Invalid resource type {0} expected {1}", id.ResourceType, Tenant.ResourceType), nameof(id));
+                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, Tenant.ResourceType), nameof(id));
         }
 
         // Collection level operations.

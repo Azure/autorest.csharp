@@ -8,6 +8,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -44,7 +45,7 @@ namespace Azure.Management.Storage
         internal static void ValidateResourceId(ResourceIdentifier id)
         {
             if (id.ResourceType != FileService.ResourceType)
-                throw new ArgumentException(string.Format("Invalid resource type {0} expected {1}", id.ResourceType, FileService.ResourceType), nameof(id));
+                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, FileService.ResourceType), nameof(id));
         }
 
         // Collection level operations.
