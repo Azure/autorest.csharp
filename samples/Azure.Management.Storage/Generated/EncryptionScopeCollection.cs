@@ -200,9 +200,9 @@ namespace Azure.Management.Storage
             try
             {
                 var response = _encryptionScopesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, encryptionScopeName, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<EncryptionScope>(null, response.GetRawResponse())
-                    : Response.FromValue(new EncryptionScope(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<EncryptionScope>(null, response.GetRawResponse());
+                return Response.FromValue(new EncryptionScope(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -227,9 +227,9 @@ namespace Azure.Management.Storage
             try
             {
                 var response = await _encryptionScopesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, encryptionScopeName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<EncryptionScope>(null, response.GetRawResponse())
-                    : Response.FromValue(new EncryptionScope(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<EncryptionScope>(null, response.GetRawResponse());
+                return Response.FromValue(new EncryptionScope(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

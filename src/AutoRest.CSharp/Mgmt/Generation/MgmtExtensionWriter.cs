@@ -175,7 +175,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
             Dictionary<RequestPath, IEnumerable<ParameterMapping>> parameterMappings, IReadOnlyList<Parameter> methodParameters,
             string methodName, bool async)
         {
-            var actualItemType = WrapResourceDataType(itemType, clientOperation.First())!;
+            var pagingMethod = clientOperation.First().GetPagingMethod(Context)!;
+            var wrapResource = WrapResourceDataType(itemType, clientOperation.First());
+            var actualItemType = wrapResource?.Type ?? itemType;
 
             _writer.WriteXmlDocumentationSummary($"Lists the {actualItemType.Name.LastWordToPlural()} for this <see cref=\"{ExtensionOperationVariableType}\" />.");
             WritePagingMethodSignature(actualItemType, methodName, methodParameters, async, clientOperation.Accessibility, false);
@@ -276,7 +278,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             string methodName, bool async, bool shouldThrowExceptionWhenNull = false)
         {
             // TODO -- since we are combining multiple operations under different parents, which description should we leave here?
-            var returnType = WrapResourceDataType(clientOperation.ReturnType, clientOperation.First());
+            var returnType = WrapResourceDataType(clientOperation.ReturnType, clientOperation.First())?.Type ?? clientOperation.ReturnType;
 
             _writer.WriteXmlDocumentationSummary($"{clientOperation.Description}");
             WriteNormalMethodSignature(GetResponseType(returnType, async), methodName, methodParameters, async, clientOperation.Accessibility, true);
@@ -312,10 +314,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
         /// <param name="type"></param>
         /// <param name="operation"></param>
         /// <returns></returns>
-        protected override CSharpType? WrapResourceDataType(CSharpType? type, MgmtRestOperation operation)
+        protected override Resource? WrapResourceDataType(CSharpType? type, MgmtRestOperation operation)
         {
             if (!IsResourceDataType(type, operation))
-                return type;
+                return null;
 
             // we need to find the correct resource type that links with this resource data
             var candidates = new List<RequestPath>();
@@ -332,11 +334,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             // we should have a list of candidates, return the original type if there is no candidates
             if (candidates.Count == 0)
-                return type;
+                return null;
 
             var selectedResourcePath = candidates.OrderBy(path => path.Count).First();
 
-            return Context.Library.GetArmResource(selectedResourcePath).Type;
+            return Context.Library.GetArmResource(selectedResourcePath);
         }
 
         /// <summary>

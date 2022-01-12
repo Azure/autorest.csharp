@@ -295,12 +295,12 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             }
         }
 
-        protected override CSharpType? WrapResourceDataType(CSharpType? type, MgmtRestOperation operation)
+        protected override Resource? WrapResourceDataType(CSharpType? type, MgmtRestOperation operation)
         {
             if (!IsResourceDataType(type, operation))
-                return type;
+                return null;
 
-            return _resourceCollection.Resource.Type;
+            return _resourceCollection.Resource;
         }
 
         protected override bool IsResourceDataType(CSharpType? type, MgmtRestOperation operation)

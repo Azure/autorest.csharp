@@ -201,9 +201,9 @@ namespace MgmtListMethods
             try
             {
                 var response = _mgmtGrpParentWithNonResChesRestClient.Get(Id.Name, mgmtGrpParentWithNonResChName, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<MgmtGrpParentWithNonResCh>(null, response.GetRawResponse())
-                    : Response.FromValue(new MgmtGrpParentWithNonResCh(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<MgmtGrpParentWithNonResCh>(null, response.GetRawResponse());
+                return Response.FromValue(new MgmtGrpParentWithNonResCh(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -228,9 +228,9 @@ namespace MgmtListMethods
             try
             {
                 var response = await _mgmtGrpParentWithNonResChesRestClient.GetAsync(Id.Name, mgmtGrpParentWithNonResChName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<MgmtGrpParentWithNonResCh>(null, response.GetRawResponse())
-                    : Response.FromValue(new MgmtGrpParentWithNonResCh(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<MgmtGrpParentWithNonResCh>(null, response.GetRawResponse());
+                return Response.FromValue(new MgmtGrpParentWithNonResCh(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

@@ -200,9 +200,9 @@ namespace MgmtKeyvault
             try
             {
                 var response = _mHSMPrivateEndpointConnectionsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, privateEndpointConnectionName, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<MhsmPrivateEndpointConnection>(null, response.GetRawResponse())
-                    : Response.FromValue(new MhsmPrivateEndpointConnection(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<MhsmPrivateEndpointConnection>(null, response.GetRawResponse());
+                return Response.FromValue(new MhsmPrivateEndpointConnection(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -227,9 +227,9 @@ namespace MgmtKeyvault
             try
             {
                 var response = await _mHSMPrivateEndpointConnectionsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, privateEndpointConnectionName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<MhsmPrivateEndpointConnection>(null, response.GetRawResponse())
-                    : Response.FromValue(new MhsmPrivateEndpointConnection(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<MhsmPrivateEndpointConnection>(null, response.GetRawResponse());
+                return Response.FromValue(new MhsmPrivateEndpointConnection(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

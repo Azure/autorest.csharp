@@ -208,9 +208,9 @@ namespace Azure.Management.Storage
             try
             {
                 var response = _fileSharesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, shareName, expand, xMsSnapshot, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<FileShare>(null, response.GetRawResponse())
-                    : Response.FromValue(new FileShare(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<FileShare>(null, response.GetRawResponse());
+                return Response.FromValue(new FileShare(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -237,9 +237,9 @@ namespace Azure.Management.Storage
             try
             {
                 var response = await _fileSharesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, shareName, expand, xMsSnapshot, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<FileShare>(null, response.GetRawResponse())
-                    : Response.FromValue(new FileShare(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<FileShare>(null, response.GetRawResponse());
+                return Response.FromValue(new FileShare(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

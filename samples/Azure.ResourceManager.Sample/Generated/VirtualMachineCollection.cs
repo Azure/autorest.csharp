@@ -202,9 +202,9 @@ namespace Azure.ResourceManager.Sample
             try
             {
                 var response = _virtualMachinesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, vmName, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<VirtualMachine>(null, response.GetRawResponse())
-                    : Response.FromValue(new VirtualMachine(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<VirtualMachine>(null, response.GetRawResponse());
+                return Response.FromValue(new VirtualMachine(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -229,9 +229,9 @@ namespace Azure.ResourceManager.Sample
             try
             {
                 var response = await _virtualMachinesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, vmName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<VirtualMachine>(null, response.GetRawResponse())
-                    : Response.FromValue(new VirtualMachine(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<VirtualMachine>(null, response.GetRawResponse());
+                return Response.FromValue(new VirtualMachine(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

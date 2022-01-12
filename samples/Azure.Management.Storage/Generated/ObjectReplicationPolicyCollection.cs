@@ -200,9 +200,9 @@ namespace Azure.Management.Storage
             try
             {
                 var response = _objectReplicationPoliciesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, objectReplicationPolicyId, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<ObjectReplicationPolicy>(null, response.GetRawResponse())
-                    : Response.FromValue(new ObjectReplicationPolicy(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<ObjectReplicationPolicy>(null, response.GetRawResponse());
+                return Response.FromValue(new ObjectReplicationPolicy(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -227,9 +227,9 @@ namespace Azure.Management.Storage
             try
             {
                 var response = await _objectReplicationPoliciesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, objectReplicationPolicyId, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<ObjectReplicationPolicy>(null, response.GetRawResponse())
-                    : Response.FromValue(new ObjectReplicationPolicy(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<ObjectReplicationPolicy>(null, response.GetRawResponse());
+                return Response.FromValue(new ObjectReplicationPolicy(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

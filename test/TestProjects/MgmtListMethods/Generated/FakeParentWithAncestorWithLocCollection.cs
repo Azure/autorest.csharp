@@ -200,9 +200,9 @@ namespace MgmtListMethods
             try
             {
                 var response = _fakeParentWithAncestorWithLocsRestClient.Get(Id.SubscriptionId, Id.Name, fakeParentWithAncestorWithLocName, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<FakeParentWithAncestorWithLoc>(null, response.GetRawResponse())
-                    : Response.FromValue(new FakeParentWithAncestorWithLoc(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<FakeParentWithAncestorWithLoc>(null, response.GetRawResponse());
+                return Response.FromValue(new FakeParentWithAncestorWithLoc(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -227,9 +227,9 @@ namespace MgmtListMethods
             try
             {
                 var response = await _fakeParentWithAncestorWithLocsRestClient.GetAsync(Id.SubscriptionId, Id.Name, fakeParentWithAncestorWithLocName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<FakeParentWithAncestorWithLoc>(null, response.GetRawResponse())
-                    : Response.FromValue(new FakeParentWithAncestorWithLoc(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<FakeParentWithAncestorWithLoc>(null, response.GetRawResponse());
+                return Response.FromValue(new FakeParentWithAncestorWithLoc(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

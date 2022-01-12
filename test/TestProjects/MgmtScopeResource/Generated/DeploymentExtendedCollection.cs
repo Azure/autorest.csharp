@@ -190,9 +190,9 @@ namespace MgmtScopeResource
             try
             {
                 var response = _deploymentsRestClient.GetAtScope(Id, deploymentName, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<DeploymentExtended>(null, response.GetRawResponse())
-                    : Response.FromValue(new DeploymentExtended(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<DeploymentExtended>(null, response.GetRawResponse());
+                return Response.FromValue(new DeploymentExtended(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -217,9 +217,9 @@ namespace MgmtScopeResource
             try
             {
                 var response = await _deploymentsRestClient.GetAtScopeAsync(Id, deploymentName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<DeploymentExtended>(null, response.GetRawResponse())
-                    : Response.FromValue(new DeploymentExtended(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<DeploymentExtended>(null, response.GetRawResponse());
+                return Response.FromValue(new DeploymentExtended(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

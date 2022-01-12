@@ -202,9 +202,9 @@ namespace MgmtLRO
             try
             {
                 var response = _barsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, barName, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<Bar>(null, response.GetRawResponse())
-                    : Response.FromValue(new Bar(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<Bar>(null, response.GetRawResponse());
+                return Response.FromValue(new Bar(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -229,9 +229,9 @@ namespace MgmtLRO
             try
             {
                 var response = await _barsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, barName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<Bar>(null, response.GetRawResponse())
-                    : Response.FromValue(new Bar(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<Bar>(null, response.GetRawResponse());
+                return Response.FromValue(new Bar(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

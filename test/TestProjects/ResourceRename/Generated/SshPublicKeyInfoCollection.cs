@@ -194,9 +194,9 @@ namespace ResourceRename
             try
             {
                 var response = _sshPublicKeysRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, sshPublicKeyName, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<SshPublicKeyInfo>(null, response.GetRawResponse())
-                    : Response.FromValue(new SshPublicKeyInfo(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<SshPublicKeyInfo>(null, response.GetRawResponse());
+                return Response.FromValue(new SshPublicKeyInfo(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -221,9 +221,9 @@ namespace ResourceRename
             try
             {
                 var response = await _sshPublicKeysRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, sshPublicKeyName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<SshPublicKeyInfo>(null, response.GetRawResponse())
-                    : Response.FromValue(new SshPublicKeyInfo(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<SshPublicKeyInfo>(null, response.GetRawResponse());
+                return Response.FromValue(new SshPublicKeyInfo(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

@@ -202,9 +202,9 @@ namespace MgmtKeyvault
             try
             {
                 var response = _managedHsmsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<ManagedHsm>(null, response.GetRawResponse())
-                    : Response.FromValue(new ManagedHsm(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<ManagedHsm>(null, response.GetRawResponse());
+                return Response.FromValue(new ManagedHsm(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -229,9 +229,9 @@ namespace MgmtKeyvault
             try
             {
                 var response = await _managedHsmsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<ManagedHsm>(null, response.GetRawResponse())
-                    : Response.FromValue(new ManagedHsm(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<ManagedHsm>(null, response.GetRawResponse());
+                return Response.FromValue(new ManagedHsm(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

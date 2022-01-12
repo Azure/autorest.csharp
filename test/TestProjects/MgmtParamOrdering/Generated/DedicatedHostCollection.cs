@@ -200,9 +200,9 @@ namespace MgmtParamOrdering
             try
             {
                 var response = _dedicatedHostsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, hostName, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<DedicatedHost>(null, response.GetRawResponse())
-                    : Response.FromValue(new DedicatedHost(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<DedicatedHost>(null, response.GetRawResponse());
+                return Response.FromValue(new DedicatedHost(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -227,9 +227,9 @@ namespace MgmtParamOrdering
             try
             {
                 var response = await _dedicatedHostsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, hostName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<DedicatedHost>(null, response.GetRawResponse())
-                    : Response.FromValue(new DedicatedHost(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<DedicatedHost>(null, response.GetRawResponse());
+                return Response.FromValue(new DedicatedHost(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

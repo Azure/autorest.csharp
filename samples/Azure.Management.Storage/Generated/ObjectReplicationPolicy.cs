@@ -39,11 +39,11 @@ namespace Azure.Management.Storage
 
         /// <summary> Initializes a new instance of the <see cref = "ObjectReplicationPolicy"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
-        /// <param name="resource"> The resource that is the target of operations. </param>
-        internal ObjectReplicationPolicy(ArmResource options, ObjectReplicationPolicyData resource) : base(options, resource.Id)
+        /// <param name="data"> The resource that is the target of operations. </param>
+        internal ObjectReplicationPolicy(ArmResource options, ObjectReplicationPolicyData data) : base(options, data.Id)
         {
             HasData = true;
-            _data = resource;
+            _data = data;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _objectReplicationPoliciesRestClient = new ObjectReplicationPoliciesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
 #if DEBUG

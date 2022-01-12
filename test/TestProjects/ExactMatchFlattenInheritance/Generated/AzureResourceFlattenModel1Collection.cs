@@ -202,9 +202,9 @@ namespace ExactMatchFlattenInheritance
             try
             {
                 var response = _azureResourceFlattenModel1sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<AzureResourceFlattenModel1>(null, response.GetRawResponse())
-                    : Response.FromValue(new AzureResourceFlattenModel1(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<AzureResourceFlattenModel1>(null, response.GetRawResponse());
+                return Response.FromValue(new AzureResourceFlattenModel1(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -229,9 +229,9 @@ namespace ExactMatchFlattenInheritance
             try
             {
                 var response = await _azureResourceFlattenModel1sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<AzureResourceFlattenModel1>(null, response.GetRawResponse())
-                    : Response.FromValue(new AzureResourceFlattenModel1(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<AzureResourceFlattenModel1>(null, response.GetRawResponse());
+                return Response.FromValue(new AzureResourceFlattenModel1(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

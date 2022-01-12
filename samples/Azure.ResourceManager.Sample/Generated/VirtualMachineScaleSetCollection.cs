@@ -202,9 +202,9 @@ namespace Azure.ResourceManager.Sample
             try
             {
                 var response = _virtualMachineScaleSetsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, vmScaleSetName, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<VirtualMachineScaleSet>(null, response.GetRawResponse())
-                    : Response.FromValue(new VirtualMachineScaleSet(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<VirtualMachineScaleSet>(null, response.GetRawResponse());
+                return Response.FromValue(new VirtualMachineScaleSet(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -229,9 +229,9 @@ namespace Azure.ResourceManager.Sample
             try
             {
                 var response = await _virtualMachineScaleSetsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, vmScaleSetName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<VirtualMachineScaleSet>(null, response.GetRawResponse())
-                    : Response.FromValue(new VirtualMachineScaleSet(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<VirtualMachineScaleSet>(null, response.GetRawResponse());
+                return Response.FromValue(new VirtualMachineScaleSet(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

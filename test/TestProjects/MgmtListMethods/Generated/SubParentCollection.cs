@@ -202,9 +202,9 @@ namespace MgmtListMethods
             try
             {
                 var response = _subParentsRestClient.Get(Id.SubscriptionId, subParentName, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<SubParent>(null, response.GetRawResponse())
-                    : Response.FromValue(new SubParent(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<SubParent>(null, response.GetRawResponse());
+                return Response.FromValue(new SubParent(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -229,9 +229,9 @@ namespace MgmtListMethods
             try
             {
                 var response = await _subParentsRestClient.GetAsync(Id.SubscriptionId, subParentName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<SubParent>(null, response.GetRawResponse())
-                    : Response.FromValue(new SubParent(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<SubParent>(null, response.GetRawResponse());
+                return Response.FromValue(new SubParent(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

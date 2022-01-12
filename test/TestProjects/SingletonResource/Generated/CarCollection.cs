@@ -200,9 +200,9 @@ namespace SingletonResource
             try
             {
                 var response = _carsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, carName, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<Car>(null, response.GetRawResponse())
-                    : Response.FromValue(new Car(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<Car>(null, response.GetRawResponse());
+                return Response.FromValue(new Car(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -227,9 +227,9 @@ namespace SingletonResource
             try
             {
                 var response = await _carsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, carName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<Car>(null, response.GetRawResponse())
-                    : Response.FromValue(new Car(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<Car>(null, response.GetRawResponse());
+                return Response.FromValue(new Car(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

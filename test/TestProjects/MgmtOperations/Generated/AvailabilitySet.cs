@@ -39,11 +39,11 @@ namespace MgmtOperations
 
         /// <summary> Initializes a new instance of the <see cref = "AvailabilitySet"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
-        /// <param name="resource"> The resource that is the target of operations. </param>
-        internal AvailabilitySet(ArmResource options, AvailabilitySetData resource) : base(options, resource.Id)
+        /// <param name="data"> The resource that is the target of operations. </param>
+        internal AvailabilitySet(ArmResource options, AvailabilitySetData data) : base(options, data.Id)
         {
             HasData = true;
-            _data = resource;
+            _data = data;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _availabilitySetsRestClient = new AvailabilitySetsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
 #if DEBUG

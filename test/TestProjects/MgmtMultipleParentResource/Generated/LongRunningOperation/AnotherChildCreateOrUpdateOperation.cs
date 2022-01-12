@@ -65,13 +65,15 @@ namespace MgmtMultipleParentResource.Models
         AnotherParentChild IOperationSource<AnotherParentChild>.CreateResult(Response response, CancellationToken cancellationToken)
         {
             using var document = JsonDocument.Parse(response.ContentStream);
-            return new AnotherParentChild(_operationBase, ChildBodyData.DeserializeChildBodyData(document.RootElement));
+            var data = ChildBodyData.DeserializeChildBodyData(document.RootElement);
+            return new AnotherParentChild(_operationBase, data);
         }
 
         async ValueTask<AnotherParentChild> IOperationSource<AnotherParentChild>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-            return new AnotherParentChild(_operationBase, ChildBodyData.DeserializeChildBodyData(document.RootElement));
+            var data = ChildBodyData.DeserializeChildBodyData(document.RootElement);
+            return new AnotherParentChild(_operationBase, data);
         }
     }
 }

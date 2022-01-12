@@ -39,11 +39,11 @@ namespace MgmtKeyvault
 
         /// <summary> Initializes a new instance of the <see cref = "DeletedManagedHsm"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
-        /// <param name="resource"> The resource that is the target of operations. </param>
-        internal DeletedManagedHsm(ArmResource options, DeletedManagedHsmData resource) : base(options, resource.Id)
+        /// <param name="data"> The resource that is the target of operations. </param>
+        internal DeletedManagedHsm(ArmResource options, DeletedManagedHsmData data) : base(options, data.Id)
         {
             HasData = true;
-            _data = resource;
+            _data = data;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _managedHsmsRestClient = new ManagedHsmsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
 #if DEBUG

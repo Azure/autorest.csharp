@@ -200,9 +200,9 @@ namespace MgmtListMethods
             try
             {
                 var response = _tenantParentsRestClient.Get(Id.Name, tenantParentName, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<TenantParent>(null, response.GetRawResponse())
-                    : Response.FromValue(new TenantParent(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<TenantParent>(null, response.GetRawResponse());
+                return Response.FromValue(new TenantParent(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -227,9 +227,9 @@ namespace MgmtListMethods
             try
             {
                 var response = await _tenantParentsRestClient.GetAsync(Id.Name, tenantParentName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<TenantParent>(null, response.GetRawResponse())
-                    : Response.FromValue(new TenantParent(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<TenantParent>(null, response.GetRawResponse());
+                return Response.FromValue(new TenantParent(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

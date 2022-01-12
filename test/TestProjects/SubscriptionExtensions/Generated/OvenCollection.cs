@@ -200,9 +200,9 @@ namespace SubscriptionExtensions
             try
             {
                 var response = _ovensRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, ovenName, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<Oven>(null, response.GetRawResponse())
-                    : Response.FromValue(new Oven(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<Oven>(null, response.GetRawResponse());
+                return Response.FromValue(new Oven(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -227,9 +227,9 @@ namespace SubscriptionExtensions
             try
             {
                 var response = await _ovensRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, ovenName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<Oven>(null, response.GetRawResponse())
-                    : Response.FromValue(new Oven(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<Oven>(null, response.GetRawResponse());
+                return Response.FromValue(new Oven(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

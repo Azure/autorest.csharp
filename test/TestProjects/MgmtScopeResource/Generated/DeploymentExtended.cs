@@ -43,11 +43,11 @@ namespace MgmtScopeResource
 
         /// <summary> Initializes a new instance of the <see cref = "DeploymentExtended"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
-        /// <param name="resource"> The resource that is the target of operations. </param>
-        internal DeploymentExtended(ArmResource options, DeploymentExtendedData resource) : base(options, resource.Id)
+        /// <param name="data"> The resource that is the target of operations. </param>
+        internal DeploymentExtended(ArmResource options, DeploymentExtendedData data) : base(options, data.Id)
         {
             HasData = true;
-            _data = resource;
+            _data = data;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _deploymentsRestClient = new DeploymentsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
             _restClient = new ResourceManagementRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);

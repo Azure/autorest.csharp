@@ -202,9 +202,9 @@ namespace MgmtExtensionResource
             try
             {
                 var response = _policyDefinitionsRestClient.Get(Id.SubscriptionId, policyDefinitionName, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<SubscriptionPolicyDefinition>(null, response.GetRawResponse())
-                    : Response.FromValue(new SubscriptionPolicyDefinition(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<SubscriptionPolicyDefinition>(null, response.GetRawResponse());
+                return Response.FromValue(new SubscriptionPolicyDefinition(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -229,9 +229,9 @@ namespace MgmtExtensionResource
             try
             {
                 var response = await _policyDefinitionsRestClient.GetAsync(Id.SubscriptionId, policyDefinitionName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<SubscriptionPolicyDefinition>(null, response.GetRawResponse())
-                    : Response.FromValue(new SubscriptionPolicyDefinition(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<SubscriptionPolicyDefinition>(null, response.GetRawResponse());
+                return Response.FromValue(new SubscriptionPolicyDefinition(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

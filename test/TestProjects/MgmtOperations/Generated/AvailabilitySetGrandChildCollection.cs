@@ -200,9 +200,9 @@ namespace MgmtOperations
             try
             {
                 var response = _availabilitySetGrandChildRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, availabilitySetGrandChildName, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<AvailabilitySetGrandChild>(null, response.GetRawResponse())
-                    : Response.FromValue(new AvailabilitySetGrandChild(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<AvailabilitySetGrandChild>(null, response.GetRawResponse());
+                return Response.FromValue(new AvailabilitySetGrandChild(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -227,9 +227,9 @@ namespace MgmtOperations
             try
             {
                 var response = await _availabilitySetGrandChildRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, availabilitySetGrandChildName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<AvailabilitySetGrandChild>(null, response.GetRawResponse())
-                    : Response.FromValue(new AvailabilitySetGrandChild(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<AvailabilitySetGrandChild>(null, response.GetRawResponse());
+                return Response.FromValue(new AvailabilitySetGrandChild(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

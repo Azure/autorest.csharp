@@ -198,9 +198,9 @@ namespace SupersetInheritance
             try
             {
                 var response = _supersetModel4sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, supersetModel4SName, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<SupersetModel4>(null, response.GetRawResponse())
-                    : Response.FromValue(new SupersetModel4(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<SupersetModel4>(null, response.GetRawResponse());
+                return Response.FromValue(new SupersetModel4(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -225,9 +225,9 @@ namespace SupersetInheritance
             try
             {
                 var response = await _supersetModel4sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, supersetModel4SName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<SupersetModel4>(null, response.GetRawResponse())
-                    : Response.FromValue(new SupersetModel4(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<SupersetModel4>(null, response.GetRawResponse());
+                return Response.FromValue(new SupersetModel4(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

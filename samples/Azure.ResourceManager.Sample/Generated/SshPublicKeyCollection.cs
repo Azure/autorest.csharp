@@ -202,9 +202,9 @@ namespace Azure.ResourceManager.Sample
             try
             {
                 var response = _sshPublicKeysRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, sshPublicKeyName, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<SshPublicKey>(null, response.GetRawResponse())
-                    : Response.FromValue(new SshPublicKey(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<SshPublicKey>(null, response.GetRawResponse());
+                return Response.FromValue(new SshPublicKey(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -229,9 +229,9 @@ namespace Azure.ResourceManager.Sample
             try
             {
                 var response = await _sshPublicKeysRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, sshPublicKeyName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<SshPublicKey>(null, response.GetRawResponse())
-                    : Response.FromValue(new SshPublicKey(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<SshPublicKey>(null, response.GetRawResponse());
+                return Response.FromValue(new SshPublicKey(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

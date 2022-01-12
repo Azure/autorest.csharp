@@ -200,9 +200,9 @@ namespace MgmtListMethods
             try
             {
                 var response = _fakeParentWithAncestorsRestClient.Get(Id.SubscriptionId, Id.Name, fakeParentWithAncestorName, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<FakeParentWithAncestor>(null, response.GetRawResponse())
-                    : Response.FromValue(new FakeParentWithAncestor(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<FakeParentWithAncestor>(null, response.GetRawResponse());
+                return Response.FromValue(new FakeParentWithAncestor(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -227,9 +227,9 @@ namespace MgmtListMethods
             try
             {
                 var response = await _fakeParentWithAncestorsRestClient.GetAsync(Id.SubscriptionId, Id.Name, fakeParentWithAncestorName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<FakeParentWithAncestor>(null, response.GetRawResponse())
-                    : Response.FromValue(new FakeParentWithAncestor(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<FakeParentWithAncestor>(null, response.GetRawResponse());
+                return Response.FromValue(new FakeParentWithAncestor(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

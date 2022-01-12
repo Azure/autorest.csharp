@@ -202,9 +202,9 @@ namespace MgmtKeyvault
             try
             {
                 var response = _vaultsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, vaultName, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<Vault>(null, response.GetRawResponse())
-                    : Response.FromValue(new Vault(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<Vault>(null, response.GetRawResponse());
+                return Response.FromValue(new Vault(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -229,9 +229,9 @@ namespace MgmtKeyvault
             try
             {
                 var response = await _vaultsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, vaultName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<Vault>(null, response.GetRawResponse())
-                    : Response.FromValue(new Vault(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<Vault>(null, response.GetRawResponse());
+                return Response.FromValue(new Vault(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

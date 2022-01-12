@@ -205,9 +205,9 @@ namespace MgmtOperations
             try
             {
                 var response = _availabilitySetsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, availabilitySetName, expand, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<AvailabilitySet>(null, response.GetRawResponse())
-                    : Response.FromValue(new AvailabilitySet(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<AvailabilitySet>(null, response.GetRawResponse());
+                return Response.FromValue(new AvailabilitySet(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -233,9 +233,9 @@ namespace MgmtOperations
             try
             {
                 var response = await _availabilitySetsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, availabilitySetName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<AvailabilitySet>(null, response.GetRawResponse())
-                    : Response.FromValue(new AvailabilitySet(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<AvailabilitySet>(null, response.GetRawResponse());
+                return Response.FromValue(new AvailabilitySet(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

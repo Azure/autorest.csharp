@@ -199,9 +199,9 @@ namespace MgmtParent
             try
             {
                 var response = _dedicatedHostGroupsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, hostGroupName, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<DedicatedHostGroup>(null, response.GetRawResponse())
-                    : Response.FromValue(new DedicatedHostGroup(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<DedicatedHostGroup>(null, response.GetRawResponse());
+                return Response.FromValue(new DedicatedHostGroup(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -226,9 +226,9 @@ namespace MgmtParent
             try
             {
                 var response = await _dedicatedHostGroupsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, hostGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<DedicatedHostGroup>(null, response.GetRawResponse())
-                    : Response.FromValue(new DedicatedHostGroup(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<DedicatedHostGroup>(null, response.GetRawResponse());
+                return Response.FromValue(new DedicatedHostGroup(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

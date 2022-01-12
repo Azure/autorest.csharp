@@ -206,9 +206,9 @@ namespace MgmtExpandResourceTypes
             try
             {
                 var response = _zonesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, zoneName, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<Zone>(null, response.GetRawResponse())
-                    : Response.FromValue(new Zone(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<Zone>(null, response.GetRawResponse());
+                return Response.FromValue(new Zone(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -233,9 +233,9 @@ namespace MgmtExpandResourceTypes
             try
             {
                 var response = await _zonesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, zoneName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<Zone>(null, response.GetRawResponse())
-                    : Response.FromValue(new Zone(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<Zone>(null, response.GetRawResponse());
+                return Response.FromValue(new Zone(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

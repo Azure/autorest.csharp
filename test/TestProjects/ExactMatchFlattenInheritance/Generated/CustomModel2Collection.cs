@@ -194,9 +194,9 @@ namespace ExactMatchFlattenInheritance
             try
             {
                 var response = _customModel2sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<CustomModel2>(null, response.GetRawResponse())
-                    : Response.FromValue(new CustomModel2(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<CustomModel2>(null, response.GetRawResponse());
+                return Response.FromValue(new CustomModel2(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -221,9 +221,9 @@ namespace ExactMatchFlattenInheritance
             try
             {
                 var response = await _customModel2sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<CustomModel2>(null, response.GetRawResponse())
-                    : Response.FromValue(new CustomModel2(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<CustomModel2>(null, response.GetRawResponse());
+                return Response.FromValue(new CustomModel2(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

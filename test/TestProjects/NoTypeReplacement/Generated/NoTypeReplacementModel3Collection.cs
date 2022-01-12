@@ -186,9 +186,9 @@ namespace NoTypeReplacement
             try
             {
                 var response = _noTypeReplacementModel3sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, noTypeReplacementModel3SName, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<NoTypeReplacementModel3>(null, response.GetRawResponse())
-                    : Response.FromValue(new NoTypeReplacementModel3(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<NoTypeReplacementModel3>(null, response.GetRawResponse());
+                return Response.FromValue(new NoTypeReplacementModel3(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -213,9 +213,9 @@ namespace NoTypeReplacement
             try
             {
                 var response = await _noTypeReplacementModel3sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, noTypeReplacementModel3SName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<NoTypeReplacementModel3>(null, response.GetRawResponse())
-                    : Response.FromValue(new NoTypeReplacementModel3(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<NoTypeReplacementModel3>(null, response.GetRawResponse());
+                return Response.FromValue(new NoTypeReplacementModel3(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

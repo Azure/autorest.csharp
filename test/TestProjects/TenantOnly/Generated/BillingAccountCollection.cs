@@ -204,9 +204,9 @@ namespace TenantOnly
             try
             {
                 var response = _billingAccountsRestClient.Get(billingAccountName, expand, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<BillingAccount>(null, response.GetRawResponse())
-                    : Response.FromValue(new BillingAccount(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<BillingAccount>(null, response.GetRawResponse());
+                return Response.FromValue(new BillingAccount(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -232,9 +232,9 @@ namespace TenantOnly
             try
             {
                 var response = await _billingAccountsRestClient.GetAsync(billingAccountName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<BillingAccount>(null, response.GetRawResponse())
-                    : Response.FromValue(new BillingAccount(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<BillingAccount>(null, response.GetRawResponse());
+                return Response.FromValue(new BillingAccount(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

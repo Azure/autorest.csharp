@@ -198,9 +198,9 @@ namespace SupersetFlattenInheritance
             try
             {
                 var response = _trackedResourceModel1sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, trackedResourceModel1SName, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<TrackedResourceModel1>(null, response.GetRawResponse())
-                    : Response.FromValue(new TrackedResourceModel1(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<TrackedResourceModel1>(null, response.GetRawResponse());
+                return Response.FromValue(new TrackedResourceModel1(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -225,9 +225,9 @@ namespace SupersetFlattenInheritance
             try
             {
                 var response = await _trackedResourceModel1sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, trackedResourceModel1SName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<TrackedResourceModel1>(null, response.GetRawResponse())
-                    : Response.FromValue(new TrackedResourceModel1(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<TrackedResourceModel1>(null, response.GetRawResponse());
+                return Response.FromValue(new TrackedResourceModel1(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

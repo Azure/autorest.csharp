@@ -198,9 +198,9 @@ namespace ExactMatchInheritance
             try
             {
                 var response = _exactMatchModel1sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, exactMatchModel1SName, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<ExactMatchModel1>(null, response.GetRawResponse())
-                    : Response.FromValue(new ExactMatchModel1(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<ExactMatchModel1>(null, response.GetRawResponse());
+                return Response.FromValue(new ExactMatchModel1(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -225,9 +225,9 @@ namespace ExactMatchInheritance
             try
             {
                 var response = await _exactMatchModel1sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, exactMatchModel1SName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<ExactMatchModel1>(null, response.GetRawResponse())
-                    : Response.FromValue(new ExactMatchModel1(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<ExactMatchModel1>(null, response.GetRawResponse());
+                return Response.FromValue(new ExactMatchModel1(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

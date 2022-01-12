@@ -203,9 +203,9 @@ namespace Azure.ResourceManager.Sample
             try
             {
                 var response = _virtualMachineScaleSetExtensionsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmssExtensionName, expand, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<VirtualMachineScaleSetExtension>(null, response.GetRawResponse())
-                    : Response.FromValue(new VirtualMachineScaleSetExtension(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<VirtualMachineScaleSetExtension>(null, response.GetRawResponse());
+                return Response.FromValue(new VirtualMachineScaleSetExtension(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -231,9 +231,9 @@ namespace Azure.ResourceManager.Sample
             try
             {
                 var response = await _virtualMachineScaleSetExtensionsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmssExtensionName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<VirtualMachineScaleSetExtension>(null, response.GetRawResponse())
-                    : Response.FromValue(new VirtualMachineScaleSetExtension(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<VirtualMachineScaleSetExtension>(null, response.GetRawResponse());
+                return Response.FromValue(new VirtualMachineScaleSetExtension(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

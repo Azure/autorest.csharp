@@ -200,9 +200,9 @@ namespace Azure.Management.Storage
             try
             {
                 var response = _blobContainersRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, containerName, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<BlobContainer>(null, response.GetRawResponse())
-                    : Response.FromValue(new BlobContainer(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<BlobContainer>(null, response.GetRawResponse());
+                return Response.FromValue(new BlobContainer(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -227,9 +227,9 @@ namespace Azure.Management.Storage
             try
             {
                 var response = await _blobContainersRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, containerName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<BlobContainer>(null, response.GetRawResponse())
-                    : Response.FromValue(new BlobContainer(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<BlobContainer>(null, response.GetRawResponse());
+                return Response.FromValue(new BlobContainer(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

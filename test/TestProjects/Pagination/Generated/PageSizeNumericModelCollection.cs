@@ -186,9 +186,9 @@ namespace Pagination
             try
             {
                 var response = _pageSizeNumericModelsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<PageSizeNumericModel>(null, response.GetRawResponse())
-                    : Response.FromValue(new PageSizeNumericModel(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<PageSizeNumericModel>(null, response.GetRawResponse());
+                return Response.FromValue(new PageSizeNumericModel(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -213,9 +213,9 @@ namespace Pagination
             try
             {
                 var response = await _pageSizeNumericModelsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<PageSizeNumericModel>(null, response.GetRawResponse())
-                    : Response.FromValue(new PageSizeNumericModel(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<PageSizeNumericModel>(null, response.GetRawResponse());
+                return Response.FromValue(new PageSizeNumericModel(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

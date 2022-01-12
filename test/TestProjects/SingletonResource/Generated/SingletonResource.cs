@@ -39,11 +39,11 @@ namespace SingletonResource
 
         /// <summary> Initializes a new instance of the <see cref = "SingletonResource"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
-        /// <param name="resource"> The resource that is the target of operations. </param>
-        internal SingletonResource(ArmResource options, SingletonResourceData resource) : base(options, resource.Id)
+        /// <param name="data"> The resource that is the target of operations. </param>
+        internal SingletonResource(ArmResource options, SingletonResourceData data) : base(options, data.Id)
         {
             HasData = true;
-            _data = resource;
+            _data = data;
             Parent = options;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _singletonResourcesRestClient = new SingletonResourcesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);

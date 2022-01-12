@@ -202,9 +202,9 @@ namespace MgmtListMethods
             try
             {
                 var response = _resGrpParentWithAncestorWithLocsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentWithAncestorWithLocName, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<ResGrpParentWithAncestorWithLoc>(null, response.GetRawResponse())
-                    : Response.FromValue(new ResGrpParentWithAncestorWithLoc(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<ResGrpParentWithAncestorWithLoc>(null, response.GetRawResponse());
+                return Response.FromValue(new ResGrpParentWithAncestorWithLoc(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -229,9 +229,9 @@ namespace MgmtListMethods
             try
             {
                 var response = await _resGrpParentWithAncestorWithLocsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentWithAncestorWithLocName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<ResGrpParentWithAncestorWithLoc>(null, response.GetRawResponse())
-                    : Response.FromValue(new ResGrpParentWithAncestorWithLoc(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<ResGrpParentWithAncestorWithLoc>(null, response.GetRawResponse());
+                return Response.FromValue(new ResGrpParentWithAncestorWithLoc(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

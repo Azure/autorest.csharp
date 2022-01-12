@@ -204,9 +204,9 @@ namespace MgmtListMethods
             try
             {
                 var response = _tenantTestsRestClient.Get(tenantTestName, expand, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<TenantTest>(null, response.GetRawResponse())
-                    : Response.FromValue(new TenantTest(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<TenantTest>(null, response.GetRawResponse());
+                return Response.FromValue(new TenantTest(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -232,9 +232,9 @@ namespace MgmtListMethods
             try
             {
                 var response = await _tenantTestsRestClient.GetAsync(tenantTestName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<TenantTest>(null, response.GetRawResponse())
-                    : Response.FromValue(new TenantTest(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<TenantTest>(null, response.GetRawResponse());
+                return Response.FromValue(new TenantTest(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

@@ -205,9 +205,9 @@ namespace MgmtLRO
             try
             {
                 var response = _fakesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, fakeName, expand, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<Fake>(null, response.GetRawResponse())
-                    : Response.FromValue(new Fake(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<Fake>(null, response.GetRawResponse());
+                return Response.FromValue(new Fake(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -233,9 +233,9 @@ namespace MgmtLRO
             try
             {
                 var response = await _fakesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, fakeName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<Fake>(null, response.GetRawResponse())
-                    : Response.FromValue(new Fake(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<Fake>(null, response.GetRawResponse());
+                return Response.FromValue(new Fake(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

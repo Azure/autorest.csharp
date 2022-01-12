@@ -205,9 +205,9 @@ namespace MgmtMultipleParentResource
             try
             {
                 var response = _anotherParentsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, anotherName, expand, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<AnotherParent>(null, response.GetRawResponse())
-                    : Response.FromValue(new AnotherParent(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<AnotherParent>(null, response.GetRawResponse());
+                return Response.FromValue(new AnotherParent(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -233,9 +233,9 @@ namespace MgmtMultipleParentResource
             try
             {
                 var response = await _anotherParentsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, anotherName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<AnotherParent>(null, response.GetRawResponse())
-                    : Response.FromValue(new AnotherParent(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<AnotherParent>(null, response.GetRawResponse());
+                return Response.FromValue(new AnotherParent(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

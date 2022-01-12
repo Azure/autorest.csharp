@@ -205,9 +205,9 @@ namespace Azure.Management.Storage
             try
             {
                 var response = _storageAccountsRestClient.GetProperties(Id.SubscriptionId, Id.ResourceGroupName, accountName, expand, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<StorageAccount>(null, response.GetRawResponse())
-                    : Response.FromValue(new StorageAccount(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<StorageAccount>(null, response.GetRawResponse());
+                return Response.FromValue(new StorageAccount(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -233,9 +233,9 @@ namespace Azure.Management.Storage
             try
             {
                 var response = await _storageAccountsRestClient.GetPropertiesAsync(Id.SubscriptionId, Id.ResourceGroupName, accountName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<StorageAccount>(null, response.GetRawResponse())
-                    : Response.FromValue(new StorageAccount(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<StorageAccount>(null, response.GetRawResponse());
+                return Response.FromValue(new StorageAccount(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

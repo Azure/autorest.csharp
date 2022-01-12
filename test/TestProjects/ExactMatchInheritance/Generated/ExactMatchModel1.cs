@@ -38,11 +38,11 @@ namespace ExactMatchInheritance
 
         /// <summary> Initializes a new instance of the <see cref = "ExactMatchModel1"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
-        /// <param name="resource"> The resource that is the target of operations. </param>
-        internal ExactMatchModel1(ArmResource options, ExactMatchModel1Data resource) : base(options, resource.Id)
+        /// <param name="data"> The resource that is the target of operations. </param>
+        internal ExactMatchModel1(ArmResource options, ExactMatchModel1Data data) : base(options, data.Id)
         {
             HasData = true;
-            _data = resource;
+            _data = data;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _exactMatchModel1sRestClient = new ExactMatchModel1SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
 #if DEBUG

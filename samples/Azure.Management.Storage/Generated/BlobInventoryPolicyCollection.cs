@@ -174,9 +174,9 @@ namespace Azure.Management.Storage
             try
             {
                 var response = _blobInventoryPoliciesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, blobInventoryPolicyName, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<BlobInventoryPolicy>(null, response.GetRawResponse())
-                    : Response.FromValue(new BlobInventoryPolicy(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<BlobInventoryPolicy>(null, response.GetRawResponse());
+                return Response.FromValue(new BlobInventoryPolicy(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -195,9 +195,9 @@ namespace Azure.Management.Storage
             try
             {
                 var response = await _blobInventoryPoliciesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, blobInventoryPolicyName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<BlobInventoryPolicy>(null, response.GetRawResponse())
-                    : Response.FromValue(new BlobInventoryPolicy(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<BlobInventoryPolicy>(null, response.GetRawResponse());
+                return Response.FromValue(new BlobInventoryPolicy(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

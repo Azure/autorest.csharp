@@ -192,9 +192,9 @@ namespace MgmtScopeResource
             try
             {
                 var response = _policyAssignmentsRestClient.Get(Id, policyAssignmentName, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<PolicyAssignment>(null, response.GetRawResponse())
-                    : Response.FromValue(new PolicyAssignment(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<PolicyAssignment>(null, response.GetRawResponse());
+                return Response.FromValue(new PolicyAssignment(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -219,9 +219,9 @@ namespace MgmtScopeResource
             try
             {
                 var response = await _policyAssignmentsRestClient.GetAsync(Id, policyAssignmentName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<PolicyAssignment>(null, response.GetRawResponse())
-                    : Response.FromValue(new PolicyAssignment(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<PolicyAssignment>(null, response.GetRawResponse());
+                return Response.FromValue(new PolicyAssignment(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

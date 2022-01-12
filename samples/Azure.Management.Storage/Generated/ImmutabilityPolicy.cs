@@ -39,11 +39,11 @@ namespace Azure.Management.Storage
 
         /// <summary> Initializes a new instance of the <see cref = "ImmutabilityPolicy"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
-        /// <param name="resource"> The resource that is the target of operations. </param>
-        internal ImmutabilityPolicy(ArmResource options, ImmutabilityPolicyData resource) : base(options, resource.Id)
+        /// <param name="data"> The resource that is the target of operations. </param>
+        internal ImmutabilityPolicy(ArmResource options, ImmutabilityPolicyData data) : base(options, data.Id)
         {
             HasData = true;
-            _data = resource;
+            _data = data;
             Parent = options;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _blobContainersRestClient = new BlobContainersRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);

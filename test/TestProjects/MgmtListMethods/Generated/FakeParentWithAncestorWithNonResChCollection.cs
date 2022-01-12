@@ -200,9 +200,9 @@ namespace MgmtListMethods
             try
             {
                 var response = _fakeParentWithAncestorWithNonResChesRestClient.Get(Id.SubscriptionId, Id.Name, fakeParentWithAncestorWithNonResChName, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<FakeParentWithAncestorWithNonResCh>(null, response.GetRawResponse())
-                    : Response.FromValue(new FakeParentWithAncestorWithNonResCh(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<FakeParentWithAncestorWithNonResCh>(null, response.GetRawResponse());
+                return Response.FromValue(new FakeParentWithAncestorWithNonResCh(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -227,9 +227,9 @@ namespace MgmtListMethods
             try
             {
                 var response = await _fakeParentWithAncestorWithNonResChesRestClient.GetAsync(Id.SubscriptionId, Id.Name, fakeParentWithAncestorWithNonResChName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<FakeParentWithAncestorWithNonResCh>(null, response.GetRawResponse())
-                    : Response.FromValue(new FakeParentWithAncestorWithNonResCh(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<FakeParentWithAncestorWithNonResCh>(null, response.GetRawResponse());
+                return Response.FromValue(new FakeParentWithAncestorWithNonResCh(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

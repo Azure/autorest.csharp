@@ -200,9 +200,9 @@ namespace Azure.Management.Storage
             try
             {
                 var response = _privateEndpointConnectionsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, privateEndpointConnectionName, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<PrivateEndpointConnection>(null, response.GetRawResponse())
-                    : Response.FromValue(new PrivateEndpointConnection(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<PrivateEndpointConnection>(null, response.GetRawResponse());
+                return Response.FromValue(new PrivateEndpointConnection(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -227,9 +227,9 @@ namespace Azure.Management.Storage
             try
             {
                 var response = await _privateEndpointConnectionsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, privateEndpointConnectionName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<PrivateEndpointConnection>(null, response.GetRawResponse())
-                    : Response.FromValue(new PrivateEndpointConnection(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<PrivateEndpointConnection>(null, response.GetRawResponse());
+                return Response.FromValue(new PrivateEndpointConnection(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

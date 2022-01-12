@@ -202,9 +202,9 @@ namespace MgmtSubscriptionNameParameter
             try
             {
                 var response = _subscriptionsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, subscriptionName, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<SBSubscription>(null, response.GetRawResponse())
-                    : Response.FromValue(new SBSubscription(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<SBSubscription>(null, response.GetRawResponse());
+                return Response.FromValue(new SBSubscription(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -229,9 +229,9 @@ namespace MgmtSubscriptionNameParameter
             try
             {
                 var response = await _subscriptionsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, subscriptionName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<SBSubscription>(null, response.GetRawResponse())
-                    : Response.FromValue(new SBSubscription(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<SBSubscription>(null, response.GetRawResponse());
+                return Response.FromValue(new SBSubscription(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

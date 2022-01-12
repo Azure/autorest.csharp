@@ -199,9 +199,9 @@ namespace MgmtScopeResource
             try
             {
                 var response = _resourceLinksRestClient.Get(linkId, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<ResourceLink>(null, response.GetRawResponse())
-                    : Response.FromValue(new ResourceLink(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<ResourceLink>(null, response.GetRawResponse());
+                return Response.FromValue(new ResourceLink(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -226,9 +226,9 @@ namespace MgmtScopeResource
             try
             {
                 var response = await _resourceLinksRestClient.GetAsync(linkId, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<ResourceLink>(null, response.GetRawResponse())
-                    : Response.FromValue(new ResourceLink(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<ResourceLink>(null, response.GetRawResponse());
+                return Response.FromValue(new ResourceLink(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

@@ -25,7 +25,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             DefaultNamespace = $"{context.DefaultNamespace}.Models";
             if (operation.ShouldWrapResultType(ResultType, context, out var resource))
             {
-                WrapperType = resource.Type;
+                WrapperResource = resource;
             }
         }
 
@@ -34,7 +34,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         /// Only valid for PUT operations.
         /// </summary>
         /// <value></value>
-        public CSharpType? WrapperType { get; }
+        public Resource? WrapperResource { get; }
 
         protected override string DefaultNamespace { get; }
     }

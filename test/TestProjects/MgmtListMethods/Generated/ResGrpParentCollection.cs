@@ -202,9 +202,9 @@ namespace MgmtListMethods
             try
             {
                 var response = _resGrpParentsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentName, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<ResGrpParent>(null, response.GetRawResponse())
-                    : Response.FromValue(new ResGrpParent(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<ResGrpParent>(null, response.GetRawResponse());
+                return Response.FromValue(new ResGrpParent(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -229,9 +229,9 @@ namespace MgmtListMethods
             try
             {
                 var response = await _resGrpParentsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<ResGrpParent>(null, response.GetRawResponse())
-                    : Response.FromValue(new ResGrpParent(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<ResGrpParent>(null, response.GetRawResponse());
+                return Response.FromValue(new ResGrpParent(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

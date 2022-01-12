@@ -205,9 +205,9 @@ namespace Azure.ResourceManager.Sample
             try
             {
                 var response = _imagesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, imageName, expand, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<Image>(null, response.GetRawResponse())
-                    : Response.FromValue(new Image(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<Image>(null, response.GetRawResponse());
+                return Response.FromValue(new Image(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -233,9 +233,9 @@ namespace Azure.ResourceManager.Sample
             try
             {
                 var response = await _imagesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, imageName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<Image>(null, response.GetRawResponse())
-                    : Response.FromValue(new Image(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<Image>(null, response.GetRawResponse());
+                return Response.FromValue(new Image(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
