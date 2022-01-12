@@ -1767,7 +1767,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="parameters"/> is null. </exception>
-        public static async Task<LogAnalyticExportRequestRateByIntervalOperation> ExportRequestRateByIntervalLogAnalyticAsync(this Subscription subscription, string location, RequestRateByIntervalInput parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public static async Task<ExportRequestRateByIntervalLogAnalyticOperation> ExportRequestRateByIntervalLogAnalyticAsync(this Subscription subscription, string location, RequestRateByIntervalInput parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -1787,7 +1787,7 @@ namespace Azure.ResourceManager.Sample
                 {
                     var restOperations = GetLogAnalyticsRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
                     var response = await restOperations.ExportRequestRateByIntervalAsync(subscription.Id.SubscriptionId, location, parameters, cancellationToken).ConfigureAwait(false);
-                    var operation = new LogAnalyticExportRequestRateByIntervalOperation(clientDiagnostics, pipeline, restOperations.CreateExportRequestRateByIntervalRequest(subscription.Id.SubscriptionId, location, parameters).Request, response);
+                    var operation = new ExportRequestRateByIntervalLogAnalyticOperation(clientDiagnostics, pipeline, restOperations.CreateExportRequestRateByIntervalRequest(subscription.Id.SubscriptionId, location, parameters).Request, response);
                     if (waitForCompletion)
                         await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                     return operation;
@@ -1811,7 +1811,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="parameters"/> is null. </exception>
-        public static LogAnalyticExportRequestRateByIntervalOperation ExportRequestRateByIntervalLogAnalytic(this Subscription subscription, string location, RequestRateByIntervalInput parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public static ExportRequestRateByIntervalLogAnalyticOperation ExportRequestRateByIntervalLogAnalytic(this Subscription subscription, string location, RequestRateByIntervalInput parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -1831,7 +1831,7 @@ namespace Azure.ResourceManager.Sample
                 {
                     var restOperations = GetLogAnalyticsRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
                     var response = restOperations.ExportRequestRateByInterval(subscription.Id.SubscriptionId, location, parameters, cancellationToken);
-                    var operation = new LogAnalyticExportRequestRateByIntervalOperation(clientDiagnostics, pipeline, restOperations.CreateExportRequestRateByIntervalRequest(subscription.Id.SubscriptionId, location, parameters).Request, response);
+                    var operation = new ExportRequestRateByIntervalLogAnalyticOperation(clientDiagnostics, pipeline, restOperations.CreateExportRequestRateByIntervalRequest(subscription.Id.SubscriptionId, location, parameters).Request, response);
                     if (waitForCompletion)
                         operation.WaitForCompletion(cancellationToken);
                     return operation;
@@ -1855,7 +1855,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="parameters"/> is null. </exception>
-        public static async Task<LogAnalyticExportThrottledRequestsOperation> ExportThrottledRequestsLogAnalyticAsync(this Subscription subscription, string location, ThrottledRequestsInput parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public static async Task<ExportThrottledRequestsLogAnalyticOperation> ExportThrottledRequestsLogAnalyticAsync(this Subscription subscription, string location, ThrottledRequestsInput parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -1875,7 +1875,7 @@ namespace Azure.ResourceManager.Sample
                 {
                     var restOperations = GetLogAnalyticsRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
                     var response = await restOperations.ExportThrottledRequestsAsync(subscription.Id.SubscriptionId, location, parameters, cancellationToken).ConfigureAwait(false);
-                    var operation = new LogAnalyticExportThrottledRequestsOperation(clientDiagnostics, pipeline, restOperations.CreateExportThrottledRequestsRequest(subscription.Id.SubscriptionId, location, parameters).Request, response);
+                    var operation = new ExportThrottledRequestsLogAnalyticOperation(clientDiagnostics, pipeline, restOperations.CreateExportThrottledRequestsRequest(subscription.Id.SubscriptionId, location, parameters).Request, response);
                     if (waitForCompletion)
                         await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                     return operation;
@@ -1899,7 +1899,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="parameters"/> is null. </exception>
-        public static LogAnalyticExportThrottledRequestsOperation ExportThrottledRequestsLogAnalytic(this Subscription subscription, string location, ThrottledRequestsInput parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public static ExportThrottledRequestsLogAnalyticOperation ExportThrottledRequestsLogAnalytic(this Subscription subscription, string location, ThrottledRequestsInput parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -1919,7 +1919,7 @@ namespace Azure.ResourceManager.Sample
                 {
                     var restOperations = GetLogAnalyticsRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
                     var response = restOperations.ExportThrottledRequests(subscription.Id.SubscriptionId, location, parameters, cancellationToken);
-                    var operation = new LogAnalyticExportThrottledRequestsOperation(clientDiagnostics, pipeline, restOperations.CreateExportThrottledRequestsRequest(subscription.Id.SubscriptionId, location, parameters).Request, response);
+                    var operation = new ExportThrottledRequestsLogAnalyticOperation(clientDiagnostics, pipeline, restOperations.CreateExportThrottledRequestsRequest(subscription.Id.SubscriptionId, location, parameters).Request, response);
                     if (waitForCompletion)
                         operation.WaitForCompletion(cancellationToken);
                     return operation;

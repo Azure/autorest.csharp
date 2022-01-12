@@ -61,7 +61,7 @@ namespace Azure.Management.Storage
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual StorageAccountCreateOperation CreateOrUpdate(string accountName, StorageAccountCreateParameters parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual StorageAccountCreateOrUpdateOperation CreateOrUpdate(string accountName, StorageAccountCreateParameters parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (accountName == null)
             {
@@ -77,7 +77,7 @@ namespace Azure.Management.Storage
             try
             {
                 var response = _storageAccountsRestClient.Create(Id.SubscriptionId, Id.ResourceGroupName, accountName, parameters, cancellationToken);
-                var operation = new StorageAccountCreateOperation(Parent, _clientDiagnostics, Pipeline, _storageAccountsRestClient.CreateCreateRequest(Id.SubscriptionId, Id.ResourceGroupName, accountName, parameters).Request, response);
+                var operation = new StorageAccountCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _storageAccountsRestClient.CreateCreateRequest(Id.SubscriptionId, Id.ResourceGroupName, accountName, parameters).Request, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -98,7 +98,7 @@ namespace Azure.Management.Storage
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<StorageAccountCreateOperation> CreateOrUpdateAsync(string accountName, StorageAccountCreateParameters parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<StorageAccountCreateOrUpdateOperation> CreateOrUpdateAsync(string accountName, StorageAccountCreateParameters parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (accountName == null)
             {
@@ -114,7 +114,7 @@ namespace Azure.Management.Storage
             try
             {
                 var response = await _storageAccountsRestClient.CreateAsync(Id.SubscriptionId, Id.ResourceGroupName, accountName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new StorageAccountCreateOperation(Parent, _clientDiagnostics, Pipeline, _storageAccountsRestClient.CreateCreateRequest(Id.SubscriptionId, Id.ResourceGroupName, accountName, parameters).Request, response);
+                var operation = new StorageAccountCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _storageAccountsRestClient.CreateCreateRequest(Id.SubscriptionId, Id.ResourceGroupName, accountName, parameters).Request, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
