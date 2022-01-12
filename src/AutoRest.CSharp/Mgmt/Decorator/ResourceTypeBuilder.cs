@@ -17,10 +17,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class ResourceTypeBuilder
     {
-        private static ConcurrentDictionary<OperationGroup, string> _valueCache = new ConcurrentDictionary<OperationGroup, string>();
-
-        private static ConcurrentDictionary<string, string> _operationPathValueCache = new ConcurrentDictionary<string, string>();
-
         private static ConcurrentDictionary<RequestPath, ResourceTypeSegment> _requestPathToResourceTypeCache = new ConcurrentDictionary<RequestPath, ResourceTypeSegment>();
 
         static ResourceTypeBuilder()
