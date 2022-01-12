@@ -376,6 +376,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 });
                 CodeWriterDelegate selectBody;
                 if (wrapResource.ResourceData.ShouldSetResourceIdentifier)
+                {
                     selectBody = w =>
                     {
                         using (w.Scope())
@@ -384,8 +385,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
                             w.Line($"return {newInstanceExpression};");
                         }
                     };
+                }
                 else
+                {
                     selectBody = newInstanceExpression;
+                }
 
                 _writer.UseNamespace("System.Linq");
                 converter = $".Select({dataExpression} => {selectBody})";
@@ -432,12 +436,18 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 if (parameterInvocations.Count < methodWithLeastParameters.Parameters.Length)
                 {
                     if (resource.ResourceData.GetTypeOfName() != null)
+                    {
                         parameterInvocations.Add(w => w.Append($"{dataExpression}.Name"));
+                    }
                     else
+                    {
                         throw new ErrorHelpers.ErrorException($"The resource data {resource.ResourceData.Type.Name} does not have a `Name` property, which is required when assigning non-resource as resources");
+                    }
                 }
                 foreach (var invocation in parameterInvocations)
+                {
                     w.Append($"{invocation}, ");
+                }
                 w.RemoveTrailingCharacter();
                 w.Append($")");
             };
