@@ -18,7 +18,7 @@ function Invoke($command, $errorMessage=$null)
     
     if($LastExitCode -ne 0)
     {
-        if ($ErrorMessage) {
+        if ($errorMessage) {
             Write-Error "Command failed to execute: $command`n$errorMessage"
         }
         else {
