@@ -66,14 +66,14 @@ namespace Azure.Management.Storage.Models
         {
             using var document = JsonDocument.Parse(response.ContentStream);
             var data = StorageAccountData.DeserializeStorageAccountData(document.RootElement);
-            return new StorageAccount(_operationBase, data.Id, data);
+            return new StorageAccount(_operationBase, data);
         }
 
         async ValueTask<StorageAccount> IOperationSource<StorageAccount>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
             var data = StorageAccountData.DeserializeStorageAccountData(document.RootElement);
-            return new StorageAccount(_operationBase, data.Id, data);
+            return new StorageAccount(_operationBase, data);
         }
     }
 }

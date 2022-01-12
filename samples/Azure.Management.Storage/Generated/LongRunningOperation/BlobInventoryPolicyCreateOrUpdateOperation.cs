@@ -27,7 +27,7 @@ namespace Azure.Management.Storage.Models
 
         internal BlobInventoryPolicyCreateOrUpdateOperation(ArmResource operationsBase, Response<BlobInventoryPolicyData> response)
         {
-            _operation = new OperationOrResponseInternals<BlobInventoryPolicy>(Response.FromValue(new BlobInventoryPolicy(operationsBase, response.Value.Id, response.Value), response.GetRawResponse()));
+            _operation = new OperationOrResponseInternals<BlobInventoryPolicy>(Response.FromValue(new BlobInventoryPolicy(operationsBase, response.Value), response.GetRawResponse()));
         }
 
         /// <inheritdoc />

@@ -26,7 +26,7 @@ namespace ExactMatchInheritance.Models
 
         internal ExactMatchModel5SPutOperation(ArmResource operationsBase, Response<ExactMatchModel5Data> response)
         {
-            _operation = new OperationOrResponseInternals<ExactMatchModel5>(Response.FromValue(new ExactMatchModel5(operationsBase, response.Value.Id, response.Value), response.GetRawResponse()));
+            _operation = new OperationOrResponseInternals<ExactMatchModel5>(Response.FromValue(new ExactMatchModel5(operationsBase, response.Value), response.GetRawResponse()));
         }
 
         /// <inheritdoc />

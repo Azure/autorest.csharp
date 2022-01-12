@@ -144,7 +144,7 @@ namespace MgmtListMethods
                 var response = _tenantParentsRestClient.Get(Id.Name, tenantParentName, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new TenantParent(Parent, response.Value.Id, response.Value), response.GetRawResponse());
+                return Response.FromValue(new TenantParent(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -174,7 +174,7 @@ namespace MgmtListMethods
                 var response = await _tenantParentsRestClient.GetAsync(Id.Name, tenantParentName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new TenantParent(Parent, response.Value.Id, response.Value), response.GetRawResponse());
+                return Response.FromValue(new TenantParent(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -199,9 +199,9 @@ namespace MgmtListMethods
             try
             {
                 var response = _tenantParentsRestClient.Get(Id.Name, tenantParentName, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<TenantParent>(null, response.GetRawResponse())
-                    : Response.FromValue(new TenantParent(this, response.Value.Id, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<TenantParent>(null, response.GetRawResponse());
+                return Response.FromValue(new TenantParent(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -226,9 +226,9 @@ namespace MgmtListMethods
             try
             {
                 var response = await _tenantParentsRestClient.GetAsync(Id.Name, tenantParentName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<TenantParent>(null, response.GetRawResponse())
-                    : Response.FromValue(new TenantParent(this, response.Value.Id, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<TenantParent>(null, response.GetRawResponse());
+                return Response.FromValue(new TenantParent(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -302,7 +302,7 @@ namespace MgmtListMethods
                 try
                 {
                     var response = _tenantParentsRestClient.List(Id.Name, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new TenantParent(Parent, value.Id, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new TenantParent(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -317,7 +317,7 @@ namespace MgmtListMethods
                 try
                 {
                     var response = _tenantParentsRestClient.ListNextPage(nextLink, Id.Name, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new TenantParent(Parent, value.Id, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new TenantParent(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -343,7 +343,7 @@ namespace MgmtListMethods
                 try
                 {
                     var response = await _tenantParentsRestClient.ListAsync(Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new TenantParent(Parent, value.Id, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new TenantParent(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -358,7 +358,7 @@ namespace MgmtListMethods
                 try
                 {
                     var response = await _tenantParentsRestClient.ListNextPageAsync(nextLink, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new TenantParent(Parent, value.Id, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new TenantParent(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {

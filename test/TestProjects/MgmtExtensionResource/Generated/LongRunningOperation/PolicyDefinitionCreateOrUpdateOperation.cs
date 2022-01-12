@@ -27,7 +27,7 @@ namespace MgmtExtensionResource.Models
 
         internal PolicyDefinitionCreateOrUpdateOperation(ArmResource operationsBase, Response<PolicyDefinitionData> response)
         {
-            _operation = new OperationOrResponseInternals<SubscriptionPolicyDefinition>(Response.FromValue(new SubscriptionPolicyDefinition(operationsBase, response.Value.Id, response.Value), response.GetRawResponse()));
+            _operation = new OperationOrResponseInternals<SubscriptionPolicyDefinition>(Response.FromValue(new SubscriptionPolicyDefinition(operationsBase, response.Value), response.GetRawResponse()));
         }
 
         /// <inheritdoc />

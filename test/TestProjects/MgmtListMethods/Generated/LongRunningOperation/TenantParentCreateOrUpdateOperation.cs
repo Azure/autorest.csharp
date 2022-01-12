@@ -27,7 +27,7 @@ namespace MgmtListMethods.Models
 
         internal TenantParentCreateOrUpdateOperation(ArmResource operationsBase, Response<TenantParentData> response)
         {
-            _operation = new OperationOrResponseInternals<TenantParent>(Response.FromValue(new TenantParent(operationsBase, response.Value.Id, response.Value), response.GetRawResponse()));
+            _operation = new OperationOrResponseInternals<TenantParent>(Response.FromValue(new TenantParent(operationsBase, response.Value), response.GetRawResponse()));
         }
 
         /// <inheritdoc />

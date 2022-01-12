@@ -73,7 +73,7 @@ namespace MgmtKeyvault
                 var response = _managedHsmsRestClient.GetDeleted(Id.SubscriptionId, location, name, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new DeletedManagedHsm(Parent, response.Value.Id, response.Value), response.GetRawResponse());
+                return Response.FromValue(new DeletedManagedHsm(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -108,7 +108,7 @@ namespace MgmtKeyvault
                 var response = await _managedHsmsRestClient.GetDeletedAsync(Id.SubscriptionId, location, name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new DeletedManagedHsm(Parent, response.Value.Id, response.Value), response.GetRawResponse());
+                return Response.FromValue(new DeletedManagedHsm(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -138,9 +138,9 @@ namespace MgmtKeyvault
             try
             {
                 var response = _managedHsmsRestClient.GetDeleted(Id.SubscriptionId, location, name, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<DeletedManagedHsm>(null, response.GetRawResponse())
-                    : Response.FromValue(new DeletedManagedHsm(this, response.Value.Id, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<DeletedManagedHsm>(null, response.GetRawResponse());
+                return Response.FromValue(new DeletedManagedHsm(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -170,9 +170,9 @@ namespace MgmtKeyvault
             try
             {
                 var response = await _managedHsmsRestClient.GetDeletedAsync(Id.SubscriptionId, location, name, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<DeletedManagedHsm>(null, response.GetRawResponse())
-                    : Response.FromValue(new DeletedManagedHsm(this, response.Value.Id, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<DeletedManagedHsm>(null, response.GetRawResponse());
+                return Response.FromValue(new DeletedManagedHsm(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

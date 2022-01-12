@@ -38,9 +38,8 @@ namespace MgmtParamOrdering
 
         /// <summary> Initializes a new instance of the <see cref = "EnvironmentContainerResource"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
-        /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal EnvironmentContainerResource(ArmResource options, ResourceIdentifier id, EnvironmentContainerResourceData data) : base(options, id)
+        internal EnvironmentContainerResource(ArmResource options, EnvironmentContainerResourceData data) : base(options, data.Id)
         {
             HasData = true;
             _data = data;
@@ -116,7 +115,7 @@ namespace MgmtParamOrdering
                 var response = await _environmentContainersRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new EnvironmentContainerResource(this, response.Value.Id, response.Value), response.GetRawResponse());
+                return Response.FromValue(new EnvironmentContainerResource(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -139,7 +138,7 @@ namespace MgmtParamOrdering
                 var response = _environmentContainersRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new EnvironmentContainerResource(this, response.Value.Id, response.Value), response.GetRawResponse());
+                return Response.FromValue(new EnvironmentContainerResource(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -234,7 +233,7 @@ namespace MgmtParamOrdering
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _environmentContainersRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new EnvironmentContainerResource(this, originalResponse.Value.Id, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new EnvironmentContainerResource(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -263,7 +262,7 @@ namespace MgmtParamOrdering
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _environmentContainersRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
-                return Response.FromValue(new EnvironmentContainerResource(this, originalResponse.Value.Id, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new EnvironmentContainerResource(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -292,7 +291,7 @@ namespace MgmtParamOrdering
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _environmentContainersRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new EnvironmentContainerResource(this, originalResponse.Value.Id, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new EnvironmentContainerResource(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -321,7 +320,7 @@ namespace MgmtParamOrdering
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _environmentContainersRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
-                return Response.FromValue(new EnvironmentContainerResource(this, originalResponse.Value.Id, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new EnvironmentContainerResource(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -349,7 +348,7 @@ namespace MgmtParamOrdering
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _environmentContainersRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new EnvironmentContainerResource(this, originalResponse.Value.Id, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new EnvironmentContainerResource(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -377,7 +376,7 @@ namespace MgmtParamOrdering
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _environmentContainersRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
-                return Response.FromValue(new EnvironmentContainerResource(this, originalResponse.Value.Id, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new EnvironmentContainerResource(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {

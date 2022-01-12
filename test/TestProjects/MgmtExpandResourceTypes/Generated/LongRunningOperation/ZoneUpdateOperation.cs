@@ -27,7 +27,7 @@ namespace MgmtExpandResourceTypes.Models
 
         internal ZoneUpdateOperation(ArmResource operationsBase, Response<ZoneData> response)
         {
-            _operation = new OperationOrResponseInternals<Zone>(Response.FromValue(new Zone(operationsBase, response.Value.Id, response.Value), response.GetRawResponse()));
+            _operation = new OperationOrResponseInternals<Zone>(Response.FromValue(new Zone(operationsBase, response.Value), response.GetRawResponse()));
         }
 
         /// <inheritdoc />

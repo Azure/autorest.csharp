@@ -53,7 +53,7 @@ namespace MgmtExpandResourceTypes
                     try
                     {
                         var response = await restOperations.ListAsync(subscription.Id.SubscriptionId, top, cancellationToken: cancellationToken).ConfigureAwait(false);
-                        return Page.FromValues(response.Value.Value.Select(value => new Zone(subscription, value.Id, value)), response.Value.NextLink, response.GetRawResponse());
+                        return Page.FromValues(response.Value.Value.Select(value => new Zone(subscription, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
                     {
@@ -68,7 +68,7 @@ namespace MgmtExpandResourceTypes
                     try
                     {
                         var response = await restOperations.ListNextPageAsync(nextLink, subscription.Id.SubscriptionId, top, cancellationToken: cancellationToken).ConfigureAwait(false);
-                        return Page.FromValues(response.Value.Value.Select(value => new Zone(subscription, value.Id, value)), response.Value.NextLink, response.GetRawResponse());
+                        return Page.FromValues(response.Value.Value.Select(value => new Zone(subscription, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
                     {
@@ -102,7 +102,7 @@ namespace MgmtExpandResourceTypes
                     try
                     {
                         var response = restOperations.List(subscription.Id.SubscriptionId, top, cancellationToken: cancellationToken);
-                        return Page.FromValues(response.Value.Value.Select(value => new Zone(subscription, value.Id, value)), response.Value.NextLink, response.GetRawResponse());
+                        return Page.FromValues(response.Value.Value.Select(value => new Zone(subscription, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
                     {
@@ -117,7 +117,7 @@ namespace MgmtExpandResourceTypes
                     try
                     {
                         var response = restOperations.ListNextPage(nextLink, subscription.Id.SubscriptionId, top, cancellationToken: cancellationToken);
-                        return Page.FromValues(response.Value.Value.Select(value => new Zone(subscription, value.Id, value)), response.Value.NextLink, response.GetRawResponse());
+                        return Page.FromValues(response.Value.Value.Select(value => new Zone(subscription, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
                     {

@@ -37,9 +37,8 @@ namespace Pagination
 
         /// <summary> Initializes a new instance of the <see cref = "PageSizeInt32Model"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
-        /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal PageSizeInt32Model(ArmResource options, ResourceIdentifier id, PageSizeInt32ModelData data) : base(options, id)
+        internal PageSizeInt32Model(ArmResource options, PageSizeInt32ModelData data) : base(options, new ResourceIdentifier(data.Id))
         {
             HasData = true;
             _data = data;
@@ -111,7 +110,7 @@ namespace Pagination
                 var response = await _pageSizeInt32ModelsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new PageSizeInt32Model(this, new ResourceIdentifier(response.Value.Id), response.Value), response.GetRawResponse());
+                return Response.FromValue(new PageSizeInt32Model(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -130,7 +129,7 @@ namespace Pagination
                 var response = _pageSizeInt32ModelsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new PageSizeInt32Model(this, new ResourceIdentifier(response.Value.Id), response.Value), response.GetRawResponse());
+                return Response.FromValue(new PageSizeInt32Model(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

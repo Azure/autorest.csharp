@@ -66,14 +66,14 @@ namespace MgmtNonStringPathVariable.Models
         {
             using var document = JsonDocument.Parse(response.ContentStream);
             var data = BarData.DeserializeBarData(document.RootElement);
-            return new Bar(_operationBase, data.Id, data);
+            return new Bar(_operationBase, data);
         }
 
         async ValueTask<Bar> IOperationSource<Bar>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
             var data = BarData.DeserializeBarData(document.RootElement);
-            return new Bar(_operationBase, data.Id, data);
+            return new Bar(_operationBase, data);
         }
     }
 }

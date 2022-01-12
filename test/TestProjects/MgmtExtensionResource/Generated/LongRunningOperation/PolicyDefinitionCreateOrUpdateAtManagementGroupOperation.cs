@@ -27,7 +27,7 @@ namespace MgmtExtensionResource.Models
 
         internal PolicyDefinitionCreateOrUpdateAtManagementGroupOperation(ArmResource operationsBase, Response<PolicyDefinitionData> response)
         {
-            _operation = new OperationOrResponseInternals<ManagementGroupPolicyDefinition>(Response.FromValue(new ManagementGroupPolicyDefinition(operationsBase, response.Value.Id, response.Value), response.GetRawResponse()));
+            _operation = new OperationOrResponseInternals<ManagementGroupPolicyDefinition>(Response.FromValue(new ManagementGroupPolicyDefinition(operationsBase, response.Value), response.GetRawResponse()));
         }
 
         /// <inheritdoc />

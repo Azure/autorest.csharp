@@ -138,7 +138,7 @@ namespace ExactMatchFlattenInheritance
                 var response = _customModel2sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new CustomModel2(Parent, response.Value.Id, response.Value), response.GetRawResponse());
+                return Response.FromValue(new CustomModel2(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -168,7 +168,7 @@ namespace ExactMatchFlattenInheritance
                 var response = await _customModel2sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new CustomModel2(Parent, response.Value.Id, response.Value), response.GetRawResponse());
+                return Response.FromValue(new CustomModel2(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -193,9 +193,9 @@ namespace ExactMatchFlattenInheritance
             try
             {
                 var response = _customModel2sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<CustomModel2>(null, response.GetRawResponse())
-                    : Response.FromValue(new CustomModel2(this, response.Value.Id, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<CustomModel2>(null, response.GetRawResponse());
+                return Response.FromValue(new CustomModel2(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -220,9 +220,9 @@ namespace ExactMatchFlattenInheritance
             try
             {
                 var response = await _customModel2sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<CustomModel2>(null, response.GetRawResponse())
-                    : Response.FromValue(new CustomModel2(this, response.Value.Id, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<CustomModel2>(null, response.GetRawResponse());
+                return Response.FromValue(new CustomModel2(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -296,7 +296,7 @@ namespace ExactMatchFlattenInheritance
                 try
                 {
                     var response = _customModel2sRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new CustomModel2(Parent, value.Id, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new CustomModel2(Parent, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -322,7 +322,7 @@ namespace ExactMatchFlattenInheritance
                 try
                 {
                     var response = await _customModel2sRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new CustomModel2(Parent, value.Id, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new CustomModel2(Parent, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {

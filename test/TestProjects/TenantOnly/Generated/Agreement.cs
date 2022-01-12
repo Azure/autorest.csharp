@@ -37,9 +37,8 @@ namespace TenantOnly
 
         /// <summary> Initializes a new instance of the <see cref = "Agreement"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
-        /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal Agreement(ArmResource options, ResourceIdentifier id, AgreementData data) : base(options, id)
+        internal Agreement(ArmResource options, AgreementData data) : base(options, data.Id)
         {
             HasData = true;
             _data = data;
@@ -116,7 +115,7 @@ namespace TenantOnly
                 var response = await _agreementsRestClient.GetAsync(Id.Parent.Name, Id.Name, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new Agreement(this, response.Value.Id, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Agreement(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -140,7 +139,7 @@ namespace TenantOnly
                 var response = _agreementsRestClient.Get(Id.Parent.Name, Id.Name, expand, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new Agreement(this, response.Value.Id, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Agreement(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

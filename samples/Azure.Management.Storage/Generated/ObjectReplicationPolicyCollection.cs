@@ -144,7 +144,7 @@ namespace Azure.Management.Storage
                 var response = _objectReplicationPoliciesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, objectReplicationPolicyId, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new ObjectReplicationPolicy(Parent, response.Value.Id, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ObjectReplicationPolicy(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -174,7 +174,7 @@ namespace Azure.Management.Storage
                 var response = await _objectReplicationPoliciesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, objectReplicationPolicyId, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new ObjectReplicationPolicy(Parent, response.Value.Id, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ObjectReplicationPolicy(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -199,9 +199,9 @@ namespace Azure.Management.Storage
             try
             {
                 var response = _objectReplicationPoliciesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, objectReplicationPolicyId, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<ObjectReplicationPolicy>(null, response.GetRawResponse())
-                    : Response.FromValue(new ObjectReplicationPolicy(this, response.Value.Id, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<ObjectReplicationPolicy>(null, response.GetRawResponse());
+                return Response.FromValue(new ObjectReplicationPolicy(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -226,9 +226,9 @@ namespace Azure.Management.Storage
             try
             {
                 var response = await _objectReplicationPoliciesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, objectReplicationPolicyId, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<ObjectReplicationPolicy>(null, response.GetRawResponse())
-                    : Response.FromValue(new ObjectReplicationPolicy(this, response.Value.Id, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<ObjectReplicationPolicy>(null, response.GetRawResponse());
+                return Response.FromValue(new ObjectReplicationPolicy(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -302,7 +302,7 @@ namespace Azure.Management.Storage
                 try
                 {
                     var response = _objectReplicationPoliciesRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new ObjectReplicationPolicy(Parent, value.Id, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new ObjectReplicationPolicy(Parent, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -328,7 +328,7 @@ namespace Azure.Management.Storage
                 try
                 {
                     var response = await _objectReplicationPoliciesRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new ObjectReplicationPolicy(Parent, value.Id, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new ObjectReplicationPolicy(Parent, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {

@@ -37,9 +37,8 @@ namespace ExactMatchFlattenInheritance
 
         /// <summary> Initializes a new instance of the <see cref = "CustomModel3"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
-        /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal CustomModel3(ArmResource options, ResourceIdentifier id, CustomModel3Data data) : base(options, id)
+        internal CustomModel3(ArmResource options, CustomModel3Data data) : base(options, new ResourceIdentifier(data.Id))
         {
             HasData = true;
             _data = data;
@@ -115,7 +114,7 @@ namespace ExactMatchFlattenInheritance
                 var response = await _customModel3sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new CustomModel3(this, new ResourceIdentifier(response.Value.Id), response.Value), response.GetRawResponse());
+                return Response.FromValue(new CustomModel3(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -138,7 +137,7 @@ namespace ExactMatchFlattenInheritance
                 var response = _customModel3sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new CustomModel3(this, new ResourceIdentifier(response.Value.Id), response.Value), response.GetRawResponse());
+                return Response.FromValue(new CustomModel3(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

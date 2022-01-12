@@ -37,9 +37,8 @@ namespace Pagination
 
         /// <summary> Initializes a new instance of the <see cref = "PageSizeIntegerModel"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
-        /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal PageSizeIntegerModel(ArmResource options, ResourceIdentifier id, PageSizeIntegerModelData data) : base(options, id)
+        internal PageSizeIntegerModel(ArmResource options, PageSizeIntegerModelData data) : base(options, new ResourceIdentifier(data.Id))
         {
             HasData = true;
             _data = data;
@@ -111,7 +110,7 @@ namespace Pagination
                 var response = await _pageSizeIntegerModelsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new PageSizeIntegerModel(this, new ResourceIdentifier(response.Value.Id), response.Value), response.GetRawResponse());
+                return Response.FromValue(new PageSizeIntegerModel(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -130,7 +129,7 @@ namespace Pagination
                 var response = _pageSizeIntegerModelsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new PageSizeIntegerModel(this, new ResourceIdentifier(response.Value.Id), response.Value), response.GetRawResponse());
+                return Response.FromValue(new PageSizeIntegerModel(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

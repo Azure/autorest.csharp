@@ -27,7 +27,7 @@ namespace XmlDeserialization.Models
 
         internal XmlDeserializationCreateOrUpdateOperation(ArmResource operationsBase, Response<XmlInstanceData> response)
         {
-            _operation = new OperationOrResponseInternals<XmlInstance>(Response.FromValue(new XmlInstance(operationsBase, response.Value.Id, response.Value), response.GetRawResponse()));
+            _operation = new OperationOrResponseInternals<XmlInstance>(Response.FromValue(new XmlInstance(operationsBase, response.Value), response.GetRawResponse()));
         }
 
         /// <inheritdoc />

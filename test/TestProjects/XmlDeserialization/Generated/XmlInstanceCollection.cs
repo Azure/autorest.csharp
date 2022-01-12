@@ -148,7 +148,7 @@ namespace XmlDeserialization
                 var response = _xmlDeserializationRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, xmlName, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new XmlInstance(Parent, response.Value.Id, response.Value), response.GetRawResponse());
+                return Response.FromValue(new XmlInstance(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -178,7 +178,7 @@ namespace XmlDeserialization
                 var response = await _xmlDeserializationRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, xmlName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new XmlInstance(Parent, response.Value.Id, response.Value), response.GetRawResponse());
+                return Response.FromValue(new XmlInstance(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -203,9 +203,9 @@ namespace XmlDeserialization
             try
             {
                 var response = _xmlDeserializationRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, xmlName, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<XmlInstance>(null, response.GetRawResponse())
-                    : Response.FromValue(new XmlInstance(this, response.Value.Id, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<XmlInstance>(null, response.GetRawResponse());
+                return Response.FromValue(new XmlInstance(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -230,9 +230,9 @@ namespace XmlDeserialization
             try
             {
                 var response = await _xmlDeserializationRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, xmlName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<XmlInstance>(null, response.GetRawResponse())
-                    : Response.FromValue(new XmlInstance(this, response.Value.Id, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<XmlInstance>(null, response.GetRawResponse());
+                return Response.FromValue(new XmlInstance(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -309,7 +309,7 @@ namespace XmlDeserialization
                 try
                 {
                     var response = _xmlDeserializationRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, filter, top, skip, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new XmlInstance(Parent, value.Id, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new XmlInstance(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -324,7 +324,7 @@ namespace XmlDeserialization
                 try
                 {
                     var response = _xmlDeserializationRestClient.ListNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, filter, top, skip, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new XmlInstance(Parent, value.Id, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new XmlInstance(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -353,7 +353,7 @@ namespace XmlDeserialization
                 try
                 {
                     var response = await _xmlDeserializationRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, filter, top, skip, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new XmlInstance(Parent, value.Id, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new XmlInstance(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -368,7 +368,7 @@ namespace XmlDeserialization
                 try
                 {
                     var response = await _xmlDeserializationRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, filter, top, skip, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new XmlInstance(Parent, value.Id, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new XmlInstance(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {

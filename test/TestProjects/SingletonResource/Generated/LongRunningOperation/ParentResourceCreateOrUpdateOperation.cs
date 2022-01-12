@@ -26,7 +26,7 @@ namespace SingletonResource.Models
 
         internal ParentResourceCreateOrUpdateOperation(ArmResource operationsBase, Response<ParentResourceData> response)
         {
-            _operation = new OperationOrResponseInternals<ParentResource>(Response.FromValue(new ParentResource(operationsBase, response.Value.Id, response.Value), response.GetRawResponse()));
+            _operation = new OperationOrResponseInternals<ParentResource>(Response.FromValue(new ParentResource(operationsBase, response.Value), response.GetRawResponse()));
         }
 
         /// <inheritdoc />

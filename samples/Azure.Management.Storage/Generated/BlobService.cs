@@ -38,9 +38,8 @@ namespace Azure.Management.Storage
 
         /// <summary> Initializes a new instance of the <see cref = "BlobService"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
-        /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal BlobService(ArmResource options, ResourceIdentifier id, BlobServiceData data) : base(options, id)
+        internal BlobService(ArmResource options, BlobServiceData data) : base(options, data.Id)
         {
             HasData = true;
             _data = data;
@@ -121,7 +120,7 @@ namespace Azure.Management.Storage
                 var response = await _blobServicesRestClient.GetServicePropertiesAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new BlobService(this, response.Value.Id, response.Value), response.GetRawResponse());
+                return Response.FromValue(new BlobService(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -144,7 +143,7 @@ namespace Azure.Management.Storage
                 var response = _blobServicesRestClient.GetServiceProperties(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new BlobService(this, response.Value.Id, response.Value), response.GetRawResponse());
+                return Response.FromValue(new BlobService(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

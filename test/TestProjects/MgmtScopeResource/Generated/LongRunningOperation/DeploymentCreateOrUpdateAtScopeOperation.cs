@@ -66,14 +66,14 @@ namespace MgmtScopeResource.Models
         {
             using var document = JsonDocument.Parse(response.ContentStream);
             var data = DeploymentExtendedData.DeserializeDeploymentExtendedData(document.RootElement);
-            return new DeploymentExtended(_operationBase, data.Id, data);
+            return new DeploymentExtended(_operationBase, data);
         }
 
         async ValueTask<DeploymentExtended> IOperationSource<DeploymentExtended>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
             var data = DeploymentExtendedData.DeserializeDeploymentExtendedData(document.RootElement);
-            return new DeploymentExtended(_operationBase, data.Id, data);
+            return new DeploymentExtended(_operationBase, data);
         }
     }
 }

@@ -27,7 +27,7 @@ namespace ResourceRename.Models
 
         internal SshPublicKeyCreateOperation(ArmResource operationsBase, Response<SshPublicKeyInfoData> response)
         {
-            _operation = new OperationOrResponseInternals<SshPublicKeyInfo>(Response.FromValue(new SshPublicKeyInfo(operationsBase, response.Value.Id, response.Value), response.GetRawResponse()));
+            _operation = new OperationOrResponseInternals<SshPublicKeyInfo>(Response.FromValue(new SshPublicKeyInfo(operationsBase, response.Value), response.GetRawResponse()));
         }
 
         /// <inheritdoc />

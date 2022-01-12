@@ -146,7 +146,7 @@ namespace MgmtListMethods
                 var response = _resGrpParentsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentName, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new ResGrpParent(Parent, response.Value.Id, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ResGrpParent(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -176,7 +176,7 @@ namespace MgmtListMethods
                 var response = await _resGrpParentsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new ResGrpParent(Parent, response.Value.Id, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ResGrpParent(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -201,9 +201,9 @@ namespace MgmtListMethods
             try
             {
                 var response = _resGrpParentsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentName, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<ResGrpParent>(null, response.GetRawResponse())
-                    : Response.FromValue(new ResGrpParent(this, response.Value.Id, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<ResGrpParent>(null, response.GetRawResponse());
+                return Response.FromValue(new ResGrpParent(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -228,9 +228,9 @@ namespace MgmtListMethods
             try
             {
                 var response = await _resGrpParentsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<ResGrpParent>(null, response.GetRawResponse())
-                    : Response.FromValue(new ResGrpParent(this, response.Value.Id, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<ResGrpParent>(null, response.GetRawResponse());
+                return Response.FromValue(new ResGrpParent(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -304,7 +304,7 @@ namespace MgmtListMethods
                 try
                 {
                     var response = _resGrpParentsRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new ResGrpParent(Parent, value.Id, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new ResGrpParent(Parent, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -330,7 +330,7 @@ namespace MgmtListMethods
                 try
                 {
                     var response = await _resGrpParentsRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new ResGrpParent(Parent, value.Id, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new ResGrpParent(Parent, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {

@@ -38,9 +38,8 @@ namespace SingletonResource
 
         /// <summary> Initializes a new instance of the <see cref = "SingletonResource"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
-        /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal SingletonResource(ArmResource options, ResourceIdentifier id, SingletonResourceData data) : base(options, id)
+        internal SingletonResource(ArmResource options, SingletonResourceData data) : base(options, data.Id)
         {
             HasData = true;
             _data = data;
@@ -121,7 +120,7 @@ namespace SingletonResource
                 var response = await _singletonResourcesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new SingletonResource(this, response.Value.Id, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SingletonResource(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -144,7 +143,7 @@ namespace SingletonResource
                 var response = _singletonResourcesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new SingletonResource(this, response.Value.Id, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SingletonResource(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

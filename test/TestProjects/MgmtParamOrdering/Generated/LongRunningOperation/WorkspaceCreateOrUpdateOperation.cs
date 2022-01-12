@@ -66,14 +66,14 @@ namespace MgmtParamOrdering.Models
         {
             using var document = JsonDocument.Parse(response.ContentStream);
             var data = WorkspaceData.DeserializeWorkspaceData(document.RootElement);
-            return new Workspace(_operationBase, data.Id, data);
+            return new Workspace(_operationBase, data);
         }
 
         async ValueTask<Workspace> IOperationSource<Workspace>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
             var data = WorkspaceData.DeserializeWorkspaceData(document.RootElement);
-            return new Workspace(_operationBase, data.Id, data);
+            return new Workspace(_operationBase, data);
         }
     }
 }

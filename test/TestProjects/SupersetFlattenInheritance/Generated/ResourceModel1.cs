@@ -37,9 +37,8 @@ namespace SupersetFlattenInheritance
 
         /// <summary> Initializes a new instance of the <see cref = "ResourceModel1"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
-        /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal ResourceModel1(ArmResource options, ResourceIdentifier id, ResourceModel1Data data) : base(options, id)
+        internal ResourceModel1(ArmResource options, ResourceModel1Data data) : base(options, data.Id)
         {
             HasData = true;
             _data = data;
@@ -114,7 +113,7 @@ namespace SupersetFlattenInheritance
                 var response = await _resourceModel1sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new ResourceModel1(this, response.Value.Id, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ResourceModel1(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -136,7 +135,7 @@ namespace SupersetFlattenInheritance
                 var response = _resourceModel1sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new ResourceModel1(this, response.Value.Id, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ResourceModel1(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

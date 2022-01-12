@@ -38,9 +38,8 @@ namespace MgmtSubscriptionNameParameter
 
         /// <summary> Initializes a new instance of the <see cref = "SBSubscription"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
-        /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal SBSubscription(ArmResource options, ResourceIdentifier id, SBSubscriptionData data) : base(options, id)
+        internal SBSubscription(ArmResource options, SBSubscriptionData data) : base(options, data.Id)
         {
             HasData = true;
             _data = data;
@@ -116,7 +115,7 @@ namespace MgmtSubscriptionNameParameter
                 var response = await _subscriptionsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new SBSubscription(this, response.Value.Id, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SBSubscription(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -139,7 +138,7 @@ namespace MgmtSubscriptionNameParameter
                 var response = _subscriptionsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new SBSubscription(this, response.Value.Id, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SBSubscription(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

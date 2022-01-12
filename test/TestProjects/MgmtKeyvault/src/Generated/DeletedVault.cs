@@ -38,9 +38,8 @@ namespace MgmtKeyvault
 
         /// <summary> Initializes a new instance of the <see cref = "DeletedVault"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
-        /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal DeletedVault(ArmResource options, ResourceIdentifier id, DeletedVaultData data) : base(options, id)
+        internal DeletedVault(ArmResource options, DeletedVaultData data) : base(options, data.Id)
         {
             HasData = true;
             _data = data;
@@ -116,7 +115,7 @@ namespace MgmtKeyvault
                 var response = await _vaultsRestClient.GetDeletedAsync(Id.SubscriptionId, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new DeletedVault(this, response.Value.Id, response.Value), response.GetRawResponse());
+                return Response.FromValue(new DeletedVault(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -139,7 +138,7 @@ namespace MgmtKeyvault
                 var response = _vaultsRestClient.GetDeleted(Id.SubscriptionId, Id.Parent.Name, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new DeletedVault(this, response.Value.Id, response.Value), response.GetRawResponse());
+                return Response.FromValue(new DeletedVault(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

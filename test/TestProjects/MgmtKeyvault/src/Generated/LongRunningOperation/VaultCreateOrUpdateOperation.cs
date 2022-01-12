@@ -66,14 +66,14 @@ namespace MgmtKeyvault.Models
         {
             using var document = JsonDocument.Parse(response.ContentStream);
             var data = VaultData.DeserializeVaultData(document.RootElement);
-            return new Vault(_operationBase, data.Id, data);
+            return new Vault(_operationBase, data);
         }
 
         async ValueTask<Vault> IOperationSource<Vault>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
             var data = VaultData.DeserializeVaultData(document.RootElement);
-            return new Vault(_operationBase, data.Id, data);
+            return new Vault(_operationBase, data);
         }
     }
 }

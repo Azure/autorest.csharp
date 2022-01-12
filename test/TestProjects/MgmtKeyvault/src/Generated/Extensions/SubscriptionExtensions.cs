@@ -73,7 +73,7 @@ namespace MgmtKeyvault
                     try
                     {
                         var response = await restOperations.ListBySubscriptionAsync(subscription.Id.SubscriptionId, top, cancellationToken: cancellationToken).ConfigureAwait(false);
-                        return Page.FromValues(response.Value.Value.Select(value => new Vault(subscription, value.Id, value)), response.Value.NextLink, response.GetRawResponse());
+                        return Page.FromValues(response.Value.Value.Select(value => new Vault(subscription, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
                     {
@@ -88,7 +88,7 @@ namespace MgmtKeyvault
                     try
                     {
                         var response = await restOperations.ListBySubscriptionNextPageAsync(nextLink, subscription.Id.SubscriptionId, top, cancellationToken: cancellationToken).ConfigureAwait(false);
-                        return Page.FromValues(response.Value.Value.Select(value => new Vault(subscription, value.Id, value)), response.Value.NextLink, response.GetRawResponse());
+                        return Page.FromValues(response.Value.Value.Select(value => new Vault(subscription, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
                     {
@@ -122,7 +122,7 @@ namespace MgmtKeyvault
                     try
                     {
                         var response = restOperations.ListBySubscription(subscription.Id.SubscriptionId, top, cancellationToken: cancellationToken);
-                        return Page.FromValues(response.Value.Value.Select(value => new Vault(subscription, value.Id, value)), response.Value.NextLink, response.GetRawResponse());
+                        return Page.FromValues(response.Value.Value.Select(value => new Vault(subscription, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
                     {
@@ -137,7 +137,7 @@ namespace MgmtKeyvault
                     try
                     {
                         var response = restOperations.ListBySubscriptionNextPage(nextLink, subscription.Id.SubscriptionId, top, cancellationToken: cancellationToken);
-                        return Page.FromValues(response.Value.Value.Select(value => new Vault(subscription, value.Id, value)), response.Value.NextLink, response.GetRawResponse());
+                        return Page.FromValues(response.Value.Value.Select(value => new Vault(subscription, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
                     {
@@ -393,7 +393,7 @@ namespace MgmtKeyvault
                     try
                     {
                         var response = await restOperations.ListBySubscriptionAsync(subscription.Id.SubscriptionId, top, cancellationToken: cancellationToken).ConfigureAwait(false);
-                        return Page.FromValues(response.Value.Value.Select(value => new ManagedHsm(subscription, value.Id, value)), response.Value.NextLink, response.GetRawResponse());
+                        return Page.FromValues(response.Value.Value.Select(value => new ManagedHsm(subscription, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
                     {
@@ -408,7 +408,7 @@ namespace MgmtKeyvault
                     try
                     {
                         var response = await restOperations.ListBySubscriptionNextPageAsync(nextLink, subscription.Id.SubscriptionId, top, cancellationToken: cancellationToken).ConfigureAwait(false);
-                        return Page.FromValues(response.Value.Value.Select(value => new ManagedHsm(subscription, value.Id, value)), response.Value.NextLink, response.GetRawResponse());
+                        return Page.FromValues(response.Value.Value.Select(value => new ManagedHsm(subscription, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
                     {
@@ -442,7 +442,7 @@ namespace MgmtKeyvault
                     try
                     {
                         var response = restOperations.ListBySubscription(subscription.Id.SubscriptionId, top, cancellationToken: cancellationToken);
-                        return Page.FromValues(response.Value.Value.Select(value => new ManagedHsm(subscription, value.Id, value)), response.Value.NextLink, response.GetRawResponse());
+                        return Page.FromValues(response.Value.Value.Select(value => new ManagedHsm(subscription, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
                     {
@@ -457,7 +457,7 @@ namespace MgmtKeyvault
                     try
                     {
                         var response = restOperations.ListBySubscriptionNextPage(nextLink, subscription.Id.SubscriptionId, top, cancellationToken: cancellationToken);
-                        return Page.FromValues(response.Value.Value.Select(value => new ManagedHsm(subscription, value.Id, value)), response.Value.NextLink, response.GetRawResponse());
+                        return Page.FromValues(response.Value.Value.Select(value => new ManagedHsm(subscription, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
                     {

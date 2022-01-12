@@ -146,7 +146,7 @@ namespace TenantOnly
                 var response = _billingAccountsRestClient.Get(billingAccountName, expand, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new BillingAccount(Parent, response.Value.Id, response.Value), response.GetRawResponse());
+                return Response.FromValue(new BillingAccount(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -177,7 +177,7 @@ namespace TenantOnly
                 var response = await _billingAccountsRestClient.GetAsync(billingAccountName, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new BillingAccount(Parent, response.Value.Id, response.Value), response.GetRawResponse());
+                return Response.FromValue(new BillingAccount(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -203,9 +203,9 @@ namespace TenantOnly
             try
             {
                 var response = _billingAccountsRestClient.Get(billingAccountName, expand, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<BillingAccount>(null, response.GetRawResponse())
-                    : Response.FromValue(new BillingAccount(this, response.Value.Id, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<BillingAccount>(null, response.GetRawResponse());
+                return Response.FromValue(new BillingAccount(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -231,9 +231,9 @@ namespace TenantOnly
             try
             {
                 var response = await _billingAccountsRestClient.GetAsync(billingAccountName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<BillingAccount>(null, response.GetRawResponse())
-                    : Response.FromValue(new BillingAccount(this, response.Value.Id, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<BillingAccount>(null, response.GetRawResponse());
+                return Response.FromValue(new BillingAccount(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -310,7 +310,7 @@ namespace TenantOnly
                 try
                 {
                     var response = _billingAccountsRestClient.List(expand, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new BillingAccount(Parent, value.Id, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new BillingAccount(Parent, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -337,7 +337,7 @@ namespace TenantOnly
                 try
                 {
                     var response = await _billingAccountsRestClient.ListAsync(expand, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new BillingAccount(Parent, value.Id, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new BillingAccount(Parent, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {

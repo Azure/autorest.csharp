@@ -38,9 +38,8 @@ namespace MgmtScopeResource
 
         /// <summary> Initializes a new instance of the <see cref = "ResourceLink"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
-        /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal ResourceLink(ArmResource options, ResourceIdentifier id, ResourceLinkData data) : base(options, id)
+        internal ResourceLink(ArmResource options, ResourceLinkData data) : base(options, new ResourceIdentifier(data.Id))
         {
             HasData = true;
             _data = data;
@@ -116,7 +115,7 @@ namespace MgmtScopeResource
                 var response = await _resourceLinksRestClient.GetAsync(Id, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new ResourceLink(this, new ResourceIdentifier(response.Value.Id), response.Value), response.GetRawResponse());
+                return Response.FromValue(new ResourceLink(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -139,7 +138,7 @@ namespace MgmtScopeResource
                 var response = _resourceLinksRestClient.Get(Id, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new ResourceLink(this, new ResourceIdentifier(response.Value.Id), response.Value), response.GetRawResponse());
+                return Response.FromValue(new ResourceLink(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

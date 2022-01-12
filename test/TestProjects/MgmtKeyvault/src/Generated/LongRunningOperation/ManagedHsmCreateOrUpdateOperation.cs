@@ -66,14 +66,14 @@ namespace MgmtKeyvault.Models
         {
             using var document = JsonDocument.Parse(response.ContentStream);
             var data = ManagedHsmData.DeserializeManagedHsmData(document.RootElement);
-            return new ManagedHsm(_operationBase, data.Id, data);
+            return new ManagedHsm(_operationBase, data);
         }
 
         async ValueTask<ManagedHsm> IOperationSource<ManagedHsm>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
             var data = ManagedHsmData.DeserializeManagedHsmData(document.RootElement);
-            return new ManagedHsm(_operationBase, data.Id, data);
+            return new ManagedHsm(_operationBase, data);
         }
     }
 }

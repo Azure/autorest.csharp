@@ -66,14 +66,14 @@ namespace MgmtMultipleParentResource.Models
         {
             using var document = JsonDocument.Parse(response.ContentStream);
             var data = ChildBodyData.DeserializeChildBodyData(document.RootElement);
-            return new AnotherParentChild(_operationBase, data.Id, data);
+            return new AnotherParentChild(_operationBase, data);
         }
 
         async ValueTask<AnotherParentChild> IOperationSource<AnotherParentChild>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
             var data = ChildBodyData.DeserializeChildBodyData(document.RootElement);
-            return new AnotherParentChild(_operationBase, data.Id, data);
+            return new AnotherParentChild(_operationBase, data);
         }
     }
 }

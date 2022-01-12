@@ -26,7 +26,7 @@ namespace SingletonResource.Models
 
         internal CarPutOperation(ArmResource operationsBase, Response<CarData> response)
         {
-            _operation = new OperationOrResponseInternals<Car>(Response.FromValue(new Car(operationsBase, response.Value.Id, response.Value), response.GetRawResponse()));
+            _operation = new OperationOrResponseInternals<Car>(Response.FromValue(new Car(operationsBase, response.Value), response.GetRawResponse()));
         }
 
         /// <inheritdoc />

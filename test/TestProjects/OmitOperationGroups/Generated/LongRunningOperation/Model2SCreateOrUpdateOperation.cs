@@ -26,7 +26,7 @@ namespace OmitOperationGroups.Models
 
         internal Model2SCreateOrUpdateOperation(ArmResource operationsBase, Response<Model2Data> response)
         {
-            _operation = new OperationOrResponseInternals<Model2>(Response.FromValue(new Model2(operationsBase, response.Value.Id, response.Value), response.GetRawResponse()));
+            _operation = new OperationOrResponseInternals<Model2>(Response.FromValue(new Model2(operationsBase, response.Value), response.GetRawResponse()));
         }
 
         /// <inheritdoc />

@@ -824,7 +824,7 @@ namespace MgmtListMethods
                     try
                     {
                         var response = await restOperations.ListBySubscriptionAsync(subscription.Id.SubscriptionId, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
-                        return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentWithAncestorWithNonResChWithLoc(subscription, value.Id, value)), response.Value.NextLink, response.GetRawResponse());
+                        return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentWithAncestorWithNonResChWithLoc(subscription, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
                     {
@@ -839,7 +839,7 @@ namespace MgmtListMethods
                     try
                     {
                         var response = await restOperations.ListBySubscriptionNextPageAsync(nextLink, subscription.Id.SubscriptionId, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
-                        return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentWithAncestorWithNonResChWithLoc(subscription, value.Id, value)), response.Value.NextLink, response.GetRawResponse());
+                        return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentWithAncestorWithNonResChWithLoc(subscription, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
                     {
@@ -873,7 +873,7 @@ namespace MgmtListMethods
                     try
                     {
                         var response = restOperations.ListBySubscription(subscription.Id.SubscriptionId, expand, cancellationToken: cancellationToken);
-                        return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentWithAncestorWithNonResChWithLoc(subscription, value.Id, value)), response.Value.NextLink, response.GetRawResponse());
+                        return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentWithAncestorWithNonResChWithLoc(subscription, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
                     {
@@ -888,7 +888,7 @@ namespace MgmtListMethods
                     try
                     {
                         var response = restOperations.ListBySubscriptionNextPage(nextLink, subscription.Id.SubscriptionId, expand, cancellationToken: cancellationToken);
-                        return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentWithAncestorWithNonResChWithLoc(subscription, value.Id, value)), response.Value.NextLink, response.GetRawResponse());
+                        return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentWithAncestorWithNonResChWithLoc(subscription, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
                     {
@@ -950,7 +950,7 @@ namespace MgmtListMethods
                     try
                     {
                         var response = await restOperations.ListBySubscriptionAsync(subscription.Id.SubscriptionId, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
-                        return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentWithAncestorWithNonResCh(subscription, value.Id, value)), response.Value.NextLink, response.GetRawResponse());
+                        return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentWithAncestorWithNonResCh(subscription, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
                     {
@@ -965,7 +965,7 @@ namespace MgmtListMethods
                     try
                     {
                         var response = await restOperations.ListBySubscriptionNextPageAsync(nextLink, subscription.Id.SubscriptionId, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
-                        return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentWithAncestorWithNonResCh(subscription, value.Id, value)), response.Value.NextLink, response.GetRawResponse());
+                        return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentWithAncestorWithNonResCh(subscription, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
                     {
@@ -999,7 +999,7 @@ namespace MgmtListMethods
                     try
                     {
                         var response = restOperations.ListBySubscription(subscription.Id.SubscriptionId, expand, cancellationToken: cancellationToken);
-                        return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentWithAncestorWithNonResCh(subscription, value.Id, value)), response.Value.NextLink, response.GetRawResponse());
+                        return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentWithAncestorWithNonResCh(subscription, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
                     {
@@ -1014,7 +1014,7 @@ namespace MgmtListMethods
                     try
                     {
                         var response = restOperations.ListBySubscriptionNextPage(nextLink, subscription.Id.SubscriptionId, expand, cancellationToken: cancellationToken);
-                        return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentWithAncestorWithNonResCh(subscription, value.Id, value)), response.Value.NextLink, response.GetRawResponse());
+                        return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentWithAncestorWithNonResCh(subscription, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
                     {
@@ -1075,7 +1075,7 @@ namespace MgmtListMethods
                     try
                     {
                         var response = await restOperations.ListTestAsync(subscription.Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
-                        return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentWithAncestorWithLoc(subscription, value.Id, value)), response.Value.NextLink, response.GetRawResponse());
+                        return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentWithAncestorWithLoc(subscription, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
                     {
@@ -1090,7 +1090,7 @@ namespace MgmtListMethods
                     try
                     {
                         var response = await restOperations.ListTestNextPageAsync(nextLink, subscription.Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
-                        return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentWithAncestorWithLoc(subscription, value.Id, value)), response.Value.NextLink, response.GetRawResponse());
+                        return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentWithAncestorWithLoc(subscription, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
                     {
@@ -1123,7 +1123,7 @@ namespace MgmtListMethods
                     try
                     {
                         var response = restOperations.ListTest(subscription.Id.SubscriptionId, cancellationToken: cancellationToken);
-                        return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentWithAncestorWithLoc(subscription, value.Id, value)), response.Value.NextLink, response.GetRawResponse());
+                        return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentWithAncestorWithLoc(subscription, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
                     {
@@ -1138,7 +1138,7 @@ namespace MgmtListMethods
                     try
                     {
                         var response = restOperations.ListTestNextPage(nextLink, subscription.Id.SubscriptionId, cancellationToken: cancellationToken);
-                        return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentWithAncestorWithLoc(subscription, value.Id, value)), response.Value.NextLink, response.GetRawResponse());
+                        return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentWithAncestorWithLoc(subscription, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
                     {
@@ -1309,7 +1309,7 @@ namespace MgmtListMethods
                     try
                     {
                         var response = await restOperations.NonPageableListBySubscriptionAsync(subscription.Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
-                        return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentWithAncestor(subscription, value.Id, value)), null, response.GetRawResponse());
+                        return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentWithAncestor(subscription, value)), null, response.GetRawResponse());
                     }
                     catch (Exception e)
                     {
@@ -1342,7 +1342,7 @@ namespace MgmtListMethods
                     try
                     {
                         var response = restOperations.NonPageableListBySubscription(subscription.Id.SubscriptionId, cancellationToken: cancellationToken);
-                        return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentWithAncestor(subscription, value.Id, value)), null, response.GetRawResponse());
+                        return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentWithAncestor(subscription, value)), null, response.GetRawResponse());
                     }
                     catch (Exception e)
                     {

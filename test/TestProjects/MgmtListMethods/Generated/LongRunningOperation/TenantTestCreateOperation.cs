@@ -66,14 +66,14 @@ namespace MgmtListMethods.Models
         {
             using var document = JsonDocument.Parse(response.ContentStream);
             var data = TenantTestData.DeserializeTenantTestData(document.RootElement);
-            return new TenantTest(_operationBase, data.Id, data);
+            return new TenantTest(_operationBase, data);
         }
 
         async ValueTask<TenantTest> IOperationSource<TenantTest>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
             var data = TenantTestData.DeserializeTenantTestData(document.RootElement);
-            return new TenantTest(_operationBase, data.Id, data);
+            return new TenantTest(_operationBase, data);
         }
     }
 }

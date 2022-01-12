@@ -66,14 +66,14 @@ namespace MgmtLRO.Models
         {
             using var document = JsonDocument.Parse(response.ContentStream);
             var data = FakeData.DeserializeFakeData(document.RootElement);
-            return new Fake(_operationBase, data.Id, data);
+            return new Fake(_operationBase, data);
         }
 
         async ValueTask<Fake> IOperationSource<Fake>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
             var data = FakeData.DeserializeFakeData(document.RootElement);
-            return new Fake(_operationBase, data.Id, data);
+            return new Fake(_operationBase, data);
         }
     }
 }

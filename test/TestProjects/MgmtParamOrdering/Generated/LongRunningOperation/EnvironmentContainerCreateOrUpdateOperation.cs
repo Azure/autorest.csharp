@@ -27,7 +27,7 @@ namespace MgmtParamOrdering.Models
 
         internal EnvironmentContainerCreateOrUpdateOperation(ArmResource operationsBase, Response<EnvironmentContainerResourceData> response)
         {
-            _operation = new OperationOrResponseInternals<EnvironmentContainerResource>(Response.FromValue(new EnvironmentContainerResource(operationsBase, response.Value.Id, response.Value), response.GetRawResponse()));
+            _operation = new OperationOrResponseInternals<EnvironmentContainerResource>(Response.FromValue(new EnvironmentContainerResource(operationsBase, response.Value), response.GetRawResponse()));
         }
 
         /// <inheritdoc />

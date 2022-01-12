@@ -38,9 +38,8 @@ namespace MgmtScopeResource
 
         /// <summary> Initializes a new instance of the <see cref = "PolicyAssignment"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
-        /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal PolicyAssignment(ArmResource options, ResourceIdentifier id, PolicyAssignmentData data) : base(options, id)
+        internal PolicyAssignment(ArmResource options, PolicyAssignmentData data) : base(options, data.Id)
         {
             HasData = true;
             _data = data;
@@ -116,7 +115,7 @@ namespace MgmtScopeResource
                 var response = await _policyAssignmentsRestClient.GetAsync(Id.Parent, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new PolicyAssignment(this, response.Value.Id, response.Value), response.GetRawResponse());
+                return Response.FromValue(new PolicyAssignment(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -139,7 +138,7 @@ namespace MgmtScopeResource
                 var response = _policyAssignmentsRestClient.Get(Id.Parent, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new PolicyAssignment(this, response.Value.Id, response.Value), response.GetRawResponse());
+                return Response.FromValue(new PolicyAssignment(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

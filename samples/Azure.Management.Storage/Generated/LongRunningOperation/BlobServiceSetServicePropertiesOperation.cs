@@ -27,7 +27,7 @@ namespace Azure.Management.Storage.Models
 
         internal BlobServiceSetServicePropertiesOperation(ArmResource operationsBase, Response<BlobServiceData> response)
         {
-            _operation = new OperationOrResponseInternals<BlobService>(Response.FromValue(new BlobService(operationsBase, response.Value.Id, response.Value), response.GetRawResponse()));
+            _operation = new OperationOrResponseInternals<BlobService>(Response.FromValue(new BlobService(operationsBase, response.Value), response.GetRawResponse()));
         }
 
         /// <inheritdoc />
