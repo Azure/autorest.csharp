@@ -18,7 +18,7 @@ using AutoRest.CSharp.Output.Models.Types;
 using Azure.ResourceManager.Core;
 using NUnit.Framework;
 
-[assembly: LevelOfParallelism(1)]
+[assembly: LevelOfParallelism(2)]
 namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
 {
     [Parallelizable(ParallelScope.All)]
