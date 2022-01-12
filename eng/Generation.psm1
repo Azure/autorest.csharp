@@ -32,7 +32,6 @@ function Invoke-AutoRest($baseOutput, $projectName, $autoRestArguments, $sharedS
     $namespace = $projectName.Replace('-', '_')
     $command = "$script:autoRestBinary $autoRestArguments  --skip-upgrade-check  --namespace=$namespace --output-folder=$outputPath"
 
-    # A temporary work around for autorest csharo issue #1826
     if ($fast)
     {
         $command = "dotnet run --project $script:AutoRestPluginProject --no-build -- --standalone $outputPath"
