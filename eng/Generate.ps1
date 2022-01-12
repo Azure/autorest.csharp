@@ -282,3 +282,13 @@ if ($includeTests) {
         }
     } -ThrottleLimit $parallel
 }
+else {
+    $keys | %{ $swaggerTestDefinitions[$_] } | ForEach-Object -Parallel {
+        if ($_.output -ne $null) {
+            Import-Module "$using:PSScriptRoot\Generation.psm1" -DisableNameChecking;
+            $baseOutput = $_.output
+            Invoke "dotnet build $baseOutput --verbosity quiet /nologo" -errorMessage "Try to execute Generate.ps1 with option '-includeTests' to generate tests again."
+        }
+    } -ThrottleLimit $parallel
+}
+

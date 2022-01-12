@@ -2,7 +2,7 @@ $repoRoot = Resolve-Path (Join-Path $PSScriptRoot '..')
 $autoRestBinary = "npx --no-install autorest"
 $AutoRestPluginProject = Resolve-Path (Join-Path $repoRoot 'src' 'AutoRest.CSharp')
 
-function Invoke($command)
+function Invoke($command, $errorMessage=$null)
 {
     Write-Host "> $command"
     pushd $repoRoot
@@ -18,7 +18,12 @@ function Invoke($command)
     
     if($LastExitCode -ne 0)
     {
-        Write-Error "Command failed to execute: $command"
+        if ($ErrorMessage) {
+            Write-Error "Command failed to execute: $command`n$errorMessage"
+        }
+        else {
+            Write-Error "Command failed to execute: $command"
+        }
     }
 }
 
