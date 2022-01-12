@@ -376,6 +376,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 });
                 CodeWriterDelegate selectBody;
                 if (wrapResource.ResourceData.ShouldSetResourceIdentifier)
+                {
                     selectBody = w =>
                     {
                         using (w.Scope())
@@ -384,8 +385,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
                             w.Line($"return {newInstanceExpression};");
                         }
                     };
+                }
                 else
+                {
                     selectBody = newInstanceExpression;
+                }
 
                 _writer.UseNamespace("System.Linq");
                 converter = $".Select({dataExpression} => {selectBody})";
@@ -413,6 +417,40 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.WriteParameter(parameter);
             }
             _writer.Line($"{typeof(CancellationToken)} cancellationToken = default)");
+        }
+
+        protected CodeWriterDelegate CreateResourceIdentifierExpression(Resource resource, RequestPath requestPath, IEnumerable<ParameterMapping> parameterMappings, CodeWriterDelegate dataExpression)
+        {
+            var methodWithLeastParameters = resource.CreateResourceIdentifierMethodSignature().Values.OrderBy(method => method.Parameters.Length).First();
+            var cache = new List<ParameterMapping>(parameterMappings);
+            return w =>
+            {
+                w.Append($"{resource.Type.Name}.CreateResourceIdentifier(");
+                var parameterInvocations = new List<CodeWriterDelegate>();
+                foreach (var reference in requestPath.Where(s => s.IsReference).Select(s => s.Reference))
+                {
+                    var match = cache.First(p => reference.Name.Equals(p.Parameter.Name, StringComparison.InvariantCultureIgnoreCase) && reference.Type.Equals(p.Parameter.Type));
+                    cache.Remove(match);
+                    parameterInvocations.Add(match.IsPassThru ? w => w.Append($"{match.Parameter.Name}") : w => w.Append(match.ValueExpression));
+                }
+                if (parameterInvocations.Count < methodWithLeastParameters.Parameters.Length)
+                {
+                    if (resource.ResourceData.GetTypeOfName() != null)
+                    {
+                        parameterInvocations.Add(w => w.Append($"{dataExpression}.Name"));
+                    }
+                    else
+                    {
+                        throw new ErrorHelpers.ErrorException($"The resource data {resource.ResourceData.Type.Name} does not have a `Name` property, which is required when assigning non-resource as resources");
+                    }
+                }
+                foreach (var invocation in parameterInvocations)
+                {
+                    w.Append($"{invocation}, ");
+                }
+                w.RemoveTrailingCharacter();
+                w.Append($")");
+            };
         }
 
         protected CodeWriterDelegate CreateResourceIdentifierExpression(Resource resource, RequestPath requestPath, IEnumerable<ParameterMapping> parameterMappings, CodeWriterDelegate dataExpression)
@@ -824,7 +862,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
             CSharpType? returnType = null;
             if (operation.IsLongRunning)
             {
-                var longRunningOperation = Context.Library.GetLongRunningOperation(lroObjectType);
+                LongRunningOperation lro = Context.Library.GetLongRunningOperation(lroObjectType);
+                MgmtLongRunningOperation longRunningOperation = AsMgmtOperation(lro); 
                 returnType = longRunningOperation.WrapperResource?.Type ?? longRunningOperation.ResultType;
             }
             else

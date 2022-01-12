@@ -24,7 +24,9 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             DefaultNamespace = $"{context.DefaultNamespace}.Models";
             if (operation.ShouldWrapResultType(ResultType, resource))
+            {
                 WrapperResource = resource;
+            }
         }
 
         /// <summary>
