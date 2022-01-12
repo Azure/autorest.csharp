@@ -50,3 +50,4 @@ directive:
     where: $..[?(@.operationId == "ResourceSetRules_ListResourceSetRules")]
     transform: >
       $.operationId = "Accounts_GetResourceSetRules";
+```
