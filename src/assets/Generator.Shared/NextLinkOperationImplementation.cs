@@ -4,10 +4,12 @@
 #nullable enable
 
 using System;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Web;
 using Azure.Core.Pipeline;
 
 namespace Azure.Core
@@ -104,7 +106,7 @@ namespace Azure.Core
             switch (_headerSource)
             {
                 case HeaderSource.OperationLocation when headers.TryGetValue("Operation-Location", out string? operationLocation):
-                    _nextRequestUri = operationLocation;
+                    _nextRequestUri = AppendOrReplaceApiVersion(operationLocation, _startRequestUri);
                     return;
                 case HeaderSource.AzureAsyncOperation when headers.TryGetValue("Azure-AsyncOperation", out string? azureAsyncOperation):
                     _nextRequestUri = azureAsyncOperation;
@@ -113,6 +115,31 @@ namespace Azure.Core
                     _nextRequestUri = location!;
                     return;
             }
+        }
+
+        private static string AppendOrReplaceApiVersion(string uri, Uri startRequestUri)
+        {
+            NameValueCollection nameValueCollection = HttpUtility.ParseQueryString(startRequestUri.Query);
+            var apiVersion = nameValueCollection.Get("api-version");
+            if (apiVersion != null)
+            {
+                if (uri.Contains("api-version"))
+                {
+                    var index = uri.IndexOf('?');
+                    var plainUri = uri.Substring(0, index);
+                    var queryString = uri.Substring(index + 1);
+                    NameValueCollection nvCollection = HttpUtility.ParseQueryString(queryString);
+                    nameValueCollection["api-version"] = apiVersion;
+                    var queryData = string.Join("&", nvCollection.AllKeys.Select(key => $"{HttpUtility.UrlEncode(key)}={HttpUtility.UrlEncode(nvCollection[key])}").ToArray());
+                    return $"{plainUri}?{queryData}";
+                }
+                else
+                {
+                    var concatSymbol = uri.IndexOf('?') > -1 ? "&" : "?";
+                    return $"{uri}{concatSymbol}api-version={apiVersion}";
+                }
+            }
+            return uri;
         }
 
         private string? GetFinalUri()
@@ -237,7 +264,7 @@ namespace Azure.Core
             var headers = response.Headers;
             if (headers.TryGetValue("Operation-Location", out var operationLocationUri))
             {
-                nextRequestUri = operationLocationUri;
+                nextRequestUri = AppendOrReplaceApiVersion(operationLocationUri, requestUri);
                 return HeaderSource.OperationLocation;
             }
 
