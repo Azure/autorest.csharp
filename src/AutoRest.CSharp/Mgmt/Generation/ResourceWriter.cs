@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading;
 using AutoRest.CSharp.Generation.Types;
@@ -296,15 +297,16 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
 
         protected override CSharpType? WrapResourceDataType(CSharpType? type, MgmtRestOperation operation)
         {
-            if (!IsResourceDataType(type, operation))
+            if (!IsResourceDataType(type, operation, out _))
                 return type;
 
             return _resource.Type;
         }
 
-        protected override bool IsResourceDataType(CSharpType? type, MgmtRestOperation clientOperation)
+        protected override bool IsResourceDataType(CSharpType? type, MgmtRestOperation clientOperation, [MaybeNullWhen(false)] out ResourceData data)
         {
-            return _resourceData.Type.Equals(type);
+            data = _resourceData;
+            return data.Type.Equals(type);
         }
 
         private void WriteListAvailableLocationsMethod(bool async)

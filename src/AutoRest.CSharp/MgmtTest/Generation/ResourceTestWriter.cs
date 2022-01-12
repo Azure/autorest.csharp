@@ -16,6 +16,7 @@ using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Utilities;
 using Azure.ResourceManager;
+using System.Diagnostics.CodeAnalysis;
 
 namespace AutoRest.CSharp.MgmtTest.Generation
 {
@@ -118,15 +119,16 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
         protected override CSharpType? WrapResourceDataType(CSharpType? type, MgmtRestOperation operation)
         {
-            if (!IsResourceDataType(type, operation))
+            if (!IsResourceDataType(type, operation, out _))
                 return type;
 
             return _resource.Type;
         }
 
-        protected override bool IsResourceDataType(CSharpType? type, MgmtRestOperation operation)
+        protected override bool IsResourceDataType(CSharpType? type, MgmtRestOperation operation, [MaybeNullWhen(false)] out ResourceData data)
         {
-            return _resource.Type.Equals(type);
+            data = _resource.ResourceData;
+            return data.Type.Equals(type);
         }
 
         protected void WriteMethodTest(Resource resource, MgmtClientOperation clientOperation, bool async)
