@@ -22,7 +22,7 @@ namespace MgmtKeyvault.Tests.Mock
     {
         public DeletedManagedHsmCollectionMockTests(bool isAsync) : base(isAsync, RecordedTestMode.Record)
         {
-            ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyErrors) => true;
+            // ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyErrors) => true;
             Environment.SetEnvironmentVariable("RESOURCE_MANAGER_URL", $"https://localhost:8443");
         }
 
