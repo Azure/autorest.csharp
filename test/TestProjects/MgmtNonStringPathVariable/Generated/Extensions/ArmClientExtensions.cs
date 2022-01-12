@@ -20,6 +20,7 @@ namespace MgmtNonStringPathVariable
         /// <returns> Returns a <see cref="Fake" /> object. </returns>
         public static Fake GetFake(this ArmClient armClient, ResourceIdentifier id)
         {
+            Fake.ValidateResourceId(id);
             return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new Fake(clientOptions, credential, uri, pipeline, id));
         }
         #endregion
@@ -31,6 +32,7 @@ namespace MgmtNonStringPathVariable
         /// <returns> Returns a <see cref="Bar" /> object. </returns>
         public static Bar GetBar(this ArmClient armClient, ResourceIdentifier id)
         {
+            Bar.ValidateResourceId(id);
             return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new Bar(clientOptions, credential, uri, pipeline, id));
         }
         #endregion
