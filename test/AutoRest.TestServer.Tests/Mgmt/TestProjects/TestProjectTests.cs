@@ -443,8 +443,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         private static string GetSampleKey(string paramName) => paramName switch
         {
             "subscriptionId" => Guid.Empty.ToString(),
-            "scope" => "subscriptions/0c2f6471-1bf0-4dda-aec3-cb9272f09575/resourceGroups/myrg/providers/Microsoft.Something/somethings/mySomething",
-            "linkId" => "providers/Microsoft.Resources/links/myLink",
+            "scope" => "/subscriptions/0c2f6471-1bf0-4dda-aec3-cb9272f09575/resourceGroups/myrg/providers/Microsoft.Something/somethings/mySomething",
+            "linkId" => "/providers/Microsoft.Resources/links/myLink",
             _ => paramName
         };
 

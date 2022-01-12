@@ -99,7 +99,8 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
                     // - https://github.com/Azure/azure-rest-api-specs/blob/719b74f77b92eb1ec3814be6c4488bcf6b651733/specification/storage/resource-manager/Microsoft.Storage/stable/2021-04-01/blob.json#L58
                     // - https://github.com/Azure/azure-rest-api-specs/blob/719b74f77b92eb1ec3814be6c4488bcf6b651733/specification/storage/resource-manager/Microsoft.Storage/stable/2021-04-01/blob.json#L146
                     // so here we have to use `Seqment.BuildSerializedSegments` instead of `RequestPath.SerializedPath` which could be from `RestClientMethod.Operation.GetHttpPath`
-                    _writer.Line($"var resourceId = $\"{Segment.BuildSerializedSegments(requestPath)}\";");
+                    // If first segment is "{var}", then we should not add leading "/". Instead, we should let callers to specify, e.g. "{scope}/providers/Microsoft.Resources/..." v.s. "/subscriptions/{subscriptionId}/..."
+                    _writer.Line($"var resourceId = $\"{Segment.BuildSerializedSegments(requestPath, requestPath.First().IsConstant)}\";");
                     _writer.Line($"return new {typeof(Azure.Core.ResourceIdentifier)}(resourceId);");
                 }
             }
