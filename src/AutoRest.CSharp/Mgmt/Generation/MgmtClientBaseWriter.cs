@@ -453,34 +453,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
             };
         }
 
-        protected CodeWriterDelegate CreateResourceIdentifierExpression(Resource resource, RequestPath requestPath, IEnumerable<ParameterMapping> parameterMappings, CodeWriterDelegate dataExpression)
-        {
-            var methodWithLeastParameters = resource.CreateResourceIdentifierMethodSignature().Values.OrderBy(method => method.Parameters.Length).First();
-            var cache = new List<ParameterMapping>(parameterMappings);
-            return w =>
-            {
-                w.Append($"{resource.Type.Name}.CreateResourceIdentifier(");
-                var parameterInvocations = new List<CodeWriterDelegate>();
-                foreach (var reference in requestPath.Where(s => s.IsReference).Select(s => s.Reference))
-                {
-                    var match = cache.First(p => reference.Name.Equals(p.Parameter.Name, StringComparison.InvariantCultureIgnoreCase) && reference.Type.Equals(p.Parameter.Type));
-                    cache.Remove(match);
-                    parameterInvocations.Add(match.IsPassThru ? w => w.Append($"{match.Parameter.Name}") : w => w.Append(match.ValueExpression));
-                }
-                if (parameterInvocations.Count < methodWithLeastParameters.Parameters.Length)
-                {
-                    if (resource.ResourceData.GetTypeOfName() != null)
-                        parameterInvocations.Add(w => w.Append($"{dataExpression}.Name"));
-                    else
-                        throw new ErrorHelpers.ErrorException($"The resource data {resource.ResourceData.Type.Name} does not have a `Name` property, which is required when assigning non-resource as resources");
-                }
-                foreach (var invocation in parameterInvocations)
-                    w.Append($"{invocation}, ");
-                w.RemoveTrailingCharacter();
-                w.Append($")");
-            };
-        }
-
         protected class PagingMethodWrapper
         {
             public PagingMethodWrapper(PagingMethod pagingMethod)
@@ -862,8 +834,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             CSharpType? returnType = null;
             if (operation.IsLongRunning)
             {
-                LongRunningOperation lro = Context.Library.GetLongRunningOperation(lroObjectType);
-                MgmtLongRunningOperation longRunningOperation = AsMgmtOperation(lro); 
+                var longRunningOperation = Context.Library.GetLongRunningOperation(lroObjectType);
                 returnType = longRunningOperation.WrapperResource?.Type ?? longRunningOperation.ResultType;
             }
             else

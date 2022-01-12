@@ -659,31 +659,31 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             return paramNames;
         }
 
-        public CSharpType GenResponseType(MgmtClientOperation clientOperation, bool async, string? methodName = null)
-        {
-            if (clientOperation.IsLongRunningOperation() || methodName == "CreateOrUpdate")
-            {
-                var lroObjectType = GetLROObjectType(clientOperation.First().Operation, async);
-                return lroObjectType.WrapAsync(async);
-            }
-            else if (clientOperation.IsPagingOperation(Context))
-            {
-                var itemType = clientOperation.First(restOperation => restOperation.IsPagingOperation(Context)).GetPagingMethod(Context)!.PagingResponse.ItemType;
-                var actualItemType = WrapResourceDataType(itemType, clientOperation.First())?.Type ?? itemType;
-                return actualItemType.WrapPageable(async);
-            }
-            else if (clientOperation.IsListOperation(Context, out var itemType) && methodName != "Get")
-            {
-                var actualItemType = WrapResourceDataType(itemType, clientOperation.First())?.Type ?? itemType;
-                var returnType = new CSharpType(typeof(IReadOnlyList<>), actualItemType);
-                return GetResponseType(returnType, async);
-            }
-            else
-            {
-                var returnType = WrapResourceDataType(clientOperation.ReturnType, clientOperation.First())?.Type ?? clientOperation.ReturnType;
-                return GetResponseType(returnType, async);
-            }
-        }
+        //public CSharpType GenResponseType(MgmtClientOperation clientOperation, bool async, string? methodName = null)
+        //{
+        //    if (clientOperation.IsLongRunningOperation() || methodName == "CreateOrUpdate")
+        //    {
+        //        var lroObjectType = GetLROObjectType(clientOperation.First().Operation, async);
+        //        return lroObjectType.WrapAsync(async);
+        //    }
+        //    else if (clientOperation.IsPagingOperation(Context))
+        //    {
+        //        var itemType = clientOperation.First(restOperation => restOperation.IsPagingOperation(Context)).GetPagingMethod(Context)!.PagingResponse.ItemType;
+        //        var actualItemType = WrapResourceDataType(itemType, clientOperation.First())?.Type ?? itemType;
+        //        return actualItemType.WrapPageable(async);
+        //    }
+        //    else if (clientOperation.IsListOperation(Context, out var itemType) && methodName != "Get")
+        //    {
+        //        var actualItemType = WrapResourceDataType(itemType, clientOperation.First())?.Type ?? itemType;
+        //        var returnType = new CSharpType(typeof(IReadOnlyList<>), actualItemType);
+        //        return GetResponseType(returnType, async);
+        //    }
+        //    else
+        //    {
+        //        var returnType = WrapResourceDataType(clientOperation.ReturnType, clientOperation.First())?.Type ?? clientOperation.ReturnType;
+        //        return GetResponseType(returnType, async);
+        //    }
+        //}
 
         public string? ParseRequestPath(MgmtTypeProvider tp, string requestPath, ExampleModel exampleModel)
         {
