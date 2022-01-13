@@ -33,7 +33,7 @@ namespace MgmtExpandResourceTypes
         {
         }
 
-        /// <summary> Initializes a new instance of ZoneCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="ZoneCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal ZoneCollection(ArmResource parent) : base(parent)
         {
@@ -228,7 +228,7 @@ namespace MgmtExpandResourceTypes
                 throw new ArgumentNullException(nameof(zoneName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ZoneCollection.GetIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("ZoneCollection.GetIfExists");
             scope.Start();
             try
             {
@@ -280,7 +280,7 @@ namespace MgmtExpandResourceTypes
                 throw new ArgumentNullException(nameof(zoneName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ZoneCollection.ExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("ZoneCollection.Exists");
             scope.Start();
             try
             {

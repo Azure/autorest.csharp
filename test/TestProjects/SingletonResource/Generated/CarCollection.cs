@@ -34,7 +34,7 @@ namespace SingletonResource
         {
         }
 
-        /// <summary> Initializes a new instance of CarCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="CarCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal CarCollection(ArmResource parent) : base(parent)
         {
@@ -222,7 +222,7 @@ namespace SingletonResource
                 throw new ArgumentNullException(nameof(carName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("CarCollection.GetIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("CarCollection.GetIfExists");
             scope.Start();
             try
             {
@@ -274,7 +274,7 @@ namespace SingletonResource
                 throw new ArgumentNullException(nameof(carName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("CarCollection.ExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("CarCollection.Exists");
             scope.Start();
             try
             {

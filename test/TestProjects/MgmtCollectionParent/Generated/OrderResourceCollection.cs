@@ -32,7 +32,7 @@ namespace MgmtCollectionParent
         {
         }
 
-        /// <summary> Initializes a new instance of OrderResourceCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="OrderResourceCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal OrderResourceCollection(ArmResource parent) : base(parent)
         {
@@ -169,7 +169,7 @@ namespace MgmtCollectionParent
                 throw new ArgumentNullException(nameof(orderName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("OrderResourceCollection.GetIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("OrderResourceCollection.GetIfExists");
             scope.Start();
             try
             {
@@ -231,7 +231,7 @@ namespace MgmtCollectionParent
                 throw new ArgumentNullException(nameof(orderName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("OrderResourceCollection.ExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("OrderResourceCollection.Exists");
             scope.Start();
             try
             {

@@ -30,7 +30,7 @@ namespace TenantOnly
         {
         }
 
-        /// <summary> Initializes a new instance of AgreementCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="AgreementCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal AgreementCollection(ArmResource parent) : base(parent)
         {
@@ -151,7 +151,7 @@ namespace TenantOnly
                 throw new ArgumentNullException(nameof(agreementName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("AgreementCollection.GetIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("AgreementCollection.GetIfExists");
             scope.Start();
             try
             {
@@ -205,7 +205,7 @@ namespace TenantOnly
                 throw new ArgumentNullException(nameof(agreementName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("AgreementCollection.ExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("AgreementCollection.Exists");
             scope.Start();
             try
             {

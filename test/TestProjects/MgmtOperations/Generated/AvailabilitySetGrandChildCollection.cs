@@ -31,7 +31,7 @@ namespace MgmtOperations
         {
         }
 
-        /// <summary> Initializes a new instance of AvailabilitySetGrandChildCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="AvailabilitySetGrandChildCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal AvailabilitySetGrandChildCollection(ArmResource parent) : base(parent)
         {
@@ -222,7 +222,7 @@ namespace MgmtOperations
                 throw new ArgumentNullException(nameof(availabilitySetGrandChildName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChildCollection.GetIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChildCollection.GetIfExists");
             scope.Start();
             try
             {
@@ -274,7 +274,7 @@ namespace MgmtOperations
                 throw new ArgumentNullException(nameof(availabilitySetGrandChildName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChildCollection.ExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChildCollection.Exists");
             scope.Start();
             try
             {

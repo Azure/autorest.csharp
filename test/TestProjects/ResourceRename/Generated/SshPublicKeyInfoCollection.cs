@@ -33,7 +33,7 @@ namespace ResourceRename
         {
         }
 
-        /// <summary> Initializes a new instance of SshPublicKeyInfoCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="SshPublicKeyInfoCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal SshPublicKeyInfoCollection(ArmResource parent) : base(parent)
         {
@@ -216,7 +216,7 @@ namespace ResourceRename
                 throw new ArgumentNullException(nameof(sshPublicKeyName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyInfoCollection.GetIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyInfoCollection.GetIfExists");
             scope.Start();
             try
             {
@@ -268,7 +268,7 @@ namespace ResourceRename
                 throw new ArgumentNullException(nameof(sshPublicKeyName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyInfoCollection.ExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyInfoCollection.Exists");
             scope.Start();
             try
             {
