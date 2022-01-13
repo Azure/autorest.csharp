@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using AutoRest.CSharp.Generation.Writers;
+using AutoRest.CSharp.Output.Models.Shared;
 using Azure.ResourceManager;
 
 namespace AutoRest.CSharp.Mgmt.Generation

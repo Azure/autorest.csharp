@@ -24,8 +24,6 @@ namespace AutoRest.CSharp.Mgmt.Output
             _builder = (MgmtRestClientBuilder)Builder;
         }
 
-        public string DefaultVersion => _builder.DefaultVersion!;
-
         protected override Func<string?, bool> ShouldReturnNullOn404(Operation operation)
         {
             Func<string?, bool> f = delegate (string? responseBodyType)

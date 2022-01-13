@@ -164,7 +164,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
 
             writer.Append($"{clientParameter.Type} {clientParameter.Name:D}");
-            if (clientParameter.DefaultValue != null)
+            if (clientParameter.DefaultValue != null && clientParameter.UseDefaultValueInCtorParam)
             {
                 var defaultValue = clientParameter.DefaultValue.Value;
                 if (defaultValue.IsNewInstanceSentinel || !TypeFactory.CanBeInitializedInline(clientParameter.Type, defaultValue))
@@ -184,6 +184,10 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.Append($" = ");
                     writer.WriteConstant(clientParameter.DefaultValue.Value);
                 }
+            }
+            else if (!clientParameter.IsRequired)
+            {
+                writer.Append($" = null");
             }
             else if (enforceDefaultValue)
             {
@@ -257,7 +261,7 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             // Temporary check to minimize amount of changes in existing generated code
             var assignToSelf = parameter.Name == variableName;
-            if (parameter.DefaultValue != null && !TypeFactory.CanBeInitializedInline(parameter.Type, parameter.DefaultValue))
+            if (parameter.DefaultValue != null && (!parameter.UseDefaultValueInCtorParam || !TypeFactory.CanBeInitializedInline(parameter.Type, parameter.DefaultValue)))
             {
                 if (assignToSelf)
                 {
@@ -269,7 +273,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
 
                 var defaultValue = parameter.DefaultValue.Value;
-                if (defaultValue.IsNewInstanceSentinel || TypeFactory.IsExtendableEnum(parameter.Type) || parameter.DefaultValue.Value.Type.Equals(parameter.Type))
+                if (defaultValue.IsNewInstanceSentinel || TypeFactory.IsExtendableEnum(parameter.Type) || parameter.DefaultValue.Value.Type.Equals(parameter.Type) || parameter.Type.Equals(typeof(string)))
                 {
                     WriteConstant(writer, defaultValue);
                 }

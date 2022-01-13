@@ -17,30 +17,24 @@ namespace AutoRest.CSharp.Mgmt.Models
         {
         }
 
-        public string? DefaultVersion { get; private set; }
-
         public override Parameter BuildConstructorParameter(RequestParameter requestParameter)
         {
-            return base.BuildConstructorParameter(requestParameter);
+            if (requestParameter.CSharpName() != "apiVersion")
+                return base.BuildConstructorParameter(requestParameter);
 
-            //    if (requestParameter.CSharpName() != "apiVersion")
-            //        return base.BuildConstructorParameter(requestParameter);
+            CSharpType type = _context.TypeFactory.CreateType(requestParameter.Schema, true);
 
-            //    CSharpType type = _context.TypeFactory.CreateType(requestParameter.Schema, true);
-
-            //    var defaultValue = ParseConstant(requestParameter);
-            //    DefaultVersion = defaultValue!.ToString();
-
-            //    return new Parameter(
-            //        requestParameter.CSharpName(),
-            //        CreateDescription(requestParameter, type),
-            //        TypeFactory.GetInputType(type),
-            //        null,
-            //        true,
-            //        IsApiVersionParameter: requestParameter.Origin == "modelerfour:synthesized/api-version",
-            //        SkipUrlEncoding: requestParameter.Extensions?.SkipEncoding ?? false,
-            //        RequestLocation: GetRequestLocation(requestParameter));
-            //}
+            return new Parameter(
+                requestParameter.CSharpName(),
+                CreateDescription(requestParameter, type),
+                TypeFactory.GetInputType(type),
+                ParseConstant(requestParameter),
+                true,
+                false,
+                IsApiVersionParameter: requestParameter.Origin == "modelerfour:synthesized/api-version",
+                SkipUrlEncoding: requestParameter.Extensions?.SkipEncoding ?? false,
+                RequestLocation: GetRequestLocation(requestParameter),
+                UseDefaultValueInCtorParam: false);
         }
     }
 }
