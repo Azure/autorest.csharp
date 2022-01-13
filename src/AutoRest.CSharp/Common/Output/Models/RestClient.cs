@@ -25,7 +25,7 @@ namespace AutoRest.CSharp.Output.Models
         private RestClientMethod[]? _allMethods;
 
         protected RestClient(OperationGroup operationGroup, BuildContext context, string? clientName)
-            : this(operationGroup, null, context, ClientBuilder.GetClientPrefix(clientName ?? operationGroup.Language.Default.Name, context), "Rest" + ClientBuilder.GetClientSuffix(context), new RestClientBuilder(operationGroup, context)) { }
+            : this(operationGroup, null, context, ClientBuilder.GetClientPrefix(clientName ?? operationGroup.Language.Default.Name, context), "Rest" + ClientBuilder.GetClientSuffix(context), new RestClientBuilder(operationGroup.Operations, context)) { }
 
         protected RestClient(OperationGroup operationGroup, BuildContext context, string? clientName, RestClientBuilder clientBuilder)
             : this(operationGroup, null, context, ClientBuilder.GetClientPrefix(clientName ?? operationGroup.Language.Default.Name, context), "Rest" + ClientBuilder.GetClientSuffix(context), clientBuilder) { }

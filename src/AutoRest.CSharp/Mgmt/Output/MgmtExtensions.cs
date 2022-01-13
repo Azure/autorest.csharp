@@ -45,7 +45,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                     GetResourceFromResourceType(operation.GetRequestPath(_context).GetResourceType(_context.Configuration.MgmtConfiguration)))));
         }
 
-        private Resource? GetResourceFromResourceType(ResourceType resourceType)
+        private Resource? GetResourceFromResourceType(ResourceTypeSegment resourceType)
         {
             var candidates = _context.Library.ArmResources.Where(resource => resource.ResourceType == resourceType);
             if (candidates.Count() == 0)

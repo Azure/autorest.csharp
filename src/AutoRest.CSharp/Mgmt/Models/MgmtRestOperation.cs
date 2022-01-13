@@ -65,7 +65,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             RequestPath = requestPath;
             ContextualPath = contextualPath;
             Name = methodName;
-            Resource = resource; 
+            Resource = resource;
             ReturnType = returnType;
         }
 

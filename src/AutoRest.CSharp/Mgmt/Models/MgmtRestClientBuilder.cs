@@ -13,7 +13,7 @@ namespace AutoRest.CSharp.Mgmt.Models
     internal class MgmtRestClientBuilder : RestClientBuilder
     {
         public MgmtRestClientBuilder(OperationGroup operationGroup, BuildContext context)
-            : base(operationGroup, context)
+            : base(operationGroup.Operations, context)
         {
         }
 
