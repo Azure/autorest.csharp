@@ -302,6 +302,8 @@ namespace media_types_LowLevel
         public virtual async Task<Response> BinaryBodyWithTwoContentTypesAsync(RequestContent content, ContentType contentType, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            content = content ?? throw new ArgumentNullException(nameof(content));
+
             using var scope = _clientDiagnostics.CreateScope("MediaTypesClient.BinaryBodyWithTwoContentTypes");
             scope.Start();
             try
@@ -325,6 +327,8 @@ namespace media_types_LowLevel
         public virtual Response BinaryBodyWithTwoContentTypes(RequestContent content, ContentType contentType, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            content = content ?? throw new ArgumentNullException(nameof(content));
+
             using var scope = _clientDiagnostics.CreateScope("MediaTypesClient.BinaryBodyWithTwoContentTypes");
             scope.Start();
             try
@@ -348,6 +352,8 @@ namespace media_types_LowLevel
         public virtual async Task<Response> BinaryBodyWithThreeContentTypesAsync(RequestContent content, ContentType contentType, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            content = content ?? throw new ArgumentNullException(nameof(content));
+
             using var scope = _clientDiagnostics.CreateScope("MediaTypesClient.BinaryBodyWithThreeContentTypes");
             scope.Start();
             try
@@ -371,6 +377,8 @@ namespace media_types_LowLevel
         public virtual Response BinaryBodyWithThreeContentTypes(RequestContent content, ContentType contentType, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            content = content ?? throw new ArgumentNullException(nameof(content));
+
             using var scope = _clientDiagnostics.CreateScope("MediaTypesClient.BinaryBodyWithThreeContentTypes");
             scope.Start();
             try
@@ -393,6 +401,8 @@ namespace media_types_LowLevel
         public virtual async Task<Response> BinaryBodyWithThreeContentTypesAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            content = content ?? throw new ArgumentNullException(nameof(content));
+
             using var scope = _clientDiagnostics.CreateScope("MediaTypesClient.BinaryBodyWithThreeContentTypes");
             scope.Start();
             try
@@ -415,6 +425,8 @@ namespace media_types_LowLevel
         public virtual Response BinaryBodyWithThreeContentTypes(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            content = content ?? throw new ArgumentNullException(nameof(content));
+
             using var scope = _clientDiagnostics.CreateScope("MediaTypesClient.BinaryBodyWithThreeContentTypes");
             scope.Start();
             try
