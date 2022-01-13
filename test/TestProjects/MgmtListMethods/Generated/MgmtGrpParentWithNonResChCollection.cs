@@ -31,7 +31,7 @@ namespace MgmtListMethods
         {
         }
 
-        /// <summary> Initializes a new instance of MgmtGrpParentWithNonResChCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="MgmtGrpParentWithNonResChCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal MgmtGrpParentWithNonResChCollection(ArmResource parent) : base(parent)
         {

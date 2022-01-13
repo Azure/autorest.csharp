@@ -8,7 +8,7 @@
 using System.Text.Json;
 using Azure.Core;
 
-namespace MgmtSingleton
+namespace SingletonResource
 {
     public partial class SingletonResourceData : IUtf8JsonSerializable
     {

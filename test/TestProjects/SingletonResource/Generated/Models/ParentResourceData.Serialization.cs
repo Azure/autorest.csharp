@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
-namespace MgmtSingleton
+namespace SingletonResource
 {
     public partial class ParentResourceData : IUtf8JsonSerializable
     {

@@ -32,7 +32,7 @@ namespace MgmtSubscriptionNameParameter
         {
         }
 
-        /// <summary> Initializes a new instance of SBSubscriptionCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="SBSubscriptionCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal SBSubscriptionCollection(ArmResource parent) : base(parent)
         {

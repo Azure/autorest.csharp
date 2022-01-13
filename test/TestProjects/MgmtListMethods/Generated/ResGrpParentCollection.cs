@@ -32,7 +32,7 @@ namespace MgmtListMethods
         {
         }
 
-        /// <summary> Initializes a new instance of ResGrpParentCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="ResGrpParentCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal ResGrpParentCollection(ArmResource parent) : base(parent)
         {

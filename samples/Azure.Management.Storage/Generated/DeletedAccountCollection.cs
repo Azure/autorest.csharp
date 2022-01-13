@@ -31,7 +31,7 @@ namespace Azure.Management.Storage
         {
         }
 
-        /// <summary> Initializes a new instance of DeletedAccountCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="DeletedAccountCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal DeletedAccountCollection(ArmResource parent) : base(parent)
         {

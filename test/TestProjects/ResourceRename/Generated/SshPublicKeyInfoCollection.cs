@@ -32,7 +32,7 @@ namespace ResourceRename
         {
         }
 
-        /// <summary> Initializes a new instance of SshPublicKeyInfoCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="SshPublicKeyInfoCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal SshPublicKeyInfoCollection(ArmResource parent) : base(parent)
         {

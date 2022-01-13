@@ -32,7 +32,7 @@ namespace Azure.ResourceManager.Sample
         {
         }
 
-        /// <summary> Initializes a new instance of SshPublicKeyCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="SshPublicKeyCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal SshPublicKeyCollection(ArmResource parent) : base(parent)
         {

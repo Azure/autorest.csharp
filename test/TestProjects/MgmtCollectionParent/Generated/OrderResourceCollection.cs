@@ -31,7 +31,7 @@ namespace MgmtCollectionParent
         {
         }
 
-        /// <summary> Initializes a new instance of OrderResourceCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="OrderResourceCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal OrderResourceCollection(ArmResource parent) : base(parent)
         {

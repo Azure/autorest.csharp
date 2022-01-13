@@ -32,7 +32,7 @@ namespace SubscriptionExtensions
         {
         }
 
-        /// <summary> Initializes a new instance of OvenCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="OvenCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal OvenCollection(ArmResource parent) : base(parent)
         {

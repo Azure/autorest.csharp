@@ -32,7 +32,7 @@ namespace SupersetFlattenInheritance
         {
         }
 
-        /// <summary> Initializes a new instance of TrackedResourceModel1Collection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="TrackedResourceModel1Collection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal TrackedResourceModel1Collection(ArmResource parent) : base(parent)
         {

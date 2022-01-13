@@ -30,7 +30,7 @@ namespace MgmtOperations
         {
         }
 
-        /// <summary> Initializes a new instance of AvailabilitySetChildCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="AvailabilitySetChildCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal AvailabilitySetChildCollection(ArmResource parent) : base(parent)
         {

@@ -32,7 +32,7 @@ namespace MgmtScopeResource
         {
         }
 
-        /// <summary> Initializes a new instance of PolicyAssignmentCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="PolicyAssignmentCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal PolicyAssignmentCollection(ArmResource parent) : base(parent)
         {

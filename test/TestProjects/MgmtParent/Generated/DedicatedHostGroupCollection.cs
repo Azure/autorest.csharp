@@ -29,7 +29,7 @@ namespace MgmtParent
         {
         }
 
-        /// <summary> Initializes a new instance of DedicatedHostGroupCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="DedicatedHostGroupCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal DedicatedHostGroupCollection(ArmResource parent) : base(parent)
         {

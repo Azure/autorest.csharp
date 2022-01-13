@@ -8,9 +8,9 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
-using MgmtSingleton;
+using SingletonResource;
 
-namespace MgmtSingleton.Models
+namespace SingletonResource.Models
 {
     public partial class ParentResourceListResult
     {

@@ -30,7 +30,7 @@ namespace Azure.Management.Storage
         {
         }
 
-        /// <summary> Initializes a new instance of BlobInventoryPolicyCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="BlobInventoryPolicyCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal BlobInventoryPolicyCollection(ArmResource parent) : base(parent)
         {

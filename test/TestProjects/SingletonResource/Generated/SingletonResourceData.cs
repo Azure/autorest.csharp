@@ -8,7 +8,7 @@
 using Azure.Core;
 using Azure.ResourceManager.Models;
 
-namespace MgmtSingleton
+namespace SingletonResource
 {
     /// <summary> A class representing the SingletonResource data model. </summary>
     public partial class SingletonResourceData : Resource

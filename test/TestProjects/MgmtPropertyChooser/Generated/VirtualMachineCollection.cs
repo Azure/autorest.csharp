@@ -32,7 +32,7 @@ namespace MgmtPropertyChooser
         {
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="VirtualMachineCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal VirtualMachineCollection(ArmResource parent) : base(parent)
         {

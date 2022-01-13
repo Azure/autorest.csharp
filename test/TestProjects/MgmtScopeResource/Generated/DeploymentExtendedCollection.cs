@@ -30,7 +30,7 @@ namespace MgmtScopeResource
         {
         }
 
-        /// <summary> Initializes a new instance of DeploymentExtendedCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="DeploymentExtendedCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal DeploymentExtendedCollection(ArmResource parent) : base(parent)
         {

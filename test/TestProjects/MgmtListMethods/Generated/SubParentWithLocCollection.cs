@@ -32,7 +32,7 @@ namespace MgmtListMethods
         {
         }
 
-        /// <summary> Initializes a new instance of SubParentWithLocCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="SubParentWithLocCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal SubParentWithLocCollection(ArmResource parent) : base(parent)
         {

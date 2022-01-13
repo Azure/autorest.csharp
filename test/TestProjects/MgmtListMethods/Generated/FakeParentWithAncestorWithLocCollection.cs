@@ -30,7 +30,7 @@ namespace MgmtListMethods
         {
         }
 
-        /// <summary> Initializes a new instance of FakeParentWithAncestorWithLocCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="FakeParentWithAncestorWithLocCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal FakeParentWithAncestorWithLocCollection(ArmResource parent) : base(parent)
         {

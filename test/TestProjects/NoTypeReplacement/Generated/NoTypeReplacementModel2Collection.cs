@@ -32,7 +32,7 @@ namespace NoTypeReplacement
         {
         }
 
-        /// <summary> Initializes a new instance of NoTypeReplacementModel2Collection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="NoTypeReplacementModel2Collection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal NoTypeReplacementModel2Collection(ArmResource parent) : base(parent)
         {

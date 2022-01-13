@@ -32,7 +32,7 @@ namespace MgmtKeyvault
         {
         }
 
-        /// <summary> Initializes a new instance of ManagedHsmCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="ManagedHsmCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal ManagedHsmCollection(ArmResource parent) : base(parent)
         {

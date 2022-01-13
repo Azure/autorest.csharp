@@ -11,9 +11,9 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.ResourceManager.Core;
-using MgmtSingleton;
+using SingletonResource;
 
-namespace MgmtSingleton.Models
+namespace SingletonResource.Models
 {
     public partial class ParentResourceCreateOrUpdateOperation : Operation<ParentResource>
     {

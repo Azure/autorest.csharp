@@ -32,7 +32,7 @@ namespace ExactMatchFlattenInheritance
         {
         }
 
-        /// <summary> Initializes a new instance of CustomModel3Collection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="CustomModel3Collection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal CustomModel3Collection(ArmResource parent) : base(parent)
         {

@@ -32,7 +32,7 @@ namespace XmlDeserialization
         {
         }
 
-        /// <summary> Initializes a new instance of XmlInstanceCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="XmlInstanceCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal XmlInstanceCollection(ArmResource parent) : base(parent)
         {

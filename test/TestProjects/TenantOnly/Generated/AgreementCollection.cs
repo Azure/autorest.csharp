@@ -29,7 +29,7 @@ namespace TenantOnly
         {
         }
 
-        /// <summary> Initializes a new instance of AgreementCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="AgreementCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal AgreementCollection(ArmResource parent) : base(parent)
         {

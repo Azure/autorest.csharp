@@ -30,7 +30,7 @@ namespace Azure.Management.Storage
         {
         }
 
-        /// <summary> Initializes a new instance of EncryptionScopeCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="EncryptionScopeCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal EncryptionScopeCollection(ArmResource parent) : base(parent)
         {

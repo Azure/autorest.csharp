@@ -32,7 +32,7 @@ namespace SupersetFlattenInheritance
         {
         }
 
-        /// <summary> Initializes a new instance of ResourceModel1Collection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="ResourceModel1Collection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal ResourceModel1Collection(ArmResource parent) : base(parent)
         {

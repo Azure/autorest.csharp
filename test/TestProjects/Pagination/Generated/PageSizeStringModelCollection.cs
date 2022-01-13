@@ -32,7 +32,7 @@ namespace Pagination
         {
         }
 
-        /// <summary> Initializes a new instance of PageSizeStringModelCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="PageSizeStringModelCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal PageSizeStringModelCollection(ArmResource parent) : base(parent)
         {

@@ -17,9 +17,9 @@ using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources;
-using MgmtSingleton.Models;
+using SingletonResource.Models;
 
-namespace MgmtSingleton
+namespace SingletonResource
 {
     /// <summary> A class representing collection of ParentResource and their operations over its parent. </summary>
     public partial class ParentResourceCollection : ArmCollection, IEnumerable<ParentResource>, IAsyncEnumerable<ParentResource>
@@ -32,7 +32,7 @@ namespace MgmtSingleton
         {
         }
 
-        /// <summary> Initializes a new instance of ParentResourceCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="ParentResourceCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal ParentResourceCollection(ArmResource parent) : base(parent)
         {
