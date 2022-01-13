@@ -11,13 +11,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
     {
         public MgmtLROTests() : base("MgmtLRO") { }
 
-<<<<<<< HEAD
         [TestCase("BarCollection", "CreateOrUpdate", typeof(BarCreateOrUpdateOperation))]
-        [TestCase("FakeCollection", "StartCreateOrUpdate", typeof(FakeCreateOrUpdateOperation))]
-=======
-        [TestCase("BarCollection", "CreateOrUpdate", typeof(BarCreateOperation))]
         [TestCase("FakeCollection", "CreateOrUpdate", typeof(FakeCreateOrUpdateOperation))]
->>>>>>> origin/feature/v3
         public void ValidateLongRunningOperationFunctionInCollection(string className, string functionName, Type returnType)
         {
             var collections = FindAllCollections().First(c => c.Name == className);
