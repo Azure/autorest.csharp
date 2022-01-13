@@ -42,7 +42,7 @@ namespace MgmtKeyvault.Tests.Mock
             // Example: KeyVaultDeletePrivateEndpointConnection
             var privateEndpointConnection = GetArmClient().GetPrivateEndpointConnection(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/vaults/sample-vault/privateEndpointConnections/sample-pec"));
 
-            await privateEndpointConnection.DeleteAsync();
+            await privateEndpointConnection.DeleteAsync(true);
         }
     }
 }

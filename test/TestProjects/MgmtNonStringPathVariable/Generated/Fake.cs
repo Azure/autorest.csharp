@@ -172,7 +172,7 @@ namespace MgmtNonStringPathVariable
         /// <summary> Delete an fake. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<FakeDeleteOperation> DeleteAsync(bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<FakeDeleteOperation> DeleteAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("Fake.Delete");
             scope.Start();
@@ -197,7 +197,7 @@ namespace MgmtNonStringPathVariable
         /// <summary> Delete an fake. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual FakeDeleteOperation Delete(bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual FakeDeleteOperation Delete(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("Fake.Delete");
             scope.Start();
@@ -396,14 +396,14 @@ namespace MgmtNonStringPathVariable
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<FakeUpdateOperation> StartUpdateAsync(FakeUpdate parameters, bool waitForCompletion = false, CancellationToken cancellationToken = default)
+        public async virtual Task<FakeUpdateOperation> UpdateAsync(bool waitForCompletion, FakeUpdate parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("Fake.StartUpdate");
+            using var scope = _clientDiagnostics.CreateScope("Fake.Update");
             scope.Start();
             try
             {
@@ -428,14 +428,14 @@ namespace MgmtNonStringPathVariable
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual FakeUpdateOperation StartUpdate(FakeUpdate parameters, bool waitForCompletion = false, CancellationToken cancellationToken = default)
+        public virtual FakeUpdateOperation Update(bool waitForCompletion, FakeUpdate parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("Fake.StartUpdate");
+            using var scope = _clientDiagnostics.CreateScope("Fake.Update");
             scope.Start();
             try
             {

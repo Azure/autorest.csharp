@@ -60,7 +60,7 @@ namespace MgmtListMethods
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="mgmtGrpParentWithNonResChName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual MgmtGrpParentWithNonResChCreateOrUpdateOperation CreateOrUpdate(string mgmtGrpParentWithNonResChName, MgmtGrpParentWithNonResChData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual MgmtGrpParentWithNonResChCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string mgmtGrpParentWithNonResChName, MgmtGrpParentWithNonResChData parameters, CancellationToken cancellationToken = default)
         {
             if (mgmtGrpParentWithNonResChName == null)
             {
@@ -97,7 +97,7 @@ namespace MgmtListMethods
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="mgmtGrpParentWithNonResChName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<MgmtGrpParentWithNonResChCreateOrUpdateOperation> CreateOrUpdateAsync(string mgmtGrpParentWithNonResChName, MgmtGrpParentWithNonResChData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<MgmtGrpParentWithNonResChCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string mgmtGrpParentWithNonResChName, MgmtGrpParentWithNonResChData parameters, CancellationToken cancellationToken = default)
         {
             if (mgmtGrpParentWithNonResChName == null)
             {

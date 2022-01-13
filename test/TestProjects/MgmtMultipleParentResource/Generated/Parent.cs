@@ -172,7 +172,7 @@ namespace MgmtMultipleParentResource
         /// <summary> The operation to delete the VMSS VM run command. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<ParentDeleteOperation> DeleteAsync(bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<ParentDeleteOperation> DeleteAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("Parent.Delete");
             scope.Start();
@@ -197,7 +197,7 @@ namespace MgmtMultipleParentResource
         /// <summary> The operation to delete the VMSS VM run command. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual ParentDeleteOperation Delete(bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual ParentDeleteOperation Delete(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("Parent.Delete");
             scope.Start();
@@ -396,7 +396,7 @@ namespace MgmtMultipleParentResource
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        public async virtual Task<ParentUpdateOperation> UpdateAsync(ParentUpdate body, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<ParentUpdateOperation> UpdateAsync(bool waitForCompletion, ParentUpdate body, CancellationToken cancellationToken = default)
         {
             if (body == null)
             {
@@ -428,7 +428,7 @@ namespace MgmtMultipleParentResource
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        public virtual ParentUpdateOperation Update(ParentUpdate body, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual ParentUpdateOperation Update(bool waitForCompletion, ParentUpdate body, CancellationToken cancellationToken = default)
         {
             if (body == null)
             {

@@ -57,7 +57,7 @@ namespace NoTypeReplacement
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="noTypeReplacementModel3SName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual NoTypeReplacementModel3SPutOperation CreateOrUpdate(string noTypeReplacementModel3SName, NoTypeReplacementModel3Data parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual NoTypeReplacementModel3SPutOperation CreateOrUpdate(bool waitForCompletion, string noTypeReplacementModel3SName, NoTypeReplacementModel3Data parameters, CancellationToken cancellationToken = default)
         {
             if (noTypeReplacementModel3SName == null)
             {
@@ -90,7 +90,7 @@ namespace NoTypeReplacement
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="noTypeReplacementModel3SName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<NoTypeReplacementModel3SPutOperation> CreateOrUpdateAsync(string noTypeReplacementModel3SName, NoTypeReplacementModel3Data parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<NoTypeReplacementModel3SPutOperation> CreateOrUpdateAsync(bool waitForCompletion, string noTypeReplacementModel3SName, NoTypeReplacementModel3Data parameters, CancellationToken cancellationToken = default)
         {
             if (noTypeReplacementModel3SName == null)
             {

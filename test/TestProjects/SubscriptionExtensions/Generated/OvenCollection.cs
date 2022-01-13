@@ -61,7 +61,7 @@ namespace SubscriptionExtensions
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="ovenName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual OvenCreateOrUpdateOperation CreateOrUpdate(string ovenName, OvenData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual OvenCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string ovenName, OvenData parameters, CancellationToken cancellationToken = default)
         {
             if (ovenName == null)
             {
@@ -98,7 +98,7 @@ namespace SubscriptionExtensions
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="ovenName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<OvenCreateOrUpdateOperation> CreateOrUpdateAsync(string ovenName, OvenData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<OvenCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string ovenName, OvenData parameters, CancellationToken cancellationToken = default)
         {
             if (ovenName == null)
             {

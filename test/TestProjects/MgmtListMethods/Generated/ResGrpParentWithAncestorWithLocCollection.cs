@@ -61,7 +61,7 @@ namespace MgmtListMethods
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithAncestorWithLocName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ResGrpParentWithAncestorWithLocCreateOrUpdateOperation CreateOrUpdate(string resGrpParentWithAncestorWithLocName, ResGrpParentWithAncestorWithLocData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual ResGrpParentWithAncestorWithLocCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string resGrpParentWithAncestorWithLocName, ResGrpParentWithAncestorWithLocData parameters, CancellationToken cancellationToken = default)
         {
             if (resGrpParentWithAncestorWithLocName == null)
             {
@@ -98,7 +98,7 @@ namespace MgmtListMethods
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithAncestorWithLocName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<ResGrpParentWithAncestorWithLocCreateOrUpdateOperation> CreateOrUpdateAsync(string resGrpParentWithAncestorWithLocName, ResGrpParentWithAncestorWithLocData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<ResGrpParentWithAncestorWithLocCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string resGrpParentWithAncestorWithLocName, ResGrpParentWithAncestorWithLocData parameters, CancellationToken cancellationToken = default)
         {
             if (resGrpParentWithAncestorWithLocName == null)
             {

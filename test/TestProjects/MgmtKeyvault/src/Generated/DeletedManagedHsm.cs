@@ -170,7 +170,7 @@ namespace MgmtKeyvault
         /// <summary> Permanently deletes the specified managed HSM. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<ManagedHsmPurgeDeletedOperation> PurgeDeletedAsync(bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<ManagedHsmPurgeDeletedOperation> PurgeDeletedAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DeletedManagedHsm.PurgeDeleted");
             scope.Start();
@@ -195,7 +195,7 @@ namespace MgmtKeyvault
         /// <summary> Permanently deletes the specified managed HSM. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual ManagedHsmPurgeDeletedOperation PurgeDeleted(bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual ManagedHsmPurgeDeletedOperation PurgeDeleted(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DeletedManagedHsm.PurgeDeleted");
             scope.Start();

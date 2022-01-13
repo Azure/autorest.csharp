@@ -60,7 +60,7 @@ namespace SingletonResource
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parentName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ParentResourceCreateOrUpdateOperation CreateOrUpdate(string parentName, ParentResourceData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual ParentResourceCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string parentName, ParentResourceData parameters, CancellationToken cancellationToken = default)
         {
             if (parentName == null)
             {
@@ -96,7 +96,7 @@ namespace SingletonResource
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parentName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<ParentResourceCreateOrUpdateOperation> CreateOrUpdateAsync(string parentName, ParentResourceData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<ParentResourceCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string parentName, ParentResourceData parameters, CancellationToken cancellationToken = default)
         {
             if (parentName == null)
             {

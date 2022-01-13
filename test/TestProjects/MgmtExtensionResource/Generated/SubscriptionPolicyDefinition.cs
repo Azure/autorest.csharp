@@ -170,7 +170,7 @@ namespace MgmtExtensionResource
         /// <summary> This operation deletes the policy definition in the given subscription with the given name. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<PolicyDefinitionDeleteOperation> DeleteAsync(bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<PolicyDefinitionDeleteOperation> DeleteAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SubscriptionPolicyDefinition.Delete");
             scope.Start();
@@ -195,7 +195,7 @@ namespace MgmtExtensionResource
         /// <summary> This operation deletes the policy definition in the given subscription with the given name. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual PolicyDefinitionDeleteOperation Delete(bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual PolicyDefinitionDeleteOperation Delete(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SubscriptionPolicyDefinition.Delete");
             scope.Start();

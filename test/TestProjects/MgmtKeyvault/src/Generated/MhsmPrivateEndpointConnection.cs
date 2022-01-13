@@ -170,7 +170,7 @@ namespace MgmtKeyvault
         /// <summary> Deletes the specified private endpoint connection associated with the managed hsm pool. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<MhsmPrivateEndpointConnectionDeleteOperation> DeleteAsync(bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<MhsmPrivateEndpointConnectionDeleteOperation> DeleteAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("MhsmPrivateEndpointConnection.Delete");
             scope.Start();
@@ -195,7 +195,7 @@ namespace MgmtKeyvault
         /// <summary> Deletes the specified private endpoint connection associated with the managed hsm pool. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual MhsmPrivateEndpointConnectionDeleteOperation Delete(bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual MhsmPrivateEndpointConnectionDeleteOperation Delete(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("MhsmPrivateEndpointConnection.Delete");
             scope.Start();

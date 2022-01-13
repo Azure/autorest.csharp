@@ -45,7 +45,7 @@ namespace MgmtKeyvault.Tests.Mock
                 Sku = new MgmtKeyvault.Models.ManagedHsmSku(family: new MgmtKeyvault.Models.ManagedHsmSkuFamily("B"), name: MgmtKeyvault.Models.ManagedHsmSkuName.StandardB1),
             };
             parameters.Tags.ReplaceWith(new System.Collections.Generic.Dictionary<string, string>() { ["Dept"] = "hsm", ["Environment"] = "dogfood", });
-            await collection.CreateOrUpdateAsync(name, parameters);
+            await collection.CreateOrUpdateAsync(true, name, parameters);
         }
 
         [RecordedTest]

@@ -59,7 +59,7 @@ namespace MgmtKeyvault
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="privateEndpointConnectionName"/> or <paramref name="properties"/> is null. </exception>
-        public virtual PrivateEndpointConnectionPutOperation CreateOrUpdate(string privateEndpointConnectionName, PrivateEndpointConnectionData properties, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual PrivateEndpointConnectionPutOperation CreateOrUpdate(bool waitForCompletion, string privateEndpointConnectionName, PrivateEndpointConnectionData properties, CancellationToken cancellationToken = default)
         {
             if (privateEndpointConnectionName == null)
             {
@@ -96,7 +96,7 @@ namespace MgmtKeyvault
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="privateEndpointConnectionName"/> or <paramref name="properties"/> is null. </exception>
-        public async virtual Task<PrivateEndpointConnectionPutOperation> CreateOrUpdateAsync(string privateEndpointConnectionName, PrivateEndpointConnectionData properties, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<PrivateEndpointConnectionPutOperation> CreateOrUpdateAsync(bool waitForCompletion, string privateEndpointConnectionName, PrivateEndpointConnectionData properties, CancellationToken cancellationToken = default)
         {
             if (privateEndpointConnectionName == null)
             {

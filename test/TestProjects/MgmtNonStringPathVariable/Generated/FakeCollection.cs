@@ -61,7 +61,7 @@ namespace MgmtNonStringPathVariable
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual FakeCreateOrUpdateOperation CreateOrUpdate(FakeNameAsEnum fakeName, FakeData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual FakeCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, FakeNameAsEnum fakeName, FakeData parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -94,7 +94,7 @@ namespace MgmtNonStringPathVariable
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<FakeCreateOrUpdateOperation> CreateOrUpdateAsync(FakeNameAsEnum fakeName, FakeData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<FakeCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, FakeNameAsEnum fakeName, FakeData parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {

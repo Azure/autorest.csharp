@@ -177,7 +177,7 @@ namespace SingletonResource
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<SingletonResourceCreateOrUpdateOperation> CreateOrUpdateAsync(SingletonResourceData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<SingletonResourceCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, SingletonResourceData parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -209,7 +209,7 @@ namespace SingletonResource
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual SingletonResourceCreateOrUpdateOperation CreateOrUpdate(SingletonResourceData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual SingletonResourceCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, SingletonResourceData parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {

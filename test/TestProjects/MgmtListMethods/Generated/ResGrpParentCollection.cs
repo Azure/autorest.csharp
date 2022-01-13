@@ -61,7 +61,7 @@ namespace MgmtListMethods
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ResGrpParentCreateOrUpdateOperation CreateOrUpdate(string resGrpParentName, ResGrpParentData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual ResGrpParentCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string resGrpParentName, ResGrpParentData parameters, CancellationToken cancellationToken = default)
         {
             if (resGrpParentName == null)
             {
@@ -98,7 +98,7 @@ namespace MgmtListMethods
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<ResGrpParentCreateOrUpdateOperation> CreateOrUpdateAsync(string resGrpParentName, ResGrpParentData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<ResGrpParentCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string resGrpParentName, ResGrpParentData parameters, CancellationToken cancellationToken = default)
         {
             if (resGrpParentName == null)
             {

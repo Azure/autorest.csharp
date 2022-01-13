@@ -59,7 +59,7 @@ namespace MgmtOperations
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetChildName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual AvailabilitySetChildCreateOrUpdateOperation CreateOrUpdate(string availabilitySetChildName, AvailabilitySetChildData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual AvailabilitySetChildCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string availabilitySetChildName, AvailabilitySetChildData parameters, CancellationToken cancellationToken = default)
         {
             if (availabilitySetChildName == null)
             {
@@ -96,7 +96,7 @@ namespace MgmtOperations
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetChildName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<AvailabilitySetChildCreateOrUpdateOperation> CreateOrUpdateAsync(string availabilitySetChildName, AvailabilitySetChildData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<AvailabilitySetChildCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string availabilitySetChildName, AvailabilitySetChildData parameters, CancellationToken cancellationToken = default)
         {
             if (availabilitySetChildName == null)
             {

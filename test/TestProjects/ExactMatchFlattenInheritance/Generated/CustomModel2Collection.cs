@@ -61,7 +61,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public virtual CustomModel2SPutOperation CreateOrUpdate(string name, string foo = null, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual CustomModel2SPutOperation CreateOrUpdate(bool waitForCompletion, string name, string foo = null, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
@@ -94,7 +94,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public async virtual Task<CustomModel2SPutOperation> CreateOrUpdateAsync(string name, string foo = null, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<CustomModel2SPutOperation> CreateOrUpdateAsync(bool waitForCompletion, string name, string foo = null, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {

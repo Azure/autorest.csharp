@@ -58,7 +58,7 @@ namespace MgmtScopeResource
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="linkId"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ResourceLinkCreateOrUpdateOperation CreateOrUpdate(ResourceIdentifier linkId, ResourceLinkData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual ResourceLinkCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, ResourceIdentifier linkId, ResourceLinkData parameters, CancellationToken cancellationToken = default)
         {
             if (linkId == null)
             {
@@ -95,7 +95,7 @@ namespace MgmtScopeResource
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="linkId"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<ResourceLinkCreateOrUpdateOperation> CreateOrUpdateAsync(ResourceIdentifier linkId, ResourceLinkData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<ResourceLinkCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, ResourceIdentifier linkId, ResourceLinkData parameters, CancellationToken cancellationToken = default)
         {
             if (linkId == null)
             {
