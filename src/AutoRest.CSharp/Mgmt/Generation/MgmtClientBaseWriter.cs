@@ -349,7 +349,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             if (actualItemType != itemType)
             {
                 _writer.UseNamespace("System.Linq");
-                converter = $".Select(value => new {actualItemType!.Name}({ContextProperty}, value))";
+                converter = $".Select(value => new {actualItemType!.Name}(this, value))";
             }
             var itemName = pagingMethod.ItemName.IsNullOrEmpty() ? string.Empty : $".{pagingMethod.ItemName}";
             _writer.Line($"return {typeof(Page)}.FromValues(response.Value{itemName}{converter}, {continuationTokenText}, response.GetRawResponse());");
