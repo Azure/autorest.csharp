@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using System.Threading;
@@ -764,8 +765,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
             return null;
         }
 
-        protected virtual bool IsResourceDataType(CSharpType? type, MgmtRestOperation operation)
+        protected virtual bool IsResourceDataType(CSharpType? type, MgmtRestOperation operation, [MaybeNullWhen(false)] out ResourceData data)
         {
+            data = null;
             return false;
         }
 
