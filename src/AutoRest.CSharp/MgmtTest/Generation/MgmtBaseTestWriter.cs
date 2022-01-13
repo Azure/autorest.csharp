@@ -23,6 +23,7 @@ using System.Text.Json.Serialization;
 using Azure.Core.Serialization;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text.RegularExpressions;
+using Azure.Core;
 
 namespace AutoRest.CSharp.MgmtTest.Generation
 {
@@ -275,7 +276,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     // initiate for special parameter, others provide default
                     if (p.Name == "location")
                     {
-                        writer.Append($"\"westus\"");
+                        writer.Append($"{typeof(AzureLocation)}.WestUS");
                     }
                     else
                     {
@@ -478,7 +479,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             }
             else if (exampleValue.RawValue is not null)
             {
-                if (new string[] { "String", "Location" }.Contains(cst.FrameworkType.Name))
+                if (new string[] { "String", "AzureLocation" }.Contains(cst.FrameworkType.Name))
                 {
                     writer.Append($"{exampleValue.RawValue:L}");
                 }
@@ -618,7 +619,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             throw new NotImplementedException();
         }
 
-        protected override ResourceType GetBranchResourceType(RequestPath branch)
+        protected override ResourceTypeSegment GetBranchResourceType(RequestPath branch)
         {
             throw new NotImplementedException();
         }
@@ -668,17 +669,18 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             else if (clientOperation.IsPagingOperation(Context))
             {
                 var itemType = clientOperation.First(restOperation => restOperation.IsPagingOperation(Context)).GetPagingMethod(Context)!.PagingResponse.ItemType;
-                var actualItemType = WrapResourceDataType(itemType, clientOperation.First())!;
+                var actualItemType = WrapResourceDataType(itemType, clientOperation.First())?.Type ?? itemType;
                 return actualItemType.WrapPageable(async);
             }
             else if (clientOperation.IsListOperation(Context, out var itemType) && methodName != "Get")
             {
-                var returnType = new CSharpType(typeof(IReadOnlyList<>), WrapResourceDataType(itemType, clientOperation.First())!);
+                var actualItemType = WrapResourceDataType(itemType, clientOperation.First())?.Type ?? itemType;
+                var returnType = new CSharpType(typeof(IReadOnlyList<>), actualItemType);
                 return GetResponseType(returnType, async);
             }
             else
             {
-                var returnType = WrapResourceDataType(clientOperation.ReturnType, clientOperation.First());
+                var returnType = WrapResourceDataType(clientOperation.ReturnType, clientOperation.First())?.Type ?? clientOperation.ReturnType;
                 return GetResponseType(returnType, async);
             }
         }
@@ -768,6 +770,38 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 }
             }
             return null;
+        }
+
+        protected static CodeWriterDelegate WriteMethodInvocation(string methodName, IEnumerable<string> paramNames)
+        {
+            return new CodeWriterDelegate(writer =>
+            {
+                writer.Append($"{methodName}(");
+                foreach (var paramName in paramNames)
+                {
+                    writer.Append($"{paramName},");
+                }
+                writer.RemoveTrailingComma();
+                writer.Append($")");
+            });
+        }
+
+        protected void WriteMethodTestInvocation(bool async, MgmtClientOperation clientOperation, bool isLroOperation, string methodName, IEnumerable<string> paramNames)
+        {
+            _writer.Append($"{GetAwait(async)}");
+            if (isLroOperation || clientOperation.IsLongRunningOperation() && !clientOperation.IsPagingOperation(Context)) {
+                paramNames = new List<string>().Append("true").Concat(paramNames);   // assign  waitForCompletion = true
+            }
+            var isPagingOperation = clientOperation.IsPagingOperation(Context)|| clientOperation.IsListOperation(Context, out var _);
+            if (isPagingOperation)
+            {
+                using (_writer.Scope($"foreach (var _ in {WriteMethodInvocation($"{methodName}", paramNames)})"))
+                { }
+            }
+            else
+            {
+                _writer.Line($"{WriteMethodInvocation($"{methodName}", paramNames)};");
+            }
         }
     }
 }

@@ -10,10 +10,24 @@
   "public-clients": true,
   "head-as-boolean": true,
   "skip-csproj-packagereference": true,
-  "ListException": [
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/locations/{location}/deletedAccounts/{deletedAccountName}",
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/managementPolicies/{managementPolicyName}"
-  ],
+  "RequestPathToParent": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/deletedAccounts": "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/locations/{location}/deletedAccounts/{deletedAccountName}",
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}"
+  },
+  "OperationPositions": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/deletedAccounts": [
+      "collection"
+    ],
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability": [
+      "collection"
+    ]
+  },
+  "RequestPathToSingletonResource": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/managementPolicies/{managementPolicyName}": "managementPolicies/default"
+  },
+  "OverrideOperationName": {
+    "DeletedAccounts_List": "GetAll"
+  },
   "MgmtDebug": {
     "ShowRequestPath": true
   }

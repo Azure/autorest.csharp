@@ -17,17 +17,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Azure.Core" Version="1.22.0-alpha.20211207.1" />
+    <PackageReference Include="Azure.Core" Version="1.22.0-alpha.20220110.4" />
     <PackageReference Include="Azure.Core.Experimental" Version="0.1.0-preview.18" />
-    <PackageReference Include="Azure.ResourceManager" Version="1.0.0-alpha.20211229.2" />
+    <PackageReference Include="Azure.ResourceManager" Version="1.0.0-alpha.20220110.1" />
     <PackageReference Include="Humanizer.Core" Version="2.13.14" />
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="3.10.0-1.final" />
-    <PackageReference Include="YamlDotNet" Version="8.1.2" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.0.1" />
+    <PackageReference Include="YamlDotNet" Version="11.2.1" />
   </ItemGroup>
 
   <!-- Enable SourceLink  -->
   <ItemGroup>
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
   </ItemGroup>
 
   <ItemGroup>

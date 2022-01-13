@@ -59,7 +59,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     WriteGetTest();
                     foreach (var clientOperation in _resourceCollection.ClientOperations)
                     {
-                        WriteMethodTest(clientOperation, true);
+                        WriteMethodTest(clientOperation, true, false);
                     }
                 }
             }
@@ -99,7 +99,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             if (_resourceCollection.CreateOperation != null)
             {
                 _writer.Line();
-                WriteMethodTest(_resourceCollection.CreateOperation, true);
+                WriteMethodTest(_resourceCollection.CreateOperation, true, true);
             }
         }
 
@@ -108,7 +108,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             if (_resourceCollection.GetOperation != null)
             {
                 _writer.Line();
-                WriteMethodTest(_resourceCollection.GetOperation, true);
+                WriteMethodTest(_resourceCollection.GetOperation, true, false);
             }
         }
 
@@ -161,17 +161,17 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             {
                 case Resource parentResource:
                     {
-                        _writer.Append($"var collection = GetArmClient().Get{parentResource.Type.Name}(new {typeof(Azure.ResourceManager.ResourceIdentifier)}({MgmtBaseTestWriter.FormatResourceId(realRequestPath):L}))");
+                        _writer.Append($"var collection = GetArmClient().Get{parentResource.Type.Name}(new {typeof(Azure.Core.ResourceIdentifier)}({MgmtBaseTestWriter.FormatResourceId(realRequestPath):L}))");
                         break;
                     }
                 case Mgmt.Output.ResourceGroupExtensions:
                     {
-                        _writer.Append($"var collection = GetArmClient().GetResourceGroup(new {typeof(Azure.ResourceManager.ResourceIdentifier)}({MgmtBaseTestWriter.FormatResourceId(realRequestPath):L}))");
+                        _writer.Append($"var collection = GetArmClient().GetResourceGroup(new {typeof(Azure.Core.ResourceIdentifier)}({MgmtBaseTestWriter.FormatResourceId(realRequestPath):L}))");
                         break;
                     }
                 case Mgmt.Output.SubscriptionExtensions:
                     {
-                        _writer.Append($"var collection = GetArmClient().GetSubscription(new {typeof(Azure.ResourceManager.ResourceIdentifier)}({MgmtBaseTestWriter.FormatResourceId(realRequestPath):L}))");
+                        _writer.Append($"var collection = GetArmClient().GetSubscription(new {typeof(Azure.Core.ResourceIdentifier)}({MgmtBaseTestWriter.FormatResourceId(realRequestPath):L}))");
                         break;
                     }
                 case Mgmt.Output.TenantExtensions:
@@ -252,7 +252,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             return null;
         }
 
-        protected void WriteMethodTest(MgmtClientOperation clientOperation, bool async)
+        protected void WriteMethodTest(MgmtClientOperation clientOperation, bool async, bool isLroOperation)
         {
             Debug.Assert(clientOperation != null);
             var methodName = clientOperation.Name;
@@ -276,30 +276,18 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     }
 
                     WriteTestDecorator();
-                    if (clientOperation.IsPagingOperation(Context))
-                    {
-                        _writer.Append($"public void {testMethodName}{(exampleIdx > 0 ? (exampleIdx + 1).ToString() : "")}()");
-                    }
-                    else
-                    {
-                        _writer.Append($"public {GetAsyncKeyword(async)} {MgmtBaseTestWriter.GetTaskOrVoid(async)} {testMethodName}{(exampleIdx > 0 ? (exampleIdx + 1).ToString() : "")}()");
-                    }
+                    var testCaseSuffix = exampleIdx > 0 ? (exampleIdx + 1).ToString() : String.Empty;
+                    _writer.Append($"public {GetAsyncKeyword(async)} {MgmtBaseTestWriter.GetTaskOrVoid(async)} {testMethodName}{testCaseSuffix}()");
                     using (_writer.Scope())
                     {
-                        _writer.LineRaw($"// Example: {exampleModel.Name}");
+                        _writer.Line($"// Example: {exampleModel.Name}");
                         clearVariableNames();
                         // WriteGetCollection(clientOperation, exampleModel, async);
                         WriteGetCollection(parentTp, operation.RequestPath.SerializedPath, exampleModel);
 
                         List<string> paramNames = WriteOperationParameters(methodParameters, new List<Parameter>(), exampleModel);
                         _writer.Line();
-                        _writer.Append($"{GetAwait(async && !clientOperation.IsPagingOperation(Context))} collection.{testMethodName}(");
-                        foreach (var paramName in paramNames)
-                        {
-                            _writer.Append($"{paramName},");
-                        }
-                        _writer.RemoveTrailingComma();
-                        _writer.LineRaw(");");
+                        WriteMethodTestInvocation(async, clientOperation, isLroOperation, $"collection.{testMethodName}", paramNames);
                     }
                     _writer.Line();
                     exampleIdx++;
@@ -307,12 +295,12 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             }
         }
 
-        protected override CSharpType? WrapResourceDataType(CSharpType? type, MgmtRestOperation operation)
+        protected override Resource? WrapResourceDataType(CSharpType? type, MgmtRestOperation operation)
         {
             if (!IsResourceDataType(type, operation))
-                return type;
+                return null;
 
-            return _resourceCollection.Resource.Type;
+            return _resourceCollection.Resource;
         }
 
         protected override bool IsResourceDataType(CSharpType? type, MgmtRestOperation operation)

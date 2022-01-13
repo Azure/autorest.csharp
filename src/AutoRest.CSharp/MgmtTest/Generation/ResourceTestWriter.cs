@@ -79,22 +79,22 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             if (resource.GetOperation != null)
             {
                 _writer.Line();
-                WriteMethodTest(resource, resource.GetOperation, true);
+                WriteMethodTest(resource, resource.GetOperation, true, false);
             }
             if (resource.DeleteOperation != null)
             {
                 _writer.Line();
-                WriteMethodTest(resource, resource.DeleteOperation, true);
+                WriteMethodTest(resource, resource.DeleteOperation, true, true);
             }
             if (resource.UpdateOperation != null)
             {
                 _writer.Line();
-                WriteMethodTest(resource, resource.UpdateOperation, true);
+                WriteMethodTest(resource, resource.UpdateOperation, true, false);
             }
             foreach (var clientOperation in resource.ClientOperations)
             {
                 _writer.Line();
-                WriteMethodTest(resource, clientOperation, true);
+                WriteMethodTest(resource, clientOperation, true, false);
             }
         }
 
@@ -109,18 +109,19 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             }
         }
 
-        public void WriteGetResource(Resource resource, string requestPath, ExampleModel exampleModel)
+        public string WriteGetResource(Resource resource, string requestPath, ExampleModel exampleModel)
         {
             var resourceVariableName = useVariableName(resource.Type.Name.FirstCharToLowerCase());
-            _writer.Line($"var {resourceVariableName} = GetArmClient().Get{resource.Type.Name}(new {typeof(ResourceIdentifier)}({MgmtBaseTestWriter.FormatResourceId(requestPath):L}));");
+            _writer.Line($"var {resourceVariableName} = GetArmClient().Get{resource.Type.Name}(new {typeof(Azure.Core.ResourceIdentifier)}({MgmtBaseTestWriter.FormatResourceId(requestPath):L}));");
+            return resourceVariableName;
         }
 
-        protected override CSharpType? WrapResourceDataType(CSharpType? type, MgmtRestOperation operation)
+        protected override Resource? WrapResourceDataType(CSharpType? type, MgmtRestOperation operation)
         {
             if (!IsResourceDataType(type, operation))
-                return type;
+                return null;
 
-            return _resource.Type;
+            return _resource;
         }
 
         protected override bool IsResourceDataType(CSharpType? type, MgmtRestOperation operation)
@@ -128,7 +129,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             return _resource.Type.Equals(type);
         }
 
-        protected void WriteMethodTest(Resource resource, MgmtClientOperation clientOperation, bool async)
+        protected void WriteMethodTest(Resource resource, MgmtClientOperation clientOperation, bool async, bool isLroOperation)
         {
             Debug.Assert(clientOperation != null);
             var methodName = clientOperation.Name;
@@ -150,31 +151,19 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                         continue;
                     }
                     WriteTestDecorator();
-                    if (clientOperation.IsPagingOperation(Context))
-                    {
-                        _writer.Append($"public void {(resource == _resource ? "" : resource.Type.Name)}{testMethodName}{(exampleIdx > 0 ? (exampleIdx + 1).ToString() : "")}()");
-                    }
-                    else
-                    {
-                        _writer.Append($"public {GetAsyncKeyword(async)} {MgmtBaseTestWriter.GetTaskOrVoid(async)} {(resource == _resource ? "" : resource.Type.Name)}{testMethodName}{(exampleIdx > 0 ? (exampleIdx + 1).ToString() : "")}()");
-                    }
+                    var testCaseSuffix = exampleIdx > 0 ? (exampleIdx + 1).ToString() : String.Empty;
+                    _writer.Append($"public {GetAsyncKeyword(async)} {MgmtBaseTestWriter.GetTaskOrVoid(async)} {(resource == _resource ? "" : resource.Type.Name)}{testMethodName}{testCaseSuffix}()");
 
                     using (_writer.Scope())
                     {
                         _writer.LineRaw($"// Example: {exampleModel.Name}");
                         clearVariableNames();
-                        WriteGetResource(resource, realRequestPath, exampleModel);
+                        var resourceVariableName = WriteGetResource(resource, realRequestPath, exampleModel);
 
                         List<string> paramNames = WriteOperationParameters(methodParameters, Enumerable.Empty<Parameter> (), exampleModel);
 
                         _writer.Line();
-                        _writer.Append($"{GetAwait(async && !clientOperation.IsPagingOperation(Context))} {resource.Type.Name.FirstCharToLowerCase()}.{testMethodName}(");
-                        foreach (var paramName in paramNames)
-                        {
-                            _writer.Append($"{paramName},");
-                        }
-                        _writer.RemoveTrailingComma();
-                        _writer.LineRaw(");");
+                        WriteMethodTestInvocation(async, clientOperation, isLroOperation, $"{resourceVariableName}.{testMethodName}", paramNames);
                     }
                     _writer.Line();
                     exampleIdx++;

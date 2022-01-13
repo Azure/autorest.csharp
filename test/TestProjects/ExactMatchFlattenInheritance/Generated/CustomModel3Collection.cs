@@ -8,10 +8,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
+using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
@@ -21,7 +23,7 @@ using ExactMatchFlattenInheritance.Models;
 namespace ExactMatchFlattenInheritance
 {
     /// <summary> A class representing collection of CustomModel3 and their operations over its parent. </summary>
-    public partial class CustomModel3Collection : ArmCollection, IEnumerable<CustomModel3>
+    public partial class CustomModel3Collection : ArmCollection, IEnumerable<CustomModel3>, IAsyncEnumerable<CustomModel3>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly CustomModel3SRestOperations _customModel3sRestClient;
@@ -37,10 +39,16 @@ namespace ExactMatchFlattenInheritance
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _customModel3sRestClient = new CustomModel3SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+#if DEBUG
+			ValidateResourceId(Id);
+#endif
         }
 
-        /// <summary> Gets the valid resource type for this object. </summary>
-        protected override ResourceType ValidResourceType => ResourceGroup.ResourceType;
+        internal static void ValidateResourceId(ResourceIdentifier id)
+        {
+            if (id.ResourceType != ResourceGroup.ResourceType)
+                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ResourceGroup.ResourceType), nameof(id));
+        }
 
         // Collection level operations.
 
@@ -53,7 +61,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual CustomModel3SPutOperation CreateOrUpdate(string name, CustomModel3Data parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual CustomModel3SPutOperation CreateOrUpdate(bool waitForCompletion, string name, CustomModel3Data parameters, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
@@ -90,7 +98,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<CustomModel3SPutOperation> CreateOrUpdateAsync(string name, CustomModel3Data parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<CustomModel3SPutOperation> CreateOrUpdateAsync(bool waitForCompletion, string name, CustomModel3Data parameters, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
@@ -194,9 +202,9 @@ namespace ExactMatchFlattenInheritance
             try
             {
                 var response = _customModel3sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<CustomModel3>(null, response.GetRawResponse())
-                    : Response.FromValue(new CustomModel3(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<CustomModel3>(null, response.GetRawResponse());
+                return Response.FromValue(new CustomModel3(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -221,9 +229,9 @@ namespace ExactMatchFlattenInheritance
             try
             {
                 var response = await _customModel3sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<CustomModel3>(null, response.GetRawResponse())
-                    : Response.FromValue(new CustomModel3(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<CustomModel3>(null, response.GetRawResponse());
+                return Response.FromValue(new CustomModel3(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -287,20 +295,25 @@ namespace ExactMatchFlattenInheritance
         /// OperationId: CustomModel3s_List
         /// <summary> Get an CustomModel3s. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IReadOnlyList<CustomModel3>> GetAll(CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="CustomModel3" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<CustomModel3> GetAll(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("CustomModel3Collection.GetAll");
-            scope.Start();
-            try
+            Page<CustomModel3> FirstPageFunc(int? pageSizeHint)
             {
-                var response = _customModel3sRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken);
-                return Response.FromValue(response.Value.Value.Select(value => new CustomModel3(Parent, value)).ToArray() as IReadOnlyList<CustomModel3>, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("CustomModel3Collection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = _customModel3sRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new CustomModel3(Parent, value)), null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel3s
@@ -308,20 +321,25 @@ namespace ExactMatchFlattenInheritance
         /// OperationId: CustomModel3s_List
         /// <summary> Get an CustomModel3s. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<IReadOnlyList<CustomModel3>>> GetAllAsync(CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="CustomModel3" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<CustomModel3> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("CustomModel3Collection.GetAll");
-            scope.Start();
-            try
+            async Task<Page<CustomModel3>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await _customModel3sRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(response.Value.Value.Select(value => new CustomModel3(Parent, value)).ToArray() as IReadOnlyList<CustomModel3>, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("CustomModel3Collection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = await _customModel3sRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new CustomModel3(Parent, value)), null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
         /// <summary> Filters the list of <see cref="CustomModel3" /> for this resource group represented as generic resources. </summary>
@@ -372,15 +390,20 @@ namespace ExactMatchFlattenInheritance
 
         IEnumerator<CustomModel3> IEnumerable<CustomModel3>.GetEnumerator()
         {
-            return GetAll().Value.GetEnumerator();
+            return GetAll().GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return GetAll().Value.GetEnumerator();
+            return GetAll().GetEnumerator();
+        }
+
+        IAsyncEnumerator<CustomModel3> IAsyncEnumerable<CustomModel3>.GetAsyncEnumerator(CancellationToken cancellationToken)
+        {
+            return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, CustomModel3, CustomModel3Data> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, CustomModel3, CustomModel3Data> Construct() { }
     }
 }

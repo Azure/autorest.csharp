@@ -6,8 +6,8 @@
 #nullable disable
 
 using System;
+using Azure.Core;
 using Azure.Management.Storage.Models;
-using Azure.ResourceManager;
 using Azure.ResourceManager.Models;
 
 namespace Azure.Management.Storage

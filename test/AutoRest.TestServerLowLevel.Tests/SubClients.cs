@@ -32,13 +32,13 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void TopLevelClientWithOperation_PublicMethods()
         {
-            TypeAsserts.TypeOnlyDeclaresThesePublicMethods(typeof(TopLevelClientWithOperationClient), "Operation", "OperationAsync", $"Get{nameof(Client1)}Client", $"Get{nameof(Client2)}Client");
+            TypeAsserts.TypeOnlyDeclaresThesePublicMethods(typeof(TopLevelClientWithOperationClient), "Operation", "OperationAsync", "GetAll", "GetAllAsync", $"Get{nameof(Client1)}Client", $"Get{nameof(Client2)}Client", $"Get{nameof(Client4)}");
         }
 
         [Test]
         public void TopLevelClientWithoutOperation_PublicMethods()
         {
-            TypeAsserts.TypeOnlyDeclaresThesePublicMethods(typeof(TopLevelClientWithoutOperationClient), $"Get{nameof(Client3)}Client", $"Get{nameof(Client4)}Client", $"Get{nameof(Client5)}Client");
+            TypeAsserts.TypeOnlyDeclaresThesePublicMethods(typeof(TopLevelClientWithoutOperationClient), $"Get{nameof(Client5)}Client", $"Get{nameof(Client6)}Client", $"Get{nameof(Client7)}Client");
         }
     }
 }

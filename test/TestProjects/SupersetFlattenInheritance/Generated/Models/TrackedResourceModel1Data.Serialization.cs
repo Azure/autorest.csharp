@@ -8,8 +8,6 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
-using Azure.ResourceManager;
-using Azure.ResourceManager.Resources.Models;
 
 namespace SupersetFlattenInheritance
 {
@@ -40,7 +38,7 @@ namespace SupersetFlattenInheritance
         {
             Optional<string> foo = default;
             IDictionary<string, string> tags = default;
-            Location location = default;
+            AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;

@@ -2,9 +2,8 @@
 // Licensed under the MIT License.
 
 using System;
-using Azure.ResourceManager;
+using Azure.Core;
 using Azure.ResourceManager.Models;
-using Azure.ResourceManager.Resources.Models;
 using NUnit.Framework;
 using SupersetInheritance;
 using SupersetInheritance.Models;
@@ -35,8 +34,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase(typeof(SupersetModel1Data), new string[] { }, new Type[] { })]
         [TestCase(typeof(SupersetModel2), new string[] { }, new Type[] { })]
         [TestCase(typeof(SupersetModel3), new string[] { }, new Type[] { })]
-        [TestCase(typeof(SupersetModel4Data), new string[] { "location" }, new Type[] { typeof(Location) })]
-        [TestCase(typeof(SupersetModel5), new string[] { "location" }, new Type[] { typeof(Location) })]
+        [TestCase(typeof(SupersetModel4Data), new string[] { "location" }, new Type[] { typeof(AzureLocation) })]
+        [TestCase(typeof(SupersetModel5), new string[] { "location" }, new Type[] { typeof(AzureLocation) })]
         public void ValidateCtor(Type model, string[] paramNames, Type[] paramTypes) => ValidatePublicCtor(model, paramNames, paramTypes);
     }
 }

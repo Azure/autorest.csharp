@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -14,7 +15,6 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
-using Azure.ResourceManager.Resources.Models;
 using MgmtExpandResourceTypes.Models;
 
 namespace MgmtExpandResourceTypes
@@ -40,14 +40,17 @@ namespace MgmtExpandResourceTypes
 
         /// <summary> Initializes a new instance of the <see cref = "Zone"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
-        /// <param name="resource"> The resource that is the target of operations. </param>
-        internal Zone(ArmResource options, ZoneData resource) : base(options, resource.Id)
+        /// <param name="data"> The resource that is the target of operations. </param>
+        internal Zone(ArmResource options, ZoneData data) : base(options, data.Id)
         {
             HasData = true;
-            _data = resource;
+            _data = data;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _zonesRestClient = new ZonesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
             _recordSetsRestClient = new RecordSetsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+#if DEBUG
+			ValidateResourceId(Id);
+#endif
         }
 
         /// <summary> Initializes a new instance of the <see cref="Zone"/> class. </summary>
@@ -58,6 +61,9 @@ namespace MgmtExpandResourceTypes
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _zonesRestClient = new ZonesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
             _recordSetsRestClient = new RecordSetsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+#if DEBUG
+			ValidateResourceId(Id);
+#endif
         }
 
         /// <summary> Initializes a new instance of the <see cref="Zone"/> class. </summary>
@@ -71,13 +77,13 @@ namespace MgmtExpandResourceTypes
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _zonesRestClient = new ZonesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
             _recordSetsRestClient = new RecordSetsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+#if DEBUG
+			ValidateResourceId(Id);
+#endif
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
         public static readonly ResourceType ResourceType = "Microsoft.Network/dnsZones";
-
-        /// <summary> Gets the valid resource type for the operations. </summary>
-        protected override ResourceType ValidResourceType => ResourceType;
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }
@@ -92,6 +98,12 @@ namespace MgmtExpandResourceTypes
                     throw new InvalidOperationException("The current instance does not have data, you must call Get first.");
                 return _data;
             }
+        }
+
+        internal static void ValidateResourceId(ResourceIdentifier id)
+        {
+            if (id.ResourceType != ResourceType)
+                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ResourceType), nameof(id));
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}
@@ -143,7 +155,7 @@ namespace MgmtExpandResourceTypes
         /// <summary> Lists all available geo-locations. </summary>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
-        public async virtual Task<IEnumerable<Location>> GetAvailableLocationsAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<IEnumerable<AzureLocation>> GetAvailableLocationsAsync(CancellationToken cancellationToken = default)
         {
             return await ListAvailableLocationsAsync(ResourceType, cancellationToken).ConfigureAwait(false);
         }
@@ -151,7 +163,7 @@ namespace MgmtExpandResourceTypes
         /// <summary> Lists all available geo-locations. </summary>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
-        public virtual IEnumerable<Location> GetAvailableLocations(CancellationToken cancellationToken = default)
+        public virtual IEnumerable<AzureLocation> GetAvailableLocations(CancellationToken cancellationToken = default)
         {
             return ListAvailableLocations(ResourceType, cancellationToken);
         }
@@ -163,7 +175,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="ifMatch"> The etag of the DNS zone. Omit this value to always delete the current zone. Specify the last-seen etag value to prevent accidentally deleting any concurrent changes. </param>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<ZoneDeleteOperation> DeleteAsync(string ifMatch = null, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<ZoneDeleteOperation> DeleteAsync(bool waitForCompletion, string ifMatch = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("Zone.Delete");
             scope.Start();
@@ -189,7 +201,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="ifMatch"> The etag of the DNS zone. Omit this value to always delete the current zone. Specify the last-seen etag value to prevent accidentally deleting any concurrent changes. </param>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual ZoneDeleteOperation Delete(string ifMatch = null, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual ZoneDeleteOperation Delete(bool waitForCompletion, string ifMatch = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("Zone.Delete");
             scope.Start();
@@ -614,7 +626,7 @@ namespace MgmtExpandResourceTypes
 
         /// <summary> Gets a collection of RecordSetAs in the Zone. </summary>
         /// <returns> An object representing collection of RecordSetAs and their operations over a Zone. </returns>
-        public RecordSetACollection GetRecordSetAs()
+        public virtual RecordSetACollection GetRecordSetAs()
         {
             return new RecordSetACollection(this);
         }
@@ -624,7 +636,7 @@ namespace MgmtExpandResourceTypes
 
         /// <summary> Gets a collection of RecordSetAaaas in the Zone. </summary>
         /// <returns> An object representing collection of RecordSetAaaas and their operations over a Zone. </returns>
-        public RecordSetAaaaCollection GetRecordSetAaaas()
+        public virtual RecordSetAaaaCollection GetRecordSetAaaas()
         {
             return new RecordSetAaaaCollection(this);
         }
@@ -634,7 +646,7 @@ namespace MgmtExpandResourceTypes
 
         /// <summary> Gets a collection of RecordSetCaas in the Zone. </summary>
         /// <returns> An object representing collection of RecordSetCaas and their operations over a Zone. </returns>
-        public RecordSetCaaCollection GetRecordSetCaas()
+        public virtual RecordSetCaaCollection GetRecordSetCaas()
         {
             return new RecordSetCaaCollection(this);
         }
@@ -644,7 +656,7 @@ namespace MgmtExpandResourceTypes
 
         /// <summary> Gets a collection of RecordSetCNames in the Zone. </summary>
         /// <returns> An object representing collection of RecordSetCNames and their operations over a Zone. </returns>
-        public RecordSetCNameCollection GetRecordSetCNames()
+        public virtual RecordSetCNameCollection GetRecordSetCNames()
         {
             return new RecordSetCNameCollection(this);
         }
@@ -654,7 +666,7 @@ namespace MgmtExpandResourceTypes
 
         /// <summary> Gets a collection of RecordSetMxes in the Zone. </summary>
         /// <returns> An object representing collection of RecordSetMxes and their operations over a Zone. </returns>
-        public RecordSetMxCollection GetRecordSetMxes()
+        public virtual RecordSetMxCollection GetRecordSetMxes()
         {
             return new RecordSetMxCollection(this);
         }
@@ -664,7 +676,7 @@ namespace MgmtExpandResourceTypes
 
         /// <summary> Gets a collection of RecordSetNs in the Zone. </summary>
         /// <returns> An object representing collection of RecordSetNs and their operations over a Zone. </returns>
-        public RecordSetNsCollection GetRecordSetNs()
+        public virtual RecordSetNsCollection GetRecordSetNs()
         {
             return new RecordSetNsCollection(this);
         }
@@ -674,7 +686,7 @@ namespace MgmtExpandResourceTypes
 
         /// <summary> Gets a collection of RecordSetPtrs in the Zone. </summary>
         /// <returns> An object representing collection of RecordSetPtrs and their operations over a Zone. </returns>
-        public RecordSetPtrCollection GetRecordSetPtrs()
+        public virtual RecordSetPtrCollection GetRecordSetPtrs()
         {
             return new RecordSetPtrCollection(this);
         }
@@ -684,7 +696,7 @@ namespace MgmtExpandResourceTypes
 
         /// <summary> Gets a collection of RecordSetSoas in the Zone. </summary>
         /// <returns> An object representing collection of RecordSetSoas and their operations over a Zone. </returns>
-        public RecordSetSoaCollection GetRecordSetSoas()
+        public virtual RecordSetSoaCollection GetRecordSetSoas()
         {
             return new RecordSetSoaCollection(this);
         }
@@ -694,7 +706,7 @@ namespace MgmtExpandResourceTypes
 
         /// <summary> Gets a collection of RecordSetSrvs in the Zone. </summary>
         /// <returns> An object representing collection of RecordSetSrvs and their operations over a Zone. </returns>
-        public RecordSetSrvCollection GetRecordSetSrvs()
+        public virtual RecordSetSrvCollection GetRecordSetSrvs()
         {
             return new RecordSetSrvCollection(this);
         }
@@ -704,7 +716,7 @@ namespace MgmtExpandResourceTypes
 
         /// <summary> Gets a collection of RecordSetTxts in the Zone. </summary>
         /// <returns> An object representing collection of RecordSetTxts and their operations over a Zone. </returns>
-        public RecordSetTxtCollection GetRecordSetTxts()
+        public virtual RecordSetTxtCollection GetRecordSetTxts()
         {
             return new RecordSetTxtCollection(this);
         }

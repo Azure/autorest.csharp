@@ -14,6 +14,7 @@ using AutoRest.CSharp.Mgmt.Generation;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Types;
+using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources.Models;
@@ -27,9 +28,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         private static ConcurrentDictionary<Schema, CSharpType?> _valueCache = new ConcurrentDictionary<Schema, CSharpType?>();
 
-        private static readonly Type _locationType = typeof(Location);
-        private static readonly Type _resourceIdentifierType = typeof(ResourceIdentifier);
-        private static readonly Type _resourceTypeType = typeof(ResourceType);
+        private static readonly Type _locationType = typeof(AzureLocation);
+        private static readonly Type _resourceIdentifierType = typeof(Azure.Core.ResourceIdentifier);
+        private static readonly Type _resourceTypeType = typeof(Azure.Core.ResourceType);
 
         private static IList<System.Type> GetReferenceClassCollection()
         {

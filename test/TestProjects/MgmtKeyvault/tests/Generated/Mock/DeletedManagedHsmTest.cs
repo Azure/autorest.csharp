@@ -9,8 +9,8 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
+using Azure.Core;
 using Azure.Core.TestFramework;
-using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
 using Azure.ResourceManager.Resources.Models;
 using Azure.ResourceManager.TestFramework;
@@ -42,7 +42,7 @@ namespace MgmtKeyvault.Tests.Mock
             // Example: Purge a managed HSM Pool
             var deletedManagedHsm = GetArmClient().GetDeletedManagedHsm(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.KeyVault/locations/westus/deletedManagedHSMs/hsm1"));
 
-            await deletedManagedHsm.PurgeDeletedAsync();
+            await deletedManagedHsm.PurgeDeletedAsync(true);
         }
     }
 }

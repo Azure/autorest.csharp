@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using Azure.Core;
 using Azure.ResourceManager;
 
 namespace SubscriptionExtensions
@@ -19,6 +20,7 @@ namespace SubscriptionExtensions
         /// <returns> Returns a <see cref="Toaster" /> object. </returns>
         public static Toaster GetToaster(this ArmClient armClient, ResourceIdentifier id)
         {
+            Toaster.ValidateResourceId(id);
             return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new Toaster(clientOptions, credential, uri, pipeline, id));
         }
         #endregion
@@ -30,6 +32,7 @@ namespace SubscriptionExtensions
         /// <returns> Returns a <see cref="Oven" /> object. </returns>
         public static Oven GetOven(this ArmClient armClient, ResourceIdentifier id)
         {
+            Oven.ValidateResourceId(id);
             return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new Oven(clientOptions, credential, uri, pipeline, id));
         }
         #endregion

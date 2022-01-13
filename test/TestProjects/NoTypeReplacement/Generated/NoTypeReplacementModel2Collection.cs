@@ -8,10 +8,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
+using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
@@ -21,7 +23,7 @@ using NoTypeReplacement.Models;
 namespace NoTypeReplacement
 {
     /// <summary> A class representing collection of NoTypeReplacementModel2 and their operations over its parent. </summary>
-    public partial class NoTypeReplacementModel2Collection : ArmCollection, IEnumerable<NoTypeReplacementModel2>
+    public partial class NoTypeReplacementModel2Collection : ArmCollection, IEnumerable<NoTypeReplacementModel2>, IAsyncEnumerable<NoTypeReplacementModel2>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly NoTypeReplacementModel2SRestOperations _noTypeReplacementModel2sRestClient;
@@ -37,10 +39,16 @@ namespace NoTypeReplacement
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _noTypeReplacementModel2sRestClient = new NoTypeReplacementModel2SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+#if DEBUG
+			ValidateResourceId(Id);
+#endif
         }
 
-        /// <summary> Gets the valid resource type for this object. </summary>
-        protected override ResourceType ValidResourceType => ResourceGroup.ResourceType;
+        internal static void ValidateResourceId(ResourceIdentifier id)
+        {
+            if (id.ResourceType != ResourceGroup.ResourceType)
+                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ResourceGroup.ResourceType), nameof(id));
+        }
 
         // Collection level operations.
 
@@ -49,7 +57,7 @@ namespace NoTypeReplacement
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="noTypeReplacementModel2SName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual NoTypeReplacementModel2SPutOperation CreateOrUpdate(string noTypeReplacementModel2SName, NoTypeReplacementModel2Data parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual NoTypeReplacementModel2SPutOperation CreateOrUpdate(bool waitForCompletion, string noTypeReplacementModel2SName, NoTypeReplacementModel2Data parameters, CancellationToken cancellationToken = default)
         {
             if (noTypeReplacementModel2SName == null)
             {
@@ -82,7 +90,7 @@ namespace NoTypeReplacement
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="noTypeReplacementModel2SName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<NoTypeReplacementModel2SPutOperation> CreateOrUpdateAsync(string noTypeReplacementModel2SName, NoTypeReplacementModel2Data parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<NoTypeReplacementModel2SPutOperation> CreateOrUpdateAsync(bool waitForCompletion, string noTypeReplacementModel2SName, NoTypeReplacementModel2Data parameters, CancellationToken cancellationToken = default)
         {
             if (noTypeReplacementModel2SName == null)
             {
@@ -178,9 +186,9 @@ namespace NoTypeReplacement
             try
             {
                 var response = _noTypeReplacementModel2sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, noTypeReplacementModel2SName, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<NoTypeReplacementModel2>(null, response.GetRawResponse())
-                    : Response.FromValue(new NoTypeReplacementModel2(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<NoTypeReplacementModel2>(null, response.GetRawResponse());
+                return Response.FromValue(new NoTypeReplacementModel2(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -205,9 +213,9 @@ namespace NoTypeReplacement
             try
             {
                 var response = await _noTypeReplacementModel2sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, noTypeReplacementModel2SName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<NoTypeReplacementModel2>(null, response.GetRawResponse())
-                    : Response.FromValue(new NoTypeReplacementModel2(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<NoTypeReplacementModel2>(null, response.GetRawResponse());
+                return Response.FromValue(new NoTypeReplacementModel2(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -267,37 +275,47 @@ namespace NoTypeReplacement
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IReadOnlyList<NoTypeReplacementModel2>> GetAll(CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="NoTypeReplacementModel2" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<NoTypeReplacementModel2> GetAll(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("NoTypeReplacementModel2Collection.GetAll");
-            scope.Start();
-            try
+            Page<NoTypeReplacementModel2> FirstPageFunc(int? pageSizeHint)
             {
-                var response = _noTypeReplacementModel2sRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken);
-                return Response.FromValue(response.Value.Value.Select(value => new NoTypeReplacementModel2(Parent, value)).ToArray() as IReadOnlyList<NoTypeReplacementModel2>, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("NoTypeReplacementModel2Collection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = _noTypeReplacementModel2sRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new NoTypeReplacementModel2(Parent, value)), null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<IReadOnlyList<NoTypeReplacementModel2>>> GetAllAsync(CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="NoTypeReplacementModel2" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<NoTypeReplacementModel2> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("NoTypeReplacementModel2Collection.GetAll");
-            scope.Start();
-            try
+            async Task<Page<NoTypeReplacementModel2>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await _noTypeReplacementModel2sRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(response.Value.Value.Select(value => new NoTypeReplacementModel2(Parent, value)).ToArray() as IReadOnlyList<NoTypeReplacementModel2>, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("NoTypeReplacementModel2Collection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = await _noTypeReplacementModel2sRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new NoTypeReplacementModel2(Parent, value)), null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
         /// <summary> Filters the list of <see cref="NoTypeReplacementModel2" /> for this resource group represented as generic resources. </summary>
@@ -348,15 +366,20 @@ namespace NoTypeReplacement
 
         IEnumerator<NoTypeReplacementModel2> IEnumerable<NoTypeReplacementModel2>.GetEnumerator()
         {
-            return GetAll().Value.GetEnumerator();
+            return GetAll().GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return GetAll().Value.GetEnumerator();
+            return GetAll().GetEnumerator();
+        }
+
+        IAsyncEnumerator<NoTypeReplacementModel2> IAsyncEnumerable<NoTypeReplacementModel2>.GetAsyncEnumerator(CancellationToken cancellationToken)
+        {
+            return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, NoTypeReplacementModel2, NoTypeReplacementModel2Data> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, NoTypeReplacementModel2, NoTypeReplacementModel2Data> Construct() { }
     }
 }

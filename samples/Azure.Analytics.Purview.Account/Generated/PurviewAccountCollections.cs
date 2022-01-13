@@ -24,9 +24,10 @@ namespace Azure.Analytics.Purview.Account
         private readonly HttpPipeline _pipeline;
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly Uri _endpoint;
-        private readonly string _collectionName;
         private readonly string _apiVersion;
 
+        /// <summary> The String to use. </summary>
+        public virtual string CollectionName { get; }
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
@@ -70,7 +71,7 @@ namespace Azure.Analytics.Purview.Account
             _pipeline = pipeline;
             _tokenCredential = tokenCredential;
             _endpoint = endpoint;
-            _collectionName = collectionName;
+            CollectionName = collectionName;
             _apiVersion = apiVersion;
         }
 
@@ -646,7 +647,7 @@ namespace Azure.Analytics.Purview.Account
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/collections/", false);
-            uri.AppendPath(_collectionName, true);
+            uri.AppendPath(CollectionName, true);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -662,7 +663,7 @@ namespace Azure.Analytics.Purview.Account
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/collections/", false);
-            uri.AppendPath(_collectionName, true);
+            uri.AppendPath(CollectionName, true);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -680,7 +681,7 @@ namespace Azure.Analytics.Purview.Account
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/collections/", false);
-            uri.AppendPath(_collectionName, true);
+            uri.AppendPath(CollectionName, true);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -696,7 +697,7 @@ namespace Azure.Analytics.Purview.Account
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/collections/", false);
-            uri.AppendPath(_collectionName, true);
+            uri.AppendPath(CollectionName, true);
             uri.AppendPath("/getChildCollectionNames", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             if (skipToken != null)
@@ -717,7 +718,7 @@ namespace Azure.Analytics.Purview.Account
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/collections/", false);
-            uri.AppendPath(_collectionName, true);
+            uri.AppendPath(CollectionName, true);
             uri.AppendPath("/getCollectionPath", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;

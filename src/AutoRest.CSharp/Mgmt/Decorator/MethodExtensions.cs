@@ -71,11 +71,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return clientOperation.First().IsLongRunningOperation();
         }
 
-        public static bool IsLongRunningReallyLong(this MgmtClientOperation clientOperation)
-        {
-            return clientOperation.First().IsLongRunningReallyLong();
-        }
-
         public static bool IsPagingOperation(this MgmtRestOperation restOperation, BuildContext<MgmtOutputLibrary> context)
         {
             return restOperation.Operation.Language.Default.Paging != null;
@@ -92,11 +87,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         public static bool IsLongRunningOperation(this MgmtRestOperation restOperation)
         {
             return restOperation.Operation.IsLongRunning;
-        }
-
-        public static bool IsLongRunningReallyLong(this MgmtRestOperation restOperation)
-        {
-            return restOperation.Operation.IsLongRunningReallyLong ?? false;
         }
     }
 }

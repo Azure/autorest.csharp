@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using Azure.Core;
 using Azure.ResourceManager;
 
 namespace SingletonResource
@@ -19,6 +20,7 @@ namespace SingletonResource
         /// <returns> Returns a <see cref="Car" /> object. </returns>
         public static Car GetCar(this ArmClient armClient, ResourceIdentifier id)
         {
+            Car.ValidateResourceId(id);
             return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new Car(clientOptions, credential, uri, pipeline, id));
         }
         #endregion
@@ -30,7 +32,32 @@ namespace SingletonResource
         /// <returns> Returns a <see cref="Ignition" /> object. </returns>
         public static Ignition GetIgnition(this ArmClient armClient, ResourceIdentifier id)
         {
+            Ignition.ValidateResourceId(id);
             return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new Ignition(clientOptions, credential, uri, pipeline, id));
+        }
+        #endregion
+
+        #region SingletonResource
+        /// <summary> Gets an object representing a SingletonResource along with the instance operations that can be performed on it but with no data. </summary>
+        /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="SingletonResource" /> object. </returns>
+        public static SingletonResource GetSingletonResource(this ArmClient armClient, ResourceIdentifier id)
+        {
+            SingletonResource.ValidateResourceId(id);
+            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new SingletonResource(clientOptions, credential, uri, pipeline, id));
+        }
+        #endregion
+
+        #region ParentResource
+        /// <summary> Gets an object representing a ParentResource along with the instance operations that can be performed on it but with no data. </summary>
+        /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="ParentResource" /> object. </returns>
+        public static ParentResource GetParentResource(this ArmClient armClient, ResourceIdentifier id)
+        {
+            ParentResource.ValidateResourceId(id);
+            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new ParentResource(clientOptions, credential, uri, pipeline, id));
         }
         #endregion
     }

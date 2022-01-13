@@ -8,12 +8,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
+using Azure.Core;
 using Azure.Core.Pipeline;
-using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources;
 using TenantOnly.Models;
@@ -21,7 +22,7 @@ using TenantOnly.Models;
 namespace TenantOnly
 {
     /// <summary> A class representing collection of BillingAccount and their operations over its parent. </summary>
-    public partial class BillingAccountCollection : ArmCollection, IEnumerable<BillingAccount>
+    public partial class BillingAccountCollection : ArmCollection, IEnumerable<BillingAccount>, IAsyncEnumerable<BillingAccount>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly BillingAccountsRestOperations _billingAccountsRestClient;
@@ -37,10 +38,16 @@ namespace TenantOnly
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _billingAccountsRestClient = new BillingAccountsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+#if DEBUG
+			ValidateResourceId(Id);
+#endif
         }
 
-        /// <summary> Gets the valid resource type for this object. </summary>
-        protected override ResourceType ValidResourceType => Tenant.ResourceType;
+        internal static void ValidateResourceId(ResourceIdentifier id)
+        {
+            if (id.ResourceType != Tenant.ResourceType)
+                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, Tenant.ResourceType), nameof(id));
+        }
 
         // Collection level operations.
 
@@ -53,7 +60,7 @@ namespace TenantOnly
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="billingAccountName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual BillingAccountCreateOperation CreateOrUpdate(string billingAccountName, BillingAccountData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual BillingAccountCreateOperation CreateOrUpdate(bool waitForCompletion, string billingAccountName, BillingAccountData parameters, CancellationToken cancellationToken = default)
         {
             if (billingAccountName == null)
             {
@@ -90,7 +97,7 @@ namespace TenantOnly
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="billingAccountName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<BillingAccountCreateOperation> CreateOrUpdateAsync(string billingAccountName, BillingAccountData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<BillingAccountCreateOperation> CreateOrUpdateAsync(bool waitForCompletion, string billingAccountName, BillingAccountData parameters, CancellationToken cancellationToken = default)
         {
             if (billingAccountName == null)
             {
@@ -197,9 +204,9 @@ namespace TenantOnly
             try
             {
                 var response = _billingAccountsRestClient.Get(billingAccountName, expand, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<BillingAccount>(null, response.GetRawResponse())
-                    : Response.FromValue(new BillingAccount(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<BillingAccount>(null, response.GetRawResponse());
+                return Response.FromValue(new BillingAccount(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -225,9 +232,9 @@ namespace TenantOnly
             try
             {
                 var response = await _billingAccountsRestClient.GetAsync(billingAccountName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<BillingAccount>(null, response.GetRawResponse())
-                    : Response.FromValue(new BillingAccount(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<BillingAccount>(null, response.GetRawResponse());
+                return Response.FromValue(new BillingAccount(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -294,20 +301,25 @@ namespace TenantOnly
         /// <summary> Gets a billing account by its ID. </summary>
         /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IReadOnlyList<BillingAccount>> GetAll(string expand = null, CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="BillingAccount" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<BillingAccount> GetAll(string expand = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BillingAccountCollection.GetAll");
-            scope.Start();
-            try
+            Page<BillingAccount> FirstPageFunc(int? pageSizeHint)
             {
-                var response = _billingAccountsRestClient.List(expand, cancellationToken);
-                return Response.FromValue(response.Value.Value.Select(value => new BillingAccount(Parent, value)).ToArray() as IReadOnlyList<BillingAccount>, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("BillingAccountCollection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = _billingAccountsRestClient.List(expand, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new BillingAccount(Parent, value)), null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
 
         /// RequestPath: /providers/Microsoft.Billing/billingAccounts
@@ -316,33 +328,43 @@ namespace TenantOnly
         /// <summary> Gets a billing account by its ID. </summary>
         /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<IReadOnlyList<BillingAccount>>> GetAllAsync(string expand = null, CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="BillingAccount" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<BillingAccount> GetAllAsync(string expand = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BillingAccountCollection.GetAll");
-            scope.Start();
-            try
+            async Task<Page<BillingAccount>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await _billingAccountsRestClient.ListAsync(expand, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(response.Value.Value.Select(value => new BillingAccount(Parent, value)).ToArray() as IReadOnlyList<BillingAccount>, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("BillingAccountCollection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = await _billingAccountsRestClient.ListAsync(expand, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new BillingAccount(Parent, value)), null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
         IEnumerator<BillingAccount> IEnumerable<BillingAccount>.GetEnumerator()
         {
-            return GetAll().Value.GetEnumerator();
+            return GetAll().GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return GetAll().Value.GetEnumerator();
+            return GetAll().GetEnumerator();
+        }
+
+        IAsyncEnumerator<BillingAccount> IAsyncEnumerable<BillingAccount>.GetAsyncEnumerator(CancellationToken cancellationToken)
+        {
+            return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, BillingAccount, BillingAccountData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, BillingAccount, BillingAccountData> Construct() { }
     }
 }

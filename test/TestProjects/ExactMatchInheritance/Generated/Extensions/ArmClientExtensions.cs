@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using Azure.Core;
 using Azure.ResourceManager;
 
 namespace ExactMatchInheritance
@@ -19,6 +20,7 @@ namespace ExactMatchInheritance
         /// <returns> Returns a <see cref="ExactMatchModel1" /> object. </returns>
         public static ExactMatchModel1 GetExactMatchModel1(this ArmClient armClient, ResourceIdentifier id)
         {
+            ExactMatchModel1.ValidateResourceId(id);
             return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new ExactMatchModel1(clientOptions, credential, uri, pipeline, id));
         }
         #endregion
@@ -30,6 +32,7 @@ namespace ExactMatchInheritance
         /// <returns> Returns a <see cref="ExactMatchModel5" /> object. </returns>
         public static ExactMatchModel5 GetExactMatchModel5(this ArmClient armClient, ResourceIdentifier id)
         {
+            ExactMatchModel5.ValidateResourceId(id);
             return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new ExactMatchModel5(clientOptions, credential, uri, pipeline, id));
         }
         #endregion

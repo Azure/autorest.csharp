@@ -7,9 +7,8 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.ResourceManager;
+using Azure.Core;
 using Azure.ResourceManager.Models;
-using Azure.ResourceManager.Resources.Models;
 using MgmtParamOrdering.Models;
 
 namespace MgmtParamOrdering
@@ -21,7 +20,7 @@ namespace MgmtParamOrdering
         /// <param name="location"> The location. </param>
         /// <param name="properties"> Additional attributes of the entity. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
-        public EnvironmentContainerResourceData(Location location, EnvironmentContainer properties) : base(location)
+        public EnvironmentContainerResourceData(AzureLocation location, EnvironmentContainer properties) : base(location)
         {
             if (properties == null)
             {
@@ -39,7 +38,7 @@ namespace MgmtParamOrdering
         /// <param name="location"> The location. </param>
         /// <param name="properties"> Additional attributes of the entity. </param>
         /// <param name="systemData"> System data associated with resource provider. </param>
-        internal EnvironmentContainerResourceData(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, Location location, EnvironmentContainer properties, SystemData systemData) : base(id, name, type, tags, location)
+        internal EnvironmentContainerResourceData(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, AzureLocation location, EnvironmentContainer properties, SystemData systemData) : base(id, name, type, tags, location)
         {
             Properties = properties;
             SystemData = systemData;
