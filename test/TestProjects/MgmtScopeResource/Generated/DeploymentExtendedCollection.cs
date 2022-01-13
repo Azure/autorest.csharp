@@ -49,7 +49,7 @@ namespace MgmtScopeResource
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual DeploymentCreateOrUpdateAtScopeOperation CreateOrUpdate(string deploymentName, Deployment parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual DeploymentCreateOrUpdateAtScopeOperation CreateOrUpdate(bool waitForCompletion, string deploymentName, Deployment parameters, CancellationToken cancellationToken = default)
         {
             if (deploymentName == null)
             {
@@ -86,7 +86,7 @@ namespace MgmtScopeResource
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<DeploymentCreateOrUpdateAtScopeOperation> CreateOrUpdateAsync(string deploymentName, Deployment parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<DeploymentCreateOrUpdateAtScopeOperation> CreateOrUpdateAsync(bool waitForCompletion, string deploymentName, Deployment parameters, CancellationToken cancellationToken = default)
         {
             if (deploymentName == null)
             {
@@ -190,9 +190,9 @@ namespace MgmtScopeResource
             try
             {
                 var response = _deploymentsRestClient.GetAtScope(Id, deploymentName, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<DeploymentExtended>(null, response.GetRawResponse())
-                    : Response.FromValue(new DeploymentExtended(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<DeploymentExtended>(null, response.GetRawResponse());
+                return Response.FromValue(new DeploymentExtended(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -217,9 +217,9 @@ namespace MgmtScopeResource
             try
             {
                 var response = await _deploymentsRestClient.GetAtScopeAsync(Id, deploymentName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<DeploymentExtended>(null, response.GetRawResponse())
-                    : Response.FromValue(new DeploymentExtended(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<DeploymentExtended>(null, response.GetRawResponse());
+                return Response.FromValue(new DeploymentExtended(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

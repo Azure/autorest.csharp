@@ -39,7 +39,7 @@ namespace MgmtKeyvault.Tests.Mock
                 EnabledForTemplateDeployment = true,
             });
 
-            await collection.CreateOrUpdateAsync(vaultName, parameters);
+            await collection.CreateOrUpdateAsync(true, vaultName, parameters);
         }
 
         [RecordedTest]
@@ -60,7 +60,7 @@ namespace MgmtKeyvault.Tests.Mock
                 },
             });
 
-            await collection.CreateOrUpdateAsync(vaultName, parameters);
+            await collection.CreateOrUpdateAsync(true, vaultName, parameters);
         }
 
         [RecordedTest]

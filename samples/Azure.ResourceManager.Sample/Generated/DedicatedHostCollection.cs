@@ -59,7 +59,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="hostName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual DedicatedHostCreateOrUpdateOperation CreateOrUpdate(string hostName, DedicatedHostData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual DedicatedHostCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string hostName, DedicatedHostData parameters, CancellationToken cancellationToken = default)
         {
             if (hostName == null)
             {
@@ -96,7 +96,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="hostName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<DedicatedHostCreateOrUpdateOperation> CreateOrUpdateAsync(string hostName, DedicatedHostData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<DedicatedHostCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string hostName, DedicatedHostData parameters, CancellationToken cancellationToken = default)
         {
             if (hostName == null)
             {
@@ -200,9 +200,9 @@ namespace Azure.ResourceManager.Sample
             try
             {
                 var response = _dedicatedHostsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, hostName, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<DedicatedHost>(null, response.GetRawResponse())
-                    : Response.FromValue(new DedicatedHost(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<DedicatedHost>(null, response.GetRawResponse());
+                return Response.FromValue(new DedicatedHost(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -227,9 +227,9 @@ namespace Azure.ResourceManager.Sample
             try
             {
                 var response = await _dedicatedHostsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, hostName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<DedicatedHost>(null, response.GetRawResponse())
-                    : Response.FromValue(new DedicatedHost(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<DedicatedHost>(null, response.GetRawResponse());
+                return Response.FromValue(new DedicatedHost(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

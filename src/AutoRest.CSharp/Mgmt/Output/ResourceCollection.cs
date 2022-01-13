@@ -191,5 +191,11 @@ namespace AutoRest.CSharp.Mgmt.Output
 
             return type.AsIEnumerable();
         }
+
+        public Parameter ParentParameter => OptionsParameter with
+        {
+            Name = "parent",
+            Description = $"The resource representing the parent resource."
+        };
     }
 }

@@ -42,7 +42,7 @@ namespace MgmtKeyvault.Tests.Mock
             // Example: Purge a deleted vault
             var deletedVault = GetArmClient().GetDeletedVault(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.KeyVault/locations/westus/deletedVaults/sample-vault"));
 
-            await deletedVault.PurgeDeletedAsync();
+            await deletedVault.PurgeDeletedAsync(true);
         }
     }
 }

@@ -59,7 +59,7 @@ namespace MgmtListMethods
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithAncestorName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual FakeParentWithAncestorCreateOrUpdateOperation CreateOrUpdate(string fakeParentWithAncestorName, FakeParentWithAncestorData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual FakeParentWithAncestorCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string fakeParentWithAncestorName, FakeParentWithAncestorData parameters, CancellationToken cancellationToken = default)
         {
             if (fakeParentWithAncestorName == null)
             {
@@ -96,7 +96,7 @@ namespace MgmtListMethods
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithAncestorName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<FakeParentWithAncestorCreateOrUpdateOperation> CreateOrUpdateAsync(string fakeParentWithAncestorName, FakeParentWithAncestorData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<FakeParentWithAncestorCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string fakeParentWithAncestorName, FakeParentWithAncestorData parameters, CancellationToken cancellationToken = default)
         {
             if (fakeParentWithAncestorName == null)
             {
@@ -200,9 +200,9 @@ namespace MgmtListMethods
             try
             {
                 var response = _fakeParentWithAncestorsRestClient.Get(Id.SubscriptionId, Id.Name, fakeParentWithAncestorName, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<FakeParentWithAncestor>(null, response.GetRawResponse())
-                    : Response.FromValue(new FakeParentWithAncestor(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<FakeParentWithAncestor>(null, response.GetRawResponse());
+                return Response.FromValue(new FakeParentWithAncestor(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -227,9 +227,9 @@ namespace MgmtListMethods
             try
             {
                 var response = await _fakeParentWithAncestorsRestClient.GetAsync(Id.SubscriptionId, Id.Name, fakeParentWithAncestorName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<FakeParentWithAncestor>(null, response.GetRawResponse())
-                    : Response.FromValue(new FakeParentWithAncestor(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<FakeParentWithAncestor>(null, response.GetRawResponse());
+                return Response.FromValue(new FakeParentWithAncestor(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

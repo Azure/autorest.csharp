@@ -11,7 +11,7 @@ using Azure.Core;
 namespace body_complex_LowLevel
 {
     /// <summary> Client options for AutoRestComplexTestService library clients. </summary>
-    public partial class AutoRestComplexTestServiceClientsOptions : ClientOptions
+    public partial class AutoRestComplexTestServiceClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V2016_02_29;
 
@@ -24,8 +24,8 @@ namespace body_complex_LowLevel
 
         internal string Version { get; }
 
-        /// <summary> Initializes new instance of AutoRestComplexTestServiceClientsOptions. </summary>
-        public AutoRestComplexTestServiceClientsOptions(ServiceVersion version = LatestVersion)
+        /// <summary> Initializes new instance of AutoRestComplexTestServiceClientOptions. </summary>
+        public AutoRestComplexTestServiceClientOptions(ServiceVersion version = LatestVersion)
         {
             Version = version switch
             {

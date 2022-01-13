@@ -40,11 +40,11 @@ namespace MgmtKeyvault
 
         /// <summary> Initializes a new instance of the <see cref = "ManagedHsm"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
-        /// <param name="resource"> The resource that is the target of operations. </param>
-        internal ManagedHsm(ArmResource options, ManagedHsmData resource) : base(options, resource.Id)
+        /// <param name="data"> The resource that is the target of operations. </param>
+        internal ManagedHsm(ArmResource options, ManagedHsmData data) : base(options, data.Id)
         {
             HasData = true;
-            _data = resource;
+            _data = data;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _managedHsmsRestClient = new ManagedHsmsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
             _mHSMPrivateLinkResourcesRestClient = new MhsmPrivateLinkResourcesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
@@ -174,7 +174,7 @@ namespace MgmtKeyvault
         /// <summary> Deletes the specified managed HSM Pool. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<ManagedHsmDeleteOperation> DeleteAsync(bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<ManagedHsmDeleteOperation> DeleteAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ManagedHsm.Delete");
             scope.Start();
@@ -199,7 +199,7 @@ namespace MgmtKeyvault
         /// <summary> Deletes the specified managed HSM Pool. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual ManagedHsmDeleteOperation Delete(bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual ManagedHsmDeleteOperation Delete(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ManagedHsm.Delete");
             scope.Start();
@@ -226,7 +226,7 @@ namespace MgmtKeyvault
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<ManagedHsmUpdateOperation> UpdateAsync(ManagedHsmData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<ManagedHsmUpdateOperation> UpdateAsync(bool waitForCompletion, ManagedHsmData parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -258,7 +258,7 @@ namespace MgmtKeyvault
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual ManagedHsmUpdateOperation Update(ManagedHsmData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual ManagedHsmUpdateOperation Update(bool waitForCompletion, ManagedHsmData parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {

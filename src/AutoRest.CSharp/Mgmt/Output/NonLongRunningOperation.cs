@@ -35,8 +35,8 @@ namespace AutoRest.CSharp.Mgmt.Output
 
             if (operation.ShouldWrapResultType(ResultType, context, out var resource))
             {
+                WrapperResource = resource;
                 ResultType = resource.Type;
-                ResultDataType = resource.ResourceData.Type;
             }
 
             DefaultName = lroInfo.ClientPrefix.LastWordToSingular() + operation.CSharpName() + "Operation";
@@ -45,17 +45,13 @@ namespace AutoRest.CSharp.Mgmt.Output
             DefaultAccessibility = lroInfo.Accessibility;
         }
 
+        public Resource? WrapperResource { get; }
+
         /// <summary>
         /// Type of the result of the operation.
         /// </summary>
         /// <value></value>
         public CSharpType? ResultType { get; }
-
-        /// <summary>
-        /// Type of the inner data of the operation.
-        /// </summary>
-        /// <value></value>
-        public CSharpType? ResultDataType { get; }
 
         protected override string DefaultName { get; }
 

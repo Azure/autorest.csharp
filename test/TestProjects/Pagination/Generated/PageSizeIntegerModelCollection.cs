@@ -57,7 +57,7 @@ namespace Pagination
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual PageSizeIntegerModelPutOperation CreateOrUpdate(string name, PageSizeIntegerModelData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual PageSizeIntegerModelPutOperation CreateOrUpdate(bool waitForCompletion, string name, PageSizeIntegerModelData parameters, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
@@ -90,7 +90,7 @@ namespace Pagination
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<PageSizeIntegerModelPutOperation> CreateOrUpdateAsync(string name, PageSizeIntegerModelData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<PageSizeIntegerModelPutOperation> CreateOrUpdateAsync(bool waitForCompletion, string name, PageSizeIntegerModelData parameters, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
@@ -186,9 +186,9 @@ namespace Pagination
             try
             {
                 var response = _pageSizeIntegerModelsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<PageSizeIntegerModel>(null, response.GetRawResponse())
-                    : Response.FromValue(new PageSizeIntegerModel(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<PageSizeIntegerModel>(null, response.GetRawResponse());
+                return Response.FromValue(new PageSizeIntegerModel(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -213,9 +213,9 @@ namespace Pagination
             try
             {
                 var response = await _pageSizeIntegerModelsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<PageSizeIntegerModel>(null, response.GetRawResponse())
-                    : Response.FromValue(new PageSizeIntegerModel(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<PageSizeIntegerModel>(null, response.GetRawResponse());
+                return Response.FromValue(new PageSizeIntegerModel(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

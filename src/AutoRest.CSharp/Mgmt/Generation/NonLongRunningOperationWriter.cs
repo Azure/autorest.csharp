@@ -4,6 +4,7 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.Output;
@@ -49,11 +50,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     writer.Append($"internal {cs.Name}(");
                     if (operation.ResultType != null)
                     {
-                        if (operation.ResultDataType != null)
+                        if (operation.WrapperResource != null)
                         {
                             // todo: programmatically get the type of operationBase from the definition of [Resource]
                             writer.Append($"{typeof(ArmResource)} operationsBase, ");
-                            writer.Append($"{typeof(Response)}<{operation.ResultDataType}> {responseVariable}");
+                            writer.Append($"{typeof(Response)}<{operation.WrapperResource.ResourceData.Type}> {responseVariable}");
                         }
                         else
                         {
@@ -69,10 +70,23 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     using (writer.Scope())
                     {
                         writer.Append($"_operation = new {helperType}(");
-                        if (operation.ResultType != null && operation.ResultDataType != null)
+                        if (operation.ResultType != null && operation.WrapperResource != null)
                         {
+                            var resource = operation.WrapperResource;
+
+                            CodeWriterDelegate optionsExpression = w => w.Append($"operationsBase");
+                            CodeWriterDelegate dataExpression = w => w.Append($"{responseVariable}.Value");
+
+                            if (resource.ResourceData.ShouldSetResourceIdentifier)
+                                writer.Line($"{dataExpression}.Id = {optionsExpression}.Id;");
+
+                            var newInstanceExpression = operation.WrapperResource.NewInstanceExpression(new[]
+                            {
+                                new ParameterInvocation(resource.OptionsParameter, optionsExpression),
+                                new ParameterInvocation(resource.ResourceDataParameter, dataExpression),
+                            });
                             writer.Append($"{typeof(Response)}.FromValue(");
-                            writer.Append($"new {operation.ResultType}(operationsBase, {responseVariable}.Value),");
+                            writer.Append($"{newInstanceExpression}, ");
                             writer.Append($"{responseVariable}.GetRawResponse()");
                             writer.Append($")");
                         }
