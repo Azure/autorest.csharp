@@ -37,7 +37,7 @@ namespace Accessibility_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
         public AccessibilityClient(AzureKeyCredential credential, Uri endpoint = null, AccessibilityClientOptions options = null)
         {
-            credential = credential ?? throw new ArgumentNullException(nameof(credential));
+            Argument.AssertNotNull(credential, nameof(credential));
             endpoint ??= new Uri("http://localhost:3000");
             options ??= new AccessibilityClientOptions();
 

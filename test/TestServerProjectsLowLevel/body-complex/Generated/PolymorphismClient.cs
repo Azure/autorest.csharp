@@ -37,7 +37,7 @@ namespace body_complex_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
         public PolymorphismClient(AzureKeyCredential credential, Uri endpoint = null, AutoRestComplexTestServiceClientOptions options = null)
         {
-            credential = credential ?? throw new ArgumentNullException(nameof(credential));
+            Argument.AssertNotNull(credential, nameof(credential));
             endpoint ??= new Uri("http://localhost:3000");
             options ??= new AutoRestComplexTestServiceClientOptions();
 
@@ -146,7 +146,7 @@ namespace body_complex_LowLevel
         public virtual async Task<Response> PutValidAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.PutValid");
             scope.Start();
@@ -187,7 +187,7 @@ namespace body_complex_LowLevel
         public virtual Response PutValid(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.PutValid");
             scope.Start();
@@ -579,7 +579,7 @@ namespace body_complex_LowLevel
         public virtual async Task<Response> PutComplicatedAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.PutComplicated");
             scope.Start();
@@ -629,7 +629,7 @@ namespace body_complex_LowLevel
         public virtual Response PutComplicated(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.PutComplicated");
             scope.Start();
@@ -696,7 +696,7 @@ namespace body_complex_LowLevel
         public virtual async Task<Response> PutMissingDiscriminatorAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.PutMissingDiscriminator");
             scope.Start();
@@ -763,7 +763,7 @@ namespace body_complex_LowLevel
         public virtual Response PutMissingDiscriminator(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.PutMissingDiscriminator");
             scope.Start();
@@ -804,7 +804,7 @@ namespace body_complex_LowLevel
         public virtual async Task<Response> PutValidMissingRequiredAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.PutValidMissingRequired");
             scope.Start();
@@ -845,7 +845,7 @@ namespace body_complex_LowLevel
         public virtual Response PutValidMissingRequired(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.PutValidMissingRequired");
             scope.Start();

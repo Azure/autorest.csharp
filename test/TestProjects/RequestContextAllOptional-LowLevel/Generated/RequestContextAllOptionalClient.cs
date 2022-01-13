@@ -37,7 +37,7 @@ namespace RequestContextAllOptional_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
         public RequestContextAllOptionalClient(AzureKeyCredential credential, Uri endpoint = null, RequestContextAllOptionalClientOptions options = null)
         {
-            credential = credential ?? throw new ArgumentNullException(nameof(credential));
+            Argument.AssertNotNull(credential, nameof(credential));
             endpoint ??= new Uri("http://localhost:3000");
             options ??= new RequestContextAllOptionalClientOptions();
 
@@ -175,7 +175,7 @@ namespace RequestContextAllOptional_LowLevel
         public virtual async Task<Response> DeleteNoRequestBodyResponseBodyAsync(string resourceName, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            resourceName = resourceName ?? throw new ArgumentNullException(nameof(resourceName));
+            Argument.AssertNotNull(resourceName, nameof(resourceName));
 
             using var scope = _clientDiagnostics.CreateScope("RequestContextAllOptionalClient.DeleteNoRequestBodyResponseBody");
             scope.Start();
@@ -199,7 +199,7 @@ namespace RequestContextAllOptional_LowLevel
         public virtual Response DeleteNoRequestBodyResponseBody(string resourceName, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            resourceName = resourceName ?? throw new ArgumentNullException(nameof(resourceName));
+            Argument.AssertNotNull(resourceName, nameof(resourceName));
 
             using var scope = _clientDiagnostics.CreateScope("RequestContextAllOptionalClient.DeleteNoRequestBodyResponseBody");
             scope.Start();

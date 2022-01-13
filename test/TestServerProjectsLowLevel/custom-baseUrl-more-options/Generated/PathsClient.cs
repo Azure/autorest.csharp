@@ -39,9 +39,9 @@ namespace custom_baseUrl_more_options_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="credential"/>, or <paramref name="dnsSuffix"/> is null. </exception>
         public PathsClient(string subscriptionId, AzureKeyCredential credential, string dnsSuffix = "host", PathsClientOptions options = null)
         {
-            subscriptionId = subscriptionId ?? throw new ArgumentNullException(nameof(subscriptionId));
-            credential = credential ?? throw new ArgumentNullException(nameof(credential));
-            dnsSuffix = dnsSuffix ?? throw new ArgumentNullException(nameof(dnsSuffix));
+            Argument.AssertNotNull(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNull(credential, nameof(credential));
+            Argument.AssertNotNull(dnsSuffix, nameof(dnsSuffix));
             options ??= new PathsClientOptions();
 
             _clientDiagnostics = new ClientDiagnostics(options);
@@ -71,9 +71,9 @@ namespace custom_baseUrl_more_options_LowLevel
         public virtual async Task<Response> GetEmptyAsync(string vault, string secret, string keyName, string keyVersion = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            vault = vault ?? throw new ArgumentNullException(nameof(vault));
-            secret = secret ?? throw new ArgumentNullException(nameof(secret));
-            keyName = keyName ?? throw new ArgumentNullException(nameof(keyName));
+            Argument.AssertNotNull(vault, nameof(vault));
+            Argument.AssertNotNull(secret, nameof(secret));
+            Argument.AssertNotNull(keyName, nameof(keyName));
 
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetEmpty");
             scope.Start();
@@ -109,9 +109,9 @@ namespace custom_baseUrl_more_options_LowLevel
         public virtual Response GetEmpty(string vault, string secret, string keyName, string keyVersion = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            vault = vault ?? throw new ArgumentNullException(nameof(vault));
-            secret = secret ?? throw new ArgumentNullException(nameof(secret));
-            keyName = keyName ?? throw new ArgumentNullException(nameof(keyName));
+            Argument.AssertNotNull(vault, nameof(vault));
+            Argument.AssertNotNull(secret, nameof(secret));
+            Argument.AssertNotNull(keyName, nameof(keyName));
 
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetEmpty");
             scope.Start();

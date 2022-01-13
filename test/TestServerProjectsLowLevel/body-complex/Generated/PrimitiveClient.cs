@@ -37,7 +37,7 @@ namespace body_complex_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
         public PrimitiveClient(AzureKeyCredential credential, Uri endpoint = null, AutoRestComplexTestServiceClientOptions options = null)
         {
-            credential = credential ?? throw new ArgumentNullException(nameof(credential));
+            Argument.AssertNotNull(credential, nameof(credential));
             endpoint ??= new Uri("http://localhost:3000");
             options ??= new AutoRestComplexTestServiceClientOptions();
 
@@ -140,7 +140,7 @@ namespace body_complex_LowLevel
         public virtual async Task<Response> PutIntAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutInt");
             scope.Start();
@@ -179,7 +179,7 @@ namespace body_complex_LowLevel
         public virtual Response PutInt(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutInt");
             scope.Start();
@@ -288,7 +288,7 @@ namespace body_complex_LowLevel
         public virtual async Task<Response> PutLongAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutLong");
             scope.Start();
@@ -327,7 +327,7 @@ namespace body_complex_LowLevel
         public virtual Response PutLong(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutLong");
             scope.Start();
@@ -436,7 +436,7 @@ namespace body_complex_LowLevel
         public virtual async Task<Response> PutFloatAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutFloat");
             scope.Start();
@@ -475,7 +475,7 @@ namespace body_complex_LowLevel
         public virtual Response PutFloat(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutFloat");
             scope.Start();
@@ -584,7 +584,7 @@ namespace body_complex_LowLevel
         public virtual async Task<Response> PutDoubleAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutDouble");
             scope.Start();
@@ -623,7 +623,7 @@ namespace body_complex_LowLevel
         public virtual Response PutDouble(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutDouble");
             scope.Start();
@@ -732,7 +732,7 @@ namespace body_complex_LowLevel
         public virtual async Task<Response> PutBoolAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutBool");
             scope.Start();
@@ -771,7 +771,7 @@ namespace body_complex_LowLevel
         public virtual Response PutBool(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutBool");
             scope.Start();
@@ -883,7 +883,7 @@ namespace body_complex_LowLevel
         public virtual async Task<Response> PutStringAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutString");
             scope.Start();
@@ -923,7 +923,7 @@ namespace body_complex_LowLevel
         public virtual Response PutString(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutString");
             scope.Start();
@@ -1032,7 +1032,7 @@ namespace body_complex_LowLevel
         public virtual async Task<Response> PutDateAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutDate");
             scope.Start();
@@ -1071,7 +1071,7 @@ namespace body_complex_LowLevel
         public virtual Response PutDate(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutDate");
             scope.Start();
@@ -1180,7 +1180,7 @@ namespace body_complex_LowLevel
         public virtual async Task<Response> PutDateTimeAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutDateTime");
             scope.Start();
@@ -1219,7 +1219,7 @@ namespace body_complex_LowLevel
         public virtual Response PutDateTime(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutDateTime");
             scope.Start();
@@ -1328,7 +1328,7 @@ namespace body_complex_LowLevel
         public virtual async Task<Response> PutDateTimeRfc1123Async(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutDateTimeRfc1123");
             scope.Start();
@@ -1367,7 +1367,7 @@ namespace body_complex_LowLevel
         public virtual Response PutDateTimeRfc1123(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutDateTimeRfc1123");
             scope.Start();
@@ -1473,7 +1473,7 @@ namespace body_complex_LowLevel
         public virtual async Task<Response> PutDurationAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutDuration");
             scope.Start();
@@ -1511,7 +1511,7 @@ namespace body_complex_LowLevel
         public virtual Response PutDuration(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutDuration");
             scope.Start();
@@ -1617,7 +1617,7 @@ namespace body_complex_LowLevel
         public virtual async Task<Response> PutByteAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutByte");
             scope.Start();
@@ -1655,7 +1655,7 @@ namespace body_complex_LowLevel
         public virtual Response PutByte(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutByte");
             scope.Start();

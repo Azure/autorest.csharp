@@ -46,11 +46,11 @@ namespace Azure.Analytics.Purview.Account
         /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/>, <paramref name="pipeline"/>, <paramref name="endpoint"/>, <paramref name="collectionName"/>, or <paramref name="apiVersion"/> is null. </exception>
         internal PurviewAccountCollections(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, TokenCredential tokenCredential, Uri endpoint, string collectionName, string apiVersion = "2019-11-01-preview")
         {
-            clientDiagnostics = clientDiagnostics ?? throw new ArgumentNullException(nameof(clientDiagnostics));
-            pipeline = pipeline ?? throw new ArgumentNullException(nameof(pipeline));
-            endpoint = endpoint ?? throw new ArgumentNullException(nameof(endpoint));
-            collectionName = collectionName ?? throw new ArgumentNullException(nameof(collectionName));
-            apiVersion = apiVersion ?? throw new ArgumentNullException(nameof(apiVersion));
+            Argument.AssertNotNull(clientDiagnostics, nameof(clientDiagnostics));
+            Argument.AssertNotNull(pipeline, nameof(pipeline));
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
+            Argument.AssertNotNull(collectionName, nameof(collectionName));
+            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
@@ -248,7 +248,7 @@ namespace Azure.Analytics.Purview.Account
         public virtual async Task<Response> CreateOrUpdateCollectionAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("PurviewAccountCollections.CreateOrUpdateCollection");
             scope.Start();
@@ -332,7 +332,7 @@ namespace Azure.Analytics.Purview.Account
         public virtual Response CreateOrUpdateCollection(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("PurviewAccountCollections.CreateOrUpdateCollection");
             scope.Start();

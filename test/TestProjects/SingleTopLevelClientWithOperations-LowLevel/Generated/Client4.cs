@@ -41,9 +41,9 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/>, <paramref name="pipeline"/>, or <paramref name="clientParameter"/> is null. </exception>
         internal Client4(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, AzureKeyCredential keyCredential, string clientParameter, Uri endpoint = null)
         {
-            clientDiagnostics = clientDiagnostics ?? throw new ArgumentNullException(nameof(clientDiagnostics));
-            pipeline = pipeline ?? throw new ArgumentNullException(nameof(pipeline));
-            clientParameter = clientParameter ?? throw new ArgumentNullException(nameof(clientParameter));
+            Argument.AssertNotNull(clientDiagnostics, nameof(clientDiagnostics));
+            Argument.AssertNotNull(pipeline, nameof(pipeline));
+            Argument.AssertNotNull(clientParameter, nameof(clientParameter));
             endpoint ??= new Uri("http://localhost:3000");
 
             _clientDiagnostics = clientDiagnostics;
@@ -61,7 +61,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         public virtual async Task<Response> PatchAsync(string filter, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            filter = filter ?? throw new ArgumentNullException(nameof(filter));
+            Argument.AssertNotNull(filter, nameof(filter));
 
             using var scope = _clientDiagnostics.CreateScope("Client4.Patch");
             scope.Start();
@@ -85,7 +85,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         public virtual Response Patch(string filter, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            filter = filter ?? throw new ArgumentNullException(nameof(filter));
+            Argument.AssertNotNull(filter, nameof(filter));
 
             using var scope = _clientDiagnostics.CreateScope("Client4.Patch");
             scope.Start();

@@ -38,7 +38,7 @@ namespace url_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
         public PathsClient(AzureKeyCredential credential, Uri endpoint = null, AutoRestUrlTestServiceClientOptions options = null)
         {
-            credential = credential ?? throw new ArgumentNullException(nameof(credential));
+            Argument.AssertNotNull(credential, nameof(credential));
             endpoint ??= new Uri("http://localhost:3000");
             options ??= new AutoRestUrlTestServiceClientOptions();
 
@@ -877,7 +877,7 @@ namespace url_LowLevel
         public virtual async Task<Response> StringNullAsync(string stringPath, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            stringPath = stringPath ?? throw new ArgumentNullException(nameof(stringPath));
+            Argument.AssertNotNull(stringPath, nameof(stringPath));
 
             using var scope = _clientDiagnostics.CreateScope("PathsClient.StringNull");
             scope.Start();
@@ -910,7 +910,7 @@ namespace url_LowLevel
         public virtual Response StringNull(string stringPath, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            stringPath = stringPath ?? throw new ArgumentNullException(nameof(stringPath));
+            Argument.AssertNotNull(stringPath, nameof(stringPath));
 
             using var scope = _clientDiagnostics.CreateScope("PathsClient.StringNull");
             scope.Start();
@@ -943,7 +943,7 @@ namespace url_LowLevel
         public virtual async Task<Response> EnumValidAsync(string enumPath, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            enumPath = enumPath ?? throw new ArgumentNullException(nameof(enumPath));
+            Argument.AssertNotNull(enumPath, nameof(enumPath));
 
             using var scope = _clientDiagnostics.CreateScope("PathsClient.EnumValid");
             scope.Start();
@@ -976,7 +976,7 @@ namespace url_LowLevel
         public virtual Response EnumValid(string enumPath, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            enumPath = enumPath ?? throw new ArgumentNullException(nameof(enumPath));
+            Argument.AssertNotNull(enumPath, nameof(enumPath));
 
             using var scope = _clientDiagnostics.CreateScope("PathsClient.EnumValid");
             scope.Start();
@@ -1009,7 +1009,7 @@ namespace url_LowLevel
         public virtual async Task<Response> EnumNullAsync(string enumPath, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            enumPath = enumPath ?? throw new ArgumentNullException(nameof(enumPath));
+            Argument.AssertNotNull(enumPath, nameof(enumPath));
 
             using var scope = _clientDiagnostics.CreateScope("PathsClient.EnumNull");
             scope.Start();
@@ -1042,7 +1042,7 @@ namespace url_LowLevel
         public virtual Response EnumNull(string enumPath, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            enumPath = enumPath ?? throw new ArgumentNullException(nameof(enumPath));
+            Argument.AssertNotNull(enumPath, nameof(enumPath));
 
             using var scope = _clientDiagnostics.CreateScope("PathsClient.EnumNull");
             scope.Start();
@@ -1075,7 +1075,7 @@ namespace url_LowLevel
         public virtual async Task<Response> ByteMultiByteAsync(byte[] bytePath, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            bytePath = bytePath ?? throw new ArgumentNullException(nameof(bytePath));
+            Argument.AssertNotNull(bytePath, nameof(bytePath));
 
             using var scope = _clientDiagnostics.CreateScope("PathsClient.ByteMultiByte");
             scope.Start();
@@ -1108,7 +1108,7 @@ namespace url_LowLevel
         public virtual Response ByteMultiByte(byte[] bytePath, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            bytePath = bytePath ?? throw new ArgumentNullException(nameof(bytePath));
+            Argument.AssertNotNull(bytePath, nameof(bytePath));
 
             using var scope = _clientDiagnostics.CreateScope("PathsClient.ByteMultiByte");
             scope.Start();
@@ -1199,7 +1199,7 @@ namespace url_LowLevel
         public virtual async Task<Response> ByteNullAsync(byte[] bytePath, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            bytePath = bytePath ?? throw new ArgumentNullException(nameof(bytePath));
+            Argument.AssertNotNull(bytePath, nameof(bytePath));
 
             using var scope = _clientDiagnostics.CreateScope("PathsClient.ByteNull");
             scope.Start();
@@ -1232,7 +1232,7 @@ namespace url_LowLevel
         public virtual Response ByteNull(byte[] bytePath, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            bytePath = bytePath ?? throw new ArgumentNullException(nameof(bytePath));
+            Argument.AssertNotNull(bytePath, nameof(bytePath));
 
             using var scope = _clientDiagnostics.CreateScope("PathsClient.ByteNull");
             scope.Start();
@@ -1501,7 +1501,7 @@ namespace url_LowLevel
         public virtual async Task<Response> Base64UrlAsync(byte[] base64UrlPath, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            base64UrlPath = base64UrlPath ?? throw new ArgumentNullException(nameof(base64UrlPath));
+            Argument.AssertNotNull(base64UrlPath, nameof(base64UrlPath));
 
             using var scope = _clientDiagnostics.CreateScope("PathsClient.Base64Url");
             scope.Start();
@@ -1534,7 +1534,7 @@ namespace url_LowLevel
         public virtual Response Base64Url(byte[] base64UrlPath, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            base64UrlPath = base64UrlPath ?? throw new ArgumentNullException(nameof(base64UrlPath));
+            Argument.AssertNotNull(base64UrlPath, nameof(base64UrlPath));
 
             using var scope = _clientDiagnostics.CreateScope("PathsClient.Base64Url");
             scope.Start();
@@ -1567,7 +1567,7 @@ namespace url_LowLevel
         public virtual async Task<Response> ArrayCsvInPathAsync(IEnumerable<string> arrayPath, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            arrayPath = arrayPath ?? throw new ArgumentNullException(nameof(arrayPath));
+            Argument.AssertNotNull(arrayPath, nameof(arrayPath));
 
             using var scope = _clientDiagnostics.CreateScope("PathsClient.ArrayCsvInPath");
             scope.Start();
@@ -1600,7 +1600,7 @@ namespace url_LowLevel
         public virtual Response ArrayCsvInPath(IEnumerable<string> arrayPath, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            arrayPath = arrayPath ?? throw new ArgumentNullException(nameof(arrayPath));
+            Argument.AssertNotNull(arrayPath, nameof(arrayPath));
 
             using var scope = _clientDiagnostics.CreateScope("PathsClient.ArrayCsvInPath");
             scope.Start();

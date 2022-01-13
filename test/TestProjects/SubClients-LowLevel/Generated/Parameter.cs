@@ -38,8 +38,8 @@ namespace SubClients_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/> or <paramref name="pipeline"/> is null. </exception>
         internal Parameter(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, AzureKeyCredential keyCredential, Uri endpoint = null)
         {
-            clientDiagnostics = clientDiagnostics ?? throw new ArgumentNullException(nameof(clientDiagnostics));
-            pipeline = pipeline ?? throw new ArgumentNullException(nameof(pipeline));
+            Argument.AssertNotNull(clientDiagnostics, nameof(clientDiagnostics));
+            Argument.AssertNotNull(pipeline, nameof(pipeline));
             endpoint ??= new Uri("http://localhost:3000");
 
             _clientDiagnostics = clientDiagnostics;
@@ -55,7 +55,7 @@ namespace SubClients_LowLevel
         public virtual async Task<Response> GetSubParameterAsync(string subParameter, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            subParameter = subParameter ?? throw new ArgumentNullException(nameof(subParameter));
+            Argument.AssertNotNull(subParameter, nameof(subParameter));
 
             using var scope = _clientDiagnostics.CreateScope("Parameter.GetSubParameter");
             scope.Start();
@@ -78,7 +78,7 @@ namespace SubClients_LowLevel
         public virtual Response GetSubParameter(string subParameter, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            subParameter = subParameter ?? throw new ArgumentNullException(nameof(subParameter));
+            Argument.AssertNotNull(subParameter, nameof(subParameter));
 
             using var scope = _clientDiagnostics.CreateScope("Parameter.GetSubParameter");
             scope.Start();

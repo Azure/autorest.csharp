@@ -37,7 +37,7 @@ namespace body_string_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
         public EnumClient(AzureKeyCredential credential, Uri endpoint = null, AutoRestSwaggerBATServiceClientOptions options = null)
         {
-            credential = credential ?? throw new ArgumentNullException(nameof(credential));
+            Argument.AssertNotNull(credential, nameof(credential));
             endpoint ??= new Uri("http://localhost:3000");
             options ??= new AutoRestSwaggerBATServiceClientOptions();
 
@@ -122,7 +122,7 @@ namespace body_string_LowLevel
         public virtual async Task<Response> PutNotExpandableAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("EnumClient.PutNotExpandable");
             scope.Start();
@@ -155,7 +155,7 @@ namespace body_string_LowLevel
         public virtual Response PutNotExpandable(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("EnumClient.PutNotExpandable");
             scope.Start();
@@ -246,7 +246,7 @@ namespace body_string_LowLevel
         public virtual async Task<Response> PutReferencedAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("EnumClient.PutReferenced");
             scope.Start();
@@ -279,7 +279,7 @@ namespace body_string_LowLevel
         public virtual Response PutReferenced(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("EnumClient.PutReferenced");
             scope.Start();
@@ -388,7 +388,7 @@ namespace body_string_LowLevel
         public virtual async Task<Response> PutReferencedConstantAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("EnumClient.PutReferencedConstant");
             scope.Start();
@@ -427,7 +427,7 @@ namespace body_string_LowLevel
         public virtual Response PutReferencedConstant(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("EnumClient.PutReferencedConstant");
             scope.Start();

@@ -223,7 +223,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
             else if (CanWriteNullCheck(parameter))
             {
-                writer.Line($"{parameter.Name:I} = {parameter.Name:I} ?? throw new {typeof(ArgumentNullException)}(nameof({parameter.Name:I}));");
+                writer.Line($"{typeof(Argument)}.{nameof(Argument.AssertNotNull)}({parameter.Name:I}, nameof({parameter.Name:I}));");
             }
         }
 

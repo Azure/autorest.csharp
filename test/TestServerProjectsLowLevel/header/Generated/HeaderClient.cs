@@ -37,7 +37,7 @@ namespace header_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
         public HeaderClient(AzureKeyCredential credential, Uri endpoint = null, HeaderClientOptions options = null)
         {
-            credential = credential ?? throw new ArgumentNullException(nameof(credential));
+            Argument.AssertNotNull(credential, nameof(credential));
             endpoint ??= new Uri("http://localhost:3000");
             options ??= new HeaderClientOptions();
 
@@ -64,7 +64,7 @@ namespace header_LowLevel
         public virtual async Task<Response> ParamExistingKeyAsync(string userAgent, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            userAgent = userAgent ?? throw new ArgumentNullException(nameof(userAgent));
+            Argument.AssertNotNull(userAgent, nameof(userAgent));
 
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamExistingKey");
             scope.Start();
@@ -97,7 +97,7 @@ namespace header_LowLevel
         public virtual Response ParamExistingKey(string userAgent, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            userAgent = userAgent ?? throw new ArgumentNullException(nameof(userAgent));
+            Argument.AssertNotNull(userAgent, nameof(userAgent));
 
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamExistingKey");
             scope.Start();
@@ -188,7 +188,7 @@ namespace header_LowLevel
         public virtual async Task<Response> ParamProtectedKeyAsync(string contentType, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            contentType = contentType ?? throw new ArgumentNullException(nameof(contentType));
+            Argument.AssertNotNull(contentType, nameof(contentType));
 
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamProtectedKey");
             scope.Start();
@@ -221,7 +221,7 @@ namespace header_LowLevel
         public virtual Response ParamProtectedKey(string contentType, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            contentType = contentType ?? throw new ArgumentNullException(nameof(contentType));
+            Argument.AssertNotNull(contentType, nameof(contentType));
 
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamProtectedKey");
             scope.Start();
@@ -313,7 +313,7 @@ namespace header_LowLevel
         public virtual async Task<Response> ParamIntegerAsync(string scenario, int value, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            scenario = scenario ?? throw new ArgumentNullException(nameof(scenario));
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamInteger");
             scope.Start();
@@ -347,7 +347,7 @@ namespace header_LowLevel
         public virtual Response ParamInteger(string scenario, int value, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            scenario = scenario ?? throw new ArgumentNullException(nameof(scenario));
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamInteger");
             scope.Start();
@@ -380,7 +380,7 @@ namespace header_LowLevel
         public virtual async Task<Response> ResponseIntegerAsync(string scenario, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            scenario = scenario ?? throw new ArgumentNullException(nameof(scenario));
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseInteger");
             scope.Start();
@@ -413,7 +413,7 @@ namespace header_LowLevel
         public virtual Response ResponseInteger(string scenario, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            scenario = scenario ?? throw new ArgumentNullException(nameof(scenario));
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseInteger");
             scope.Start();
@@ -447,7 +447,7 @@ namespace header_LowLevel
         public virtual async Task<Response> ParamLongAsync(string scenario, long value, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            scenario = scenario ?? throw new ArgumentNullException(nameof(scenario));
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamLong");
             scope.Start();
@@ -481,7 +481,7 @@ namespace header_LowLevel
         public virtual Response ParamLong(string scenario, long value, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            scenario = scenario ?? throw new ArgumentNullException(nameof(scenario));
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamLong");
             scope.Start();
@@ -514,7 +514,7 @@ namespace header_LowLevel
         public virtual async Task<Response> ResponseLongAsync(string scenario, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            scenario = scenario ?? throw new ArgumentNullException(nameof(scenario));
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseLong");
             scope.Start();
@@ -547,7 +547,7 @@ namespace header_LowLevel
         public virtual Response ResponseLong(string scenario, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            scenario = scenario ?? throw new ArgumentNullException(nameof(scenario));
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseLong");
             scope.Start();
@@ -581,7 +581,7 @@ namespace header_LowLevel
         public virtual async Task<Response> ParamFloatAsync(string scenario, float value, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            scenario = scenario ?? throw new ArgumentNullException(nameof(scenario));
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamFloat");
             scope.Start();
@@ -615,7 +615,7 @@ namespace header_LowLevel
         public virtual Response ParamFloat(string scenario, float value, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            scenario = scenario ?? throw new ArgumentNullException(nameof(scenario));
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamFloat");
             scope.Start();
@@ -648,7 +648,7 @@ namespace header_LowLevel
         public virtual async Task<Response> ResponseFloatAsync(string scenario, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            scenario = scenario ?? throw new ArgumentNullException(nameof(scenario));
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseFloat");
             scope.Start();
@@ -681,7 +681,7 @@ namespace header_LowLevel
         public virtual Response ResponseFloat(string scenario, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            scenario = scenario ?? throw new ArgumentNullException(nameof(scenario));
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseFloat");
             scope.Start();
@@ -715,7 +715,7 @@ namespace header_LowLevel
         public virtual async Task<Response> ParamDoubleAsync(string scenario, double value, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            scenario = scenario ?? throw new ArgumentNullException(nameof(scenario));
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDouble");
             scope.Start();
@@ -749,7 +749,7 @@ namespace header_LowLevel
         public virtual Response ParamDouble(string scenario, double value, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            scenario = scenario ?? throw new ArgumentNullException(nameof(scenario));
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDouble");
             scope.Start();
@@ -782,7 +782,7 @@ namespace header_LowLevel
         public virtual async Task<Response> ResponseDoubleAsync(string scenario, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            scenario = scenario ?? throw new ArgumentNullException(nameof(scenario));
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDouble");
             scope.Start();
@@ -815,7 +815,7 @@ namespace header_LowLevel
         public virtual Response ResponseDouble(string scenario, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            scenario = scenario ?? throw new ArgumentNullException(nameof(scenario));
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDouble");
             scope.Start();
@@ -849,7 +849,7 @@ namespace header_LowLevel
         public virtual async Task<Response> ParamBoolAsync(string scenario, bool value, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            scenario = scenario ?? throw new ArgumentNullException(nameof(scenario));
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamBool");
             scope.Start();
@@ -883,7 +883,7 @@ namespace header_LowLevel
         public virtual Response ParamBool(string scenario, bool value, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            scenario = scenario ?? throw new ArgumentNullException(nameof(scenario));
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamBool");
             scope.Start();
@@ -916,7 +916,7 @@ namespace header_LowLevel
         public virtual async Task<Response> ResponseBoolAsync(string scenario, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            scenario = scenario ?? throw new ArgumentNullException(nameof(scenario));
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseBool");
             scope.Start();
@@ -949,7 +949,7 @@ namespace header_LowLevel
         public virtual Response ResponseBool(string scenario, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            scenario = scenario ?? throw new ArgumentNullException(nameof(scenario));
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseBool");
             scope.Start();
@@ -983,7 +983,7 @@ namespace header_LowLevel
         public virtual async Task<Response> ParamStringAsync(string scenario, string value = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            scenario = scenario ?? throw new ArgumentNullException(nameof(scenario));
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamString");
             scope.Start();
@@ -1017,7 +1017,7 @@ namespace header_LowLevel
         public virtual Response ParamString(string scenario, string value = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            scenario = scenario ?? throw new ArgumentNullException(nameof(scenario));
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamString");
             scope.Start();
@@ -1050,7 +1050,7 @@ namespace header_LowLevel
         public virtual async Task<Response> ResponseStringAsync(string scenario, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            scenario = scenario ?? throw new ArgumentNullException(nameof(scenario));
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseString");
             scope.Start();
@@ -1083,7 +1083,7 @@ namespace header_LowLevel
         public virtual Response ResponseString(string scenario, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            scenario = scenario ?? throw new ArgumentNullException(nameof(scenario));
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseString");
             scope.Start();
@@ -1117,7 +1117,7 @@ namespace header_LowLevel
         public virtual async Task<Response> ParamDateAsync(string scenario, DateTimeOffset value, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            scenario = scenario ?? throw new ArgumentNullException(nameof(scenario));
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDate");
             scope.Start();
@@ -1151,7 +1151,7 @@ namespace header_LowLevel
         public virtual Response ParamDate(string scenario, DateTimeOffset value, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            scenario = scenario ?? throw new ArgumentNullException(nameof(scenario));
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDate");
             scope.Start();
@@ -1184,7 +1184,7 @@ namespace header_LowLevel
         public virtual async Task<Response> ResponseDateAsync(string scenario, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            scenario = scenario ?? throw new ArgumentNullException(nameof(scenario));
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDate");
             scope.Start();
@@ -1217,7 +1217,7 @@ namespace header_LowLevel
         public virtual Response ResponseDate(string scenario, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            scenario = scenario ?? throw new ArgumentNullException(nameof(scenario));
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDate");
             scope.Start();
@@ -1251,7 +1251,7 @@ namespace header_LowLevel
         public virtual async Task<Response> ParamDatetimeAsync(string scenario, DateTimeOffset value, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            scenario = scenario ?? throw new ArgumentNullException(nameof(scenario));
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDatetime");
             scope.Start();
@@ -1285,7 +1285,7 @@ namespace header_LowLevel
         public virtual Response ParamDatetime(string scenario, DateTimeOffset value, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            scenario = scenario ?? throw new ArgumentNullException(nameof(scenario));
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDatetime");
             scope.Start();
@@ -1318,7 +1318,7 @@ namespace header_LowLevel
         public virtual async Task<Response> ResponseDatetimeAsync(string scenario, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            scenario = scenario ?? throw new ArgumentNullException(nameof(scenario));
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDatetime");
             scope.Start();
@@ -1351,7 +1351,7 @@ namespace header_LowLevel
         public virtual Response ResponseDatetime(string scenario, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            scenario = scenario ?? throw new ArgumentNullException(nameof(scenario));
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDatetime");
             scope.Start();
@@ -1385,7 +1385,7 @@ namespace header_LowLevel
         public virtual async Task<Response> ParamDatetimeRfc1123Async(string scenario, DateTimeOffset? value = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            scenario = scenario ?? throw new ArgumentNullException(nameof(scenario));
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDatetimeRfc1123");
             scope.Start();
@@ -1419,7 +1419,7 @@ namespace header_LowLevel
         public virtual Response ParamDatetimeRfc1123(string scenario, DateTimeOffset? value = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            scenario = scenario ?? throw new ArgumentNullException(nameof(scenario));
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDatetimeRfc1123");
             scope.Start();
@@ -1452,7 +1452,7 @@ namespace header_LowLevel
         public virtual async Task<Response> ResponseDatetimeRfc1123Async(string scenario, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            scenario = scenario ?? throw new ArgumentNullException(nameof(scenario));
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDatetimeRfc1123");
             scope.Start();
@@ -1485,7 +1485,7 @@ namespace header_LowLevel
         public virtual Response ResponseDatetimeRfc1123(string scenario, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            scenario = scenario ?? throw new ArgumentNullException(nameof(scenario));
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDatetimeRfc1123");
             scope.Start();
@@ -1519,7 +1519,7 @@ namespace header_LowLevel
         public virtual async Task<Response> ParamDurationAsync(string scenario, TimeSpan value, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            scenario = scenario ?? throw new ArgumentNullException(nameof(scenario));
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDuration");
             scope.Start();
@@ -1553,7 +1553,7 @@ namespace header_LowLevel
         public virtual Response ParamDuration(string scenario, TimeSpan value, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            scenario = scenario ?? throw new ArgumentNullException(nameof(scenario));
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDuration");
             scope.Start();
@@ -1586,7 +1586,7 @@ namespace header_LowLevel
         public virtual async Task<Response> ResponseDurationAsync(string scenario, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            scenario = scenario ?? throw new ArgumentNullException(nameof(scenario));
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDuration");
             scope.Start();
@@ -1619,7 +1619,7 @@ namespace header_LowLevel
         public virtual Response ResponseDuration(string scenario, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            scenario = scenario ?? throw new ArgumentNullException(nameof(scenario));
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDuration");
             scope.Start();
@@ -1653,8 +1653,8 @@ namespace header_LowLevel
         public virtual async Task<Response> ParamByteAsync(string scenario, byte[] value, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            scenario = scenario ?? throw new ArgumentNullException(nameof(scenario));
-            value = value ?? throw new ArgumentNullException(nameof(value));
+            Argument.AssertNotNull(scenario, nameof(scenario));
+            Argument.AssertNotNull(value, nameof(value));
 
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamByte");
             scope.Start();
@@ -1688,8 +1688,8 @@ namespace header_LowLevel
         public virtual Response ParamByte(string scenario, byte[] value, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            scenario = scenario ?? throw new ArgumentNullException(nameof(scenario));
-            value = value ?? throw new ArgumentNullException(nameof(value));
+            Argument.AssertNotNull(scenario, nameof(scenario));
+            Argument.AssertNotNull(value, nameof(value));
 
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamByte");
             scope.Start();
@@ -1722,7 +1722,7 @@ namespace header_LowLevel
         public virtual async Task<Response> ResponseByteAsync(string scenario, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            scenario = scenario ?? throw new ArgumentNullException(nameof(scenario));
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseByte");
             scope.Start();
@@ -1755,7 +1755,7 @@ namespace header_LowLevel
         public virtual Response ResponseByte(string scenario, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            scenario = scenario ?? throw new ArgumentNullException(nameof(scenario));
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseByte");
             scope.Start();
@@ -1789,7 +1789,7 @@ namespace header_LowLevel
         public virtual async Task<Response> ParamEnumAsync(string scenario, string value = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            scenario = scenario ?? throw new ArgumentNullException(nameof(scenario));
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamEnum");
             scope.Start();
@@ -1823,7 +1823,7 @@ namespace header_LowLevel
         public virtual Response ParamEnum(string scenario, string value = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            scenario = scenario ?? throw new ArgumentNullException(nameof(scenario));
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamEnum");
             scope.Start();
@@ -1856,7 +1856,7 @@ namespace header_LowLevel
         public virtual async Task<Response> ResponseEnumAsync(string scenario, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            scenario = scenario ?? throw new ArgumentNullException(nameof(scenario));
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseEnum");
             scope.Start();
@@ -1889,7 +1889,7 @@ namespace header_LowLevel
         public virtual Response ResponseEnum(string scenario, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            scenario = scenario ?? throw new ArgumentNullException(nameof(scenario));
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseEnum");
             scope.Start();

@@ -37,7 +37,7 @@ namespace body_file_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
         public FilesClient(AzureKeyCredential credential, Uri endpoint = null, FilesClientOptions options = null)
         {
-            credential = credential ?? throw new ArgumentNullException(nameof(credential));
+            Argument.AssertNotNull(credential, nameof(credential));
             endpoint ??= new Uri("http://localhost:3000");
             options ??= new FilesClientOptions();
 

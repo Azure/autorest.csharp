@@ -38,8 +38,8 @@ namespace SingleTopLevelClientWithoutOperations_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/> or <paramref name="pipeline"/> is null. </exception>
         internal Client7(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, AzureKeyCredential keyCredential, Uri endpoint = null)
         {
-            clientDiagnostics = clientDiagnostics ?? throw new ArgumentNullException(nameof(clientDiagnostics));
-            pipeline = pipeline ?? throw new ArgumentNullException(nameof(pipeline));
+            Argument.AssertNotNull(clientDiagnostics, nameof(clientDiagnostics));
+            Argument.AssertNotNull(pipeline, nameof(pipeline));
             endpoint ??= new Uri("http://localhost:3000");
 
             _clientDiagnostics = clientDiagnostics;

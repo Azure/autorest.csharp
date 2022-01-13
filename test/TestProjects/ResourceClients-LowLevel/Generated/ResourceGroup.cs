@@ -44,9 +44,9 @@ namespace ResourceClients_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/>, <paramref name="pipeline"/>, or <paramref name="groupId"/> is null. </exception>
         internal ResourceGroup(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, AzureKeyCredential keyCredential, string groupId, Uri endpoint = null)
         {
-            clientDiagnostics = clientDiagnostics ?? throw new ArgumentNullException(nameof(clientDiagnostics));
-            pipeline = pipeline ?? throw new ArgumentNullException(nameof(pipeline));
-            groupId = groupId ?? throw new ArgumentNullException(nameof(groupId));
+            Argument.AssertNotNull(clientDiagnostics, nameof(clientDiagnostics));
+            Argument.AssertNotNull(pipeline, nameof(pipeline));
+            Argument.AssertNotNull(groupId, nameof(groupId));
             endpoint ??= new Uri("http://localhost:3000");
 
             _clientDiagnostics = clientDiagnostics;
@@ -143,7 +143,7 @@ namespace ResourceClients_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="itemId"/> is null. </exception>
         public virtual Resource GetResource(string itemId)
         {
-            itemId = itemId ?? throw new ArgumentNullException(nameof(itemId));
+            Argument.AssertNotNull(itemId, nameof(itemId));
 
             return new Resource(_clientDiagnostics, _pipeline, _keyCredential, GroupId, itemId, _endpoint);
         }

@@ -41,8 +41,8 @@ namespace url_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="globalStringPath"/> or <paramref name="credential"/> is null. </exception>
         public PathItemsClient(string globalStringPath, AzureKeyCredential credential, Uri endpoint = null, string globalStringQuery = null, AutoRestUrlTestServiceClientOptions options = null)
         {
-            globalStringPath = globalStringPath ?? throw new ArgumentNullException(nameof(globalStringPath));
-            credential = credential ?? throw new ArgumentNullException(nameof(credential));
+            Argument.AssertNotNull(globalStringPath, nameof(globalStringPath));
+            Argument.AssertNotNull(credential, nameof(credential));
             endpoint ??= new Uri("http://localhost:3000");
             options ??= new AutoRestUrlTestServiceClientOptions();
 
@@ -74,8 +74,8 @@ namespace url_LowLevel
         public virtual async Task<Response> GetAllWithValuesAsync(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            pathItemStringPath = pathItemStringPath ?? throw new ArgumentNullException(nameof(pathItemStringPath));
-            localStringPath = localStringPath ?? throw new ArgumentNullException(nameof(localStringPath));
+            Argument.AssertNotNull(pathItemStringPath, nameof(pathItemStringPath));
+            Argument.AssertNotNull(localStringPath, nameof(localStringPath));
 
             using var scope = _clientDiagnostics.CreateScope("PathItemsClient.GetAllWithValues");
             scope.Start();
@@ -111,8 +111,8 @@ namespace url_LowLevel
         public virtual Response GetAllWithValues(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            pathItemStringPath = pathItemStringPath ?? throw new ArgumentNullException(nameof(pathItemStringPath));
-            localStringPath = localStringPath ?? throw new ArgumentNullException(nameof(localStringPath));
+            Argument.AssertNotNull(pathItemStringPath, nameof(pathItemStringPath));
+            Argument.AssertNotNull(localStringPath, nameof(localStringPath));
 
             using var scope = _clientDiagnostics.CreateScope("PathItemsClient.GetAllWithValues");
             scope.Start();
@@ -148,8 +148,8 @@ namespace url_LowLevel
         public virtual async Task<Response> GetGlobalQueryNullAsync(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            pathItemStringPath = pathItemStringPath ?? throw new ArgumentNullException(nameof(pathItemStringPath));
-            localStringPath = localStringPath ?? throw new ArgumentNullException(nameof(localStringPath));
+            Argument.AssertNotNull(pathItemStringPath, nameof(pathItemStringPath));
+            Argument.AssertNotNull(localStringPath, nameof(localStringPath));
 
             using var scope = _clientDiagnostics.CreateScope("PathItemsClient.GetGlobalQueryNull");
             scope.Start();
@@ -185,8 +185,8 @@ namespace url_LowLevel
         public virtual Response GetGlobalQueryNull(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            pathItemStringPath = pathItemStringPath ?? throw new ArgumentNullException(nameof(pathItemStringPath));
-            localStringPath = localStringPath ?? throw new ArgumentNullException(nameof(localStringPath));
+            Argument.AssertNotNull(pathItemStringPath, nameof(pathItemStringPath));
+            Argument.AssertNotNull(localStringPath, nameof(localStringPath));
 
             using var scope = _clientDiagnostics.CreateScope("PathItemsClient.GetGlobalQueryNull");
             scope.Start();
@@ -222,8 +222,8 @@ namespace url_LowLevel
         public virtual async Task<Response> GetGlobalAndLocalQueryNullAsync(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            pathItemStringPath = pathItemStringPath ?? throw new ArgumentNullException(nameof(pathItemStringPath));
-            localStringPath = localStringPath ?? throw new ArgumentNullException(nameof(localStringPath));
+            Argument.AssertNotNull(pathItemStringPath, nameof(pathItemStringPath));
+            Argument.AssertNotNull(localStringPath, nameof(localStringPath));
 
             using var scope = _clientDiagnostics.CreateScope("PathItemsClient.GetGlobalAndLocalQueryNull");
             scope.Start();
@@ -259,8 +259,8 @@ namespace url_LowLevel
         public virtual Response GetGlobalAndLocalQueryNull(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            pathItemStringPath = pathItemStringPath ?? throw new ArgumentNullException(nameof(pathItemStringPath));
-            localStringPath = localStringPath ?? throw new ArgumentNullException(nameof(localStringPath));
+            Argument.AssertNotNull(pathItemStringPath, nameof(pathItemStringPath));
+            Argument.AssertNotNull(localStringPath, nameof(localStringPath));
 
             using var scope = _clientDiagnostics.CreateScope("PathItemsClient.GetGlobalAndLocalQueryNull");
             scope.Start();
@@ -296,8 +296,8 @@ namespace url_LowLevel
         public virtual async Task<Response> GetLocalPathItemQueryNullAsync(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            pathItemStringPath = pathItemStringPath ?? throw new ArgumentNullException(nameof(pathItemStringPath));
-            localStringPath = localStringPath ?? throw new ArgumentNullException(nameof(localStringPath));
+            Argument.AssertNotNull(pathItemStringPath, nameof(pathItemStringPath));
+            Argument.AssertNotNull(localStringPath, nameof(localStringPath));
 
             using var scope = _clientDiagnostics.CreateScope("PathItemsClient.GetLocalPathItemQueryNull");
             scope.Start();
@@ -333,8 +333,8 @@ namespace url_LowLevel
         public virtual Response GetLocalPathItemQueryNull(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            pathItemStringPath = pathItemStringPath ?? throw new ArgumentNullException(nameof(pathItemStringPath));
-            localStringPath = localStringPath ?? throw new ArgumentNullException(nameof(localStringPath));
+            Argument.AssertNotNull(pathItemStringPath, nameof(pathItemStringPath));
+            Argument.AssertNotNull(localStringPath, nameof(localStringPath));
 
             using var scope = _clientDiagnostics.CreateScope("PathItemsClient.GetLocalPathItemQueryNull");
             scope.Start();

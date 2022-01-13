@@ -37,7 +37,7 @@ namespace body_array_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
         public ArrayClient(AzureKeyCredential credential, Uri endpoint = null, ArrayClientOptions options = null)
         {
-            credential = credential ?? throw new ArgumentNullException(nameof(credential));
+            Argument.AssertNotNull(credential, nameof(credential));
             endpoint ??= new Uri("http://localhost:3000");
             options ??= new ArrayClientOptions();
 
@@ -238,7 +238,7 @@ namespace body_array_LowLevel
         public virtual async Task<Response> PutEmptyAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutEmpty");
             scope.Start();
@@ -271,7 +271,7 @@ namespace body_array_LowLevel
         public virtual Response PutEmpty(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutEmpty");
             scope.Start();
@@ -362,7 +362,7 @@ namespace body_array_LowLevel
         public virtual async Task<Response> PutBooleanTfftAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutBooleanTfft");
             scope.Start();
@@ -395,7 +395,7 @@ namespace body_array_LowLevel
         public virtual Response PutBooleanTfft(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutBooleanTfft");
             scope.Start();
@@ -602,7 +602,7 @@ namespace body_array_LowLevel
         public virtual async Task<Response> PutIntegerValidAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutIntegerValid");
             scope.Start();
@@ -635,7 +635,7 @@ namespace body_array_LowLevel
         public virtual Response PutIntegerValid(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutIntegerValid");
             scope.Start();
@@ -842,7 +842,7 @@ namespace body_array_LowLevel
         public virtual async Task<Response> PutLongValidAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutLongValid");
             scope.Start();
@@ -875,7 +875,7 @@ namespace body_array_LowLevel
         public virtual Response PutLongValid(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutLongValid");
             scope.Start();
@@ -1082,7 +1082,7 @@ namespace body_array_LowLevel
         public virtual async Task<Response> PutFloatValidAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutFloatValid");
             scope.Start();
@@ -1115,7 +1115,7 @@ namespace body_array_LowLevel
         public virtual Response PutFloatValid(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutFloatValid");
             scope.Start();
@@ -1322,7 +1322,7 @@ namespace body_array_LowLevel
         public virtual async Task<Response> PutDoubleValidAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutDoubleValid");
             scope.Start();
@@ -1355,7 +1355,7 @@ namespace body_array_LowLevel
         public virtual Response PutDoubleValid(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutDoubleValid");
             scope.Start();
@@ -1562,7 +1562,7 @@ namespace body_array_LowLevel
         public virtual async Task<Response> PutStringValidAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutStringValid");
             scope.Start();
@@ -1595,7 +1595,7 @@ namespace body_array_LowLevel
         public virtual Response PutStringValid(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutStringValid");
             scope.Start();
@@ -1686,7 +1686,7 @@ namespace body_array_LowLevel
         public virtual async Task<Response> PutEnumValidAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutEnumValid");
             scope.Start();
@@ -1719,7 +1719,7 @@ namespace body_array_LowLevel
         public virtual Response PutEnumValid(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutEnumValid");
             scope.Start();
@@ -1810,7 +1810,7 @@ namespace body_array_LowLevel
         public virtual async Task<Response> PutStringEnumValidAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutStringEnumValid");
             scope.Start();
@@ -1843,7 +1843,7 @@ namespace body_array_LowLevel
         public virtual Response PutStringEnumValid(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutStringEnumValid");
             scope.Start();
@@ -2050,7 +2050,7 @@ namespace body_array_LowLevel
         public virtual async Task<Response> PutUuidValidAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutUuidValid");
             scope.Start();
@@ -2083,7 +2083,7 @@ namespace body_array_LowLevel
         public virtual Response PutUuidValid(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutUuidValid");
             scope.Start();
@@ -2232,7 +2232,7 @@ namespace body_array_LowLevel
         public virtual async Task<Response> PutDateValidAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutDateValid");
             scope.Start();
@@ -2265,7 +2265,7 @@ namespace body_array_LowLevel
         public virtual Response PutDateValid(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutDateValid");
             scope.Start();
@@ -2472,7 +2472,7 @@ namespace body_array_LowLevel
         public virtual async Task<Response> PutDateTimeValidAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutDateTimeValid");
             scope.Start();
@@ -2505,7 +2505,7 @@ namespace body_array_LowLevel
         public virtual Response PutDateTimeValid(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutDateTimeValid");
             scope.Start();
@@ -2712,7 +2712,7 @@ namespace body_array_LowLevel
         public virtual async Task<Response> PutDateTimeRfc1123ValidAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutDateTimeRfc1123Valid");
             scope.Start();
@@ -2745,7 +2745,7 @@ namespace body_array_LowLevel
         public virtual Response PutDateTimeRfc1123Valid(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutDateTimeRfc1123Valid");
             scope.Start();
@@ -2836,7 +2836,7 @@ namespace body_array_LowLevel
         public virtual async Task<Response> PutDurationValidAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutDurationValid");
             scope.Start();
@@ -2869,7 +2869,7 @@ namespace body_array_LowLevel
         public virtual Response PutDurationValid(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutDurationValid");
             scope.Start();
@@ -2960,7 +2960,7 @@ namespace body_array_LowLevel
         public virtual async Task<Response> PutByteValidAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutByteValid");
             scope.Start();
@@ -2993,7 +2993,7 @@ namespace body_array_LowLevel
         public virtual Response PutByteValid(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutByteValid");
             scope.Start();
@@ -3498,7 +3498,7 @@ namespace body_array_LowLevel
         public virtual async Task<Response> PutComplexValidAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutComplexValid");
             scope.Start();
@@ -3537,7 +3537,7 @@ namespace body_array_LowLevel
         public virtual Response PutComplexValid(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutComplexValid");
             scope.Start();
@@ -3860,7 +3860,7 @@ namespace body_array_LowLevel
         public virtual async Task<Response> PutArrayValidAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutArrayValid");
             scope.Start();
@@ -3893,7 +3893,7 @@ namespace body_array_LowLevel
         public virtual Response PutArrayValid(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutArrayValid");
             scope.Start();
@@ -4216,7 +4216,7 @@ namespace body_array_LowLevel
         public virtual async Task<Response> PutDictionaryValidAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutDictionaryValid");
             scope.Start();
@@ -4249,7 +4249,7 @@ namespace body_array_LowLevel
         public virtual Response PutDictionaryValid(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutDictionaryValid");
             scope.Start();

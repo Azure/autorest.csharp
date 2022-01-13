@@ -38,7 +38,7 @@ namespace BodyAndPath_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
         public BodyAndPathClient(AzureKeyCredential credential, Uri endpoint = null, BodyAndPathClientOptions options = null)
         {
-            credential = credential ?? throw new ArgumentNullException(nameof(credential));
+            Argument.AssertNotNull(credential, nameof(credential));
             endpoint ??= new Uri("http://localhost:3000");
             options ??= new BodyAndPathClientOptions();
 
@@ -57,8 +57,8 @@ namespace BodyAndPath_LowLevel
         public virtual async Task<Response> CreateAsync(string itemName, RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            itemName = itemName ?? throw new ArgumentNullException(nameof(itemName));
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(itemName, nameof(itemName));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.Create");
             scope.Start();
@@ -83,8 +83,8 @@ namespace BodyAndPath_LowLevel
         public virtual Response Create(string itemName, RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            itemName = itemName ?? throw new ArgumentNullException(nameof(itemName));
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(itemName, nameof(itemName));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.Create");
             scope.Start();
@@ -111,8 +111,8 @@ namespace BodyAndPath_LowLevel
         public virtual async Task<Response> CreateStreamAsync(string itemNameStream, RequestContent content, ContentType contentType, IEnumerable<string> excluded = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            itemNameStream = itemNameStream ?? throw new ArgumentNullException(nameof(itemNameStream));
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(itemNameStream, nameof(itemNameStream));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.CreateStream");
             scope.Start();
@@ -139,8 +139,8 @@ namespace BodyAndPath_LowLevel
         public virtual Response CreateStream(string itemNameStream, RequestContent content, ContentType contentType, IEnumerable<string> excluded = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            itemNameStream = itemNameStream ?? throw new ArgumentNullException(nameof(itemNameStream));
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(itemNameStream, nameof(itemNameStream));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.CreateStream");
             scope.Start();
@@ -166,9 +166,9 @@ namespace BodyAndPath_LowLevel
         public virtual async Task<Response> CreateEnumAsync(string enumName1, string enumName2, RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            enumName1 = enumName1 ?? throw new ArgumentNullException(nameof(enumName1));
-            enumName2 = enumName2 ?? throw new ArgumentNullException(nameof(enumName2));
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(enumName1, nameof(enumName1));
+            Argument.AssertNotNull(enumName2, nameof(enumName2));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.CreateEnum");
             scope.Start();
@@ -194,9 +194,9 @@ namespace BodyAndPath_LowLevel
         public virtual Response CreateEnum(string enumName1, string enumName2, RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            enumName1 = enumName1 ?? throw new ArgumentNullException(nameof(enumName1));
-            enumName2 = enumName2 ?? throw new ArgumentNullException(nameof(enumName2));
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(enumName1, nameof(enumName1));
+            Argument.AssertNotNull(enumName2, nameof(enumName2));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.CreateEnum");
             scope.Start();
@@ -304,10 +304,10 @@ namespace BodyAndPath_LowLevel
         public virtual async Task<Response> UpdateAsync(string item3, string item2, string item4, RequestContent content, string item5 = null, string item1 = "value", RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            item3 = item3 ?? throw new ArgumentNullException(nameof(item3));
-            item2 = item2 ?? throw new ArgumentNullException(nameof(item2));
-            item4 = item4 ?? throw new ArgumentNullException(nameof(item4));
-            item1 = item1 ?? throw new ArgumentNullException(nameof(item1));
+            Argument.AssertNotNull(item3, nameof(item3));
+            Argument.AssertNotNull(item2, nameof(item2));
+            Argument.AssertNotNull(item4, nameof(item4));
+            Argument.AssertNotNull(item1, nameof(item1));
 
             using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.Update");
             scope.Start();
@@ -335,10 +335,10 @@ namespace BodyAndPath_LowLevel
         public virtual Response Update(string item3, string item2, string item4, RequestContent content, string item5 = null, string item1 = "value", RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            item3 = item3 ?? throw new ArgumentNullException(nameof(item3));
-            item2 = item2 ?? throw new ArgumentNullException(nameof(item2));
-            item4 = item4 ?? throw new ArgumentNullException(nameof(item4));
-            item1 = item1 ?? throw new ArgumentNullException(nameof(item1));
+            Argument.AssertNotNull(item3, nameof(item3));
+            Argument.AssertNotNull(item2, nameof(item2));
+            Argument.AssertNotNull(item4, nameof(item4));
+            Argument.AssertNotNull(item1, nameof(item1));
 
             using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.Update");
             scope.Start();

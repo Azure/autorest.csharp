@@ -40,8 +40,8 @@ namespace Azure.AI.DocumentTranslation
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
         public DocumentTranslationClient(string endpoint, AzureKeyCredential credential, DocumentTranslationClientOptions options = null)
         {
-            endpoint = endpoint ?? throw new ArgumentNullException(nameof(endpoint));
-            credential = credential ?? throw new ArgumentNullException(nameof(credential));
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
+            Argument.AssertNotNull(credential, nameof(credential));
             options ??= new DocumentTranslationClientOptions();
 
             _clientDiagnostics = new ClientDiagnostics(options);
@@ -1313,7 +1313,7 @@ namespace Azure.AI.DocumentTranslation
         public virtual async Task<Operation<BinaryData>> StartTranslationAsync(bool waitForCompletion, RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.StartTranslation");
             scope.Start();
@@ -1400,7 +1400,7 @@ namespace Azure.AI.DocumentTranslation
         public virtual Operation<BinaryData> StartTranslation(bool waitForCompletion, RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            content = content ?? throw new ArgumentNullException(nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.StartTranslation");
             scope.Start();

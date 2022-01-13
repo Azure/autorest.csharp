@@ -40,7 +40,7 @@ namespace ResourceClients_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
         public ResourceServiceClient(AzureKeyCredential credential, Uri endpoint = null, ResourceServiceClientOptions options = null)
         {
-            credential = credential ?? throw new ArgumentNullException(nameof(credential));
+            Argument.AssertNotNull(credential, nameof(credential));
             endpoint ??= new Uri("http://localhost:3000");
             options ??= new ResourceServiceClientOptions();
 
@@ -177,7 +177,7 @@ namespace ResourceClients_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="groupId"/> is null. </exception>
         public virtual ResourceGroup GetResourceGroup(string groupId)
         {
-            groupId = groupId ?? throw new ArgumentNullException(nameof(groupId));
+            Argument.AssertNotNull(groupId, nameof(groupId));
 
             return new ResourceGroup(_clientDiagnostics, _pipeline, _keyCredential, groupId, _endpoint);
         }
