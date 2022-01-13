@@ -40,14 +40,8 @@ namespace SubClients_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="cachedParameter"/> or <paramref name="credential"/> is null. </exception>
         public RootClient(string cachedParameter, AzureKeyCredential credential, Uri endpoint = null, RootClientOptions options = null)
         {
-            if (cachedParameter == null)
-            {
-                throw new ArgumentNullException(nameof(cachedParameter));
-            }
-            if (credential == null)
-            {
-                throw new ArgumentNullException(nameof(credential));
-            }
+            cachedParameter = cachedParameter ?? throw new ArgumentNullException(nameof(cachedParameter));
+            credential = credential ?? throw new ArgumentNullException(nameof(credential));
             endpoint ??= new Uri("http://localhost:3000");
             options ??= new RootClientOptions();
 

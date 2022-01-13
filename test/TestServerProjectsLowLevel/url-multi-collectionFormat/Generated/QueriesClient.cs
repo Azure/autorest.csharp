@@ -38,10 +38,7 @@ namespace url_multi_collectionFormat_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
         public QueriesClient(AzureKeyCredential credential, Uri endpoint = null, QueriesClientOptions options = null)
         {
-            if (credential == null)
-            {
-                throw new ArgumentNullException(nameof(credential));
-            }
+            credential = credential ?? throw new ArgumentNullException(nameof(credential));
             endpoint ??= new Uri("http://localhost:3000");
             options ??= new QueriesClientOptions();
 

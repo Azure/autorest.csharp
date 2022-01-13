@@ -37,14 +37,8 @@ namespace custom_baseUrl_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> or <paramref name="host"/> is null. </exception>
         public PathsClient(AzureKeyCredential credential, string host = "host", PathsClientOptions options = null)
         {
-            if (credential == null)
-            {
-                throw new ArgumentNullException(nameof(credential));
-            }
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
+            credential = credential ?? throw new ArgumentNullException(nameof(credential));
+            host = host ?? throw new ArgumentNullException(nameof(host));
             options ??= new PathsClientOptions();
 
             _clientDiagnostics = new ClientDiagnostics(options);
@@ -70,6 +64,8 @@ namespace custom_baseUrl_LowLevel
         public virtual async Task<Response> GetEmptyAsync(string accountName, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            accountName = accountName ?? throw new ArgumentNullException(nameof(accountName));
+
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetEmpty");
             scope.Start();
             try
@@ -101,6 +97,8 @@ namespace custom_baseUrl_LowLevel
         public virtual Response GetEmpty(string accountName, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            accountName = accountName ?? throw new ArgumentNullException(nameof(accountName));
+
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetEmpty");
             scope.Start();
             try

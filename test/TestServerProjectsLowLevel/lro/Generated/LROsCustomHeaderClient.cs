@@ -37,10 +37,7 @@ namespace lro_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
         public LROsCustomHeaderClient(AzureKeyCredential credential, Uri endpoint = null, AutoRestLongRunningOperationTestServiceClientOptions options = null)
         {
-            if (credential == null)
-            {
-                throw new ArgumentNullException(nameof(credential));
-            }
+            credential = credential ?? throw new ArgumentNullException(nameof(credential));
             endpoint ??= new Uri("http://localhost:3000");
             options ??= new AutoRestLongRunningOperationTestServiceClientOptions();
 

@@ -37,10 +37,7 @@ namespace body_complex_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
         public PolymorphicrecursiveClient(AzureKeyCredential credential, Uri endpoint = null, AutoRestComplexTestServiceClientOptions options = null)
         {
-            if (credential == null)
-            {
-                throw new ArgumentNullException(nameof(credential));
-            }
+            credential = credential ?? throw new ArgumentNullException(nameof(credential));
             endpoint ??= new Uri("http://localhost:3000");
             options ??= new AutoRestComplexTestServiceClientOptions();
 
@@ -149,6 +146,8 @@ namespace body_complex_LowLevel
         public virtual async Task<Response> PutValidAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            content = content ?? throw new ArgumentNullException(nameof(content));
+
             using var scope = _clientDiagnostics.CreateScope("PolymorphicrecursiveClient.PutValid");
             scope.Start();
             try
@@ -188,6 +187,8 @@ namespace body_complex_LowLevel
         public virtual Response PutValid(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            content = content ?? throw new ArgumentNullException(nameof(content));
+
             using var scope = _clientDiagnostics.CreateScope("PolymorphicrecursiveClient.PutValid");
             scope.Start();
             try
