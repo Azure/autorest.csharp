@@ -36,14 +36,14 @@ namespace url_LowLevel
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public PathsClient(AzureKeyCredential credential, Uri endpoint = null, AutoRestUrlTestServiceClientsOptions options = null)
+        public PathsClient(AzureKeyCredential credential, Uri endpoint = null, AutoRestUrlTestServiceClientOptions options = null)
         {
             if (credential == null)
             {
                 throw new ArgumentNullException(nameof(credential));
             }
             endpoint ??= new Uri("http://localhost:3000");
-            options ??= new AutoRestUrlTestServiceClientsOptions();
+            options ??= new AutoRestUrlTestServiceClientOptions();
 
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;

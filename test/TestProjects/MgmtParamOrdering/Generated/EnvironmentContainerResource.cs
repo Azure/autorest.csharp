@@ -39,11 +39,11 @@ namespace MgmtParamOrdering
 
         /// <summary> Initializes a new instance of the <see cref = "EnvironmentContainerResource"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
-        /// <param name="resource"> The resource that is the target of operations. </param>
-        internal EnvironmentContainerResource(ArmResource options, EnvironmentContainerResourceData resource) : base(options, resource.Id)
+        /// <param name="data"> The resource that is the target of operations. </param>
+        internal EnvironmentContainerResource(ArmResource options, EnvironmentContainerResourceData data) : base(options, data.Id)
         {
             HasData = true;
-            _data = resource;
+            _data = data;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _environmentContainersRestClient = new EnvironmentContainersRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
 #if DEBUG
@@ -170,7 +170,7 @@ namespace MgmtParamOrdering
         /// <summary> Delete container. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<EnvironmentContainerDeleteOperation> DeleteAsync(bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<EnvironmentContainerDeleteOperation> DeleteAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("EnvironmentContainerResource.Delete");
             scope.Start();
@@ -195,7 +195,7 @@ namespace MgmtParamOrdering
         /// <summary> Delete container. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual EnvironmentContainerDeleteOperation Delete(bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual EnvironmentContainerDeleteOperation Delete(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("EnvironmentContainerResource.Delete");
             scope.Start();

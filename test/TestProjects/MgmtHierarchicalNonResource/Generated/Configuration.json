@@ -1,0 +1,19 @@
+{
+  "OutputFolder": ".",
+  "Namespace": "MgmtHierarchicalNonResource",
+  "LibraryName": null,
+  "SharedSourceFolders": [
+    "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Generator.Shared",
+    "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Azure.Core.Shared"
+  ],
+  "azure-arm": true,
+  "public-clients": true,
+  "head-as-boolean": true,
+  "skip-csproj-packagereference": true,
+  "RequestPathToResourceData": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}": "SharedGallery"
+  },
+  "MgmtDebug": {
+    "ShowRequestPath": true
+  }
+}

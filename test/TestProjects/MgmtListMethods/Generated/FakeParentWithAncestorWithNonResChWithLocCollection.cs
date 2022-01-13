@@ -59,7 +59,7 @@ namespace MgmtListMethods
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithAncestorWithNonResChWithLocName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual FakeParentWithAncestorWithNonResChWithLocCreateOrUpdateOperation CreateOrUpdate(string fakeParentWithAncestorWithNonResChWithLocName, FakeParentWithAncestorWithNonResChWithLocData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual FakeParentWithAncestorWithNonResChWithLocCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string fakeParentWithAncestorWithNonResChWithLocName, FakeParentWithAncestorWithNonResChWithLocData parameters, CancellationToken cancellationToken = default)
         {
             if (fakeParentWithAncestorWithNonResChWithLocName == null)
             {
@@ -96,7 +96,7 @@ namespace MgmtListMethods
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithAncestorWithNonResChWithLocName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<FakeParentWithAncestorWithNonResChWithLocCreateOrUpdateOperation> CreateOrUpdateAsync(string fakeParentWithAncestorWithNonResChWithLocName, FakeParentWithAncestorWithNonResChWithLocData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<FakeParentWithAncestorWithNonResChWithLocCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string fakeParentWithAncestorWithNonResChWithLocName, FakeParentWithAncestorWithNonResChWithLocData parameters, CancellationToken cancellationToken = default)
         {
             if (fakeParentWithAncestorWithNonResChWithLocName == null)
             {
@@ -200,9 +200,9 @@ namespace MgmtListMethods
             try
             {
                 var response = _fakeParentWithAncestorWithNonResChWithLocsRestClient.Get(Id.SubscriptionId, Id.Name, fakeParentWithAncestorWithNonResChWithLocName, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<FakeParentWithAncestorWithNonResChWithLoc>(null, response.GetRawResponse())
-                    : Response.FromValue(new FakeParentWithAncestorWithNonResChWithLoc(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<FakeParentWithAncestorWithNonResChWithLoc>(null, response.GetRawResponse());
+                return Response.FromValue(new FakeParentWithAncestorWithNonResChWithLoc(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -227,9 +227,9 @@ namespace MgmtListMethods
             try
             {
                 var response = await _fakeParentWithAncestorWithNonResChWithLocsRestClient.GetAsync(Id.SubscriptionId, Id.Name, fakeParentWithAncestorWithNonResChWithLocName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<FakeParentWithAncestorWithNonResChWithLoc>(null, response.GetRawResponse())
-                    : Response.FromValue(new FakeParentWithAncestorWithNonResChWithLoc(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<FakeParentWithAncestorWithNonResChWithLoc>(null, response.GetRawResponse());
+                return Response.FromValue(new FakeParentWithAncestorWithNonResChWithLoc(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

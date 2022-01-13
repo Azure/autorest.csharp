@@ -60,7 +60,7 @@ namespace SupersetInheritance
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel1SName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual SupersetModel1SPutOperation CreateOrUpdate(string supersetModel1SName, SupersetModel1Data parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual SupersetModel1SPutOperation CreateOrUpdate(bool waitForCompletion, string supersetModel1SName, SupersetModel1Data parameters, CancellationToken cancellationToken = default)
         {
             if (supersetModel1SName == null)
             {
@@ -96,7 +96,7 @@ namespace SupersetInheritance
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel1SName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<SupersetModel1SPutOperation> CreateOrUpdateAsync(string supersetModel1SName, SupersetModel1Data parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<SupersetModel1SPutOperation> CreateOrUpdateAsync(bool waitForCompletion, string supersetModel1SName, SupersetModel1Data parameters, CancellationToken cancellationToken = default)
         {
             if (supersetModel1SName == null)
             {
@@ -198,9 +198,9 @@ namespace SupersetInheritance
             try
             {
                 var response = _supersetModel1sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, supersetModel1SName, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<SupersetModel1>(null, response.GetRawResponse())
-                    : Response.FromValue(new SupersetModel1(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<SupersetModel1>(null, response.GetRawResponse());
+                return Response.FromValue(new SupersetModel1(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -225,9 +225,9 @@ namespace SupersetInheritance
             try
             {
                 var response = await _supersetModel1sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, supersetModel1SName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<SupersetModel1>(null, response.GetRawResponse())
-                    : Response.FromValue(new SupersetModel1(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<SupersetModel1>(null, response.GetRawResponse());
+                return Response.FromValue(new SupersetModel1(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

@@ -38,11 +38,11 @@ namespace ExactMatchFlattenInheritance
 
         /// <summary> Initializes a new instance of the <see cref = "AzureResourceFlattenModel1"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
-        /// <param name="resource"> The resource that is the target of operations. </param>
-        internal AzureResourceFlattenModel1(ArmResource options, AzureResourceFlattenModel1Data resource) : base(options, resource.Id)
+        /// <param name="data"> The resource that is the target of operations. </param>
+        internal AzureResourceFlattenModel1(ArmResource options, AzureResourceFlattenModel1Data data) : base(options, data.Id)
         {
             HasData = true;
-            _data = resource;
+            _data = data;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _azureResourceFlattenModel1sRestClient = new AzureResourceFlattenModel1SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
 #if DEBUG

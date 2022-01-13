@@ -39,11 +39,11 @@ namespace MgmtListMethods
 
         /// <summary> Initializes a new instance of the <see cref = "FakeParentWithAncestorWithNonResCh"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
-        /// <param name="resource"> The resource that is the target of operations. </param>
-        internal FakeParentWithAncestorWithNonResCh(ArmResource options, FakeParentWithAncestorWithNonResChData resource) : base(options, resource.Id)
+        /// <param name="data"> The resource that is the target of operations. </param>
+        internal FakeParentWithAncestorWithNonResCh(ArmResource options, FakeParentWithAncestorWithNonResChData data) : base(options, data.Id)
         {
             HasData = true;
-            _data = resource;
+            _data = data;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _fakeParentWithAncestorWithNonResChesRestClient = new FakeParentWithAncestorWithNonResChesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
 #if DEBUG

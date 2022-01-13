@@ -17,6 +17,7 @@ using AutoRest.CSharp.Utilities;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Mgmt.Models;
 using Azure.ResourceManager.Resources;
+using System.Diagnostics.CodeAnalysis;
 
 namespace AutoRest.CSharp.MgmtTest.Generation
 {
@@ -59,7 +60,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     WriteGetTest();
                     foreach (var clientOperation in _resourceCollection.ClientOperations)
                     {
-                        WriteMethodTest(clientOperation, true);
+                        WriteMethodTest(clientOperation, true, false);
                     }
                 }
             }
@@ -99,7 +100,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             if (_resourceCollection.CreateOperation != null)
             {
                 _writer.Line();
-                WriteMethodTest(_resourceCollection.CreateOperation, true);
+                WriteMethodTest(_resourceCollection.CreateOperation, true, true);
             }
         }
 
@@ -108,7 +109,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             if (_resourceCollection.GetOperation != null)
             {
                 _writer.Line();
-                WriteMethodTest(_resourceCollection.GetOperation, true);
+                WriteMethodTest(_resourceCollection.GetOperation, true, false);
             }
         }
 
@@ -252,7 +253,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             return null;
         }
 
-        protected void WriteMethodTest(MgmtClientOperation clientOperation, bool async)
+        protected void WriteMethodTest(MgmtClientOperation clientOperation, bool async, bool isLroOperation)
         {
             Debug.Assert(clientOperation != null);
             var methodName = clientOperation.Name;
@@ -287,7 +288,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
                         List<string> paramNames = WriteOperationParameters(methodParameters, new List<Parameter>(), exampleModel);
                         _writer.Line();
-                        WriteMethodTestInvocation(async, clientOperation.IsPagingOperation(Context)|| clientOperation.IsListOperation(Context, out var _), $"collection.{testMethodName}", paramNames);
+                        WriteMethodTestInvocation(async, clientOperation, isLroOperation, $"collection.{testMethodName}", paramNames);
                     }
                     _writer.Line();
                     exampleIdx++;
@@ -295,17 +296,18 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             }
         }
 
-        protected override CSharpType? WrapResourceDataType(CSharpType? type, MgmtRestOperation operation)
+        protected override Resource? WrapResourceDataType(CSharpType? type, MgmtRestOperation operation)
         {
-            if (!IsResourceDataType(type, operation))
-                return type;
+            if (!IsResourceDataType(type, operation, out _))
+                return null;
 
-            return _resourceCollection.Resource.Type;
+            return _resourceCollection.Resource;
         }
 
-        protected override bool IsResourceDataType(CSharpType? type, MgmtRestOperation operation)
+        protected override bool IsResourceDataType(CSharpType? type, MgmtRestOperation operation, [MaybeNullWhen(false)] out ResourceData data)
         {
-            return _resourceCollection.ResourceData.Type.Equals(type);
+            data = _resourceCollection.ResourceData;
+            return data.Type.Equals(type);
         }
 
         public string GenExampleInstanceMethodName(string methodName, bool isAsync)

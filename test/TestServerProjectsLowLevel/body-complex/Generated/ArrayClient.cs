@@ -35,14 +35,14 @@ namespace body_complex_LowLevel
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public ArrayClient(AzureKeyCredential credential, Uri endpoint = null, AutoRestComplexTestServiceClientsOptions options = null)
+        public ArrayClient(AzureKeyCredential credential, Uri endpoint = null, AutoRestComplexTestServiceClientOptions options = null)
         {
             if (credential == null)
             {
                 throw new ArgumentNullException(nameof(credential));
             }
             endpoint ??= new Uri("http://localhost:3000");
-            options ??= new AutoRestComplexTestServiceClientsOptions();
+            options ??= new AutoRestComplexTestServiceClientOptions();
 
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;

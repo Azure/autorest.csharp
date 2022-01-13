@@ -59,7 +59,7 @@ namespace MgmtListMethods
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithAncestorWithNonResChName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual FakeParentWithAncestorWithNonResChCreateOrUpdateOperation CreateOrUpdate(string fakeParentWithAncestorWithNonResChName, FakeParentWithAncestorWithNonResChData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual FakeParentWithAncestorWithNonResChCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string fakeParentWithAncestorWithNonResChName, FakeParentWithAncestorWithNonResChData parameters, CancellationToken cancellationToken = default)
         {
             if (fakeParentWithAncestorWithNonResChName == null)
             {
@@ -96,7 +96,7 @@ namespace MgmtListMethods
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithAncestorWithNonResChName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<FakeParentWithAncestorWithNonResChCreateOrUpdateOperation> CreateOrUpdateAsync(string fakeParentWithAncestorWithNonResChName, FakeParentWithAncestorWithNonResChData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<FakeParentWithAncestorWithNonResChCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string fakeParentWithAncestorWithNonResChName, FakeParentWithAncestorWithNonResChData parameters, CancellationToken cancellationToken = default)
         {
             if (fakeParentWithAncestorWithNonResChName == null)
             {
@@ -200,9 +200,9 @@ namespace MgmtListMethods
             try
             {
                 var response = _fakeParentWithAncestorWithNonResChesRestClient.Get(Id.SubscriptionId, Id.Name, fakeParentWithAncestorWithNonResChName, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<FakeParentWithAncestorWithNonResCh>(null, response.GetRawResponse())
-                    : Response.FromValue(new FakeParentWithAncestorWithNonResCh(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<FakeParentWithAncestorWithNonResCh>(null, response.GetRawResponse());
+                return Response.FromValue(new FakeParentWithAncestorWithNonResCh(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -227,9 +227,9 @@ namespace MgmtListMethods
             try
             {
                 var response = await _fakeParentWithAncestorWithNonResChesRestClient.GetAsync(Id.SubscriptionId, Id.Name, fakeParentWithAncestorWithNonResChName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<FakeParentWithAncestorWithNonResCh>(null, response.GetRawResponse())
-                    : Response.FromValue(new FakeParentWithAncestorWithNonResCh(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<FakeParentWithAncestorWithNonResCh>(null, response.GetRawResponse());
+                return Response.FromValue(new FakeParentWithAncestorWithNonResCh(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

@@ -142,9 +142,9 @@ namespace Azure.Management.Storage
             try
             {
                 var response = _deletedAccountsRestClient.Get(Id.SubscriptionId, location, deletedAccountName, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<DeletedAccount>(null, response.GetRawResponse())
-                    : Response.FromValue(new DeletedAccount(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<DeletedAccount>(null, response.GetRawResponse());
+                return Response.FromValue(new DeletedAccount(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -174,9 +174,9 @@ namespace Azure.Management.Storage
             try
             {
                 var response = await _deletedAccountsRestClient.GetAsync(Id.SubscriptionId, location, deletedAccountName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<DeletedAccount>(null, response.GetRawResponse())
-                    : Response.FromValue(new DeletedAccount(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<DeletedAccount>(null, response.GetRawResponse());
+                return Response.FromValue(new DeletedAccount(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

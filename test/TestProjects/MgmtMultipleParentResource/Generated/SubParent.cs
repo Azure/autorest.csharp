@@ -39,11 +39,11 @@ namespace MgmtMultipleParentResource
 
         /// <summary> Initializes a new instance of the <see cref = "SubParent"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
-        /// <param name="resource"> The resource that is the target of operations. </param>
-        internal SubParent(ArmResource options, SubParentData resource) : base(options, resource.Id)
+        /// <param name="data"> The resource that is the target of operations. </param>
+        internal SubParent(ArmResource options, SubParentData data) : base(options, data.Id)
         {
             HasData = true;
-            _data = resource;
+            _data = data;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _subParentsRestClient = new SubParentsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
 #if DEBUG
@@ -172,7 +172,7 @@ namespace MgmtMultipleParentResource
         /// <summary> The operation to delete the VMSS VM run command. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<SubParentDeleteOperation> DeleteAsync(bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<SubParentDeleteOperation> DeleteAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SubParent.Delete");
             scope.Start();
@@ -197,7 +197,7 @@ namespace MgmtMultipleParentResource
         /// <summary> The operation to delete the VMSS VM run command. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual SubParentDeleteOperation Delete(bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual SubParentDeleteOperation Delete(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SubParent.Delete");
             scope.Start();
@@ -396,7 +396,7 @@ namespace MgmtMultipleParentResource
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subBody"/> is null. </exception>
-        public async virtual Task<SubParentUpdateOperation> UpdateAsync(SubParentUpdate subBody, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<SubParentUpdateOperation> UpdateAsync(bool waitForCompletion, SubParentUpdate subBody, CancellationToken cancellationToken = default)
         {
             if (subBody == null)
             {
@@ -428,7 +428,7 @@ namespace MgmtMultipleParentResource
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subBody"/> is null. </exception>
-        public virtual SubParentUpdateOperation Update(SubParentUpdate subBody, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual SubParentUpdateOperation Update(bool waitForCompletion, SubParentUpdate subBody, CancellationToken cancellationToken = default)
         {
             if (subBody == null)
             {

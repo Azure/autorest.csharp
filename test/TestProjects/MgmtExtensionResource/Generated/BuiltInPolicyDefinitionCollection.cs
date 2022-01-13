@@ -126,9 +126,9 @@ namespace MgmtExtensionResource
             try
             {
                 var response = _policyDefinitionsRestClient.GetBuiltIn(policyDefinitionName, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<BuiltInPolicyDefinition>(null, response.GetRawResponse())
-                    : Response.FromValue(new BuiltInPolicyDefinition(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<BuiltInPolicyDefinition>(null, response.GetRawResponse());
+                return Response.FromValue(new BuiltInPolicyDefinition(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -153,9 +153,9 @@ namespace MgmtExtensionResource
             try
             {
                 var response = await _policyDefinitionsRestClient.GetBuiltInAsync(policyDefinitionName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<BuiltInPolicyDefinition>(null, response.GetRawResponse())
-                    : Response.FromValue(new BuiltInPolicyDefinition(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<BuiltInPolicyDefinition>(null, response.GetRawResponse());
+                return Response.FromValue(new BuiltInPolicyDefinition(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

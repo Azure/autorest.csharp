@@ -42,7 +42,7 @@ namespace MgmtKeyvault.Tests.Mock
             // Example: Delete a vault
             var vault = GetArmClient().GetVault(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group/providers/Microsoft.KeyVault/vaults/sample-vault"));
 
-            await vault.DeleteAsync();
+            await vault.DeleteAsync(true);
         }
 
         [RecordedTest]
