@@ -128,9 +128,9 @@ namespace TenantOnly
             try
             {
                 var response = _agreementsRestClient.Get(Id.Name, agreementName, expand, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<Agreement>(null, response.GetRawResponse())
-                    : Response.FromValue(new Agreement(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<Agreement>(null, response.GetRawResponse());
+                return Response.FromValue(new Agreement(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -156,9 +156,9 @@ namespace TenantOnly
             try
             {
                 var response = await _agreementsRestClient.GetAsync(Id.Name, agreementName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<Agreement>(null, response.GetRawResponse())
-                    : Response.FromValue(new Agreement(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<Agreement>(null, response.GetRawResponse());
+                return Response.FromValue(new Agreement(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

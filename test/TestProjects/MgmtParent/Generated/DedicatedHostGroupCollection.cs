@@ -58,7 +58,7 @@ namespace MgmtParent
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="hostGroupName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual DedicatedHostGroupCreateOrUpdateOperation CreateOrUpdate(string hostGroupName, DedicatedHostGroupData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual DedicatedHostGroupCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string hostGroupName, DedicatedHostGroupData parameters, CancellationToken cancellationToken = default)
         {
             if (hostGroupName == null)
             {
@@ -95,7 +95,7 @@ namespace MgmtParent
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="hostGroupName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<DedicatedHostGroupCreateOrUpdateOperation> CreateOrUpdateAsync(string hostGroupName, DedicatedHostGroupData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<DedicatedHostGroupCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string hostGroupName, DedicatedHostGroupData parameters, CancellationToken cancellationToken = default)
         {
             if (hostGroupName == null)
             {
@@ -199,9 +199,9 @@ namespace MgmtParent
             try
             {
                 var response = _dedicatedHostGroupsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, hostGroupName, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<DedicatedHostGroup>(null, response.GetRawResponse())
-                    : Response.FromValue(new DedicatedHostGroup(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<DedicatedHostGroup>(null, response.GetRawResponse());
+                return Response.FromValue(new DedicatedHostGroup(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -226,9 +226,9 @@ namespace MgmtParent
             try
             {
                 var response = await _dedicatedHostGroupsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, hostGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<DedicatedHostGroup>(null, response.GetRawResponse())
-                    : Response.FromValue(new DedicatedHostGroup(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<DedicatedHostGroup>(null, response.GetRawResponse());
+                return Response.FromValue(new DedicatedHostGroup(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

@@ -61,7 +61,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual AvailabilitySetCreateOrUpdateOperation CreateOrUpdate(string availabilitySetName, AvailabilitySetData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual AvailabilitySetCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string availabilitySetName, AvailabilitySetData parameters, CancellationToken cancellationToken = default)
         {
             if (availabilitySetName == null)
             {
@@ -98,7 +98,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<AvailabilitySetCreateOrUpdateOperation> CreateOrUpdateAsync(string availabilitySetName, AvailabilitySetData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<AvailabilitySetCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string availabilitySetName, AvailabilitySetData parameters, CancellationToken cancellationToken = default)
         {
             if (availabilitySetName == null)
             {
@@ -202,9 +202,9 @@ namespace Azure.ResourceManager.Sample
             try
             {
                 var response = _availabilitySetsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, availabilitySetName, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<AvailabilitySet>(null, response.GetRawResponse())
-                    : Response.FromValue(new AvailabilitySet(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<AvailabilitySet>(null, response.GetRawResponse());
+                return Response.FromValue(new AvailabilitySet(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -229,9 +229,9 @@ namespace Azure.ResourceManager.Sample
             try
             {
                 var response = await _availabilitySetsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, availabilitySetName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<AvailabilitySet>(null, response.GetRawResponse())
-                    : Response.FromValue(new AvailabilitySet(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<AvailabilitySet>(null, response.GetRawResponse());
+                return Response.FromValue(new AvailabilitySet(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

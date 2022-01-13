@@ -4,25 +4,26 @@
 using NUnit.Framework;
 using ResourceClients_LowLevel;
 
-namespace AutoRest.TestServer.Tests;
-
-public class ResourceClient
+namespace AutoRest.TestServer.Tests
 {
-    [Test]
-    public void ResourceServiceClient_PublicMethods()
+    public class ResourceClient
     {
-        TypeAsserts.TypeOnlyDeclaresThesePublicMethods(typeof(ResourceServiceClient), "GetParameters", "GetParametersAsync", "GetResourceGroup", "GetGroups", "GetGroupsAsync", "GetAllItems", "GetAllItemsAsync");
-    }
+        [Test]
+        public void ResourceServiceClient_PublicMethods()
+        {
+            TypeAsserts.TypeOnlyDeclaresThesePublicMethods(typeof(ResourceServiceClient), "GetParameters", "GetParametersAsync", "GetResourceGroup", "GetGroups", "GetGroupsAsync", "GetAllItems", "GetAllItemsAsync");
+        }
 
-    [Test]
-    public void ResourceGroup_PublicMethods()
-    {
-        TypeAsserts.TypeOnlyDeclaresThesePublicMethods(typeof(ResourceGroup), "GetGroup", "GetGroupAsync", "GetResource", "GetItems", "GetItemsAsync");
-    }
+        [Test]
+        public void ResourceGroup_PublicMethods()
+        {
+            TypeAsserts.TypeOnlyDeclaresThesePublicMethods(typeof(ResourceGroup), "GetGroup", "GetGroupAsync", "GetResource", "GetItems", "GetItemsAsync");
+        }
 
-    [Test]
-    public void Resource_PublicMethods()
-    {
-        TypeAsserts.TypeOnlyDeclaresThesePublicMethods(typeof(Resource), "GetItem", "GetItemAsync");
+        [Test]
+        public void Resource_PublicMethods()
+        {
+            TypeAsserts.TypeOnlyDeclaresThesePublicMethods(typeof(Resource), "GetItem", "GetItemAsync");
+        }
     }
 }

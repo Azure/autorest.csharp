@@ -5,6 +5,7 @@ using System;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
+using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.Output;
@@ -24,25 +25,25 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected override CSharpType GetBaseType(LongRunningOperation operation)
         {
             MgmtLongRunningOperation mgmtOperation = AsMgmtOperation(operation);
-            return mgmtOperation.WrapperType != null ? new CSharpType(typeof(Operation<>), mgmtOperation.WrapperType) : base.GetBaseType(operation);
+            return mgmtOperation.WrapperResource != null ? new CSharpType(typeof(Operation<>), mgmtOperation.WrapperResource.Type) : base.GetBaseType(operation);
         }
 
         protected override CSharpType? GetInterfaceType(LongRunningOperation operation)
         {
             MgmtLongRunningOperation mgmtOperation = AsMgmtOperation(operation);
-            return mgmtOperation.WrapperType != null ? new CSharpType(typeof(IOperationSource<>), mgmtOperation.WrapperType) : base.GetInterfaceType(operation);
+            return mgmtOperation.WrapperResource != null ? new CSharpType(typeof(IOperationSource<>), mgmtOperation.WrapperResource.Type) : base.GetInterfaceType(operation);
         }
 
         protected override CSharpType GetHelperType(LongRunningOperation operation)
         {
             MgmtLongRunningOperation mgmtOperation = AsMgmtOperation(operation);
-            return mgmtOperation.WrapperType != null ? new CSharpType(typeof(OperationInternals<>), mgmtOperation.WrapperType) : base.GetHelperType(operation);
+            return mgmtOperation.WrapperResource != null ? new CSharpType(typeof(OperationInternals<>), mgmtOperation.WrapperResource.Type) : base.GetHelperType(operation);
         }
 
         protected override CSharpType GetValueTaskType(LongRunningOperation operation)
         {
             MgmtLongRunningOperation mgmtOperation = AsMgmtOperation(operation);
-            return mgmtOperation.WrapperType != null ? new CSharpType(typeof(Response<>), mgmtOperation.WrapperType) : base.GetValueTaskType(operation);
+            return mgmtOperation.WrapperResource != null ? new CSharpType(typeof(Response<>), mgmtOperation.WrapperResource.Type) : base.GetValueTaskType(operation);
         }
 
         protected override void WriteFields(CodeWriter writer, LongRunningOperation operation, PagingResponseInfo? pagingResponse, CSharpType helperType)
@@ -51,7 +52,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             MgmtLongRunningOperation mgmtOperation = AsMgmtOperation(operation);
 
-            if (mgmtOperation.WrapperType != null)
+            if (mgmtOperation.WrapperResource != null)
             {
                 writer.Line();
                 writer.Line($"private readonly {typeof(ArmResource)} {_operationBaseField};");
@@ -62,7 +63,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             MgmtLongRunningOperation mgmtOperation = AsMgmtOperation(operation);
 
-            if (mgmtOperation.WrapperType != null)
+            if (mgmtOperation.WrapperResource != null)
             {
                 // pass operationsBase in so that the construction of [Resource] is possible
                 writer.Append($"internal {cs.Name}({typeof(ArmResource)} operationsBase, {typeof(ClientDiagnostics)} clientDiagnostics, {typeof(HttpPipeline)} pipeline, {typeof(Request)} request, {typeof(Response)} response");
@@ -80,7 +81,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     {
                         writer.Append($"this, ");
                     }
-                    writer.Line($"clientDiagnostics, pipeline, request, response, { typeof(OperationFinalStateVia)}.{ operation.FinalStateVia}, { operation.Diagnostics.ScopeName:L});");
+                    writer.Line($"clientDiagnostics, pipeline, request, response, {typeof(OperationFinalStateVia)}.{operation.FinalStateVia}, { operation.Diagnostics.ScopeName:L});");
 
                     if (pagingResponse != null)
                     {
@@ -100,10 +101,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             MgmtLongRunningOperation mgmtOperation = AsMgmtOperation(operation);
 
-            if (mgmtOperation.WrapperType != null)
+            if (mgmtOperation.WrapperResource != null)
             {
                 writer.WriteXmlDocumentationInheritDoc();
-                writer.Line($"public override {mgmtOperation.WrapperType} Value => _operation.Value;");
+                writer.Line($"public override {mgmtOperation.WrapperResource.Type} Value => _operation.Value;");
                 writer.Line();
             }
             else
@@ -116,17 +117,32 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             MgmtLongRunningOperation mgmtOperation = AsMgmtOperation(operation);
 
-            if (mgmtOperation.WrapperType != null)
+            if (mgmtOperation.WrapperResource != null)
             {
-                Action<CodeWriter, CodeWriterDelegate> valueCallback = (w, v) => w.Line($"return new {mgmtOperation.WrapperType}({_operationBaseField}, {v});");
+                Action<CodeWriter, CodeWriterDelegate> valueCallback = (w, v) =>
+                {
+                    CodeWriterDelegate optionsExpression = w => w.Append($"{_operationBaseField}");
+                    CodeWriterDelegate dataExpression = w => w.Append($"data");
 
-                using (writer.Scope($"{mgmtOperation.WrapperType} {interfaceType}.CreateResult({typeof(Response)} {responseVariable:D}, {typeof(CancellationToken)} cancellationToken)"))
+                    w.Line($"var {dataExpression} = {v};");
+                    if (mgmtOperation.WrapperResource.ResourceData.ShouldSetResourceIdentifier)
+                        w.Line($"{dataExpression}.Id = {optionsExpression}.Id;");
+
+                    var newInstanceExpression = mgmtOperation.WrapperResource.NewInstanceExpression(new[]
+                    {
+                        new ParameterInvocation(mgmtOperation.WrapperResource.OptionsParameter, optionsExpression),
+                        new ParameterInvocation(mgmtOperation.WrapperResource.ResourceDataParameter, dataExpression),
+                    });
+                    w.Line($"return {newInstanceExpression};");
+                };
+
+                using (writer.Scope($"{mgmtOperation.WrapperResource.Type} {interfaceType}.CreateResult({typeof(Response)} {responseVariable:D}, {typeof(CancellationToken)} cancellationToken)"))
                 {
                     WriteCreateResultImpl(false, writer, operation, responseVariable, pagingResponse, valueCallback);
                 }
                 writer.Line();
 
-                using (writer.Scope($"async {new CSharpType(typeof(ValueTask<>), mgmtOperation.WrapperType)} {interfaceType}.CreateResultAsync({typeof(Response)} {responseVariable:D}, {typeof(CancellationToken)} cancellationToken)"))
+                using (writer.Scope($"async {new CSharpType(typeof(ValueTask<>), mgmtOperation.WrapperResource.Type)} {interfaceType}.CreateResultAsync({typeof(Response)} {responseVariable:D}, {typeof(CancellationToken)} cancellationToken)"))
                 {
                     WriteCreateResultImpl(true, writer, operation, responseVariable, pagingResponse, valueCallback);
                 }

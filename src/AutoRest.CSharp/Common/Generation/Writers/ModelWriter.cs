@@ -71,19 +71,25 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     WriteConstructor(writer, schema);
 
-                    foreach (var property in schema.Properties)
-                    {
-                        writer.WriteXmlDocumentationSummary(CreatePropertyDescription(property));
-
-                        CSharpType propertyType = property.Declaration.Type;
-                        writer.Append($"{property.Declaration.Accessibility} {propertyType} {property.Declaration.Name:D}");
-                        writer.AppendRaw(property.IsReadOnly ? "{ get; }" : "{ get; set; }");
-
-                        writer.Line();
-                    }
+                    WriteProperties(writer, schema);
                 }
             }
         }
+
+        protected virtual void WriteProperties(CodeWriter writer, ObjectType schema)
+        {
+            foreach (var property in schema.Properties)
+            {
+                writer.WriteXmlDocumentationSummary(CreatePropertyDescription(property));
+
+                CSharpType propertyType = property.Declaration.Type;
+                writer.Append($"{property.Declaration.Accessibility} {propertyType} {property.Declaration.Name:D}");
+                writer.AppendRaw(property.IsReadOnly ? "{ get; }" : "{ get; set; }");
+
+                writer.Line();
+            }
+        }
+
         private FormattableString CreatePropertyDescription(ObjectTypeProperty property)
         {
             if (!string.IsNullOrWhiteSpace(property.Description))

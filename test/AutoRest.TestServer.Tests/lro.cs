@@ -116,6 +116,38 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
+        public Task LROPatch201WithAsyncHeader() => Test(async (host, pipeline) =>
+        {
+            var operation = await new LROsClient(ClientDiagnostics, pipeline, host).StartPatch201RetryWithAsyncHeaderAsync();
+            var resp = await operation.WaitForCompletionAsync().ConfigureAwait(false);
+            Assert.AreEqual("/lro/patch/201/retry/onlyAsyncHeader", resp.Value.Id);
+        });
+
+        [Test]
+        public Task LROPatch201WithAsyncHeader_Sync() => Test((host, pipeline) =>
+        {
+            var operation = new LROsClient(ClientDiagnostics, pipeline, host).StartPatch201RetryWithAsyncHeader();
+            var resp = WaitForCompletionWithValue(operation);
+            Assert.AreEqual("/lro/patch/201/retry/onlyAsyncHeader", resp.Value.Id);
+        });
+
+        [Test]
+        public Task LROPatch202WithAsyncAndLocationHeader() => Test(async (host, pipeline) =>
+        {
+            var operation = await new LROsClient(ClientDiagnostics, pipeline, host).StartPatch202RetryWithAsyncAndLocationHeaderAsync();
+            var resp = await operation.WaitForCompletionAsync().ConfigureAwait(false);
+            Assert.AreEqual("/lro/patch/202/retry/asyncAndLocationHeader", resp.Value.Id);
+        });
+
+        [Test]
+        public Task LROPatch202WithAsyncAndLocationHeader_Sync() => Test((host, pipeline) =>
+        {
+            var operation = new LROsClient(ClientDiagnostics, pipeline, host).StartPatch202RetryWithAsyncAndLocationHeader();
+            var resp = WaitForCompletionWithValue(operation);
+            Assert.AreEqual("/lro/patch/202/retry/asyncAndLocationHeader", resp.Value.Id);
+        });
+
+        [Test]
         public Task LRODelete200() => Test(async (host, pipeline) =>
         {
             var operation = await new LROsClient(ClientDiagnostics, pipeline, host).StartDelete202Retry200Async();

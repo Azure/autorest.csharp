@@ -39,11 +39,11 @@ namespace MgmtListMethods
 
         /// <summary> Initializes a new instance of the <see cref = "MgmtGrpParentWithNonResChWithLoc"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
-        /// <param name="resource"> The resource that is the target of operations. </param>
-        internal MgmtGrpParentWithNonResChWithLoc(ArmResource options, MgmtGrpParentWithNonResChWithLocData resource) : base(options, resource.Id)
+        /// <param name="data"> The resource that is the target of operations. </param>
+        internal MgmtGrpParentWithNonResChWithLoc(ArmResource options, MgmtGrpParentWithNonResChWithLocData data) : base(options, data.Id)
         {
             HasData = true;
-            _data = resource;
+            _data = data;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _mgmtGrpParentWithNonResChWithLocsRestClient = new MgmtGrpParentWithNonResChWithLocsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
 #if DEBUG

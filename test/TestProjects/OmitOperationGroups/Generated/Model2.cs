@@ -40,11 +40,11 @@ namespace OmitOperationGroups
 
         /// <summary> Initializes a new instance of the <see cref = "Model2"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
-        /// <param name="resource"> The resource that is the target of operations. </param>
-        internal Model2(ArmResource options, Model2Data resource) : base(options, resource.Id)
+        /// <param name="data"> The resource that is the target of operations. </param>
+        internal Model2(ArmResource options, Model2Data data) : base(options, data.Id)
         {
             HasData = true;
-            _data = resource;
+            _data = data;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _model2sRestClient = new Model2SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
             _model4sRestClient = new Model4SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);

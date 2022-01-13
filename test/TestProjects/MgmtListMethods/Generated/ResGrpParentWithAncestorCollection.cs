@@ -61,7 +61,7 @@ namespace MgmtListMethods
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithAncestorName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ResGrpParentWithAncestorCreateOrUpdateOperation CreateOrUpdate(string resGrpParentWithAncestorName, ResGrpParentWithAncestorData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual ResGrpParentWithAncestorCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string resGrpParentWithAncestorName, ResGrpParentWithAncestorData parameters, CancellationToken cancellationToken = default)
         {
             if (resGrpParentWithAncestorName == null)
             {
@@ -98,7 +98,7 @@ namespace MgmtListMethods
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithAncestorName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<ResGrpParentWithAncestorCreateOrUpdateOperation> CreateOrUpdateAsync(string resGrpParentWithAncestorName, ResGrpParentWithAncestorData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<ResGrpParentWithAncestorCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string resGrpParentWithAncestorName, ResGrpParentWithAncestorData parameters, CancellationToken cancellationToken = default)
         {
             if (resGrpParentWithAncestorName == null)
             {
@@ -202,9 +202,9 @@ namespace MgmtListMethods
             try
             {
                 var response = _resGrpParentWithAncestorsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentWithAncestorName, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<ResGrpParentWithAncestor>(null, response.GetRawResponse())
-                    : Response.FromValue(new ResGrpParentWithAncestor(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<ResGrpParentWithAncestor>(null, response.GetRawResponse());
+                return Response.FromValue(new ResGrpParentWithAncestor(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -229,9 +229,9 @@ namespace MgmtListMethods
             try
             {
                 var response = await _resGrpParentWithAncestorsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentWithAncestorName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<ResGrpParentWithAncestor>(null, response.GetRawResponse())
-                    : Response.FromValue(new ResGrpParentWithAncestor(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<ResGrpParentWithAncestor>(null, response.GetRawResponse());
+                return Response.FromValue(new ResGrpParentWithAncestor(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

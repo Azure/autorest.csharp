@@ -39,11 +39,11 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Initializes a new instance of the <see cref = "VirtualMachineScaleSetVirtualMachineExtension"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
-        /// <param name="resource"> The resource that is the target of operations. </param>
-        internal VirtualMachineScaleSetVirtualMachineExtension(ArmResource options, VirtualMachineExtensionData resource) : base(options, resource.Id)
+        /// <param name="data"> The resource that is the target of operations. </param>
+        internal VirtualMachineScaleSetVirtualMachineExtension(ArmResource options, VirtualMachineExtensionData data) : base(options, data.Id)
         {
             HasData = true;
-            _data = resource;
+            _data = data;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _virtualMachineScaleSetVMExtensionsRestClient = new VirtualMachineScaleSetVMExtensionsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
 #if DEBUG
@@ -172,7 +172,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> The operation to delete the VMSS VM extension. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<VirtualMachineScaleSetVMExtensionDeleteOperation> DeleteAsync(bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<VirtualMachineScaleSetVMExtensionDeleteOperation> DeleteAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetVirtualMachineExtension.Delete");
             scope.Start();
@@ -197,7 +197,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> The operation to delete the VMSS VM extension. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual VirtualMachineScaleSetVMExtensionDeleteOperation Delete(bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual VirtualMachineScaleSetVMExtensionDeleteOperation Delete(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetVirtualMachineExtension.Delete");
             scope.Start();
@@ -396,7 +396,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="extensionParameters"/> is null. </exception>
-        public async virtual Task<VirtualMachineScaleSetVMExtensionUpdateOperation> UpdateAsync(VirtualMachineExtensionUpdate extensionParameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<VirtualMachineScaleSetVMExtensionUpdateOperation> UpdateAsync(bool waitForCompletion, VirtualMachineExtensionUpdate extensionParameters, CancellationToken cancellationToken = default)
         {
             if (extensionParameters == null)
             {
@@ -428,7 +428,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="extensionParameters"/> is null. </exception>
-        public virtual VirtualMachineScaleSetVMExtensionUpdateOperation Update(VirtualMachineExtensionUpdate extensionParameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual VirtualMachineScaleSetVMExtensionUpdateOperation Update(bool waitForCompletion, VirtualMachineExtensionUpdate extensionParameters, CancellationToken cancellationToken = default)
         {
             if (extensionParameters == null)
             {

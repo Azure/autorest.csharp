@@ -38,11 +38,11 @@ namespace NoTypeReplacement
 
         /// <summary> Initializes a new instance of the <see cref = "NoTypeReplacementModel2"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
-        /// <param name="resource"> The resource that is the target of operations. </param>
-        internal NoTypeReplacementModel2(ArmResource options, NoTypeReplacementModel2Data resource) : base(options, resource.Id)
+        /// <param name="data"> The resource that is the target of operations. </param>
+        internal NoTypeReplacementModel2(ArmResource options, NoTypeReplacementModel2Data data) : base(options, data.Id)
         {
             HasData = true;
-            _data = resource;
+            _data = data;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _noTypeReplacementModel2sRestClient = new NoTypeReplacementModel2SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
 #if DEBUG

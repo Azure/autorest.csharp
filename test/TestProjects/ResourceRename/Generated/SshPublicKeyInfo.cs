@@ -39,11 +39,11 @@ namespace ResourceRename
 
         /// <summary> Initializes a new instance of the <see cref = "SshPublicKeyInfo"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
-        /// <param name="resource"> The resource that is the target of operations. </param>
-        internal SshPublicKeyInfo(ArmResource options, SshPublicKeyInfoData resource) : base(options, resource.Id)
+        /// <param name="data"> The resource that is the target of operations. </param>
+        internal SshPublicKeyInfo(ArmResource options, SshPublicKeyInfoData data) : base(options, data.Id)
         {
             HasData = true;
-            _data = resource;
+            _data = data;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _sshPublicKeysRestClient = new SshPublicKeysRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
 #if DEBUG
@@ -170,7 +170,7 @@ namespace ResourceRename
         /// <summary> Delete an SSH public key. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<SshPublicKeyDeleteOperation> DeleteAsync(bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<SshPublicKeyDeleteOperation> DeleteAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SshPublicKeyInfo.Delete");
             scope.Start();
@@ -195,7 +195,7 @@ namespace ResourceRename
         /// <summary> Delete an SSH public key. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual SshPublicKeyDeleteOperation Delete(bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual SshPublicKeyDeleteOperation Delete(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SshPublicKeyInfo.Delete");
             scope.Start();

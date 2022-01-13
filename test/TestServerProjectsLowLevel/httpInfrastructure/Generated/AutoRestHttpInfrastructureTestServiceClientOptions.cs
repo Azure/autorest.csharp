@@ -8,10 +8,10 @@
 using System;
 using Azure.Core;
 
-namespace lro_LowLevel
+namespace httpInfrastructure_LowLevel
 {
-    /// <summary> Client options for AutoRestLongRunningOperationTestService library clients. </summary>
-    public partial class AutoRestLongRunningOperationTestServiceClientsOptions : ClientOptions
+    /// <summary> Client options for AutoRestHttpInfrastructureTestService library clients. </summary>
+    public partial class AutoRestHttpInfrastructureTestServiceClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V1_0_0;
 
@@ -24,8 +24,8 @@ namespace lro_LowLevel
 
         internal string Version { get; }
 
-        /// <summary> Initializes new instance of AutoRestLongRunningOperationTestServiceClientsOptions. </summary>
-        public AutoRestLongRunningOperationTestServiceClientsOptions(ServiceVersion version = LatestVersion)
+        /// <summary> Initializes new instance of AutoRestHttpInfrastructureTestServiceClientOptions. </summary>
+        public AutoRestHttpInfrastructureTestServiceClientOptions(ServiceVersion version = LatestVersion)
         {
             Version = version switch
             {

@@ -59,7 +59,7 @@ namespace MgmtListMethods
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithNonResChWithLocName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual TenantParentWithNonResChWithLocCreateOrUpdateOperation CreateOrUpdate(string tenantParentWithNonResChWithLocName, TenantParentWithNonResChWithLocData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual TenantParentWithNonResChWithLocCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string tenantParentWithNonResChWithLocName, TenantParentWithNonResChWithLocData parameters, CancellationToken cancellationToken = default)
         {
             if (tenantParentWithNonResChWithLocName == null)
             {
@@ -96,7 +96,7 @@ namespace MgmtListMethods
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithNonResChWithLocName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<TenantParentWithNonResChWithLocCreateOrUpdateOperation> CreateOrUpdateAsync(string tenantParentWithNonResChWithLocName, TenantParentWithNonResChWithLocData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<TenantParentWithNonResChWithLocCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string tenantParentWithNonResChWithLocName, TenantParentWithNonResChWithLocData parameters, CancellationToken cancellationToken = default)
         {
             if (tenantParentWithNonResChWithLocName == null)
             {
@@ -200,9 +200,9 @@ namespace MgmtListMethods
             try
             {
                 var response = _tenantParentWithNonResChWithLocsRestClient.Get(Id.Name, tenantParentWithNonResChWithLocName, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<TenantParentWithNonResChWithLoc>(null, response.GetRawResponse())
-                    : Response.FromValue(new TenantParentWithNonResChWithLoc(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<TenantParentWithNonResChWithLoc>(null, response.GetRawResponse());
+                return Response.FromValue(new TenantParentWithNonResChWithLoc(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -227,9 +227,9 @@ namespace MgmtListMethods
             try
             {
                 var response = await _tenantParentWithNonResChWithLocsRestClient.GetAsync(Id.Name, tenantParentWithNonResChWithLocName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<TenantParentWithNonResChWithLoc>(null, response.GetRawResponse())
-                    : Response.FromValue(new TenantParentWithNonResChWithLoc(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<TenantParentWithNonResChWithLoc>(null, response.GetRawResponse());
+                return Response.FromValue(new TenantParentWithNonResChWithLoc(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

@@ -65,13 +65,15 @@ namespace TenantOnly.Models
         BillingAccount IOperationSource<BillingAccount>.CreateResult(Response response, CancellationToken cancellationToken)
         {
             using var document = JsonDocument.Parse(response.ContentStream);
-            return new BillingAccount(_operationBase, BillingAccountData.DeserializeBillingAccountData(document.RootElement));
+            var data = BillingAccountData.DeserializeBillingAccountData(document.RootElement);
+            return new BillingAccount(_operationBase, data);
         }
 
         async ValueTask<BillingAccount> IOperationSource<BillingAccount>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-            return new BillingAccount(_operationBase, BillingAccountData.DeserializeBillingAccountData(document.RootElement));
+            var data = BillingAccountData.DeserializeBillingAccountData(document.RootElement);
+            return new BillingAccount(_operationBase, data);
         }
     }
 }

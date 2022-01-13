@@ -42,7 +42,7 @@ namespace MgmtKeyvault.Tests.Mock
                 },
             };
 
-            await collection.CreateOrUpdateAsync(privateEndpointConnectionName, properties);
+            await collection.CreateOrUpdateAsync(true, privateEndpointConnectionName, properties);
         }
 
         [RecordedTest]
