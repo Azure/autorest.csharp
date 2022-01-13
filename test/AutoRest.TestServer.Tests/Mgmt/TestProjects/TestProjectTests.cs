@@ -217,17 +217,6 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             }
         }
 
-        [TestCase("ValidResourceType")]
-        public void ValidateCollectionPropertyExists(string propertyName)
-        {
-            foreach (var type in FindAllCollections())
-            {
-                var propertyInfo = type.GetProperty(propertyName, BindingFlags.Instance | BindingFlags.NonPublic);
-                Assert.NotNull(propertyInfo, $"Property '{type.Name}' is not found");
-                Assert.AreEqual(typeof(ResourceType), propertyInfo.PropertyType);
-            }
-        }
-
         public IEnumerable<Type> FindAllCollections()
         {
             Type[] allTypes = Assembly.GetExecutingAssembly().GetTypes();

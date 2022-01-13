@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading;
 using AutoRest.CSharp.Common.Output.Models;
@@ -331,15 +332,16 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
 
         protected override Resource? WrapResourceDataType(CSharpType? type, MgmtRestOperation operation)
         {
-            if (!IsResourceDataType(type, operation))
+            if (!IsResourceDataType(type, operation, out _))
                 return null;
 
             return _resource;
         }
 
-        protected override bool IsResourceDataType(CSharpType? type, MgmtRestOperation clientOperation)
+        protected override bool IsResourceDataType(CSharpType? type, MgmtRestOperation clientOperation, [MaybeNullWhen(false)] out ResourceData data)
         {
-            return _resourceData.Type.Equals(type);
+            data = _resourceData;
+            return data.Type.Equals(type);
         }
 
         private void WriteListAvailableLocationsMethod(bool async)
@@ -353,7 +355,11 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
 
             using (_writer.Scope($"public {GetAsyncKeyword(async)} {GetVirtual(true)} {responseType} {CreateMethodName("GetAvailableLocations", async)}({typeof(CancellationToken)} cancellationToken = default)"))
             {
-                _writer.Line($"return {GetAwait(async)} {CreateMethodName("ListAvailableLocations", async)}(ResourceType, cancellationToken){GetConfigureAwait(async)};");
+                Diagnostic diagnostic = new Diagnostic($"{TypeOfThis.Name}.GetAvailableLocations", Array.Empty<DiagnosticAttribute>());
+                using (WriteDiagnosticScope(_writer, diagnostic, ClientDiagnosticsField))
+                {
+                    _writer.Line($"return {GetAwait(async)} {CreateMethodName("ListAvailableLocations", async)}(ResourceType, cancellationToken){GetConfigureAwait(async)};");
+                }
             }
         }
 
@@ -373,7 +379,7 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
             {
                 using (_writer.Scope($"if (string.IsNullOrWhiteSpace(key))"))
                 {
-                    _writer.Line($"throw new {typeof(ArgumentNullException)}($\"{{nameof(key)}} provided cannot be null or a whitespace.\", nameof(key));");
+                    _writer.Line($"throw new {typeof(ArgumentNullException)}(nameof(key), $\"{{nameof(key)}} provided cannot be null or a whitespace.\");");
                 }
                 _writer.Line();
 
@@ -408,7 +414,7 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
             {
                 using (_writer.Scope($"if (tags == null)"))
                 {
-                    _writer.Line($"throw new {typeof(ArgumentNullException)}($\"{{nameof(tags)}} provided cannot be null.\", nameof(tags));");
+                    _writer.Line($"throw new {typeof(ArgumentNullException)}(nameof(tags), $\"{{nameof(tags)}} provided cannot be null.\");");
                 }
                 _writer.Line();
 
@@ -448,7 +454,7 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
             {
                 using (_writer.Scope($"if (string.IsNullOrWhiteSpace(key))"))
                 {
-                    _writer.Line($"throw new {typeof(ArgumentNullException)}($\"{{nameof(key)}} provided cannot be null or a whitespace.\", nameof(key));");
+                    _writer.Line($"throw new {typeof(ArgumentNullException)}(nameof(key), $\"{{nameof(key)}} provided cannot be null or a whitespace.\");");
                 }
                 _writer.Line();
 

@@ -29,7 +29,7 @@ namespace MgmtKeyvault
         {
         }
 
-        /// <summary> Initializes a new instance of DeletedVaultCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="DeletedVaultCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal DeletedVaultCollection(ArmResource parent) : base(parent)
         {
@@ -166,7 +166,7 @@ namespace MgmtKeyvault
                 throw new ArgumentNullException(nameof(vaultName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DeletedVaultCollection.GetIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("DeletedVaultCollection.GetIfExists");
             scope.Start();
             try
             {
@@ -228,7 +228,7 @@ namespace MgmtKeyvault
                 throw new ArgumentNullException(nameof(vaultName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DeletedVaultCollection.ExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("DeletedVaultCollection.Exists");
             scope.Start();
             try
             {

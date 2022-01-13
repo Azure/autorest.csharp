@@ -33,7 +33,7 @@ namespace XmlDeserialization
         {
         }
 
-        /// <summary> Initializes a new instance of XmlInstanceCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="XmlInstanceCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal XmlInstanceCollection(ArmResource parent) : base(parent)
         {
@@ -226,7 +226,7 @@ namespace XmlDeserialization
                 throw new ArgumentNullException(nameof(xmlName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("XmlInstanceCollection.GetIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("XmlInstanceCollection.GetIfExists");
             scope.Start();
             try
             {
@@ -278,7 +278,7 @@ namespace XmlDeserialization
                 throw new ArgumentNullException(nameof(xmlName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("XmlInstanceCollection.ExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("XmlInstanceCollection.Exists");
             scope.Start();
             try
             {

@@ -33,7 +33,7 @@ namespace Azure.ResourceManager.Sample
         {
         }
 
-        /// <summary> Initializes a new instance of SshPublicKeyCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="SshPublicKeyCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal SshPublicKeyCollection(ArmResource parent) : base(parent)
         {
@@ -224,7 +224,7 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentNullException(nameof(sshPublicKeyName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyCollection.GetIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyCollection.GetIfExists");
             scope.Start();
             try
             {
@@ -276,7 +276,7 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentNullException(nameof(sshPublicKeyName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyCollection.ExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyCollection.Exists");
             scope.Start();
             try
             {

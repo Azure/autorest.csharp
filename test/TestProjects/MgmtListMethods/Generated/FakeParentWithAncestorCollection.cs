@@ -31,7 +31,7 @@ namespace MgmtListMethods
         {
         }
 
-        /// <summary> Initializes a new instance of FakeParentWithAncestorCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="FakeParentWithAncestorCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal FakeParentWithAncestorCollection(ArmResource parent) : base(parent)
         {
@@ -222,7 +222,7 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(fakeParentWithAncestorName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("FakeParentWithAncestorCollection.GetIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("FakeParentWithAncestorCollection.GetIfExists");
             scope.Start();
             try
             {
@@ -274,7 +274,7 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(fakeParentWithAncestorName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("FakeParentWithAncestorCollection.ExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("FakeParentWithAncestorCollection.Exists");
             scope.Start();
             try
             {

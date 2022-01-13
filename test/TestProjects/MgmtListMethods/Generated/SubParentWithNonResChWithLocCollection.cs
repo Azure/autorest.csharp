@@ -33,7 +33,7 @@ namespace MgmtListMethods
         {
         }
 
-        /// <summary> Initializes a new instance of SubParentWithNonResChWithLocCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="SubParentWithNonResChWithLocCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal SubParentWithNonResChWithLocCollection(ArmResource parent) : base(parent)
         {
@@ -224,7 +224,7 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(subParentWithNonResChWithLocName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SubParentWithNonResChWithLocCollection.GetIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("SubParentWithNonResChWithLocCollection.GetIfExists");
             scope.Start();
             try
             {
@@ -276,7 +276,7 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(subParentWithNonResChWithLocName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SubParentWithNonResChWithLocCollection.ExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("SubParentWithNonResChWithLocCollection.Exists");
             scope.Start();
             try
             {

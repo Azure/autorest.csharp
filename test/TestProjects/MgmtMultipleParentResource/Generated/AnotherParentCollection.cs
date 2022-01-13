@@ -33,7 +33,7 @@ namespace MgmtMultipleParentResource
         {
         }
 
-        /// <summary> Initializes a new instance of AnotherParentCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="AnotherParentCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal AnotherParentCollection(ArmResource parent) : base(parent)
         {
@@ -228,7 +228,7 @@ namespace MgmtMultipleParentResource
                 throw new ArgumentNullException(nameof(anotherName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("AnotherParentCollection.GetIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("AnotherParentCollection.GetIfExists");
             scope.Start();
             try
             {
@@ -282,7 +282,7 @@ namespace MgmtMultipleParentResource
                 throw new ArgumentNullException(nameof(anotherName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("AnotherParentCollection.ExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("AnotherParentCollection.Exists");
             scope.Start();
             try
             {

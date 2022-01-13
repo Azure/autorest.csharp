@@ -31,7 +31,7 @@ namespace MgmtExtensionResource
         {
         }
 
-        /// <summary> Initializes a new instance of BuiltInPolicyDefinitionCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="BuiltInPolicyDefinitionCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal BuiltInPolicyDefinitionCollection(ArmResource parent) : base(parent)
         {
@@ -148,7 +148,7 @@ namespace MgmtExtensionResource
                 throw new ArgumentNullException(nameof(policyDefinitionName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("BuiltInPolicyDefinitionCollection.GetIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("BuiltInPolicyDefinitionCollection.GetIfExists");
             scope.Start();
             try
             {
@@ -200,7 +200,7 @@ namespace MgmtExtensionResource
                 throw new ArgumentNullException(nameof(policyDefinitionName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("BuiltInPolicyDefinitionCollection.ExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("BuiltInPolicyDefinitionCollection.Exists");
             scope.Start();
             try
             {

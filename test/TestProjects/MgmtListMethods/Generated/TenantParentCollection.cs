@@ -31,7 +31,7 @@ namespace MgmtListMethods
         {
         }
 
-        /// <summary> Initializes a new instance of TenantParentCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="TenantParentCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal TenantParentCollection(ArmResource parent) : base(parent)
         {
@@ -222,7 +222,7 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(tenantParentName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("TenantParentCollection.GetIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("TenantParentCollection.GetIfExists");
             scope.Start();
             try
             {
@@ -274,7 +274,7 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(tenantParentName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("TenantParentCollection.ExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("TenantParentCollection.Exists");
             scope.Start();
             try
             {
