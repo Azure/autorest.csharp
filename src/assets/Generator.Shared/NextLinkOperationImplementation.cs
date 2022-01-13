@@ -109,10 +109,10 @@ namespace Azure.Core
                     _nextRequestUri = AppendOrReplaceApiVersion(operationLocation, _startRequestUri);
                     return;
                 case HeaderSource.AzureAsyncOperation when headers.TryGetValue("Azure-AsyncOperation", out string? azureAsyncOperation):
-                    _nextRequestUri = azureAsyncOperation;
+                    _nextRequestUri = AppendOrReplaceApiVersion(azureAsyncOperation, _startRequestUri);
                     return;
                 case HeaderSource.Location when hasLocation:
-                    _nextRequestUri = location!;
+                    _nextRequestUri = AppendOrReplaceApiVersion(location!, _startRequestUri);
                     return;
             }
         }
