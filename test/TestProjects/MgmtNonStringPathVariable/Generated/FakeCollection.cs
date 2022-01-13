@@ -33,7 +33,7 @@ namespace MgmtNonStringPathVariable
         {
         }
 
-        /// <summary> Initializes a new instance of FakeCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="FakeCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal FakeCollection(ArmResource parent) : base(parent)
         {
@@ -196,7 +196,7 @@ namespace MgmtNonStringPathVariable
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<Fake>> GetIfExistsAsync(FakeNameAsEnum fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("FakeCollection.GetIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("FakeCollection.GetIfExists");
             scope.Start();
             try
             {
@@ -238,7 +238,7 @@ namespace MgmtNonStringPathVariable
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<bool>> ExistsAsync(FakeNameAsEnum fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("FakeCollection.ExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("FakeCollection.Exists");
             scope.Start();
             try
             {

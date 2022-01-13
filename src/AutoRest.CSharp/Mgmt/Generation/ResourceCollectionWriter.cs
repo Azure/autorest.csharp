@@ -107,7 +107,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             // write "parent resource" constructor
             var parentResourceConstructor = new MethodSignature(
                 name: TypeOfThis.Name,
-                description: $"Initializes a new instance of {TypeOfThis.Name} class.",
+                description: $"Initializes a new instance of the <see cref=\"{TypeNameOfThis}\"/> class.",
                 modifiers: "internal",
                 parameters: _resourceCollection.ParentParameter.AsIEnumerable().Concat(_resourceCollection.ExtraConstructorParameters).ToArray(),
                 baseMethod: new MethodSignature(
@@ -172,7 +172,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 WriteExists(_resourceCollection.GetOperation, true);
             }
 
-            // write all the methods that should belong to this resouce collection
+            // write all the methods that should belong to this resource collection
             foreach (var clientOperation in _resourceCollection.ClientOperations)
             {
                 WriteMethod(clientOperation, false);
@@ -301,7 +301,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         private void WriteCollectionMethodScope(CSharpType returnType, string methodName, IReadOnlyList<Parameter> methodParameters,
             CodeWriterDelegate inner, bool async, bool isOverride = false)
         {
-            methodName = CreateMethodName(methodName, async);
+            var fullMethodName = CreateMethodName(methodName, async);
 
             if (isOverride)
                 _writer.WriteXmlDocumentationInheritDoc();
@@ -312,7 +312,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
             _writer.WriteXmlDocumentationRequiredParametersException(methodParameters);
 
-            _writer.Append($"public {GetAsyncKeyword(async)} {GetOverride(isOverride, true)} {returnType} {methodName}(");
+            _writer.Append($"public {GetAsyncKeyword(async)} {GetOverride(isOverride, true)} {returnType} {fullMethodName}(");
             foreach (var parameter in methodParameters)
             {
                 _writer.WriteParameter(parameter);

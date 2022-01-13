@@ -33,7 +33,7 @@ namespace MgmtListMethods
         {
         }
 
-        /// <summary> Initializes a new instance of ResGrpParentWithAncestorWithNonResChWithLocCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="ResGrpParentWithAncestorWithNonResChWithLocCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal ResGrpParentWithAncestorWithNonResChWithLocCollection(ArmResource parent) : base(parent)
         {
@@ -224,7 +224,7 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(resGrpParentWithAncestorWithNonResChWithLocName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ResGrpParentWithAncestorWithNonResChWithLocCollection.GetIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("ResGrpParentWithAncestorWithNonResChWithLocCollection.GetIfExists");
             scope.Start();
             try
             {
@@ -276,7 +276,7 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(resGrpParentWithAncestorWithNonResChWithLocName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ResGrpParentWithAncestorWithNonResChWithLocCollection.ExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("ResGrpParentWithAncestorWithNonResChWithLocCollection.Exists");
             scope.Start();
             try
             {

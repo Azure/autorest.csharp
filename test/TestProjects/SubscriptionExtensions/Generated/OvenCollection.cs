@@ -33,7 +33,7 @@ namespace SubscriptionExtensions
         {
         }
 
-        /// <summary> Initializes a new instance of OvenCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="OvenCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal OvenCollection(ArmResource parent) : base(parent)
         {
@@ -222,7 +222,7 @@ namespace SubscriptionExtensions
                 throw new ArgumentNullException(nameof(ovenName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("OvenCollection.GetIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("OvenCollection.GetIfExists");
             scope.Start();
             try
             {
@@ -274,7 +274,7 @@ namespace SubscriptionExtensions
                 throw new ArgumentNullException(nameof(ovenName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("OvenCollection.ExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("OvenCollection.Exists");
             scope.Start();
             try
             {

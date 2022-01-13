@@ -33,7 +33,7 @@ namespace SubscriptionExtensions
         {
         }
 
-        /// <summary> Initializes a new instance of ToasterCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="ToasterCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal ToasterCollection(ArmResource parent) : base(parent)
         {
@@ -222,7 +222,7 @@ namespace SubscriptionExtensions
                 throw new ArgumentNullException(nameof(toasterName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ToasterCollection.GetIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("ToasterCollection.GetIfExists");
             scope.Start();
             try
             {
@@ -274,7 +274,7 @@ namespace SubscriptionExtensions
                 throw new ArgumentNullException(nameof(toasterName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ToasterCollection.ExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("ToasterCollection.Exists");
             scope.Start();
             try
             {

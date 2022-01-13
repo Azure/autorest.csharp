@@ -33,7 +33,7 @@ namespace MgmtSubscriptionNameParameter
         {
         }
 
-        /// <summary> Initializes a new instance of SBSubscriptionCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="SBSubscriptionCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal SBSubscriptionCollection(ArmResource parent) : base(parent)
         {
@@ -224,7 +224,7 @@ namespace MgmtSubscriptionNameParameter
                 throw new ArgumentNullException(nameof(subscriptionName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SBSubscriptionCollection.GetIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("SBSubscriptionCollection.GetIfExists");
             scope.Start();
             try
             {
@@ -276,7 +276,7 @@ namespace MgmtSubscriptionNameParameter
                 throw new ArgumentNullException(nameof(subscriptionName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SBSubscriptionCollection.ExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("SBSubscriptionCollection.Exists");
             scope.Start();
             try
             {

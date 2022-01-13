@@ -31,7 +31,7 @@ namespace Azure.ResourceManager.Sample
         {
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineExtensionCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="VirtualMachineExtensionCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal VirtualMachineExtensionCollection(ArmResource parent) : base(parent)
         {
@@ -226,7 +226,7 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentNullException(nameof(vmExtensionName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionCollection.GetIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionCollection.GetIfExists");
             scope.Start();
             try
             {
@@ -280,7 +280,7 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentNullException(nameof(vmExtensionName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionCollection.ExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionCollection.Exists");
             scope.Start();
             try
             {

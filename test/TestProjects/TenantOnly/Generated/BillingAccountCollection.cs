@@ -32,7 +32,7 @@ namespace TenantOnly
         {
         }
 
-        /// <summary> Initializes a new instance of BillingAccountCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="BillingAccountCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal BillingAccountCollection(ArmResource parent) : base(parent)
         {
@@ -227,7 +227,7 @@ namespace TenantOnly
                 throw new ArgumentNullException(nameof(billingAccountName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("BillingAccountCollection.GetIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("BillingAccountCollection.GetIfExists");
             scope.Start();
             try
             {
@@ -281,7 +281,7 @@ namespace TenantOnly
                 throw new ArgumentNullException(nameof(billingAccountName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("BillingAccountCollection.ExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("BillingAccountCollection.Exists");
             scope.Start();
             try
             {

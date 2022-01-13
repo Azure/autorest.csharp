@@ -34,7 +34,7 @@ namespace MgmtParamOrdering
         {
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineExtensionImageCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="VirtualMachineExtensionImageCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         /// <param name="location"> The name of a supported Azure region. </param>
         /// <param name="publisherName"> The String to use. </param>
@@ -176,7 +176,7 @@ namespace MgmtParamOrdering
                 throw new ArgumentNullException(nameof(version));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageCollection.GetIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageCollection.GetIfExists");
             scope.Start();
             try
             {
@@ -238,7 +238,7 @@ namespace MgmtParamOrdering
                 throw new ArgumentNullException(nameof(version));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageCollection.ExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageCollection.Exists");
             scope.Start();
             try
             {

@@ -33,7 +33,7 @@ namespace SupersetFlattenInheritance
         {
         }
 
-        /// <summary> Initializes a new instance of TrackedResourceModel1Collection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="TrackedResourceModel1Collection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal TrackedResourceModel1Collection(ArmResource parent) : base(parent)
         {
@@ -220,7 +220,7 @@ namespace SupersetFlattenInheritance
                 throw new ArgumentNullException(nameof(trackedResourceModel1SName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("TrackedResourceModel1Collection.GetIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("TrackedResourceModel1Collection.GetIfExists");
             scope.Start();
             try
             {
@@ -272,7 +272,7 @@ namespace SupersetFlattenInheritance
                 throw new ArgumentNullException(nameof(trackedResourceModel1SName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("TrackedResourceModel1Collection.ExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("TrackedResourceModel1Collection.Exists");
             scope.Start();
             try
             {

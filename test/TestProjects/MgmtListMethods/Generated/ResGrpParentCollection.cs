@@ -33,7 +33,7 @@ namespace MgmtListMethods
         {
         }
 
-        /// <summary> Initializes a new instance of ResGrpParentCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="ResGrpParentCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal ResGrpParentCollection(ArmResource parent) : base(parent)
         {
@@ -224,7 +224,7 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(resGrpParentName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ResGrpParentCollection.GetIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("ResGrpParentCollection.GetIfExists");
             scope.Start();
             try
             {
@@ -276,7 +276,7 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(resGrpParentName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ResGrpParentCollection.ExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("ResGrpParentCollection.Exists");
             scope.Start();
             try
             {

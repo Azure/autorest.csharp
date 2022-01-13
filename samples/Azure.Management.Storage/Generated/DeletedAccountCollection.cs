@@ -32,7 +32,7 @@ namespace Azure.Management.Storage
         {
         }
 
-        /// <summary> Initializes a new instance of DeletedAccountCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="DeletedAccountCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal DeletedAccountCollection(ArmResource parent) : base(parent)
         {
@@ -169,7 +169,7 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(deletedAccountName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DeletedAccountCollection.GetIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("DeletedAccountCollection.GetIfExists");
             scope.Start();
             try
             {
@@ -231,7 +231,7 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(deletedAccountName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DeletedAccountCollection.ExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("DeletedAccountCollection.Exists");
             scope.Start();
             try
             {

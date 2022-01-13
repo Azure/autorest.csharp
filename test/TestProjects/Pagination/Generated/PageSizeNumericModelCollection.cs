@@ -33,7 +33,7 @@ namespace Pagination
         {
         }
 
-        /// <summary> Initializes a new instance of PageSizeNumericModelCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="PageSizeNumericModelCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal PageSizeNumericModelCollection(ArmResource parent) : base(parent)
         {
@@ -208,7 +208,7 @@ namespace Pagination
                 throw new ArgumentNullException(nameof(name));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("PageSizeNumericModelCollection.GetIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("PageSizeNumericModelCollection.GetIfExists");
             scope.Start();
             try
             {
@@ -260,7 +260,7 @@ namespace Pagination
                 throw new ArgumentNullException(nameof(name));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("PageSizeNumericModelCollection.ExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("PageSizeNumericModelCollection.Exists");
             scope.Start();
             try
             {
