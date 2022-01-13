@@ -21,7 +21,7 @@ shared-source-folders: $(this-folder)/Generator.Shared;$(this-folder)/Azure.Core
 ```yaml !$(data-plane)
 modelerfour:
   flatten-models: true
-  flatten-payloads: true
+  flatten-payloads: false
   group-parameters: true
 ```
 
