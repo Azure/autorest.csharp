@@ -62,7 +62,7 @@ namespace XmlDeserialization
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="xmlName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual XmlInstanceCreateOrUpdateOperation CreateOrUpdate(string xmlName, XmlInstanceData parameters, string ifMatch = null, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual XmlInstanceCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string xmlName, XmlInstanceData parameters, string ifMatch = null, CancellationToken cancellationToken = default)
         {
             if (xmlName == null)
             {
@@ -100,7 +100,7 @@ namespace XmlDeserialization
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="xmlName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<XmlInstanceCreateOrUpdateOperation> CreateOrUpdateAsync(string xmlName, XmlInstanceData parameters, string ifMatch = null, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<XmlInstanceCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string xmlName, XmlInstanceData parameters, string ifMatch = null, CancellationToken cancellationToken = default)
         {
             if (xmlName == null)
             {

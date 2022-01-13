@@ -42,7 +42,7 @@ namespace MgmtKeyvault.Tests.Mock
             // Example: Purge a managed HSM Pool
             var deletedManagedHsm = GetArmClient().GetDeletedManagedHsm(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.KeyVault/locations/westus/deletedManagedHSMs/hsm1"));
 
-            await deletedManagedHsm.PurgeDeletedAsync();
+            await deletedManagedHsm.PurgeDeletedAsync(true);
         }
     }
 }

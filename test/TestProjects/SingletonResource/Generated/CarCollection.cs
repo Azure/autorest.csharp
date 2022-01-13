@@ -62,7 +62,7 @@ namespace SingletonResource
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="carName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual CarCreateOrUpdateOperation CreateOrUpdate(string carName, CarData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual CarCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string carName, CarData parameters, CancellationToken cancellationToken = default)
         {
             if (carName == null)
             {
@@ -98,7 +98,7 @@ namespace SingletonResource
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="carName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<CarCreateOrUpdateOperation> CreateOrUpdateAsync(string carName, CarData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<CarCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string carName, CarData parameters, CancellationToken cancellationToken = default)
         {
             if (carName == null)
             {

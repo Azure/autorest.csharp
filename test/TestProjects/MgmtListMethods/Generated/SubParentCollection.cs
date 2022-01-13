@@ -61,7 +61,7 @@ namespace MgmtListMethods
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subParentName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual SubParentCreateOrUpdateOperation CreateOrUpdate(string subParentName, SubParentData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual SubParentCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string subParentName, SubParentData parameters, CancellationToken cancellationToken = default)
         {
             if (subParentName == null)
             {
@@ -98,7 +98,7 @@ namespace MgmtListMethods
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subParentName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<SubParentCreateOrUpdateOperation> CreateOrUpdateAsync(string subParentName, SubParentData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<SubParentCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string subParentName, SubParentData parameters, CancellationToken cancellationToken = default)
         {
             if (subParentName == null)
             {

@@ -170,9 +170,9 @@ namespace MgmtNonStringPathVariable
         /// <summary> Retrieves information about an fake. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<BarDeleteOperation> StartDeleteAsync(bool waitForCompletion = false, CancellationToken cancellationToken = default)
+        public async virtual Task<BarDeleteOperation> DeleteAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("Bar.StartDelete");
+            using var scope = _clientDiagnostics.CreateScope("Bar.Delete");
             scope.Start();
             try
             {
@@ -195,9 +195,9 @@ namespace MgmtNonStringPathVariable
         /// <summary> Retrieves information about an fake. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual BarDeleteOperation StartDelete(bool waitForCompletion = false, CancellationToken cancellationToken = default)
+        public virtual BarDeleteOperation Delete(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("Bar.StartDelete");
+            using var scope = _clientDiagnostics.CreateScope("Bar.Delete");
             scope.Start();
             try
             {
@@ -394,7 +394,7 @@ namespace MgmtNonStringPathVariable
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<BarUpdateOperation> UpdateAsync(BarUpdate parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<BarUpdateOperation> UpdateAsync(bool waitForCompletion, BarUpdate parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -426,7 +426,7 @@ namespace MgmtNonStringPathVariable
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual BarUpdateOperation Update(BarUpdate parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual BarUpdateOperation Update(bool waitForCompletion, BarUpdate parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {

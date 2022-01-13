@@ -61,7 +61,7 @@ namespace MgmtKeyvault
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ManagedHsmCreateOrUpdateOperation CreateOrUpdate(string name, ManagedHsmData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual ManagedHsmCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string name, ManagedHsmData parameters, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
@@ -98,7 +98,7 @@ namespace MgmtKeyvault
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<ManagedHsmCreateOrUpdateOperation> CreateOrUpdateAsync(string name, ManagedHsmData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<ManagedHsmCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string name, ManagedHsmData parameters, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {

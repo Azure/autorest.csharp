@@ -47,7 +47,13 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         public void ValidateCollectionCorrectFirstParameter(string collectionName, string methodName, string parameterName)
         {
             var method = FindAllCollections().Single(o => o.Name == collectionName).GetMethod(methodName);
-            Assert.AreEqual(parameterName, method?.GetParameters().First().Name);
+            var firstParamName = method?.GetParameters().First().Name;
+            if (firstParamName.Equals("waitForCompletion"))
+            {
+                // LRO, get next one
+                firstParamName = method?.GetParameters()[1].Name;
+            }
+            Assert.AreEqual(parameterName, firstParamName);
         }
     }
 }

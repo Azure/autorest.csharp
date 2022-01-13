@@ -170,7 +170,7 @@ namespace MgmtExtensionResource
         /// <summary> This operation deletes the policy definition in the given management group with the given name. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<ManagementGroupPolicyDefinitionDeleteOperation> DeleteAsync(bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<ManagementGroupPolicyDefinitionDeleteOperation> DeleteAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ManagementGroupPolicyDefinition.Delete");
             scope.Start();
@@ -195,7 +195,7 @@ namespace MgmtExtensionResource
         /// <summary> This operation deletes the policy definition in the given management group with the given name. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual ManagementGroupPolicyDefinitionDeleteOperation Delete(bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual ManagementGroupPolicyDefinitionDeleteOperation Delete(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ManagementGroupPolicyDefinition.Delete");
             scope.Start();

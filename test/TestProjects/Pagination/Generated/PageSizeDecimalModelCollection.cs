@@ -57,7 +57,7 @@ namespace Pagination
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual PageSizeDecimalModelCreateOrUpdateOperation CreateOrUpdate(string name, PageSizeDecimalModelData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual PageSizeDecimalModelCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string name, PageSizeDecimalModelData parameters, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
@@ -90,7 +90,7 @@ namespace Pagination
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<PageSizeDecimalModelCreateOrUpdateOperation> CreateOrUpdateAsync(string name, PageSizeDecimalModelData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<PageSizeDecimalModelCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string name, PageSizeDecimalModelData parameters, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {

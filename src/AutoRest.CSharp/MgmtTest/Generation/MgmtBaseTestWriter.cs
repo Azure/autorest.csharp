@@ -786,9 +786,13 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             });
         }
 
-        protected void WriteMethodTestInvocation(bool async, bool isPagingOperation, string methodName, IEnumerable<string> paramNames)
+        protected void WriteMethodTestInvocation(bool async, MgmtClientOperation clientOperation, bool isLroOperation, string methodName, IEnumerable<string> paramNames)
         {
             _writer.Append($"{GetAwait(async)}");
+            if (isLroOperation || clientOperation.IsLongRunningOperation() && !clientOperation.IsPagingOperation(Context)) {
+                paramNames = new List<string>().Append("true").Concat(paramNames);   // assign  waitForCompletion = true
+            }
+            var isPagingOperation = clientOperation.IsPagingOperation(Context)|| clientOperation.IsListOperation(Context, out var _);
             if (isPagingOperation)
             {
                 using (_writer.Scope($"foreach (var _ in {WriteMethodInvocation($"{methodName}", paramNames)})"))

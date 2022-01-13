@@ -172,7 +172,7 @@ namespace MgmtOperations
         /// <summary> Delete an availability set. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<AvailabilitySetDeleteOperation> DeleteAsync(bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<AvailabilitySetDeleteOperation> DeleteAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AvailabilitySet.Delete");
             scope.Start();
@@ -197,7 +197,7 @@ namespace MgmtOperations
         /// <summary> Delete an availability set. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual AvailabilitySetDeleteOperation Delete(bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual AvailabilitySetDeleteOperation Delete(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AvailabilitySet.Delete");
             scope.Start();
@@ -452,7 +452,7 @@ namespace MgmtOperations
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<AvailabilitySetTestSetSharedKeyOperation> TestSetSharedKeyAsync(ConnectionSharedKey parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<AvailabilitySetTestSetSharedKeyOperation> TestSetSharedKeyAsync(bool waitForCompletion, ConnectionSharedKey parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -484,7 +484,7 @@ namespace MgmtOperations
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual AvailabilitySetTestSetSharedKeyOperation TestSetSharedKey(ConnectionSharedKey parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual AvailabilitySetTestSetSharedKeyOperation TestSetSharedKey(bool waitForCompletion, ConnectionSharedKey parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {

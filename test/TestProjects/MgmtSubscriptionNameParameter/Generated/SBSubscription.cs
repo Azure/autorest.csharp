@@ -170,7 +170,7 @@ namespace MgmtSubscriptionNameParameter
         /// <summary> Deletes a subscription from the specified topic. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<SBSubscriptionDeleteOperation> DeleteAsync(bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<SBSubscriptionDeleteOperation> DeleteAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SBSubscription.Delete");
             scope.Start();
@@ -195,7 +195,7 @@ namespace MgmtSubscriptionNameParameter
         /// <summary> Deletes a subscription from the specified topic. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual SBSubscriptionDeleteOperation Delete(bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual SBSubscriptionDeleteOperation Delete(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SBSubscription.Delete");
             scope.Start();

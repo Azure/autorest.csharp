@@ -60,7 +60,7 @@ namespace TenantOnly
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="billingAccountName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual BillingAccountCreateOrUpdateOperation CreateOrUpdate(string billingAccountName, BillingAccountData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual BillingAccountCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string billingAccountName, BillingAccountData parameters, CancellationToken cancellationToken = default)
         {
             if (billingAccountName == null)
             {
@@ -97,7 +97,7 @@ namespace TenantOnly
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="billingAccountName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<BillingAccountCreateOrUpdateOperation> CreateOrUpdateAsync(string billingAccountName, BillingAccountData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<BillingAccountCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string billingAccountName, BillingAccountData parameters, CancellationToken cancellationToken = default)
         {
             if (billingAccountName == null)
             {

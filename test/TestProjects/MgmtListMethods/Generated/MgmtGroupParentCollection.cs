@@ -60,7 +60,7 @@ namespace MgmtListMethods
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="mgmtGroupParentName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual MgmtGroupParentCreateOrUpdateOperation CreateOrUpdate(string mgmtGroupParentName, MgmtGroupParentData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual MgmtGroupParentCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string mgmtGroupParentName, MgmtGroupParentData parameters, CancellationToken cancellationToken = default)
         {
             if (mgmtGroupParentName == null)
             {
@@ -97,7 +97,7 @@ namespace MgmtListMethods
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="mgmtGroupParentName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<MgmtGroupParentCreateOrUpdateOperation> CreateOrUpdateAsync(string mgmtGroupParentName, MgmtGroupParentData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<MgmtGroupParentCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string mgmtGroupParentName, MgmtGroupParentData parameters, CancellationToken cancellationToken = default)
         {
             if (mgmtGroupParentName == null)
             {
