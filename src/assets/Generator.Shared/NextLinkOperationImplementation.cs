@@ -119,8 +119,8 @@ namespace Azure.Core
 
         private static string AppendOrReplaceApiVersion(string uri, Uri startRequestUri)
         {
-            NameValueCollection nameValueCollection = HttpUtility.ParseQueryString(startRequestUri.Query);
-            var apiVersion = nameValueCollection.Get("api-version");
+            NameValueCollection startRequestUriQueries = HttpUtility.ParseQueryString(startRequestUri.Query);
+            var apiVersion = startRequestUriQueries.Get("api-version");
             if (apiVersion != null)
             {
                 if (uri.Contains("api-version"))
@@ -128,9 +128,9 @@ namespace Azure.Core
                     var index = uri.IndexOf('?');
                     var plainUri = uri.Substring(0, index);
                     var queryString = uri.Substring(index + 1);
-                    NameValueCollection nvCollection = HttpUtility.ParseQueryString(queryString);
-                    nameValueCollection["api-version"] = apiVersion;
-                    var queryData = string.Join("&", nvCollection.AllKeys.Select(key => $"{HttpUtility.UrlEncode(key)}={HttpUtility.UrlEncode(nvCollection[key])}").ToArray());
+                    NameValueCollection uriQueries = HttpUtility.ParseQueryString(queryString);
+                    uriQueries["api-version"] = apiVersion;
+                    var queryData = string.Join("&", uriQueries.AllKeys.Select(key => $"{HttpUtility.UrlEncode(key)}={HttpUtility.UrlEncode(uriQueries[key])}").ToArray());
                     return $"{plainUri}?{queryData}";
                 }
                 else
@@ -270,13 +270,13 @@ namespace Azure.Core
 
             if (headers.TryGetValue("Azure-AsyncOperation", out var azureAsyncOperationUri))
             {
-                nextRequestUri = azureAsyncOperationUri;
+                nextRequestUri = AppendOrReplaceApiVersion(azureAsyncOperationUri, requestUri);;
                 return HeaderSource.AzureAsyncOperation;
             }
 
             if (headers.TryGetValue("Location", out var locationUri))
             {
-                nextRequestUri = locationUri;
+                nextRequestUri = AppendOrReplaceApiVersion(locationUri, requestUri);
                 return HeaderSource.Location;
             }
 
