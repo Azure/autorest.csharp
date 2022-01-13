@@ -65,13 +65,15 @@ namespace SubscriptionExtensions.Models
         Oven IOperationSource<Oven>.CreateResult(Response response, CancellationToken cancellationToken)
         {
             using var document = JsonDocument.Parse(response.ContentStream);
-            return new Oven(_operationBase, OvenData.DeserializeOvenData(document.RootElement));
+            var data = OvenData.DeserializeOvenData(document.RootElement);
+            return new Oven(_operationBase, data);
         }
 
         async ValueTask<Oven> IOperationSource<Oven>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-            return new Oven(_operationBase, OvenData.DeserializeOvenData(document.RootElement));
+            var data = OvenData.DeserializeOvenData(document.RootElement);
+            return new Oven(_operationBase, data);
         }
     }
 }

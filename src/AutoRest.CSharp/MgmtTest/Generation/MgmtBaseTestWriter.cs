@@ -669,17 +669,18 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             else if (clientOperation.IsPagingOperation(Context))
             {
                 var itemType = clientOperation.First(restOperation => restOperation.IsPagingOperation(Context)).GetPagingMethod(Context)!.PagingResponse.ItemType;
-                var actualItemType = WrapResourceDataType(itemType, clientOperation.First())!;
+                var actualItemType = WrapResourceDataType(itemType, clientOperation.First())?.Type ?? itemType;
                 return actualItemType.WrapPageable(async);
             }
             else if (clientOperation.IsListOperation(Context, out var itemType) && methodName != "Get")
             {
-                var returnType = new CSharpType(typeof(IReadOnlyList<>), WrapResourceDataType(itemType, clientOperation.First())!);
+                var actualItemType = WrapResourceDataType(itemType, clientOperation.First())?.Type ?? itemType;
+                var returnType = new CSharpType(typeof(IReadOnlyList<>), actualItemType);
                 return GetResponseType(returnType, async);
             }
             else
             {
-                var returnType = WrapResourceDataType(clientOperation.ReturnType, clientOperation.First());
+                var returnType = WrapResourceDataType(clientOperation.ReturnType, clientOperation.First())?.Type ?? clientOperation.ReturnType;
                 return GetResponseType(returnType, async);
             }
         }
@@ -785,9 +786,13 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             });
         }
 
-        protected void WriteMethodTestInvocation(bool async, bool isPagingOperation, string methodName, IEnumerable<string> paramNames)
+        protected void WriteMethodTestInvocation(bool async, MgmtClientOperation clientOperation, bool isLroOperation, string methodName, IEnumerable<string> paramNames)
         {
             _writer.Append($"{GetAwait(async)}");
+            if (isLroOperation || clientOperation.IsLongRunningOperation() && !clientOperation.IsPagingOperation(Context)) {
+                paramNames = new List<string>().Append("true").Concat(paramNames);   // assign  waitForCompletion = true
+            }
+            var isPagingOperation = clientOperation.IsPagingOperation(Context)|| clientOperation.IsListOperation(Context, out var _);
             if (isPagingOperation)
             {
                 using (_writer.Scope($"foreach (var _ in {WriteMethodInvocation($"{methodName}", paramNames)})"))

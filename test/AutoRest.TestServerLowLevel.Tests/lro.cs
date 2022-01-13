@@ -20,7 +20,7 @@ namespace AutoRest.TestServer.Tests
         public Task CustomHeaderPostAsyncSucceded([Values(true, false)] bool waitForCompletion) => TestStatus(async endpoint =>
         {
             using var _ = ClientRequestIdScope.Start("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
-            var options = new AutoRestLongRunningOperationTestServiceClientsOptions();
+            var options = new AutoRestLongRunningOperationTestServiceClientOptions();
             options.AddPolicy(new CustomClientRequestIdPolicy(), HttpPipelinePosition.PerCall);
             var value = RequestContent.Create(new object());
             var operation = await new LROsCustomHeaderClient(Key, endpoint, options).PostAsyncRetrySucceededAsync(waitForCompletion, value);
@@ -31,7 +31,7 @@ namespace AutoRest.TestServer.Tests
         public Task CustomHeaderPostAsyncSucceded_Sync([Values(true, false)] bool waitForCompletion) => TestStatus(endpoint =>
         {
             using var _ = ClientRequestIdScope.Start("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
-            var options = new AutoRestLongRunningOperationTestServiceClientsOptions();
+            var options = new AutoRestLongRunningOperationTestServiceClientOptions();
             options.AddPolicy(new CustomClientRequestIdPolicy(), HttpPipelinePosition.PerCall);
             var value = RequestContent.Create(new object());
             var operation = new LROsCustomHeaderClient(Key, endpoint, options).PostAsyncRetrySucceeded(waitForCompletion, value);
@@ -42,7 +42,7 @@ namespace AutoRest.TestServer.Tests
         public Task CustomHeaderPostSucceeded([Values(true, false)] bool waitForCompletion) => TestStatus(async endpoint =>
         {
             using var _ = ClientRequestIdScope.Start("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
-            var options = new AutoRestLongRunningOperationTestServiceClientsOptions();
+            var options = new AutoRestLongRunningOperationTestServiceClientOptions();
             options.AddPolicy(new CustomClientRequestIdPolicy(), HttpPipelinePosition.PerCall);
             var value = RequestContent.Create(new object());
             var operation = await new LROsCustomHeaderClient(Key, endpoint, options).Post202Retry200Async(waitForCompletion, value);
@@ -53,7 +53,7 @@ namespace AutoRest.TestServer.Tests
         public Task CustomHeaderPostSucceeded_Sync([Values(true, false)] bool waitForCompletion) => TestStatus(endpoint =>
         {
             using var _ = ClientRequestIdScope.Start("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
-            var options = new AutoRestLongRunningOperationTestServiceClientsOptions();
+            var options = new AutoRestLongRunningOperationTestServiceClientOptions();
             options.AddPolicy(new CustomClientRequestIdPolicy(), HttpPipelinePosition.PerCall);
             var value = RequestContent.Create(new object());
             var operation = new LROsCustomHeaderClient(Key, endpoint, options).Post202Retry200(waitForCompletion, value);
@@ -64,7 +64,7 @@ namespace AutoRest.TestServer.Tests
         public Task CustomHeaderPutAsyncSucceded([Values(true, false)] bool waitForCompletion) => Test(async endpoint =>
         {
             using var _ = ClientRequestIdScope.Start("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
-            var options = new AutoRestLongRunningOperationTestServiceClientsOptions();
+            var options = new AutoRestLongRunningOperationTestServiceClientOptions();
             options.AddPolicy(new CustomClientRequestIdPolicy(), HttpPipelinePosition.PerCall);
             var value = RequestContent.Create(new object());
             var operation = await new LROsCustomHeaderClient(Key, endpoint, options).PutAsyncRetrySucceededAsync(waitForCompletion, value);
@@ -78,7 +78,7 @@ namespace AutoRest.TestServer.Tests
         public Task CustomHeaderPutAsyncSucceded_Sync([Values(true, false)] bool waitForCompletion) => Test(endpoint =>
         {
             using var _ = ClientRequestIdScope.Start("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
-            var options = new AutoRestLongRunningOperationTestServiceClientsOptions();
+            var options = new AutoRestLongRunningOperationTestServiceClientOptions();
             options.AddPolicy(new CustomClientRequestIdPolicy(), HttpPipelinePosition.PerCall);
             var value = RequestContent.Create(new object());
             var operation = new LROsCustomHeaderClient(Key, endpoint, options).PutAsyncRetrySucceeded(waitForCompletion, value);
@@ -92,7 +92,7 @@ namespace AutoRest.TestServer.Tests
         public Task CustomHeaderPutSucceeded([Values(true, false)] bool waitForCompletion) => Test(async endpoint =>
         {
             using var _ = ClientRequestIdScope.Start("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
-            var options = new AutoRestLongRunningOperationTestServiceClientsOptions();
+            var options = new AutoRestLongRunningOperationTestServiceClientOptions();
             options.AddPolicy(new CustomClientRequestIdPolicy(), HttpPipelinePosition.PerCall);
             var value = RequestContent.Create(new object());
             var operation = await new LROsCustomHeaderClient(Key, endpoint, options).Put201CreatingSucceeded200Async(waitForCompletion, value);
@@ -106,7 +106,7 @@ namespace AutoRest.TestServer.Tests
         public Task CustomHeaderPutSucceeded_Sync([Values(true, false)] bool waitForCompletion) => Test(endpoint =>
         {
             using var _ = ClientRequestIdScope.Start("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
-            var options = new AutoRestLongRunningOperationTestServiceClientsOptions();
+            var options = new AutoRestLongRunningOperationTestServiceClientOptions();
             options.AddPolicy(new CustomClientRequestIdPolicy(), HttpPipelinePosition.PerCall);
             var value = RequestContent.Create(new object());
             var operation = new LROsCustomHeaderClient(Key, endpoint, options).Put201CreatingSucceeded200(waitForCompletion, value);

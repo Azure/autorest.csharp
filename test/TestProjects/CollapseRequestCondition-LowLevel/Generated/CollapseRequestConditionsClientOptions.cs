@@ -8,10 +8,10 @@
 using System;
 using Azure.Core;
 
-namespace body_string_LowLevel
+namespace CollapseRequestCondition_LowLevel
 {
-    /// <summary> Client options for AutoRestSwaggerBATService library clients. </summary>
-    public partial class AutoRestSwaggerBATServiceClientsOptions : ClientOptions
+    /// <summary> Client options for CollapseRequestConditions library clients. </summary>
+    public partial class CollapseRequestConditionsClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V1_0_0;
 
@@ -24,8 +24,8 @@ namespace body_string_LowLevel
 
         internal string Version { get; }
 
-        /// <summary> Initializes new instance of AutoRestSwaggerBATServiceClientsOptions. </summary>
-        public AutoRestSwaggerBATServiceClientsOptions(ServiceVersion version = LatestVersion)
+        /// <summary> Initializes new instance of CollapseRequestConditionsClientOptions. </summary>
+        public CollapseRequestConditionsClientOptions(ServiceVersion version = LatestVersion)
         {
             Version = version switch
             {

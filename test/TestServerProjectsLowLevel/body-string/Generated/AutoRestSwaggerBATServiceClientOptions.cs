@@ -8,10 +8,10 @@
 using System;
 using Azure.Core;
 
-namespace url_LowLevel
+namespace body_string_LowLevel
 {
-    /// <summary> Client options for AutoRestUrlTestService library clients. </summary>
-    public partial class AutoRestUrlTestServiceClientsOptions : ClientOptions
+    /// <summary> Client options for AutoRestSwaggerBATService library clients. </summary>
+    public partial class AutoRestSwaggerBATServiceClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V1_0_0;
 
@@ -24,8 +24,8 @@ namespace url_LowLevel
 
         internal string Version { get; }
 
-        /// <summary> Initializes new instance of AutoRestUrlTestServiceClientsOptions. </summary>
-        public AutoRestUrlTestServiceClientsOptions(ServiceVersion version = LatestVersion)
+        /// <summary> Initializes new instance of AutoRestSwaggerBATServiceClientOptions. </summary>
+        public AutoRestSwaggerBATServiceClientOptions(ServiceVersion version = LatestVersion)
         {
             Version = version switch
             {

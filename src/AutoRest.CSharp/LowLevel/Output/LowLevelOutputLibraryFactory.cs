@@ -56,7 +56,7 @@ namespace AutoRest.CSharp.Output.Models
 
             var clientOptionsName = clientName != null
                 ? $"{ClientBuilder.GetClientPrefix(clientName, context)}ClientOptions"
-                : $"{ClientBuilder.GetClientPrefix(context.DefaultLibraryName, context)}ClientsOptions";
+                : $"{ClientBuilder.GetClientPrefix(context.DefaultLibraryName, context)}ClientOptions";
 
             return new ClientOptionsTypeProvider(context, clientOptionsName, clientName);
         }
