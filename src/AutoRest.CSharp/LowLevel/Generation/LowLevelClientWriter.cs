@@ -132,7 +132,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.WriteMethodDocumentation(signature);
             using (writer.WriteMethodDeclaration(signature))
             {
-                writer.WriteParameterNullChecks(signature.Parameters);
+                writer.WriteParametersValidation(signature.Parameters);
                 writer.Line();
 
                 var clientOptionsParameter = signature.Parameters.Last(p => p.Type.EqualsIgnoreNullable(client.ClientOptions.Type));
@@ -186,7 +186,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.WriteMethodDocumentation(signature);
             using (writer.WriteMethodDeclaration(signature))
             {
-                writer.WriteParameterNullChecks(signature.Parameters);
+                writer.WriteParametersValidation(signature.Parameters);
                 writer.Line();
 
                 foreach (var parameter in signature.Parameters)
@@ -238,7 +238,6 @@ namespace AutoRest.CSharp.Generation.Writers
 
             using (WriteClientMethodDeclaration(writer, clientMethod, clientMethod.OperationSchemas, returnType, async))
             {
-                writer.WriteParameterNullChecks(method.Parameters);
                 var createEnumerableMethod = new CodeWriterDeclaration(CreateMethodName("CreateEnumerable", async));
                 var createEnumerableParameters = async ? new[] { NextLinkParameter, PageSizeHintParameter, EnumeratorCancellationTokenParameter } : new[] { NextLinkParameter, PageSizeHintParameter };
                 var createEnumerableReturnType = async ? typeof(IAsyncEnumerable<Page<BinaryData>>) : typeof(IEnumerable<Page<BinaryData>>);
@@ -421,7 +420,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.WriteMethodDocumentation(methodSignature);
                 using (writer.WriteMethodDeclaration(methodSignature))
                 {
-                    writer.WriteParameterNullChecks(methodSignature.Parameters);
+                    writer.WriteParametersValidation(methodSignature.Parameters);
                     writer.Line();
 
                     if (field != null)
@@ -479,7 +478,9 @@ namespace AutoRest.CSharp.Generation.Writers
 
             writer.WriteMethodDocumentation(methodSignature);
             WriteSchemaDocumentationRemarks(writer, operationSchemas);
-            return writer.WriteMethodDeclaration(methodSignature, "AZC0002");
+            var scope = writer.WriteMethodDeclaration(methodSignature, "AZC0002");
+            writer.WriteParametersValidation(methodSignature.Parameters);
+            return scope;
         }
 
         private static ResponseClassifierType CreateResponseClassifierType(RestClientMethod method)
