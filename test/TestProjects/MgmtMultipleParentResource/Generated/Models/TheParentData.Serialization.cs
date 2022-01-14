@@ -11,7 +11,7 @@ using Azure.Core;
 
 namespace MgmtMultipleParentResource
 {
-    public partial class ParentData : IUtf8JsonSerializable
+    public partial class TheParentData : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -62,7 +62,7 @@ namespace MgmtMultipleParentResource
             writer.WriteEndObject();
         }
 
-        internal static ParentData DeserializeParentData(JsonElement element)
+        internal static TheParentData DeserializeTheParentData(JsonElement element)
         {
             IDictionary<string, string> tags = default;
             AzureLocation location = default;
@@ -166,7 +166,7 @@ namespace MgmtMultipleParentResource
                     continue;
                 }
             }
-            return new ParentData(id, name, type, tags, location, Optional.ToNullable(asyncExecution), runAsUser.Value, runAsPassword.Value, Optional.ToNullable(timeoutInSeconds), outputBlobUri.Value, errorBlobUri.Value, provisioningState.Value);
+            return new TheParentData(id, name, type, tags, location, Optional.ToNullable(asyncExecution), runAsUser.Value, runAsPassword.Value, Optional.ToNullable(timeoutInSeconds), outputBlobUri.Value, errorBlobUri.Value, provisioningState.Value);
         }
     }
 }

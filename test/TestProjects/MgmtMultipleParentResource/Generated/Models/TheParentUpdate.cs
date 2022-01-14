@@ -8,10 +8,10 @@
 namespace MgmtMultipleParentResource.Models
 {
     /// <summary> Describes a Virtual Machine run command. </summary>
-    public partial class ParentUpdate : UpdateResource
+    public partial class TheParentUpdate : UpdateResource
     {
-        /// <summary> Initializes a new instance of ParentUpdate. </summary>
-        public ParentUpdate()
+        /// <summary> Initializes a new instance of TheParentUpdate. </summary>
+        public TheParentUpdate()
         {
         }
 

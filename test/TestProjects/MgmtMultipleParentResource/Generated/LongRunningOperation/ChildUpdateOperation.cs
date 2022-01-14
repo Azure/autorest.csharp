@@ -18,9 +18,9 @@ using MgmtMultipleParentResource;
 namespace MgmtMultipleParentResource.Models
 {
     /// <summary> The operation to update the VMSS VM run command. </summary>
-    public partial class ChildUpdateOperation : Operation<ParentSubParentChild>, IOperationSource<ParentSubParentChild>
+    public partial class ChildUpdateOperation : Operation<TheParentSubParentChild>, IOperationSource<TheParentSubParentChild>
     {
-        private readonly OperationInternals<ParentSubParentChild> _operation;
+        private readonly OperationInternals<TheParentSubParentChild> _operation;
 
         private readonly ArmResource _operationBase;
 
@@ -31,7 +31,7 @@ namespace MgmtMultipleParentResource.Models
 
         internal ChildUpdateOperation(ArmResource operationsBase, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new OperationInternals<ParentSubParentChild>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "ChildUpdateOperation");
+            _operation = new OperationInternals<TheParentSubParentChild>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "ChildUpdateOperation");
             _operationBase = operationsBase;
         }
 
@@ -39,7 +39,7 @@ namespace MgmtMultipleParentResource.Models
         public override string Id => _operation.Id;
 
         /// <inheritdoc />
-        public override ParentSubParentChild Value => _operation.Value;
+        public override TheParentSubParentChild Value => _operation.Value;
 
         /// <inheritdoc />
         public override bool HasCompleted => _operation.HasCompleted;
@@ -57,23 +57,23 @@ namespace MgmtMultipleParentResource.Models
         public override ValueTask<Response> UpdateStatusAsync(CancellationToken cancellationToken = default) => _operation.UpdateStatusAsync(cancellationToken);
 
         /// <inheritdoc />
-        public override ValueTask<Response<ParentSubParentChild>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(cancellationToken);
+        public override ValueTask<Response<TheParentSubParentChild>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(cancellationToken);
 
         /// <inheritdoc />
-        public override ValueTask<Response<ParentSubParentChild>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(pollingInterval, cancellationToken);
+        public override ValueTask<Response<TheParentSubParentChild>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(pollingInterval, cancellationToken);
 
-        ParentSubParentChild IOperationSource<ParentSubParentChild>.CreateResult(Response response, CancellationToken cancellationToken)
+        TheParentSubParentChild IOperationSource<TheParentSubParentChild>.CreateResult(Response response, CancellationToken cancellationToken)
         {
             using var document = JsonDocument.Parse(response.ContentStream);
             var data = ChildBodyData.DeserializeChildBodyData(document.RootElement);
-            return new ParentSubParentChild(_operationBase, data);
+            return new TheParentSubParentChild(_operationBase, data);
         }
 
-        async ValueTask<ParentSubParentChild> IOperationSource<ParentSubParentChild>.CreateResultAsync(Response response, CancellationToken cancellationToken)
+        async ValueTask<TheParentSubParentChild> IOperationSource<TheParentSubParentChild>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
             var data = ChildBodyData.DeserializeChildBodyData(document.RootElement);
-            return new ParentSubParentChild(_operationBase, data);
+            return new TheParentSubParentChild(_operationBase, data);
         }
     }
 }

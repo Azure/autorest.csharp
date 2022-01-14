@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace MgmtMultipleParentResource.Models
 {
-    public partial class ParentUpdate : IUtf8JsonSerializable
+    public partial class TheParentUpdate : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {

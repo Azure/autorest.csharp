@@ -18,20 +18,20 @@ using MgmtMultipleParentResource;
 namespace MgmtMultipleParentResource.Models
 {
     /// <summary> The operation to create or update the VMSS VM run command. </summary>
-    public partial class ParentCreateOrUpdateOperation : Operation<Parent>, IOperationSource<Parent>
+    public partial class TheParentCreateOrUpdateOperation : Operation<TheParent>, IOperationSource<TheParent>
     {
-        private readonly OperationInternals<Parent> _operation;
+        private readonly OperationInternals<TheParent> _operation;
 
         private readonly ArmResource _operationBase;
 
-        /// <summary> Initializes a new instance of ParentCreateOrUpdateOperation for mocking. </summary>
-        protected ParentCreateOrUpdateOperation()
+        /// <summary> Initializes a new instance of TheParentCreateOrUpdateOperation for mocking. </summary>
+        protected TheParentCreateOrUpdateOperation()
         {
         }
 
-        internal ParentCreateOrUpdateOperation(ArmResource operationsBase, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
+        internal TheParentCreateOrUpdateOperation(ArmResource operationsBase, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new OperationInternals<Parent>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "ParentCreateOrUpdateOperation");
+            _operation = new OperationInternals<TheParent>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "TheParentCreateOrUpdateOperation");
             _operationBase = operationsBase;
         }
 
@@ -39,7 +39,7 @@ namespace MgmtMultipleParentResource.Models
         public override string Id => _operation.Id;
 
         /// <inheritdoc />
-        public override Parent Value => _operation.Value;
+        public override TheParent Value => _operation.Value;
 
         /// <inheritdoc />
         public override bool HasCompleted => _operation.HasCompleted;
@@ -57,23 +57,23 @@ namespace MgmtMultipleParentResource.Models
         public override ValueTask<Response> UpdateStatusAsync(CancellationToken cancellationToken = default) => _operation.UpdateStatusAsync(cancellationToken);
 
         /// <inheritdoc />
-        public override ValueTask<Response<Parent>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(cancellationToken);
+        public override ValueTask<Response<TheParent>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(cancellationToken);
 
         /// <inheritdoc />
-        public override ValueTask<Response<Parent>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(pollingInterval, cancellationToken);
+        public override ValueTask<Response<TheParent>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(pollingInterval, cancellationToken);
 
-        Parent IOperationSource<Parent>.CreateResult(Response response, CancellationToken cancellationToken)
+        TheParent IOperationSource<TheParent>.CreateResult(Response response, CancellationToken cancellationToken)
         {
             using var document = JsonDocument.Parse(response.ContentStream);
-            var data = ParentData.DeserializeParentData(document.RootElement);
-            return new Parent(_operationBase, data);
+            var data = TheParentData.DeserializeTheParentData(document.RootElement);
+            return new TheParent(_operationBase, data);
         }
 
-        async ValueTask<Parent> IOperationSource<Parent>.CreateResultAsync(Response response, CancellationToken cancellationToken)
+        async ValueTask<TheParent> IOperationSource<TheParent>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-            var data = ParentData.DeserializeParentData(document.RootElement);
-            return new Parent(_operationBase, data);
+            var data = TheParentData.DeserializeTheParentData(document.RootElement);
+            return new TheParent(_operationBase, data);
         }
     }
 }

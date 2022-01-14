@@ -38,7 +38,8 @@ namespace NoTypeReplacement
         internal NoTypeReplacementModel1Collection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _noTypeReplacementModel1sRestClient = new NoTypeReplacementModel1SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            ClientOptions.TryGetApiVersion(NoTypeReplacementModel1.ResourceType, out string apiVersion);
+            _noTypeReplacementModel1sRestClient = new NoTypeReplacementModel1SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

@@ -13,12 +13,12 @@ using MgmtMultipleParentResource;
 namespace MgmtMultipleParentResource.Models
 {
     /// <summary> The List run command operation response. </summary>
-    internal partial class ParentsListResult
+    internal partial class TheParentsListResult
     {
-        /// <summary> Initializes a new instance of ParentsListResult. </summary>
+        /// <summary> Initializes a new instance of TheParentsListResult. </summary>
         /// <param name="value"> The list of run commands. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
-        internal ParentsListResult(IEnumerable<ParentData> value)
+        internal TheParentsListResult(IEnumerable<TheParentData> value)
         {
             if (value == null)
             {
@@ -28,17 +28,17 @@ namespace MgmtMultipleParentResource.Models
             Value = value.ToList();
         }
 
-        /// <summary> Initializes a new instance of ParentsListResult. </summary>
+        /// <summary> Initializes a new instance of TheParentsListResult. </summary>
         /// <param name="value"> The list of run commands. </param>
         /// <param name="nextLink"> The uri to fetch the next page of run commands. </param>
-        internal ParentsListResult(IReadOnlyList<ParentData> value, string nextLink)
+        internal TheParentsListResult(IReadOnlyList<TheParentData> value, string nextLink)
         {
             Value = value;
             NextLink = nextLink;
         }
 
         /// <summary> The list of run commands. </summary>
-        public IReadOnlyList<ParentData> Value { get; }
+        public IReadOnlyList<TheParentData> Value { get; }
         /// <summary> The uri to fetch the next page of run commands. </summary>
         public string NextLink { get; }
     }

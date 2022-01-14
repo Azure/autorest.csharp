@@ -15,18 +15,18 @@ using Azure.Core.Pipeline;
 namespace MgmtMultipleParentResource.Models
 {
     /// <summary> The operation to delete the VMSS VM run command. </summary>
-    public partial class ParentDeleteOperation : Operation
+    public partial class TheParentDeleteOperation : Operation
     {
         private readonly OperationInternals _operation;
 
-        /// <summary> Initializes a new instance of ParentDeleteOperation for mocking. </summary>
-        protected ParentDeleteOperation()
+        /// <summary> Initializes a new instance of TheParentDeleteOperation for mocking. </summary>
+        protected TheParentDeleteOperation()
         {
         }
 
-        internal ParentDeleteOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
+        internal TheParentDeleteOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new OperationInternals(clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "ParentDeleteOperation");
+            _operation = new OperationInternals(clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "TheParentDeleteOperation");
         }
 
         /// <inheritdoc />

@@ -22,14 +22,14 @@ namespace MgmtExpandResourceTypes
     /// <summary> A class to add extension methods to Subscription. </summary>
     public static partial class SubscriptionExtensions
     {
-        private static ZonesRestOperations GetZonesRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, Uri endpoint = null)
+        private static ZonesRestOperations GetZonesRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = null)
         {
-            return new ZonesRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint);
+            return new ZonesRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);
         }
 
-        private static DnsResourceReferenceRestOperations GetDnsResourceReferenceRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, Uri endpoint = null)
+        private static DnsResourceReferenceRestOperations GetDnsResourceReferenceRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = null)
         {
-            return new DnsResourceReferenceRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint);
+            return new DnsResourceReferenceRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Network/dnszones
@@ -45,7 +45,9 @@ namespace MgmtExpandResourceTypes
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetZonesRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                ZonesRestOperations restOperations;
+                options.TryGetApiVersion(Zone.ResourceType, out string apiVersion);
+                restOperations = GetZonesRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
                 async Task<Page<Zone>> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetZones");
@@ -94,7 +96,9 @@ namespace MgmtExpandResourceTypes
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetZonesRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                ZonesRestOperations restOperations;
+                options.TryGetApiVersion(Zone.ResourceType, out string apiVersion);
+                restOperations = GetZonesRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
                 Page<Zone> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetZones");
@@ -180,7 +184,7 @@ namespace MgmtExpandResourceTypes
                 scope.Start();
                 try
                 {
-                    var restOperations = GetDnsResourceReferenceRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    DnsResourceReferenceRestOperations restOperations = GetDnsResourceReferenceRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = await restOperations.GetByTargetResourcesAsync(subscription.Id.SubscriptionId, parameters, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
@@ -215,7 +219,7 @@ namespace MgmtExpandResourceTypes
                 scope.Start();
                 try
                 {
-                    var restOperations = GetDnsResourceReferenceRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    DnsResourceReferenceRestOperations restOperations = GetDnsResourceReferenceRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = restOperations.GetByTargetResources(subscription.Id.SubscriptionId, parameters, cancellationToken);
                     return response;
                 }

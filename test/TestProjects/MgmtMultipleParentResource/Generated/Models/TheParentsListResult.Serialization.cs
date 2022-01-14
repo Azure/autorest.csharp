@@ -12,20 +12,20 @@ using MgmtMultipleParentResource;
 
 namespace MgmtMultipleParentResource.Models
 {
-    internal partial class ParentsListResult
+    internal partial class TheParentsListResult
     {
-        internal static ParentsListResult DeserializeParentsListResult(JsonElement element)
+        internal static TheParentsListResult DeserializeTheParentsListResult(JsonElement element)
         {
-            IReadOnlyList<ParentData> value = default;
+            IReadOnlyList<TheParentData> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"))
                 {
-                    List<ParentData> array = new List<ParentData>();
+                    List<TheParentData> array = new List<TheParentData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ParentData.DeserializeParentData(item));
+                        array.Add(TheParentData.DeserializeTheParentData(item));
                     }
                     value = array;
                     continue;
@@ -36,7 +36,7 @@ namespace MgmtMultipleParentResource.Models
                     continue;
                 }
             }
-            return new ParentsListResult(value, nextLink.Value);
+            return new TheParentsListResult(value, nextLink.Value);
         }
     }
 }
