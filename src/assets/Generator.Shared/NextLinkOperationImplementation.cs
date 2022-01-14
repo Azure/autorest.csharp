@@ -136,7 +136,7 @@ namespace Azure.Core
             // 1.Original request is a put method;
             // 2.Original request is a patch method;
             // 3.Original response header contains "Location" and FinalStateVia is configured to OriginalUri.
-            if (_requestMethod == RequestMethod.Put || _requestMethod == RequestMethod.Patch || _originalResponseHasLocation && _finalStateVia == OperationFinalStateVia.OriginalUri)
+            if (_requestMethod == RequestMethod.Put || _requestMethod == RequestMethod.Patch && _startRequestUri.AbsoluteUri.Contains("https://management.azure.com/") || _originalResponseHasLocation && _finalStateVia == OperationFinalStateVia.OriginalUri)
             {
                 return _startRequestUri.AbsoluteUri;
             }
