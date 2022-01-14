@@ -43,26 +43,6 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             }
         }
 
-        public static object? ConvertToStringDictionary(object dict)
-        {
-            if (dict is null)
-            {
-                return dict;
-            }
-            Type t = dict.GetType();
-            bool isDict = t.IsGenericType && t.GetGenericTypeDefinition() == typeof(Dictionary<,>);
-            if (!isDict)
-            {
-                return dict;
-            }
-            var ret = new Dictionary<string, object?>();
-            foreach (KeyValuePair<object, object> entry in (IEnumerable< KeyValuePair<object, object>>)dict)
-            {
-                ret.Add(entry.Key.ToString()!, ConvertToStringDictionary(entry.Value));
-            }
-            return ret;
-        }
-
         public static string FormatResourceId(string resourceId)
         {
             if (resourceId.Length == 0)
