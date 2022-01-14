@@ -1,0 +1,41 @@
+{
+  "OutputFolder": ".",
+  "Namespace": "Azure.ResourceManager.Resources",
+  "LibraryName": "Resources",
+  "SharedSourceFolders": [
+    "..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Generator.Shared",
+    "..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Azure.Core.Shared"
+  ],
+  "azure-arm": true,
+  "public-clients": true,
+  "skip-csproj-packagereference": true,
+  "OperationGroupToResourceType": {
+    "DeploymentOperations": "Microsoft.Resources/deployments/operations",
+    "Deployments": "Microsoft.Resources/deployments",
+    "DeploymentScriptLogs": "Microsoft.Resources/deploymentScripts/logs"
+  },
+  "OperationGroupToResource": {
+    "DeploymentOperations": "DeploymentOperation",
+    "Deployments": "DeploymentExtended",
+    "DeploymentScripts": "DeploymentScript",
+    "ApplicationDefinitions": "ApplicationDefinition",
+    "DeploymentScriptLogs": "ScriptLog"
+  },
+  "MergeOperations": {
+    "WhatIf": [
+      "Deployments_WhatIf_POST",
+      "Deployments_WhatIfAtTenantScope_POST",
+      "Deployments_WhatIfAtManagementGroupScope_POST",
+      "Deployments_WhatIfAtSubscriptionScope_POST"
+    ]
+  },
+  "OperationGroupsToOmit": [
+    "Providers",
+    "ProviderResourceTypes",
+    "Resources",
+    "ResourceGroups",
+    "Tags",
+    "Subscriptions",
+    "Tenants"
+  ]
+}

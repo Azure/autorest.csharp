@@ -290,8 +290,8 @@ namespace MgmtScopeResource
         /// ContextualPath: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}
         /// OperationId: Deployments_ValidateAtScope
         /// <summary> Validates whether the specified template is syntactically correct and will be accepted by Azure Resource Manager.. </summary>
-        /// <param name="parameters"> Parameters to validate. </param>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="parameters"> Parameters to validate. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public async virtual Task<DeploymentValidateAtScopeOperation> ValidateAtScopeAsync(bool waitForCompletion, Deployment parameters, CancellationToken cancellationToken = default)
@@ -322,8 +322,8 @@ namespace MgmtScopeResource
         /// ContextualPath: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}
         /// OperationId: Deployments_ValidateAtScope
         /// <summary> Validates whether the specified template is syntactically correct and will be accepted by Azure Resource Manager.. </summary>
-        /// <param name="parameters"> Parameters to validate. </param>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="parameters"> Parameters to validate. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public virtual DeploymentValidateAtScopeOperation ValidateAtScope(bool waitForCompletion, Deployment parameters, CancellationToken cancellationToken = default)
@@ -405,8 +405,8 @@ namespace MgmtScopeResource
         /// ContextualPath: /subscriptions/{subscriptionId}/providers/Microsoft.Resources/deployments/{deploymentName}
         /// OperationId: Deployments_WhatIfAtSubscriptionScope
         /// <summary> Returns changes that will be made by the deployment if executed at the scope of the resource group. </summary>
-        /// <param name="parameters"> Parameters to validate. </param>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="parameters"> Parameters to validate. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public async virtual Task<DeploymentWhatIfOperation> WhatIfAsync(bool waitForCompletion, DeploymentWhatIf parameters, CancellationToken cancellationToken = default)
@@ -477,8 +477,8 @@ namespace MgmtScopeResource
         /// ContextualPath: /subscriptions/{subscriptionId}/providers/Microsoft.Resources/deployments/{deploymentName}
         /// OperationId: Deployments_WhatIfAtSubscriptionScope
         /// <summary> Returns changes that will be made by the deployment if executed at the scope of the resource group. </summary>
-        /// <param name="parameters"> Parameters to validate. </param>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="parameters"> Parameters to validate. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public virtual DeploymentWhatIfOperation WhatIf(bool waitForCompletion, DeploymentWhatIf parameters, CancellationToken cancellationToken = default)

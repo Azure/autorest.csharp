@@ -242,8 +242,8 @@ namespace MgmtKeyvault
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/managedHSMs/{name}
         /// OperationId: ManagedHsms_Update
         /// <summary> Update a managed HSM Pool in the specified subscription. </summary>
-        /// <param name="parameters"> Parameters to patch the managed HSM Pool. </param>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="parameters"> Parameters to patch the managed HSM Pool. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public async virtual Task<ManagedHsmUpdateOperation> UpdateAsync(bool waitForCompletion, ManagedHsmData parameters, CancellationToken cancellationToken = default)
@@ -274,8 +274,8 @@ namespace MgmtKeyvault
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/managedHSMs/{name}
         /// OperationId: ManagedHsms_Update
         /// <summary> Update a managed HSM Pool in the specified subscription. </summary>
-        /// <param name="parameters"> Parameters to patch the managed HSM Pool. </param>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="parameters"> Parameters to patch the managed HSM Pool. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public virtual ManagedHsmUpdateOperation Update(bool waitForCompletion, ManagedHsmData parameters, CancellationToken cancellationToken = default)

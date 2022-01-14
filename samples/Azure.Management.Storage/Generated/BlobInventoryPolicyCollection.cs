@@ -54,9 +54,9 @@ namespace Azure.Management.Storage
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
         /// OperationId: BlobInventoryPolicies_CreateOrUpdate
         /// <summary> Sets the blob inventory policy to the specified storage account. </summary>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="blobInventoryPolicyName"> The name of the storage account blob inventory policy. It should always be &apos;default&apos;. </param>
         /// <param name="properties"> The blob inventory policy set to a storage account. </param>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
         public virtual BlobInventoryPolicyCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, BlobInventoryPolicyName blobInventoryPolicyName, BlobInventoryPolicyData properties, CancellationToken cancellationToken = default)
@@ -71,7 +71,7 @@ namespace Azure.Management.Storage
             try
             {
                 var response = _blobInventoryPoliciesRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, blobInventoryPolicyName, properties, cancellationToken);
-                var operation = new BlobInventoryPolicyCreateOrUpdateOperation(Parent, response);
+                var operation = new BlobInventoryPolicyCreateOrUpdateOperation(this, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -87,9 +87,9 @@ namespace Azure.Management.Storage
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
         /// OperationId: BlobInventoryPolicies_CreateOrUpdate
         /// <summary> Sets the blob inventory policy to the specified storage account. </summary>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="blobInventoryPolicyName"> The name of the storage account blob inventory policy. It should always be &apos;default&apos;. </param>
         /// <param name="properties"> The blob inventory policy set to a storage account. </param>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
         public async virtual Task<BlobInventoryPolicyCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, BlobInventoryPolicyName blobInventoryPolicyName, BlobInventoryPolicyData properties, CancellationToken cancellationToken = default)
@@ -104,7 +104,7 @@ namespace Azure.Management.Storage
             try
             {
                 var response = await _blobInventoryPoliciesRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, blobInventoryPolicyName, properties, cancellationToken).ConfigureAwait(false);
-                var operation = new BlobInventoryPolicyCreateOrUpdateOperation(Parent, response);
+                var operation = new BlobInventoryPolicyCreateOrUpdateOperation(this, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -131,7 +131,7 @@ namespace Azure.Management.Storage
                 var response = _blobInventoryPoliciesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, blobInventoryPolicyName, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new BlobInventoryPolicy(Parent, response.Value), response.GetRawResponse());
+                return Response.FromValue(new BlobInventoryPolicy(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -155,7 +155,7 @@ namespace Azure.Management.Storage
                 var response = await _blobInventoryPoliciesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, blobInventoryPolicyName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new BlobInventoryPolicy(Parent, response.Value), response.GetRawResponse());
+                return Response.FromValue(new BlobInventoryPolicy(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -259,7 +259,7 @@ namespace Azure.Management.Storage
                 try
                 {
                     var response = _blobInventoryPoliciesRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new BlobInventoryPolicy(Parent, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new BlobInventoryPolicy(this, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -285,7 +285,7 @@ namespace Azure.Management.Storage
                 try
                 {
                     var response = await _blobInventoryPoliciesRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new BlobInventoryPolicy(Parent, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new BlobInventoryPolicy(this, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {

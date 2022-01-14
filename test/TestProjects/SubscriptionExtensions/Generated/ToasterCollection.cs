@@ -56,9 +56,9 @@ namespace SubscriptionExtensions
         /// ContextualPath: /subscriptions/{subscriptionId}
         /// OperationId: Toasters_CreateOrUpdate
         /// <summary> Create or update an availability set. </summary>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="toasterName"> The name of the availability set. </param>
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="toasterName"/> or <paramref name="parameters"/> is null. </exception>
         public virtual ToasterCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string toasterName, ToasterData parameters, CancellationToken cancellationToken = default)
@@ -77,7 +77,7 @@ namespace SubscriptionExtensions
             try
             {
                 var response = _toastersRestClient.CreateOrUpdate(Id.SubscriptionId, toasterName, parameters, cancellationToken);
-                var operation = new ToasterCreateOrUpdateOperation(Parent, response);
+                var operation = new ToasterCreateOrUpdateOperation(this, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -93,9 +93,9 @@ namespace SubscriptionExtensions
         /// ContextualPath: /subscriptions/{subscriptionId}
         /// OperationId: Toasters_CreateOrUpdate
         /// <summary> Create or update an availability set. </summary>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="toasterName"> The name of the availability set. </param>
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="toasterName"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<ToasterCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string toasterName, ToasterData parameters, CancellationToken cancellationToken = default)
@@ -114,7 +114,7 @@ namespace SubscriptionExtensions
             try
             {
                 var response = await _toastersRestClient.CreateOrUpdateAsync(Id.SubscriptionId, toasterName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new ToasterCreateOrUpdateOperation(Parent, response);
+                var operation = new ToasterCreateOrUpdateOperation(this, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -146,7 +146,7 @@ namespace SubscriptionExtensions
                 var response = _toastersRestClient.Get(Id.SubscriptionId, toasterName, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new Toaster(Parent, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Toaster(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -175,7 +175,7 @@ namespace SubscriptionExtensions
                 var response = await _toastersRestClient.GetAsync(Id.SubscriptionId, toasterName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new Toaster(Parent, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Toaster(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -302,7 +302,7 @@ namespace SubscriptionExtensions
                 try
                 {
                     var response = _toastersRestClient.List(Id.SubscriptionId, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new Toaster(Parent, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new Toaster(this, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -327,7 +327,7 @@ namespace SubscriptionExtensions
                 try
                 {
                     var response = await _toastersRestClient.ListAsync(Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new Toaster(Parent, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new Toaster(this, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {

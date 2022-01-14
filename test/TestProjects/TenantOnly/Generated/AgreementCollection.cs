@@ -71,7 +71,7 @@ namespace TenantOnly
                 var response = _agreementsRestClient.Get(Id.Name, agreementName, expand, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new Agreement(Parent, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Agreement(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -102,7 +102,7 @@ namespace TenantOnly
                 var response = await _agreementsRestClient.GetAsync(Id.Name, agreementName, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new Agreement(Parent, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Agreement(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -235,7 +235,7 @@ namespace TenantOnly
                 try
                 {
                     var response = _agreementsRestClient.List(Id.Name, expand, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new Agreement(Parent, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new Agreement(this, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -262,7 +262,7 @@ namespace TenantOnly
                 try
                 {
                     var response = await _agreementsRestClient.ListAsync(Id.Name, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new Agreement(Parent, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new Agreement(this, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
