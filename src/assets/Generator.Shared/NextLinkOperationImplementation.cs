@@ -134,7 +134,7 @@ namespace Azure.Core
 
             // Set final uri as original request's uri if one of these requirements are met:
             // 1.Original request is a put method;
-            // 2.Original request is a management plane patch method, for data plane patch method, the final uri will be determinned by the "_finalStateVia";
+            // 2.Original request is a management plane patch method. For data plane patch method, the final uri will be determinned by the original response header and "_finalStateVia";
             // 3.Original response header contains "Location" and FinalStateVia is configured to OriginalUri.
             if (_requestMethod == RequestMethod.Put || _requestMethod == RequestMethod.Patch && _startRequestUri.AbsoluteUri.StartsWith("https://management.azure.com/") || _originalResponseHasLocation && _finalStateVia == OperationFinalStateVia.OriginalUri)
             {
