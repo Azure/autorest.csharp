@@ -705,11 +705,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected virtual void WriteLROMethodSignature(CSharpType responseType, string methodName, IReadOnlyList<Parameter> methodParameters, bool async,
             string accessibility = "public", bool isVirtual = true)
         {
+            _writer.WriteXmlDocumentationParameter("waitForCompletion", $"Waits for the completion of the long running operations.");
             foreach (var parameter in methodParameters)
             {
                 _writer.WriteXmlDocumentationParameter(parameter);
             }
-            _writer.WriteXmlDocumentationParameter("waitForCompletion", $"Waits for the completion of the long running operations.");
             _writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
             _writer.WriteXmlDocumentationRequiredParametersException(methodParameters);
             _writer.Append($"{accessibility} {GetAsyncKeyword(async)} {GetVirtual(isVirtual)} {responseType} {CreateMethodName(methodName, async)}(");

@@ -94,6 +94,8 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
             // we should implement the logic to avoid overload conflicts (e.g. /{A}/{B}/{C} v.s. /{D}/{E}/{F}, both context path contains 3 parameters).
             foreach (var requestPath in _resource.RequestPaths)
             {
+                if (requestPath.Count == 0)
+                    continue;
                 _writer.Line();
                 _writer.WriteXmlDocumentationSummary($"Generate the resource identifier of a <see cref=\"{TypeOfThis}\"/> instance.");
                 var parameterList = string.Join(", ", requestPath.Where(segment => segment.IsReference).Select(segment => $"string {segment.ReferenceName}"));
@@ -366,6 +368,7 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
         {
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Add a tag to the current resource.");
+            _writer.WriteXmlDocumentationParameter("waitForCompletion", $"Waits for the completion of the long running operations.");
             _writer.WriteXmlDocumentationParameter("key", $"The key for the tag.");
             _writer.WriteXmlDocumentationParameter("value", $"The value for the tag.");
             _writer.WriteXmlDocumentationParameter("cancellationToken", $"A token to allow the caller to cancel the call to the service. The default value is <see cref=\"CancellationToken.None\" />.");
@@ -373,7 +376,7 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
 
             var responseType = TypeOfThis.WrapResponse(async);
 
-            _writer.Append($"public {GetAsyncKeyword(async)} {GetVirtual(true)} {responseType} {CreateMethodName("AddTag", async)}(string key, string value, {typeof(CancellationToken)} cancellationToken = default)");
+            _writer.Append($"public {GetAsyncKeyword(async)} {GetVirtual(true)} {responseType} {CreateMethodName("AddTag", async)}(bool waitForCompletion, string key, string value, {typeof(CancellationToken)} cancellationToken = default)");
             using (_writer.Scope())
             {
                 using (_writer.Scope($"if (string.IsNullOrWhiteSpace(key))"))
@@ -402,13 +405,14 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
         {
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Replace the tags on the resource with the given set.");
+            _writer.WriteXmlDocumentationParameter("waitForCompletion", $"Waits for the completion of the long running operations.");
             _writer.WriteXmlDocumentationParameter("tags", $"The set of tags to use as replacement.");
             _writer.WriteXmlDocumentationParameter("cancellationToken", $"A token to allow the caller to cancel the call to the service. The default value is <see cref=\"CancellationToken.None\" />.");
             _writer.WriteXmlDocumentationReturns($"The updated resource with the tags replaced.");
 
             var responseType = TypeOfThis.WrapResponse(async);
 
-            _writer.Append($"public {GetAsyncKeyword(async)} {GetVirtual(true)} {responseType} {CreateMethodName("SetTags", async)}({typeof(IDictionary<string, string>)} tags, {typeof(CancellationToken)} cancellationToken = default)");
+            _writer.Append($"public {GetAsyncKeyword(async)} {GetVirtual(true)} {responseType} {CreateMethodName("SetTags", async)}(bool waitForCompletion, {typeof(IDictionary<string, string>)} tags, {typeof(CancellationToken)} cancellationToken = default)");
             using (_writer.Scope())
             {
                 using (_writer.Scope($"if (tags == null)"))
@@ -424,7 +428,7 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
                     {
                         _writer.Append($"await ");
                     }
-                    _writer.Line($"TagResource.{CreateMethodName("Delete", async)}(cancellationToken: cancellationToken){GetConfigureAwait(async)};");
+                    _writer.Line($"TagResource.{CreateMethodName("Delete", async)}(waitForCompletion, cancellationToken: cancellationToken){GetConfigureAwait(async)};");
                     _writer.Append($"var originalTags  = ");
                     if (async)
                     {
@@ -442,13 +446,14 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
         {
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Removes a tag by key from the resource.");
+            _writer.WriteXmlDocumentationParameter("waitForCompletion", $"Waits for the completion of the long running operations.");
             _writer.WriteXmlDocumentationParameter("key", $"The key of the tag to remove.");
             _writer.WriteXmlDocumentationParameter("cancellationToken", $"A token to allow the caller to cancel the call to the service. The default value is <see cref=\"CancellationToken.None\" />.");
             _writer.WriteXmlDocumentationReturns($"The updated resource with the tag removed.");
 
             var responseType = TypeOfThis.WrapResponse(async);
 
-            _writer.Append($"public {GetAsyncKeyword(async)} {GetVirtual(true)} {responseType} {CreateMethodName("RemoveTag", async)}(string key, {typeof(CancellationToken)} cancellationToken = default)");
+            _writer.Append($"public {GetAsyncKeyword(async)} {GetVirtual(true)} {responseType} {CreateMethodName("RemoveTag", async)}(bool waitForCompletion, string key, {typeof(CancellationToken)} cancellationToken = default)");
             using (_writer.Scope())
             {
                 using (_writer.Scope($"if (string.IsNullOrWhiteSpace(key))"))
@@ -475,7 +480,7 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
 
         private void WriteTaggableCommonMethod(bool async)
         {
-            _writer.Line($"{GetAwait(async)} TagResource.{CreateMethodName("CreateOrUpdate", async)}(originalTags.Value.Data, cancellationToken: cancellationToken){GetConfigureAwait(async)};");
+            _writer.Line($"{GetAwait(async)} TagResource.{CreateMethodName("CreateOrUpdate", async)}(waitForCompletion, originalTags.Value.Data, cancellationToken: cancellationToken){GetConfigureAwait(async)};");
 
             BuildParameters(_resource.GetOperation!, out var operationMappings, out var parameterMappings, out _);
 
