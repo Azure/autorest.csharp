@@ -124,7 +124,7 @@ namespace ExactMatchFlattenInheritance
             }
         }
 
-        internal HttpMessage CreatePutRequest(string subscriptionId, string resourceGroupName, string name, int? foo)
+        internal HttpMessage CreatePutRequest(string subscriptionId, string resourceGroupName, string name, AzureResourceFlattenModel5 parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -141,12 +141,8 @@ namespace ExactMatchFlattenInheritance
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
-            var model = new AzureResourceFlattenModel5()
-            {
-                Foo = foo
-            };
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(model);
+            content.JsonWriter.WriteObjectValue(parameters);
             request.Content = content;
             message.SetProperty("UserAgentOverride", _userAgent);
             return message;
@@ -156,10 +152,10 @@ namespace ExactMatchFlattenInheritance
         /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="name"> The String to use. </param>
-        /// <param name="foo"> New property. </param>
+        /// <param name="parameters"> The AzureResourceFlattenModel5 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="name"/> is null. </exception>
-        public async Task<Response<AzureResourceFlattenModel5>> PutAsync(string subscriptionId, string resourceGroupName, string name, int? foo = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="name"/>, or <paramref name="parameters"/> is null. </exception>
+        public async Task<Response<AzureResourceFlattenModel5>> PutAsync(string subscriptionId, string resourceGroupName, string name, AzureResourceFlattenModel5 parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -173,8 +169,12 @@ namespace ExactMatchFlattenInheritance
             {
                 throw new ArgumentNullException(nameof(name));
             }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
 
-            using var message = CreatePutRequest(subscriptionId, resourceGroupName, name, foo);
+            using var message = CreatePutRequest(subscriptionId, resourceGroupName, name, parameters);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -194,10 +194,10 @@ namespace ExactMatchFlattenInheritance
         /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="name"> The String to use. </param>
-        /// <param name="foo"> New property. </param>
+        /// <param name="parameters"> The AzureResourceFlattenModel5 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="name"/> is null. </exception>
-        public Response<AzureResourceFlattenModel5> Put(string subscriptionId, string resourceGroupName, string name, int? foo = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="name"/>, or <paramref name="parameters"/> is null. </exception>
+        public Response<AzureResourceFlattenModel5> Put(string subscriptionId, string resourceGroupName, string name, AzureResourceFlattenModel5 parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -211,8 +211,12 @@ namespace ExactMatchFlattenInheritance
             {
                 throw new ArgumentNullException(nameof(name));
             }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
 
-            using var message = CreatePutRequest(subscriptionId, resourceGroupName, name, foo);
+            using var message = CreatePutRequest(subscriptionId, resourceGroupName, name, parameters);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

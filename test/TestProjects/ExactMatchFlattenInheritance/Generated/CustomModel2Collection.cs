@@ -57,22 +57,26 @@ namespace ExactMatchFlattenInheritance
         /// OperationId: CustomModel2s_Put
         /// <summary> Create or update an CustomModel2. </summary>
         /// <param name="name"> The String to use. </param>
-        /// <param name="foo"> The CustomModel2Foo to use. </param>
+        /// <param name="parameters"> The CustomModel2 to use. </param>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public virtual CustomModel2SPutOperation CreateOrUpdate(bool waitForCompletion, string name, string foo = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
+        public virtual CustomModel2SPutOperation CreateOrUpdate(bool waitForCompletion, string name, CustomModel2Data parameters, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
                 throw new ArgumentNullException(nameof(name));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
             }
 
             using var scope = _clientDiagnostics.CreateScope("CustomModel2Collection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _customModel2sRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, name, foo, cancellationToken);
+                var response = _customModel2sRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, name, parameters, cancellationToken);
                 var operation = new CustomModel2SPutOperation(Parent, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
@@ -90,22 +94,26 @@ namespace ExactMatchFlattenInheritance
         /// OperationId: CustomModel2s_Put
         /// <summary> Create or update an CustomModel2. </summary>
         /// <param name="name"> The String to use. </param>
-        /// <param name="foo"> The CustomModel2Foo to use. </param>
+        /// <param name="parameters"> The CustomModel2 to use. </param>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public async virtual Task<CustomModel2SPutOperation> CreateOrUpdateAsync(bool waitForCompletion, string name, string foo = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
+        public async virtual Task<CustomModel2SPutOperation> CreateOrUpdateAsync(bool waitForCompletion, string name, CustomModel2Data parameters, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
                 throw new ArgumentNullException(nameof(name));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
             }
 
             using var scope = _clientDiagnostics.CreateScope("CustomModel2Collection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _customModel2sRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, name, foo, cancellationToken).ConfigureAwait(false);
+                var response = await _customModel2sRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, name, parameters, cancellationToken).ConfigureAwait(false);
                 var operation = new CustomModel2SPutOperation(Parent, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);

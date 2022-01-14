@@ -1024,7 +1024,7 @@ schemas: !Schemas
                 - !ApiVersion 
                   version: '2020-06-01'
               properties:
-                - !Property &ref_94
+                - !Property 
                   schema: *ref_33
                   serializedName: foo
                   language: !Languages 
@@ -1113,7 +1113,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_35
-    - !ObjectSchema &ref_101
+    - !ObjectSchema &ref_99
       type: object
       apiVersions:
         - !ApiVersion 
@@ -1186,7 +1186,7 @@ schemas: !Schemas
                 immediate:
                   - *ref_40
               properties:
-                - !Property &ref_103
+                - !Property 
                   schema: *ref_41
                   serializedName: foo
                   language: !Languages 
@@ -1238,7 +1238,7 @@ schemas: !Schemas
       protocol: !Protocols {}
     - *ref_36
     - *ref_40
-    - !ObjectSchema &ref_110
+    - !ObjectSchema &ref_106
       type: object
       apiVersions:
         - !ApiVersion 
@@ -2545,7 +2545,7 @@ operationGroups:
             version: '2020-06-01'
         parameters:
           - *ref_58
-          - !Parameter &ref_96
+          - !Parameter &ref_94
             schema: *ref_1
             implementation: Method
             required: true
@@ -2557,7 +2557,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_97
+          - !Parameter &ref_95
             schema: *ref_1
             implementation: Method
             required: true
@@ -2589,7 +2589,6 @@ operationGroups:
                     in: header
               - !Parameter &ref_93
                 schema: *ref_35
-                flattened: true
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -2613,19 +2612,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !VirtualParameter &ref_95
-                schema: *ref_33
-                implementation: Method
-                originalParameter: *ref_93
-                pathToProperty: []
-                targetProperty: *ref_94
-                language: !Languages 
-                  default:
-                    name: foo
-                    description: New property
-                protocol: !Protocols {}
             signatureParameters:
-              - *ref_95
+              - *ref_93
             language: !Languages 
               default:
                 name: ''
@@ -2639,8 +2627,8 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_96
-          - *ref_97
+          - *ref_94
+          - *ref_95
         responses:
           - !SchemaResponse 
             schema: *ref_35
@@ -2666,7 +2654,7 @@ operationGroups:
             version: '2020-06-01'
         parameters:
           - *ref_58
-          - !Parameter &ref_98
+          - !Parameter &ref_96
             schema: *ref_1
             implementation: Method
             required: true
@@ -2678,7 +2666,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_99
+          - !Parameter &ref_97
             schema: *ref_1
             implementation: Method
             required: true
@@ -2719,8 +2707,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_98
-          - *ref_99
+          - *ref_96
+          - *ref_97
         responses:
           - !SchemaResponse 
             schema: *ref_35
@@ -2754,7 +2742,7 @@ operationGroups:
             version: '2020-06-01'
         parameters:
           - *ref_58
-          - !Parameter &ref_100
+          - !Parameter &ref_98
             schema: *ref_1
             implementation: Method
             required: true
@@ -2795,10 +2783,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_100
+          - *ref_98
         responses:
           - !SchemaResponse 
-            schema: *ref_101
+            schema: *ref_99
             language: !Languages 
               default:
                 name: ''
@@ -2821,7 +2809,7 @@ operationGroups:
             version: '2020-06-01'
         parameters:
           - *ref_58
-          - !Parameter &ref_105
+          - !Parameter &ref_101
             schema: *ref_1
             implementation: Method
             required: true
@@ -2833,7 +2821,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_106
+          - !Parameter &ref_102
             schema: *ref_1
             implementation: Method
             required: true
@@ -2863,9 +2851,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_102
+              - !Parameter &ref_100
                 schema: *ref_36
-                flattened: true
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -2889,19 +2876,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !VirtualParameter &ref_104
-                schema: *ref_41
-                implementation: Method
-                originalParameter: *ref_102
-                pathToProperty: []
-                targetProperty: *ref_103
-                language: !Languages 
-                  default:
-                    name: foo
-                    description: ''
-                protocol: !Protocols {}
             signatureParameters:
-              - *ref_104
+              - *ref_100
             language: !Languages 
               default:
                 name: ''
@@ -2915,8 +2891,8 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_105
-          - *ref_106
+          - *ref_101
+          - *ref_102
         responses:
           - !SchemaResponse 
             schema: *ref_36
@@ -2942,7 +2918,7 @@ operationGroups:
             version: '2020-06-01'
         parameters:
           - *ref_58
-          - !Parameter &ref_107
+          - !Parameter &ref_103
             schema: *ref_1
             implementation: Method
             required: true
@@ -2954,7 +2930,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_108
+          - !Parameter &ref_104
             schema: *ref_1
             implementation: Method
             required: true
@@ -2995,8 +2971,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_107
-          - *ref_108
+          - *ref_103
+          - *ref_104
         responses:
           - !SchemaResponse 
             schema: *ref_36
@@ -3030,7 +3006,7 @@ operationGroups:
             version: '2020-06-01'
         parameters:
           - *ref_58
-          - !Parameter &ref_109
+          - !Parameter &ref_105
             schema: *ref_1
             implementation: Method
             required: true
@@ -3071,10 +3047,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_109
+          - *ref_105
         responses:
           - !SchemaResponse 
-            schema: *ref_110
+            schema: *ref_106
             language: !Languages 
               default:
                 name: ''
@@ -3097,7 +3073,7 @@ operationGroups:
             version: '2020-06-01'
         parameters:
           - *ref_58
-          - !Parameter &ref_112
+          - !Parameter &ref_108
             schema: *ref_1
             implementation: Method
             required: true
@@ -3109,7 +3085,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_113
+          - !Parameter &ref_109
             schema: *ref_1
             implementation: Method
             required: true
@@ -3139,7 +3115,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_111
+              - !Parameter &ref_107
                 schema: *ref_43
                 implementation: Method
                 required: true
@@ -3165,7 +3141,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_111
+              - *ref_107
             language: !Languages 
               default:
                 name: ''
@@ -3179,8 +3155,8 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_112
-          - *ref_113
+          - *ref_108
+          - *ref_109
         responses:
           - !SchemaResponse 
             schema: *ref_43
@@ -3206,7 +3182,7 @@ operationGroups:
             version: '2020-06-01'
         parameters:
           - *ref_58
-          - !Parameter &ref_114
+          - !Parameter &ref_110
             schema: *ref_1
             implementation: Method
             required: true
@@ -3218,7 +3194,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_115
+          - !Parameter &ref_111
             schema: *ref_1
             implementation: Method
             required: true
@@ -3259,8 +3235,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_114
-          - *ref_115
+          - *ref_110
+          - *ref_111
         responses:
           - !SchemaResponse 
             schema: *ref_43

@@ -160,7 +160,7 @@ schemas: !Schemas
                       name: name
                       description: ''
                   protocol: !Protocols {}
-                - !Property &ref_20
+                - !Property 
                   schema: !ObjectSchema &ref_8
                     type: object
                     apiVersions:
@@ -374,7 +374,7 @@ operationGroups:
             version: '2020-06-01'
         parameters:
           - *ref_12
-          - !Parameter &ref_22
+          - !Parameter &ref_20
             schema: *ref_10
             implementation: Method
             required: true
@@ -386,7 +386,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_23
+          - !Parameter &ref_21
             schema: *ref_10
             implementation: Method
             required: true
@@ -418,7 +418,6 @@ operationGroups:
                     in: header
               - !Parameter &ref_19
                 schema: *ref_7
-                flattened: true
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -442,19 +441,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !VirtualParameter &ref_21
-                schema: *ref_8
-                implementation: Method
-                originalParameter: *ref_19
-                pathToProperty: []
-                targetProperty: *ref_20
-                language: !Languages 
-                  default:
-                    name: properties
-                    description: Contains information about SSH certificate public key and the path on the Linux VM where the public key is placed.
-                protocol: !Protocols {}
             signatureParameters:
-              - *ref_21
+              - *ref_19
             language: !Languages 
               default:
                 name: ''
@@ -468,8 +456,8 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_22
-          - *ref_23
+          - *ref_20
+          - *ref_21
         responses:
           - !SchemaResponse 
             schema: *ref_7
@@ -508,7 +496,7 @@ operationGroups:
             version: '2020-06-01'
         parameters:
           - *ref_12
-          - !Parameter &ref_24
+          - !Parameter &ref_22
             schema: *ref_10
             implementation: Method
             required: true
@@ -520,7 +508,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_25
+          - !Parameter &ref_23
             schema: *ref_10
             implementation: Method
             required: true
@@ -546,8 +534,8 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_24
-          - *ref_25
+          - *ref_22
+          - *ref_23
         responses:
           - !Response 
             language: !Languages 
@@ -578,7 +566,7 @@ operationGroups:
             version: '2020-06-01'
         parameters:
           - *ref_12
-          - !Parameter &ref_26
+          - !Parameter &ref_24
             schema: *ref_10
             implementation: Method
             required: true
@@ -590,7 +578,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_27
+          - !Parameter &ref_25
             schema: *ref_10
             implementation: Method
             required: true
@@ -631,8 +619,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_26
-          - *ref_27
+          - *ref_24
+          - *ref_25
         responses:
           - !SchemaResponse 
             schema: *ref_7

@@ -790,14 +790,18 @@ namespace ExactMatchFlattenInheritance
         /// <summary> Create or update an AzureResourceFlattenModel5. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>
-        /// <param name="foo"> New property. </param>
+        /// <param name="parameters"> The AzureResourceFlattenModel5 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public static async Task<Response<AzureResourceFlattenModel5>> PutAzureResourceFlattenModel5Async(this ResourceGroup resourceGroup, string name, int? foo = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
+        public static async Task<Response<AzureResourceFlattenModel5>> PutAzureResourceFlattenModel5Async(this ResourceGroup resourceGroup, string name, AzureResourceFlattenModel5 parameters, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
                 throw new ArgumentNullException(nameof(name));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
             }
 
             return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
@@ -808,7 +812,7 @@ namespace ExactMatchFlattenInheritance
                 try
                 {
                     var restOperations = GetAzureResourceFlattenModel5SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
-                    var response = await restOperations.PutAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, name, foo, cancellationToken).ConfigureAwait(false);
+                    var response = await restOperations.PutAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, name, parameters, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
                 catch (Exception e)
@@ -826,14 +830,18 @@ namespace ExactMatchFlattenInheritance
         /// <summary> Create or update an AzureResourceFlattenModel5. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>
-        /// <param name="foo"> New property. </param>
+        /// <param name="parameters"> The AzureResourceFlattenModel5 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public static Response<AzureResourceFlattenModel5> PutAzureResourceFlattenModel5(this ResourceGroup resourceGroup, string name, int? foo = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
+        public static Response<AzureResourceFlattenModel5> PutAzureResourceFlattenModel5(this ResourceGroup resourceGroup, string name, AzureResourceFlattenModel5 parameters, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
                 throw new ArgumentNullException(nameof(name));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
             }
 
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
@@ -844,7 +852,7 @@ namespace ExactMatchFlattenInheritance
                 try
                 {
                     var restOperations = GetAzureResourceFlattenModel5SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
-                    var response = restOperations.Put(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, name, foo, cancellationToken);
+                    var response = restOperations.Put(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, name, parameters, cancellationToken);
                     return response;
                 }
                 catch (Exception e)
