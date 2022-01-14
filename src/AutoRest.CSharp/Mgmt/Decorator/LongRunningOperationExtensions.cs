@@ -19,7 +19,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         {
             HttpMethod.Put,
             HttpMethod.Delete,
-            //HttpMethod.Patch // do we want PATCH to be fake LROs?
+            // we do not do fake LROs for PATCH requests
         };
 
         public static CSharpType? GetReturnTypeAsLongRunningOperation(this Operation operation, Resource? resource, string operationName, BuildContext<MgmtOutputLibrary> context)
