@@ -39,7 +39,7 @@ namespace MgmtScopeResource
         }
         #endregion
 
-        private static DeploymentsRestOperations GetDeploymentsRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = null)
+        private static DeploymentsRestOperations GetDeploymentsRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = default)
         {
             return new DeploymentsRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);
         }

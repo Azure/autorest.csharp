@@ -30,7 +30,7 @@ namespace OmitOperationGroups
         }
         #endregion
 
-        private static Model5SRestOperations GetModel5SRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = null)
+        private static Model5SRestOperations GetModel5SRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = default)
         {
             return new Model5SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);
         }

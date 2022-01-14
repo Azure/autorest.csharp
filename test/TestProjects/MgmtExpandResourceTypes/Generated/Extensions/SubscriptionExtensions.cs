@@ -22,12 +22,12 @@ namespace MgmtExpandResourceTypes
     /// <summary> A class to add extension methods to Subscription. </summary>
     public static partial class SubscriptionExtensions
     {
-        private static ZonesRestOperations GetZonesRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = null)
+        private static ZonesRestOperations GetZonesRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = default)
         {
             return new ZonesRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);
         }
 
-        private static DnsResourceReferenceRestOperations GetDnsResourceReferenceRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = null)
+        private static DnsResourceReferenceRestOperations GetDnsResourceReferenceRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = default)
         {
             return new DnsResourceReferenceRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);
         }

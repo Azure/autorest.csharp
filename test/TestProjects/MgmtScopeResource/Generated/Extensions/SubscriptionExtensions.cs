@@ -32,7 +32,7 @@ namespace MgmtScopeResource
         }
         #endregion
 
-        private static ResourceLinksRestOperations GetResourceLinksRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = null)
+        private static ResourceLinksRestOperations GetResourceLinksRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = default)
         {
             return new ResourceLinksRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);
         }

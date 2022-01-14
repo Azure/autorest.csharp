@@ -50,22 +50,22 @@ namespace ExactMatchFlattenInheritance
         }
         #endregion
 
-        private static AzureResourceFlattenModel2SRestOperations GetAzureResourceFlattenModel2SRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = null)
+        private static AzureResourceFlattenModel2SRestOperations GetAzureResourceFlattenModel2SRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = default)
         {
             return new AzureResourceFlattenModel2SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);
         }
 
-        private static AzureResourceFlattenModel3SRestOperations GetAzureResourceFlattenModel3SRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = null)
+        private static AzureResourceFlattenModel3SRestOperations GetAzureResourceFlattenModel3SRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = default)
         {
             return new AzureResourceFlattenModel3SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);
         }
 
-        private static AzureResourceFlattenModel4SRestOperations GetAzureResourceFlattenModel4SRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = null)
+        private static AzureResourceFlattenModel4SRestOperations GetAzureResourceFlattenModel4SRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = default)
         {
             return new AzureResourceFlattenModel4SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);
         }
 
-        private static AzureResourceFlattenModel5SRestOperations GetAzureResourceFlattenModel5SRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = null)
+        private static AzureResourceFlattenModel5SRestOperations GetAzureResourceFlattenModel5SRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = default)
         {
             return new AzureResourceFlattenModel5SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);
         }

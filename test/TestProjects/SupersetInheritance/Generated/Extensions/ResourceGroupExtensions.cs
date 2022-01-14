@@ -39,12 +39,12 @@ namespace SupersetInheritance
         }
         #endregion
 
-        private static SupersetModel2SRestOperations GetSupersetModel2SRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = null)
+        private static SupersetModel2SRestOperations GetSupersetModel2SRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = default)
         {
             return new SupersetModel2SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);
         }
 
-        private static SupersetModel3SRestOperations GetSupersetModel3SRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = null)
+        private static SupersetModel3SRestOperations GetSupersetModel3SRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = default)
         {
             return new SupersetModel3SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);
         }

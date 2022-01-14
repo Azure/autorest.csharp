@@ -21,7 +21,7 @@ namespace MgmtCollectionParent
     /// <summary> A class to add extension methods to Subscription. </summary>
     public static partial class SubscriptionExtensions
     {
-        private static ComputeManagementRestOperations GetComputeManagementRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = null)
+        private static ComputeManagementRestOperations GetComputeManagementRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = default)
         {
             return new ComputeManagementRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);
         }
