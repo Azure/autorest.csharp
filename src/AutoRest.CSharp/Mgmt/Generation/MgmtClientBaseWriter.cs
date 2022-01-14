@@ -748,9 +748,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
             _writer.Line($"response);");
             CSharpType? lroResultType = GetLROResultType(lroObjectType, operation.Operation);
-            // note that the sync version of method "WaitForCompletion" is an extension method provided by "Azure.ResourceManager.Core", we need to add the corresponding namespace here
-            _writer.UseNamespace("Azure.ResourceManager.Core");
-            var waitForCompletionMethod = lroResultType == null && async ?
+            var waitForCompletionMethod = lroResultType == null ?
                     "WaitForCompletionResponse" :
                     "WaitForCompletion";
             _writer.Line($"if (waitForCompletion)");
