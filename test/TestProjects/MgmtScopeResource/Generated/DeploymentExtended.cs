@@ -234,7 +234,7 @@ namespace MgmtScopeResource
                 var response = _deploymentsRestClient.DeleteAtScope(Id.Parent, Id.Name, cancellationToken);
                 var operation = new DeploymentExtendedDeleteOperation(_clientDiagnostics, Pipeline, _deploymentsRestClient.CreateDeleteAtScopeRequest(Id.Parent, Id.Name).Request, response);
                 if (waitForCompletion)
-                    operation.WaitForCompletion(cancellationToken);
+                    operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
             }
             catch (Exception e)
