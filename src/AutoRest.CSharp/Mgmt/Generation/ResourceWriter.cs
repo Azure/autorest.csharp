@@ -208,11 +208,6 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
             WriteRestClientConstructionForResource(_resource, This.RestClients, getSubId, ClientDiagnosticsField, ClientOptionsProperty, PipelineProperty, BaseUriField, "new ", false);
         }
 
-        private string ConvertToVariableName(string str)
-        {
-            return char.ToLower(str[0]) + str.Substring(1);
-        }
-
         protected virtual void WriteProperties()
         {
             _writer.Line();
