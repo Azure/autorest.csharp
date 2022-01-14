@@ -17,21 +17,21 @@ using MgmtMultipleParentResource;
 
 namespace MgmtMultipleParentResource.Models
 {
-    /// <summary> The operation to update the VMSS VM run command. </summary>
-    public partial class ParentSubParentChildUpdateOperation : Operation<ParentSubParentChild>, IOperationSource<ParentSubParentChild>
+    /// <summary> The operation to create or update the VMSS VM run command. </summary>
+    public partial class TheParentSubParentChildCreateOrUpdateOperation : Operation<TheParentSubParentChild>, IOperationSource<TheParentSubParentChild>
     {
         private readonly OperationInternals<TheParentSubParentChild> _operation;
 
         private readonly ArmResource _operationBase;
 
-        /// <summary> Initializes a new instance of ParentSubParentChildUpdateOperation for mocking. </summary>
-        protected ParentSubParentChildUpdateOperation()
+        /// <summary> Initializes a new instance of TheParentSubParentChildCreateOrUpdateOperation for mocking. </summary>
+        protected TheParentSubParentChildCreateOrUpdateOperation()
         {
         }
 
-        internal ParentSubParentChildUpdateOperation(ArmResource operationsBase, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
+        internal TheParentSubParentChildCreateOrUpdateOperation(ArmResource operationsBase, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new OperationInternals<ParentSubParentChild>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "ParentSubParentChildUpdateOperation");
+            _operation = new OperationInternals<TheParentSubParentChild>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "TheParentSubParentChildCreateOrUpdateOperation");
             _operationBase = operationsBase;
         }
 
