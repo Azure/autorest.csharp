@@ -185,11 +185,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.WriteConstant(clientParameter.DefaultValue.Value);
                 }
             }
-            else if (!clientParameter.IsRequired)
-            {
-                writer.Append($" = null");
-            }
-            else if (enforceDefaultValue)
+            else if (!clientParameter.IsRequired || enforceDefaultValue)
             {
                 // initialize with default
                 writer.Append($" = default");

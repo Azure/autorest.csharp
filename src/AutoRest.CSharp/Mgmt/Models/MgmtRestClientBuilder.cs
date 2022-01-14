@@ -49,23 +49,8 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         public override Parameter BuildConstructorParameter(RequestParameter requestParameter)
         {
-            bool isApiVersion = requestParameter.Origin == "modelerfour:synthesized/api-version";
-
-            if (!isApiVersion)
-                return base.BuildConstructorParameter(requestParameter);
-
-            CSharpType type = _context.TypeFactory.CreateType(requestParameter.Schema, true);
-
-            return new Parameter(
-                requestParameter.CSharpName(),
-                CreateDescription(requestParameter, type),
-                TypeFactory.GetInputType(type),
-                ParseConstant(requestParameter),
-                true,
-                IsApiVersionParameter: isApiVersion,
-                SkipUrlEncoding: requestParameter.Extensions?.SkipEncoding ?? false,
-                RequestLocation: GetRequestLocation(requestParameter),
-                UseDefaultValueInCtorParam: false);
+            var parameter = base.BuildConstructorParameter(requestParameter);
+            return parameter.IsApiVersionParameter ? parameter with { UseDefaultValueInCtorParam = false } : parameter;
         }
     }
 }
