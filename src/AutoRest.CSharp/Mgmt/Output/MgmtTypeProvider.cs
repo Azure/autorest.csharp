@@ -66,8 +66,8 @@ namespace AutoRest.CSharp.Mgmt.Output
             var operationGroup = _context.Library.GetRestClient(operation).OperationGroup;
             var operationId = operation.OperationId(operationGroup);
             // search the configuration for a override of this operation
-            if (Context.Configuration.MgmtConfiguration.OverrideOperationName.TryGetValue(operationId, out var operationName))
-                return operationName;
+            if (operation.TryGetConfigOperationName(_context, out var name))
+                return name;
 
             if (operationGroup.Key == clientResourceName)
             {
@@ -75,7 +75,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             }
 
             var resourceName = string.Empty;
-            if (_context.Library.RestClientMethods[operation].IsListMethod(out _))
+            if (_context.Library.GetRestClientMethod(operation).IsListMethod(out _))
             {
                 resourceName = operationGroup.Key.IsNullOrEmpty() ? string.Empty : operationGroup.Key.ResourceNameToPlural();
                 var opName = operation.MgmtCSharpName(!resourceName.IsNullOrEmpty());
