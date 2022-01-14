@@ -61,7 +61,7 @@ namespace MgmtSubscriptionNameParameter
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual SubscriptionCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string subscriptionName, SBSubscriptionData parameters, CancellationToken cancellationToken = default)
+        public virtual SBSubscriptionCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string subscriptionName, SBSubscriptionData parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionName == null)
             {
@@ -77,7 +77,7 @@ namespace MgmtSubscriptionNameParameter
             try
             {
                 var response = _subscriptionsRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, subscriptionName, parameters, cancellationToken);
-                var operation = new SubscriptionCreateOrUpdateOperation(Parent, response);
+                var operation = new SBSubscriptionCreateOrUpdateOperation(Parent, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -98,7 +98,7 @@ namespace MgmtSubscriptionNameParameter
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<SubscriptionCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string subscriptionName, SBSubscriptionData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<SBSubscriptionCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string subscriptionName, SBSubscriptionData parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionName == null)
             {
@@ -114,7 +114,7 @@ namespace MgmtSubscriptionNameParameter
             try
             {
                 var response = await _subscriptionsRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, subscriptionName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new SubscriptionCreateOrUpdateOperation(Parent, response);
+                var operation = new SBSubscriptionCreateOrUpdateOperation(Parent, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;

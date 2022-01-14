@@ -58,11 +58,6 @@ namespace AutoRest.CSharp.Mgmt.Output
             if (OperationSets.First().TryGetSingletonResourceSuffix(context, out var singletonResourceIdSuffix))
                 SingletonResourceIdSuffix = singletonResourceIdSuffix;
 
-            CreateOperation = GetOperationWithVerb(HttpMethod.Put, "CreateOrUpdate");
-            GetOperation = GetOperationWithVerb(HttpMethod.Get, "Get");
-            DeleteOperation = GetOperationWithVerb(HttpMethod.Delete, "Delete");
-            UpdateOperation = GetOperationWithVerb(HttpMethod.Patch, "Update");
-
             _allOperationMap = GetAllOperationsMap(allOperations);
 
             IsById = OperationSets.Any(operationSet => operationSet.IsById(_context));
@@ -88,7 +83,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected bool IsById { get; }
 
-        protected MgmtClientOperation? GetOperationWithVerb(HttpMethod method, string name)
+        protected MgmtClientOperation? GetOperationWithVerb(HttpMethod method, string operationName)
         {
             var result = new List<MgmtRestOperation>();
             foreach (var operationSet in OperationSets)
@@ -98,11 +93,12 @@ namespace AutoRest.CSharp.Mgmt.Output
                 {
                     var requestPath = operation.GetRequestPath(_context);
                     var restOperation = new MgmtRestOperation(
-                        _context.Library.RestClientMethods[operation],
+                        _context.Library.GetRestClientMethod(operation),
                         _context.Library.GetRestClient(operation),
                         requestPath,
                         GetContextualPath(operationSet, requestPath),
-                        name);
+                        operationName,
+                        operation.GetReturnTypeAsLongRunningOperation(this, operationName, _context));
                     result.Add(restOperation);
                 }
             }
@@ -200,10 +196,10 @@ namespace AutoRest.CSharp.Mgmt.Output
         /// </summary>
         public ResourceData ResourceData { get; }
 
-        public MgmtClientOperation? CreateOperation { get; }
-        public virtual MgmtClientOperation? GetOperation { get; }
-        public virtual MgmtClientOperation? DeleteOperation { get; }
-        public virtual MgmtClientOperation? UpdateOperation { get; }
+        public MgmtClientOperation? CreateOperation => GetOperationWithVerb(HttpMethod.Put, "CreateOrUpdate");
+        public MgmtClientOperation? GetOperation => GetOperationWithVerb(HttpMethod.Get, "Get");
+        public MgmtClientOperation? DeleteOperation => GetOperationWithVerb(HttpMethod.Delete, "Delete");
+        public MgmtClientOperation? UpdateOperation => GetOperationWithVerb(HttpMethod.Patch, "Update");
 
         protected virtual bool ShouldIncludeOperation(Operation operation)
         {
@@ -213,7 +209,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 return positions.Contains(Position);
             }
             // In the resource class, we need to exclude the List operations
-            var restClientMethod = _context.Library.RestClientMethods[operation];
+            var restClientMethod = _context.Library.GetRestClientMethod(operation);
             if (restClientMethod.IsListMethod(out var valueType))
                 return !valueType.EqualsByName(ResourceData.Type);
             return true;
@@ -274,11 +270,12 @@ namespace AutoRest.CSharp.Mgmt.Output
                         GetOperationName(operation, resourceRestClient.OperationGroup.Key);
                     // get the MgmtRestOperation with a proper name
                     var restOperation = new MgmtRestOperation(
-                        _context.Library.RestClientMethods[operation],
+                        _context.Library.GetRestClientMethod(operation),
                         _context.Library.GetRestClient(operation),
                         requestPath,
                         contextualPath,
-                        methodName);
+                        methodName,
+                        operation.GetReturnTypeAsLongRunningOperation(this, methodName, _context));
 
                     if (result.TryGetValue(key, out var list))
                     {

@@ -60,7 +60,7 @@ namespace MgmtExtensionResource
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual PolicyDefinitionCreateOrUpdateAtManagementGroupOperation CreateOrUpdate(bool waitForCompletion, string policyDefinitionName, PolicyDefinitionData parameters, CancellationToken cancellationToken = default)
+        public virtual ManagementGroupPolicyDefinitionCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string policyDefinitionName, PolicyDefinitionData parameters, CancellationToken cancellationToken = default)
         {
             if (policyDefinitionName == null)
             {
@@ -76,7 +76,7 @@ namespace MgmtExtensionResource
             try
             {
                 var response = _policyDefinitionsRestClient.CreateOrUpdateAtManagementGroup(Id.Name, policyDefinitionName, parameters, cancellationToken);
-                var operation = new PolicyDefinitionCreateOrUpdateAtManagementGroupOperation(Parent, response);
+                var operation = new ManagementGroupPolicyDefinitionCreateOrUpdateOperation(Parent, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -97,7 +97,7 @@ namespace MgmtExtensionResource
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<PolicyDefinitionCreateOrUpdateAtManagementGroupOperation> CreateOrUpdateAsync(bool waitForCompletion, string policyDefinitionName, PolicyDefinitionData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<ManagementGroupPolicyDefinitionCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string policyDefinitionName, PolicyDefinitionData parameters, CancellationToken cancellationToken = default)
         {
             if (policyDefinitionName == null)
             {
@@ -113,7 +113,7 @@ namespace MgmtExtensionResource
             try
             {
                 var response = await _policyDefinitionsRestClient.CreateOrUpdateAtManagementGroupAsync(Id.Name, policyDefinitionName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new PolicyDefinitionCreateOrUpdateAtManagementGroupOperation(Parent, response);
+                var operation = new ManagementGroupPolicyDefinitionCreateOrUpdateOperation(Parent, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;

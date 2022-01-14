@@ -60,7 +60,7 @@ namespace OmitOperationGroups
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="model2SName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual Model2SCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string model2SName, Model2Data parameters, CancellationToken cancellationToken = default)
+        public virtual Model2CreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string model2SName, Model2Data parameters, CancellationToken cancellationToken = default)
         {
             if (model2SName == null)
             {
@@ -76,7 +76,7 @@ namespace OmitOperationGroups
             try
             {
                 var response = _model2sRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, model2SName, parameters, cancellationToken);
-                var operation = new Model2SCreateOrUpdateOperation(Parent, response);
+                var operation = new Model2CreateOrUpdateOperation(Parent, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -96,7 +96,7 @@ namespace OmitOperationGroups
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="model2SName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<Model2SCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string model2SName, Model2Data parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<Model2CreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string model2SName, Model2Data parameters, CancellationToken cancellationToken = default)
         {
             if (model2SName == null)
             {
@@ -112,7 +112,7 @@ namespace OmitOperationGroups
             try
             {
                 var response = await _model2sRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, model2SName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new Model2SCreateOrUpdateOperation(Parent, response);
+                var operation = new Model2CreateOrUpdateOperation(Parent, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;

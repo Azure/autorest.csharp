@@ -192,7 +192,7 @@ namespace XmlDeserialization
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="ifMatch"/> is null. </exception>
-        public async virtual Task<XmlDeserializationDeleteOperation> DeleteAsync(bool waitForCompletion, string ifMatch, CancellationToken cancellationToken = default)
+        public async virtual Task<XmlInstanceDeleteOperation> DeleteAsync(bool waitForCompletion, string ifMatch, CancellationToken cancellationToken = default)
         {
             if (ifMatch == null)
             {
@@ -204,7 +204,7 @@ namespace XmlDeserialization
             try
             {
                 var response = await _xmlDeserializationRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, ifMatch, cancellationToken).ConfigureAwait(false);
-                var operation = new XmlDeserializationDeleteOperation(response);
+                var operation = new XmlInstanceDeleteOperation(response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -224,7 +224,7 @@ namespace XmlDeserialization
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="ifMatch"/> is null. </exception>
-        public virtual XmlDeserializationDeleteOperation Delete(bool waitForCompletion, string ifMatch, CancellationToken cancellationToken = default)
+        public virtual XmlInstanceDeleteOperation Delete(bool waitForCompletion, string ifMatch, CancellationToken cancellationToken = default)
         {
             if (ifMatch == null)
             {
@@ -236,7 +236,7 @@ namespace XmlDeserialization
             try
             {
                 var response = _xmlDeserializationRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, ifMatch, cancellationToken);
-                var operation = new XmlDeserializationDeleteOperation(response);
+                var operation = new XmlInstanceDeleteOperation(response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

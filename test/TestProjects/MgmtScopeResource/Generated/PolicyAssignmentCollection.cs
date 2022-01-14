@@ -51,7 +51,7 @@ namespace MgmtScopeResource
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="policyAssignmentName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual PolicyAssignmentCreateOperation CreateOrUpdate(bool waitForCompletion, string policyAssignmentName, PolicyAssignmentData parameters, CancellationToken cancellationToken = default)
+        public virtual PolicyAssignmentCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string policyAssignmentName, PolicyAssignmentData parameters, CancellationToken cancellationToken = default)
         {
             if (policyAssignmentName == null)
             {
@@ -67,7 +67,7 @@ namespace MgmtScopeResource
             try
             {
                 var response = _policyAssignmentsRestClient.Create(Id, policyAssignmentName, parameters, cancellationToken);
-                var operation = new PolicyAssignmentCreateOperation(Parent, response);
+                var operation = new PolicyAssignmentCreateOrUpdateOperation(Parent, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -88,7 +88,7 @@ namespace MgmtScopeResource
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="policyAssignmentName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<PolicyAssignmentCreateOperation> CreateOrUpdateAsync(bool waitForCompletion, string policyAssignmentName, PolicyAssignmentData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<PolicyAssignmentCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string policyAssignmentName, PolicyAssignmentData parameters, CancellationToken cancellationToken = default)
         {
             if (policyAssignmentName == null)
             {
@@ -104,7 +104,7 @@ namespace MgmtScopeResource
             try
             {
                 var response = await _policyAssignmentsRestClient.CreateAsync(Id, policyAssignmentName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new PolicyAssignmentCreateOperation(Parent, response);
+                var operation = new PolicyAssignmentCreateOrUpdateOperation(Parent, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;

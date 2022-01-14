@@ -59,7 +59,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="vmExtensionName"/> or <paramref name="extensionParameters"/> is null. </exception>
-        public virtual VirtualMachineScaleSetVMExtensionCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string vmExtensionName, VirtualMachineExtensionData extensionParameters, CancellationToken cancellationToken = default)
+        public virtual VirtualMachineScaleSetVirtualMachineExtensionCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string vmExtensionName, VirtualMachineExtensionData extensionParameters, CancellationToken cancellationToken = default)
         {
             if (vmExtensionName == null)
             {
@@ -75,7 +75,7 @@ namespace Azure.ResourceManager.Sample
             try
             {
                 var response = _virtualMachineScaleSetVMExtensionsRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, vmExtensionName, extensionParameters, cancellationToken);
-                var operation = new VirtualMachineScaleSetVMExtensionCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _virtualMachineScaleSetVMExtensionsRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, vmExtensionName, extensionParameters).Request, response);
+                var operation = new VirtualMachineScaleSetVirtualMachineExtensionCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _virtualMachineScaleSetVMExtensionsRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, vmExtensionName, extensionParameters).Request, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -96,7 +96,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="vmExtensionName"/> or <paramref name="extensionParameters"/> is null. </exception>
-        public async virtual Task<VirtualMachineScaleSetVMExtensionCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string vmExtensionName, VirtualMachineExtensionData extensionParameters, CancellationToken cancellationToken = default)
+        public async virtual Task<VirtualMachineScaleSetVirtualMachineExtensionCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string vmExtensionName, VirtualMachineExtensionData extensionParameters, CancellationToken cancellationToken = default)
         {
             if (vmExtensionName == null)
             {
@@ -112,7 +112,7 @@ namespace Azure.ResourceManager.Sample
             try
             {
                 var response = await _virtualMachineScaleSetVMExtensionsRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, vmExtensionName, extensionParameters, cancellationToken).ConfigureAwait(false);
-                var operation = new VirtualMachineScaleSetVMExtensionCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _virtualMachineScaleSetVMExtensionsRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, vmExtensionName, extensionParameters).Request, response);
+                var operation = new VirtualMachineScaleSetVirtualMachineExtensionCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _virtualMachineScaleSetVMExtensionsRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, vmExtensionName, extensionParameters).Request, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;

@@ -197,7 +197,7 @@ namespace Azure.Management.Storage
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<BlobServiceSetServicePropertiesOperation> CreateOrUpdateAsync(bool waitForCompletion, BlobServiceData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<BlobServiceCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, BlobServiceData parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -209,7 +209,7 @@ namespace Azure.Management.Storage
             try
             {
                 var response = await _blobServicesRestClient.SetServicePropertiesAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new BlobServiceSetServicePropertiesOperation(this, response);
+                var operation = new BlobServiceCreateOrUpdateOperation(this, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -229,7 +229,7 @@ namespace Azure.Management.Storage
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual BlobServiceSetServicePropertiesOperation CreateOrUpdate(bool waitForCompletion, BlobServiceData parameters, CancellationToken cancellationToken = default)
+        public virtual BlobServiceCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, BlobServiceData parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -241,7 +241,7 @@ namespace Azure.Management.Storage
             try
             {
                 var response = _blobServicesRestClient.SetServiceProperties(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, parameters, cancellationToken);
-                var operation = new BlobServiceSetServicePropertiesOperation(this, response);
+                var operation = new BlobServiceCreateOrUpdateOperation(this, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

@@ -35,13 +35,18 @@ namespace AutoRest.CSharp.Mgmt.Output
         private IEnumerable<MgmtClientOperation>? _clientOperations;
         private IEnumerable<MgmtClientOperation> EnsureClientOperations()
         {
-            return _allOperations.Select(operation => MgmtClientOperation.FromOperation(
-                new MgmtRestOperation(
-                    _context.Library.RestClientMethods[operation],
-                    _context.Library.GetRestClient(operation),
-                    operation.GetRequestPath(_context),
-                    ContextualPath,
-                    GetOperationName(operation, ResourceName))));
+            return _allOperations.Select(operation =>
+            {
+                var operationName = GetOperationName(operation, ResourceName);
+                return MgmtClientOperation.FromOperation(
+                    new MgmtRestOperation(
+                        _context.Library.GetRestClientMethod(operation),
+                        _context.Library.GetRestClient(operation),
+                        operation.GetRequestPath(_context),
+                        ContextualPath,
+                        operationName,
+                        operation.GetReturnTypeAsLongRunningOperation(null, operationName, _context)));
+            });
         }
 
         private IEnumerable<MgmtRestClient>? _restClients;

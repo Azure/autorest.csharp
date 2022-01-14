@@ -62,7 +62,7 @@ namespace XmlDeserialization
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="xmlName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual XmlDeserializationCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string xmlName, XmlInstanceData parameters, string ifMatch = null, CancellationToken cancellationToken = default)
+        public virtual XmlInstanceCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string xmlName, XmlInstanceData parameters, string ifMatch = null, CancellationToken cancellationToken = default)
         {
             if (xmlName == null)
             {
@@ -78,7 +78,7 @@ namespace XmlDeserialization
             try
             {
                 var response = _xmlDeserializationRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, xmlName, parameters, ifMatch, cancellationToken);
-                var operation = new XmlDeserializationCreateOrUpdateOperation(Parent, response);
+                var operation = new XmlInstanceCreateOrUpdateOperation(Parent, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -100,7 +100,7 @@ namespace XmlDeserialization
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="xmlName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<XmlDeserializationCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string xmlName, XmlInstanceData parameters, string ifMatch = null, CancellationToken cancellationToken = default)
+        public async virtual Task<XmlInstanceCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string xmlName, XmlInstanceData parameters, string ifMatch = null, CancellationToken cancellationToken = default)
         {
             if (xmlName == null)
             {
@@ -116,7 +116,7 @@ namespace XmlDeserialization
             try
             {
                 var response = await _xmlDeserializationRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, xmlName, parameters, ifMatch, cancellationToken).ConfigureAwait(false);
-                var operation = new XmlDeserializationCreateOrUpdateOperation(Parent, response);
+                var operation = new XmlInstanceCreateOrUpdateOperation(Parent, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;

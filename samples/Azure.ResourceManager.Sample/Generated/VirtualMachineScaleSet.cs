@@ -1396,14 +1396,14 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Cancels the current virtual machine scale set rolling upgrade. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<VirtualMachineScaleSetRollingUpgradeCancelOperation> CancelVirtualMachineScaleSetRollingUpgradeAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
+        public async virtual Task<VirtualMachineScaleSetCancelVirtualMachineScaleSetRollingUpgradeOperation> CancelVirtualMachineScaleSetRollingUpgradeAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSet.CancelVirtualMachineScaleSetRollingUpgrade");
             scope.Start();
             try
             {
                 var response = await _virtualMachineScaleSetRollingUpgradesRestClient.CancelAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                var operation = new VirtualMachineScaleSetRollingUpgradeCancelOperation(_clientDiagnostics, Pipeline, _virtualMachineScaleSetRollingUpgradesRestClient.CreateCancelRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response);
+                var operation = new VirtualMachineScaleSetCancelVirtualMachineScaleSetRollingUpgradeOperation(_clientDiagnostics, Pipeline, _virtualMachineScaleSetRollingUpgradesRestClient.CreateCancelRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -1421,14 +1421,14 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Cancels the current virtual machine scale set rolling upgrade. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual VirtualMachineScaleSetRollingUpgradeCancelOperation CancelVirtualMachineScaleSetRollingUpgrade(bool waitForCompletion, CancellationToken cancellationToken = default)
+        public virtual VirtualMachineScaleSetCancelVirtualMachineScaleSetRollingUpgradeOperation CancelVirtualMachineScaleSetRollingUpgrade(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSet.CancelVirtualMachineScaleSetRollingUpgrade");
             scope.Start();
             try
             {
                 var response = _virtualMachineScaleSetRollingUpgradesRestClient.Cancel(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
-                var operation = new VirtualMachineScaleSetRollingUpgradeCancelOperation(_clientDiagnostics, Pipeline, _virtualMachineScaleSetRollingUpgradesRestClient.CreateCancelRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response);
+                var operation = new VirtualMachineScaleSetCancelVirtualMachineScaleSetRollingUpgradeOperation(_clientDiagnostics, Pipeline, _virtualMachineScaleSetRollingUpgradesRestClient.CreateCancelRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -1446,14 +1446,14 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Starts a rolling upgrade to move all virtual machine scale set instances to the latest available Platform Image OS version. Instances which are already running the latest available OS version are not affected. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<VirtualMachineScaleSetRollingUpgradeStartOSUpgradeOperation> StartOSUpgradeVirtualMachineScaleSetRollingUpgradeAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
+        public async virtual Task<VirtualMachineScaleSetStartOSUpgradeVirtualMachineScaleSetRollingUpgradeOperation> StartOSUpgradeVirtualMachineScaleSetRollingUpgradeAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSet.StartOSUpgradeVirtualMachineScaleSetRollingUpgrade");
             scope.Start();
             try
             {
                 var response = await _virtualMachineScaleSetRollingUpgradesRestClient.StartOSUpgradeAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                var operation = new VirtualMachineScaleSetRollingUpgradeStartOSUpgradeOperation(_clientDiagnostics, Pipeline, _virtualMachineScaleSetRollingUpgradesRestClient.CreateStartOSUpgradeRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response);
+                var operation = new VirtualMachineScaleSetStartOSUpgradeVirtualMachineScaleSetRollingUpgradeOperation(_clientDiagnostics, Pipeline, _virtualMachineScaleSetRollingUpgradesRestClient.CreateStartOSUpgradeRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -1471,14 +1471,14 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Starts a rolling upgrade to move all virtual machine scale set instances to the latest available Platform Image OS version. Instances which are already running the latest available OS version are not affected. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual VirtualMachineScaleSetRollingUpgradeStartOSUpgradeOperation StartOSUpgradeVirtualMachineScaleSetRollingUpgrade(bool waitForCompletion, CancellationToken cancellationToken = default)
+        public virtual VirtualMachineScaleSetStartOSUpgradeVirtualMachineScaleSetRollingUpgradeOperation StartOSUpgradeVirtualMachineScaleSetRollingUpgrade(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSet.StartOSUpgradeVirtualMachineScaleSetRollingUpgrade");
             scope.Start();
             try
             {
                 var response = _virtualMachineScaleSetRollingUpgradesRestClient.StartOSUpgrade(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
-                var operation = new VirtualMachineScaleSetRollingUpgradeStartOSUpgradeOperation(_clientDiagnostics, Pipeline, _virtualMachineScaleSetRollingUpgradesRestClient.CreateStartOSUpgradeRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response);
+                var operation = new VirtualMachineScaleSetStartOSUpgradeVirtualMachineScaleSetRollingUpgradeOperation(_clientDiagnostics, Pipeline, _virtualMachineScaleSetRollingUpgradesRestClient.CreateStartOSUpgradeRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -1496,14 +1496,14 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Starts a rolling upgrade to move all extensions for all virtual machine scale set instances to the latest available extension version. Instances which are already running the latest extension versions are not affected. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<VirtualMachineScaleSetRollingUpgradeStartExtensionUpgradeOperation> StartExtensionUpgradeVirtualMachineScaleSetRollingUpgradeAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
+        public async virtual Task<VirtualMachineScaleSetStartExtensionUpgradeVirtualMachineScaleSetRollingUpgradeOperation> StartExtensionUpgradeVirtualMachineScaleSetRollingUpgradeAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSet.StartExtensionUpgradeVirtualMachineScaleSetRollingUpgrade");
             scope.Start();
             try
             {
                 var response = await _virtualMachineScaleSetRollingUpgradesRestClient.StartExtensionUpgradeAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                var operation = new VirtualMachineScaleSetRollingUpgradeStartExtensionUpgradeOperation(_clientDiagnostics, Pipeline, _virtualMachineScaleSetRollingUpgradesRestClient.CreateStartExtensionUpgradeRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response);
+                var operation = new VirtualMachineScaleSetStartExtensionUpgradeVirtualMachineScaleSetRollingUpgradeOperation(_clientDiagnostics, Pipeline, _virtualMachineScaleSetRollingUpgradesRestClient.CreateStartExtensionUpgradeRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -1521,14 +1521,14 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Starts a rolling upgrade to move all extensions for all virtual machine scale set instances to the latest available extension version. Instances which are already running the latest extension versions are not affected. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual VirtualMachineScaleSetRollingUpgradeStartExtensionUpgradeOperation StartExtensionUpgradeVirtualMachineScaleSetRollingUpgrade(bool waitForCompletion, CancellationToken cancellationToken = default)
+        public virtual VirtualMachineScaleSetStartExtensionUpgradeVirtualMachineScaleSetRollingUpgradeOperation StartExtensionUpgradeVirtualMachineScaleSetRollingUpgrade(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSet.StartExtensionUpgradeVirtualMachineScaleSetRollingUpgrade");
             scope.Start();
             try
             {
                 var response = _virtualMachineScaleSetRollingUpgradesRestClient.StartExtensionUpgrade(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
-                var operation = new VirtualMachineScaleSetRollingUpgradeStartExtensionUpgradeOperation(_clientDiagnostics, Pipeline, _virtualMachineScaleSetRollingUpgradesRestClient.CreateStartExtensionUpgradeRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response);
+                var operation = new VirtualMachineScaleSetStartExtensionUpgradeVirtualMachineScaleSetRollingUpgradeOperation(_clientDiagnostics, Pipeline, _virtualMachineScaleSetRollingUpgradesRestClient.CreateStartExtensionUpgradeRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
