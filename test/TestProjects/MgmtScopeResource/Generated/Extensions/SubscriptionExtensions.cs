@@ -50,9 +50,8 @@ namespace MgmtScopeResource
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                ResourceLinksRestOperations restOperations;
                 options.TryGetApiVersion(ResourceLink.ResourceType, out string apiVersion);
-                restOperations = GetResourceLinksRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
+                ResourceLinksRestOperations restOperations = GetResourceLinksRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
                 async Task<Page<ResourceLink>> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetAtSubscriptionResourceLinks");
@@ -101,9 +100,8 @@ namespace MgmtScopeResource
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                ResourceLinksRestOperations restOperations;
                 options.TryGetApiVersion(ResourceLink.ResourceType, out string apiVersion);
-                restOperations = GetResourceLinksRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
+                ResourceLinksRestOperations restOperations = GetResourceLinksRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
                 Page<ResourceLink> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetAtSubscriptionResourceLinks");

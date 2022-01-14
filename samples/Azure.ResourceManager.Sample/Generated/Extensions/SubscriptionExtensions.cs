@@ -102,9 +102,8 @@ namespace Azure.ResourceManager.Sample
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                AvailabilitySetsRestOperations restOperations;
                 options.TryGetApiVersion(AvailabilitySet.ResourceType, out string apiVersion);
-                restOperations = GetAvailabilitySetsRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
+                AvailabilitySetsRestOperations restOperations = GetAvailabilitySetsRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
                 async Task<Page<AvailabilitySet>> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetAvailabilitySets");
@@ -153,9 +152,8 @@ namespace Azure.ResourceManager.Sample
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                AvailabilitySetsRestOperations restOperations;
                 options.TryGetApiVersion(AvailabilitySet.ResourceType, out string apiVersion);
-                restOperations = GetAvailabilitySetsRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
+                AvailabilitySetsRestOperations restOperations = GetAvailabilitySetsRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
                 Page<AvailabilitySet> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetAvailabilitySets");
@@ -231,9 +229,8 @@ namespace Azure.ResourceManager.Sample
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                ProximityPlacementGroupsRestOperations restOperations;
                 options.TryGetApiVersion(ProximityPlacementGroup.ResourceType, out string apiVersion);
-                restOperations = GetProximityPlacementGroupsRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
+                ProximityPlacementGroupsRestOperations restOperations = GetProximityPlacementGroupsRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
                 async Task<Page<ProximityPlacementGroup>> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetProximityPlacementGroups");
@@ -281,9 +278,8 @@ namespace Azure.ResourceManager.Sample
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                ProximityPlacementGroupsRestOperations restOperations;
                 options.TryGetApiVersion(ProximityPlacementGroup.ResourceType, out string apiVersion);
-                restOperations = GetProximityPlacementGroupsRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
+                ProximityPlacementGroupsRestOperations restOperations = GetProximityPlacementGroupsRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
                 Page<ProximityPlacementGroup> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetProximityPlacementGroups");
@@ -359,9 +355,8 @@ namespace Azure.ResourceManager.Sample
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                DedicatedHostGroupsRestOperations restOperations;
                 options.TryGetApiVersion(DedicatedHostGroup.ResourceType, out string apiVersion);
-                restOperations = GetDedicatedHostGroupsRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
+                DedicatedHostGroupsRestOperations restOperations = GetDedicatedHostGroupsRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
                 async Task<Page<DedicatedHostGroup>> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetDedicatedHostGroups");
@@ -409,9 +404,8 @@ namespace Azure.ResourceManager.Sample
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                DedicatedHostGroupsRestOperations restOperations;
                 options.TryGetApiVersion(DedicatedHostGroup.ResourceType, out string apiVersion);
-                restOperations = GetDedicatedHostGroupsRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
+                DedicatedHostGroupsRestOperations restOperations = GetDedicatedHostGroupsRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
                 Page<DedicatedHostGroup> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetDedicatedHostGroups");
@@ -487,9 +481,8 @@ namespace Azure.ResourceManager.Sample
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                SshPublicKeysRestOperations restOperations;
                 options.TryGetApiVersion(SshPublicKey.ResourceType, out string apiVersion);
-                restOperations = GetSshPublicKeysRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
+                SshPublicKeysRestOperations restOperations = GetSshPublicKeysRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
                 async Task<Page<SshPublicKey>> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetSshPublicKeys");
@@ -537,9 +530,8 @@ namespace Azure.ResourceManager.Sample
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                SshPublicKeysRestOperations restOperations;
                 options.TryGetApiVersion(SshPublicKey.ResourceType, out string apiVersion);
-                restOperations = GetSshPublicKeysRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
+                SshPublicKeysRestOperations restOperations = GetSshPublicKeysRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
                 Page<SshPublicKey> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetSshPublicKeys");
@@ -1360,9 +1352,8 @@ namespace Azure.ResourceManager.Sample
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                VirtualMachinesRestOperations restOperations;
                 options.TryGetApiVersion(VirtualMachine.ResourceType, out string apiVersion);
-                restOperations = GetVirtualMachinesRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
+                VirtualMachinesRestOperations restOperations = GetVirtualMachinesRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
                 async Task<Page<VirtualMachine>> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetVirtualMachines");
@@ -1411,9 +1402,8 @@ namespace Azure.ResourceManager.Sample
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                VirtualMachinesRestOperations restOperations;
                 options.TryGetApiVersion(VirtualMachine.ResourceType, out string apiVersion);
-                restOperations = GetVirtualMachinesRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
+                VirtualMachinesRestOperations restOperations = GetVirtualMachinesRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
                 Page<VirtualMachine> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetVirtualMachines");
@@ -1541,9 +1531,8 @@ namespace Azure.ResourceManager.Sample
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                ImagesRestOperations restOperations;
                 options.TryGetApiVersion(Image.ResourceType, out string apiVersion);
-                restOperations = GetImagesRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
+                ImagesRestOperations restOperations = GetImagesRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
                 async Task<Page<Image>> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetImages");
@@ -1591,9 +1580,8 @@ namespace Azure.ResourceManager.Sample
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                ImagesRestOperations restOperations;
                 options.TryGetApiVersion(Image.ResourceType, out string apiVersion);
-                restOperations = GetImagesRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
+                ImagesRestOperations restOperations = GetImagesRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
                 Page<Image> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetImages");
@@ -1669,9 +1657,8 @@ namespace Azure.ResourceManager.Sample
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                VirtualMachineScaleSetsRestOperations restOperations;
                 options.TryGetApiVersion(VirtualMachineScaleSet.ResourceType, out string apiVersion);
-                restOperations = GetVirtualMachineScaleSetsRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
+                VirtualMachineScaleSetsRestOperations restOperations = GetVirtualMachineScaleSetsRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
                 async Task<Page<VirtualMachineScaleSet>> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetVirtualMachineScaleSets");
@@ -1719,9 +1706,8 @@ namespace Azure.ResourceManager.Sample
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                VirtualMachineScaleSetsRestOperations restOperations;
                 options.TryGetApiVersion(VirtualMachineScaleSet.ResourceType, out string apiVersion);
-                restOperations = GetVirtualMachineScaleSetsRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
+                VirtualMachineScaleSetsRestOperations restOperations = GetVirtualMachineScaleSetsRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
                 Page<VirtualMachineScaleSet> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetVirtualMachineScaleSets");

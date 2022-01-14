@@ -45,9 +45,8 @@ namespace MgmtExpandResourceTypes
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                ZonesRestOperations restOperations;
                 options.TryGetApiVersion(Zone.ResourceType, out string apiVersion);
-                restOperations = GetZonesRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
+                ZonesRestOperations restOperations = GetZonesRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
                 async Task<Page<Zone>> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetZones");
@@ -96,9 +95,8 @@ namespace MgmtExpandResourceTypes
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                ZonesRestOperations restOperations;
                 options.TryGetApiVersion(Zone.ResourceType, out string apiVersion);
-                restOperations = GetZonesRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
+                ZonesRestOperations restOperations = GetZonesRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
                 Page<Zone> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetZones");

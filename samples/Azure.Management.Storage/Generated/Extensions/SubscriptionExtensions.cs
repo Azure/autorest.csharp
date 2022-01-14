@@ -125,9 +125,8 @@ namespace Azure.Management.Storage
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                StorageAccountsRestOperations restOperations;
                 options.TryGetApiVersion(StorageAccount.ResourceType, out string apiVersion);
-                restOperations = GetStorageAccountsRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
+                StorageAccountsRestOperations restOperations = GetStorageAccountsRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
                 async Task<Page<StorageAccount>> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetStorageAccounts");
@@ -175,9 +174,8 @@ namespace Azure.Management.Storage
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                StorageAccountsRestOperations restOperations;
                 options.TryGetApiVersion(StorageAccount.ResourceType, out string apiVersion);
-                restOperations = GetStorageAccountsRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
+                StorageAccountsRestOperations restOperations = GetStorageAccountsRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
                 Page<StorageAccount> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetStorageAccounts");

@@ -52,9 +52,8 @@ namespace MgmtParent
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                AvailabilitySetsRestOperations restOperations;
                 options.TryGetApiVersion(AvailabilitySet.ResourceType, out string apiVersion);
-                restOperations = GetAvailabilitySetsRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
+                AvailabilitySetsRestOperations restOperations = GetAvailabilitySetsRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
                 async Task<Page<AvailabilitySet>> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetAvailabilitySets");
@@ -103,9 +102,8 @@ namespace MgmtParent
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                AvailabilitySetsRestOperations restOperations;
                 options.TryGetApiVersion(AvailabilitySet.ResourceType, out string apiVersion);
-                restOperations = GetAvailabilitySetsRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
+                AvailabilitySetsRestOperations restOperations = GetAvailabilitySetsRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
                 Page<AvailabilitySet> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetAvailabilitySets");

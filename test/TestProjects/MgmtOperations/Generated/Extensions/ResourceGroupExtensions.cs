@@ -57,9 +57,8 @@ namespace MgmtOperations
                 scope.Start();
                 try
                 {
-                    AvailabilitySetsRestOperations restOperations;
                     options.TryGetApiVersion(AvailabilitySet.ResourceType, out string apiVersion);
-                    restOperations = GetAvailabilitySetsRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
+                    AvailabilitySetsRestOperations restOperations = GetAvailabilitySetsRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
                     var response = await restOperations.TestLROMethodAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, parameters, cancellationToken).ConfigureAwait(false);
                     var operation = new TestLROMethodAvailabilitySetOperation(clientDiagnostics, pipeline, restOperations.CreateTestLROMethodRequest(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, parameters).Request, response);
                     if (waitForCompletion)
@@ -98,9 +97,8 @@ namespace MgmtOperations
                 scope.Start();
                 try
                 {
-                    AvailabilitySetsRestOperations restOperations;
                     options.TryGetApiVersion(AvailabilitySet.ResourceType, out string apiVersion);
-                    restOperations = GetAvailabilitySetsRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
+                    AvailabilitySetsRestOperations restOperations = GetAvailabilitySetsRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
                     var response = restOperations.TestLROMethod(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, parameters, cancellationToken);
                     var operation = new TestLROMethodAvailabilitySetOperation(clientDiagnostics, pipeline, restOperations.CreateTestLROMethodRequest(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, parameters).Request, response);
                     if (waitForCompletion)

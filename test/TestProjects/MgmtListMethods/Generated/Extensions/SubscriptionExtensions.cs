@@ -816,9 +816,8 @@ namespace MgmtListMethods
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                ResGrpParentWithAncestorWithNonResChWithLocsRestOperations restOperations;
                 options.TryGetApiVersion(ResGrpParentWithAncestorWithNonResChWithLoc.ResourceType, out string apiVersion);
-                restOperations = GetResGrpParentWithAncestorWithNonResChWithLocsRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
+                ResGrpParentWithAncestorWithNonResChWithLocsRestOperations restOperations = GetResGrpParentWithAncestorWithNonResChWithLocsRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
                 async Task<Page<ResGrpParentWithAncestorWithNonResChWithLoc>> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetResGrpParentWithAncestorWithNonResChWithLocs");
@@ -867,9 +866,8 @@ namespace MgmtListMethods
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                ResGrpParentWithAncestorWithNonResChWithLocsRestOperations restOperations;
                 options.TryGetApiVersion(ResGrpParentWithAncestorWithNonResChWithLoc.ResourceType, out string apiVersion);
-                restOperations = GetResGrpParentWithAncestorWithNonResChWithLocsRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
+                ResGrpParentWithAncestorWithNonResChWithLocsRestOperations restOperations = GetResGrpParentWithAncestorWithNonResChWithLocsRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
                 Page<ResGrpParentWithAncestorWithNonResChWithLoc> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetResGrpParentWithAncestorWithNonResChWithLocs");
@@ -946,9 +944,8 @@ namespace MgmtListMethods
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                ResGrpParentWithAncestorWithNonResChesRestOperations restOperations;
                 options.TryGetApiVersion(ResGrpParentWithAncestorWithNonResCh.ResourceType, out string apiVersion);
-                restOperations = GetResGrpParentWithAncestorWithNonResChesRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
+                ResGrpParentWithAncestorWithNonResChesRestOperations restOperations = GetResGrpParentWithAncestorWithNonResChesRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
                 async Task<Page<ResGrpParentWithAncestorWithNonResCh>> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetResGrpParentWithAncestorWithNonResChes");
@@ -997,9 +994,8 @@ namespace MgmtListMethods
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                ResGrpParentWithAncestorWithNonResChesRestOperations restOperations;
                 options.TryGetApiVersion(ResGrpParentWithAncestorWithNonResCh.ResourceType, out string apiVersion);
-                restOperations = GetResGrpParentWithAncestorWithNonResChesRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
+                ResGrpParentWithAncestorWithNonResChesRestOperations restOperations = GetResGrpParentWithAncestorWithNonResChesRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
                 Page<ResGrpParentWithAncestorWithNonResCh> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetResGrpParentWithAncestorWithNonResChes");
@@ -1075,9 +1071,8 @@ namespace MgmtListMethods
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                ResGrpParentWithAncestorWithLocsRestOperations restOperations;
                 options.TryGetApiVersion(ResGrpParentWithAncestorWithLoc.ResourceType, out string apiVersion);
-                restOperations = GetResGrpParentWithAncestorWithLocsRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
+                ResGrpParentWithAncestorWithLocsRestOperations restOperations = GetResGrpParentWithAncestorWithLocsRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
                 async Task<Page<ResGrpParentWithAncestorWithLoc>> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetTestResGrpParentWithAncestorWithLocs");
@@ -1125,9 +1120,8 @@ namespace MgmtListMethods
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                ResGrpParentWithAncestorWithLocsRestOperations restOperations;
                 options.TryGetApiVersion(ResGrpParentWithAncestorWithLoc.ResourceType, out string apiVersion);
-                restOperations = GetResGrpParentWithAncestorWithLocsRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
+                ResGrpParentWithAncestorWithLocsRestOperations restOperations = GetResGrpParentWithAncestorWithLocsRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
                 Page<ResGrpParentWithAncestorWithLoc> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetTestResGrpParentWithAncestorWithLocs");
@@ -1313,9 +1307,8 @@ namespace MgmtListMethods
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                ResGrpParentWithAncestorsRestOperations restOperations;
                 options.TryGetApiVersion(ResGrpParentWithAncestor.ResourceType, out string apiVersion);
-                restOperations = GetResGrpParentWithAncestorsRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
+                ResGrpParentWithAncestorsRestOperations restOperations = GetResGrpParentWithAncestorsRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
                 async Task<Page<ResGrpParentWithAncestor>> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.NonPageableListResGrpParentWithAncestors");
@@ -1348,9 +1341,8 @@ namespace MgmtListMethods
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                ResGrpParentWithAncestorsRestOperations restOperations;
                 options.TryGetApiVersion(ResGrpParentWithAncestor.ResourceType, out string apiVersion);
-                restOperations = GetResGrpParentWithAncestorsRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
+                ResGrpParentWithAncestorsRestOperations restOperations = GetResGrpParentWithAncestorsRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
                 Page<ResGrpParentWithAncestor> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.NonPageableListResGrpParentWithAncestors");
