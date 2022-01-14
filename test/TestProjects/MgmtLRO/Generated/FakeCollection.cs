@@ -33,7 +33,7 @@ namespace MgmtLRO
         {
         }
 
-        /// <summary> Initializes a new instance of FakeCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="FakeCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal FakeCollection(ArmResource parent) : base(parent)
         {
@@ -228,7 +228,7 @@ namespace MgmtLRO
                 throw new ArgumentNullException(nameof(fakeName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("FakeCollection.GetIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("FakeCollection.GetIfExists");
             scope.Start();
             try
             {
@@ -282,7 +282,7 @@ namespace MgmtLRO
                 throw new ArgumentNullException(nameof(fakeName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("FakeCollection.ExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("FakeCollection.Exists");
             scope.Start();
             try
             {

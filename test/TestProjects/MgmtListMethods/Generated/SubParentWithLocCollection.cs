@@ -33,7 +33,7 @@ namespace MgmtListMethods
         {
         }
 
-        /// <summary> Initializes a new instance of SubParentWithLocCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="SubParentWithLocCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal SubParentWithLocCollection(ArmResource parent) : base(parent)
         {
@@ -224,7 +224,7 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(subParentWithLocName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SubParentWithLocCollection.GetIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("SubParentWithLocCollection.GetIfExists");
             scope.Start();
             try
             {
@@ -276,7 +276,7 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(subParentWithLocName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SubParentWithLocCollection.ExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("SubParentWithLocCollection.Exists");
             scope.Start();
             try
             {

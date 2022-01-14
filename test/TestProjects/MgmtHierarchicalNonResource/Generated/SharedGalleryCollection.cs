@@ -34,7 +34,7 @@ namespace MgmtHierarchicalNonResource
         {
         }
 
-        /// <summary> Initializes a new instance of SharedGalleryCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="SharedGalleryCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         /// <param name="location"> Resource location. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
@@ -157,7 +157,7 @@ namespace MgmtHierarchicalNonResource
                 throw new ArgumentNullException(nameof(galleryUniqueName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SharedGalleryCollection.GetIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("SharedGalleryCollection.GetIfExists");
             scope.Start();
             try
             {
@@ -210,7 +210,7 @@ namespace MgmtHierarchicalNonResource
                 throw new ArgumentNullException(nameof(galleryUniqueName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SharedGalleryCollection.ExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("SharedGalleryCollection.Exists");
             scope.Start();
             try
             {

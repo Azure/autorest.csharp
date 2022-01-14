@@ -33,7 +33,7 @@ namespace ExactMatchFlattenInheritance
         {
         }
 
-        /// <summary> Initializes a new instance of AzureResourceFlattenModel1Collection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="AzureResourceFlattenModel1Collection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal AzureResourceFlattenModel1Collection(ArmResource parent) : base(parent)
         {
@@ -224,7 +224,7 @@ namespace ExactMatchFlattenInheritance
                 throw new ArgumentNullException(nameof(name));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel1Collection.GetIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel1Collection.GetIfExists");
             scope.Start();
             try
             {
@@ -276,7 +276,7 @@ namespace ExactMatchFlattenInheritance
                 throw new ArgumentNullException(nameof(name));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel1Collection.ExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel1Collection.Exists");
             scope.Start();
             try
             {

@@ -31,7 +31,7 @@ namespace Azure.Management.Storage
         {
         }
 
-        /// <summary> Initializes a new instance of FileShareCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="FileShareCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal FileShareCollection(ArmResource parent) : base(parent)
         {
@@ -232,7 +232,7 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(shareName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("FileShareCollection.GetIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("FileShareCollection.GetIfExists");
             scope.Start();
             try
             {
@@ -288,7 +288,7 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(shareName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("FileShareCollection.ExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("FileShareCollection.Exists");
             scope.Start();
             try
             {

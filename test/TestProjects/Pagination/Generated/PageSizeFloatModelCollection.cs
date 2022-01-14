@@ -33,7 +33,7 @@ namespace Pagination
         {
         }
 
-        /// <summary> Initializes a new instance of PageSizeFloatModelCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="PageSizeFloatModelCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal PageSizeFloatModelCollection(ArmResource parent) : base(parent)
         {
@@ -208,7 +208,7 @@ namespace Pagination
                 throw new ArgumentNullException(nameof(name));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("PageSizeFloatModelCollection.GetIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("PageSizeFloatModelCollection.GetIfExists");
             scope.Start();
             try
             {
@@ -260,7 +260,7 @@ namespace Pagination
                 throw new ArgumentNullException(nameof(name));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("PageSizeFloatModelCollection.ExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("PageSizeFloatModelCollection.Exists");
             scope.Start();
             try
             {

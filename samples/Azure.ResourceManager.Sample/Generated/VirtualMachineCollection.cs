@@ -33,7 +33,7 @@ namespace Azure.ResourceManager.Sample
         {
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="VirtualMachineCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal VirtualMachineCollection(ArmResource parent) : base(parent)
         {
@@ -224,7 +224,7 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentNullException(nameof(vmName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineCollection.GetIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineCollection.GetIfExists");
             scope.Start();
             try
             {
@@ -276,7 +276,7 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentNullException(nameof(vmName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineCollection.ExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineCollection.Exists");
             scope.Start();
             try
             {

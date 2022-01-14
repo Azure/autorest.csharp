@@ -33,7 +33,7 @@ namespace SingletonResource
         {
         }
 
-        /// <summary> Initializes a new instance of ParentResourceCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="ParentResourceCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal ParentResourceCollection(ArmResource parent) : base(parent)
         {
@@ -222,7 +222,7 @@ namespace SingletonResource
                 throw new ArgumentNullException(nameof(parentName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ParentResourceCollection.GetIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("ParentResourceCollection.GetIfExists");
             scope.Start();
             try
             {
@@ -274,7 +274,7 @@ namespace SingletonResource
                 throw new ArgumentNullException(nameof(parentName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ParentResourceCollection.ExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("ParentResourceCollection.Exists");
             scope.Start();
             try
             {

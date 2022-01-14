@@ -29,7 +29,7 @@ namespace MgmtKeyvault
         {
         }
 
-        /// <summary> Initializes a new instance of DeletedManagedHsmCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="DeletedManagedHsmCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal DeletedManagedHsmCollection(ArmResource parent) : base(parent)
         {
@@ -166,7 +166,7 @@ namespace MgmtKeyvault
                 throw new ArgumentNullException(nameof(name));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DeletedManagedHsmCollection.GetIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("DeletedManagedHsmCollection.GetIfExists");
             scope.Start();
             try
             {
@@ -228,7 +228,7 @@ namespace MgmtKeyvault
                 throw new ArgumentNullException(nameof(name));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DeletedManagedHsmCollection.ExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("DeletedManagedHsmCollection.Exists");
             scope.Start();
             try
             {

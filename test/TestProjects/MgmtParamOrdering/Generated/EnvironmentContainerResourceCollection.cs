@@ -31,7 +31,7 @@ namespace MgmtParamOrdering
         {
         }
 
-        /// <summary> Initializes a new instance of EnvironmentContainerResourceCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="EnvironmentContainerResourceCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal EnvironmentContainerResourceCollection(ArmResource parent) : base(parent)
         {
@@ -222,7 +222,7 @@ namespace MgmtParamOrdering
                 throw new ArgumentNullException(nameof(name));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("EnvironmentContainerResourceCollection.GetIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("EnvironmentContainerResourceCollection.GetIfExists");
             scope.Start();
             try
             {
@@ -274,7 +274,7 @@ namespace MgmtParamOrdering
                 throw new ArgumentNullException(nameof(name));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("EnvironmentContainerResourceCollection.ExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("EnvironmentContainerResourceCollection.Exists");
             scope.Start();
             try
             {

@@ -37,10 +37,7 @@ namespace Accessibility_LowLevel_TokenAuth
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
         public AccessibilityClient(TokenCredential credential, Uri endpoint = null, AccessibilityClientOptions options = null)
         {
-            if (credential == null)
-            {
-                throw new ArgumentNullException(nameof(credential));
-            }
+            Argument.AssertNotNull(credential, nameof(credential));
             endpoint ??= new Uri("http://localhost:3000");
             options ??= new AccessibilityClientOptions();
 

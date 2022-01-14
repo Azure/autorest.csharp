@@ -31,7 +31,7 @@ namespace MgmtExpandResourceTypes
         {
         }
 
-        /// <summary> Initializes a new instance of RecordSetTxtCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="RecordSetTxtCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal RecordSetTxtCollection(ArmResource parent) : base(parent)
         {
@@ -226,7 +226,7 @@ namespace MgmtExpandResourceTypes
                 throw new ArgumentNullException(nameof(relativeRecordSetName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("RecordSetTxtCollection.GetIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("RecordSetTxtCollection.GetIfExists");
             scope.Start();
             try
             {
@@ -278,7 +278,7 @@ namespace MgmtExpandResourceTypes
                 throw new ArgumentNullException(nameof(relativeRecordSetName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("RecordSetTxtCollection.ExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("RecordSetTxtCollection.Exists");
             scope.Start();
             try
             {
