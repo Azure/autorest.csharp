@@ -31,7 +31,7 @@ namespace MgmtListMethods
         {
         }
 
-        /// <summary> Initializes a new instance of FakeParentWithAncestorWithNonResChWithLocCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="FakeParentWithAncestorWithNonResChWithLocCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal FakeParentWithAncestorWithNonResChWithLocCollection(ArmResource parent) : base(parent)
         {
@@ -222,7 +222,7 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(fakeParentWithAncestorWithNonResChWithLocName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("FakeParentWithAncestorWithNonResChWithLocCollection.GetIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("FakeParentWithAncestorWithNonResChWithLocCollection.GetIfExists");
             scope.Start();
             try
             {
@@ -274,7 +274,7 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(fakeParentWithAncestorWithNonResChWithLocName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("FakeParentWithAncestorWithNonResChWithLocCollection.ExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("FakeParentWithAncestorWithNonResChWithLocCollection.Exists");
             scope.Start();
             try
             {

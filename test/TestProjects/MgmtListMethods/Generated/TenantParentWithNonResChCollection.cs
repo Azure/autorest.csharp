@@ -31,7 +31,7 @@ namespace MgmtListMethods
         {
         }
 
-        /// <summary> Initializes a new instance of TenantParentWithNonResChCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="TenantParentWithNonResChCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal TenantParentWithNonResChCollection(ArmResource parent) : base(parent)
         {
@@ -222,7 +222,7 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(tenantParentWithNonResChName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("TenantParentWithNonResChCollection.GetIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("TenantParentWithNonResChCollection.GetIfExists");
             scope.Start();
             try
             {
@@ -274,7 +274,7 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(tenantParentWithNonResChName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("TenantParentWithNonResChCollection.ExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("TenantParentWithNonResChCollection.Exists");
             scope.Start();
             try
             {

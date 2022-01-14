@@ -32,7 +32,7 @@ namespace MgmtListMethods
         {
         }
 
-        /// <summary> Initializes a new instance of MgmtGroupParentCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="MgmtGroupParentCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal MgmtGroupParentCollection(ArmResource parent) : base(parent)
         {
@@ -223,7 +223,7 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(mgmtGroupParentName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("MgmtGroupParentCollection.GetIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("MgmtGroupParentCollection.GetIfExists");
             scope.Start();
             try
             {
@@ -275,7 +275,7 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(mgmtGroupParentName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("MgmtGroupParentCollection.ExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("MgmtGroupParentCollection.Exists");
             scope.Start();
             try
             {

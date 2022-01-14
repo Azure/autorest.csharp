@@ -33,7 +33,7 @@ namespace NoTypeReplacement
         {
         }
 
-        /// <summary> Initializes a new instance of NoTypeReplacementModel3Collection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="NoTypeReplacementModel3Collection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal NoTypeReplacementModel3Collection(ArmResource parent) : base(parent)
         {
@@ -208,7 +208,7 @@ namespace NoTypeReplacement
                 throw new ArgumentNullException(nameof(noTypeReplacementModel3SName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("NoTypeReplacementModel3Collection.GetIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("NoTypeReplacementModel3Collection.GetIfExists");
             scope.Start();
             try
             {
@@ -260,7 +260,7 @@ namespace NoTypeReplacement
                 throw new ArgumentNullException(nameof(noTypeReplacementModel3SName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("NoTypeReplacementModel3Collection.ExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("NoTypeReplacementModel3Collection.Exists");
             scope.Start();
             try
             {

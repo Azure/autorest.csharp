@@ -31,7 +31,7 @@ namespace MgmtExpandResourceTypes
         {
         }
 
-        /// <summary> Initializes a new instance of RecordSetMxCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="RecordSetMxCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal RecordSetMxCollection(ArmResource parent) : base(parent)
         {
@@ -226,7 +226,7 @@ namespace MgmtExpandResourceTypes
                 throw new ArgumentNullException(nameof(relativeRecordSetName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("RecordSetMxCollection.GetIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("RecordSetMxCollection.GetIfExists");
             scope.Start();
             try
             {
@@ -278,7 +278,7 @@ namespace MgmtExpandResourceTypes
                 throw new ArgumentNullException(nameof(relativeRecordSetName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("RecordSetMxCollection.ExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("RecordSetMxCollection.Exists");
             scope.Start();
             try
             {

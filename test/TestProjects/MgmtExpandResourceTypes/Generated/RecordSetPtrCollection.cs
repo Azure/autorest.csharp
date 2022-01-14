@@ -31,7 +31,7 @@ namespace MgmtExpandResourceTypes
         {
         }
 
-        /// <summary> Initializes a new instance of RecordSetPtrCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="RecordSetPtrCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal RecordSetPtrCollection(ArmResource parent) : base(parent)
         {
@@ -226,7 +226,7 @@ namespace MgmtExpandResourceTypes
                 throw new ArgumentNullException(nameof(relativeRecordSetName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("RecordSetPtrCollection.GetIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("RecordSetPtrCollection.GetIfExists");
             scope.Start();
             try
             {
@@ -278,7 +278,7 @@ namespace MgmtExpandResourceTypes
                 throw new ArgumentNullException(nameof(relativeRecordSetName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("RecordSetPtrCollection.ExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("RecordSetPtrCollection.Exists");
             scope.Start();
             try
             {

@@ -33,7 +33,7 @@ namespace ExactMatchFlattenInheritance
         {
         }
 
-        /// <summary> Initializes a new instance of CustomModel2Collection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="CustomModel2Collection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal CustomModel2Collection(ArmResource parent) : base(parent)
         {
@@ -216,7 +216,7 @@ namespace ExactMatchFlattenInheritance
                 throw new ArgumentNullException(nameof(name));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("CustomModel2Collection.GetIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("CustomModel2Collection.GetIfExists");
             scope.Start();
             try
             {
@@ -268,7 +268,7 @@ namespace ExactMatchFlattenInheritance
                 throw new ArgumentNullException(nameof(name));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("CustomModel2Collection.ExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("CustomModel2Collection.Exists");
             scope.Start();
             try
             {

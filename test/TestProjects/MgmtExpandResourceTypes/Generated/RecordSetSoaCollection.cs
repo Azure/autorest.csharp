@@ -31,7 +31,7 @@ namespace MgmtExpandResourceTypes
         {
         }
 
-        /// <summary> Initializes a new instance of RecordSetSoaCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="RecordSetSoaCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal RecordSetSoaCollection(ArmResource parent) : base(parent)
         {
@@ -226,7 +226,7 @@ namespace MgmtExpandResourceTypes
                 throw new ArgumentNullException(nameof(relativeRecordSetName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("RecordSetSoaCollection.GetIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("RecordSetSoaCollection.GetIfExists");
             scope.Start();
             try
             {
@@ -278,7 +278,7 @@ namespace MgmtExpandResourceTypes
                 throw new ArgumentNullException(nameof(relativeRecordSetName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("RecordSetSoaCollection.ExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("RecordSetSoaCollection.Exists");
             scope.Start();
             try
             {

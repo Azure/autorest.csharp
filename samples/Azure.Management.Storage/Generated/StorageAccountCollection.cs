@@ -33,7 +33,7 @@ namespace Azure.Management.Storage
         {
         }
 
-        /// <summary> Initializes a new instance of StorageAccountCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="StorageAccountCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal StorageAccountCollection(ArmResource parent) : base(parent)
         {
@@ -228,7 +228,7 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(accountName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("StorageAccountCollection.GetIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountCollection.GetIfExists");
             scope.Start();
             try
             {
@@ -282,7 +282,7 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(accountName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("StorageAccountCollection.ExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountCollection.Exists");
             scope.Start();
             try
             {

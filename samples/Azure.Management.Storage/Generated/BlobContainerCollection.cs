@@ -31,7 +31,7 @@ namespace Azure.Management.Storage
         {
         }
 
-        /// <summary> Initializes a new instance of BlobContainerCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="BlobContainerCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal BlobContainerCollection(ArmResource parent) : base(parent)
         {
@@ -222,7 +222,7 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(containerName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("BlobContainerCollection.GetIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("BlobContainerCollection.GetIfExists");
             scope.Start();
             try
             {
@@ -274,7 +274,7 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(containerName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("BlobContainerCollection.ExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("BlobContainerCollection.Exists");
             scope.Start();
             try
             {

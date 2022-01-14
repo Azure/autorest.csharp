@@ -33,7 +33,7 @@ namespace SupersetInheritance
         {
         }
 
-        /// <summary> Initializes a new instance of SupersetModel1Collection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="SupersetModel1Collection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal SupersetModel1Collection(ArmResource parent) : base(parent)
         {
@@ -220,7 +220,7 @@ namespace SupersetInheritance
                 throw new ArgumentNullException(nameof(supersetModel1SName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SupersetModel1Collection.GetIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("SupersetModel1Collection.GetIfExists");
             scope.Start();
             try
             {
@@ -272,7 +272,7 @@ namespace SupersetInheritance
                 throw new ArgumentNullException(nameof(supersetModel1SName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SupersetModel1Collection.ExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("SupersetModel1Collection.Exists");
             scope.Start();
             try
             {

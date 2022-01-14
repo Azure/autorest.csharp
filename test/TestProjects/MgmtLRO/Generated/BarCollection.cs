@@ -33,7 +33,7 @@ namespace MgmtLRO
         {
         }
 
-        /// <summary> Initializes a new instance of BarCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="BarCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal BarCollection(ArmResource parent) : base(parent)
         {
@@ -224,7 +224,7 @@ namespace MgmtLRO
                 throw new ArgumentNullException(nameof(barName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("BarCollection.GetIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("BarCollection.GetIfExists");
             scope.Start();
             try
             {
@@ -276,7 +276,7 @@ namespace MgmtLRO
                 throw new ArgumentNullException(nameof(barName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("BarCollection.ExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("BarCollection.Exists");
             scope.Start();
             try
             {

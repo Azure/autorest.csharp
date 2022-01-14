@@ -32,7 +32,7 @@ namespace MgmtListMethods
         {
         }
 
-        /// <summary> Initializes a new instance of MgmtGrpParentWithNonResChWithLocCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="MgmtGrpParentWithNonResChWithLocCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal MgmtGrpParentWithNonResChWithLocCollection(ArmResource parent) : base(parent)
         {
@@ -223,7 +223,7 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(mgmtGrpParentWithNonResChWithLocName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("MgmtGrpParentWithNonResChWithLocCollection.GetIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("MgmtGrpParentWithNonResChWithLocCollection.GetIfExists");
             scope.Start();
             try
             {
@@ -275,7 +275,7 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(mgmtGrpParentWithNonResChWithLocName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("MgmtGrpParentWithNonResChWithLocCollection.ExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("MgmtGrpParentWithNonResChWithLocCollection.Exists");
             scope.Start();
             try
             {

@@ -33,7 +33,7 @@ namespace Azure.ResourceManager.Sample
         {
         }
 
-        /// <summary> Initializes a new instance of DedicatedHostGroupCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="DedicatedHostGroupCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal DedicatedHostGroupCollection(ArmResource parent) : base(parent)
         {
@@ -224,7 +224,7 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentNullException(nameof(hostGroupName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupCollection.GetIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupCollection.GetIfExists");
             scope.Start();
             try
             {
@@ -276,7 +276,7 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentNullException(nameof(hostGroupName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupCollection.ExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupCollection.Exists");
             scope.Start();
             try
             {

@@ -33,7 +33,7 @@ namespace ExactMatchInheritance
         {
         }
 
-        /// <summary> Initializes a new instance of ExactMatchModel1Collection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="ExactMatchModel1Collection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal ExactMatchModel1Collection(ArmResource parent) : base(parent)
         {
@@ -220,7 +220,7 @@ namespace ExactMatchInheritance
                 throw new ArgumentNullException(nameof(exactMatchModel1SName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ExactMatchModel1Collection.GetIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("ExactMatchModel1Collection.GetIfExists");
             scope.Start();
             try
             {
@@ -272,7 +272,7 @@ namespace ExactMatchInheritance
                 throw new ArgumentNullException(nameof(exactMatchModel1SName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ExactMatchModel1Collection.ExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("ExactMatchModel1Collection.Exists");
             scope.Start();
             try
             {

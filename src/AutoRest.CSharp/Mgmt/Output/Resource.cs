@@ -360,7 +360,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             return w =>
             {
-                w.Append($"new {Type.Name}(");
+                w.Append($"new {Type}(");
                 foreach (var parameter in parameterInvocations)
                 {
                     if (parameter.Invocation != null)

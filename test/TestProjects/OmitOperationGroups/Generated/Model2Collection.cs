@@ -33,7 +33,7 @@ namespace OmitOperationGroups
         {
         }
 
-        /// <summary> Initializes a new instance of Model2Collection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="Model2Collection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal Model2Collection(ArmResource parent) : base(parent)
         {
@@ -220,7 +220,7 @@ namespace OmitOperationGroups
                 throw new ArgumentNullException(nameof(model2SName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("Model2Collection.GetIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("Model2Collection.GetIfExists");
             scope.Start();
             try
             {
@@ -272,7 +272,7 @@ namespace OmitOperationGroups
                 throw new ArgumentNullException(nameof(model2SName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("Model2Collection.ExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("Model2Collection.Exists");
             scope.Start();
             try
             {
