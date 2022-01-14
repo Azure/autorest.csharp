@@ -226,7 +226,7 @@ namespace MgmtPropertyChooser
                 var response = _virtualMachinesRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, forceDeletion, cancellationToken);
                 var operation = new VirtualMachineDeleteOperation(_clientDiagnostics, Pipeline, _virtualMachinesRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, forceDeletion).Request, response);
                 if (waitForCompletion)
-                    operation.WaitForCompletion(cancellationToken);
+                    operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
             }
             catch (Exception e)

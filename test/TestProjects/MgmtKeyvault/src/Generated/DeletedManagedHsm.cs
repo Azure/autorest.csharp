@@ -224,7 +224,7 @@ namespace MgmtKeyvault
                 var response = _managedHsmsRestClient.PurgeDeleted(Id.SubscriptionId, Id.Parent.Name, Id.Name, cancellationToken);
                 var operation = new DeletedManagedHsmPurgeDeletedOperation(_clientDiagnostics, Pipeline, _managedHsmsRestClient.CreatePurgeDeletedRequest(Id.SubscriptionId, Id.Parent.Name, Id.Name).Request, response);
                 if (waitForCompletion)
-                    operation.WaitForCompletion(cancellationToken);
+                    operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
             }
             catch (Exception e)

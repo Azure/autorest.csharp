@@ -232,7 +232,7 @@ namespace Azure.Management.Storage
                 var response = _fileSharesRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, xMsSnapshot, include, cancellationToken);
                 var operation = new FileShareDeleteOperation(response);
                 if (waitForCompletion)
-                    operation.WaitForCompletion(cancellationToken);
+                    operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
             }
             catch (Exception e)

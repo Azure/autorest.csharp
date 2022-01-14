@@ -228,7 +228,7 @@ namespace Azure.ResourceManager.Sample
                 var response = _virtualMachineScaleSetsRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 var operation = new VirtualMachineScaleSetDeleteOperation(_clientDiagnostics, Pipeline, _virtualMachineScaleSetsRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response);
                 if (waitForCompletion)
-                    operation.WaitForCompletion(cancellationToken);
+                    operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
             }
             catch (Exception e)
@@ -516,7 +516,7 @@ namespace Azure.ResourceManager.Sample
                 var response = _virtualMachineScaleSetsRestClient.Deallocate(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmInstanceIDs, cancellationToken);
                 var operation = new VirtualMachineScaleSetDeallocateOperation(_clientDiagnostics, Pipeline, _virtualMachineScaleSetsRestClient.CreateDeallocateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmInstanceIDs).Request, response);
                 if (waitForCompletion)
-                    operation.WaitForCompletion(cancellationToken);
+                    operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
             }
             catch (Exception e)
@@ -580,7 +580,7 @@ namespace Azure.ResourceManager.Sample
                 var response = _virtualMachineScaleSetsRestClient.DeleteInstances(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmInstanceIDs, cancellationToken);
                 var operation = new VirtualMachineScaleSetDeleteInstancesOperation(_clientDiagnostics, Pipeline, _virtualMachineScaleSetsRestClient.CreateDeleteInstancesRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmInstanceIDs).Request, response);
                 if (waitForCompletion)
-                    operation.WaitForCompletion(cancellationToken);
+                    operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
             }
             catch (Exception e)
@@ -840,7 +840,7 @@ namespace Azure.ResourceManager.Sample
                 var response = _virtualMachineScaleSetsRestClient.PowerOff(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, skipShutdown, vmInstanceIDs, cancellationToken);
                 var operation = new VirtualMachineScaleSetPowerOffOperation(_clientDiagnostics, Pipeline, _virtualMachineScaleSetsRestClient.CreatePowerOffRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, skipShutdown, vmInstanceIDs).Request, response);
                 if (waitForCompletion)
-                    operation.WaitForCompletion(cancellationToken);
+                    operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
             }
             catch (Exception e)
@@ -892,7 +892,7 @@ namespace Azure.ResourceManager.Sample
                 var response = _virtualMachineScaleSetsRestClient.Restart(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmInstanceIDs, cancellationToken);
                 var operation = new VirtualMachineScaleSetRestartOperation(_clientDiagnostics, Pipeline, _virtualMachineScaleSetsRestClient.CreateRestartRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmInstanceIDs).Request, response);
                 if (waitForCompletion)
-                    operation.WaitForCompletion(cancellationToken);
+                    operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
             }
             catch (Exception e)
@@ -944,7 +944,7 @@ namespace Azure.ResourceManager.Sample
                 var response = _virtualMachineScaleSetsRestClient.Start(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmInstanceIDs, cancellationToken);
                 var operation = new VirtualMachineScaleSetStartOperation(_clientDiagnostics, Pipeline, _virtualMachineScaleSetsRestClient.CreateStartRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmInstanceIDs).Request, response);
                 if (waitForCompletion)
-                    operation.WaitForCompletion(cancellationToken);
+                    operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
             }
             catch (Exception e)
@@ -996,7 +996,7 @@ namespace Azure.ResourceManager.Sample
                 var response = _virtualMachineScaleSetsRestClient.Redeploy(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmInstanceIDs, cancellationToken);
                 var operation = new VirtualMachineScaleSetRedeployOperation(_clientDiagnostics, Pipeline, _virtualMachineScaleSetsRestClient.CreateRedeployRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmInstanceIDs).Request, response);
                 if (waitForCompletion)
-                    operation.WaitForCompletion(cancellationToken);
+                    operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
             }
             catch (Exception e)
@@ -1048,7 +1048,7 @@ namespace Azure.ResourceManager.Sample
                 var response = _virtualMachineScaleSetsRestClient.PerformMaintenance(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmInstanceIDs, cancellationToken);
                 var operation = new VirtualMachineScaleSetPerformMaintenanceOperation(_clientDiagnostics, Pipeline, _virtualMachineScaleSetsRestClient.CreatePerformMaintenanceRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmInstanceIDs).Request, response);
                 if (waitForCompletion)
-                    operation.WaitForCompletion(cancellationToken);
+                    operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
             }
             catch (Exception e)
@@ -1112,7 +1112,7 @@ namespace Azure.ResourceManager.Sample
                 var response = _virtualMachineScaleSetsRestClient.UpdateInstances(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmInstanceIDs, cancellationToken);
                 var operation = new VirtualMachineScaleSetUpdateInstancesOperation(_clientDiagnostics, Pipeline, _virtualMachineScaleSetsRestClient.CreateUpdateInstancesRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmInstanceIDs).Request, response);
                 if (waitForCompletion)
-                    operation.WaitForCompletion(cancellationToken);
+                    operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
             }
             catch (Exception e)
@@ -1164,7 +1164,7 @@ namespace Azure.ResourceManager.Sample
                 var response = _virtualMachineScaleSetsRestClient.Reimage(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmScaleSetReimageInput, cancellationToken);
                 var operation = new VirtualMachineScaleSetReimageOperation(_clientDiagnostics, Pipeline, _virtualMachineScaleSetsRestClient.CreateReimageRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmScaleSetReimageInput).Request, response);
                 if (waitForCompletion)
-                    operation.WaitForCompletion(cancellationToken);
+                    operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
             }
             catch (Exception e)
@@ -1216,7 +1216,7 @@ namespace Azure.ResourceManager.Sample
                 var response = _virtualMachineScaleSetsRestClient.ReimageAll(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmInstanceIDs, cancellationToken);
                 var operation = new VirtualMachineScaleSetReimageAllOperation(_clientDiagnostics, Pipeline, _virtualMachineScaleSetsRestClient.CreateReimageAllRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmInstanceIDs).Request, response);
                 if (waitForCompletion)
-                    operation.WaitForCompletion(cancellationToken);
+                    operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
             }
             catch (Exception e)
@@ -1380,7 +1380,7 @@ namespace Azure.ResourceManager.Sample
                 var response = _virtualMachineScaleSetsRestClient.SetOrchestrationServiceState(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
                 var operation = new VirtualMachineScaleSetSetOrchestrationServiceStateOperation(_clientDiagnostics, Pipeline, _virtualMachineScaleSetsRestClient.CreateSetOrchestrationServiceStateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters).Request, response);
                 if (waitForCompletion)
-                    operation.WaitForCompletion(cancellationToken);
+                    operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
             }
             catch (Exception e)
@@ -1430,7 +1430,7 @@ namespace Azure.ResourceManager.Sample
                 var response = _virtualMachineScaleSetRollingUpgradesRestClient.Cancel(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 var operation = new VirtualMachineScaleSetCancelVirtualMachineScaleSetRollingUpgradeOperation(_clientDiagnostics, Pipeline, _virtualMachineScaleSetRollingUpgradesRestClient.CreateCancelRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response);
                 if (waitForCompletion)
-                    operation.WaitForCompletion(cancellationToken);
+                    operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
             }
             catch (Exception e)
@@ -1480,7 +1480,7 @@ namespace Azure.ResourceManager.Sample
                 var response = _virtualMachineScaleSetRollingUpgradesRestClient.StartOSUpgrade(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 var operation = new VirtualMachineScaleSetStartOSUpgradeVirtualMachineScaleSetRollingUpgradeOperation(_clientDiagnostics, Pipeline, _virtualMachineScaleSetRollingUpgradesRestClient.CreateStartOSUpgradeRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response);
                 if (waitForCompletion)
-                    operation.WaitForCompletion(cancellationToken);
+                    operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
             }
             catch (Exception e)
@@ -1530,7 +1530,7 @@ namespace Azure.ResourceManager.Sample
                 var response = _virtualMachineScaleSetRollingUpgradesRestClient.StartExtensionUpgrade(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 var operation = new VirtualMachineScaleSetStartExtensionUpgradeVirtualMachineScaleSetRollingUpgradeOperation(_clientDiagnostics, Pipeline, _virtualMachineScaleSetRollingUpgradesRestClient.CreateStartExtensionUpgradeRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response);
                 if (waitForCompletion)
-                    operation.WaitForCompletion(cancellationToken);
+                    operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
             }
             catch (Exception e)

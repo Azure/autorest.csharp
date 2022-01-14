@@ -224,7 +224,7 @@ namespace MgmtExtensionResource
                 var response = _policyDefinitionsRestClient.Delete(Id.SubscriptionId, Id.Name, cancellationToken);
                 var operation = new SubscriptionPolicyDefinitionDeleteOperation(response);
                 if (waitForCompletion)
-                    operation.WaitForCompletion(cancellationToken);
+                    operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
             }
             catch (Exception e)

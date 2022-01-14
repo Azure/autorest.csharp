@@ -227,7 +227,7 @@ namespace MgmtExpandResourceTypes
                 var response = _recordSetsRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.ResourceType.GetLastType().ToRecordType(), Id.Name, ifMatch, cancellationToken);
                 var operation = new RecordSetADeleteOperation(response);
                 if (waitForCompletion)
-                    operation.WaitForCompletion(cancellationToken);
+                    operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
             }
             catch (Exception e)
