@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -26,7 +27,7 @@ namespace MgmtScopeResource
         /// <summary> Generate the resource identifier of a <see cref="DeploymentExtended"/> instance. </summary>
         public static ResourceIdentifier CreateResourceIdentifier(string scope, string deploymentName)
         {
-            var resourceId = $"/{scope}/providers/Microsoft.Resources/deployments/{deploymentName}";
+            var resourceId = $"{scope}/providers/Microsoft.Resources/deployments/{deploymentName}";
             return new ResourceIdentifier(resourceId);
         }
         private readonly ClientDiagnostics _clientDiagnostics;
@@ -42,15 +43,18 @@ namespace MgmtScopeResource
 
         /// <summary> Initializes a new instance of the <see cref = "DeploymentExtended"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
-        /// <param name="resource"> The resource that is the target of operations. </param>
-        internal DeploymentExtended(ArmResource options, DeploymentExtendedData resource) : base(options, resource.Id)
+        /// <param name="data"> The resource that is the target of operations. </param>
+        internal DeploymentExtended(ArmResource options, DeploymentExtendedData data) : base(options, data.Id)
         {
             HasData = true;
-            _data = resource;
+            _data = data;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _deploymentsRestClient = new DeploymentsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
             _restClient = new ResourceManagementRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
             _deploymentOperationsRestClient = new DeploymentRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+#if DEBUG
+			ValidateResourceId(Id);
+#endif
         }
 
         /// <summary> Initializes a new instance of the <see cref="DeploymentExtended"/> class. </summary>
@@ -62,6 +66,9 @@ namespace MgmtScopeResource
             _deploymentsRestClient = new DeploymentsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
             _restClient = new ResourceManagementRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
             _deploymentOperationsRestClient = new DeploymentRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+#if DEBUG
+			ValidateResourceId(Id);
+#endif
         }
 
         /// <summary> Initializes a new instance of the <see cref="DeploymentExtended"/> class. </summary>
@@ -76,13 +83,13 @@ namespace MgmtScopeResource
             _deploymentsRestClient = new DeploymentsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
             _restClient = new ResourceManagementRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
             _deploymentOperationsRestClient = new DeploymentRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+#if DEBUG
+			ValidateResourceId(Id);
+#endif
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
         public static readonly ResourceType ResourceType = "Microsoft.Resources/deployments";
-
-        /// <summary> Gets the valid resource type for the operations. </summary>
-        protected override ResourceType ValidResourceType => ResourceType;
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }
@@ -97,6 +104,12 @@ namespace MgmtScopeResource
                     throw new InvalidOperationException("The current instance does not have data, you must call Get first.");
                 return _data;
             }
+        }
+
+        internal static void ValidateResourceId(ResourceIdentifier id)
+        {
+            if (id.ResourceType != ResourceType)
+                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ResourceType), nameof(id));
         }
 
         /// RequestPath: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}
@@ -187,7 +200,7 @@ namespace MgmtScopeResource
         /// <summary> A template deployment that is currently running cannot be deleted. Deleting a template deployment removes the associated deployment operations. This is an asynchronous operation that returns a status of 202 until the template deployment is successfully deleted. The Location response header contains the URI that is used to obtain the status of the process. While the process is running, a call to the URI in the Location header returns a status of 202. When the process finishes, the URI in the Location header returns a status of 204 on success. If the asynchronous request failed, the URI in the Location header returns an error-level status code. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<DeploymentDeleteAtScopeOperation> DeleteAsync(bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<DeploymentDeleteAtScopeOperation> DeleteAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DeploymentExtended.Delete");
             scope.Start();
@@ -212,7 +225,7 @@ namespace MgmtScopeResource
         /// <summary> A template deployment that is currently running cannot be deleted. Deleting a template deployment removes the associated deployment operations. This is an asynchronous operation that returns a status of 202 until the template deployment is successfully deleted. The Location response header contains the URI that is used to obtain the status of the process. While the process is running, a call to the URI in the Location header returns a status of 202. When the process finishes, the URI in the Location header returns a status of 204 on success. If the asynchronous request failed, the URI in the Location header returns an error-level status code. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual DeploymentDeleteAtScopeOperation Delete(bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual DeploymentDeleteAtScopeOperation Delete(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DeploymentExtended.Delete");
             scope.Start();
@@ -281,7 +294,7 @@ namespace MgmtScopeResource
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<DeploymentValidateAtScopeOperation> ValidateAtScopeAsync(Deployment parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<DeploymentValidateAtScopeOperation> ValidateAtScopeAsync(bool waitForCompletion, Deployment parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -313,7 +326,7 @@ namespace MgmtScopeResource
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual DeploymentValidateAtScopeOperation ValidateAtScope(Deployment parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual DeploymentValidateAtScopeOperation ValidateAtScope(bool waitForCompletion, Deployment parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -396,7 +409,7 @@ namespace MgmtScopeResource
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<DeploymentWhatIfOperation> WhatIfAsync(DeploymentWhatIf parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<DeploymentWhatIfOperation> WhatIfAsync(bool waitForCompletion, DeploymentWhatIf parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -468,7 +481,7 @@ namespace MgmtScopeResource
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual DeploymentWhatIfOperation WhatIf(DeploymentWhatIf parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual DeploymentWhatIfOperation WhatIf(bool waitForCompletion, DeploymentWhatIf parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {

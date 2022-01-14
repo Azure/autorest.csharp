@@ -8,6 +8,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -37,10 +38,16 @@ namespace MgmtCollectionParent
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new ComputeManagementRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+#if DEBUG
+			ValidateResourceId(Id);
+#endif
         }
 
-        /// <summary> Gets the valid resource type for this object. </summary>
-        protected override ResourceType ValidResourceType => ResourceGroup.ResourceType;
+        internal static void ValidateResourceId(ResourceIdentifier id)
+        {
+            if (id.ResourceType != ResourceGroup.ResourceType)
+                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ResourceGroup.ResourceType), nameof(id));
+        }
 
         // Collection level operations.
 
@@ -135,9 +142,9 @@ namespace MgmtCollectionParent
             try
             {
                 var response = _restClient.GetOrderByName(Id.SubscriptionId, Id.ResourceGroupName, location, orderName, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<OrderResource>(null, response.GetRawResponse())
-                    : Response.FromValue(new OrderResource(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<OrderResource>(null, response.GetRawResponse());
+                return Response.FromValue(new OrderResource(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -162,14 +169,14 @@ namespace MgmtCollectionParent
                 throw new ArgumentNullException(nameof(orderName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("OrderResourceCollection.GetIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("OrderResourceCollection.GetIfExists");
             scope.Start();
             try
             {
                 var response = await _restClient.GetOrderByNameAsync(Id.SubscriptionId, Id.ResourceGroupName, location, orderName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<OrderResource>(null, response.GetRawResponse())
-                    : Response.FromValue(new OrderResource(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<OrderResource>(null, response.GetRawResponse());
+                return Response.FromValue(new OrderResource(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -224,7 +231,7 @@ namespace MgmtCollectionParent
                 throw new ArgumentNullException(nameof(orderName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("OrderResourceCollection.ExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("OrderResourceCollection.Exists");
             scope.Start();
             try
             {

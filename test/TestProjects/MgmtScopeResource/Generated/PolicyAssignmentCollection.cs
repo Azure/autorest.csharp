@@ -40,15 +40,6 @@ namespace MgmtScopeResource
             _policyAssignmentsRestClient = new PolicyAssignmentsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
-        /// <summary> Gets the valid resource type for this object. </summary>
-        protected override ResourceType ValidResourceType => ResourceIdentifier.Root.ResourceType;
-
-        /// <summary> Verify that the input resource Id is a valid collection for this type. </summary>
-        /// <param name="identifier"> The input resource Id to check. </param>
-        protected override void ValidateResourceType(ResourceIdentifier identifier)
-        {
-        }
-
         // Collection level operations.
 
         /// RequestPath: /{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}
@@ -60,7 +51,7 @@ namespace MgmtScopeResource
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="policyAssignmentName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual PolicyAssignmentCreateOperation CreateOrUpdate(string policyAssignmentName, PolicyAssignmentData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual PolicyAssignmentCreateOperation CreateOrUpdate(bool waitForCompletion, string policyAssignmentName, PolicyAssignmentData parameters, CancellationToken cancellationToken = default)
         {
             if (policyAssignmentName == null)
             {
@@ -97,7 +88,7 @@ namespace MgmtScopeResource
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="policyAssignmentName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<PolicyAssignmentCreateOperation> CreateOrUpdateAsync(string policyAssignmentName, PolicyAssignmentData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<PolicyAssignmentCreateOperation> CreateOrUpdateAsync(bool waitForCompletion, string policyAssignmentName, PolicyAssignmentData parameters, CancellationToken cancellationToken = default)
         {
             if (policyAssignmentName == null)
             {
@@ -201,9 +192,9 @@ namespace MgmtScopeResource
             try
             {
                 var response = _policyAssignmentsRestClient.Get(Id, policyAssignmentName, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<PolicyAssignment>(null, response.GetRawResponse())
-                    : Response.FromValue(new PolicyAssignment(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<PolicyAssignment>(null, response.GetRawResponse());
+                return Response.FromValue(new PolicyAssignment(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -223,14 +214,14 @@ namespace MgmtScopeResource
                 throw new ArgumentNullException(nameof(policyAssignmentName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("PolicyAssignmentCollection.GetIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("PolicyAssignmentCollection.GetIfExists");
             scope.Start();
             try
             {
                 var response = await _policyAssignmentsRestClient.GetAsync(Id, policyAssignmentName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<PolicyAssignment>(null, response.GetRawResponse())
-                    : Response.FromValue(new PolicyAssignment(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<PolicyAssignment>(null, response.GetRawResponse());
+                return Response.FromValue(new PolicyAssignment(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -275,7 +266,7 @@ namespace MgmtScopeResource
                 throw new ArgumentNullException(nameof(policyAssignmentName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("PolicyAssignmentCollection.ExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("PolicyAssignmentCollection.Exists");
             scope.Start();
             try
             {

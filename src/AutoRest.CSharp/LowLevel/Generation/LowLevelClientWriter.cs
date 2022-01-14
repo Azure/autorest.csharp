@@ -41,7 +41,7 @@ namespace AutoRest.CSharp.Generation.Writers
         private static readonly FormattableString CreatePageableMethodName = $"{typeof(PageableHelpers)}.{nameof(PageableHelpers.CreatePageable)}";
         private static readonly FormattableString CreateAsyncPageableMethodName = $"{typeof(PageableHelpers)}.{nameof(PageableHelpers.CreateAsyncPageable)}";
 
-        public void WriteClient(CodeWriter writer, LowLevelClient client, LowLevelClient[] subClients, BuildContext<LowLevelOutputLibrary> context)
+        public void WriteClient(CodeWriter writer, LowLevelClient client, BuildContext<LowLevelOutputLibrary> context)
         {
             var cs = client.Type;
             using (writer.Namespace(cs.Namespace))
@@ -71,7 +71,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         }
                     }
 
-                    WriteSubClientFactoryMethod(writer, context, client, subClients);
+                    WriteSubClientFactoryMethod(writer, context, client);
 
                     var responseClassifierTypes = new List<ResponseClassifierType>();
                     foreach (var method in client.RequestMethods)
@@ -132,7 +132,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.WriteMethodDocumentation(signature);
             using (writer.WriteMethodDeclaration(signature))
             {
-                writer.WriteParameterNullChecks(signature.Parameters);
+                writer.WriteParametersValidation(signature.Parameters);
                 writer.Line();
 
                 var clientOptionsParameter = signature.Parameters.Last(p => p.Type.EqualsIgnoreNullable(client.ClientOptions.Type));
@@ -186,7 +186,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.WriteMethodDocumentation(signature);
             using (writer.WriteMethodDeclaration(signature))
             {
-                writer.WriteParameterNullChecks(signature.Parameters);
+                writer.WriteParametersValidation(signature.Parameters);
                 writer.Line();
 
                 foreach (var parameter in signature.Parameters)
@@ -238,7 +238,6 @@ namespace AutoRest.CSharp.Generation.Writers
 
             using (WriteClientMethodDeclaration(writer, clientMethod, clientMethod.OperationSchemas, returnType, async))
             {
-                writer.WriteParameterNullChecks(method.Parameters);
                 var createEnumerableMethod = new CodeWriterDeclaration(CreateMethodName("CreateEnumerable", async));
                 var createEnumerableParameters = async ? new[] { NextLinkParameter, PageSizeHintParameter, EnumeratorCancellationTokenParameter } : new[] { NextLinkParameter, PageSizeHintParameter };
                 var createEnumerableReturnType = async ? typeof(IAsyncEnumerable<Page<BinaryData>>) : typeof(IEnumerable<Page<BinaryData>>);
@@ -361,10 +360,10 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        private void WriteSubClientFactoryMethod(CodeWriter writer, BuildContext context, LowLevelClient parentClient, LowLevelClient[] subClients)
+        private void WriteSubClientFactoryMethod(CodeWriter writer, BuildContext context, LowLevelClient parentClient)
         {
             var factoryMethods = new List<(FieldDeclaration?, MethodSignature, List<Reference>)>();
-            foreach (var subClient in subClients)
+            foreach (var subClient in parentClient.SubClients)
             {
                 var methodParameters = new List<Parameter>();
                 var constructorCallParameters = new List<Reference>();
@@ -389,14 +388,19 @@ namespace AutoRest.CSharp.Generation.Writers
                     ? subClientName[libraryName.Length..]
                     : subClientName;
 
-                var methodSignature = new MethodSignature($"Get{methodName}{ClientBuilder.GetClientSuffix(context)}", $"Initializes a new instance of {subClient.Type.Name}", "public virtual", subClient.Type, null, methodParameters.ToArray());
+                if (!subClient.IsResourceClient)
+                {
+                    methodName += ClientBuilder.GetClientSuffix(context);
+                }
+
+                var methodSignature = new MethodSignature($"Get{methodName}", $"Initializes a new instance of {subClient.Type.Name}", "public virtual", subClient.Type, null, methodParameters.ToArray());
                 if (methodParameters.Any())
                 {
                     factoryMethods.Add((null, methodSignature, constructorCallParameters));
                 }
                 else
                 {
-                    var field = new FieldDeclaration("private", subClient.Type, $"_cached{subClient.Type.Name}");
+                    var field = new FieldDeclaration(FieldModifiers.Private, subClient.Type, $"_cached{subClient.Type.Name}");
                     factoryMethods.Add((field, methodSignature, constructorCallParameters));
                 }
             }
@@ -416,7 +420,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.WriteMethodDocumentation(methodSignature);
                 using (writer.WriteMethodDeclaration(methodSignature))
                 {
-                    writer.WriteParameterNullChecks(methodSignature.Parameters);
+                    writer.WriteParametersValidation(methodSignature.Parameters);
                     writer.Line();
 
                     if (field != null)
@@ -474,7 +478,9 @@ namespace AutoRest.CSharp.Generation.Writers
 
             writer.WriteMethodDocumentation(methodSignature);
             WriteSchemaDocumentationRemarks(writer, operationSchemas);
-            return writer.WriteMethodDeclaration(methodSignature, "AZC0002");
+            var scope = writer.WriteMethodDeclaration(methodSignature, "AZC0002");
+            writer.WriteParametersValidation(methodSignature.Parameters);
+            return scope;
         }
 
         private static ResponseClassifierType CreateResponseClassifierType(RestClientMethod method)

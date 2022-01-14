@@ -20,6 +20,7 @@ namespace SingletonResource
         /// <returns> Returns a <see cref="Car" /> object. </returns>
         public static Car GetCar(this ArmClient armClient, ResourceIdentifier id)
         {
+            Car.ValidateResourceId(id);
             return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new Car(clientOptions, credential, uri, pipeline, id));
         }
         #endregion
@@ -31,6 +32,7 @@ namespace SingletonResource
         /// <returns> Returns a <see cref="Ignition" /> object. </returns>
         public static Ignition GetIgnition(this ArmClient armClient, ResourceIdentifier id)
         {
+            Ignition.ValidateResourceId(id);
             return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new Ignition(clientOptions, credential, uri, pipeline, id));
         }
         #endregion
@@ -42,6 +44,7 @@ namespace SingletonResource
         /// <returns> Returns a <see cref="SingletonResource" /> object. </returns>
         public static SingletonResource GetSingletonResource(this ArmClient armClient, ResourceIdentifier id)
         {
+            SingletonResource.ValidateResourceId(id);
             return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new SingletonResource(clientOptions, credential, uri, pipeline, id));
         }
         #endregion
@@ -53,6 +56,7 @@ namespace SingletonResource
         /// <returns> Returns a <see cref="ParentResource" /> object. </returns>
         public static ParentResource GetParentResource(this ArmClient armClient, ResourceIdentifier id)
         {
+            ParentResource.ValidateResourceId(id);
             return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new ParentResource(clientOptions, credential, uri, pipeline, id));
         }
         #endregion

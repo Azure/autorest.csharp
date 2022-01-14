@@ -8,6 +8,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -38,10 +39,16 @@ namespace SupersetInheritance
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _supersetModel4sRestClient = new SupersetModel4SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+#if DEBUG
+			ValidateResourceId(Id);
+#endif
         }
 
-        /// <summary> Gets the valid resource type for this object. </summary>
-        protected override ResourceType ValidResourceType => ResourceGroup.ResourceType;
+        internal static void ValidateResourceId(ResourceIdentifier id)
+        {
+            if (id.ResourceType != ResourceGroup.ResourceType)
+                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ResourceGroup.ResourceType), nameof(id));
+        }
 
         // Collection level operations.
 
@@ -53,7 +60,7 @@ namespace SupersetInheritance
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel4SName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual SupersetModel4SPutOperation CreateOrUpdate(string supersetModel4SName, SupersetModel4Data parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual SupersetModel4SPutOperation CreateOrUpdate(bool waitForCompletion, string supersetModel4SName, SupersetModel4Data parameters, CancellationToken cancellationToken = default)
         {
             if (supersetModel4SName == null)
             {
@@ -89,7 +96,7 @@ namespace SupersetInheritance
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel4SName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<SupersetModel4SPutOperation> CreateOrUpdateAsync(string supersetModel4SName, SupersetModel4Data parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<SupersetModel4SPutOperation> CreateOrUpdateAsync(bool waitForCompletion, string supersetModel4SName, SupersetModel4Data parameters, CancellationToken cancellationToken = default)
         {
             if (supersetModel4SName == null)
             {
@@ -191,9 +198,9 @@ namespace SupersetInheritance
             try
             {
                 var response = _supersetModel4sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, supersetModel4SName, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<SupersetModel4>(null, response.GetRawResponse())
-                    : Response.FromValue(new SupersetModel4(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<SupersetModel4>(null, response.GetRawResponse());
+                return Response.FromValue(new SupersetModel4(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -213,14 +220,14 @@ namespace SupersetInheritance
                 throw new ArgumentNullException(nameof(supersetModel4SName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SupersetModel4Collection.GetIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("SupersetModel4Collection.GetIfExists");
             scope.Start();
             try
             {
                 var response = await _supersetModel4sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, supersetModel4SName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<SupersetModel4>(null, response.GetRawResponse())
-                    : Response.FromValue(new SupersetModel4(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<SupersetModel4>(null, response.GetRawResponse());
+                return Response.FromValue(new SupersetModel4(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -265,7 +272,7 @@ namespace SupersetInheritance
                 throw new ArgumentNullException(nameof(supersetModel4SName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SupersetModel4Collection.ExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("SupersetModel4Collection.Exists");
             scope.Start();
             try
             {

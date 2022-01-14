@@ -4,13 +4,18 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.Common.Output.Models;
+using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Output.Builders;
+using AutoRest.CSharp.Output.Models;
+using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
+using Azure.Core;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
@@ -337,5 +342,67 @@ namespace AutoRest.CSharp.Mgmt.Output
         }
 
         private string ParentPrefix(Resource resource) => string.Join("", resource.Parent(_context).Select(p => p.ResourceName));
+
+        /// <summary>
+        /// Returns the different method signature for different base path of this resource
+        /// </summary>
+        /// <returns></returns>
+        public IDictionary<RequestPath, MethodSignature> CreateResourceIdentifierMethodSignature()
+        {
+            return RequestPaths.ToDictionary(requestPath => requestPath,
+                requestPath => new MethodSignature(
+                    name: "CreateResourceIdentifier",
+                    description: $"Generate the resource identifier of a <see cref=\"{Type.Name}\"/> instance.",
+                    modifiers: "public static",
+                    returnType: typeof(Azure.Core.ResourceIdentifier),
+                    returnDescription: null,
+                    parameters: requestPath.Where(segment => segment.IsReference).Select(segment => new Parameter(segment.Reference.Name, null, segment.Reference.Type, null, true)).ToArray()));
+        }
+
+        public CodeWriterDelegate NewInstanceExpression(IEnumerable<ParameterInvocation> parameterInvocations)
+        {
+            return w =>
+            {
+                w.Append($"new {Type}(");
+                foreach (var parameter in parameterInvocations)
+                {
+                    if (parameter.Invocation != null)
+                        w.Append($"{parameter.Invocation}, ");
+                    else
+                        w.Append($"{parameter.Name:I}, ");
+                }
+                w.RemoveTrailingComma();
+                w.Append($")");
+            };
+        }
+
+        public CodeWriterDelegate ResourceDataIdExpression(CodeWriterDelegate dataExpression)
+        {
+            var typeOfId = ResourceData.TypeOfId;
+            if (typeOfId != null && typeOfId.Equals(typeof(string)))
+            {
+                return w => w.Append($"new {typeof(ResourceIdentifier)}({dataExpression}.Id)");
+            }
+            else
+            {
+                // we have ensured other cases we would have an Id of Azure.Core.ResourceIdentifier type
+                return w => w.Append($"{dataExpression}.Id");
+            }
+        }
+
+        public Parameter OptionsParameter => new Parameter(Name: "options", Description: $"The client parameters to use in these operations.",
+                            Type: typeof(Azure.ResourceManager.Core.ArmResource), DefaultValue: null, ValidateNotNull: false);
+        public Parameter ResourceDataParameter => new Parameter(Name: "data", Description: $"The resource that is the target of operations.",
+                        Type: ResourceData.Type, DefaultValue: null, ValidateNotNull: false);
+        public Parameter ResourceIdentifierParameter => new Parameter(Name: "id", Description: $"The identifier of the resource that is the target of operations.",
+                        Type: typeof(Azure.Core.ResourceIdentifier), DefaultValue: null, ValidateNotNull: false);
+        public Parameter ClientOptionsParameter => new Parameter(Name: "clientOptions", Description: $"The client options to build client context.",
+                        Type: typeof(Azure.ResourceManager.ArmClientOptions), DefaultValue: null, ValidateNotNull: false);
+        public Parameter CredentialParameter => new Parameter(Name: "credential", Description: $"The credential to build client context.",
+                        Type: typeof(Azure.Core.TokenCredential), DefaultValue: null, ValidateNotNull: false);
+        public Parameter UriParameter => new Parameter(Name: "uri", Description: $"The uri to build client context.",
+                        Type: typeof(Uri), DefaultValue: null, ValidateNotNull: false);
+        public Parameter PipelineParameter => new Parameter(Name: "pipeline", Description: $"The pipeline to build client context.",
+                        Type: typeof(Azure.Core.Pipeline.HttpPipeline), DefaultValue: null, ValidateNotNull: false);
     }
 }

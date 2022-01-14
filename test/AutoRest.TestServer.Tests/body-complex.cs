@@ -229,7 +229,7 @@ namespace AutoRest.TestServer.Tests
         public Task GetComplexPrimitiveDate() => Test(async (host, pipeline) =>
         {
             var result = await new PrimitiveClient(ClientDiagnostics, pipeline, host).GetDateAsync();
-            Assert.AreEqual(DateTimeOffset.Parse("0001-01-01", styles: DateTimeStyles.AssumeUniversal), result.Value.Field);
+            Assert.AreEqual(DateTimeOffset.MinValue, result.Value.Field);
             Assert.AreEqual(DateTimeOffset.Parse("2016-02-29", styles: DateTimeStyles.AssumeUniversal), result.Value.Leap);
         });
 
@@ -238,7 +238,7 @@ namespace AutoRest.TestServer.Tests
         {
             var value = new DateWrapper
             {
-                Field = DateTimeOffset.Parse("0001-01-01", styles: DateTimeStyles.AssumeUniversal),
+                Field = DateTimeOffset.MinValue,
                 Leap = DateTimeOffset.Parse("2016-02-29", styles: DateTimeStyles.AssumeUniversal)
             };
             return await new PrimitiveClient(ClientDiagnostics, pipeline, host).PutDateAsync( value);

@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Mgmt.Models
 {
@@ -90,7 +91,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             // find providers
             int index = path.ToList().LastIndexOf(Segment.Providers);
             if (index < 0)
-                throw new ArgumentException($"Could not set ResourceTypeSegment for operations group {path}. No {Segment.Providers} string found in the URI");
+                throw new ErrorHelpers.ErrorException($"Could not set ResourceTypeSegment for request path {path}. No {Segment.Providers} string found in the URI. Please assign a valid resource type in `request-path-to-resource-type` configuration");
             segment.Add(path[index + 1]);
             segment.AddRange(path.Skip(index + 1).Where((_, index) => index % 2 != 0));
 

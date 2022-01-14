@@ -20,6 +20,7 @@ namespace OmitOperationGroups
         /// <returns> Returns a <see cref="Model2" /> object. </returns>
         public static Model2 GetModel2(this ArmClient armClient, ResourceIdentifier id)
         {
+            Model2.ValidateResourceId(id);
             return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new Model2(clientOptions, credential, uri, pipeline, id));
         }
         #endregion

@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading;
 using AutoRest.CSharp.Generation.Types;
@@ -142,17 +143,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
             Dictionary<RequestPath, IEnumerable<ParameterMapping>> parameterMappings, IReadOnlyList<Parameter> methodParameters,
             string methodName, bool async)
         {
-            // we can only make this an SLRO when all of the methods are not really long
-            bool isSLRO = !clientOperation.IsLongRunningReallyLong();
-            methodName = isSLRO ? methodName : $"Start{methodName}";
-
             // TODO -- since we are combining multiple operations under different parents, which description should we leave here?
             // TODO -- find a way to properly get the LRO response type here. Temporarily we are using the first one
             var lroObjectType = GetLROObjectType(clientOperation.First().Operation, async);
             var responseType = lroObjectType.WrapAsync(async);
 
             _writer.WriteXmlDocumentationSummary($"{clientOperation.Description}");
-            WriteLROMethodSignature(responseType, methodName, methodParameters, async, isSLRO, clientOperation.Accessibility, true);
+            WriteLROMethodSignature(responseType, methodName, methodParameters, async, clientOperation.Accessibility, true);
 
             using (_writer.Scope())
             {
@@ -187,7 +184,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
             Dictionary<RequestPath, IEnumerable<ParameterMapping>> parameterMappings, IReadOnlyList<Parameter> methodParameters,
             string methodName, bool async)
         {
-            var actualItemType = WrapResourceDataType(itemType, clientOperation.First())!;
+            var pagingMethod = clientOperation.First().GetPagingMethod(Context)!;
+            var wrapResource = WrapResourceDataType(itemType, clientOperation.First());
+            var actualItemType = wrapResource?.Type ?? itemType;
 
             _writer.WriteXmlDocumentationSummary($"Lists the {actualItemType.Name.LastWordToPlural()} for this <see cref=\"{ExtensionOperationVariableType}\" />.");
             WritePagingMethodSignature(actualItemType, methodName, methodParameters, async, clientOperation.Accessibility, false);
@@ -244,7 +243,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         }
 
         protected override void WriteLROMethodSignature(CSharpType responseType, string methodName, IReadOnlyList<Parameter> methodParameters, bool async,
-            bool isSLRO, string accessibility = "public", bool isVirtual = true)
+            string accessibility = "public", bool isVirtual = true)
         {
             _writer.WriteXmlDocumentationParameter($"{ExtensionOperationVariableName}", $"The <see cref=\"{ExtensionOperationVariableType}\" /> instance the method will execute against.");
             foreach (var parameter in methodParameters)
@@ -255,13 +254,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
             _writer.WriteXmlDocumentationRequiredParametersException(methodParameters);
             _writer.Append($"{accessibility} static {GetAsyncKeyword(async)} {responseType} {CreateMethodName(methodName, async)}(this {ExtensionOperationVariableType} {ExtensionOperationVariableName}, ");
+            _writer.Append($"bool waitForCompletion, ");
             foreach (var parameter in methodParameters)
             {
                 _writer.WriteParameter(parameter);
             }
 
-            var defaultWaitForCompletion = isSLRO ? "true" : "false";
-            _writer.Line($"bool waitForCompletion = {defaultWaitForCompletion}, {typeof(CancellationToken)} cancellationToken = default)");
+            _writer.Line($"{typeof(CancellationToken)} cancellationToken = default)");
         }
 
         protected override void WriteNormalMethodSignature(CSharpType responseType, string methodName, IReadOnlyList<Parameter> methodParameters,
@@ -288,7 +287,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             string methodName, bool async, bool shouldThrowExceptionWhenNull = false)
         {
             // TODO -- since we are combining multiple operations under different parents, which description should we leave here?
-            var returnType = WrapResourceDataType(clientOperation.ReturnType, clientOperation.First());
+            var returnType = WrapResourceDataType(clientOperation.ReturnType, clientOperation.First())?.Type ?? clientOperation.ReturnType;
 
             _writer.WriteXmlDocumentationSummary($"{clientOperation.Description}");
             WriteNormalMethodSignature(GetResponseType(returnType, async), methodName, methodParameters, async, clientOperation.Accessibility, true);
@@ -324,31 +323,35 @@ namespace AutoRest.CSharp.Mgmt.Generation
         /// <param name="type"></param>
         /// <param name="operation"></param>
         /// <returns></returns>
-        protected override CSharpType? WrapResourceDataType(CSharpType? type, MgmtRestOperation operation)
+        protected override Resource? WrapResourceDataType(CSharpType? type, MgmtRestOperation operation)
         {
-            if (!IsResourceDataType(type, operation))
-                return type;
+            if (!IsResourceDataType(type, operation, out var data))
+                return null;
 
             // we need to find the correct resource type that links with this resource data
-            var candidates = new List<RequestPath>();
+            var candidates = new List<Resource>();
             foreach (var resource in Context.Library.ArmResources)
             {
-                foreach (var operationSet in resource.OperationSets)
-                {
-                    var resourceRequestPath = operationSet.GetRequestPath(Context);
-                    // TODO -- verify if this has the same prefix after the scope is trimeed
-                    if (operation.RequestPath.TrimScope().IsAncestorOf(resourceRequestPath.TrimScope()))
-                        candidates.Add(resourceRequestPath);
-                }
+                if (resource.ResourceData == data)
+                    candidates.Add(resource);
             }
+
+            // when we only find one result, just return it.
+            if (candidates.Count == 1)
+                return candidates.Single();
 
             // we should have a list of candidates, return the original type if there is no candidates
             if (candidates.Count == 0)
-                return type;
+                return null;
 
-            var selectedResourcePath = candidates.OrderBy(path => path.Count).First();
+            // if there is more candidates than one, we are going to some more matching to see if we could determine one
+            var resourceType = operation.RequestPath.GetResourceType(Config);
+            var filteredResources = candidates.Where(resource => resource.ResourceType == resourceType);
 
-            return Context.Library.GetArmResource(selectedResourcePath).Type;
+            if (filteredResources.Count() == 1)
+                return filteredResources.Single();
+
+            return null;
         }
 
         /// <summary>
@@ -357,13 +360,18 @@ namespace AutoRest.CSharp.Mgmt.Generation
         /// <param name="type"></param>
         /// <param name="operation"></param>
         /// <returns></returns>
-        protected override bool IsResourceDataType(CSharpType? type, MgmtRestOperation operation)
+        protected override bool IsResourceDataType(CSharpType? type, MgmtRestOperation operation, [MaybeNullWhen(false)] out ResourceData data)
         {
+            data = null;
             if (type == null || type.IsFrameworkType)
                 return false;
 
-            return Context.Library.TryGetTypeProvider(type.Name, out var provider)
-                && provider is ResourceData;
+            if (Context.Library.TryGetTypeProvider(type.Name, out var provider))
+            {
+                data = provider as ResourceData;
+                return data != null;
+            }
+            return false;
         }
 
         private void WriteClientDiagnosticsAssignment(string optionsVariable)

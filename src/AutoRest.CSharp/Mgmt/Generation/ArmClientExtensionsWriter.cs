@@ -62,6 +62,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var instanceParameter = IsArmCore ? string.Empty : $"this {ExtensionOperationVariableType} {ExtensionOperationVariableName}, ";
             using (writer.Scope($"public {modifier} {resource.Type} Get{resource.Type.Name}({instanceParameter}{typeof(Azure.Core.ResourceIdentifier)} id)"))
             {
+                writer.Line($"{resource.Type.Name}.ValidateResourceId(id);");
                 if (IsArmCore)
                 {
                     writer.Line($"return new {resource.Type.Name}(ClientOptions, Credential, BaseUri, Pipeline, id);");

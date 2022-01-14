@@ -8,6 +8,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -38,10 +39,16 @@ namespace XmlDeserialization
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _xmlDeserializationRestClient = new XmlDeserializationRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+#if DEBUG
+			ValidateResourceId(Id);
+#endif
         }
 
-        /// <summary> Gets the valid resource type for this object. </summary>
-        protected override ResourceType ValidResourceType => ResourceGroup.ResourceType;
+        internal static void ValidateResourceId(ResourceIdentifier id)
+        {
+            if (id.ResourceType != ResourceGroup.ResourceType)
+                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ResourceGroup.ResourceType), nameof(id));
+        }
 
         // Collection level operations.
 
@@ -55,7 +62,7 @@ namespace XmlDeserialization
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="xmlName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual XmlDeserializationCreateOrUpdateOperation CreateOrUpdate(string xmlName, XmlInstanceData parameters, string ifMatch = null, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual XmlDeserializationCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string xmlName, XmlInstanceData parameters, string ifMatch = null, CancellationToken cancellationToken = default)
         {
             if (xmlName == null)
             {
@@ -93,7 +100,7 @@ namespace XmlDeserialization
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="xmlName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<XmlDeserializationCreateOrUpdateOperation> CreateOrUpdateAsync(string xmlName, XmlInstanceData parameters, string ifMatch = null, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<XmlDeserializationCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string xmlName, XmlInstanceData parameters, string ifMatch = null, CancellationToken cancellationToken = default)
         {
             if (xmlName == null)
             {
@@ -197,9 +204,9 @@ namespace XmlDeserialization
             try
             {
                 var response = _xmlDeserializationRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, xmlName, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<XmlInstance>(null, response.GetRawResponse())
-                    : Response.FromValue(new XmlInstance(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<XmlInstance>(null, response.GetRawResponse());
+                return Response.FromValue(new XmlInstance(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -219,14 +226,14 @@ namespace XmlDeserialization
                 throw new ArgumentNullException(nameof(xmlName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("XmlInstanceCollection.GetIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("XmlInstanceCollection.GetIfExists");
             scope.Start();
             try
             {
                 var response = await _xmlDeserializationRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, xmlName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<XmlInstance>(null, response.GetRawResponse())
-                    : Response.FromValue(new XmlInstance(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<XmlInstance>(null, response.GetRawResponse());
+                return Response.FromValue(new XmlInstance(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -271,7 +278,7 @@ namespace XmlDeserialization
                 throw new ArgumentNullException(nameof(xmlName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("XmlInstanceCollection.ExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("XmlInstanceCollection.Exists");
             scope.Start();
             try
             {

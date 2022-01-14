@@ -6,12 +6,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
+using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
@@ -92,30 +94,41 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             _writer.Line();
             // write protected default constructor
-            _writer.WriteXmlDocumentationSummary($"Initializes a new instance of the <see cref=\"{TypeNameOfThis}\"/> class for mocking.");
-            using (_writer.Scope($"protected {TypeNameOfThis}()"))
+            var mockingConstructor = new MethodSignature(
+                name: TypeOfThis.Name,
+                description: $"Initializes a new instance of the <see cref=\"{TypeOfThis.Name}\"/> class for mocking.",
+                modifiers: "protected",
+                parameters: new Parameter[0]);
+            _writer.WriteMethodDocumentation(mockingConstructor);
+            using (_writer.WriteMethodDeclaration(mockingConstructor))
             { }
 
-            // write "parent resource" constructor
             _writer.Line();
-            _writer.WriteXmlDocumentationSummary($"Initializes a new instance of the <see cref=\"{TypeNameOfThis}\"/> class.");
-            _writer.WriteXmlDocumentationParameter("parent", $"The resource representing the parent resource.");
-            _writer.WriteXmlDocumentationParameters(_resourceCollection.ExtraConstructorParameters);
-            _writer.Append($"internal {TypeNameOfThis}({typeof(ArmResource)} parent, ");
-            foreach (var reference in _resourceCollection.ExtraConstructorParameters)
+            // write "parent resource" constructor
+            var parentResourceConstructor = new MethodSignature(
+                name: TypeOfThis.Name,
+                description: $"Initializes a new instance of the <see cref=\"{TypeNameOfThis}\"/> class.",
+                modifiers: "internal",
+                parameters: _resourceCollection.ParentParameter.AsIEnumerable().Concat(_resourceCollection.ExtraConstructorParameters).ToArray(),
+                baseMethod: new MethodSignature(
+                    name: TypeOfThis.Name,
+                    description: null,
+                    modifiers: "protected",
+                    parameters: new[] { _resourceCollection.ParentParameter })
+                );
+
+            _writer.WriteMethodDocumentation(parentResourceConstructor);
+            using (_writer.WriteMethodDeclaration(parentResourceConstructor))
             {
-                _writer.Append($"{reference.Type} {reference.Name}, ");
-            }
-            _writer.RemoveTrailingComma();
-            _writer.Line($") : base(parent)");
-            using (_writer.Scope())
-            {
+                var allPossibleTypes = _resourceCollection.ResourceTypes.SelectMany(p => p.Value).Distinct();
                 _writer.Line($"{ClientDiagnosticsField} = new {typeof(ClientDiagnostics)}(ClientOptions);");
                 WriteRestClientAssignments();
-                foreach (var reference in _resourceCollection.ExtraConstructorParameters)
+                foreach (var parameter in _resourceCollection.ExtraConstructorParameters)
                 {
-                    _writer.Line($"{_resourceCollection.GetFieldName(reference)} = {reference.Name};");
+                    _writer.Line($"{_resourceCollection.GetFieldName(parameter)} = {parameter.Name};");
                 }
+                if (allPossibleTypes.Count() == 1)
+                    WriteDebugValidate(_writer);
             }
         }
 
@@ -129,26 +142,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             var allPossibleTypes = _resourceCollection.ResourceTypes.SelectMany(p => p.Value).Distinct();
 
-            FormattableString validResourceType;
-            if (allPossibleTypes.Count() == 1)
-                validResourceType = GetResourceTypeExpression(allPossibleTypes.First());
-            else
-                validResourceType = $"{typeof(Azure.Core.ResourceIdentifier)}.Root.ResourceType";
+            FormattableString validResourceType = allPossibleTypes.Count() == 1
+                ? validResourceType = GetResourceTypeExpression(allPossibleTypes.First())
+                : validResourceType = $"{typeof(Azure.Core.ResourceIdentifier)}.Root.ResourceType";
             _writer.Line();
-            _writer.WriteXmlDocumentationSummary($"Gets the valid resource type for this object");
-            _writer.Line($"protected override {typeof(Azure.Core.ResourceType)} ValidResourceType => {validResourceType};");
 
-            if (allPossibleTypes.Count() != 1)
-            {
-                // TODO -- if the collection has a limited list of possible resource types, we need to verify them one by one
-                _writer.Line();
-                _writer.WriteXmlDocumentationSummary($"Verify that the input resource Id is a valid collection for this type.");
-                _writer.WriteXmlDocumentationParameter("identifier", $"The input resource Id to check.");
-                _writer.Line($"protected override void ValidateResourceType({typeof(Azure.Core.ResourceIdentifier)} identifier)");
-                using (_writer.Scope())
-                {
-                }
-            }
+            if (allPossibleTypes.Count() == 1)
+                WriteStaticValidate(validResourceType, _writer);
         }
 
         protected override void WriteMethods()
@@ -273,9 +273,20 @@ namespace AutoRest.CSharp.Mgmt.Generation
             WriteArguments(writer, parameterMappings);
             writer.Line($"cancellationToken: cancellationToken){GetConfigureAwait(async)};");
 
-            writer.Line($"return response.Value == null");
-            writer.Line($"\t? {typeof(Response)}.FromValue<{_resource.Type.Name}>(null, response.GetRawResponse())");
-            writer.Line($"\t: {typeof(Response)}.FromValue(new {_resource.Type.Name}(this, response.Value), response.GetRawResponse());");
+            CodeWriterDelegate dataExpression = w => w.Append($"response.Value");
+
+            writer.Line($"if ({dataExpression} == null)");
+            writer.Line($"return {typeof(Response)}.FromValue<{_resource.Type.Name}>(null, response.GetRawResponse());");
+
+            if (_resource.ResourceData.ShouldSetResourceIdentifier)
+                writer.Line($"{dataExpression}.Id = {CreateResourceIdentifierExpression(_resource, operation.RequestPath, parameterMappings, dataExpression)};");
+
+            var newInstanceExpression = _resource.NewInstanceExpression(new[]
+            {
+                new ParameterInvocation(_resource.OptionsParameter, w => w.Append($"this")),
+                new ParameterInvocation(_resource.ResourceDataParameter, dataExpression),
+            });
+            writer.Line($"return {typeof(Response)}.FromValue({newInstanceExpression}, response.GetRawResponse());");
         }
 
         /// <summary>

@@ -8,6 +8,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -35,10 +36,16 @@ namespace TenantOnly
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _agreementsRestClient = new AgreementsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+#if DEBUG
+			ValidateResourceId(Id);
+#endif
         }
 
-        /// <summary> Gets the valid resource type for this object. </summary>
-        protected override ResourceType ValidResourceType => BillingAccount.ResourceType;
+        internal static void ValidateResourceId(ResourceIdentifier id)
+        {
+            if (id.ResourceType != BillingAccount.ResourceType)
+                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, BillingAccount.ResourceType), nameof(id));
+        }
 
         // Collection level operations.
 
@@ -121,9 +128,9 @@ namespace TenantOnly
             try
             {
                 var response = _agreementsRestClient.Get(Id.Name, agreementName, expand, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<Agreement>(null, response.GetRawResponse())
-                    : Response.FromValue(new Agreement(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<Agreement>(null, response.GetRawResponse());
+                return Response.FromValue(new Agreement(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -144,14 +151,14 @@ namespace TenantOnly
                 throw new ArgumentNullException(nameof(agreementName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("AgreementCollection.GetIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("AgreementCollection.GetIfExists");
             scope.Start();
             try
             {
                 var response = await _agreementsRestClient.GetAsync(Id.Name, agreementName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<Agreement>(null, response.GetRawResponse())
-                    : Response.FromValue(new Agreement(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<Agreement>(null, response.GetRawResponse());
+                return Response.FromValue(new Agreement(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -198,7 +205,7 @@ namespace TenantOnly
                 throw new ArgumentNullException(nameof(agreementName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("AgreementCollection.ExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("AgreementCollection.Exists");
             scope.Start();
             try
             {

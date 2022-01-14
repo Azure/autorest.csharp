@@ -38,14 +38,11 @@ namespace paging_LowLevel
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public PagingClient(AzureKeyCredential credential, Uri endpoint = null, AutoRestPagingTestServiceClientOptions options = null)
+        public PagingClient(AzureKeyCredential credential, Uri endpoint = null, PagingClientOptions options = null)
         {
-            if (credential == null)
-            {
-                throw new ArgumentNullException(nameof(credential));
-            }
+            Argument.AssertNotNull(credential, nameof(credential));
             endpoint ??= new Uri("http://localhost:3000");
-            options ??= new AutoRestPagingTestServiceClientOptions();
+            options ??= new PagingClientOptions();
 
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
@@ -1080,14 +1077,8 @@ namespace paging_LowLevel
         public virtual AsyncPageable<BinaryData> GetMultiplePagesFragmentNextLinkAsync(string tenant, string apiVersion, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            if (tenant == null)
-            {
-                throw new ArgumentNullException(nameof(tenant));
-            }
-            if (apiVersion == null)
-            {
-                throw new ArgumentNullException(nameof(apiVersion));
-            }
+            Argument.AssertNotNull(tenant, nameof(tenant));
+            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 
             return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingClient.GetMultiplePagesFragmentNextLink");
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
@@ -1129,14 +1120,8 @@ namespace paging_LowLevel
         public virtual Pageable<BinaryData> GetMultiplePagesFragmentNextLink(string tenant, string apiVersion, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            if (tenant == null)
-            {
-                throw new ArgumentNullException(nameof(tenant));
-            }
-            if (apiVersion == null)
-            {
-                throw new ArgumentNullException(nameof(apiVersion));
-            }
+            Argument.AssertNotNull(tenant, nameof(tenant));
+            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 
             return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingClient.GetMultiplePagesFragmentNextLink");
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
@@ -1178,14 +1163,8 @@ namespace paging_LowLevel
         public virtual AsyncPageable<BinaryData> GetMultiplePagesFragmentWithGroupingNextLinkAsync(string tenant, string apiVersion, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            if (tenant == null)
-            {
-                throw new ArgumentNullException(nameof(tenant));
-            }
-            if (apiVersion == null)
-            {
-                throw new ArgumentNullException(nameof(apiVersion));
-            }
+            Argument.AssertNotNull(tenant, nameof(tenant));
+            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 
             return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingClient.GetMultiplePagesFragmentWithGroupingNextLink");
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
@@ -1227,14 +1206,8 @@ namespace paging_LowLevel
         public virtual Pageable<BinaryData> GetMultiplePagesFragmentWithGroupingNextLink(string tenant, string apiVersion, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            if (tenant == null)
-            {
-                throw new ArgumentNullException(nameof(tenant));
-            }
-            if (apiVersion == null)
-            {
-                throw new ArgumentNullException(nameof(apiVersion));
-            }
+            Argument.AssertNotNull(tenant, nameof(tenant));
+            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 
             return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingClient.GetMultiplePagesFragmentWithGroupingNextLink");
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
@@ -1277,18 +1250,9 @@ namespace paging_LowLevel
         public virtual AsyncPageable<BinaryData> NextFragmentAsync(string tenant, string nextLink, string apiVersion, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            if (tenant == null)
-            {
-                throw new ArgumentNullException(nameof(tenant));
-            }
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-            if (apiVersion == null)
-            {
-                throw new ArgumentNullException(nameof(apiVersion));
-            }
+            Argument.AssertNotNull(tenant, nameof(tenant));
+            Argument.AssertNotNull(nextLink, nameof(nextLink));
+            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 
             return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingClient.NextFragment");
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
@@ -1329,18 +1293,9 @@ namespace paging_LowLevel
         public virtual Pageable<BinaryData> NextFragment(string tenant, string nextLink, string apiVersion, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            if (tenant == null)
-            {
-                throw new ArgumentNullException(nameof(tenant));
-            }
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-            if (apiVersion == null)
-            {
-                throw new ArgumentNullException(nameof(apiVersion));
-            }
+            Argument.AssertNotNull(tenant, nameof(tenant));
+            Argument.AssertNotNull(nextLink, nameof(nextLink));
+            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 
             return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingClient.NextFragment");
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
@@ -1381,18 +1336,9 @@ namespace paging_LowLevel
         public virtual AsyncPageable<BinaryData> NextFragmentWithGroupingAsync(string tenant, string nextLink, string apiVersion, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            if (tenant == null)
-            {
-                throw new ArgumentNullException(nameof(tenant));
-            }
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-            if (apiVersion == null)
-            {
-                throw new ArgumentNullException(nameof(apiVersion));
-            }
+            Argument.AssertNotNull(tenant, nameof(tenant));
+            Argument.AssertNotNull(nextLink, nameof(nextLink));
+            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 
             return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingClient.NextFragmentWithGrouping");
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
@@ -1433,18 +1379,9 @@ namespace paging_LowLevel
         public virtual Pageable<BinaryData> NextFragmentWithGrouping(string tenant, string nextLink, string apiVersion, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            if (tenant == null)
-            {
-                throw new ArgumentNullException(nameof(tenant));
-            }
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-            if (apiVersion == null)
-            {
-                throw new ArgumentNullException(nameof(apiVersion));
-            }
+            Argument.AssertNotNull(tenant, nameof(tenant));
+            Argument.AssertNotNull(nextLink, nameof(nextLink));
+            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 
             return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingClient.NextFragmentWithGrouping");
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)

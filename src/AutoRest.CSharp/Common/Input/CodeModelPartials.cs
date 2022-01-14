@@ -39,14 +39,6 @@ namespace AutoRest.CSharp.Input
             }
         }
 
-        public bool? IsLongRunningReallyLong
-        {
-            get
-            {
-                return Convert.ToBoolean(Extensions.GetValue<IDictionary<object, object>>("x-ms-long-running-operation-options")?.GetValue<string>("x-ms-long-running-reallyLong"));
-            }
-        }
-
         public string? Accessibility => Extensions.GetValue<string>("x-accessibility");
 
         public ServiceResponse LongRunningInitialResponse
@@ -147,7 +139,7 @@ namespace AutoRest.CSharp.Input
 
     internal partial class RequestParameter
     {
-        public bool IsResourceParameter => Convert.ToBoolean(Extensions.GetValue<string>("x-ms-resource-parameter"));
+        public bool IsResourceParameter => Convert.ToBoolean(Extensions.GetValue<string>("x-ms-resource-identifier"));
 
         public ParameterLocation In => Protocol.Http is HttpParameter httpParameter ? httpParameter.In : ParameterLocation.None;
         public bool IsFlattened => Flattened ?? false;

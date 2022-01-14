@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -34,10 +35,16 @@ namespace MgmtKeyvault
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _managedHsmsRestClient = new ManagedHsmsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+#if DEBUG
+			ValidateResourceId(Id);
+#endif
         }
 
-        /// <summary> Gets the valid resource type for this object. </summary>
-        protected override ResourceType ValidResourceType => Subscription.ResourceType;
+        internal static void ValidateResourceId(ResourceIdentifier id)
+        {
+            if (id.ResourceType != Subscription.ResourceType)
+                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, Subscription.ResourceType), nameof(id));
+        }
 
         // Collection level operations.
 
@@ -132,9 +139,9 @@ namespace MgmtKeyvault
             try
             {
                 var response = _managedHsmsRestClient.GetDeleted(Id.SubscriptionId, location, name, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<DeletedManagedHsm>(null, response.GetRawResponse())
-                    : Response.FromValue(new DeletedManagedHsm(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<DeletedManagedHsm>(null, response.GetRawResponse());
+                return Response.FromValue(new DeletedManagedHsm(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -159,14 +166,14 @@ namespace MgmtKeyvault
                 throw new ArgumentNullException(nameof(name));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DeletedManagedHsmCollection.GetIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("DeletedManagedHsmCollection.GetIfExists");
             scope.Start();
             try
             {
                 var response = await _managedHsmsRestClient.GetDeletedAsync(Id.SubscriptionId, location, name, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<DeletedManagedHsm>(null, response.GetRawResponse())
-                    : Response.FromValue(new DeletedManagedHsm(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<DeletedManagedHsm>(null, response.GetRawResponse());
+                return Response.FromValue(new DeletedManagedHsm(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -221,7 +228,7 @@ namespace MgmtKeyvault
                 throw new ArgumentNullException(nameof(name));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DeletedManagedHsmCollection.ExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("DeletedManagedHsmCollection.Exists");
             scope.Start();
             try
             {

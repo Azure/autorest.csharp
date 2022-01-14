@@ -43,7 +43,7 @@ namespace MgmtKeyvault.Tests.Mock
             // Example: Delete a managed HSM Pool
             var managedHsm = GetArmClient().GetManagedHsm(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hsm-group/providers/Microsoft.KeyVault/managedHSMs/hsm1"));
 
-            await managedHsm.DeleteAsync();
+            await managedHsm.DeleteAsync(true);
         }
 
         [RecordedTest]
@@ -55,7 +55,7 @@ namespace MgmtKeyvault.Tests.Mock
             {
             };
             parameters.Tags.ReplaceWith(new Dictionary<string, string>() { ["Dept"] = "hsm", ["Environment"] = "dogfood", ["Slice"] = "A", });
-            await managedHsm.UpdateAsync(parameters);
+            await managedHsm.UpdateAsync(true, parameters);
         }
 
         [RecordedTest]
