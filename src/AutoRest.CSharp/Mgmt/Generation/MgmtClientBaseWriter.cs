@@ -130,17 +130,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             var nameSpace = $"{resource.Type.Namespace}.Models";
             _writer.UseNamespace(nameSpace);
-            if (writeVariable)
-            {
-                foreach (var restClient in restClients)
-                {
-                    _writer.Line($"{restClient.Type.Name} {GetRestClientVariableName(restClient)};");
-                }
-            }
             _writer.Line($"{optionVariable}.TryGetApiVersion({resource.Type.Name}.ResourceType, out string apiVersion);");
             foreach (var restClient in restClients)
             {
-                _writer.Line($"{GetRestClientVariableName(restClient)} = {accessType}{restClient.Type.Name}({clientDiagVariable}, {pipelineVariable}, {optionVariable}{getSubId(restClient)}, {uriVariable}, apiVersion);");
+                var variableDeclaration = writeVariable ? $"{restClient.Type.Name} " : string.Empty;
+                _writer.Line($"{variableDeclaration}{GetRestClientVariableName(restClient)} = {accessType}{restClient.Type.Name}({clientDiagVariable}, {pipelineVariable}, {optionVariable}{getSubId(restClient)}, {uriVariable}, apiVersion);");
             }
         }
 
