@@ -38,7 +38,8 @@ namespace Pagination
         internal PageSizeStringModelCollection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _pageSizeStringModelsRestClient = new PageSizeStringModelsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            ClientOptions.TryGetApiVersion(PageSizeStringModel.ResourceType, out string apiVersion);
+            _pageSizeStringModelsRestClient = new PageSizeStringModelsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

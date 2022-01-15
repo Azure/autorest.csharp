@@ -100,6 +100,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         private void UpdateSubscriptionIdForAllResource(CodeModel codeModel)
         {
+            bool setSubParam = false;
             foreach (var operationGroup in codeModel.OperationGroups)
             {
                 foreach (var op in operationGroup.Operations)
@@ -107,10 +108,15 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     foreach (var p in op.Parameters)
                     {
                         //updater the first subscriptionId to be 'method'
-                        if (p.Language.Default.Name.Equals("subscriptionId", StringComparison.InvariantCultureIgnoreCase))
+                        if (!setSubParam && p.Language.Default.Name.Equals("subscriptionId", StringComparison.OrdinalIgnoreCase))
                         {
+                            setSubParam = true;
                             p.Implementation = ImplementationLocation.Method;
-                            break;
+                        }
+                        //updater the first subscriptionId to be 'method'
+                        if (p.Language.Default.Name.Equals("apiVersion", StringComparison.OrdinalIgnoreCase))
+                        {
+                            p.Implementation = ImplementationLocation.Client;
                         }
                     }
                 }

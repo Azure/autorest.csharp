@@ -38,7 +38,8 @@ namespace ExactMatchFlattenInheritance
         internal CustomModel3Collection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _customModel3sRestClient = new CustomModel3SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            ClientOptions.TryGetApiVersion(CustomModel3.ResourceType, out string apiVersion);
+            _customModel3sRestClient = new CustomModel3SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

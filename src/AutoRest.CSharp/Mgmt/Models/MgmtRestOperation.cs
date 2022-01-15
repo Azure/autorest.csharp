@@ -56,13 +56,16 @@ namespace AutoRest.CSharp.Mgmt.Models
         /// </summary>
         public MgmtRestClient RestClient { get; }
 
-        public MgmtRestOperation(RestClientMethod method, MgmtRestClient restClient, RequestPath requestPath, RequestPath contextualPath, string methodName, CSharpType? returnType)
+        public Resource? Resource { get; }
+
+        public MgmtRestOperation(RestClientMethod method, MgmtRestClient restClient, RequestPath requestPath, RequestPath contextualPath, string methodName, Resource? resource, CSharpType? returnType)
         {
             Method = method;
             RestClient = restClient;
             RequestPath = requestPath;
             ContextualPath = contextualPath;
             Name = methodName;
+            Resource = resource;
             ReturnType = returnType ?? method.ReturnType;
         }
     }

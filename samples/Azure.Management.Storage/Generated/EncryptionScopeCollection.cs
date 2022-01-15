@@ -36,7 +36,8 @@ namespace Azure.Management.Storage
         internal EncryptionScopeCollection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _encryptionScopesRestClient = new EncryptionScopesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            ClientOptions.TryGetApiVersion(EncryptionScope.ResourceType, out string apiVersion);
+            _encryptionScopesRestClient = new EncryptionScopesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

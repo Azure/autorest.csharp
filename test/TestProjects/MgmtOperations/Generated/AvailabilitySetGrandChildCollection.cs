@@ -36,7 +36,8 @@ namespace MgmtOperations
         internal AvailabilitySetGrandChildCollection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _availabilitySetGrandChildRestClient = new AvailabilitySetGrandChildRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            ClientOptions.TryGetApiVersion(AvailabilitySetGrandChild.ResourceType, out string apiVersion);
+            _availabilitySetGrandChildRestClient = new AvailabilitySetGrandChildRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

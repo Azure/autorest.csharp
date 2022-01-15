@@ -45,8 +45,21 @@ namespace AutoRest.CSharp.Mgmt.Output
                         operation.GetRequestPath(_context),
                         ContextualPath,
                         operationName,
+                        GetResourceFromResourceType(operation.GetRequestPath(_context).GetResourceType(_context.Configuration.MgmtConfiguration)),
                         operation.GetReturnTypeAsLongRunningOperation(null, operationName, _context)));
             });
+        }
+
+        private Resource? GetResourceFromResourceType(ResourceTypeSegment resourceType)
+        {
+            var candidates = _context.Library.ArmResources.Where(resource => resource.ResourceType == resourceType);
+            if (candidates.Count() == 0)
+                return null;
+
+            if (candidates.Count() == 1)
+                return candidates.First();
+
+            throw new InvalidOperationException($"Found more than 1 candidate for {resourceType}, results were ({string.Join(',', candidates.Select(r => r.ResourceName))})");
         }
 
         private IEnumerable<MgmtRestClient>? _restClients;

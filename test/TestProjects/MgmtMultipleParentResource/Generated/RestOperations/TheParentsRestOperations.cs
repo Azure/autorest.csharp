@@ -12,12 +12,13 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using MgmtMultipleParentResource.Models;
 
 namespace MgmtMultipleParentResource
 {
-    internal partial class ParentsRestOperations
+    internal partial class TheParentsRestOperations
     {
         private Uri endpoint;
         private string apiVersion;
@@ -25,23 +26,23 @@ namespace MgmtMultipleParentResource
         private HttpPipeline _pipeline;
         private readonly string _userAgent;
 
-        /// <summary> Initializes a new instance of ParentsRestOperations. </summary>
+        /// <summary> Initializes a new instance of TheParentsRestOperations. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="options"> The client options used to construct the current client. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="apiVersion"> Api Version. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public ParentsRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ClientOptions options, Uri endpoint = null, string apiVersion = "2021-03-01")
+        public TheParentsRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions options, Uri endpoint = null, string apiVersion = default)
         {
             this.endpoint = endpoint ?? new Uri("https://management.azure.com");
-            this.apiVersion = apiVersion ?? throw new ArgumentNullException(nameof(apiVersion));
+            this.apiVersion = apiVersion ?? "2021-03-01";
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
             _userAgent = HttpMessageUtilities.GetUserAgentName(this, options);
         }
 
-        internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string parentName, ParentData body)
+        internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string theParentName, TheParentData body)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -52,8 +53,8 @@ namespace MgmtMultipleParentResource
             uri.AppendPath(subscriptionId, true);
             uri.AppendPath("/resourceGroups/", false);
             uri.AppendPath(resourceGroupName, true);
-            uri.AppendPath("/providers/Microsoft.Compute/parents/", false);
-            uri.AppendPath(parentName, true);
+            uri.AppendPath("/providers/Microsoft.Compute/theParents/", false);
+            uri.AppendPath(theParentName, true);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json, text/json");
@@ -68,11 +69,11 @@ namespace MgmtMultipleParentResource
         /// <summary> The operation to create or update the VMSS VM run command. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="parentName"> The name of the VM scale set. </param>
+        /// <param name="theParentName"> The name of the VM scale set. </param>
         /// <param name="body"> Parameters supplied to the Create Virtual Machine RunCommand operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="parentName"/>, or <paramref name="body"/> is null. </exception>
-        public async Task<Response> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string parentName, ParentData body, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="theParentName"/>, or <paramref name="body"/> is null. </exception>
+        public async Task<Response> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string theParentName, TheParentData body, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -82,16 +83,16 @@ namespace MgmtMultipleParentResource
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
-            if (parentName == null)
+            if (theParentName == null)
             {
-                throw new ArgumentNullException(nameof(parentName));
+                throw new ArgumentNullException(nameof(theParentName));
             }
             if (body == null)
             {
                 throw new ArgumentNullException(nameof(body));
             }
 
-            using var message = CreateCreateOrUpdateRequest(subscriptionId, resourceGroupName, parentName, body);
+            using var message = CreateCreateOrUpdateRequest(subscriptionId, resourceGroupName, theParentName, body);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -106,11 +107,11 @@ namespace MgmtMultipleParentResource
         /// <summary> The operation to create or update the VMSS VM run command. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="parentName"> The name of the VM scale set. </param>
+        /// <param name="theParentName"> The name of the VM scale set. </param>
         /// <param name="body"> Parameters supplied to the Create Virtual Machine RunCommand operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="parentName"/>, or <paramref name="body"/> is null. </exception>
-        public Response CreateOrUpdate(string subscriptionId, string resourceGroupName, string parentName, ParentData body, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="theParentName"/>, or <paramref name="body"/> is null. </exception>
+        public Response CreateOrUpdate(string subscriptionId, string resourceGroupName, string theParentName, TheParentData body, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -120,16 +121,16 @@ namespace MgmtMultipleParentResource
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
-            if (parentName == null)
+            if (theParentName == null)
             {
-                throw new ArgumentNullException(nameof(parentName));
+                throw new ArgumentNullException(nameof(theParentName));
             }
             if (body == null)
             {
                 throw new ArgumentNullException(nameof(body));
             }
 
-            using var message = CreateCreateOrUpdateRequest(subscriptionId, resourceGroupName, parentName, body);
+            using var message = CreateCreateOrUpdateRequest(subscriptionId, resourceGroupName, theParentName, body);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -141,7 +142,7 @@ namespace MgmtMultipleParentResource
             }
         }
 
-        internal HttpMessage CreateUpdateRequest(string subscriptionId, string resourceGroupName, string parentName, ParentUpdate body)
+        internal HttpMessage CreateUpdateRequest(string subscriptionId, string resourceGroupName, string theParentName, TheParentUpdate body)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -152,8 +153,8 @@ namespace MgmtMultipleParentResource
             uri.AppendPath(subscriptionId, true);
             uri.AppendPath("/resourceGroups/", false);
             uri.AppendPath(resourceGroupName, true);
-            uri.AppendPath("/providers/Microsoft.Compute/parents/", false);
-            uri.AppendPath(parentName, true);
+            uri.AppendPath("/providers/Microsoft.Compute/theParents/", false);
+            uri.AppendPath(theParentName, true);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json, text/json");
@@ -168,11 +169,11 @@ namespace MgmtMultipleParentResource
         /// <summary> The operation to update the VMSS VM run command. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="parentName"> The name of the VM scale set. </param>
+        /// <param name="theParentName"> The name of the VM scale set. </param>
         /// <param name="body"> Parameters supplied to the Update Virtual Machine RunCommand operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="parentName"/>, or <paramref name="body"/> is null. </exception>
-        public async Task<Response> UpdateAsync(string subscriptionId, string resourceGroupName, string parentName, ParentUpdate body, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="theParentName"/>, or <paramref name="body"/> is null. </exception>
+        public async Task<Response> UpdateAsync(string subscriptionId, string resourceGroupName, string theParentName, TheParentUpdate body, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -182,16 +183,16 @@ namespace MgmtMultipleParentResource
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
-            if (parentName == null)
+            if (theParentName == null)
             {
-                throw new ArgumentNullException(nameof(parentName));
+                throw new ArgumentNullException(nameof(theParentName));
             }
             if (body == null)
             {
                 throw new ArgumentNullException(nameof(body));
             }
 
-            using var message = CreateUpdateRequest(subscriptionId, resourceGroupName, parentName, body);
+            using var message = CreateUpdateRequest(subscriptionId, resourceGroupName, theParentName, body);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -205,11 +206,11 @@ namespace MgmtMultipleParentResource
         /// <summary> The operation to update the VMSS VM run command. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="parentName"> The name of the VM scale set. </param>
+        /// <param name="theParentName"> The name of the VM scale set. </param>
         /// <param name="body"> Parameters supplied to the Update Virtual Machine RunCommand operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="parentName"/>, or <paramref name="body"/> is null. </exception>
-        public Response Update(string subscriptionId, string resourceGroupName, string parentName, ParentUpdate body, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="theParentName"/>, or <paramref name="body"/> is null. </exception>
+        public Response Update(string subscriptionId, string resourceGroupName, string theParentName, TheParentUpdate body, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -219,16 +220,16 @@ namespace MgmtMultipleParentResource
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
-            if (parentName == null)
+            if (theParentName == null)
             {
-                throw new ArgumentNullException(nameof(parentName));
+                throw new ArgumentNullException(nameof(theParentName));
             }
             if (body == null)
             {
                 throw new ArgumentNullException(nameof(body));
             }
 
-            using var message = CreateUpdateRequest(subscriptionId, resourceGroupName, parentName, body);
+            using var message = CreateUpdateRequest(subscriptionId, resourceGroupName, theParentName, body);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -239,7 +240,7 @@ namespace MgmtMultipleParentResource
             }
         }
 
-        internal HttpMessage CreateDeleteRequest(string subscriptionId, string resourceGroupName, string parentName)
+        internal HttpMessage CreateDeleteRequest(string subscriptionId, string resourceGroupName, string theParentName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -250,8 +251,8 @@ namespace MgmtMultipleParentResource
             uri.AppendPath(subscriptionId, true);
             uri.AppendPath("/resourceGroups/", false);
             uri.AppendPath(resourceGroupName, true);
-            uri.AppendPath("/providers/Microsoft.Compute/parents/", false);
-            uri.AppendPath(parentName, true);
+            uri.AppendPath("/providers/Microsoft.Compute/theParents/", false);
+            uri.AppendPath(theParentName, true);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json, text/json");
@@ -262,10 +263,10 @@ namespace MgmtMultipleParentResource
         /// <summary> The operation to delete the VMSS VM run command. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="parentName"> The name of the VM scale set. </param>
+        /// <param name="theParentName"> The name of the VM scale set. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="parentName"/> is null. </exception>
-        public async Task<Response> DeleteAsync(string subscriptionId, string resourceGroupName, string parentName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="theParentName"/> is null. </exception>
+        public async Task<Response> DeleteAsync(string subscriptionId, string resourceGroupName, string theParentName, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -275,12 +276,12 @@ namespace MgmtMultipleParentResource
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
-            if (parentName == null)
+            if (theParentName == null)
             {
-                throw new ArgumentNullException(nameof(parentName));
+                throw new ArgumentNullException(nameof(theParentName));
             }
 
-            using var message = CreateDeleteRequest(subscriptionId, resourceGroupName, parentName);
+            using var message = CreateDeleteRequest(subscriptionId, resourceGroupName, theParentName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -296,10 +297,10 @@ namespace MgmtMultipleParentResource
         /// <summary> The operation to delete the VMSS VM run command. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="parentName"> The name of the VM scale set. </param>
+        /// <param name="theParentName"> The name of the VM scale set. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="parentName"/> is null. </exception>
-        public Response Delete(string subscriptionId, string resourceGroupName, string parentName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="theParentName"/> is null. </exception>
+        public Response Delete(string subscriptionId, string resourceGroupName, string theParentName, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -309,12 +310,12 @@ namespace MgmtMultipleParentResource
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
-            if (parentName == null)
+            if (theParentName == null)
             {
-                throw new ArgumentNullException(nameof(parentName));
+                throw new ArgumentNullException(nameof(theParentName));
             }
 
-            using var message = CreateDeleteRequest(subscriptionId, resourceGroupName, parentName);
+            using var message = CreateDeleteRequest(subscriptionId, resourceGroupName, theParentName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -327,7 +328,7 @@ namespace MgmtMultipleParentResource
             }
         }
 
-        internal HttpMessage CreateGetRequest(string subscriptionId, string resourceGroupName, string parentName, string expand)
+        internal HttpMessage CreateGetRequest(string subscriptionId, string resourceGroupName, string theParentName, string expand)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -338,8 +339,8 @@ namespace MgmtMultipleParentResource
             uri.AppendPath(subscriptionId, true);
             uri.AppendPath("/resourceGroups/", false);
             uri.AppendPath(resourceGroupName, true);
-            uri.AppendPath("/providers/Microsoft.Compute/parents/", false);
-            uri.AppendPath(parentName, true);
+            uri.AppendPath("/providers/Microsoft.Compute/theParents/", false);
+            uri.AppendPath(theParentName, true);
             if (expand != null)
             {
                 uri.AppendQuery("$expand", expand, true);
@@ -354,11 +355,11 @@ namespace MgmtMultipleParentResource
         /// <summary> The operation to get the VMSS VM run command. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="parentName"> The name of the VM scale set. </param>
+        /// <param name="theParentName"> The name of the VM scale set. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="parentName"/> is null. </exception>
-        public async Task<Response<ParentData>> GetAsync(string subscriptionId, string resourceGroupName, string parentName, string expand = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="theParentName"/> is null. </exception>
+        public async Task<Response<TheParentData>> GetAsync(string subscriptionId, string resourceGroupName, string theParentName, string expand = null, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -368,24 +369,24 @@ namespace MgmtMultipleParentResource
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
-            if (parentName == null)
+            if (theParentName == null)
             {
-                throw new ArgumentNullException(nameof(parentName));
+                throw new ArgumentNullException(nameof(theParentName));
             }
 
-            using var message = CreateGetRequest(subscriptionId, resourceGroupName, parentName, expand);
+            using var message = CreateGetRequest(subscriptionId, resourceGroupName, theParentName, expand);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
                 case 200:
                     {
-                        ParentData value = default;
+                        TheParentData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = ParentData.DeserializeParentData(document.RootElement);
+                        value = TheParentData.DeserializeTheParentData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((ParentData)null, message.Response);
+                    return Response.FromValue((TheParentData)null, message.Response);
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -394,11 +395,11 @@ namespace MgmtMultipleParentResource
         /// <summary> The operation to get the VMSS VM run command. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="parentName"> The name of the VM scale set. </param>
+        /// <param name="theParentName"> The name of the VM scale set. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="parentName"/> is null. </exception>
-        public Response<ParentData> Get(string subscriptionId, string resourceGroupName, string parentName, string expand = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="theParentName"/> is null. </exception>
+        public Response<TheParentData> Get(string subscriptionId, string resourceGroupName, string theParentName, string expand = null, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -408,24 +409,24 @@ namespace MgmtMultipleParentResource
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
-            if (parentName == null)
+            if (theParentName == null)
             {
-                throw new ArgumentNullException(nameof(parentName));
+                throw new ArgumentNullException(nameof(theParentName));
             }
 
-            using var message = CreateGetRequest(subscriptionId, resourceGroupName, parentName, expand);
+            using var message = CreateGetRequest(subscriptionId, resourceGroupName, theParentName, expand);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
                 case 200:
                     {
-                        ParentData value = default;
+                        TheParentData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = ParentData.DeserializeParentData(document.RootElement);
+                        value = TheParentData.DeserializeTheParentData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((ParentData)null, message.Response);
+                    return Response.FromValue((TheParentData)null, message.Response);
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -442,7 +443,7 @@ namespace MgmtMultipleParentResource
             uri.AppendPath(subscriptionId, true);
             uri.AppendPath("/resourceGroups/", false);
             uri.AppendPath(resourceGroupName, true);
-            uri.AppendPath("/providers/Microsoft.Compute/parents", false);
+            uri.AppendPath("/providers/Microsoft.Compute/theParents", false);
             if (expand != null)
             {
                 uri.AppendQuery("$expand", expand, true);
@@ -460,7 +461,7 @@ namespace MgmtMultipleParentResource
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
-        public async Task<Response<ParentsListResult>> ListAsync(string subscriptionId, string resourceGroupName, string expand = null, CancellationToken cancellationToken = default)
+        public async Task<Response<TheParentsListResult>> ListAsync(string subscriptionId, string resourceGroupName, string expand = null, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -477,9 +478,9 @@ namespace MgmtMultipleParentResource
             {
                 case 200:
                     {
-                        ParentsListResult value = default;
+                        TheParentsListResult value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = ParentsListResult.DeserializeParentsListResult(document.RootElement);
+                        value = TheParentsListResult.DeserializeTheParentsListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -493,7 +494,7 @@ namespace MgmtMultipleParentResource
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
-        public Response<ParentsListResult> List(string subscriptionId, string resourceGroupName, string expand = null, CancellationToken cancellationToken = default)
+        public Response<TheParentsListResult> List(string subscriptionId, string resourceGroupName, string expand = null, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -510,9 +511,9 @@ namespace MgmtMultipleParentResource
             {
                 case 200:
                     {
-                        ParentsListResult value = default;
+                        TheParentsListResult value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = ParentsListResult.DeserializeParentsListResult(document.RootElement);
+                        value = TheParentsListResult.DeserializeTheParentsListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -541,7 +542,7 @@ namespace MgmtMultipleParentResource
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="subscriptionId"/>, or <paramref name="resourceGroupName"/> is null. </exception>
-        public async Task<Response<ParentsListResult>> ListNextPageAsync(string nextLink, string subscriptionId, string resourceGroupName, string expand = null, CancellationToken cancellationToken = default)
+        public async Task<Response<TheParentsListResult>> ListNextPageAsync(string nextLink, string subscriptionId, string resourceGroupName, string expand = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -562,9 +563,9 @@ namespace MgmtMultipleParentResource
             {
                 case 200:
                     {
-                        ParentsListResult value = default;
+                        TheParentsListResult value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = ParentsListResult.DeserializeParentsListResult(document.RootElement);
+                        value = TheParentsListResult.DeserializeTheParentsListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -579,7 +580,7 @@ namespace MgmtMultipleParentResource
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="subscriptionId"/>, or <paramref name="resourceGroupName"/> is null. </exception>
-        public Response<ParentsListResult> ListNextPage(string nextLink, string subscriptionId, string resourceGroupName, string expand = null, CancellationToken cancellationToken = default)
+        public Response<TheParentsListResult> ListNextPage(string nextLink, string subscriptionId, string resourceGroupName, string expand = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -600,9 +601,9 @@ namespace MgmtMultipleParentResource
             {
                 case 200:
                     {
-                        ParentsListResult value = default;
+                        TheParentsListResult value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = ParentsListResult.DeserializeParentsListResult(document.RootElement);
+                        value = TheParentsListResult.DeserializeTheParentsListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:

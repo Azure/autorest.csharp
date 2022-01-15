@@ -117,6 +117,27 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
+        protected void WriteRestClientConstructionForResource(
+            Resource resource,
+            IEnumerable<MgmtRestClient> restClients,
+            Func<MgmtRestClient, string> getSubId,
+            string clientDiagVariable,
+            string optionVariable,
+            string pipelineVariable,
+            string uriVariable,
+            string accessType,
+            bool writeVariable)
+        {
+            var nameSpace = $"{resource.Type.Namespace}.Models";
+            _writer.UseNamespace(nameSpace);
+            _writer.Line($"{optionVariable}.TryGetApiVersion({resource.Type.Name}.ResourceType, out string apiVersion);");
+            foreach (var restClient in restClients)
+            {
+                var variableDeclaration = writeVariable ? $"{restClient.Type.Name} " : string.Empty;
+                _writer.Line($"{variableDeclaration}{GetRestClientVariableName(restClient)} = {accessType}{restClient.Type.Name}({clientDiagVariable}, {pipelineVariable}, {optionVariable}{getSubId(restClient)}, {uriVariable}, apiVersion);");
+            }
+        }
+
         protected virtual string GetRestClientVariableName(RestClient client)
         {
             return client.OperationGroup.Key.IsNullOrEmpty()

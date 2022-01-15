@@ -11,16 +11,16 @@ using Azure.ResourceManager.Models;
 
 namespace MgmtMultipleParentResource
 {
-    /// <summary> A class representing the Parent data model. </summary>
-    public partial class ParentData : TrackedResource
+    /// <summary> A class representing the TheParent data model. </summary>
+    public partial class TheParentData : TrackedResource
     {
-        /// <summary> Initializes a new instance of ParentData. </summary>
+        /// <summary> Initializes a new instance of TheParentData. </summary>
         /// <param name="location"> The location. </param>
-        public ParentData(AzureLocation location) : base(location)
+        public TheParentData(AzureLocation location) : base(location)
         {
         }
 
-        /// <summary> Initializes a new instance of ParentData. </summary>
+        /// <summary> Initializes a new instance of TheParentData. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="type"> The type. </param>
@@ -33,7 +33,7 @@ namespace MgmtMultipleParentResource
         /// <param name="outputBlobUri"> Specifies the Azure storage blob where script output stream will be uploaded. </param>
         /// <param name="errorBlobUri"> Specifies the Azure storage blob where script error stream will be uploaded. </param>
         /// <param name="provisioningState"> The provisioning state, which only appears in the response. </param>
-        internal ParentData(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, AzureLocation location, bool? asyncExecution, string runAsUser, string runAsPassword, int? timeoutInSeconds, string outputBlobUri, string errorBlobUri, string provisioningState) : base(id, name, type, tags, location)
+        internal TheParentData(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, AzureLocation location, bool? asyncExecution, string runAsUser, string runAsPassword, int? timeoutInSeconds, string outputBlobUri, string errorBlobUri, string provisioningState) : base(id, name, type, tags, location)
         {
             AsyncExecution = asyncExecution;
             RunAsUser = runAsUser;

@@ -32,19 +32,19 @@ namespace Azure.Management.Storage
         }
         #endregion
 
-        private static SkusRestOperations GetSkusRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, Uri endpoint = null)
+        private static SkusRestOperations GetSkusRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = default)
         {
-            return new SkusRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint);
+            return new SkusRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);
         }
 
-        private static StorageAccountsRestOperations GetStorageAccountsRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, Uri endpoint = null)
+        private static StorageAccountsRestOperations GetStorageAccountsRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = default)
         {
-            return new StorageAccountsRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint);
+            return new StorageAccountsRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);
         }
 
-        private static UsagesRestOperations GetUsagesRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, Uri endpoint = null)
+        private static UsagesRestOperations GetUsagesRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = default)
         {
-            return new UsagesRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint);
+            return new UsagesRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/skus
@@ -59,7 +59,7 @@ namespace Azure.Management.Storage
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetSkusRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                SkusRestOperations restOperations = GetSkusRestOperations(clientDiagnostics, pipeline, options, baseUri);
                 async Task<Page<SkuInformation>> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetSkus");
@@ -92,7 +92,7 @@ namespace Azure.Management.Storage
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetSkusRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                SkusRestOperations restOperations = GetSkusRestOperations(clientDiagnostics, pipeline, options, baseUri);
                 Page<SkuInformation> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetSkus");
@@ -125,7 +125,8 @@ namespace Azure.Management.Storage
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetStorageAccountsRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                options.TryGetApiVersion(StorageAccount.ResourceType, out string apiVersion);
+                StorageAccountsRestOperations restOperations = GetStorageAccountsRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
                 async Task<Page<StorageAccount>> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetStorageAccounts");
@@ -173,7 +174,8 @@ namespace Azure.Management.Storage
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetStorageAccountsRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                options.TryGetApiVersion(StorageAccount.ResourceType, out string apiVersion);
+                StorageAccountsRestOperations restOperations = GetStorageAccountsRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
                 Page<StorageAccount> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetStorageAccounts");
@@ -256,7 +258,7 @@ namespace Azure.Management.Storage
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetUsagesRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                UsagesRestOperations restOperations = GetUsagesRestOperations(clientDiagnostics, pipeline, options, baseUri);
                 async Task<Page<Usage>> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetUsagesByLocation");
@@ -296,7 +298,7 @@ namespace Azure.Management.Storage
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetUsagesRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                UsagesRestOperations restOperations = GetUsagesRestOperations(clientDiagnostics, pipeline, options, baseUri);
                 Page<Usage> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetUsagesByLocation");

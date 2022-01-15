@@ -40,49 +40,49 @@ namespace SupersetFlattenInheritance
         }
         #endregion
 
-        private static CustomModel1SRestOperations GetCustomModel1SRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, Uri endpoint = null)
+        private static CustomModel1SRestOperations GetCustomModel1SRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = default)
         {
-            return new CustomModel1SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint);
+            return new CustomModel1SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);
         }
 
-        private static CustomModel2SRestOperations GetCustomModel2SRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, Uri endpoint = null)
+        private static CustomModel2SRestOperations GetCustomModel2SRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = default)
         {
-            return new CustomModel2SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint);
+            return new CustomModel2SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);
         }
 
-        private static SubResourceModel1SRestOperations GetSubResourceModel1SRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, Uri endpoint = null)
+        private static SubResourceModel1SRestOperations GetSubResourceModel1SRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = default)
         {
-            return new SubResourceModel1SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint);
+            return new SubResourceModel1SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);
         }
 
-        private static SubResourceModel2SRestOperations GetSubResourceModel2SRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, Uri endpoint = null)
+        private static SubResourceModel2SRestOperations GetSubResourceModel2SRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = default)
         {
-            return new SubResourceModel2SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint);
+            return new SubResourceModel2SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);
         }
 
-        private static WritableSubResourceModel1SRestOperations GetWritableSubResourceModel1SRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, Uri endpoint = null)
+        private static WritableSubResourceModel1SRestOperations GetWritableSubResourceModel1SRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = default)
         {
-            return new WritableSubResourceModel1SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint);
+            return new WritableSubResourceModel1SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);
         }
 
-        private static WritableSubResourceModel2SRestOperations GetWritableSubResourceModel2SRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, Uri endpoint = null)
+        private static WritableSubResourceModel2SRestOperations GetWritableSubResourceModel2SRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = default)
         {
-            return new WritableSubResourceModel2SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint);
+            return new WritableSubResourceModel2SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);
         }
 
-        private static ResourceModel2SRestOperations GetResourceModel2SRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, Uri endpoint = null)
+        private static ResourceModel2SRestOperations GetResourceModel2SRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = default)
         {
-            return new ResourceModel2SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint);
+            return new ResourceModel2SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);
         }
 
-        private static TrackedResourceModel2SRestOperations GetTrackedResourceModel2SRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, Uri endpoint = null)
+        private static TrackedResourceModel2SRestOperations GetTrackedResourceModel2SRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = default)
         {
-            return new TrackedResourceModel2SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint);
+            return new TrackedResourceModel2SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);
         }
 
-        private static NonResourceModel1SRestOperations GetNonResourceModel1SRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, Uri endpoint = null)
+        private static NonResourceModel1SRestOperations GetNonResourceModel1SRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = default)
         {
-            return new NonResourceModel1SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint);
+            return new NonResourceModel1SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel1s
@@ -97,7 +97,7 @@ namespace SupersetFlattenInheritance
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetCustomModel1SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                CustomModel1SRestOperations restOperations = GetCustomModel1SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                 async Task<Page<CustomModel1>> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetCustomModel1s");
@@ -130,7 +130,7 @@ namespace SupersetFlattenInheritance
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetCustomModel1SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                CustomModel1SRestOperations restOperations = GetCustomModel1SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                 Page<CustomModel1> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetCustomModel1s");
@@ -177,7 +177,7 @@ namespace SupersetFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetCustomModel1SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    CustomModel1SRestOperations restOperations = GetCustomModel1SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = await restOperations.PutAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, customModel1SName, parameters, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
@@ -216,7 +216,7 @@ namespace SupersetFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetCustomModel1SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    CustomModel1SRestOperations restOperations = GetCustomModel1SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = restOperations.Put(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, customModel1SName, parameters, cancellationToken);
                     return response;
                 }
@@ -250,7 +250,7 @@ namespace SupersetFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetCustomModel1SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    CustomModel1SRestOperations restOperations = GetCustomModel1SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = await restOperations.GetAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, customModel1SName, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
@@ -284,7 +284,7 @@ namespace SupersetFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetCustomModel1SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    CustomModel1SRestOperations restOperations = GetCustomModel1SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = restOperations.Get(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, customModel1SName, cancellationToken);
                     return response;
                 }
@@ -309,7 +309,7 @@ namespace SupersetFlattenInheritance
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetCustomModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                CustomModel2SRestOperations restOperations = GetCustomModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                 async Task<Page<CustomModel2>> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetCustomModel2s");
@@ -342,7 +342,7 @@ namespace SupersetFlattenInheritance
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetCustomModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                CustomModel2SRestOperations restOperations = GetCustomModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                 Page<CustomModel2> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetCustomModel2s");
@@ -389,7 +389,7 @@ namespace SupersetFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetCustomModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    CustomModel2SRestOperations restOperations = GetCustomModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = await restOperations.PutAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, customModel2SName, parameters, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
@@ -428,7 +428,7 @@ namespace SupersetFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetCustomModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    CustomModel2SRestOperations restOperations = GetCustomModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = restOperations.Put(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, customModel2SName, parameters, cancellationToken);
                     return response;
                 }
@@ -462,7 +462,7 @@ namespace SupersetFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetCustomModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    CustomModel2SRestOperations restOperations = GetCustomModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = await restOperations.GetAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, customModel2SName, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
@@ -496,7 +496,7 @@ namespace SupersetFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetCustomModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    CustomModel2SRestOperations restOperations = GetCustomModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = restOperations.Get(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, customModel2SName, cancellationToken);
                     return response;
                 }
@@ -521,7 +521,7 @@ namespace SupersetFlattenInheritance
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetSubResourceModel1SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                SubResourceModel1SRestOperations restOperations = GetSubResourceModel1SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                 async Task<Page<SubResourceModel1>> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetSubResourceModel1s");
@@ -554,7 +554,7 @@ namespace SupersetFlattenInheritance
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetSubResourceModel1SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                SubResourceModel1SRestOperations restOperations = GetSubResourceModel1SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                 Page<SubResourceModel1> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetSubResourceModel1s");
@@ -601,7 +601,7 @@ namespace SupersetFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetSubResourceModel1SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    SubResourceModel1SRestOperations restOperations = GetSubResourceModel1SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = await restOperations.PutAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, subResourceModel1SName, parameters, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
@@ -640,7 +640,7 @@ namespace SupersetFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetSubResourceModel1SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    SubResourceModel1SRestOperations restOperations = GetSubResourceModel1SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = restOperations.Put(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, subResourceModel1SName, parameters, cancellationToken);
                     return response;
                 }
@@ -674,7 +674,7 @@ namespace SupersetFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetSubResourceModel1SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    SubResourceModel1SRestOperations restOperations = GetSubResourceModel1SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = await restOperations.GetAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, subResourceModel1SName, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
@@ -708,7 +708,7 @@ namespace SupersetFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetSubResourceModel1SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    SubResourceModel1SRestOperations restOperations = GetSubResourceModel1SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = restOperations.Get(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, subResourceModel1SName, cancellationToken);
                     return response;
                 }
@@ -733,7 +733,7 @@ namespace SupersetFlattenInheritance
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetSubResourceModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                SubResourceModel2SRestOperations restOperations = GetSubResourceModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                 async Task<Page<SubResourceModel2>> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetSubResourceModel2s");
@@ -766,7 +766,7 @@ namespace SupersetFlattenInheritance
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetSubResourceModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                SubResourceModel2SRestOperations restOperations = GetSubResourceModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                 Page<SubResourceModel2> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetSubResourceModel2s");
@@ -813,7 +813,7 @@ namespace SupersetFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetSubResourceModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    SubResourceModel2SRestOperations restOperations = GetSubResourceModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = await restOperations.PutAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, subResourceModel2SName, parameters, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
@@ -852,7 +852,7 @@ namespace SupersetFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetSubResourceModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    SubResourceModel2SRestOperations restOperations = GetSubResourceModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = restOperations.Put(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, subResourceModel2SName, parameters, cancellationToken);
                     return response;
                 }
@@ -886,7 +886,7 @@ namespace SupersetFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetSubResourceModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    SubResourceModel2SRestOperations restOperations = GetSubResourceModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = await restOperations.GetAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, subResourceModel2SName, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
@@ -920,7 +920,7 @@ namespace SupersetFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetSubResourceModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    SubResourceModel2SRestOperations restOperations = GetSubResourceModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = restOperations.Get(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, subResourceModel2SName, cancellationToken);
                     return response;
                 }
@@ -945,7 +945,7 @@ namespace SupersetFlattenInheritance
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetWritableSubResourceModel1SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                WritableSubResourceModel1SRestOperations restOperations = GetWritableSubResourceModel1SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                 async Task<Page<WritableSubResourceModel1>> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetWritableSubResourceModel1s");
@@ -978,7 +978,7 @@ namespace SupersetFlattenInheritance
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetWritableSubResourceModel1SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                WritableSubResourceModel1SRestOperations restOperations = GetWritableSubResourceModel1SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                 Page<WritableSubResourceModel1> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetWritableSubResourceModel1s");
@@ -1025,7 +1025,7 @@ namespace SupersetFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetWritableSubResourceModel1SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    WritableSubResourceModel1SRestOperations restOperations = GetWritableSubResourceModel1SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = await restOperations.PutAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, writableSubResourceModel1SName, parameters, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
@@ -1064,7 +1064,7 @@ namespace SupersetFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetWritableSubResourceModel1SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    WritableSubResourceModel1SRestOperations restOperations = GetWritableSubResourceModel1SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = restOperations.Put(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, writableSubResourceModel1SName, parameters, cancellationToken);
                     return response;
                 }
@@ -1098,7 +1098,7 @@ namespace SupersetFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetWritableSubResourceModel1SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    WritableSubResourceModel1SRestOperations restOperations = GetWritableSubResourceModel1SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = await restOperations.GetAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, writableSubResourceModel1SName, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
@@ -1132,7 +1132,7 @@ namespace SupersetFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetWritableSubResourceModel1SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    WritableSubResourceModel1SRestOperations restOperations = GetWritableSubResourceModel1SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = restOperations.Get(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, writableSubResourceModel1SName, cancellationToken);
                     return response;
                 }
@@ -1157,7 +1157,7 @@ namespace SupersetFlattenInheritance
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetWritableSubResourceModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                WritableSubResourceModel2SRestOperations restOperations = GetWritableSubResourceModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                 async Task<Page<WritableSubResourceModel2>> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetWritableSubResourceModel2s");
@@ -1190,7 +1190,7 @@ namespace SupersetFlattenInheritance
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetWritableSubResourceModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                WritableSubResourceModel2SRestOperations restOperations = GetWritableSubResourceModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                 Page<WritableSubResourceModel2> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetWritableSubResourceModel2s");
@@ -1237,7 +1237,7 @@ namespace SupersetFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetWritableSubResourceModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    WritableSubResourceModel2SRestOperations restOperations = GetWritableSubResourceModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = await restOperations.PutAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, writableSubResourceModel2SName, parameters, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
@@ -1276,7 +1276,7 @@ namespace SupersetFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetWritableSubResourceModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    WritableSubResourceModel2SRestOperations restOperations = GetWritableSubResourceModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = restOperations.Put(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, writableSubResourceModel2SName, parameters, cancellationToken);
                     return response;
                 }
@@ -1310,7 +1310,7 @@ namespace SupersetFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetWritableSubResourceModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    WritableSubResourceModel2SRestOperations restOperations = GetWritableSubResourceModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = await restOperations.GetAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, writableSubResourceModel2SName, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
@@ -1344,7 +1344,7 @@ namespace SupersetFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetWritableSubResourceModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    WritableSubResourceModel2SRestOperations restOperations = GetWritableSubResourceModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = restOperations.Get(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, writableSubResourceModel2SName, cancellationToken);
                     return response;
                 }
@@ -1369,7 +1369,7 @@ namespace SupersetFlattenInheritance
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetResourceModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                ResourceModel2SRestOperations restOperations = GetResourceModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                 async Task<Page<ResourceModel2>> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetResourceModel2s");
@@ -1402,7 +1402,7 @@ namespace SupersetFlattenInheritance
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetResourceModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                ResourceModel2SRestOperations restOperations = GetResourceModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                 Page<ResourceModel2> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetResourceModel2s");
@@ -1449,7 +1449,7 @@ namespace SupersetFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetResourceModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    ResourceModel2SRestOperations restOperations = GetResourceModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = await restOperations.PutAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, resourceModel2SName, parameters, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
@@ -1488,7 +1488,7 @@ namespace SupersetFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetResourceModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    ResourceModel2SRestOperations restOperations = GetResourceModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = restOperations.Put(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, resourceModel2SName, parameters, cancellationToken);
                     return response;
                 }
@@ -1522,7 +1522,7 @@ namespace SupersetFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetResourceModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    ResourceModel2SRestOperations restOperations = GetResourceModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = await restOperations.GetAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, resourceModel2SName, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
@@ -1556,7 +1556,7 @@ namespace SupersetFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetResourceModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    ResourceModel2SRestOperations restOperations = GetResourceModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = restOperations.Get(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, resourceModel2SName, cancellationToken);
                     return response;
                 }
@@ -1581,7 +1581,7 @@ namespace SupersetFlattenInheritance
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetTrackedResourceModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                TrackedResourceModel2SRestOperations restOperations = GetTrackedResourceModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                 async Task<Page<TrackedResourceModel2>> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetTrackedResourceModel2s");
@@ -1614,7 +1614,7 @@ namespace SupersetFlattenInheritance
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetTrackedResourceModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                TrackedResourceModel2SRestOperations restOperations = GetTrackedResourceModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                 Page<TrackedResourceModel2> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetTrackedResourceModel2s");
@@ -1661,7 +1661,7 @@ namespace SupersetFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetTrackedResourceModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    TrackedResourceModel2SRestOperations restOperations = GetTrackedResourceModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = await restOperations.PutAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, trackedResourceModel2SName, parameters, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
@@ -1700,7 +1700,7 @@ namespace SupersetFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetTrackedResourceModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    TrackedResourceModel2SRestOperations restOperations = GetTrackedResourceModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = restOperations.Put(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, trackedResourceModel2SName, parameters, cancellationToken);
                     return response;
                 }
@@ -1734,7 +1734,7 @@ namespace SupersetFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetTrackedResourceModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    TrackedResourceModel2SRestOperations restOperations = GetTrackedResourceModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = await restOperations.GetAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, trackedResourceModel2SName, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
@@ -1768,7 +1768,7 @@ namespace SupersetFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetTrackedResourceModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    TrackedResourceModel2SRestOperations restOperations = GetTrackedResourceModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = restOperations.Get(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, trackedResourceModel2SName, cancellationToken);
                     return response;
                 }
@@ -1807,7 +1807,7 @@ namespace SupersetFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetNonResourceModel1SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    NonResourceModel1SRestOperations restOperations = GetNonResourceModel1SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = await restOperations.PutAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, nonResourceModel1SName, parameters, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
@@ -1846,7 +1846,7 @@ namespace SupersetFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetNonResourceModel1SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    NonResourceModel1SRestOperations restOperations = GetNonResourceModel1SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = restOperations.Put(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, nonResourceModel1SName, parameters, cancellationToken);
                     return response;
                 }
@@ -1880,7 +1880,7 @@ namespace SupersetFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetNonResourceModel1SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    NonResourceModel1SRestOperations restOperations = GetNonResourceModel1SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = await restOperations.GetAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, nonResourceModel1SName, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
@@ -1914,7 +1914,7 @@ namespace SupersetFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetNonResourceModel1SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    NonResourceModel1SRestOperations restOperations = GetNonResourceModel1SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = restOperations.Get(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, nonResourceModel1SName, cancellationToken);
                     return response;
                 }

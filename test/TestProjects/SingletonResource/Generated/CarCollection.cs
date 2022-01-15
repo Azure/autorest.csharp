@@ -39,8 +39,9 @@ namespace SingletonResource
         internal CarCollection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _carsRestClient = new CarsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
-            _restClient = new SingletonResourceRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            ClientOptions.TryGetApiVersion(Car.ResourceType, out string apiVersion);
+            _carsRestClient = new CarsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
+            _restClient = new SingletonResourceRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

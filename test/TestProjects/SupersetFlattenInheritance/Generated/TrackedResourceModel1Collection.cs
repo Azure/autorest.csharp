@@ -38,7 +38,8 @@ namespace SupersetFlattenInheritance
         internal TrackedResourceModel1Collection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _trackedResourceModel1sRestClient = new TrackedResourceModel1SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            ClientOptions.TryGetApiVersion(TrackedResourceModel1.ResourceType, out string apiVersion);
+            _trackedResourceModel1sRestClient = new TrackedResourceModel1SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

@@ -42,7 +42,7 @@ namespace AutoRest.CSharp.Output.Models
         };
 
         private readonly SerializationBuilder _serializationBuilder;
-        private readonly BuildContext _context;
+        protected readonly BuildContext _context;
         private readonly OutputLibrary _library;
         private readonly Dictionary<string, Parameter> _parameters;
 
@@ -551,7 +551,7 @@ namespace AutoRest.CSharp.Output.Models
             };
         }
 
-        private Parameter BuildConstructorParameter(RequestParameter requestParameter)
+        public virtual Parameter BuildConstructorParameter(RequestParameter requestParameter)
         {
             var parameter = BuildParameter(requestParameter);
             if (IsEndpointParameter(requestParameter))
@@ -620,7 +620,7 @@ namespace AutoRest.CSharp.Output.Models
         private Constant ParseConstant(ConstantSchema constant) =>
             BuilderHelpers.ParseConstant(constant.Value.Value, _context.TypeFactory.CreateType(constant.ValueType, constant.Value.Value == null));
 
-        private Constant? ParseConstant(RequestParameter parameter)
+        protected Constant? ParseConstant(RequestParameter parameter)
         {
             if (parameter.ClientDefaultValue != null)
             {
@@ -646,7 +646,7 @@ namespace AutoRest.CSharp.Output.Models
                 BuilderHelpers.EscapeXmlDescription(operationGroup.Language.Default.Description);
         }
 
-        private static string CreateDescription(RequestParameter requestParameter, CSharpType type)
+        protected static string CreateDescription(RequestParameter requestParameter, CSharpType type)
         {
             var description = string.IsNullOrWhiteSpace(requestParameter.Language.Default.Description) ?
                 $"The {requestParameter.Schema.Name} to use." :
@@ -746,7 +746,7 @@ namespace AutoRest.CSharp.Output.Models
             return constructorParameters;
         }
 
-        private static RequestLocation GetRequestLocation(RequestParameter requestParameter)
+        protected static RequestLocation GetRequestLocation(RequestParameter requestParameter)
             => requestParameter.In switch
             {
                 ParameterLocation.Uri => RequestLocation.Uri,
