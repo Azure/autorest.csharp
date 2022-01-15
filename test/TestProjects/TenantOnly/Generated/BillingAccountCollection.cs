@@ -37,7 +37,8 @@ namespace TenantOnly
         internal BillingAccountCollection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _billingAccountsRestClient = new BillingAccountsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            ClientOptions.TryGetApiVersion(BillingAccount.ResourceType, out string apiVersion);
+            _billingAccountsRestClient = new BillingAccountsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -60,7 +61,7 @@ namespace TenantOnly
         /// <param name="parameters"> Request parameters that are provided to the update billing account operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="billingAccountName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual BillingAccountCreateOperation CreateOrUpdate(bool waitForCompletion, string billingAccountName, BillingAccountData parameters, CancellationToken cancellationToken = default)
+        public virtual BillingAccountCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string billingAccountName, BillingAccountData parameters, CancellationToken cancellationToken = default)
         {
             if (billingAccountName == null)
             {
@@ -76,7 +77,7 @@ namespace TenantOnly
             try
             {
                 var response = _billingAccountsRestClient.Create(billingAccountName, parameters, cancellationToken);
-                var operation = new BillingAccountCreateOperation(this, _clientDiagnostics, Pipeline, _billingAccountsRestClient.CreateCreateRequest(billingAccountName, parameters).Request, response);
+                var operation = new BillingAccountCreateOrUpdateOperation(this, _clientDiagnostics, Pipeline, _billingAccountsRestClient.CreateCreateRequest(billingAccountName, parameters).Request, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -97,7 +98,7 @@ namespace TenantOnly
         /// <param name="parameters"> Request parameters that are provided to the update billing account operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="billingAccountName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<BillingAccountCreateOperation> CreateOrUpdateAsync(bool waitForCompletion, string billingAccountName, BillingAccountData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<BillingAccountCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string billingAccountName, BillingAccountData parameters, CancellationToken cancellationToken = default)
         {
             if (billingAccountName == null)
             {
@@ -113,7 +114,7 @@ namespace TenantOnly
             try
             {
                 var response = await _billingAccountsRestClient.CreateAsync(billingAccountName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new BillingAccountCreateOperation(this, _clientDiagnostics, Pipeline, _billingAccountsRestClient.CreateCreateRequest(billingAccountName, parameters).Request, response);
+                var operation = new BillingAccountCreateOrUpdateOperation(this, _clientDiagnostics, Pipeline, _billingAccountsRestClient.CreateCreateRequest(billingAccountName, parameters).Request, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;

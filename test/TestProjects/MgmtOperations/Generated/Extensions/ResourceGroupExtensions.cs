@@ -8,10 +8,8 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources;
 using MgmtOperations.Models;
 
@@ -30,9 +28,9 @@ namespace MgmtOperations
         }
         #endregion
 
-        private static AvailabilitySetsRestOperations GetAvailabilitySetsRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, Uri endpoint = null)
+        private static AvailabilitySetsRestOperations GetAvailabilitySetsRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = default)
         {
-            return new AvailabilitySetsRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint);
+            return new AvailabilitySetsRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets
@@ -44,7 +42,7 @@ namespace MgmtOperations
         /// <param name="parameters"> Parameters supplied to the Update Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public static async Task<AvailabilitySetTestLROMethodOperation> TestLROMethodAvailabilitySetAsync(this ResourceGroup resourceGroup, bool waitForCompletion, AvailabilitySetUpdate parameters, CancellationToken cancellationToken = default)
+        public static async Task<TestLROMethodAvailabilitySetOperation> TestLROMethodAvailabilitySetAsync(this ResourceGroup resourceGroup, bool waitForCompletion, AvailabilitySetUpdate parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -58,9 +56,10 @@ namespace MgmtOperations
                 scope.Start();
                 try
                 {
-                    var restOperations = GetAvailabilitySetsRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    options.TryGetApiVersion(AvailabilitySet.ResourceType, out string apiVersion);
+                    AvailabilitySetsRestOperations restOperations = GetAvailabilitySetsRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
                     var response = await restOperations.TestLROMethodAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, parameters, cancellationToken).ConfigureAwait(false);
-                    var operation = new AvailabilitySetTestLROMethodOperation(clientDiagnostics, pipeline, restOperations.CreateTestLROMethodRequest(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, parameters).Request, response);
+                    var operation = new TestLROMethodAvailabilitySetOperation(clientDiagnostics, pipeline, restOperations.CreateTestLROMethodRequest(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, parameters).Request, response);
                     if (waitForCompletion)
                         await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                     return operation;
@@ -83,7 +82,7 @@ namespace MgmtOperations
         /// <param name="parameters"> Parameters supplied to the Update Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public static AvailabilitySetTestLROMethodOperation TestLROMethodAvailabilitySet(this ResourceGroup resourceGroup, bool waitForCompletion, AvailabilitySetUpdate parameters, CancellationToken cancellationToken = default)
+        public static TestLROMethodAvailabilitySetOperation TestLROMethodAvailabilitySet(this ResourceGroup resourceGroup, bool waitForCompletion, AvailabilitySetUpdate parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -97,9 +96,10 @@ namespace MgmtOperations
                 scope.Start();
                 try
                 {
-                    var restOperations = GetAvailabilitySetsRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    options.TryGetApiVersion(AvailabilitySet.ResourceType, out string apiVersion);
+                    AvailabilitySetsRestOperations restOperations = GetAvailabilitySetsRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
                     var response = restOperations.TestLROMethod(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, parameters, cancellationToken);
-                    var operation = new AvailabilitySetTestLROMethodOperation(clientDiagnostics, pipeline, restOperations.CreateTestLROMethodRequest(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, parameters).Request, response);
+                    var operation = new TestLROMethodAvailabilitySetOperation(clientDiagnostics, pipeline, restOperations.CreateTestLROMethodRequest(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, parameters).Request, response);
                     if (waitForCompletion)
                         operation.WaitForCompletion(cancellationToken);
                     return operation;

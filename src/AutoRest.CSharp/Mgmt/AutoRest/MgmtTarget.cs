@@ -112,22 +112,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 AddGeneratedFile(project, $"{resource.Type.Name}.cs", codeWriter.ToString());
             }
 
-            foreach (var operation in context.Library.LongRunningOperations)
-            {
-                var codeWriter = new CodeWriter();
-                new MgmtLongRunningOperationWriter().Write(codeWriter, operation);
-
-                AddGeneratedFile(project, $"LongRunningOperation/{operation.Type.Name}.cs", codeWriter.ToString());
-            }
-
-            foreach (var operation in context.Library.NonLongRunningOperations)
-            {
-                var codeWriter = new CodeWriter();
-                new NonLongRunningOperationWriter().Write(codeWriter, operation);
-
-                AddGeneratedFile(project, $"LongRunningOperation/{operation.Type.Name}.cs", codeWriter.ToString());
-            }
-
             if (!isArmCore)
             {
                 // we will write the ResourceGroupExtensions class even if it does not contain anything
@@ -167,6 +151,23 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 var armResourceExtensionsCodeWriter = new CodeWriter();
                 new ArmResourceExtensionsWriter(armResourceExtensionsCodeWriter, context.Library.ArmResourceExtensions, context, isArmCore).Write();
                 AddGeneratedFile(project, isArmCore ? $"{context.Library.ArmResourceExtensions.ResourceName}.cs" : $"Extensions/{context.Library.ArmResourceExtensions.Type.Name}.cs", armResourceExtensionsCodeWriter.ToString());
+            }
+
+            // we must output the LROs and fake LROs as the last step to sure all the LRO and fake LRO object could be initialized.
+            foreach (var operation in context.Library.LongRunningOperations)
+            {
+                var codeWriter = new CodeWriter();
+                new MgmtLongRunningOperationWriter().Write(codeWriter, operation);
+
+                AddGeneratedFile(project, $"LongRunningOperation/{operation.Type.Name}.cs", codeWriter.ToString());
+            }
+
+            foreach (var operation in context.Library.NonLongRunningOperations)
+            {
+                var codeWriter = new CodeWriter();
+                new NonLongRunningOperationWriter().Write(codeWriter, operation);
+
+                AddGeneratedFile(project, $"LongRunningOperation/{operation.Type.Name}.cs", codeWriter.ToString());
             }
 
             if (_overriddenProjectFilenames.TryGetValue(project, out var overriddenFilenames))

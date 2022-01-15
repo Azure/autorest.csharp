@@ -38,7 +38,8 @@ namespace ExactMatchFlattenInheritance
         internal CustomModel3Collection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _customModel3sRestClient = new CustomModel3SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            ClientOptions.TryGetApiVersion(CustomModel3.ResourceType, out string apiVersion);
+            _customModel3sRestClient = new CustomModel3SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -61,7 +62,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="parameters"> The CustomModel3 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual CustomModel3SPutOperation CreateOrUpdate(bool waitForCompletion, string name, CustomModel3Data parameters, CancellationToken cancellationToken = default)
+        public virtual CustomModel3CreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string name, CustomModel3Data parameters, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
@@ -77,7 +78,7 @@ namespace ExactMatchFlattenInheritance
             try
             {
                 var response = _customModel3sRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, name, parameters, cancellationToken);
-                var operation = new CustomModel3SPutOperation(this, response);
+                var operation = new CustomModel3CreateOrUpdateOperation(this, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -98,7 +99,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="parameters"> The CustomModel3 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<CustomModel3SPutOperation> CreateOrUpdateAsync(bool waitForCompletion, string name, CustomModel3Data parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<CustomModel3CreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string name, CustomModel3Data parameters, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
@@ -114,7 +115,7 @@ namespace ExactMatchFlattenInheritance
             try
             {
                 var response = await _customModel3sRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, name, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new CustomModel3SPutOperation(this, response);
+                var operation = new CustomModel3CreateOrUpdateOperation(this, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;

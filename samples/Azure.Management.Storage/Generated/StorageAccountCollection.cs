@@ -38,7 +38,8 @@ namespace Azure.Management.Storage
         internal StorageAccountCollection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _storageAccountsRestClient = new StorageAccountsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            ClientOptions.TryGetApiVersion(StorageAccount.ResourceType, out string apiVersion);
+            _storageAccountsRestClient = new StorageAccountsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -61,7 +62,7 @@ namespace Azure.Management.Storage
         /// <param name="parameters"> The parameters to provide for the created account. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual StorageAccountCreateOperation CreateOrUpdate(bool waitForCompletion, string accountName, StorageAccountCreateParameters parameters, CancellationToken cancellationToken = default)
+        public virtual StorageAccountCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string accountName, StorageAccountCreateParameters parameters, CancellationToken cancellationToken = default)
         {
             if (accountName == null)
             {
@@ -77,7 +78,7 @@ namespace Azure.Management.Storage
             try
             {
                 var response = _storageAccountsRestClient.Create(Id.SubscriptionId, Id.ResourceGroupName, accountName, parameters, cancellationToken);
-                var operation = new StorageAccountCreateOperation(this, _clientDiagnostics, Pipeline, _storageAccountsRestClient.CreateCreateRequest(Id.SubscriptionId, Id.ResourceGroupName, accountName, parameters).Request, response);
+                var operation = new StorageAccountCreateOrUpdateOperation(this, _clientDiagnostics, Pipeline, _storageAccountsRestClient.CreateCreateRequest(Id.SubscriptionId, Id.ResourceGroupName, accountName, parameters).Request, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -98,7 +99,7 @@ namespace Azure.Management.Storage
         /// <param name="parameters"> The parameters to provide for the created account. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<StorageAccountCreateOperation> CreateOrUpdateAsync(bool waitForCompletion, string accountName, StorageAccountCreateParameters parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<StorageAccountCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string accountName, StorageAccountCreateParameters parameters, CancellationToken cancellationToken = default)
         {
             if (accountName == null)
             {
@@ -114,7 +115,7 @@ namespace Azure.Management.Storage
             try
             {
                 var response = await _storageAccountsRestClient.CreateAsync(Id.SubscriptionId, Id.ResourceGroupName, accountName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new StorageAccountCreateOperation(this, _clientDiagnostics, Pipeline, _storageAccountsRestClient.CreateCreateRequest(Id.SubscriptionId, Id.ResourceGroupName, accountName, parameters).Request, response);
+                var operation = new StorageAccountCreateOrUpdateOperation(this, _clientDiagnostics, Pipeline, _storageAccountsRestClient.CreateCreateRequest(Id.SubscriptionId, Id.ResourceGroupName, accountName, parameters).Request, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;

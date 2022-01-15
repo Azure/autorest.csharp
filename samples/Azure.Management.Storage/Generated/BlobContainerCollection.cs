@@ -36,7 +36,8 @@ namespace Azure.Management.Storage
         internal BlobContainerCollection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _blobContainersRestClient = new BlobContainersRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            ClientOptions.TryGetApiVersion(BlobContainer.ResourceType, out string apiVersion);
+            _blobContainersRestClient = new BlobContainersRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -59,7 +60,7 @@ namespace Azure.Management.Storage
         /// <param name="blobContainer"> Properties of the blob container to create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="containerName"/> or <paramref name="blobContainer"/> is null. </exception>
-        public virtual BlobContainerCreateOperation CreateOrUpdate(bool waitForCompletion, string containerName, BlobContainerData blobContainer, CancellationToken cancellationToken = default)
+        public virtual BlobContainerCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string containerName, BlobContainerData blobContainer, CancellationToken cancellationToken = default)
         {
             if (containerName == null)
             {
@@ -75,7 +76,7 @@ namespace Azure.Management.Storage
             try
             {
                 var response = _blobContainersRestClient.Create(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, containerName, blobContainer, cancellationToken);
-                var operation = new BlobContainerCreateOperation(this, response);
+                var operation = new BlobContainerCreateOrUpdateOperation(this, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -96,7 +97,7 @@ namespace Azure.Management.Storage
         /// <param name="blobContainer"> Properties of the blob container to create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="containerName"/> or <paramref name="blobContainer"/> is null. </exception>
-        public async virtual Task<BlobContainerCreateOperation> CreateOrUpdateAsync(bool waitForCompletion, string containerName, BlobContainerData blobContainer, CancellationToken cancellationToken = default)
+        public async virtual Task<BlobContainerCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string containerName, BlobContainerData blobContainer, CancellationToken cancellationToken = default)
         {
             if (containerName == null)
             {
@@ -112,7 +113,7 @@ namespace Azure.Management.Storage
             try
             {
                 var response = await _blobContainersRestClient.CreateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, containerName, blobContainer, cancellationToken).ConfigureAwait(false);
-                var operation = new BlobContainerCreateOperation(this, response);
+                var operation = new BlobContainerCreateOrUpdateOperation(this, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;

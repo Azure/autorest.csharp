@@ -38,7 +38,8 @@ namespace MgmtListMethods
         internal ResGrpParentCollection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _resGrpParentsRestClient = new ResGrpParentsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            ClientOptions.TryGetApiVersion(ResGrpParent.ResourceType, out string apiVersion);
+            _resGrpParentsRestClient = new ResGrpParentsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

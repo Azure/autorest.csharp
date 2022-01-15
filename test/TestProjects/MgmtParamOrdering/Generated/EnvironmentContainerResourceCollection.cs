@@ -36,7 +36,8 @@ namespace MgmtParamOrdering
         internal EnvironmentContainerResourceCollection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _environmentContainersRestClient = new EnvironmentContainersRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            ClientOptions.TryGetApiVersion(EnvironmentContainerResource.ResourceType, out string apiVersion);
+            _environmentContainersRestClient = new EnvironmentContainersRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -59,7 +60,7 @@ namespace MgmtParamOrdering
         /// <param name="body"> Container entity to create or update. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="body"/> is null. </exception>
-        public virtual EnvironmentContainerCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string name, EnvironmentContainerResourceData body, CancellationToken cancellationToken = default)
+        public virtual EnvironmentContainerResourceCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string name, EnvironmentContainerResourceData body, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
@@ -75,7 +76,7 @@ namespace MgmtParamOrdering
             try
             {
                 var response = _environmentContainersRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, name, body, cancellationToken);
-                var operation = new EnvironmentContainerCreateOrUpdateOperation(this, response);
+                var operation = new EnvironmentContainerResourceCreateOrUpdateOperation(this, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -96,7 +97,7 @@ namespace MgmtParamOrdering
         /// <param name="body"> Container entity to create or update. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="body"/> is null. </exception>
-        public async virtual Task<EnvironmentContainerCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string name, EnvironmentContainerResourceData body, CancellationToken cancellationToken = default)
+        public async virtual Task<EnvironmentContainerResourceCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string name, EnvironmentContainerResourceData body, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
@@ -112,7 +113,7 @@ namespace MgmtParamOrdering
             try
             {
                 var response = await _environmentContainersRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, name, body, cancellationToken).ConfigureAwait(false);
-                var operation = new EnvironmentContainerCreateOrUpdateOperation(this, response);
+                var operation = new EnvironmentContainerResourceCreateOrUpdateOperation(this, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;

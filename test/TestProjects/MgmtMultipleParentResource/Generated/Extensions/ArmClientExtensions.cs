@@ -37,27 +37,27 @@ namespace MgmtMultipleParentResource
         }
         #endregion
 
-        #region ParentSubParentChild
-        /// <summary> Gets an object representing a ParentSubParentChild along with the instance operations that can be performed on it but with no data. </summary>
+        #region TheParentSubParentChild
+        /// <summary> Gets an object representing a TheParentSubParentChild along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="ParentSubParentChild" /> object. </returns>
-        public static ParentSubParentChild GetParentSubParentChild(this ArmClient armClient, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="TheParentSubParentChild" /> object. </returns>
+        public static TheParentSubParentChild GetTheParentSubParentChild(this ArmClient armClient, ResourceIdentifier id)
         {
-            ParentSubParentChild.ValidateResourceId(id);
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new ParentSubParentChild(clientOptions, credential, uri, pipeline, id));
+            TheParentSubParentChild.ValidateResourceId(id);
+            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new TheParentSubParentChild(clientOptions, credential, uri, pipeline, id));
         }
         #endregion
 
-        #region Parent
-        /// <summary> Gets an object representing a Parent along with the instance operations that can be performed on it but with no data. </summary>
+        #region TheParent
+        /// <summary> Gets an object representing a TheParent along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="Parent" /> object. </returns>
-        public static Parent GetParent(this ArmClient armClient, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="TheParent" /> object. </returns>
+        public static TheParent GetTheParent(this ArmClient armClient, ResourceIdentifier id)
         {
-            Parent.ValidateResourceId(id);
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new Parent(clientOptions, credential, uri, pipeline, id));
+            TheParent.ValidateResourceId(id);
+            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new TheParent(clientOptions, credential, uri, pipeline, id));
         }
         #endregion
 

@@ -16,6 +16,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager.Core;
+using TenantOnly.Models;
 
 namespace TenantOnly
 {
@@ -35,7 +36,8 @@ namespace TenantOnly
         internal AgreementCollection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _agreementsRestClient = new AgreementsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            ClientOptions.TryGetApiVersion(Agreement.ResourceType, out string apiVersion);
+            _agreementsRestClient = new AgreementsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

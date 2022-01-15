@@ -38,7 +38,8 @@ namespace Pagination
         internal PageSizeDecimalModelCollection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _pageSizeDecimalModelsRestClient = new PageSizeDecimalModelsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            ClientOptions.TryGetApiVersion(PageSizeDecimalModel.ResourceType, out string apiVersion);
+            _pageSizeDecimalModelsRestClient = new PageSizeDecimalModelsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -57,7 +58,7 @@ namespace Pagination
         /// <param name="parameters"> The PageSizeDecimalModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual PageSizeDecimalModelPutOperation CreateOrUpdate(bool waitForCompletion, string name, PageSizeDecimalModelData parameters, CancellationToken cancellationToken = default)
+        public virtual PageSizeDecimalModelCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string name, PageSizeDecimalModelData parameters, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
@@ -73,7 +74,7 @@ namespace Pagination
             try
             {
                 var response = _pageSizeDecimalModelsRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, name, parameters, cancellationToken);
-                var operation = new PageSizeDecimalModelPutOperation(this, response);
+                var operation = new PageSizeDecimalModelCreateOrUpdateOperation(this, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -90,7 +91,7 @@ namespace Pagination
         /// <param name="parameters"> The PageSizeDecimalModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<PageSizeDecimalModelPutOperation> CreateOrUpdateAsync(bool waitForCompletion, string name, PageSizeDecimalModelData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<PageSizeDecimalModelCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string name, PageSizeDecimalModelData parameters, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
@@ -106,7 +107,7 @@ namespace Pagination
             try
             {
                 var response = await _pageSizeDecimalModelsRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, name, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new PageSizeDecimalModelPutOperation(this, response);
+                var operation = new PageSizeDecimalModelCreateOrUpdateOperation(this, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;

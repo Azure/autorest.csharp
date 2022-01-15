@@ -38,7 +38,8 @@ namespace Pagination
         internal PageSizeIntegerModelCollection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _pageSizeIntegerModelsRestClient = new PageSizeIntegerModelsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            ClientOptions.TryGetApiVersion(PageSizeIntegerModel.ResourceType, out string apiVersion);
+            _pageSizeIntegerModelsRestClient = new PageSizeIntegerModelsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -57,7 +58,7 @@ namespace Pagination
         /// <param name="parameters"> The PageSizeIntegerModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual PageSizeIntegerModelPutOperation CreateOrUpdate(bool waitForCompletion, string name, PageSizeIntegerModelData parameters, CancellationToken cancellationToken = default)
+        public virtual PageSizeIntegerModelCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string name, PageSizeIntegerModelData parameters, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
@@ -73,7 +74,7 @@ namespace Pagination
             try
             {
                 var response = _pageSizeIntegerModelsRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, name, parameters, cancellationToken);
-                var operation = new PageSizeIntegerModelPutOperation(this, response);
+                var operation = new PageSizeIntegerModelCreateOrUpdateOperation(this, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -90,7 +91,7 @@ namespace Pagination
         /// <param name="parameters"> The PageSizeIntegerModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<PageSizeIntegerModelPutOperation> CreateOrUpdateAsync(bool waitForCompletion, string name, PageSizeIntegerModelData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<PageSizeIntegerModelCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string name, PageSizeIntegerModelData parameters, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
@@ -106,7 +107,7 @@ namespace Pagination
             try
             {
                 var response = await _pageSizeIntegerModelsRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, name, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new PageSizeIntegerModelPutOperation(this, response);
+                var operation = new PageSizeIntegerModelCreateOrUpdateOperation(this, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;

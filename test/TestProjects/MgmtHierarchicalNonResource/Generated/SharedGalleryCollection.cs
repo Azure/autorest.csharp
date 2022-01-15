@@ -41,7 +41,8 @@ namespace MgmtHierarchicalNonResource
         internal SharedGalleryCollection(ArmResource parent, string location) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _sharedGalleriesRestClient = new SharedGalleriesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            ClientOptions.TryGetApiVersion(SharedGallery.ResourceType, out string apiVersion);
+            _sharedGalleriesRestClient = new SharedGalleriesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
             _location = location;
 #if DEBUG
 			ValidateResourceId(Id);

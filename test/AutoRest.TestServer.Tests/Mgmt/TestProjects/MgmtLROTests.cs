@@ -11,7 +11,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
     {
         public MgmtLROTests() : base("MgmtLRO") { }
 
-        [TestCase("BarCollection", "CreateOrUpdate", typeof(BarCreateOperation))]
+        [TestCase("BarCollection", "CreateOrUpdate", typeof(BarCreateOrUpdateOperation))]
         [TestCase("FakeCollection", "CreateOrUpdate", typeof(FakeCreateOrUpdateOperation))]
         public void ValidateLongRunningOperationFunctionInCollection(string className, string functionName, Type returnType)
         {

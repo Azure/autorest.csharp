@@ -36,7 +36,8 @@ namespace MgmtListMethods
         internal TenantParentCollection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _tenantParentsRestClient = new TenantParentsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            ClientOptions.TryGetApiVersion(TenantParent.ResourceType, out string apiVersion);
+            _tenantParentsRestClient = new TenantParentsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

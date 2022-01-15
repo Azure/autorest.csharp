@@ -38,7 +38,8 @@ namespace SupersetInheritance
         internal SupersetModel1Collection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _supersetModel1sRestClient = new SupersetModel1SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            ClientOptions.TryGetApiVersion(SupersetModel1.ResourceType, out string apiVersion);
+            _supersetModel1sRestClient = new SupersetModel1SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -60,7 +61,7 @@ namespace SupersetInheritance
         /// <param name="parameters"> The SupersetModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel1SName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual SupersetModel1SPutOperation CreateOrUpdate(bool waitForCompletion, string supersetModel1SName, SupersetModel1Data parameters, CancellationToken cancellationToken = default)
+        public virtual SupersetModel1CreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string supersetModel1SName, SupersetModel1Data parameters, CancellationToken cancellationToken = default)
         {
             if (supersetModel1SName == null)
             {
@@ -76,7 +77,7 @@ namespace SupersetInheritance
             try
             {
                 var response = _supersetModel1sRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, supersetModel1SName, parameters, cancellationToken);
-                var operation = new SupersetModel1SPutOperation(this, response);
+                var operation = new SupersetModel1CreateOrUpdateOperation(this, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -96,7 +97,7 @@ namespace SupersetInheritance
         /// <param name="parameters"> The SupersetModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel1SName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<SupersetModel1SPutOperation> CreateOrUpdateAsync(bool waitForCompletion, string supersetModel1SName, SupersetModel1Data parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<SupersetModel1CreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string supersetModel1SName, SupersetModel1Data parameters, CancellationToken cancellationToken = default)
         {
             if (supersetModel1SName == null)
             {
@@ -112,7 +113,7 @@ namespace SupersetInheritance
             try
             {
                 var response = await _supersetModel1sRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, supersetModel1SName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new SupersetModel1SPutOperation(this, response);
+                var operation = new SupersetModel1CreateOrUpdateOperation(this, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;

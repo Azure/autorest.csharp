@@ -36,7 +36,8 @@ namespace Azure.Management.Storage
         internal EncryptionScopeCollection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _encryptionScopesRestClient = new EncryptionScopesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            ClientOptions.TryGetApiVersion(EncryptionScope.ResourceType, out string apiVersion);
+            _encryptionScopesRestClient = new EncryptionScopesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -59,7 +60,7 @@ namespace Azure.Management.Storage
         /// <param name="encryptionScope"> Encryption scope properties to be used for the create or update. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="encryptionScopeName"/> or <paramref name="encryptionScope"/> is null. </exception>
-        public virtual EncryptionScopePutOperation CreateOrUpdate(bool waitForCompletion, string encryptionScopeName, EncryptionScopeData encryptionScope, CancellationToken cancellationToken = default)
+        public virtual EncryptionScopeCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string encryptionScopeName, EncryptionScopeData encryptionScope, CancellationToken cancellationToken = default)
         {
             if (encryptionScopeName == null)
             {
@@ -75,7 +76,7 @@ namespace Azure.Management.Storage
             try
             {
                 var response = _encryptionScopesRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, encryptionScopeName, encryptionScope, cancellationToken);
-                var operation = new EncryptionScopePutOperation(this, response);
+                var operation = new EncryptionScopeCreateOrUpdateOperation(this, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -96,7 +97,7 @@ namespace Azure.Management.Storage
         /// <param name="encryptionScope"> Encryption scope properties to be used for the create or update. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="encryptionScopeName"/> or <paramref name="encryptionScope"/> is null. </exception>
-        public async virtual Task<EncryptionScopePutOperation> CreateOrUpdateAsync(bool waitForCompletion, string encryptionScopeName, EncryptionScopeData encryptionScope, CancellationToken cancellationToken = default)
+        public async virtual Task<EncryptionScopeCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string encryptionScopeName, EncryptionScopeData encryptionScope, CancellationToken cancellationToken = default)
         {
             if (encryptionScopeName == null)
             {
@@ -112,7 +113,7 @@ namespace Azure.Management.Storage
             try
             {
                 var response = await _encryptionScopesRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, encryptionScopeName, encryptionScope, cancellationToken).ConfigureAwait(false);
-                var operation = new EncryptionScopePutOperation(this, response);
+                var operation = new EncryptionScopeCreateOrUpdateOperation(this, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;

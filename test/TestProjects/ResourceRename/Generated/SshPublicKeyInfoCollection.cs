@@ -38,7 +38,8 @@ namespace ResourceRename
         internal SshPublicKeyInfoCollection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _sshPublicKeysRestClient = new SshPublicKeysRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            ClientOptions.TryGetApiVersion(SshPublicKeyInfo.ResourceType, out string apiVersion);
+            _sshPublicKeysRestClient = new SshPublicKeysRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -61,7 +62,7 @@ namespace ResourceRename
         /// <param name="properties"> Contains information about SSH certificate public key and the path on the Linux VM where the public key is placed. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="sshPublicKeyName"/> is null. </exception>
-        public virtual SshPublicKeyCreateOperation CreateOrUpdate(bool waitForCompletion, string sshPublicKeyName, SshPublicKeyProperties properties = null, CancellationToken cancellationToken = default)
+        public virtual SshPublicKeyInfoCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string sshPublicKeyName, SshPublicKeyProperties properties = null, CancellationToken cancellationToken = default)
         {
             if (sshPublicKeyName == null)
             {
@@ -73,7 +74,7 @@ namespace ResourceRename
             try
             {
                 var response = _sshPublicKeysRestClient.Create(Id.SubscriptionId, Id.ResourceGroupName, sshPublicKeyName, properties, cancellationToken);
-                var operation = new SshPublicKeyCreateOperation(this, response);
+                var operation = new SshPublicKeyInfoCreateOrUpdateOperation(this, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -94,7 +95,7 @@ namespace ResourceRename
         /// <param name="properties"> Contains information about SSH certificate public key and the path on the Linux VM where the public key is placed. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="sshPublicKeyName"/> is null. </exception>
-        public async virtual Task<SshPublicKeyCreateOperation> CreateOrUpdateAsync(bool waitForCompletion, string sshPublicKeyName, SshPublicKeyProperties properties = null, CancellationToken cancellationToken = default)
+        public async virtual Task<SshPublicKeyInfoCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string sshPublicKeyName, SshPublicKeyProperties properties = null, CancellationToken cancellationToken = default)
         {
             if (sshPublicKeyName == null)
             {
@@ -106,7 +107,7 @@ namespace ResourceRename
             try
             {
                 var response = await _sshPublicKeysRestClient.CreateAsync(Id.SubscriptionId, Id.ResourceGroupName, sshPublicKeyName, properties, cancellationToken).ConfigureAwait(false);
-                var operation = new SshPublicKeyCreateOperation(this, response);
+                var operation = new SshPublicKeyInfoCreateOrUpdateOperation(this, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;

@@ -37,7 +37,8 @@ namespace MgmtScopeResource
         internal PolicyAssignmentCollection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _policyAssignmentsRestClient = new PolicyAssignmentsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            ClientOptions.TryGetApiVersion(PolicyAssignment.ResourceType, out string apiVersion);
+            _policyAssignmentsRestClient = new PolicyAssignmentsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
         }
 
         // Collection level operations.
@@ -51,7 +52,7 @@ namespace MgmtScopeResource
         /// <param name="parameters"> Parameters for the policy assignment. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="policyAssignmentName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual PolicyAssignmentCreateOperation CreateOrUpdate(bool waitForCompletion, string policyAssignmentName, PolicyAssignmentData parameters, CancellationToken cancellationToken = default)
+        public virtual PolicyAssignmentCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string policyAssignmentName, PolicyAssignmentData parameters, CancellationToken cancellationToken = default)
         {
             if (policyAssignmentName == null)
             {
@@ -67,7 +68,7 @@ namespace MgmtScopeResource
             try
             {
                 var response = _policyAssignmentsRestClient.Create(Id, policyAssignmentName, parameters, cancellationToken);
-                var operation = new PolicyAssignmentCreateOperation(this, response);
+                var operation = new PolicyAssignmentCreateOrUpdateOperation(this, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -88,7 +89,7 @@ namespace MgmtScopeResource
         /// <param name="parameters"> Parameters for the policy assignment. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="policyAssignmentName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<PolicyAssignmentCreateOperation> CreateOrUpdateAsync(bool waitForCompletion, string policyAssignmentName, PolicyAssignmentData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<PolicyAssignmentCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string policyAssignmentName, PolicyAssignmentData parameters, CancellationToken cancellationToken = default)
         {
             if (policyAssignmentName == null)
             {
@@ -104,7 +105,7 @@ namespace MgmtScopeResource
             try
             {
                 var response = await _policyAssignmentsRestClient.CreateAsync(Id, policyAssignmentName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new PolicyAssignmentCreateOperation(this, response);
+                var operation = new PolicyAssignmentCreateOrUpdateOperation(this, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;

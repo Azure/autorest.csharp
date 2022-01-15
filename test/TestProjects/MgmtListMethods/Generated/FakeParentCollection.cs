@@ -36,7 +36,8 @@ namespace MgmtListMethods
         internal FakeParentCollection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _fakeParentsRestClient = new FakeParentsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            ClientOptions.TryGetApiVersion(FakeParent.ResourceType, out string apiVersion);
+            _fakeParentsRestClient = new FakeParentsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

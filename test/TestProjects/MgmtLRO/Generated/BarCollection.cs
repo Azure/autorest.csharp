@@ -38,7 +38,8 @@ namespace MgmtLRO
         internal BarCollection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _barsRestClient = new BarsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            ClientOptions.TryGetApiVersion(Bar.ResourceType, out string apiVersion);
+            _barsRestClient = new BarsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -61,7 +62,7 @@ namespace MgmtLRO
         /// <param name="body"> The Bar to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="barName"/> or <paramref name="body"/> is null. </exception>
-        public virtual BarCreateOperation CreateOrUpdate(bool waitForCompletion, string barName, BarData body, CancellationToken cancellationToken = default)
+        public virtual BarCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string barName, BarData body, CancellationToken cancellationToken = default)
         {
             if (barName == null)
             {
@@ -77,7 +78,7 @@ namespace MgmtLRO
             try
             {
                 var response = _barsRestClient.Create(Id.SubscriptionId, Id.ResourceGroupName, barName, body, cancellationToken);
-                var operation = new BarCreateOperation(this, _clientDiagnostics, Pipeline, _barsRestClient.CreateCreateRequest(Id.SubscriptionId, Id.ResourceGroupName, barName, body).Request, response);
+                var operation = new BarCreateOrUpdateOperation(this, _clientDiagnostics, Pipeline, _barsRestClient.CreateCreateRequest(Id.SubscriptionId, Id.ResourceGroupName, barName, body).Request, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -98,7 +99,7 @@ namespace MgmtLRO
         /// <param name="body"> The Bar to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="barName"/> or <paramref name="body"/> is null. </exception>
-        public async virtual Task<BarCreateOperation> CreateOrUpdateAsync(bool waitForCompletion, string barName, BarData body, CancellationToken cancellationToken = default)
+        public async virtual Task<BarCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string barName, BarData body, CancellationToken cancellationToken = default)
         {
             if (barName == null)
             {
@@ -114,7 +115,7 @@ namespace MgmtLRO
             try
             {
                 var response = await _barsRestClient.CreateAsync(Id.SubscriptionId, Id.ResourceGroupName, barName, body, cancellationToken).ConfigureAwait(false);
-                var operation = new BarCreateOperation(this, _clientDiagnostics, Pipeline, _barsRestClient.CreateCreateRequest(Id.SubscriptionId, Id.ResourceGroupName, barName, body).Request, response);
+                var operation = new BarCreateOrUpdateOperation(this, _clientDiagnostics, Pipeline, _barsRestClient.CreateCreateRequest(Id.SubscriptionId, Id.ResourceGroupName, barName, body).Request, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;

@@ -37,7 +37,8 @@ namespace MgmtListMethods
         internal MgmtGrpParentWithNonResChWithLocCollection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _mgmtGrpParentWithNonResChWithLocsRestClient = new MgmtGrpParentWithNonResChWithLocsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            ClientOptions.TryGetApiVersion(MgmtGrpParentWithNonResChWithLoc.ResourceType, out string apiVersion);
+            _mgmtGrpParentWithNonResChWithLocsRestClient = new MgmtGrpParentWithNonResChWithLocsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

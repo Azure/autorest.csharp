@@ -30,9 +30,9 @@ namespace OmitOperationGroups
         }
         #endregion
 
-        private static Model5SRestOperations GetModel5SRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, Uri endpoint = null)
+        private static Model5SRestOperations GetModel5SRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = default)
         {
-            return new Model5SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint);
+            return new Model5SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model5s
@@ -47,7 +47,7 @@ namespace OmitOperationGroups
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetModel5SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                Model5SRestOperations restOperations = GetModel5SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                 async Task<Page<Model5>> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetModel5s");
@@ -80,7 +80,7 @@ namespace OmitOperationGroups
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetModel5SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                Model5SRestOperations restOperations = GetModel5SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                 Page<Model5> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetModel5s");
@@ -127,7 +127,7 @@ namespace OmitOperationGroups
                 scope.Start();
                 try
                 {
-                    var restOperations = GetModel5SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    Model5SRestOperations restOperations = GetModel5SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = await restOperations.CreateOrUpdateAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, model5SName, parameters, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
@@ -166,7 +166,7 @@ namespace OmitOperationGroups
                 scope.Start();
                 try
                 {
-                    var restOperations = GetModel5SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    Model5SRestOperations restOperations = GetModel5SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = restOperations.CreateOrUpdate(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, model5SName, parameters, cancellationToken);
                     return response;
                 }
@@ -200,7 +200,7 @@ namespace OmitOperationGroups
                 scope.Start();
                 try
                 {
-                    var restOperations = GetModel5SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    Model5SRestOperations restOperations = GetModel5SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = await restOperations.GetAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, model5SName, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
@@ -234,7 +234,7 @@ namespace OmitOperationGroups
                 scope.Start();
                 try
                 {
-                    var restOperations = GetModel5SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    Model5SRestOperations restOperations = GetModel5SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = restOperations.Get(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, model5SName, cancellationToken);
                     return response;
                 }

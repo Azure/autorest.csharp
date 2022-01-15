@@ -38,7 +38,8 @@ namespace SupersetFlattenInheritance
         internal ResourceModel1Collection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _resourceModel1sRestClient = new ResourceModel1SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            ClientOptions.TryGetApiVersion(ResourceModel1.ResourceType, out string apiVersion);
+            _resourceModel1sRestClient = new ResourceModel1SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -60,7 +61,7 @@ namespace SupersetFlattenInheritance
         /// <param name="parameters"> The ResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceModel1SName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ResourceModel1SPutOperation CreateOrUpdate(bool waitForCompletion, string resourceModel1SName, ResourceModel1Data parameters, CancellationToken cancellationToken = default)
+        public virtual ResourceModel1CreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string resourceModel1SName, ResourceModel1Data parameters, CancellationToken cancellationToken = default)
         {
             if (resourceModel1SName == null)
             {
@@ -76,7 +77,7 @@ namespace SupersetFlattenInheritance
             try
             {
                 var response = _resourceModel1sRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, resourceModel1SName, parameters, cancellationToken);
-                var operation = new ResourceModel1SPutOperation(this, response);
+                var operation = new ResourceModel1CreateOrUpdateOperation(this, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -96,7 +97,7 @@ namespace SupersetFlattenInheritance
         /// <param name="parameters"> The ResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceModel1SName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<ResourceModel1SPutOperation> CreateOrUpdateAsync(bool waitForCompletion, string resourceModel1SName, ResourceModel1Data parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<ResourceModel1CreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string resourceModel1SName, ResourceModel1Data parameters, CancellationToken cancellationToken = default)
         {
             if (resourceModel1SName == null)
             {
@@ -112,7 +113,7 @@ namespace SupersetFlattenInheritance
             try
             {
                 var response = await _resourceModel1sRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, resourceModel1SName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new ResourceModel1SPutOperation(this, response);
+                var operation = new ResourceModel1CreateOrUpdateOperation(this, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;

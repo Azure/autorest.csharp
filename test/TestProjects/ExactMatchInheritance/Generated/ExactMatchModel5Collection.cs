@@ -38,7 +38,8 @@ namespace ExactMatchInheritance
         internal ExactMatchModel5Collection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _exactMatchModel5sRestClient = new ExactMatchModel5SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            ClientOptions.TryGetApiVersion(ExactMatchModel5.ResourceType, out string apiVersion);
+            _exactMatchModel5sRestClient = new ExactMatchModel5SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -60,7 +61,7 @@ namespace ExactMatchInheritance
         /// <param name="parameters"> The ExactMatchModel5 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel5SName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ExactMatchModel5SPutOperation CreateOrUpdate(bool waitForCompletion, string exactMatchModel5SName, ExactMatchModel5Data parameters, CancellationToken cancellationToken = default)
+        public virtual ExactMatchModel5CreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string exactMatchModel5SName, ExactMatchModel5Data parameters, CancellationToken cancellationToken = default)
         {
             if (exactMatchModel5SName == null)
             {
@@ -76,7 +77,7 @@ namespace ExactMatchInheritance
             try
             {
                 var response = _exactMatchModel5sRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, exactMatchModel5SName, parameters, cancellationToken);
-                var operation = new ExactMatchModel5SPutOperation(this, response);
+                var operation = new ExactMatchModel5CreateOrUpdateOperation(this, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -96,7 +97,7 @@ namespace ExactMatchInheritance
         /// <param name="parameters"> The ExactMatchModel5 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel5SName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<ExactMatchModel5SPutOperation> CreateOrUpdateAsync(bool waitForCompletion, string exactMatchModel5SName, ExactMatchModel5Data parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<ExactMatchModel5CreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string exactMatchModel5SName, ExactMatchModel5Data parameters, CancellationToken cancellationToken = default)
         {
             if (exactMatchModel5SName == null)
             {
@@ -112,7 +113,7 @@ namespace ExactMatchInheritance
             try
             {
                 var response = await _exactMatchModel5sRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, exactMatchModel5SName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new ExactMatchModel5SPutOperation(this, response);
+                var operation = new ExactMatchModel5CreateOrUpdateOperation(this, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;

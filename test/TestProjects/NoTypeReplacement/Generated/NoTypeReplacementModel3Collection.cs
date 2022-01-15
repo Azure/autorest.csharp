@@ -38,7 +38,8 @@ namespace NoTypeReplacement
         internal NoTypeReplacementModel3Collection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _noTypeReplacementModel3sRestClient = new NoTypeReplacementModel3SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            ClientOptions.TryGetApiVersion(NoTypeReplacementModel3.ResourceType, out string apiVersion);
+            _noTypeReplacementModel3sRestClient = new NoTypeReplacementModel3SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -57,7 +58,7 @@ namespace NoTypeReplacement
         /// <param name="parameters"> The NoTypeReplacementModel3 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="noTypeReplacementModel3SName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual NoTypeReplacementModel3SPutOperation CreateOrUpdate(bool waitForCompletion, string noTypeReplacementModel3SName, NoTypeReplacementModel3Data parameters, CancellationToken cancellationToken = default)
+        public virtual NoTypeReplacementModel3CreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string noTypeReplacementModel3SName, NoTypeReplacementModel3Data parameters, CancellationToken cancellationToken = default)
         {
             if (noTypeReplacementModel3SName == null)
             {
@@ -73,7 +74,7 @@ namespace NoTypeReplacement
             try
             {
                 var response = _noTypeReplacementModel3sRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, noTypeReplacementModel3SName, parameters, cancellationToken);
-                var operation = new NoTypeReplacementModel3SPutOperation(this, response);
+                var operation = new NoTypeReplacementModel3CreateOrUpdateOperation(this, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -90,7 +91,7 @@ namespace NoTypeReplacement
         /// <param name="parameters"> The NoTypeReplacementModel3 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="noTypeReplacementModel3SName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<NoTypeReplacementModel3SPutOperation> CreateOrUpdateAsync(bool waitForCompletion, string noTypeReplacementModel3SName, NoTypeReplacementModel3Data parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<NoTypeReplacementModel3CreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string noTypeReplacementModel3SName, NoTypeReplacementModel3Data parameters, CancellationToken cancellationToken = default)
         {
             if (noTypeReplacementModel3SName == null)
             {
@@ -106,7 +107,7 @@ namespace NoTypeReplacement
             try
             {
                 var response = await _noTypeReplacementModel3sRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, noTypeReplacementModel3SName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new NoTypeReplacementModel3SPutOperation(this, response);
+                var operation = new NoTypeReplacementModel3CreateOrUpdateOperation(this, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;

@@ -42,14 +42,14 @@ namespace MgmtKeyvault
         }
         #endregion
 
-        private static VaultsRestOperations GetVaultsRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, Uri endpoint = null)
+        private static VaultsRestOperations GetVaultsRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = default)
         {
-            return new VaultsRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint);
+            return new VaultsRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);
         }
 
-        private static ManagedHsmsRestOperations GetManagedHsmsRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, Uri endpoint = null)
+        private static ManagedHsmsRestOperations GetManagedHsmsRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = default)
         {
-            return new ManagedHsmsRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint);
+            return new ManagedHsmsRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.KeyVault/vaults
@@ -65,7 +65,8 @@ namespace MgmtKeyvault
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetVaultsRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                options.TryGetApiVersion(Vault.ResourceType, out string apiVersion);
+                VaultsRestOperations restOperations = GetVaultsRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
                 async Task<Page<Vault>> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetVaults");
@@ -114,7 +115,8 @@ namespace MgmtKeyvault
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetVaultsRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                options.TryGetApiVersion(Vault.ResourceType, out string apiVersion);
+                VaultsRestOperations restOperations = GetVaultsRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
                 Page<Vault> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetVaults");
@@ -190,7 +192,7 @@ namespace MgmtKeyvault
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetVaultsRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                VaultsRestOperations restOperations = GetVaultsRestOperations(clientDiagnostics, pipeline, options, baseUri);
                 async Task<Page<DeletedVault>> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetDeletedVaults");
@@ -238,7 +240,7 @@ namespace MgmtKeyvault
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetVaultsRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                VaultsRestOperations restOperations = GetVaultsRestOperations(clientDiagnostics, pipeline, options, baseUri);
                 Page<DeletedVault> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetDeletedVaults");
@@ -324,7 +326,7 @@ namespace MgmtKeyvault
                 scope.Start();
                 try
                 {
-                    var restOperations = GetVaultsRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    VaultsRestOperations restOperations = GetVaultsRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = await restOperations.CheckNameAvailabilityAsync(subscription.Id.SubscriptionId, vaultName, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
@@ -359,7 +361,7 @@ namespace MgmtKeyvault
                 scope.Start();
                 try
                 {
-                    var restOperations = GetVaultsRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    VaultsRestOperations restOperations = GetVaultsRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = restOperations.CheckNameAvailability(subscription.Id.SubscriptionId, vaultName, cancellationToken);
                     return response;
                 }
@@ -385,7 +387,8 @@ namespace MgmtKeyvault
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetManagedHsmsRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                options.TryGetApiVersion(ManagedHsm.ResourceType, out string apiVersion);
+                ManagedHsmsRestOperations restOperations = GetManagedHsmsRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
                 async Task<Page<ManagedHsm>> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetManagedHsms");
@@ -434,7 +437,8 @@ namespace MgmtKeyvault
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetManagedHsmsRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                options.TryGetApiVersion(ManagedHsm.ResourceType, out string apiVersion);
+                ManagedHsmsRestOperations restOperations = GetManagedHsmsRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
                 Page<ManagedHsm> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetManagedHsms");
@@ -510,7 +514,7 @@ namespace MgmtKeyvault
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetManagedHsmsRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                ManagedHsmsRestOperations restOperations = GetManagedHsmsRestOperations(clientDiagnostics, pipeline, options, baseUri);
                 async Task<Page<DeletedManagedHsm>> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetDeletedManagedHsms");
@@ -558,7 +562,7 @@ namespace MgmtKeyvault
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetManagedHsmsRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                ManagedHsmsRestOperations restOperations = GetManagedHsmsRestOperations(clientDiagnostics, pipeline, options, baseUri);
                 Page<DeletedManagedHsm> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetDeletedManagedHsms");

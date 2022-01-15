@@ -38,7 +38,8 @@ namespace Azure.ResourceManager.Sample
         internal ImageCollection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _imagesRestClient = new ImagesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            ClientOptions.TryGetApiVersion(Image.ResourceType, out string apiVersion);
+            _imagesRestClient = new ImagesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
