@@ -23,7 +23,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 {
     internal partial class MgmtBaseTestWriter: MgmtClientBaseWriter<MgmtTypeProvider>
     {
-        public CodeWriter _tagsWriter = new CodeWriter();
+        public CodeWriterDelegate? _tagsWriterDelegate = null;
         public HashSet<string>  variableNames = new HashSet<string>();
 
         public MgmtBaseTestWriter(CodeWriter writer, MgmtTypeProvider provider, BuildContext<MgmtOutputLibrary> context) : base(writer, provider, context)
@@ -283,6 +283,16 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 WriteSchemaObjectExampleProperties(writer, sot, ev, variableName, consumedProperties);
         }
 
+        protected void CreateTagWriterDelegate(string newVariableName, CSharpType valueType, ExampleValue ev)
+        {
+            _tagsWriterDelegate = new CodeWriterDelegate(writer =>
+            {
+                writer.Append($"{newVariableName}.ReplaceWith(");
+                WriteExampleValue(writer, valueType, ev, newVariableName);
+                writer.Append($");");
+            });
+        }
+
         private void WriteSchemaObjectExampleProperties(CodeWriter writer, ObjectType sot, ExampleValue ev, string variableName, HashSet<ObjectTypeProperty> consumedProperties)
         {
             using (writer.Scope($"", newLine: false))
@@ -299,9 +309,10 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                             var newVariableName = $"{variableName}.{targetProperty.Declaration.Name}";
                             if (targetProperty.Declaration.Name == "Tags" && targetProperty.ValueType.Name == "IDictionary")
                             {
-                                _tagsWriter.Append($"{newVariableName}.ReplaceWith(");
-                                WriteExampleValue(_tagsWriter, targetProperty.ValueType, paramValue!, newVariableName);
-                                _tagsWriter.Append($");");
+                                // _tagsWriter.Append($"{newVariableName}.ReplaceWith(");
+                                // WriteExampleValue(_tagsWriter, targetProperty.ValueType, paramValue!, newVariableName);
+                                // _tagsWriter.Append($");");
+                                CreateTagWriterDelegate(newVariableName, targetProperty.ValueType, paramValue);
                             }
                             else
                             {
@@ -565,11 +576,10 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             WriteExampleValue(writer, parameter.Type, exampleParameter.ExampleValue, variableName);
             writer.Line($";");
 
-            foreach (var tagLine in _tagsWriter.ToString(false).Split(Environment.NewLine))
-            {
-                writer.AppendRaw(tagLine);
+            if (_tagsWriterDelegate != null) {
+                writer.Line($"{_tagsWriterDelegate}");
             }
-            _tagsWriter = new CodeWriter();
+            _tagsWriterDelegate = null;
             return variableName;
         }
 
