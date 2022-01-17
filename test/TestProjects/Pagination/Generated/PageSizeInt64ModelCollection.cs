@@ -38,7 +38,8 @@ namespace Pagination
         internal PageSizeInt64ModelCollection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _pageSizeInt64ModelsRestClient = new PageSizeInt64ModelsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            ClientOptions.TryGetApiVersion(PageSizeInt64Model.ResourceType, out string apiVersion);
+            _pageSizeInt64ModelsRestClient = new PageSizeInt64ModelsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -57,7 +58,7 @@ namespace Pagination
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual PageSizeInt64ModelPutOperation CreateOrUpdate(bool waitForCompletion, string name, PageSizeInt64ModelData parameters, CancellationToken cancellationToken = default)
+        public virtual PageSizeInt64ModelCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string name, PageSizeInt64ModelData parameters, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
@@ -73,7 +74,7 @@ namespace Pagination
             try
             {
                 var response = _pageSizeInt64ModelsRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, name, parameters, cancellationToken);
-                var operation = new PageSizeInt64ModelPutOperation(Parent, response);
+                var operation = new PageSizeInt64ModelCreateOrUpdateOperation(Parent, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -90,7 +91,7 @@ namespace Pagination
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<PageSizeInt64ModelPutOperation> CreateOrUpdateAsync(bool waitForCompletion, string name, PageSizeInt64ModelData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<PageSizeInt64ModelCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string name, PageSizeInt64ModelData parameters, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
@@ -106,7 +107,7 @@ namespace Pagination
             try
             {
                 var response = await _pageSizeInt64ModelsRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, name, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new PageSizeInt64ModelPutOperation(Parent, response);
+                var operation = new PageSizeInt64ModelCreateOrUpdateOperation(Parent, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;

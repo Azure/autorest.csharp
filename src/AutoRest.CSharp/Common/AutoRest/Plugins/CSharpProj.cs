@@ -30,7 +30,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 ";
         private string _coreCsProjContent = @"
   <ItemGroup>
-    <PackageReference Include=""Azure.Core"" Version=""1.22.0-alpha.20220110.4"" />
+    <PackageReference Include=""Azure.Core"" Version=""1.22.0"" />
   </ItemGroup>";
 
         private string _armCsProjContent = @"
@@ -39,7 +39,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include=""Azure.ResourceManager"" Version=""1.0.0-alpha.20220110.1"" />
+    <PackageReference Include=""Azure.ResourceManager"" Version=""1.0.0-alpha.20220113.5"" />
   </ItemGroup>
 ";
 

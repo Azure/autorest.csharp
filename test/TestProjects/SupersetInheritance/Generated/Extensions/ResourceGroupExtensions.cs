@@ -9,7 +9,6 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
-using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
@@ -40,14 +39,14 @@ namespace SupersetInheritance
         }
         #endregion
 
-        private static SupersetModel2SRestOperations GetSupersetModel2SRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, Uri endpoint = null)
+        private static SupersetModel2SRestOperations GetSupersetModel2SRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = default)
         {
-            return new SupersetModel2SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint);
+            return new SupersetModel2SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);
         }
 
-        private static SupersetModel3SRestOperations GetSupersetModel3SRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, Uri endpoint = null)
+        private static SupersetModel3SRestOperations GetSupersetModel3SRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = default)
         {
-            return new SupersetModel3SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint);
+            return new SupersetModel3SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel2s/{supersetModel2sName}
@@ -76,7 +75,7 @@ namespace SupersetInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetSupersetModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    SupersetModel2SRestOperations restOperations = GetSupersetModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = await restOperations.PutAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, supersetModel2SName, parameters, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
@@ -115,7 +114,7 @@ namespace SupersetInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetSupersetModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    SupersetModel2SRestOperations restOperations = GetSupersetModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = restOperations.Put(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, supersetModel2SName, parameters, cancellationToken);
                     return response;
                 }
@@ -149,7 +148,7 @@ namespace SupersetInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetSupersetModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    SupersetModel2SRestOperations restOperations = GetSupersetModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = await restOperations.GetAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, supersetModel2SName, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
@@ -183,7 +182,7 @@ namespace SupersetInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetSupersetModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    SupersetModel2SRestOperations restOperations = GetSupersetModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = restOperations.Get(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, supersetModel2SName, cancellationToken);
                     return response;
                 }
@@ -222,7 +221,7 @@ namespace SupersetInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetSupersetModel3SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    SupersetModel3SRestOperations restOperations = GetSupersetModel3SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = await restOperations.PutAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, supersetModel3SName, parameters, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
@@ -261,7 +260,7 @@ namespace SupersetInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetSupersetModel3SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    SupersetModel3SRestOperations restOperations = GetSupersetModel3SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = restOperations.Put(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, supersetModel3SName, parameters, cancellationToken);
                     return response;
                 }
@@ -295,7 +294,7 @@ namespace SupersetInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetSupersetModel3SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    SupersetModel3SRestOperations restOperations = GetSupersetModel3SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = await restOperations.GetAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, supersetModel3SName, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
@@ -329,7 +328,7 @@ namespace SupersetInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetSupersetModel3SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    SupersetModel3SRestOperations restOperations = GetSupersetModel3SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = restOperations.Get(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, supersetModel3SName, cancellationToken);
                     return response;
                 }

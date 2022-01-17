@@ -28,12 +28,11 @@ namespace AutoRest.CSharp.Mgmt.Output
             : base(operationSets, resource.ResourceName, resource.ResourceType, resource.ResourceData, context, CollectionPosition)
         {
             Resource = resource;
-            GetAllOperation = EnsureGetAllOperation();
         }
 
         public Resource Resource { get; }
 
-        public MgmtClientOperation? GetAllOperation { get; }
+        public MgmtClientOperation? GetAllOperation => EnsureGetAllOperation();
 
         private Dictionary<Parameter, FormattableString> _extraConstructorParameters = new();
         public IEnumerable<Parameter> ExtraConstructorParameters => _extraConstructorParameters.Keys;

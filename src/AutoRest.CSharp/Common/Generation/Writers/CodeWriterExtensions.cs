@@ -164,7 +164,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
 
             writer.Append($"{clientParameter.Type} {clientParameter.Name:D}");
-            if (clientParameter.DefaultValue != null)
+            if (clientParameter.DefaultValue != null && clientParameter.UseDefaultValueInCtorParam)
             {
                 var defaultValue = clientParameter.DefaultValue.Value;
                 if (defaultValue.IsNewInstanceSentinel || !TypeFactory.CanBeInitializedInline(clientParameter.Type, defaultValue))
@@ -185,13 +185,46 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.WriteConstant(clientParameter.DefaultValue.Value);
                 }
             }
-            else if (enforceDefaultValue)
+            else if (!clientParameter.IsRequired || enforceDefaultValue)
             {
                 // initialize with default
                 writer.Append($" = default");
             }
 
             writer.AppendRaw(",");
+        }
+
+        public static CodeWriter WriteParametersValidation(this CodeWriter writer, IReadOnlyCollection<Parameter> parameters)
+        {
+            foreach (Parameter parameter in parameters)
+            {
+                writer.WriteParameterValidation(parameter);
+            }
+
+            writer.Line();
+            return writer;
+        }
+
+        private static void WriteParameterValidation(this CodeWriter writer, Parameter parameter)
+        {
+            if (parameter.DefaultValue != null && parameter.Type.Equals(typeof(Uri)) && parameter.DefaultValue.Value.Type.Equals(typeof(string)))
+            {
+                writer
+                    .Append($"{parameter.Name:I} ??= new {typeof(Uri)}(")
+                    .WriteConstant(parameter.DefaultValue.Value)
+                    .LineRaw(");");
+            }
+            else if (parameter.DefaultValue != null && !TypeFactory.CanBeInitializedInline(parameter.Type, parameter.DefaultValue))
+            {
+                writer
+                    .Append($"{parameter.Name:I} ??= ")
+                    .WriteConstant(parameter.DefaultValue.Value)
+                    .LineRaw(";");
+            }
+            else if (CanWriteNullCheck(parameter))
+            {
+                writer.Line($"{typeof(Argument)}.{nameof(Argument.AssertNotNull)}({parameter.Name:I}, nameof({parameter.Name:I}));");
+            }
         }
 
         public static CodeWriter WriteParameterNullChecks(this CodeWriter writer, IReadOnlyCollection<Parameter> parameters)
@@ -224,7 +257,7 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             // Temporary check to minimize amount of changes in existing generated code
             var assignToSelf = parameter.Name == variableName;
-            if (parameter.DefaultValue != null && !TypeFactory.CanBeInitializedInline(parameter.Type, parameter.DefaultValue))
+            if (parameter.DefaultValue != null && (!parameter.UseDefaultValueInCtorParam || !TypeFactory.CanBeInitializedInline(parameter.Type, parameter.DefaultValue)))
             {
                 if (assignToSelf)
                 {
@@ -236,7 +269,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
 
                 var defaultValue = parameter.DefaultValue.Value;
-                if (defaultValue.IsNewInstanceSentinel || TypeFactory.IsExtendableEnum(parameter.Type) || parameter.DefaultValue.Value.Type.Equals(parameter.Type))
+                if (defaultValue.IsNewInstanceSentinel || TypeFactory.IsExtendableEnum(parameter.Type) || parameter.DefaultValue.Value.Type.Equals(parameter.Type) || parameter.Type.Equals(typeof(string)))
                 {
                     WriteConstant(writer, defaultValue);
                 }
@@ -292,31 +325,27 @@ namespace AutoRest.CSharp.Generation.Writers
             return false;
         }
 
-        public static void WriteConstant(this CodeWriter writer, Constant constant)
+        public static CodeWriter WriteConstant(this CodeWriter writer, Constant constant)
         {
             if (constant.Value == null)
             {
                 // Cast helps the overload resolution
-                writer.Append($"({constant.Type}){null:L}");
-                return;
+                return writer.Append($"({constant.Type}){null:L}");
             }
 
             if (constant.IsNewInstanceSentinel)
             {
-                writer.Append($"new {constant.Type}()");
-                return;
+                return writer.Append($"new {constant.Type}()");
             }
 
             if (!constant.Type.IsFrameworkType && constant.Value is EnumTypeValue enumTypeValue)
             {
-                writer.Append($"{constant.Type}.{enumTypeValue.Declaration.Name}");
-                return;
+                return writer.Append($"{constant.Type}.{enumTypeValue.Declaration.Name}");
             }
 
             if (!constant.Type.IsFrameworkType && constant.Value is string enumValue)
             {
-                writer.Append($"new {constant.Type}({enumValue:L})");
-                return;
+                return writer.Append($"new {constant.Type}({enumValue:L})");
             }
 
             Type frameworkType = constant.Type.FrameworkType;
@@ -341,6 +370,8 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 writer.Literal(constant.Value);
             }
+
+            return writer;
         }
 
         public static void WriteDeserializationForMethods(this CodeWriter writer, ObjectSerialization serialization, bool async,

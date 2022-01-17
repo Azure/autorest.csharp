@@ -39,8 +39,9 @@ namespace SingletonResource
         internal CarCollection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _carsRestClient = new CarsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
-            _restClient = new SingletonResourceRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            ClientOptions.TryGetApiVersion(Car.ResourceType, out string apiVersion);
+            _carsRestClient = new CarsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
+            _restClient = new SingletonResourceRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -62,7 +63,7 @@ namespace SingletonResource
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="carName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual CarPutOperation CreateOrUpdate(bool waitForCompletion, string carName, CarData parameters, CancellationToken cancellationToken = default)
+        public virtual CarCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string carName, CarData parameters, CancellationToken cancellationToken = default)
         {
             if (carName == null)
             {
@@ -78,7 +79,7 @@ namespace SingletonResource
             try
             {
                 var response = _carsRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, carName, parameters, cancellationToken);
-                var operation = new CarPutOperation(Parent, response);
+                var operation = new CarCreateOrUpdateOperation(Parent, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -98,7 +99,7 @@ namespace SingletonResource
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="carName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<CarPutOperation> CreateOrUpdateAsync(bool waitForCompletion, string carName, CarData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<CarCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string carName, CarData parameters, CancellationToken cancellationToken = default)
         {
             if (carName == null)
             {
@@ -114,7 +115,7 @@ namespace SingletonResource
             try
             {
                 var response = await _carsRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, carName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new CarPutOperation(Parent, response);
+                var operation = new CarCreateOrUpdateOperation(Parent, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;

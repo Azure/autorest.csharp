@@ -40,10 +40,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
         public TopLevelClientWithOperationClient(AzureKeyCredential credential, Uri endpoint = null, TopLevelClientWithOperationClientOptions options = null)
         {
-            if (credential == null)
-            {
-                throw new ArgumentNullException(nameof(credential));
-            }
+            Argument.AssertNotNull(credential, nameof(credential));
             endpoint ??= new Uri("http://localhost:3000");
             options ??= new TopLevelClientWithOperationClientOptions();
 
@@ -99,10 +96,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         public virtual AsyncPageable<BinaryData> GetAllAsync(string filter, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            if (filter == null)
-            {
-                throw new ArgumentNullException(nameof(filter));
-            }
+            Argument.AssertNotNull(filter, nameof(filter));
 
             return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "TopLevelClientWithOperationClient.GetAll");
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
@@ -127,10 +121,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         public virtual Pageable<BinaryData> GetAll(string filter, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            if (filter == null)
-            {
-                throw new ArgumentNullException(nameof(filter));
-            }
+            Argument.AssertNotNull(filter, nameof(filter));
 
             return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "TopLevelClientWithOperationClient.GetAll");
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
@@ -167,10 +158,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="clientParameter"/> is null. </exception>
         public virtual Client4 GetClient4(string clientParameter)
         {
-            if (clientParameter == null)
-            {
-                throw new ArgumentNullException(nameof(clientParameter));
-            }
+            Argument.AssertNotNull(clientParameter, nameof(clientParameter));
 
             return new Client4(_clientDiagnostics, _pipeline, _keyCredential, clientParameter, _endpoint);
         }
