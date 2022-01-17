@@ -15,9 +15,6 @@ head-as-boolean: false
 modelerfour:
   lenient-model-deduplication: true
 
-override-operation-name:
-  VirtualMachines_ListByLocation: GetVirtualMachinesByLocation
-
 mgmt-debug:
   show-request-path: true
 directive:
