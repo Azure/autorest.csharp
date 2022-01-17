@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License
 
+using System;
 using System.Collections.Concurrent;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -20,6 +21,10 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         public const string Tenant = "tenant";
         public const string ManagementGroups = "managementGroups";
         public const string Any = "*";
+        private const string _managementGroupScopePrefix = "/providers/Microsoft.Management/managementGroups";
+        private const string _resourceGroupScopePrefix = "/subscriptions/{subscriptionId}/resourceGroups";
+        private const string _subscriptionScopePrefix = "/subscriptions";
+        private const string _tenantScopePrefix = "/tenants";
 
         private static ConcurrentDictionary<RequestPath, RequestPath> _scopePathCache = new ConcurrentDictionary<RequestPath, RequestPath>();
         private static ConcurrentDictionary<RequestPath, ResourceTypeSegment[]?> _scopeTypesCache = new ConcurrentDictionary<RequestPath, ResourceTypeSegment[]?>();
@@ -58,10 +63,19 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         {
             var indexOfProvider = requestPath.ToList().LastIndexOf(Segment.Providers);
             // if there is no providers segment, myself should be a scope request path. Just return myself
-            if (indexOfProvider < 0)
-                return requestPath;
-
-            return new RequestPath(requestPath.Take(indexOfProvider));
+            if (indexOfProvider >= 0)
+            {
+                if (indexOfProvider == 0 && requestPath.SerializedPath.StartsWith(_managementGroupScopePrefix, StringComparison.InvariantCultureIgnoreCase))
+                    return RequestPath.ManagementGroup;
+                return new RequestPath(requestPath.Take(indexOfProvider));
+            }
+            if (requestPath.SerializedPath.StartsWith(_resourceGroupScopePrefix, StringComparison.InvariantCultureIgnoreCase))
+                return RequestPath.ResourceGroup;
+            if (requestPath.SerializedPath.StartsWith(_subscriptionScopePrefix, StringComparison.InvariantCultureIgnoreCase))
+                return RequestPath.Subscription;
+            if (requestPath.SerializedPath.Equals(_tenantScopePrefix))
+                return RequestPath.Tenant;
+            return requestPath;
         }
 
         public static ResourceTypeSegment[]? GetParameterizedScopeResourceTypes(this RequestPath requestPath, MgmtConfiguration config)

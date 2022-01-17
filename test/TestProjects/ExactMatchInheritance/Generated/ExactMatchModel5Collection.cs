@@ -56,9 +56,9 @@ namespace ExactMatchInheritance
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel5s/{exactMatchModel5sName}
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
         /// OperationId: ExactMatchModel5s_Put
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="exactMatchModel5SName"> The String to use. </param>
         /// <param name="parameters"> The ExactMatchModel5 to use. </param>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel5SName"/> or <paramref name="parameters"/> is null. </exception>
         public virtual ExactMatchModel5CreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string exactMatchModel5SName, ExactMatchModel5Data parameters, CancellationToken cancellationToken = default)
@@ -77,7 +77,7 @@ namespace ExactMatchInheritance
             try
             {
                 var response = _exactMatchModel5sRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, exactMatchModel5SName, parameters, cancellationToken);
-                var operation = new ExactMatchModel5CreateOrUpdateOperation(Parent, response);
+                var operation = new ExactMatchModel5CreateOrUpdateOperation(this, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -92,9 +92,9 @@ namespace ExactMatchInheritance
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel5s/{exactMatchModel5sName}
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
         /// OperationId: ExactMatchModel5s_Put
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="exactMatchModel5SName"> The String to use. </param>
         /// <param name="parameters"> The ExactMatchModel5 to use. </param>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel5SName"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<ExactMatchModel5CreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string exactMatchModel5SName, ExactMatchModel5Data parameters, CancellationToken cancellationToken = default)
@@ -113,7 +113,7 @@ namespace ExactMatchInheritance
             try
             {
                 var response = await _exactMatchModel5sRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, exactMatchModel5SName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new ExactMatchModel5CreateOrUpdateOperation(Parent, response);
+                var operation = new ExactMatchModel5CreateOrUpdateOperation(this, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -145,7 +145,7 @@ namespace ExactMatchInheritance
                 var response = _exactMatchModel5sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, exactMatchModel5SName, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new ExactMatchModel5(Parent, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ExactMatchModel5(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -174,7 +174,7 @@ namespace ExactMatchInheritance
                 var response = await _exactMatchModel5sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, exactMatchModel5SName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new ExactMatchModel5(Parent, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ExactMatchModel5(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -301,7 +301,7 @@ namespace ExactMatchInheritance
                 try
                 {
                     var response = _exactMatchModel5sRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new ExactMatchModel5(Parent, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new ExactMatchModel5(this, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -326,7 +326,7 @@ namespace ExactMatchInheritance
                 try
                 {
                     var response = await _exactMatchModel5sRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new ExactMatchModel5(Parent, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new ExactMatchModel5(this, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {

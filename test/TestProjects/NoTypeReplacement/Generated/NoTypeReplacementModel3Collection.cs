@@ -53,9 +53,9 @@ namespace NoTypeReplacement
 
         // Collection level operations.
 
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="noTypeReplacementModel3SName"> The String to use. </param>
         /// <param name="parameters"> The NoTypeReplacementModel3 to use. </param>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="noTypeReplacementModel3SName"/> or <paramref name="parameters"/> is null. </exception>
         public virtual NoTypeReplacementModel3CreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string noTypeReplacementModel3SName, NoTypeReplacementModel3Data parameters, CancellationToken cancellationToken = default)
@@ -74,7 +74,7 @@ namespace NoTypeReplacement
             try
             {
                 var response = _noTypeReplacementModel3sRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, noTypeReplacementModel3SName, parameters, cancellationToken);
-                var operation = new NoTypeReplacementModel3CreateOrUpdateOperation(Parent, response);
+                var operation = new NoTypeReplacementModel3CreateOrUpdateOperation(this, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -86,9 +86,9 @@ namespace NoTypeReplacement
             }
         }
 
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="noTypeReplacementModel3SName"> The String to use. </param>
         /// <param name="parameters"> The NoTypeReplacementModel3 to use. </param>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="noTypeReplacementModel3SName"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<NoTypeReplacementModel3CreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string noTypeReplacementModel3SName, NoTypeReplacementModel3Data parameters, CancellationToken cancellationToken = default)
@@ -107,7 +107,7 @@ namespace NoTypeReplacement
             try
             {
                 var response = await _noTypeReplacementModel3sRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, noTypeReplacementModel3SName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new NoTypeReplacementModel3CreateOrUpdateOperation(Parent, response);
+                var operation = new NoTypeReplacementModel3CreateOrUpdateOperation(this, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -136,7 +136,7 @@ namespace NoTypeReplacement
                 var response = _noTypeReplacementModel3sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, noTypeReplacementModel3SName, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new NoTypeReplacementModel3(Parent, response.Value), response.GetRawResponse());
+                return Response.FromValue(new NoTypeReplacementModel3(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -162,7 +162,7 @@ namespace NoTypeReplacement
                 var response = await _noTypeReplacementModel3sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, noTypeReplacementModel3SName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new NoTypeReplacementModel3(Parent, response.Value), response.GetRawResponse());
+                return Response.FromValue(new NoTypeReplacementModel3(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -286,7 +286,7 @@ namespace NoTypeReplacement
                 try
                 {
                     var response = _noTypeReplacementModel3sRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new NoTypeReplacementModel3(Parent, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new NoTypeReplacementModel3(this, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -308,7 +308,7 @@ namespace NoTypeReplacement
                 try
                 {
                     var response = await _noTypeReplacementModel3sRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new NoTypeReplacementModel3(Parent, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new NoTypeReplacementModel3(this, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {

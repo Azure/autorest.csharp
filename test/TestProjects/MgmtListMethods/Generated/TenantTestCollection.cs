@@ -56,9 +56,9 @@ namespace MgmtListMethods
         /// ContextualPath: /
         /// OperationId: TenantTests_Create
         /// <summary> Updates the properties of a billing account. Currently, displayName and address can be updated. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement. </summary>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="tenantTestName"> The ID that uniquely identifies a billing account. </param>
         /// <param name="parameters"> Request parameters that are provided to the update billing account operation. </param>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantTestName"/> or <paramref name="parameters"/> is null. </exception>
         public virtual TenantTestCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string tenantTestName, TenantTestData parameters, CancellationToken cancellationToken = default)
@@ -77,7 +77,7 @@ namespace MgmtListMethods
             try
             {
                 var response = _tenantTestsRestClient.Create(tenantTestName, parameters, cancellationToken);
-                var operation = new TenantTestCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _tenantTestsRestClient.CreateCreateRequest(tenantTestName, parameters).Request, response);
+                var operation = new TenantTestCreateOrUpdateOperation(this, _clientDiagnostics, Pipeline, _tenantTestsRestClient.CreateCreateRequest(tenantTestName, parameters).Request, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -93,9 +93,9 @@ namespace MgmtListMethods
         /// ContextualPath: /
         /// OperationId: TenantTests_Create
         /// <summary> Updates the properties of a billing account. Currently, displayName and address can be updated. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement. </summary>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="tenantTestName"> The ID that uniquely identifies a billing account. </param>
         /// <param name="parameters"> Request parameters that are provided to the update billing account operation. </param>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantTestName"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<TenantTestCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string tenantTestName, TenantTestData parameters, CancellationToken cancellationToken = default)
@@ -114,7 +114,7 @@ namespace MgmtListMethods
             try
             {
                 var response = await _tenantTestsRestClient.CreateAsync(tenantTestName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new TenantTestCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _tenantTestsRestClient.CreateCreateRequest(tenantTestName, parameters).Request, response);
+                var operation = new TenantTestCreateOrUpdateOperation(this, _clientDiagnostics, Pipeline, _tenantTestsRestClient.CreateCreateRequest(tenantTestName, parameters).Request, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -148,7 +148,7 @@ namespace MgmtListMethods
                 var response = _tenantTestsRestClient.Get(tenantTestName, expand, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new TenantTest(Parent, response.Value), response.GetRawResponse());
+                return Response.FromValue(new TenantTest(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -179,7 +179,7 @@ namespace MgmtListMethods
                 var response = await _tenantTestsRestClient.GetAsync(tenantTestName, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new TenantTest(Parent, response.Value), response.GetRawResponse());
+                return Response.FromValue(new TenantTest(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -312,7 +312,7 @@ namespace MgmtListMethods
                 try
                 {
                     var response = _tenantTestsRestClient.List(optionalParam, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new TenantTest(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new TenantTest(this, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -327,7 +327,7 @@ namespace MgmtListMethods
                 try
                 {
                     var response = _tenantTestsRestClient.ListNextPage(nextLink, optionalParam, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new TenantTest(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new TenantTest(this, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -354,7 +354,7 @@ namespace MgmtListMethods
                 try
                 {
                     var response = await _tenantTestsRestClient.ListAsync(optionalParam, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new TenantTest(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new TenantTest(this, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -369,7 +369,7 @@ namespace MgmtListMethods
                 try
                 {
                     var response = await _tenantTestsRestClient.ListNextPageAsync(nextLink, optionalParam, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new TenantTest(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new TenantTest(this, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {

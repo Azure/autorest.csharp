@@ -57,9 +57,9 @@ namespace ExactMatchFlattenInheritance
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
         /// OperationId: CustomModel2s_Put
         /// <summary> Create or update an CustomModel2. </summary>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="name"> The String to use. </param>
         /// <param name="foo"> The CustomModel2Foo to use. </param>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public virtual CustomModel2CreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string name, string foo = null, CancellationToken cancellationToken = default)
@@ -74,7 +74,7 @@ namespace ExactMatchFlattenInheritance
             try
             {
                 var response = _customModel2sRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, name, foo, cancellationToken);
-                var operation = new CustomModel2CreateOrUpdateOperation(Parent, response);
+                var operation = new CustomModel2CreateOrUpdateOperation(this, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -90,9 +90,9 @@ namespace ExactMatchFlattenInheritance
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
         /// OperationId: CustomModel2s_Put
         /// <summary> Create or update an CustomModel2. </summary>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="name"> The String to use. </param>
         /// <param name="foo"> The CustomModel2Foo to use. </param>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public async virtual Task<CustomModel2CreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string name, string foo = null, CancellationToken cancellationToken = default)
@@ -107,7 +107,7 @@ namespace ExactMatchFlattenInheritance
             try
             {
                 var response = await _customModel2sRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, name, foo, cancellationToken).ConfigureAwait(false);
-                var operation = new CustomModel2CreateOrUpdateOperation(Parent, response);
+                var operation = new CustomModel2CreateOrUpdateOperation(this, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -140,7 +140,7 @@ namespace ExactMatchFlattenInheritance
                 var response = _customModel2sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new CustomModel2(Parent, response.Value), response.GetRawResponse());
+                return Response.FromValue(new CustomModel2(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -170,7 +170,7 @@ namespace ExactMatchFlattenInheritance
                 var response = await _customModel2sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new CustomModel2(Parent, response.Value), response.GetRawResponse());
+                return Response.FromValue(new CustomModel2(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -298,7 +298,7 @@ namespace ExactMatchFlattenInheritance
                 try
                 {
                     var response = _customModel2sRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new CustomModel2(Parent, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new CustomModel2(this, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -324,7 +324,7 @@ namespace ExactMatchFlattenInheritance
                 try
                 {
                     var response = await _customModel2sRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new CustomModel2(Parent, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new CustomModel2(this, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {

@@ -41,7 +41,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected override Type BaseClass => typeof(ArmCollection);
 
-        protected override string ContextProperty => "Parent";
+        protected override string ContextProperty => "this";
 
         protected override MgmtTypeProvider This => _resourceCollection;
 
@@ -349,12 +349,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     _writer.Line($"filters.SubstringFilter = nameFilter;");
                     if (resourceType == ResourceTypeSegment.ResourceGroup)
                     {
-                        _writer.Line($"return {typeof(ResourceListOperations)}.{CreateMethodName("GetAtContext", async)}({ContextProperty} as {typeof(ResourceGroup)}, filters, expand, top, cancellationToken);");
+                        _writer.Line($"return {typeof(ResourceListOperations)}.{CreateMethodName("GetAtContext", async)}(Parent as {typeof(ResourceGroup)}, filters, expand, top, cancellationToken);");
                     }
                     else
                     {
                         // this must be ResourceType.Subscription
-                        _writer.Line($"return {typeof(ResourceListOperations)}.{CreateMethodName("GetAtContext", async)}({ContextProperty} as {typeof(Subscription)}, filters, expand, top, cancellationToken);");
+                        _writer.Line($"return {typeof(ResourceListOperations)}.{CreateMethodName("GetAtContext", async)}(Parent as {typeof(Subscription)}, filters, expand, top, cancellationToken);");
                     }
                 }
             }

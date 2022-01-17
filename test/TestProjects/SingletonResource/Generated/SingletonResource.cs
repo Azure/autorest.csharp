@@ -196,8 +196,8 @@ namespace SingletonResource
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}/singletonResources/{resourceName}
         /// OperationId: SingletonResources_CreateOrUpdate
         /// <summary> Singleton non-resource test example with a single-value enum name parameter. </summary>
-        /// <param name="parameters"> The SingletonResource to use. </param>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="parameters"> The SingletonResource to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public async virtual Task<SingletonResourceCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, SingletonResourceData parameters, CancellationToken cancellationToken = default)
@@ -228,8 +228,8 @@ namespace SingletonResource
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}/singletonResources/{resourceName}
         /// OperationId: SingletonResources_CreateOrUpdate
         /// <summary> Singleton non-resource test example with a single-value enum name parameter. </summary>
-        /// <param name="parameters"> The SingletonResource to use. </param>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="parameters"> The SingletonResource to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public virtual SingletonResourceCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, SingletonResourceData parameters, CancellationToken cancellationToken = default)

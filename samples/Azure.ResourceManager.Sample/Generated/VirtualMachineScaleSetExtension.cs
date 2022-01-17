@@ -243,8 +243,8 @@ namespace Azure.ResourceManager.Sample
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/extensions/{vmssExtensionName}
         /// OperationId: VirtualMachineScaleSetExtensions_Update
         /// <summary> The operation to update an extension. </summary>
-        /// <param name="extensionParameters"> Parameters supplied to the Update VM scale set Extension operation. </param>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="extensionParameters"> Parameters supplied to the Update VM scale set Extension operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="extensionParameters"/> is null. </exception>
         public async virtual Task<VirtualMachineScaleSetExtensionUpdateOperation> UpdateAsync(bool waitForCompletion, VirtualMachineScaleSetExtensionUpdate extensionParameters, CancellationToken cancellationToken = default)
@@ -275,8 +275,8 @@ namespace Azure.ResourceManager.Sample
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/extensions/{vmssExtensionName}
         /// OperationId: VirtualMachineScaleSetExtensions_Update
         /// <summary> The operation to update an extension. </summary>
-        /// <param name="extensionParameters"> Parameters supplied to the Update VM scale set Extension operation. </param>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="extensionParameters"> Parameters supplied to the Update VM scale set Extension operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="extensionParameters"/> is null. </exception>
         public virtual VirtualMachineScaleSetExtensionUpdateOperation Update(bool waitForCompletion, VirtualMachineScaleSetExtensionUpdate extensionParameters, CancellationToken cancellationToken = default)

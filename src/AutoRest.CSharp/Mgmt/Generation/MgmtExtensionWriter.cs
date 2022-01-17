@@ -29,9 +29,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
     internal abstract class MgmtExtensionWriter : MgmtClientBaseWriter
     {
         protected MgmtExtensions _extensions;
-        public MgmtExtensionWriter(CodeWriter writer, MgmtExtensions extensions, BuildContext<MgmtOutputLibrary> context) : base(writer, extensions, context)
+
+        protected bool IsArmCore;
+        public MgmtExtensionWriter(CodeWriter writer, MgmtExtensions extensions, BuildContext<MgmtOutputLibrary> context, bool isArmCore = false) : base(writer, extensions, context)
         {
             _extensions = extensions;
+            IsArmCore = isArmCore;
         }
 
         protected abstract string Description { get; }
@@ -75,11 +78,15 @@ namespace AutoRest.CSharp.Mgmt.Generation
             if (collection == null)
                 throw new InvalidOperationException($"We are about to write a {resource.Type.Name} resource entry, but it does not have a collection, this cannot happen");
             _writer.WriteXmlDocumentationSummary($"Gets an object representing a {collection.Type.Name} along with the instance operations that can be performed on it.");
-            _writer.WriteXmlDocumentationParameter($"{ExtensionOperationVariableName}", $"The <see cref=\"{ExtensionOperationVariableType}\" /> instance the method will execute against.");
+            if (!IsArmCore)
+            {
+                _writer.WriteXmlDocumentationParameter($"{ExtensionOperationVariableName}", $"The <see cref=\"{ExtensionOperationVariableType}\" /> instance the method will execute against.");
+            }
             _writer.WriteXmlDocumentationParameters(collection.ExtraConstructorParameters);
             _writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{collection.Type}\" /> object.");
-
-            _writer.Append($"public static {collection.Type.Name} Get{resource.Type.Name.ResourceNameToPlural()}(this {ExtensionOperationVariableType} {ExtensionOperationVariableName}, ");
+            var modifier = IsArmCore ? "virtual" : "static";
+            var instanceParameter = IsArmCore ? string.Empty : $"this {ExtensionOperationVariableType} {ExtensionOperationVariableName}, ";
+            _writer.Append($"public {modifier} {collection.Type.Name} Get{resource.Type.Name.ResourceNameToPlural()}({instanceParameter}");
             foreach (var parameter in collection.ExtraConstructorParameters)
             {
                 _writer.WriteParameter(parameter);
@@ -101,9 +108,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected override void WriteSingletonResourceEntry(Resource resource, string singletonResourceSuffix)
         {
             _writer.WriteXmlDocumentationSummary($"Gets an object representing a {resource.Type.Name} along with the instance operations that can be performed on it.");
-            _writer.WriteXmlDocumentationParameter($"{ExtensionOperationVariableName}", $"The <see cref=\"{ExtensionOperationVariableType}\" /> instance the method will execute against.");
+            if (!IsArmCore)
+            {
+                _writer.WriteXmlDocumentationParameter($"{ExtensionOperationVariableName}", $"The <see cref=\"{ExtensionOperationVariableType}\" /> instance the method will execute against.");
+            }
             _writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{resource.Type.Name}\" /> object.");
-            using (_writer.Scope($"public static {resource.Type.Name} Get{resource.Type.Name}(this {ExtensionOperationVariableType} {ExtensionOperationVariableName})"))
+            var modifier = IsArmCore ? "virtual" : "static";
+            var instanceParameter = IsArmCore ? string.Empty : $"this {ExtensionOperationVariableType} {ExtensionOperationVariableName}";
+            using (_writer.Scope($"public {modifier} {resource.Type.Name} Get{resource.Type.Name}({instanceParameter})"))
             {
                 _writer.Line($"return new {resource.Type.Name}({ExtensionOperationVariableName}, new {typeof(Azure.Core.ResourceIdentifier)}({ExtensionOperationVariableName}.Id + \"/{singletonResourceSuffix}\"));");
             }
@@ -225,11 +237,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
             string accessibility = "public", bool isVirtual = true)
         {
             _writer.WriteXmlDocumentationParameter($"{ExtensionOperationVariableName}", $"The <see cref=\"{ExtensionOperationVariableType}\" /> instance the method will execute against.");
+            _writer.WriteXmlDocumentationParameter("waitForCompletion", $"Waits for the completion of the long running operations.");
             foreach (var parameter in methodParameters)
             {
                 _writer.WriteXmlDocumentationParameter(parameter);
             }
-            _writer.WriteXmlDocumentationParameter("waitForCompletion", $"Waits for the completion of the long running operations.");
             _writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
             _writer.WriteXmlDocumentationRequiredParametersException(methodParameters);
             _writer.Append($"{accessibility} static {GetAsyncKeyword(async)} {returnType.WrapAsync(async)} {CreateMethodName(methodName, async)}(this {ExtensionOperationVariableType} {ExtensionOperationVariableName}, ");

@@ -133,7 +133,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 AddResponseSchemas(operation, setToProcess);
                 AddRequestSchemas(operation, setToProcess);
             }
-            AddDependantSchemasRecursively(setToProcess);
         }
 
         private static void AddResponseSchemas(Operation operation, HashSet<Schema> setToProcess)
