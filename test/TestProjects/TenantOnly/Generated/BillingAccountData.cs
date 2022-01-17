@@ -6,9 +6,8 @@
 #nullable disable
 
 using System.Collections.Generic;
-using Azure.ResourceManager;
+using Azure.Core;
 using Azure.ResourceManager.Models;
-using Azure.ResourceManager.Resources.Models;
 
 namespace TenantOnly
 {
@@ -17,7 +16,7 @@ namespace TenantOnly
     {
         /// <summary> Initializes a new instance of BillingAccountData. </summary>
         /// <param name="location"> The location. </param>
-        public BillingAccountData(Location location) : base(location)
+        public BillingAccountData(AzureLocation location) : base(location)
         {
         }
 
@@ -28,7 +27,7 @@ namespace TenantOnly
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
         /// <param name="bar"></param>
-        internal BillingAccountData(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, Location location, string bar) : base(id, name, type, tags, location)
+        internal BillingAccountData(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, AzureLocation location, string bar) : base(id, name, type, tags, location)
         {
             Bar = bar;
         }

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using Azure.Core;
 using Azure.ResourceManager;
 
 namespace MgmtOperations
@@ -19,6 +20,7 @@ namespace MgmtOperations
         /// <returns> Returns a <see cref="AvailabilitySet" /> object. </returns>
         public static AvailabilitySet GetAvailabilitySet(this ArmClient armClient, ResourceIdentifier id)
         {
+            AvailabilitySet.ValidateResourceId(id);
             return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new AvailabilitySet(clientOptions, credential, uri, pipeline, id));
         }
         #endregion
@@ -30,6 +32,7 @@ namespace MgmtOperations
         /// <returns> Returns a <see cref="AvailabilitySetChild" /> object. </returns>
         public static AvailabilitySetChild GetAvailabilitySetChild(this ArmClient armClient, ResourceIdentifier id)
         {
+            AvailabilitySetChild.ValidateResourceId(id);
             return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new AvailabilitySetChild(clientOptions, credential, uri, pipeline, id));
         }
         #endregion
@@ -41,6 +44,7 @@ namespace MgmtOperations
         /// <returns> Returns a <see cref="AvailabilitySetGrandChild" /> object. </returns>
         public static AvailabilitySetGrandChild GetAvailabilitySetGrandChild(this ArmClient armClient, ResourceIdentifier id)
         {
+            AvailabilitySetGrandChild.ValidateResourceId(id);
             return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new AvailabilitySetGrandChild(clientOptions, credential, uri, pipeline, id));
         }
         #endregion

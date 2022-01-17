@@ -41,6 +41,19 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return string.Join("", replacedWords);
         }
 
+        /// <summary>
+        /// Search the configuration for an overridden of this operation's name
+        /// </summary>
+        /// <param name="operation"></param>
+        /// <param name="context"></param>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public static bool TryGetConfigOperationName(this Operation operation, BuildContext<MgmtOutputLibrary> context, [MaybeNullWhen(false)] out string name)
+        {
+            var operationId = operation.OperationId(context.Library.GetRestClient(operation).OperationGroup);
+            return context.Configuration.MgmtConfiguration.OverrideOperationName.TryGetValue(operationId, out name);
+        }
+
         public static string OperationId(this Operation operation, OperationGroup operationGroup)
         {
             if (_operationIdCache.TryGetValue(operation, out var result))
@@ -59,7 +72,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             if (_operationToRequestPathCache.TryGetValue(operation, out var requestPath))
                 return requestPath;
 
-            requestPath = new RequestPath(context.Library.RestClientMethods[operation]);
+            requestPath = new RequestPath(context.Library.GetRestClientMethod(operation));
             _operationToRequestPathCache.TryAdd(operation, requestPath);
             return requestPath;
         }
@@ -68,7 +81,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         {
             operationSetOfResource = null;
             // first we need to ensure this operation at least returns a collection of something
-            var restClientMethod = context.Library.RestClientMethods[operation];
+            var restClientMethod = context.Library.GetRestClientMethod(operation);
             if (!restClientMethod.IsListMethod(out var valueType))
                 return false;
 
@@ -86,15 +99,15 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return valueType.EqualsByName(resourceData.Type);
         }
 
-        private static ISet<ResourceType> GetScopeResourceTypes(RequestPath requestPath, MgmtConfiguration config)
+        private static ISet<ResourceTypeSegment> GetScopeResourceTypes(RequestPath requestPath, MgmtConfiguration config)
         {
             var scope = requestPath.GetScopePath();
             if (scope.IsParameterizedScope())
             {
-                return new HashSet<ResourceType>(requestPath.GetParameterizedScopeResourceTypes(config)!);
+                return new HashSet<ResourceTypeSegment>(requestPath.GetParameterizedScopeResourceTypes(config)!);
             }
 
-            return new HashSet<ResourceType> { scope.GetResourceType(config) };
+            return new HashSet<ResourceTypeSegment> { scope.GetResourceType(config) };
         }
 
         private static bool IsScopeCompatible(RequestPath requestPath, RequestPath resourcePath, MgmtConfiguration config)
@@ -102,7 +115,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             // get scope types
             var requestScopeTypes = GetScopeResourceTypes(requestPath, config);
             var resourceScopeTypes = GetScopeResourceTypes(resourcePath, config);
-            if (resourceScopeTypes.Contains(ResourceType.Any))
+            if (resourceScopeTypes.Contains(ResourceTypeSegment.Any))
                 return true;
             return requestScopeTypes.IsSubsetOf(resourceScopeTypes);
         }

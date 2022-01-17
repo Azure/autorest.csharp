@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -41,101 +40,113 @@ namespace SupersetFlattenInheritance
         }
         #endregion
 
-        private static CustomModel1SRestOperations GetCustomModel1SRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, Uri endpoint = null)
+        private static CustomModel1SRestOperations GetCustomModel1SRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = default)
         {
-            return new CustomModel1SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint);
+            return new CustomModel1SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);
         }
 
-        private static CustomModel2SRestOperations GetCustomModel2SRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, Uri endpoint = null)
+        private static CustomModel2SRestOperations GetCustomModel2SRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = default)
         {
-            return new CustomModel2SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint);
+            return new CustomModel2SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);
         }
 
-        private static SubResourceModel1SRestOperations GetSubResourceModel1SRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, Uri endpoint = null)
+        private static SubResourceModel1SRestOperations GetSubResourceModel1SRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = default)
         {
-            return new SubResourceModel1SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint);
+            return new SubResourceModel1SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);
         }
 
-        private static SubResourceModel2SRestOperations GetSubResourceModel2SRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, Uri endpoint = null)
+        private static SubResourceModel2SRestOperations GetSubResourceModel2SRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = default)
         {
-            return new SubResourceModel2SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint);
+            return new SubResourceModel2SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);
         }
 
-        private static WritableSubResourceModel1SRestOperations GetWritableSubResourceModel1SRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, Uri endpoint = null)
+        private static WritableSubResourceModel1SRestOperations GetWritableSubResourceModel1SRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = default)
         {
-            return new WritableSubResourceModel1SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint);
+            return new WritableSubResourceModel1SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);
         }
 
-        private static WritableSubResourceModel2SRestOperations GetWritableSubResourceModel2SRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, Uri endpoint = null)
+        private static WritableSubResourceModel2SRestOperations GetWritableSubResourceModel2SRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = default)
         {
-            return new WritableSubResourceModel2SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint);
+            return new WritableSubResourceModel2SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);
         }
 
-        private static ResourceModel2SRestOperations GetResourceModel2SRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, Uri endpoint = null)
+        private static ResourceModel2SRestOperations GetResourceModel2SRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = default)
         {
-            return new ResourceModel2SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint);
+            return new ResourceModel2SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);
         }
 
-        private static TrackedResourceModel2SRestOperations GetTrackedResourceModel2SRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, Uri endpoint = null)
+        private static TrackedResourceModel2SRestOperations GetTrackedResourceModel2SRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = default)
         {
-            return new TrackedResourceModel2SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint);
+            return new TrackedResourceModel2SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);
         }
 
-        private static NonResourceModel1SRestOperations GetNonResourceModel1SRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, Uri endpoint = null)
+        private static NonResourceModel1SRestOperations GetNonResourceModel1SRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = default)
         {
-            return new NonResourceModel1SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint);
-        }
-
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel1s
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: CustomModel1s_List
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public static async Task<Response<IReadOnlyList<CustomModel1>>> GetCustomModel1sAsync(this ResourceGroup resourceGroup, CancellationToken cancellationToken = default)
-        {
-            return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetCustomModel1s");
-                scope.Start();
-                try
-                {
-                    var restOperations = GetCustomModel1SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
-                    var response = await restOperations.ListAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
-                    return Response.FromValue(response.Value.Value, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            ).ConfigureAwait(false);
+            return new NonResourceModel1SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel1s
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
         /// OperationId: CustomModel1s_List
+        /// <summary> Lists the CustomModel1s for this <see cref="ResourceGroup" />. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public static Response<IReadOnlyList<CustomModel1>> GetCustomModel1s(this ResourceGroup resourceGroup, CancellationToken cancellationToken = default)
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        public static AsyncPageable<CustomModel1> GetCustomModel1sAsync(this ResourceGroup resourceGroup, CancellationToken cancellationToken = default)
         {
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetCustomModel1s");
-                scope.Start();
-                try
+                CustomModel1SRestOperations restOperations = GetCustomModel1SRestOperations(clientDiagnostics, pipeline, options, baseUri);
+                async Task<Page<CustomModel1>> FirstPageFunc(int? pageSizeHint)
                 {
-                    var restOperations = GetCustomModel1SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
-                    var response = restOperations.List(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, cancellationToken);
-                    return Response.FromValue(response.Value.Value, response.GetRawResponse());
+                    using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetCustomModel1s");
+                    scope.Start();
+                    try
+                    {
+                        var response = await restOperations.ListAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
                 }
-                catch (Exception e)
+                return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
+            }
+            );
+        }
+
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel1s
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
+        /// OperationId: CustomModel1s_List
+        /// <summary> Lists the CustomModel1s for this <see cref="ResourceGroup" />. </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        public static Pageable<CustomModel1> GetCustomModel1s(this ResourceGroup resourceGroup, CancellationToken cancellationToken = default)
+        {
+            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                CustomModel1SRestOperations restOperations = GetCustomModel1SRestOperations(clientDiagnostics, pipeline, options, baseUri);
+                Page<CustomModel1> FirstPageFunc(int? pageSizeHint)
                 {
-                    scope.Failed(e);
-                    throw;
+                    using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetCustomModel1s");
+                    scope.Start();
+                    try
+                    {
+                        var response = restOperations.List(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, cancellationToken: cancellationToken);
+                        return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
                 }
+                return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
             }
             );
         }
@@ -166,7 +177,7 @@ namespace SupersetFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetCustomModel1SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    CustomModel1SRestOperations restOperations = GetCustomModel1SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = await restOperations.PutAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, customModel1SName, parameters, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
@@ -205,7 +216,7 @@ namespace SupersetFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetCustomModel1SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    CustomModel1SRestOperations restOperations = GetCustomModel1SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = restOperations.Put(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, customModel1SName, parameters, cancellationToken);
                     return response;
                 }
@@ -239,7 +250,7 @@ namespace SupersetFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetCustomModel1SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    CustomModel1SRestOperations restOperations = GetCustomModel1SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = await restOperations.GetAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, customModel1SName, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
@@ -273,7 +284,7 @@ namespace SupersetFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetCustomModel1SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    CustomModel1SRestOperations restOperations = GetCustomModel1SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = restOperations.Get(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, customModel1SName, cancellationToken);
                     return response;
                 }
@@ -289,53 +300,65 @@ namespace SupersetFlattenInheritance
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel2s
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
         /// OperationId: CustomModel2s_List
+        /// <summary> Lists the CustomModel2s for this <see cref="ResourceGroup" />. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public static async Task<Response<IReadOnlyList<CustomModel2>>> GetCustomModel2sAsync(this ResourceGroup resourceGroup, CancellationToken cancellationToken = default)
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        public static AsyncPageable<CustomModel2> GetCustomModel2sAsync(this ResourceGroup resourceGroup, CancellationToken cancellationToken = default)
         {
-            return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
+            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetCustomModel2s");
-                scope.Start();
-                try
+                CustomModel2SRestOperations restOperations = GetCustomModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
+                async Task<Page<CustomModel2>> FirstPageFunc(int? pageSizeHint)
                 {
-                    var restOperations = GetCustomModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
-                    var response = await restOperations.ListAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
-                    return Response.FromValue(response.Value.Value, response.GetRawResponse());
+                    using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetCustomModel2s");
+                    scope.Start();
+                    try
+                    {
+                        var response = await restOperations.ListAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
                 }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
             }
-            ).ConfigureAwait(false);
+            );
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel2s
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
         /// OperationId: CustomModel2s_List
+        /// <summary> Lists the CustomModel2s for this <see cref="ResourceGroup" />. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public static Response<IReadOnlyList<CustomModel2>> GetCustomModel2s(this ResourceGroup resourceGroup, CancellationToken cancellationToken = default)
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        public static Pageable<CustomModel2> GetCustomModel2s(this ResourceGroup resourceGroup, CancellationToken cancellationToken = default)
         {
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetCustomModel2s");
-                scope.Start();
-                try
+                CustomModel2SRestOperations restOperations = GetCustomModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
+                Page<CustomModel2> FirstPageFunc(int? pageSizeHint)
                 {
-                    var restOperations = GetCustomModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
-                    var response = restOperations.List(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, cancellationToken);
-                    return Response.FromValue(response.Value.Value, response.GetRawResponse());
+                    using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetCustomModel2s");
+                    scope.Start();
+                    try
+                    {
+                        var response = restOperations.List(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, cancellationToken: cancellationToken);
+                        return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
                 }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
             }
             );
         }
@@ -366,7 +389,7 @@ namespace SupersetFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetCustomModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    CustomModel2SRestOperations restOperations = GetCustomModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = await restOperations.PutAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, customModel2SName, parameters, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
@@ -405,7 +428,7 @@ namespace SupersetFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetCustomModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    CustomModel2SRestOperations restOperations = GetCustomModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = restOperations.Put(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, customModel2SName, parameters, cancellationToken);
                     return response;
                 }
@@ -439,7 +462,7 @@ namespace SupersetFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetCustomModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    CustomModel2SRestOperations restOperations = GetCustomModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = await restOperations.GetAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, customModel2SName, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
@@ -473,7 +496,7 @@ namespace SupersetFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetCustomModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    CustomModel2SRestOperations restOperations = GetCustomModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = restOperations.Get(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, customModel2SName, cancellationToken);
                     return response;
                 }
@@ -489,53 +512,65 @@ namespace SupersetFlattenInheritance
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/subResourceModel1s
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
         /// OperationId: SubResourceModel1s_List
+        /// <summary> Lists the SubResourceModel1s for this <see cref="ResourceGroup" />. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public static async Task<Response<IReadOnlyList<SubResourceModel1>>> GetSubResourceModel1sAsync(this ResourceGroup resourceGroup, CancellationToken cancellationToken = default)
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        public static AsyncPageable<SubResourceModel1> GetSubResourceModel1sAsync(this ResourceGroup resourceGroup, CancellationToken cancellationToken = default)
         {
-            return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
+            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetSubResourceModel1s");
-                scope.Start();
-                try
+                SubResourceModel1SRestOperations restOperations = GetSubResourceModel1SRestOperations(clientDiagnostics, pipeline, options, baseUri);
+                async Task<Page<SubResourceModel1>> FirstPageFunc(int? pageSizeHint)
                 {
-                    var restOperations = GetSubResourceModel1SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
-                    var response = await restOperations.ListAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
-                    return Response.FromValue(response.Value.Value, response.GetRawResponse());
+                    using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetSubResourceModel1s");
+                    scope.Start();
+                    try
+                    {
+                        var response = await restOperations.ListAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
                 }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
             }
-            ).ConfigureAwait(false);
+            );
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/subResourceModel1s
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
         /// OperationId: SubResourceModel1s_List
+        /// <summary> Lists the SubResourceModel1s for this <see cref="ResourceGroup" />. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public static Response<IReadOnlyList<SubResourceModel1>> GetSubResourceModel1s(this ResourceGroup resourceGroup, CancellationToken cancellationToken = default)
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        public static Pageable<SubResourceModel1> GetSubResourceModel1s(this ResourceGroup resourceGroup, CancellationToken cancellationToken = default)
         {
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetSubResourceModel1s");
-                scope.Start();
-                try
+                SubResourceModel1SRestOperations restOperations = GetSubResourceModel1SRestOperations(clientDiagnostics, pipeline, options, baseUri);
+                Page<SubResourceModel1> FirstPageFunc(int? pageSizeHint)
                 {
-                    var restOperations = GetSubResourceModel1SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
-                    var response = restOperations.List(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, cancellationToken);
-                    return Response.FromValue(response.Value.Value, response.GetRawResponse());
+                    using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetSubResourceModel1s");
+                    scope.Start();
+                    try
+                    {
+                        var response = restOperations.List(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, cancellationToken: cancellationToken);
+                        return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
                 }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
             }
             );
         }
@@ -566,7 +601,7 @@ namespace SupersetFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetSubResourceModel1SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    SubResourceModel1SRestOperations restOperations = GetSubResourceModel1SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = await restOperations.PutAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, subResourceModel1SName, parameters, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
@@ -605,7 +640,7 @@ namespace SupersetFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetSubResourceModel1SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    SubResourceModel1SRestOperations restOperations = GetSubResourceModel1SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = restOperations.Put(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, subResourceModel1SName, parameters, cancellationToken);
                     return response;
                 }
@@ -639,7 +674,7 @@ namespace SupersetFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetSubResourceModel1SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    SubResourceModel1SRestOperations restOperations = GetSubResourceModel1SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = await restOperations.GetAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, subResourceModel1SName, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
@@ -673,7 +708,7 @@ namespace SupersetFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetSubResourceModel1SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    SubResourceModel1SRestOperations restOperations = GetSubResourceModel1SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = restOperations.Get(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, subResourceModel1SName, cancellationToken);
                     return response;
                 }
@@ -689,53 +724,65 @@ namespace SupersetFlattenInheritance
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/subResourceModel2s
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
         /// OperationId: SubResourceModel2s_List
+        /// <summary> Lists the SubResourceModel2s for this <see cref="ResourceGroup" />. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public static async Task<Response<IReadOnlyList<SubResourceModel2>>> GetSubResourceModel2sAsync(this ResourceGroup resourceGroup, CancellationToken cancellationToken = default)
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        public static AsyncPageable<SubResourceModel2> GetSubResourceModel2sAsync(this ResourceGroup resourceGroup, CancellationToken cancellationToken = default)
         {
-            return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
+            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetSubResourceModel2s");
-                scope.Start();
-                try
+                SubResourceModel2SRestOperations restOperations = GetSubResourceModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
+                async Task<Page<SubResourceModel2>> FirstPageFunc(int? pageSizeHint)
                 {
-                    var restOperations = GetSubResourceModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
-                    var response = await restOperations.ListAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
-                    return Response.FromValue(response.Value.Value, response.GetRawResponse());
+                    using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetSubResourceModel2s");
+                    scope.Start();
+                    try
+                    {
+                        var response = await restOperations.ListAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
                 }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
             }
-            ).ConfigureAwait(false);
+            );
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/subResourceModel2s
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
         /// OperationId: SubResourceModel2s_List
+        /// <summary> Lists the SubResourceModel2s for this <see cref="ResourceGroup" />. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public static Response<IReadOnlyList<SubResourceModel2>> GetSubResourceModel2s(this ResourceGroup resourceGroup, CancellationToken cancellationToken = default)
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        public static Pageable<SubResourceModel2> GetSubResourceModel2s(this ResourceGroup resourceGroup, CancellationToken cancellationToken = default)
         {
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetSubResourceModel2s");
-                scope.Start();
-                try
+                SubResourceModel2SRestOperations restOperations = GetSubResourceModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
+                Page<SubResourceModel2> FirstPageFunc(int? pageSizeHint)
                 {
-                    var restOperations = GetSubResourceModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
-                    var response = restOperations.List(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, cancellationToken);
-                    return Response.FromValue(response.Value.Value, response.GetRawResponse());
+                    using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetSubResourceModel2s");
+                    scope.Start();
+                    try
+                    {
+                        var response = restOperations.List(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, cancellationToken: cancellationToken);
+                        return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
                 }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
             }
             );
         }
@@ -766,7 +813,7 @@ namespace SupersetFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetSubResourceModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    SubResourceModel2SRestOperations restOperations = GetSubResourceModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = await restOperations.PutAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, subResourceModel2SName, parameters, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
@@ -805,7 +852,7 @@ namespace SupersetFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetSubResourceModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    SubResourceModel2SRestOperations restOperations = GetSubResourceModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = restOperations.Put(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, subResourceModel2SName, parameters, cancellationToken);
                     return response;
                 }
@@ -839,7 +886,7 @@ namespace SupersetFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetSubResourceModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    SubResourceModel2SRestOperations restOperations = GetSubResourceModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = await restOperations.GetAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, subResourceModel2SName, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
@@ -873,7 +920,7 @@ namespace SupersetFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetSubResourceModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    SubResourceModel2SRestOperations restOperations = GetSubResourceModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = restOperations.Get(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, subResourceModel2SName, cancellationToken);
                     return response;
                 }
@@ -889,53 +936,65 @@ namespace SupersetFlattenInheritance
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/writableSubResourceModel1s
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
         /// OperationId: WritableSubResourceModel1s_List
+        /// <summary> Lists the WritableSubResourceModel1s for this <see cref="ResourceGroup" />. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public static async Task<Response<IReadOnlyList<WritableSubResourceModel1>>> GetWritableSubResourceModel1sAsync(this ResourceGroup resourceGroup, CancellationToken cancellationToken = default)
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        public static AsyncPageable<WritableSubResourceModel1> GetWritableSubResourceModel1sAsync(this ResourceGroup resourceGroup, CancellationToken cancellationToken = default)
         {
-            return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
+            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetWritableSubResourceModel1s");
-                scope.Start();
-                try
+                WritableSubResourceModel1SRestOperations restOperations = GetWritableSubResourceModel1SRestOperations(clientDiagnostics, pipeline, options, baseUri);
+                async Task<Page<WritableSubResourceModel1>> FirstPageFunc(int? pageSizeHint)
                 {
-                    var restOperations = GetWritableSubResourceModel1SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
-                    var response = await restOperations.ListAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
-                    return Response.FromValue(response.Value.Value, response.GetRawResponse());
+                    using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetWritableSubResourceModel1s");
+                    scope.Start();
+                    try
+                    {
+                        var response = await restOperations.ListAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
                 }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
             }
-            ).ConfigureAwait(false);
+            );
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/writableSubResourceModel1s
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
         /// OperationId: WritableSubResourceModel1s_List
+        /// <summary> Lists the WritableSubResourceModel1s for this <see cref="ResourceGroup" />. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public static Response<IReadOnlyList<WritableSubResourceModel1>> GetWritableSubResourceModel1s(this ResourceGroup resourceGroup, CancellationToken cancellationToken = default)
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        public static Pageable<WritableSubResourceModel1> GetWritableSubResourceModel1s(this ResourceGroup resourceGroup, CancellationToken cancellationToken = default)
         {
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetWritableSubResourceModel1s");
-                scope.Start();
-                try
+                WritableSubResourceModel1SRestOperations restOperations = GetWritableSubResourceModel1SRestOperations(clientDiagnostics, pipeline, options, baseUri);
+                Page<WritableSubResourceModel1> FirstPageFunc(int? pageSizeHint)
                 {
-                    var restOperations = GetWritableSubResourceModel1SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
-                    var response = restOperations.List(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, cancellationToken);
-                    return Response.FromValue(response.Value.Value, response.GetRawResponse());
+                    using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetWritableSubResourceModel1s");
+                    scope.Start();
+                    try
+                    {
+                        var response = restOperations.List(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, cancellationToken: cancellationToken);
+                        return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
                 }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
             }
             );
         }
@@ -966,7 +1025,7 @@ namespace SupersetFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetWritableSubResourceModel1SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    WritableSubResourceModel1SRestOperations restOperations = GetWritableSubResourceModel1SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = await restOperations.PutAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, writableSubResourceModel1SName, parameters, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
@@ -1005,7 +1064,7 @@ namespace SupersetFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetWritableSubResourceModel1SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    WritableSubResourceModel1SRestOperations restOperations = GetWritableSubResourceModel1SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = restOperations.Put(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, writableSubResourceModel1SName, parameters, cancellationToken);
                     return response;
                 }
@@ -1039,7 +1098,7 @@ namespace SupersetFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetWritableSubResourceModel1SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    WritableSubResourceModel1SRestOperations restOperations = GetWritableSubResourceModel1SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = await restOperations.GetAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, writableSubResourceModel1SName, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
@@ -1073,7 +1132,7 @@ namespace SupersetFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetWritableSubResourceModel1SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    WritableSubResourceModel1SRestOperations restOperations = GetWritableSubResourceModel1SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = restOperations.Get(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, writableSubResourceModel1SName, cancellationToken);
                     return response;
                 }
@@ -1089,53 +1148,65 @@ namespace SupersetFlattenInheritance
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/writableSubResourceModel2s
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
         /// OperationId: WritableSubResourceModel2s_List
+        /// <summary> Lists the WritableSubResourceModel2s for this <see cref="ResourceGroup" />. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public static async Task<Response<IReadOnlyList<WritableSubResourceModel2>>> GetWritableSubResourceModel2sAsync(this ResourceGroup resourceGroup, CancellationToken cancellationToken = default)
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        public static AsyncPageable<WritableSubResourceModel2> GetWritableSubResourceModel2sAsync(this ResourceGroup resourceGroup, CancellationToken cancellationToken = default)
         {
-            return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
+            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetWritableSubResourceModel2s");
-                scope.Start();
-                try
+                WritableSubResourceModel2SRestOperations restOperations = GetWritableSubResourceModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
+                async Task<Page<WritableSubResourceModel2>> FirstPageFunc(int? pageSizeHint)
                 {
-                    var restOperations = GetWritableSubResourceModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
-                    var response = await restOperations.ListAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
-                    return Response.FromValue(response.Value.Value, response.GetRawResponse());
+                    using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetWritableSubResourceModel2s");
+                    scope.Start();
+                    try
+                    {
+                        var response = await restOperations.ListAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
                 }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
             }
-            ).ConfigureAwait(false);
+            );
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/writableSubResourceModel2s
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
         /// OperationId: WritableSubResourceModel2s_List
+        /// <summary> Lists the WritableSubResourceModel2s for this <see cref="ResourceGroup" />. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public static Response<IReadOnlyList<WritableSubResourceModel2>> GetWritableSubResourceModel2s(this ResourceGroup resourceGroup, CancellationToken cancellationToken = default)
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        public static Pageable<WritableSubResourceModel2> GetWritableSubResourceModel2s(this ResourceGroup resourceGroup, CancellationToken cancellationToken = default)
         {
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetWritableSubResourceModel2s");
-                scope.Start();
-                try
+                WritableSubResourceModel2SRestOperations restOperations = GetWritableSubResourceModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
+                Page<WritableSubResourceModel2> FirstPageFunc(int? pageSizeHint)
                 {
-                    var restOperations = GetWritableSubResourceModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
-                    var response = restOperations.List(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, cancellationToken);
-                    return Response.FromValue(response.Value.Value, response.GetRawResponse());
+                    using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetWritableSubResourceModel2s");
+                    scope.Start();
+                    try
+                    {
+                        var response = restOperations.List(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, cancellationToken: cancellationToken);
+                        return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
                 }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
             }
             );
         }
@@ -1166,7 +1237,7 @@ namespace SupersetFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetWritableSubResourceModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    WritableSubResourceModel2SRestOperations restOperations = GetWritableSubResourceModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = await restOperations.PutAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, writableSubResourceModel2SName, parameters, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
@@ -1205,7 +1276,7 @@ namespace SupersetFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetWritableSubResourceModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    WritableSubResourceModel2SRestOperations restOperations = GetWritableSubResourceModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = restOperations.Put(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, writableSubResourceModel2SName, parameters, cancellationToken);
                     return response;
                 }
@@ -1239,7 +1310,7 @@ namespace SupersetFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetWritableSubResourceModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    WritableSubResourceModel2SRestOperations restOperations = GetWritableSubResourceModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = await restOperations.GetAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, writableSubResourceModel2SName, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
@@ -1273,7 +1344,7 @@ namespace SupersetFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetWritableSubResourceModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    WritableSubResourceModel2SRestOperations restOperations = GetWritableSubResourceModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = restOperations.Get(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, writableSubResourceModel2SName, cancellationToken);
                     return response;
                 }
@@ -1289,53 +1360,65 @@ namespace SupersetFlattenInheritance
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/resourceModel2s
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
         /// OperationId: ResourceModel2s_List
+        /// <summary> Lists the ResourceModel2s for this <see cref="ResourceGroup" />. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public static async Task<Response<IReadOnlyList<ResourceModel2>>> GetResourceModel2sAsync(this ResourceGroup resourceGroup, CancellationToken cancellationToken = default)
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        public static AsyncPageable<ResourceModel2> GetResourceModel2sAsync(this ResourceGroup resourceGroup, CancellationToken cancellationToken = default)
         {
-            return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
+            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetResourceModel2s");
-                scope.Start();
-                try
+                ResourceModel2SRestOperations restOperations = GetResourceModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
+                async Task<Page<ResourceModel2>> FirstPageFunc(int? pageSizeHint)
                 {
-                    var restOperations = GetResourceModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
-                    var response = await restOperations.ListAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
-                    return Response.FromValue(response.Value.Value, response.GetRawResponse());
+                    using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetResourceModel2s");
+                    scope.Start();
+                    try
+                    {
+                        var response = await restOperations.ListAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
                 }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
             }
-            ).ConfigureAwait(false);
+            );
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/resourceModel2s
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
         /// OperationId: ResourceModel2s_List
+        /// <summary> Lists the ResourceModel2s for this <see cref="ResourceGroup" />. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public static Response<IReadOnlyList<ResourceModel2>> GetResourceModel2s(this ResourceGroup resourceGroup, CancellationToken cancellationToken = default)
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        public static Pageable<ResourceModel2> GetResourceModel2s(this ResourceGroup resourceGroup, CancellationToken cancellationToken = default)
         {
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetResourceModel2s");
-                scope.Start();
-                try
+                ResourceModel2SRestOperations restOperations = GetResourceModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
+                Page<ResourceModel2> FirstPageFunc(int? pageSizeHint)
                 {
-                    var restOperations = GetResourceModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
-                    var response = restOperations.List(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, cancellationToken);
-                    return Response.FromValue(response.Value.Value, response.GetRawResponse());
+                    using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetResourceModel2s");
+                    scope.Start();
+                    try
+                    {
+                        var response = restOperations.List(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, cancellationToken: cancellationToken);
+                        return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
                 }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
             }
             );
         }
@@ -1366,7 +1449,7 @@ namespace SupersetFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetResourceModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    ResourceModel2SRestOperations restOperations = GetResourceModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = await restOperations.PutAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, resourceModel2SName, parameters, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
@@ -1405,7 +1488,7 @@ namespace SupersetFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetResourceModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    ResourceModel2SRestOperations restOperations = GetResourceModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = restOperations.Put(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, resourceModel2SName, parameters, cancellationToken);
                     return response;
                 }
@@ -1439,7 +1522,7 @@ namespace SupersetFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetResourceModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    ResourceModel2SRestOperations restOperations = GetResourceModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = await restOperations.GetAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, resourceModel2SName, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
@@ -1473,7 +1556,7 @@ namespace SupersetFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetResourceModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    ResourceModel2SRestOperations restOperations = GetResourceModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = restOperations.Get(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, resourceModel2SName, cancellationToken);
                     return response;
                 }
@@ -1489,53 +1572,65 @@ namespace SupersetFlattenInheritance
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/trackedResourceModel2s
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
         /// OperationId: TrackedResourceModel2s_List
+        /// <summary> Lists the TrackedResourceModel2s for this <see cref="ResourceGroup" />. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public static async Task<Response<IReadOnlyList<TrackedResourceModel2>>> GetTrackedResourceModel2sAsync(this ResourceGroup resourceGroup, CancellationToken cancellationToken = default)
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        public static AsyncPageable<TrackedResourceModel2> GetTrackedResourceModel2sAsync(this ResourceGroup resourceGroup, CancellationToken cancellationToken = default)
         {
-            return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
+            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetTrackedResourceModel2s");
-                scope.Start();
-                try
+                TrackedResourceModel2SRestOperations restOperations = GetTrackedResourceModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
+                async Task<Page<TrackedResourceModel2>> FirstPageFunc(int? pageSizeHint)
                 {
-                    var restOperations = GetTrackedResourceModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
-                    var response = await restOperations.ListAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
-                    return Response.FromValue(response.Value.Value, response.GetRawResponse());
+                    using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetTrackedResourceModel2s");
+                    scope.Start();
+                    try
+                    {
+                        var response = await restOperations.ListAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
                 }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
             }
-            ).ConfigureAwait(false);
+            );
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/trackedResourceModel2s
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
         /// OperationId: TrackedResourceModel2s_List
+        /// <summary> Lists the TrackedResourceModel2s for this <see cref="ResourceGroup" />. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public static Response<IReadOnlyList<TrackedResourceModel2>> GetTrackedResourceModel2s(this ResourceGroup resourceGroup, CancellationToken cancellationToken = default)
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        public static Pageable<TrackedResourceModel2> GetTrackedResourceModel2s(this ResourceGroup resourceGroup, CancellationToken cancellationToken = default)
         {
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetTrackedResourceModel2s");
-                scope.Start();
-                try
+                TrackedResourceModel2SRestOperations restOperations = GetTrackedResourceModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
+                Page<TrackedResourceModel2> FirstPageFunc(int? pageSizeHint)
                 {
-                    var restOperations = GetTrackedResourceModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
-                    var response = restOperations.List(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, cancellationToken);
-                    return Response.FromValue(response.Value.Value, response.GetRawResponse());
+                    using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetTrackedResourceModel2s");
+                    scope.Start();
+                    try
+                    {
+                        var response = restOperations.List(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, cancellationToken: cancellationToken);
+                        return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
                 }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
             }
             );
         }
@@ -1566,7 +1661,7 @@ namespace SupersetFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetTrackedResourceModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    TrackedResourceModel2SRestOperations restOperations = GetTrackedResourceModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = await restOperations.PutAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, trackedResourceModel2SName, parameters, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
@@ -1605,7 +1700,7 @@ namespace SupersetFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetTrackedResourceModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    TrackedResourceModel2SRestOperations restOperations = GetTrackedResourceModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = restOperations.Put(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, trackedResourceModel2SName, parameters, cancellationToken);
                     return response;
                 }
@@ -1639,7 +1734,7 @@ namespace SupersetFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetTrackedResourceModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    TrackedResourceModel2SRestOperations restOperations = GetTrackedResourceModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = await restOperations.GetAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, trackedResourceModel2SName, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
@@ -1673,7 +1768,7 @@ namespace SupersetFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetTrackedResourceModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    TrackedResourceModel2SRestOperations restOperations = GetTrackedResourceModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = restOperations.Get(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, trackedResourceModel2SName, cancellationToken);
                     return response;
                 }
@@ -1712,7 +1807,7 @@ namespace SupersetFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetNonResourceModel1SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    NonResourceModel1SRestOperations restOperations = GetNonResourceModel1SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = await restOperations.PutAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, nonResourceModel1SName, parameters, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
@@ -1751,7 +1846,7 @@ namespace SupersetFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetNonResourceModel1SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    NonResourceModel1SRestOperations restOperations = GetNonResourceModel1SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = restOperations.Put(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, nonResourceModel1SName, parameters, cancellationToken);
                     return response;
                 }
@@ -1785,7 +1880,7 @@ namespace SupersetFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetNonResourceModel1SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    NonResourceModel1SRestOperations restOperations = GetNonResourceModel1SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = await restOperations.GetAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, nonResourceModel1SName, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
@@ -1819,7 +1914,7 @@ namespace SupersetFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetNonResourceModel1SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    NonResourceModel1SRestOperations restOperations = GetNonResourceModel1SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = restOperations.Get(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, nonResourceModel1SName, cancellationToken);
                     return response;
                 }

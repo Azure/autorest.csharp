@@ -8,13 +8,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using MgmtListMethods.Models;
 
@@ -22,7 +22,6 @@ namespace MgmtListMethods
 {
     /// <summary> A class representing collection of TenantParentWithNonResChWithLoc and their operations over its parent. </summary>
     public partial class TenantParentWithNonResChWithLocCollection : ArmCollection, IEnumerable<TenantParentWithNonResChWithLoc>, IAsyncEnumerable<TenantParentWithNonResChWithLoc>
-
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly TenantParentWithNonResChWithLocsRestOperations _tenantParentWithNonResChWithLocsRestClient;
@@ -32,16 +31,23 @@ namespace MgmtListMethods
         {
         }
 
-        /// <summary> Initializes a new instance of TenantParentWithNonResChWithLocCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="TenantParentWithNonResChWithLocCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal TenantParentWithNonResChWithLocCollection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _tenantParentWithNonResChWithLocsRestClient = new TenantParentWithNonResChWithLocsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            ClientOptions.TryGetApiVersion(TenantParentWithNonResChWithLoc.ResourceType, out string apiVersion);
+            _tenantParentWithNonResChWithLocsRestClient = new TenantParentWithNonResChWithLocsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
+#if DEBUG
+			ValidateResourceId(Id);
+#endif
         }
 
-        /// <summary> Gets the valid resource type for this object. </summary>
-        protected override ResourceType ValidResourceType => TenantTest.ResourceType;
+        internal static void ValidateResourceId(ResourceIdentifier id)
+        {
+            if (id.ResourceType != TenantTest.ResourceType)
+                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, TenantTest.ResourceType), nameof(id));
+        }
 
         // Collection level operations.
 
@@ -54,7 +60,7 @@ namespace MgmtListMethods
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithNonResChWithLocName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual TenantParentWithNonResChWithLocCreateOrUpdateOperation CreateOrUpdate(string tenantParentWithNonResChWithLocName, TenantParentWithNonResChWithLocData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual TenantParentWithNonResChWithLocCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string tenantParentWithNonResChWithLocName, TenantParentWithNonResChWithLocData parameters, CancellationToken cancellationToken = default)
         {
             if (tenantParentWithNonResChWithLocName == null)
             {
@@ -91,7 +97,7 @@ namespace MgmtListMethods
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithNonResChWithLocName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<TenantParentWithNonResChWithLocCreateOrUpdateOperation> CreateOrUpdateAsync(string tenantParentWithNonResChWithLocName, TenantParentWithNonResChWithLocData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<TenantParentWithNonResChWithLocCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string tenantParentWithNonResChWithLocName, TenantParentWithNonResChWithLocData parameters, CancellationToken cancellationToken = default)
         {
             if (tenantParentWithNonResChWithLocName == null)
             {
@@ -195,9 +201,9 @@ namespace MgmtListMethods
             try
             {
                 var response = _tenantParentWithNonResChWithLocsRestClient.Get(Id.Name, tenantParentWithNonResChWithLocName, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<TenantParentWithNonResChWithLoc>(null, response.GetRawResponse())
-                    : Response.FromValue(new TenantParentWithNonResChWithLoc(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<TenantParentWithNonResChWithLoc>(null, response.GetRawResponse());
+                return Response.FromValue(new TenantParentWithNonResChWithLoc(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -217,14 +223,14 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(tenantParentWithNonResChWithLocName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("TenantParentWithNonResChWithLocCollection.GetIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("TenantParentWithNonResChWithLocCollection.GetIfExists");
             scope.Start();
             try
             {
                 var response = await _tenantParentWithNonResChWithLocsRestClient.GetAsync(Id.Name, tenantParentWithNonResChWithLocName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<TenantParentWithNonResChWithLoc>(null, response.GetRawResponse())
-                    : Response.FromValue(new TenantParentWithNonResChWithLoc(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<TenantParentWithNonResChWithLoc>(null, response.GetRawResponse());
+                return Response.FromValue(new TenantParentWithNonResChWithLoc(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -237,14 +243,14 @@ namespace MgmtListMethods
         /// <param name="tenantParentWithNonResChWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithNonResChWithLocName"/> is null. </exception>
-        public virtual Response<bool> CheckIfExists(string tenantParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
+        public virtual Response<bool> Exists(string tenantParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
             if (tenantParentWithNonResChWithLocName == null)
             {
                 throw new ArgumentNullException(nameof(tenantParentWithNonResChWithLocName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("TenantParentWithNonResChWithLocCollection.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("TenantParentWithNonResChWithLocCollection.Exists");
             scope.Start();
             try
             {
@@ -262,14 +268,14 @@ namespace MgmtListMethods
         /// <param name="tenantParentWithNonResChWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithNonResChWithLocName"/> is null. </exception>
-        public async virtual Task<Response<bool>> CheckIfExistsAsync(string tenantParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> ExistsAsync(string tenantParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
             if (tenantParentWithNonResChWithLocName == null)
             {
                 throw new ArgumentNullException(nameof(tenantParentWithNonResChWithLocName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("TenantParentWithNonResChWithLocCollection.CheckIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("TenantParentWithNonResChWithLocCollection.Exists");
             scope.Start();
             try
             {
@@ -381,6 +387,6 @@ namespace MgmtListMethods
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, TenantParentWithNonResChWithLoc, TenantParentWithNonResChWithLocData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, TenantParentWithNonResChWithLoc, TenantParentWithNonResChWithLocData> Construct() { }
     }
 }

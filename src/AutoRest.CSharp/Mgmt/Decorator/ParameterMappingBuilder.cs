@@ -106,7 +106,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                         }
                         if (keySegment.IsReference)
                         {
-                            parameterMappingStack.Push(new ContextualParameterMapping(string.Empty, keySegment, $"{idVariableName}{invocationSuffix}.ResourceType.Types.Last()", new[] { "System.Linq" }));
+                            parameterMappingStack.Push(new ContextualParameterMapping(string.Empty, keySegment, $"{idVariableName}{invocationSuffix}.ResourceType.GetLastType()", new[] { "System.Linq" }));
                             appendParent = true;
                         }
                         // add .Parent suffix
@@ -177,6 +177,22 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return result;
         }
 
+        public static FormattableString GetValueExpression(CSharpType type, FormattableString rawExpression)
+        {
+            if (type.IsStringLike())
+                return rawExpression;
+
+            if (!type.IsFrameworkType)
+            {
+                if (type.Implementation is EnumType enumType && !enumType.IsExtendable)
+                {
+                    return $"{rawExpression}.To{enumType.Declaration.Name}()";
+                }
+                throw new System.InvalidOperationException($"Type {type} is not supported to construct parameter mapping");
+            }
+            return $"{type.FrameworkType}.Parse({rawExpression})";
+        }
+
         /// <summary>
         /// Represents how a parameter of rest operation is mapped to a parameter of a collection method or an expression.
         /// </summary>
@@ -194,40 +210,24 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             /// <summary>
             /// This is the value expression to pass in a method
             /// </summary>
-            public string ValueExpression;
+            public FormattableString ValueExpression;
             /// <summary>
             /// The using statements in the ValueExpression
             /// </summary>
             public IEnumerable<string> Usings;
 
-            public ContextualParameterMapping(string key, Segment value, string valueExpression, IEnumerable<string>? usings = default)
+            public ContextualParameterMapping(string key, Segment value, FormattableString valueExpression, IEnumerable<string>? usings = default)
                 : this(key, value.Reference.Name, value.Reference.Type, valueExpression, usings ?? Enumerable.Empty<string>())
             {
             }
 
-            internal ContextualParameterMapping(string key, string parameterName, CSharpType parameterType, string valueExpression, IEnumerable<string> usings)
+            internal ContextualParameterMapping(string key, string parameterName, CSharpType parameterType, FormattableString valueExpression, IEnumerable<string> usings)
             {
                 Key = key;
                 ParameterName = parameterName;
                 ParameterType = parameterType;
                 ValueExpression = GetValueExpression(parameterType, valueExpression);
                 Usings = usings;
-            }
-
-            private static string GetValueExpression(CSharpType type, string rawExpression)
-            {
-                if (type.IsStringLike())
-                    return rawExpression;
-
-                if (!type.IsFrameworkType)
-                {
-                    if (type.Implementation is EnumType enumType && !enumType.IsExtendable)
-                    {
-                        return $"{rawExpression}.To{enumType.Declaration.Name}()";
-                    }
-                    throw new System.InvalidOperationException($"Type {type} is not supported to construct contextual parameter mapping");
-                }
-                return $"{type.FrameworkType}.Parse({rawExpression})";
             }
 
             /// <summary>
@@ -255,7 +255,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 var p = UpdateParameterTypeOfByIdMethod(operation.RequestPath, parameter);
                 if (mapping == null)
                 {
-                    yield return new ParameterMapping(p, true, "", Enumerable.Empty<string>());
+                    yield return new ParameterMapping(p, true, $"", Enumerable.Empty<string>());
                 }
                 else
                 {
@@ -271,7 +271,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 var reference = requestPath.First().Reference;
                 if (parameter.Name.Equals(reference.Name, StringComparison.InvariantCultureIgnoreCase) && parameter.Type.EqualsByName(reference.Type))
                 {
-                    return parameter with { Type = typeof(Azure.ResourceManager.ResourceIdentifier) };
+                    return parameter with { Type = typeof(Azure.Core.ResourceIdentifier) };
                 }
             }
 
@@ -294,13 +294,13 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             /// <summary>
             /// if not pass-through, this is the value to pass in <see cref="RestClientMethod"/>.
             /// </summary>
-            public string ValueExpression;
+            public FormattableString ValueExpression;
             /// <summary>
             /// the using statements used in the ValueExpression
             /// </summary>
             public IEnumerable<string> Usings;
 
-            public ParameterMapping(Parameter parameter, bool isPassThru, string valueExpression, IEnumerable<string> usings)
+            public ParameterMapping(Parameter parameter, bool isPassThru, FormattableString valueExpression, IEnumerable<string> usings)
             {
                 Parameter = parameter;
                 IsPassThru = isPassThru;
@@ -322,12 +322,12 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return result;
         }
 
-        private static string FindKeyOfParameter(Parameter pathParameter, RequestPath requestPath)
+        public static string FindKeyOfParameter(Reference reference, RequestPath requestPath)
         {
             var segments = requestPath.ToList();
-            int index = segments.FindIndex(segment => segment.IsReference && segment.ReferenceName == pathParameter.Name && segment.Reference.Type.Equals(pathParameter.Type));
+            int index = segments.FindIndex(segment => segment.IsReference && segment.ReferenceName == reference.Name && segment.Type.Equals(reference.Type));
             if (index < 0)
-                throw new InvalidOperationException($"Cannot find the key corresponding to parameter {pathParameter.Name} in path {requestPath}");
+                throw new InvalidOperationException($"Cannot find the key corresponding to parameter {reference.Name} in path {requestPath}");
 
             if (index == 0)
                 return string.Empty;

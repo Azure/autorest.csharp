@@ -7,10 +7,12 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
+using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Mgmt.Models
 {
@@ -140,12 +142,26 @@ namespace AutoRest.CSharp.Mgmt.Models
         /// <exception cref="InvalidOperationException">if this.IsAncestorOf(other) is false</exception>
         public RequestPath TrimAncestorFrom(RequestPath other)
         {
+            if (TryTrimAncestorFrom(other, out var diff))
+                return diff;
+
+            throw new InvalidOperationException($"Request path {this} is not parent of {other}");
+        }
+
+        public bool TryTrimAncestorFrom(RequestPath other, [MaybeNullWhen(false)] out RequestPath diff)
+        {
+            diff = default;
             if (this == other)
-                return RequestPath.Tenant;
-            if (!this.IsAncestorOf(other))
-                throw new InvalidOperationException($"Request path {this} is not parent of {other}");
-            // this is a parent, we can safely just return from the length of this
-            return new RequestPath(other._segments.Skip(this.Count));
+            {
+                diff = RequestPath.Tenant;
+                return true;
+            }
+            if (this.IsAncestorOf(other))
+            {
+                diff = new RequestPath(other._segments.Skip(this.Count));
+                return true;
+            }
+            return false;
         }
 
         /// <summary>
@@ -164,6 +180,65 @@ namespace AutoRest.CSharp.Mgmt.Models
         public RequestPath Append(RequestPath other)
         {
             return new RequestPath(this._segments.Concat(other._segments));
+        }
+
+        public IEnumerable<RequestPath> Expand(MgmtConfiguration config)
+        {
+            // we first get the resource type
+            var resourceType = this.GetResourceType(config);
+
+            // if this resource type is a constant, we do not need to expand it
+            if (resourceType.IsConstant)
+                return this.AsIEnumerable();
+
+            // otherwise we need to expand them (the resource type is not a constant)
+            // first we get all the segment that is not a constant
+            var possibleValueMap = new Dictionary<Segment, IEnumerable<Segment>>();
+            foreach (var segment in resourceType.Where(segment => segment.IsReference))
+            {
+                var type = segment.Reference.Type.Implementation;
+                switch (type)
+                {
+                    case EnumType enumType:
+                        possibleValueMap.Add(segment, enumType.Values.Select(v => new Segment(v.Value, segment.Escape, segment.IsStrict)));
+                        break;
+                    default:
+                        throw new InvalidOperationException($"The resource type {this} contains variables in it, but it is not an enum type, therefore we cannot expand it. Please double check and/or override it in `request-path-to-resource-type` section.");
+                }
+            }
+
+            // construct new resource types to make the resource types constant again
+            // here we are traversing the segments in this resource type as a tree:
+            // if the segment is constant, just add it into the result
+            // if the segment is not a constant, we need to add its all possible values (they are all constants) into the result
+            // first we build the levels
+            var levels = this.Select(segment => segment.IsConstant || !possibleValueMap.ContainsKey(segment) ?
+                segment.AsIEnumerable() :
+                possibleValueMap[segment]);
+            // now we traverse the tree to get the result
+            var queue = new Queue<List<Segment>>();
+            foreach (var level in levels)
+            {
+                // initialize
+                if (queue.Count == 0)
+                {
+                    foreach (var _ in level)
+                        queue.Enqueue(new List<Segment>());
+                }
+                // get every element in queue out, and push the new results back
+                int count = queue.Count;
+                for (int i = 0; i < count; i++)
+                {
+                    var list = queue.Dequeue();
+                    foreach (var segment in level)
+                    {
+                        // push the results back with a new element on it
+                        queue.Enqueue(new List<Segment>(list) { segment });
+                    }
+                }
+            }
+
+            return queue.Select(list => new RequestPath(list));
         }
 
         private static IEnumerable<Segment> ParsePathSegment(PathSegment pathSegment)

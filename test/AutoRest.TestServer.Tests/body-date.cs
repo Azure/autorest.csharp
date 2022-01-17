@@ -24,14 +24,14 @@ namespace AutoRest.TestServer.Tests
         public Task GetDateMax() => Test(async (host, pipeline) =>
         {
             var result = await new DateClient(ClientDiagnostics, pipeline, host).GetMaxDateAsync();
-            Assert.AreEqual(DateTimeOffset.Parse("9999-12-31", styles: DateTimeStyles.AssumeUniversal), result.Value);
+            Assert.AreEqual(DateTimeOffset.Parse("9999-12-31", CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal), result.Value);
         });
 
         [Test]
         public Task GetDateMin() => Test(async (host, pipeline) =>
         {
             var result = await new DateClient(ClientDiagnostics, pipeline, host).GetMinDateAsync();
-            Assert.AreEqual(DateTimeOffset.Parse("0001-01-01", styles: DateTimeStyles.AssumeUniversal), result.Value);
+            Assert.AreEqual(DateTimeOffset.MinValue, result.Value);
         });
 
         [Test]
@@ -57,15 +57,13 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task PutDateMax() => TestStatus(async (host, pipeline) =>
         {
-            var value = DateTimeOffset.Parse("9999-12-31");
-            return await new DateClient(ClientDiagnostics, pipeline, host).PutMaxDateAsync( value);
+            return await new DateClient(ClientDiagnostics, pipeline, host).PutMaxDateAsync(DateTimeOffset.MaxValue);
         });
 
         [Test]
         public Task PutDateMin() => TestStatus(async (host, pipeline) =>
         {
-            var value = DateTimeOffset.Parse("0001-01-01Z");
-            return await new DateClient(ClientDiagnostics, pipeline, host).PutMinDateAsync( value);
+            return await new DateClient(ClientDiagnostics, pipeline, host).PutMinDateAsync(DateTimeOffset.MinValue);
         });
     }
 }

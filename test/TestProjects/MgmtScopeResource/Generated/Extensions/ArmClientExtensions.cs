@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using Azure.Core;
 using Azure.ResourceManager;
 
 namespace MgmtScopeResource
@@ -19,6 +20,7 @@ namespace MgmtScopeResource
         /// <returns> Returns a <see cref="PolicyAssignment" /> object. </returns>
         public static PolicyAssignment GetPolicyAssignment(this ArmClient armClient, ResourceIdentifier id)
         {
+            PolicyAssignment.ValidateResourceId(id);
             return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new PolicyAssignment(clientOptions, credential, uri, pipeline, id));
         }
         #endregion
@@ -30,6 +32,7 @@ namespace MgmtScopeResource
         /// <returns> Returns a <see cref="DeploymentExtended" /> object. </returns>
         public static DeploymentExtended GetDeploymentExtended(this ArmClient armClient, ResourceIdentifier id)
         {
+            DeploymentExtended.ValidateResourceId(id);
             return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new DeploymentExtended(clientOptions, credential, uri, pipeline, id));
         }
         #endregion
@@ -41,6 +44,7 @@ namespace MgmtScopeResource
         /// <returns> Returns a <see cref="ResourceLink" /> object. </returns>
         public static ResourceLink GetResourceLink(this ArmClient armClient, ResourceIdentifier id)
         {
+            ResourceLink.ValidateResourceId(id);
             return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new ResourceLink(clientOptions, credential, uri, pipeline, id));
         }
         #endregion

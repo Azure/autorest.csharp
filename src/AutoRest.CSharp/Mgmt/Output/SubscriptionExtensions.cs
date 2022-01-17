@@ -11,11 +11,9 @@ namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class SubscriptionExtensions : MgmtExtensions
     {
-        public SubscriptionExtensions(IEnumerable<Operation> allOperations, BuildContext<MgmtOutputLibrary> context) : base(allOperations, context)
+        public SubscriptionExtensions(IEnumerable<Operation> allOperations, BuildContext<MgmtOutputLibrary> context) : base(allOperations, "Subscription", context)
         {
         }
-
-        public override string ResourceName => "Subscription";
 
         protected override string DefaultName => "SubscriptionExtensions";
 

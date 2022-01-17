@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using Azure.Core;
 using Azure.ResourceManager;
 
 namespace ResourceRename
@@ -19,6 +20,7 @@ namespace ResourceRename
         /// <returns> Returns a <see cref="SshPublicKeyInfo" /> object. </returns>
         public static SshPublicKeyInfo GetSshPublicKeyInfo(this ArmClient armClient, ResourceIdentifier id)
         {
+            SshPublicKeyInfo.ValidateResourceId(id);
             return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new SshPublicKeyInfo(clientOptions, credential, uri, pipeline, id));
         }
         #endregion

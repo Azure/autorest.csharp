@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -41,19 +40,19 @@ namespace ExactMatchInheritance
         }
         #endregion
 
-        private static ExactMatchModel2SRestOperations GetExactMatchModel2SRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, Uri endpoint = null)
+        private static ExactMatchModel2SRestOperations GetExactMatchModel2SRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = default)
         {
-            return new ExactMatchModel2SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint);
+            return new ExactMatchModel2SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);
         }
 
-        private static ExactMatchModel3SRestOperations GetExactMatchModel3SRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, Uri endpoint = null)
+        private static ExactMatchModel3SRestOperations GetExactMatchModel3SRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = default)
         {
-            return new ExactMatchModel3SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint);
+            return new ExactMatchModel3SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);
         }
 
-        private static ExactMatchModel4SRestOperations GetExactMatchModel4SRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, Uri endpoint = null)
+        private static ExactMatchModel4SRestOperations GetExactMatchModel4SRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = default)
         {
-            return new ExactMatchModel4SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint);
+            return new ExactMatchModel4SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel2s/{exactMatchModel2sName}
@@ -82,7 +81,7 @@ namespace ExactMatchInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetExactMatchModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    ExactMatchModel2SRestOperations restOperations = GetExactMatchModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = await restOperations.PutAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, exactMatchModel2SName, parameters, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
@@ -121,7 +120,7 @@ namespace ExactMatchInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetExactMatchModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    ExactMatchModel2SRestOperations restOperations = GetExactMatchModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = restOperations.Put(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, exactMatchModel2SName, parameters, cancellationToken);
                     return response;
                 }
@@ -137,53 +136,65 @@ namespace ExactMatchInheritance
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel3s
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
         /// OperationId: ExactMatchModel3s_List
+        /// <summary> Lists the ExactMatchModel3s for this <see cref="ResourceGroup" />. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public static async Task<Response<IReadOnlyList<ExactMatchModel3>>> GetExactMatchModel3sAsync(this ResourceGroup resourceGroup, CancellationToken cancellationToken = default)
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        public static AsyncPageable<ExactMatchModel3> GetExactMatchModel3sAsync(this ResourceGroup resourceGroup, CancellationToken cancellationToken = default)
         {
-            return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
+            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetExactMatchModel3s");
-                scope.Start();
-                try
+                ExactMatchModel3SRestOperations restOperations = GetExactMatchModel3SRestOperations(clientDiagnostics, pipeline, options, baseUri);
+                async Task<Page<ExactMatchModel3>> FirstPageFunc(int? pageSizeHint)
                 {
-                    var restOperations = GetExactMatchModel3SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
-                    var response = await restOperations.ListAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
-                    return Response.FromValue(response.Value.Value, response.GetRawResponse());
+                    using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetExactMatchModel3s");
+                    scope.Start();
+                    try
+                    {
+                        var response = await restOperations.ListAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
                 }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
             }
-            ).ConfigureAwait(false);
+            );
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel3s
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
         /// OperationId: ExactMatchModel3s_List
+        /// <summary> Lists the ExactMatchModel3s for this <see cref="ResourceGroup" />. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public static Response<IReadOnlyList<ExactMatchModel3>> GetExactMatchModel3s(this ResourceGroup resourceGroup, CancellationToken cancellationToken = default)
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        public static Pageable<ExactMatchModel3> GetExactMatchModel3s(this ResourceGroup resourceGroup, CancellationToken cancellationToken = default)
         {
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetExactMatchModel3s");
-                scope.Start();
-                try
+                ExactMatchModel3SRestOperations restOperations = GetExactMatchModel3SRestOperations(clientDiagnostics, pipeline, options, baseUri);
+                Page<ExactMatchModel3> FirstPageFunc(int? pageSizeHint)
                 {
-                    var restOperations = GetExactMatchModel3SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
-                    var response = restOperations.List(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, cancellationToken);
-                    return Response.FromValue(response.Value.Value, response.GetRawResponse());
+                    using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetExactMatchModel3s");
+                    scope.Start();
+                    try
+                    {
+                        var response = restOperations.List(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, cancellationToken: cancellationToken);
+                        return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
                 }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
             }
             );
         }
@@ -214,7 +225,7 @@ namespace ExactMatchInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetExactMatchModel3SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    ExactMatchModel3SRestOperations restOperations = GetExactMatchModel3SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = await restOperations.PutAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, exactMatchModel3SName, parameters, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
@@ -253,7 +264,7 @@ namespace ExactMatchInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetExactMatchModel3SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    ExactMatchModel3SRestOperations restOperations = GetExactMatchModel3SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = restOperations.Put(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, exactMatchModel3SName, parameters, cancellationToken);
                     return response;
                 }
@@ -287,7 +298,7 @@ namespace ExactMatchInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetExactMatchModel3SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    ExactMatchModel3SRestOperations restOperations = GetExactMatchModel3SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = await restOperations.GetAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, exactMatchModel3SName, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
@@ -321,7 +332,7 @@ namespace ExactMatchInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetExactMatchModel3SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    ExactMatchModel3SRestOperations restOperations = GetExactMatchModel3SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = restOperations.Get(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, exactMatchModel3SName, cancellationToken);
                     return response;
                 }
@@ -360,7 +371,7 @@ namespace ExactMatchInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetExactMatchModel4SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    ExactMatchModel4SRestOperations restOperations = GetExactMatchModel4SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = await restOperations.PutAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, exactMatchModel4SName, parameters, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
@@ -399,7 +410,7 @@ namespace ExactMatchInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetExactMatchModel4SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    ExactMatchModel4SRestOperations restOperations = GetExactMatchModel4SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = restOperations.Put(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, exactMatchModel4SName, parameters, cancellationToken);
                     return response;
                 }

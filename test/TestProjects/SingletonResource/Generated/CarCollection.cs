@@ -8,10 +8,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
+using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
@@ -21,7 +23,7 @@ using SingletonResource.Models;
 namespace SingletonResource
 {
     /// <summary> A class representing collection of Car and their operations over its parent. </summary>
-    public partial class CarCollection : ArmCollection, IEnumerable<Car>
+    public partial class CarCollection : ArmCollection, IEnumerable<Car>, IAsyncEnumerable<Car>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly CarsRestOperations _carsRestClient;
@@ -32,17 +34,24 @@ namespace SingletonResource
         {
         }
 
-        /// <summary> Initializes a new instance of CarCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="CarCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal CarCollection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _carsRestClient = new CarsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
-            _restClient = new SingletonResourceRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            ClientOptions.TryGetApiVersion(Car.ResourceType, out string apiVersion);
+            _carsRestClient = new CarsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
+            _restClient = new SingletonResourceRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
+#if DEBUG
+			ValidateResourceId(Id);
+#endif
         }
 
-        /// <summary> Gets the valid resource type for this object. </summary>
-        protected override ResourceType ValidResourceType => ResourceGroup.ResourceType;
+        internal static void ValidateResourceId(ResourceIdentifier id)
+        {
+            if (id.ResourceType != ResourceGroup.ResourceType)
+                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ResourceGroup.ResourceType), nameof(id));
+        }
 
         // Collection level operations.
 
@@ -54,7 +63,7 @@ namespace SingletonResource
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="carName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual CarPutOperation CreateOrUpdate(string carName, CarData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual CarCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string carName, CarData parameters, CancellationToken cancellationToken = default)
         {
             if (carName == null)
             {
@@ -70,7 +79,7 @@ namespace SingletonResource
             try
             {
                 var response = _carsRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, carName, parameters, cancellationToken);
-                var operation = new CarPutOperation(Parent, response);
+                var operation = new CarCreateOrUpdateOperation(Parent, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -90,7 +99,7 @@ namespace SingletonResource
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="carName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<CarPutOperation> CreateOrUpdateAsync(string carName, CarData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<CarCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string carName, CarData parameters, CancellationToken cancellationToken = default)
         {
             if (carName == null)
             {
@@ -106,7 +115,7 @@ namespace SingletonResource
             try
             {
                 var response = await _carsRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, carName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new CarPutOperation(Parent, response);
+                var operation = new CarCreateOrUpdateOperation(Parent, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -192,9 +201,9 @@ namespace SingletonResource
             try
             {
                 var response = _carsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, carName, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<Car>(null, response.GetRawResponse())
-                    : Response.FromValue(new Car(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<Car>(null, response.GetRawResponse());
+                return Response.FromValue(new Car(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -214,14 +223,14 @@ namespace SingletonResource
                 throw new ArgumentNullException(nameof(carName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("CarCollection.GetIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("CarCollection.GetIfExists");
             scope.Start();
             try
             {
                 var response = await _carsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, carName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<Car>(null, response.GetRawResponse())
-                    : Response.FromValue(new Car(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<Car>(null, response.GetRawResponse());
+                return Response.FromValue(new Car(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -234,14 +243,14 @@ namespace SingletonResource
         /// <param name="carName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="carName"/> is null. </exception>
-        public virtual Response<bool> CheckIfExists(string carName, CancellationToken cancellationToken = default)
+        public virtual Response<bool> Exists(string carName, CancellationToken cancellationToken = default)
         {
             if (carName == null)
             {
                 throw new ArgumentNullException(nameof(carName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("CarCollection.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("CarCollection.Exists");
             scope.Start();
             try
             {
@@ -259,14 +268,14 @@ namespace SingletonResource
         /// <param name="carName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="carName"/> is null. </exception>
-        public async virtual Task<Response<bool>> CheckIfExistsAsync(string carName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> ExistsAsync(string carName, CancellationToken cancellationToken = default)
         {
             if (carName == null)
             {
                 throw new ArgumentNullException(nameof(carName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("CarCollection.CheckIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("CarCollection.Exists");
             scope.Start();
             try
             {
@@ -284,40 +293,50 @@ namespace SingletonResource
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
         /// OperationId: Cars
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IReadOnlyList<Car>> GetAll(CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="Car" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<Car> GetAll(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("CarCollection.GetAll");
-            scope.Start();
-            try
+            Page<Car> FirstPageFunc(int? pageSizeHint)
             {
-                var response = _restClient.Cars(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken);
-                return Response.FromValue(response.Value.Value.Select(value => new Car(Parent, value)).ToArray() as IReadOnlyList<Car>, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("CarCollection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = _restClient.Cars(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new Car(Parent, value)), null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cars
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
         /// OperationId: Cars
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<IReadOnlyList<Car>>> GetAllAsync(CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="Car" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<Car> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("CarCollection.GetAll");
-            scope.Start();
-            try
+            async Task<Page<Car>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await _restClient.CarsAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(response.Value.Value.Select(value => new Car(Parent, value)).ToArray() as IReadOnlyList<Car>, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("CarCollection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = await _restClient.CarsAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new Car(Parent, value)), null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
         /// <summary> Filters the list of <see cref="Car" /> for this resource group represented as generic resources. </summary>
@@ -368,15 +387,20 @@ namespace SingletonResource
 
         IEnumerator<Car> IEnumerable<Car>.GetEnumerator()
         {
-            return GetAll().Value.GetEnumerator();
+            return GetAll().GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return GetAll().Value.GetEnumerator();
+            return GetAll().GetEnumerator();
+        }
+
+        IAsyncEnumerator<Car> IAsyncEnumerable<Car>.GetAsyncEnumerator(CancellationToken cancellationToken)
+        {
+            return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, Car, CarData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, Car, CarData> Construct() { }
     }
 }

@@ -54,8 +54,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.WriteXmlDocumentationParameter($"{ExtensionOperationVariableName}", $"The <see cref=\"{ExtensionOperationVariableType}\" /> instance the method will execute against.");
             writer.WriteXmlDocumentationParameter("id", $"The resource ID of the resource to get.");
             writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{resource.Type.Name}\" /> object.");
-            using (writer.Scope($"public static {resource.Type} Get{resource.Type.Name}(this {ExtensionOperationVariableType} {ExtensionOperationVariableName}, {typeof(ResourceIdentifier)} id)"))
+            using (writer.Scope($"public static {resource.Type} Get{resource.Type.Name}(this {ExtensionOperationVariableType} {ExtensionOperationVariableName}, {typeof(Azure.Core.ResourceIdentifier)} id)"))
             {
+                writer.Line($"{resource.Type.Name}.ValidateResourceId(id);");
                 writer.Line($"return {ExtensionOperationVariableName}.UseClientContext((uri, credential, clientOptions, pipeline) => new {resource.Type.Name}(clientOptions, credential, uri, pipeline, id));");
             }
         }

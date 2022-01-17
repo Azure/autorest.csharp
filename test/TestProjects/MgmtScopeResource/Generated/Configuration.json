@@ -20,6 +20,11 @@
     "/providers/Microsoft.Management/managementGroups/{groupId}/providers/Microsoft.Resources/deployments/{deploymentName}/whatIf": "/{scope}/providers/Microsoft.Resources/deployments/{deploymentName}",
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Resources/deployments/{deploymentName}/whatIf": "/{scope}/providers/Microsoft.Resources/deployments/{deploymentName}"
   },
+  "OperationPositions": {
+    "/{scope}/providers/Microsoft.Resources/links": [
+      "collection"
+    ]
+  },
   "RequestPathToResourceData": {
     "/{linkId}": "ResourceLink"
   },
@@ -39,6 +44,9 @@
       "managementGroups",
       "tenant"
     ]
+  },
+  "OverrideOperationName": {
+    "ResourceLinks_ListAtSourceScope": "GetAll"
   },
   "MgmtDebug": {
     "ShowRequestPath": true

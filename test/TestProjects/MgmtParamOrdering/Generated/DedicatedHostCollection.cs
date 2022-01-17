@@ -8,13 +8,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using MgmtParamOrdering.Models;
 
@@ -22,7 +22,6 @@ namespace MgmtParamOrdering
 {
     /// <summary> A class representing collection of DedicatedHost and their operations over its parent. </summary>
     public partial class DedicatedHostCollection : ArmCollection, IEnumerable<DedicatedHost>, IAsyncEnumerable<DedicatedHost>
-
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly DedicatedHostsRestOperations _dedicatedHostsRestClient;
@@ -32,16 +31,23 @@ namespace MgmtParamOrdering
         {
         }
 
-        /// <summary> Initializes a new instance of DedicatedHostCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="DedicatedHostCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal DedicatedHostCollection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _dedicatedHostsRestClient = new DedicatedHostsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            ClientOptions.TryGetApiVersion(DedicatedHost.ResourceType, out string apiVersion);
+            _dedicatedHostsRestClient = new DedicatedHostsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
+#if DEBUG
+			ValidateResourceId(Id);
+#endif
         }
 
-        /// <summary> Gets the valid resource type for this object. </summary>
-        protected override ResourceType ValidResourceType => DedicatedHostGroup.ResourceType;
+        internal static void ValidateResourceId(ResourceIdentifier id)
+        {
+            if (id.ResourceType != DedicatedHostGroup.ResourceType)
+                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, DedicatedHostGroup.ResourceType), nameof(id));
+        }
 
         // Collection level operations.
 
@@ -54,7 +60,7 @@ namespace MgmtParamOrdering
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="hostName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual DedicatedHostCreateOrUpdateOperation CreateOrUpdate(string hostName, DedicatedHostData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual DedicatedHostCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string hostName, DedicatedHostData parameters, CancellationToken cancellationToken = default)
         {
             if (hostName == null)
             {
@@ -91,7 +97,7 @@ namespace MgmtParamOrdering
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="hostName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<DedicatedHostCreateOrUpdateOperation> CreateOrUpdateAsync(string hostName, DedicatedHostData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<DedicatedHostCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string hostName, DedicatedHostData parameters, CancellationToken cancellationToken = default)
         {
             if (hostName == null)
             {
@@ -195,9 +201,9 @@ namespace MgmtParamOrdering
             try
             {
                 var response = _dedicatedHostsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, hostName, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<DedicatedHost>(null, response.GetRawResponse())
-                    : Response.FromValue(new DedicatedHost(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<DedicatedHost>(null, response.GetRawResponse());
+                return Response.FromValue(new DedicatedHost(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -217,14 +223,14 @@ namespace MgmtParamOrdering
                 throw new ArgumentNullException(nameof(hostName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DedicatedHostCollection.GetIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("DedicatedHostCollection.GetIfExists");
             scope.Start();
             try
             {
                 var response = await _dedicatedHostsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, hostName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<DedicatedHost>(null, response.GetRawResponse())
-                    : Response.FromValue(new DedicatedHost(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<DedicatedHost>(null, response.GetRawResponse());
+                return Response.FromValue(new DedicatedHost(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -237,14 +243,14 @@ namespace MgmtParamOrdering
         /// <param name="hostName"> The name of the dedicated host. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="hostName"/> is null. </exception>
-        public virtual Response<bool> CheckIfExists(string hostName, CancellationToken cancellationToken = default)
+        public virtual Response<bool> Exists(string hostName, CancellationToken cancellationToken = default)
         {
             if (hostName == null)
             {
                 throw new ArgumentNullException(nameof(hostName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DedicatedHostCollection.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("DedicatedHostCollection.Exists");
             scope.Start();
             try
             {
@@ -262,14 +268,14 @@ namespace MgmtParamOrdering
         /// <param name="hostName"> The name of the dedicated host. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="hostName"/> is null. </exception>
-        public async virtual Task<Response<bool>> CheckIfExistsAsync(string hostName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> ExistsAsync(string hostName, CancellationToken cancellationToken = default)
         {
             if (hostName == null)
             {
                 throw new ArgumentNullException(nameof(hostName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DedicatedHostCollection.CheckIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("DedicatedHostCollection.Exists");
             scope.Start();
             try
             {
@@ -381,6 +387,6 @@ namespace MgmtParamOrdering
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, DedicatedHost, DedicatedHostData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, DedicatedHost, DedicatedHostData> Construct() { }
     }
 }

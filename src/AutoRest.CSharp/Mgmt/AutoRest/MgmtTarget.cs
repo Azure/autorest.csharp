@@ -89,6 +89,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             foreach (var model in context.Library.ResourceData)
             {
+                if (TypeReferenceTypeChooser.HasMatch(model.ObjectSchema))
+                    continue;
+
                 var codeWriter = new CodeWriter();
                 ReferenceTypeWriter.GetWriter(model).WriteModel(codeWriter, model);
 
@@ -106,22 +109,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 new ResourceWriter(codeWriter, resource, context).Write();
 
                 AddGeneratedFile(project, $"{resource.Type.Name}.cs", codeWriter.ToString());
-            }
-
-            foreach (var operation in context.Library.LongRunningOperations)
-            {
-                var codeWriter = new CodeWriter();
-                new MgmtLongRunningOperationWriter().Write(codeWriter, operation);
-
-                AddGeneratedFile(project, $"LongRunningOperation/{operation.Type.Name}.cs", codeWriter.ToString());
-            }
-
-            foreach (var operation in context.Library.NonLongRunningOperations)
-            {
-                var codeWriter = new CodeWriter();
-                new NonLongRunningOperationWriter().Write(codeWriter, operation);
-
-                AddGeneratedFile(project, $"LongRunningOperation/{operation.Type.Name}.cs", codeWriter.ToString());
             }
 
             // we will write the ResourceGroupExtensions class even if it does not contain anything
@@ -162,6 +149,23 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 AddGeneratedFile(project, $"Extensions/{context.Library.ArmResourceExtensions.Type.Name}.cs", armResourceExtensionsCodeWriter.ToString());
             }
 
+            // we must output the LROs and fake LROs as the last step to sure all the LRO and fake LRO object could be initialized.
+            foreach (var operation in context.Library.LongRunningOperations)
+            {
+                var codeWriter = new CodeWriter();
+                new MgmtLongRunningOperationWriter().Write(codeWriter, operation);
+
+                AddGeneratedFile(project, $"LongRunningOperation/{operation.Type.Name}.cs", codeWriter.ToString());
+            }
+
+            foreach (var operation in context.Library.NonLongRunningOperations)
+            {
+                var codeWriter = new CodeWriter();
+                new NonLongRunningOperationWriter().Write(codeWriter, operation);
+
+                AddGeneratedFile(project, $"LongRunningOperation/{operation.Type.Name}.cs", codeWriter.ToString());
+            }
+
             if (_overriddenProjectFilenames.TryGetValue(project, out var overriddenFilenames))
                 throw new InvalidOperationException($"At least one file was overridden during the generation process. Filenames are: {string.Join(", ", overriddenFilenames)}");
         }
@@ -175,11 +179,24 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             {
                 return true;
             }
+
+            // do not skip generation of reference types in resource manager
+            // some common types (like `PrivateEndpointConnectionData`) will inherit `Resource`
+            // it will cause `Resource` not being generated since `Resource` is `usedAsInheritance`
+            if (model is MgmtReferenceType)
+            {
+                return false;
+            }
+
             if (model is SchemaObjectType objSchema)
             {
                 //TODO: we need to add logic to replace SubResource with ResourceIdentifier where appropriate until then we won't remove these types
                 if (objSchema.ObjectSchema.Name.StartsWith("SubResource"))
                     return false;
+
+                if (TypeReferenceTypeChooser.HasMatch(objSchema.ObjectSchema))
+                    return true;
+
                 //skip things that had exact match replacements
                 //TODO: Can go away after full orphan fix https://dev.azure.com/azure-mgmt-ex/DotNET%20Management%20SDK/_workitems/edit/6000
                 //Since we forced the evaluation of inheritance and property match for all models before, here we can use the fully loaded cache to

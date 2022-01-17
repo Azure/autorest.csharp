@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -15,7 +16,6 @@ using Azure.Core.Pipeline;
 using Azure.Management.Storage.Models;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
-using Azure.ResourceManager.Resources.Models;
 
 namespace Azure.Management.Storage
 {
@@ -40,14 +40,18 @@ namespace Azure.Management.Storage
 
         /// <summary> Initializes a new instance of the <see cref = "StorageAccount"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
-        /// <param name="resource"> The resource that is the target of operations. </param>
-        internal StorageAccount(ArmResource options, StorageAccountData resource) : base(options, resource.Id)
+        /// <param name="data"> The resource that is the target of operations. </param>
+        internal StorageAccount(ArmResource options, StorageAccountData data) : base(options, data.Id)
         {
             HasData = true;
-            _data = resource;
+            _data = data;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _storageAccountsRestClient = new StorageAccountsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
-            _privateLinkResourcesRestClient = new PrivateLinkResourcesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            ClientOptions.TryGetApiVersion(ResourceType, out string apiVersion);
+            _storageAccountsRestClient = new StorageAccountsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
+            _privateLinkResourcesRestClient = new PrivateLinkResourcesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
+#if DEBUG
+			ValidateResourceId(Id);
+#endif
         }
 
         /// <summary> Initializes a new instance of the <see cref="StorageAccount"/> class. </summary>
@@ -56,8 +60,12 @@ namespace Azure.Management.Storage
         internal StorageAccount(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _storageAccountsRestClient = new StorageAccountsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
-            _privateLinkResourcesRestClient = new PrivateLinkResourcesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            ClientOptions.TryGetApiVersion(ResourceType, out string apiVersion);
+            _storageAccountsRestClient = new StorageAccountsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
+            _privateLinkResourcesRestClient = new PrivateLinkResourcesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
+#if DEBUG
+			ValidateResourceId(Id);
+#endif
         }
 
         /// <summary> Initializes a new instance of the <see cref="StorageAccount"/> class. </summary>
@@ -69,15 +77,16 @@ namespace Azure.Management.Storage
         internal StorageAccount(ArmClientOptions clientOptions, TokenCredential credential, Uri uri, HttpPipeline pipeline, ResourceIdentifier id) : base(clientOptions, credential, uri, pipeline, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _storageAccountsRestClient = new StorageAccountsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
-            _privateLinkResourcesRestClient = new PrivateLinkResourcesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            ClientOptions.TryGetApiVersion(ResourceType, out string apiVersion);
+            _storageAccountsRestClient = new StorageAccountsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
+            _privateLinkResourcesRestClient = new PrivateLinkResourcesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
+#if DEBUG
+			ValidateResourceId(Id);
+#endif
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
         public static readonly ResourceType ResourceType = "Microsoft.Storage/storageAccounts";
-
-        /// <summary> Gets the valid resource type for the operations. </summary>
-        protected override ResourceType ValidResourceType => ResourceType;
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }
@@ -92,6 +101,12 @@ namespace Azure.Management.Storage
                     throw new InvalidOperationException("The current instance does not have data, you must call Get first.");
                 return _data;
             }
+        }
+
+        internal static void ValidateResourceId(ResourceIdentifier id)
+        {
+            if (id.ResourceType != ResourceType)
+                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ResourceType), nameof(id));
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
@@ -145,17 +160,37 @@ namespace Azure.Management.Storage
         /// <summary> Lists all available geo-locations. </summary>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
-        public async virtual Task<IEnumerable<Location>> GetAvailableLocationsAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<IEnumerable<AzureLocation>> GetAvailableLocationsAsync(CancellationToken cancellationToken = default)
         {
-            return await ListAvailableLocationsAsync(ResourceType, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("StorageAccount.GetAvailableLocations");
+            scope.Start();
+            try
+            {
+                return await ListAvailableLocationsAsync(ResourceType, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Lists all available geo-locations. </summary>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
-        public virtual IEnumerable<Location> GetAvailableLocations(CancellationToken cancellationToken = default)
+        public virtual IEnumerable<AzureLocation> GetAvailableLocations(CancellationToken cancellationToken = default)
         {
-            return ListAvailableLocations(ResourceType, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("StorageAccount.GetAvailableLocations");
+            scope.Start();
+            try
+            {
+                return ListAvailableLocations(ResourceType, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
@@ -164,7 +199,7 @@ namespace Azure.Management.Storage
         /// <summary> Deletes a storage account in Microsoft Azure. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<StorageAccountDeleteOperation> DeleteAsync(bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<StorageAccountDeleteOperation> DeleteAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("StorageAccount.Delete");
             scope.Start();
@@ -189,7 +224,7 @@ namespace Azure.Management.Storage
         /// <summary> Deletes a storage account in Microsoft Azure. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual StorageAccountDeleteOperation Delete(bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual StorageAccountDeleteOperation Delete(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("StorageAccount.Delete");
             scope.Start();
@@ -198,7 +233,7 @@ namespace Azure.Management.Storage
                 var response = _storageAccountsRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 var operation = new StorageAccountDeleteOperation(response);
                 if (waitForCompletion)
-                    operation.WaitForCompletion(cancellationToken);
+                    operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
             }
             catch (Exception e)
@@ -217,7 +252,7 @@ namespace Azure.Management.Storage
         {
             if (string.IsNullOrWhiteSpace(key))
             {
-                throw new ArgumentNullException($"{nameof(key)} provided cannot be null or a whitespace.", nameof(key));
+                throw new ArgumentNullException(nameof(key), $"{nameof(key)} provided cannot be null or a whitespace.");
             }
 
             using var scope = _clientDiagnostics.CreateScope("StorageAccount.AddTag");
@@ -246,7 +281,7 @@ namespace Azure.Management.Storage
         {
             if (string.IsNullOrWhiteSpace(key))
             {
-                throw new ArgumentNullException($"{nameof(key)} provided cannot be null or a whitespace.", nameof(key));
+                throw new ArgumentNullException(nameof(key), $"{nameof(key)} provided cannot be null or a whitespace.");
             }
 
             using var scope = _clientDiagnostics.CreateScope("StorageAccount.AddTag");
@@ -274,7 +309,7 @@ namespace Azure.Management.Storage
         {
             if (tags == null)
             {
-                throw new ArgumentNullException($"{nameof(tags)} provided cannot be null.", nameof(tags));
+                throw new ArgumentNullException(nameof(tags), $"{nameof(tags)} provided cannot be null.");
             }
 
             using var scope = _clientDiagnostics.CreateScope("StorageAccount.SetTags");
@@ -303,7 +338,7 @@ namespace Azure.Management.Storage
         {
             if (tags == null)
             {
-                throw new ArgumentNullException($"{nameof(tags)} provided cannot be null.", nameof(tags));
+                throw new ArgumentNullException(nameof(tags), $"{nameof(tags)} provided cannot be null.");
             }
 
             using var scope = _clientDiagnostics.CreateScope("StorageAccount.SetTags");
@@ -332,7 +367,7 @@ namespace Azure.Management.Storage
         {
             if (string.IsNullOrWhiteSpace(key))
             {
-                throw new ArgumentNullException($"{nameof(key)} provided cannot be null or a whitespace.", nameof(key));
+                throw new ArgumentNullException(nameof(key), $"{nameof(key)} provided cannot be null or a whitespace.");
             }
 
             using var scope = _clientDiagnostics.CreateScope("StorageAccount.RemoveTag");
@@ -360,7 +395,7 @@ namespace Azure.Management.Storage
         {
             if (string.IsNullOrWhiteSpace(key))
             {
-                throw new ArgumentNullException($"{nameof(key)} provided cannot be null or a whitespace.", nameof(key));
+                throw new ArgumentNullException(nameof(key), $"{nameof(key)} provided cannot be null or a whitespace.");
             }
 
             using var scope = _clientDiagnostics.CreateScope("StorageAccount.RemoveTag");
@@ -652,7 +687,7 @@ namespace Azure.Management.Storage
         /// <summary> Failover request can be triggered for a storage account in case of availability issues. The failover occurs from the storage account&apos;s primary cluster to secondary cluster for RA-GRS accounts. The secondary cluster will become primary after failover. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<StorageAccountFailoverOperation> FailoverAsync(bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<StorageAccountFailoverOperation> FailoverAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("StorageAccount.Failover");
             scope.Start();
@@ -677,7 +712,7 @@ namespace Azure.Management.Storage
         /// <summary> Failover request can be triggered for a storage account in case of availability issues. The failover occurs from the storage account&apos;s primary cluster to secondary cluster for RA-GRS accounts. The secondary cluster will become primary after failover. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual StorageAccountFailoverOperation Failover(bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual StorageAccountFailoverOperation Failover(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("StorageAccount.Failover");
             scope.Start();
@@ -686,7 +721,7 @@ namespace Azure.Management.Storage
                 var response = _storageAccountsRestClient.Failover(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 var operation = new StorageAccountFailoverOperation(_clientDiagnostics, Pipeline, _storageAccountsRestClient.CreateFailoverRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response);
                 if (waitForCompletion)
-                    operation.WaitForCompletion(cancellationToken);
+                    operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
             }
             catch (Exception e)
@@ -704,7 +739,7 @@ namespace Azure.Management.Storage
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requestType"/> is null. </exception>
-        public async virtual Task<StorageAccountHierarchicalNamespaceMigrationOperation> HierarchicalNamespaceMigrationAsync(string requestType, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<StorageAccountHierarchicalNamespaceMigrationOperation> HierarchicalNamespaceMigrationAsync(bool waitForCompletion, string requestType, CancellationToken cancellationToken = default)
         {
             if (requestType == null)
             {
@@ -736,7 +771,7 @@ namespace Azure.Management.Storage
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requestType"/> is null. </exception>
-        public virtual StorageAccountHierarchicalNamespaceMigrationOperation HierarchicalNamespaceMigration(string requestType, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual StorageAccountHierarchicalNamespaceMigrationOperation HierarchicalNamespaceMigration(bool waitForCompletion, string requestType, CancellationToken cancellationToken = default)
         {
             if (requestType == null)
             {
@@ -750,7 +785,7 @@ namespace Azure.Management.Storage
                 var response = _storageAccountsRestClient.HierarchicalNamespaceMigration(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, requestType, cancellationToken);
                 var operation = new StorageAccountHierarchicalNamespaceMigrationOperation(_clientDiagnostics, Pipeline, _storageAccountsRestClient.CreateHierarchicalNamespaceMigrationRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, requestType).Request, response);
                 if (waitForCompletion)
-                    operation.WaitForCompletion(cancellationToken);
+                    operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
             }
             catch (Exception e)
@@ -766,7 +801,7 @@ namespace Azure.Management.Storage
         /// <summary> Abort live Migration of storage account to enable Hns. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<StorageAccountAbortHierarchicalNamespaceMigrationOperation> AbortHierarchicalNamespaceMigrationAsync(bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<StorageAccountAbortHierarchicalNamespaceMigrationOperation> AbortHierarchicalNamespaceMigrationAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("StorageAccount.AbortHierarchicalNamespaceMigration");
             scope.Start();
@@ -791,7 +826,7 @@ namespace Azure.Management.Storage
         /// <summary> Abort live Migration of storage account to enable Hns. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual StorageAccountAbortHierarchicalNamespaceMigrationOperation AbortHierarchicalNamespaceMigration(bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual StorageAccountAbortHierarchicalNamespaceMigrationOperation AbortHierarchicalNamespaceMigration(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("StorageAccount.AbortHierarchicalNamespaceMigration");
             scope.Start();
@@ -800,7 +835,7 @@ namespace Azure.Management.Storage
                 var response = _storageAccountsRestClient.AbortHierarchicalNamespaceMigration(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 var operation = new StorageAccountAbortHierarchicalNamespaceMigrationOperation(_clientDiagnostics, Pipeline, _storageAccountsRestClient.CreateAbortHierarchicalNamespaceMigrationRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response);
                 if (waitForCompletion)
-                    operation.WaitForCompletion(cancellationToken);
+                    operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
             }
             catch (Exception e)
@@ -818,7 +853,7 @@ namespace Azure.Management.Storage
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<StorageAccountRestoreBlobRangesOperation> RestoreBlobRangesAsync(BlobRestoreParameters parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<StorageAccountRestoreBlobRangesOperation> RestoreBlobRangesAsync(bool waitForCompletion, BlobRestoreParameters parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -850,7 +885,7 @@ namespace Azure.Management.Storage
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual StorageAccountRestoreBlobRangesOperation RestoreBlobRanges(BlobRestoreParameters parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual StorageAccountRestoreBlobRangesOperation RestoreBlobRanges(bool waitForCompletion, BlobRestoreParameters parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -921,20 +956,25 @@ namespace Azure.Management.Storage
         /// OperationId: PrivateLinkResources_ListByStorageAccount
         /// <summary> Gets the private link resources that need to be created for a storage account. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<IReadOnlyList<PrivateLinkResource>>> GetPrivateLinkResourcesAsync(CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="PrivateLinkResource" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<PrivateLinkResource> GetPrivateLinkResourcesAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("StorageAccount.GetPrivateLinkResources");
-            scope.Start();
-            try
+            async Task<Page<PrivateLinkResource>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await _privateLinkResourcesRestClient.ListByStorageAccountAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(response.Value.Value, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("StorageAccount.GetPrivateLinkResources");
+                scope.Start();
+                try
+                {
+                    var response = await _privateLinkResourcesRestClient.ListByStorageAccountAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/privateLinkResources
@@ -942,27 +982,32 @@ namespace Azure.Management.Storage
         /// OperationId: PrivateLinkResources_ListByStorageAccount
         /// <summary> Gets the private link resources that need to be created for a storage account. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IReadOnlyList<PrivateLinkResource>> GetPrivateLinkResources(CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="PrivateLinkResource" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<PrivateLinkResource> GetPrivateLinkResources(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("StorageAccount.GetPrivateLinkResources");
-            scope.Start();
-            try
+            Page<PrivateLinkResource> FirstPageFunc(int? pageSizeHint)
             {
-                var response = _privateLinkResourcesRestClient.ListByStorageAccount(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
-                return Response.FromValue(response.Value.Value, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("StorageAccount.GetPrivateLinkResources");
+                scope.Start();
+                try
+                {
+                    var response = _privateLinkResourcesRestClient.ListByStorageAccount(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
 
         #region BlobService
 
         /// <summary> Gets an object representing a BlobService along with the instance operations that can be performed on it in the StorageAccount. </summary>
         /// <returns> Returns a <see cref="BlobService" /> object. </returns>
-        public BlobService GetBlobService()
+        public virtual BlobService GetBlobService()
         {
             return new BlobService(this, new ResourceIdentifier(Id.ToString() + "/blobServices/default"));
         }
@@ -972,7 +1017,7 @@ namespace Azure.Management.Storage
 
         /// <summary> Gets an object representing a FileService along with the instance operations that can be performed on it in the StorageAccount. </summary>
         /// <returns> Returns a <see cref="FileService" /> object. </returns>
-        public FileService GetFileService()
+        public virtual FileService GetFileService()
         {
             return new FileService(this, new ResourceIdentifier(Id.ToString() + "/fileServices/default"));
         }
@@ -980,11 +1025,11 @@ namespace Azure.Management.Storage
 
         #region ManagementPolicy
 
-        /// <summary> Gets a collection of ManagementPolicies in the StorageAccount. </summary>
-        /// <returns> An object representing collection of ManagementPolicies and their operations over a StorageAccount. </returns>
-        public ManagementPolicyCollection GetManagementPolicies()
+        /// <summary> Gets an object representing a ManagementPolicy along with the instance operations that can be performed on it in the StorageAccount. </summary>
+        /// <returns> Returns a <see cref="ManagementPolicy" /> object. </returns>
+        public virtual ManagementPolicy GetManagementPolicy()
         {
-            return new ManagementPolicyCollection(this);
+            return new ManagementPolicy(this, new ResourceIdentifier(Id.ToString() + "/managementPolicies/default"));
         }
         #endregion
 
@@ -992,7 +1037,7 @@ namespace Azure.Management.Storage
 
         /// <summary> Gets a collection of BlobInventoryPolicies in the StorageAccount. </summary>
         /// <returns> An object representing collection of BlobInventoryPolicies and their operations over a StorageAccount. </returns>
-        public BlobInventoryPolicyCollection GetBlobInventoryPolicies()
+        public virtual BlobInventoryPolicyCollection GetBlobInventoryPolicies()
         {
             return new BlobInventoryPolicyCollection(this);
         }
@@ -1002,7 +1047,7 @@ namespace Azure.Management.Storage
 
         /// <summary> Gets a collection of PrivateEndpointConnections in the StorageAccount. </summary>
         /// <returns> An object representing collection of PrivateEndpointConnections and their operations over a StorageAccount. </returns>
-        public PrivateEndpointConnectionCollection GetPrivateEndpointConnections()
+        public virtual PrivateEndpointConnectionCollection GetPrivateEndpointConnections()
         {
             return new PrivateEndpointConnectionCollection(this);
         }
@@ -1012,7 +1057,7 @@ namespace Azure.Management.Storage
 
         /// <summary> Gets a collection of ObjectReplicationPolicies in the StorageAccount. </summary>
         /// <returns> An object representing collection of ObjectReplicationPolicies and their operations over a StorageAccount. </returns>
-        public ObjectReplicationPolicyCollection GetObjectReplicationPolicies()
+        public virtual ObjectReplicationPolicyCollection GetObjectReplicationPolicies()
         {
             return new ObjectReplicationPolicyCollection(this);
         }
@@ -1022,7 +1067,7 @@ namespace Azure.Management.Storage
 
         /// <summary> Gets a collection of EncryptionScopes in the StorageAccount. </summary>
         /// <returns> An object representing collection of EncryptionScopes and their operations over a StorageAccount. </returns>
-        public EncryptionScopeCollection GetEncryptionScopes()
+        public virtual EncryptionScopeCollection GetEncryptionScopes()
         {
             return new EncryptionScopeCollection(this);
         }

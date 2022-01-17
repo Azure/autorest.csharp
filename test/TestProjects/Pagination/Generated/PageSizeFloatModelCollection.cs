@@ -8,6 +8,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -23,7 +24,6 @@ namespace Pagination
 {
     /// <summary> A class representing collection of PageSizeFloatModel and their operations over its parent. </summary>
     public partial class PageSizeFloatModelCollection : ArmCollection, IEnumerable<PageSizeFloatModel>, IAsyncEnumerable<PageSizeFloatModel>
-
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly PageSizeFloatModelsRestOperations _pageSizeFloatModelsRestClient;
@@ -33,16 +33,23 @@ namespace Pagination
         {
         }
 
-        /// <summary> Initializes a new instance of PageSizeFloatModelCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="PageSizeFloatModelCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal PageSizeFloatModelCollection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _pageSizeFloatModelsRestClient = new PageSizeFloatModelsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            ClientOptions.TryGetApiVersion(PageSizeFloatModel.ResourceType, out string apiVersion);
+            _pageSizeFloatModelsRestClient = new PageSizeFloatModelsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
+#if DEBUG
+			ValidateResourceId(Id);
+#endif
         }
 
-        /// <summary> Gets the valid resource type for this object. </summary>
-        protected override ResourceType ValidResourceType => ResourceGroup.ResourceType;
+        internal static void ValidateResourceId(ResourceIdentifier id)
+        {
+            if (id.ResourceType != ResourceGroup.ResourceType)
+                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ResourceGroup.ResourceType), nameof(id));
+        }
 
         // Collection level operations.
 
@@ -51,7 +58,7 @@ namespace Pagination
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual PageSizeFloatModelPutOperation CreateOrUpdate(string name, PageSizeFloatModelData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual PageSizeFloatModelCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string name, PageSizeFloatModelData parameters, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
@@ -67,7 +74,7 @@ namespace Pagination
             try
             {
                 var response = _pageSizeFloatModelsRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, name, parameters, cancellationToken);
-                var operation = new PageSizeFloatModelPutOperation(Parent, response);
+                var operation = new PageSizeFloatModelCreateOrUpdateOperation(Parent, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -84,7 +91,7 @@ namespace Pagination
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<PageSizeFloatModelPutOperation> CreateOrUpdateAsync(string name, PageSizeFloatModelData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<PageSizeFloatModelCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string name, PageSizeFloatModelData parameters, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
@@ -100,7 +107,7 @@ namespace Pagination
             try
             {
                 var response = await _pageSizeFloatModelsRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, name, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new PageSizeFloatModelPutOperation(Parent, response);
+                var operation = new PageSizeFloatModelCreateOrUpdateOperation(Parent, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -180,9 +187,9 @@ namespace Pagination
             try
             {
                 var response = _pageSizeFloatModelsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<PageSizeFloatModel>(null, response.GetRawResponse())
-                    : Response.FromValue(new PageSizeFloatModel(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<PageSizeFloatModel>(null, response.GetRawResponse());
+                return Response.FromValue(new PageSizeFloatModel(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -202,14 +209,14 @@ namespace Pagination
                 throw new ArgumentNullException(nameof(name));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("PageSizeFloatModelCollection.GetIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("PageSizeFloatModelCollection.GetIfExists");
             scope.Start();
             try
             {
                 var response = await _pageSizeFloatModelsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<PageSizeFloatModel>(null, response.GetRawResponse())
-                    : Response.FromValue(new PageSizeFloatModel(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<PageSizeFloatModel>(null, response.GetRawResponse());
+                return Response.FromValue(new PageSizeFloatModel(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -222,14 +229,14 @@ namespace Pagination
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public virtual Response<bool> CheckIfExists(string name, CancellationToken cancellationToken = default)
+        public virtual Response<bool> Exists(string name, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
                 throw new ArgumentNullException(nameof(name));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("PageSizeFloatModelCollection.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("PageSizeFloatModelCollection.Exists");
             scope.Start();
             try
             {
@@ -247,14 +254,14 @@ namespace Pagination
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public async virtual Task<Response<bool>> CheckIfExistsAsync(string name, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> ExistsAsync(string name, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
                 throw new ArgumentNullException(nameof(name));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("PageSizeFloatModelCollection.CheckIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("PageSizeFloatModelCollection.Exists");
             scope.Start();
             try
             {
@@ -406,6 +413,6 @@ namespace Pagination
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, PageSizeFloatModel, PageSizeFloatModelData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, PageSizeFloatModel, PageSizeFloatModelData> Construct() { }
     }
 }

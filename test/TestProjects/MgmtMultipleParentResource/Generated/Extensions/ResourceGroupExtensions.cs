@@ -22,13 +22,13 @@ namespace MgmtMultipleParentResource
         }
         #endregion
 
-        #region Parent
-        /// <summary> Gets an object representing a ParentCollection along with the instance operations that can be performed on it. </summary>
+        #region TheParent
+        /// <summary> Gets an object representing a TheParentCollection along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="ParentCollection" /> object. </returns>
-        public static ParentCollection GetParents(this ResourceGroup resourceGroup)
+        /// <returns> Returns a <see cref="TheParentCollection" /> object. </returns>
+        public static TheParentCollection GetTheParents(this ResourceGroup resourceGroup)
         {
-            return new ParentCollection(resourceGroup);
+            return new TheParentCollection(resourceGroup);
         }
         #endregion
     }

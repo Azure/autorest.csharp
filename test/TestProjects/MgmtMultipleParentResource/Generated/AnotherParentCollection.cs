@@ -8,6 +8,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -23,7 +24,6 @@ namespace MgmtMultipleParentResource
 {
     /// <summary> A class representing collection of AnotherParent and their operations over its parent. </summary>
     public partial class AnotherParentCollection : ArmCollection, IEnumerable<AnotherParent>, IAsyncEnumerable<AnotherParent>
-
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly AnotherParentsRestOperations _anotherParentsRestClient;
@@ -33,16 +33,23 @@ namespace MgmtMultipleParentResource
         {
         }
 
-        /// <summary> Initializes a new instance of AnotherParentCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="AnotherParentCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal AnotherParentCollection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _anotherParentsRestClient = new AnotherParentsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            ClientOptions.TryGetApiVersion(AnotherParent.ResourceType, out string apiVersion);
+            _anotherParentsRestClient = new AnotherParentsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
+#if DEBUG
+			ValidateResourceId(Id);
+#endif
         }
 
-        /// <summary> Gets the valid resource type for this object. </summary>
-        protected override ResourceType ValidResourceType => ResourceGroup.ResourceType;
+        internal static void ValidateResourceId(ResourceIdentifier id)
+        {
+            if (id.ResourceType != ResourceGroup.ResourceType)
+                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ResourceGroup.ResourceType), nameof(id));
+        }
 
         // Collection level operations.
 
@@ -55,7 +62,7 @@ namespace MgmtMultipleParentResource
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="anotherName"/> or <paramref name="anotherBody"/> is null. </exception>
-        public virtual AnotherParentCreateOrUpdateOperation CreateOrUpdate(string anotherName, AnotherParentData anotherBody, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual AnotherParentCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string anotherName, AnotherParentData anotherBody, CancellationToken cancellationToken = default)
         {
             if (anotherName == null)
             {
@@ -92,7 +99,7 @@ namespace MgmtMultipleParentResource
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="anotherName"/> or <paramref name="anotherBody"/> is null. </exception>
-        public async virtual Task<AnotherParentCreateOrUpdateOperation> CreateOrUpdateAsync(string anotherName, AnotherParentData anotherBody, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<AnotherParentCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string anotherName, AnotherParentData anotherBody, CancellationToken cancellationToken = default)
         {
             if (anotherName == null)
             {
@@ -199,9 +206,9 @@ namespace MgmtMultipleParentResource
             try
             {
                 var response = _anotherParentsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, anotherName, expand, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<AnotherParent>(null, response.GetRawResponse())
-                    : Response.FromValue(new AnotherParent(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<AnotherParent>(null, response.GetRawResponse());
+                return Response.FromValue(new AnotherParent(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -222,14 +229,14 @@ namespace MgmtMultipleParentResource
                 throw new ArgumentNullException(nameof(anotherName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("AnotherParentCollection.GetIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("AnotherParentCollection.GetIfExists");
             scope.Start();
             try
             {
                 var response = await _anotherParentsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, anotherName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<AnotherParent>(null, response.GetRawResponse())
-                    : Response.FromValue(new AnotherParent(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<AnotherParent>(null, response.GetRawResponse());
+                return Response.FromValue(new AnotherParent(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -243,14 +250,14 @@ namespace MgmtMultipleParentResource
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="anotherName"/> is null. </exception>
-        public virtual Response<bool> CheckIfExists(string anotherName, string expand = null, CancellationToken cancellationToken = default)
+        public virtual Response<bool> Exists(string anotherName, string expand = null, CancellationToken cancellationToken = default)
         {
             if (anotherName == null)
             {
                 throw new ArgumentNullException(nameof(anotherName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("AnotherParentCollection.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("AnotherParentCollection.Exists");
             scope.Start();
             try
             {
@@ -269,14 +276,14 @@ namespace MgmtMultipleParentResource
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="anotherName"/> is null. </exception>
-        public async virtual Task<Response<bool>> CheckIfExistsAsync(string anotherName, string expand = null, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> ExistsAsync(string anotherName, string expand = null, CancellationToken cancellationToken = default)
         {
             if (anotherName == null)
             {
                 throw new ArgumentNullException(nameof(anotherName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("AnotherParentCollection.CheckIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("AnotherParentCollection.Exists");
             scope.Start();
             try
             {
@@ -436,6 +443,6 @@ namespace MgmtMultipleParentResource
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, AnotherParent, AnotherParentData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, AnotherParent, AnotherParentData> Construct() { }
     }
 }

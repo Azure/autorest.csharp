@@ -8,6 +8,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -23,7 +24,6 @@ namespace MgmtExtensionResource
 {
     /// <summary> A class representing collection of PolicyDefinition and their operations over its parent. </summary>
     public partial class SubscriptionPolicyDefinitionCollection : ArmCollection, IEnumerable<SubscriptionPolicyDefinition>, IAsyncEnumerable<SubscriptionPolicyDefinition>
-
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly PolicyDefinitionsRestOperations _policyDefinitionsRestClient;
@@ -33,16 +33,23 @@ namespace MgmtExtensionResource
         {
         }
 
-        /// <summary> Initializes a new instance of SubscriptionPolicyDefinitionCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="SubscriptionPolicyDefinitionCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal SubscriptionPolicyDefinitionCollection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _policyDefinitionsRestClient = new PolicyDefinitionsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            ClientOptions.TryGetApiVersion(SubscriptionPolicyDefinition.ResourceType, out string apiVersion);
+            _policyDefinitionsRestClient = new PolicyDefinitionsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
+#if DEBUG
+			ValidateResourceId(Id);
+#endif
         }
 
-        /// <summary> Gets the valid resource type for this object. </summary>
-        protected override ResourceType ValidResourceType => Subscription.ResourceType;
+        internal static void ValidateResourceId(ResourceIdentifier id)
+        {
+            if (id.ResourceType != Subscription.ResourceType)
+                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, Subscription.ResourceType), nameof(id));
+        }
 
         // Collection level operations.
 
@@ -55,7 +62,7 @@ namespace MgmtExtensionResource
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual PolicyDefinitionCreateOrUpdateOperation CreateOrUpdate(string policyDefinitionName, PolicyDefinitionData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual SubscriptionPolicyDefinitionCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string policyDefinitionName, PolicyDefinitionData parameters, CancellationToken cancellationToken = default)
         {
             if (policyDefinitionName == null)
             {
@@ -71,7 +78,7 @@ namespace MgmtExtensionResource
             try
             {
                 var response = _policyDefinitionsRestClient.CreateOrUpdate(Id.SubscriptionId, policyDefinitionName, parameters, cancellationToken);
-                var operation = new PolicyDefinitionCreateOrUpdateOperation(Parent, response);
+                var operation = new SubscriptionPolicyDefinitionCreateOrUpdateOperation(Parent, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -92,7 +99,7 @@ namespace MgmtExtensionResource
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<PolicyDefinitionCreateOrUpdateOperation> CreateOrUpdateAsync(string policyDefinitionName, PolicyDefinitionData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<SubscriptionPolicyDefinitionCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string policyDefinitionName, PolicyDefinitionData parameters, CancellationToken cancellationToken = default)
         {
             if (policyDefinitionName == null)
             {
@@ -108,7 +115,7 @@ namespace MgmtExtensionResource
             try
             {
                 var response = await _policyDefinitionsRestClient.CreateOrUpdateAsync(Id.SubscriptionId, policyDefinitionName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new PolicyDefinitionCreateOrUpdateOperation(Parent, response);
+                var operation = new SubscriptionPolicyDefinitionCreateOrUpdateOperation(Parent, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -196,9 +203,9 @@ namespace MgmtExtensionResource
             try
             {
                 var response = _policyDefinitionsRestClient.Get(Id.SubscriptionId, policyDefinitionName, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<SubscriptionPolicyDefinition>(null, response.GetRawResponse())
-                    : Response.FromValue(new SubscriptionPolicyDefinition(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<SubscriptionPolicyDefinition>(null, response.GetRawResponse());
+                return Response.FromValue(new SubscriptionPolicyDefinition(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -218,14 +225,14 @@ namespace MgmtExtensionResource
                 throw new ArgumentNullException(nameof(policyDefinitionName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SubscriptionPolicyDefinitionCollection.GetIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("SubscriptionPolicyDefinitionCollection.GetIfExists");
             scope.Start();
             try
             {
                 var response = await _policyDefinitionsRestClient.GetAsync(Id.SubscriptionId, policyDefinitionName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<SubscriptionPolicyDefinition>(null, response.GetRawResponse())
-                    : Response.FromValue(new SubscriptionPolicyDefinition(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<SubscriptionPolicyDefinition>(null, response.GetRawResponse());
+                return Response.FromValue(new SubscriptionPolicyDefinition(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -238,14 +245,14 @@ namespace MgmtExtensionResource
         /// <param name="policyDefinitionName"> The name of the policy definition to get. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
-        public virtual Response<bool> CheckIfExists(string policyDefinitionName, CancellationToken cancellationToken = default)
+        public virtual Response<bool> Exists(string policyDefinitionName, CancellationToken cancellationToken = default)
         {
             if (policyDefinitionName == null)
             {
                 throw new ArgumentNullException(nameof(policyDefinitionName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SubscriptionPolicyDefinitionCollection.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("SubscriptionPolicyDefinitionCollection.Exists");
             scope.Start();
             try
             {
@@ -263,14 +270,14 @@ namespace MgmtExtensionResource
         /// <param name="policyDefinitionName"> The name of the policy definition to get. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
-        public async virtual Task<Response<bool>> CheckIfExistsAsync(string policyDefinitionName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> ExistsAsync(string policyDefinitionName, CancellationToken cancellationToken = default)
         {
             if (policyDefinitionName == null)
             {
                 throw new ArgumentNullException(nameof(policyDefinitionName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SubscriptionPolicyDefinitionCollection.CheckIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("SubscriptionPolicyDefinitionCollection.Exists");
             scope.Start();
             try
             {
@@ -432,6 +439,6 @@ namespace MgmtExtensionResource
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, SubscriptionPolicyDefinition, PolicyDefinitionData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, SubscriptionPolicyDefinition, PolicyDefinitionData> Construct() { }
     }
 }

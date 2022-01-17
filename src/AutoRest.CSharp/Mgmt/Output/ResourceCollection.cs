@@ -16,6 +16,7 @@ using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure.Core;
+using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
@@ -23,18 +24,21 @@ namespace AutoRest.CSharp.Mgmt.Output
     {
         private const string _suffixValue = "Collection";
 
-        public ResourceCollection(IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> operationSets, string resourceName, BuildContext<MgmtOutputLibrary> context)
-            : base(operationSets, resourceName, ResourceType.Any, context) // The collection might include multiple resource types, therefore we do not need the ResourceType property in Resource base class
+        public ResourceCollection(IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> operationSets, Resource resource, BuildContext<MgmtOutputLibrary> context)
+            : base(operationSets, resource.ResourceName, resource.ResourceType, resource.ResourceData, context, CollectionPosition)
         {
-            GetAllOperation = EnsureGetAllOperation();
+            Resource = resource;
         }
 
-        private Resource? _resource;
-        public Resource Resource => _resource ??= _context.Library.GetArmResource(RequestPaths.First());
+        public Resource Resource { get; }
 
-        public override string ResourceName => Resource.ResourceName;
+        public MgmtClientOperation? GetAllOperation => EnsureGetAllOperation();
 
-        public MgmtClientOperation? GetAllOperation { get; }
+        private Dictionary<Parameter, FormattableString> _extraConstructorParameters = new();
+        public IEnumerable<Parameter> ExtraConstructorParameters => _extraConstructorParameters.Keys;
+
+        private List<ContextualParameterMapping> _extraContextualParameterMapping = new();
+        public IEnumerable<ContextualParameterMapping> ExtraContextualParameterMapping => _extraContextualParameterMapping;
 
         private MgmtClientOperation? EnsureGetAllOperation()
         {
@@ -42,38 +46,74 @@ namespace AutoRest.CSharp.Mgmt.Output
             // or if the debug flag `--mgmt-debug.suppress-list-exception` is on, we suppress the exception here
             var suppressListException = RequestPaths.Any(path => _context.Configuration.MgmtConfiguration.ListException.Contains(path))
                 || _context.Configuration.MgmtConfiguration.MgmtDebug.SuppressListException;
-            var candidates = ClientOperations.Where(operation => operation.Name == "GetAll" && !HasExtraParameter(operation));
-            // we need to filter out the methods that does not have extra mandatory parameters in our current context
-            if (!suppressListException && candidates.Count() > 1)
-                throw new ErrorHelpers.ErrorException($"The ResourceCollection {Type.Name} (RequestPaths: {string.Join(", ", RequestPaths)}) contains more than one `GetAll` method with no required parameters.");
-            if (!suppressListException && !candidates.Any())
-                throw new ErrorHelpers.ErrorException($"The ResourceCollection {Type.Name} (RequestPaths: {string.Join(", ", RequestPaths)}) does not have a `GetAll` method with no required parameters");
-            return candidates.FirstOrDefault();
-        }
+            var getAllOperation = ClientOperations.Where(operation => operation.Name == "GetAll").OrderBy(operation => ReferenceSegments(operation).Count()).FirstOrDefault();
+            if (!suppressListException && getAllOperation == null)
+                throw new ErrorHelpers.ErrorException($"The ResourceCollection {Type.Name} (RequestPaths: {string.Join(", ", RequestPaths)}) does not have a `GetAll` method");
 
-        private static bool HasExtraParameter(MgmtClientOperation clientOperation)
-        {
-            foreach (var operation in clientOperation)
+            if (getAllOperation == null)
+                return getAllOperation;
+
+            // skip the following transformations for `ById` resources.
+            // In ById resources, the required parameters of the GetAll operation is usually a scope, doing the following transform will require the constructor to accept a scope variable
+            // which is not reasonable and causes problems
+            if (IsById)
             {
-                var diff = operation.RequestPath.IsAncestorOf(operation.ContextualPath)
-                    ? operation.RequestPath.TrimAncestorFrom(operation.ContextualPath)
-                    : operation.ContextualPath.TrimAncestorFrom(operation.RequestPath);
+                return ReferenceSegments(getAllOperation).Any() ? null : getAllOperation;
+            }
 
-                if (!diff.All(segment => segment.IsConstant))
+            // calculate the ResourceType from the RequestPath of this resource
+            var resourceType = RequestPaths.GetResourceType(_context);
+            var resourceTypeSegments = resourceType.Select((segment, index) => (segment, index)).Where(tuple => tuple.segment.IsReference).ToList();
+            // iterate over all the reference segments in the diff of this GetAll operation
+            var candidatesOfParameters = new List<Parameter>(getAllOperation.Parameters);
+            foreach (var segment in ReferenceSegments(getAllOperation))
+            {
+                var index = resourceTypeSegments.FindIndex(tuple => tuple.segment == segment);
+                if (index < 0)
                 {
-                    return true;
+                    var parameter = candidatesOfParameters.First(p => p.Name == segment.ReferenceName && p.Type.Equals(segment.Type));
+                    candidatesOfParameters.Remove(parameter);
+                    // this reference is not in the resource type, therefore this parameter goes to the constructor
+                    _extraConstructorParameters.Add(parameter, $"_{segment.ReferenceName}");
+                    // there is a key for this parameter, get the key and add this one to contextual parameter mapping
+                    var key = ParameterMappingBuilder.FindKeyOfParameter(parameter, getAllOperation.First().RequestPath);
+                    _extraContextualParameterMapping.Add(new ContextualParameterMapping(key, segment, GetFieldName(parameter)));
                 }
-
-                if (operation.Parameters.Any(parameter => parameter.RequestLocation != RequestLocation.Path && parameter.IsRequired))
+                else
                 {
-                    return true;
+                    var candidate = resourceTypeSegments[index];
+                    var value = ResourceType[candidate.index];
+                    _extraContextualParameterMapping.Add(new ContextualParameterMapping("", segment, $"\"{value.ConstantValue}\""));
                 }
             }
-            return false;
+
+            return getAllOperation;
+        }
+
+        public FormattableString GetFieldName(Parameter parameter)
+        {
+            return _extraConstructorParameters[parameter];
+        }
+
+        private static IEnumerable<Segment> ReferenceSegments(MgmtClientOperation clientOperation)
+        {
+            var operation = clientOperation.First();
+            RequestPath diff;
+            if (operation.RequestPath.IsAncestorOf(operation.ContextualPath))
+                diff = operation.RequestPath.TrimAncestorFrom(operation.ContextualPath);
+            else
+                diff = operation.ContextualPath.TrimAncestorFrom(operation.RequestPath);
+            return diff.Where(segment => segment.IsReference);
         }
 
         protected override bool ShouldIncludeOperation(Operation operation)
         {
+            var requestPath = operation.GetHttpPath();
+            if (Context.Configuration.MgmtConfiguration.OperationPositions.TryGetValue(requestPath, out var positions))
+            {
+                return positions.Contains(Position);
+            }
+            // if the position of this operation is not set in the configuration, we just include those are excluded in the resource class
             return !base.ShouldIncludeOperation(operation);
         }
 
@@ -102,11 +142,6 @@ namespace AutoRest.CSharp.Mgmt.Output
             return $"A class representing collection of {clientPrefix} and their operations over its parent.";
         }
 
-        /// <summary>
-        /// The resource collection might support multiple resource types, therefore we should never use this property in <see cref="ResourceCollection"/>
-        /// </summary>
-        public override ResourceType ResourceType => throw new InvalidOperationException($"We should not use the property `ResourceType` in ResourceCollection. This is a bug in autorest.csharp, please file an issue about this");
-
         private IEnumerable<MgmtClientOperation>? _allOperations;
         public override IEnumerable<MgmtClientOperation> AllOperations => _allOperations ??= EnsureAllOperations();
 
@@ -124,12 +159,12 @@ namespace AutoRest.CSharp.Mgmt.Output
             return result;
         }
 
-        private IDictionary<RequestPath, ISet<ResourceType>>? _resourceTypes;
-        public IDictionary<RequestPath, ISet<ResourceType>> ResourceTypes => _resourceTypes ??= EnsureResourceTypes();
+        private IDictionary<RequestPath, ISet<ResourceTypeSegment>>? _resourceTypes;
+        public IDictionary<RequestPath, ISet<ResourceTypeSegment>> ResourceTypes => _resourceTypes ??= EnsureResourceTypes();
 
-        private IDictionary<RequestPath, ISet<ResourceType>> EnsureResourceTypes()
+        private IDictionary<RequestPath, ISet<ResourceTypeSegment>> EnsureResourceTypes()
         {
-            var result = new Dictionary<RequestPath, ISet<ResourceType>>();
+            var result = new Dictionary<RequestPath, ISet<ResourceTypeSegment>>();
             foreach (var operation in AllOperations.SelectMany(o => o))
             {
                 var resourceTypes = GetResourceTypes(operation.RequestPath, operation.ContextualPath);
@@ -139,7 +174,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 }
                 else
                 {
-                    set = new HashSet<ResourceType>();
+                    set = new HashSet<ResourceTypeSegment>();
                     set.UnionWith(resourceTypes);
                     result.Add(operation.ContextualPath, set);
                 }
@@ -147,13 +182,19 @@ namespace AutoRest.CSharp.Mgmt.Output
             return result;
         }
 
-        private IEnumerable<ResourceType> GetResourceTypes(RequestPath requestPath, RequestPath contextualPath)
+        private IEnumerable<ResourceTypeSegment> GetResourceTypes(RequestPath requestPath, RequestPath contextualPath)
         {
             var type = contextualPath.GetResourceType(_context.Configuration.MgmtConfiguration);
-            if (type == ResourceType.Scope)
+            if (type == ResourceTypeSegment.Scope)
                 return requestPath.GetParameterizedScopeResourceTypes(_context.Configuration.MgmtConfiguration)!;
 
             return type.AsIEnumerable();
         }
+
+        public Parameter ParentParameter => OptionsParameter with
+        {
+            Name = "parent",
+            Description = $"The resource representing the parent resource."
+        };
     }
 }

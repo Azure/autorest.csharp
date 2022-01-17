@@ -11,35 +11,35 @@
   "produces": [ "application/json" ],
   "consumes": [ "application/json" ],
   "paths": {
-    "/client1": {
-      "get": {
-        "operationId": "Client3_Operation",
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "type":"string"
-            }
-          }
-        }
-      }
-    },
-    "/client2": {
-      "get": {
-        "operationId": "Client4_Operation",
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "type":"string"
-            }
-          }
-        }
-      }
-    },
-    "/client3": {
+    "/client5": {
       "get": {
         "operationId": "Client5_Operation",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type":"string"
+            }
+          }
+        }
+      }
+    },
+    "/client6": {
+      "get": {
+        "operationId": "Client6_Operation",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type":"string"
+            }
+          }
+        }
+      }
+    },
+    "/client7": {
+      "get": {
+        "operationId": "Client7_Operation",
         "responses": {
           "200": {
             "description": "Success",

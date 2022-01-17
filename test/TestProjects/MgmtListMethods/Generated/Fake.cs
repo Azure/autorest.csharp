@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -14,7 +15,7 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
-using Azure.ResourceManager.Resources.Models;
+using MgmtListMethods.Models;
 
 namespace MgmtListMethods
 {
@@ -38,13 +39,17 @@ namespace MgmtListMethods
 
         /// <summary> Initializes a new instance of the <see cref = "Fake"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
-        /// <param name="resource"> The resource that is the target of operations. </param>
-        internal Fake(ArmResource options, FakeData resource) : base(options, resource.Id)
+        /// <param name="data"> The resource that is the target of operations. </param>
+        internal Fake(ArmResource options, FakeData data) : base(options, data.Id)
         {
             HasData = true;
-            _data = resource;
+            _data = data;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _fakesRestClient = new FakesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            ClientOptions.TryGetApiVersion(ResourceType, out string apiVersion);
+            _fakesRestClient = new FakesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
+#if DEBUG
+			ValidateResourceId(Id);
+#endif
         }
 
         /// <summary> Initializes a new instance of the <see cref="Fake"/> class. </summary>
@@ -53,7 +58,11 @@ namespace MgmtListMethods
         internal Fake(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _fakesRestClient = new FakesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            ClientOptions.TryGetApiVersion(ResourceType, out string apiVersion);
+            _fakesRestClient = new FakesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
+#if DEBUG
+			ValidateResourceId(Id);
+#endif
         }
 
         /// <summary> Initializes a new instance of the <see cref="Fake"/> class. </summary>
@@ -65,14 +74,15 @@ namespace MgmtListMethods
         internal Fake(ArmClientOptions clientOptions, TokenCredential credential, Uri uri, HttpPipeline pipeline, ResourceIdentifier id) : base(clientOptions, credential, uri, pipeline, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _fakesRestClient = new FakesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            ClientOptions.TryGetApiVersion(ResourceType, out string apiVersion);
+            _fakesRestClient = new FakesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
+#if DEBUG
+			ValidateResourceId(Id);
+#endif
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
         public static readonly ResourceType ResourceType = "Microsoft.Fake/fakes";
-
-        /// <summary> Gets the valid resource type for the operations. </summary>
-        protected override ResourceType ValidResourceType => ResourceType;
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }
@@ -87,6 +97,12 @@ namespace MgmtListMethods
                     throw new InvalidOperationException("The current instance does not have data, you must call Get first.");
                 return _data;
             }
+        }
+
+        internal static void ValidateResourceId(ResourceIdentifier id)
+        {
+            if (id.ResourceType != ResourceType)
+                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ResourceType), nameof(id));
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes/{fakeName}
@@ -140,17 +156,37 @@ namespace MgmtListMethods
         /// <summary> Lists all available geo-locations. </summary>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
-        public async virtual Task<IEnumerable<Location>> GetAvailableLocationsAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<IEnumerable<AzureLocation>> GetAvailableLocationsAsync(CancellationToken cancellationToken = default)
         {
-            return await ListAvailableLocationsAsync(ResourceType, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("Fake.GetAvailableLocations");
+            scope.Start();
+            try
+            {
+                return await ListAvailableLocationsAsync(ResourceType, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Lists all available geo-locations. </summary>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
-        public virtual IEnumerable<Location> GetAvailableLocations(CancellationToken cancellationToken = default)
+        public virtual IEnumerable<AzureLocation> GetAvailableLocations(CancellationToken cancellationToken = default)
         {
-            return ListAvailableLocations(ResourceType, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("Fake.GetAvailableLocations");
+            scope.Start();
+            try
+            {
+                return ListAvailableLocations(ResourceType, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Add a tag to the current resource. </summary>
@@ -162,7 +198,7 @@ namespace MgmtListMethods
         {
             if (string.IsNullOrWhiteSpace(key))
             {
-                throw new ArgumentNullException($"{nameof(key)} provided cannot be null or a whitespace.", nameof(key));
+                throw new ArgumentNullException(nameof(key), $"{nameof(key)} provided cannot be null or a whitespace.");
             }
 
             using var scope = _clientDiagnostics.CreateScope("Fake.AddTag");
@@ -191,7 +227,7 @@ namespace MgmtListMethods
         {
             if (string.IsNullOrWhiteSpace(key))
             {
-                throw new ArgumentNullException($"{nameof(key)} provided cannot be null or a whitespace.", nameof(key));
+                throw new ArgumentNullException(nameof(key), $"{nameof(key)} provided cannot be null or a whitespace.");
             }
 
             using var scope = _clientDiagnostics.CreateScope("Fake.AddTag");
@@ -219,7 +255,7 @@ namespace MgmtListMethods
         {
             if (tags == null)
             {
-                throw new ArgumentNullException($"{nameof(tags)} provided cannot be null.", nameof(tags));
+                throw new ArgumentNullException(nameof(tags), $"{nameof(tags)} provided cannot be null.");
             }
 
             using var scope = _clientDiagnostics.CreateScope("Fake.SetTags");
@@ -248,7 +284,7 @@ namespace MgmtListMethods
         {
             if (tags == null)
             {
-                throw new ArgumentNullException($"{nameof(tags)} provided cannot be null.", nameof(tags));
+                throw new ArgumentNullException(nameof(tags), $"{nameof(tags)} provided cannot be null.");
             }
 
             using var scope = _clientDiagnostics.CreateScope("Fake.SetTags");
@@ -277,7 +313,7 @@ namespace MgmtListMethods
         {
             if (string.IsNullOrWhiteSpace(key))
             {
-                throw new ArgumentNullException($"{nameof(key)} provided cannot be null or a whitespace.", nameof(key));
+                throw new ArgumentNullException(nameof(key), $"{nameof(key)} provided cannot be null or a whitespace.");
             }
 
             using var scope = _clientDiagnostics.CreateScope("Fake.RemoveTag");
@@ -305,7 +341,7 @@ namespace MgmtListMethods
         {
             if (string.IsNullOrWhiteSpace(key))
             {
-                throw new ArgumentNullException($"{nameof(key)} provided cannot be null or a whitespace.", nameof(key));
+                throw new ArgumentNullException(nameof(key), $"{nameof(key)} provided cannot be null or a whitespace.");
             }
 
             using var scope = _clientDiagnostics.CreateScope("Fake.RemoveTag");
@@ -329,7 +365,7 @@ namespace MgmtListMethods
 
         /// <summary> Gets a collection of FakeParentWithAncestorWithNonResChWithLocs in the Fake. </summary>
         /// <returns> An object representing collection of FakeParentWithAncestorWithNonResChWithLocs and their operations over a Fake. </returns>
-        public FakeParentWithAncestorWithNonResChWithLocCollection GetFakeParentWithAncestorWithNonResChWithLocs()
+        public virtual FakeParentWithAncestorWithNonResChWithLocCollection GetFakeParentWithAncestorWithNonResChWithLocs()
         {
             return new FakeParentWithAncestorWithNonResChWithLocCollection(this);
         }
@@ -339,7 +375,7 @@ namespace MgmtListMethods
 
         /// <summary> Gets a collection of FakeParentWithAncestorWithNonResChes in the Fake. </summary>
         /// <returns> An object representing collection of FakeParentWithAncestorWithNonResChes and their operations over a Fake. </returns>
-        public FakeParentWithAncestorWithNonResChCollection GetFakeParentWithAncestorWithNonResChes()
+        public virtual FakeParentWithAncestorWithNonResChCollection GetFakeParentWithAncestorWithNonResChes()
         {
             return new FakeParentWithAncestorWithNonResChCollection(this);
         }
@@ -349,7 +385,7 @@ namespace MgmtListMethods
 
         /// <summary> Gets a collection of FakeParentWithAncestorWithLocs in the Fake. </summary>
         /// <returns> An object representing collection of FakeParentWithAncestorWithLocs and their operations over a Fake. </returns>
-        public FakeParentWithAncestorWithLocCollection GetFakeParentWithAncestorWithLocs()
+        public virtual FakeParentWithAncestorWithLocCollection GetFakeParentWithAncestorWithLocs()
         {
             return new FakeParentWithAncestorWithLocCollection(this);
         }
@@ -359,7 +395,7 @@ namespace MgmtListMethods
 
         /// <summary> Gets a collection of FakeParentWithAncestors in the Fake. </summary>
         /// <returns> An object representing collection of FakeParentWithAncestors and their operations over a Fake. </returns>
-        public FakeParentWithAncestorCollection GetFakeParentWithAncestors()
+        public virtual FakeParentWithAncestorCollection GetFakeParentWithAncestors()
         {
             return new FakeParentWithAncestorCollection(this);
         }
@@ -369,7 +405,7 @@ namespace MgmtListMethods
 
         /// <summary> Gets a collection of FakeParentWithNonResChes in the Fake. </summary>
         /// <returns> An object representing collection of FakeParentWithNonResChes and their operations over a Fake. </returns>
-        public FakeParentWithNonResChCollection GetFakeParentWithNonResChes()
+        public virtual FakeParentWithNonResChCollection GetFakeParentWithNonResChes()
         {
             return new FakeParentWithNonResChCollection(this);
         }
@@ -379,7 +415,7 @@ namespace MgmtListMethods
 
         /// <summary> Gets a collection of FakeParents in the Fake. </summary>
         /// <returns> An object representing collection of FakeParents and their operations over a Fake. </returns>
-        public FakeParentCollection GetFakeParents()
+        public virtual FakeParentCollection GetFakeParents()
         {
             return new FakeParentCollection(this);
         }

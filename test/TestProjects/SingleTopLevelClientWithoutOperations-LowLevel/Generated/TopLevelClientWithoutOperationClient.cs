@@ -37,10 +37,7 @@ namespace SingleTopLevelClientWithoutOperations_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
         public TopLevelClientWithoutOperationClient(AzureKeyCredential credential, Uri endpoint = null, TopLevelClientWithoutOperationClientOptions options = null)
         {
-            if (credential == null)
-            {
-                throw new ArgumentNullException(nameof(credential));
-            }
+            Argument.AssertNotNull(credential, nameof(credential));
             endpoint ??= new Uri("http://localhost:3000");
             options ??= new TopLevelClientWithoutOperationClientOptions();
 
@@ -50,26 +47,26 @@ namespace SingleTopLevelClientWithoutOperations_LowLevel
             _endpoint = endpoint;
         }
 
-        private Client3 _cachedClient3;
-        private Client4 _cachedClient4;
         private Client5 _cachedClient5;
-
-        /// <summary> Initializes a new instance of Client3. </summary>
-        public virtual Client3 GetClient3Client()
-        {
-            return Volatile.Read(ref _cachedClient3) ?? Interlocked.CompareExchange(ref _cachedClient3, new Client3(_clientDiagnostics, _pipeline, _keyCredential, _endpoint), null) ?? _cachedClient3;
-        }
-
-        /// <summary> Initializes a new instance of Client4. </summary>
-        public virtual Client4 GetClient4Client()
-        {
-            return Volatile.Read(ref _cachedClient4) ?? Interlocked.CompareExchange(ref _cachedClient4, new Client4(_clientDiagnostics, _pipeline, _keyCredential, _endpoint), null) ?? _cachedClient4;
-        }
+        private Client6 _cachedClient6;
+        private Client7 _cachedClient7;
 
         /// <summary> Initializes a new instance of Client5. </summary>
         public virtual Client5 GetClient5Client()
         {
             return Volatile.Read(ref _cachedClient5) ?? Interlocked.CompareExchange(ref _cachedClient5, new Client5(_clientDiagnostics, _pipeline, _keyCredential, _endpoint), null) ?? _cachedClient5;
+        }
+
+        /// <summary> Initializes a new instance of Client6. </summary>
+        public virtual Client6 GetClient6Client()
+        {
+            return Volatile.Read(ref _cachedClient6) ?? Interlocked.CompareExchange(ref _cachedClient6, new Client6(_clientDiagnostics, _pipeline, _keyCredential, _endpoint), null) ?? _cachedClient6;
+        }
+
+        /// <summary> Initializes a new instance of Client7. </summary>
+        public virtual Client7 GetClient7Client()
+        {
+            return Volatile.Read(ref _cachedClient7) ?? Interlocked.CompareExchange(ref _cachedClient7, new Client7(_clientDiagnostics, _pipeline, _keyCredential, _endpoint), null) ?? _cachedClient7;
         }
     }
 }

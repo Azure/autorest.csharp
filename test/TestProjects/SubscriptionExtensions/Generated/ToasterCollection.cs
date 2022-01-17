@@ -8,10 +8,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
+using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
@@ -21,7 +23,7 @@ using SubscriptionExtensions.Models;
 namespace SubscriptionExtensions
 {
     /// <summary> A class representing collection of Toaster and their operations over its parent. </summary>
-    public partial class ToasterCollection : ArmCollection, IEnumerable<Toaster>
+    public partial class ToasterCollection : ArmCollection, IEnumerable<Toaster>, IAsyncEnumerable<Toaster>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly ToastersRestOperations _toastersRestClient;
@@ -31,16 +33,23 @@ namespace SubscriptionExtensions
         {
         }
 
-        /// <summary> Initializes a new instance of ToasterCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="ToasterCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal ToasterCollection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _toastersRestClient = new ToastersRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            ClientOptions.TryGetApiVersion(Toaster.ResourceType, out string apiVersion);
+            _toastersRestClient = new ToastersRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
+#if DEBUG
+			ValidateResourceId(Id);
+#endif
         }
 
-        /// <summary> Gets the valid resource type for this object. </summary>
-        protected override ResourceType ValidResourceType => Subscription.ResourceType;
+        internal static void ValidateResourceId(ResourceIdentifier id)
+        {
+            if (id.ResourceType != Subscription.ResourceType)
+                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, Subscription.ResourceType), nameof(id));
+        }
 
         // Collection level operations.
 
@@ -53,7 +62,7 @@ namespace SubscriptionExtensions
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="toasterName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ToasterCreateOrUpdateOperation CreateOrUpdate(string toasterName, ToasterData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual ToasterCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string toasterName, ToasterData parameters, CancellationToken cancellationToken = default)
         {
             if (toasterName == null)
             {
@@ -90,7 +99,7 @@ namespace SubscriptionExtensions
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="toasterName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<ToasterCreateOrUpdateOperation> CreateOrUpdateAsync(string toasterName, ToasterData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<ToasterCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string toasterName, ToasterData parameters, CancellationToken cancellationToken = default)
         {
             if (toasterName == null)
             {
@@ -192,9 +201,9 @@ namespace SubscriptionExtensions
             try
             {
                 var response = _toastersRestClient.Get(Id.SubscriptionId, toasterName, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<Toaster>(null, response.GetRawResponse())
-                    : Response.FromValue(new Toaster(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<Toaster>(null, response.GetRawResponse());
+                return Response.FromValue(new Toaster(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -214,14 +223,14 @@ namespace SubscriptionExtensions
                 throw new ArgumentNullException(nameof(toasterName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ToasterCollection.GetIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("ToasterCollection.GetIfExists");
             scope.Start();
             try
             {
                 var response = await _toastersRestClient.GetAsync(Id.SubscriptionId, toasterName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<Toaster>(null, response.GetRawResponse())
-                    : Response.FromValue(new Toaster(this, response.Value), response.GetRawResponse());
+                if (response.Value == null)
+                    return Response.FromValue<Toaster>(null, response.GetRawResponse());
+                return Response.FromValue(new Toaster(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -234,14 +243,14 @@ namespace SubscriptionExtensions
         /// <param name="toasterName"> The name of the availability set. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="toasterName"/> is null. </exception>
-        public virtual Response<bool> CheckIfExists(string toasterName, CancellationToken cancellationToken = default)
+        public virtual Response<bool> Exists(string toasterName, CancellationToken cancellationToken = default)
         {
             if (toasterName == null)
             {
                 throw new ArgumentNullException(nameof(toasterName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ToasterCollection.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("ToasterCollection.Exists");
             scope.Start();
             try
             {
@@ -259,14 +268,14 @@ namespace SubscriptionExtensions
         /// <param name="toasterName"> The name of the availability set. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="toasterName"/> is null. </exception>
-        public async virtual Task<Response<bool>> CheckIfExistsAsync(string toasterName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> ExistsAsync(string toasterName, CancellationToken cancellationToken = default)
         {
             if (toasterName == null)
             {
                 throw new ArgumentNullException(nameof(toasterName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ToasterCollection.CheckIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("ToasterCollection.Exists");
             scope.Start();
             try
             {
@@ -284,40 +293,50 @@ namespace SubscriptionExtensions
         /// ContextualPath: /subscriptions/{subscriptionId}
         /// OperationId: Toasters_List
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IReadOnlyList<Toaster>> GetAll(CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="Toaster" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<Toaster> GetAll(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ToasterCollection.GetAll");
-            scope.Start();
-            try
+            Page<Toaster> FirstPageFunc(int? pageSizeHint)
             {
-                var response = _toastersRestClient.List(Id.SubscriptionId, cancellationToken);
-                return Response.FromValue(response.Value.Value.Select(value => new Toaster(Parent, value)).ToArray() as IReadOnlyList<Toaster>, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("ToasterCollection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = _toastersRestClient.List(Id.SubscriptionId, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new Toaster(Parent, value)), null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/toasters
         /// ContextualPath: /subscriptions/{subscriptionId}
         /// OperationId: Toasters_List
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<IReadOnlyList<Toaster>>> GetAllAsync(CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="Toaster" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<Toaster> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ToasterCollection.GetAll");
-            scope.Start();
-            try
+            async Task<Page<Toaster>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await _toastersRestClient.ListAsync(Id.SubscriptionId, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(response.Value.Value.Select(value => new Toaster(Parent, value)).ToArray() as IReadOnlyList<Toaster>, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("ToasterCollection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = await _toastersRestClient.ListAsync(Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new Toaster(Parent, value)), null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
         /// <summary> Filters the list of <see cref="Toaster" /> for this subscription represented as generic resources. </summary>
@@ -368,15 +387,20 @@ namespace SubscriptionExtensions
 
         IEnumerator<Toaster> IEnumerable<Toaster>.GetEnumerator()
         {
-            return GetAll().Value.GetEnumerator();
+            return GetAll().GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return GetAll().Value.GetEnumerator();
+            return GetAll().GetEnumerator();
+        }
+
+        IAsyncEnumerator<Toaster> IAsyncEnumerable<Toaster>.GetAsyncEnumerator(CancellationToken cancellationToken)
+        {
+            return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, Toaster, ToasterData> Construct() { }
+        // public ArmBuilder<Azure.Core.ResourceIdentifier, Toaster, ToasterData> Construct() { }
     }
 }

@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -73,72 +72,72 @@ namespace MgmtListMethods
         }
         #endregion
 
-        private static FakeParentWithAncestorWithNonResChWithLocsRestOperations GetFakeParentWithAncestorWithNonResChWithLocsRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, Uri endpoint = null)
+        private static FakeParentWithAncestorWithNonResChWithLocsRestOperations GetFakeParentWithAncestorWithNonResChWithLocsRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = default)
         {
-            return new FakeParentWithAncestorWithNonResChWithLocsRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint);
+            return new FakeParentWithAncestorWithNonResChWithLocsRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);
         }
 
-        private static FakeParentWithAncestorWithNonResChesRestOperations GetFakeParentWithAncestorWithNonResChesRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, Uri endpoint = null)
+        private static FakeParentWithAncestorWithNonResChesRestOperations GetFakeParentWithAncestorWithNonResChesRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = default)
         {
-            return new FakeParentWithAncestorWithNonResChesRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint);
+            return new FakeParentWithAncestorWithNonResChesRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);
         }
 
-        private static FakeParentWithAncestorWithLocsRestOperations GetFakeParentWithAncestorWithLocsRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, Uri endpoint = null)
+        private static FakeParentWithAncestorWithLocsRestOperations GetFakeParentWithAncestorWithLocsRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = default)
         {
-            return new FakeParentWithAncestorWithLocsRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint);
+            return new FakeParentWithAncestorWithLocsRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);
         }
 
-        private static FakeParentWithAncestorsRestOperations GetFakeParentWithAncestorsRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, Uri endpoint = null)
+        private static FakeParentWithAncestorsRestOperations GetFakeParentWithAncestorsRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = default)
         {
-            return new FakeParentWithAncestorsRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint);
+            return new FakeParentWithAncestorsRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);
         }
 
-        private static ResGrpParentWithAncestorWithNonResChWithLocsRestOperations GetResGrpParentWithAncestorWithNonResChWithLocsRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, Uri endpoint = null)
+        private static ResGrpParentWithAncestorWithNonResChWithLocsRestOperations GetResGrpParentWithAncestorWithNonResChWithLocsRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = default)
         {
-            return new ResGrpParentWithAncestorWithNonResChWithLocsRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint);
+            return new ResGrpParentWithAncestorWithNonResChWithLocsRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);
         }
 
-        private static ResGrpParentWithAncestorWithNonResChesRestOperations GetResGrpParentWithAncestorWithNonResChesRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, Uri endpoint = null)
+        private static ResGrpParentWithAncestorWithNonResChesRestOperations GetResGrpParentWithAncestorWithNonResChesRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = default)
         {
-            return new ResGrpParentWithAncestorWithNonResChesRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint);
+            return new ResGrpParentWithAncestorWithNonResChesRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);
         }
 
-        private static ResGrpParentWithAncestorWithLocsRestOperations GetResGrpParentWithAncestorWithLocsRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, Uri endpoint = null)
+        private static ResGrpParentWithAncestorWithLocsRestOperations GetResGrpParentWithAncestorWithLocsRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = default)
         {
-            return new ResGrpParentWithAncestorWithLocsRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint);
+            return new ResGrpParentWithAncestorWithLocsRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);
         }
 
-        private static ResGrpParentWithAncestorsRestOperations GetResGrpParentWithAncestorsRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, Uri endpoint = null)
+        private static ResGrpParentWithAncestorsRestOperations GetResGrpParentWithAncestorsRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = default)
         {
-            return new ResGrpParentWithAncestorsRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint);
+            return new ResGrpParentWithAncestorsRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);
         }
 
-        private static QuotasRestOperations GetQuotasRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, Uri endpoint = null)
+        private static QuotasRestOperations GetQuotasRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = default)
         {
-            return new QuotasRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint);
+            return new QuotasRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakeParentWithAncestorWithNonResChWithLocs
         /// ContextualPath: /subscriptions/{subscriptionId}
         /// OperationId: FakeParentWithAncestorWithNonResChWithLocs_ListBySubscription
-        /// <summary> Lists the FakeParentWithAncestorWithNonResChWithLocData for this <see cref="Subscription" />. </summary>
+        /// <summary> Lists the FakeParentWithAncestorWithNonResChWithLocs for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<FakeParentWithAncestorWithNonResChWithLocData> GetFakeParentWithAncestorWithNonResourceChWithLocAsync(this Subscription subscription, CancellationToken cancellationToken = default)
+        public static AsyncPageable<FakeParentWithAncestorWithNonResChWithLoc> GetFakeParentWithAncestorWithNonResourceChWithLocAsync(this Subscription subscription, CancellationToken cancellationToken = default)
         {
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetFakeParentWithAncestorWithNonResChWithLocsRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
-                async Task<Page<FakeParentWithAncestorWithNonResChWithLocData>> FirstPageFunc(int? pageSizeHint)
+                FakeParentWithAncestorWithNonResChWithLocsRestOperations restOperations = GetFakeParentWithAncestorWithNonResChWithLocsRestOperations(clientDiagnostics, pipeline, options, baseUri);
+                async Task<Page<FakeParentWithAncestorWithNonResChWithLoc>> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetFakeParentWithAncestorWithNonResourceChWithLoc");
                     scope.Start();
                     try
                     {
                         var response = await restOperations.ListBySubscriptionAsync(subscription.Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
-                        return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                        return Page.FromValues(response.Value.Value.Select(value => new FakeParentWithAncestorWithNonResChWithLoc(subscription, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
                     {
@@ -146,14 +145,14 @@ namespace MgmtListMethods
                         throw;
                     }
                 }
-                async Task<Page<FakeParentWithAncestorWithNonResChWithLocData>> NextPageFunc(string nextLink, int? pageSizeHint)
+                async Task<Page<FakeParentWithAncestorWithNonResChWithLoc>> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetFakeParentWithAncestorWithNonResourceChWithLoc");
                     scope.Start();
                     try
                     {
                         var response = await restOperations.ListBySubscriptionNextPageAsync(nextLink, subscription.Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
-                        return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                        return Page.FromValues(response.Value.Value.Select(value => new FakeParentWithAncestorWithNonResChWithLoc(subscription, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
                     {
@@ -169,24 +168,24 @@ namespace MgmtListMethods
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakeParentWithAncestorWithNonResChWithLocs
         /// ContextualPath: /subscriptions/{subscriptionId}
         /// OperationId: FakeParentWithAncestorWithNonResChWithLocs_ListBySubscription
-        /// <summary> Lists the FakeParentWithAncestorWithNonResChWithLocData for this <see cref="Subscription" />. </summary>
+        /// <summary> Lists the FakeParentWithAncestorWithNonResChWithLocs for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static Pageable<FakeParentWithAncestorWithNonResChWithLocData> GetFakeParentWithAncestorWithNonResourceChWithLoc(this Subscription subscription, CancellationToken cancellationToken = default)
+        public static Pageable<FakeParentWithAncestorWithNonResChWithLoc> GetFakeParentWithAncestorWithNonResourceChWithLoc(this Subscription subscription, CancellationToken cancellationToken = default)
         {
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetFakeParentWithAncestorWithNonResChWithLocsRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
-                Page<FakeParentWithAncestorWithNonResChWithLocData> FirstPageFunc(int? pageSizeHint)
+                FakeParentWithAncestorWithNonResChWithLocsRestOperations restOperations = GetFakeParentWithAncestorWithNonResChWithLocsRestOperations(clientDiagnostics, pipeline, options, baseUri);
+                Page<FakeParentWithAncestorWithNonResChWithLoc> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetFakeParentWithAncestorWithNonResourceChWithLoc");
                     scope.Start();
                     try
                     {
                         var response = restOperations.ListBySubscription(subscription.Id.SubscriptionId, cancellationToken: cancellationToken);
-                        return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                        return Page.FromValues(response.Value.Value.Select(value => new FakeParentWithAncestorWithNonResChWithLoc(subscription, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
                     {
@@ -194,14 +193,14 @@ namespace MgmtListMethods
                         throw;
                     }
                 }
-                Page<FakeParentWithAncestorWithNonResChWithLocData> NextPageFunc(string nextLink, int? pageSizeHint)
+                Page<FakeParentWithAncestorWithNonResChWithLoc> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetFakeParentWithAncestorWithNonResourceChWithLoc");
                     scope.Start();
                     try
                     {
                         var response = restOperations.ListBySubscriptionNextPage(nextLink, subscription.Id.SubscriptionId, cancellationToken: cancellationToken);
-                        return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                        return Page.FromValues(response.Value.Value.Select(value => new FakeParentWithAncestorWithNonResChWithLoc(subscription, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
                     {
@@ -221,7 +220,7 @@ namespace MgmtListMethods
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<GenericResource> GetFakeParentWithAncestorWithNonResChWithLocByNameAsync(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
+        public static AsyncPageable<GenericResource> GetFakeParentWithAncestorWithNonResChWithLocsAsGenericResourcesAsync(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
         {
             ResourceFilterCollection filters = new(FakeParentWithAncestorWithNonResChWithLoc.ResourceType);
             filters.SubstringFilter = filter;
@@ -235,7 +234,7 @@ namespace MgmtListMethods
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static Pageable<GenericResource> GetFakeParentWithAncestorWithNonResChWithLocByName(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
+        public static Pageable<GenericResource> GetFakeParentWithAncestorWithNonResChWithLocsAsGenericResources(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
         {
             ResourceFilterCollection filters = new(FakeParentWithAncestorWithNonResChWithLoc.ResourceType);
             filters.SubstringFilter = filter;
@@ -249,8 +248,8 @@ namespace MgmtListMethods
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<NonResourceChild> GetTestByLocationsFakeParentWithAncestorWithNonResChWithLocsAsync(this Subscription subscription, string location, CancellationToken cancellationToken = default)
         {
             if (location == null)
@@ -261,7 +260,7 @@ namespace MgmtListMethods
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetFakeParentWithAncestorWithNonResChWithLocsRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                FakeParentWithAncestorWithNonResChWithLocsRestOperations restOperations = GetFakeParentWithAncestorWithNonResChWithLocsRestOperations(clientDiagnostics, pipeline, options, baseUri);
                 async Task<Page<NonResourceChild>> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetTestByLocationsFakeParentWithAncestorWithNonResChWithLocs");
@@ -289,8 +288,8 @@ namespace MgmtListMethods
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static Pageable<NonResourceChild> GetTestByLocationsFakeParentWithAncestorWithNonResChWithLocs(this Subscription subscription, string location, CancellationToken cancellationToken = default)
         {
             if (location == null)
@@ -301,7 +300,7 @@ namespace MgmtListMethods
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetFakeParentWithAncestorWithNonResChWithLocsRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                FakeParentWithAncestorWithNonResChWithLocsRestOperations restOperations = GetFakeParentWithAncestorWithNonResChWithLocsRestOperations(clientDiagnostics, pipeline, options, baseUri);
                 Page<NonResourceChild> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetTestByLocationsFakeParentWithAncestorWithNonResChWithLocs");
@@ -325,24 +324,24 @@ namespace MgmtListMethods
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakeParentWithAncestorWithNonResChes
         /// ContextualPath: /subscriptions/{subscriptionId}
         /// OperationId: FakeParentWithAncestorWithNonResChes_ListBySubscription
-        /// <summary> Lists the FakeParentWithAncestorWithNonResChData for this <see cref="Subscription" />. </summary>
+        /// <summary> Lists the FakeParentWithAncestorWithNonResChes for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<FakeParentWithAncestorWithNonResChData> GetFakeParentWithAncestorWithNonResChesAsync(this Subscription subscription, CancellationToken cancellationToken = default)
+        public static AsyncPageable<FakeParentWithAncestorWithNonResCh> GetFakeParentWithAncestorWithNonResChesAsync(this Subscription subscription, CancellationToken cancellationToken = default)
         {
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetFakeParentWithAncestorWithNonResChesRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
-                async Task<Page<FakeParentWithAncestorWithNonResChData>> FirstPageFunc(int? pageSizeHint)
+                FakeParentWithAncestorWithNonResChesRestOperations restOperations = GetFakeParentWithAncestorWithNonResChesRestOperations(clientDiagnostics, pipeline, options, baseUri);
+                async Task<Page<FakeParentWithAncestorWithNonResCh>> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetFakeParentWithAncestorWithNonResChes");
                     scope.Start();
                     try
                     {
                         var response = await restOperations.ListBySubscriptionAsync(subscription.Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
-                        return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                        return Page.FromValues(response.Value.Value.Select(value => new FakeParentWithAncestorWithNonResCh(subscription, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
                     {
@@ -350,14 +349,14 @@ namespace MgmtListMethods
                         throw;
                     }
                 }
-                async Task<Page<FakeParentWithAncestorWithNonResChData>> NextPageFunc(string nextLink, int? pageSizeHint)
+                async Task<Page<FakeParentWithAncestorWithNonResCh>> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetFakeParentWithAncestorWithNonResChes");
                     scope.Start();
                     try
                     {
                         var response = await restOperations.ListBySubscriptionNextPageAsync(nextLink, subscription.Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
-                        return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                        return Page.FromValues(response.Value.Value.Select(value => new FakeParentWithAncestorWithNonResCh(subscription, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
                     {
@@ -373,24 +372,24 @@ namespace MgmtListMethods
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakeParentWithAncestorWithNonResChes
         /// ContextualPath: /subscriptions/{subscriptionId}
         /// OperationId: FakeParentWithAncestorWithNonResChes_ListBySubscription
-        /// <summary> Lists the FakeParentWithAncestorWithNonResChData for this <see cref="Subscription" />. </summary>
+        /// <summary> Lists the FakeParentWithAncestorWithNonResChes for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static Pageable<FakeParentWithAncestorWithNonResChData> GetFakeParentWithAncestorWithNonResChes(this Subscription subscription, CancellationToken cancellationToken = default)
+        public static Pageable<FakeParentWithAncestorWithNonResCh> GetFakeParentWithAncestorWithNonResChes(this Subscription subscription, CancellationToken cancellationToken = default)
         {
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetFakeParentWithAncestorWithNonResChesRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
-                Page<FakeParentWithAncestorWithNonResChData> FirstPageFunc(int? pageSizeHint)
+                FakeParentWithAncestorWithNonResChesRestOperations restOperations = GetFakeParentWithAncestorWithNonResChesRestOperations(clientDiagnostics, pipeline, options, baseUri);
+                Page<FakeParentWithAncestorWithNonResCh> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetFakeParentWithAncestorWithNonResChes");
                     scope.Start();
                     try
                     {
                         var response = restOperations.ListBySubscription(subscription.Id.SubscriptionId, cancellationToken: cancellationToken);
-                        return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                        return Page.FromValues(response.Value.Value.Select(value => new FakeParentWithAncestorWithNonResCh(subscription, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
                     {
@@ -398,14 +397,14 @@ namespace MgmtListMethods
                         throw;
                     }
                 }
-                Page<FakeParentWithAncestorWithNonResChData> NextPageFunc(string nextLink, int? pageSizeHint)
+                Page<FakeParentWithAncestorWithNonResCh> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetFakeParentWithAncestorWithNonResChes");
                     scope.Start();
                     try
                     {
                         var response = restOperations.ListBySubscriptionNextPage(nextLink, subscription.Id.SubscriptionId, cancellationToken: cancellationToken);
-                        return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                        return Page.FromValues(response.Value.Value.Select(value => new FakeParentWithAncestorWithNonResCh(subscription, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
                     {
@@ -425,7 +424,7 @@ namespace MgmtListMethods
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<GenericResource> GetFakeParentWithAncestorWithNonResChByNameAsync(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
+        public static AsyncPageable<GenericResource> GetFakeParentWithAncestorWithNonResChesAsGenericResourcesAsync(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
         {
             ResourceFilterCollection filters = new(FakeParentWithAncestorWithNonResCh.ResourceType);
             filters.SubstringFilter = filter;
@@ -439,7 +438,7 @@ namespace MgmtListMethods
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static Pageable<GenericResource> GetFakeParentWithAncestorWithNonResChByName(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
+        public static Pageable<GenericResource> GetFakeParentWithAncestorWithNonResChesAsGenericResources(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
         {
             ResourceFilterCollection filters = new(FakeParentWithAncestorWithNonResCh.ResourceType);
             filters.SubstringFilter = filter;
@@ -449,24 +448,24 @@ namespace MgmtListMethods
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakeParentWithAncestorWithLocs
         /// ContextualPath: /subscriptions/{subscriptionId}
         /// OperationId: FakeParentWithAncestorWithLocs_ListBySubscription
-        /// <summary> Lists the FakeParentWithAncestorWithLocData for this <see cref="Subscription" />. </summary>
+        /// <summary> Lists the FakeParentWithAncestorWithLocs for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<FakeParentWithAncestorWithLocData> GetFakeParentWithAncestorWithLocsAsync(this Subscription subscription, CancellationToken cancellationToken = default)
+        public static AsyncPageable<FakeParentWithAncestorWithLoc> GetFakeParentWithAncestorWithLocsAsync(this Subscription subscription, CancellationToken cancellationToken = default)
         {
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetFakeParentWithAncestorWithLocsRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
-                async Task<Page<FakeParentWithAncestorWithLocData>> FirstPageFunc(int? pageSizeHint)
+                FakeParentWithAncestorWithLocsRestOperations restOperations = GetFakeParentWithAncestorWithLocsRestOperations(clientDiagnostics, pipeline, options, baseUri);
+                async Task<Page<FakeParentWithAncestorWithLoc>> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetFakeParentWithAncestorWithLocs");
                     scope.Start();
                     try
                     {
                         var response = await restOperations.ListBySubscriptionAsync(subscription.Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
-                        return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                        return Page.FromValues(response.Value.Value.Select(value => new FakeParentWithAncestorWithLoc(subscription, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
                     {
@@ -474,14 +473,14 @@ namespace MgmtListMethods
                         throw;
                     }
                 }
-                async Task<Page<FakeParentWithAncestorWithLocData>> NextPageFunc(string nextLink, int? pageSizeHint)
+                async Task<Page<FakeParentWithAncestorWithLoc>> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetFakeParentWithAncestorWithLocs");
                     scope.Start();
                     try
                     {
                         var response = await restOperations.ListBySubscriptionNextPageAsync(nextLink, subscription.Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
-                        return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                        return Page.FromValues(response.Value.Value.Select(value => new FakeParentWithAncestorWithLoc(subscription, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
                     {
@@ -497,24 +496,24 @@ namespace MgmtListMethods
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakeParentWithAncestorWithLocs
         /// ContextualPath: /subscriptions/{subscriptionId}
         /// OperationId: FakeParentWithAncestorWithLocs_ListBySubscription
-        /// <summary> Lists the FakeParentWithAncestorWithLocData for this <see cref="Subscription" />. </summary>
+        /// <summary> Lists the FakeParentWithAncestorWithLocs for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static Pageable<FakeParentWithAncestorWithLocData> GetFakeParentWithAncestorWithLocs(this Subscription subscription, CancellationToken cancellationToken = default)
+        public static Pageable<FakeParentWithAncestorWithLoc> GetFakeParentWithAncestorWithLocs(this Subscription subscription, CancellationToken cancellationToken = default)
         {
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetFakeParentWithAncestorWithLocsRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
-                Page<FakeParentWithAncestorWithLocData> FirstPageFunc(int? pageSizeHint)
+                FakeParentWithAncestorWithLocsRestOperations restOperations = GetFakeParentWithAncestorWithLocsRestOperations(clientDiagnostics, pipeline, options, baseUri);
+                Page<FakeParentWithAncestorWithLoc> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetFakeParentWithAncestorWithLocs");
                     scope.Start();
                     try
                     {
                         var response = restOperations.ListBySubscription(subscription.Id.SubscriptionId, cancellationToken: cancellationToken);
-                        return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                        return Page.FromValues(response.Value.Value.Select(value => new FakeParentWithAncestorWithLoc(subscription, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
                     {
@@ -522,14 +521,14 @@ namespace MgmtListMethods
                         throw;
                     }
                 }
-                Page<FakeParentWithAncestorWithLocData> NextPageFunc(string nextLink, int? pageSizeHint)
+                Page<FakeParentWithAncestorWithLoc> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetFakeParentWithAncestorWithLocs");
                     scope.Start();
                     try
                     {
                         var response = restOperations.ListBySubscriptionNextPage(nextLink, subscription.Id.SubscriptionId, cancellationToken: cancellationToken);
-                        return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                        return Page.FromValues(response.Value.Value.Select(value => new FakeParentWithAncestorWithLoc(subscription, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
                     {
@@ -549,7 +548,7 @@ namespace MgmtListMethods
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<GenericResource> GetFakeParentWithAncestorWithLocByNameAsync(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
+        public static AsyncPageable<GenericResource> GetFakeParentWithAncestorWithLocsAsGenericResourcesAsync(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
         {
             ResourceFilterCollection filters = new(FakeParentWithAncestorWithLoc.ResourceType);
             filters.SubstringFilter = filter;
@@ -563,7 +562,7 @@ namespace MgmtListMethods
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static Pageable<GenericResource> GetFakeParentWithAncestorWithLocByName(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
+        public static Pageable<GenericResource> GetFakeParentWithAncestorWithLocsAsGenericResources(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
         {
             ResourceFilterCollection filters = new(FakeParentWithAncestorWithLoc.ResourceType);
             filters.SubstringFilter = filter;
@@ -573,13 +572,13 @@ namespace MgmtListMethods
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/locations/{location}/fakeParentWithAncestorWithLocs
         /// ContextualPath: /subscriptions/{subscriptionId}
         /// OperationId: FakeParentWithAncestorWithLocs_ListTestByLocations
-        /// <summary> Lists the FakeParentWithAncestorWithLocData for this <see cref="Subscription" />. </summary>
+        /// <summary> Lists the FakeParentWithAncestorWithLocs for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        public static AsyncPageable<FakeParentWithAncestorWithLocData> GetTestByLocationsFakeParentWithAncestorWithLocsAsync(this Subscription subscription, string location, CancellationToken cancellationToken = default)
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        public static AsyncPageable<FakeParentWithAncestorWithLoc> GetTestByLocationsFakeParentWithAncestorWithLocsAsync(this Subscription subscription, string location, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -589,15 +588,15 @@ namespace MgmtListMethods
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetFakeParentWithAncestorWithLocsRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
-                async Task<Page<FakeParentWithAncestorWithLocData>> FirstPageFunc(int? pageSizeHint)
+                FakeParentWithAncestorWithLocsRestOperations restOperations = GetFakeParentWithAncestorWithLocsRestOperations(clientDiagnostics, pipeline, options, baseUri);
+                async Task<Page<FakeParentWithAncestorWithLoc>> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetTestByLocationsFakeParentWithAncestorWithLocs");
                     scope.Start();
                     try
                     {
                         var response = await restOperations.ListTestByLocationsAsync(subscription.Id.SubscriptionId, location, cancellationToken: cancellationToken).ConfigureAwait(false);
-                        return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                        return Page.FromValues(response.Value.Value.Select(value => new FakeParentWithAncestorWithLoc(subscription, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
                     {
@@ -605,14 +604,14 @@ namespace MgmtListMethods
                         throw;
                     }
                 }
-                async Task<Page<FakeParentWithAncestorWithLocData>> NextPageFunc(string nextLink, int? pageSizeHint)
+                async Task<Page<FakeParentWithAncestorWithLoc>> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetTestByLocationsFakeParentWithAncestorWithLocs");
                     scope.Start();
                     try
                     {
                         var response = await restOperations.ListTestByLocationsNextPageAsync(nextLink, subscription.Id.SubscriptionId, location, cancellationToken: cancellationToken).ConfigureAwait(false);
-                        return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                        return Page.FromValues(response.Value.Value.Select(value => new FakeParentWithAncestorWithLoc(subscription, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
                     {
@@ -628,13 +627,13 @@ namespace MgmtListMethods
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/locations/{location}/fakeParentWithAncestorWithLocs
         /// ContextualPath: /subscriptions/{subscriptionId}
         /// OperationId: FakeParentWithAncestorWithLocs_ListTestByLocations
-        /// <summary> Lists the FakeParentWithAncestorWithLocData for this <see cref="Subscription" />. </summary>
+        /// <summary> Lists the FakeParentWithAncestorWithLocs for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        public static Pageable<FakeParentWithAncestorWithLocData> GetTestByLocationsFakeParentWithAncestorWithLocs(this Subscription subscription, string location, CancellationToken cancellationToken = default)
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        public static Pageable<FakeParentWithAncestorWithLoc> GetTestByLocationsFakeParentWithAncestorWithLocs(this Subscription subscription, string location, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -644,15 +643,15 @@ namespace MgmtListMethods
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetFakeParentWithAncestorWithLocsRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
-                Page<FakeParentWithAncestorWithLocData> FirstPageFunc(int? pageSizeHint)
+                FakeParentWithAncestorWithLocsRestOperations restOperations = GetFakeParentWithAncestorWithLocsRestOperations(clientDiagnostics, pipeline, options, baseUri);
+                Page<FakeParentWithAncestorWithLoc> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetTestByLocationsFakeParentWithAncestorWithLocs");
                     scope.Start();
                     try
                     {
                         var response = restOperations.ListTestByLocations(subscription.Id.SubscriptionId, location, cancellationToken: cancellationToken);
-                        return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                        return Page.FromValues(response.Value.Value.Select(value => new FakeParentWithAncestorWithLoc(subscription, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
                     {
@@ -660,14 +659,14 @@ namespace MgmtListMethods
                         throw;
                     }
                 }
-                Page<FakeParentWithAncestorWithLocData> NextPageFunc(string nextLink, int? pageSizeHint)
+                Page<FakeParentWithAncestorWithLoc> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetTestByLocationsFakeParentWithAncestorWithLocs");
                     scope.Start();
                     try
                     {
                         var response = restOperations.ListTestByLocationsNextPage(nextLink, subscription.Id.SubscriptionId, location, cancellationToken: cancellationToken);
-                        return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                        return Page.FromValues(response.Value.Value.Select(value => new FakeParentWithAncestorWithLoc(subscription, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
                     {
@@ -683,24 +682,24 @@ namespace MgmtListMethods
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakeParentWithAncestors
         /// ContextualPath: /subscriptions/{subscriptionId}
         /// OperationId: FakeParentWithAncestors_ListBySubscription
-        /// <summary> Lists the FakeParentWithAncestorData for this <see cref="Subscription" />. </summary>
+        /// <summary> Lists the FakeParentWithAncestors for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<FakeParentWithAncestorData> GetFakeParentWithAncestorsAsync(this Subscription subscription, CancellationToken cancellationToken = default)
+        public static AsyncPageable<FakeParentWithAncestor> GetFakeParentWithAncestorsAsync(this Subscription subscription, CancellationToken cancellationToken = default)
         {
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetFakeParentWithAncestorsRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
-                async Task<Page<FakeParentWithAncestorData>> FirstPageFunc(int? pageSizeHint)
+                FakeParentWithAncestorsRestOperations restOperations = GetFakeParentWithAncestorsRestOperations(clientDiagnostics, pipeline, options, baseUri);
+                async Task<Page<FakeParentWithAncestor>> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetFakeParentWithAncestors");
                     scope.Start();
                     try
                     {
                         var response = await restOperations.ListBySubscriptionAsync(subscription.Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
-                        return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                        return Page.FromValues(response.Value.Value.Select(value => new FakeParentWithAncestor(subscription, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
                     {
@@ -708,14 +707,14 @@ namespace MgmtListMethods
                         throw;
                     }
                 }
-                async Task<Page<FakeParentWithAncestorData>> NextPageFunc(string nextLink, int? pageSizeHint)
+                async Task<Page<FakeParentWithAncestor>> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetFakeParentWithAncestors");
                     scope.Start();
                     try
                     {
                         var response = await restOperations.ListBySubscriptionNextPageAsync(nextLink, subscription.Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
-                        return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                        return Page.FromValues(response.Value.Value.Select(value => new FakeParentWithAncestor(subscription, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
                     {
@@ -731,24 +730,24 @@ namespace MgmtListMethods
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakeParentWithAncestors
         /// ContextualPath: /subscriptions/{subscriptionId}
         /// OperationId: FakeParentWithAncestors_ListBySubscription
-        /// <summary> Lists the FakeParentWithAncestorData for this <see cref="Subscription" />. </summary>
+        /// <summary> Lists the FakeParentWithAncestors for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static Pageable<FakeParentWithAncestorData> GetFakeParentWithAncestors(this Subscription subscription, CancellationToken cancellationToken = default)
+        public static Pageable<FakeParentWithAncestor> GetFakeParentWithAncestors(this Subscription subscription, CancellationToken cancellationToken = default)
         {
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetFakeParentWithAncestorsRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
-                Page<FakeParentWithAncestorData> FirstPageFunc(int? pageSizeHint)
+                FakeParentWithAncestorsRestOperations restOperations = GetFakeParentWithAncestorsRestOperations(clientDiagnostics, pipeline, options, baseUri);
+                Page<FakeParentWithAncestor> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetFakeParentWithAncestors");
                     scope.Start();
                     try
                     {
                         var response = restOperations.ListBySubscription(subscription.Id.SubscriptionId, cancellationToken: cancellationToken);
-                        return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                        return Page.FromValues(response.Value.Value.Select(value => new FakeParentWithAncestor(subscription, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
                     {
@@ -756,14 +755,14 @@ namespace MgmtListMethods
                         throw;
                     }
                 }
-                Page<FakeParentWithAncestorData> NextPageFunc(string nextLink, int? pageSizeHint)
+                Page<FakeParentWithAncestor> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetFakeParentWithAncestors");
                     scope.Start();
                     try
                     {
                         var response = restOperations.ListBySubscriptionNextPage(nextLink, subscription.Id.SubscriptionId, cancellationToken: cancellationToken);
-                        return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                        return Page.FromValues(response.Value.Value.Select(value => new FakeParentWithAncestor(subscription, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
                     {
@@ -783,7 +782,7 @@ namespace MgmtListMethods
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<GenericResource> GetFakeParentWithAncestorByNameAsync(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
+        public static AsyncPageable<GenericResource> GetFakeParentWithAncestorsAsGenericResourcesAsync(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
         {
             ResourceFilterCollection filters = new(FakeParentWithAncestor.ResourceType);
             filters.SubstringFilter = filter;
@@ -797,7 +796,7 @@ namespace MgmtListMethods
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static Pageable<GenericResource> GetFakeParentWithAncestorByName(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
+        public static Pageable<GenericResource> GetFakeParentWithAncestorsAsGenericResources(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
         {
             ResourceFilterCollection filters = new(FakeParentWithAncestor.ResourceType);
             filters.SubstringFilter = filter;
@@ -817,7 +816,8 @@ namespace MgmtListMethods
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetResGrpParentWithAncestorWithNonResChWithLocsRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                options.TryGetApiVersion(ResGrpParentWithAncestorWithNonResChWithLoc.ResourceType, out string apiVersion);
+                ResGrpParentWithAncestorWithNonResChWithLocsRestOperations restOperations = GetResGrpParentWithAncestorWithNonResChWithLocsRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
                 async Task<Page<ResGrpParentWithAncestorWithNonResChWithLoc>> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetResGrpParentWithAncestorWithNonResChWithLocs");
@@ -866,7 +866,8 @@ namespace MgmtListMethods
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetResGrpParentWithAncestorWithNonResChWithLocsRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                options.TryGetApiVersion(ResGrpParentWithAncestorWithNonResChWithLoc.ResourceType, out string apiVersion);
+                ResGrpParentWithAncestorWithNonResChWithLocsRestOperations restOperations = GetResGrpParentWithAncestorWithNonResChWithLocsRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
                 Page<ResGrpParentWithAncestorWithNonResChWithLoc> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetResGrpParentWithAncestorWithNonResChWithLocs");
@@ -909,7 +910,7 @@ namespace MgmtListMethods
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<GenericResource> GetResGrpParentWithAncestorWithNonResChWithLocByNameAsync(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
+        public static AsyncPageable<GenericResource> GetResGrpParentWithAncestorWithNonResChWithLocsAsGenericResourcesAsync(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
         {
             ResourceFilterCollection filters = new(ResGrpParentWithAncestorWithNonResChWithLoc.ResourceType);
             filters.SubstringFilter = filter;
@@ -923,7 +924,7 @@ namespace MgmtListMethods
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static Pageable<GenericResource> GetResGrpParentWithAncestorWithNonResChWithLocByName(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
+        public static Pageable<GenericResource> GetResGrpParentWithAncestorWithNonResChWithLocsAsGenericResources(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
         {
             ResourceFilterCollection filters = new(ResGrpParentWithAncestorWithNonResChWithLoc.ResourceType);
             filters.SubstringFilter = filter;
@@ -943,7 +944,8 @@ namespace MgmtListMethods
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetResGrpParentWithAncestorWithNonResChesRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                options.TryGetApiVersion(ResGrpParentWithAncestorWithNonResCh.ResourceType, out string apiVersion);
+                ResGrpParentWithAncestorWithNonResChesRestOperations restOperations = GetResGrpParentWithAncestorWithNonResChesRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
                 async Task<Page<ResGrpParentWithAncestorWithNonResCh>> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetResGrpParentWithAncestorWithNonResChes");
@@ -992,7 +994,8 @@ namespace MgmtListMethods
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetResGrpParentWithAncestorWithNonResChesRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                options.TryGetApiVersion(ResGrpParentWithAncestorWithNonResCh.ResourceType, out string apiVersion);
+                ResGrpParentWithAncestorWithNonResChesRestOperations restOperations = GetResGrpParentWithAncestorWithNonResChesRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
                 Page<ResGrpParentWithAncestorWithNonResCh> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetResGrpParentWithAncestorWithNonResChes");
@@ -1035,7 +1038,7 @@ namespace MgmtListMethods
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<GenericResource> GetResGrpParentWithAncestorWithNonResChByNameAsync(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
+        public static AsyncPageable<GenericResource> GetResGrpParentWithAncestorWithNonResChesAsGenericResourcesAsync(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
         {
             ResourceFilterCollection filters = new(ResGrpParentWithAncestorWithNonResCh.ResourceType);
             filters.SubstringFilter = filter;
@@ -1049,7 +1052,7 @@ namespace MgmtListMethods
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static Pageable<GenericResource> GetResGrpParentWithAncestorWithNonResChByName(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
+        public static Pageable<GenericResource> GetResGrpParentWithAncestorWithNonResChesAsGenericResources(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
         {
             ResourceFilterCollection filters = new(ResGrpParentWithAncestorWithNonResCh.ResourceType);
             filters.SubstringFilter = filter;
@@ -1068,7 +1071,8 @@ namespace MgmtListMethods
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetResGrpParentWithAncestorWithLocsRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                options.TryGetApiVersion(ResGrpParentWithAncestorWithLoc.ResourceType, out string apiVersion);
+                ResGrpParentWithAncestorWithLocsRestOperations restOperations = GetResGrpParentWithAncestorWithLocsRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
                 async Task<Page<ResGrpParentWithAncestorWithLoc>> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetTestResGrpParentWithAncestorWithLocs");
@@ -1116,7 +1120,8 @@ namespace MgmtListMethods
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetResGrpParentWithAncestorWithLocsRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                options.TryGetApiVersion(ResGrpParentWithAncestorWithLoc.ResourceType, out string apiVersion);
+                ResGrpParentWithAncestorWithLocsRestOperations restOperations = GetResGrpParentWithAncestorWithLocsRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
                 Page<ResGrpParentWithAncestorWithLoc> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetTestResGrpParentWithAncestorWithLocs");
@@ -1159,7 +1164,7 @@ namespace MgmtListMethods
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<GenericResource> GetResGrpParentWithAncestorWithLocByNameAsync(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
+        public static AsyncPageable<GenericResource> GetResGrpParentWithAncestorWithLocsAsGenericResourcesAsync(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
         {
             ResourceFilterCollection filters = new(ResGrpParentWithAncestorWithLoc.ResourceType);
             filters.SubstringFilter = filter;
@@ -1173,7 +1178,7 @@ namespace MgmtListMethods
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static Pageable<GenericResource> GetResGrpParentWithAncestorWithLocByName(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
+        public static Pageable<GenericResource> GetResGrpParentWithAncestorWithLocsAsGenericResources(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
         {
             ResourceFilterCollection filters = new(ResGrpParentWithAncestorWithLoc.ResourceType);
             filters.SubstringFilter = filter;
@@ -1183,13 +1188,13 @@ namespace MgmtListMethods
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/locations/{location}/resGrpParentWithAncestorWithLocs
         /// ContextualPath: /subscriptions/{subscriptionId}
         /// OperationId: ResGrpParentWithAncestorWithLocs_ListAll
-        /// <summary> Lists the ResGrpParentWithAncestorWithNonResChWithLocData for this <see cref="Subscription" />. </summary>
+        /// <summary> Lists the ResGrpParentWithAncestorWithNonResChWithLocs for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        public static AsyncPageable<ResGrpParentWithAncestorWithNonResChWithLocData> GetResGrpParentWithAncestorWithLocsAsync(this Subscription subscription, string location, CancellationToken cancellationToken = default)
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        public static AsyncPageable<ResGrpParentWithAncestorWithNonResChWithLoc> GetResGrpParentWithAncestorWithLocsAsync(this Subscription subscription, string location, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -1199,15 +1204,15 @@ namespace MgmtListMethods
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetResGrpParentWithAncestorWithLocsRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
-                async Task<Page<ResGrpParentWithAncestorWithNonResChWithLocData>> FirstPageFunc(int? pageSizeHint)
+                ResGrpParentWithAncestorWithLocsRestOperations restOperations = GetResGrpParentWithAncestorWithLocsRestOperations(clientDiagnostics, pipeline, options, baseUri);
+                async Task<Page<ResGrpParentWithAncestorWithNonResChWithLoc>> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetResGrpParentWithAncestorWithLocs");
                     scope.Start();
                     try
                     {
                         var response = await restOperations.ListAllAsync(subscription.Id.SubscriptionId, location, cancellationToken: cancellationToken).ConfigureAwait(false);
-                        return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                        return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentWithAncestorWithNonResChWithLoc(subscription, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
                     {
@@ -1215,14 +1220,14 @@ namespace MgmtListMethods
                         throw;
                     }
                 }
-                async Task<Page<ResGrpParentWithAncestorWithNonResChWithLocData>> NextPageFunc(string nextLink, int? pageSizeHint)
+                async Task<Page<ResGrpParentWithAncestorWithNonResChWithLoc>> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetResGrpParentWithAncestorWithLocs");
                     scope.Start();
                     try
                     {
                         var response = await restOperations.ListAllNextPageAsync(nextLink, subscription.Id.SubscriptionId, location, cancellationToken: cancellationToken).ConfigureAwait(false);
-                        return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                        return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentWithAncestorWithNonResChWithLoc(subscription, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
                     {
@@ -1238,13 +1243,13 @@ namespace MgmtListMethods
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/locations/{location}/resGrpParentWithAncestorWithLocs
         /// ContextualPath: /subscriptions/{subscriptionId}
         /// OperationId: ResGrpParentWithAncestorWithLocs_ListAll
-        /// <summary> Lists the ResGrpParentWithAncestorWithNonResChWithLocData for this <see cref="Subscription" />. </summary>
+        /// <summary> Lists the ResGrpParentWithAncestorWithNonResChWithLocs for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        public static Pageable<ResGrpParentWithAncestorWithNonResChWithLocData> GetResGrpParentWithAncestorWithLocs(this Subscription subscription, string location, CancellationToken cancellationToken = default)
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        public static Pageable<ResGrpParentWithAncestorWithNonResChWithLoc> GetResGrpParentWithAncestorWithLocs(this Subscription subscription, string location, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -1254,15 +1259,15 @@ namespace MgmtListMethods
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetResGrpParentWithAncestorWithLocsRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
-                Page<ResGrpParentWithAncestorWithNonResChWithLocData> FirstPageFunc(int? pageSizeHint)
+                ResGrpParentWithAncestorWithLocsRestOperations restOperations = GetResGrpParentWithAncestorWithLocsRestOperations(clientDiagnostics, pipeline, options, baseUri);
+                Page<ResGrpParentWithAncestorWithNonResChWithLoc> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetResGrpParentWithAncestorWithLocs");
                     scope.Start();
                     try
                     {
                         var response = restOperations.ListAll(subscription.Id.SubscriptionId, location, cancellationToken: cancellationToken);
-                        return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                        return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentWithAncestorWithNonResChWithLoc(subscription, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
                     {
@@ -1270,14 +1275,14 @@ namespace MgmtListMethods
                         throw;
                     }
                 }
-                Page<ResGrpParentWithAncestorWithNonResChWithLocData> NextPageFunc(string nextLink, int? pageSizeHint)
+                Page<ResGrpParentWithAncestorWithNonResChWithLoc> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetResGrpParentWithAncestorWithLocs");
                     scope.Start();
                     try
                     {
                         var response = restOperations.ListAllNextPage(nextLink, subscription.Id.SubscriptionId, location, cancellationToken: cancellationToken);
-                        return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                        return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentWithAncestorWithNonResChWithLoc(subscription, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
                     {
@@ -1293,55 +1298,67 @@ namespace MgmtListMethods
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/resGrpParentWithAncestors
         /// ContextualPath: /subscriptions/{subscriptionId}
         /// OperationId: ResGrpParentWithAncestors_NonPageableListBySubscription
-        /// <summary> Lists all in a subscription. </summary>
+        /// <summary> Lists the ResGrpParentWithAncestors for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public static async Task<Response<IReadOnlyList<ResGrpParentWithAncestor>>> NonPageableListResGrpParentWithAncestorsAsync(this Subscription subscription, CancellationToken cancellationToken = default)
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        public static AsyncPageable<ResGrpParentWithAncestor> NonPageableListResGrpParentWithAncestorsAsync(this Subscription subscription, CancellationToken cancellationToken = default)
         {
-            return await subscription.UseClientContext(async (baseUri, credential, options, pipeline) =>
+            return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.NonPageableListResGrpParentWithAncestors");
-                scope.Start();
-                try
+                options.TryGetApiVersion(ResGrpParentWithAncestor.ResourceType, out string apiVersion);
+                ResGrpParentWithAncestorsRestOperations restOperations = GetResGrpParentWithAncestorsRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
+                async Task<Page<ResGrpParentWithAncestor>> FirstPageFunc(int? pageSizeHint)
                 {
-                    var restOperations = GetResGrpParentWithAncestorsRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
-                    var response = await restOperations.NonPageableListBySubscriptionAsync(subscription.Id.SubscriptionId, cancellationToken).ConfigureAwait(false);
-                    return Response.FromValue(response.Value.Value.Select(value => new ResGrpParentWithAncestor(subscription, value)).ToArray() as IReadOnlyList<ResGrpParentWithAncestor>, response.GetRawResponse());
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.NonPageableListResGrpParentWithAncestors");
+                    scope.Start();
+                    try
+                    {
+                        var response = await restOperations.NonPageableListBySubscriptionAsync(subscription.Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentWithAncestor(subscription, value)), null, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
                 }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
             }
-            ).ConfigureAwait(false);
+            );
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/resGrpParentWithAncestors
         /// ContextualPath: /subscriptions/{subscriptionId}
         /// OperationId: ResGrpParentWithAncestors_NonPageableListBySubscription
-        /// <summary> Lists all in a subscription. </summary>
+        /// <summary> Lists the ResGrpParentWithAncestors for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public static Response<IReadOnlyList<ResGrpParentWithAncestor>> NonPageableListResGrpParentWithAncestors(this Subscription subscription, CancellationToken cancellationToken = default)
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        public static Pageable<ResGrpParentWithAncestor> NonPageableListResGrpParentWithAncestors(this Subscription subscription, CancellationToken cancellationToken = default)
         {
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.NonPageableListResGrpParentWithAncestors");
-                scope.Start();
-                try
+                options.TryGetApiVersion(ResGrpParentWithAncestor.ResourceType, out string apiVersion);
+                ResGrpParentWithAncestorsRestOperations restOperations = GetResGrpParentWithAncestorsRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
+                Page<ResGrpParentWithAncestor> FirstPageFunc(int? pageSizeHint)
                 {
-                    var restOperations = GetResGrpParentWithAncestorsRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
-                    var response = restOperations.NonPageableListBySubscription(subscription.Id.SubscriptionId, cancellationToken);
-                    return Response.FromValue(response.Value.Value.Select(value => new ResGrpParentWithAncestor(subscription, value)).ToArray() as IReadOnlyList<ResGrpParentWithAncestor>, response.GetRawResponse());
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.NonPageableListResGrpParentWithAncestors");
+                    scope.Start();
+                    try
+                    {
+                        var response = restOperations.NonPageableListBySubscription(subscription.Id.SubscriptionId, cancellationToken: cancellationToken);
+                        return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentWithAncestor(subscription, value)), null, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
                 }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
             }
             );
         }
@@ -1353,7 +1370,7 @@ namespace MgmtListMethods
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<GenericResource> GetResGrpParentWithAncestorByNameAsync(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
+        public static AsyncPageable<GenericResource> GetResGrpParentWithAncestorsAsGenericResourcesAsync(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
         {
             ResourceFilterCollection filters = new(ResGrpParentWithAncestor.ResourceType);
             filters.SubstringFilter = filter;
@@ -1367,7 +1384,7 @@ namespace MgmtListMethods
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static Pageable<GenericResource> GetResGrpParentWithAncestorByName(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
+        public static Pageable<GenericResource> GetResGrpParentWithAncestorsAsGenericResources(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
         {
             ResourceFilterCollection filters = new(ResGrpParentWithAncestor.ResourceType);
             filters.SubstringFilter = filter;
@@ -1377,53 +1394,14 @@ namespace MgmtListMethods
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/locations/{location}/updateQuotas
         /// ContextualPath: /subscriptions/{subscriptionId}
         /// OperationId: Quotas_Update
-        /// <summary> Update quota for each VM family in workspace. </summary>
+        /// <summary> Lists the UpdateWorkspaceQuotas for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="location"> The location for update quota is queried. </param>
         /// <param name="parameters"> Quota update parameters. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="parameters"/> is null. </exception>
-        public static async Task<Response<IReadOnlyList<UpdateWorkspaceQuotas>>> UpdateQuotasAsync(this Subscription subscription, string location, QuotaUpdateParameters parameters, CancellationToken cancellationToken = default)
-        {
-            if (location == null)
-            {
-                throw new ArgumentNullException(nameof(location));
-            }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            return await subscription.UseClientContext(async (baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.UpdateQuotas");
-                scope.Start();
-                try
-                {
-                    var restOperations = GetQuotasRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
-                    var response = await restOperations.UpdateAsync(subscription.Id.SubscriptionId, location, parameters, cancellationToken).ConfigureAwait(false);
-                    return Response.FromValue(response.Value.Value, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            ).ConfigureAwait(false);
-        }
-
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/locations/{location}/updateQuotas
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: Quotas_Update
-        /// <summary> Update quota for each VM family in workspace. </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <param name="location"> The location for update quota is queried. </param>
-        /// <param name="parameters"> Quota update parameters. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="parameters"/> is null. </exception>
-        public static Response<IReadOnlyList<UpdateWorkspaceQuotas>> UpdateQuotas(this Subscription subscription, string location, QuotaUpdateParameters parameters, CancellationToken cancellationToken = default)
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        public static AsyncPageable<UpdateWorkspaceQuotas> UpdateQuotasAsync(this Subscription subscription, string location, QuotaUpdateParameters parameters, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -1437,19 +1415,68 @@ namespace MgmtListMethods
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.UpdateQuotas");
-                scope.Start();
-                try
+                QuotasRestOperations restOperations = GetQuotasRestOperations(clientDiagnostics, pipeline, options, baseUri);
+                async Task<Page<UpdateWorkspaceQuotas>> FirstPageFunc(int? pageSizeHint)
                 {
-                    var restOperations = GetQuotasRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
-                    var response = restOperations.Update(subscription.Id.SubscriptionId, location, parameters, cancellationToken);
-                    return Response.FromValue(response.Value.Value, response.GetRawResponse());
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.UpdateQuotas");
+                    scope.Start();
+                    try
+                    {
+                        var response = await restOperations.UpdateAsync(subscription.Id.SubscriptionId, location, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
                 }
-                catch (Exception e)
+                return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
+            }
+            );
+        }
+
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/locations/{location}/updateQuotas
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: Quotas_Update
+        /// <summary> Lists the UpdateWorkspaceQuotas for this <see cref="Subscription" />. </summary>
+        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="location"> The location for update quota is queried. </param>
+        /// <param name="parameters"> Quota update parameters. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="parameters"/> is null. </exception>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        public static Pageable<UpdateWorkspaceQuotas> UpdateQuotas(this Subscription subscription, string location, QuotaUpdateParameters parameters, CancellationToken cancellationToken = default)
+        {
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                QuotasRestOperations restOperations = GetQuotasRestOperations(clientDiagnostics, pipeline, options, baseUri);
+                Page<UpdateWorkspaceQuotas> FirstPageFunc(int? pageSizeHint)
                 {
-                    scope.Failed(e);
-                    throw;
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.UpdateQuotas");
+                    scope.Start();
+                    try
+                    {
+                        var response = restOperations.Update(subscription.Id.SubscriptionId, location, parameters, cancellationToken: cancellationToken);
+                        return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
                 }
+                return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
             }
             );
         }

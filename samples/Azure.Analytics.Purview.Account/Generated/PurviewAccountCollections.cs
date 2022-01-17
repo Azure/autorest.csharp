@@ -24,9 +24,10 @@ namespace Azure.Analytics.Purview.Account
         private readonly HttpPipeline _pipeline;
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly Uri _endpoint;
-        private readonly string _collectionName;
         private readonly string _apiVersion;
 
+        /// <summary> The String to use. </summary>
+        public virtual string CollectionName { get; }
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
@@ -45,32 +46,17 @@ namespace Azure.Analytics.Purview.Account
         /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/>, <paramref name="pipeline"/>, <paramref name="endpoint"/>, <paramref name="collectionName"/>, or <paramref name="apiVersion"/> is null. </exception>
         internal PurviewAccountCollections(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, TokenCredential tokenCredential, Uri endpoint, string collectionName, string apiVersion = "2019-11-01-preview")
         {
-            if (clientDiagnostics == null)
-            {
-                throw new ArgumentNullException(nameof(clientDiagnostics));
-            }
-            if (pipeline == null)
-            {
-                throw new ArgumentNullException(nameof(pipeline));
-            }
-            if (endpoint == null)
-            {
-                throw new ArgumentNullException(nameof(endpoint));
-            }
-            if (collectionName == null)
-            {
-                throw new ArgumentNullException(nameof(collectionName));
-            }
-            if (apiVersion == null)
-            {
-                throw new ArgumentNullException(nameof(apiVersion));
-            }
+            Argument.AssertNotNull(clientDiagnostics, nameof(clientDiagnostics));
+            Argument.AssertNotNull(pipeline, nameof(pipeline));
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
+            Argument.AssertNotNull(collectionName, nameof(collectionName));
+            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
             _tokenCredential = tokenCredential;
             _endpoint = endpoint;
-            _collectionName = collectionName;
+            CollectionName = collectionName;
             _apiVersion = apiVersion;
         }
 
@@ -262,6 +248,8 @@ namespace Azure.Analytics.Purview.Account
         public virtual async Task<Response> CreateOrUpdateCollectionAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(content, nameof(content));
+
             using var scope = _clientDiagnostics.CreateScope("PurviewAccountCollections.CreateOrUpdateCollection");
             scope.Start();
             try
@@ -344,6 +332,8 @@ namespace Azure.Analytics.Purview.Account
         public virtual Response CreateOrUpdateCollection(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(content, nameof(content));
+
             using var scope = _clientDiagnostics.CreateScope("PurviewAccountCollections.CreateOrUpdateCollection");
             scope.Start();
             try
@@ -646,7 +636,7 @@ namespace Azure.Analytics.Purview.Account
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/collections/", false);
-            uri.AppendPath(_collectionName, true);
+            uri.AppendPath(CollectionName, true);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -662,7 +652,7 @@ namespace Azure.Analytics.Purview.Account
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/collections/", false);
-            uri.AppendPath(_collectionName, true);
+            uri.AppendPath(CollectionName, true);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -680,7 +670,7 @@ namespace Azure.Analytics.Purview.Account
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/collections/", false);
-            uri.AppendPath(_collectionName, true);
+            uri.AppendPath(CollectionName, true);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -696,7 +686,7 @@ namespace Azure.Analytics.Purview.Account
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/collections/", false);
-            uri.AppendPath(_collectionName, true);
+            uri.AppendPath(CollectionName, true);
             uri.AppendPath("/getChildCollectionNames", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             if (skipToken != null)
@@ -717,7 +707,7 @@ namespace Azure.Analytics.Purview.Account
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/collections/", false);
-            uri.AppendPath(_collectionName, true);
+            uri.AppendPath(CollectionName, true);
             uri.AppendPath("/getCollectionPath", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
