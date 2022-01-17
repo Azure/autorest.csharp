@@ -309,9 +309,6 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                             var newVariableName = $"{variableName}.{targetProperty.Declaration.Name}";
                             if (targetProperty.Declaration.Name == "Tags" && targetProperty.ValueType.Name == "IDictionary")
                             {
-                                // _tagsWriter.Append($"{newVariableName}.ReplaceWith(");
-                                // WriteExampleValue(_tagsWriter, targetProperty.ValueType, paramValue!, newVariableName);
-                                // _tagsWriter.Append($");");
                                 CreateTagWriterDelegate(newVariableName, targetProperty.ValueType, paramValue);
                             }
                             else
