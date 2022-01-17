@@ -50,24 +50,24 @@ namespace ExactMatchFlattenInheritance
         }
         #endregion
 
-        private static AzureResourceFlattenModel2SRestOperations GetAzureResourceFlattenModel2SRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, Uri endpoint = null)
+        private static AzureResourceFlattenModel2SRestOperations GetAzureResourceFlattenModel2SRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = default)
         {
-            return new AzureResourceFlattenModel2SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint);
+            return new AzureResourceFlattenModel2SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);
         }
 
-        private static AzureResourceFlattenModel3SRestOperations GetAzureResourceFlattenModel3SRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, Uri endpoint = null)
+        private static AzureResourceFlattenModel3SRestOperations GetAzureResourceFlattenModel3SRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = default)
         {
-            return new AzureResourceFlattenModel3SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint);
+            return new AzureResourceFlattenModel3SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);
         }
 
-        private static AzureResourceFlattenModel4SRestOperations GetAzureResourceFlattenModel4SRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, Uri endpoint = null)
+        private static AzureResourceFlattenModel4SRestOperations GetAzureResourceFlattenModel4SRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = default)
         {
-            return new AzureResourceFlattenModel4SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint);
+            return new AzureResourceFlattenModel4SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);
         }
 
-        private static AzureResourceFlattenModel5SRestOperations GetAzureResourceFlattenModel5SRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, Uri endpoint = null)
+        private static AzureResourceFlattenModel5SRestOperations GetAzureResourceFlattenModel5SRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = default)
         {
-            return new AzureResourceFlattenModel5SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint);
+            return new AzureResourceFlattenModel5SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel2s
@@ -82,7 +82,7 @@ namespace ExactMatchFlattenInheritance
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetAzureResourceFlattenModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                AzureResourceFlattenModel2SRestOperations restOperations = GetAzureResourceFlattenModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                 async Task<Page<AzureResourceFlattenModel2>> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetAzureResourceFlattenModel2s");
@@ -115,7 +115,7 @@ namespace ExactMatchFlattenInheritance
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetAzureResourceFlattenModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                AzureResourceFlattenModel2SRestOperations restOperations = GetAzureResourceFlattenModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                 Page<AzureResourceFlattenModel2> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetAzureResourceFlattenModel2s");
@@ -163,7 +163,7 @@ namespace ExactMatchFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetAzureResourceFlattenModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    AzureResourceFlattenModel2SRestOperations restOperations = GetAzureResourceFlattenModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = await restOperations.PutAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, name, parameters, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
@@ -203,7 +203,7 @@ namespace ExactMatchFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetAzureResourceFlattenModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    AzureResourceFlattenModel2SRestOperations restOperations = GetAzureResourceFlattenModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = restOperations.Put(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, name, parameters, cancellationToken);
                     return response;
                 }
@@ -238,7 +238,7 @@ namespace ExactMatchFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetAzureResourceFlattenModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    AzureResourceFlattenModel2SRestOperations restOperations = GetAzureResourceFlattenModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = await restOperations.GetAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, name, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
@@ -273,7 +273,7 @@ namespace ExactMatchFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetAzureResourceFlattenModel2SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    AzureResourceFlattenModel2SRestOperations restOperations = GetAzureResourceFlattenModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = restOperations.Get(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, name, cancellationToken);
                     return response;
                 }
@@ -298,7 +298,7 @@ namespace ExactMatchFlattenInheritance
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetAzureResourceFlattenModel3SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                AzureResourceFlattenModel3SRestOperations restOperations = GetAzureResourceFlattenModel3SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                 async Task<Page<AzureResourceFlattenModel3>> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetAzureResourceFlattenModel3s");
@@ -331,7 +331,7 @@ namespace ExactMatchFlattenInheritance
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetAzureResourceFlattenModel3SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                AzureResourceFlattenModel3SRestOperations restOperations = GetAzureResourceFlattenModel3SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                 Page<AzureResourceFlattenModel3> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetAzureResourceFlattenModel3s");
@@ -379,7 +379,7 @@ namespace ExactMatchFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetAzureResourceFlattenModel3SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    AzureResourceFlattenModel3SRestOperations restOperations = GetAzureResourceFlattenModel3SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = await restOperations.PutAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, name, parameters, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
@@ -419,7 +419,7 @@ namespace ExactMatchFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetAzureResourceFlattenModel3SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    AzureResourceFlattenModel3SRestOperations restOperations = GetAzureResourceFlattenModel3SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = restOperations.Put(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, name, parameters, cancellationToken);
                     return response;
                 }
@@ -454,7 +454,7 @@ namespace ExactMatchFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetAzureResourceFlattenModel3SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    AzureResourceFlattenModel3SRestOperations restOperations = GetAzureResourceFlattenModel3SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = await restOperations.GetAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, name, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
@@ -489,7 +489,7 @@ namespace ExactMatchFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetAzureResourceFlattenModel3SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    AzureResourceFlattenModel3SRestOperations restOperations = GetAzureResourceFlattenModel3SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = restOperations.Get(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, name, cancellationToken);
                     return response;
                 }
@@ -514,7 +514,7 @@ namespace ExactMatchFlattenInheritance
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetAzureResourceFlattenModel4SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                AzureResourceFlattenModel4SRestOperations restOperations = GetAzureResourceFlattenModel4SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                 async Task<Page<AzureResourceFlattenModel4>> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetAzureResourceFlattenModel4s");
@@ -547,7 +547,7 @@ namespace ExactMatchFlattenInheritance
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetAzureResourceFlattenModel4SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                AzureResourceFlattenModel4SRestOperations restOperations = GetAzureResourceFlattenModel4SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                 Page<AzureResourceFlattenModel4> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetAzureResourceFlattenModel4s");
@@ -595,7 +595,7 @@ namespace ExactMatchFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetAzureResourceFlattenModel4SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    AzureResourceFlattenModel4SRestOperations restOperations = GetAzureResourceFlattenModel4SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = await restOperations.PutAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, name, parameters, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
@@ -635,7 +635,7 @@ namespace ExactMatchFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetAzureResourceFlattenModel4SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    AzureResourceFlattenModel4SRestOperations restOperations = GetAzureResourceFlattenModel4SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = restOperations.Put(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, name, parameters, cancellationToken);
                     return response;
                 }
@@ -670,7 +670,7 @@ namespace ExactMatchFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetAzureResourceFlattenModel4SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    AzureResourceFlattenModel4SRestOperations restOperations = GetAzureResourceFlattenModel4SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = await restOperations.GetAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, name, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
@@ -705,7 +705,7 @@ namespace ExactMatchFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetAzureResourceFlattenModel4SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    AzureResourceFlattenModel4SRestOperations restOperations = GetAzureResourceFlattenModel4SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = restOperations.Get(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, name, cancellationToken);
                     return response;
                 }
@@ -730,7 +730,7 @@ namespace ExactMatchFlattenInheritance
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetAzureResourceFlattenModel5SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                AzureResourceFlattenModel5SRestOperations restOperations = GetAzureResourceFlattenModel5SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                 async Task<Page<AzureResourceFlattenModel5>> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetAzureResourceFlattenModel5s");
@@ -763,7 +763,7 @@ namespace ExactMatchFlattenInheritance
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetAzureResourceFlattenModel5SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                AzureResourceFlattenModel5SRestOperations restOperations = GetAzureResourceFlattenModel5SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                 Page<AzureResourceFlattenModel5> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetAzureResourceFlattenModel5s");
@@ -811,7 +811,7 @@ namespace ExactMatchFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetAzureResourceFlattenModel5SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    AzureResourceFlattenModel5SRestOperations restOperations = GetAzureResourceFlattenModel5SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = await restOperations.PutAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, name, parameters, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
@@ -851,7 +851,7 @@ namespace ExactMatchFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetAzureResourceFlattenModel5SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    AzureResourceFlattenModel5SRestOperations restOperations = GetAzureResourceFlattenModel5SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = restOperations.Put(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, name, parameters, cancellationToken);
                     return response;
                 }
@@ -886,7 +886,7 @@ namespace ExactMatchFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetAzureResourceFlattenModel5SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    AzureResourceFlattenModel5SRestOperations restOperations = GetAzureResourceFlattenModel5SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = await restOperations.GetAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, name, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
@@ -921,7 +921,7 @@ namespace ExactMatchFlattenInheritance
                 scope.Start();
                 try
                 {
-                    var restOperations = GetAzureResourceFlattenModel5SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    AzureResourceFlattenModel5SRestOperations restOperations = GetAzureResourceFlattenModel5SRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = restOperations.Get(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, name, cancellationToken);
                     return response;
                 }
