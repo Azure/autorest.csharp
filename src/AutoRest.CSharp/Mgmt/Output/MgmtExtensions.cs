@@ -3,8 +3,10 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
@@ -38,6 +40,8 @@ namespace AutoRest.CSharp.Mgmt.Output
             return _allOperations.Select(operation =>
             {
                 var operationName = GetOperationName(operation, ResourceName);
+                // TODO -- these logic needs a thorough refactor -- the values MgmtRestOperation consumes here are actually coupled together, some of the values are calculated multiple times (here and in writers).
+                // we just leave this implementation here since it could work for now
                 return MgmtClientOperation.FromOperation(
                     new MgmtRestOperation(
                         _context.Library.GetRestClientMethod(operation),
@@ -49,13 +53,59 @@ namespace AutoRest.CSharp.Mgmt.Output
                         operation.GetReturnTypeAsLongRunningOperation(null, operationName, _context)));
             });
         }
-        protected override string GetOperationName(Operation operation, string clientResourceName)
-        {
-            var opertionName = base.GetOperationName(operation, clientResourceName);
 
-            
+        protected override string CalculateOperationName(Operation operation, string clientResourceName)
+        {
+            var opertionName = base.CalculateOperationName(operation, clientResourceName);
+
+            if (_context.Library.GetRestClientMethod(operation).IsListMethod(out var itemType) && itemType.IsResourceDataType(_context, out var data))
+            {
+                var requestPath = operation.GetRequestPath(_context);
+                // we need to find the correct resource type that links with this resource data
+                var resource = FindResourceFromResourceData(data, requestPath);
+                if (resource != null)
+                {
+                    var extraLayers = GetExtraLayers(requestPath, resource);
+                    if (!extraLayers.Any())
+                        return $"Get{resource.Type.Name.ResourceNameToPlural()}";
+                    var suffix = string.Join("", extraLayers.Select(segment => segment.ConstantValue.FirstCharToUpperCase().LastWordToSingular()));
+                    return $"Get{resource.Type.Name.ResourceNameToPlural()}By{suffix}";
+                }
+            }
 
             return opertionName;
+        }
+
+        private IEnumerable<Segment> GetExtraLayers(RequestPath requestPath, Resource resource)
+        {
+            var rawType = ResourceTypeSegment.ParseRequestPath(requestPath);
+            var segmentsInResourceType = new HashSet<Segment>(resource.ResourceType);
+            // compare and find the new segments in rawType
+            return rawType.Where(segment => !segmentsInResourceType.Contains(segment));
+        }
+
+        // This piece of logic is duplicated in MgmtExtensionWriter, to be refactored
+        private Resource? FindResourceFromResourceData(ResourceData data, RequestPath requestPath)
+        {
+            // we need to find the correct resource type that links with this resource data
+            var candidates = _context.Library.FindResources(data);
+
+            // return null when there is no match
+            if (!candidates.Any())
+                return null;
+
+            // when we only find one result, just return it.
+            if (candidates.Count() == 1)
+                return candidates.Single();
+
+            // if there is more candidates than one, we are going to some more matching to see if we could determine one
+            var resourceType = requestPath.GetResourceType(_context.Configuration.MgmtConfiguration);
+            var filteredResources = candidates.Where(resource => resource.ResourceType == resourceType);
+
+            if (filteredResources.Count() == 1)
+                return filteredResources.Single();
+
+            return null;
         }
 
         private Resource? GetResourceFromResourceType(ResourceTypeSegment resourceType)

@@ -308,20 +308,15 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 return null;
 
             // we need to find the correct resource type that links with this resource data
-            var candidates = new List<Resource>();
-            foreach (var resource in Context.Library.ArmResources)
-            {
-                if (resource.ResourceData == data)
-                    candidates.Add(resource);
-            }
+            var candidates = Context.Library.FindResources(data);
+
+            // return null when there is no match
+            if (!candidates.Any())
+                return null;
 
             // when we only find one result, just return it.
-            if (candidates.Count == 1)
+            if (candidates.Count() == 1)
                 return candidates.Single();
-
-            // we should have a list of candidates, return the original type if there is no candidates
-            if (candidates.Count == 0)
-                return null;
 
             // if there is more candidates than one, we are going to some more matching to see if we could determine one
             var resourceType = operation.RequestPath.GetResourceType(Config);

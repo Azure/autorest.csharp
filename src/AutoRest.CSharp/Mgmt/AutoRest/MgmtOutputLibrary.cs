@@ -725,8 +725,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public IEnumerable<Resource> FindResources(ResourceData resourceData)
         {
-            var requestPaths = EnsureRequestPathToResourceData().Where(pair => pair.Value == resourceData).Select(pair => pair.Key).ToHashSet();
-            return EnsureRequestPathToResourcesMap().Where(pair => requestPaths.Contains(pair.Key)).Select(pair => pair.Value.Resource);
+            return ArmResources.Where(resource => resource.ResourceData == resourceData);
         }
 
 

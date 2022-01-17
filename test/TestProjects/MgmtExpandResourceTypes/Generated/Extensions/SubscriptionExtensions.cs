@@ -40,7 +40,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="top"> The maximum number of DNS zones to return. If not specified, returns up to 100 zones. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<Zone> GetZonesAsync(this Subscription subscription, int? top = null, CancellationToken cancellationToken = default)
+        public static AsyncPageable<Zone> GetZonesByDnszoneAsync(this Subscription subscription, int? top = null, CancellationToken cancellationToken = default)
         {
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
@@ -49,7 +49,7 @@ namespace MgmtExpandResourceTypes
                 ZonesRestOperations restOperations = GetZonesRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
                 async Task<Page<Zone>> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetZones");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetZonesByDnszone");
                     scope.Start();
                     try
                     {
@@ -64,7 +64,7 @@ namespace MgmtExpandResourceTypes
                 }
                 async Task<Page<Zone>> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetZones");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetZonesByDnszone");
                     scope.Start();
                     try
                     {
@@ -90,7 +90,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="top"> The maximum number of DNS zones to return. If not specified, returns up to 100 zones. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static Pageable<Zone> GetZones(this Subscription subscription, int? top = null, CancellationToken cancellationToken = default)
+        public static Pageable<Zone> GetZonesByDnszone(this Subscription subscription, int? top = null, CancellationToken cancellationToken = default)
         {
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
@@ -99,7 +99,7 @@ namespace MgmtExpandResourceTypes
                 ZonesRestOperations restOperations = GetZonesRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
                 Page<Zone> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetZones");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetZonesByDnszone");
                     scope.Start();
                     try
                     {
@@ -114,7 +114,7 @@ namespace MgmtExpandResourceTypes
                 }
                 Page<Zone> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetZones");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetZonesByDnszone");
                     scope.Start();
                     try
                     {
