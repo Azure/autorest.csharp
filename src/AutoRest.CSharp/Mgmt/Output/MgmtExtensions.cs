@@ -49,6 +49,14 @@ namespace AutoRest.CSharp.Mgmt.Output
                         operation.GetReturnTypeAsLongRunningOperation(null, operationName, _context)));
             });
         }
+        protected override string GetOperationName(Operation operation, string clientResourceName)
+        {
+            var opertionName = base.GetOperationName(operation, clientResourceName);
+
+            
+
+            return opertionName;
+        }
 
         private Resource? GetResourceFromResourceType(ResourceTypeSegment resourceType)
         {
