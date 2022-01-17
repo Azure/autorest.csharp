@@ -21,10 +21,14 @@ namespace AutoRest.CSharp.Mgmt.Models
     /// </summary>
     internal struct RequestPath : IEquatable<RequestPath>, IReadOnlyList<Segment>
     {
+        private const string _providerPath = "/subscriptions/{subscriptionId}/providers/{resourceProviderNamespace}";
+        private const string _featurePath = "/subscriptions/{subscriptionId}/providers/Microsoft.Features/providers/{resourceProviderNamespace}/features";
+
         /// <summary>
         /// This is a placeholder of request path for "any" resources in other RPs
         /// </summary>
         public static readonly RequestPath Any = new(new[] { new Segment("*") });
+
         /// <summary>
         /// The <see cref="RequestPath"/> of a resource group resource
         /// </summary>
@@ -162,7 +166,7 @@ namespace AutoRest.CSharp.Mgmt.Models
                 return true;
             }
             // Handle the special case of trim provider from feature
-            else if (this.SerializedPath == "/subscriptions/{subscriptionId}/providers/{resourceProviderNamespace}" && other.SerializedPath.StartsWith("/subscriptions/{subscriptionId}/providers/Microsoft.Features/providers/{resourceProviderNamespace}/features"))
+            else if (this.SerializedPath == _providerPath && other.SerializedPath.StartsWith(_featurePath))
             {
                 diff = new RequestPath(other._segments.Skip(this.Count + 2));
                 return true;
