@@ -93,7 +93,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             if (index < 0)
             {
                 if (path.SerializedPath.StartsWith(RequestPath.ResourceGroupScopePrefix, StringComparison.InvariantCultureIgnoreCase))
-                return ResourceTypeSegment.ResourceGroup;
+                    return ResourceTypeSegment.ResourceGroup;
                 if (path.SerializedPath.StartsWith(RequestPath.SubscriptionScopePrefix, StringComparison.InvariantCultureIgnoreCase))
                     return ResourceTypeSegment.Subscription;
                 if (path.SerializedPath.Equals(RequestPath.TenantScopePrefix))
