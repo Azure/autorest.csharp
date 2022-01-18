@@ -31,7 +31,7 @@ namespace AutoRest.CSharp.Output.Models
 
         public ClientFields(BuildContext<LowLevelOutputLibrary> context, IEnumerable<Parameter> parameters)
         {
-            ClientDiagnosticsField = new(Private | ReadOnly, typeof(ClientDiagnostics), "_" + KnownParameters.ClientDiagnostics.Name);
+            ClientDiagnosticsField = new(Internal | ReadOnly, typeof(ClientDiagnostics), "_" + KnownParameters.ClientDiagnostics.Name);
             PipelineField = new(Private | ReadOnly, typeof(HttpPipeline), "_" + KnownParameters.Pipeline.Name);
 
             var parameterNamesToFields = new Dictionary<string, FieldDeclaration>

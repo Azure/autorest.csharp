@@ -70,7 +70,7 @@ namespace AutoRest.CSharp.Generation.Writers
             else
             {
                 writer
-                    .AppendRaw(modifiers.HasFlag(FieldModifiers.Public) ? "public " : "private ")
+                    .AppendRaw(modifiers.HasFlag(FieldModifiers.Public) ? "public " : (modifiers.HasFlag(FieldModifiers.Internal) ? "internal " : "private "))
                     .AppendRawIf("const ", modifiers.HasFlag(FieldModifiers.Const))
                     .AppendRawIf("static ", modifiers.HasFlag(FieldModifiers.Static))
                     .AppendRawIf("readonly ", modifiers.HasFlag(FieldModifiers.ReadOnly));
