@@ -310,7 +310,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.WriteXmlDocumentationParameter(parameter);
             }
             _writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
-            _writer.WriteXmlDocumentationRequiredParametersException(methodParameters);
+            _writer.WriteXmlDocumentationMgmtRequiredParametersException(methodParameters);
 
             _writer.Append($"public {GetAsyncKeyword(async)} {GetOverride(isOverride, true)} {returnType} {fullMethodName}(");
             foreach (var parameter in methodParameters)
@@ -320,7 +320,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Append($"{typeof(CancellationToken)} cancellationToken = default)");
             using (_writer.Scope())
             {
-                _writer.WriteParameterNullChecks(methodParameters);
+                _writer.WriteParameterNullOrEmptyChecks(methodParameters);
                 using (WriteDiagnosticScope(_writer, new Diagnostic($"{_resourceCollection.Type.Name}.{methodName}"), ClientDiagnosticsField))
                 {
                     inner(_writer);

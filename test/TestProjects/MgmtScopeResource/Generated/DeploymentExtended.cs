@@ -545,12 +545,12 @@ namespace MgmtScopeResource
         /// <summary> Gets a deployments operation. </summary>
         /// <param name="operationId"> The ID of the operation to get. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="operationId"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="operationId"/> is null or empty. </exception>
         public async virtual Task<Response<DeploymentOperation>> GetAtScopeDeploymentOperationAsync(string operationId, CancellationToken cancellationToken = default)
         {
-            if (operationId == null)
+            if (string.IsNullOrEmpty(operationId))
             {
-                throw new ArgumentNullException(nameof(operationId));
+                throw new ArgumentException($"Parameter {nameof(operationId)} cannot be null or empty", nameof(operationId));
             }
 
             using var scope = _clientDiagnostics.CreateScope("DeploymentExtended.GetAtScopeDeploymentOperation");
@@ -573,12 +573,12 @@ namespace MgmtScopeResource
         /// <summary> Gets a deployments operation. </summary>
         /// <param name="operationId"> The ID of the operation to get. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="operationId"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="operationId"/> is null or empty. </exception>
         public virtual Response<DeploymentOperation> GetAtScopeDeploymentOperation(string operationId, CancellationToken cancellationToken = default)
         {
-            if (operationId == null)
+            if (string.IsNullOrEmpty(operationId))
             {
-                throw new ArgumentNullException(nameof(operationId));
+                throw new ArgumentException($"Parameter {nameof(operationId)} cannot be null or empty", nameof(operationId));
             }
 
             using var scope = _clientDiagnostics.CreateScope("DeploymentExtended.GetAtScopeDeploymentOperation");

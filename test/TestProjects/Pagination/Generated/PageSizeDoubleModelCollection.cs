@@ -57,12 +57,13 @@ namespace Pagination
         /// <param name="name"> The String to use. </param>
         /// <param name="parameters"> The PageSizeDoubleModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is null or empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public virtual PageSizeDoubleModelCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string name, PageSizeDoubleModelData parameters, CancellationToken cancellationToken = default)
         {
-            if (name == null)
+            if (string.IsNullOrEmpty(name))
             {
-                throw new ArgumentNullException(nameof(name));
+                throw new ArgumentException($"Parameter {nameof(name)} cannot be null or empty", nameof(name));
             }
             if (parameters == null)
             {
@@ -90,12 +91,13 @@ namespace Pagination
         /// <param name="name"> The String to use. </param>
         /// <param name="parameters"> The PageSizeDoubleModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is null or empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public async virtual Task<PageSizeDoubleModelCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string name, PageSizeDoubleModelData parameters, CancellationToken cancellationToken = default)
         {
-            if (name == null)
+            if (string.IsNullOrEmpty(name))
             {
-                throw new ArgumentNullException(nameof(name));
+                throw new ArgumentException($"Parameter {nameof(name)} cannot be null or empty", nameof(name));
             }
             if (parameters == null)
             {
@@ -121,12 +123,12 @@ namespace Pagination
 
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is null or empty. </exception>
         public virtual Response<PageSizeDoubleModel> Get(string name, CancellationToken cancellationToken = default)
         {
-            if (name == null)
+            if (string.IsNullOrEmpty(name))
             {
-                throw new ArgumentNullException(nameof(name));
+                throw new ArgumentException($"Parameter {nameof(name)} cannot be null or empty", nameof(name));
             }
 
             using var scope = _clientDiagnostics.CreateScope("PageSizeDoubleModelCollection.Get");
@@ -147,12 +149,12 @@ namespace Pagination
 
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is null or empty. </exception>
         public async virtual Task<Response<PageSizeDoubleModel>> GetAsync(string name, CancellationToken cancellationToken = default)
         {
-            if (name == null)
+            if (string.IsNullOrEmpty(name))
             {
-                throw new ArgumentNullException(nameof(name));
+                throw new ArgumentException($"Parameter {nameof(name)} cannot be null or empty", nameof(name));
             }
 
             using var scope = _clientDiagnostics.CreateScope("PageSizeDoubleModelCollection.Get");
@@ -174,12 +176,12 @@ namespace Pagination
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is null or empty. </exception>
         public virtual Response<PageSizeDoubleModel> GetIfExists(string name, CancellationToken cancellationToken = default)
         {
-            if (name == null)
+            if (string.IsNullOrEmpty(name))
             {
-                throw new ArgumentNullException(nameof(name));
+                throw new ArgumentException($"Parameter {nameof(name)} cannot be null or empty", nameof(name));
             }
 
             using var scope = _clientDiagnostics.CreateScope("PageSizeDoubleModelCollection.GetIfExists");
@@ -201,12 +203,12 @@ namespace Pagination
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is null or empty. </exception>
         public async virtual Task<Response<PageSizeDoubleModel>> GetIfExistsAsync(string name, CancellationToken cancellationToken = default)
         {
-            if (name == null)
+            if (string.IsNullOrEmpty(name))
             {
-                throw new ArgumentNullException(nameof(name));
+                throw new ArgumentException($"Parameter {nameof(name)} cannot be null or empty", nameof(name));
             }
 
             using var scope = _clientDiagnostics.CreateScope("PageSizeDoubleModelCollection.GetIfExists");
@@ -228,12 +230,12 @@ namespace Pagination
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is null or empty. </exception>
         public virtual Response<bool> Exists(string name, CancellationToken cancellationToken = default)
         {
-            if (name == null)
+            if (string.IsNullOrEmpty(name))
             {
-                throw new ArgumentNullException(nameof(name));
+                throw new ArgumentException($"Parameter {nameof(name)} cannot be null or empty", nameof(name));
             }
 
             using var scope = _clientDiagnostics.CreateScope("PageSizeDoubleModelCollection.Exists");
@@ -253,12 +255,12 @@ namespace Pagination
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is null or empty. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string name, CancellationToken cancellationToken = default)
         {
-            if (name == null)
+            if (string.IsNullOrEmpty(name))
             {
-                throw new ArgumentNullException(nameof(name));
+                throw new ArgumentException($"Parameter {nameof(name)} cannot be null or empty", nameof(name));
             }
 
             using var scope = _clientDiagnostics.CreateScope("PageSizeDoubleModelCollection.Exists");

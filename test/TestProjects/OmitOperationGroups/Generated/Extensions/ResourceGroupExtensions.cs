@@ -108,12 +108,13 @@ namespace OmitOperationGroups
         /// <param name="model5SName"> The String to use. </param>
         /// <param name="parameters"> The Model5 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="model5SName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="model5SName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public static async Task<Response<Model5>> CreateOrUpdateModel5Async(this ResourceGroup resourceGroup, string model5SName, Model5 parameters, CancellationToken cancellationToken = default)
         {
-            if (model5SName == null)
+            if (string.IsNullOrEmpty(model5SName))
             {
-                throw new ArgumentNullException(nameof(model5SName));
+                throw new ArgumentException($"Parameter {nameof(model5SName)} cannot be null or empty", nameof(model5SName));
             }
             if (parameters == null)
             {
@@ -147,12 +148,13 @@ namespace OmitOperationGroups
         /// <param name="model5SName"> The String to use. </param>
         /// <param name="parameters"> The Model5 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="model5SName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="model5SName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public static Response<Model5> CreateOrUpdateModel5(this ResourceGroup resourceGroup, string model5SName, Model5 parameters, CancellationToken cancellationToken = default)
         {
-            if (model5SName == null)
+            if (string.IsNullOrEmpty(model5SName))
             {
-                throw new ArgumentNullException(nameof(model5SName));
+                throw new ArgumentException($"Parameter {nameof(model5SName)} cannot be null or empty", nameof(model5SName));
             }
             if (parameters == null)
             {
@@ -185,12 +187,12 @@ namespace OmitOperationGroups
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="model5SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="model5SName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="model5SName"/> is null or empty. </exception>
         public static async Task<Response<Model5>> GetModel5Async(this ResourceGroup resourceGroup, string model5SName, CancellationToken cancellationToken = default)
         {
-            if (model5SName == null)
+            if (string.IsNullOrEmpty(model5SName))
             {
-                throw new ArgumentNullException(nameof(model5SName));
+                throw new ArgumentException($"Parameter {nameof(model5SName)} cannot be null or empty", nameof(model5SName));
             }
 
             return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
@@ -219,12 +221,12 @@ namespace OmitOperationGroups
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="model5SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="model5SName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="model5SName"/> is null or empty. </exception>
         public static Response<Model5> GetModel5(this ResourceGroup resourceGroup, string model5SName, CancellationToken cancellationToken = default)
         {
-            if (model5SName == null)
+            if (string.IsNullOrEmpty(model5SName))
             {
-                throw new ArgumentNullException(nameof(model5SName));
+                throw new ArgumentException($"Parameter {nameof(model5SName)} cannot be null or empty", nameof(model5SName));
             }
 
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>

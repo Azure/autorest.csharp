@@ -67,16 +67,16 @@ namespace Azure.ResourceManager.Sample
         /// <param name="type"> The String to use. </param>
         /// <param name="version"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="type"/> or <paramref name="version"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="type"/> or <paramref name="version"/> is null or empty. </exception>
         public virtual Response<VirtualMachineExtensionImage> Get(string type, string version, CancellationToken cancellationToken = default)
         {
-            if (type == null)
+            if (string.IsNullOrEmpty(type))
             {
-                throw new ArgumentNullException(nameof(type));
+                throw new ArgumentException($"Parameter {nameof(type)} cannot be null or empty", nameof(type));
             }
-            if (version == null)
+            if (string.IsNullOrEmpty(version))
             {
-                throw new ArgumentNullException(nameof(version));
+                throw new ArgumentException($"Parameter {nameof(version)} cannot be null or empty", nameof(version));
             }
 
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageCollection.Get");
@@ -102,16 +102,16 @@ namespace Azure.ResourceManager.Sample
         /// <param name="type"> The String to use. </param>
         /// <param name="version"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="type"/> or <paramref name="version"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="type"/> or <paramref name="version"/> is null or empty. </exception>
         public async virtual Task<Response<VirtualMachineExtensionImage>> GetAsync(string type, string version, CancellationToken cancellationToken = default)
         {
-            if (type == null)
+            if (string.IsNullOrEmpty(type))
             {
-                throw new ArgumentNullException(nameof(type));
+                throw new ArgumentException($"Parameter {nameof(type)} cannot be null or empty", nameof(type));
             }
-            if (version == null)
+            if (string.IsNullOrEmpty(version))
             {
-                throw new ArgumentNullException(nameof(version));
+                throw new ArgumentException($"Parameter {nameof(version)} cannot be null or empty", nameof(version));
             }
 
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageCollection.Get");
@@ -134,16 +134,16 @@ namespace Azure.ResourceManager.Sample
         /// <param name="type"> The String to use. </param>
         /// <param name="version"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="type"/> or <paramref name="version"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="type"/> or <paramref name="version"/> is null or empty. </exception>
         public virtual Response<VirtualMachineExtensionImage> GetIfExists(string type, string version, CancellationToken cancellationToken = default)
         {
-            if (type == null)
+            if (string.IsNullOrEmpty(type))
             {
-                throw new ArgumentNullException(nameof(type));
+                throw new ArgumentException($"Parameter {nameof(type)} cannot be null or empty", nameof(type));
             }
-            if (version == null)
+            if (string.IsNullOrEmpty(version))
             {
-                throw new ArgumentNullException(nameof(version));
+                throw new ArgumentException($"Parameter {nameof(version)} cannot be null or empty", nameof(version));
             }
 
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageCollection.GetIfExists");
@@ -166,16 +166,16 @@ namespace Azure.ResourceManager.Sample
         /// <param name="type"> The String to use. </param>
         /// <param name="version"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="type"/> or <paramref name="version"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="type"/> or <paramref name="version"/> is null or empty. </exception>
         public async virtual Task<Response<VirtualMachineExtensionImage>> GetIfExistsAsync(string type, string version, CancellationToken cancellationToken = default)
         {
-            if (type == null)
+            if (string.IsNullOrEmpty(type))
             {
-                throw new ArgumentNullException(nameof(type));
+                throw new ArgumentException($"Parameter {nameof(type)} cannot be null or empty", nameof(type));
             }
-            if (version == null)
+            if (string.IsNullOrEmpty(version))
             {
-                throw new ArgumentNullException(nameof(version));
+                throw new ArgumentException($"Parameter {nameof(version)} cannot be null or empty", nameof(version));
             }
 
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageCollection.GetIfExists");
@@ -198,16 +198,16 @@ namespace Azure.ResourceManager.Sample
         /// <param name="type"> The String to use. </param>
         /// <param name="version"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="type"/> or <paramref name="version"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="type"/> or <paramref name="version"/> is null or empty. </exception>
         public virtual Response<bool> Exists(string type, string version, CancellationToken cancellationToken = default)
         {
-            if (type == null)
+            if (string.IsNullOrEmpty(type))
             {
-                throw new ArgumentNullException(nameof(type));
+                throw new ArgumentException($"Parameter {nameof(type)} cannot be null or empty", nameof(type));
             }
-            if (version == null)
+            if (string.IsNullOrEmpty(version))
             {
-                throw new ArgumentNullException(nameof(version));
+                throw new ArgumentException($"Parameter {nameof(version)} cannot be null or empty", nameof(version));
             }
 
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageCollection.Exists");
@@ -228,16 +228,16 @@ namespace Azure.ResourceManager.Sample
         /// <param name="type"> The String to use. </param>
         /// <param name="version"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="type"/> or <paramref name="version"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="type"/> or <paramref name="version"/> is null or empty. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string type, string version, CancellationToken cancellationToken = default)
         {
-            if (type == null)
+            if (string.IsNullOrEmpty(type))
             {
-                throw new ArgumentNullException(nameof(type));
+                throw new ArgumentException($"Parameter {nameof(type)} cannot be null or empty", nameof(type));
             }
-            if (version == null)
+            if (string.IsNullOrEmpty(version))
             {
-                throw new ArgumentNullException(nameof(version));
+                throw new ArgumentException($"Parameter {nameof(version)} cannot be null or empty", nameof(version));
             }
 
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageCollection.Exists");
@@ -315,13 +315,13 @@ namespace Azure.ResourceManager.Sample
         /// <param name="top"> The Integer to use. </param>
         /// <param name="orderby"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="type"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="type"/> is null or empty. </exception>
         /// <returns> A collection of <see cref="VirtualMachineExtensionImage" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<VirtualMachineExtensionImage> GetAll(string type, string filter = null, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
         {
-            if (type == null)
+            if (string.IsNullOrEmpty(type))
             {
-                throw new ArgumentNullException(nameof(type));
+                throw new ArgumentException($"Parameter {nameof(type)} cannot be null or empty", nameof(type));
             }
 
             Page<VirtualMachineExtensionImage> FirstPageFunc(int? pageSizeHint)
@@ -351,13 +351,13 @@ namespace Azure.ResourceManager.Sample
         /// <param name="top"> The Integer to use. </param>
         /// <param name="orderby"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="type"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="type"/> is null or empty. </exception>
         /// <returns> An async collection of <see cref="VirtualMachineExtensionImage" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<VirtualMachineExtensionImage> GetAllAsync(string type, string filter = null, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
         {
-            if (type == null)
+            if (string.IsNullOrEmpty(type))
             {
-                throw new ArgumentNullException(nameof(type));
+                throw new ArgumentException($"Parameter {nameof(type)} cannot be null or empty", nameof(type));
             }
 
             async Task<Page<VirtualMachineExtensionImage>> FirstPageFunc(int? pageSizeHint)

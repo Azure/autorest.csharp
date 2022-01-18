@@ -57,12 +57,13 @@ namespace Pagination
         /// <param name="name"> The String to use. </param>
         /// <param name="parameters"> The PageSizeFloatModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is null or empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public virtual PageSizeFloatModelCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string name, PageSizeFloatModelData parameters, CancellationToken cancellationToken = default)
         {
-            if (name == null)
+            if (string.IsNullOrEmpty(name))
             {
-                throw new ArgumentNullException(nameof(name));
+                throw new ArgumentException($"Parameter {nameof(name)} cannot be null or empty", nameof(name));
             }
             if (parameters == null)
             {
@@ -90,12 +91,13 @@ namespace Pagination
         /// <param name="name"> The String to use. </param>
         /// <param name="parameters"> The PageSizeFloatModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is null or empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public async virtual Task<PageSizeFloatModelCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string name, PageSizeFloatModelData parameters, CancellationToken cancellationToken = default)
         {
-            if (name == null)
+            if (string.IsNullOrEmpty(name))
             {
-                throw new ArgumentNullException(nameof(name));
+                throw new ArgumentException($"Parameter {nameof(name)} cannot be null or empty", nameof(name));
             }
             if (parameters == null)
             {
@@ -121,12 +123,12 @@ namespace Pagination
 
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is null or empty. </exception>
         public virtual Response<PageSizeFloatModel> Get(string name, CancellationToken cancellationToken = default)
         {
-            if (name == null)
+            if (string.IsNullOrEmpty(name))
             {
-                throw new ArgumentNullException(nameof(name));
+                throw new ArgumentException($"Parameter {nameof(name)} cannot be null or empty", nameof(name));
             }
 
             using var scope = _clientDiagnostics.CreateScope("PageSizeFloatModelCollection.Get");
@@ -147,12 +149,12 @@ namespace Pagination
 
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is null or empty. </exception>
         public async virtual Task<Response<PageSizeFloatModel>> GetAsync(string name, CancellationToken cancellationToken = default)
         {
-            if (name == null)
+            if (string.IsNullOrEmpty(name))
             {
-                throw new ArgumentNullException(nameof(name));
+                throw new ArgumentException($"Parameter {nameof(name)} cannot be null or empty", nameof(name));
             }
 
             using var scope = _clientDiagnostics.CreateScope("PageSizeFloatModelCollection.Get");
@@ -174,12 +176,12 @@ namespace Pagination
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is null or empty. </exception>
         public virtual Response<PageSizeFloatModel> GetIfExists(string name, CancellationToken cancellationToken = default)
         {
-            if (name == null)
+            if (string.IsNullOrEmpty(name))
             {
-                throw new ArgumentNullException(nameof(name));
+                throw new ArgumentException($"Parameter {nameof(name)} cannot be null or empty", nameof(name));
             }
 
             using var scope = _clientDiagnostics.CreateScope("PageSizeFloatModelCollection.GetIfExists");
@@ -201,12 +203,12 @@ namespace Pagination
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is null or empty. </exception>
         public async virtual Task<Response<PageSizeFloatModel>> GetIfExistsAsync(string name, CancellationToken cancellationToken = default)
         {
-            if (name == null)
+            if (string.IsNullOrEmpty(name))
             {
-                throw new ArgumentNullException(nameof(name));
+                throw new ArgumentException($"Parameter {nameof(name)} cannot be null or empty", nameof(name));
             }
 
             using var scope = _clientDiagnostics.CreateScope("PageSizeFloatModelCollection.GetIfExists");
@@ -228,12 +230,12 @@ namespace Pagination
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is null or empty. </exception>
         public virtual Response<bool> Exists(string name, CancellationToken cancellationToken = default)
         {
-            if (name == null)
+            if (string.IsNullOrEmpty(name))
             {
-                throw new ArgumentNullException(nameof(name));
+                throw new ArgumentException($"Parameter {nameof(name)} cannot be null or empty", nameof(name));
             }
 
             using var scope = _clientDiagnostics.CreateScope("PageSizeFloatModelCollection.Exists");
@@ -253,12 +255,12 @@ namespace Pagination
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is null or empty. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string name, CancellationToken cancellationToken = default)
         {
-            if (name == null)
+            if (string.IsNullOrEmpty(name))
             {
-                throw new ArgumentNullException(nameof(name));
+                throw new ArgumentException($"Parameter {nameof(name)} cannot be null or empty", nameof(name));
             }
 
             using var scope = _clientDiagnostics.CreateScope("PageSizeFloatModelCollection.Exists");

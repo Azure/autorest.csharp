@@ -60,12 +60,13 @@ namespace SingletonResource
         /// <param name="parentName"> The String to use. </param>
         /// <param name="parameters"> The ParentResource to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="parentName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="parentName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public virtual ParentResourceCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string parentName, ParentResourceData parameters, CancellationToken cancellationToken = default)
         {
-            if (parentName == null)
+            if (string.IsNullOrEmpty(parentName))
             {
-                throw new ArgumentNullException(nameof(parentName));
+                throw new ArgumentException($"Parameter {nameof(parentName)} cannot be null or empty", nameof(parentName));
             }
             if (parameters == null)
             {
@@ -96,12 +97,13 @@ namespace SingletonResource
         /// <param name="parentName"> The String to use. </param>
         /// <param name="parameters"> The ParentResource to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="parentName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="parentName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public async virtual Task<ParentResourceCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string parentName, ParentResourceData parameters, CancellationToken cancellationToken = default)
         {
-            if (parentName == null)
+            if (string.IsNullOrEmpty(parentName))
             {
-                throw new ArgumentNullException(nameof(parentName));
+                throw new ArgumentException($"Parameter {nameof(parentName)} cannot be null or empty", nameof(parentName));
             }
             if (parameters == null)
             {
@@ -131,12 +133,12 @@ namespace SingletonResource
         /// <summary> Singleton Test Parent Example. </summary>
         /// <param name="parentName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="parentName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="parentName"/> is null or empty. </exception>
         public virtual Response<ParentResource> Get(string parentName, CancellationToken cancellationToken = default)
         {
-            if (parentName == null)
+            if (string.IsNullOrEmpty(parentName))
             {
-                throw new ArgumentNullException(nameof(parentName));
+                throw new ArgumentException($"Parameter {nameof(parentName)} cannot be null or empty", nameof(parentName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("ParentResourceCollection.Get");
@@ -161,12 +163,12 @@ namespace SingletonResource
         /// <summary> Singleton Test Parent Example. </summary>
         /// <param name="parentName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="parentName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="parentName"/> is null or empty. </exception>
         public async virtual Task<Response<ParentResource>> GetAsync(string parentName, CancellationToken cancellationToken = default)
         {
-            if (parentName == null)
+            if (string.IsNullOrEmpty(parentName))
             {
-                throw new ArgumentNullException(nameof(parentName));
+                throw new ArgumentException($"Parameter {nameof(parentName)} cannot be null or empty", nameof(parentName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("ParentResourceCollection.Get");
@@ -188,12 +190,12 @@ namespace SingletonResource
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="parentName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="parentName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="parentName"/> is null or empty. </exception>
         public virtual Response<ParentResource> GetIfExists(string parentName, CancellationToken cancellationToken = default)
         {
-            if (parentName == null)
+            if (string.IsNullOrEmpty(parentName))
             {
-                throw new ArgumentNullException(nameof(parentName));
+                throw new ArgumentException($"Parameter {nameof(parentName)} cannot be null or empty", nameof(parentName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("ParentResourceCollection.GetIfExists");
@@ -215,12 +217,12 @@ namespace SingletonResource
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="parentName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="parentName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="parentName"/> is null or empty. </exception>
         public async virtual Task<Response<ParentResource>> GetIfExistsAsync(string parentName, CancellationToken cancellationToken = default)
         {
-            if (parentName == null)
+            if (string.IsNullOrEmpty(parentName))
             {
-                throw new ArgumentNullException(nameof(parentName));
+                throw new ArgumentException($"Parameter {nameof(parentName)} cannot be null or empty", nameof(parentName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("ParentResourceCollection.GetIfExists");
@@ -242,12 +244,12 @@ namespace SingletonResource
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="parentName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="parentName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="parentName"/> is null or empty. </exception>
         public virtual Response<bool> Exists(string parentName, CancellationToken cancellationToken = default)
         {
-            if (parentName == null)
+            if (string.IsNullOrEmpty(parentName))
             {
-                throw new ArgumentNullException(nameof(parentName));
+                throw new ArgumentException($"Parameter {nameof(parentName)} cannot be null or empty", nameof(parentName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("ParentResourceCollection.Exists");
@@ -267,12 +269,12 @@ namespace SingletonResource
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="parentName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="parentName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="parentName"/> is null or empty. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string parentName, CancellationToken cancellationToken = default)
         {
-            if (parentName == null)
+            if (string.IsNullOrEmpty(parentName))
             {
-                throw new ArgumentNullException(nameof(parentName));
+                throw new ArgumentException($"Parameter {nameof(parentName)} cannot be null or empty", nameof(parentName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("ParentResourceCollection.Exists");

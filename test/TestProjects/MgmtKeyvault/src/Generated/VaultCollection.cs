@@ -61,12 +61,13 @@ namespace MgmtKeyvault
         /// <param name="vaultName"> Name of the vault. </param>
         /// <param name="parameters"> Parameters to create or update the vault. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="vaultName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="vaultName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public virtual VaultCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string vaultName, VaultCreateOrUpdateParameters parameters, CancellationToken cancellationToken = default)
         {
-            if (vaultName == null)
+            if (string.IsNullOrEmpty(vaultName))
             {
-                throw new ArgumentNullException(nameof(vaultName));
+                throw new ArgumentException($"Parameter {nameof(vaultName)} cannot be null or empty", nameof(vaultName));
             }
             if (parameters == null)
             {
@@ -98,12 +99,13 @@ namespace MgmtKeyvault
         /// <param name="vaultName"> Name of the vault. </param>
         /// <param name="parameters"> Parameters to create or update the vault. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="vaultName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="vaultName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public async virtual Task<VaultCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string vaultName, VaultCreateOrUpdateParameters parameters, CancellationToken cancellationToken = default)
         {
-            if (vaultName == null)
+            if (string.IsNullOrEmpty(vaultName))
             {
-                throw new ArgumentNullException(nameof(vaultName));
+                throw new ArgumentException($"Parameter {nameof(vaultName)} cannot be null or empty", nameof(vaultName));
             }
             if (parameters == null)
             {
@@ -133,12 +135,12 @@ namespace MgmtKeyvault
         /// <summary> Gets the specified Azure key vault. </summary>
         /// <param name="vaultName"> The name of the vault. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="vaultName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="vaultName"/> is null or empty. </exception>
         public virtual Response<Vault> Get(string vaultName, CancellationToken cancellationToken = default)
         {
-            if (vaultName == null)
+            if (string.IsNullOrEmpty(vaultName))
             {
-                throw new ArgumentNullException(nameof(vaultName));
+                throw new ArgumentException($"Parameter {nameof(vaultName)} cannot be null or empty", nameof(vaultName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("VaultCollection.Get");
@@ -163,12 +165,12 @@ namespace MgmtKeyvault
         /// <summary> Gets the specified Azure key vault. </summary>
         /// <param name="vaultName"> The name of the vault. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="vaultName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="vaultName"/> is null or empty. </exception>
         public async virtual Task<Response<Vault>> GetAsync(string vaultName, CancellationToken cancellationToken = default)
         {
-            if (vaultName == null)
+            if (string.IsNullOrEmpty(vaultName))
             {
-                throw new ArgumentNullException(nameof(vaultName));
+                throw new ArgumentException($"Parameter {nameof(vaultName)} cannot be null or empty", nameof(vaultName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("VaultCollection.Get");
@@ -190,12 +192,12 @@ namespace MgmtKeyvault
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="vaultName"> The name of the vault. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="vaultName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="vaultName"/> is null or empty. </exception>
         public virtual Response<Vault> GetIfExists(string vaultName, CancellationToken cancellationToken = default)
         {
-            if (vaultName == null)
+            if (string.IsNullOrEmpty(vaultName))
             {
-                throw new ArgumentNullException(nameof(vaultName));
+                throw new ArgumentException($"Parameter {nameof(vaultName)} cannot be null or empty", nameof(vaultName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("VaultCollection.GetIfExists");
@@ -217,12 +219,12 @@ namespace MgmtKeyvault
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="vaultName"> The name of the vault. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="vaultName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="vaultName"/> is null or empty. </exception>
         public async virtual Task<Response<Vault>> GetIfExistsAsync(string vaultName, CancellationToken cancellationToken = default)
         {
-            if (vaultName == null)
+            if (string.IsNullOrEmpty(vaultName))
             {
-                throw new ArgumentNullException(nameof(vaultName));
+                throw new ArgumentException($"Parameter {nameof(vaultName)} cannot be null or empty", nameof(vaultName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("VaultCollection.GetIfExists");
@@ -244,12 +246,12 @@ namespace MgmtKeyvault
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="vaultName"> The name of the vault. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="vaultName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="vaultName"/> is null or empty. </exception>
         public virtual Response<bool> Exists(string vaultName, CancellationToken cancellationToken = default)
         {
-            if (vaultName == null)
+            if (string.IsNullOrEmpty(vaultName))
             {
-                throw new ArgumentNullException(nameof(vaultName));
+                throw new ArgumentException($"Parameter {nameof(vaultName)} cannot be null or empty", nameof(vaultName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("VaultCollection.Exists");
@@ -269,12 +271,12 @@ namespace MgmtKeyvault
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="vaultName"> The name of the vault. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="vaultName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="vaultName"/> is null or empty. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string vaultName, CancellationToken cancellationToken = default)
         {
-            if (vaultName == null)
+            if (string.IsNullOrEmpty(vaultName))
             {
-                throw new ArgumentNullException(nameof(vaultName));
+                throw new ArgumentException($"Parameter {nameof(vaultName)} cannot be null or empty", nameof(vaultName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("VaultCollection.Exists");

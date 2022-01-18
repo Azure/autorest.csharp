@@ -158,12 +158,13 @@ namespace SupersetFlattenInheritance
         /// <param name="customModel1SName"> The String to use. </param>
         /// <param name="parameters"> The CustomModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="customModel1SName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="customModel1SName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public static async Task<Response<CustomModel1>> PutCustomModel1Async(this ResourceGroup resourceGroup, string customModel1SName, CustomModel1 parameters, CancellationToken cancellationToken = default)
         {
-            if (customModel1SName == null)
+            if (string.IsNullOrEmpty(customModel1SName))
             {
-                throw new ArgumentNullException(nameof(customModel1SName));
+                throw new ArgumentException($"Parameter {nameof(customModel1SName)} cannot be null or empty", nameof(customModel1SName));
             }
             if (parameters == null)
             {
@@ -197,12 +198,13 @@ namespace SupersetFlattenInheritance
         /// <param name="customModel1SName"> The String to use. </param>
         /// <param name="parameters"> The CustomModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="customModel1SName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="customModel1SName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public static Response<CustomModel1> PutCustomModel1(this ResourceGroup resourceGroup, string customModel1SName, CustomModel1 parameters, CancellationToken cancellationToken = default)
         {
-            if (customModel1SName == null)
+            if (string.IsNullOrEmpty(customModel1SName))
             {
-                throw new ArgumentNullException(nameof(customModel1SName));
+                throw new ArgumentException($"Parameter {nameof(customModel1SName)} cannot be null or empty", nameof(customModel1SName));
             }
             if (parameters == null)
             {
@@ -235,12 +237,12 @@ namespace SupersetFlattenInheritance
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="customModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="customModel1SName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="customModel1SName"/> is null or empty. </exception>
         public static async Task<Response<CustomModel1>> GetCustomModel1Async(this ResourceGroup resourceGroup, string customModel1SName, CancellationToken cancellationToken = default)
         {
-            if (customModel1SName == null)
+            if (string.IsNullOrEmpty(customModel1SName))
             {
-                throw new ArgumentNullException(nameof(customModel1SName));
+                throw new ArgumentException($"Parameter {nameof(customModel1SName)} cannot be null or empty", nameof(customModel1SName));
             }
 
             return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
@@ -269,12 +271,12 @@ namespace SupersetFlattenInheritance
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="customModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="customModel1SName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="customModel1SName"/> is null or empty. </exception>
         public static Response<CustomModel1> GetCustomModel1(this ResourceGroup resourceGroup, string customModel1SName, CancellationToken cancellationToken = default)
         {
-            if (customModel1SName == null)
+            if (string.IsNullOrEmpty(customModel1SName))
             {
-                throw new ArgumentNullException(nameof(customModel1SName));
+                throw new ArgumentException($"Parameter {nameof(customModel1SName)} cannot be null or empty", nameof(customModel1SName));
             }
 
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
@@ -370,12 +372,13 @@ namespace SupersetFlattenInheritance
         /// <param name="customModel2SName"> The String to use. </param>
         /// <param name="parameters"> The CustomModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="customModel2SName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="customModel2SName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public static async Task<Response<CustomModel2>> PutCustomModel2Async(this ResourceGroup resourceGroup, string customModel2SName, CustomModel2 parameters, CancellationToken cancellationToken = default)
         {
-            if (customModel2SName == null)
+            if (string.IsNullOrEmpty(customModel2SName))
             {
-                throw new ArgumentNullException(nameof(customModel2SName));
+                throw new ArgumentException($"Parameter {nameof(customModel2SName)} cannot be null or empty", nameof(customModel2SName));
             }
             if (parameters == null)
             {
@@ -409,12 +412,13 @@ namespace SupersetFlattenInheritance
         /// <param name="customModel2SName"> The String to use. </param>
         /// <param name="parameters"> The CustomModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="customModel2SName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="customModel2SName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public static Response<CustomModel2> PutCustomModel2(this ResourceGroup resourceGroup, string customModel2SName, CustomModel2 parameters, CancellationToken cancellationToken = default)
         {
-            if (customModel2SName == null)
+            if (string.IsNullOrEmpty(customModel2SName))
             {
-                throw new ArgumentNullException(nameof(customModel2SName));
+                throw new ArgumentException($"Parameter {nameof(customModel2SName)} cannot be null or empty", nameof(customModel2SName));
             }
             if (parameters == null)
             {
@@ -447,12 +451,12 @@ namespace SupersetFlattenInheritance
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="customModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="customModel2SName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="customModel2SName"/> is null or empty. </exception>
         public static async Task<Response<CustomModel2>> GetCustomModel2Async(this ResourceGroup resourceGroup, string customModel2SName, CancellationToken cancellationToken = default)
         {
-            if (customModel2SName == null)
+            if (string.IsNullOrEmpty(customModel2SName))
             {
-                throw new ArgumentNullException(nameof(customModel2SName));
+                throw new ArgumentException($"Parameter {nameof(customModel2SName)} cannot be null or empty", nameof(customModel2SName));
             }
 
             return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
@@ -481,12 +485,12 @@ namespace SupersetFlattenInheritance
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="customModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="customModel2SName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="customModel2SName"/> is null or empty. </exception>
         public static Response<CustomModel2> GetCustomModel2(this ResourceGroup resourceGroup, string customModel2SName, CancellationToken cancellationToken = default)
         {
-            if (customModel2SName == null)
+            if (string.IsNullOrEmpty(customModel2SName))
             {
-                throw new ArgumentNullException(nameof(customModel2SName));
+                throw new ArgumentException($"Parameter {nameof(customModel2SName)} cannot be null or empty", nameof(customModel2SName));
             }
 
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
@@ -582,12 +586,13 @@ namespace SupersetFlattenInheritance
         /// <param name="subResourceModel1SName"> The String to use. </param>
         /// <param name="parameters"> The SubResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subResourceModel1SName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subResourceModel1SName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public static async Task<Response<SubResourceModel1>> PutSubResourceModel1Async(this ResourceGroup resourceGroup, string subResourceModel1SName, SubResourceModel1 parameters, CancellationToken cancellationToken = default)
         {
-            if (subResourceModel1SName == null)
+            if (string.IsNullOrEmpty(subResourceModel1SName))
             {
-                throw new ArgumentNullException(nameof(subResourceModel1SName));
+                throw new ArgumentException($"Parameter {nameof(subResourceModel1SName)} cannot be null or empty", nameof(subResourceModel1SName));
             }
             if (parameters == null)
             {
@@ -621,12 +626,13 @@ namespace SupersetFlattenInheritance
         /// <param name="subResourceModel1SName"> The String to use. </param>
         /// <param name="parameters"> The SubResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subResourceModel1SName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subResourceModel1SName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public static Response<SubResourceModel1> PutSubResourceModel1(this ResourceGroup resourceGroup, string subResourceModel1SName, SubResourceModel1 parameters, CancellationToken cancellationToken = default)
         {
-            if (subResourceModel1SName == null)
+            if (string.IsNullOrEmpty(subResourceModel1SName))
             {
-                throw new ArgumentNullException(nameof(subResourceModel1SName));
+                throw new ArgumentException($"Parameter {nameof(subResourceModel1SName)} cannot be null or empty", nameof(subResourceModel1SName));
             }
             if (parameters == null)
             {
@@ -659,12 +665,12 @@ namespace SupersetFlattenInheritance
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="subResourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subResourceModel1SName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subResourceModel1SName"/> is null or empty. </exception>
         public static async Task<Response<SubResourceModel1>> GetSubResourceModel1Async(this ResourceGroup resourceGroup, string subResourceModel1SName, CancellationToken cancellationToken = default)
         {
-            if (subResourceModel1SName == null)
+            if (string.IsNullOrEmpty(subResourceModel1SName))
             {
-                throw new ArgumentNullException(nameof(subResourceModel1SName));
+                throw new ArgumentException($"Parameter {nameof(subResourceModel1SName)} cannot be null or empty", nameof(subResourceModel1SName));
             }
 
             return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
@@ -693,12 +699,12 @@ namespace SupersetFlattenInheritance
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="subResourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subResourceModel1SName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subResourceModel1SName"/> is null or empty. </exception>
         public static Response<SubResourceModel1> GetSubResourceModel1(this ResourceGroup resourceGroup, string subResourceModel1SName, CancellationToken cancellationToken = default)
         {
-            if (subResourceModel1SName == null)
+            if (string.IsNullOrEmpty(subResourceModel1SName))
             {
-                throw new ArgumentNullException(nameof(subResourceModel1SName));
+                throw new ArgumentException($"Parameter {nameof(subResourceModel1SName)} cannot be null or empty", nameof(subResourceModel1SName));
             }
 
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
@@ -794,12 +800,13 @@ namespace SupersetFlattenInheritance
         /// <param name="subResourceModel2SName"> The String to use. </param>
         /// <param name="parameters"> The SubResourceModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subResourceModel2SName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subResourceModel2SName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public static async Task<Response<SubResourceModel2>> PutSubResourceModel2Async(this ResourceGroup resourceGroup, string subResourceModel2SName, SubResourceModel2 parameters, CancellationToken cancellationToken = default)
         {
-            if (subResourceModel2SName == null)
+            if (string.IsNullOrEmpty(subResourceModel2SName))
             {
-                throw new ArgumentNullException(nameof(subResourceModel2SName));
+                throw new ArgumentException($"Parameter {nameof(subResourceModel2SName)} cannot be null or empty", nameof(subResourceModel2SName));
             }
             if (parameters == null)
             {
@@ -833,12 +840,13 @@ namespace SupersetFlattenInheritance
         /// <param name="subResourceModel2SName"> The String to use. </param>
         /// <param name="parameters"> The SubResourceModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subResourceModel2SName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subResourceModel2SName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public static Response<SubResourceModel2> PutSubResourceModel2(this ResourceGroup resourceGroup, string subResourceModel2SName, SubResourceModel2 parameters, CancellationToken cancellationToken = default)
         {
-            if (subResourceModel2SName == null)
+            if (string.IsNullOrEmpty(subResourceModel2SName))
             {
-                throw new ArgumentNullException(nameof(subResourceModel2SName));
+                throw new ArgumentException($"Parameter {nameof(subResourceModel2SName)} cannot be null or empty", nameof(subResourceModel2SName));
             }
             if (parameters == null)
             {
@@ -871,12 +879,12 @@ namespace SupersetFlattenInheritance
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="subResourceModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subResourceModel2SName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subResourceModel2SName"/> is null or empty. </exception>
         public static async Task<Response<SubResourceModel2>> GetSubResourceModel2Async(this ResourceGroup resourceGroup, string subResourceModel2SName, CancellationToken cancellationToken = default)
         {
-            if (subResourceModel2SName == null)
+            if (string.IsNullOrEmpty(subResourceModel2SName))
             {
-                throw new ArgumentNullException(nameof(subResourceModel2SName));
+                throw new ArgumentException($"Parameter {nameof(subResourceModel2SName)} cannot be null or empty", nameof(subResourceModel2SName));
             }
 
             return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
@@ -905,12 +913,12 @@ namespace SupersetFlattenInheritance
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="subResourceModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subResourceModel2SName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subResourceModel2SName"/> is null or empty. </exception>
         public static Response<SubResourceModel2> GetSubResourceModel2(this ResourceGroup resourceGroup, string subResourceModel2SName, CancellationToken cancellationToken = default)
         {
-            if (subResourceModel2SName == null)
+            if (string.IsNullOrEmpty(subResourceModel2SName))
             {
-                throw new ArgumentNullException(nameof(subResourceModel2SName));
+                throw new ArgumentException($"Parameter {nameof(subResourceModel2SName)} cannot be null or empty", nameof(subResourceModel2SName));
             }
 
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
@@ -1006,12 +1014,13 @@ namespace SupersetFlattenInheritance
         /// <param name="writableSubResourceModel1SName"> The String to use. </param>
         /// <param name="parameters"> The WritableSubResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="writableSubResourceModel1SName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="writableSubResourceModel1SName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public static async Task<Response<WritableSubResourceModel1>> PutWritableSubResourceModel1Async(this ResourceGroup resourceGroup, string writableSubResourceModel1SName, WritableSubResourceModel1 parameters, CancellationToken cancellationToken = default)
         {
-            if (writableSubResourceModel1SName == null)
+            if (string.IsNullOrEmpty(writableSubResourceModel1SName))
             {
-                throw new ArgumentNullException(nameof(writableSubResourceModel1SName));
+                throw new ArgumentException($"Parameter {nameof(writableSubResourceModel1SName)} cannot be null or empty", nameof(writableSubResourceModel1SName));
             }
             if (parameters == null)
             {
@@ -1045,12 +1054,13 @@ namespace SupersetFlattenInheritance
         /// <param name="writableSubResourceModel1SName"> The String to use. </param>
         /// <param name="parameters"> The WritableSubResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="writableSubResourceModel1SName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="writableSubResourceModel1SName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public static Response<WritableSubResourceModel1> PutWritableSubResourceModel1(this ResourceGroup resourceGroup, string writableSubResourceModel1SName, WritableSubResourceModel1 parameters, CancellationToken cancellationToken = default)
         {
-            if (writableSubResourceModel1SName == null)
+            if (string.IsNullOrEmpty(writableSubResourceModel1SName))
             {
-                throw new ArgumentNullException(nameof(writableSubResourceModel1SName));
+                throw new ArgumentException($"Parameter {nameof(writableSubResourceModel1SName)} cannot be null or empty", nameof(writableSubResourceModel1SName));
             }
             if (parameters == null)
             {
@@ -1083,12 +1093,12 @@ namespace SupersetFlattenInheritance
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="writableSubResourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="writableSubResourceModel1SName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="writableSubResourceModel1SName"/> is null or empty. </exception>
         public static async Task<Response<WritableSubResourceModel1>> GetWritableSubResourceModel1Async(this ResourceGroup resourceGroup, string writableSubResourceModel1SName, CancellationToken cancellationToken = default)
         {
-            if (writableSubResourceModel1SName == null)
+            if (string.IsNullOrEmpty(writableSubResourceModel1SName))
             {
-                throw new ArgumentNullException(nameof(writableSubResourceModel1SName));
+                throw new ArgumentException($"Parameter {nameof(writableSubResourceModel1SName)} cannot be null or empty", nameof(writableSubResourceModel1SName));
             }
 
             return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
@@ -1117,12 +1127,12 @@ namespace SupersetFlattenInheritance
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="writableSubResourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="writableSubResourceModel1SName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="writableSubResourceModel1SName"/> is null or empty. </exception>
         public static Response<WritableSubResourceModel1> GetWritableSubResourceModel1(this ResourceGroup resourceGroup, string writableSubResourceModel1SName, CancellationToken cancellationToken = default)
         {
-            if (writableSubResourceModel1SName == null)
+            if (string.IsNullOrEmpty(writableSubResourceModel1SName))
             {
-                throw new ArgumentNullException(nameof(writableSubResourceModel1SName));
+                throw new ArgumentException($"Parameter {nameof(writableSubResourceModel1SName)} cannot be null or empty", nameof(writableSubResourceModel1SName));
             }
 
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
@@ -1218,12 +1228,13 @@ namespace SupersetFlattenInheritance
         /// <param name="writableSubResourceModel2SName"> The String to use. </param>
         /// <param name="parameters"> The WritableSubResourceModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="writableSubResourceModel2SName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="writableSubResourceModel2SName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public static async Task<Response<WritableSubResourceModel2>> PutWritableSubResourceModel2Async(this ResourceGroup resourceGroup, string writableSubResourceModel2SName, WritableSubResourceModel2 parameters, CancellationToken cancellationToken = default)
         {
-            if (writableSubResourceModel2SName == null)
+            if (string.IsNullOrEmpty(writableSubResourceModel2SName))
             {
-                throw new ArgumentNullException(nameof(writableSubResourceModel2SName));
+                throw new ArgumentException($"Parameter {nameof(writableSubResourceModel2SName)} cannot be null or empty", nameof(writableSubResourceModel2SName));
             }
             if (parameters == null)
             {
@@ -1257,12 +1268,13 @@ namespace SupersetFlattenInheritance
         /// <param name="writableSubResourceModel2SName"> The String to use. </param>
         /// <param name="parameters"> The WritableSubResourceModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="writableSubResourceModel2SName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="writableSubResourceModel2SName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public static Response<WritableSubResourceModel2> PutWritableSubResourceModel2(this ResourceGroup resourceGroup, string writableSubResourceModel2SName, WritableSubResourceModel2 parameters, CancellationToken cancellationToken = default)
         {
-            if (writableSubResourceModel2SName == null)
+            if (string.IsNullOrEmpty(writableSubResourceModel2SName))
             {
-                throw new ArgumentNullException(nameof(writableSubResourceModel2SName));
+                throw new ArgumentException($"Parameter {nameof(writableSubResourceModel2SName)} cannot be null or empty", nameof(writableSubResourceModel2SName));
             }
             if (parameters == null)
             {
@@ -1295,12 +1307,12 @@ namespace SupersetFlattenInheritance
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="writableSubResourceModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="writableSubResourceModel2SName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="writableSubResourceModel2SName"/> is null or empty. </exception>
         public static async Task<Response<WritableSubResourceModel2>> GetWritableSubResourceModel2Async(this ResourceGroup resourceGroup, string writableSubResourceModel2SName, CancellationToken cancellationToken = default)
         {
-            if (writableSubResourceModel2SName == null)
+            if (string.IsNullOrEmpty(writableSubResourceModel2SName))
             {
-                throw new ArgumentNullException(nameof(writableSubResourceModel2SName));
+                throw new ArgumentException($"Parameter {nameof(writableSubResourceModel2SName)} cannot be null or empty", nameof(writableSubResourceModel2SName));
             }
 
             return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
@@ -1329,12 +1341,12 @@ namespace SupersetFlattenInheritance
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="writableSubResourceModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="writableSubResourceModel2SName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="writableSubResourceModel2SName"/> is null or empty. </exception>
         public static Response<WritableSubResourceModel2> GetWritableSubResourceModel2(this ResourceGroup resourceGroup, string writableSubResourceModel2SName, CancellationToken cancellationToken = default)
         {
-            if (writableSubResourceModel2SName == null)
+            if (string.IsNullOrEmpty(writableSubResourceModel2SName))
             {
-                throw new ArgumentNullException(nameof(writableSubResourceModel2SName));
+                throw new ArgumentException($"Parameter {nameof(writableSubResourceModel2SName)} cannot be null or empty", nameof(writableSubResourceModel2SName));
             }
 
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
@@ -1430,12 +1442,13 @@ namespace SupersetFlattenInheritance
         /// <param name="resourceModel2SName"> The String to use. </param>
         /// <param name="parameters"> The ResourceModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceModel2SName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="resourceModel2SName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public static async Task<Response<ResourceModel2>> PutResourceModel2Async(this ResourceGroup resourceGroup, string resourceModel2SName, ResourceModel2 parameters, CancellationToken cancellationToken = default)
         {
-            if (resourceModel2SName == null)
+            if (string.IsNullOrEmpty(resourceModel2SName))
             {
-                throw new ArgumentNullException(nameof(resourceModel2SName));
+                throw new ArgumentException($"Parameter {nameof(resourceModel2SName)} cannot be null or empty", nameof(resourceModel2SName));
             }
             if (parameters == null)
             {
@@ -1469,12 +1482,13 @@ namespace SupersetFlattenInheritance
         /// <param name="resourceModel2SName"> The String to use. </param>
         /// <param name="parameters"> The ResourceModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceModel2SName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="resourceModel2SName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public static Response<ResourceModel2> PutResourceModel2(this ResourceGroup resourceGroup, string resourceModel2SName, ResourceModel2 parameters, CancellationToken cancellationToken = default)
         {
-            if (resourceModel2SName == null)
+            if (string.IsNullOrEmpty(resourceModel2SName))
             {
-                throw new ArgumentNullException(nameof(resourceModel2SName));
+                throw new ArgumentException($"Parameter {nameof(resourceModel2SName)} cannot be null or empty", nameof(resourceModel2SName));
             }
             if (parameters == null)
             {
@@ -1507,12 +1521,12 @@ namespace SupersetFlattenInheritance
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="resourceModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceModel2SName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="resourceModel2SName"/> is null or empty. </exception>
         public static async Task<Response<ResourceModel2>> GetResourceModel2Async(this ResourceGroup resourceGroup, string resourceModel2SName, CancellationToken cancellationToken = default)
         {
-            if (resourceModel2SName == null)
+            if (string.IsNullOrEmpty(resourceModel2SName))
             {
-                throw new ArgumentNullException(nameof(resourceModel2SName));
+                throw new ArgumentException($"Parameter {nameof(resourceModel2SName)} cannot be null or empty", nameof(resourceModel2SName));
             }
 
             return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
@@ -1541,12 +1555,12 @@ namespace SupersetFlattenInheritance
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="resourceModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceModel2SName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="resourceModel2SName"/> is null or empty. </exception>
         public static Response<ResourceModel2> GetResourceModel2(this ResourceGroup resourceGroup, string resourceModel2SName, CancellationToken cancellationToken = default)
         {
-            if (resourceModel2SName == null)
+            if (string.IsNullOrEmpty(resourceModel2SName))
             {
-                throw new ArgumentNullException(nameof(resourceModel2SName));
+                throw new ArgumentException($"Parameter {nameof(resourceModel2SName)} cannot be null or empty", nameof(resourceModel2SName));
             }
 
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
@@ -1642,12 +1656,13 @@ namespace SupersetFlattenInheritance
         /// <param name="trackedResourceModel2SName"> The String to use. </param>
         /// <param name="parameters"> The TrackedResourceModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel2SName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="trackedResourceModel2SName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public static async Task<Response<TrackedResourceModel2>> PutTrackedResourceModel2Async(this ResourceGroup resourceGroup, string trackedResourceModel2SName, TrackedResourceModel2 parameters, CancellationToken cancellationToken = default)
         {
-            if (trackedResourceModel2SName == null)
+            if (string.IsNullOrEmpty(trackedResourceModel2SName))
             {
-                throw new ArgumentNullException(nameof(trackedResourceModel2SName));
+                throw new ArgumentException($"Parameter {nameof(trackedResourceModel2SName)} cannot be null or empty", nameof(trackedResourceModel2SName));
             }
             if (parameters == null)
             {
@@ -1681,12 +1696,13 @@ namespace SupersetFlattenInheritance
         /// <param name="trackedResourceModel2SName"> The String to use. </param>
         /// <param name="parameters"> The TrackedResourceModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel2SName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="trackedResourceModel2SName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public static Response<TrackedResourceModel2> PutTrackedResourceModel2(this ResourceGroup resourceGroup, string trackedResourceModel2SName, TrackedResourceModel2 parameters, CancellationToken cancellationToken = default)
         {
-            if (trackedResourceModel2SName == null)
+            if (string.IsNullOrEmpty(trackedResourceModel2SName))
             {
-                throw new ArgumentNullException(nameof(trackedResourceModel2SName));
+                throw new ArgumentException($"Parameter {nameof(trackedResourceModel2SName)} cannot be null or empty", nameof(trackedResourceModel2SName));
             }
             if (parameters == null)
             {
@@ -1719,12 +1735,12 @@ namespace SupersetFlattenInheritance
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="trackedResourceModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel2SName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="trackedResourceModel2SName"/> is null or empty. </exception>
         public static async Task<Response<TrackedResourceModel2>> GetTrackedResourceModel2Async(this ResourceGroup resourceGroup, string trackedResourceModel2SName, CancellationToken cancellationToken = default)
         {
-            if (trackedResourceModel2SName == null)
+            if (string.IsNullOrEmpty(trackedResourceModel2SName))
             {
-                throw new ArgumentNullException(nameof(trackedResourceModel2SName));
+                throw new ArgumentException($"Parameter {nameof(trackedResourceModel2SName)} cannot be null or empty", nameof(trackedResourceModel2SName));
             }
 
             return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
@@ -1753,12 +1769,12 @@ namespace SupersetFlattenInheritance
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="trackedResourceModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel2SName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="trackedResourceModel2SName"/> is null or empty. </exception>
         public static Response<TrackedResourceModel2> GetTrackedResourceModel2(this ResourceGroup resourceGroup, string trackedResourceModel2SName, CancellationToken cancellationToken = default)
         {
-            if (trackedResourceModel2SName == null)
+            if (string.IsNullOrEmpty(trackedResourceModel2SName))
             {
-                throw new ArgumentNullException(nameof(trackedResourceModel2SName));
+                throw new ArgumentException($"Parameter {nameof(trackedResourceModel2SName)} cannot be null or empty", nameof(trackedResourceModel2SName));
             }
 
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
@@ -1788,12 +1804,13 @@ namespace SupersetFlattenInheritance
         /// <param name="nonResourceModel1SName"> The String to use. </param>
         /// <param name="parameters"> The NonResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nonResourceModel1SName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="nonResourceModel1SName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public static async Task<Response<NonResourceModel1>> PutNonResourceModel1Async(this ResourceGroup resourceGroup, string nonResourceModel1SName, NonResourceModel1 parameters, CancellationToken cancellationToken = default)
         {
-            if (nonResourceModel1SName == null)
+            if (string.IsNullOrEmpty(nonResourceModel1SName))
             {
-                throw new ArgumentNullException(nameof(nonResourceModel1SName));
+                throw new ArgumentException($"Parameter {nameof(nonResourceModel1SName)} cannot be null or empty", nameof(nonResourceModel1SName));
             }
             if (parameters == null)
             {
@@ -1827,12 +1844,13 @@ namespace SupersetFlattenInheritance
         /// <param name="nonResourceModel1SName"> The String to use. </param>
         /// <param name="parameters"> The NonResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nonResourceModel1SName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="nonResourceModel1SName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public static Response<NonResourceModel1> PutNonResourceModel1(this ResourceGroup resourceGroup, string nonResourceModel1SName, NonResourceModel1 parameters, CancellationToken cancellationToken = default)
         {
-            if (nonResourceModel1SName == null)
+            if (string.IsNullOrEmpty(nonResourceModel1SName))
             {
-                throw new ArgumentNullException(nameof(nonResourceModel1SName));
+                throw new ArgumentException($"Parameter {nameof(nonResourceModel1SName)} cannot be null or empty", nameof(nonResourceModel1SName));
             }
             if (parameters == null)
             {
@@ -1865,12 +1883,12 @@ namespace SupersetFlattenInheritance
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="nonResourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nonResourceModel1SName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="nonResourceModel1SName"/> is null or empty. </exception>
         public static async Task<Response<NonResourceModel1>> GetNonResourceModel1Async(this ResourceGroup resourceGroup, string nonResourceModel1SName, CancellationToken cancellationToken = default)
         {
-            if (nonResourceModel1SName == null)
+            if (string.IsNullOrEmpty(nonResourceModel1SName))
             {
-                throw new ArgumentNullException(nameof(nonResourceModel1SName));
+                throw new ArgumentException($"Parameter {nameof(nonResourceModel1SName)} cannot be null or empty", nameof(nonResourceModel1SName));
             }
 
             return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
@@ -1899,12 +1917,12 @@ namespace SupersetFlattenInheritance
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="nonResourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nonResourceModel1SName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="nonResourceModel1SName"/> is null or empty. </exception>
         public static Response<NonResourceModel1> GetNonResourceModel1(this ResourceGroup resourceGroup, string nonResourceModel1SName, CancellationToken cancellationToken = default)
         {
-            if (nonResourceModel1SName == null)
+            if (string.IsNullOrEmpty(nonResourceModel1SName))
             {
-                throw new ArgumentNullException(nameof(nonResourceModel1SName));
+                throw new ArgumentException($"Parameter {nameof(nonResourceModel1SName)} cannot be null or empty", nameof(nonResourceModel1SName));
             }
 
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>

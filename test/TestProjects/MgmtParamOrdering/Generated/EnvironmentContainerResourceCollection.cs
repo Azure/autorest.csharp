@@ -59,12 +59,13 @@ namespace MgmtParamOrdering
         /// <param name="name"> Container name. </param>
         /// <param name="body"> Container entity to create or update. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="body"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is null or empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         public virtual EnvironmentContainerResourceCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string name, EnvironmentContainerResourceData body, CancellationToken cancellationToken = default)
         {
-            if (name == null)
+            if (string.IsNullOrEmpty(name))
             {
-                throw new ArgumentNullException(nameof(name));
+                throw new ArgumentException($"Parameter {nameof(name)} cannot be null or empty", nameof(name));
             }
             if (body == null)
             {
@@ -96,12 +97,13 @@ namespace MgmtParamOrdering
         /// <param name="name"> Container name. </param>
         /// <param name="body"> Container entity to create or update. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="body"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is null or empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         public async virtual Task<EnvironmentContainerResourceCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string name, EnvironmentContainerResourceData body, CancellationToken cancellationToken = default)
         {
-            if (name == null)
+            if (string.IsNullOrEmpty(name))
             {
-                throw new ArgumentNullException(nameof(name));
+                throw new ArgumentException($"Parameter {nameof(name)} cannot be null or empty", nameof(name));
             }
             if (body == null)
             {
@@ -131,12 +133,12 @@ namespace MgmtParamOrdering
         /// <summary> Get container. </summary>
         /// <param name="name"> Container name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is null or empty. </exception>
         public virtual Response<EnvironmentContainerResource> Get(string name, CancellationToken cancellationToken = default)
         {
-            if (name == null)
+            if (string.IsNullOrEmpty(name))
             {
-                throw new ArgumentNullException(nameof(name));
+                throw new ArgumentException($"Parameter {nameof(name)} cannot be null or empty", nameof(name));
             }
 
             using var scope = _clientDiagnostics.CreateScope("EnvironmentContainerResourceCollection.Get");
@@ -161,12 +163,12 @@ namespace MgmtParamOrdering
         /// <summary> Get container. </summary>
         /// <param name="name"> Container name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is null or empty. </exception>
         public async virtual Task<Response<EnvironmentContainerResource>> GetAsync(string name, CancellationToken cancellationToken = default)
         {
-            if (name == null)
+            if (string.IsNullOrEmpty(name))
             {
-                throw new ArgumentNullException(nameof(name));
+                throw new ArgumentException($"Parameter {nameof(name)} cannot be null or empty", nameof(name));
             }
 
             using var scope = _clientDiagnostics.CreateScope("EnvironmentContainerResourceCollection.Get");
@@ -188,12 +190,12 @@ namespace MgmtParamOrdering
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="name"> Container name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is null or empty. </exception>
         public virtual Response<EnvironmentContainerResource> GetIfExists(string name, CancellationToken cancellationToken = default)
         {
-            if (name == null)
+            if (string.IsNullOrEmpty(name))
             {
-                throw new ArgumentNullException(nameof(name));
+                throw new ArgumentException($"Parameter {nameof(name)} cannot be null or empty", nameof(name));
             }
 
             using var scope = _clientDiagnostics.CreateScope("EnvironmentContainerResourceCollection.GetIfExists");
@@ -215,12 +217,12 @@ namespace MgmtParamOrdering
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="name"> Container name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is null or empty. </exception>
         public async virtual Task<Response<EnvironmentContainerResource>> GetIfExistsAsync(string name, CancellationToken cancellationToken = default)
         {
-            if (name == null)
+            if (string.IsNullOrEmpty(name))
             {
-                throw new ArgumentNullException(nameof(name));
+                throw new ArgumentException($"Parameter {nameof(name)} cannot be null or empty", nameof(name));
             }
 
             using var scope = _clientDiagnostics.CreateScope("EnvironmentContainerResourceCollection.GetIfExists");
@@ -242,12 +244,12 @@ namespace MgmtParamOrdering
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="name"> Container name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is null or empty. </exception>
         public virtual Response<bool> Exists(string name, CancellationToken cancellationToken = default)
         {
-            if (name == null)
+            if (string.IsNullOrEmpty(name))
             {
-                throw new ArgumentNullException(nameof(name));
+                throw new ArgumentException($"Parameter {nameof(name)} cannot be null or empty", nameof(name));
             }
 
             using var scope = _clientDiagnostics.CreateScope("EnvironmentContainerResourceCollection.Exists");
@@ -267,12 +269,12 @@ namespace MgmtParamOrdering
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="name"> Container name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is null or empty. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string name, CancellationToken cancellationToken = default)
         {
-            if (name == null)
+            if (string.IsNullOrEmpty(name))
             {
-                throw new ArgumentNullException(nameof(name));
+                throw new ArgumentException($"Parameter {nameof(name)} cannot be null or empty", nameof(name));
             }
 
             using var scope = _clientDiagnostics.CreateScope("EnvironmentContainerResourceCollection.Exists");

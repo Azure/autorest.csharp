@@ -60,12 +60,13 @@ namespace MgmtListMethods
         /// <param name="mgmtGrpParentWithNonResChWithLocName"> Name. </param>
         /// <param name="parameters"> Parameters supplied to the Create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="mgmtGrpParentWithNonResChWithLocName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="mgmtGrpParentWithNonResChWithLocName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public virtual MgmtGrpParentWithNonResChWithLocCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string mgmtGrpParentWithNonResChWithLocName, MgmtGrpParentWithNonResChWithLocData parameters, CancellationToken cancellationToken = default)
         {
-            if (mgmtGrpParentWithNonResChWithLocName == null)
+            if (string.IsNullOrEmpty(mgmtGrpParentWithNonResChWithLocName))
             {
-                throw new ArgumentNullException(nameof(mgmtGrpParentWithNonResChWithLocName));
+                throw new ArgumentException($"Parameter {nameof(mgmtGrpParentWithNonResChWithLocName)} cannot be null or empty", nameof(mgmtGrpParentWithNonResChWithLocName));
             }
             if (parameters == null)
             {
@@ -97,12 +98,13 @@ namespace MgmtListMethods
         /// <param name="mgmtGrpParentWithNonResChWithLocName"> Name. </param>
         /// <param name="parameters"> Parameters supplied to the Create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="mgmtGrpParentWithNonResChWithLocName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="mgmtGrpParentWithNonResChWithLocName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public async virtual Task<MgmtGrpParentWithNonResChWithLocCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string mgmtGrpParentWithNonResChWithLocName, MgmtGrpParentWithNonResChWithLocData parameters, CancellationToken cancellationToken = default)
         {
-            if (mgmtGrpParentWithNonResChWithLocName == null)
+            if (string.IsNullOrEmpty(mgmtGrpParentWithNonResChWithLocName))
             {
-                throw new ArgumentNullException(nameof(mgmtGrpParentWithNonResChWithLocName));
+                throw new ArgumentException($"Parameter {nameof(mgmtGrpParentWithNonResChWithLocName)} cannot be null or empty", nameof(mgmtGrpParentWithNonResChWithLocName));
             }
             if (parameters == null)
             {
@@ -132,12 +134,12 @@ namespace MgmtListMethods
         /// <summary> Retrieves information. </summary>
         /// <param name="mgmtGrpParentWithNonResChWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="mgmtGrpParentWithNonResChWithLocName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="mgmtGrpParentWithNonResChWithLocName"/> is null or empty. </exception>
         public virtual Response<MgmtGrpParentWithNonResChWithLoc> Get(string mgmtGrpParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
-            if (mgmtGrpParentWithNonResChWithLocName == null)
+            if (string.IsNullOrEmpty(mgmtGrpParentWithNonResChWithLocName))
             {
-                throw new ArgumentNullException(nameof(mgmtGrpParentWithNonResChWithLocName));
+                throw new ArgumentException($"Parameter {nameof(mgmtGrpParentWithNonResChWithLocName)} cannot be null or empty", nameof(mgmtGrpParentWithNonResChWithLocName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("MgmtGrpParentWithNonResChWithLocCollection.Get");
@@ -162,12 +164,12 @@ namespace MgmtListMethods
         /// <summary> Retrieves information. </summary>
         /// <param name="mgmtGrpParentWithNonResChWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="mgmtGrpParentWithNonResChWithLocName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="mgmtGrpParentWithNonResChWithLocName"/> is null or empty. </exception>
         public async virtual Task<Response<MgmtGrpParentWithNonResChWithLoc>> GetAsync(string mgmtGrpParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
-            if (mgmtGrpParentWithNonResChWithLocName == null)
+            if (string.IsNullOrEmpty(mgmtGrpParentWithNonResChWithLocName))
             {
-                throw new ArgumentNullException(nameof(mgmtGrpParentWithNonResChWithLocName));
+                throw new ArgumentException($"Parameter {nameof(mgmtGrpParentWithNonResChWithLocName)} cannot be null or empty", nameof(mgmtGrpParentWithNonResChWithLocName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("MgmtGrpParentWithNonResChWithLocCollection.Get");
@@ -189,12 +191,12 @@ namespace MgmtListMethods
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="mgmtGrpParentWithNonResChWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="mgmtGrpParentWithNonResChWithLocName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="mgmtGrpParentWithNonResChWithLocName"/> is null or empty. </exception>
         public virtual Response<MgmtGrpParentWithNonResChWithLoc> GetIfExists(string mgmtGrpParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
-            if (mgmtGrpParentWithNonResChWithLocName == null)
+            if (string.IsNullOrEmpty(mgmtGrpParentWithNonResChWithLocName))
             {
-                throw new ArgumentNullException(nameof(mgmtGrpParentWithNonResChWithLocName));
+                throw new ArgumentException($"Parameter {nameof(mgmtGrpParentWithNonResChWithLocName)} cannot be null or empty", nameof(mgmtGrpParentWithNonResChWithLocName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("MgmtGrpParentWithNonResChWithLocCollection.GetIfExists");
@@ -216,12 +218,12 @@ namespace MgmtListMethods
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="mgmtGrpParentWithNonResChWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="mgmtGrpParentWithNonResChWithLocName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="mgmtGrpParentWithNonResChWithLocName"/> is null or empty. </exception>
         public async virtual Task<Response<MgmtGrpParentWithNonResChWithLoc>> GetIfExistsAsync(string mgmtGrpParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
-            if (mgmtGrpParentWithNonResChWithLocName == null)
+            if (string.IsNullOrEmpty(mgmtGrpParentWithNonResChWithLocName))
             {
-                throw new ArgumentNullException(nameof(mgmtGrpParentWithNonResChWithLocName));
+                throw new ArgumentException($"Parameter {nameof(mgmtGrpParentWithNonResChWithLocName)} cannot be null or empty", nameof(mgmtGrpParentWithNonResChWithLocName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("MgmtGrpParentWithNonResChWithLocCollection.GetIfExists");
@@ -243,12 +245,12 @@ namespace MgmtListMethods
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="mgmtGrpParentWithNonResChWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="mgmtGrpParentWithNonResChWithLocName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="mgmtGrpParentWithNonResChWithLocName"/> is null or empty. </exception>
         public virtual Response<bool> Exists(string mgmtGrpParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
-            if (mgmtGrpParentWithNonResChWithLocName == null)
+            if (string.IsNullOrEmpty(mgmtGrpParentWithNonResChWithLocName))
             {
-                throw new ArgumentNullException(nameof(mgmtGrpParentWithNonResChWithLocName));
+                throw new ArgumentException($"Parameter {nameof(mgmtGrpParentWithNonResChWithLocName)} cannot be null or empty", nameof(mgmtGrpParentWithNonResChWithLocName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("MgmtGrpParentWithNonResChWithLocCollection.Exists");
@@ -268,12 +270,12 @@ namespace MgmtListMethods
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="mgmtGrpParentWithNonResChWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="mgmtGrpParentWithNonResChWithLocName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="mgmtGrpParentWithNonResChWithLocName"/> is null or empty. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string mgmtGrpParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
-            if (mgmtGrpParentWithNonResChWithLocName == null)
+            if (string.IsNullOrEmpty(mgmtGrpParentWithNonResChWithLocName))
             {
-                throw new ArgumentNullException(nameof(mgmtGrpParentWithNonResChWithLocName));
+                throw new ArgumentException($"Parameter {nameof(mgmtGrpParentWithNonResChWithLocName)} cannot be null or empty", nameof(mgmtGrpParentWithNonResChWithLocName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("MgmtGrpParentWithNonResChWithLocCollection.Exists");

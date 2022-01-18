@@ -61,12 +61,13 @@ namespace MgmtParamOrdering
         /// <param name="workspaceName"> Name of Azure Machine Learning workspace. </param>
         /// <param name="parameters"> The parameters for creating or updating a machine learning workspace. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="workspaceName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="workspaceName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public virtual WorkspaceCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string workspaceName, WorkspaceData parameters, CancellationToken cancellationToken = default)
         {
-            if (workspaceName == null)
+            if (string.IsNullOrEmpty(workspaceName))
             {
-                throw new ArgumentNullException(nameof(workspaceName));
+                throw new ArgumentException($"Parameter {nameof(workspaceName)} cannot be null or empty", nameof(workspaceName));
             }
             if (parameters == null)
             {
@@ -98,12 +99,13 @@ namespace MgmtParamOrdering
         /// <param name="workspaceName"> Name of Azure Machine Learning workspace. </param>
         /// <param name="parameters"> The parameters for creating or updating a machine learning workspace. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="workspaceName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="workspaceName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public async virtual Task<WorkspaceCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string workspaceName, WorkspaceData parameters, CancellationToken cancellationToken = default)
         {
-            if (workspaceName == null)
+            if (string.IsNullOrEmpty(workspaceName))
             {
-                throw new ArgumentNullException(nameof(workspaceName));
+                throw new ArgumentException($"Parameter {nameof(workspaceName)} cannot be null or empty", nameof(workspaceName));
             }
             if (parameters == null)
             {
@@ -133,12 +135,12 @@ namespace MgmtParamOrdering
         /// <summary> Gets the properties of the specified machine learning workspace. </summary>
         /// <param name="workspaceName"> Name of Azure Machine Learning workspace. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="workspaceName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="workspaceName"/> is null or empty. </exception>
         public virtual Response<Workspace> Get(string workspaceName, CancellationToken cancellationToken = default)
         {
-            if (workspaceName == null)
+            if (string.IsNullOrEmpty(workspaceName))
             {
-                throw new ArgumentNullException(nameof(workspaceName));
+                throw new ArgumentException($"Parameter {nameof(workspaceName)} cannot be null or empty", nameof(workspaceName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("WorkspaceCollection.Get");
@@ -163,12 +165,12 @@ namespace MgmtParamOrdering
         /// <summary> Gets the properties of the specified machine learning workspace. </summary>
         /// <param name="workspaceName"> Name of Azure Machine Learning workspace. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="workspaceName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="workspaceName"/> is null or empty. </exception>
         public async virtual Task<Response<Workspace>> GetAsync(string workspaceName, CancellationToken cancellationToken = default)
         {
-            if (workspaceName == null)
+            if (string.IsNullOrEmpty(workspaceName))
             {
-                throw new ArgumentNullException(nameof(workspaceName));
+                throw new ArgumentException($"Parameter {nameof(workspaceName)} cannot be null or empty", nameof(workspaceName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("WorkspaceCollection.Get");
@@ -190,12 +192,12 @@ namespace MgmtParamOrdering
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="workspaceName"> Name of Azure Machine Learning workspace. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="workspaceName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="workspaceName"/> is null or empty. </exception>
         public virtual Response<Workspace> GetIfExists(string workspaceName, CancellationToken cancellationToken = default)
         {
-            if (workspaceName == null)
+            if (string.IsNullOrEmpty(workspaceName))
             {
-                throw new ArgumentNullException(nameof(workspaceName));
+                throw new ArgumentException($"Parameter {nameof(workspaceName)} cannot be null or empty", nameof(workspaceName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("WorkspaceCollection.GetIfExists");
@@ -217,12 +219,12 @@ namespace MgmtParamOrdering
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="workspaceName"> Name of Azure Machine Learning workspace. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="workspaceName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="workspaceName"/> is null or empty. </exception>
         public async virtual Task<Response<Workspace>> GetIfExistsAsync(string workspaceName, CancellationToken cancellationToken = default)
         {
-            if (workspaceName == null)
+            if (string.IsNullOrEmpty(workspaceName))
             {
-                throw new ArgumentNullException(nameof(workspaceName));
+                throw new ArgumentException($"Parameter {nameof(workspaceName)} cannot be null or empty", nameof(workspaceName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("WorkspaceCollection.GetIfExists");
@@ -244,12 +246,12 @@ namespace MgmtParamOrdering
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="workspaceName"> Name of Azure Machine Learning workspace. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="workspaceName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="workspaceName"/> is null or empty. </exception>
         public virtual Response<bool> Exists(string workspaceName, CancellationToken cancellationToken = default)
         {
-            if (workspaceName == null)
+            if (string.IsNullOrEmpty(workspaceName))
             {
-                throw new ArgumentNullException(nameof(workspaceName));
+                throw new ArgumentException($"Parameter {nameof(workspaceName)} cannot be null or empty", nameof(workspaceName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("WorkspaceCollection.Exists");
@@ -269,12 +271,12 @@ namespace MgmtParamOrdering
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="workspaceName"> Name of Azure Machine Learning workspace. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="workspaceName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="workspaceName"/> is null or empty. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string workspaceName, CancellationToken cancellationToken = default)
         {
-            if (workspaceName == null)
+            if (string.IsNullOrEmpty(workspaceName))
             {
-                throw new ArgumentNullException(nameof(workspaceName));
+                throw new ArgumentException($"Parameter {nameof(workspaceName)} cannot be null or empty", nameof(workspaceName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("WorkspaceCollection.Exists");
