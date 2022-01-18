@@ -277,7 +277,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             using (_writer.Scope())
             {
-                _writer.WriteParameterChecks(methodParameters);
+                _writer.WriteParameterNullOrEmptyChecks(methodParameters);
 
                 var diagnostic = new Diagnostic($"{TypeOfThis.Name}.{methodName}", Array.Empty<DiagnosticAttribute>());
                 WritePagingMethodBody(itemType, diagnostic, operationMappings, parameterMappings, async);
@@ -560,7 +560,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             using (_writer.Scope())
             {
-                _writer.WriteParameterChecks(methodParameters);
+                _writer.WriteParameterNullOrEmptyChecks(methodParameters);
                 var diagnostic = new Diagnostic($"{TypeOfThis.Name}.{methodName}", Array.Empty<DiagnosticAttribute>());
                 using (WriteDiagnosticScope(_writer, diagnostic, ClientDiagnosticsField))
                 {
@@ -649,7 +649,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             using (_writer.Scope())
             {
-                _writer.WriteParameterChecks(methodParameters);
+                _writer.WriteParameterNullOrEmptyChecks(methodParameters);
 
                 Diagnostic diagnostic = new Diagnostic($"{TypeNameOfThis}.{methodName}", Array.Empty<DiagnosticAttribute>());
                 using (WriteDiagnosticScope(_writer, diagnostic, ClientDiagnosticsField))

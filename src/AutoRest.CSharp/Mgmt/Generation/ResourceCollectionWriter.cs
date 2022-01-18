@@ -320,7 +320,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Append($"{typeof(CancellationToken)} cancellationToken = default)");
             using (_writer.Scope())
             {
-                _writer.WriteParameterChecks(methodParameters);
+                _writer.WriteParameterNullOrEmptyChecks(methodParameters);
                 using (WriteDiagnosticScope(_writer, new Diagnostic($"{_resourceCollection.Type.Name}.{methodName}"), ClientDiagnosticsField))
                 {
                     inner(_writer);

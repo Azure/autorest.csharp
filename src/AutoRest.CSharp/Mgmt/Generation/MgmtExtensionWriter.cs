@@ -144,7 +144,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             using (_writer.Scope())
             {
-                _writer.WriteParameterChecks(methodParameters);
+                _writer.WriteParameterNullOrEmptyChecks(methodParameters);
 
                 using (WriteExtensionContextScope(_writer, ExtensionOperationVariableName, async))
                 {
@@ -184,7 +184,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             using (_writer.Scope())
             {
-                _writer.WriteParameterChecks(methodParameters);
+                _writer.WriteParameterNullOrEmptyChecks(methodParameters);
 
                 // the wrapper for paging method will never be async
                 using (WriteExtensionContextScope(_writer, ExtensionOperationVariableName, false))
@@ -285,7 +285,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             using (_writer.Scope())
             {
-                _writer.WriteParameterChecks(methodParameters);
+                _writer.WriteParameterNullOrEmptyChecks(methodParameters);
 
                 using (WriteExtensionContextScope(_writer, ExtensionOperationVariableName, async))
                 {

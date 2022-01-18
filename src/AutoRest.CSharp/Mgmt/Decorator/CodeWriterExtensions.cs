@@ -13,18 +13,18 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class CodeWriterExtensions
     {
-        public static CodeWriter WriteParameterChecks(this CodeWriter writer, IReadOnlyList<Parameter> parameters)
+        public static CodeWriter WriteParameterNullOrEmptyChecks(this CodeWriter writer, IReadOnlyList<Parameter> parameters)
         {
             foreach (var parameter in parameters)
             {
-                writer.WriteParameterCheck(parameter);
+                writer.WriteParameterNullOrEmptyCheck(parameter);
             }
 
             writer.Line();
             return writer;
         }
 
-        private static CodeWriter WriteParameterCheck(this CodeWriter writer, Parameter parameter)
+        private static CodeWriter WriteParameterNullOrEmptyCheck(this CodeWriter writer, Parameter parameter)
         {
             if (HasEmptyCheck(parameter) && CSharp.Generation.Writers.CodeWriterExtensions.HasNullCheck(parameter))
                 writer.WriteVariableNullOrEmptyCheck(parameter);
