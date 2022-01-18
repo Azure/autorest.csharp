@@ -24,6 +24,11 @@ namespace AutoRest.CSharp.Mgmt.Models
         private const string _providerPath = "/subscriptions/{subscriptionId}/providers/{resourceProviderNamespace}";
         private const string _featurePath = "/subscriptions/{subscriptionId}/providers/Microsoft.Features/providers/{resourceProviderNamespace}/features";
 
+        internal const string ManagementGroupScopePrefix = "/providers/Microsoft.Management/managementGroups";
+        internal const string ResourceGroupScopePrefix = "/subscriptions/{subscriptionId}/resourceGroups";
+        internal const string SubscriptionScopePrefix = "/subscriptions";
+        internal const string TenantScopePrefix = "/tenants";
+
         /// <summary>
         /// This is a placeholder of request path for "any" resources in other RPs
         /// </summary>
