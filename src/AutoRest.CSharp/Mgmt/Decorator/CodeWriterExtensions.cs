@@ -93,6 +93,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return writer;
         }
 
-        private static bool HasEmptyCheck(Parameter parameter) => parameter.RequestLocation == RequestLocation.Path && parameter.Type.IsStringLike();
+        private static bool HasEmptyCheck(Parameter parameter) => parameter.RequestLocation == RequestLocation.Path && parameter.Type.IsStringLike() && !parameter.SkipUrlEncoding;
     }
 }
