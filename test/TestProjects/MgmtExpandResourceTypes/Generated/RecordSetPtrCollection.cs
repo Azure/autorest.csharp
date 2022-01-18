@@ -61,13 +61,12 @@ namespace MgmtExpandResourceTypes
         /// <param name="ifMatch"> The etag of the record set. Omit this value to always overwrite the current record set. Specify the last-seen etag value to prevent accidentally overwriting any concurrent changes. </param>
         /// <param name="ifNoneMatch"> Set to &apos;*&apos; to allow a new record set to be created, but to prevent updating an existing record set. Other values will be ignored. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="relativeRecordSetName"/> is null or empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> or <paramref name="parameters"/> is null. </exception>
         public virtual RecordSetPtrCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string relativeRecordSetName, RecordSetData parameters, string ifMatch = null, string ifNoneMatch = null, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(relativeRecordSetName))
+            if (relativeRecordSetName == null)
             {
-                throw new ArgumentException($"Parameter {nameof(relativeRecordSetName)} cannot be null or empty", nameof(relativeRecordSetName));
+                throw new ArgumentNullException(nameof(relativeRecordSetName));
             }
             if (parameters == null)
             {
@@ -101,13 +100,12 @@ namespace MgmtExpandResourceTypes
         /// <param name="ifMatch"> The etag of the record set. Omit this value to always overwrite the current record set. Specify the last-seen etag value to prevent accidentally overwriting any concurrent changes. </param>
         /// <param name="ifNoneMatch"> Set to &apos;*&apos; to allow a new record set to be created, but to prevent updating an existing record set. Other values will be ignored. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="relativeRecordSetName"/> is null or empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<RecordSetPtrCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string relativeRecordSetName, RecordSetData parameters, string ifMatch = null, string ifNoneMatch = null, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(relativeRecordSetName))
+            if (relativeRecordSetName == null)
             {
-                throw new ArgumentException($"Parameter {nameof(relativeRecordSetName)} cannot be null or empty", nameof(relativeRecordSetName));
+                throw new ArgumentNullException(nameof(relativeRecordSetName));
             }
             if (parameters == null)
             {
@@ -137,12 +135,12 @@ namespace MgmtExpandResourceTypes
         /// <summary> Gets a record set. </summary>
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="relativeRecordSetName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
         public virtual Response<RecordSetPtr> Get(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(relativeRecordSetName))
+            if (relativeRecordSetName == null)
             {
-                throw new ArgumentException($"Parameter {nameof(relativeRecordSetName)} cannot be null or empty", nameof(relativeRecordSetName));
+                throw new ArgumentNullException(nameof(relativeRecordSetName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("RecordSetPtrCollection.Get");
@@ -167,12 +165,12 @@ namespace MgmtExpandResourceTypes
         /// <summary> Gets a record set. </summary>
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="relativeRecordSetName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
         public async virtual Task<Response<RecordSetPtr>> GetAsync(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(relativeRecordSetName))
+            if (relativeRecordSetName == null)
             {
-                throw new ArgumentException($"Parameter {nameof(relativeRecordSetName)} cannot be null or empty", nameof(relativeRecordSetName));
+                throw new ArgumentNullException(nameof(relativeRecordSetName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("RecordSetPtrCollection.Get");
@@ -194,12 +192,12 @@ namespace MgmtExpandResourceTypes
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="relativeRecordSetName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
         public virtual Response<RecordSetPtr> GetIfExists(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(relativeRecordSetName))
+            if (relativeRecordSetName == null)
             {
-                throw new ArgumentException($"Parameter {nameof(relativeRecordSetName)} cannot be null or empty", nameof(relativeRecordSetName));
+                throw new ArgumentNullException(nameof(relativeRecordSetName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("RecordSetPtrCollection.GetIfExists");
@@ -221,12 +219,12 @@ namespace MgmtExpandResourceTypes
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="relativeRecordSetName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
         public async virtual Task<Response<RecordSetPtr>> GetIfExistsAsync(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(relativeRecordSetName))
+            if (relativeRecordSetName == null)
             {
-                throw new ArgumentException($"Parameter {nameof(relativeRecordSetName)} cannot be null or empty", nameof(relativeRecordSetName));
+                throw new ArgumentNullException(nameof(relativeRecordSetName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("RecordSetPtrCollection.GetIfExists");
@@ -248,12 +246,12 @@ namespace MgmtExpandResourceTypes
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="relativeRecordSetName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
         public virtual Response<bool> Exists(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(relativeRecordSetName))
+            if (relativeRecordSetName == null)
             {
-                throw new ArgumentException($"Parameter {nameof(relativeRecordSetName)} cannot be null or empty", nameof(relativeRecordSetName));
+                throw new ArgumentNullException(nameof(relativeRecordSetName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("RecordSetPtrCollection.Exists");
@@ -273,12 +271,12 @@ namespace MgmtExpandResourceTypes
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="relativeRecordSetName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(relativeRecordSetName))
+            if (relativeRecordSetName == null)
             {
-                throw new ArgumentException($"Parameter {nameof(relativeRecordSetName)} cannot be null or empty", nameof(relativeRecordSetName));
+                throw new ArgumentNullException(nameof(relativeRecordSetName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("RecordSetPtrCollection.Exists");

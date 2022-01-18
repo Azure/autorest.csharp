@@ -60,12 +60,13 @@ namespace SupersetFlattenInheritance
         /// <param name="trackedResourceModel1SName"> The String to use. </param>
         /// <param name="parameters"> The TrackedResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel1SName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="trackedResourceModel1SName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public virtual TrackedResourceModel1CreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string trackedResourceModel1SName, TrackedResourceModel1Data parameters, CancellationToken cancellationToken = default)
         {
-            if (trackedResourceModel1SName == null)
+            if (string.IsNullOrEmpty(trackedResourceModel1SName))
             {
-                throw new ArgumentNullException(nameof(trackedResourceModel1SName));
+                throw new ArgumentException($"Parameter {nameof(trackedResourceModel1SName)} cannot be null or empty", nameof(trackedResourceModel1SName));
             }
             if (parameters == null)
             {
@@ -96,12 +97,13 @@ namespace SupersetFlattenInheritance
         /// <param name="trackedResourceModel1SName"> The String to use. </param>
         /// <param name="parameters"> The TrackedResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel1SName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="trackedResourceModel1SName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public async virtual Task<TrackedResourceModel1CreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string trackedResourceModel1SName, TrackedResourceModel1Data parameters, CancellationToken cancellationToken = default)
         {
-            if (trackedResourceModel1SName == null)
+            if (string.IsNullOrEmpty(trackedResourceModel1SName))
             {
-                throw new ArgumentNullException(nameof(trackedResourceModel1SName));
+                throw new ArgumentException($"Parameter {nameof(trackedResourceModel1SName)} cannot be null or empty", nameof(trackedResourceModel1SName));
             }
             if (parameters == null)
             {
@@ -130,12 +132,12 @@ namespace SupersetFlattenInheritance
         /// OperationId: TrackedResourceModel1s_Get
         /// <param name="trackedResourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel1SName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="trackedResourceModel1SName"/> is null or empty. </exception>
         public virtual Response<TrackedResourceModel1> Get(string trackedResourceModel1SName, CancellationToken cancellationToken = default)
         {
-            if (trackedResourceModel1SName == null)
+            if (string.IsNullOrEmpty(trackedResourceModel1SName))
             {
-                throw new ArgumentNullException(nameof(trackedResourceModel1SName));
+                throw new ArgumentException($"Parameter {nameof(trackedResourceModel1SName)} cannot be null or empty", nameof(trackedResourceModel1SName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("TrackedResourceModel1Collection.Get");
@@ -159,12 +161,12 @@ namespace SupersetFlattenInheritance
         /// OperationId: TrackedResourceModel1s_Get
         /// <param name="trackedResourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel1SName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="trackedResourceModel1SName"/> is null or empty. </exception>
         public async virtual Task<Response<TrackedResourceModel1>> GetAsync(string trackedResourceModel1SName, CancellationToken cancellationToken = default)
         {
-            if (trackedResourceModel1SName == null)
+            if (string.IsNullOrEmpty(trackedResourceModel1SName))
             {
-                throw new ArgumentNullException(nameof(trackedResourceModel1SName));
+                throw new ArgumentException($"Parameter {nameof(trackedResourceModel1SName)} cannot be null or empty", nameof(trackedResourceModel1SName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("TrackedResourceModel1Collection.Get");
@@ -186,12 +188,12 @@ namespace SupersetFlattenInheritance
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="trackedResourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel1SName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="trackedResourceModel1SName"/> is null or empty. </exception>
         public virtual Response<TrackedResourceModel1> GetIfExists(string trackedResourceModel1SName, CancellationToken cancellationToken = default)
         {
-            if (trackedResourceModel1SName == null)
+            if (string.IsNullOrEmpty(trackedResourceModel1SName))
             {
-                throw new ArgumentNullException(nameof(trackedResourceModel1SName));
+                throw new ArgumentException($"Parameter {nameof(trackedResourceModel1SName)} cannot be null or empty", nameof(trackedResourceModel1SName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("TrackedResourceModel1Collection.GetIfExists");
@@ -213,12 +215,12 @@ namespace SupersetFlattenInheritance
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="trackedResourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel1SName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="trackedResourceModel1SName"/> is null or empty. </exception>
         public async virtual Task<Response<TrackedResourceModel1>> GetIfExistsAsync(string trackedResourceModel1SName, CancellationToken cancellationToken = default)
         {
-            if (trackedResourceModel1SName == null)
+            if (string.IsNullOrEmpty(trackedResourceModel1SName))
             {
-                throw new ArgumentNullException(nameof(trackedResourceModel1SName));
+                throw new ArgumentException($"Parameter {nameof(trackedResourceModel1SName)} cannot be null or empty", nameof(trackedResourceModel1SName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("TrackedResourceModel1Collection.GetIfExists");
@@ -240,12 +242,12 @@ namespace SupersetFlattenInheritance
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="trackedResourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel1SName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="trackedResourceModel1SName"/> is null or empty. </exception>
         public virtual Response<bool> Exists(string trackedResourceModel1SName, CancellationToken cancellationToken = default)
         {
-            if (trackedResourceModel1SName == null)
+            if (string.IsNullOrEmpty(trackedResourceModel1SName))
             {
-                throw new ArgumentNullException(nameof(trackedResourceModel1SName));
+                throw new ArgumentException($"Parameter {nameof(trackedResourceModel1SName)} cannot be null or empty", nameof(trackedResourceModel1SName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("TrackedResourceModel1Collection.Exists");
@@ -265,12 +267,12 @@ namespace SupersetFlattenInheritance
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="trackedResourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel1SName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="trackedResourceModel1SName"/> is null or empty. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string trackedResourceModel1SName, CancellationToken cancellationToken = default)
         {
-            if (trackedResourceModel1SName == null)
+            if (string.IsNullOrEmpty(trackedResourceModel1SName))
             {
-                throw new ArgumentNullException(nameof(trackedResourceModel1SName));
+                throw new ArgumentException($"Parameter {nameof(trackedResourceModel1SName)} cannot be null or empty", nameof(trackedResourceModel1SName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("TrackedResourceModel1Collection.Exists");

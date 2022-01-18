@@ -60,12 +60,13 @@ namespace OmitOperationGroups
         /// <param name="model2SName"> The String to use. </param>
         /// <param name="parameters"> The Model2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="model2SName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="model2SName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public virtual Model2CreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string model2SName, Model2Data parameters, CancellationToken cancellationToken = default)
         {
-            if (model2SName == null)
+            if (string.IsNullOrEmpty(model2SName))
             {
-                throw new ArgumentNullException(nameof(model2SName));
+                throw new ArgumentException($"Parameter {nameof(model2SName)} cannot be null or empty", nameof(model2SName));
             }
             if (parameters == null)
             {
@@ -96,12 +97,13 @@ namespace OmitOperationGroups
         /// <param name="model2SName"> The String to use. </param>
         /// <param name="parameters"> The Model2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="model2SName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="model2SName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public async virtual Task<Model2CreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string model2SName, Model2Data parameters, CancellationToken cancellationToken = default)
         {
-            if (model2SName == null)
+            if (string.IsNullOrEmpty(model2SName))
             {
-                throw new ArgumentNullException(nameof(model2SName));
+                throw new ArgumentException($"Parameter {nameof(model2SName)} cannot be null or empty", nameof(model2SName));
             }
             if (parameters == null)
             {
@@ -130,12 +132,12 @@ namespace OmitOperationGroups
         /// OperationId: Model2s_Get
         /// <param name="model2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="model2SName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="model2SName"/> is null or empty. </exception>
         public virtual Response<Model2> Get(string model2SName, CancellationToken cancellationToken = default)
         {
-            if (model2SName == null)
+            if (string.IsNullOrEmpty(model2SName))
             {
-                throw new ArgumentNullException(nameof(model2SName));
+                throw new ArgumentException($"Parameter {nameof(model2SName)} cannot be null or empty", nameof(model2SName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("Model2Collection.Get");
@@ -159,12 +161,12 @@ namespace OmitOperationGroups
         /// OperationId: Model2s_Get
         /// <param name="model2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="model2SName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="model2SName"/> is null or empty. </exception>
         public async virtual Task<Response<Model2>> GetAsync(string model2SName, CancellationToken cancellationToken = default)
         {
-            if (model2SName == null)
+            if (string.IsNullOrEmpty(model2SName))
             {
-                throw new ArgumentNullException(nameof(model2SName));
+                throw new ArgumentException($"Parameter {nameof(model2SName)} cannot be null or empty", nameof(model2SName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("Model2Collection.Get");
@@ -186,12 +188,12 @@ namespace OmitOperationGroups
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="model2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="model2SName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="model2SName"/> is null or empty. </exception>
         public virtual Response<Model2> GetIfExists(string model2SName, CancellationToken cancellationToken = default)
         {
-            if (model2SName == null)
+            if (string.IsNullOrEmpty(model2SName))
             {
-                throw new ArgumentNullException(nameof(model2SName));
+                throw new ArgumentException($"Parameter {nameof(model2SName)} cannot be null or empty", nameof(model2SName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("Model2Collection.GetIfExists");
@@ -213,12 +215,12 @@ namespace OmitOperationGroups
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="model2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="model2SName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="model2SName"/> is null or empty. </exception>
         public async virtual Task<Response<Model2>> GetIfExistsAsync(string model2SName, CancellationToken cancellationToken = default)
         {
-            if (model2SName == null)
+            if (string.IsNullOrEmpty(model2SName))
             {
-                throw new ArgumentNullException(nameof(model2SName));
+                throw new ArgumentException($"Parameter {nameof(model2SName)} cannot be null or empty", nameof(model2SName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("Model2Collection.GetIfExists");
@@ -240,12 +242,12 @@ namespace OmitOperationGroups
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="model2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="model2SName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="model2SName"/> is null or empty. </exception>
         public virtual Response<bool> Exists(string model2SName, CancellationToken cancellationToken = default)
         {
-            if (model2SName == null)
+            if (string.IsNullOrEmpty(model2SName))
             {
-                throw new ArgumentNullException(nameof(model2SName));
+                throw new ArgumentException($"Parameter {nameof(model2SName)} cannot be null or empty", nameof(model2SName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("Model2Collection.Exists");
@@ -265,12 +267,12 @@ namespace OmitOperationGroups
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="model2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="model2SName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="model2SName"/> is null or empty. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string model2SName, CancellationToken cancellationToken = default)
         {
-            if (model2SName == null)
+            if (string.IsNullOrEmpty(model2SName))
             {
-                throw new ArgumentNullException(nameof(model2SName));
+                throw new ArgumentException($"Parameter {nameof(model2SName)} cannot be null or empty", nameof(model2SName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("Model2Collection.Exists");

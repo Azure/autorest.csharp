@@ -59,12 +59,13 @@ namespace MgmtOperations
         /// <param name="availabilitySetChildName"> The name of the availability set child. </param>
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetChildName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="availabilitySetChildName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public virtual AvailabilitySetChildCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string availabilitySetChildName, AvailabilitySetChildData parameters, CancellationToken cancellationToken = default)
         {
-            if (availabilitySetChildName == null)
+            if (string.IsNullOrEmpty(availabilitySetChildName))
             {
-                throw new ArgumentNullException(nameof(availabilitySetChildName));
+                throw new ArgumentException($"Parameter {nameof(availabilitySetChildName)} cannot be null or empty", nameof(availabilitySetChildName));
             }
             if (parameters == null)
             {
@@ -96,12 +97,13 @@ namespace MgmtOperations
         /// <param name="availabilitySetChildName"> The name of the availability set child. </param>
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetChildName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="availabilitySetChildName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public async virtual Task<AvailabilitySetChildCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string availabilitySetChildName, AvailabilitySetChildData parameters, CancellationToken cancellationToken = default)
         {
-            if (availabilitySetChildName == null)
+            if (string.IsNullOrEmpty(availabilitySetChildName))
             {
-                throw new ArgumentNullException(nameof(availabilitySetChildName));
+                throw new ArgumentException($"Parameter {nameof(availabilitySetChildName)} cannot be null or empty", nameof(availabilitySetChildName));
             }
             if (parameters == null)
             {
@@ -131,12 +133,12 @@ namespace MgmtOperations
         /// <summary> Retrieves information about an availability set. </summary>
         /// <param name="availabilitySetChildName"> The name of the availability set child. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetChildName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="availabilitySetChildName"/> is null or empty. </exception>
         public virtual Response<AvailabilitySetChild> Get(string availabilitySetChildName, CancellationToken cancellationToken = default)
         {
-            if (availabilitySetChildName == null)
+            if (string.IsNullOrEmpty(availabilitySetChildName))
             {
-                throw new ArgumentNullException(nameof(availabilitySetChildName));
+                throw new ArgumentException($"Parameter {nameof(availabilitySetChildName)} cannot be null or empty", nameof(availabilitySetChildName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("AvailabilitySetChildCollection.Get");
@@ -161,12 +163,12 @@ namespace MgmtOperations
         /// <summary> Retrieves information about an availability set. </summary>
         /// <param name="availabilitySetChildName"> The name of the availability set child. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetChildName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="availabilitySetChildName"/> is null or empty. </exception>
         public async virtual Task<Response<AvailabilitySetChild>> GetAsync(string availabilitySetChildName, CancellationToken cancellationToken = default)
         {
-            if (availabilitySetChildName == null)
+            if (string.IsNullOrEmpty(availabilitySetChildName))
             {
-                throw new ArgumentNullException(nameof(availabilitySetChildName));
+                throw new ArgumentException($"Parameter {nameof(availabilitySetChildName)} cannot be null or empty", nameof(availabilitySetChildName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("AvailabilitySetChildCollection.Get");
@@ -188,12 +190,12 @@ namespace MgmtOperations
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="availabilitySetChildName"> The name of the availability set child. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetChildName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="availabilitySetChildName"/> is null or empty. </exception>
         public virtual Response<AvailabilitySetChild> GetIfExists(string availabilitySetChildName, CancellationToken cancellationToken = default)
         {
-            if (availabilitySetChildName == null)
+            if (string.IsNullOrEmpty(availabilitySetChildName))
             {
-                throw new ArgumentNullException(nameof(availabilitySetChildName));
+                throw new ArgumentException($"Parameter {nameof(availabilitySetChildName)} cannot be null or empty", nameof(availabilitySetChildName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("AvailabilitySetChildCollection.GetIfExists");
@@ -215,12 +217,12 @@ namespace MgmtOperations
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="availabilitySetChildName"> The name of the availability set child. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetChildName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="availabilitySetChildName"/> is null or empty. </exception>
         public async virtual Task<Response<AvailabilitySetChild>> GetIfExistsAsync(string availabilitySetChildName, CancellationToken cancellationToken = default)
         {
-            if (availabilitySetChildName == null)
+            if (string.IsNullOrEmpty(availabilitySetChildName))
             {
-                throw new ArgumentNullException(nameof(availabilitySetChildName));
+                throw new ArgumentException($"Parameter {nameof(availabilitySetChildName)} cannot be null or empty", nameof(availabilitySetChildName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("AvailabilitySetChildCollection.GetIfExists");
@@ -242,12 +244,12 @@ namespace MgmtOperations
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="availabilitySetChildName"> The name of the availability set child. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetChildName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="availabilitySetChildName"/> is null or empty. </exception>
         public virtual Response<bool> Exists(string availabilitySetChildName, CancellationToken cancellationToken = default)
         {
-            if (availabilitySetChildName == null)
+            if (string.IsNullOrEmpty(availabilitySetChildName))
             {
-                throw new ArgumentNullException(nameof(availabilitySetChildName));
+                throw new ArgumentException($"Parameter {nameof(availabilitySetChildName)} cannot be null or empty", nameof(availabilitySetChildName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("AvailabilitySetChildCollection.Exists");
@@ -267,12 +269,12 @@ namespace MgmtOperations
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="availabilitySetChildName"> The name of the availability set child. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetChildName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="availabilitySetChildName"/> is null or empty. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string availabilitySetChildName, CancellationToken cancellationToken = default)
         {
-            if (availabilitySetChildName == null)
+            if (string.IsNullOrEmpty(availabilitySetChildName))
             {
-                throw new ArgumentNullException(nameof(availabilitySetChildName));
+                throw new ArgumentException($"Parameter {nameof(availabilitySetChildName)} cannot be null or empty", nameof(availabilitySetChildName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("AvailabilitySetChildCollection.Exists");
