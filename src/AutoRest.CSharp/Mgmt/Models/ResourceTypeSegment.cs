@@ -91,7 +91,15 @@ namespace AutoRest.CSharp.Mgmt.Models
             // find providers
             int index = path.ToList().LastIndexOf(Segment.Providers);
             if (index < 0)
+            {
+                if (path.SerializedPath.StartsWith(RequestPath.ResourceGroupScopePrefix, StringComparison.InvariantCultureIgnoreCase))
+                return ResourceTypeSegment.ResourceGroup;
+                if (path.SerializedPath.StartsWith(RequestPath.SubscriptionScopePrefix, StringComparison.InvariantCultureIgnoreCase))
+                    return ResourceTypeSegment.Subscription;
+                if (path.SerializedPath.Equals(RequestPath.TenantScopePrefix))
+                    return ResourceTypeSegment.Tenant;
                 throw new ErrorHelpers.ErrorException($"Could not set ResourceTypeSegment for request path {path}. No {Segment.Providers} string found in the URI. Please assign a valid resource type in `request-path-to-resource-type` configuration");
+            }
             segment.Add(path[index + 1]);
             segment.AddRange(path.Skip(index + 1).Where((_, index) => index % 2 != 0));
 
