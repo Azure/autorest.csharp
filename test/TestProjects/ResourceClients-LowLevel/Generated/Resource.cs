@@ -19,7 +19,7 @@ namespace ResourceClients_LowLevel
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
-        private readonly ClientDiagnostics _clientDiagnostics;
+        internal readonly ClientDiagnostics _clientDiagnostics;
         private readonly Uri _endpoint;
 
         /// <summary> Group identifier. </summary>

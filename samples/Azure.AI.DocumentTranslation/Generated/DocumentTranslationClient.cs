@@ -22,7 +22,7 @@ namespace Azure.AI.DocumentTranslation
         private const string AuthorizationHeader = "Ocp-Apim-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
-        private readonly ClientDiagnostics _clientDiagnostics;
+        internal readonly ClientDiagnostics _clientDiagnostics;
         private readonly string _endpoint;
 
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
