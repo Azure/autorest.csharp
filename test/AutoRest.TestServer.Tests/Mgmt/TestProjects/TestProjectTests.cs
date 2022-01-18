@@ -113,7 +113,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 var method = type.GetMethod(methodName);
                 Assert.NotNull(method, $"{type.Name} does not implement the {methodName} method.");
 
-                Assert.AreEqual(4, method.GetParameters().Length);
+                Assert.AreEqual(3, method.GetParameters().Length);
                 var param1 = TypeAsserts.HasParameter(method, "key");
                 Assert.AreEqual(typeof(string), param1.ParameterType);
                 var param2 = TypeAsserts.HasParameter(method, "value");
@@ -138,7 +138,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 var method = type.GetMethod(methodName);
                 Assert.NotNull(method, $"{type.Name} does not implement the {methodName} method.");
 
-                Assert.AreEqual(3, method.GetParameters().Length);
+                Assert.AreEqual(2, method.GetParameters().Length);
                 var param1 = TypeAsserts.HasParameter(method, "tags");
                 Assert.AreEqual(typeof(IDictionary<string, string>), param1.ParameterType);
                 var param2 = TypeAsserts.HasParameter(method, "cancellationToken");
@@ -161,7 +161,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 var method = type.GetMethod(methodName);
                 Assert.NotNull(method, $"{type.Name} does not implement the {methodName} method.");
 
-                Assert.AreEqual(3, method.GetParameters().Length);
+                Assert.AreEqual(2, method.GetParameters().Length);
                 var param1 = TypeAsserts.HasParameter(method, "key");
                 Assert.AreEqual(typeof(string), param1.ParameterType);
                 var param2 = TypeAsserts.HasParameter(method, "cancellationToken");
