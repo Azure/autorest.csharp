@@ -277,7 +277,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             using (_writer.Scope())
             {
-                _writer.WriteParameterNullChecks(methodParameters);
+                _writer.WriteParameterChecks(methodParameters);
 
                 var diagnostic = new Diagnostic($"{TypeOfThis.Name}.{methodName}", Array.Empty<DiagnosticAttribute>());
                 WritePagingMethodBody(itemType, diagnostic, operationMappings, parameterMappings, async);
@@ -428,7 +428,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.WriteXmlDocumentationParameter(parameter);
             }
             _writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
-            _writer.WriteXmlDocumentationRequiredParametersException(methodParameters);
+            _writer.WriteXmlDocumentationMgmtRequiredParametersException(methodParameters);
             _writer.WriteXmlDocumentationReturns($"{(async ? "An async" : "A")} collection of <see cref=\"{actualItemType.Name}\" /> that may take multiple service requests to iterate over.");
 
             var responseType = actualItemType.WrapPageable(async);
@@ -527,7 +527,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.WriteXmlDocumentationParameter(parameter);
             }
             _writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
-            _writer.WriteXmlDocumentationRequiredParametersException(methodParameters);
+            _writer.WriteXmlDocumentationMgmtRequiredParametersException(methodParameters);
             _writer.Append($"{accessibility} {GetAsyncKeyword(async)} {GetVirtual(isVirtual)} {responseType} {CreateMethodName(methodName, async)}(");
 
             foreach (var parameter in methodParameters)
@@ -560,7 +560,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             using (_writer.Scope())
             {
-                _writer.WriteParameterNullChecks(methodParameters);
+                _writer.WriteParameterChecks(methodParameters);
                 var diagnostic = new Diagnostic($"{TypeOfThis.Name}.{methodName}", Array.Empty<DiagnosticAttribute>());
                 using (WriteDiagnosticScope(_writer, diagnostic, ClientDiagnosticsField))
                 {
@@ -649,7 +649,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             using (_writer.Scope())
             {
-                _writer.WriteParameterNullChecks(methodParameters);
+                _writer.WriteParameterChecks(methodParameters);
 
                 Diagnostic diagnostic = new Diagnostic($"{TypeNameOfThis}.{methodName}", Array.Empty<DiagnosticAttribute>());
                 using (WriteDiagnosticScope(_writer, diagnostic, ClientDiagnosticsField))
@@ -731,7 +731,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.WriteXmlDocumentationParameter(parameter);
             }
             _writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
-            _writer.WriteXmlDocumentationRequiredParametersException(methodParameters);
+            _writer.WriteXmlDocumentationMgmtRequiredParametersException(methodParameters);
             _writer.Append($"{accessibility} {GetAsyncKeyword(async)} {GetVirtual(isVirtual)} {returnType.WrapAsync(async)} {CreateMethodName(methodName, async)}(");
             _writer.Append($"bool waitForCompletion, ");
             foreach (var parameter in methodParameters)

@@ -59,12 +59,13 @@ namespace Azure.Management.Storage
         /// <param name="containerName"> The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
         /// <param name="blobContainer"> Properties of the blob container to create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="containerName"/> or <paramref name="blobContainer"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="containerName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="blobContainer"/> is null. </exception>
         public virtual BlobContainerCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string containerName, BlobContainerData blobContainer, CancellationToken cancellationToken = default)
         {
-            if (containerName == null)
+            if (string.IsNullOrEmpty(containerName))
             {
-                throw new ArgumentNullException(nameof(containerName));
+                throw new ArgumentException($"Parameter {nameof(containerName)} cannot be null or empty", nameof(containerName));
             }
             if (blobContainer == null)
             {
@@ -96,12 +97,13 @@ namespace Azure.Management.Storage
         /// <param name="containerName"> The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
         /// <param name="blobContainer"> Properties of the blob container to create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="containerName"/> or <paramref name="blobContainer"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="containerName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="blobContainer"/> is null. </exception>
         public async virtual Task<BlobContainerCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string containerName, BlobContainerData blobContainer, CancellationToken cancellationToken = default)
         {
-            if (containerName == null)
+            if (string.IsNullOrEmpty(containerName))
             {
-                throw new ArgumentNullException(nameof(containerName));
+                throw new ArgumentException($"Parameter {nameof(containerName)} cannot be null or empty", nameof(containerName));
             }
             if (blobContainer == null)
             {
@@ -131,12 +133,12 @@ namespace Azure.Management.Storage
         /// <summary> Gets properties of a specified container. </summary>
         /// <param name="containerName"> The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="containerName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="containerName"/> is null or empty. </exception>
         public virtual Response<BlobContainer> Get(string containerName, CancellationToken cancellationToken = default)
         {
-            if (containerName == null)
+            if (string.IsNullOrEmpty(containerName))
             {
-                throw new ArgumentNullException(nameof(containerName));
+                throw new ArgumentException($"Parameter {nameof(containerName)} cannot be null or empty", nameof(containerName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("BlobContainerCollection.Get");
@@ -161,12 +163,12 @@ namespace Azure.Management.Storage
         /// <summary> Gets properties of a specified container. </summary>
         /// <param name="containerName"> The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="containerName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="containerName"/> is null or empty. </exception>
         public async virtual Task<Response<BlobContainer>> GetAsync(string containerName, CancellationToken cancellationToken = default)
         {
-            if (containerName == null)
+            if (string.IsNullOrEmpty(containerName))
             {
-                throw new ArgumentNullException(nameof(containerName));
+                throw new ArgumentException($"Parameter {nameof(containerName)} cannot be null or empty", nameof(containerName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("BlobContainerCollection.Get");
@@ -188,12 +190,12 @@ namespace Azure.Management.Storage
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="containerName"> The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="containerName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="containerName"/> is null or empty. </exception>
         public virtual Response<BlobContainer> GetIfExists(string containerName, CancellationToken cancellationToken = default)
         {
-            if (containerName == null)
+            if (string.IsNullOrEmpty(containerName))
             {
-                throw new ArgumentNullException(nameof(containerName));
+                throw new ArgumentException($"Parameter {nameof(containerName)} cannot be null or empty", nameof(containerName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("BlobContainerCollection.GetIfExists");
@@ -215,12 +217,12 @@ namespace Azure.Management.Storage
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="containerName"> The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="containerName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="containerName"/> is null or empty. </exception>
         public async virtual Task<Response<BlobContainer>> GetIfExistsAsync(string containerName, CancellationToken cancellationToken = default)
         {
-            if (containerName == null)
+            if (string.IsNullOrEmpty(containerName))
             {
-                throw new ArgumentNullException(nameof(containerName));
+                throw new ArgumentException($"Parameter {nameof(containerName)} cannot be null or empty", nameof(containerName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("BlobContainerCollection.GetIfExists");
@@ -242,12 +244,12 @@ namespace Azure.Management.Storage
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="containerName"> The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="containerName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="containerName"/> is null or empty. </exception>
         public virtual Response<bool> Exists(string containerName, CancellationToken cancellationToken = default)
         {
-            if (containerName == null)
+            if (string.IsNullOrEmpty(containerName))
             {
-                throw new ArgumentNullException(nameof(containerName));
+                throw new ArgumentException($"Parameter {nameof(containerName)} cannot be null or empty", nameof(containerName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("BlobContainerCollection.Exists");
@@ -267,12 +269,12 @@ namespace Azure.Management.Storage
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="containerName"> The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="containerName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="containerName"/> is null or empty. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string containerName, CancellationToken cancellationToken = default)
         {
-            if (containerName == null)
+            if (string.IsNullOrEmpty(containerName))
             {
-                throw new ArgumentNullException(nameof(containerName));
+                throw new ArgumentException($"Parameter {nameof(containerName)} cannot be null or empty", nameof(containerName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("BlobContainerCollection.Exists");

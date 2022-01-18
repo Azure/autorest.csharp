@@ -272,13 +272,13 @@ namespace media_types
             request.Headers.Add("Accept", "application/json");
             if (input != null)
             {
-                request.Headers.Add("Content-Type", "text/plain; charset=UTF-8");
+                request.Headers.Add("Content-Type", "text/plain");
                 request.Content = new StringRequestContent(input);
             }
             return message;
         }
 
-        /// <summary> Pass in contentType &apos;text/plain; charset=UTF-8&apos; to pass test. Value for input does not matter. </summary>
+        /// <summary> Pass in contentType &apos;text/plain; encoding=UTF-8&apos; to pass test. Value for input does not matter. </summary>
         /// <param name="input"> Input parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<string>> ContentTypeWithEncodingAsync(string input = null, CancellationToken cancellationToken = default)
@@ -299,7 +299,7 @@ namespace media_types
             }
         }
 
-        /// <summary> Pass in contentType &apos;text/plain; charset=UTF-8&apos; to pass test. Value for input does not matter. </summary>
+        /// <summary> Pass in contentType &apos;text/plain; encoding=UTF-8&apos; to pass test. Value for input does not matter. </summary>
         /// <param name="input"> Input parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<string> ContentTypeWithEncoding(string input = null, CancellationToken cancellationToken = default)
@@ -317,211 +317,6 @@ namespace media_types
                     }
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-            }
-        }
-
-        internal HttpMessage CreateBinaryBodyWithTwoContentTypesRequest(ContentType1 contentType, Stream message)
-        {
-            var message0 = _pipeline.CreateMessage();
-            var request = message0.Request;
-            request.Method = RequestMethod.Post;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/mediatypes/binaryBodyTwoContentTypes", false);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "text/plain");
-            request.Headers.Add("Content-Type", contentType.ToSerialString());
-            request.Content = RequestContent.Create(message);
-            return message0;
-        }
-
-        /// <summary> Binary body with two content types. Pass in of {&apos;hello&apos;: &apos;world&apos;} for the application/json content type, and a byte stream of &apos;hello, world!&apos; for application/octet-stream. </summary>
-        /// <param name="contentType"> Upload file type. </param>
-        /// <param name="message"> The payload body. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="message"/> is null. </exception>
-        public async Task<Response<string>> BinaryBodyWithTwoContentTypesAsync(ContentType1 contentType, Stream message, CancellationToken cancellationToken = default)
-        {
-            if (message == null)
-            {
-                throw new ArgumentNullException(nameof(message));
-            }
-
-            using var message0 = CreateBinaryBodyWithTwoContentTypesRequest(contentType, message);
-            await _pipeline.SendAsync(message0, cancellationToken).ConfigureAwait(false);
-            switch (message0.Response.Status)
-            {
-                case 200:
-                    {
-                        StreamReader streamReader = new StreamReader(message0.Response.ContentStream);
-                        string value = await streamReader.ReadToEndAsync().ConfigureAwait(false);
-                        return Response.FromValue(value, message0.Response);
-                    }
-                default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message0.Response).ConfigureAwait(false);
-            }
-        }
-
-        /// <summary> Binary body with two content types. Pass in of {&apos;hello&apos;: &apos;world&apos;} for the application/json content type, and a byte stream of &apos;hello, world!&apos; for application/octet-stream. </summary>
-        /// <param name="contentType"> Upload file type. </param>
-        /// <param name="message"> The payload body. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="message"/> is null. </exception>
-        public Response<string> BinaryBodyWithTwoContentTypes(ContentType1 contentType, Stream message, CancellationToken cancellationToken = default)
-        {
-            if (message == null)
-            {
-                throw new ArgumentNullException(nameof(message));
-            }
-
-            using var message0 = CreateBinaryBodyWithTwoContentTypesRequest(contentType, message);
-            _pipeline.Send(message0, cancellationToken);
-            switch (message0.Response.Status)
-            {
-                case 200:
-                    {
-                        StreamReader streamReader = new StreamReader(message0.Response.ContentStream);
-                        string value = streamReader.ReadToEnd();
-                        return Response.FromValue(value, message0.Response);
-                    }
-                default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message0.Response);
-            }
-        }
-
-        internal HttpMessage CreateBinaryBodyWithThreeContentTypesRequest(ContentType1 contentType, Stream message)
-        {
-            var message0 = _pipeline.CreateMessage();
-            var request = message0.Request;
-            request.Method = RequestMethod.Post;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/mediatypes/binaryBodyThreeContentTypes", false);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "text/plain");
-            request.Headers.Add("Content-Type", contentType.ToSerialString());
-            request.Content = RequestContent.Create(message);
-            return message0;
-        }
-
-        /// <summary> Binary body with three content types. Pass in string &apos;hello, world&apos; with content type &apos;text/plain&apos;, {&apos;hello&apos;: world&apos;} with content type &apos;application/json&apos; and a byte string for &apos;application/octet-stream&apos;. </summary>
-        /// <param name="contentType"> Upload file type. </param>
-        /// <param name="message"> The payload body. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="message"/> is null. </exception>
-        public async Task<Response<string>> BinaryBodyWithThreeContentTypesAsync(ContentType1 contentType, Stream message, CancellationToken cancellationToken = default)
-        {
-            if (message == null)
-            {
-                throw new ArgumentNullException(nameof(message));
-            }
-
-            using var message0 = CreateBinaryBodyWithThreeContentTypesRequest(contentType, message);
-            await _pipeline.SendAsync(message0, cancellationToken).ConfigureAwait(false);
-            switch (message0.Response.Status)
-            {
-                case 200:
-                    {
-                        StreamReader streamReader = new StreamReader(message0.Response.ContentStream);
-                        string value = await streamReader.ReadToEndAsync().ConfigureAwait(false);
-                        return Response.FromValue(value, message0.Response);
-                    }
-                default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message0.Response).ConfigureAwait(false);
-            }
-        }
-
-        /// <summary> Binary body with three content types. Pass in string &apos;hello, world&apos; with content type &apos;text/plain&apos;, {&apos;hello&apos;: world&apos;} with content type &apos;application/json&apos; and a byte string for &apos;application/octet-stream&apos;. </summary>
-        /// <param name="contentType"> Upload file type. </param>
-        /// <param name="message"> The payload body. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="message"/> is null. </exception>
-        public Response<string> BinaryBodyWithThreeContentTypes(ContentType1 contentType, Stream message, CancellationToken cancellationToken = default)
-        {
-            if (message == null)
-            {
-                throw new ArgumentNullException(nameof(message));
-            }
-
-            using var message0 = CreateBinaryBodyWithThreeContentTypesRequest(contentType, message);
-            _pipeline.Send(message0, cancellationToken);
-            switch (message0.Response.Status)
-            {
-                case 200:
-                    {
-                        StreamReader streamReader = new StreamReader(message0.Response.ContentStream);
-                        string value = streamReader.ReadToEnd();
-                        return Response.FromValue(value, message0.Response);
-                    }
-                default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message0.Response);
-            }
-        }
-
-        internal HttpMessage CreateBinaryBodyWithThreeContentTypesRequest(string message)
-        {
-            var message0 = _pipeline.CreateMessage();
-            var request = message0.Request;
-            request.Method = RequestMethod.Post;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/mediatypes/binaryBodyThreeContentTypes", false);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "text/plain");
-            request.Headers.Add("Content-Type", "text/plain");
-            request.Content = new StringRequestContent(message);
-            return message0;
-        }
-
-        /// <summary> Binary body with three content types. Pass in string &apos;hello, world&apos; with content type &apos;text/plain&apos;, {&apos;hello&apos;: world&apos;} with content type &apos;application/json&apos; and a byte string for &apos;application/octet-stream&apos;. </summary>
-        /// <param name="message"> The payload body. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="message"/> is null. </exception>
-        public async Task<Response<string>> BinaryBodyWithThreeContentTypesAsync(string message, CancellationToken cancellationToken = default)
-        {
-            if (message == null)
-            {
-                throw new ArgumentNullException(nameof(message));
-            }
-
-            using var message0 = CreateBinaryBodyWithThreeContentTypesRequest(message);
-            await _pipeline.SendAsync(message0, cancellationToken).ConfigureAwait(false);
-            switch (message0.Response.Status)
-            {
-                case 200:
-                    {
-                        StreamReader streamReader = new StreamReader(message0.Response.ContentStream);
-                        string value = await streamReader.ReadToEndAsync().ConfigureAwait(false);
-                        return Response.FromValue(value, message0.Response);
-                    }
-                default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message0.Response).ConfigureAwait(false);
-            }
-        }
-
-        /// <summary> Binary body with three content types. Pass in string &apos;hello, world&apos; with content type &apos;text/plain&apos;, {&apos;hello&apos;: world&apos;} with content type &apos;application/json&apos; and a byte string for &apos;application/octet-stream&apos;. </summary>
-        /// <param name="message"> The payload body. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="message"/> is null. </exception>
-        public Response<string> BinaryBodyWithThreeContentTypes(string message, CancellationToken cancellationToken = default)
-        {
-            if (message == null)
-            {
-                throw new ArgumentNullException(nameof(message));
-            }
-
-            using var message0 = CreateBinaryBodyWithThreeContentTypesRequest(message);
-            _pipeline.Send(message0, cancellationToken);
-            switch (message0.Response.Status)
-            {
-                case 200:
-                    {
-                        StreamReader streamReader = new StreamReader(message0.Response.ContentStream);
-                        string value = streamReader.ReadToEnd();
-                        return Response.FromValue(value, message0.Response);
-                    }
-                default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message0.Response);
             }
         }
     }

@@ -144,7 +144,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             using (_writer.Scope())
             {
-                _writer.WriteParameterNullChecks(methodParameters);
+                _writer.WriteParameterChecks(methodParameters);
 
                 using (WriteExtensionContextScope(_writer, ExtensionOperationVariableName, async))
                 {
@@ -184,7 +184,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             using (_writer.Scope())
             {
-                _writer.WriteParameterNullChecks(methodParameters);
+                _writer.WriteParameterChecks(methodParameters);
 
                 // the wrapper for paging method will never be async
                 using (WriteExtensionContextScope(_writer, ExtensionOperationVariableName, false))
@@ -221,7 +221,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.WriteXmlDocumentationParameter(parameter);
             }
             _writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
-            _writer.WriteXmlDocumentationRequiredParametersException(methodParameters);
+            _writer.WriteXmlDocumentationMgmtRequiredParametersException(methodParameters);
             _writer.WriteXmlDocumentationReturns($"A collection of resource operations that may take multiple service requests to iterate over.");
 
             var responseType = actualItemType.WrapPageable(async);
@@ -243,7 +243,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.WriteXmlDocumentationParameter(parameter);
             }
             _writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
-            _writer.WriteXmlDocumentationRequiredParametersException(methodParameters);
+            _writer.WriteXmlDocumentationMgmtRequiredParametersException(methodParameters);
             _writer.Append($"{accessibility} static {GetAsyncKeyword(async)} {returnType.WrapAsync(async)} {CreateMethodName(methodName, async)}(this {ExtensionOperationVariableType} {ExtensionOperationVariableName}, ");
             _writer.Append($"bool waitForCompletion, ");
             foreach (var parameter in methodParameters)
@@ -263,7 +263,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.WriteXmlDocumentationParameter(parameter);
             }
             _writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
-            _writer.WriteXmlDocumentationRequiredParametersException(methodParameters);
+            _writer.WriteXmlDocumentationMgmtRequiredParametersException(methodParameters);
             _writer.Append($"{accessibility} static {GetAsyncKeyword(async)} {responseType} {CreateMethodName(methodName, async)}(this {ExtensionOperationVariableType} {ExtensionOperationVariableName}, ");
 
             foreach (var parameter in methodParameters)
@@ -285,7 +285,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             using (_writer.Scope())
             {
-                _writer.WriteParameterNullChecks(methodParameters);
+                _writer.WriteParameterChecks(methodParameters);
 
                 using (WriteExtensionContextScope(_writer, ExtensionOperationVariableName, async))
                 {
