@@ -117,25 +117,32 @@ namespace Azure.Core
             }
         }
 
-        private static string AppendOrReplaceApiVersion(string uri, Uri startRequestUri)
+        internal static string AppendOrReplaceApiVersion(string uri, Uri startRequestUri)
         {
+            const string apiVersionQuery = "api-version";
             NameValueCollection startRequestUriQueries = HttpUtility.ParseQueryString(startRequestUri.Query);
             var apiVersion = startRequestUriQueries.Get("api-version");
             if (apiVersion != null)
             {
-                if (uri.Contains("api-version"))
+                var uriSpan = uri.AsSpan();
+                if (uri.Contains(apiVersionQuery))
                 {
-                    var index = uri.IndexOf('?');
-                    var plainUri = uri.Substring(0, index);
-                    var queryString = uri.Substring(index + 1);
-                    NameValueCollection uriQueries = HttpUtility.ParseQueryString(queryString);
-                    uriQueries["api-version"] = apiVersion;
-                    var queryData = string.Join("&", uriQueries.AllKeys.Select(key => $"{HttpUtility.UrlEncode(key)}={HttpUtility.UrlEncode(uriQueries[key])}").ToArray());
-                    return $"{plainUri}?{queryData}";
+                    var apiVersionIndex = uriSpan.IndexOf(apiVersionQuery, StringComparison.OrdinalIgnoreCase);
+                    var indexOfFirstSignAfterApiVersion = uri.IndexOf("&", apiVersionIndex);
+                    ReadOnlySpan<char> uriBeforeApiVersion = uriSpan.Slice(0, apiVersionIndex + apiVersionQuery.Length + "=".Length);
+                    if (indexOfFirstSignAfterApiVersion == -1)
+                    {
+                        return string.Concat(uriBeforeApiVersion, apiVersion);
+                    }
+                    else
+                    {
+                        ReadOnlySpan<char> uriAfterApiVersion = uriSpan.Slice(indexOfFirstSignAfterApiVersion);
+                        return string.Concat(uriBeforeApiVersion, apiVersion, uriAfterApiVersion);
+                    }
                 }
                 else
                 {
-                    var concatSymbol = uri.IndexOf('?') > -1 ? "&" : "?";
+                    var concatSymbol = uriSpan.IndexOf('?') > -1 ? "&" : "?";
                     return $"{uri}{concatSymbol}api-version={apiVersion}";
                 }
             }
