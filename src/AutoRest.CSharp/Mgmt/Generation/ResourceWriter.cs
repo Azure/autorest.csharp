@@ -64,7 +64,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 Check the swagger definition, and use 'request-path-to-resource-name' or 'request-path-is-non-resource' directive to specify the correct resource if necessary.");
 
                 var inheritType = new CSharpType(typeof(TrackedResource));
-                if (_resourceData.Inherits != null && _resourceData.Inherits.Name == inheritType.Name)
+                if (_resourceData.Inherits != null && (_resourceData.Inherits.Name == inheritType.Name || _resourceData.Inherits.Name == "TrackedResourceExtended")) // TODO: use type.Name after upgrading resourcemanager version
                 {
                     _isITaggableResource = true;
                 }
@@ -94,6 +94,8 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
             // we should implement the logic to avoid overload conflicts (e.g. /{A}/{B}/{C} v.s. /{D}/{E}/{F}, both context path contains 3 parameters).
             foreach (var requestPath in _resource.RequestPaths)
             {
+                if (requestPath.Count == 0)
+                    continue;
                 _writer.Line();
                 _writer.WriteXmlDocumentationSummary($"Generate the resource identifier of a <see cref=\"{TypeOfThis}\"/> instance.");
                 var parameterList = string.Join(", ", requestPath.Where(segment => segment.IsReference).Select(segment => $"string {segment.ReferenceName}"));
@@ -420,7 +422,7 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
                     {
                         _writer.Append($"await ");
                     }
-                    _writer.Line($"TagResource.{CreateMethodName("Delete", async)}(cancellationToken: cancellationToken){GetConfigureAwait(async)};");
+                    _writer.Line($"TagResource.{CreateMethodName("Delete", async)}(true, cancellationToken: cancellationToken){GetConfigureAwait(async)};");
                     _writer.Append($"var originalTags  = ");
                     if (async)
                     {
@@ -471,7 +473,7 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
 
         private void WriteTaggableCommonMethod(bool async)
         {
-            _writer.Line($"{GetAwait(async)} TagResource.{CreateMethodName("CreateOrUpdate", async)}(originalTags.Value.Data, cancellationToken: cancellationToken){GetConfigureAwait(async)};");
+            _writer.Line($"{GetAwait(async)} TagResource.{CreateMethodName("CreateOrUpdate", async)}(true, originalTags.Value.Data, cancellationToken: cancellationToken){GetConfigureAwait(async)};");
 
             BuildParameters(_resource.GetOperation!, out var operationMappings, out var parameterMappings, out _);
 

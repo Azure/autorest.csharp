@@ -21,10 +21,14 @@ namespace AutoRest.CSharp.Mgmt.Models
     /// </summary>
     internal struct RequestPath : IEquatable<RequestPath>, IReadOnlyList<Segment>
     {
+        private const string _providerPath = "/subscriptions/{subscriptionId}/providers/{resourceProviderNamespace}";
+        private const string _featurePath = "/subscriptions/{subscriptionId}/providers/Microsoft.Features/providers/{resourceProviderNamespace}/features";
+
         /// <summary>
         /// This is a placeholder of request path for "any" resources in other RPs
         /// </summary>
         public static readonly RequestPath Any = new(new[] { new Segment("*") });
+
         /// <summary>
         /// The <see cref="RequestPath"/> of a resource group resource
         /// </summary>
@@ -32,7 +36,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             new Segment("subscriptions"),
             new Segment(new Reference("subscriptionId", typeof(string)), true, true),
             new Segment("resourceGroups"),
-            new Segment(new Reference("resourceGroupName", typeof(string)), true, true)
+            new Segment(new Reference("resourceGroupName", typeof(string)), true, false)
         });
 
         /// <summary>
@@ -110,7 +114,7 @@ namespace AutoRest.CSharp.Mgmt.Models
         public string SerializedPath { get; }
 
         /// <summary>
-        /// Check if this <see cref="RequestPath"/> is the ancestor (aka prefix) of <code other/>
+        /// Check if this <see cref="RequestPath"/> is a prefix path of <code other/>
         /// Note that this.IsAncestorOf(this) will return false which indicates that this method is testing the "proper ancestor" like a proper subset.
         /// </summary>
         /// <param name="other"></param>
@@ -161,6 +165,12 @@ namespace AutoRest.CSharp.Mgmt.Models
                 diff = new RequestPath(other._segments.Skip(this.Count));
                 return true;
             }
+            // Handle the special case of trim provider from feature
+            else if (this.SerializedPath == _providerPath && other.SerializedPath.StartsWith(_featurePath))
+            {
+                diff = new RequestPath(other._segments.Skip(this.Count + 2));
+                return true;
+            }
             return false;
         }
 
@@ -172,7 +182,8 @@ namespace AutoRest.CSharp.Mgmt.Models
         public RequestPath TrimScope()
         {
             var scope = this.GetScopePath();
-            if (scope == this)
+            // The scope for /subscriptions is /subscriptions/{subscriptionId}, we identify such case with scope.Count > this.Count.
+            if (scope == this || scope.Count > this.Count)
                 return Tenant; // if myself is a scope path, we return the empty path after the trim.
             return scope.TrimAncestorFrom(this);
         }
