@@ -127,17 +127,17 @@ namespace Azure.Core
                 var uriSpan = uri.AsSpan();
                 if (uri.Contains(apiVersionQuery))
                 {
-                    var apiVersionIndex = uriSpan.IndexOf(apiVersionQuery, StringComparison.OrdinalIgnoreCase);
+                    var apiVersionIndex = uri.IndexOf(apiVersionQuery, StringComparison.OrdinalIgnoreCase);
                     var indexOfFirstSignAfterApiVersion = uri.IndexOf("&", apiVersionIndex);
                     ReadOnlySpan<char> uriBeforeApiVersion = uriSpan.Slice(0, apiVersionIndex + apiVersionQuery.Length + "=".Length);
                     if (indexOfFirstSignAfterApiVersion == -1)
                     {
-                        return string.Concat(uriBeforeApiVersion, apiVersion);
+                        return string.Concat(uriBeforeApiVersion.ToString(), apiVersion);
                     }
                     else
                     {
                         ReadOnlySpan<char> uriAfterApiVersion = uriSpan.Slice(indexOfFirstSignAfterApiVersion);
-                        return string.Concat(uriBeforeApiVersion, apiVersion, uriAfterApiVersion);
+                        return string.Concat(uriBeforeApiVersion.ToString(), apiVersion, uriAfterApiVersion.ToString());
                     }
                 }
                 else
