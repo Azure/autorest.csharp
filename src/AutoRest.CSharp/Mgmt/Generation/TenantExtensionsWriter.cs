@@ -29,11 +29,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             using (_writer.Namespace(Context.DefaultNamespace))
             {
-                WriteDefaultNamespace(_writer);
-
                 _writer.WriteXmlDocumentationSummary($"{Description}");
                 using (_writer.Scope($"{Accessibility} static partial class {TypeNameOfThis}"))
                 {
+                    WriteDefaultNamespace(_writer);
+
                     // Write resource collection entries
                     WriteChildResourceEntries();
 

@@ -37,11 +37,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var className = IsArmCore ? nameof(ManagementGroup) : TypeNameOfThis;
             using (_writer.Namespace(theNamespace))
             {
-                WriteDefaultNamespace(_writer);
-
                 _writer.WriteXmlDocumentationSummary($"{Description}");
                 using (_writer.Scope($"{Accessibility} {staticKeyWord}partial class {className}"))
                 {
+                    WriteDefaultNamespace(_writer);
+
                     // Write resource collection entries
                     WriteChildResourceEntries();
 
