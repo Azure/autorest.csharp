@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading;
+using AutoRest.CSharp.Common.Generation.Writers;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.AutoRest;
@@ -46,6 +47,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected override string BranchIdVariableName => $"{ExtensionOperationVariableName}.Id";
 
         protected override string ContextProperty => ExtensionOperationVariableName;
+
+        protected void WriteDefaultNamespace(CodeWriter writer)
+        {
+            writer.Line($"private static string _defaultRpNamespace = {typeof(ClientDiagnostics)}.GetResourceProviderNamespace(typeof({TypeNameOfThis}).Assembly);");
+        }
 
         protected void WriteGetRestOperations(MgmtRestClient restClient)
         {

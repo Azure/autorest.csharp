@@ -31,6 +31,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.WriteXmlDocumentationSummary($"{Description}");
                 using (_writer.Scope($"{Accessibility} static partial class {TypeNameOfThis}"))
                 {
+                    WriteDefaultNamespace(_writer);
+
                     // Write resource collection entries
                     WriteChildResourceEntries();
 
