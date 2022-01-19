@@ -24,6 +24,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
     internal class ResourceTestWriter : MgmtBaseTestWriter
     {
         protected Resource _resource;
+        private IEnumerable<MgmtClientOperation> _getAllOperation;
         protected string TestNamespace => _resource.Type.Namespace + ".Tests.Mock";
         protected override string TypeNameOfThis => _resource.Type.Name + "MockTests";
 
@@ -32,6 +33,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
         public ResourceTestWriter(CodeWriter writer, Resource resource, BuildContext<MgmtOutputLibrary> context): base(writer, resource, context)
         {
             _resource = resource;
+            _getAllOperation = _resource.AllOperations;
         }
 
         public void WriteCollectionTest()

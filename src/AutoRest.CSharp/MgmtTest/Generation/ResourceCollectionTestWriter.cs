@@ -25,6 +25,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
     internal class ResourceCollectionTestWriter : MgmtBaseTestWriter
     {
         private ResourceCollection _resourceCollection;
+        private MgmtClientOperation? _getAllOperation;
 
         protected CSharpType TypeOfCollection => _resourceCollection.Type;
         protected string TypeNameOfCollection => TypeOfCollection.Name;
@@ -40,6 +41,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
         public ResourceCollectionTestWriter(CodeWriter writer, ResourceCollection resourceCollection, BuildContext<MgmtOutputLibrary> context): base(writer, resourceCollection, context)
         {
             _resourceCollection = resourceCollection;
+            _getAllOperation = _resourceCollection.GetAllOperation;
         }
 
         public void WriteCollectionTest()
