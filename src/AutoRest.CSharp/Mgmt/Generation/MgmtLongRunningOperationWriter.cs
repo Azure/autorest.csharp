@@ -13,6 +13,7 @@ using AutoRest.CSharp.Output.Models.Requests;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using Request = Azure.Core.Request;
 
@@ -20,7 +21,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal class MgmtLongRunningOperationWriter : LongRunningOperationWriter
     {
-        private const string _operationBaseField = "_operationBase";
+        private const string _armClientField = "_armClient";
 
         protected override CSharpType GetBaseType(LongRunningOperation operation)
         {
@@ -55,7 +56,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             if (mgmtOperation.WrapperResource != null)
             {
                 writer.Line();
-                writer.Line($"private readonly {typeof(ArmResource)} {_operationBaseField};");
+                writer.Line($"private readonly {typeof(ArmClient)} {_armClientField};");
             }
         }
 
@@ -66,7 +67,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             if (mgmtOperation.WrapperResource != null)
             {
                 // pass operationsBase in so that the construction of [Resource] is possible
-                writer.Append($"internal {cs.Name}({typeof(ArmResource)} operationsBase, {typeof(ClientDiagnostics)} clientDiagnostics, {typeof(HttpPipeline)} pipeline, {typeof(Request)} request, {typeof(Response)} response");
+                writer.Append($"internal {cs.Name}({typeof(ArmClient)} armClient, {typeof(ClientDiagnostics)} clientDiagnostics, {typeof(HttpPipeline)} pipeline, {typeof(Request)} request, {typeof(Response)} response");
 
                 if (pagingResponse != null)
                 {
@@ -88,7 +89,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         writer.Line($"_nextPageFunc = nextPageFunc;");
                     }
 
-                    writer.Line($"{_operationBaseField} = operationsBase;");
+                    writer.Line($"{_armClientField} = armClient;");
                 }
             }
             else
@@ -121,7 +122,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 Action<CodeWriter, CodeWriterDelegate> valueCallback = (w, v) =>
                 {
-                    CodeWriterDelegate optionsExpression = w => w.Append($"{_operationBaseField}");
+                    CodeWriterDelegate optionsExpression = w => w.Append($"{_armClientField}");
                     CodeWriterDelegate dataExpression = w => w.Append($"data");
 
                     w.Line($"var {dataExpression} = {v};");
@@ -130,7 +131,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
                     var newInstanceExpression = mgmtOperation.WrapperResource.NewInstanceExpression(new[]
                     {
-                        new ParameterInvocation(mgmtOperation.WrapperResource.OptionsParameter, optionsExpression),
+                        new ParameterInvocation(mgmtOperation.WrapperResource.ArmClientParameter, optionsExpression),
                         new ParameterInvocation(mgmtOperation.WrapperResource.ResourceDataParameter, dataExpression),
                     });
                     w.Line($"return {newInstanceExpression};");

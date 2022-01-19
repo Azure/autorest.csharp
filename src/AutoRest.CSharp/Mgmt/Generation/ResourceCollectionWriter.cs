@@ -74,8 +74,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     WriteCtors();
                     WriteProperties();
                     WriteMethods();
-
-                    WriteBuilders();
                 }
             }
         }
@@ -283,7 +281,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             var newInstanceExpression = _resource.NewInstanceExpression(new[]
             {
-                new ParameterInvocation(_resource.OptionsParameter, w => w.Append($"this")),
+                new ParameterInvocation(_resource.ResourceParameter, w => w.Append($"ArmClient")),
                 new ParameterInvocation(_resource.ResourceDataParameter, dataExpression),
             });
             writer.Line($"return {typeof(Response)}.FromValue({newInstanceExpression}, response.GetRawResponse());");

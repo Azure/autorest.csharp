@@ -112,7 +112,8 @@ namespace AutoRest.CSharp.Generation.Writers
 
             if (method.BaseMethod?.Parameters.Length > 0)
             {
-                writer.Append($": base(");
+                string keyword = method.UseBaseKeyword ? "base" : "this";
+                writer.Append($": {keyword}(");
                 foreach (var parameter in method.BaseMethod.Parameters)
                 {
                     if (parameter is ParameterInvocation invocation && invocation.Invocation != null)

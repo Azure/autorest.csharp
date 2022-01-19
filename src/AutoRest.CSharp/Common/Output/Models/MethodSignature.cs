@@ -9,12 +9,12 @@ namespace AutoRest.CSharp.Output.Models
 {
     internal record MethodSignature
     {
-        public MethodSignature(string name, string? description, string modifiers, Parameter[] parameters, MethodSignature? baseMethod = default)
-            : this(name, description, modifiers, null, null, parameters, baseMethod)
+        public MethodSignature(string name, string? description, string modifiers, Parameter[] parameters, MethodSignature? baseMethod = default, bool useBaseKeyword = true)
+            : this(name, description, modifiers, null, null, parameters, baseMethod, useBaseKeyword)
         {
         }
 
-        public MethodSignature(string name, string? description, string modifiers, CSharpType? returnType, FormattableString? returnDescription, Parameter[] parameters, MethodSignature? baseMethod = default)
+        public MethodSignature(string name, string? description, string modifiers, CSharpType? returnType, FormattableString? returnDescription, Parameter[] parameters, MethodSignature? baseMethod = default, bool useBaseKeyword = true)
         {
             Name = name;
             Description = description;
@@ -23,6 +23,7 @@ namespace AutoRest.CSharp.Output.Models
             ReturnDescription = returnDescription;
             Parameters = parameters;
             BaseMethod = baseMethod;
+            UseBaseKeyword = useBaseKeyword;
         }
 
         public string Name { get; }
@@ -32,5 +33,6 @@ namespace AutoRest.CSharp.Output.Models
         public FormattableString? ReturnDescription { get; }
         public Parameter[] Parameters { get; }
         public MethodSignature? BaseMethod { get; }
+        public bool UseBaseKeyword { get; }
     }
 }

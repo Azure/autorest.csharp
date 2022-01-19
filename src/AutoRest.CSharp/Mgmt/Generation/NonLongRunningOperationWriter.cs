@@ -10,6 +10,7 @@ using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.Output;
 using Azure;
 using Azure.Core;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 
 namespace AutoRest.CSharp.Mgmt.Generation
@@ -53,7 +54,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         if (operation.WrapperResource != null)
                         {
                             // todo: programmatically get the type of operationBase from the definition of [Resource]
-                            writer.Append($"{typeof(ArmResource)} operationsBase, ");
+                            writer.Append($"{typeof(ArmClient)} armClient, ");
                             writer.Append($"{typeof(Response)}<{operation.WrapperResource.ResourceData.Type}> {responseVariable}");
                         }
                         else
@@ -74,7 +75,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         {
                             var resource = operation.WrapperResource;
 
-                            CodeWriterDelegate optionsExpression = w => w.Append($"operationsBase");
+                            CodeWriterDelegate optionsExpression = w => w.Append($"armClient");
                             CodeWriterDelegate dataExpression = w => w.Append($"{responseVariable}.Value");
 
                             if (resource.ResourceData.ShouldSetResourceIdentifier)
@@ -82,7 +83,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
                             var newInstanceExpression = operation.WrapperResource.NewInstanceExpression(new[]
                             {
-                                new ParameterInvocation(resource.OptionsParameter, optionsExpression),
+                                new ParameterInvocation(resource.ResourceParameter, optionsExpression),
                                 new ParameterInvocation(resource.ResourceDataParameter, dataExpression),
                             });
                             writer.Append($"{typeof(Response)}.FromValue(");

@@ -50,7 +50,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected void WriteGetRestOperations(MgmtRestClient restClient)
         {
             _writer.Line();
-            _writer.Append($"private static {restClient.Type} Get{restClient.Type.Name}({typeof(ClientDiagnostics)} clientDiagnostics, {typeof(HttpPipeline)} pipeline, {typeof(ArmClientOptions)} clientOptions, ");
+            _writer.Append($"private static {restClient.Type} Get{restClient.Type.Name}({typeof(ClientDiagnostics)} clientDiagnostics, {typeof(HttpPipeline)} pipeline, string applicationId, ");
             // TODO: Use https://dev.azure.com/azure-mgmt-ex/DotNET%20Management%20SDK/_workitems/edit/5783 rest client parameters
             foreach (var parameter in restClient.Parameters)
             {
@@ -61,7 +61,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             using (_writer.Scope())
             {
-                _writer.Append($"return new {restClient.Type}(clientDiagnostics, pipeline, clientOptions, ");
+                _writer.Append($"return new {restClient.Type}(clientDiagnostics, pipeline, applicationId, ");
                 foreach (var parameter in restClient.Parameters)
                 {
                     _writer.Append($"{parameter.Name}, ");
@@ -149,7 +149,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 using (WriteExtensionContextScope(_writer, ExtensionOperationVariableName, async))
                 {
                     var diagnostic = new Diagnostic($"{TypeNameOfThis}.{methodName}", Array.Empty<DiagnosticAttribute>());
-                    WriteClientDiagnosticsAssignment("options");
+                    WriteClientDiagnosticsAssignment("options", clientOperation.ReturnType?.Name);
 
                     using (WriteDiagnosticScope(_writer, diagnostic, ClientDiagnosticsVariable))
                     {
@@ -205,7 +205,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected override void WritePagingMethodBranch(CSharpType itemType, Diagnostic diagnostic, string diagnosticVariable, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMappings, bool async)
         {
-            WriteClientDiagnosticsAssignment("options");
+            WriteClientDiagnosticsAssignment("options", itemType.Name);
 
             WriteRestOperationAssignment(operation);
 
@@ -290,7 +290,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 using (WriteExtensionContextScope(_writer, ExtensionOperationVariableName, async))
                 {
                     var diagnostic = new Diagnostic($"{TypeOfThis.Name}.{methodName}", Array.Empty<DiagnosticAttribute>());
-                    WriteClientDiagnosticsAssignment("options");
+                    WriteClientDiagnosticsAssignment("options", clientOperation.ReturnType?.Name);
 
                     using (WriteDiagnosticScope(_writer, diagnostic, ClientDiagnosticsVariable))
                     {
@@ -360,9 +360,34 @@ namespace AutoRest.CSharp.Mgmt.Generation
             return false;
         }
 
-        private void WriteClientDiagnosticsAssignment(string optionsVariable)
+        private void WriteClientDiagnosticsAssignment(string optionsVariable, string? providerNamespace)
         {
-            _writer.Line($"var {ClientDiagnosticsVariable} = new {typeof(ClientDiagnostics)}({optionsVariable});");
+            var namespaceToUse = providerNamespace;
+            if (providerNamespace is null)
+            {
+                namespaceToUse = "_defaultRpNamespace";
+            }
+            else
+            {
+                var data = Context.Library.ResourceData.FirstOrDefault(data => data.Declaration.Name == providerNamespace);
+                if (data is not null)
+                {
+                    namespaceToUse = $"{providerNamespace.Substring(0, providerNamespace.Length - 4)}.ResourceType.Namespace";
+                }
+                else
+                {
+                    var resource = Context.Library.ArmResources.FirstOrDefault(resource => resource.Declaration.Name == providerNamespace);
+                    if (resource is not null)
+                    {
+                        namespaceToUse = $"{providerNamespace}.ResourceType.Namespace";
+                    }
+                    else
+                    {
+                        namespaceToUse = "_defaultRpNamespace";
+                    }
+                }
+            }
+            _writer.Line($"var {ClientDiagnosticsVariable} = new {typeof(ClientDiagnostics)}(\"{_extensions.Declaration.Namespace}\", {namespaceToUse}, diagnosticOptions);");
         }
 
         private void WriteRestOperationAssignment(MgmtRestOperation operation)
@@ -375,11 +400,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
             };
             if (resource != null)
             {
-                WriteRestClientConstructionForResource(resource, new MgmtRestClient[] { restClient }, getSubId, ClientDiagnosticsVariable, "options", "pipeline", "baseUri", "Get", true);
+                WriteRestClientConstructionForResource(resource, new MgmtRestClient[] { restClient }, getSubId, ClientDiagnosticsVariable, "diagnosticOptions", $"armClient", "pipeline", "baseUri", "Get", true);
             }
             else
             {
-                _writer.Line($"{restClient.Type.Name} {GetRestClientVariableName(restClient)} = Get{restClient.Type.Name}({ClientDiagnosticsVariable}, pipeline, options{getSubId(restClient)}, baseUri);");
+                _writer.Line($"{restClient.Type.Name} {GetRestClientVariableName(restClient)} = Get{restClient.Type.Name}({ClientDiagnosticsVariable}, pipeline, diagnosticOptions.ApplicationId{getSubId(restClient)}, baseUri);");
             }
         }
 
@@ -391,7 +416,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected static IDisposable WriteExtensionContextScope(CodeWriter writer, string extensionVariableName, bool async)
         {
-            writer.Append($"return {GetAwait(async)} {extensionVariableName}.UseClientContext({GetAsyncKeyword(async)} (baseUri, credential, options, pipeline) =>");
+            writer.Append($"return {GetAwait(async)} {extensionVariableName}.UseClientContext({GetAsyncKeyword(async)} (armClient, baseUri, diagnosticOptions, pipeline) =>");
             return new ExtensionContextScope(writer.Scope(), writer, async);
         }
 

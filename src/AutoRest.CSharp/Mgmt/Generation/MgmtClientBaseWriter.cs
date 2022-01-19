@@ -26,6 +26,7 @@ using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Management;
 using Azure.ResourceManager.Resources;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
@@ -58,6 +59,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected virtual string IdVariableName => "Id";
 
         protected virtual string BranchIdVariableName => "Id";
+
+        protected virtual string ArmClientReference => ContextProperty.IsNullOrEmpty() ? "ArmClient" : "armClient";
 
         protected MgmtClientBaseWriter(CodeWriter writer, MgmtTypeProvider provider, BuildContext<MgmtOutputLibrary> context)
         {
@@ -122,7 +125,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
             IEnumerable<MgmtRestClient> restClients,
             Func<MgmtRestClient, string> getSubId,
             string clientDiagVariable,
-            string optionVariable,
+            string diagnosticOptionsVariable,
+            string armClientVariable,
             string pipelineVariable,
             string uriVariable,
             string accessType,
@@ -130,11 +134,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             var nameSpace = $"{resource.Type.Namespace}.Models";
             _writer.UseNamespace(nameSpace);
-            _writer.Line($"{optionVariable}.TryGetApiVersion({resource.Type.Name}.ResourceType, out string apiVersion);");
+            _writer.Line($"{armClientVariable}.TryGetApiVersion({resource.Type.Name}.ResourceType, out string apiVersion);");
             foreach (var restClient in restClients)
             {
                 var variableDeclaration = writeVariable ? $"{restClient.Type.Name} " : string.Empty;
-                _writer.Line($"{variableDeclaration}{GetRestClientVariableName(restClient)} = {accessType}{restClient.Type.Name}({clientDiagVariable}, {pipelineVariable}, {optionVariable}{getSubId(restClient)}, {uriVariable}, apiVersion);");
+                _writer.Line($"{variableDeclaration}{GetRestClientVariableName(restClient)} = {accessType}{restClient.Type.Name}({clientDiagVariable}, {pipelineVariable}, {diagnosticOptionsVariable}.ApplicationId{getSubId(restClient)}, {uriVariable}, apiVersion);");
             }
         }
 
@@ -393,7 +397,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
                 var newInstanceExpression = wrapResource.NewInstanceExpression(new[]
                 {
-                    new ParameterInvocation(wrapResource.OptionsParameter, w => w.Append($"{ContextProperty}")),
+                    new ParameterInvocation(wrapResource.ResourceParameter, w => w.Append($"{ArmClientReference}")),
                     new ParameterInvocation(wrapResource.ResourceDataParameter, dataExpression),
                 });
                 CodeWriterDelegate selectBody;
@@ -610,8 +614,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
                 var newInstanceExpression = wrapResource.NewInstanceExpression(new[]
                     {
-                        new ParameterInvocation(wrapResource.OptionsParameter, w => w.Append($"{ContextProperty}")),
-                        //new ParameterInvocation(wrapResource.ResourceIdentifierParameter, idExpression),
+                        new ParameterInvocation(wrapResource.ArmClientParameter, w => w.Append($"{ArmClientReference}")),
                         new ParameterInvocation(wrapResource.ResourceDataParameter, dataExpression),
                     });
 
@@ -751,7 +754,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 var longRunningOperation = Context.Library.GetLongRunningOperation(lroObjectType);
                 if (longRunningOperation.WrapperResource != null)
                 {
-                    _writer.Append($"{ContextProperty}, ");
+                    _writer.Append($"{ArmClientReference}, ");
                 }
                 _writer.Append($"{diagnosticsVariableName}, {pipelineVariableName}, {GetRestClientVariableName(operation.RestClient)}.{RequestWriterHelpers.CreateRequestMethodName(operation.Method.Name)}(");
                 WriteArguments(_writer, parameterMapping);
@@ -764,7 +767,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 // need to check implementation type as some delete operation uses ResourceData.
                 if (nonLongRunningOperation.ResultType != null && nonLongRunningOperation.ResultType.Implementation.GetType() == typeof(Resource))
                 {
-                    _writer.Append($"{ContextProperty}, ");
+                    _writer.Append($"{ArmClientReference}, ");
                 }
             }
             _writer.Line($"response);");

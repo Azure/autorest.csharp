@@ -42,6 +42,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected override string BranchIdVariableName => "Id.Parent";
 
+        protected override string ArmClientReference => "ArmClient";
+
         private bool IsSingleton => _resource.IsSingleton;
 
         public ResourceWriter(CodeWriter writer, Resource resource, BuildContext<MgmtOutputLibrary> context) : base(writer, resource, context)
@@ -137,48 +139,22 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
                 name: TypeOfThis.Name,
                 description: $"Initializes a new instance of the <see cref = \"{TypeOfThis.Name}\"/> class.",
                 modifiers: "internal",
-                parameters: new[] { _resource.OptionsParameter, _resource.ResourceDataParameter },
+                parameters: new[] { _resource.ArmClientParameter, _resource.ResourceDataParameter },
                 baseMethod: new MethodSignature(
                     name: TypeOfThis.Name,
                     description: null,
                     modifiers: "protected",
-                    parameters: new[] { _resource.OptionsParameter, new ParameterInvocation(_resource.ResourceIdentifierParameter, _resource.ResourceDataIdExpression(w => w.Append($"{_resource.ResourceDataParameter.Name}"))) })
-                );
+                    parameters: new[]
+                    {
+                        _resource.ArmClientParameter,
+                        new ParameterInvocation(_resource.ResourceIdentifierParameter, _resource.ResourceDataIdExpression(w => w.Append($"{_resource.ResourceDataParameter.Name}")))
+                    }),
+                useBaseKeyword: false);
             _writer.WriteMethodDocumentation(resourceDataConstructor);
             using (_writer.WriteMethodDeclaration(resourceDataConstructor))
             {
                 _writer.Line($"HasData = true;");
                 _writer.Line($"_data = {_resource.ResourceDataParameter.Name};");
-                if (IsSingleton)
-                    _writer.Line($"Parent = {_resource.OptionsParameter.Name};");
-                _writer.Line($"{ClientDiagnosticsField} = new {typeof(ClientDiagnostics)}(ClientOptions);");
-                WriteRestClientAssignments();
-                WriteDebugValidate(_writer);
-            }
-
-            // we never use the following constructor inside the SDK, and it is internal, therefore omit this.
-            // uncomment the following if in the future we need this constructor again
-            _writer.Line();
-            // write "resource + ResourceIdentifier" constructor
-            var resourceIdConstructor = new MethodSignature(
-                name: TypeOfThis.Name,
-                description: $"Initializes a new instance of the <see cref=\"{TypeOfThis.Name}\"/> class.",
-                modifiers: "internal",
-                parameters: new[] { _resource.OptionsParameter, _resource.ResourceIdentifierParameter },
-                baseMethod: new MethodSignature(
-                    name: TypeOfThis.Name,
-                    description: null,
-                    modifiers: "protected",
-                    parameters: new[] { _resource.OptionsParameter, _resource.ResourceIdentifierParameter })
-            );
-            _writer.WriteMethodDocumentation(resourceIdConstructor);
-            using (_writer.WriteMethodDeclaration(resourceIdConstructor))
-            {
-                if (IsSingleton)
-                    _writer.Line($"Parent = options;");
-                _writer.Line($"{ClientDiagnosticsField} = new {typeof(ClientDiagnostics)}(ClientOptions);");
-                WriteRestClientAssignments();
-                WriteDebugValidate(_writer);
             }
 
             _writer.Line();
@@ -187,12 +163,12 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
                 name: TypeOfThis.Name,
                 description: $"Initializes a new instance of the <see cref=\"{TypeOfThis.Name}\"/> class.",
                 modifiers: "internal",
-                parameters: new[] { _resource.ClientOptionsParameter, _resource.CredentialParameter, _resource.UriParameter, _resource.PipelineParameter, _resource.ResourceIdentifierParameter },
+                parameters: new[] { _resource.ArmClientParameter, _resource.ResourceIdentifierParameter },
                 baseMethod: new MethodSignature(
                     name: TypeOfThis.Name,
                     description: null,
                     modifiers: "protected",
-                    parameters: new[] { _resource.ClientOptionsParameter, _resource.CredentialParameter, _resource.UriParameter, _resource.PipelineParameter, _resource.ResourceIdentifierParameter })
+                    parameters: new[] { _resource.ArmClientParameter, _resource.ResourceIdentifierParameter })
                 );
 
             _writer.WriteMethodDocumentation(clientOptionsConstructor);
@@ -207,7 +183,7 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
         protected void WriteRestClientAssignments()
         {
             Func<MgmtRestClient, string> getSubId = (restClient) => { return restClient.Parameters.Any(p => p.Name.Equals("subscriptionId")) ? ", Id.SubscriptionId" : string.Empty; };
-            WriteRestClientConstructionForResource(_resource, This.RestClients, getSubId, ClientDiagnosticsField, ClientOptionsProperty, PipelineProperty, BaseUriField, "new ", false);
+            WriteRestClientConstructionForResource(_resource, This.RestClients, getSubId, ClientDiagnosticsField, ClientOptionsProperty, "ArmClient", PipelineProperty, BaseUriField, "new ", false);
         }
 
         protected virtual void WriteProperties()
@@ -234,13 +210,6 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
 
             _writer.Line();
             WriteStaticValidate($"ResourceType", _writer);
-
-            if (IsSingleton)
-            {
-                _writer.Line();
-                _writer.WriteXmlDocumentationSummary($"Gets the parent resource of this resource.");
-                _writer.Line($"public {typeof(ArmResource)} Parent {{ get; }}");
-            }
         }
 
         protected virtual void WriteMethods()
@@ -473,7 +442,7 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
 
         private void WriteTaggableCommonMethod(bool async)
         {
-            _writer.Line($"{GetAwait(async)} TagResource.{CreateMethodName("CreateOrUpdate", async)}(true, originalTags.Value.Data, cancellationToken: cancellationToken){GetConfigureAwait(async)};");
+            _writer.Line($"{GetAwait(async)} TagResource.{CreateMethodName("CreateOrUpdate", async)}(originalTags.Value.Data, cancellationToken: cancellationToken){GetConfigureAwait(async)};");
 
             BuildParameters(_resource.GetOperation!, out var operationMappings, out var parameterMappings, out _);
 
@@ -505,7 +474,7 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
 
             var newInstanceExpression = _resource.NewInstanceExpression(new[]
             {
-                new ParameterInvocation(_resource.OptionsParameter, w => w.Append($"this")),
+                new ParameterInvocation(_resource.ResourceParameter, w => w.Append($"ArmClient")),
                 new ParameterInvocation(_resource.ResourceDataParameter, dataExpression),
             });
             _writer.Line($"return {typeof(Response)}.FromValue({newInstanceExpression}, originalResponse.GetRawResponse());");
@@ -549,7 +518,7 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
             {
                 // we cannot guarantee that the singleResourceSuffix can only have two segments (it has many different cases),
                 // therefore instead of using the extension method of ResourceIdentifier, we are just concatting this as a string
-                _writer.Line($"return new {resource.Type.Name}(this, new {typeof(Azure.Core.ResourceIdentifier)}(Id.ToString() + \"/{singletonResourceIdSuffix}\"));");
+                _writer.Line($"return new {resource.Type.Name}(ArmClient, new {typeof(Azure.Core.ResourceIdentifier)}(Id.ToString() + \"/{singletonResourceIdSuffix}\"));");
             }
         }
     }
