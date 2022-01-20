@@ -8,6 +8,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Models.Shared;
+using Azure.Core;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
@@ -85,10 +86,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         private static CodeWriter WriteVariableNullOrEmptyCheck(this CodeWriter writer, Parameter parameter)
         {
-            using (writer.Scope($"if ({typeof(string)}.IsNullOrEmpty({parameter.Name:I}))"))
-            {
-                writer.Line($"throw new {typeof(ArgumentException)}($\"Parameter {{nameof({parameter.Name:I})}} cannot be null or empty\", nameof({parameter.Name:I}));");
-            }
+            writer.Line($"{typeof(Argument)}.AssertNotNullOrEmpty({parameter.Name}, nameof({parameter.Name}));");
 
             return writer;
         }

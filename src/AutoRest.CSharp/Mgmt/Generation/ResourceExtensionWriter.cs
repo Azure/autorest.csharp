@@ -97,9 +97,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             foreach (var client in This.RestClients)
             {
-                string diagOptionsCtor = ConstructClientDiagnostic(_writer, GetProviderNamespaceFromReturnType(client.Resource?.Type.Name), DiagnosticOptionsProperty);
+                string? resourceName = client.Resource?.Type.Name;
+                string diagOptionsCtor = ConstructClientDiagnostic(_writer, GetProviderNamespaceFromReturnType(resourceName), DiagnosticOptionsProperty);
                 _writer.Line($"private {typeof(ClientDiagnostics)} {GetClientDiagnosticsPropertyName(client)} => {GetClientDiagnosticFieldName(client)} ??= {diagOptionsCtor};");
-                string apiVersionString = client.Resource == null ? string.Empty : $", GetApiVersionOrNull({client.Resource.ResourceName}.ResourceType)";
+                string apiVersionString = resourceName == null ? string.Empty : $", GetApiVersionOrNull({resourceName}.ResourceType)";
                 string restCtor = GetRestConstructorString("new ", client, GetClientDiagnosticsPropertyName(client), PipelineProperty, DiagnosticOptionsProperty, ", Id.SubscriptionId", "BaseUri", apiVersionString);
                 _writer.Line($"private {client.Type} {GetRestPropertyName(client)} => {GetRestFieldName(client)} ??= {restCtor};");
             }
