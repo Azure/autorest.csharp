@@ -131,7 +131,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
                     var newInstanceExpression = mgmtOperation.WrapperResource.NewInstanceExpression(new[]
                     {
-                        new ParameterInvocation(mgmtOperation.WrapperResource.ArmClientParameter, optionsExpression),
+                        new ParameterInvocation(Resource.ArmClientParameter, optionsExpression),
                         new ParameterInvocation(mgmtOperation.WrapperResource.ResourceDataParameter, dataExpression),
                     });
                     w.Line($"return {newInstanceExpression};");

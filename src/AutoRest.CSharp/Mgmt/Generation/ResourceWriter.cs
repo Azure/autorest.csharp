@@ -139,15 +139,15 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
                 name: TypeOfThis.Name,
                 description: $"Initializes a new instance of the <see cref = \"{TypeOfThis.Name}\"/> class.",
                 modifiers: "internal",
-                parameters: new[] { _resource.ArmClientParameter, _resource.ResourceDataParameter },
+                parameters: new[] { Resource.ArmClientParameter, _resource.ResourceDataParameter },
                 baseMethod: new MethodSignature(
                     name: TypeOfThis.Name,
                     description: null,
                     modifiers: "protected",
                     parameters: new[]
                     {
-                        _resource.ArmClientParameter,
-                        new ParameterInvocation(_resource.ResourceIdentifierParameter, _resource.ResourceDataIdExpression(w => w.Append($"{_resource.ResourceDataParameter.Name}")))
+                        Resource.ArmClientParameter,
+                        new ParameterInvocation(Resource.ResourceIdentifierParameter, _resource.ResourceDataIdExpression(w => w.Append($"{_resource.ResourceDataParameter.Name}")))
                     }),
                 useBaseKeyword: false);
             _writer.WriteMethodDocumentation(resourceDataConstructor);
@@ -158,17 +158,17 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
             }
 
             _writer.Line();
-            // write "clientOptions" constructor
+            // write "armClient + id" constructor
             var clientOptionsConstructor = new MethodSignature(
                 name: TypeOfThis.Name,
                 description: $"Initializes a new instance of the <see cref=\"{TypeOfThis.Name}\"/> class.",
                 modifiers: "internal",
-                parameters: new[] { _resource.ArmClientParameter, _resource.ResourceIdentifierParameter },
+                parameters: new[] { Resource.ArmClientParameter, Resource.ResourceIdentifierParameter },
                 baseMethod: new MethodSignature(
                     name: TypeOfThis.Name,
                     description: null,
                     modifiers: "protected",
-                    parameters: new[] { _resource.ArmClientParameter, _resource.ResourceIdentifierParameter })
+                    parameters: new[] { Resource.ArmClientParameter, Resource.ResourceIdentifierParameter })
                 );
 
             _writer.WriteMethodDocumentation(clientOptionsConstructor);
@@ -182,8 +182,7 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
 
         protected void WriteRestClientAssignments()
         {
-            Func<MgmtRestClient, string> getSubId = (restClient) => { return restClient.Parameters.Any(p => p.Name.Equals("subscriptionId")) ? ", Id.SubscriptionId" : string.Empty; };
-            WriteRestClientConstructionForResource(_resource, This.RestClients, getSubId, ClientDiagnosticsField, ClientOptionsProperty, "ArmClient", PipelineProperty, BaseUriField, "new ", false);
+            WriteRestClientConstructionForResource(_resource, This.RestClients, ", Id.SubscriptionId", ClientDiagnosticsField, ClientOptionsProperty, "ArmClient", PipelineProperty, BaseUriField, "new ", false);
         }
 
         protected virtual void WriteProperties()
@@ -463,7 +462,7 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
         private void WriteTaggableCommonMethodBranch(MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMappings, bool async)
         {
             _writer.Append($"var originalResponse = {GetAwait(async)} ");
-            _writer.Append($"{GetRestClientVariableName(operation.RestClient)}.{CreateMethodName(operation.Method.Name, async)}(");
+            _writer.Append($"{GetRestFieldName(operation.RestClient)}.{CreateMethodName(operation.Method.Name, async)}(");
             WriteArguments(_writer, parameterMappings, true);
             _writer.Line($"cancellationToken){GetConfigureAwait(async)};");
 

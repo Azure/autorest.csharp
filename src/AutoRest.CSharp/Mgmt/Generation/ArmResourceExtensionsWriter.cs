@@ -17,14 +17,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal class ArmResourceExtensionsWriter : MgmtExtensionWriter
     {
-        public ArmResourceExtensionsWriter(CodeWriter writer, Output.MgmtExtensions extensions, BuildContext<MgmtOutputLibrary> context, bool isArmCore = false) : base(writer, extensions, context, isArmCore)
+        public ArmResourceExtensionsWriter(CodeWriter writer, Output.MgmtExtensions extensions, BuildContext<MgmtOutputLibrary> context, bool isArmCore = false)
+            : base(writer, extensions, context, typeof(ArmResource), isArmCore)
         {
         }
 
         protected override string Description => IsArmCore ? "A class representing the operations that can be performed over a specific resource." : "A class to add extension methods to ArmResource.";
         protected override string ExtensionOperationVariableName => IsArmCore ? "this" : "armResource";
-
-        protected override Type ExtensionOperationVariableType => typeof(ArmResource);
 
         public override void Write()
         {

@@ -110,20 +110,24 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.Line($"#endif");
         }
 
-        protected void WriteFields(CodeWriter writer, IEnumerable<RestClient> clients)
+        protected void WriteFields(CodeWriter writer, IEnumerable<RestClient> clients, bool useMultipleClientDiagnostics = false, bool useReadonly = true)
         {
-            writer.Line($"private readonly {typeof(ClientDiagnostics)} {ClientDiagnosticsField};");
+            string readOnly = useReadonly ? " readonly" : string.Empty;
+            if (!useMultipleClientDiagnostics)
+                writer.Line($"private{readOnly} {typeof(ClientDiagnostics)} {ClientDiagnosticsField};");
             foreach (var client in clients)
             {
                 // we might have multiple rest client field, if we combined multiple request together in one resource in case of extension resources
-                writer.Line($"{RestClientAccessibility} readonly {client.Type} {GetRestClientVariableName(client)};");
+                if (useMultipleClientDiagnostics)
+                    writer.Line($"private{readOnly} {typeof(ClientDiagnostics)} {GetClientDiagnosticFieldName(client)};");
+                writer.Line($"{RestClientAccessibility}{readOnly} {client.Type} {GetRestFieldName(client)};");
             }
         }
 
         protected void WriteRestClientConstructionForResource(
             Resource resource,
             IEnumerable<MgmtRestClient> restClients,
-            Func<MgmtRestClient, string> getSubId,
+            string subIdVaraiable,
             string clientDiagVariable,
             string diagnosticOptionsVariable,
             string armClientVariable,
@@ -138,15 +142,37 @@ namespace AutoRest.CSharp.Mgmt.Generation
             foreach (var restClient in restClients)
             {
                 var variableDeclaration = writeVariable ? $"{restClient.Type.Name} " : string.Empty;
-                _writer.Line($"{variableDeclaration}{GetRestClientVariableName(restClient)} = {accessType}{restClient.Type.Name}({clientDiagVariable}, {pipelineVariable}, {diagnosticOptionsVariable}.ApplicationId{getSubId(restClient)}, {uriVariable}, apiVersion);");
+                _writer.Line($"{variableDeclaration}{GetRestFieldName(restClient)} = {GetRestConstructorString(accessType, restClient, clientDiagVariable, pipelineVariable, diagnosticOptionsVariable, subIdVaraiable, uriVariable, ", apiVersion")};");
             }
         }
 
-        protected virtual string GetRestClientVariableName(RestClient client)
+        protected string GetRestConstructorString(
+            string accessType,
+            MgmtRestClient restClient,
+            string clientDiagVariable,
+            string pipelineVariable,
+            string diagnosticOptionsVariable,
+            string subIdVariable,
+            string uriVariable,
+            string apiVersionVariable)
+        {
+            if (!restClient.Parameters.Any(p => p.Name.Equals("subscriptionId")))
+                subIdVariable = string.Empty;
+            return $"{accessType}{restClient.Type.Name}({clientDiagVariable}, {pipelineVariable}, {diagnosticOptionsVariable}.ApplicationId{subIdVariable}, {uriVariable}{apiVersionVariable})";
+        }
+
+        protected virtual string GetRestFieldName(RestClient client)
         {
             return client.OperationGroup.Key.IsNullOrEmpty()
                 ? "_restClient"
                 : $"_{client.OperationGroup.Key.ToVariableName()}RestClient";
+        }
+
+        protected virtual string GetClientDiagnosticFieldName(RestClient client)
+        {
+            return client.OperationGroup.Key.IsNullOrEmpty()
+                ? ClientDiagnosticsField
+                : $"_{client.OperationGroup.Key.ToVariableName()}ClientDiagnostics";
         }
 
         protected internal static CSharpType GetResponseType(CSharpType? returnType, bool async)
@@ -192,7 +218,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             return isInheritedMethod ? "override" : GetVirtual(isVirtual);
         }
 
-        private void WriteRequestPathAndOperationId(MgmtClientOperation clientOperation)
+        protected void WriteRequestPathAndOperationId(MgmtClientOperation clientOperation)
         {
             foreach (var operation in clientOperation)
             {
@@ -284,12 +310,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.WriteParameterNullOrEmptyChecks(methodParameters);
 
                 var diagnostic = new Diagnostic($"{TypeOfThis.Name}.{methodName}", Array.Empty<DiagnosticAttribute>());
-                WritePagingMethodBody(itemType, diagnostic, operationMappings, parameterMappings, async);
+                WritePagingMethodBody(itemType, diagnostic, operationMappings, parameterMappings, async, clientOperation);
             }
         }
 
         protected virtual void WritePagingMethodBody(CSharpType itemType, Diagnostic diagnostic, IDictionary<RequestPath, MgmtRestOperation> operationMappings,
-            IDictionary<RequestPath, IEnumerable<ParameterMapping>> parameterMappings, bool async)
+            IDictionary<RequestPath, IEnumerable<ParameterMapping>> parameterMappings, bool async, MgmtClientOperation clientOperation)
         {
             // we need to write multiple branches for a paging method
             if (operationMappings.Count == 1)
@@ -385,7 +411,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var wrapResource = WrapResourceDataType(itemType, operation);
             var continuationTokenText = pagingMethod.NextLinkName != null ? $"response.Value.{pagingMethod.NextLinkName}" : "null";
 
-            _writer.Append($"var response = {GetAwait(isAsync)} {GetRestClientVariableName(operation.RestClient)}.{CreateMethodName(isNextPageFunc ? pagingMethod.NextPageMethod!.Name : pagingMethod.Method.Name, isAsync)}({GetNextLink(isNextPageFunc)}");
+            _writer.Append($"var response = {GetAwait(isAsync)} {GetRestFieldName(operation.RestClient)}.{CreateMethodName(isNextPageFunc ? pagingMethod.NextPageMethod!.Name : pagingMethod.Method.Name, isAsync)}({GetNextLink(isNextPageFunc)}");
             WriteArguments(_writer, parameterMappings);
             _writer.Line($"cancellationToken: cancellationToken){GetConfigureAwait(isAsync)};");
 
@@ -594,7 +620,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected virtual void WriteNormalMethodBranch(MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMappings, bool async, bool shouldThrowExceptionWhenNull = false)
         {
             _writer.Append($"var response = {GetAwait(async)} ");
-            _writer.Append($"{GetRestClientVariableName(operation.RestClient)}.{CreateMethodName(operation.Method.Name, async)}(");
+            _writer.Append($"{GetRestFieldName(operation.RestClient)}.{CreateMethodName(operation.Method.Name, async)}(");
             WriteArguments(_writer, parameterMappings);
             _writer.Line($"cancellationToken){GetConfigureAwait(async)};");
 
@@ -614,7 +640,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
                 var newInstanceExpression = wrapResource.NewInstanceExpression(new[]
                     {
-                        new ParameterInvocation(wrapResource.ArmClientParameter, w => w.Append($"{ArmClientReference}")),
+                        new ParameterInvocation(Resource.ArmClientParameter, w => w.Append($"{ArmClientReference}")),
                         new ParameterInvocation(wrapResource.ResourceDataParameter, dataExpression),
                     });
 
@@ -718,7 +744,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected virtual void WriteLROMethodBranch(CSharpType lroObjectType, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMapping, bool async)
         {
             _writer.Append($"var response = {GetAwait(async)} ");
-            _writer.Append($"{GetRestClientVariableName(operation.RestClient)}.{CreateMethodName(operation.Method.Name, async)}(");
+            _writer.Append($"{GetRestFieldName(operation.RestClient)}.{CreateMethodName(operation.Method.Name, async)}(");
             WriteArguments(_writer, parameterMapping);
             _writer.Line($"cancellationToken){GetConfigureAwait(async)};");
 
@@ -756,7 +782,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     _writer.Append($"{ArmClientReference}, ");
                 }
-                _writer.Append($"{diagnosticsVariableName}, {pipelineVariableName}, {GetRestClientVariableName(operation.RestClient)}.{RequestWriterHelpers.CreateRequestMethodName(operation.Method.Name)}(");
+                _writer.Append($"{diagnosticsVariableName}, {pipelineVariableName}, {GetRestFieldName(operation.RestClient)}.{RequestWriterHelpers.CreateRequestMethodName(operation.Method.Name)}(");
                 WriteArguments(_writer, parameterMapping);
                 _writer.RemoveTrailingComma();
                 _writer.Append($").Request, ");

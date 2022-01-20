@@ -262,6 +262,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         public TenantExtensions TenantExtensions => EnsureTenantExtensions();
 
         public SubscriptionExtensions SubscriptionExtensions => EnsureSubscriptionExtensions();
+        public SubscriptionExtensionClient SubscriptionExtensionsClient => EnsureSubscriptionExtensionsClient();
 
         public ResourceGroupExtensions ResourceGroupExtensions => EnsureResourceGroupExtensions();
 
@@ -290,6 +291,18 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             _subscriptionExtensions = new SubscriptionExtensions(GetChildOperations(RequestPath.Subscription), _context);
             return _subscriptionExtensions;
         }
+
+        private SubscriptionExtensionClient? _subscriptionExtensionClient;
+        private SubscriptionExtensionClient EnsureSubscriptionExtensionsClient()
+        {
+            if (_subscriptionExtensionClient != null)
+                return _subscriptionExtensionClient;
+
+            // accumulate all the operations of subscription extensions
+            _subscriptionExtensionClient = new SubscriptionExtensionClient(GetChildOperations(RequestPath.Subscription), _context);
+            return _subscriptionExtensionClient;
+        }
+
 
         private ManagementGroupExtensions? _managementGroupExtensions;
         private ManagementGroupExtensions EnsureManagementExtensions()

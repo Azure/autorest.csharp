@@ -49,7 +49,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                         operation.GetRequestPath(_context),
                         ContextualPath,
                         operationName,
-                        GetResourceFromResourceType(operation.GetRequestPath(_context).GetResourceType(_context.Configuration.MgmtConfiguration)),
+                        GetResourceFromResourceType(operation, _context),
                         operation.GetReturnTypeAsLongRunningOperation(null, operationName, _context)));
             });
         }
@@ -108,9 +108,10 @@ namespace AutoRest.CSharp.Mgmt.Output
             return null;
         }
 
-        private Resource? GetResourceFromResourceType(ResourceTypeSegment resourceType)
+        internal static Resource? GetResourceFromResourceType(Operation operation, BuildContext<MgmtOutputLibrary> context)
         {
-            var candidates = _context.Library.ArmResources.Where(resource => resource.ResourceType == resourceType);
+            var resourceType = operation.GetRequestPath(context).GetResourceType(context.Configuration.MgmtConfiguration);
+            var candidates = context.Library.ArmResources.Where(resource => resource.ResourceType == resourceType);
             if (candidates.Count() == 0)
                 return null;
 

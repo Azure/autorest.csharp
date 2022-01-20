@@ -20,13 +20,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal class ArmClientExtensionsWriter : MgmtExtensionWriter
     {
-        public ArmClientExtensionsWriter(CodeWriter writer, MgmtExtensions extensions, BuildContext<MgmtOutputLibrary> context, bool isArmCore = false) : base(writer, extensions, context, isArmCore)
+        public ArmClientExtensionsWriter(CodeWriter writer, MgmtExtensions extensions, BuildContext<MgmtOutputLibrary> context, bool isArmCore = false)
+            : base(writer, extensions, context, typeof(ArmClient), isArmCore)
         {
         }
         protected override string Description => IsArmCore ? "The entry point for all ARM clients." : "A class to add extension methods to ArmClient.";
         protected override string ExtensionOperationVariableName => IsArmCore ? "this" : "armClient";
-
-        protected override Type ExtensionOperationVariableType => typeof(ArmClient);
 
         public override void Write()
         {

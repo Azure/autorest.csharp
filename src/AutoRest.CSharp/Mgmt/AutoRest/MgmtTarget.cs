@@ -12,6 +12,7 @@ using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Generation;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Types;
+using Azure.ResourceManager.Resources;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
 {
@@ -123,6 +124,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 var subscriptionExtensionsCodeWriter = new CodeWriter();
                 new SubscriptionExtensionsWriter(subscriptionExtensionsCodeWriter, context.Library.SubscriptionExtensions, context).Write();
                 AddGeneratedFile(project, $"Extensions/{context.Library.SubscriptionExtensions.Type.Name}.cs", subscriptionExtensionsCodeWriter.ToString());
+
+                var subExtensionClientWriter = new CodeWriter();
+                new ResourceExtensionWriter(subExtensionClientWriter, context.Library.SubscriptionExtensionsClient, context, typeof(Subscription)).Write();
+                AddGeneratedFile(project, $"Extensions/{context.Library.SubscriptionExtensions.Type.Name}Client.cs", subExtensionClientWriter.ToString());
             }
 
             if (!context.Library.ManagementGroupExtensions.IsEmpty)

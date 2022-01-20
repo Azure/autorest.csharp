@@ -14,15 +14,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
     internal class ResourceGroupExtensionsWriter : MgmtExtensionWriter
     {
         public ResourceGroupExtensionsWriter(CodeWriter writer, Output.ResourceGroupExtensions resourceGroupExtensions, BuildContext<MgmtOutputLibrary> context)
-            : base(writer, resourceGroupExtensions, context)
+            : base(writer, resourceGroupExtensions, context, typeof(ResourceGroup))
         {
         }
 
         protected override string Description => "A class to add extension methods to ResourceGroup.";
 
         protected override string ExtensionOperationVariableName => "resourceGroup";
-
-        protected override Type ExtensionOperationVariableType => typeof(ResourceGroup);
 
         public override void Write()
         {
@@ -31,7 +29,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.WriteXmlDocumentationSummary($"{Description}");
                 using (_writer.Scope($"{Accessibility} static partial class {TypeNameOfThis}"))
                 {
-                    WriteDefaultNamespace(_writer);
+                    WriteProviderDefaultNamespace(_writer);
 
                     // Write resource collection entries
                     WriteChildResourceEntries();

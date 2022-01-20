@@ -20,15 +20,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal class ManagementGroupExtensionsWriter : MgmtExtensionWriter
     {
-        public ManagementGroupExtensionsWriter(CodeWriter writer, ManagementGroupExtensions extensions, BuildContext<MgmtOutputLibrary> context, bool isArmCore = false) : base(writer, extensions, context, isArmCore)
+        public ManagementGroupExtensionsWriter(CodeWriter writer, ManagementGroupExtensions extensions, BuildContext<MgmtOutputLibrary> context, bool isArmCore = false)
+            : base(writer, extensions, context, typeof(ManagementGroup), isArmCore)
         {
         }
 
         protected override string Description => IsArmCore ? "A Class representing a ManagementGroup along with the instance operations that can be performed on it." : "A class to add extension methods to ManagementGroup.";
 
         protected override string ExtensionOperationVariableName => IsArmCore ? "this" : "managementGroup";
-
-        protected override Type ExtensionOperationVariableType => typeof(ManagementGroup);
 
         public override void Write()
         {
@@ -40,7 +39,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.WriteXmlDocumentationSummary($"{Description}");
                 using (_writer.Scope($"{Accessibility} {staticKeyWord}partial class {className}"))
                 {
-                    WriteDefaultNamespace(_writer);
+                    WriteProviderDefaultNamespace(_writer);
 
                     // Write resource collection entries
                     WriteChildResourceEntries();

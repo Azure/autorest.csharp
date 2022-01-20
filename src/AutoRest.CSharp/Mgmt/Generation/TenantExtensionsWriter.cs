@@ -16,14 +16,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal class TenantExtensionsWriter : MgmtExtensionWriter
     {
-        public TenantExtensionsWriter(CodeWriter writer, Output.MgmtExtensions extensions, BuildContext<MgmtOutputLibrary> context) : base(writer, extensions, context)
+        public TenantExtensionsWriter(CodeWriter writer, Output.MgmtExtensions extensions, BuildContext<MgmtOutputLibrary> context)
+            : base(writer, extensions, context, typeof(Tenant))
         {
         }
 
         protected override string Description => "A class to add extension methods to Tenant.";
         protected override string ExtensionOperationVariableName => "tenant";
-
-        protected override Type ExtensionOperationVariableType => typeof(Tenant);
 
         public override void Write()
         {
@@ -32,7 +31,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.WriteXmlDocumentationSummary($"{Description}");
                 using (_writer.Scope($"{Accessibility} static partial class {TypeNameOfThis}"))
                 {
-                    WriteDefaultNamespace(_writer);
+                    WriteProviderDefaultNamespace(_writer);
 
                     // Write resource collection entries
                     WriteChildResourceEntries();
