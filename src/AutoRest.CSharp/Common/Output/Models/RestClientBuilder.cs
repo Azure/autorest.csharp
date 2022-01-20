@@ -60,9 +60,13 @@ namespace AutoRest.CSharp.Output.Models
             _parameters = clientParameters.ToDictionary(p => p.Language.Default.Name, BuildConstructorParameter);
         }
 
-        public Parameter[] GetOrderedParameters()
+        /// <summary>
+        /// Get sorted parameters, required parameters are at the beginning.
+        /// </summary>
+        /// <returns></returns>
+        public Parameter[] GetOrderedParametersByRequired()
         {
-            return OrderParameters(_parameters.Values);
+            return OrderParametersByRequired(_parameters.Values);
         }
 
         public static IEnumerable<RequestParameter> GetParametersFromOperations(ICollection<Operation> operations) =>
@@ -289,17 +293,38 @@ namespace AutoRest.CSharp.Output.Models
 
         private Parameter[] BuildMethodParameters(IReadOnlyDictionary<RequestParameter, Parameter> allParameters)
         {
-            List<Parameter> methodParameters = new();
+            List<Parameter> requiredParameters = new();
+            List<Parameter> optionalParameters = new();
+            List<Parameter> bodyParameters = new();
             foreach (var (requestParameter, parameter) in allParameters)
             {
                 // Grouped and flattened parameters shouldn't be added to methods
                 if (IsMethodParameter(requestParameter))
                 {
-                    methodParameters.Add(parameter);
+                    // sort the parameters by the following sequence:
+                    // 1. required parameters
+                    // 2. body parameters (if exists), note that form data can generate multiple body parameters (e.g. "in": "formdata")
+                    //    see test project `body-formdata` for more details
+                    // 3. optional parameters
+                    if (parameter.RequestLocation == RequestLocation.Body)
+                    {
+                        bodyParameters.Add(parameter);
+                    }
+                    else if (parameter.DefaultValue == null)
+                    {
+                        requiredParameters.Add(parameter);
+                    }
+                    else
+                    {
+                        optionalParameters.Add(parameter);
+                    }
                 }
             }
 
-            return OrderParameters(methodParameters);
+            requiredParameters.AddRange(bodyParameters.OrderBy(p => p.DefaultValue != null)); // move required body parameters at the beginning
+            requiredParameters.AddRange(optionalParameters);
+
+            return requiredParameters.ToArray();
         }
 
         private RequestBody? BuildRequestBody(IReadOnlyDictionary<string, ParameterInfo> allParameters, KnownMediaType mediaType)
@@ -521,7 +546,12 @@ namespace AutoRest.CSharp.Output.Models
             return segments;
         }
 
-        private static Parameter[] OrderParameters(IEnumerable<Parameter> parameters) => parameters.OrderBy(p => p.DefaultValue != null).ToArray();
+        /// <summary>
+        /// Sort the parameters, move required parameters at the beginning, in order.
+        /// </summary>
+        /// <param name="parameters">Parameters to sort</param>
+        /// <returns></returns>
+        private static Parameter[] OrderParametersByRequired(IEnumerable<Parameter> parameters) => parameters.OrderBy(p => p.DefaultValue != null).ToArray();
 
         // Merges operations without response types types together
         private CSharpType? ReduceResponses(List<Response> responses)
