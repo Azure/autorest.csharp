@@ -10,7 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager;
 using XmlDeserialization;
 
 namespace XmlDeserialization.Models
@@ -25,9 +25,9 @@ namespace XmlDeserialization.Models
         {
         }
 
-        internal XmlInstanceCreateOrUpdateOperation(ArmResource operationsBase, Response<XmlInstanceData> response)
+        internal XmlInstanceCreateOrUpdateOperation(ArmClient armClient, Response<XmlInstanceData> response)
         {
-            _operation = new OperationOrResponseInternals<XmlInstance>(Response.FromValue(new XmlInstance(operationsBase, response.Value), response.GetRawResponse()));
+            _operation = new OperationOrResponseInternals<XmlInstance>(Response.FromValue(new XmlInstance(armClient, response.Value), response.GetRawResponse()));
         }
 
         /// <inheritdoc />

@@ -71,5 +71,14 @@ namespace MgmtListMethods
             return new ResGrpParentCollection(resourceGroup);
         }
         #endregion
+
+        private static ResourceGroupExtensionClient GetExtensionClient(ResourceGroup resourceGroup)
+        {
+            return resourceGroup.GetCachedClient((armClient) =>
+            {
+                return new ResourceGroupExtensionClient(armClient, resourceGroup.Id);
+            }
+            );
+        }
     }
 }

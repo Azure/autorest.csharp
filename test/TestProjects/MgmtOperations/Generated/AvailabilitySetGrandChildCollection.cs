@@ -35,9 +35,9 @@ namespace MgmtOperations
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal AvailabilitySetGrandChildCollection(ArmResource parent) : base(parent)
         {
-            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            ClientOptions.TryGetApiVersion(AvailabilitySetGrandChild.ResourceType, out string apiVersion);
-            _availabilitySetGrandChildRestClient = new AvailabilitySetGrandChildRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
+            _clientDiagnostics = new ClientDiagnostics("MgmtOperations", AvailabilitySetGrandChild.ResourceType.Namespace, DiagnosticOptions);
+            ArmClient.TryGetApiVersion(AvailabilitySetGrandChild.ResourceType, out string apiVersion);
+            _availabilitySetGrandChildRestClient = new AvailabilitySetGrandChildRestOperations(_clientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, apiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -77,7 +77,7 @@ namespace MgmtOperations
             try
             {
                 var response = _availabilitySetGrandChildRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, availabilitySetGrandChildName, parameters, cancellationToken);
-                var operation = new AvailabilitySetGrandChildCreateOrUpdateOperation(this, response);
+                var operation = new AvailabilitySetGrandChildCreateOrUpdateOperation(ArmClient, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -115,7 +115,7 @@ namespace MgmtOperations
             try
             {
                 var response = await _availabilitySetGrandChildRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, availabilitySetGrandChildName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new AvailabilitySetGrandChildCreateOrUpdateOperation(this, response);
+                var operation = new AvailabilitySetGrandChildCreateOrUpdateOperation(ArmClient, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -148,7 +148,7 @@ namespace MgmtOperations
                 var response = _availabilitySetGrandChildRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, availabilitySetGrandChildName, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new AvailabilitySetGrandChild(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new AvailabilitySetGrandChild(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -178,7 +178,7 @@ namespace MgmtOperations
                 var response = await _availabilitySetGrandChildRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, availabilitySetGrandChildName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new AvailabilitySetGrandChild(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new AvailabilitySetGrandChild(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -205,7 +205,7 @@ namespace MgmtOperations
                 var response = _availabilitySetGrandChildRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, availabilitySetGrandChildName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<AvailabilitySetGrandChild>(null, response.GetRawResponse());
-                return Response.FromValue(new AvailabilitySetGrandChild(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new AvailabilitySetGrandChild(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -232,7 +232,7 @@ namespace MgmtOperations
                 var response = await _availabilitySetGrandChildRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, availabilitySetGrandChildName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<AvailabilitySetGrandChild>(null, response.GetRawResponse());
-                return Response.FromValue(new AvailabilitySetGrandChild(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new AvailabilitySetGrandChild(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -306,7 +306,7 @@ namespace MgmtOperations
                 try
                 {
                     var response = _availabilitySetGrandChildRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new AvailabilitySetGrandChild(this, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new AvailabilitySetGrandChild(ArmClient, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -332,7 +332,7 @@ namespace MgmtOperations
                 try
                 {
                     var response = await _availabilitySetGrandChildRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new AvailabilitySetGrandChild(this, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new AvailabilitySetGrandChild(ArmClient, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -357,8 +357,5 @@ namespace MgmtOperations
         {
             return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
-
-        // Builders.
-        // public ArmBuilder<Azure.Core.ResourceIdentifier, AvailabilitySetGrandChild, AvailabilitySetGrandChildData> Construct() { }
     }
 }

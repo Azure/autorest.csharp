@@ -37,9 +37,9 @@ namespace ExactMatchInheritance
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal ExactMatchModel1Collection(ArmResource parent) : base(parent)
         {
-            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            ClientOptions.TryGetApiVersion(ExactMatchModel1.ResourceType, out string apiVersion);
-            _exactMatchModel1sRestClient = new ExactMatchModel1SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
+            _clientDiagnostics = new ClientDiagnostics("ExactMatchInheritance", ExactMatchModel1.ResourceType.Namespace, DiagnosticOptions);
+            ArmClient.TryGetApiVersion(ExactMatchModel1.ResourceType, out string apiVersion);
+            _exactMatchModel1sRestClient = new ExactMatchModel1SRestOperations(_clientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, apiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -78,7 +78,7 @@ namespace ExactMatchInheritance
             try
             {
                 var response = _exactMatchModel1sRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, exactMatchModel1SName, parameters, cancellationToken);
-                var operation = new ExactMatchModel1CreateOrUpdateOperation(this, response);
+                var operation = new ExactMatchModel1CreateOrUpdateOperation(ArmClient, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -115,7 +115,7 @@ namespace ExactMatchInheritance
             try
             {
                 var response = await _exactMatchModel1sRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, exactMatchModel1SName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new ExactMatchModel1CreateOrUpdateOperation(this, response);
+                var operation = new ExactMatchModel1CreateOrUpdateOperation(ArmClient, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -147,7 +147,7 @@ namespace ExactMatchInheritance
                 var response = _exactMatchModel1sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, exactMatchModel1SName, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new ExactMatchModel1(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ExactMatchModel1(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -176,7 +176,7 @@ namespace ExactMatchInheritance
                 var response = await _exactMatchModel1sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, exactMatchModel1SName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new ExactMatchModel1(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ExactMatchModel1(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -203,7 +203,7 @@ namespace ExactMatchInheritance
                 var response = _exactMatchModel1sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, exactMatchModel1SName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<ExactMatchModel1>(null, response.GetRawResponse());
-                return Response.FromValue(new ExactMatchModel1(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ExactMatchModel1(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -230,7 +230,7 @@ namespace ExactMatchInheritance
                 var response = await _exactMatchModel1sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, exactMatchModel1SName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<ExactMatchModel1>(null, response.GetRawResponse());
-                return Response.FromValue(new ExactMatchModel1(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ExactMatchModel1(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -303,7 +303,7 @@ namespace ExactMatchInheritance
                 try
                 {
                     var response = _exactMatchModel1sRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new ExactMatchModel1(this, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new ExactMatchModel1(ArmClient, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -328,7 +328,7 @@ namespace ExactMatchInheritance
                 try
                 {
                     var response = await _exactMatchModel1sRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new ExactMatchModel1(this, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new ExactMatchModel1(ArmClient, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -399,8 +399,5 @@ namespace ExactMatchInheritance
         {
             return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
-
-        // Builders.
-        // public ArmBuilder<Azure.Core.ResourceIdentifier, ExactMatchModel1, ExactMatchModel1Data> Construct() { }
     }
 }

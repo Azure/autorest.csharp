@@ -42,9 +42,9 @@ namespace MgmtParent
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="publisherName"/> is null. </exception>
         internal VirtualMachineExtensionImageCollection(ArmResource parent, string location, string publisherName) : base(parent)
         {
-            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            ClientOptions.TryGetApiVersion(VirtualMachineExtensionImage.ResourceType, out string apiVersion);
-            _virtualMachineExtensionImagesRestClient = new VirtualMachineExtensionImagesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
+            _clientDiagnostics = new ClientDiagnostics("MgmtParent", VirtualMachineExtensionImage.ResourceType.Namespace, DiagnosticOptions);
+            ArmClient.TryGetApiVersion(VirtualMachineExtensionImage.ResourceType, out string apiVersion);
+            _virtualMachineExtensionImagesRestClient = new VirtualMachineExtensionImagesRestOperations(_clientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, apiVersion);
             _location = location;
             _publisherName = publisherName;
 #if DEBUG
@@ -86,7 +86,7 @@ namespace MgmtParent
                 var response = _virtualMachineExtensionImagesRestClient.Get(Id.SubscriptionId, _location, _publisherName, type, version, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new VirtualMachineExtensionImage(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new VirtualMachineExtensionImage(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -121,7 +121,7 @@ namespace MgmtParent
                 var response = await _virtualMachineExtensionImagesRestClient.GetAsync(Id.SubscriptionId, _location, _publisherName, type, version, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new VirtualMachineExtensionImage(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new VirtualMachineExtensionImage(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -153,7 +153,7 @@ namespace MgmtParent
                 var response = _virtualMachineExtensionImagesRestClient.Get(Id.SubscriptionId, _location, _publisherName, type, version, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<VirtualMachineExtensionImage>(null, response.GetRawResponse());
-                return Response.FromValue(new VirtualMachineExtensionImage(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new VirtualMachineExtensionImage(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -185,7 +185,7 @@ namespace MgmtParent
                 var response = await _virtualMachineExtensionImagesRestClient.GetAsync(Id.SubscriptionId, _location, _publisherName, type, version, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<VirtualMachineExtensionImage>(null, response.GetRawResponse());
-                return Response.FromValue(new VirtualMachineExtensionImage(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new VirtualMachineExtensionImage(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -269,7 +269,7 @@ namespace MgmtParent
                 try
                 {
                     var response = _virtualMachineExtensionImagesRestClient.ListTypes(Id.SubscriptionId, _location, _publisherName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Select(value => new VirtualMachineExtensionImage(this, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Select(value => new VirtualMachineExtensionImage(ArmClient, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -295,7 +295,7 @@ namespace MgmtParent
                 try
                 {
                     var response = await _virtualMachineExtensionImagesRestClient.ListTypesAsync(Id.SubscriptionId, _location, _publisherName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Select(value => new VirtualMachineExtensionImage(this, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Select(value => new VirtualMachineExtensionImage(ArmClient, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -331,7 +331,7 @@ namespace MgmtParent
                 try
                 {
                     var response = _virtualMachineExtensionImagesRestClient.ListVersions(Id.SubscriptionId, _location, _publisherName, type, filter, top, orderby, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Select(value => new VirtualMachineExtensionImage(this, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Select(value => new VirtualMachineExtensionImage(ArmClient, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -367,7 +367,7 @@ namespace MgmtParent
                 try
                 {
                     var response = await _virtualMachineExtensionImagesRestClient.ListVersionsAsync(Id.SubscriptionId, _location, _publisherName, type, filter, top, orderby, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Select(value => new VirtualMachineExtensionImage(this, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Select(value => new VirtualMachineExtensionImage(ArmClient, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -438,8 +438,5 @@ namespace MgmtParent
         {
             return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
-
-        // Builders.
-        // public ArmBuilder<Azure.Core.ResourceIdentifier, VirtualMachineExtensionImage, VirtualMachineExtensionImageData> Construct() { }
     }
 }

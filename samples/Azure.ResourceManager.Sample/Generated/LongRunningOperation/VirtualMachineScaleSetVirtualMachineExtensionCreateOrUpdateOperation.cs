@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Models
@@ -22,17 +22,17 @@ namespace Azure.ResourceManager.Sample.Models
     {
         private readonly OperationInternals<VirtualMachineScaleSetVirtualMachineExtension> _operation;
 
-        private readonly ArmResource _operationBase;
+        private readonly ArmClient _armClient;
 
         /// <summary> Initializes a new instance of VirtualMachineScaleSetVirtualMachineExtensionCreateOrUpdateOperation for mocking. </summary>
         protected VirtualMachineScaleSetVirtualMachineExtensionCreateOrUpdateOperation()
         {
         }
 
-        internal VirtualMachineScaleSetVirtualMachineExtensionCreateOrUpdateOperation(ArmResource operationsBase, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
+        internal VirtualMachineScaleSetVirtualMachineExtensionCreateOrUpdateOperation(ArmClient armClient, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
             _operation = new OperationInternals<VirtualMachineScaleSetVirtualMachineExtension>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "VirtualMachineScaleSetVirtualMachineExtensionCreateOrUpdateOperation");
-            _operationBase = operationsBase;
+            _armClient = armClient;
         }
 
         /// <inheritdoc />
@@ -66,14 +66,14 @@ namespace Azure.ResourceManager.Sample.Models
         {
             using var document = JsonDocument.Parse(response.ContentStream);
             var data = VirtualMachineExtensionData.DeserializeVirtualMachineExtensionData(document.RootElement);
-            return new VirtualMachineScaleSetVirtualMachineExtension(_operationBase, data);
+            return new VirtualMachineScaleSetVirtualMachineExtension(_armClient, data);
         }
 
         async ValueTask<VirtualMachineScaleSetVirtualMachineExtension> IOperationSource<VirtualMachineScaleSetVirtualMachineExtension>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
             var data = VirtualMachineExtensionData.DeserializeVirtualMachineExtensionData(document.RootElement);
-            return new VirtualMachineScaleSetVirtualMachineExtension(_operationBase, data);
+            return new VirtualMachineScaleSetVirtualMachineExtension(_armClient, data);
         }
     }
 }

@@ -37,9 +37,9 @@ namespace ExactMatchFlattenInheritance
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal CustomModel3Collection(ArmResource parent) : base(parent)
         {
-            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            ClientOptions.TryGetApiVersion(CustomModel3.ResourceType, out string apiVersion);
-            _customModel3sRestClient = new CustomModel3SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
+            _clientDiagnostics = new ClientDiagnostics("ExactMatchFlattenInheritance", CustomModel3.ResourceType.Namespace, DiagnosticOptions);
+            ArmClient.TryGetApiVersion(CustomModel3.ResourceType, out string apiVersion);
+            _customModel3sRestClient = new CustomModel3SRestOperations(_clientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, apiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -79,7 +79,7 @@ namespace ExactMatchFlattenInheritance
             try
             {
                 var response = _customModel3sRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, name, parameters, cancellationToken);
-                var operation = new CustomModel3CreateOrUpdateOperation(this, response);
+                var operation = new CustomModel3CreateOrUpdateOperation(ArmClient, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -117,7 +117,7 @@ namespace ExactMatchFlattenInheritance
             try
             {
                 var response = await _customModel3sRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, name, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new CustomModel3CreateOrUpdateOperation(this, response);
+                var operation = new CustomModel3CreateOrUpdateOperation(ArmClient, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -150,7 +150,7 @@ namespace ExactMatchFlattenInheritance
                 var response = _customModel3sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new CustomModel3(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new CustomModel3(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -180,7 +180,7 @@ namespace ExactMatchFlattenInheritance
                 var response = await _customModel3sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new CustomModel3(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new CustomModel3(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -207,7 +207,7 @@ namespace ExactMatchFlattenInheritance
                 var response = _customModel3sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<CustomModel3>(null, response.GetRawResponse());
-                return Response.FromValue(new CustomModel3(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new CustomModel3(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -234,7 +234,7 @@ namespace ExactMatchFlattenInheritance
                 var response = await _customModel3sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<CustomModel3>(null, response.GetRawResponse());
-                return Response.FromValue(new CustomModel3(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new CustomModel3(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -308,7 +308,7 @@ namespace ExactMatchFlattenInheritance
                 try
                 {
                     var response = _customModel3sRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new CustomModel3(this, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new CustomModel3(ArmClient, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -334,7 +334,7 @@ namespace ExactMatchFlattenInheritance
                 try
                 {
                     var response = await _customModel3sRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new CustomModel3(this, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new CustomModel3(ArmClient, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -405,8 +405,5 @@ namespace ExactMatchFlattenInheritance
         {
             return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
-
-        // Builders.
-        // public ArmBuilder<Azure.Core.ResourceIdentifier, CustomModel3, CustomModel3Data> Construct() { }
     }
 }

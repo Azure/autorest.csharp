@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Models
@@ -22,17 +22,17 @@ namespace Azure.ResourceManager.Sample.Models
     {
         private readonly OperationInternals<VirtualMachineScaleSetVM> _operation;
 
-        private readonly ArmResource _operationBase;
+        private readonly ArmClient _armClient;
 
         /// <summary> Initializes a new instance of VirtualMachineScaleSetVMCreateOrUpdateOperation for mocking. </summary>
         protected VirtualMachineScaleSetVMCreateOrUpdateOperation()
         {
         }
 
-        internal VirtualMachineScaleSetVMCreateOrUpdateOperation(ArmResource operationsBase, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
+        internal VirtualMachineScaleSetVMCreateOrUpdateOperation(ArmClient armClient, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
             _operation = new OperationInternals<VirtualMachineScaleSetVM>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "VirtualMachineScaleSetVMCreateOrUpdateOperation");
-            _operationBase = operationsBase;
+            _armClient = armClient;
         }
 
         /// <inheritdoc />
@@ -66,14 +66,14 @@ namespace Azure.ResourceManager.Sample.Models
         {
             using var document = JsonDocument.Parse(response.ContentStream);
             var data = VirtualMachineScaleSetVMData.DeserializeVirtualMachineScaleSetVMData(document.RootElement);
-            return new VirtualMachineScaleSetVM(_operationBase, data);
+            return new VirtualMachineScaleSetVM(_armClient, data);
         }
 
         async ValueTask<VirtualMachineScaleSetVM> IOperationSource<VirtualMachineScaleSetVM>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
             var data = VirtualMachineScaleSetVMData.DeserializeVirtualMachineScaleSetVMData(document.RootElement);
-            return new VirtualMachineScaleSetVM(_operationBase, data);
+            return new VirtualMachineScaleSetVM(_armClient, data);
         }
     }
 }

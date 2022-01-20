@@ -21,7 +21,7 @@ namespace MgmtHierarchicalNonResource
         public static SharedGallery GetSharedGallery(this ArmClient armClient, ResourceIdentifier id)
         {
             SharedGallery.ValidateResourceId(id);
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new SharedGallery(clientOptions, credential, uri, pipeline, id));
+            return new SharedGallery(armClient, id);
         }
         #endregion
     }

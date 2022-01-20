@@ -34,9 +34,9 @@ namespace MgmtParent
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal DedicatedHostGroupCollection(ArmResource parent) : base(parent)
         {
-            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            ClientOptions.TryGetApiVersion(DedicatedHostGroup.ResourceType, out string apiVersion);
-            _dedicatedHostGroupsRestClient = new DedicatedHostGroupsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
+            _clientDiagnostics = new ClientDiagnostics("MgmtParent", DedicatedHostGroup.ResourceType.Namespace, DiagnosticOptions);
+            ArmClient.TryGetApiVersion(DedicatedHostGroup.ResourceType, out string apiVersion);
+            _dedicatedHostGroupsRestClient = new DedicatedHostGroupsRestOperations(_clientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, apiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -76,7 +76,7 @@ namespace MgmtParent
             try
             {
                 var response = _dedicatedHostGroupsRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, hostGroupName, parameters, cancellationToken);
-                var operation = new DedicatedHostGroupCreateOrUpdateOperation(this, response);
+                var operation = new DedicatedHostGroupCreateOrUpdateOperation(ArmClient, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -114,7 +114,7 @@ namespace MgmtParent
             try
             {
                 var response = await _dedicatedHostGroupsRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, hostGroupName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new DedicatedHostGroupCreateOrUpdateOperation(this, response);
+                var operation = new DedicatedHostGroupCreateOrUpdateOperation(ArmClient, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -147,7 +147,7 @@ namespace MgmtParent
                 var response = _dedicatedHostGroupsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, hostGroupName, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new DedicatedHostGroup(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new DedicatedHostGroup(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -177,7 +177,7 @@ namespace MgmtParent
                 var response = await _dedicatedHostGroupsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, hostGroupName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new DedicatedHostGroup(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new DedicatedHostGroup(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -204,7 +204,7 @@ namespace MgmtParent
                 var response = _dedicatedHostGroupsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, hostGroupName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<DedicatedHostGroup>(null, response.GetRawResponse());
-                return Response.FromValue(new DedicatedHostGroup(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new DedicatedHostGroup(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -231,7 +231,7 @@ namespace MgmtParent
                 var response = await _dedicatedHostGroupsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, hostGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<DedicatedHostGroup>(null, response.GetRawResponse());
-                return Response.FromValue(new DedicatedHostGroup(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new DedicatedHostGroup(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -335,8 +335,5 @@ namespace MgmtParent
                 throw;
             }
         }
-
-        // Builders.
-        // public ArmBuilder<Azure.Core.ResourceIdentifier, DedicatedHostGroup, DedicatedHostGroupData> Construct() { }
     }
 }

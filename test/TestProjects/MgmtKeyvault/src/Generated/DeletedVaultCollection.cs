@@ -34,9 +34,9 @@ namespace MgmtKeyvault
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal DeletedVaultCollection(ArmResource parent) : base(parent)
         {
-            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            ClientOptions.TryGetApiVersion(DeletedVault.ResourceType, out string apiVersion);
-            _vaultsRestClient = new VaultsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
+            _clientDiagnostics = new ClientDiagnostics("MgmtKeyvault", DeletedVault.ResourceType.Namespace, DiagnosticOptions);
+            ArmClient.TryGetApiVersion(DeletedVault.ResourceType, out string apiVersion);
+            _vaultsRestClient = new VaultsRestOperations(_clientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, apiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -76,7 +76,7 @@ namespace MgmtKeyvault
                 var response = _vaultsRestClient.GetDeleted(Id.SubscriptionId, location, vaultName, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new DeletedVault(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new DeletedVault(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -111,7 +111,7 @@ namespace MgmtKeyvault
                 var response = await _vaultsRestClient.GetDeletedAsync(Id.SubscriptionId, location, vaultName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new DeletedVault(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new DeletedVault(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -143,7 +143,7 @@ namespace MgmtKeyvault
                 var response = _vaultsRestClient.GetDeleted(Id.SubscriptionId, location, vaultName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<DeletedVault>(null, response.GetRawResponse());
-                return Response.FromValue(new DeletedVault(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new DeletedVault(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -175,7 +175,7 @@ namespace MgmtKeyvault
                 var response = await _vaultsRestClient.GetDeletedAsync(Id.SubscriptionId, location, vaultName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<DeletedVault>(null, response.GetRawResponse());
-                return Response.FromValue(new DeletedVault(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new DeletedVault(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -289,8 +289,5 @@ namespace MgmtKeyvault
                 throw;
             }
         }
-
-        // Builders.
-        // public ArmBuilder<Azure.Core.ResourceIdentifier, DeletedVault, DeletedVaultData> Construct() { }
     }
 }

@@ -37,9 +37,9 @@ namespace ExactMatchFlattenInheritance
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal AzureResourceFlattenModel1Collection(ArmResource parent) : base(parent)
         {
-            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            ClientOptions.TryGetApiVersion(AzureResourceFlattenModel1.ResourceType, out string apiVersion);
-            _azureResourceFlattenModel1sRestClient = new AzureResourceFlattenModel1SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
+            _clientDiagnostics = new ClientDiagnostics("ExactMatchFlattenInheritance", AzureResourceFlattenModel1.ResourceType.Namespace, DiagnosticOptions);
+            ArmClient.TryGetApiVersion(AzureResourceFlattenModel1.ResourceType, out string apiVersion);
+            _azureResourceFlattenModel1sRestClient = new AzureResourceFlattenModel1SRestOperations(_clientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, apiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -79,7 +79,7 @@ namespace ExactMatchFlattenInheritance
             try
             {
                 var response = _azureResourceFlattenModel1sRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, name, parameters, cancellationToken);
-                var operation = new AzureResourceFlattenModel1CreateOrUpdateOperation(this, response);
+                var operation = new AzureResourceFlattenModel1CreateOrUpdateOperation(ArmClient, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -117,7 +117,7 @@ namespace ExactMatchFlattenInheritance
             try
             {
                 var response = await _azureResourceFlattenModel1sRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, name, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new AzureResourceFlattenModel1CreateOrUpdateOperation(this, response);
+                var operation = new AzureResourceFlattenModel1CreateOrUpdateOperation(ArmClient, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -150,7 +150,7 @@ namespace ExactMatchFlattenInheritance
                 var response = _azureResourceFlattenModel1sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new AzureResourceFlattenModel1(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new AzureResourceFlattenModel1(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -180,7 +180,7 @@ namespace ExactMatchFlattenInheritance
                 var response = await _azureResourceFlattenModel1sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new AzureResourceFlattenModel1(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new AzureResourceFlattenModel1(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -207,7 +207,7 @@ namespace ExactMatchFlattenInheritance
                 var response = _azureResourceFlattenModel1sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<AzureResourceFlattenModel1>(null, response.GetRawResponse());
-                return Response.FromValue(new AzureResourceFlattenModel1(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new AzureResourceFlattenModel1(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -234,7 +234,7 @@ namespace ExactMatchFlattenInheritance
                 var response = await _azureResourceFlattenModel1sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<AzureResourceFlattenModel1>(null, response.GetRawResponse());
-                return Response.FromValue(new AzureResourceFlattenModel1(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new AzureResourceFlattenModel1(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -308,7 +308,7 @@ namespace ExactMatchFlattenInheritance
                 try
                 {
                     var response = _azureResourceFlattenModel1sRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new AzureResourceFlattenModel1(this, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new AzureResourceFlattenModel1(ArmClient, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -334,7 +334,7 @@ namespace ExactMatchFlattenInheritance
                 try
                 {
                     var response = await _azureResourceFlattenModel1sRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new AzureResourceFlattenModel1(this, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new AzureResourceFlattenModel1(ArmClient, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -405,8 +405,5 @@ namespace ExactMatchFlattenInheritance
         {
             return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
-
-        // Builders.
-        // public ArmBuilder<Azure.Core.ResourceIdentifier, AzureResourceFlattenModel1, AzureResourceFlattenModel1Data> Construct() { }
     }
 }

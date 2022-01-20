@@ -21,7 +21,7 @@ namespace XmlDeserialization
         public static XmlInstance GetXmlInstance(this ArmClient armClient, ResourceIdentifier id)
         {
             XmlInstance.ValidateResourceId(id);
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new XmlInstance(clientOptions, credential, uri, pipeline, id));
+            return new XmlInstance(armClient, id);
         }
         #endregion
     }

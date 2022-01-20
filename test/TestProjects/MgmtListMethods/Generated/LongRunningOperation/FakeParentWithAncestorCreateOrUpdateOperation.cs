@@ -10,7 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager;
 using MgmtListMethods;
 
 namespace MgmtListMethods.Models
@@ -25,9 +25,9 @@ namespace MgmtListMethods.Models
         {
         }
 
-        internal FakeParentWithAncestorCreateOrUpdateOperation(ArmResource operationsBase, Response<FakeParentWithAncestorData> response)
+        internal FakeParentWithAncestorCreateOrUpdateOperation(ArmClient armClient, Response<FakeParentWithAncestorData> response)
         {
-            _operation = new OperationOrResponseInternals<FakeParentWithAncestor>(Response.FromValue(new FakeParentWithAncestor(operationsBase, response.Value), response.GetRawResponse()));
+            _operation = new OperationOrResponseInternals<FakeParentWithAncestor>(Response.FromValue(new FakeParentWithAncestor(armClient, response.Value), response.GetRawResponse()));
         }
 
         /// <inheritdoc />

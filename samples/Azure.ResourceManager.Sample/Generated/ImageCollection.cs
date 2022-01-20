@@ -37,9 +37,9 @@ namespace Azure.ResourceManager.Sample
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal ImageCollection(ArmResource parent) : base(parent)
         {
-            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            ClientOptions.TryGetApiVersion(Image.ResourceType, out string apiVersion);
-            _imagesRestClient = new ImagesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
+            _clientDiagnostics = new ClientDiagnostics("Azure.ResourceManager.Sample", Image.ResourceType.Namespace, DiagnosticOptions);
+            ArmClient.TryGetApiVersion(Image.ResourceType, out string apiVersion);
+            _imagesRestClient = new ImagesRestOperations(_clientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, apiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -79,7 +79,7 @@ namespace Azure.ResourceManager.Sample
             try
             {
                 var response = _imagesRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, imageName, parameters, cancellationToken);
-                var operation = new ImageCreateOrUpdateOperation(this, _clientDiagnostics, Pipeline, _imagesRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, imageName, parameters).Request, response);
+                var operation = new ImageCreateOrUpdateOperation(ArmClient, _clientDiagnostics, Pipeline, _imagesRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, imageName, parameters).Request, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -117,7 +117,7 @@ namespace Azure.ResourceManager.Sample
             try
             {
                 var response = await _imagesRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, imageName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new ImageCreateOrUpdateOperation(this, _clientDiagnostics, Pipeline, _imagesRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, imageName, parameters).Request, response);
+                var operation = new ImageCreateOrUpdateOperation(ArmClient, _clientDiagnostics, Pipeline, _imagesRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, imageName, parameters).Request, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -151,7 +151,7 @@ namespace Azure.ResourceManager.Sample
                 var response = _imagesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, imageName, expand, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new Image(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Image(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -182,7 +182,7 @@ namespace Azure.ResourceManager.Sample
                 var response = await _imagesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, imageName, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new Image(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Image(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -210,7 +210,7 @@ namespace Azure.ResourceManager.Sample
                 var response = _imagesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, imageName, expand, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<Image>(null, response.GetRawResponse());
-                return Response.FromValue(new Image(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Image(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -238,7 +238,7 @@ namespace Azure.ResourceManager.Sample
                 var response = await _imagesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, imageName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<Image>(null, response.GetRawResponse());
-                return Response.FromValue(new Image(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Image(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -314,7 +314,7 @@ namespace Azure.ResourceManager.Sample
                 try
                 {
                     var response = _imagesRestClient.ListByResourceGroup(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new Image(this, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new Image(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -329,7 +329,7 @@ namespace Azure.ResourceManager.Sample
                 try
                 {
                     var response = _imagesRestClient.ListByResourceGroupNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new Image(this, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new Image(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -355,7 +355,7 @@ namespace Azure.ResourceManager.Sample
                 try
                 {
                     var response = await _imagesRestClient.ListByResourceGroupAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new Image(this, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new Image(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -370,7 +370,7 @@ namespace Azure.ResourceManager.Sample
                 try
                 {
                     var response = await _imagesRestClient.ListByResourceGroupNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new Image(this, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new Image(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -441,8 +441,5 @@ namespace Azure.ResourceManager.Sample
         {
             return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
-
-        // Builders.
-        // public ArmBuilder<Azure.Core.ResourceIdentifier, Image, ImageData> Construct() { }
     }
 }
