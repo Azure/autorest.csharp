@@ -33,6 +33,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected override string ArmClientReference => "ArmClient";
 
+        protected override bool UseRestClientField => false;
+
         public ResourceExtensionWriter(CodeWriter writer, MgmtExtensions extensions, BuildContext<MgmtOutputLibrary> context, Type extensionType)
             : base(writer, extensions, context, extensionType)
         {
@@ -95,17 +97,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             foreach (var client in This.RestClients)
             {
-                string diagOptionsCtor = ConstructClientDiagnostic(_writer, client.Resource?.ResourceName, "DiagnosticOptions");
+                string diagOptionsCtor = ConstructClientDiagnostic(_writer, client.Resource?.ResourceName, DiagnosticOptionsProperty);
                 _writer.Line($"private {typeof(ClientDiagnostics)} {GetClientDiagnosticsPropertyName(client)} => {GetClientDiagnosticFieldName(client)} ??= {diagOptionsCtor};");
                 string apiVersionString = client.Resource == null ? string.Empty : $", GetApiVersionOrNull({client.Resource.ResourceName}.ResourceType)";
-                string restCtor = GetRestConstructorString("new ", client, GetClientDiagnosticsPropertyName(client), "Pipeline", "DiagnosticOptions", ", Id.SubscriptionId", "BaseUri", apiVersionString);
+                string restCtor = GetRestConstructorString("new ", client, GetClientDiagnosticsPropertyName(client), PipelineProperty, DiagnosticOptionsProperty, ", Id.SubscriptionId", "BaseUri", apiVersionString);
                 _writer.Line($"private {client.Type} {GetRestPropertyName(client)} => {GetRestFieldName(client)} ??= {restCtor};");
             }
-        }
-
-        private object GetRestPropertyName(MgmtRestClient client)
-        {
-            return $"{client.OperationGroup.Key}RestClient";
         }
 
         private void WriteCtor()

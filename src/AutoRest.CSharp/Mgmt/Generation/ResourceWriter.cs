@@ -88,6 +88,7 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
         private void WriteStaticMethods()
         {
             WriteCreateResourceIdentifierMethods();
+            _writer.Line();
         }
 
         private void WriteCreateResourceIdentifierMethods()
@@ -174,7 +175,8 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
             _writer.WriteMethodDocumentation(clientOptionsConstructor);
             using (_writer.WriteMethodDeclaration(clientOptionsConstructor))
             {
-                _writer.Line($"{ClientDiagnosticsField} = new {typeof(ClientDiagnostics)}(ClientOptions);");
+                string ctorString = ConstructClientDiagnostic(_writer, _resource.ResourceName, DiagnosticOptionsProperty);
+                _writer.Line($"{ClientDiagnosticsField} = {ctorString};");
                 WriteRestClientAssignments();
                 WriteDebugValidate(_writer);
             }
@@ -182,7 +184,7 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
 
         protected void WriteRestClientAssignments()
         {
-            WriteRestClientConstructionForResource(_resource, This.RestClients, ", Id.SubscriptionId", ClientDiagnosticsField, ClientOptionsProperty, "ArmClient", PipelineProperty, BaseUriField, "new ", false);
+            WriteRestClientConstructionForResource(_resource, This.RestClients, ", Id.SubscriptionId", ClientDiagnosticsField, DiagnosticOptionsProperty, "ArmClient", PipelineProperty, BaseUriField, "new ", false);
         }
 
         protected virtual void WriteProperties()

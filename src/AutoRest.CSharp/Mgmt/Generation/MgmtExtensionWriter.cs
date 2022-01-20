@@ -407,36 +407,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Line($"var {ClientDiagnosticsVariable} = {ConstructClientDiagnostic(_writer, providerNamespace, diagnosticsOptionsVariable)};");
         }
 
-        protected string ConstructClientDiagnostic(CodeWriter writer, string? providerNamespace, string diagnosticsOptionsVariable)
-        {
-            var namespaceToUse = providerNamespace;
-            if (providerNamespace is null)
-            {
-                namespaceToUse = "_defaultRpNamespace";
-            }
-            else
-            {
-                var data = Context.Library.ResourceData.FirstOrDefault(data => data.Declaration.Name == providerNamespace);
-                if (data is not null)
-                {
-                    namespaceToUse = $"{providerNamespace.Substring(0, providerNamespace.Length - 4)}.ResourceType.Namespace";
-                }
-                else
-                {
-                    var resource = Context.Library.ArmResources.FirstOrDefault(resource => resource.Declaration.Name == providerNamespace);
-                    if (resource is not null)
-                    {
-                        namespaceToUse = $"{providerNamespace}.ResourceType.Namespace";
-                    }
-                    else
-                    {
-                        namespaceToUse = "_defaultRpNamespace";
-                    }
-                }
-            }
-            return $"new {typeof(ClientDiagnostics)}(\"{_extensions.Declaration.Namespace}\", {namespaceToUse}, {diagnosticsOptionsVariable})";
-        }
-
         protected override ResourceTypeSegment GetBranchResourceType(RequestPath branch)
         {
             // we should never have a branch in the operations in an extension class, therefore throwing an exception here
