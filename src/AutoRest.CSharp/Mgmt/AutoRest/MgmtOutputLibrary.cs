@@ -262,7 +262,18 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         public TenantExtensions TenantExtensions => EnsureTenantExtensions();
 
         public SubscriptionExtensions SubscriptionExtensions => EnsureSubscriptionExtensions();
-        public SubscriptionExtensionClient SubscriptionExtensionsClient => EnsureSubscriptionExtensionsClient();
+
+        private MgmtExtensions? _subscriptionExtensionClient;
+        public MgmtExtensions SubscriptionExtensionsClient => EnsureExtensionsClient(ref _subscriptionExtensionClient, "Subscription", RequestPath.Subscription);
+
+        private MgmtExtensions? _resourceGroupExtensionClient;
+        public MgmtExtensions ResourceGroupExtensionsClient => EnsureExtensionsClient(ref _resourceGroupExtensionClient, "ResourceGroup", RequestPath.ResourceGroup);
+
+        private MgmtExtensions? _tenantExtensionClient;
+        public MgmtExtensions TenantExtensionsClient => EnsureExtensionsClient(ref _tenantExtensionClient, "Tenant", RequestPath.Tenant);
+
+        private MgmtExtensions? _managementGroupExtensionClient;
+        public MgmtExtensions ManagementGroupExtensionsClient => EnsureExtensionsClient(ref _managementGroupExtensionClient, "ManagementGroup", RequestPath.ManagementGroup);
 
         public ResourceGroupExtensions ResourceGroupExtensions => EnsureResourceGroupExtensions();
 
@@ -292,15 +303,13 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return _subscriptionExtensions;
         }
 
-        private SubscriptionExtensionClient? _subscriptionExtensionClient;
-        private SubscriptionExtensionClient EnsureSubscriptionExtensionsClient()
+        private MgmtExtensions EnsureExtensionsClient(ref MgmtExtensions? extensionField, string typePrefix, RequestPath path)
         {
-            if (_subscriptionExtensionClient != null)
-                return _subscriptionExtensionClient;
+            if (extensionField != null)
+                return extensionField;
 
-            // accumulate all the operations of subscription extensions
-            _subscriptionExtensionClient = new SubscriptionExtensionClient(GetChildOperations(RequestPath.Subscription), _context);
-            return _subscriptionExtensionClient;
+            extensionField = new MgmtExtensions(GetChildOperations(path), typePrefix, _context, $"{typePrefix}ExtensionClient", path);
+            return extensionField;
         }
 
 

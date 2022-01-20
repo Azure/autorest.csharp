@@ -12,6 +12,7 @@ using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Generation;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Types;
+using Azure.ResourceManager.Management;
 using Azure.ResourceManager.Resources;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
@@ -120,6 +121,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 new ResourceGroupExtensionsWriter(resourceGroupExtensionsCodeWriter, context.Library.ResourceGroupExtensions, context).Write();
                 AddGeneratedFile(project, $"Extensions/{context.Library.ResourceGroupExtensions.Type.Name}.cs", resourceGroupExtensionsCodeWriter.ToString());
 
+                var rgExtensionClientWriter = new CodeWriter();
+                new ResourceExtensionWriter(rgExtensionClientWriter, context.Library.ResourceGroupExtensionsClient, context, typeof(ResourceGroup)).Write();
+                AddGeneratedFile(project, $"Extensions/{context.Library.ResourceGroupExtensions.Type.Name}Client.cs", rgExtensionClientWriter.ToString());
+
                 // we will write the SubscriptionExtensions class even if it does not contain anything
                 var subscriptionExtensionsCodeWriter = new CodeWriter();
                 new SubscriptionExtensionsWriter(subscriptionExtensionsCodeWriter, context.Library.SubscriptionExtensions, context).Write();
@@ -135,6 +140,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 var managementGroupExtensionsCodeWriter = new CodeWriter();
                 new ManagementGroupExtensionsWriter(managementGroupExtensionsCodeWriter, context.Library.ManagementGroupExtensions, context, isArmCore).Write();
                 AddGeneratedFile(project, isArmCore ? $"{context.Library.ManagementGroupExtensions.ResourceName}.cs" : $"Extensions/{context.Library.ManagementGroupExtensions.Type.Name}.cs", managementGroupExtensionsCodeWriter.ToString());
+
+                var extensionClientWriter = new CodeWriter();
+                new ResourceExtensionWriter(extensionClientWriter, context.Library.ManagementGroupExtensionsClient, context, typeof(ManagementGroup)).Write();
+                AddGeneratedFile(project, $"Extensions/{context.Library.ManagementGroupExtensions.Type.Name}Client.cs", extensionClientWriter.ToString());
             }
 
             if (!context.Library.TenantExtensions.IsEmpty)
@@ -142,6 +151,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 var tenantExtensionsCodeWriter = new CodeWriter();
                 new TenantExtensionsWriter(tenantExtensionsCodeWriter, context.Library.TenantExtensions, context).Write();
                 AddGeneratedFile(project, $"Extensions/{context.Library.TenantExtensions.Type.Name}.cs", tenantExtensionsCodeWriter.ToString());
+
+                var extensionClientWriter = new CodeWriter();
+                new ResourceExtensionWriter(extensionClientWriter, context.Library.TenantExtensionsClient, context, typeof(Tenant)).Write();
+                AddGeneratedFile(project, $"Extensions/{context.Library.TenantExtensions.Type.Name}Client.cs", extensionClientWriter.ToString());
             }
 
             if (!context.Library.ArmClientExtensions.IsEmpty)
