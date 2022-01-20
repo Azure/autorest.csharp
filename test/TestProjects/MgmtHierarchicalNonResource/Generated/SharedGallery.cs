@@ -47,9 +47,10 @@ namespace MgmtHierarchicalNonResource
             HasData = true;
             _data = data;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _sharedGalleriesRestClient = new SharedGalleriesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
-            _sharedGalleryImagesRestClient = new SharedGalleryImagesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
-            _sharedGalleryImageVersionsRestClient = new SharedGalleryImageVersionsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            ClientOptions.TryGetApiVersion(ResourceType, out string apiVersion);
+            _sharedGalleriesRestClient = new SharedGalleriesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
+            _sharedGalleryImagesRestClient = new SharedGalleryImagesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
+            _sharedGalleryImageVersionsRestClient = new SharedGalleryImageVersionsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -61,9 +62,10 @@ namespace MgmtHierarchicalNonResource
         internal SharedGallery(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _sharedGalleriesRestClient = new SharedGalleriesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
-            _sharedGalleryImagesRestClient = new SharedGalleryImagesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
-            _sharedGalleryImageVersionsRestClient = new SharedGalleryImageVersionsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            ClientOptions.TryGetApiVersion(ResourceType, out string apiVersion);
+            _sharedGalleriesRestClient = new SharedGalleriesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
+            _sharedGalleryImagesRestClient = new SharedGalleryImagesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
+            _sharedGalleryImageVersionsRestClient = new SharedGalleryImageVersionsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -78,9 +80,10 @@ namespace MgmtHierarchicalNonResource
         internal SharedGallery(ArmClientOptions clientOptions, TokenCredential credential, Uri uri, HttpPipeline pipeline, ResourceIdentifier id) : base(clientOptions, credential, uri, pipeline, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _sharedGalleriesRestClient = new SharedGalleriesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
-            _sharedGalleryImagesRestClient = new SharedGalleryImagesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
-            _sharedGalleryImageVersionsRestClient = new SharedGalleryImageVersionsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            ClientOptions.TryGetApiVersion(ResourceType, out string apiVersion);
+            _sharedGalleriesRestClient = new SharedGalleriesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
+            _sharedGalleryImagesRestClient = new SharedGalleryImagesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
+            _sharedGalleryImageVersionsRestClient = new SharedGalleryImageVersionsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -284,12 +287,12 @@ namespace MgmtHierarchicalNonResource
         /// <summary> Get a shared gallery image by subscription id or tenant id. </summary>
         /// <param name="galleryImageName"> The name of the Shared Gallery Image Definition from which the Image Versions are to be listed. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="galleryImageName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="galleryImageName"/> is null or empty. </exception>
         public async virtual Task<Response<SharedGalleryImage>> GetSharedGalleryImageAsync(string galleryImageName, CancellationToken cancellationToken = default)
         {
-            if (galleryImageName == null)
+            if (string.IsNullOrEmpty(galleryImageName))
             {
-                throw new ArgumentNullException(nameof(galleryImageName));
+                throw new ArgumentException($"Parameter {nameof(galleryImageName)} cannot be null or empty", nameof(galleryImageName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("SharedGallery.GetSharedGalleryImage");
@@ -312,12 +315,12 @@ namespace MgmtHierarchicalNonResource
         /// <summary> Get a shared gallery image by subscription id or tenant id. </summary>
         /// <param name="galleryImageName"> The name of the Shared Gallery Image Definition from which the Image Versions are to be listed. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="galleryImageName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="galleryImageName"/> is null or empty. </exception>
         public virtual Response<SharedGalleryImage> GetSharedGalleryImage(string galleryImageName, CancellationToken cancellationToken = default)
         {
-            if (galleryImageName == null)
+            if (string.IsNullOrEmpty(galleryImageName))
             {
-                throw new ArgumentNullException(nameof(galleryImageName));
+                throw new ArgumentException($"Parameter {nameof(galleryImageName)} cannot be null or empty", nameof(galleryImageName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("SharedGallery.GetSharedGalleryImage");
@@ -341,13 +344,13 @@ namespace MgmtHierarchicalNonResource
         /// <param name="galleryImageName"> The name of the Shared Gallery Image Definition from which the Image Versions are to be listed. </param>
         /// <param name="sharedTo"> The query parameter to decide what shared galleries to fetch when doing listing operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="galleryImageName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="galleryImageName"/> is null or empty. </exception>
         /// <returns> An async collection of <see cref="SharedGalleryImageVersion" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<SharedGalleryImageVersion> GetSharedGalleryImageVersionsAsync(string galleryImageName, SharedToValues? sharedTo = null, CancellationToken cancellationToken = default)
         {
-            if (galleryImageName == null)
+            if (string.IsNullOrEmpty(galleryImageName))
             {
-                throw new ArgumentNullException(nameof(galleryImageName));
+                throw new ArgumentException($"Parameter {nameof(galleryImageName)} cannot be null or empty", nameof(galleryImageName));
             }
 
             async Task<Page<SharedGalleryImageVersion>> FirstPageFunc(int? pageSizeHint)
@@ -390,13 +393,13 @@ namespace MgmtHierarchicalNonResource
         /// <param name="galleryImageName"> The name of the Shared Gallery Image Definition from which the Image Versions are to be listed. </param>
         /// <param name="sharedTo"> The query parameter to decide what shared galleries to fetch when doing listing operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="galleryImageName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="galleryImageName"/> is null or empty. </exception>
         /// <returns> A collection of <see cref="SharedGalleryImageVersion" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<SharedGalleryImageVersion> GetSharedGalleryImageVersions(string galleryImageName, SharedToValues? sharedTo = null, CancellationToken cancellationToken = default)
         {
-            if (galleryImageName == null)
+            if (string.IsNullOrEmpty(galleryImageName))
             {
-                throw new ArgumentNullException(nameof(galleryImageName));
+                throw new ArgumentException($"Parameter {nameof(galleryImageName)} cannot be null or empty", nameof(galleryImageName));
             }
 
             Page<SharedGalleryImageVersion> FirstPageFunc(int? pageSizeHint)
@@ -439,16 +442,16 @@ namespace MgmtHierarchicalNonResource
         /// <param name="galleryImageName"> The name of the Shared Gallery Image Definition from which the Image Versions are to be listed. </param>
         /// <param name="galleryImageVersionName"> The name of the gallery image version to be created. Needs to follow semantic version name pattern: The allowed characters are digit and period. Digits must be within the range of a 32-bit integer. Format: &lt;MajorVersion&gt;.&lt;MinorVersion&gt;.&lt;Patch&gt;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="galleryImageName"/> or <paramref name="galleryImageVersionName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="galleryImageName"/> or <paramref name="galleryImageVersionName"/> is null or empty. </exception>
         public async virtual Task<Response<SharedGalleryImageVersion>> GetSharedGalleryImageVersionAsync(string galleryImageName, string galleryImageVersionName, CancellationToken cancellationToken = default)
         {
-            if (galleryImageName == null)
+            if (string.IsNullOrEmpty(galleryImageName))
             {
-                throw new ArgumentNullException(nameof(galleryImageName));
+                throw new ArgumentException($"Parameter {nameof(galleryImageName)} cannot be null or empty", nameof(galleryImageName));
             }
-            if (galleryImageVersionName == null)
+            if (string.IsNullOrEmpty(galleryImageVersionName))
             {
-                throw new ArgumentNullException(nameof(galleryImageVersionName));
+                throw new ArgumentException($"Parameter {nameof(galleryImageVersionName)} cannot be null or empty", nameof(galleryImageVersionName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("SharedGallery.GetSharedGalleryImageVersion");
@@ -472,16 +475,16 @@ namespace MgmtHierarchicalNonResource
         /// <param name="galleryImageName"> The name of the Shared Gallery Image Definition from which the Image Versions are to be listed. </param>
         /// <param name="galleryImageVersionName"> The name of the gallery image version to be created. Needs to follow semantic version name pattern: The allowed characters are digit and period. Digits must be within the range of a 32-bit integer. Format: &lt;MajorVersion&gt;.&lt;MinorVersion&gt;.&lt;Patch&gt;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="galleryImageName"/> or <paramref name="galleryImageVersionName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="galleryImageName"/> or <paramref name="galleryImageVersionName"/> is null or empty. </exception>
         public virtual Response<SharedGalleryImageVersion> GetSharedGalleryImageVersion(string galleryImageName, string galleryImageVersionName, CancellationToken cancellationToken = default)
         {
-            if (galleryImageName == null)
+            if (string.IsNullOrEmpty(galleryImageName))
             {
-                throw new ArgumentNullException(nameof(galleryImageName));
+                throw new ArgumentException($"Parameter {nameof(galleryImageName)} cannot be null or empty", nameof(galleryImageName));
             }
-            if (galleryImageVersionName == null)
+            if (string.IsNullOrEmpty(galleryImageVersionName))
             {
-                throw new ArgumentNullException(nameof(galleryImageVersionName));
+                throw new ArgumentException($"Parameter {nameof(galleryImageVersionName)} cannot be null or empty", nameof(galleryImageVersionName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("SharedGallery.GetSharedGalleryImageVersion");

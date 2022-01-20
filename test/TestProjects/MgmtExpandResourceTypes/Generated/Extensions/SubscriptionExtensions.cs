@@ -22,14 +22,14 @@ namespace MgmtExpandResourceTypes
     /// <summary> A class to add extension methods to Subscription. </summary>
     public static partial class SubscriptionExtensions
     {
-        private static ZonesRestOperations GetZonesRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, Uri endpoint = null)
+        private static ZonesRestOperations GetZonesRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = default)
         {
-            return new ZonesRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint);
+            return new ZonesRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);
         }
 
-        private static DnsResourceReferenceRestOperations GetDnsResourceReferenceRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, Uri endpoint = null)
+        private static DnsResourceReferenceRestOperations GetDnsResourceReferenceRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = default)
         {
-            return new DnsResourceReferenceRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint);
+            return new DnsResourceReferenceRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Network/dnszones
@@ -40,15 +40,16 @@ namespace MgmtExpandResourceTypes
         /// <param name="top"> The maximum number of DNS zones to return. If not specified, returns up to 100 zones. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<Zone> GetZonesAsync(this Subscription subscription, int? top = null, CancellationToken cancellationToken = default)
+        public static AsyncPageable<Zone> GetZonesByDnszoneAsync(this Subscription subscription, int? top = null, CancellationToken cancellationToken = default)
         {
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetZonesRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                options.TryGetApiVersion(Zone.ResourceType, out string apiVersion);
+                ZonesRestOperations restOperations = GetZonesRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
                 async Task<Page<Zone>> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetZones");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetZonesByDnszone");
                     scope.Start();
                     try
                     {
@@ -63,7 +64,7 @@ namespace MgmtExpandResourceTypes
                 }
                 async Task<Page<Zone>> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetZones");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetZonesByDnszone");
                     scope.Start();
                     try
                     {
@@ -89,15 +90,16 @@ namespace MgmtExpandResourceTypes
         /// <param name="top"> The maximum number of DNS zones to return. If not specified, returns up to 100 zones. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static Pageable<Zone> GetZones(this Subscription subscription, int? top = null, CancellationToken cancellationToken = default)
+        public static Pageable<Zone> GetZonesByDnszone(this Subscription subscription, int? top = null, CancellationToken cancellationToken = default)
         {
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetZonesRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                options.TryGetApiVersion(Zone.ResourceType, out string apiVersion);
+                ZonesRestOperations restOperations = GetZonesRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
                 Page<Zone> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetZones");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetZonesByDnszone");
                     scope.Start();
                     try
                     {
@@ -112,7 +114,7 @@ namespace MgmtExpandResourceTypes
                 }
                 Page<Zone> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetZones");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetZonesByDnszone");
                     scope.Start();
                     try
                     {
@@ -180,7 +182,7 @@ namespace MgmtExpandResourceTypes
                 scope.Start();
                 try
                 {
-                    var restOperations = GetDnsResourceReferenceRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    DnsResourceReferenceRestOperations restOperations = GetDnsResourceReferenceRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = await restOperations.GetByTargetResourcesAsync(subscription.Id.SubscriptionId, parameters, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
@@ -215,7 +217,7 @@ namespace MgmtExpandResourceTypes
                 scope.Start();
                 try
                 {
-                    var restOperations = GetDnsResourceReferenceRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    DnsResourceReferenceRestOperations restOperations = GetDnsResourceReferenceRestOperations(clientDiagnostics, pipeline, options, baseUri);
                     var response = restOperations.GetByTargetResources(subscription.Id.SubscriptionId, parameters, cancellationToken);
                     return response;
                 }

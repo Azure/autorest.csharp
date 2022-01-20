@@ -38,7 +38,8 @@ namespace SupersetInheritance
         internal SupersetModel1Collection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _supersetModel1sRestClient = new SupersetModel1SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            ClientOptions.TryGetApiVersion(SupersetModel1.ResourceType, out string apiVersion);
+            _supersetModel1sRestClient = new SupersetModel1SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -55,16 +56,17 @@ namespace SupersetInheritance
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel1s/{supersetModel1sName}
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
         /// OperationId: SupersetModel1s_Put
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="supersetModel1SName"> The String to use. </param>
         /// <param name="parameters"> The SupersetModel1 to use. </param>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="supersetModel1SName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual SupersetModel1SPutOperation CreateOrUpdate(bool waitForCompletion, string supersetModel1SName, SupersetModel1Data parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentException"> <paramref name="supersetModel1SName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        public virtual SupersetModel1CreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string supersetModel1SName, SupersetModel1Data parameters, CancellationToken cancellationToken = default)
         {
-            if (supersetModel1SName == null)
+            if (string.IsNullOrEmpty(supersetModel1SName))
             {
-                throw new ArgumentNullException(nameof(supersetModel1SName));
+                throw new ArgumentException($"Parameter {nameof(supersetModel1SName)} cannot be null or empty", nameof(supersetModel1SName));
             }
             if (parameters == null)
             {
@@ -76,7 +78,7 @@ namespace SupersetInheritance
             try
             {
                 var response = _supersetModel1sRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, supersetModel1SName, parameters, cancellationToken);
-                var operation = new SupersetModel1SPutOperation(Parent, response);
+                var operation = new SupersetModel1CreateOrUpdateOperation(this, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -91,16 +93,17 @@ namespace SupersetInheritance
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel1s/{supersetModel1sName}
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
         /// OperationId: SupersetModel1s_Put
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="supersetModel1SName"> The String to use. </param>
         /// <param name="parameters"> The SupersetModel1 to use. </param>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="supersetModel1SName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<SupersetModel1SPutOperation> CreateOrUpdateAsync(bool waitForCompletion, string supersetModel1SName, SupersetModel1Data parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentException"> <paramref name="supersetModel1SName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        public async virtual Task<SupersetModel1CreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string supersetModel1SName, SupersetModel1Data parameters, CancellationToken cancellationToken = default)
         {
-            if (supersetModel1SName == null)
+            if (string.IsNullOrEmpty(supersetModel1SName))
             {
-                throw new ArgumentNullException(nameof(supersetModel1SName));
+                throw new ArgumentException($"Parameter {nameof(supersetModel1SName)} cannot be null or empty", nameof(supersetModel1SName));
             }
             if (parameters == null)
             {
@@ -112,7 +115,7 @@ namespace SupersetInheritance
             try
             {
                 var response = await _supersetModel1sRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, supersetModel1SName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new SupersetModel1SPutOperation(Parent, response);
+                var operation = new SupersetModel1CreateOrUpdateOperation(this, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -129,12 +132,12 @@ namespace SupersetInheritance
         /// OperationId: SupersetModel1s_Get
         /// <param name="supersetModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="supersetModel1SName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="supersetModel1SName"/> is null or empty. </exception>
         public virtual Response<SupersetModel1> Get(string supersetModel1SName, CancellationToken cancellationToken = default)
         {
-            if (supersetModel1SName == null)
+            if (string.IsNullOrEmpty(supersetModel1SName))
             {
-                throw new ArgumentNullException(nameof(supersetModel1SName));
+                throw new ArgumentException($"Parameter {nameof(supersetModel1SName)} cannot be null or empty", nameof(supersetModel1SName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("SupersetModel1Collection.Get");
@@ -144,7 +147,7 @@ namespace SupersetInheritance
                 var response = _supersetModel1sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, supersetModel1SName, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new SupersetModel1(Parent, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SupersetModel1(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -158,12 +161,12 @@ namespace SupersetInheritance
         /// OperationId: SupersetModel1s_Get
         /// <param name="supersetModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="supersetModel1SName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="supersetModel1SName"/> is null or empty. </exception>
         public async virtual Task<Response<SupersetModel1>> GetAsync(string supersetModel1SName, CancellationToken cancellationToken = default)
         {
-            if (supersetModel1SName == null)
+            if (string.IsNullOrEmpty(supersetModel1SName))
             {
-                throw new ArgumentNullException(nameof(supersetModel1SName));
+                throw new ArgumentException($"Parameter {nameof(supersetModel1SName)} cannot be null or empty", nameof(supersetModel1SName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("SupersetModel1Collection.Get");
@@ -173,7 +176,7 @@ namespace SupersetInheritance
                 var response = await _supersetModel1sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, supersetModel1SName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new SupersetModel1(Parent, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SupersetModel1(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -185,12 +188,12 @@ namespace SupersetInheritance
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="supersetModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="supersetModel1SName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="supersetModel1SName"/> is null or empty. </exception>
         public virtual Response<SupersetModel1> GetIfExists(string supersetModel1SName, CancellationToken cancellationToken = default)
         {
-            if (supersetModel1SName == null)
+            if (string.IsNullOrEmpty(supersetModel1SName))
             {
-                throw new ArgumentNullException(nameof(supersetModel1SName));
+                throw new ArgumentException($"Parameter {nameof(supersetModel1SName)} cannot be null or empty", nameof(supersetModel1SName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("SupersetModel1Collection.GetIfExists");
@@ -212,12 +215,12 @@ namespace SupersetInheritance
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="supersetModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="supersetModel1SName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="supersetModel1SName"/> is null or empty. </exception>
         public async virtual Task<Response<SupersetModel1>> GetIfExistsAsync(string supersetModel1SName, CancellationToken cancellationToken = default)
         {
-            if (supersetModel1SName == null)
+            if (string.IsNullOrEmpty(supersetModel1SName))
             {
-                throw new ArgumentNullException(nameof(supersetModel1SName));
+                throw new ArgumentException($"Parameter {nameof(supersetModel1SName)} cannot be null or empty", nameof(supersetModel1SName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("SupersetModel1Collection.GetIfExists");
@@ -239,12 +242,12 @@ namespace SupersetInheritance
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="supersetModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="supersetModel1SName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="supersetModel1SName"/> is null or empty. </exception>
         public virtual Response<bool> Exists(string supersetModel1SName, CancellationToken cancellationToken = default)
         {
-            if (supersetModel1SName == null)
+            if (string.IsNullOrEmpty(supersetModel1SName))
             {
-                throw new ArgumentNullException(nameof(supersetModel1SName));
+                throw new ArgumentException($"Parameter {nameof(supersetModel1SName)} cannot be null or empty", nameof(supersetModel1SName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("SupersetModel1Collection.Exists");
@@ -264,12 +267,12 @@ namespace SupersetInheritance
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="supersetModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="supersetModel1SName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="supersetModel1SName"/> is null or empty. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string supersetModel1SName, CancellationToken cancellationToken = default)
         {
-            if (supersetModel1SName == null)
+            if (string.IsNullOrEmpty(supersetModel1SName))
             {
-                throw new ArgumentNullException(nameof(supersetModel1SName));
+                throw new ArgumentException($"Parameter {nameof(supersetModel1SName)} cannot be null or empty", nameof(supersetModel1SName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("SupersetModel1Collection.Exists");
@@ -300,7 +303,7 @@ namespace SupersetInheritance
                 try
                 {
                     var response = _supersetModel1sRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new SupersetModel1(Parent, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new SupersetModel1(this, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -325,7 +328,7 @@ namespace SupersetInheritance
                 try
                 {
                     var response = await _supersetModel1sRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new SupersetModel1(Parent, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new SupersetModel1(this, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {

@@ -36,7 +36,8 @@ namespace MgmtMultipleParentResource
         internal AnotherParentChildCollection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _anotherChildrenRestClient = new AnotherChildrenRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            ClientOptions.TryGetApiVersion(AnotherParentChild.ResourceType, out string apiVersion);
+            _anotherChildrenRestClient = new AnotherChildrenRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -54,16 +55,17 @@ namespace MgmtMultipleParentResource
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/anotherParents/{anotherName}
         /// OperationId: AnotherChildren_CreateOrUpdate
         /// <summary> The operation to create or update the run command. </summary>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="childName"> The name of the virtual machine run command. </param>
         /// <param name="childBody"> Parameters supplied to the Create Virtual Machine RunCommand operation. </param>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="childName"/> or <paramref name="childBody"/> is null. </exception>
-        public virtual AnotherChildCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string childName, ChildBodyData childBody, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentException"> <paramref name="childName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="childBody"/> is null. </exception>
+        public virtual AnotherParentChildCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string childName, ChildBodyData childBody, CancellationToken cancellationToken = default)
         {
-            if (childName == null)
+            if (string.IsNullOrEmpty(childName))
             {
-                throw new ArgumentNullException(nameof(childName));
+                throw new ArgumentException($"Parameter {nameof(childName)} cannot be null or empty", nameof(childName));
             }
             if (childBody == null)
             {
@@ -75,7 +77,7 @@ namespace MgmtMultipleParentResource
             try
             {
                 var response = _anotherChildrenRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, childName, childBody, cancellationToken);
-                var operation = new AnotherChildCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _anotherChildrenRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, childName, childBody).Request, response);
+                var operation = new AnotherParentChildCreateOrUpdateOperation(this, _clientDiagnostics, Pipeline, _anotherChildrenRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, childName, childBody).Request, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -91,16 +93,17 @@ namespace MgmtMultipleParentResource
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/anotherParents/{anotherName}
         /// OperationId: AnotherChildren_CreateOrUpdate
         /// <summary> The operation to create or update the run command. </summary>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="childName"> The name of the virtual machine run command. </param>
         /// <param name="childBody"> Parameters supplied to the Create Virtual Machine RunCommand operation. </param>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="childName"/> or <paramref name="childBody"/> is null. </exception>
-        public async virtual Task<AnotherChildCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string childName, ChildBodyData childBody, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentException"> <paramref name="childName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="childBody"/> is null. </exception>
+        public async virtual Task<AnotherParentChildCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string childName, ChildBodyData childBody, CancellationToken cancellationToken = default)
         {
-            if (childName == null)
+            if (string.IsNullOrEmpty(childName))
             {
-                throw new ArgumentNullException(nameof(childName));
+                throw new ArgumentException($"Parameter {nameof(childName)} cannot be null or empty", nameof(childName));
             }
             if (childBody == null)
             {
@@ -112,7 +115,7 @@ namespace MgmtMultipleParentResource
             try
             {
                 var response = await _anotherChildrenRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, childName, childBody, cancellationToken).ConfigureAwait(false);
-                var operation = new AnotherChildCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _anotherChildrenRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, childName, childBody).Request, response);
+                var operation = new AnotherParentChildCreateOrUpdateOperation(this, _clientDiagnostics, Pipeline, _anotherChildrenRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, childName, childBody).Request, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -131,12 +134,12 @@ namespace MgmtMultipleParentResource
         /// <param name="childName"> The name of the virtual machine run command. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="childName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="childName"/> is null or empty. </exception>
         public virtual Response<AnotherParentChild> Get(string childName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (childName == null)
+            if (string.IsNullOrEmpty(childName))
             {
-                throw new ArgumentNullException(nameof(childName));
+                throw new ArgumentException($"Parameter {nameof(childName)} cannot be null or empty", nameof(childName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("AnotherParentChildCollection.Get");
@@ -146,7 +149,7 @@ namespace MgmtMultipleParentResource
                 var response = _anotherChildrenRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, childName, expand, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new AnotherParentChild(Parent, response.Value), response.GetRawResponse());
+                return Response.FromValue(new AnotherParentChild(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -162,12 +165,12 @@ namespace MgmtMultipleParentResource
         /// <param name="childName"> The name of the virtual machine run command. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="childName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="childName"/> is null or empty. </exception>
         public async virtual Task<Response<AnotherParentChild>> GetAsync(string childName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (childName == null)
+            if (string.IsNullOrEmpty(childName))
             {
-                throw new ArgumentNullException(nameof(childName));
+                throw new ArgumentException($"Parameter {nameof(childName)} cannot be null or empty", nameof(childName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("AnotherParentChildCollection.Get");
@@ -177,7 +180,7 @@ namespace MgmtMultipleParentResource
                 var response = await _anotherChildrenRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, childName, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new AnotherParentChild(Parent, response.Value), response.GetRawResponse());
+                return Response.FromValue(new AnotherParentChild(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -190,12 +193,12 @@ namespace MgmtMultipleParentResource
         /// <param name="childName"> The name of the virtual machine run command. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="childName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="childName"/> is null or empty. </exception>
         public virtual Response<AnotherParentChild> GetIfExists(string childName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (childName == null)
+            if (string.IsNullOrEmpty(childName))
             {
-                throw new ArgumentNullException(nameof(childName));
+                throw new ArgumentException($"Parameter {nameof(childName)} cannot be null or empty", nameof(childName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("AnotherParentChildCollection.GetIfExists");
@@ -218,12 +221,12 @@ namespace MgmtMultipleParentResource
         /// <param name="childName"> The name of the virtual machine run command. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="childName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="childName"/> is null or empty. </exception>
         public async virtual Task<Response<AnotherParentChild>> GetIfExistsAsync(string childName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (childName == null)
+            if (string.IsNullOrEmpty(childName))
             {
-                throw new ArgumentNullException(nameof(childName));
+                throw new ArgumentException($"Parameter {nameof(childName)} cannot be null or empty", nameof(childName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("AnotherParentChildCollection.GetIfExists");
@@ -246,12 +249,12 @@ namespace MgmtMultipleParentResource
         /// <param name="childName"> The name of the virtual machine run command. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="childName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="childName"/> is null or empty. </exception>
         public virtual Response<bool> Exists(string childName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (childName == null)
+            if (string.IsNullOrEmpty(childName))
             {
-                throw new ArgumentNullException(nameof(childName));
+                throw new ArgumentException($"Parameter {nameof(childName)} cannot be null or empty", nameof(childName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("AnotherParentChildCollection.Exists");
@@ -272,12 +275,12 @@ namespace MgmtMultipleParentResource
         /// <param name="childName"> The name of the virtual machine run command. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="childName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="childName"/> is null or empty. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string childName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (childName == null)
+            if (string.IsNullOrEmpty(childName))
             {
-                throw new ArgumentNullException(nameof(childName));
+                throw new ArgumentException($"Parameter {nameof(childName)} cannot be null or empty", nameof(childName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("AnotherParentChildCollection.Exists");
@@ -310,7 +313,7 @@ namespace MgmtMultipleParentResource
                 try
                 {
                     var response = _anotherChildrenRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, expand, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new AnotherParentChild(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new AnotherParentChild(this, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -325,7 +328,7 @@ namespace MgmtMultipleParentResource
                 try
                 {
                     var response = _anotherChildrenRestClient.ListNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, expand, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new AnotherParentChild(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new AnotherParentChild(this, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -352,7 +355,7 @@ namespace MgmtMultipleParentResource
                 try
                 {
                     var response = await _anotherChildrenRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new AnotherParentChild(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new AnotherParentChild(this, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -367,7 +370,7 @@ namespace MgmtMultipleParentResource
                 try
                 {
                     var response = await _anotherChildrenRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new AnotherParentChild(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new AnotherParentChild(this, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {

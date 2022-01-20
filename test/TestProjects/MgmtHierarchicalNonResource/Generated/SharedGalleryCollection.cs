@@ -41,7 +41,8 @@ namespace MgmtHierarchicalNonResource
         internal SharedGalleryCollection(ArmResource parent, string location) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _sharedGalleriesRestClient = new SharedGalleriesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            ClientOptions.TryGetApiVersion(SharedGallery.ResourceType, out string apiVersion);
+            _sharedGalleriesRestClient = new SharedGalleriesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
             _location = location;
 #if DEBUG
 			ValidateResourceId(Id);
@@ -62,12 +63,12 @@ namespace MgmtHierarchicalNonResource
         /// <summary> Get a shared gallery by subscription id or tenant id. </summary>
         /// <param name="galleryUniqueName"> The unique name of the Shared Gallery. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="galleryUniqueName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="galleryUniqueName"/> is null or empty. </exception>
         public virtual Response<SharedGallery> Get(string galleryUniqueName, CancellationToken cancellationToken = default)
         {
-            if (galleryUniqueName == null)
+            if (string.IsNullOrEmpty(galleryUniqueName))
             {
-                throw new ArgumentNullException(nameof(galleryUniqueName));
+                throw new ArgumentException($"Parameter {nameof(galleryUniqueName)} cannot be null or empty", nameof(galleryUniqueName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("SharedGalleryCollection.Get");
@@ -78,7 +79,7 @@ namespace MgmtHierarchicalNonResource
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 response.Value.Id = SharedGallery.CreateResourceIdentifier(Id.SubscriptionId, _location, galleryUniqueName);
-                return Response.FromValue(new SharedGallery(Parent, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SharedGallery(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -93,12 +94,12 @@ namespace MgmtHierarchicalNonResource
         /// <summary> Get a shared gallery by subscription id or tenant id. </summary>
         /// <param name="galleryUniqueName"> The unique name of the Shared Gallery. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="galleryUniqueName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="galleryUniqueName"/> is null or empty. </exception>
         public async virtual Task<Response<SharedGallery>> GetAsync(string galleryUniqueName, CancellationToken cancellationToken = default)
         {
-            if (galleryUniqueName == null)
+            if (string.IsNullOrEmpty(galleryUniqueName))
             {
-                throw new ArgumentNullException(nameof(galleryUniqueName));
+                throw new ArgumentException($"Parameter {nameof(galleryUniqueName)} cannot be null or empty", nameof(galleryUniqueName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("SharedGalleryCollection.Get");
@@ -109,7 +110,7 @@ namespace MgmtHierarchicalNonResource
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 response.Value.Id = SharedGallery.CreateResourceIdentifier(Id.SubscriptionId, _location, galleryUniqueName);
-                return Response.FromValue(new SharedGallery(Parent, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SharedGallery(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -121,12 +122,12 @@ namespace MgmtHierarchicalNonResource
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="galleryUniqueName"> The unique name of the Shared Gallery. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="galleryUniqueName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="galleryUniqueName"/> is null or empty. </exception>
         public virtual Response<SharedGallery> GetIfExists(string galleryUniqueName, CancellationToken cancellationToken = default)
         {
-            if (galleryUniqueName == null)
+            if (string.IsNullOrEmpty(galleryUniqueName))
             {
-                throw new ArgumentNullException(nameof(galleryUniqueName));
+                throw new ArgumentException($"Parameter {nameof(galleryUniqueName)} cannot be null or empty", nameof(galleryUniqueName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("SharedGalleryCollection.GetIfExists");
@@ -149,12 +150,12 @@ namespace MgmtHierarchicalNonResource
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="galleryUniqueName"> The unique name of the Shared Gallery. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="galleryUniqueName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="galleryUniqueName"/> is null or empty. </exception>
         public async virtual Task<Response<SharedGallery>> GetIfExistsAsync(string galleryUniqueName, CancellationToken cancellationToken = default)
         {
-            if (galleryUniqueName == null)
+            if (string.IsNullOrEmpty(galleryUniqueName))
             {
-                throw new ArgumentNullException(nameof(galleryUniqueName));
+                throw new ArgumentException($"Parameter {nameof(galleryUniqueName)} cannot be null or empty", nameof(galleryUniqueName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("SharedGalleryCollection.GetIfExists");
@@ -177,12 +178,12 @@ namespace MgmtHierarchicalNonResource
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="galleryUniqueName"> The unique name of the Shared Gallery. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="galleryUniqueName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="galleryUniqueName"/> is null or empty. </exception>
         public virtual Response<bool> Exists(string galleryUniqueName, CancellationToken cancellationToken = default)
         {
-            if (galleryUniqueName == null)
+            if (string.IsNullOrEmpty(galleryUniqueName))
             {
-                throw new ArgumentNullException(nameof(galleryUniqueName));
+                throw new ArgumentException($"Parameter {nameof(galleryUniqueName)} cannot be null or empty", nameof(galleryUniqueName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("SharedGalleryCollection.Exists");
@@ -202,12 +203,12 @@ namespace MgmtHierarchicalNonResource
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="galleryUniqueName"> The unique name of the Shared Gallery. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="galleryUniqueName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="galleryUniqueName"/> is null or empty. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string galleryUniqueName, CancellationToken cancellationToken = default)
         {
-            if (galleryUniqueName == null)
+            if (string.IsNullOrEmpty(galleryUniqueName))
             {
-                throw new ArgumentNullException(nameof(galleryUniqueName));
+                throw new ArgumentException($"Parameter {nameof(galleryUniqueName)} cannot be null or empty", nameof(galleryUniqueName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("SharedGalleryCollection.Exists");
@@ -243,7 +244,7 @@ namespace MgmtHierarchicalNonResource
                     return Page.FromValues(response.Value.Value.Select(value =>
                     {
                         value.Id = SharedGallery.CreateResourceIdentifier(Id.SubscriptionId, _location, value.Name);
-                        return new SharedGallery(Parent, value);
+                        return new SharedGallery(this, value);
                     }
                     ), response.Value.NextLink, response.GetRawResponse());
                 }
@@ -263,7 +264,7 @@ namespace MgmtHierarchicalNonResource
                     return Page.FromValues(response.Value.Value.Select(value =>
                     {
                         value.Id = SharedGallery.CreateResourceIdentifier(Id.SubscriptionId, _location, value.Name);
-                        return new SharedGallery(Parent, value);
+                        return new SharedGallery(this, value);
                     }
                     ), response.Value.NextLink, response.GetRawResponse());
                 }
@@ -295,7 +296,7 @@ namespace MgmtHierarchicalNonResource
                     return Page.FromValues(response.Value.Value.Select(value =>
                     {
                         value.Id = SharedGallery.CreateResourceIdentifier(Id.SubscriptionId, _location, value.Name);
-                        return new SharedGallery(Parent, value);
+                        return new SharedGallery(this, value);
                     }
                     ), response.Value.NextLink, response.GetRawResponse());
                 }
@@ -315,7 +316,7 @@ namespace MgmtHierarchicalNonResource
                     return Page.FromValues(response.Value.Value.Select(value =>
                     {
                         value.Id = SharedGallery.CreateResourceIdentifier(Id.SubscriptionId, _location, value.Name);
-                        return new SharedGallery(Parent, value);
+                        return new SharedGallery(this, value);
                     }
                     ), response.Value.NextLink, response.GetRawResponse());
                 }

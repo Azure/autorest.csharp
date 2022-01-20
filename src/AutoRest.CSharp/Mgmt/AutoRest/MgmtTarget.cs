@@ -48,6 +48,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var addedFilenames = new HashSet<string>();
             BuildContext<MgmtOutputLibrary> context = new BuildContext<MgmtOutputLibrary>(codeModel, configuration, sourceInputModel);
             var serializeWriter = new SerializationWriter();
+            var isArmCore = context.Configuration.MgmtConfiguration.IsArmCore;
 
             foreach (var model in context.Library.Models)
             {
@@ -111,6 +112,48 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 AddGeneratedFile(project, $"{resource.Type.Name}.cs", codeWriter.ToString());
             }
 
+            if (!isArmCore)
+            {
+                // we will write the ResourceGroupExtensions class even if it does not contain anything
+                var resourceGroupExtensionsCodeWriter = new CodeWriter();
+                new ResourceGroupExtensionsWriter(resourceGroupExtensionsCodeWriter, context.Library.ResourceGroupExtensions, context).Write();
+                AddGeneratedFile(project, $"Extensions/{context.Library.ResourceGroupExtensions.Type.Name}.cs", resourceGroupExtensionsCodeWriter.ToString());
+
+                // we will write the SubscriptionExtensions class even if it does not contain anything
+                var subscriptionExtensionsCodeWriter = new CodeWriter();
+                new SubscriptionExtensionsWriter(subscriptionExtensionsCodeWriter, context.Library.SubscriptionExtensions, context).Write();
+                AddGeneratedFile(project, $"Extensions/{context.Library.SubscriptionExtensions.Type.Name}.cs", subscriptionExtensionsCodeWriter.ToString());
+            }
+
+            if (!context.Library.ManagementGroupExtensions.IsEmpty)
+            {
+                var managementGroupExtensionsCodeWriter = new CodeWriter();
+                new ManagementGroupExtensionsWriter(managementGroupExtensionsCodeWriter, context.Library.ManagementGroupExtensions, context, isArmCore).Write();
+                AddGeneratedFile(project, isArmCore ? $"{context.Library.ManagementGroupExtensions.ResourceName}.cs" : $"Extensions/{context.Library.ManagementGroupExtensions.Type.Name}.cs", managementGroupExtensionsCodeWriter.ToString());
+            }
+
+            if (!context.Library.TenantExtensions.IsEmpty)
+            {
+                var tenantExtensionsCodeWriter = new CodeWriter();
+                new TenantExtensionsWriter(tenantExtensionsCodeWriter, context.Library.TenantExtensions, context).Write();
+                AddGeneratedFile(project, $"Extensions/{context.Library.TenantExtensions.Type.Name}.cs", tenantExtensionsCodeWriter.ToString());
+            }
+
+            if (!context.Library.ArmClientExtensions.IsEmpty)
+            {
+                var armClientExtensionsCodeWriter = new CodeWriter();
+                new ArmClientExtensionsWriter(armClientExtensionsCodeWriter, context.Library.ArmClientExtensions, context, isArmCore).Write();
+                AddGeneratedFile(project, isArmCore ? $"{context.Library.ArmClientExtensions.ResourceName}.cs" : $"Extensions/{context.Library.ArmClientExtensions.Type.Name}.cs", armClientExtensionsCodeWriter.ToString());
+            }
+
+            if (!context.Library.ArmResourceExtensions.IsEmpty)
+            {
+                var armResourceExtensionsCodeWriter = new CodeWriter();
+                new ArmResourceExtensionsWriter(armResourceExtensionsCodeWriter, context.Library.ArmResourceExtensions, context, isArmCore).Write();
+                AddGeneratedFile(project, isArmCore ? $"{context.Library.ArmResourceExtensions.ResourceName}.cs" : $"Extensions/{context.Library.ArmResourceExtensions.Type.Name}.cs", armResourceExtensionsCodeWriter.ToString());
+            }
+
+            // we must output the LROs and fake LROs as the last step to sure all the LRO and fake LRO object could be initialized.
             foreach (var operation in context.Library.LongRunningOperations)
             {
                 var codeWriter = new CodeWriter();
@@ -125,44 +168,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 new NonLongRunningOperationWriter().Write(codeWriter, operation);
 
                 AddGeneratedFile(project, $"LongRunningOperation/{operation.Type.Name}.cs", codeWriter.ToString());
-            }
-
-            // we will write the ResourceGroupExtensions class even if it does not contain anything
-            var resourceGroupExtensionsCodeWriter = new CodeWriter();
-            new ResourceGroupExtensionsWriter(resourceGroupExtensionsCodeWriter, context.Library.ResourceGroupExtensions, context).Write();
-            AddGeneratedFile(project, $"Extensions/{context.Library.ResourceGroupExtensions.Type.Name}.cs", resourceGroupExtensionsCodeWriter.ToString());
-
-            // we will write the SubscriptionExtensions class even if it does not contain anything
-            var subscriptionExtensionsCodeWriter = new CodeWriter();
-            new SubscriptionExtensionsWriter(subscriptionExtensionsCodeWriter, context.Library.SubscriptionExtensions, context).Write();
-            AddGeneratedFile(project, $"Extensions/{context.Library.SubscriptionExtensions.Type.Name}.cs", subscriptionExtensionsCodeWriter.ToString());
-
-            if (!context.Library.ManagementGroupExtensions.IsEmpty)
-            {
-                var managementGroupExtensionsCodeWriter = new CodeWriter();
-                new ManagementGroupExtensionsWriter(managementGroupExtensionsCodeWriter, context.Library.ManagementGroupExtensions, context).Write();
-                AddGeneratedFile(project, $"Extensions/{context.Library.ManagementGroupExtensions.Type.Name}.cs", managementGroupExtensionsCodeWriter.ToString());
-            }
-
-            if (!context.Library.TenantExtensions.IsEmpty)
-            {
-                var tenantExtensionsCodeWriter = new CodeWriter();
-                new TenantExtensionsWriter(tenantExtensionsCodeWriter, context.Library.TenantExtensions, context).Write();
-                AddGeneratedFile(project, $"Extensions/{context.Library.TenantExtensions.Type.Name}.cs", tenantExtensionsCodeWriter.ToString());
-            }
-
-            if (!context.Library.ArmClientExtensions.IsEmpty)
-            {
-                var armClientExtensionsCodeWriter = new CodeWriter();
-                new ArmClientExtensionsWriter(armClientExtensionsCodeWriter, context.Library.ArmClientExtensions, context).Write();
-                AddGeneratedFile(project, $"Extensions/{context.Library.ArmClientExtensions.Type.Name}.cs", armClientExtensionsCodeWriter.ToString());
-            }
-
-            if (!context.Library.ArmResourceExtensions.IsEmpty)
-            {
-                var armResourceExtensionsCodeWriter = new CodeWriter();
-                new ArmResourceExtensionsWriter(armResourceExtensionsCodeWriter, context.Library.ArmResourceExtensions, context).Write();
-                AddGeneratedFile(project, $"Extensions/{context.Library.ArmResourceExtensions.Type.Name}.cs", armResourceExtensionsCodeWriter.ToString());
             }
 
             if (_overriddenProjectFilenames.TryGetValue(project, out var overriddenFilenames))

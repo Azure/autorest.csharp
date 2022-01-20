@@ -38,7 +38,8 @@ namespace MgmtListMethods
         internal ResGrpParentWithNonResChCollection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _resGrpParentWithNonResChesRestClient = new ResGrpParentWithNonResChesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            ClientOptions.TryGetApiVersion(ResGrpParentWithNonResCh.ResourceType, out string apiVersion);
+            _resGrpParentWithNonResChesRestClient = new ResGrpParentWithNonResChesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -56,16 +57,17 @@ namespace MgmtListMethods
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
         /// OperationId: ResGrpParentWithNonResChes_CreateOrUpdate
         /// <summary> Create or update. </summary>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="resGrpParentWithNonResChName"> Name. </param>
         /// <param name="parameters"> Parameters supplied to the Create. </param>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithNonResChName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="resGrpParentWithNonResChName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public virtual ResGrpParentWithNonResChCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string resGrpParentWithNonResChName, ResGrpParentWithNonResChData parameters, CancellationToken cancellationToken = default)
         {
-            if (resGrpParentWithNonResChName == null)
+            if (string.IsNullOrEmpty(resGrpParentWithNonResChName))
             {
-                throw new ArgumentNullException(nameof(resGrpParentWithNonResChName));
+                throw new ArgumentException($"Parameter {nameof(resGrpParentWithNonResChName)} cannot be null or empty", nameof(resGrpParentWithNonResChName));
             }
             if (parameters == null)
             {
@@ -77,7 +79,7 @@ namespace MgmtListMethods
             try
             {
                 var response = _resGrpParentWithNonResChesRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentWithNonResChName, parameters, cancellationToken);
-                var operation = new ResGrpParentWithNonResChCreateOrUpdateOperation(Parent, response);
+                var operation = new ResGrpParentWithNonResChCreateOrUpdateOperation(this, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -93,16 +95,17 @@ namespace MgmtListMethods
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
         /// OperationId: ResGrpParentWithNonResChes_CreateOrUpdate
         /// <summary> Create or update. </summary>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="resGrpParentWithNonResChName"> Name. </param>
         /// <param name="parameters"> Parameters supplied to the Create. </param>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithNonResChName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="resGrpParentWithNonResChName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public async virtual Task<ResGrpParentWithNonResChCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string resGrpParentWithNonResChName, ResGrpParentWithNonResChData parameters, CancellationToken cancellationToken = default)
         {
-            if (resGrpParentWithNonResChName == null)
+            if (string.IsNullOrEmpty(resGrpParentWithNonResChName))
             {
-                throw new ArgumentNullException(nameof(resGrpParentWithNonResChName));
+                throw new ArgumentException($"Parameter {nameof(resGrpParentWithNonResChName)} cannot be null or empty", nameof(resGrpParentWithNonResChName));
             }
             if (parameters == null)
             {
@@ -114,7 +117,7 @@ namespace MgmtListMethods
             try
             {
                 var response = await _resGrpParentWithNonResChesRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentWithNonResChName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new ResGrpParentWithNonResChCreateOrUpdateOperation(Parent, response);
+                var operation = new ResGrpParentWithNonResChCreateOrUpdateOperation(this, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -132,12 +135,12 @@ namespace MgmtListMethods
         /// <summary> Retrieves information. </summary>
         /// <param name="resGrpParentWithNonResChName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithNonResChName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="resGrpParentWithNonResChName"/> is null or empty. </exception>
         public virtual Response<ResGrpParentWithNonResCh> Get(string resGrpParentWithNonResChName, CancellationToken cancellationToken = default)
         {
-            if (resGrpParentWithNonResChName == null)
+            if (string.IsNullOrEmpty(resGrpParentWithNonResChName))
             {
-                throw new ArgumentNullException(nameof(resGrpParentWithNonResChName));
+                throw new ArgumentException($"Parameter {nameof(resGrpParentWithNonResChName)} cannot be null or empty", nameof(resGrpParentWithNonResChName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("ResGrpParentWithNonResChCollection.Get");
@@ -147,7 +150,7 @@ namespace MgmtListMethods
                 var response = _resGrpParentWithNonResChesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentWithNonResChName, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new ResGrpParentWithNonResCh(Parent, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ResGrpParentWithNonResCh(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -162,12 +165,12 @@ namespace MgmtListMethods
         /// <summary> Retrieves information. </summary>
         /// <param name="resGrpParentWithNonResChName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithNonResChName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="resGrpParentWithNonResChName"/> is null or empty. </exception>
         public async virtual Task<Response<ResGrpParentWithNonResCh>> GetAsync(string resGrpParentWithNonResChName, CancellationToken cancellationToken = default)
         {
-            if (resGrpParentWithNonResChName == null)
+            if (string.IsNullOrEmpty(resGrpParentWithNonResChName))
             {
-                throw new ArgumentNullException(nameof(resGrpParentWithNonResChName));
+                throw new ArgumentException($"Parameter {nameof(resGrpParentWithNonResChName)} cannot be null or empty", nameof(resGrpParentWithNonResChName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("ResGrpParentWithNonResChCollection.Get");
@@ -177,7 +180,7 @@ namespace MgmtListMethods
                 var response = await _resGrpParentWithNonResChesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentWithNonResChName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new ResGrpParentWithNonResCh(Parent, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ResGrpParentWithNonResCh(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -189,12 +192,12 @@ namespace MgmtListMethods
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="resGrpParentWithNonResChName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithNonResChName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="resGrpParentWithNonResChName"/> is null or empty. </exception>
         public virtual Response<ResGrpParentWithNonResCh> GetIfExists(string resGrpParentWithNonResChName, CancellationToken cancellationToken = default)
         {
-            if (resGrpParentWithNonResChName == null)
+            if (string.IsNullOrEmpty(resGrpParentWithNonResChName))
             {
-                throw new ArgumentNullException(nameof(resGrpParentWithNonResChName));
+                throw new ArgumentException($"Parameter {nameof(resGrpParentWithNonResChName)} cannot be null or empty", nameof(resGrpParentWithNonResChName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("ResGrpParentWithNonResChCollection.GetIfExists");
@@ -216,12 +219,12 @@ namespace MgmtListMethods
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="resGrpParentWithNonResChName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithNonResChName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="resGrpParentWithNonResChName"/> is null or empty. </exception>
         public async virtual Task<Response<ResGrpParentWithNonResCh>> GetIfExistsAsync(string resGrpParentWithNonResChName, CancellationToken cancellationToken = default)
         {
-            if (resGrpParentWithNonResChName == null)
+            if (string.IsNullOrEmpty(resGrpParentWithNonResChName))
             {
-                throw new ArgumentNullException(nameof(resGrpParentWithNonResChName));
+                throw new ArgumentException($"Parameter {nameof(resGrpParentWithNonResChName)} cannot be null or empty", nameof(resGrpParentWithNonResChName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("ResGrpParentWithNonResChCollection.GetIfExists");
@@ -243,12 +246,12 @@ namespace MgmtListMethods
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="resGrpParentWithNonResChName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithNonResChName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="resGrpParentWithNonResChName"/> is null or empty. </exception>
         public virtual Response<bool> Exists(string resGrpParentWithNonResChName, CancellationToken cancellationToken = default)
         {
-            if (resGrpParentWithNonResChName == null)
+            if (string.IsNullOrEmpty(resGrpParentWithNonResChName))
             {
-                throw new ArgumentNullException(nameof(resGrpParentWithNonResChName));
+                throw new ArgumentException($"Parameter {nameof(resGrpParentWithNonResChName)} cannot be null or empty", nameof(resGrpParentWithNonResChName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("ResGrpParentWithNonResChCollection.Exists");
@@ -268,12 +271,12 @@ namespace MgmtListMethods
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="resGrpParentWithNonResChName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithNonResChName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="resGrpParentWithNonResChName"/> is null or empty. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string resGrpParentWithNonResChName, CancellationToken cancellationToken = default)
         {
-            if (resGrpParentWithNonResChName == null)
+            if (string.IsNullOrEmpty(resGrpParentWithNonResChName))
             {
-                throw new ArgumentNullException(nameof(resGrpParentWithNonResChName));
+                throw new ArgumentException($"Parameter {nameof(resGrpParentWithNonResChName)} cannot be null or empty", nameof(resGrpParentWithNonResChName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("ResGrpParentWithNonResChCollection.Exists");
@@ -305,7 +308,7 @@ namespace MgmtListMethods
                 try
                 {
                     var response = _resGrpParentWithNonResChesRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentWithNonResCh(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentWithNonResCh(this, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -320,7 +323,7 @@ namespace MgmtListMethods
                 try
                 {
                     var response = _resGrpParentWithNonResChesRestClient.ListNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentWithNonResCh(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentWithNonResCh(this, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -346,7 +349,7 @@ namespace MgmtListMethods
                 try
                 {
                     var response = await _resGrpParentWithNonResChesRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentWithNonResCh(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentWithNonResCh(this, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -361,7 +364,7 @@ namespace MgmtListMethods
                 try
                 {
                     var response = await _resGrpParentWithNonResChesRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentWithNonResCh(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentWithNonResCh(this, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {

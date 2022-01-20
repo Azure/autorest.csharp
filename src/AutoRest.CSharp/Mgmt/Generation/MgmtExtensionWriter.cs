@@ -29,9 +29,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
     internal abstract class MgmtExtensionWriter : MgmtClientBaseWriter
     {
         protected MgmtExtensions _extensions;
-        public MgmtExtensionWriter(CodeWriter writer, MgmtExtensions extensions, BuildContext<MgmtOutputLibrary> context) : base(writer, extensions, context)
+
+        protected bool IsArmCore;
+        public MgmtExtensionWriter(CodeWriter writer, MgmtExtensions extensions, BuildContext<MgmtOutputLibrary> context, bool isArmCore = false) : base(writer, extensions, context)
         {
             _extensions = extensions;
+            IsArmCore = isArmCore;
         }
 
         protected abstract string Description { get; }
@@ -47,14 +50,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected void WriteGetRestOperations(MgmtRestClient restClient)
         {
             _writer.Line();
-            _writer.Append($"private static {restClient.Type} Get{restClient.Type.Name}({typeof(ClientDiagnostics)} clientDiagnostics, {typeof(TokenCredential)} credential, {typeof(ArmClientOptions)} clientOptions, {typeof(HttpPipeline)} pipeline, ");
+            _writer.Append($"private static {restClient.Type} Get{restClient.Type.Name}({typeof(ClientDiagnostics)} clientDiagnostics, {typeof(HttpPipeline)} pipeline, {typeof(ArmClientOptions)} clientOptions, ");
             // TODO: Use https://dev.azure.com/azure-mgmt-ex/DotNET%20Management%20SDK/_workitems/edit/5783 rest client parameters
             foreach (var parameter in restClient.Parameters)
             {
-                if (parameter.IsApiVersionParameter)
-                {
-                    continue;
-                }
                 _writer.WriteParameter(parameter);
             }
             _writer.RemoveTrailingComma();
@@ -65,10 +64,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.Append($"return new {restClient.Type}(clientDiagnostics, pipeline, clientOptions, ");
                 foreach (var parameter in restClient.Parameters)
                 {
-                    if (parameter.IsApiVersionParameter)
-                    {
-                        continue;
-                    }
                     _writer.Append($"{parameter.Name}, ");
                 }
                 _writer.RemoveTrailingComma();
@@ -83,11 +78,15 @@ namespace AutoRest.CSharp.Mgmt.Generation
             if (collection == null)
                 throw new InvalidOperationException($"We are about to write a {resource.Type.Name} resource entry, but it does not have a collection, this cannot happen");
             _writer.WriteXmlDocumentationSummary($"Gets an object representing a {collection.Type.Name} along with the instance operations that can be performed on it.");
-            _writer.WriteXmlDocumentationParameter($"{ExtensionOperationVariableName}", $"The <see cref=\"{ExtensionOperationVariableType}\" /> instance the method will execute against.");
+            if (!IsArmCore)
+            {
+                _writer.WriteXmlDocumentationParameter($"{ExtensionOperationVariableName}", $"The <see cref=\"{ExtensionOperationVariableType}\" /> instance the method will execute against.");
+            }
             _writer.WriteXmlDocumentationParameters(collection.ExtraConstructorParameters);
             _writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{collection.Type}\" /> object.");
-
-            _writer.Append($"public static {collection.Type.Name} Get{resource.Type.Name.ResourceNameToPlural()}(this {ExtensionOperationVariableType} {ExtensionOperationVariableName}, ");
+            var modifier = IsArmCore ? "virtual" : "static";
+            var instanceParameter = IsArmCore ? string.Empty : $"this {ExtensionOperationVariableType} {ExtensionOperationVariableName}, ";
+            _writer.Append($"public {modifier} {collection.Type.Name} Get{resource.Type.Name.ResourceNameToPlural()}({instanceParameter}");
             foreach (var parameter in collection.ExtraConstructorParameters)
             {
                 _writer.WriteParameter(parameter);
@@ -109,9 +108,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected override void WriteSingletonResourceEntry(Resource resource, string singletonResourceSuffix)
         {
             _writer.WriteXmlDocumentationSummary($"Gets an object representing a {resource.Type.Name} along with the instance operations that can be performed on it.");
-            _writer.WriteXmlDocumentationParameter($"{ExtensionOperationVariableName}", $"The <see cref=\"{ExtensionOperationVariableType}\" /> instance the method will execute against.");
+            if (!IsArmCore)
+            {
+                _writer.WriteXmlDocumentationParameter($"{ExtensionOperationVariableName}", $"The <see cref=\"{ExtensionOperationVariableType}\" /> instance the method will execute against.");
+            }
             _writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{resource.Type.Name}\" /> object.");
-            using (_writer.Scope($"public static {resource.Type.Name} Get{resource.Type.Name}(this {ExtensionOperationVariableType} {ExtensionOperationVariableName})"))
+            var modifier = IsArmCore ? "virtual" : "static";
+            var instanceParameter = IsArmCore ? string.Empty : $"this {ExtensionOperationVariableType} {ExtensionOperationVariableName}";
+            using (_writer.Scope($"public {modifier} {resource.Type.Name} Get{resource.Type.Name}({instanceParameter})"))
             {
                 _writer.Line($"return new {resource.Type.Name}({ExtensionOperationVariableName}, new {typeof(Azure.Core.ResourceIdentifier)}({ExtensionOperationVariableName}.Id + \"/{singletonResourceSuffix}\"));");
             }
@@ -133,15 +137,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             // TODO -- since we are combining multiple operations under different parents, which description should we leave here?
             // TODO -- find a way to properly get the LRO response type here. Temporarily we are using the first one
-            var lroObjectType = GetLROObjectType(clientOperation.First().Operation, async);
-            var responseType = lroObjectType.WrapAsync(async);
+            var lroObjectType = clientOperation.ReturnType!; // LRO return type will never be null
 
             _writer.WriteXmlDocumentationSummary($"{clientOperation.Description}");
-            WriteLROMethodSignature(responseType, methodName, methodParameters, async, clientOperation.Accessibility, true);
+            WriteLROMethodSignature(lroObjectType, methodName, methodParameters, async, clientOperation.Accessibility, true);
 
             using (_writer.Scope())
             {
-                _writer.WriteParameterNullChecks(methodParameters);
+                _writer.WriteParameterNullOrEmptyChecks(methodParameters);
 
                 using (WriteExtensionContextScope(_writer, ExtensionOperationVariableName, async))
                 {
@@ -159,7 +162,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected override void WriteLROMethodBranch(CSharpType lroObjectType, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMapping, bool async)
         {
-            WriteRestOperationAssignment(operation.RestClient);
+            WriteRestOperationAssignment(operation);
             _writer.Append($"var response = {GetAwait(async)} ");
             _writer.Append($"{GetRestClientVariableName(operation.RestClient)}.{CreateMethodName(operation.Method.Name, async)}(");
             WriteArguments(_writer, parameterMapping);
@@ -181,7 +184,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             using (_writer.Scope())
             {
-                _writer.WriteParameterNullChecks(methodParameters);
+                _writer.WriteParameterNullOrEmptyChecks(methodParameters);
 
                 // the wrapper for paging method will never be async
                 using (WriteExtensionContextScope(_writer, ExtensionOperationVariableName, false))
@@ -204,7 +207,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             WriteClientDiagnosticsAssignment("options");
 
-            WriteRestOperationAssignment(operation.RestClient);
+            WriteRestOperationAssignment(operation);
 
             base.WritePagingMethodBranch(itemType, diagnostic, diagnosticVariable, operation, parameterMappings, async);
         }
@@ -218,7 +221,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.WriteXmlDocumentationParameter(parameter);
             }
             _writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
-            _writer.WriteXmlDocumentationRequiredParametersException(methodParameters);
+            _writer.WriteXmlDocumentationMgmtRequiredParametersException(methodParameters);
             _writer.WriteXmlDocumentationReturns($"A collection of resource operations that may take multiple service requests to iterate over.");
 
             var responseType = actualItemType.WrapPageable(async);
@@ -230,18 +233,18 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Line($"{typeof(CancellationToken)} cancellationToken = default)");
         }
 
-        protected override void WriteLROMethodSignature(CSharpType responseType, string methodName, IReadOnlyList<Parameter> methodParameters, bool async,
+        protected override void WriteLROMethodSignature(CSharpType returnType, string methodName, IReadOnlyList<Parameter> methodParameters, bool async,
             string accessibility = "public", bool isVirtual = true)
         {
             _writer.WriteXmlDocumentationParameter($"{ExtensionOperationVariableName}", $"The <see cref=\"{ExtensionOperationVariableType}\" /> instance the method will execute against.");
+            _writer.WriteXmlDocumentationParameter("waitForCompletion", $"Waits for the completion of the long running operations.");
             foreach (var parameter in methodParameters)
             {
                 _writer.WriteXmlDocumentationParameter(parameter);
             }
-            _writer.WriteXmlDocumentationParameter("waitForCompletion", $"Waits for the completion of the long running operations.");
             _writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
-            _writer.WriteXmlDocumentationRequiredParametersException(methodParameters);
-            _writer.Append($"{accessibility} static {GetAsyncKeyword(async)} {responseType} {CreateMethodName(methodName, async)}(this {ExtensionOperationVariableType} {ExtensionOperationVariableName}, ");
+            _writer.WriteXmlDocumentationMgmtRequiredParametersException(methodParameters);
+            _writer.Append($"{accessibility} static {GetAsyncKeyword(async)} {returnType.WrapAsync(async)} {CreateMethodName(methodName, async)}(this {ExtensionOperationVariableType} {ExtensionOperationVariableName}, ");
             _writer.Append($"bool waitForCompletion, ");
             foreach (var parameter in methodParameters)
             {
@@ -260,7 +263,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.WriteXmlDocumentationParameter(parameter);
             }
             _writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
-            _writer.WriteXmlDocumentationRequiredParametersException(methodParameters);
+            _writer.WriteXmlDocumentationMgmtRequiredParametersException(methodParameters);
             _writer.Append($"{accessibility} static {GetAsyncKeyword(async)} {responseType} {CreateMethodName(methodName, async)}(this {ExtensionOperationVariableType} {ExtensionOperationVariableName}, ");
 
             foreach (var parameter in methodParameters)
@@ -282,7 +285,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             using (_writer.Scope())
             {
-                _writer.WriteParameterNullChecks(methodParameters);
+                _writer.WriteParameterNullOrEmptyChecks(methodParameters);
 
                 using (WriteExtensionContextScope(_writer, ExtensionOperationVariableName, async))
                 {
@@ -300,7 +303,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected override void WriteNormalMethodBranch(MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMappings, bool async, bool shouldThrowExceptionWhenNull = false)
         {
-            WriteRestOperationAssignment(operation.RestClient);
+            WriteRestOperationAssignment(operation);
 
             base.WriteNormalMethodBranch(operation, parameterMappings, async, shouldThrowExceptionWhenNull);
         }
@@ -317,20 +320,15 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 return null;
 
             // we need to find the correct resource type that links with this resource data
-            var candidates = new List<Resource>();
-            foreach (var resource in Context.Library.ArmResources)
-            {
-                if (resource.ResourceData == data)
-                    candidates.Add(resource);
-            }
+            var candidates = Context.Library.FindResources(data);
+
+            // return null when there is no match
+            if (!candidates.Any())
+                return null;
 
             // when we only find one result, just return it.
-            if (candidates.Count == 1)
+            if (candidates.Count() == 1)
                 return candidates.Single();
-
-            // we should have a list of candidates, return the original type if there is no candidates
-            if (candidates.Count == 0)
-                return null;
 
             // if there is more candidates than one, we are going to some more matching to see if we could determine one
             var resourceType = operation.RequestPath.GetResourceType(Config);
@@ -367,10 +365,22 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Line($"var {ClientDiagnosticsVariable} = new {typeof(ClientDiagnostics)}({optionsVariable});");
         }
 
-        private void WriteRestOperationAssignment(MgmtRestClient restClient)
+        private void WriteRestOperationAssignment(MgmtRestOperation operation)
         {
-            var subIdIfNeeded = restClient.Parameters.FirstOrDefault()?.Name == "subscriptionId" ? $", {ExtensionOperationVariableName}.Id.SubscriptionId" : "";
-            _writer.Line($"var {GetRestClientVariableName(restClient)} = Get{restClient.Type.Name}({ClientDiagnosticsVariable}, credential, options, pipeline{subIdIfNeeded}, baseUri);");
+            var resource = operation.Resource;
+            var restClient = operation.RestClient;
+            Func<MgmtRestClient, string> getSubId = (restClient) =>
+            {
+                return restClient.Parameters.FirstOrDefault()?.Name == "subscriptionId" ? $", {ExtensionOperationVariableName}.Id.SubscriptionId" : "";
+            };
+            if (resource != null)
+            {
+                WriteRestClientConstructionForResource(resource, new MgmtRestClient[] { restClient }, getSubId, ClientDiagnosticsVariable, "options", "pipeline", "baseUri", "Get", true);
+            }
+            else
+            {
+                _writer.Line($"{restClient.Type.Name} {GetRestClientVariableName(restClient)} = Get{restClient.Type.Name}({ClientDiagnosticsVariable}, pipeline, options{getSubId(restClient)}, baseUri);");
+            }
         }
 
         protected override ResourceTypeSegment GetBranchResourceType(RequestPath branch)

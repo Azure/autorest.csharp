@@ -21,9 +21,9 @@ namespace MgmtCollectionParent
     /// <summary> A class to add extension methods to Subscription. </summary>
     public static partial class SubscriptionExtensions
     {
-        private static ComputeManagementRestOperations GetComputeManagementRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, Uri endpoint = null)
+        private static ComputeManagementRestOperations GetComputeManagementRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = default)
         {
-            return new ComputeManagementRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint);
+            return new ComputeManagementRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.EdgeOrder/orders
@@ -34,15 +34,15 @@ namespace MgmtCollectionParent
         /// <param name="skipToken"> $skipToken is supported on Get list of order, which provides the next page in the list of order. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<OrderResource> GetOrderAtSubscriptionLevelAsync(this Subscription subscription, string skipToken = null, CancellationToken cancellationToken = default)
+        public static AsyncPageable<OrderResource> GetOrderResourcesAsync(this Subscription subscription, string skipToken = null, CancellationToken cancellationToken = default)
         {
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetComputeManagementRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                ComputeManagementRestOperations restOperations = GetComputeManagementRestOperations(clientDiagnostics, pipeline, options, baseUri);
                 async Task<Page<OrderResource>> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetOrderAtSubscriptionLevel");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetOrderResources");
                     scope.Start();
                     try
                     {
@@ -57,7 +57,7 @@ namespace MgmtCollectionParent
                 }
                 async Task<Page<OrderResource>> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetOrderAtSubscriptionLevel");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetOrderResources");
                     scope.Start();
                     try
                     {
@@ -83,15 +83,15 @@ namespace MgmtCollectionParent
         /// <param name="skipToken"> $skipToken is supported on Get list of order, which provides the next page in the list of order. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static Pageable<OrderResource> GetOrderAtSubscriptionLevel(this Subscription subscription, string skipToken = null, CancellationToken cancellationToken = default)
+        public static Pageable<OrderResource> GetOrderResources(this Subscription subscription, string skipToken = null, CancellationToken cancellationToken = default)
         {
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetComputeManagementRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                ComputeManagementRestOperations restOperations = GetComputeManagementRestOperations(clientDiagnostics, pipeline, options, baseUri);
                 Page<OrderResource> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetOrderAtSubscriptionLevel");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetOrderResources");
                     scope.Start();
                     try
                     {
@@ -106,7 +106,7 @@ namespace MgmtCollectionParent
                 }
                 Page<OrderResource> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetOrderAtSubscriptionLevel");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetOrderResources");
                     scope.Start();
                     try
                     {

@@ -38,7 +38,8 @@ namespace SubscriptionExtensions
         internal OvenCollection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _ovensRestClient = new OvensRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            ClientOptions.TryGetApiVersion(Oven.ResourceType, out string apiVersion);
+            _ovensRestClient = new OvensRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -56,16 +57,17 @@ namespace SubscriptionExtensions
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
         /// OperationId: Ovens_CreateOrUpdate
         /// <summary> The operation to create or update a virtual machine. Please note some properties can be set only during virtual machine creation. </summary>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="ovenName"> The name of the virtual machine. </param>
         /// <param name="parameters"> Parameters supplied to the Create Virtual Machine operation. </param>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="ovenName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="ovenName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public virtual OvenCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string ovenName, OvenData parameters, CancellationToken cancellationToken = default)
         {
-            if (ovenName == null)
+            if (string.IsNullOrEmpty(ovenName))
             {
-                throw new ArgumentNullException(nameof(ovenName));
+                throw new ArgumentException($"Parameter {nameof(ovenName)} cannot be null or empty", nameof(ovenName));
             }
             if (parameters == null)
             {
@@ -77,7 +79,7 @@ namespace SubscriptionExtensions
             try
             {
                 var response = _ovensRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, ovenName, parameters, cancellationToken);
-                var operation = new OvenCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _ovensRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, ovenName, parameters).Request, response);
+                var operation = new OvenCreateOrUpdateOperation(this, _clientDiagnostics, Pipeline, _ovensRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, ovenName, parameters).Request, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -93,16 +95,17 @@ namespace SubscriptionExtensions
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
         /// OperationId: Ovens_CreateOrUpdate
         /// <summary> The operation to create or update a virtual machine. Please note some properties can be set only during virtual machine creation. </summary>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="ovenName"> The name of the virtual machine. </param>
         /// <param name="parameters"> Parameters supplied to the Create Virtual Machine operation. </param>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="ovenName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="ovenName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public async virtual Task<OvenCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string ovenName, OvenData parameters, CancellationToken cancellationToken = default)
         {
-            if (ovenName == null)
+            if (string.IsNullOrEmpty(ovenName))
             {
-                throw new ArgumentNullException(nameof(ovenName));
+                throw new ArgumentException($"Parameter {nameof(ovenName)} cannot be null or empty", nameof(ovenName));
             }
             if (parameters == null)
             {
@@ -114,7 +117,7 @@ namespace SubscriptionExtensions
             try
             {
                 var response = await _ovensRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, ovenName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new OvenCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _ovensRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, ovenName, parameters).Request, response);
+                var operation = new OvenCreateOrUpdateOperation(this, _clientDiagnostics, Pipeline, _ovensRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, ovenName, parameters).Request, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -131,12 +134,12 @@ namespace SubscriptionExtensions
         /// OperationId: Ovens_Get
         /// <param name="ovenName"> The name of the virtual machine. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="ovenName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="ovenName"/> is null or empty. </exception>
         public virtual Response<Oven> Get(string ovenName, CancellationToken cancellationToken = default)
         {
-            if (ovenName == null)
+            if (string.IsNullOrEmpty(ovenName))
             {
-                throw new ArgumentNullException(nameof(ovenName));
+                throw new ArgumentException($"Parameter {nameof(ovenName)} cannot be null or empty", nameof(ovenName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("OvenCollection.Get");
@@ -146,7 +149,7 @@ namespace SubscriptionExtensions
                 var response = _ovensRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, ovenName, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new Oven(Parent, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Oven(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -160,12 +163,12 @@ namespace SubscriptionExtensions
         /// OperationId: Ovens_Get
         /// <param name="ovenName"> The name of the virtual machine. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="ovenName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="ovenName"/> is null or empty. </exception>
         public async virtual Task<Response<Oven>> GetAsync(string ovenName, CancellationToken cancellationToken = default)
         {
-            if (ovenName == null)
+            if (string.IsNullOrEmpty(ovenName))
             {
-                throw new ArgumentNullException(nameof(ovenName));
+                throw new ArgumentException($"Parameter {nameof(ovenName)} cannot be null or empty", nameof(ovenName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("OvenCollection.Get");
@@ -175,7 +178,7 @@ namespace SubscriptionExtensions
                 var response = await _ovensRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, ovenName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new Oven(Parent, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Oven(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -187,12 +190,12 @@ namespace SubscriptionExtensions
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="ovenName"> The name of the virtual machine. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="ovenName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="ovenName"/> is null or empty. </exception>
         public virtual Response<Oven> GetIfExists(string ovenName, CancellationToken cancellationToken = default)
         {
-            if (ovenName == null)
+            if (string.IsNullOrEmpty(ovenName))
             {
-                throw new ArgumentNullException(nameof(ovenName));
+                throw new ArgumentException($"Parameter {nameof(ovenName)} cannot be null or empty", nameof(ovenName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("OvenCollection.GetIfExists");
@@ -214,12 +217,12 @@ namespace SubscriptionExtensions
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="ovenName"> The name of the virtual machine. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="ovenName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="ovenName"/> is null or empty. </exception>
         public async virtual Task<Response<Oven>> GetIfExistsAsync(string ovenName, CancellationToken cancellationToken = default)
         {
-            if (ovenName == null)
+            if (string.IsNullOrEmpty(ovenName))
             {
-                throw new ArgumentNullException(nameof(ovenName));
+                throw new ArgumentException($"Parameter {nameof(ovenName)} cannot be null or empty", nameof(ovenName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("OvenCollection.GetIfExists");
@@ -241,12 +244,12 @@ namespace SubscriptionExtensions
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="ovenName"> The name of the virtual machine. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="ovenName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="ovenName"/> is null or empty. </exception>
         public virtual Response<bool> Exists(string ovenName, CancellationToken cancellationToken = default)
         {
-            if (ovenName == null)
+            if (string.IsNullOrEmpty(ovenName))
             {
-                throw new ArgumentNullException(nameof(ovenName));
+                throw new ArgumentException($"Parameter {nameof(ovenName)} cannot be null or empty", nameof(ovenName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("OvenCollection.Exists");
@@ -266,12 +269,12 @@ namespace SubscriptionExtensions
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="ovenName"> The name of the virtual machine. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="ovenName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="ovenName"/> is null or empty. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string ovenName, CancellationToken cancellationToken = default)
         {
-            if (ovenName == null)
+            if (string.IsNullOrEmpty(ovenName))
             {
-                throw new ArgumentNullException(nameof(ovenName));
+                throw new ArgumentException($"Parameter {nameof(ovenName)} cannot be null or empty", nameof(ovenName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("OvenCollection.Exists");
@@ -304,7 +307,7 @@ namespace SubscriptionExtensions
                 try
                 {
                     var response = _ovensRestClient.ListAll(Id.SubscriptionId, Id.ResourceGroupName, statusOnly, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new Oven(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new Oven(this, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -319,7 +322,7 @@ namespace SubscriptionExtensions
                 try
                 {
                     var response = _ovensRestClient.ListAllNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, statusOnly, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new Oven(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new Oven(this, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -346,7 +349,7 @@ namespace SubscriptionExtensions
                 try
                 {
                     var response = await _ovensRestClient.ListAllAsync(Id.SubscriptionId, Id.ResourceGroupName, statusOnly, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new Oven(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new Oven(this, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -361,7 +364,7 @@ namespace SubscriptionExtensions
                 try
                 {
                     var response = await _ovensRestClient.ListAllNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, statusOnly, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new Oven(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new Oven(this, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {

@@ -1,0 +1,44 @@
+{
+  "OutputFolder": ".",
+  "Namespace": "Azure.ResourceManager.OnlyCoreResource",
+  "LibraryName": null,
+  "SharedSourceFolders": [
+    "..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Generator.Shared",
+    "..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Azure.Core.Shared"
+  ],
+  "azure-arm": true,
+  "public-clients": true,
+  "skip-csproj-packagereference": true,
+  "OperationGroupToResourceType": {
+    "ResourceLinks": "Microsoft.Resources/links",
+    "DataPolicyManifests": "Microsoft.Authorization/dataPolicyManifests",
+    "Providers": "Microsoft.Resources/providers",
+    "ProviderResourceTypes": "Microsoft.Resources/providers/resourceTypes",
+    "Resources": "Microsoft.Resources/resources",
+    "ResourceGroups": "Microsoft.Resources/resourceGroups"
+  },
+  "OperationGroupToResource": {
+    "ResourceLinks": "ResourceLink",
+    "DataPolicyManifests": "DataPolicyManifest",
+    "Providers": "Provider"
+  },
+  "OperationGroupToParent": {
+    "PolicyAssignments": "tenant",
+    "PolicyDefinitions": "tenant",
+    "PolicySetDefinitions": "tenant",
+    "PolicyExemptions": "tenant",
+    "ManagementLocks": "tenant",
+    "ResourceLinks": "tenant",
+    "Providers": "tenant",
+    "ProviderResourceTypes": "Microsoft.Resources/providers"
+  },
+  "OperationGroupsToOmit": [
+    "Deployments",
+    "DeploymentOperations",
+    "Resources",
+    "ResourceGroups",
+    "Tags",
+    "Providers"
+  ],
+  "ArmCore": true
+}

@@ -38,7 +38,8 @@ namespace ResourceRename
         internal SshPublicKeyInfoCollection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _sshPublicKeysRestClient = new SshPublicKeysRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            ClientOptions.TryGetApiVersion(SshPublicKeyInfo.ResourceType, out string apiVersion);
+            _sshPublicKeysRestClient = new SshPublicKeysRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -56,16 +57,16 @@ namespace ResourceRename
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
         /// OperationId: SshPublicKeys_Create
         /// <summary> Creates a new SSH public key resource. </summary>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
         /// <param name="properties"> Contains information about SSH certificate public key and the path on the Linux VM where the public key is placed. </param>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="sshPublicKeyName"/> is null. </exception>
-        public virtual SshPublicKeyCreateOperation CreateOrUpdate(bool waitForCompletion, string sshPublicKeyName, SshPublicKeyProperties properties = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentException"> <paramref name="sshPublicKeyName"/> is null or empty. </exception>
+        public virtual SshPublicKeyInfoCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string sshPublicKeyName, SshPublicKeyProperties properties = null, CancellationToken cancellationToken = default)
         {
-            if (sshPublicKeyName == null)
+            if (string.IsNullOrEmpty(sshPublicKeyName))
             {
-                throw new ArgumentNullException(nameof(sshPublicKeyName));
+                throw new ArgumentException($"Parameter {nameof(sshPublicKeyName)} cannot be null or empty", nameof(sshPublicKeyName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("SshPublicKeyInfoCollection.CreateOrUpdate");
@@ -73,7 +74,7 @@ namespace ResourceRename
             try
             {
                 var response = _sshPublicKeysRestClient.Create(Id.SubscriptionId, Id.ResourceGroupName, sshPublicKeyName, properties, cancellationToken);
-                var operation = new SshPublicKeyCreateOperation(Parent, response);
+                var operation = new SshPublicKeyInfoCreateOrUpdateOperation(this, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -89,16 +90,16 @@ namespace ResourceRename
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
         /// OperationId: SshPublicKeys_Create
         /// <summary> Creates a new SSH public key resource. </summary>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
         /// <param name="properties"> Contains information about SSH certificate public key and the path on the Linux VM where the public key is placed. </param>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="sshPublicKeyName"/> is null. </exception>
-        public async virtual Task<SshPublicKeyCreateOperation> CreateOrUpdateAsync(bool waitForCompletion, string sshPublicKeyName, SshPublicKeyProperties properties = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentException"> <paramref name="sshPublicKeyName"/> is null or empty. </exception>
+        public async virtual Task<SshPublicKeyInfoCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string sshPublicKeyName, SshPublicKeyProperties properties = null, CancellationToken cancellationToken = default)
         {
-            if (sshPublicKeyName == null)
+            if (string.IsNullOrEmpty(sshPublicKeyName))
             {
-                throw new ArgumentNullException(nameof(sshPublicKeyName));
+                throw new ArgumentException($"Parameter {nameof(sshPublicKeyName)} cannot be null or empty", nameof(sshPublicKeyName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("SshPublicKeyInfoCollection.CreateOrUpdate");
@@ -106,7 +107,7 @@ namespace ResourceRename
             try
             {
                 var response = await _sshPublicKeysRestClient.CreateAsync(Id.SubscriptionId, Id.ResourceGroupName, sshPublicKeyName, properties, cancellationToken).ConfigureAwait(false);
-                var operation = new SshPublicKeyCreateOperation(Parent, response);
+                var operation = new SshPublicKeyInfoCreateOrUpdateOperation(this, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -124,12 +125,12 @@ namespace ResourceRename
         /// <summary> Retrieves information about an SSH public key. </summary>
         /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="sshPublicKeyName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="sshPublicKeyName"/> is null or empty. </exception>
         public virtual Response<SshPublicKeyInfo> Get(string sshPublicKeyName, CancellationToken cancellationToken = default)
         {
-            if (sshPublicKeyName == null)
+            if (string.IsNullOrEmpty(sshPublicKeyName))
             {
-                throw new ArgumentNullException(nameof(sshPublicKeyName));
+                throw new ArgumentException($"Parameter {nameof(sshPublicKeyName)} cannot be null or empty", nameof(sshPublicKeyName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("SshPublicKeyInfoCollection.Get");
@@ -139,7 +140,7 @@ namespace ResourceRename
                 var response = _sshPublicKeysRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, sshPublicKeyName, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new SshPublicKeyInfo(Parent, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SshPublicKeyInfo(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -154,12 +155,12 @@ namespace ResourceRename
         /// <summary> Retrieves information about an SSH public key. </summary>
         /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="sshPublicKeyName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="sshPublicKeyName"/> is null or empty. </exception>
         public async virtual Task<Response<SshPublicKeyInfo>> GetAsync(string sshPublicKeyName, CancellationToken cancellationToken = default)
         {
-            if (sshPublicKeyName == null)
+            if (string.IsNullOrEmpty(sshPublicKeyName))
             {
-                throw new ArgumentNullException(nameof(sshPublicKeyName));
+                throw new ArgumentException($"Parameter {nameof(sshPublicKeyName)} cannot be null or empty", nameof(sshPublicKeyName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("SshPublicKeyInfoCollection.Get");
@@ -169,7 +170,7 @@ namespace ResourceRename
                 var response = await _sshPublicKeysRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, sshPublicKeyName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new SshPublicKeyInfo(Parent, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SshPublicKeyInfo(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -181,12 +182,12 @@ namespace ResourceRename
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="sshPublicKeyName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="sshPublicKeyName"/> is null or empty. </exception>
         public virtual Response<SshPublicKeyInfo> GetIfExists(string sshPublicKeyName, CancellationToken cancellationToken = default)
         {
-            if (sshPublicKeyName == null)
+            if (string.IsNullOrEmpty(sshPublicKeyName))
             {
-                throw new ArgumentNullException(nameof(sshPublicKeyName));
+                throw new ArgumentException($"Parameter {nameof(sshPublicKeyName)} cannot be null or empty", nameof(sshPublicKeyName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("SshPublicKeyInfoCollection.GetIfExists");
@@ -208,12 +209,12 @@ namespace ResourceRename
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="sshPublicKeyName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="sshPublicKeyName"/> is null or empty. </exception>
         public async virtual Task<Response<SshPublicKeyInfo>> GetIfExistsAsync(string sshPublicKeyName, CancellationToken cancellationToken = default)
         {
-            if (sshPublicKeyName == null)
+            if (string.IsNullOrEmpty(sshPublicKeyName))
             {
-                throw new ArgumentNullException(nameof(sshPublicKeyName));
+                throw new ArgumentException($"Parameter {nameof(sshPublicKeyName)} cannot be null or empty", nameof(sshPublicKeyName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("SshPublicKeyInfoCollection.GetIfExists");
@@ -235,12 +236,12 @@ namespace ResourceRename
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="sshPublicKeyName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="sshPublicKeyName"/> is null or empty. </exception>
         public virtual Response<bool> Exists(string sshPublicKeyName, CancellationToken cancellationToken = default)
         {
-            if (sshPublicKeyName == null)
+            if (string.IsNullOrEmpty(sshPublicKeyName))
             {
-                throw new ArgumentNullException(nameof(sshPublicKeyName));
+                throw new ArgumentException($"Parameter {nameof(sshPublicKeyName)} cannot be null or empty", nameof(sshPublicKeyName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("SshPublicKeyInfoCollection.Exists");
@@ -260,12 +261,12 @@ namespace ResourceRename
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="sshPublicKeyName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="sshPublicKeyName"/> is null or empty. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string sshPublicKeyName, CancellationToken cancellationToken = default)
         {
-            if (sshPublicKeyName == null)
+            if (string.IsNullOrEmpty(sshPublicKeyName))
             {
-                throw new ArgumentNullException(nameof(sshPublicKeyName));
+                throw new ArgumentException($"Parameter {nameof(sshPublicKeyName)} cannot be null or empty", nameof(sshPublicKeyName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("SshPublicKeyInfoCollection.Exists");
@@ -297,7 +298,7 @@ namespace ResourceRename
                 try
                 {
                     var response = _sshPublicKeysRestClient.ListByResourceGroup(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new SshPublicKeyInfo(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new SshPublicKeyInfo(this, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -312,7 +313,7 @@ namespace ResourceRename
                 try
                 {
                     var response = _sshPublicKeysRestClient.ListByResourceGroupNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new SshPublicKeyInfo(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new SshPublicKeyInfo(this, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -338,7 +339,7 @@ namespace ResourceRename
                 try
                 {
                     var response = await _sshPublicKeysRestClient.ListByResourceGroupAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new SshPublicKeyInfo(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new SshPublicKeyInfo(this, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -353,7 +354,7 @@ namespace ResourceRename
                 try
                 {
                     var response = await _sshPublicKeysRestClient.ListByResourceGroupNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new SshPublicKeyInfo(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new SshPublicKeyInfo(this, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {

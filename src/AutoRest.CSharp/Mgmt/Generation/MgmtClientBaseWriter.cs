@@ -117,6 +117,27 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
+        protected void WriteRestClientConstructionForResource(
+            Resource resource,
+            IEnumerable<MgmtRestClient> restClients,
+            Func<MgmtRestClient, string> getSubId,
+            string clientDiagVariable,
+            string optionVariable,
+            string pipelineVariable,
+            string uriVariable,
+            string accessType,
+            bool writeVariable)
+        {
+            var nameSpace = $"{resource.Type.Namespace}.Models";
+            _writer.UseNamespace(nameSpace);
+            _writer.Line($"{optionVariable}.TryGetApiVersion({resource.Type.Name}.ResourceType, out string apiVersion);");
+            foreach (var restClient in restClients)
+            {
+                var variableDeclaration = writeVariable ? $"{restClient.Type.Name} " : string.Empty;
+                _writer.Line($"{variableDeclaration}{GetRestClientVariableName(restClient)} = {accessType}{restClient.Type.Name}({clientDiagVariable}, {pipelineVariable}, {optionVariable}{getSubId(restClient)}, {uriVariable}, apiVersion);");
+            }
+        }
+
         protected virtual string GetRestClientVariableName(RestClient client)
         {
             return client.OperationGroup.Key.IsNullOrEmpty()
@@ -256,7 +277,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             using (_writer.Scope())
             {
-                _writer.WriteParameterNullChecks(methodParameters);
+                _writer.WriteParameterNullOrEmptyChecks(methodParameters);
 
                 var diagnostic = new Diagnostic($"{TypeOfThis.Name}.{methodName}", Array.Empty<DiagnosticAttribute>());
                 WritePagingMethodBody(itemType, diagnostic, operationMappings, parameterMappings, async);
@@ -407,7 +428,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.WriteXmlDocumentationParameter(parameter);
             }
             _writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
-            _writer.WriteXmlDocumentationRequiredParametersException(methodParameters);
+            _writer.WriteXmlDocumentationMgmtRequiredParametersException(methodParameters);
             _writer.WriteXmlDocumentationReturns($"{(async ? "An async" : "A")} collection of <see cref=\"{actualItemType.Name}\" /> that may take multiple service requests to iterate over.");
 
             var responseType = actualItemType.WrapPageable(async);
@@ -506,7 +527,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.WriteXmlDocumentationParameter(parameter);
             }
             _writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
-            _writer.WriteXmlDocumentationRequiredParametersException(methodParameters);
+            _writer.WriteXmlDocumentationMgmtRequiredParametersException(methodParameters);
             _writer.Append($"{accessibility} {GetAsyncKeyword(async)} {GetVirtual(isVirtual)} {responseType} {CreateMethodName(methodName, async)}(");
 
             foreach (var parameter in methodParameters)
@@ -539,7 +560,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             using (_writer.Scope())
             {
-                _writer.WriteParameterNullChecks(methodParameters);
+                _writer.WriteParameterNullOrEmptyChecks(methodParameters);
                 var diagnostic = new Diagnostic($"{TypeOfThis.Name}.{methodName}", Array.Empty<DiagnosticAttribute>());
                 using (WriteDiagnosticScope(_writer, diagnostic, ClientDiagnosticsField))
                 {
@@ -621,15 +642,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             // TODO -- since we are combining multiple operations under different parents, which description should we leave here?
             // TODO -- find a way to properly get the LRO response type here. Temporarily we are using the first one
-            var lroObjectType = GetLROObjectType(clientOperation.First().Operation, async);
-            var responseType = lroObjectType.WrapAsync(async);
+            var lroObjectType = clientOperation.ReturnType!; // the LRO operation cannot be null
 
             _writer.WriteXmlDocumentationSummary($"{clientOperation.Description}");
-            WriteLROMethodSignature(responseType, methodName, methodParameters, async, clientOperation.Accessibility, true);
+            WriteLROMethodSignature(lroObjectType, methodName, methodParameters, async, clientOperation.Accessibility, true);
 
             using (_writer.Scope())
             {
-                _writer.WriteParameterNullChecks(methodParameters);
+                _writer.WriteParameterNullOrEmptyChecks(methodParameters);
 
                 Diagnostic diagnostic = new Diagnostic($"{TypeNameOfThis}.{methodName}", Array.Empty<DiagnosticAttribute>());
                 using (WriteDiagnosticScope(_writer, diagnostic, ClientDiagnosticsField))
@@ -702,17 +722,17 @@ namespace AutoRest.CSharp.Mgmt.Generation
             WriteLROResponse(lroObjectType, ClientDiagnosticsField, PipelineProperty, operation, parameterMapping, async);
         }
 
-        protected virtual void WriteLROMethodSignature(CSharpType responseType, string methodName, IReadOnlyList<Parameter> methodParameters, bool async,
+        protected virtual void WriteLROMethodSignature(CSharpType returnType, string methodName, IReadOnlyList<Parameter> methodParameters, bool async,
             string accessibility = "public", bool isVirtual = true)
         {
+            _writer.WriteXmlDocumentationParameter("waitForCompletion", $"Waits for the completion of the long running operations.");
             foreach (var parameter in methodParameters)
             {
                 _writer.WriteXmlDocumentationParameter(parameter);
             }
-            _writer.WriteXmlDocumentationParameter("waitForCompletion", $"Waits for the completion of the long running operations.");
             _writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
-            _writer.WriteXmlDocumentationRequiredParametersException(methodParameters);
-            _writer.Append($"{accessibility} {GetAsyncKeyword(async)} {GetVirtual(isVirtual)} {responseType} {CreateMethodName(methodName, async)}(");
+            _writer.WriteXmlDocumentationMgmtRequiredParametersException(methodParameters);
+            _writer.Append($"{accessibility} {GetAsyncKeyword(async)} {GetVirtual(isVirtual)} {returnType.WrapAsync(async)} {CreateMethodName(methodName, async)}(");
             _writer.Append($"bool waitForCompletion, ");
             foreach (var parameter in methodParameters)
             {
@@ -728,7 +748,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             if (operation.Operation.IsLongRunning)
             {
-                var longRunningOperation = AsMgmtOperation(Context.Library.GetLongRunningOperation(operation.Operation));
+                var longRunningOperation = Context.Library.GetLongRunningOperation(lroObjectType);
                 if (longRunningOperation.WrapperResource != null)
                 {
                     _writer.Append($"{ContextProperty}, ");
@@ -740,7 +760,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
             else
             {
-                var nonLongRunningOperation = Context.Library.GetNonLongRunningOperation(operation.Operation);
+                var nonLongRunningOperation = Context.Library.GetNonLongRunningOperation(lroObjectType);
                 // need to check implementation type as some delete operation uses ResourceData.
                 if (nonLongRunningOperation.ResultType != null && nonLongRunningOperation.ResultType.Implementation.GetType() == typeof(Resource))
                 {
@@ -748,10 +768,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 }
             }
             _writer.Line($"response);");
-            CSharpType? lroResultType = GetLROResultType(operation.Operation);
-            // note that the sync version of method "WaitForCompletion" is an extension method provided by "Azure.ResourceManager.Core", we need to add the corresponding namespace here
-            _writer.UseNamespace("Azure.ResourceManager.Core");
-            var waitForCompletionMethod = lroResultType == null && async ?
+            CSharpType? lroResultType = GetLROResultType(lroObjectType, operation.Operation);
+            var waitForCompletionMethod = lroResultType == null ?
                     "WaitForCompletionResponse" :
                     "WaitForCompletion";
             _writer.Line($"if (waitForCompletion)");
@@ -769,14 +787,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             data = null;
             return false;
-        }
-
-        protected CSharpType GetLROObjectType(Operation operation, bool async)
-        {
-            var lroObjectType = operation.IsLongRunning
-                ? Context.Library.GetLongRunningOperation(operation).Type
-                : Context.Library.GetNonLongRunningOperation(operation).Type;
-            return lroObjectType;
         }
 
         protected virtual void BuildParameters(MgmtClientOperation clientOperation, out Dictionary<RequestPath, MgmtRestOperation> operationMappings,
@@ -836,29 +846,21 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        protected CSharpType? GetLROResultType(Input.Operation operation)
+        protected CSharpType? GetLROResultType(CSharpType lroObjectType, Operation operation)
         {
             CSharpType? returnType = null;
             if (operation.IsLongRunning)
             {
-                LongRunningOperation lro = Context.Library.GetLongRunningOperation(operation);
-                MgmtLongRunningOperation longRunningOperation = AsMgmtOperation(lro);
+                var longRunningOperation = Context.Library.GetLongRunningOperation(lroObjectType);
                 returnType = longRunningOperation.WrapperResource?.Type ?? longRunningOperation.ResultType;
             }
             else
             {
-                NonLongRunningOperation nonLongRunningOperation = Context.Library.GetNonLongRunningOperation(operation);
+                var nonLongRunningOperation = Context.Library.GetNonLongRunningOperation(lroObjectType);
                 returnType = nonLongRunningOperation.ResultType;
             }
 
             return returnType;
-        }
-
-        protected MgmtLongRunningOperation AsMgmtOperation(LongRunningOperation operation)
-        {
-            var mgmtOperation = operation as MgmtLongRunningOperation;
-            Debug.Assert(mgmtOperation != null);
-            return mgmtOperation;
         }
     }
 }

@@ -20,22 +20,25 @@ namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal class ManagementGroupExtensionsWriter : MgmtExtensionWriter
     {
-        public ManagementGroupExtensionsWriter(CodeWriter writer, ManagementGroupExtensions extensions, BuildContext<MgmtOutputLibrary> context) : base(writer, extensions, context)
+        public ManagementGroupExtensionsWriter(CodeWriter writer, ManagementGroupExtensions extensions, BuildContext<MgmtOutputLibrary> context, bool isArmCore = false) : base(writer, extensions, context, isArmCore)
         {
         }
 
-        protected override string Description => "A class to add extension methods to ManagementGroup.";
+        protected override string Description => IsArmCore ? "A Class representing a ManagementGroup along with the instance operations that can be performed on it." : "A class to add extension methods to ManagementGroup.";
 
-        protected override string ExtensionOperationVariableName => "managementGroup";
+        protected override string ExtensionOperationVariableName => IsArmCore ? "this" : "managementGroup";
 
         protected override Type ExtensionOperationVariableType => typeof(ManagementGroup);
 
         public override void Write()
         {
-            using (_writer.Namespace(Context.DefaultNamespace))
+            var theNamespace = IsArmCore ? "Azure.ResourceManager.Management" : Context.DefaultNamespace;
+            var staticKeyWord = IsArmCore ? string.Empty : "static ";
+            var className = IsArmCore ? nameof(ManagementGroup) : TypeNameOfThis;
+            using (_writer.Namespace(theNamespace))
             {
                 _writer.WriteXmlDocumentationSummary($"{Description}");
-                using (_writer.Scope($"{Accessibility} static partial class {TypeNameOfThis}"))
+                using (_writer.Scope($"{Accessibility} {staticKeyWord}partial class {className}"))
                 {
                     // Write resource collection entries
                     WriteChildResourceEntries();

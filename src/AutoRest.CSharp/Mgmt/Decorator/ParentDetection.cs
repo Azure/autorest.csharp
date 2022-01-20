@@ -161,22 +161,23 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             // or null if none matched
             // NOTE that we are always using fuzzy match in the IsAncestorOf method, we need to block the ById operations - they literally can be anyone's ancestor when there is no better choice.
             // We will never want this
-            var candidates = context.Library.ResourceOperationSets.Select(operationSet => operationSet.GetRequestPath(context))
-                .Where(r => r.IsAncestorOf(requestPath)).OrderBy(r => r.Count);
-            if (candidates.Any())
-                return candidates.Last();
-            // if we cannot find one, we try the 4 extensions
-            // first try management group
-            if (RequestPath.ManagementGroup.IsAncestorOf(requestPath))
-                return RequestPath.ManagementGroup;
-            // then try resourceGroup
-            if (RequestPath.ResourceGroup.IsAncestorOf(requestPath))
-                return RequestPath.ResourceGroup;
-            // then try subscriptions
-            if (RequestPath.Subscription.IsAncestorOf(requestPath))
-                return RequestPath.Subscription;
-            // the only option left is the tenant. But we have our last chance that its parent could be the scope of this
             var scope = requestPath.GetScopePath();
+            var candidates = context.Library.ResourceOperationSets.Select(operationSet => operationSet.GetRequestPath(context))
+                .Concat(new List<RequestPath>{RequestPath.ResourceGroup, RequestPath.Subscription, RequestPath.ManagementGroup}) // When generating management group in management.json, the path is /providers/Microsoft.Management/managementGroups/{groupId} while RequestPath.ManagementGroup is /providers/Microsoft.Management/managementGroups/{managementGroupId}. We pick the first one.
+                .Where(r => r.IsAncestorOf(requestPath)).OrderByDescending(r => r.Count);
+            if (candidates.Any())
+            {
+                var parent = candidates.First();
+                if (parent == RequestPath.Tenant)
+                {
+                    // when generating for tenant and a scope path like policy assignment in Azure.ResourceManager, Tenant could be the only parent in context.Library.ResourceOperationSets.
+                    // we need to return the parameterized scope instead.
+                    if (scope != requestPath && scope.IsParameterizedScope())
+                        parent = scope;
+                }
+                return parent;
+            }
+            // the only option left is the tenant. But we have our last chance that its parent could be the scope of this
             // if the scope of this request path is parameterized, we return the scope as its parent
             if (scope != requestPath && scope.IsParameterizedScope())
                 return scope;

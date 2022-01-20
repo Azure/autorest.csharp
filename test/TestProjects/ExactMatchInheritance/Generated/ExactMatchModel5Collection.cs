@@ -38,7 +38,8 @@ namespace ExactMatchInheritance
         internal ExactMatchModel5Collection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _exactMatchModel5sRestClient = new ExactMatchModel5SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            ClientOptions.TryGetApiVersion(ExactMatchModel5.ResourceType, out string apiVersion);
+            _exactMatchModel5sRestClient = new ExactMatchModel5SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -55,16 +56,17 @@ namespace ExactMatchInheritance
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel5s/{exactMatchModel5sName}
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
         /// OperationId: ExactMatchModel5s_Put
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="exactMatchModel5SName"> The String to use. </param>
         /// <param name="parameters"> The ExactMatchModel5 to use. </param>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel5SName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ExactMatchModel5SPutOperation CreateOrUpdate(bool waitForCompletion, string exactMatchModel5SName, ExactMatchModel5Data parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentException"> <paramref name="exactMatchModel5SName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        public virtual ExactMatchModel5CreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string exactMatchModel5SName, ExactMatchModel5Data parameters, CancellationToken cancellationToken = default)
         {
-            if (exactMatchModel5SName == null)
+            if (string.IsNullOrEmpty(exactMatchModel5SName))
             {
-                throw new ArgumentNullException(nameof(exactMatchModel5SName));
+                throw new ArgumentException($"Parameter {nameof(exactMatchModel5SName)} cannot be null or empty", nameof(exactMatchModel5SName));
             }
             if (parameters == null)
             {
@@ -76,7 +78,7 @@ namespace ExactMatchInheritance
             try
             {
                 var response = _exactMatchModel5sRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, exactMatchModel5SName, parameters, cancellationToken);
-                var operation = new ExactMatchModel5SPutOperation(Parent, response);
+                var operation = new ExactMatchModel5CreateOrUpdateOperation(this, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -91,16 +93,17 @@ namespace ExactMatchInheritance
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel5s/{exactMatchModel5sName}
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
         /// OperationId: ExactMatchModel5s_Put
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="exactMatchModel5SName"> The String to use. </param>
         /// <param name="parameters"> The ExactMatchModel5 to use. </param>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel5SName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<ExactMatchModel5SPutOperation> CreateOrUpdateAsync(bool waitForCompletion, string exactMatchModel5SName, ExactMatchModel5Data parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentException"> <paramref name="exactMatchModel5SName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        public async virtual Task<ExactMatchModel5CreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string exactMatchModel5SName, ExactMatchModel5Data parameters, CancellationToken cancellationToken = default)
         {
-            if (exactMatchModel5SName == null)
+            if (string.IsNullOrEmpty(exactMatchModel5SName))
             {
-                throw new ArgumentNullException(nameof(exactMatchModel5SName));
+                throw new ArgumentException($"Parameter {nameof(exactMatchModel5SName)} cannot be null or empty", nameof(exactMatchModel5SName));
             }
             if (parameters == null)
             {
@@ -112,7 +115,7 @@ namespace ExactMatchInheritance
             try
             {
                 var response = await _exactMatchModel5sRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, exactMatchModel5SName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new ExactMatchModel5SPutOperation(Parent, response);
+                var operation = new ExactMatchModel5CreateOrUpdateOperation(this, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -129,12 +132,12 @@ namespace ExactMatchInheritance
         /// OperationId: ExactMatchModel5s_Get
         /// <param name="exactMatchModel5SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel5SName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="exactMatchModel5SName"/> is null or empty. </exception>
         public virtual Response<ExactMatchModel5> Get(string exactMatchModel5SName, CancellationToken cancellationToken = default)
         {
-            if (exactMatchModel5SName == null)
+            if (string.IsNullOrEmpty(exactMatchModel5SName))
             {
-                throw new ArgumentNullException(nameof(exactMatchModel5SName));
+                throw new ArgumentException($"Parameter {nameof(exactMatchModel5SName)} cannot be null or empty", nameof(exactMatchModel5SName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("ExactMatchModel5Collection.Get");
@@ -144,7 +147,7 @@ namespace ExactMatchInheritance
                 var response = _exactMatchModel5sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, exactMatchModel5SName, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new ExactMatchModel5(Parent, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ExactMatchModel5(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -158,12 +161,12 @@ namespace ExactMatchInheritance
         /// OperationId: ExactMatchModel5s_Get
         /// <param name="exactMatchModel5SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel5SName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="exactMatchModel5SName"/> is null or empty. </exception>
         public async virtual Task<Response<ExactMatchModel5>> GetAsync(string exactMatchModel5SName, CancellationToken cancellationToken = default)
         {
-            if (exactMatchModel5SName == null)
+            if (string.IsNullOrEmpty(exactMatchModel5SName))
             {
-                throw new ArgumentNullException(nameof(exactMatchModel5SName));
+                throw new ArgumentException($"Parameter {nameof(exactMatchModel5SName)} cannot be null or empty", nameof(exactMatchModel5SName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("ExactMatchModel5Collection.Get");
@@ -173,7 +176,7 @@ namespace ExactMatchInheritance
                 var response = await _exactMatchModel5sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, exactMatchModel5SName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new ExactMatchModel5(Parent, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ExactMatchModel5(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -185,12 +188,12 @@ namespace ExactMatchInheritance
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="exactMatchModel5SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel5SName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="exactMatchModel5SName"/> is null or empty. </exception>
         public virtual Response<ExactMatchModel5> GetIfExists(string exactMatchModel5SName, CancellationToken cancellationToken = default)
         {
-            if (exactMatchModel5SName == null)
+            if (string.IsNullOrEmpty(exactMatchModel5SName))
             {
-                throw new ArgumentNullException(nameof(exactMatchModel5SName));
+                throw new ArgumentException($"Parameter {nameof(exactMatchModel5SName)} cannot be null or empty", nameof(exactMatchModel5SName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("ExactMatchModel5Collection.GetIfExists");
@@ -212,12 +215,12 @@ namespace ExactMatchInheritance
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="exactMatchModel5SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel5SName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="exactMatchModel5SName"/> is null or empty. </exception>
         public async virtual Task<Response<ExactMatchModel5>> GetIfExistsAsync(string exactMatchModel5SName, CancellationToken cancellationToken = default)
         {
-            if (exactMatchModel5SName == null)
+            if (string.IsNullOrEmpty(exactMatchModel5SName))
             {
-                throw new ArgumentNullException(nameof(exactMatchModel5SName));
+                throw new ArgumentException($"Parameter {nameof(exactMatchModel5SName)} cannot be null or empty", nameof(exactMatchModel5SName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("ExactMatchModel5Collection.GetIfExists");
@@ -239,12 +242,12 @@ namespace ExactMatchInheritance
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="exactMatchModel5SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel5SName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="exactMatchModel5SName"/> is null or empty. </exception>
         public virtual Response<bool> Exists(string exactMatchModel5SName, CancellationToken cancellationToken = default)
         {
-            if (exactMatchModel5SName == null)
+            if (string.IsNullOrEmpty(exactMatchModel5SName))
             {
-                throw new ArgumentNullException(nameof(exactMatchModel5SName));
+                throw new ArgumentException($"Parameter {nameof(exactMatchModel5SName)} cannot be null or empty", nameof(exactMatchModel5SName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("ExactMatchModel5Collection.Exists");
@@ -264,12 +267,12 @@ namespace ExactMatchInheritance
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="exactMatchModel5SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel5SName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="exactMatchModel5SName"/> is null or empty. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string exactMatchModel5SName, CancellationToken cancellationToken = default)
         {
-            if (exactMatchModel5SName == null)
+            if (string.IsNullOrEmpty(exactMatchModel5SName))
             {
-                throw new ArgumentNullException(nameof(exactMatchModel5SName));
+                throw new ArgumentException($"Parameter {nameof(exactMatchModel5SName)} cannot be null or empty", nameof(exactMatchModel5SName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("ExactMatchModel5Collection.Exists");
@@ -300,7 +303,7 @@ namespace ExactMatchInheritance
                 try
                 {
                     var response = _exactMatchModel5sRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new ExactMatchModel5(Parent, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new ExactMatchModel5(this, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -325,7 +328,7 @@ namespace ExactMatchInheritance
                 try
                 {
                     var response = await _exactMatchModel5sRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new ExactMatchModel5(Parent, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new ExactMatchModel5(this, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {

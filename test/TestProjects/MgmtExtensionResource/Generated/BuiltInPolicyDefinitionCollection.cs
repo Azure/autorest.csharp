@@ -17,6 +17,7 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources;
+using MgmtExtensionResource.Models;
 
 namespace MgmtExtensionResource
 {
@@ -36,7 +37,8 @@ namespace MgmtExtensionResource
         internal BuiltInPolicyDefinitionCollection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _policyDefinitionsRestClient = new PolicyDefinitionsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            ClientOptions.TryGetApiVersion(BuiltInPolicyDefinition.ResourceType, out string apiVersion);
+            _policyDefinitionsRestClient = new PolicyDefinitionsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -56,12 +58,12 @@ namespace MgmtExtensionResource
         /// <summary> This operation retrieves the built-in policy definition with the given name. </summary>
         /// <param name="policyDefinitionName"> The name of the built-in policy definition to get. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is null or empty. </exception>
         public virtual Response<BuiltInPolicyDefinition> Get(string policyDefinitionName, CancellationToken cancellationToken = default)
         {
-            if (policyDefinitionName == null)
+            if (string.IsNullOrEmpty(policyDefinitionName))
             {
-                throw new ArgumentNullException(nameof(policyDefinitionName));
+                throw new ArgumentException($"Parameter {nameof(policyDefinitionName)} cannot be null or empty", nameof(policyDefinitionName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("BuiltInPolicyDefinitionCollection.Get");
@@ -71,7 +73,7 @@ namespace MgmtExtensionResource
                 var response = _policyDefinitionsRestClient.GetBuiltIn(policyDefinitionName, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new BuiltInPolicyDefinition(Parent, response.Value), response.GetRawResponse());
+                return Response.FromValue(new BuiltInPolicyDefinition(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -86,12 +88,12 @@ namespace MgmtExtensionResource
         /// <summary> This operation retrieves the built-in policy definition with the given name. </summary>
         /// <param name="policyDefinitionName"> The name of the built-in policy definition to get. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is null or empty. </exception>
         public async virtual Task<Response<BuiltInPolicyDefinition>> GetAsync(string policyDefinitionName, CancellationToken cancellationToken = default)
         {
-            if (policyDefinitionName == null)
+            if (string.IsNullOrEmpty(policyDefinitionName))
             {
-                throw new ArgumentNullException(nameof(policyDefinitionName));
+                throw new ArgumentException($"Parameter {nameof(policyDefinitionName)} cannot be null or empty", nameof(policyDefinitionName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("BuiltInPolicyDefinitionCollection.Get");
@@ -101,7 +103,7 @@ namespace MgmtExtensionResource
                 var response = await _policyDefinitionsRestClient.GetBuiltInAsync(policyDefinitionName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new BuiltInPolicyDefinition(Parent, response.Value), response.GetRawResponse());
+                return Response.FromValue(new BuiltInPolicyDefinition(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -113,12 +115,12 @@ namespace MgmtExtensionResource
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="policyDefinitionName"> The name of the built-in policy definition to get. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is null or empty. </exception>
         public virtual Response<BuiltInPolicyDefinition> GetIfExists(string policyDefinitionName, CancellationToken cancellationToken = default)
         {
-            if (policyDefinitionName == null)
+            if (string.IsNullOrEmpty(policyDefinitionName))
             {
-                throw new ArgumentNullException(nameof(policyDefinitionName));
+                throw new ArgumentException($"Parameter {nameof(policyDefinitionName)} cannot be null or empty", nameof(policyDefinitionName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("BuiltInPolicyDefinitionCollection.GetIfExists");
@@ -140,12 +142,12 @@ namespace MgmtExtensionResource
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="policyDefinitionName"> The name of the built-in policy definition to get. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is null or empty. </exception>
         public async virtual Task<Response<BuiltInPolicyDefinition>> GetIfExistsAsync(string policyDefinitionName, CancellationToken cancellationToken = default)
         {
-            if (policyDefinitionName == null)
+            if (string.IsNullOrEmpty(policyDefinitionName))
             {
-                throw new ArgumentNullException(nameof(policyDefinitionName));
+                throw new ArgumentException($"Parameter {nameof(policyDefinitionName)} cannot be null or empty", nameof(policyDefinitionName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("BuiltInPolicyDefinitionCollection.GetIfExists");
@@ -167,12 +169,12 @@ namespace MgmtExtensionResource
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="policyDefinitionName"> The name of the built-in policy definition to get. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is null or empty. </exception>
         public virtual Response<bool> Exists(string policyDefinitionName, CancellationToken cancellationToken = default)
         {
-            if (policyDefinitionName == null)
+            if (string.IsNullOrEmpty(policyDefinitionName))
             {
-                throw new ArgumentNullException(nameof(policyDefinitionName));
+                throw new ArgumentException($"Parameter {nameof(policyDefinitionName)} cannot be null or empty", nameof(policyDefinitionName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("BuiltInPolicyDefinitionCollection.Exists");
@@ -192,12 +194,12 @@ namespace MgmtExtensionResource
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="policyDefinitionName"> The name of the built-in policy definition to get. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is null or empty. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string policyDefinitionName, CancellationToken cancellationToken = default)
         {
-            if (policyDefinitionName == null)
+            if (string.IsNullOrEmpty(policyDefinitionName))
             {
-                throw new ArgumentNullException(nameof(policyDefinitionName));
+                throw new ArgumentException($"Parameter {nameof(policyDefinitionName)} cannot be null or empty", nameof(policyDefinitionName));
             }
 
             using var scope = _clientDiagnostics.CreateScope("BuiltInPolicyDefinitionCollection.Exists");
@@ -231,7 +233,7 @@ namespace MgmtExtensionResource
                 try
                 {
                     var response = _policyDefinitionsRestClient.ListBuiltIn(filter, top, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new BuiltInPolicyDefinition(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new BuiltInPolicyDefinition(this, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -246,7 +248,7 @@ namespace MgmtExtensionResource
                 try
                 {
                     var response = _policyDefinitionsRestClient.ListBuiltInNextPage(nextLink, filter, top, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new BuiltInPolicyDefinition(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new BuiltInPolicyDefinition(this, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -274,7 +276,7 @@ namespace MgmtExtensionResource
                 try
                 {
                     var response = await _policyDefinitionsRestClient.ListBuiltInAsync(filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new BuiltInPolicyDefinition(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new BuiltInPolicyDefinition(this, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -289,7 +291,7 @@ namespace MgmtExtensionResource
                 try
                 {
                     var response = await _policyDefinitionsRestClient.ListBuiltInNextPageAsync(nextLink, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new BuiltInPolicyDefinition(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new BuiltInPolicyDefinition(this, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
