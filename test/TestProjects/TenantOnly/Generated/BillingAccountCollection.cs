@@ -64,10 +64,7 @@ namespace TenantOnly
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public virtual BillingAccountCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string billingAccountName, BillingAccountData parameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(billingAccountName))
-            {
-                throw new ArgumentException($"Parameter {nameof(billingAccountName)} cannot be null or empty", nameof(billingAccountName));
-            }
+            Argument.AssertNotNullOrEmpty(billingAccountName, nameof(billingAccountName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -102,10 +99,7 @@ namespace TenantOnly
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public async virtual Task<BillingAccountCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string billingAccountName, BillingAccountData parameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(billingAccountName))
-            {
-                throw new ArgumentException($"Parameter {nameof(billingAccountName)} cannot be null or empty", nameof(billingAccountName));
-            }
+            Argument.AssertNotNullOrEmpty(billingAccountName, nameof(billingAccountName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -138,10 +132,7 @@ namespace TenantOnly
         /// <exception cref="ArgumentException"> <paramref name="billingAccountName"/> is null or empty. </exception>
         public virtual Response<BillingAccount> Get(string billingAccountName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(billingAccountName))
-            {
-                throw new ArgumentException($"Parameter {nameof(billingAccountName)} cannot be null or empty", nameof(billingAccountName));
-            }
+            Argument.AssertNotNullOrEmpty(billingAccountName, nameof(billingAccountName));
 
             using var scope = _clientDiagnostics.CreateScope("BillingAccountCollection.Get");
             scope.Start();
@@ -169,10 +160,7 @@ namespace TenantOnly
         /// <exception cref="ArgumentException"> <paramref name="billingAccountName"/> is null or empty. </exception>
         public async virtual Task<Response<BillingAccount>> GetAsync(string billingAccountName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(billingAccountName))
-            {
-                throw new ArgumentException($"Parameter {nameof(billingAccountName)} cannot be null or empty", nameof(billingAccountName));
-            }
+            Argument.AssertNotNullOrEmpty(billingAccountName, nameof(billingAccountName));
 
             using var scope = _clientDiagnostics.CreateScope("BillingAccountCollection.Get");
             scope.Start();
@@ -197,10 +185,7 @@ namespace TenantOnly
         /// <exception cref="ArgumentException"> <paramref name="billingAccountName"/> is null or empty. </exception>
         public virtual Response<BillingAccount> GetIfExists(string billingAccountName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(billingAccountName))
-            {
-                throw new ArgumentException($"Parameter {nameof(billingAccountName)} cannot be null or empty", nameof(billingAccountName));
-            }
+            Argument.AssertNotNullOrEmpty(billingAccountName, nameof(billingAccountName));
 
             using var scope = _clientDiagnostics.CreateScope("BillingAccountCollection.GetIfExists");
             scope.Start();
@@ -225,10 +210,7 @@ namespace TenantOnly
         /// <exception cref="ArgumentException"> <paramref name="billingAccountName"/> is null or empty. </exception>
         public async virtual Task<Response<BillingAccount>> GetIfExistsAsync(string billingAccountName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(billingAccountName))
-            {
-                throw new ArgumentException($"Parameter {nameof(billingAccountName)} cannot be null or empty", nameof(billingAccountName));
-            }
+            Argument.AssertNotNullOrEmpty(billingAccountName, nameof(billingAccountName));
 
             using var scope = _clientDiagnostics.CreateScope("BillingAccountCollection.GetIfExists");
             scope.Start();
@@ -253,10 +235,7 @@ namespace TenantOnly
         /// <exception cref="ArgumentException"> <paramref name="billingAccountName"/> is null or empty. </exception>
         public virtual Response<bool> Exists(string billingAccountName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(billingAccountName))
-            {
-                throw new ArgumentException($"Parameter {nameof(billingAccountName)} cannot be null or empty", nameof(billingAccountName));
-            }
+            Argument.AssertNotNullOrEmpty(billingAccountName, nameof(billingAccountName));
 
             using var scope = _clientDiagnostics.CreateScope("BillingAccountCollection.Exists");
             scope.Start();
@@ -279,10 +258,7 @@ namespace TenantOnly
         /// <exception cref="ArgumentException"> <paramref name="billingAccountName"/> is null or empty. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string billingAccountName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(billingAccountName))
-            {
-                throw new ArgumentException($"Parameter {nameof(billingAccountName)} cannot be null or empty", nameof(billingAccountName));
-            }
+            Argument.AssertNotNullOrEmpty(billingAccountName, nameof(billingAccountName));
 
             using var scope = _clientDiagnostics.CreateScope("BillingAccountCollection.Exists");
             scope.Start();

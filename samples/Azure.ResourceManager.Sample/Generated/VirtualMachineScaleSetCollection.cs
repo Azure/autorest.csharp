@@ -65,10 +65,7 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public virtual VirtualMachineScaleSetCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string vmScaleSetName, VirtualMachineScaleSetData parameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(vmScaleSetName))
-            {
-                throw new ArgumentException($"Parameter {nameof(vmScaleSetName)} cannot be null or empty", nameof(vmScaleSetName));
-            }
+            Argument.AssertNotNullOrEmpty(vmScaleSetName, nameof(vmScaleSetName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -103,10 +100,7 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public async virtual Task<VirtualMachineScaleSetCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string vmScaleSetName, VirtualMachineScaleSetData parameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(vmScaleSetName))
-            {
-                throw new ArgumentException($"Parameter {nameof(vmScaleSetName)} cannot be null or empty", nameof(vmScaleSetName));
-            }
+            Argument.AssertNotNullOrEmpty(vmScaleSetName, nameof(vmScaleSetName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -138,10 +132,7 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentException"> <paramref name="vmScaleSetName"/> is null or empty. </exception>
         public virtual Response<VirtualMachineScaleSet> Get(string vmScaleSetName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(vmScaleSetName))
-            {
-                throw new ArgumentException($"Parameter {nameof(vmScaleSetName)} cannot be null or empty", nameof(vmScaleSetName));
-            }
+            Argument.AssertNotNullOrEmpty(vmScaleSetName, nameof(vmScaleSetName));
 
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetCollection.Get");
             scope.Start();
@@ -168,10 +159,7 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentException"> <paramref name="vmScaleSetName"/> is null or empty. </exception>
         public async virtual Task<Response<VirtualMachineScaleSet>> GetAsync(string vmScaleSetName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(vmScaleSetName))
-            {
-                throw new ArgumentException($"Parameter {nameof(vmScaleSetName)} cannot be null or empty", nameof(vmScaleSetName));
-            }
+            Argument.AssertNotNullOrEmpty(vmScaleSetName, nameof(vmScaleSetName));
 
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetCollection.Get");
             scope.Start();
@@ -195,10 +183,7 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentException"> <paramref name="vmScaleSetName"/> is null or empty. </exception>
         public virtual Response<VirtualMachineScaleSet> GetIfExists(string vmScaleSetName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(vmScaleSetName))
-            {
-                throw new ArgumentException($"Parameter {nameof(vmScaleSetName)} cannot be null or empty", nameof(vmScaleSetName));
-            }
+            Argument.AssertNotNullOrEmpty(vmScaleSetName, nameof(vmScaleSetName));
 
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetCollection.GetIfExists");
             scope.Start();
@@ -222,10 +207,7 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentException"> <paramref name="vmScaleSetName"/> is null or empty. </exception>
         public async virtual Task<Response<VirtualMachineScaleSet>> GetIfExistsAsync(string vmScaleSetName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(vmScaleSetName))
-            {
-                throw new ArgumentException($"Parameter {nameof(vmScaleSetName)} cannot be null or empty", nameof(vmScaleSetName));
-            }
+            Argument.AssertNotNullOrEmpty(vmScaleSetName, nameof(vmScaleSetName));
 
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetCollection.GetIfExists");
             scope.Start();
@@ -249,10 +231,7 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentException"> <paramref name="vmScaleSetName"/> is null or empty. </exception>
         public virtual Response<bool> Exists(string vmScaleSetName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(vmScaleSetName))
-            {
-                throw new ArgumentException($"Parameter {nameof(vmScaleSetName)} cannot be null or empty", nameof(vmScaleSetName));
-            }
+            Argument.AssertNotNullOrEmpty(vmScaleSetName, nameof(vmScaleSetName));
 
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetCollection.Exists");
             scope.Start();
@@ -274,10 +253,7 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentException"> <paramref name="vmScaleSetName"/> is null or empty. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string vmScaleSetName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(vmScaleSetName))
-            {
-                throw new ArgumentException($"Parameter {nameof(vmScaleSetName)} cannot be null or empty", nameof(vmScaleSetName));
-            }
+            Argument.AssertNotNullOrEmpty(vmScaleSetName, nameof(vmScaleSetName));
 
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetCollection.Exists");
             scope.Start();

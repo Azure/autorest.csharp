@@ -63,10 +63,7 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public virtual FakeParentWithAncestorWithNonResChWithLocCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string fakeParentWithAncestorWithNonResChWithLocName, FakeParentWithAncestorWithNonResChWithLocData parameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(fakeParentWithAncestorWithNonResChWithLocName))
-            {
-                throw new ArgumentException($"Parameter {nameof(fakeParentWithAncestorWithNonResChWithLocName)} cannot be null or empty", nameof(fakeParentWithAncestorWithNonResChWithLocName));
-            }
+            Argument.AssertNotNullOrEmpty(fakeParentWithAncestorWithNonResChWithLocName, nameof(fakeParentWithAncestorWithNonResChWithLocName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -101,10 +98,7 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public async virtual Task<FakeParentWithAncestorWithNonResChWithLocCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string fakeParentWithAncestorWithNonResChWithLocName, FakeParentWithAncestorWithNonResChWithLocData parameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(fakeParentWithAncestorWithNonResChWithLocName))
-            {
-                throw new ArgumentException($"Parameter {nameof(fakeParentWithAncestorWithNonResChWithLocName)} cannot be null or empty", nameof(fakeParentWithAncestorWithNonResChWithLocName));
-            }
+            Argument.AssertNotNullOrEmpty(fakeParentWithAncestorWithNonResChWithLocName, nameof(fakeParentWithAncestorWithNonResChWithLocName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -136,10 +130,7 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentException"> <paramref name="fakeParentWithAncestorWithNonResChWithLocName"/> is null or empty. </exception>
         public virtual Response<FakeParentWithAncestorWithNonResChWithLoc> Get(string fakeParentWithAncestorWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(fakeParentWithAncestorWithNonResChWithLocName))
-            {
-                throw new ArgumentException($"Parameter {nameof(fakeParentWithAncestorWithNonResChWithLocName)} cannot be null or empty", nameof(fakeParentWithAncestorWithNonResChWithLocName));
-            }
+            Argument.AssertNotNullOrEmpty(fakeParentWithAncestorWithNonResChWithLocName, nameof(fakeParentWithAncestorWithNonResChWithLocName));
 
             using var scope = _clientDiagnostics.CreateScope("FakeParentWithAncestorWithNonResChWithLocCollection.Get");
             scope.Start();
@@ -166,10 +157,7 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentException"> <paramref name="fakeParentWithAncestorWithNonResChWithLocName"/> is null or empty. </exception>
         public async virtual Task<Response<FakeParentWithAncestorWithNonResChWithLoc>> GetAsync(string fakeParentWithAncestorWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(fakeParentWithAncestorWithNonResChWithLocName))
-            {
-                throw new ArgumentException($"Parameter {nameof(fakeParentWithAncestorWithNonResChWithLocName)} cannot be null or empty", nameof(fakeParentWithAncestorWithNonResChWithLocName));
-            }
+            Argument.AssertNotNullOrEmpty(fakeParentWithAncestorWithNonResChWithLocName, nameof(fakeParentWithAncestorWithNonResChWithLocName));
 
             using var scope = _clientDiagnostics.CreateScope("FakeParentWithAncestorWithNonResChWithLocCollection.Get");
             scope.Start();
@@ -193,10 +181,7 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentException"> <paramref name="fakeParentWithAncestorWithNonResChWithLocName"/> is null or empty. </exception>
         public virtual Response<FakeParentWithAncestorWithNonResChWithLoc> GetIfExists(string fakeParentWithAncestorWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(fakeParentWithAncestorWithNonResChWithLocName))
-            {
-                throw new ArgumentException($"Parameter {nameof(fakeParentWithAncestorWithNonResChWithLocName)} cannot be null or empty", nameof(fakeParentWithAncestorWithNonResChWithLocName));
-            }
+            Argument.AssertNotNullOrEmpty(fakeParentWithAncestorWithNonResChWithLocName, nameof(fakeParentWithAncestorWithNonResChWithLocName));
 
             using var scope = _clientDiagnostics.CreateScope("FakeParentWithAncestorWithNonResChWithLocCollection.GetIfExists");
             scope.Start();
@@ -220,10 +205,7 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentException"> <paramref name="fakeParentWithAncestorWithNonResChWithLocName"/> is null or empty. </exception>
         public async virtual Task<Response<FakeParentWithAncestorWithNonResChWithLoc>> GetIfExistsAsync(string fakeParentWithAncestorWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(fakeParentWithAncestorWithNonResChWithLocName))
-            {
-                throw new ArgumentException($"Parameter {nameof(fakeParentWithAncestorWithNonResChWithLocName)} cannot be null or empty", nameof(fakeParentWithAncestorWithNonResChWithLocName));
-            }
+            Argument.AssertNotNullOrEmpty(fakeParentWithAncestorWithNonResChWithLocName, nameof(fakeParentWithAncestorWithNonResChWithLocName));
 
             using var scope = _clientDiagnostics.CreateScope("FakeParentWithAncestorWithNonResChWithLocCollection.GetIfExists");
             scope.Start();
@@ -247,10 +229,7 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentException"> <paramref name="fakeParentWithAncestorWithNonResChWithLocName"/> is null or empty. </exception>
         public virtual Response<bool> Exists(string fakeParentWithAncestorWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(fakeParentWithAncestorWithNonResChWithLocName))
-            {
-                throw new ArgumentException($"Parameter {nameof(fakeParentWithAncestorWithNonResChWithLocName)} cannot be null or empty", nameof(fakeParentWithAncestorWithNonResChWithLocName));
-            }
+            Argument.AssertNotNullOrEmpty(fakeParentWithAncestorWithNonResChWithLocName, nameof(fakeParentWithAncestorWithNonResChWithLocName));
 
             using var scope = _clientDiagnostics.CreateScope("FakeParentWithAncestorWithNonResChWithLocCollection.Exists");
             scope.Start();
@@ -272,10 +251,7 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentException"> <paramref name="fakeParentWithAncestorWithNonResChWithLocName"/> is null or empty. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string fakeParentWithAncestorWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(fakeParentWithAncestorWithNonResChWithLocName))
-            {
-                throw new ArgumentException($"Parameter {nameof(fakeParentWithAncestorWithNonResChWithLocName)} cannot be null or empty", nameof(fakeParentWithAncestorWithNonResChWithLocName));
-            }
+            Argument.AssertNotNullOrEmpty(fakeParentWithAncestorWithNonResChWithLocName, nameof(fakeParentWithAncestorWithNonResChWithLocName));
 
             using var scope = _clientDiagnostics.CreateScope("FakeParentWithAncestorWithNonResChWithLocCollection.Exists");
             scope.Start();

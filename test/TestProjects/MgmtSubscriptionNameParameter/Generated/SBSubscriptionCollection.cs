@@ -65,10 +65,7 @@ namespace MgmtSubscriptionNameParameter
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public virtual SBSubscriptionCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string subscriptionName, SBSubscriptionData parameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(subscriptionName))
-            {
-                throw new ArgumentException($"Parameter {nameof(subscriptionName)} cannot be null or empty", nameof(subscriptionName));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionName, nameof(subscriptionName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -103,10 +100,7 @@ namespace MgmtSubscriptionNameParameter
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public async virtual Task<SBSubscriptionCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string subscriptionName, SBSubscriptionData parameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(subscriptionName))
-            {
-                throw new ArgumentException($"Parameter {nameof(subscriptionName)} cannot be null or empty", nameof(subscriptionName));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionName, nameof(subscriptionName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -138,10 +132,7 @@ namespace MgmtSubscriptionNameParameter
         /// <exception cref="ArgumentException"> <paramref name="subscriptionName"/> is null or empty. </exception>
         public virtual Response<SBSubscription> Get(string subscriptionName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(subscriptionName))
-            {
-                throw new ArgumentException($"Parameter {nameof(subscriptionName)} cannot be null or empty", nameof(subscriptionName));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionName, nameof(subscriptionName));
 
             using var scope = _clientDiagnostics.CreateScope("SBSubscriptionCollection.Get");
             scope.Start();
@@ -168,10 +159,7 @@ namespace MgmtSubscriptionNameParameter
         /// <exception cref="ArgumentException"> <paramref name="subscriptionName"/> is null or empty. </exception>
         public async virtual Task<Response<SBSubscription>> GetAsync(string subscriptionName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(subscriptionName))
-            {
-                throw new ArgumentException($"Parameter {nameof(subscriptionName)} cannot be null or empty", nameof(subscriptionName));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionName, nameof(subscriptionName));
 
             using var scope = _clientDiagnostics.CreateScope("SBSubscriptionCollection.Get");
             scope.Start();
@@ -195,10 +183,7 @@ namespace MgmtSubscriptionNameParameter
         /// <exception cref="ArgumentException"> <paramref name="subscriptionName"/> is null or empty. </exception>
         public virtual Response<SBSubscription> GetIfExists(string subscriptionName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(subscriptionName))
-            {
-                throw new ArgumentException($"Parameter {nameof(subscriptionName)} cannot be null or empty", nameof(subscriptionName));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionName, nameof(subscriptionName));
 
             using var scope = _clientDiagnostics.CreateScope("SBSubscriptionCollection.GetIfExists");
             scope.Start();
@@ -222,10 +207,7 @@ namespace MgmtSubscriptionNameParameter
         /// <exception cref="ArgumentException"> <paramref name="subscriptionName"/> is null or empty. </exception>
         public async virtual Task<Response<SBSubscription>> GetIfExistsAsync(string subscriptionName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(subscriptionName))
-            {
-                throw new ArgumentException($"Parameter {nameof(subscriptionName)} cannot be null or empty", nameof(subscriptionName));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionName, nameof(subscriptionName));
 
             using var scope = _clientDiagnostics.CreateScope("SBSubscriptionCollection.GetIfExists");
             scope.Start();
@@ -249,10 +231,7 @@ namespace MgmtSubscriptionNameParameter
         /// <exception cref="ArgumentException"> <paramref name="subscriptionName"/> is null or empty. </exception>
         public virtual Response<bool> Exists(string subscriptionName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(subscriptionName))
-            {
-                throw new ArgumentException($"Parameter {nameof(subscriptionName)} cannot be null or empty", nameof(subscriptionName));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionName, nameof(subscriptionName));
 
             using var scope = _clientDiagnostics.CreateScope("SBSubscriptionCollection.Exists");
             scope.Start();
@@ -274,10 +253,7 @@ namespace MgmtSubscriptionNameParameter
         /// <exception cref="ArgumentException"> <paramref name="subscriptionName"/> is null or empty. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string subscriptionName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(subscriptionName))
-            {
-                throw new ArgumentException($"Parameter {nameof(subscriptionName)} cannot be null or empty", nameof(subscriptionName));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionName, nameof(subscriptionName));
 
             using var scope = _clientDiagnostics.CreateScope("SBSubscriptionCollection.Exists");
             scope.Start();

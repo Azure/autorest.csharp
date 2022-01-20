@@ -63,10 +63,7 @@ namespace MgmtKeyvault
         /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
         public virtual MhsmPrivateEndpointConnectionCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string privateEndpointConnectionName, MhsmPrivateEndpointConnectionData properties, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(privateEndpointConnectionName))
-            {
-                throw new ArgumentException($"Parameter {nameof(privateEndpointConnectionName)} cannot be null or empty", nameof(privateEndpointConnectionName));
-            }
+            Argument.AssertNotNullOrEmpty(privateEndpointConnectionName, nameof(privateEndpointConnectionName));
             if (properties == null)
             {
                 throw new ArgumentNullException(nameof(properties));
@@ -101,10 +98,7 @@ namespace MgmtKeyvault
         /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
         public async virtual Task<MhsmPrivateEndpointConnectionCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string privateEndpointConnectionName, MhsmPrivateEndpointConnectionData properties, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(privateEndpointConnectionName))
-            {
-                throw new ArgumentException($"Parameter {nameof(privateEndpointConnectionName)} cannot be null or empty", nameof(privateEndpointConnectionName));
-            }
+            Argument.AssertNotNullOrEmpty(privateEndpointConnectionName, nameof(privateEndpointConnectionName));
             if (properties == null)
             {
                 throw new ArgumentNullException(nameof(properties));
@@ -136,10 +130,7 @@ namespace MgmtKeyvault
         /// <exception cref="ArgumentException"> <paramref name="privateEndpointConnectionName"/> is null or empty. </exception>
         public virtual Response<MhsmPrivateEndpointConnection> Get(string privateEndpointConnectionName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(privateEndpointConnectionName))
-            {
-                throw new ArgumentException($"Parameter {nameof(privateEndpointConnectionName)} cannot be null or empty", nameof(privateEndpointConnectionName));
-            }
+            Argument.AssertNotNullOrEmpty(privateEndpointConnectionName, nameof(privateEndpointConnectionName));
 
             using var scope = _clientDiagnostics.CreateScope("MhsmPrivateEndpointConnectionCollection.Get");
             scope.Start();
@@ -166,10 +157,7 @@ namespace MgmtKeyvault
         /// <exception cref="ArgumentException"> <paramref name="privateEndpointConnectionName"/> is null or empty. </exception>
         public async virtual Task<Response<MhsmPrivateEndpointConnection>> GetAsync(string privateEndpointConnectionName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(privateEndpointConnectionName))
-            {
-                throw new ArgumentException($"Parameter {nameof(privateEndpointConnectionName)} cannot be null or empty", nameof(privateEndpointConnectionName));
-            }
+            Argument.AssertNotNullOrEmpty(privateEndpointConnectionName, nameof(privateEndpointConnectionName));
 
             using var scope = _clientDiagnostics.CreateScope("MhsmPrivateEndpointConnectionCollection.Get");
             scope.Start();
@@ -193,10 +181,7 @@ namespace MgmtKeyvault
         /// <exception cref="ArgumentException"> <paramref name="privateEndpointConnectionName"/> is null or empty. </exception>
         public virtual Response<MhsmPrivateEndpointConnection> GetIfExists(string privateEndpointConnectionName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(privateEndpointConnectionName))
-            {
-                throw new ArgumentException($"Parameter {nameof(privateEndpointConnectionName)} cannot be null or empty", nameof(privateEndpointConnectionName));
-            }
+            Argument.AssertNotNullOrEmpty(privateEndpointConnectionName, nameof(privateEndpointConnectionName));
 
             using var scope = _clientDiagnostics.CreateScope("MhsmPrivateEndpointConnectionCollection.GetIfExists");
             scope.Start();
@@ -220,10 +205,7 @@ namespace MgmtKeyvault
         /// <exception cref="ArgumentException"> <paramref name="privateEndpointConnectionName"/> is null or empty. </exception>
         public async virtual Task<Response<MhsmPrivateEndpointConnection>> GetIfExistsAsync(string privateEndpointConnectionName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(privateEndpointConnectionName))
-            {
-                throw new ArgumentException($"Parameter {nameof(privateEndpointConnectionName)} cannot be null or empty", nameof(privateEndpointConnectionName));
-            }
+            Argument.AssertNotNullOrEmpty(privateEndpointConnectionName, nameof(privateEndpointConnectionName));
 
             using var scope = _clientDiagnostics.CreateScope("MhsmPrivateEndpointConnectionCollection.GetIfExists");
             scope.Start();
@@ -247,10 +229,7 @@ namespace MgmtKeyvault
         /// <exception cref="ArgumentException"> <paramref name="privateEndpointConnectionName"/> is null or empty. </exception>
         public virtual Response<bool> Exists(string privateEndpointConnectionName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(privateEndpointConnectionName))
-            {
-                throw new ArgumentException($"Parameter {nameof(privateEndpointConnectionName)} cannot be null or empty", nameof(privateEndpointConnectionName));
-            }
+            Argument.AssertNotNullOrEmpty(privateEndpointConnectionName, nameof(privateEndpointConnectionName));
 
             using var scope = _clientDiagnostics.CreateScope("MhsmPrivateEndpointConnectionCollection.Exists");
             scope.Start();
@@ -272,10 +251,7 @@ namespace MgmtKeyvault
         /// <exception cref="ArgumentException"> <paramref name="privateEndpointConnectionName"/> is null or empty. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string privateEndpointConnectionName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(privateEndpointConnectionName))
-            {
-                throw new ArgumentException($"Parameter {nameof(privateEndpointConnectionName)} cannot be null or empty", nameof(privateEndpointConnectionName));
-            }
+            Argument.AssertNotNullOrEmpty(privateEndpointConnectionName, nameof(privateEndpointConnectionName));
 
             using var scope = _clientDiagnostics.CreateScope("MhsmPrivateEndpointConnectionCollection.Exists");
             scope.Start();

@@ -66,10 +66,7 @@ namespace MgmtHierarchicalNonResource
         /// <exception cref="ArgumentException"> <paramref name="galleryUniqueName"/> is null or empty. </exception>
         public virtual Response<SharedGallery> Get(string galleryUniqueName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(galleryUniqueName))
-            {
-                throw new ArgumentException($"Parameter {nameof(galleryUniqueName)} cannot be null or empty", nameof(galleryUniqueName));
-            }
+            Argument.AssertNotNullOrEmpty(galleryUniqueName, nameof(galleryUniqueName));
 
             using var scope = _clientDiagnostics.CreateScope("SharedGalleryCollection.Get");
             scope.Start();
@@ -97,10 +94,7 @@ namespace MgmtHierarchicalNonResource
         /// <exception cref="ArgumentException"> <paramref name="galleryUniqueName"/> is null or empty. </exception>
         public async virtual Task<Response<SharedGallery>> GetAsync(string galleryUniqueName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(galleryUniqueName))
-            {
-                throw new ArgumentException($"Parameter {nameof(galleryUniqueName)} cannot be null or empty", nameof(galleryUniqueName));
-            }
+            Argument.AssertNotNullOrEmpty(galleryUniqueName, nameof(galleryUniqueName));
 
             using var scope = _clientDiagnostics.CreateScope("SharedGalleryCollection.Get");
             scope.Start();
@@ -125,10 +119,7 @@ namespace MgmtHierarchicalNonResource
         /// <exception cref="ArgumentException"> <paramref name="galleryUniqueName"/> is null or empty. </exception>
         public virtual Response<SharedGallery> GetIfExists(string galleryUniqueName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(galleryUniqueName))
-            {
-                throw new ArgumentException($"Parameter {nameof(galleryUniqueName)} cannot be null or empty", nameof(galleryUniqueName));
-            }
+            Argument.AssertNotNullOrEmpty(galleryUniqueName, nameof(galleryUniqueName));
 
             using var scope = _clientDiagnostics.CreateScope("SharedGalleryCollection.GetIfExists");
             scope.Start();
@@ -153,10 +144,7 @@ namespace MgmtHierarchicalNonResource
         /// <exception cref="ArgumentException"> <paramref name="galleryUniqueName"/> is null or empty. </exception>
         public async virtual Task<Response<SharedGallery>> GetIfExistsAsync(string galleryUniqueName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(galleryUniqueName))
-            {
-                throw new ArgumentException($"Parameter {nameof(galleryUniqueName)} cannot be null or empty", nameof(galleryUniqueName));
-            }
+            Argument.AssertNotNullOrEmpty(galleryUniqueName, nameof(galleryUniqueName));
 
             using var scope = _clientDiagnostics.CreateScope("SharedGalleryCollection.GetIfExists");
             scope.Start();
@@ -181,10 +169,7 @@ namespace MgmtHierarchicalNonResource
         /// <exception cref="ArgumentException"> <paramref name="galleryUniqueName"/> is null or empty. </exception>
         public virtual Response<bool> Exists(string galleryUniqueName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(galleryUniqueName))
-            {
-                throw new ArgumentException($"Parameter {nameof(galleryUniqueName)} cannot be null or empty", nameof(galleryUniqueName));
-            }
+            Argument.AssertNotNullOrEmpty(galleryUniqueName, nameof(galleryUniqueName));
 
             using var scope = _clientDiagnostics.CreateScope("SharedGalleryCollection.Exists");
             scope.Start();
@@ -206,10 +191,7 @@ namespace MgmtHierarchicalNonResource
         /// <exception cref="ArgumentException"> <paramref name="galleryUniqueName"/> is null or empty. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string galleryUniqueName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(galleryUniqueName))
-            {
-                throw new ArgumentException($"Parameter {nameof(galleryUniqueName)} cannot be null or empty", nameof(galleryUniqueName));
-            }
+            Argument.AssertNotNullOrEmpty(galleryUniqueName, nameof(galleryUniqueName));
 
             using var scope = _clientDiagnostics.CreateScope("SharedGalleryCollection.Exists");
             scope.Start();

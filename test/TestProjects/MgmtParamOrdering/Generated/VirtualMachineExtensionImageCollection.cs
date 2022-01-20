@@ -70,14 +70,8 @@ namespace MgmtParamOrdering
         /// <exception cref="ArgumentException"> <paramref name="type"/> or <paramref name="version"/> is null or empty. </exception>
         public virtual Response<VirtualMachineExtensionImage> Get(string type, string version, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(type))
-            {
-                throw new ArgumentException($"Parameter {nameof(type)} cannot be null or empty", nameof(type));
-            }
-            if (string.IsNullOrEmpty(version))
-            {
-                throw new ArgumentException($"Parameter {nameof(version)} cannot be null or empty", nameof(version));
-            }
+            Argument.AssertNotNullOrEmpty(type, nameof(type));
+            Argument.AssertNotNullOrEmpty(version, nameof(version));
 
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageCollection.Get");
             scope.Start();
@@ -105,14 +99,8 @@ namespace MgmtParamOrdering
         /// <exception cref="ArgumentException"> <paramref name="type"/> or <paramref name="version"/> is null or empty. </exception>
         public async virtual Task<Response<VirtualMachineExtensionImage>> GetAsync(string type, string version, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(type))
-            {
-                throw new ArgumentException($"Parameter {nameof(type)} cannot be null or empty", nameof(type));
-            }
-            if (string.IsNullOrEmpty(version))
-            {
-                throw new ArgumentException($"Parameter {nameof(version)} cannot be null or empty", nameof(version));
-            }
+            Argument.AssertNotNullOrEmpty(type, nameof(type));
+            Argument.AssertNotNullOrEmpty(version, nameof(version));
 
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageCollection.Get");
             scope.Start();
@@ -137,14 +125,8 @@ namespace MgmtParamOrdering
         /// <exception cref="ArgumentException"> <paramref name="type"/> or <paramref name="version"/> is null or empty. </exception>
         public virtual Response<VirtualMachineExtensionImage> GetIfExists(string type, string version, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(type))
-            {
-                throw new ArgumentException($"Parameter {nameof(type)} cannot be null or empty", nameof(type));
-            }
-            if (string.IsNullOrEmpty(version))
-            {
-                throw new ArgumentException($"Parameter {nameof(version)} cannot be null or empty", nameof(version));
-            }
+            Argument.AssertNotNullOrEmpty(type, nameof(type));
+            Argument.AssertNotNullOrEmpty(version, nameof(version));
 
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageCollection.GetIfExists");
             scope.Start();
@@ -169,14 +151,8 @@ namespace MgmtParamOrdering
         /// <exception cref="ArgumentException"> <paramref name="type"/> or <paramref name="version"/> is null or empty. </exception>
         public async virtual Task<Response<VirtualMachineExtensionImage>> GetIfExistsAsync(string type, string version, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(type))
-            {
-                throw new ArgumentException($"Parameter {nameof(type)} cannot be null or empty", nameof(type));
-            }
-            if (string.IsNullOrEmpty(version))
-            {
-                throw new ArgumentException($"Parameter {nameof(version)} cannot be null or empty", nameof(version));
-            }
+            Argument.AssertNotNullOrEmpty(type, nameof(type));
+            Argument.AssertNotNullOrEmpty(version, nameof(version));
 
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageCollection.GetIfExists");
             scope.Start();
@@ -201,14 +177,8 @@ namespace MgmtParamOrdering
         /// <exception cref="ArgumentException"> <paramref name="type"/> or <paramref name="version"/> is null or empty. </exception>
         public virtual Response<bool> Exists(string type, string version, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(type))
-            {
-                throw new ArgumentException($"Parameter {nameof(type)} cannot be null or empty", nameof(type));
-            }
-            if (string.IsNullOrEmpty(version))
-            {
-                throw new ArgumentException($"Parameter {nameof(version)} cannot be null or empty", nameof(version));
-            }
+            Argument.AssertNotNullOrEmpty(type, nameof(type));
+            Argument.AssertNotNullOrEmpty(version, nameof(version));
 
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageCollection.Exists");
             scope.Start();
@@ -231,14 +201,8 @@ namespace MgmtParamOrdering
         /// <exception cref="ArgumentException"> <paramref name="type"/> or <paramref name="version"/> is null or empty. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string type, string version, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(type))
-            {
-                throw new ArgumentException($"Parameter {nameof(type)} cannot be null or empty", nameof(type));
-            }
-            if (string.IsNullOrEmpty(version))
-            {
-                throw new ArgumentException($"Parameter {nameof(version)} cannot be null or empty", nameof(version));
-            }
+            Argument.AssertNotNullOrEmpty(type, nameof(type));
+            Argument.AssertNotNullOrEmpty(version, nameof(version));
 
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageCollection.Exists");
             scope.Start();
@@ -319,10 +283,7 @@ namespace MgmtParamOrdering
         /// <returns> A collection of <see cref="VirtualMachineExtensionImage" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<VirtualMachineExtensionImage> GetAll(string type, string filter = null, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(type))
-            {
-                throw new ArgumentException($"Parameter {nameof(type)} cannot be null or empty", nameof(type));
-            }
+            Argument.AssertNotNullOrEmpty(type, nameof(type));
 
             Page<VirtualMachineExtensionImage> FirstPageFunc(int? pageSizeHint)
             {
@@ -355,10 +316,7 @@ namespace MgmtParamOrdering
         /// <returns> An async collection of <see cref="VirtualMachineExtensionImage" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<VirtualMachineExtensionImage> GetAllAsync(string type, string filter = null, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(type))
-            {
-                throw new ArgumentException($"Parameter {nameof(type)} cannot be null or empty", nameof(type));
-            }
+            Argument.AssertNotNullOrEmpty(type, nameof(type));
 
             async Task<Page<VirtualMachineExtensionImage>> FirstPageFunc(int? pageSizeHint)
             {

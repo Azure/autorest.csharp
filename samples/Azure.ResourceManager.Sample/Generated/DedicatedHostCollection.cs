@@ -63,10 +63,7 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public virtual DedicatedHostCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string hostName, DedicatedHostData parameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(hostName))
-            {
-                throw new ArgumentException($"Parameter {nameof(hostName)} cannot be null or empty", nameof(hostName));
-            }
+            Argument.AssertNotNullOrEmpty(hostName, nameof(hostName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -101,10 +98,7 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public async virtual Task<DedicatedHostCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string hostName, DedicatedHostData parameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(hostName))
-            {
-                throw new ArgumentException($"Parameter {nameof(hostName)} cannot be null or empty", nameof(hostName));
-            }
+            Argument.AssertNotNullOrEmpty(hostName, nameof(hostName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -136,10 +130,7 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentException"> <paramref name="hostName"/> is null or empty. </exception>
         public virtual Response<DedicatedHost> Get(string hostName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(hostName))
-            {
-                throw new ArgumentException($"Parameter {nameof(hostName)} cannot be null or empty", nameof(hostName));
-            }
+            Argument.AssertNotNullOrEmpty(hostName, nameof(hostName));
 
             using var scope = _clientDiagnostics.CreateScope("DedicatedHostCollection.Get");
             scope.Start();
@@ -166,10 +157,7 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentException"> <paramref name="hostName"/> is null or empty. </exception>
         public async virtual Task<Response<DedicatedHost>> GetAsync(string hostName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(hostName))
-            {
-                throw new ArgumentException($"Parameter {nameof(hostName)} cannot be null or empty", nameof(hostName));
-            }
+            Argument.AssertNotNullOrEmpty(hostName, nameof(hostName));
 
             using var scope = _clientDiagnostics.CreateScope("DedicatedHostCollection.Get");
             scope.Start();
@@ -193,10 +181,7 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentException"> <paramref name="hostName"/> is null or empty. </exception>
         public virtual Response<DedicatedHost> GetIfExists(string hostName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(hostName))
-            {
-                throw new ArgumentException($"Parameter {nameof(hostName)} cannot be null or empty", nameof(hostName));
-            }
+            Argument.AssertNotNullOrEmpty(hostName, nameof(hostName));
 
             using var scope = _clientDiagnostics.CreateScope("DedicatedHostCollection.GetIfExists");
             scope.Start();
@@ -220,10 +205,7 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentException"> <paramref name="hostName"/> is null or empty. </exception>
         public async virtual Task<Response<DedicatedHost>> GetIfExistsAsync(string hostName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(hostName))
-            {
-                throw new ArgumentException($"Parameter {nameof(hostName)} cannot be null or empty", nameof(hostName));
-            }
+            Argument.AssertNotNullOrEmpty(hostName, nameof(hostName));
 
             using var scope = _clientDiagnostics.CreateScope("DedicatedHostCollection.GetIfExists");
             scope.Start();
@@ -247,10 +229,7 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentException"> <paramref name="hostName"/> is null or empty. </exception>
         public virtual Response<bool> Exists(string hostName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(hostName))
-            {
-                throw new ArgumentException($"Parameter {nameof(hostName)} cannot be null or empty", nameof(hostName));
-            }
+            Argument.AssertNotNullOrEmpty(hostName, nameof(hostName));
 
             using var scope = _clientDiagnostics.CreateScope("DedicatedHostCollection.Exists");
             scope.Start();
@@ -272,10 +251,7 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentException"> <paramref name="hostName"/> is null or empty. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string hostName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(hostName))
-            {
-                throw new ArgumentException($"Parameter {nameof(hostName)} cannot be null or empty", nameof(hostName));
-            }
+            Argument.AssertNotNullOrEmpty(hostName, nameof(hostName));
 
             using var scope = _clientDiagnostics.CreateScope("DedicatedHostCollection.Exists");
             scope.Start();

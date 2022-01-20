@@ -62,10 +62,7 @@ namespace MgmtParent
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public virtual DedicatedHostGroupCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string hostGroupName, DedicatedHostGroupData parameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(hostGroupName))
-            {
-                throw new ArgumentException($"Parameter {nameof(hostGroupName)} cannot be null or empty", nameof(hostGroupName));
-            }
+            Argument.AssertNotNullOrEmpty(hostGroupName, nameof(hostGroupName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -100,10 +97,7 @@ namespace MgmtParent
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public async virtual Task<DedicatedHostGroupCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string hostGroupName, DedicatedHostGroupData parameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(hostGroupName))
-            {
-                throw new ArgumentException($"Parameter {nameof(hostGroupName)} cannot be null or empty", nameof(hostGroupName));
-            }
+            Argument.AssertNotNullOrEmpty(hostGroupName, nameof(hostGroupName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -135,10 +129,7 @@ namespace MgmtParent
         /// <exception cref="ArgumentException"> <paramref name="hostGroupName"/> is null or empty. </exception>
         public virtual Response<DedicatedHostGroup> Get(string hostGroupName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(hostGroupName))
-            {
-                throw new ArgumentException($"Parameter {nameof(hostGroupName)} cannot be null or empty", nameof(hostGroupName));
-            }
+            Argument.AssertNotNullOrEmpty(hostGroupName, nameof(hostGroupName));
 
             using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupCollection.Get");
             scope.Start();
@@ -165,10 +156,7 @@ namespace MgmtParent
         /// <exception cref="ArgumentException"> <paramref name="hostGroupName"/> is null or empty. </exception>
         public async virtual Task<Response<DedicatedHostGroup>> GetAsync(string hostGroupName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(hostGroupName))
-            {
-                throw new ArgumentException($"Parameter {nameof(hostGroupName)} cannot be null or empty", nameof(hostGroupName));
-            }
+            Argument.AssertNotNullOrEmpty(hostGroupName, nameof(hostGroupName));
 
             using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupCollection.Get");
             scope.Start();
@@ -192,10 +180,7 @@ namespace MgmtParent
         /// <exception cref="ArgumentException"> <paramref name="hostGroupName"/> is null or empty. </exception>
         public virtual Response<DedicatedHostGroup> GetIfExists(string hostGroupName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(hostGroupName))
-            {
-                throw new ArgumentException($"Parameter {nameof(hostGroupName)} cannot be null or empty", nameof(hostGroupName));
-            }
+            Argument.AssertNotNullOrEmpty(hostGroupName, nameof(hostGroupName));
 
             using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupCollection.GetIfExists");
             scope.Start();
@@ -219,10 +204,7 @@ namespace MgmtParent
         /// <exception cref="ArgumentException"> <paramref name="hostGroupName"/> is null or empty. </exception>
         public async virtual Task<Response<DedicatedHostGroup>> GetIfExistsAsync(string hostGroupName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(hostGroupName))
-            {
-                throw new ArgumentException($"Parameter {nameof(hostGroupName)} cannot be null or empty", nameof(hostGroupName));
-            }
+            Argument.AssertNotNullOrEmpty(hostGroupName, nameof(hostGroupName));
 
             using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupCollection.GetIfExists");
             scope.Start();
@@ -246,10 +228,7 @@ namespace MgmtParent
         /// <exception cref="ArgumentException"> <paramref name="hostGroupName"/> is null or empty. </exception>
         public virtual Response<bool> Exists(string hostGroupName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(hostGroupName))
-            {
-                throw new ArgumentException($"Parameter {nameof(hostGroupName)} cannot be null or empty", nameof(hostGroupName));
-            }
+            Argument.AssertNotNullOrEmpty(hostGroupName, nameof(hostGroupName));
 
             using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupCollection.Exists");
             scope.Start();
@@ -271,10 +250,7 @@ namespace MgmtParent
         /// <exception cref="ArgumentException"> <paramref name="hostGroupName"/> is null or empty. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string hostGroupName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(hostGroupName))
-            {
-                throw new ArgumentException($"Parameter {nameof(hostGroupName)} cannot be null or empty", nameof(hostGroupName));
-            }
+            Argument.AssertNotNullOrEmpty(hostGroupName, nameof(hostGroupName));
 
             using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupCollection.Exists");
             scope.Start();

@@ -55,10 +55,7 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public virtual PolicyAssignmentCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string policyAssignmentName, PolicyAssignmentData parameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(policyAssignmentName))
-            {
-                throw new ArgumentException($"Parameter {nameof(policyAssignmentName)} cannot be null or empty", nameof(policyAssignmentName));
-            }
+            Argument.AssertNotNullOrEmpty(policyAssignmentName, nameof(policyAssignmentName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -93,10 +90,7 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public async virtual Task<PolicyAssignmentCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string policyAssignmentName, PolicyAssignmentData parameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(policyAssignmentName))
-            {
-                throw new ArgumentException($"Parameter {nameof(policyAssignmentName)} cannot be null or empty", nameof(policyAssignmentName));
-            }
+            Argument.AssertNotNullOrEmpty(policyAssignmentName, nameof(policyAssignmentName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -128,10 +122,7 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentException"> <paramref name="policyAssignmentName"/> is null or empty. </exception>
         public virtual Response<PolicyAssignment> Get(string policyAssignmentName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(policyAssignmentName))
-            {
-                throw new ArgumentException($"Parameter {nameof(policyAssignmentName)} cannot be null or empty", nameof(policyAssignmentName));
-            }
+            Argument.AssertNotNullOrEmpty(policyAssignmentName, nameof(policyAssignmentName));
 
             using var scope = _clientDiagnostics.CreateScope("PolicyAssignmentCollection.Get");
             scope.Start();
@@ -158,10 +149,7 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentException"> <paramref name="policyAssignmentName"/> is null or empty. </exception>
         public async virtual Task<Response<PolicyAssignment>> GetAsync(string policyAssignmentName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(policyAssignmentName))
-            {
-                throw new ArgumentException($"Parameter {nameof(policyAssignmentName)} cannot be null or empty", nameof(policyAssignmentName));
-            }
+            Argument.AssertNotNullOrEmpty(policyAssignmentName, nameof(policyAssignmentName));
 
             using var scope = _clientDiagnostics.CreateScope("PolicyAssignmentCollection.Get");
             scope.Start();
@@ -185,10 +173,7 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentException"> <paramref name="policyAssignmentName"/> is null or empty. </exception>
         public virtual Response<PolicyAssignment> GetIfExists(string policyAssignmentName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(policyAssignmentName))
-            {
-                throw new ArgumentException($"Parameter {nameof(policyAssignmentName)} cannot be null or empty", nameof(policyAssignmentName));
-            }
+            Argument.AssertNotNullOrEmpty(policyAssignmentName, nameof(policyAssignmentName));
 
             using var scope = _clientDiagnostics.CreateScope("PolicyAssignmentCollection.GetIfExists");
             scope.Start();
@@ -212,10 +197,7 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentException"> <paramref name="policyAssignmentName"/> is null or empty. </exception>
         public async virtual Task<Response<PolicyAssignment>> GetIfExistsAsync(string policyAssignmentName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(policyAssignmentName))
-            {
-                throw new ArgumentException($"Parameter {nameof(policyAssignmentName)} cannot be null or empty", nameof(policyAssignmentName));
-            }
+            Argument.AssertNotNullOrEmpty(policyAssignmentName, nameof(policyAssignmentName));
 
             using var scope = _clientDiagnostics.CreateScope("PolicyAssignmentCollection.GetIfExists");
             scope.Start();
@@ -239,10 +221,7 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentException"> <paramref name="policyAssignmentName"/> is null or empty. </exception>
         public virtual Response<bool> Exists(string policyAssignmentName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(policyAssignmentName))
-            {
-                throw new ArgumentException($"Parameter {nameof(policyAssignmentName)} cannot be null or empty", nameof(policyAssignmentName));
-            }
+            Argument.AssertNotNullOrEmpty(policyAssignmentName, nameof(policyAssignmentName));
 
             using var scope = _clientDiagnostics.CreateScope("PolicyAssignmentCollection.Exists");
             scope.Start();
@@ -264,10 +243,7 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentException"> <paramref name="policyAssignmentName"/> is null or empty. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string policyAssignmentName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(policyAssignmentName))
-            {
-                throw new ArgumentException($"Parameter {nameof(policyAssignmentName)} cannot be null or empty", nameof(policyAssignmentName));
-            }
+            Argument.AssertNotNullOrEmpty(policyAssignmentName, nameof(policyAssignmentName));
 
             using var scope = _clientDiagnostics.CreateScope("PolicyAssignmentCollection.Exists");
             scope.Start();

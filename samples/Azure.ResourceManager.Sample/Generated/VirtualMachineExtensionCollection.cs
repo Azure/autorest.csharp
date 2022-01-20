@@ -63,10 +63,7 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentNullException"> <paramref name="extensionParameters"/> is null. </exception>
         public virtual VirtualMachineExtensionCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string vmExtensionName, VirtualMachineExtensionData extensionParameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(vmExtensionName))
-            {
-                throw new ArgumentException($"Parameter {nameof(vmExtensionName)} cannot be null or empty", nameof(vmExtensionName));
-            }
+            Argument.AssertNotNullOrEmpty(vmExtensionName, nameof(vmExtensionName));
             if (extensionParameters == null)
             {
                 throw new ArgumentNullException(nameof(extensionParameters));
@@ -101,10 +98,7 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentNullException"> <paramref name="extensionParameters"/> is null. </exception>
         public async virtual Task<VirtualMachineExtensionCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string vmExtensionName, VirtualMachineExtensionData extensionParameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(vmExtensionName))
-            {
-                throw new ArgumentException($"Parameter {nameof(vmExtensionName)} cannot be null or empty", nameof(vmExtensionName));
-            }
+            Argument.AssertNotNullOrEmpty(vmExtensionName, nameof(vmExtensionName));
             if (extensionParameters == null)
             {
                 throw new ArgumentNullException(nameof(extensionParameters));
@@ -137,10 +131,7 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentException"> <paramref name="vmExtensionName"/> is null or empty. </exception>
         public virtual Response<VirtualMachineExtension> Get(string vmExtensionName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(vmExtensionName))
-            {
-                throw new ArgumentException($"Parameter {nameof(vmExtensionName)} cannot be null or empty", nameof(vmExtensionName));
-            }
+            Argument.AssertNotNullOrEmpty(vmExtensionName, nameof(vmExtensionName));
 
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionCollection.Get");
             scope.Start();
@@ -168,10 +159,7 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentException"> <paramref name="vmExtensionName"/> is null or empty. </exception>
         public async virtual Task<Response<VirtualMachineExtension>> GetAsync(string vmExtensionName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(vmExtensionName))
-            {
-                throw new ArgumentException($"Parameter {nameof(vmExtensionName)} cannot be null or empty", nameof(vmExtensionName));
-            }
+            Argument.AssertNotNullOrEmpty(vmExtensionName, nameof(vmExtensionName));
 
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionCollection.Get");
             scope.Start();
@@ -196,10 +184,7 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentException"> <paramref name="vmExtensionName"/> is null or empty. </exception>
         public virtual Response<VirtualMachineExtension> GetIfExists(string vmExtensionName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(vmExtensionName))
-            {
-                throw new ArgumentException($"Parameter {nameof(vmExtensionName)} cannot be null or empty", nameof(vmExtensionName));
-            }
+            Argument.AssertNotNullOrEmpty(vmExtensionName, nameof(vmExtensionName));
 
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionCollection.GetIfExists");
             scope.Start();
@@ -224,10 +209,7 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentException"> <paramref name="vmExtensionName"/> is null or empty. </exception>
         public async virtual Task<Response<VirtualMachineExtension>> GetIfExistsAsync(string vmExtensionName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(vmExtensionName))
-            {
-                throw new ArgumentException($"Parameter {nameof(vmExtensionName)} cannot be null or empty", nameof(vmExtensionName));
-            }
+            Argument.AssertNotNullOrEmpty(vmExtensionName, nameof(vmExtensionName));
 
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionCollection.GetIfExists");
             scope.Start();
@@ -252,10 +234,7 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentException"> <paramref name="vmExtensionName"/> is null or empty. </exception>
         public virtual Response<bool> Exists(string vmExtensionName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(vmExtensionName))
-            {
-                throw new ArgumentException($"Parameter {nameof(vmExtensionName)} cannot be null or empty", nameof(vmExtensionName));
-            }
+            Argument.AssertNotNullOrEmpty(vmExtensionName, nameof(vmExtensionName));
 
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionCollection.Exists");
             scope.Start();
@@ -278,10 +257,7 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentException"> <paramref name="vmExtensionName"/> is null or empty. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string vmExtensionName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(vmExtensionName))
-            {
-                throw new ArgumentException($"Parameter {nameof(vmExtensionName)} cannot be null or empty", nameof(vmExtensionName));
-            }
+            Argument.AssertNotNullOrEmpty(vmExtensionName, nameof(vmExtensionName));
 
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionCollection.Exists");
             scope.Start();

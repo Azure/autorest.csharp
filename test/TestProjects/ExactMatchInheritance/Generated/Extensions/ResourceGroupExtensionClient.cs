@@ -59,10 +59,7 @@ namespace ExactMatchInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public async virtual Task<Response<ExactMatchModel2>> PutExactMatchModel2Async(string exactMatchModel2SName, ExactMatchModel2 parameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(exactMatchModel2SName))
-            {
-                throw new ArgumentException($"Parameter {nameof(exactMatchModel2SName)} cannot be null or empty", nameof(exactMatchModel2SName));
-            }
+            Argument.AssertNotNullOrEmpty(exactMatchModel2SName, nameof(exactMatchModel2SName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -92,10 +89,7 @@ namespace ExactMatchInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public virtual Response<ExactMatchModel2> PutExactMatchModel2(string exactMatchModel2SName, ExactMatchModel2 parameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(exactMatchModel2SName))
-            {
-                throw new ArgumentException($"Parameter {nameof(exactMatchModel2SName)} cannot be null or empty", nameof(exactMatchModel2SName));
-            }
+            Argument.AssertNotNullOrEmpty(exactMatchModel2SName, nameof(exactMatchModel2SName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -175,10 +169,7 @@ namespace ExactMatchInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public async virtual Task<Response<ExactMatchModel3>> PutExactMatchModel3Async(string exactMatchModel3SName, ExactMatchModel3 parameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(exactMatchModel3SName))
-            {
-                throw new ArgumentException($"Parameter {nameof(exactMatchModel3SName)} cannot be null or empty", nameof(exactMatchModel3SName));
-            }
+            Argument.AssertNotNullOrEmpty(exactMatchModel3SName, nameof(exactMatchModel3SName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -208,10 +199,7 @@ namespace ExactMatchInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public virtual Response<ExactMatchModel3> PutExactMatchModel3(string exactMatchModel3SName, ExactMatchModel3 parameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(exactMatchModel3SName))
-            {
-                throw new ArgumentException($"Parameter {nameof(exactMatchModel3SName)} cannot be null or empty", nameof(exactMatchModel3SName));
-            }
+            Argument.AssertNotNullOrEmpty(exactMatchModel3SName, nameof(exactMatchModel3SName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -239,10 +227,7 @@ namespace ExactMatchInheritance
         /// <exception cref="ArgumentException"> <paramref name="exactMatchModel3SName"/> is null or empty. </exception>
         public async virtual Task<Response<ExactMatchModel3>> GetExactMatchModel3Async(string exactMatchModel3SName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(exactMatchModel3SName))
-            {
-                throw new ArgumentException($"Parameter {nameof(exactMatchModel3SName)} cannot be null or empty", nameof(exactMatchModel3SName));
-            }
+            Argument.AssertNotNullOrEmpty(exactMatchModel3SName, nameof(exactMatchModel3SName));
 
             using var scope = ExactMatchModel3sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.GetExactMatchModel3");
             scope.Start();
@@ -266,10 +251,7 @@ namespace ExactMatchInheritance
         /// <exception cref="ArgumentException"> <paramref name="exactMatchModel3SName"/> is null or empty. </exception>
         public virtual Response<ExactMatchModel3> GetExactMatchModel3(string exactMatchModel3SName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(exactMatchModel3SName))
-            {
-                throw new ArgumentException($"Parameter {nameof(exactMatchModel3SName)} cannot be null or empty", nameof(exactMatchModel3SName));
-            }
+            Argument.AssertNotNullOrEmpty(exactMatchModel3SName, nameof(exactMatchModel3SName));
 
             using var scope = ExactMatchModel3sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.GetExactMatchModel3");
             scope.Start();
@@ -295,10 +277,7 @@ namespace ExactMatchInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public async virtual Task<Response<ExactMatchModel4>> PutExactMatchModel4Async(string exactMatchModel4SName, ExactMatchModel4 parameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(exactMatchModel4SName))
-            {
-                throw new ArgumentException($"Parameter {nameof(exactMatchModel4SName)} cannot be null or empty", nameof(exactMatchModel4SName));
-            }
+            Argument.AssertNotNullOrEmpty(exactMatchModel4SName, nameof(exactMatchModel4SName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -328,10 +307,7 @@ namespace ExactMatchInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public virtual Response<ExactMatchModel4> PutExactMatchModel4(string exactMatchModel4SName, ExactMatchModel4 parameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(exactMatchModel4SName))
-            {
-                throw new ArgumentException($"Parameter {nameof(exactMatchModel4SName)} cannot be null or empty", nameof(exactMatchModel4SName));
-            }
+            Argument.AssertNotNullOrEmpty(exactMatchModel4SName, nameof(exactMatchModel4SName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));

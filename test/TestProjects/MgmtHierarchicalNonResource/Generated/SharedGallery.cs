@@ -265,10 +265,7 @@ namespace MgmtHierarchicalNonResource
         /// <exception cref="ArgumentException"> <paramref name="galleryImageName"/> is null or empty. </exception>
         public async virtual Task<Response<SharedGalleryImage>> GetSharedGalleryImageAsync(string galleryImageName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(galleryImageName))
-            {
-                throw new ArgumentException($"Parameter {nameof(galleryImageName)} cannot be null or empty", nameof(galleryImageName));
-            }
+            Argument.AssertNotNullOrEmpty(galleryImageName, nameof(galleryImageName));
 
             using var scope = _clientDiagnostics.CreateScope("SharedGallery.GetSharedGalleryImage");
             scope.Start();
@@ -293,10 +290,7 @@ namespace MgmtHierarchicalNonResource
         /// <exception cref="ArgumentException"> <paramref name="galleryImageName"/> is null or empty. </exception>
         public virtual Response<SharedGalleryImage> GetSharedGalleryImage(string galleryImageName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(galleryImageName))
-            {
-                throw new ArgumentException($"Parameter {nameof(galleryImageName)} cannot be null or empty", nameof(galleryImageName));
-            }
+            Argument.AssertNotNullOrEmpty(galleryImageName, nameof(galleryImageName));
 
             using var scope = _clientDiagnostics.CreateScope("SharedGallery.GetSharedGalleryImage");
             scope.Start();
@@ -323,10 +317,7 @@ namespace MgmtHierarchicalNonResource
         /// <returns> An async collection of <see cref="SharedGalleryImageVersion" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<SharedGalleryImageVersion> GetSharedGalleryImageVersionsAsync(string galleryImageName, SharedToValues? sharedTo = null, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(galleryImageName))
-            {
-                throw new ArgumentException($"Parameter {nameof(galleryImageName)} cannot be null or empty", nameof(galleryImageName));
-            }
+            Argument.AssertNotNullOrEmpty(galleryImageName, nameof(galleryImageName));
 
             async Task<Page<SharedGalleryImageVersion>> FirstPageFunc(int? pageSizeHint)
             {
@@ -372,10 +363,7 @@ namespace MgmtHierarchicalNonResource
         /// <returns> A collection of <see cref="SharedGalleryImageVersion" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<SharedGalleryImageVersion> GetSharedGalleryImageVersions(string galleryImageName, SharedToValues? sharedTo = null, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(galleryImageName))
-            {
-                throw new ArgumentException($"Parameter {nameof(galleryImageName)} cannot be null or empty", nameof(galleryImageName));
-            }
+            Argument.AssertNotNullOrEmpty(galleryImageName, nameof(galleryImageName));
 
             Page<SharedGalleryImageVersion> FirstPageFunc(int? pageSizeHint)
             {
@@ -420,14 +408,8 @@ namespace MgmtHierarchicalNonResource
         /// <exception cref="ArgumentException"> <paramref name="galleryImageName"/> or <paramref name="galleryImageVersionName"/> is null or empty. </exception>
         public async virtual Task<Response<SharedGalleryImageVersion>> GetSharedGalleryImageVersionAsync(string galleryImageName, string galleryImageVersionName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(galleryImageName))
-            {
-                throw new ArgumentException($"Parameter {nameof(galleryImageName)} cannot be null or empty", nameof(galleryImageName));
-            }
-            if (string.IsNullOrEmpty(galleryImageVersionName))
-            {
-                throw new ArgumentException($"Parameter {nameof(galleryImageVersionName)} cannot be null or empty", nameof(galleryImageVersionName));
-            }
+            Argument.AssertNotNullOrEmpty(galleryImageName, nameof(galleryImageName));
+            Argument.AssertNotNullOrEmpty(galleryImageVersionName, nameof(galleryImageVersionName));
 
             using var scope = _clientDiagnostics.CreateScope("SharedGallery.GetSharedGalleryImageVersion");
             scope.Start();
@@ -453,14 +435,8 @@ namespace MgmtHierarchicalNonResource
         /// <exception cref="ArgumentException"> <paramref name="galleryImageName"/> or <paramref name="galleryImageVersionName"/> is null or empty. </exception>
         public virtual Response<SharedGalleryImageVersion> GetSharedGalleryImageVersion(string galleryImageName, string galleryImageVersionName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(galleryImageName))
-            {
-                throw new ArgumentException($"Parameter {nameof(galleryImageName)} cannot be null or empty", nameof(galleryImageName));
-            }
-            if (string.IsNullOrEmpty(galleryImageVersionName))
-            {
-                throw new ArgumentException($"Parameter {nameof(galleryImageVersionName)} cannot be null or empty", nameof(galleryImageVersionName));
-            }
+            Argument.AssertNotNullOrEmpty(galleryImageName, nameof(galleryImageName));
+            Argument.AssertNotNullOrEmpty(galleryImageVersionName, nameof(galleryImageVersionName));
 
             using var scope = _clientDiagnostics.CreateScope("SharedGallery.GetSharedGalleryImageVersion");
             scope.Start();

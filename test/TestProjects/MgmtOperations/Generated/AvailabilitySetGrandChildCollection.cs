@@ -63,10 +63,7 @@ namespace MgmtOperations
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public virtual AvailabilitySetGrandChildCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string availabilitySetGrandChildName, AvailabilitySetGrandChildData parameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(availabilitySetGrandChildName))
-            {
-                throw new ArgumentException($"Parameter {nameof(availabilitySetGrandChildName)} cannot be null or empty", nameof(availabilitySetGrandChildName));
-            }
+            Argument.AssertNotNullOrEmpty(availabilitySetGrandChildName, nameof(availabilitySetGrandChildName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -101,10 +98,7 @@ namespace MgmtOperations
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public async virtual Task<AvailabilitySetGrandChildCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string availabilitySetGrandChildName, AvailabilitySetGrandChildData parameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(availabilitySetGrandChildName))
-            {
-                throw new ArgumentException($"Parameter {nameof(availabilitySetGrandChildName)} cannot be null or empty", nameof(availabilitySetGrandChildName));
-            }
+            Argument.AssertNotNullOrEmpty(availabilitySetGrandChildName, nameof(availabilitySetGrandChildName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -136,10 +130,7 @@ namespace MgmtOperations
         /// <exception cref="ArgumentException"> <paramref name="availabilitySetGrandChildName"/> is null or empty. </exception>
         public virtual Response<AvailabilitySetGrandChild> Get(string availabilitySetGrandChildName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(availabilitySetGrandChildName))
-            {
-                throw new ArgumentException($"Parameter {nameof(availabilitySetGrandChildName)} cannot be null or empty", nameof(availabilitySetGrandChildName));
-            }
+            Argument.AssertNotNullOrEmpty(availabilitySetGrandChildName, nameof(availabilitySetGrandChildName));
 
             using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChildCollection.Get");
             scope.Start();
@@ -166,10 +157,7 @@ namespace MgmtOperations
         /// <exception cref="ArgumentException"> <paramref name="availabilitySetGrandChildName"/> is null or empty. </exception>
         public async virtual Task<Response<AvailabilitySetGrandChild>> GetAsync(string availabilitySetGrandChildName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(availabilitySetGrandChildName))
-            {
-                throw new ArgumentException($"Parameter {nameof(availabilitySetGrandChildName)} cannot be null or empty", nameof(availabilitySetGrandChildName));
-            }
+            Argument.AssertNotNullOrEmpty(availabilitySetGrandChildName, nameof(availabilitySetGrandChildName));
 
             using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChildCollection.Get");
             scope.Start();
@@ -193,10 +181,7 @@ namespace MgmtOperations
         /// <exception cref="ArgumentException"> <paramref name="availabilitySetGrandChildName"/> is null or empty. </exception>
         public virtual Response<AvailabilitySetGrandChild> GetIfExists(string availabilitySetGrandChildName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(availabilitySetGrandChildName))
-            {
-                throw new ArgumentException($"Parameter {nameof(availabilitySetGrandChildName)} cannot be null or empty", nameof(availabilitySetGrandChildName));
-            }
+            Argument.AssertNotNullOrEmpty(availabilitySetGrandChildName, nameof(availabilitySetGrandChildName));
 
             using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChildCollection.GetIfExists");
             scope.Start();
@@ -220,10 +205,7 @@ namespace MgmtOperations
         /// <exception cref="ArgumentException"> <paramref name="availabilitySetGrandChildName"/> is null or empty. </exception>
         public async virtual Task<Response<AvailabilitySetGrandChild>> GetIfExistsAsync(string availabilitySetGrandChildName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(availabilitySetGrandChildName))
-            {
-                throw new ArgumentException($"Parameter {nameof(availabilitySetGrandChildName)} cannot be null or empty", nameof(availabilitySetGrandChildName));
-            }
+            Argument.AssertNotNullOrEmpty(availabilitySetGrandChildName, nameof(availabilitySetGrandChildName));
 
             using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChildCollection.GetIfExists");
             scope.Start();
@@ -247,10 +229,7 @@ namespace MgmtOperations
         /// <exception cref="ArgumentException"> <paramref name="availabilitySetGrandChildName"/> is null or empty. </exception>
         public virtual Response<bool> Exists(string availabilitySetGrandChildName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(availabilitySetGrandChildName))
-            {
-                throw new ArgumentException($"Parameter {nameof(availabilitySetGrandChildName)} cannot be null or empty", nameof(availabilitySetGrandChildName));
-            }
+            Argument.AssertNotNullOrEmpty(availabilitySetGrandChildName, nameof(availabilitySetGrandChildName));
 
             using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChildCollection.Exists");
             scope.Start();
@@ -272,10 +251,7 @@ namespace MgmtOperations
         /// <exception cref="ArgumentException"> <paramref name="availabilitySetGrandChildName"/> is null or empty. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string availabilitySetGrandChildName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(availabilitySetGrandChildName))
-            {
-                throw new ArgumentException($"Parameter {nameof(availabilitySetGrandChildName)} cannot be null or empty", nameof(availabilitySetGrandChildName));
-            }
+            Argument.AssertNotNullOrEmpty(availabilitySetGrandChildName, nameof(availabilitySetGrandChildName));
 
             using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChildCollection.Exists");
             scope.Start();

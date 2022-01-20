@@ -65,10 +65,7 @@ namespace MgmtOperations
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public virtual AvailabilitySetCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string availabilitySetName, AvailabilitySetData parameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(availabilitySetName))
-            {
-                throw new ArgumentException($"Parameter {nameof(availabilitySetName)} cannot be null or empty", nameof(availabilitySetName));
-            }
+            Argument.AssertNotNullOrEmpty(availabilitySetName, nameof(availabilitySetName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -103,10 +100,7 @@ namespace MgmtOperations
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public async virtual Task<AvailabilitySetCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string availabilitySetName, AvailabilitySetData parameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(availabilitySetName))
-            {
-                throw new ArgumentException($"Parameter {nameof(availabilitySetName)} cannot be null or empty", nameof(availabilitySetName));
-            }
+            Argument.AssertNotNullOrEmpty(availabilitySetName, nameof(availabilitySetName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -139,10 +133,7 @@ namespace MgmtOperations
         /// <exception cref="ArgumentException"> <paramref name="availabilitySetName"/> is null or empty. </exception>
         public virtual Response<AvailabilitySet> Get(string availabilitySetName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(availabilitySetName))
-            {
-                throw new ArgumentException($"Parameter {nameof(availabilitySetName)} cannot be null or empty", nameof(availabilitySetName));
-            }
+            Argument.AssertNotNullOrEmpty(availabilitySetName, nameof(availabilitySetName));
 
             using var scope = _clientDiagnostics.CreateScope("AvailabilitySetCollection.Get");
             scope.Start();
@@ -170,10 +161,7 @@ namespace MgmtOperations
         /// <exception cref="ArgumentException"> <paramref name="availabilitySetName"/> is null or empty. </exception>
         public async virtual Task<Response<AvailabilitySet>> GetAsync(string availabilitySetName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(availabilitySetName))
-            {
-                throw new ArgumentException($"Parameter {nameof(availabilitySetName)} cannot be null or empty", nameof(availabilitySetName));
-            }
+            Argument.AssertNotNullOrEmpty(availabilitySetName, nameof(availabilitySetName));
 
             using var scope = _clientDiagnostics.CreateScope("AvailabilitySetCollection.Get");
             scope.Start();
@@ -198,10 +186,7 @@ namespace MgmtOperations
         /// <exception cref="ArgumentException"> <paramref name="availabilitySetName"/> is null or empty. </exception>
         public virtual Response<AvailabilitySet> GetIfExists(string availabilitySetName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(availabilitySetName))
-            {
-                throw new ArgumentException($"Parameter {nameof(availabilitySetName)} cannot be null or empty", nameof(availabilitySetName));
-            }
+            Argument.AssertNotNullOrEmpty(availabilitySetName, nameof(availabilitySetName));
 
             using var scope = _clientDiagnostics.CreateScope("AvailabilitySetCollection.GetIfExists");
             scope.Start();
@@ -226,10 +211,7 @@ namespace MgmtOperations
         /// <exception cref="ArgumentException"> <paramref name="availabilitySetName"/> is null or empty. </exception>
         public async virtual Task<Response<AvailabilitySet>> GetIfExistsAsync(string availabilitySetName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(availabilitySetName))
-            {
-                throw new ArgumentException($"Parameter {nameof(availabilitySetName)} cannot be null or empty", nameof(availabilitySetName));
-            }
+            Argument.AssertNotNullOrEmpty(availabilitySetName, nameof(availabilitySetName));
 
             using var scope = _clientDiagnostics.CreateScope("AvailabilitySetCollection.GetIfExists");
             scope.Start();
@@ -254,10 +236,7 @@ namespace MgmtOperations
         /// <exception cref="ArgumentException"> <paramref name="availabilitySetName"/> is null or empty. </exception>
         public virtual Response<bool> Exists(string availabilitySetName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(availabilitySetName))
-            {
-                throw new ArgumentException($"Parameter {nameof(availabilitySetName)} cannot be null or empty", nameof(availabilitySetName));
-            }
+            Argument.AssertNotNullOrEmpty(availabilitySetName, nameof(availabilitySetName));
 
             using var scope = _clientDiagnostics.CreateScope("AvailabilitySetCollection.Exists");
             scope.Start();
@@ -280,10 +259,7 @@ namespace MgmtOperations
         /// <exception cref="ArgumentException"> <paramref name="availabilitySetName"/> is null or empty. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string availabilitySetName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(availabilitySetName))
-            {
-                throw new ArgumentException($"Parameter {nameof(availabilitySetName)} cannot be null or empty", nameof(availabilitySetName));
-            }
+            Argument.AssertNotNullOrEmpty(availabilitySetName, nameof(availabilitySetName));
 
             using var scope = _clientDiagnostics.CreateScope("AvailabilitySetCollection.Exists");
             scope.Start();

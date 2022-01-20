@@ -60,14 +60,8 @@ namespace MgmtKeyvault
         /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="vaultName"/> is null or empty. </exception>
         public virtual Response<DeletedVault> Get(string location, string vaultName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(location))
-            {
-                throw new ArgumentException($"Parameter {nameof(location)} cannot be null or empty", nameof(location));
-            }
-            if (string.IsNullOrEmpty(vaultName))
-            {
-                throw new ArgumentException($"Parameter {nameof(vaultName)} cannot be null or empty", nameof(vaultName));
-            }
+            Argument.AssertNotNullOrEmpty(location, nameof(location));
+            Argument.AssertNotNullOrEmpty(vaultName, nameof(vaultName));
 
             using var scope = _clientDiagnostics.CreateScope("DeletedVaultCollection.Get");
             scope.Start();
@@ -95,14 +89,8 @@ namespace MgmtKeyvault
         /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="vaultName"/> is null or empty. </exception>
         public async virtual Task<Response<DeletedVault>> GetAsync(string location, string vaultName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(location))
-            {
-                throw new ArgumentException($"Parameter {nameof(location)} cannot be null or empty", nameof(location));
-            }
-            if (string.IsNullOrEmpty(vaultName))
-            {
-                throw new ArgumentException($"Parameter {nameof(vaultName)} cannot be null or empty", nameof(vaultName));
-            }
+            Argument.AssertNotNullOrEmpty(location, nameof(location));
+            Argument.AssertNotNullOrEmpty(vaultName, nameof(vaultName));
 
             using var scope = _clientDiagnostics.CreateScope("DeletedVaultCollection.Get");
             scope.Start();
@@ -127,14 +115,8 @@ namespace MgmtKeyvault
         /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="vaultName"/> is null or empty. </exception>
         public virtual Response<DeletedVault> GetIfExists(string location, string vaultName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(location))
-            {
-                throw new ArgumentException($"Parameter {nameof(location)} cannot be null or empty", nameof(location));
-            }
-            if (string.IsNullOrEmpty(vaultName))
-            {
-                throw new ArgumentException($"Parameter {nameof(vaultName)} cannot be null or empty", nameof(vaultName));
-            }
+            Argument.AssertNotNullOrEmpty(location, nameof(location));
+            Argument.AssertNotNullOrEmpty(vaultName, nameof(vaultName));
 
             using var scope = _clientDiagnostics.CreateScope("DeletedVaultCollection.GetIfExists");
             scope.Start();
@@ -159,14 +141,8 @@ namespace MgmtKeyvault
         /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="vaultName"/> is null or empty. </exception>
         public async virtual Task<Response<DeletedVault>> GetIfExistsAsync(string location, string vaultName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(location))
-            {
-                throw new ArgumentException($"Parameter {nameof(location)} cannot be null or empty", nameof(location));
-            }
-            if (string.IsNullOrEmpty(vaultName))
-            {
-                throw new ArgumentException($"Parameter {nameof(vaultName)} cannot be null or empty", nameof(vaultName));
-            }
+            Argument.AssertNotNullOrEmpty(location, nameof(location));
+            Argument.AssertNotNullOrEmpty(vaultName, nameof(vaultName));
 
             using var scope = _clientDiagnostics.CreateScope("DeletedVaultCollection.GetIfExists");
             scope.Start();
@@ -191,14 +167,8 @@ namespace MgmtKeyvault
         /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="vaultName"/> is null or empty. </exception>
         public virtual Response<bool> Exists(string location, string vaultName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(location))
-            {
-                throw new ArgumentException($"Parameter {nameof(location)} cannot be null or empty", nameof(location));
-            }
-            if (string.IsNullOrEmpty(vaultName))
-            {
-                throw new ArgumentException($"Parameter {nameof(vaultName)} cannot be null or empty", nameof(vaultName));
-            }
+            Argument.AssertNotNullOrEmpty(location, nameof(location));
+            Argument.AssertNotNullOrEmpty(vaultName, nameof(vaultName));
 
             using var scope = _clientDiagnostics.CreateScope("DeletedVaultCollection.Exists");
             scope.Start();
@@ -221,14 +191,8 @@ namespace MgmtKeyvault
         /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="vaultName"/> is null or empty. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string location, string vaultName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(location))
-            {
-                throw new ArgumentException($"Parameter {nameof(location)} cannot be null or empty", nameof(location));
-            }
-            if (string.IsNullOrEmpty(vaultName))
-            {
-                throw new ArgumentException($"Parameter {nameof(vaultName)} cannot be null or empty", nameof(vaultName));
-            }
+            Argument.AssertNotNullOrEmpty(location, nameof(location));
+            Argument.AssertNotNullOrEmpty(vaultName, nameof(vaultName));
 
             using var scope = _clientDiagnostics.CreateScope("DeletedVaultCollection.Exists");
             scope.Start();

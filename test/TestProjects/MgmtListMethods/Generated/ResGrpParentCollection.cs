@@ -65,10 +65,7 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public virtual ResGrpParentCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string resGrpParentName, ResGrpParentData parameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(resGrpParentName))
-            {
-                throw new ArgumentException($"Parameter {nameof(resGrpParentName)} cannot be null or empty", nameof(resGrpParentName));
-            }
+            Argument.AssertNotNullOrEmpty(resGrpParentName, nameof(resGrpParentName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -103,10 +100,7 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public async virtual Task<ResGrpParentCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string resGrpParentName, ResGrpParentData parameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(resGrpParentName))
-            {
-                throw new ArgumentException($"Parameter {nameof(resGrpParentName)} cannot be null or empty", nameof(resGrpParentName));
-            }
+            Argument.AssertNotNullOrEmpty(resGrpParentName, nameof(resGrpParentName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -138,10 +132,7 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentException"> <paramref name="resGrpParentName"/> is null or empty. </exception>
         public virtual Response<ResGrpParent> Get(string resGrpParentName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(resGrpParentName))
-            {
-                throw new ArgumentException($"Parameter {nameof(resGrpParentName)} cannot be null or empty", nameof(resGrpParentName));
-            }
+            Argument.AssertNotNullOrEmpty(resGrpParentName, nameof(resGrpParentName));
 
             using var scope = _clientDiagnostics.CreateScope("ResGrpParentCollection.Get");
             scope.Start();
@@ -168,10 +159,7 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentException"> <paramref name="resGrpParentName"/> is null or empty. </exception>
         public async virtual Task<Response<ResGrpParent>> GetAsync(string resGrpParentName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(resGrpParentName))
-            {
-                throw new ArgumentException($"Parameter {nameof(resGrpParentName)} cannot be null or empty", nameof(resGrpParentName));
-            }
+            Argument.AssertNotNullOrEmpty(resGrpParentName, nameof(resGrpParentName));
 
             using var scope = _clientDiagnostics.CreateScope("ResGrpParentCollection.Get");
             scope.Start();
@@ -195,10 +183,7 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentException"> <paramref name="resGrpParentName"/> is null or empty. </exception>
         public virtual Response<ResGrpParent> GetIfExists(string resGrpParentName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(resGrpParentName))
-            {
-                throw new ArgumentException($"Parameter {nameof(resGrpParentName)} cannot be null or empty", nameof(resGrpParentName));
-            }
+            Argument.AssertNotNullOrEmpty(resGrpParentName, nameof(resGrpParentName));
 
             using var scope = _clientDiagnostics.CreateScope("ResGrpParentCollection.GetIfExists");
             scope.Start();
@@ -222,10 +207,7 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentException"> <paramref name="resGrpParentName"/> is null or empty. </exception>
         public async virtual Task<Response<ResGrpParent>> GetIfExistsAsync(string resGrpParentName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(resGrpParentName))
-            {
-                throw new ArgumentException($"Parameter {nameof(resGrpParentName)} cannot be null or empty", nameof(resGrpParentName));
-            }
+            Argument.AssertNotNullOrEmpty(resGrpParentName, nameof(resGrpParentName));
 
             using var scope = _clientDiagnostics.CreateScope("ResGrpParentCollection.GetIfExists");
             scope.Start();
@@ -249,10 +231,7 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentException"> <paramref name="resGrpParentName"/> is null or empty. </exception>
         public virtual Response<bool> Exists(string resGrpParentName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(resGrpParentName))
-            {
-                throw new ArgumentException($"Parameter {nameof(resGrpParentName)} cannot be null or empty", nameof(resGrpParentName));
-            }
+            Argument.AssertNotNullOrEmpty(resGrpParentName, nameof(resGrpParentName));
 
             using var scope = _clientDiagnostics.CreateScope("ResGrpParentCollection.Exists");
             scope.Start();
@@ -274,10 +253,7 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentException"> <paramref name="resGrpParentName"/> is null or empty. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string resGrpParentName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(resGrpParentName))
-            {
-                throw new ArgumentException($"Parameter {nameof(resGrpParentName)} cannot be null or empty", nameof(resGrpParentName));
-            }
+            Argument.AssertNotNullOrEmpty(resGrpParentName, nameof(resGrpParentName));
 
             using var scope = _clientDiagnostics.CreateScope("ResGrpParentCollection.Exists");
             scope.Start();

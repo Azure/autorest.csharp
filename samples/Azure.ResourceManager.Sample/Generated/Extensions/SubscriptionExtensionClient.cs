@@ -530,26 +530,11 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentException"> <paramref name="location"/>, <paramref name="publisherName"/>, <paramref name="offer"/>, <paramref name="skus"/>, or <paramref name="version"/> is null or empty. </exception>
         public async virtual Task<Response<VirtualMachineImage>> GetVirtualMachineImageAsync(string location, string publisherName, string offer, string skus, string version, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(location))
-            {
-                throw new ArgumentException($"Parameter {nameof(location)} cannot be null or empty", nameof(location));
-            }
-            if (string.IsNullOrEmpty(publisherName))
-            {
-                throw new ArgumentException($"Parameter {nameof(publisherName)} cannot be null or empty", nameof(publisherName));
-            }
-            if (string.IsNullOrEmpty(offer))
-            {
-                throw new ArgumentException($"Parameter {nameof(offer)} cannot be null or empty", nameof(offer));
-            }
-            if (string.IsNullOrEmpty(skus))
-            {
-                throw new ArgumentException($"Parameter {nameof(skus)} cannot be null or empty", nameof(skus));
-            }
-            if (string.IsNullOrEmpty(version))
-            {
-                throw new ArgumentException($"Parameter {nameof(version)} cannot be null or empty", nameof(version));
-            }
+            Argument.AssertNotNullOrEmpty(location, nameof(location));
+            Argument.AssertNotNullOrEmpty(publisherName, nameof(publisherName));
+            Argument.AssertNotNullOrEmpty(offer, nameof(offer));
+            Argument.AssertNotNullOrEmpty(skus, nameof(skus));
+            Argument.AssertNotNullOrEmpty(version, nameof(version));
 
             using var scope = VirtualMachineImagesClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetVirtualMachineImage");
             scope.Start();
@@ -578,26 +563,11 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentException"> <paramref name="location"/>, <paramref name="publisherName"/>, <paramref name="offer"/>, <paramref name="skus"/>, or <paramref name="version"/> is null or empty. </exception>
         public virtual Response<VirtualMachineImage> GetVirtualMachineImage(string location, string publisherName, string offer, string skus, string version, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(location))
-            {
-                throw new ArgumentException($"Parameter {nameof(location)} cannot be null or empty", nameof(location));
-            }
-            if (string.IsNullOrEmpty(publisherName))
-            {
-                throw new ArgumentException($"Parameter {nameof(publisherName)} cannot be null or empty", nameof(publisherName));
-            }
-            if (string.IsNullOrEmpty(offer))
-            {
-                throw new ArgumentException($"Parameter {nameof(offer)} cannot be null or empty", nameof(offer));
-            }
-            if (string.IsNullOrEmpty(skus))
-            {
-                throw new ArgumentException($"Parameter {nameof(skus)} cannot be null or empty", nameof(skus));
-            }
-            if (string.IsNullOrEmpty(version))
-            {
-                throw new ArgumentException($"Parameter {nameof(version)} cannot be null or empty", nameof(version));
-            }
+            Argument.AssertNotNullOrEmpty(location, nameof(location));
+            Argument.AssertNotNullOrEmpty(publisherName, nameof(publisherName));
+            Argument.AssertNotNullOrEmpty(offer, nameof(offer));
+            Argument.AssertNotNullOrEmpty(skus, nameof(skus));
+            Argument.AssertNotNullOrEmpty(version, nameof(version));
 
             using var scope = VirtualMachineImagesClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetVirtualMachineImage");
             scope.Start();
@@ -629,22 +599,10 @@ namespace Azure.ResourceManager.Sample
         /// <returns> An async collection of <see cref="VirtualMachineImageResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<VirtualMachineImageResource> GetVirtualMachineImagesAsync(string location, string publisherName, string offer, string skus, string expand = null, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(location))
-            {
-                throw new ArgumentException($"Parameter {nameof(location)} cannot be null or empty", nameof(location));
-            }
-            if (string.IsNullOrEmpty(publisherName))
-            {
-                throw new ArgumentException($"Parameter {nameof(publisherName)} cannot be null or empty", nameof(publisherName));
-            }
-            if (string.IsNullOrEmpty(offer))
-            {
-                throw new ArgumentException($"Parameter {nameof(offer)} cannot be null or empty", nameof(offer));
-            }
-            if (string.IsNullOrEmpty(skus))
-            {
-                throw new ArgumentException($"Parameter {nameof(skus)} cannot be null or empty", nameof(skus));
-            }
+            Argument.AssertNotNullOrEmpty(location, nameof(location));
+            Argument.AssertNotNullOrEmpty(publisherName, nameof(publisherName));
+            Argument.AssertNotNullOrEmpty(offer, nameof(offer));
+            Argument.AssertNotNullOrEmpty(skus, nameof(skus));
 
             async Task<Page<VirtualMachineImageResource>> FirstPageFunc(int? pageSizeHint)
             {
@@ -680,22 +638,10 @@ namespace Azure.ResourceManager.Sample
         /// <returns> A collection of <see cref="VirtualMachineImageResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<VirtualMachineImageResource> GetVirtualMachineImages(string location, string publisherName, string offer, string skus, string expand = null, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(location))
-            {
-                throw new ArgumentException($"Parameter {nameof(location)} cannot be null or empty", nameof(location));
-            }
-            if (string.IsNullOrEmpty(publisherName))
-            {
-                throw new ArgumentException($"Parameter {nameof(publisherName)} cannot be null or empty", nameof(publisherName));
-            }
-            if (string.IsNullOrEmpty(offer))
-            {
-                throw new ArgumentException($"Parameter {nameof(offer)} cannot be null or empty", nameof(offer));
-            }
-            if (string.IsNullOrEmpty(skus))
-            {
-                throw new ArgumentException($"Parameter {nameof(skus)} cannot be null or empty", nameof(skus));
-            }
+            Argument.AssertNotNullOrEmpty(location, nameof(location));
+            Argument.AssertNotNullOrEmpty(publisherName, nameof(publisherName));
+            Argument.AssertNotNullOrEmpty(offer, nameof(offer));
+            Argument.AssertNotNullOrEmpty(skus, nameof(skus));
 
             Page<VirtualMachineImageResource> FirstPageFunc(int? pageSizeHint)
             {
@@ -726,14 +672,8 @@ namespace Azure.ResourceManager.Sample
         /// <returns> An async collection of <see cref="VirtualMachineImageResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<VirtualMachineImageResource> GetOffersVirtualMachineImagesAsync(string location, string publisherName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(location))
-            {
-                throw new ArgumentException($"Parameter {nameof(location)} cannot be null or empty", nameof(location));
-            }
-            if (string.IsNullOrEmpty(publisherName))
-            {
-                throw new ArgumentException($"Parameter {nameof(publisherName)} cannot be null or empty", nameof(publisherName));
-            }
+            Argument.AssertNotNullOrEmpty(location, nameof(location));
+            Argument.AssertNotNullOrEmpty(publisherName, nameof(publisherName));
 
             async Task<Page<VirtualMachineImageResource>> FirstPageFunc(int? pageSizeHint)
             {
@@ -764,14 +704,8 @@ namespace Azure.ResourceManager.Sample
         /// <returns> A collection of <see cref="VirtualMachineImageResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<VirtualMachineImageResource> GetOffersVirtualMachineImages(string location, string publisherName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(location))
-            {
-                throw new ArgumentException($"Parameter {nameof(location)} cannot be null or empty", nameof(location));
-            }
-            if (string.IsNullOrEmpty(publisherName))
-            {
-                throw new ArgumentException($"Parameter {nameof(publisherName)} cannot be null or empty", nameof(publisherName));
-            }
+            Argument.AssertNotNullOrEmpty(location, nameof(location));
+            Argument.AssertNotNullOrEmpty(publisherName, nameof(publisherName));
 
             Page<VirtualMachineImageResource> FirstPageFunc(int? pageSizeHint)
             {
@@ -801,10 +735,7 @@ namespace Azure.ResourceManager.Sample
         /// <returns> An async collection of <see cref="VirtualMachineImageResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<VirtualMachineImageResource> GetPublishersVirtualMachineImagesAsync(string location, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(location))
-            {
-                throw new ArgumentException($"Parameter {nameof(location)} cannot be null or empty", nameof(location));
-            }
+            Argument.AssertNotNullOrEmpty(location, nameof(location));
 
             async Task<Page<VirtualMachineImageResource>> FirstPageFunc(int? pageSizeHint)
             {
@@ -834,10 +765,7 @@ namespace Azure.ResourceManager.Sample
         /// <returns> A collection of <see cref="VirtualMachineImageResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<VirtualMachineImageResource> GetPublishersVirtualMachineImages(string location, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(location))
-            {
-                throw new ArgumentException($"Parameter {nameof(location)} cannot be null or empty", nameof(location));
-            }
+            Argument.AssertNotNullOrEmpty(location, nameof(location));
 
             Page<VirtualMachineImageResource> FirstPageFunc(int? pageSizeHint)
             {
@@ -869,18 +797,9 @@ namespace Azure.ResourceManager.Sample
         /// <returns> An async collection of <see cref="VirtualMachineImageResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<VirtualMachineImageResource> GetSkusVirtualMachineImagesAsync(string location, string publisherName, string offer, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(location))
-            {
-                throw new ArgumentException($"Parameter {nameof(location)} cannot be null or empty", nameof(location));
-            }
-            if (string.IsNullOrEmpty(publisherName))
-            {
-                throw new ArgumentException($"Parameter {nameof(publisherName)} cannot be null or empty", nameof(publisherName));
-            }
-            if (string.IsNullOrEmpty(offer))
-            {
-                throw new ArgumentException($"Parameter {nameof(offer)} cannot be null or empty", nameof(offer));
-            }
+            Argument.AssertNotNullOrEmpty(location, nameof(location));
+            Argument.AssertNotNullOrEmpty(publisherName, nameof(publisherName));
+            Argument.AssertNotNullOrEmpty(offer, nameof(offer));
 
             async Task<Page<VirtualMachineImageResource>> FirstPageFunc(int? pageSizeHint)
             {
@@ -912,18 +831,9 @@ namespace Azure.ResourceManager.Sample
         /// <returns> A collection of <see cref="VirtualMachineImageResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<VirtualMachineImageResource> GetSkusVirtualMachineImages(string location, string publisherName, string offer, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(location))
-            {
-                throw new ArgumentException($"Parameter {nameof(location)} cannot be null or empty", nameof(location));
-            }
-            if (string.IsNullOrEmpty(publisherName))
-            {
-                throw new ArgumentException($"Parameter {nameof(publisherName)} cannot be null or empty", nameof(publisherName));
-            }
-            if (string.IsNullOrEmpty(offer))
-            {
-                throw new ArgumentException($"Parameter {nameof(offer)} cannot be null or empty", nameof(offer));
-            }
+            Argument.AssertNotNullOrEmpty(location, nameof(location));
+            Argument.AssertNotNullOrEmpty(publisherName, nameof(publisherName));
+            Argument.AssertNotNullOrEmpty(offer, nameof(offer));
 
             Page<VirtualMachineImageResource> FirstPageFunc(int? pageSizeHint)
             {
@@ -953,10 +863,7 @@ namespace Azure.ResourceManager.Sample
         /// <returns> An async collection of <see cref="Usage" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<Usage> GetUsagesAsync(string location, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(location))
-            {
-                throw new ArgumentException($"Parameter {nameof(location)} cannot be null or empty", nameof(location));
-            }
+            Argument.AssertNotNullOrEmpty(location, nameof(location));
 
             async Task<Page<Usage>> FirstPageFunc(int? pageSizeHint)
             {
@@ -1001,10 +908,7 @@ namespace Azure.ResourceManager.Sample
         /// <returns> A collection of <see cref="Usage" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<Usage> GetUsages(string location, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(location))
-            {
-                throw new ArgumentException($"Parameter {nameof(location)} cannot be null or empty", nameof(location));
-            }
+            Argument.AssertNotNullOrEmpty(location, nameof(location));
 
             Page<Usage> FirstPageFunc(int? pageSizeHint)
             {
@@ -1049,10 +953,7 @@ namespace Azure.ResourceManager.Sample
         /// <returns> An async collection of <see cref="VirtualMachine" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<VirtualMachine> GetVirtualMachinesByLocationAsync(string location, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(location))
-            {
-                throw new ArgumentException($"Parameter {nameof(location)} cannot be null or empty", nameof(location));
-            }
+            Argument.AssertNotNullOrEmpty(location, nameof(location));
 
             async Task<Page<VirtualMachine>> FirstPageFunc(int? pageSizeHint)
             {
@@ -1097,10 +998,7 @@ namespace Azure.ResourceManager.Sample
         /// <returns> A collection of <see cref="VirtualMachine" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<VirtualMachine> GetVirtualMachinesByLocation(string location, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(location))
-            {
-                throw new ArgumentException($"Parameter {nameof(location)} cannot be null or empty", nameof(location));
-            }
+            Argument.AssertNotNullOrEmpty(location, nameof(location));
 
             Page<VirtualMachine> FirstPageFunc(int? pageSizeHint)
             {
@@ -1255,10 +1153,7 @@ namespace Azure.ResourceManager.Sample
         /// <returns> An async collection of <see cref="VirtualMachineSize" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<VirtualMachineSize> GetVirtualMachineSizesAsync(string location, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(location))
-            {
-                throw new ArgumentException($"Parameter {nameof(location)} cannot be null or empty", nameof(location));
-            }
+            Argument.AssertNotNullOrEmpty(location, nameof(location));
 
             async Task<Page<VirtualMachineSize>> FirstPageFunc(int? pageSizeHint)
             {
@@ -1288,10 +1183,7 @@ namespace Azure.ResourceManager.Sample
         /// <returns> A collection of <see cref="VirtualMachineSize" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<VirtualMachineSize> GetVirtualMachineSizes(string location, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(location))
-            {
-                throw new ArgumentException($"Parameter {nameof(location)} cannot be null or empty", nameof(location));
-            }
+            Argument.AssertNotNullOrEmpty(location, nameof(location));
 
             Page<VirtualMachineSize> FirstPageFunc(int? pageSizeHint)
             {
@@ -1539,10 +1431,7 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public async virtual Task<ExportRequestRateByIntervalLogAnalyticOperation> ExportRequestRateByIntervalLogAnalyticAsync(bool waitForCompletion, string location, RequestRateByIntervalInput parameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(location))
-            {
-                throw new ArgumentException($"Parameter {nameof(location)} cannot be null or empty", nameof(location));
-            }
+            Argument.AssertNotNullOrEmpty(location, nameof(location));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -1577,10 +1466,7 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public virtual ExportRequestRateByIntervalLogAnalyticOperation ExportRequestRateByIntervalLogAnalytic(bool waitForCompletion, string location, RequestRateByIntervalInput parameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(location))
-            {
-                throw new ArgumentException($"Parameter {nameof(location)} cannot be null or empty", nameof(location));
-            }
+            Argument.AssertNotNullOrEmpty(location, nameof(location));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -1615,10 +1501,7 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public async virtual Task<ExportThrottledRequestsLogAnalyticOperation> ExportThrottledRequestsLogAnalyticAsync(bool waitForCompletion, string location, ThrottledRequestsInput parameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(location))
-            {
-                throw new ArgumentException($"Parameter {nameof(location)} cannot be null or empty", nameof(location));
-            }
+            Argument.AssertNotNullOrEmpty(location, nameof(location));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -1653,10 +1536,7 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public virtual ExportThrottledRequestsLogAnalyticOperation ExportThrottledRequestsLogAnalytic(bool waitForCompletion, string location, ThrottledRequestsInput parameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(location))
-            {
-                throw new ArgumentException($"Parameter {nameof(location)} cannot be null or empty", nameof(location));
-            }
+            Argument.AssertNotNullOrEmpty(location, nameof(location));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));

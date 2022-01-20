@@ -221,10 +221,7 @@ namespace Azure.Management.Storage
         /// <returns> An async collection of <see cref="Usage" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<Usage> GetUsagesByLocationAsync(string location, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(location))
-            {
-                throw new ArgumentException($"Parameter {nameof(location)} cannot be null or empty", nameof(location));
-            }
+            Argument.AssertNotNullOrEmpty(location, nameof(location));
 
             async Task<Page<Usage>> FirstPageFunc(int? pageSizeHint)
             {
@@ -254,10 +251,7 @@ namespace Azure.Management.Storage
         /// <returns> A collection of <see cref="Usage" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<Usage> GetUsagesByLocation(string location, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(location))
-            {
-                throw new ArgumentException($"Parameter {nameof(location)} cannot be null or empty", nameof(location));
-            }
+            Argument.AssertNotNullOrEmpty(location, nameof(location));
 
             Page<Usage> FirstPageFunc(int? pageSizeHint)
             {

@@ -63,10 +63,7 @@ namespace MgmtOperations
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public virtual AvailabilitySetChildCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string availabilitySetChildName, AvailabilitySetChildData parameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(availabilitySetChildName))
-            {
-                throw new ArgumentException($"Parameter {nameof(availabilitySetChildName)} cannot be null or empty", nameof(availabilitySetChildName));
-            }
+            Argument.AssertNotNullOrEmpty(availabilitySetChildName, nameof(availabilitySetChildName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -101,10 +98,7 @@ namespace MgmtOperations
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public async virtual Task<AvailabilitySetChildCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string availabilitySetChildName, AvailabilitySetChildData parameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(availabilitySetChildName))
-            {
-                throw new ArgumentException($"Parameter {nameof(availabilitySetChildName)} cannot be null or empty", nameof(availabilitySetChildName));
-            }
+            Argument.AssertNotNullOrEmpty(availabilitySetChildName, nameof(availabilitySetChildName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -136,10 +130,7 @@ namespace MgmtOperations
         /// <exception cref="ArgumentException"> <paramref name="availabilitySetChildName"/> is null or empty. </exception>
         public virtual Response<AvailabilitySetChild> Get(string availabilitySetChildName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(availabilitySetChildName))
-            {
-                throw new ArgumentException($"Parameter {nameof(availabilitySetChildName)} cannot be null or empty", nameof(availabilitySetChildName));
-            }
+            Argument.AssertNotNullOrEmpty(availabilitySetChildName, nameof(availabilitySetChildName));
 
             using var scope = _clientDiagnostics.CreateScope("AvailabilitySetChildCollection.Get");
             scope.Start();
@@ -166,10 +157,7 @@ namespace MgmtOperations
         /// <exception cref="ArgumentException"> <paramref name="availabilitySetChildName"/> is null or empty. </exception>
         public async virtual Task<Response<AvailabilitySetChild>> GetAsync(string availabilitySetChildName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(availabilitySetChildName))
-            {
-                throw new ArgumentException($"Parameter {nameof(availabilitySetChildName)} cannot be null or empty", nameof(availabilitySetChildName));
-            }
+            Argument.AssertNotNullOrEmpty(availabilitySetChildName, nameof(availabilitySetChildName));
 
             using var scope = _clientDiagnostics.CreateScope("AvailabilitySetChildCollection.Get");
             scope.Start();
@@ -193,10 +181,7 @@ namespace MgmtOperations
         /// <exception cref="ArgumentException"> <paramref name="availabilitySetChildName"/> is null or empty. </exception>
         public virtual Response<AvailabilitySetChild> GetIfExists(string availabilitySetChildName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(availabilitySetChildName))
-            {
-                throw new ArgumentException($"Parameter {nameof(availabilitySetChildName)} cannot be null or empty", nameof(availabilitySetChildName));
-            }
+            Argument.AssertNotNullOrEmpty(availabilitySetChildName, nameof(availabilitySetChildName));
 
             using var scope = _clientDiagnostics.CreateScope("AvailabilitySetChildCollection.GetIfExists");
             scope.Start();
@@ -220,10 +205,7 @@ namespace MgmtOperations
         /// <exception cref="ArgumentException"> <paramref name="availabilitySetChildName"/> is null or empty. </exception>
         public async virtual Task<Response<AvailabilitySetChild>> GetIfExistsAsync(string availabilitySetChildName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(availabilitySetChildName))
-            {
-                throw new ArgumentException($"Parameter {nameof(availabilitySetChildName)} cannot be null or empty", nameof(availabilitySetChildName));
-            }
+            Argument.AssertNotNullOrEmpty(availabilitySetChildName, nameof(availabilitySetChildName));
 
             using var scope = _clientDiagnostics.CreateScope("AvailabilitySetChildCollection.GetIfExists");
             scope.Start();
@@ -247,10 +229,7 @@ namespace MgmtOperations
         /// <exception cref="ArgumentException"> <paramref name="availabilitySetChildName"/> is null or empty. </exception>
         public virtual Response<bool> Exists(string availabilitySetChildName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(availabilitySetChildName))
-            {
-                throw new ArgumentException($"Parameter {nameof(availabilitySetChildName)} cannot be null or empty", nameof(availabilitySetChildName));
-            }
+            Argument.AssertNotNullOrEmpty(availabilitySetChildName, nameof(availabilitySetChildName));
 
             using var scope = _clientDiagnostics.CreateScope("AvailabilitySetChildCollection.Exists");
             scope.Start();
@@ -272,10 +251,7 @@ namespace MgmtOperations
         /// <exception cref="ArgumentException"> <paramref name="availabilitySetChildName"/> is null or empty. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string availabilitySetChildName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(availabilitySetChildName))
-            {
-                throw new ArgumentException($"Parameter {nameof(availabilitySetChildName)} cannot be null or empty", nameof(availabilitySetChildName));
-            }
+            Argument.AssertNotNullOrEmpty(availabilitySetChildName, nameof(availabilitySetChildName));
 
             using var scope = _clientDiagnostics.CreateScope("AvailabilitySetChildCollection.Exists");
             scope.Start();

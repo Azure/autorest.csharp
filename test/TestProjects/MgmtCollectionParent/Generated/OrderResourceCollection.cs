@@ -63,14 +63,8 @@ namespace MgmtCollectionParent
         /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="orderName"/> is null or empty. </exception>
         public virtual Response<OrderResource> Get(string location, string orderName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(location))
-            {
-                throw new ArgumentException($"Parameter {nameof(location)} cannot be null or empty", nameof(location));
-            }
-            if (string.IsNullOrEmpty(orderName))
-            {
-                throw new ArgumentException($"Parameter {nameof(orderName)} cannot be null or empty", nameof(orderName));
-            }
+            Argument.AssertNotNullOrEmpty(location, nameof(location));
+            Argument.AssertNotNullOrEmpty(orderName, nameof(orderName));
 
             using var scope = _clientDiagnostics.CreateScope("OrderResourceCollection.Get");
             scope.Start();
@@ -98,14 +92,8 @@ namespace MgmtCollectionParent
         /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="orderName"/> is null or empty. </exception>
         public async virtual Task<Response<OrderResource>> GetAsync(string location, string orderName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(location))
-            {
-                throw new ArgumentException($"Parameter {nameof(location)} cannot be null or empty", nameof(location));
-            }
-            if (string.IsNullOrEmpty(orderName))
-            {
-                throw new ArgumentException($"Parameter {nameof(orderName)} cannot be null or empty", nameof(orderName));
-            }
+            Argument.AssertNotNullOrEmpty(location, nameof(location));
+            Argument.AssertNotNullOrEmpty(orderName, nameof(orderName));
 
             using var scope = _clientDiagnostics.CreateScope("OrderResourceCollection.Get");
             scope.Start();
@@ -130,14 +118,8 @@ namespace MgmtCollectionParent
         /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="orderName"/> is null or empty. </exception>
         public virtual Response<OrderResource> GetIfExists(string location, string orderName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(location))
-            {
-                throw new ArgumentException($"Parameter {nameof(location)} cannot be null or empty", nameof(location));
-            }
-            if (string.IsNullOrEmpty(orderName))
-            {
-                throw new ArgumentException($"Parameter {nameof(orderName)} cannot be null or empty", nameof(orderName));
-            }
+            Argument.AssertNotNullOrEmpty(location, nameof(location));
+            Argument.AssertNotNullOrEmpty(orderName, nameof(orderName));
 
             using var scope = _clientDiagnostics.CreateScope("OrderResourceCollection.GetIfExists");
             scope.Start();
@@ -162,14 +144,8 @@ namespace MgmtCollectionParent
         /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="orderName"/> is null or empty. </exception>
         public async virtual Task<Response<OrderResource>> GetIfExistsAsync(string location, string orderName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(location))
-            {
-                throw new ArgumentException($"Parameter {nameof(location)} cannot be null or empty", nameof(location));
-            }
-            if (string.IsNullOrEmpty(orderName))
-            {
-                throw new ArgumentException($"Parameter {nameof(orderName)} cannot be null or empty", nameof(orderName));
-            }
+            Argument.AssertNotNullOrEmpty(location, nameof(location));
+            Argument.AssertNotNullOrEmpty(orderName, nameof(orderName));
 
             using var scope = _clientDiagnostics.CreateScope("OrderResourceCollection.GetIfExists");
             scope.Start();
@@ -194,14 +170,8 @@ namespace MgmtCollectionParent
         /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="orderName"/> is null or empty. </exception>
         public virtual Response<bool> Exists(string location, string orderName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(location))
-            {
-                throw new ArgumentException($"Parameter {nameof(location)} cannot be null or empty", nameof(location));
-            }
-            if (string.IsNullOrEmpty(orderName))
-            {
-                throw new ArgumentException($"Parameter {nameof(orderName)} cannot be null or empty", nameof(orderName));
-            }
+            Argument.AssertNotNullOrEmpty(location, nameof(location));
+            Argument.AssertNotNullOrEmpty(orderName, nameof(orderName));
 
             using var scope = _clientDiagnostics.CreateScope("OrderResourceCollection.Exists");
             scope.Start();
@@ -224,14 +194,8 @@ namespace MgmtCollectionParent
         /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="orderName"/> is null or empty. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string location, string orderName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(location))
-            {
-                throw new ArgumentException($"Parameter {nameof(location)} cannot be null or empty", nameof(location));
-            }
-            if (string.IsNullOrEmpty(orderName))
-            {
-                throw new ArgumentException($"Parameter {nameof(orderName)} cannot be null or empty", nameof(orderName));
-            }
+            Argument.AssertNotNullOrEmpty(location, nameof(location));
+            Argument.AssertNotNullOrEmpty(orderName, nameof(orderName));
 
             using var scope = _clientDiagnostics.CreateScope("OrderResourceCollection.Exists");
             scope.Start();

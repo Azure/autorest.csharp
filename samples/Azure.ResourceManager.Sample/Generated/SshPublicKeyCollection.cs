@@ -65,10 +65,7 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public virtual SshPublicKeyCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string sshPublicKeyName, SshPublicKeyData parameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(sshPublicKeyName))
-            {
-                throw new ArgumentException($"Parameter {nameof(sshPublicKeyName)} cannot be null or empty", nameof(sshPublicKeyName));
-            }
+            Argument.AssertNotNullOrEmpty(sshPublicKeyName, nameof(sshPublicKeyName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -103,10 +100,7 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public async virtual Task<SshPublicKeyCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string sshPublicKeyName, SshPublicKeyData parameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(sshPublicKeyName))
-            {
-                throw new ArgumentException($"Parameter {nameof(sshPublicKeyName)} cannot be null or empty", nameof(sshPublicKeyName));
-            }
+            Argument.AssertNotNullOrEmpty(sshPublicKeyName, nameof(sshPublicKeyName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -138,10 +132,7 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentException"> <paramref name="sshPublicKeyName"/> is null or empty. </exception>
         public virtual Response<SshPublicKey> Get(string sshPublicKeyName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(sshPublicKeyName))
-            {
-                throw new ArgumentException($"Parameter {nameof(sshPublicKeyName)} cannot be null or empty", nameof(sshPublicKeyName));
-            }
+            Argument.AssertNotNullOrEmpty(sshPublicKeyName, nameof(sshPublicKeyName));
 
             using var scope = _clientDiagnostics.CreateScope("SshPublicKeyCollection.Get");
             scope.Start();
@@ -168,10 +159,7 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentException"> <paramref name="sshPublicKeyName"/> is null or empty. </exception>
         public async virtual Task<Response<SshPublicKey>> GetAsync(string sshPublicKeyName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(sshPublicKeyName))
-            {
-                throw new ArgumentException($"Parameter {nameof(sshPublicKeyName)} cannot be null or empty", nameof(sshPublicKeyName));
-            }
+            Argument.AssertNotNullOrEmpty(sshPublicKeyName, nameof(sshPublicKeyName));
 
             using var scope = _clientDiagnostics.CreateScope("SshPublicKeyCollection.Get");
             scope.Start();
@@ -195,10 +183,7 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentException"> <paramref name="sshPublicKeyName"/> is null or empty. </exception>
         public virtual Response<SshPublicKey> GetIfExists(string sshPublicKeyName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(sshPublicKeyName))
-            {
-                throw new ArgumentException($"Parameter {nameof(sshPublicKeyName)} cannot be null or empty", nameof(sshPublicKeyName));
-            }
+            Argument.AssertNotNullOrEmpty(sshPublicKeyName, nameof(sshPublicKeyName));
 
             using var scope = _clientDiagnostics.CreateScope("SshPublicKeyCollection.GetIfExists");
             scope.Start();
@@ -222,10 +207,7 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentException"> <paramref name="sshPublicKeyName"/> is null or empty. </exception>
         public async virtual Task<Response<SshPublicKey>> GetIfExistsAsync(string sshPublicKeyName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(sshPublicKeyName))
-            {
-                throw new ArgumentException($"Parameter {nameof(sshPublicKeyName)} cannot be null or empty", nameof(sshPublicKeyName));
-            }
+            Argument.AssertNotNullOrEmpty(sshPublicKeyName, nameof(sshPublicKeyName));
 
             using var scope = _clientDiagnostics.CreateScope("SshPublicKeyCollection.GetIfExists");
             scope.Start();
@@ -249,10 +231,7 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentException"> <paramref name="sshPublicKeyName"/> is null or empty. </exception>
         public virtual Response<bool> Exists(string sshPublicKeyName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(sshPublicKeyName))
-            {
-                throw new ArgumentException($"Parameter {nameof(sshPublicKeyName)} cannot be null or empty", nameof(sshPublicKeyName));
-            }
+            Argument.AssertNotNullOrEmpty(sshPublicKeyName, nameof(sshPublicKeyName));
 
             using var scope = _clientDiagnostics.CreateScope("SshPublicKeyCollection.Exists");
             scope.Start();
@@ -274,10 +253,7 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentException"> <paramref name="sshPublicKeyName"/> is null or empty. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string sshPublicKeyName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(sshPublicKeyName))
-            {
-                throw new ArgumentException($"Parameter {nameof(sshPublicKeyName)} cannot be null or empty", nameof(sshPublicKeyName));
-            }
+            Argument.AssertNotNullOrEmpty(sshPublicKeyName, nameof(sshPublicKeyName));
 
             using var scope = _clientDiagnostics.CreateScope("SshPublicKeyCollection.Exists");
             scope.Start();

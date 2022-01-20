@@ -53,10 +53,7 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public virtual DeploymentExtendedCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string deploymentName, Deployment parameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(deploymentName))
-            {
-                throw new ArgumentException($"Parameter {nameof(deploymentName)} cannot be null or empty", nameof(deploymentName));
-            }
+            Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -91,10 +88,7 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public async virtual Task<DeploymentExtendedCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string deploymentName, Deployment parameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(deploymentName))
-            {
-                throw new ArgumentException($"Parameter {nameof(deploymentName)} cannot be null or empty", nameof(deploymentName));
-            }
+            Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -126,10 +120,7 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is null or empty. </exception>
         public virtual Response<DeploymentExtended> Get(string deploymentName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(deploymentName))
-            {
-                throw new ArgumentException($"Parameter {nameof(deploymentName)} cannot be null or empty", nameof(deploymentName));
-            }
+            Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
 
             using var scope = _clientDiagnostics.CreateScope("DeploymentExtendedCollection.Get");
             scope.Start();
@@ -156,10 +147,7 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is null or empty. </exception>
         public async virtual Task<Response<DeploymentExtended>> GetAsync(string deploymentName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(deploymentName))
-            {
-                throw new ArgumentException($"Parameter {nameof(deploymentName)} cannot be null or empty", nameof(deploymentName));
-            }
+            Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
 
             using var scope = _clientDiagnostics.CreateScope("DeploymentExtendedCollection.Get");
             scope.Start();
@@ -183,10 +171,7 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is null or empty. </exception>
         public virtual Response<DeploymentExtended> GetIfExists(string deploymentName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(deploymentName))
-            {
-                throw new ArgumentException($"Parameter {nameof(deploymentName)} cannot be null or empty", nameof(deploymentName));
-            }
+            Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
 
             using var scope = _clientDiagnostics.CreateScope("DeploymentExtendedCollection.GetIfExists");
             scope.Start();
@@ -210,10 +195,7 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is null or empty. </exception>
         public async virtual Task<Response<DeploymentExtended>> GetIfExistsAsync(string deploymentName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(deploymentName))
-            {
-                throw new ArgumentException($"Parameter {nameof(deploymentName)} cannot be null or empty", nameof(deploymentName));
-            }
+            Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
 
             using var scope = _clientDiagnostics.CreateScope("DeploymentExtendedCollection.GetIfExists");
             scope.Start();
@@ -237,10 +219,7 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is null or empty. </exception>
         public virtual Response<bool> Exists(string deploymentName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(deploymentName))
-            {
-                throw new ArgumentException($"Parameter {nameof(deploymentName)} cannot be null or empty", nameof(deploymentName));
-            }
+            Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
 
             using var scope = _clientDiagnostics.CreateScope("DeploymentExtendedCollection.Exists");
             scope.Start();
@@ -262,10 +241,7 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is null or empty. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string deploymentName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(deploymentName))
-            {
-                throw new ArgumentException($"Parameter {nameof(deploymentName)} cannot be null or empty", nameof(deploymentName));
-            }
+            Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
 
             using var scope = _clientDiagnostics.CreateScope("DeploymentExtendedCollection.Exists");
             scope.Start();

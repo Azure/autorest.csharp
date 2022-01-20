@@ -65,10 +65,7 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public virtual FakeCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string fakeName, FakeData parameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(fakeName))
-            {
-                throw new ArgumentException($"Parameter {nameof(fakeName)} cannot be null or empty", nameof(fakeName));
-            }
+            Argument.AssertNotNullOrEmpty(fakeName, nameof(fakeName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -103,10 +100,7 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public async virtual Task<FakeCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string fakeName, FakeData parameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(fakeName))
-            {
-                throw new ArgumentException($"Parameter {nameof(fakeName)} cannot be null or empty", nameof(fakeName));
-            }
+            Argument.AssertNotNullOrEmpty(fakeName, nameof(fakeName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -139,10 +133,7 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentException"> <paramref name="fakeName"/> is null or empty. </exception>
         public virtual Response<Fake> Get(string fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(fakeName))
-            {
-                throw new ArgumentException($"Parameter {nameof(fakeName)} cannot be null or empty", nameof(fakeName));
-            }
+            Argument.AssertNotNullOrEmpty(fakeName, nameof(fakeName));
 
             using var scope = _clientDiagnostics.CreateScope("FakeCollection.Get");
             scope.Start();
@@ -170,10 +161,7 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentException"> <paramref name="fakeName"/> is null or empty. </exception>
         public async virtual Task<Response<Fake>> GetAsync(string fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(fakeName))
-            {
-                throw new ArgumentException($"Parameter {nameof(fakeName)} cannot be null or empty", nameof(fakeName));
-            }
+            Argument.AssertNotNullOrEmpty(fakeName, nameof(fakeName));
 
             using var scope = _clientDiagnostics.CreateScope("FakeCollection.Get");
             scope.Start();
@@ -198,10 +186,7 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentException"> <paramref name="fakeName"/> is null or empty. </exception>
         public virtual Response<Fake> GetIfExists(string fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(fakeName))
-            {
-                throw new ArgumentException($"Parameter {nameof(fakeName)} cannot be null or empty", nameof(fakeName));
-            }
+            Argument.AssertNotNullOrEmpty(fakeName, nameof(fakeName));
 
             using var scope = _clientDiagnostics.CreateScope("FakeCollection.GetIfExists");
             scope.Start();
@@ -226,10 +211,7 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentException"> <paramref name="fakeName"/> is null or empty. </exception>
         public async virtual Task<Response<Fake>> GetIfExistsAsync(string fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(fakeName))
-            {
-                throw new ArgumentException($"Parameter {nameof(fakeName)} cannot be null or empty", nameof(fakeName));
-            }
+            Argument.AssertNotNullOrEmpty(fakeName, nameof(fakeName));
 
             using var scope = _clientDiagnostics.CreateScope("FakeCollection.GetIfExists");
             scope.Start();
@@ -254,10 +236,7 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentException"> <paramref name="fakeName"/> is null or empty. </exception>
         public virtual Response<bool> Exists(string fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(fakeName))
-            {
-                throw new ArgumentException($"Parameter {nameof(fakeName)} cannot be null or empty", nameof(fakeName));
-            }
+            Argument.AssertNotNullOrEmpty(fakeName, nameof(fakeName));
 
             using var scope = _clientDiagnostics.CreateScope("FakeCollection.Exists");
             scope.Start();
@@ -280,10 +259,7 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentException"> <paramref name="fakeName"/> is null or empty. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(fakeName))
-            {
-                throw new ArgumentException($"Parameter {nameof(fakeName)} cannot be null or empty", nameof(fakeName));
-            }
+            Argument.AssertNotNullOrEmpty(fakeName, nameof(fakeName));
 
             using var scope = _clientDiagnostics.CreateScope("FakeCollection.Exists");
             scope.Start();

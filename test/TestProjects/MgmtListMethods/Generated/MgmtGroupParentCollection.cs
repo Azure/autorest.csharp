@@ -64,10 +64,7 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public virtual MgmtGroupParentCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string mgmtGroupParentName, MgmtGroupParentData parameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(mgmtGroupParentName))
-            {
-                throw new ArgumentException($"Parameter {nameof(mgmtGroupParentName)} cannot be null or empty", nameof(mgmtGroupParentName));
-            }
+            Argument.AssertNotNullOrEmpty(mgmtGroupParentName, nameof(mgmtGroupParentName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -102,10 +99,7 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public async virtual Task<MgmtGroupParentCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string mgmtGroupParentName, MgmtGroupParentData parameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(mgmtGroupParentName))
-            {
-                throw new ArgumentException($"Parameter {nameof(mgmtGroupParentName)} cannot be null or empty", nameof(mgmtGroupParentName));
-            }
+            Argument.AssertNotNullOrEmpty(mgmtGroupParentName, nameof(mgmtGroupParentName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -137,10 +131,7 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentException"> <paramref name="mgmtGroupParentName"/> is null or empty. </exception>
         public virtual Response<MgmtGroupParent> Get(string mgmtGroupParentName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(mgmtGroupParentName))
-            {
-                throw new ArgumentException($"Parameter {nameof(mgmtGroupParentName)} cannot be null or empty", nameof(mgmtGroupParentName));
-            }
+            Argument.AssertNotNullOrEmpty(mgmtGroupParentName, nameof(mgmtGroupParentName));
 
             using var scope = _clientDiagnostics.CreateScope("MgmtGroupParentCollection.Get");
             scope.Start();
@@ -167,10 +158,7 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentException"> <paramref name="mgmtGroupParentName"/> is null or empty. </exception>
         public async virtual Task<Response<MgmtGroupParent>> GetAsync(string mgmtGroupParentName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(mgmtGroupParentName))
-            {
-                throw new ArgumentException($"Parameter {nameof(mgmtGroupParentName)} cannot be null or empty", nameof(mgmtGroupParentName));
-            }
+            Argument.AssertNotNullOrEmpty(mgmtGroupParentName, nameof(mgmtGroupParentName));
 
             using var scope = _clientDiagnostics.CreateScope("MgmtGroupParentCollection.Get");
             scope.Start();
@@ -194,10 +182,7 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentException"> <paramref name="mgmtGroupParentName"/> is null or empty. </exception>
         public virtual Response<MgmtGroupParent> GetIfExists(string mgmtGroupParentName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(mgmtGroupParentName))
-            {
-                throw new ArgumentException($"Parameter {nameof(mgmtGroupParentName)} cannot be null or empty", nameof(mgmtGroupParentName));
-            }
+            Argument.AssertNotNullOrEmpty(mgmtGroupParentName, nameof(mgmtGroupParentName));
 
             using var scope = _clientDiagnostics.CreateScope("MgmtGroupParentCollection.GetIfExists");
             scope.Start();
@@ -221,10 +206,7 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentException"> <paramref name="mgmtGroupParentName"/> is null or empty. </exception>
         public async virtual Task<Response<MgmtGroupParent>> GetIfExistsAsync(string mgmtGroupParentName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(mgmtGroupParentName))
-            {
-                throw new ArgumentException($"Parameter {nameof(mgmtGroupParentName)} cannot be null or empty", nameof(mgmtGroupParentName));
-            }
+            Argument.AssertNotNullOrEmpty(mgmtGroupParentName, nameof(mgmtGroupParentName));
 
             using var scope = _clientDiagnostics.CreateScope("MgmtGroupParentCollection.GetIfExists");
             scope.Start();
@@ -248,10 +230,7 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentException"> <paramref name="mgmtGroupParentName"/> is null or empty. </exception>
         public virtual Response<bool> Exists(string mgmtGroupParentName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(mgmtGroupParentName))
-            {
-                throw new ArgumentException($"Parameter {nameof(mgmtGroupParentName)} cannot be null or empty", nameof(mgmtGroupParentName));
-            }
+            Argument.AssertNotNullOrEmpty(mgmtGroupParentName, nameof(mgmtGroupParentName));
 
             using var scope = _clientDiagnostics.CreateScope("MgmtGroupParentCollection.Exists");
             scope.Start();
@@ -273,10 +252,7 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentException"> <paramref name="mgmtGroupParentName"/> is null or empty. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string mgmtGroupParentName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(mgmtGroupParentName))
-            {
-                throw new ArgumentException($"Parameter {nameof(mgmtGroupParentName)} cannot be null or empty", nameof(mgmtGroupParentName));
-            }
+            Argument.AssertNotNullOrEmpty(mgmtGroupParentName, nameof(mgmtGroupParentName));
 
             using var scope = _clientDiagnostics.CreateScope("MgmtGroupParentCollection.Exists");
             scope.Start();

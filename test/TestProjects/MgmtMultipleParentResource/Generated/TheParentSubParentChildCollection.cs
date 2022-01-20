@@ -63,10 +63,7 @@ namespace MgmtMultipleParentResource
         /// <exception cref="ArgumentNullException"> <paramref name="childBody"/> is null. </exception>
         public virtual TheParentSubParentChildCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string childName, ChildBodyData childBody, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(childName))
-            {
-                throw new ArgumentException($"Parameter {nameof(childName)} cannot be null or empty", nameof(childName));
-            }
+            Argument.AssertNotNullOrEmpty(childName, nameof(childName));
             if (childBody == null)
             {
                 throw new ArgumentNullException(nameof(childBody));
@@ -101,10 +98,7 @@ namespace MgmtMultipleParentResource
         /// <exception cref="ArgumentNullException"> <paramref name="childBody"/> is null. </exception>
         public async virtual Task<TheParentSubParentChildCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string childName, ChildBodyData childBody, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(childName))
-            {
-                throw new ArgumentException($"Parameter {nameof(childName)} cannot be null or empty", nameof(childName));
-            }
+            Argument.AssertNotNullOrEmpty(childName, nameof(childName));
             if (childBody == null)
             {
                 throw new ArgumentNullException(nameof(childBody));
@@ -137,10 +131,7 @@ namespace MgmtMultipleParentResource
         /// <exception cref="ArgumentException"> <paramref name="childName"/> is null or empty. </exception>
         public virtual Response<TheParentSubParentChild> Get(string childName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(childName))
-            {
-                throw new ArgumentException($"Parameter {nameof(childName)} cannot be null or empty", nameof(childName));
-            }
+            Argument.AssertNotNullOrEmpty(childName, nameof(childName));
 
             using var scope = _clientDiagnostics.CreateScope("TheParentSubParentChildCollection.Get");
             scope.Start();
@@ -168,10 +159,7 @@ namespace MgmtMultipleParentResource
         /// <exception cref="ArgumentException"> <paramref name="childName"/> is null or empty. </exception>
         public async virtual Task<Response<TheParentSubParentChild>> GetAsync(string childName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(childName))
-            {
-                throw new ArgumentException($"Parameter {nameof(childName)} cannot be null or empty", nameof(childName));
-            }
+            Argument.AssertNotNullOrEmpty(childName, nameof(childName));
 
             using var scope = _clientDiagnostics.CreateScope("TheParentSubParentChildCollection.Get");
             scope.Start();
@@ -196,10 +184,7 @@ namespace MgmtMultipleParentResource
         /// <exception cref="ArgumentException"> <paramref name="childName"/> is null or empty. </exception>
         public virtual Response<TheParentSubParentChild> GetIfExists(string childName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(childName))
-            {
-                throw new ArgumentException($"Parameter {nameof(childName)} cannot be null or empty", nameof(childName));
-            }
+            Argument.AssertNotNullOrEmpty(childName, nameof(childName));
 
             using var scope = _clientDiagnostics.CreateScope("TheParentSubParentChildCollection.GetIfExists");
             scope.Start();
@@ -224,10 +209,7 @@ namespace MgmtMultipleParentResource
         /// <exception cref="ArgumentException"> <paramref name="childName"/> is null or empty. </exception>
         public async virtual Task<Response<TheParentSubParentChild>> GetIfExistsAsync(string childName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(childName))
-            {
-                throw new ArgumentException($"Parameter {nameof(childName)} cannot be null or empty", nameof(childName));
-            }
+            Argument.AssertNotNullOrEmpty(childName, nameof(childName));
 
             using var scope = _clientDiagnostics.CreateScope("TheParentSubParentChildCollection.GetIfExists");
             scope.Start();
@@ -252,10 +234,7 @@ namespace MgmtMultipleParentResource
         /// <exception cref="ArgumentException"> <paramref name="childName"/> is null or empty. </exception>
         public virtual Response<bool> Exists(string childName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(childName))
-            {
-                throw new ArgumentException($"Parameter {nameof(childName)} cannot be null or empty", nameof(childName));
-            }
+            Argument.AssertNotNullOrEmpty(childName, nameof(childName));
 
             using var scope = _clientDiagnostics.CreateScope("TheParentSubParentChildCollection.Exists");
             scope.Start();
@@ -278,10 +257,7 @@ namespace MgmtMultipleParentResource
         /// <exception cref="ArgumentException"> <paramref name="childName"/> is null or empty. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string childName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(childName))
-            {
-                throw new ArgumentException($"Parameter {nameof(childName)} cannot be null or empty", nameof(childName));
-            }
+            Argument.AssertNotNullOrEmpty(childName, nameof(childName));
 
             using var scope = _clientDiagnostics.CreateScope("TheParentSubParentChildCollection.Exists");
             scope.Start();

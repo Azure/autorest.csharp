@@ -61,10 +61,7 @@ namespace TenantOnly
         /// <exception cref="ArgumentException"> <paramref name="agreementName"/> is null or empty. </exception>
         public virtual Response<Agreement> Get(string agreementName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(agreementName))
-            {
-                throw new ArgumentException($"Parameter {nameof(agreementName)} cannot be null or empty", nameof(agreementName));
-            }
+            Argument.AssertNotNullOrEmpty(agreementName, nameof(agreementName));
 
             using var scope = _clientDiagnostics.CreateScope("AgreementCollection.Get");
             scope.Start();
@@ -92,10 +89,7 @@ namespace TenantOnly
         /// <exception cref="ArgumentException"> <paramref name="agreementName"/> is null or empty. </exception>
         public async virtual Task<Response<Agreement>> GetAsync(string agreementName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(agreementName))
-            {
-                throw new ArgumentException($"Parameter {nameof(agreementName)} cannot be null or empty", nameof(agreementName));
-            }
+            Argument.AssertNotNullOrEmpty(agreementName, nameof(agreementName));
 
             using var scope = _clientDiagnostics.CreateScope("AgreementCollection.Get");
             scope.Start();
@@ -120,10 +114,7 @@ namespace TenantOnly
         /// <exception cref="ArgumentException"> <paramref name="agreementName"/> is null or empty. </exception>
         public virtual Response<Agreement> GetIfExists(string agreementName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(agreementName))
-            {
-                throw new ArgumentException($"Parameter {nameof(agreementName)} cannot be null or empty", nameof(agreementName));
-            }
+            Argument.AssertNotNullOrEmpty(agreementName, nameof(agreementName));
 
             using var scope = _clientDiagnostics.CreateScope("AgreementCollection.GetIfExists");
             scope.Start();
@@ -148,10 +139,7 @@ namespace TenantOnly
         /// <exception cref="ArgumentException"> <paramref name="agreementName"/> is null or empty. </exception>
         public async virtual Task<Response<Agreement>> GetIfExistsAsync(string agreementName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(agreementName))
-            {
-                throw new ArgumentException($"Parameter {nameof(agreementName)} cannot be null or empty", nameof(agreementName));
-            }
+            Argument.AssertNotNullOrEmpty(agreementName, nameof(agreementName));
 
             using var scope = _clientDiagnostics.CreateScope("AgreementCollection.GetIfExists");
             scope.Start();
@@ -176,10 +164,7 @@ namespace TenantOnly
         /// <exception cref="ArgumentException"> <paramref name="agreementName"/> is null or empty. </exception>
         public virtual Response<bool> Exists(string agreementName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(agreementName))
-            {
-                throw new ArgumentException($"Parameter {nameof(agreementName)} cannot be null or empty", nameof(agreementName));
-            }
+            Argument.AssertNotNullOrEmpty(agreementName, nameof(agreementName));
 
             using var scope = _clientDiagnostics.CreateScope("AgreementCollection.Exists");
             scope.Start();
@@ -202,10 +187,7 @@ namespace TenantOnly
         /// <exception cref="ArgumentException"> <paramref name="agreementName"/> is null or empty. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string agreementName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(agreementName))
-            {
-                throw new ArgumentException($"Parameter {nameof(agreementName)} cannot be null or empty", nameof(agreementName));
-            }
+            Argument.AssertNotNullOrEmpty(agreementName, nameof(agreementName));
 
             using var scope = _clientDiagnostics.CreateScope("AgreementCollection.Exists");
             scope.Start();

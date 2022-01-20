@@ -65,10 +65,7 @@ namespace MgmtParamOrdering
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public virtual WorkspaceCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string workspaceName, WorkspaceData parameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(workspaceName))
-            {
-                throw new ArgumentException($"Parameter {nameof(workspaceName)} cannot be null or empty", nameof(workspaceName));
-            }
+            Argument.AssertNotNullOrEmpty(workspaceName, nameof(workspaceName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -103,10 +100,7 @@ namespace MgmtParamOrdering
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public async virtual Task<WorkspaceCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string workspaceName, WorkspaceData parameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(workspaceName))
-            {
-                throw new ArgumentException($"Parameter {nameof(workspaceName)} cannot be null or empty", nameof(workspaceName));
-            }
+            Argument.AssertNotNullOrEmpty(workspaceName, nameof(workspaceName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -138,10 +132,7 @@ namespace MgmtParamOrdering
         /// <exception cref="ArgumentException"> <paramref name="workspaceName"/> is null or empty. </exception>
         public virtual Response<Workspace> Get(string workspaceName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(workspaceName))
-            {
-                throw new ArgumentException($"Parameter {nameof(workspaceName)} cannot be null or empty", nameof(workspaceName));
-            }
+            Argument.AssertNotNullOrEmpty(workspaceName, nameof(workspaceName));
 
             using var scope = _clientDiagnostics.CreateScope("WorkspaceCollection.Get");
             scope.Start();
@@ -168,10 +159,7 @@ namespace MgmtParamOrdering
         /// <exception cref="ArgumentException"> <paramref name="workspaceName"/> is null or empty. </exception>
         public async virtual Task<Response<Workspace>> GetAsync(string workspaceName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(workspaceName))
-            {
-                throw new ArgumentException($"Parameter {nameof(workspaceName)} cannot be null or empty", nameof(workspaceName));
-            }
+            Argument.AssertNotNullOrEmpty(workspaceName, nameof(workspaceName));
 
             using var scope = _clientDiagnostics.CreateScope("WorkspaceCollection.Get");
             scope.Start();
@@ -195,10 +183,7 @@ namespace MgmtParamOrdering
         /// <exception cref="ArgumentException"> <paramref name="workspaceName"/> is null or empty. </exception>
         public virtual Response<Workspace> GetIfExists(string workspaceName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(workspaceName))
-            {
-                throw new ArgumentException($"Parameter {nameof(workspaceName)} cannot be null or empty", nameof(workspaceName));
-            }
+            Argument.AssertNotNullOrEmpty(workspaceName, nameof(workspaceName));
 
             using var scope = _clientDiagnostics.CreateScope("WorkspaceCollection.GetIfExists");
             scope.Start();
@@ -222,10 +207,7 @@ namespace MgmtParamOrdering
         /// <exception cref="ArgumentException"> <paramref name="workspaceName"/> is null or empty. </exception>
         public async virtual Task<Response<Workspace>> GetIfExistsAsync(string workspaceName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(workspaceName))
-            {
-                throw new ArgumentException($"Parameter {nameof(workspaceName)} cannot be null or empty", nameof(workspaceName));
-            }
+            Argument.AssertNotNullOrEmpty(workspaceName, nameof(workspaceName));
 
             using var scope = _clientDiagnostics.CreateScope("WorkspaceCollection.GetIfExists");
             scope.Start();
@@ -249,10 +231,7 @@ namespace MgmtParamOrdering
         /// <exception cref="ArgumentException"> <paramref name="workspaceName"/> is null or empty. </exception>
         public virtual Response<bool> Exists(string workspaceName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(workspaceName))
-            {
-                throw new ArgumentException($"Parameter {nameof(workspaceName)} cannot be null or empty", nameof(workspaceName));
-            }
+            Argument.AssertNotNullOrEmpty(workspaceName, nameof(workspaceName));
 
             using var scope = _clientDiagnostics.CreateScope("WorkspaceCollection.Exists");
             scope.Start();
@@ -274,10 +253,7 @@ namespace MgmtParamOrdering
         /// <exception cref="ArgumentException"> <paramref name="workspaceName"/> is null or empty. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string workspaceName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(workspaceName))
-            {
-                throw new ArgumentException($"Parameter {nameof(workspaceName)} cannot be null or empty", nameof(workspaceName));
-            }
+            Argument.AssertNotNullOrEmpty(workspaceName, nameof(workspaceName));
 
             using var scope = _clientDiagnostics.CreateScope("WorkspaceCollection.Exists");
             scope.Start();

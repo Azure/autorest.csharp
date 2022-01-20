@@ -64,10 +64,7 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public virtual TenantTestCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string tenantTestName, TenantTestData parameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(tenantTestName))
-            {
-                throw new ArgumentException($"Parameter {nameof(tenantTestName)} cannot be null or empty", nameof(tenantTestName));
-            }
+            Argument.AssertNotNullOrEmpty(tenantTestName, nameof(tenantTestName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -102,10 +99,7 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public async virtual Task<TenantTestCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string tenantTestName, TenantTestData parameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(tenantTestName))
-            {
-                throw new ArgumentException($"Parameter {nameof(tenantTestName)} cannot be null or empty", nameof(tenantTestName));
-            }
+            Argument.AssertNotNullOrEmpty(tenantTestName, nameof(tenantTestName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -138,10 +132,7 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentException"> <paramref name="tenantTestName"/> is null or empty. </exception>
         public virtual Response<TenantTest> Get(string tenantTestName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(tenantTestName))
-            {
-                throw new ArgumentException($"Parameter {nameof(tenantTestName)} cannot be null or empty", nameof(tenantTestName));
-            }
+            Argument.AssertNotNullOrEmpty(tenantTestName, nameof(tenantTestName));
 
             using var scope = _clientDiagnostics.CreateScope("TenantTestCollection.Get");
             scope.Start();
@@ -169,10 +160,7 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentException"> <paramref name="tenantTestName"/> is null or empty. </exception>
         public async virtual Task<Response<TenantTest>> GetAsync(string tenantTestName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(tenantTestName))
-            {
-                throw new ArgumentException($"Parameter {nameof(tenantTestName)} cannot be null or empty", nameof(tenantTestName));
-            }
+            Argument.AssertNotNullOrEmpty(tenantTestName, nameof(tenantTestName));
 
             using var scope = _clientDiagnostics.CreateScope("TenantTestCollection.Get");
             scope.Start();
@@ -197,10 +185,7 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentException"> <paramref name="tenantTestName"/> is null or empty. </exception>
         public virtual Response<TenantTest> GetIfExists(string tenantTestName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(tenantTestName))
-            {
-                throw new ArgumentException($"Parameter {nameof(tenantTestName)} cannot be null or empty", nameof(tenantTestName));
-            }
+            Argument.AssertNotNullOrEmpty(tenantTestName, nameof(tenantTestName));
 
             using var scope = _clientDiagnostics.CreateScope("TenantTestCollection.GetIfExists");
             scope.Start();
@@ -225,10 +210,7 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentException"> <paramref name="tenantTestName"/> is null or empty. </exception>
         public async virtual Task<Response<TenantTest>> GetIfExistsAsync(string tenantTestName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(tenantTestName))
-            {
-                throw new ArgumentException($"Parameter {nameof(tenantTestName)} cannot be null or empty", nameof(tenantTestName));
-            }
+            Argument.AssertNotNullOrEmpty(tenantTestName, nameof(tenantTestName));
 
             using var scope = _clientDiagnostics.CreateScope("TenantTestCollection.GetIfExists");
             scope.Start();
@@ -253,10 +235,7 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentException"> <paramref name="tenantTestName"/> is null or empty. </exception>
         public virtual Response<bool> Exists(string tenantTestName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(tenantTestName))
-            {
-                throw new ArgumentException($"Parameter {nameof(tenantTestName)} cannot be null or empty", nameof(tenantTestName));
-            }
+            Argument.AssertNotNullOrEmpty(tenantTestName, nameof(tenantTestName));
 
             using var scope = _clientDiagnostics.CreateScope("TenantTestCollection.Exists");
             scope.Start();
@@ -279,10 +258,7 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentException"> <paramref name="tenantTestName"/> is null or empty. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string tenantTestName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(tenantTestName))
-            {
-                throw new ArgumentException($"Parameter {nameof(tenantTestName)} cannot be null or empty", nameof(tenantTestName));
-            }
+            Argument.AssertNotNullOrEmpty(tenantTestName, nameof(tenantTestName));
 
             using var scope = _clientDiagnostics.CreateScope("TenantTestCollection.Exists");
             scope.Start();

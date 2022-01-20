@@ -523,10 +523,7 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentException"> <paramref name="operationId"/> is null or empty. </exception>
         public async virtual Task<Response<DeploymentOperation>> GetAtScopeDeploymentOperationAsync(string operationId, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(operationId))
-            {
-                throw new ArgumentException($"Parameter {nameof(operationId)} cannot be null or empty", nameof(operationId));
-            }
+            Argument.AssertNotNullOrEmpty(operationId, nameof(operationId));
 
             using var scope = _clientDiagnostics.CreateScope("DeploymentExtended.GetAtScopeDeploymentOperation");
             scope.Start();
@@ -551,10 +548,7 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentException"> <paramref name="operationId"/> is null or empty. </exception>
         public virtual Response<DeploymentOperation> GetAtScopeDeploymentOperation(string operationId, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(operationId))
-            {
-                throw new ArgumentException($"Parameter {nameof(operationId)} cannot be null or empty", nameof(operationId));
-            }
+            Argument.AssertNotNullOrEmpty(operationId, nameof(operationId));
 
             using var scope = _clientDiagnostics.CreateScope("DeploymentExtended.GetAtScopeDeploymentOperation");
             scope.Start();

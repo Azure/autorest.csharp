@@ -63,14 +63,8 @@ namespace Azure.Management.Storage
         /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="deletedAccountName"/> is null or empty. </exception>
         public virtual Response<DeletedAccount> Get(string location, string deletedAccountName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(location))
-            {
-                throw new ArgumentException($"Parameter {nameof(location)} cannot be null or empty", nameof(location));
-            }
-            if (string.IsNullOrEmpty(deletedAccountName))
-            {
-                throw new ArgumentException($"Parameter {nameof(deletedAccountName)} cannot be null or empty", nameof(deletedAccountName));
-            }
+            Argument.AssertNotNullOrEmpty(location, nameof(location));
+            Argument.AssertNotNullOrEmpty(deletedAccountName, nameof(deletedAccountName));
 
             using var scope = _clientDiagnostics.CreateScope("DeletedAccountCollection.Get");
             scope.Start();
@@ -98,14 +92,8 @@ namespace Azure.Management.Storage
         /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="deletedAccountName"/> is null or empty. </exception>
         public async virtual Task<Response<DeletedAccount>> GetAsync(string location, string deletedAccountName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(location))
-            {
-                throw new ArgumentException($"Parameter {nameof(location)} cannot be null or empty", nameof(location));
-            }
-            if (string.IsNullOrEmpty(deletedAccountName))
-            {
-                throw new ArgumentException($"Parameter {nameof(deletedAccountName)} cannot be null or empty", nameof(deletedAccountName));
-            }
+            Argument.AssertNotNullOrEmpty(location, nameof(location));
+            Argument.AssertNotNullOrEmpty(deletedAccountName, nameof(deletedAccountName));
 
             using var scope = _clientDiagnostics.CreateScope("DeletedAccountCollection.Get");
             scope.Start();
@@ -130,14 +118,8 @@ namespace Azure.Management.Storage
         /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="deletedAccountName"/> is null or empty. </exception>
         public virtual Response<DeletedAccount> GetIfExists(string location, string deletedAccountName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(location))
-            {
-                throw new ArgumentException($"Parameter {nameof(location)} cannot be null or empty", nameof(location));
-            }
-            if (string.IsNullOrEmpty(deletedAccountName))
-            {
-                throw new ArgumentException($"Parameter {nameof(deletedAccountName)} cannot be null or empty", nameof(deletedAccountName));
-            }
+            Argument.AssertNotNullOrEmpty(location, nameof(location));
+            Argument.AssertNotNullOrEmpty(deletedAccountName, nameof(deletedAccountName));
 
             using var scope = _clientDiagnostics.CreateScope("DeletedAccountCollection.GetIfExists");
             scope.Start();
@@ -162,14 +144,8 @@ namespace Azure.Management.Storage
         /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="deletedAccountName"/> is null or empty. </exception>
         public async virtual Task<Response<DeletedAccount>> GetIfExistsAsync(string location, string deletedAccountName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(location))
-            {
-                throw new ArgumentException($"Parameter {nameof(location)} cannot be null or empty", nameof(location));
-            }
-            if (string.IsNullOrEmpty(deletedAccountName))
-            {
-                throw new ArgumentException($"Parameter {nameof(deletedAccountName)} cannot be null or empty", nameof(deletedAccountName));
-            }
+            Argument.AssertNotNullOrEmpty(location, nameof(location));
+            Argument.AssertNotNullOrEmpty(deletedAccountName, nameof(deletedAccountName));
 
             using var scope = _clientDiagnostics.CreateScope("DeletedAccountCollection.GetIfExists");
             scope.Start();
@@ -194,14 +170,8 @@ namespace Azure.Management.Storage
         /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="deletedAccountName"/> is null or empty. </exception>
         public virtual Response<bool> Exists(string location, string deletedAccountName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(location))
-            {
-                throw new ArgumentException($"Parameter {nameof(location)} cannot be null or empty", nameof(location));
-            }
-            if (string.IsNullOrEmpty(deletedAccountName))
-            {
-                throw new ArgumentException($"Parameter {nameof(deletedAccountName)} cannot be null or empty", nameof(deletedAccountName));
-            }
+            Argument.AssertNotNullOrEmpty(location, nameof(location));
+            Argument.AssertNotNullOrEmpty(deletedAccountName, nameof(deletedAccountName));
 
             using var scope = _clientDiagnostics.CreateScope("DeletedAccountCollection.Exists");
             scope.Start();
@@ -224,14 +194,8 @@ namespace Azure.Management.Storage
         /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="deletedAccountName"/> is null or empty. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string location, string deletedAccountName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(location))
-            {
-                throw new ArgumentException($"Parameter {nameof(location)} cannot be null or empty", nameof(location));
-            }
-            if (string.IsNullOrEmpty(deletedAccountName))
-            {
-                throw new ArgumentException($"Parameter {nameof(deletedAccountName)} cannot be null or empty", nameof(deletedAccountName));
-            }
+            Argument.AssertNotNullOrEmpty(location, nameof(location));
+            Argument.AssertNotNullOrEmpty(deletedAccountName, nameof(deletedAccountName));
 
             using var scope = _clientDiagnostics.CreateScope("DeletedAccountCollection.Exists");
             scope.Start();

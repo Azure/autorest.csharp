@@ -65,10 +65,7 @@ namespace Azure.Management.Storage
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public virtual StorageAccountCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string accountName, StorageAccountCreateParameters parameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(accountName))
-            {
-                throw new ArgumentException($"Parameter {nameof(accountName)} cannot be null or empty", nameof(accountName));
-            }
+            Argument.AssertNotNullOrEmpty(accountName, nameof(accountName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -103,10 +100,7 @@ namespace Azure.Management.Storage
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public async virtual Task<StorageAccountCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string accountName, StorageAccountCreateParameters parameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(accountName))
-            {
-                throw new ArgumentException($"Parameter {nameof(accountName)} cannot be null or empty", nameof(accountName));
-            }
+            Argument.AssertNotNullOrEmpty(accountName, nameof(accountName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -139,10 +133,7 @@ namespace Azure.Management.Storage
         /// <exception cref="ArgumentException"> <paramref name="accountName"/> is null or empty. </exception>
         public virtual Response<StorageAccount> Get(string accountName, StorageAccountExpand? expand = null, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(accountName))
-            {
-                throw new ArgumentException($"Parameter {nameof(accountName)} cannot be null or empty", nameof(accountName));
-            }
+            Argument.AssertNotNullOrEmpty(accountName, nameof(accountName));
 
             using var scope = _clientDiagnostics.CreateScope("StorageAccountCollection.Get");
             scope.Start();
@@ -170,10 +161,7 @@ namespace Azure.Management.Storage
         /// <exception cref="ArgumentException"> <paramref name="accountName"/> is null or empty. </exception>
         public async virtual Task<Response<StorageAccount>> GetAsync(string accountName, StorageAccountExpand? expand = null, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(accountName))
-            {
-                throw new ArgumentException($"Parameter {nameof(accountName)} cannot be null or empty", nameof(accountName));
-            }
+            Argument.AssertNotNullOrEmpty(accountName, nameof(accountName));
 
             using var scope = _clientDiagnostics.CreateScope("StorageAccountCollection.Get");
             scope.Start();
@@ -198,10 +186,7 @@ namespace Azure.Management.Storage
         /// <exception cref="ArgumentException"> <paramref name="accountName"/> is null or empty. </exception>
         public virtual Response<StorageAccount> GetIfExists(string accountName, StorageAccountExpand? expand = null, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(accountName))
-            {
-                throw new ArgumentException($"Parameter {nameof(accountName)} cannot be null or empty", nameof(accountName));
-            }
+            Argument.AssertNotNullOrEmpty(accountName, nameof(accountName));
 
             using var scope = _clientDiagnostics.CreateScope("StorageAccountCollection.GetIfExists");
             scope.Start();
@@ -226,10 +211,7 @@ namespace Azure.Management.Storage
         /// <exception cref="ArgumentException"> <paramref name="accountName"/> is null or empty. </exception>
         public async virtual Task<Response<StorageAccount>> GetIfExistsAsync(string accountName, StorageAccountExpand? expand = null, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(accountName))
-            {
-                throw new ArgumentException($"Parameter {nameof(accountName)} cannot be null or empty", nameof(accountName));
-            }
+            Argument.AssertNotNullOrEmpty(accountName, nameof(accountName));
 
             using var scope = _clientDiagnostics.CreateScope("StorageAccountCollection.GetIfExists");
             scope.Start();
@@ -254,10 +236,7 @@ namespace Azure.Management.Storage
         /// <exception cref="ArgumentException"> <paramref name="accountName"/> is null or empty. </exception>
         public virtual Response<bool> Exists(string accountName, StorageAccountExpand? expand = null, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(accountName))
-            {
-                throw new ArgumentException($"Parameter {nameof(accountName)} cannot be null or empty", nameof(accountName));
-            }
+            Argument.AssertNotNullOrEmpty(accountName, nameof(accountName));
 
             using var scope = _clientDiagnostics.CreateScope("StorageAccountCollection.Exists");
             scope.Start();
@@ -280,10 +259,7 @@ namespace Azure.Management.Storage
         /// <exception cref="ArgumentException"> <paramref name="accountName"/> is null or empty. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string accountName, StorageAccountExpand? expand = null, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(accountName))
-            {
-                throw new ArgumentException($"Parameter {nameof(accountName)} cannot be null or empty", nameof(accountName));
-            }
+            Argument.AssertNotNullOrEmpty(accountName, nameof(accountName));
 
             using var scope = _clientDiagnostics.CreateScope("StorageAccountCollection.Exists");
             scope.Start();

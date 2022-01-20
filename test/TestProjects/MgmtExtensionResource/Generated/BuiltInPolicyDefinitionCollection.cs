@@ -61,10 +61,7 @@ namespace MgmtExtensionResource
         /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is null or empty. </exception>
         public virtual Response<BuiltInPolicyDefinition> Get(string policyDefinitionName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(policyDefinitionName))
-            {
-                throw new ArgumentException($"Parameter {nameof(policyDefinitionName)} cannot be null or empty", nameof(policyDefinitionName));
-            }
+            Argument.AssertNotNullOrEmpty(policyDefinitionName, nameof(policyDefinitionName));
 
             using var scope = _clientDiagnostics.CreateScope("BuiltInPolicyDefinitionCollection.Get");
             scope.Start();
@@ -91,10 +88,7 @@ namespace MgmtExtensionResource
         /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is null or empty. </exception>
         public async virtual Task<Response<BuiltInPolicyDefinition>> GetAsync(string policyDefinitionName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(policyDefinitionName))
-            {
-                throw new ArgumentException($"Parameter {nameof(policyDefinitionName)} cannot be null or empty", nameof(policyDefinitionName));
-            }
+            Argument.AssertNotNullOrEmpty(policyDefinitionName, nameof(policyDefinitionName));
 
             using var scope = _clientDiagnostics.CreateScope("BuiltInPolicyDefinitionCollection.Get");
             scope.Start();
@@ -118,10 +112,7 @@ namespace MgmtExtensionResource
         /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is null or empty. </exception>
         public virtual Response<BuiltInPolicyDefinition> GetIfExists(string policyDefinitionName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(policyDefinitionName))
-            {
-                throw new ArgumentException($"Parameter {nameof(policyDefinitionName)} cannot be null or empty", nameof(policyDefinitionName));
-            }
+            Argument.AssertNotNullOrEmpty(policyDefinitionName, nameof(policyDefinitionName));
 
             using var scope = _clientDiagnostics.CreateScope("BuiltInPolicyDefinitionCollection.GetIfExists");
             scope.Start();
@@ -145,10 +136,7 @@ namespace MgmtExtensionResource
         /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is null or empty. </exception>
         public async virtual Task<Response<BuiltInPolicyDefinition>> GetIfExistsAsync(string policyDefinitionName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(policyDefinitionName))
-            {
-                throw new ArgumentException($"Parameter {nameof(policyDefinitionName)} cannot be null or empty", nameof(policyDefinitionName));
-            }
+            Argument.AssertNotNullOrEmpty(policyDefinitionName, nameof(policyDefinitionName));
 
             using var scope = _clientDiagnostics.CreateScope("BuiltInPolicyDefinitionCollection.GetIfExists");
             scope.Start();
@@ -172,10 +160,7 @@ namespace MgmtExtensionResource
         /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is null or empty. </exception>
         public virtual Response<bool> Exists(string policyDefinitionName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(policyDefinitionName))
-            {
-                throw new ArgumentException($"Parameter {nameof(policyDefinitionName)} cannot be null or empty", nameof(policyDefinitionName));
-            }
+            Argument.AssertNotNullOrEmpty(policyDefinitionName, nameof(policyDefinitionName));
 
             using var scope = _clientDiagnostics.CreateScope("BuiltInPolicyDefinitionCollection.Exists");
             scope.Start();
@@ -197,10 +182,7 @@ namespace MgmtExtensionResource
         /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is null or empty. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string policyDefinitionName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(policyDefinitionName))
-            {
-                throw new ArgumentException($"Parameter {nameof(policyDefinitionName)} cannot be null or empty", nameof(policyDefinitionName));
-            }
+            Argument.AssertNotNullOrEmpty(policyDefinitionName, nameof(policyDefinitionName));
 
             using var scope = _clientDiagnostics.CreateScope("BuiltInPolicyDefinitionCollection.Exists");
             scope.Start();

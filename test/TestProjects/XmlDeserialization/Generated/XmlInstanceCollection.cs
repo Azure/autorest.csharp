@@ -66,10 +66,7 @@ namespace XmlDeserialization
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public virtual XmlInstanceCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string xmlName, XmlInstanceData parameters, string ifMatch = null, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(xmlName))
-            {
-                throw new ArgumentException($"Parameter {nameof(xmlName)} cannot be null or empty", nameof(xmlName));
-            }
+            Argument.AssertNotNullOrEmpty(xmlName, nameof(xmlName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -105,10 +102,7 @@ namespace XmlDeserialization
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public async virtual Task<XmlInstanceCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string xmlName, XmlInstanceData parameters, string ifMatch = null, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(xmlName))
-            {
-                throw new ArgumentException($"Parameter {nameof(xmlName)} cannot be null or empty", nameof(xmlName));
-            }
+            Argument.AssertNotNullOrEmpty(xmlName, nameof(xmlName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -140,10 +134,7 @@ namespace XmlDeserialization
         /// <exception cref="ArgumentException"> <paramref name="xmlName"/> is null or empty. </exception>
         public virtual Response<XmlInstance> Get(string xmlName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(xmlName))
-            {
-                throw new ArgumentException($"Parameter {nameof(xmlName)} cannot be null or empty", nameof(xmlName));
-            }
+            Argument.AssertNotNullOrEmpty(xmlName, nameof(xmlName));
 
             using var scope = _clientDiagnostics.CreateScope("XmlInstanceCollection.Get");
             scope.Start();
@@ -170,10 +161,7 @@ namespace XmlDeserialization
         /// <exception cref="ArgumentException"> <paramref name="xmlName"/> is null or empty. </exception>
         public async virtual Task<Response<XmlInstance>> GetAsync(string xmlName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(xmlName))
-            {
-                throw new ArgumentException($"Parameter {nameof(xmlName)} cannot be null or empty", nameof(xmlName));
-            }
+            Argument.AssertNotNullOrEmpty(xmlName, nameof(xmlName));
 
             using var scope = _clientDiagnostics.CreateScope("XmlInstanceCollection.Get");
             scope.Start();
@@ -197,10 +185,7 @@ namespace XmlDeserialization
         /// <exception cref="ArgumentException"> <paramref name="xmlName"/> is null or empty. </exception>
         public virtual Response<XmlInstance> GetIfExists(string xmlName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(xmlName))
-            {
-                throw new ArgumentException($"Parameter {nameof(xmlName)} cannot be null or empty", nameof(xmlName));
-            }
+            Argument.AssertNotNullOrEmpty(xmlName, nameof(xmlName));
 
             using var scope = _clientDiagnostics.CreateScope("XmlInstanceCollection.GetIfExists");
             scope.Start();
@@ -224,10 +209,7 @@ namespace XmlDeserialization
         /// <exception cref="ArgumentException"> <paramref name="xmlName"/> is null or empty. </exception>
         public async virtual Task<Response<XmlInstance>> GetIfExistsAsync(string xmlName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(xmlName))
-            {
-                throw new ArgumentException($"Parameter {nameof(xmlName)} cannot be null or empty", nameof(xmlName));
-            }
+            Argument.AssertNotNullOrEmpty(xmlName, nameof(xmlName));
 
             using var scope = _clientDiagnostics.CreateScope("XmlInstanceCollection.GetIfExists");
             scope.Start();
@@ -251,10 +233,7 @@ namespace XmlDeserialization
         /// <exception cref="ArgumentException"> <paramref name="xmlName"/> is null or empty. </exception>
         public virtual Response<bool> Exists(string xmlName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(xmlName))
-            {
-                throw new ArgumentException($"Parameter {nameof(xmlName)} cannot be null or empty", nameof(xmlName));
-            }
+            Argument.AssertNotNullOrEmpty(xmlName, nameof(xmlName));
 
             using var scope = _clientDiagnostics.CreateScope("XmlInstanceCollection.Exists");
             scope.Start();
@@ -276,10 +255,7 @@ namespace XmlDeserialization
         /// <exception cref="ArgumentException"> <paramref name="xmlName"/> is null or empty. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string xmlName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(xmlName))
-            {
-                throw new ArgumentException($"Parameter {nameof(xmlName)} cannot be null or empty", nameof(xmlName));
-            }
+            Argument.AssertNotNullOrEmpty(xmlName, nameof(xmlName));
 
             using var scope = _clientDiagnostics.CreateScope("XmlInstanceCollection.Exists");
             scope.Start();

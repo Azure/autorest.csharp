@@ -64,10 +64,7 @@ namespace ResourceRename
         /// <exception cref="ArgumentException"> <paramref name="sshPublicKeyName"/> is null or empty. </exception>
         public virtual SshPublicKeyInfoCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string sshPublicKeyName, SshPublicKeyProperties properties = null, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(sshPublicKeyName))
-            {
-                throw new ArgumentException($"Parameter {nameof(sshPublicKeyName)} cannot be null or empty", nameof(sshPublicKeyName));
-            }
+            Argument.AssertNotNullOrEmpty(sshPublicKeyName, nameof(sshPublicKeyName));
 
             using var scope = _clientDiagnostics.CreateScope("SshPublicKeyInfoCollection.CreateOrUpdate");
             scope.Start();
@@ -97,10 +94,7 @@ namespace ResourceRename
         /// <exception cref="ArgumentException"> <paramref name="sshPublicKeyName"/> is null or empty. </exception>
         public async virtual Task<SshPublicKeyInfoCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string sshPublicKeyName, SshPublicKeyProperties properties = null, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(sshPublicKeyName))
-            {
-                throw new ArgumentException($"Parameter {nameof(sshPublicKeyName)} cannot be null or empty", nameof(sshPublicKeyName));
-            }
+            Argument.AssertNotNullOrEmpty(sshPublicKeyName, nameof(sshPublicKeyName));
 
             using var scope = _clientDiagnostics.CreateScope("SshPublicKeyInfoCollection.CreateOrUpdate");
             scope.Start();
@@ -128,10 +122,7 @@ namespace ResourceRename
         /// <exception cref="ArgumentException"> <paramref name="sshPublicKeyName"/> is null or empty. </exception>
         public virtual Response<SshPublicKeyInfo> Get(string sshPublicKeyName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(sshPublicKeyName))
-            {
-                throw new ArgumentException($"Parameter {nameof(sshPublicKeyName)} cannot be null or empty", nameof(sshPublicKeyName));
-            }
+            Argument.AssertNotNullOrEmpty(sshPublicKeyName, nameof(sshPublicKeyName));
 
             using var scope = _clientDiagnostics.CreateScope("SshPublicKeyInfoCollection.Get");
             scope.Start();
@@ -158,10 +149,7 @@ namespace ResourceRename
         /// <exception cref="ArgumentException"> <paramref name="sshPublicKeyName"/> is null or empty. </exception>
         public async virtual Task<Response<SshPublicKeyInfo>> GetAsync(string sshPublicKeyName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(sshPublicKeyName))
-            {
-                throw new ArgumentException($"Parameter {nameof(sshPublicKeyName)} cannot be null or empty", nameof(sshPublicKeyName));
-            }
+            Argument.AssertNotNullOrEmpty(sshPublicKeyName, nameof(sshPublicKeyName));
 
             using var scope = _clientDiagnostics.CreateScope("SshPublicKeyInfoCollection.Get");
             scope.Start();
@@ -185,10 +173,7 @@ namespace ResourceRename
         /// <exception cref="ArgumentException"> <paramref name="sshPublicKeyName"/> is null or empty. </exception>
         public virtual Response<SshPublicKeyInfo> GetIfExists(string sshPublicKeyName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(sshPublicKeyName))
-            {
-                throw new ArgumentException($"Parameter {nameof(sshPublicKeyName)} cannot be null or empty", nameof(sshPublicKeyName));
-            }
+            Argument.AssertNotNullOrEmpty(sshPublicKeyName, nameof(sshPublicKeyName));
 
             using var scope = _clientDiagnostics.CreateScope("SshPublicKeyInfoCollection.GetIfExists");
             scope.Start();
@@ -212,10 +197,7 @@ namespace ResourceRename
         /// <exception cref="ArgumentException"> <paramref name="sshPublicKeyName"/> is null or empty. </exception>
         public async virtual Task<Response<SshPublicKeyInfo>> GetIfExistsAsync(string sshPublicKeyName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(sshPublicKeyName))
-            {
-                throw new ArgumentException($"Parameter {nameof(sshPublicKeyName)} cannot be null or empty", nameof(sshPublicKeyName));
-            }
+            Argument.AssertNotNullOrEmpty(sshPublicKeyName, nameof(sshPublicKeyName));
 
             using var scope = _clientDiagnostics.CreateScope("SshPublicKeyInfoCollection.GetIfExists");
             scope.Start();
@@ -239,10 +221,7 @@ namespace ResourceRename
         /// <exception cref="ArgumentException"> <paramref name="sshPublicKeyName"/> is null or empty. </exception>
         public virtual Response<bool> Exists(string sshPublicKeyName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(sshPublicKeyName))
-            {
-                throw new ArgumentException($"Parameter {nameof(sshPublicKeyName)} cannot be null or empty", nameof(sshPublicKeyName));
-            }
+            Argument.AssertNotNullOrEmpty(sshPublicKeyName, nameof(sshPublicKeyName));
 
             using var scope = _clientDiagnostics.CreateScope("SshPublicKeyInfoCollection.Exists");
             scope.Start();
@@ -264,10 +243,7 @@ namespace ResourceRename
         /// <exception cref="ArgumentException"> <paramref name="sshPublicKeyName"/> is null or empty. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string sshPublicKeyName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(sshPublicKeyName))
-            {
-                throw new ArgumentException($"Parameter {nameof(sshPublicKeyName)} cannot be null or empty", nameof(sshPublicKeyName));
-            }
+            Argument.AssertNotNullOrEmpty(sshPublicKeyName, nameof(sshPublicKeyName));
 
             using var scope = _clientDiagnostics.CreateScope("SshPublicKeyInfoCollection.Exists");
             scope.Start();

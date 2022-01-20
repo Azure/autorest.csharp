@@ -66,10 +66,7 @@ namespace SingletonResource
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public virtual CarCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string carName, CarData parameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(carName))
-            {
-                throw new ArgumentException($"Parameter {nameof(carName)} cannot be null or empty", nameof(carName));
-            }
+            Argument.AssertNotNullOrEmpty(carName, nameof(carName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -103,10 +100,7 @@ namespace SingletonResource
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public async virtual Task<CarCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string carName, CarData parameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(carName))
-            {
-                throw new ArgumentException($"Parameter {nameof(carName)} cannot be null or empty", nameof(carName));
-            }
+            Argument.AssertNotNullOrEmpty(carName, nameof(carName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -137,10 +131,7 @@ namespace SingletonResource
         /// <exception cref="ArgumentException"> <paramref name="carName"/> is null or empty. </exception>
         public virtual Response<Car> Get(string carName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(carName))
-            {
-                throw new ArgumentException($"Parameter {nameof(carName)} cannot be null or empty", nameof(carName));
-            }
+            Argument.AssertNotNullOrEmpty(carName, nameof(carName));
 
             using var scope = _clientDiagnostics.CreateScope("CarCollection.Get");
             scope.Start();
@@ -166,10 +157,7 @@ namespace SingletonResource
         /// <exception cref="ArgumentException"> <paramref name="carName"/> is null or empty. </exception>
         public async virtual Task<Response<Car>> GetAsync(string carName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(carName))
-            {
-                throw new ArgumentException($"Parameter {nameof(carName)} cannot be null or empty", nameof(carName));
-            }
+            Argument.AssertNotNullOrEmpty(carName, nameof(carName));
 
             using var scope = _clientDiagnostics.CreateScope("CarCollection.Get");
             scope.Start();
@@ -193,10 +181,7 @@ namespace SingletonResource
         /// <exception cref="ArgumentException"> <paramref name="carName"/> is null or empty. </exception>
         public virtual Response<Car> GetIfExists(string carName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(carName))
-            {
-                throw new ArgumentException($"Parameter {nameof(carName)} cannot be null or empty", nameof(carName));
-            }
+            Argument.AssertNotNullOrEmpty(carName, nameof(carName));
 
             using var scope = _clientDiagnostics.CreateScope("CarCollection.GetIfExists");
             scope.Start();
@@ -220,10 +205,7 @@ namespace SingletonResource
         /// <exception cref="ArgumentException"> <paramref name="carName"/> is null or empty. </exception>
         public async virtual Task<Response<Car>> GetIfExistsAsync(string carName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(carName))
-            {
-                throw new ArgumentException($"Parameter {nameof(carName)} cannot be null or empty", nameof(carName));
-            }
+            Argument.AssertNotNullOrEmpty(carName, nameof(carName));
 
             using var scope = _clientDiagnostics.CreateScope("CarCollection.GetIfExists");
             scope.Start();
@@ -247,10 +229,7 @@ namespace SingletonResource
         /// <exception cref="ArgumentException"> <paramref name="carName"/> is null or empty. </exception>
         public virtual Response<bool> Exists(string carName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(carName))
-            {
-                throw new ArgumentException($"Parameter {nameof(carName)} cannot be null or empty", nameof(carName));
-            }
+            Argument.AssertNotNullOrEmpty(carName, nameof(carName));
 
             using var scope = _clientDiagnostics.CreateScope("CarCollection.Exists");
             scope.Start();
@@ -272,10 +251,7 @@ namespace SingletonResource
         /// <exception cref="ArgumentException"> <paramref name="carName"/> is null or empty. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string carName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(carName))
-            {
-                throw new ArgumentException($"Parameter {nameof(carName)} cannot be null or empty", nameof(carName));
-            }
+            Argument.AssertNotNullOrEmpty(carName, nameof(carName));
 
             using var scope = _clientDiagnostics.CreateScope("CarCollection.Exists");
             scope.Start();

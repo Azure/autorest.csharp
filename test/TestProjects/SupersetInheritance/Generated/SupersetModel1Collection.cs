@@ -64,10 +64,7 @@ namespace SupersetInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public virtual SupersetModel1CreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string supersetModel1SName, SupersetModel1Data parameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(supersetModel1SName))
-            {
-                throw new ArgumentException($"Parameter {nameof(supersetModel1SName)} cannot be null or empty", nameof(supersetModel1SName));
-            }
+            Argument.AssertNotNullOrEmpty(supersetModel1SName, nameof(supersetModel1SName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -101,10 +98,7 @@ namespace SupersetInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public async virtual Task<SupersetModel1CreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string supersetModel1SName, SupersetModel1Data parameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(supersetModel1SName))
-            {
-                throw new ArgumentException($"Parameter {nameof(supersetModel1SName)} cannot be null or empty", nameof(supersetModel1SName));
-            }
+            Argument.AssertNotNullOrEmpty(supersetModel1SName, nameof(supersetModel1SName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -135,10 +129,7 @@ namespace SupersetInheritance
         /// <exception cref="ArgumentException"> <paramref name="supersetModel1SName"/> is null or empty. </exception>
         public virtual Response<SupersetModel1> Get(string supersetModel1SName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(supersetModel1SName))
-            {
-                throw new ArgumentException($"Parameter {nameof(supersetModel1SName)} cannot be null or empty", nameof(supersetModel1SName));
-            }
+            Argument.AssertNotNullOrEmpty(supersetModel1SName, nameof(supersetModel1SName));
 
             using var scope = _clientDiagnostics.CreateScope("SupersetModel1Collection.Get");
             scope.Start();
@@ -164,10 +155,7 @@ namespace SupersetInheritance
         /// <exception cref="ArgumentException"> <paramref name="supersetModel1SName"/> is null or empty. </exception>
         public async virtual Task<Response<SupersetModel1>> GetAsync(string supersetModel1SName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(supersetModel1SName))
-            {
-                throw new ArgumentException($"Parameter {nameof(supersetModel1SName)} cannot be null or empty", nameof(supersetModel1SName));
-            }
+            Argument.AssertNotNullOrEmpty(supersetModel1SName, nameof(supersetModel1SName));
 
             using var scope = _clientDiagnostics.CreateScope("SupersetModel1Collection.Get");
             scope.Start();
@@ -191,10 +179,7 @@ namespace SupersetInheritance
         /// <exception cref="ArgumentException"> <paramref name="supersetModel1SName"/> is null or empty. </exception>
         public virtual Response<SupersetModel1> GetIfExists(string supersetModel1SName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(supersetModel1SName))
-            {
-                throw new ArgumentException($"Parameter {nameof(supersetModel1SName)} cannot be null or empty", nameof(supersetModel1SName));
-            }
+            Argument.AssertNotNullOrEmpty(supersetModel1SName, nameof(supersetModel1SName));
 
             using var scope = _clientDiagnostics.CreateScope("SupersetModel1Collection.GetIfExists");
             scope.Start();
@@ -218,10 +203,7 @@ namespace SupersetInheritance
         /// <exception cref="ArgumentException"> <paramref name="supersetModel1SName"/> is null or empty. </exception>
         public async virtual Task<Response<SupersetModel1>> GetIfExistsAsync(string supersetModel1SName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(supersetModel1SName))
-            {
-                throw new ArgumentException($"Parameter {nameof(supersetModel1SName)} cannot be null or empty", nameof(supersetModel1SName));
-            }
+            Argument.AssertNotNullOrEmpty(supersetModel1SName, nameof(supersetModel1SName));
 
             using var scope = _clientDiagnostics.CreateScope("SupersetModel1Collection.GetIfExists");
             scope.Start();
@@ -245,10 +227,7 @@ namespace SupersetInheritance
         /// <exception cref="ArgumentException"> <paramref name="supersetModel1SName"/> is null or empty. </exception>
         public virtual Response<bool> Exists(string supersetModel1SName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(supersetModel1SName))
-            {
-                throw new ArgumentException($"Parameter {nameof(supersetModel1SName)} cannot be null or empty", nameof(supersetModel1SName));
-            }
+            Argument.AssertNotNullOrEmpty(supersetModel1SName, nameof(supersetModel1SName));
 
             using var scope = _clientDiagnostics.CreateScope("SupersetModel1Collection.Exists");
             scope.Start();
@@ -270,10 +249,7 @@ namespace SupersetInheritance
         /// <exception cref="ArgumentException"> <paramref name="supersetModel1SName"/> is null or empty. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string supersetModel1SName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(supersetModel1SName))
-            {
-                throw new ArgumentException($"Parameter {nameof(supersetModel1SName)} cannot be null or empty", nameof(supersetModel1SName));
-            }
+            Argument.AssertNotNullOrEmpty(supersetModel1SName, nameof(supersetModel1SName));
 
             using var scope = _clientDiagnostics.CreateScope("SupersetModel1Collection.Exists");
             scope.Start();

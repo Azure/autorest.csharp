@@ -101,10 +101,7 @@ namespace OmitOperationGroups
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public async virtual Task<Response<Model5>> CreateOrUpdateModel5Async(string model5SName, Model5 parameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(model5SName))
-            {
-                throw new ArgumentException($"Parameter {nameof(model5SName)} cannot be null or empty", nameof(model5SName));
-            }
+            Argument.AssertNotNullOrEmpty(model5SName, nameof(model5SName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -134,10 +131,7 @@ namespace OmitOperationGroups
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public virtual Response<Model5> CreateOrUpdateModel5(string model5SName, Model5 parameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(model5SName))
-            {
-                throw new ArgumentException($"Parameter {nameof(model5SName)} cannot be null or empty", nameof(model5SName));
-            }
+            Argument.AssertNotNullOrEmpty(model5SName, nameof(model5SName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -165,10 +159,7 @@ namespace OmitOperationGroups
         /// <exception cref="ArgumentException"> <paramref name="model5SName"/> is null or empty. </exception>
         public async virtual Task<Response<Model5>> GetModel5Async(string model5SName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(model5SName))
-            {
-                throw new ArgumentException($"Parameter {nameof(model5SName)} cannot be null or empty", nameof(model5SName));
-            }
+            Argument.AssertNotNullOrEmpty(model5SName, nameof(model5SName));
 
             using var scope = Model5sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.GetModel5");
             scope.Start();
@@ -192,10 +183,7 @@ namespace OmitOperationGroups
         /// <exception cref="ArgumentException"> <paramref name="model5SName"/> is null or empty. </exception>
         public virtual Response<Model5> GetModel5(string model5SName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(model5SName))
-            {
-                throw new ArgumentException($"Parameter {nameof(model5SName)} cannot be null or empty", nameof(model5SName));
-            }
+            Argument.AssertNotNullOrEmpty(model5SName, nameof(model5SName));
 
             using var scope = Model5sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.GetModel5");
             scope.Start();
