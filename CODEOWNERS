@@ -1,5 +1,16 @@
 *       @ShivangiReja @AlexanderSher
 
+# Data Plane Reviewers
+/samples/AppConfiguration                     @annelo-msft
+/samples/Azure.AI.*                           @annelo-msft
+/samples/Azure.Analytics.*                    @annelo-msft
+/samples/Azure.Storage.*                      @annelo-msft
+/samples/Cognitive*                           @annelo-msft
+/src/DataPlane                                @annelo-msft
+/src/LowLevel                                 @annelo-msft
+/test/AutoRest.TestServer.Tests               @annelo-msft
+/test/AutoRest.TestServerLowLevel.Tests       @annelo-msft
+
 # Management CSharp CodeReviewers
 /samples/Azure.Management.Storage             @allenjzhang @m-nash
 /samples/Azure.Network.Management.Interface   @allenjzhang @m-nash
