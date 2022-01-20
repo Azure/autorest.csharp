@@ -6,8 +6,9 @@
 /samples/Azure.Analytics.*                    @annelo-msft
 /samples/Azure.Storage.*                      @annelo-msft
 /samples/Cognitive*                           @annelo-msft
-/src/DataPlane                                @annelo-msft
-/src/LowLevel                                 @annelo-msft
+/src/assets/Generator.Shared                  @annelo-msft
+/src/AutoRest.CSharp/DataPlane                @annelo-msft
+/src/AutoRest.CSharp/LowLevel                 @annelo-msft
 /test/AutoRest.TestServer.Tests               @annelo-msft
 /test/AutoRest.TestServerLowLevel.Tests       @annelo-msft
 
