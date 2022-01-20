@@ -1,11 +1,8 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System;
-using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.AutoRest;
-using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure.ResourceManager.Resources;
 
@@ -29,22 +26,16 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.WriteXmlDocumentationSummary($"{Description}");
                 using (_writer.Scope($"{Accessibility} static partial class {TypeNameOfThis}"))
                 {
-                    WriteProviderDefaultNamespace(_writer);
-
                     // Write resource collection entries
                     WriteChildResourceEntries();
 
-                    // Write RestOperations
-                    foreach (var restClient in _extensions.RestClients)
-                    {
-                        WriteGetRestOperations(restClient);
-                    }
+                    WriteExtensionClientGet();
 
                     // Write other orphan operations with the parent of ResourceGroup
                     foreach (var clientOperation in _extensions.ClientOperations)
                     {
-                        WriteMethod(clientOperation, true);
-                        WriteMethod(clientOperation, false);
+                        WriteMethodWrapper(clientOperation, true);
+                        WriteMethodWrapper(clientOperation, false);
                     }
                 }
             }

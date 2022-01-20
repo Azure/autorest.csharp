@@ -56,6 +56,131 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.Line($"private static string _defaultRpNamespace = {typeof(ClientDiagnostics)}.GetResourceProviderNamespace(typeof({TypeNameOfThis}).Assembly);");
         }
 
+        protected void WriteMethodWrapper(MgmtClientOperation clientOperation, bool async)
+        {
+            // we need to identify this operation belongs to which category: NormalMethod, NormalListMethod, LROMethod or PagingMethod
+            if (clientOperation.IsLongRunningOperation() && !clientOperation.IsPagingOperation(Context))
+            {
+                // this is a non-pageable long-running operation
+                WriteMethodWrapperImpl(clientOperation, clientOperation.Name, clientOperation.ReturnType!, async, false, true);
+            }
+            else if (clientOperation.IsLongRunningOperation() && clientOperation.IsPagingOperation(Context))
+            {
+                // this is a pageable long-running operation
+                throw new NotImplementedException($"Pageable LRO is not implemented yet, please use `remove-operation` directive to remove the following operationIds: {string.Join(", ", clientOperation.Select(o => o.OperationId))}");
+            }
+            else if (clientOperation.IsPagingOperation(Context))
+            {
+                // this is a paging operation
+                var itemType = clientOperation.First(restOperation => restOperation.IsPagingOperation(Context)).GetPagingMethod(Context)!.PagingResponse.ItemType;
+                WriteMethodWrapperImpl(clientOperation, clientOperation.Name, GetActualItemType(clientOperation, itemType), async, true, false);
+            }
+            else if (clientOperation.IsListOperation(Context, out var itemType))
+            {
+                // this is a normal list operation
+                WriteMethodWrapperImpl(clientOperation, clientOperation.Name, GetActualItemType(clientOperation, itemType), async, true, false);
+            }
+            else
+            {
+                // this is a normal operation
+                WriteMethodWrapperImpl(clientOperation, clientOperation.Name, clientOperation.ReturnType!, async, false, false);
+            }
+        }
+
+        private void WriteMethodSignatureWrapper(CSharpType actualItemType, string methodName, IReadOnlyList<Parameter> methodParameters, bool isAsync, bool isPaging, bool isLro)
+        {
+            _writer.WriteXmlDocumentationParameter($"{ExtensionOperationVariableName}", $"The <see cref=\"{ExtensionOperationVariableType}\" /> instance the method will execute against.");
+            if (isLro)
+                _writer.WriteXmlDocumentationParameter("waitForCompletion", $"Waits for the completion of the long running operations.");
+
+            foreach (var parameter in methodParameters)
+            {
+                _writer.WriteXmlDocumentationParameter(parameter);
+            }
+            _writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
+            _writer.WriteXmlDocumentationMgmtRequiredParametersException(methodParameters);
+            if (isPaging)
+                _writer.WriteXmlDocumentationReturns($"A collection of resource operations that may take multiple service requests to iterate over.");
+
+            var responseType = isPaging ? actualItemType.WrapPageable(isAsync) : actualItemType.WrapAsync(isAsync);
+            string asyncText = isPaging ? string.Empty : GetAsyncKeyword(isAsync);
+            _writer.Append($"public static {asyncText} {responseType} {CreateMethodName(methodName, isAsync)}(this {ExtensionOperationVariableType} {ExtensionOperationVariableName}, ");
+
+            if (isLro)
+                _writer.Append($"bool waitForCompletion, ");
+            foreach (var parameter in methodParameters)
+            {
+                _writer.WriteParameter(parameter);
+            }
+            _writer.Line($"{typeof(CancellationToken)} cancellationToken = default)");
+        }
+
+        private CSharpType GetActualItemType(MgmtClientOperation clientOperation, CSharpType itemType)
+        {
+            var wrapResource = WrapResourceDataType(itemType, clientOperation.First());
+            CSharpType actualItemType = wrapResource?.Type ?? itemType;
+            return actualItemType;
+        }
+
+        protected void WriteExtensionClientGet()
+        {
+            _writer.Line();
+            using (_writer.Scope($"private static {ExtensionOperationVariableType.Name}ExtensionClient GetExtensionClient({ExtensionOperationVariableType} {ExtensionOperationVariableName})"))
+            {
+                using (_writer.Scope($"return {ExtensionOperationVariableName}.GetCachedClient((armClient) =>"))
+                {
+                    _writer.Line($"return new {ExtensionOperationVariableType.Name}ExtensionClient(armClient, {ExtensionOperationVariableName}.Id);");
+                }
+                _writer.Line($");");
+            }
+        }
+
+        private void WriteMethodWrapperImpl(
+            MgmtClientOperation clientOperation,
+            string methodName,
+            CSharpType itemType,
+            bool async,
+            bool isPaging,
+            bool isLro)
+        {
+            _writer.Line();
+            // write the extra information about the request path, operation id, etc
+            if (ShowRequestPathAndOperationId)
+                WriteRequestPathAndOperationId(clientOperation);
+            BuildParameters(clientOperation, out var operationMappings, out var parameterMappings, out var methodParameters);
+            WriteMethodSignatureWrapper(itemType, methodName, methodParameters, async, isPaging, isLro);
+            using (_writer.Scope())
+            {
+                WriteMethodBodyWrapper(methodName, methodParameters, async, isPaging, isLro);
+            }
+        }
+
+        private void WriteMethodBodyWrapper(string methodName, IReadOnlyList<Parameter> methodParameters, bool isAsync, bool isPaging, bool isLro)
+        {
+            string asyncText = isAsync ? "Async" : string.Empty;
+            string configureAwait = isAsync & !isPaging ? ".ConfigureAwait(false)" : string.Empty;
+            string awaitText = isAsync & !isPaging ? " await" : string.Empty;
+            _writer.Append($"return{awaitText} GetExtensionClient({ExtensionOperationVariableName}).{methodName}{asyncText}(");
+            bool isFirst = true;
+            if (isLro)
+            {
+                _writer.Append($"waitForCompletion");
+                isFirst = false;
+            }
+            foreach (var parameter in methodParameters)
+            {
+                if (!isFirst)
+                {
+                    _writer.Append($", ");
+                }
+                _writer.Append($"{parameter.Name}");
+                isFirst = false;
+            }
+            if (!isFirst)
+                _writer.Append($", ");
+            _writer.Line($"cancellationToken){configureAwait};");
+        }
+
         protected void WriteGetRestOperations(MgmtRestClient restClient)
         {
             _writer.Line();
