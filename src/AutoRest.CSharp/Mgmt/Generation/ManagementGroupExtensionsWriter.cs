@@ -33,6 +33,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     // Write resource collection entries
                     WriteChildResourceEntries();
 
+                    WriteExtensionClientGet();
+
                     // Write other orphan operations with the parent of ResourceGroup
                     foreach (var clientOperation in _extensions.ClientOperations)
                     {
