@@ -119,7 +119,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             using (_writer.WriteMethodDeclaration(parentResourceConstructor))
             {
                 var allPossibleTypes = _resourceCollection.ResourceTypes.SelectMany(p => p.Value).Distinct();
-                string ctorString = ConstructClientDiagnostic(_writer, _resource.ResourceName, DiagnosticOptionsProperty);
+                string ctorString = ConstructClientDiagnostic(_writer, $"{_resource.Type.Name}.ResourceType.Namespace", DiagnosticOptionsProperty);
                 _writer.Line($"{ClientDiagnosticsField} = {ctorString};");
                 WriteRestClientAssignments();
                 foreach (var parameter in _resourceCollection.ExtraConstructorParameters)

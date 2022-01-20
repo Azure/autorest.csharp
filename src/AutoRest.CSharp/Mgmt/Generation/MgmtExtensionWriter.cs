@@ -402,11 +402,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
             return false;
         }
 
-        private void WriteClientDiagnosticsAssignment(string diagnosticsOptionsVariable, string? providerNamespace)
-        {
-            _writer.Line($"var {ClientDiagnosticsVariable} = {ConstructClientDiagnostic(_writer, providerNamespace, diagnosticsOptionsVariable)};");
-        }
-
         protected override ResourceTypeSegment GetBranchResourceType(RequestPath branch)
         {
             // we should never have a branch in the operations in an extension class, therefore throwing an exception here

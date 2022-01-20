@@ -175,7 +175,7 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
             _writer.WriteMethodDocumentation(clientOptionsConstructor);
             using (_writer.WriteMethodDeclaration(clientOptionsConstructor))
             {
-                string ctorString = ConstructClientDiagnostic(_writer, _resource.ResourceName, DiagnosticOptionsProperty);
+                string ctorString = ConstructClientDiagnostic(_writer, "ResourceType.Namespace", DiagnosticOptionsProperty);
                 _writer.Line($"{ClientDiagnosticsField} = {ctorString};");
                 WriteRestClientAssignments();
                 WriteDebugValidate(_writer);

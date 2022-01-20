@@ -148,34 +148,22 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        protected string ConstructClientDiagnostic(CodeWriter writer, string? providerNamespace, string diagnosticsOptionsVariable)
+        protected string GetProviderNamespaceFromReturnType(string? returnType)
         {
-            var namespaceToUse = providerNamespace;
-            if (providerNamespace is null)
-            {
-                namespaceToUse = "_defaultRpNamespace";
-            }
-            else
-            {
-                var data = Context.Library.ResourceData.FirstOrDefault(data => data.Declaration.Name == providerNamespace);
-                if (data is not null)
-                {
-                    namespaceToUse = $"{providerNamespace.Substring(0, providerNamespace.Length - 4)}.ResourceType.Namespace";
-                }
-                else
-                {
-                    var resource = Context.Library.ArmResources.FirstOrDefault(resource => resource.Declaration.Name == providerNamespace);
-                    if (resource is not null)
-                    {
-                        namespaceToUse = $"{providerNamespace}.ResourceType.Namespace";
-                    }
-                    else
-                    {
-                        namespaceToUse = "_defaultRpNamespace";
-                    }
-                }
-            }
-            return $"new {typeof(ClientDiagnostics)}(\"{This.Type.Namespace}\", {namespaceToUse}, {diagnosticsOptionsVariable})";
+            if (returnType is null)
+                return "_defaultRpNamespace";
+
+            var data = Context.Library.ResourceData.FirstOrDefault(data => data.Declaration.Name == returnType);
+            if (data is not null)
+                return $"{returnType.Substring(0, returnType.Length - 4)}.ResourceType.Namespace";
+
+            var resource = Context.Library.ArmResources.FirstOrDefault(resource => resource.Declaration.Name == returnType);
+            return resource is not null ? $"{returnType}.ResourceType.Namespace" : "_defaultRpNamespace";
+        }
+
+        protected string ConstructClientDiagnostic(CodeWriter writer, string providerNamespace, string diagnosticsOptionsVariable)
+        {
+            return $"new {typeof(ClientDiagnostics)}(\"{This.Type.Namespace}\", {providerNamespace}, {diagnosticsOptionsVariable})";
         }
 
         protected string GetRestConstructorString(
