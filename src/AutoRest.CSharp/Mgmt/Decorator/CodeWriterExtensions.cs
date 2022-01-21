@@ -57,9 +57,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return writer;
         }
 
-        private static FormattableString GetExceptionDescription(IReadOnlyList<Parameter> parameters, string message)
+        private static FormattableString GetExceptionDescription(IReadOnlyList<Parameter> parameters, string nullOrEmpty)
         {
-            static string FormatParameters(IReadOnlyList<Parameter> parameters, string message)
+            static string FormatParameters(IReadOnlyList<Parameter> parameters, string nullOrEmpty)
             {
                 var sb = new StringBuilder();
 
@@ -69,15 +69,15 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                     sb.Append($"<paramref name=\"{{{i}}}\"/>, ");
                 }
 
-                sb.Append($"or <paramref name=\"{{{i}}}\"/> is {message}.");
+                sb.Append($"or <paramref name=\"{{{i}}}\"/> is {nullOrEmpty}.");
                 return sb.ToString();
             }
 
             var delimitedParameters = parameters.Count switch
             {
-                1 => "<paramref name=\"{0}\"/> is " + message + ".",
-                2 => "<paramref name=\"{0}\"/> or <paramref name=\"{1}\"/> is " + message + ".",
-                _ => FormatParameters(parameters, message),
+                1 => "<paramref name=\"{0}\"/> is " + nullOrEmpty + ".",
+                2 => "<paramref name=\"{0}\"/> or <paramref name=\"{1}\"/> is " + nullOrEmpty + ".",
+                _ => FormatParameters(parameters, nullOrEmpty),
             };
 
             return FormattableStringFactory.Create(delimitedParameters, parameters.Select(p => (object)p.Name).ToArray());
