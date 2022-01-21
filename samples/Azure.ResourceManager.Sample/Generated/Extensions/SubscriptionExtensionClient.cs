@@ -527,7 +527,8 @@ namespace Azure.ResourceManager.Sample
         /// <param name="skus"> A valid image SKU. </param>
         /// <param name="version"> A valid image SKU version. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/>, <paramref name="publisherName"/>, <paramref name="offer"/>, <paramref name="skus"/>, or <paramref name="version"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="location"/>, <paramref name="publisherName"/>, <paramref name="offer"/>, <paramref name="skus"/>, or <paramref name="version"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/>, <paramref name="publisherName"/>, <paramref name="offer"/>, <paramref name="skus"/>, or <paramref name="version"/> is null. </exception>
         public async virtual Task<Response<VirtualMachineImage>> GetVirtualMachineImageAsync(string location, string publisherName, string offer, string skus, string version, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));
@@ -560,7 +561,8 @@ namespace Azure.ResourceManager.Sample
         /// <param name="skus"> A valid image SKU. </param>
         /// <param name="version"> A valid image SKU version. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/>, <paramref name="publisherName"/>, <paramref name="offer"/>, <paramref name="skus"/>, or <paramref name="version"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="location"/>, <paramref name="publisherName"/>, <paramref name="offer"/>, <paramref name="skus"/>, or <paramref name="version"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/>, <paramref name="publisherName"/>, <paramref name="offer"/>, <paramref name="skus"/>, or <paramref name="version"/> is null. </exception>
         public virtual Response<VirtualMachineImage> GetVirtualMachineImage(string location, string publisherName, string offer, string skus, string version, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));
@@ -595,7 +597,8 @@ namespace Azure.ResourceManager.Sample
         /// <param name="top"> The Integer to use. </param>
         /// <param name="orderby"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/>, <paramref name="publisherName"/>, <paramref name="offer"/>, or <paramref name="skus"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="location"/>, <paramref name="publisherName"/>, <paramref name="offer"/>, or <paramref name="skus"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/>, <paramref name="publisherName"/>, <paramref name="offer"/>, or <paramref name="skus"/> is null. </exception>
         /// <returns> An async collection of <see cref="VirtualMachineImageResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<VirtualMachineImageResource> GetVirtualMachineImagesAsync(string location, string publisherName, string offer, string skus, string expand = null, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
         {
@@ -634,7 +637,8 @@ namespace Azure.ResourceManager.Sample
         /// <param name="top"> The Integer to use. </param>
         /// <param name="orderby"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/>, <paramref name="publisherName"/>, <paramref name="offer"/>, or <paramref name="skus"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="location"/>, <paramref name="publisherName"/>, <paramref name="offer"/>, or <paramref name="skus"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/>, <paramref name="publisherName"/>, <paramref name="offer"/>, or <paramref name="skus"/> is null. </exception>
         /// <returns> A collection of <see cref="VirtualMachineImageResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<VirtualMachineImageResource> GetVirtualMachineImages(string location, string publisherName, string offer, string skus, string expand = null, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
         {
@@ -668,7 +672,8 @@ namespace Azure.ResourceManager.Sample
         /// <param name="location"> The name of a supported Azure region. </param>
         /// <param name="publisherName"> A valid image publisher. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="publisherName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="publisherName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="publisherName"/> is null. </exception>
         /// <returns> An async collection of <see cref="VirtualMachineImageResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<VirtualMachineImageResource> GetOffersVirtualMachineImagesAsync(string location, string publisherName, CancellationToken cancellationToken = default)
         {
@@ -700,7 +705,8 @@ namespace Azure.ResourceManager.Sample
         /// <param name="location"> The name of a supported Azure region. </param>
         /// <param name="publisherName"> A valid image publisher. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="publisherName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="publisherName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="publisherName"/> is null. </exception>
         /// <returns> A collection of <see cref="VirtualMachineImageResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<VirtualMachineImageResource> GetOffersVirtualMachineImages(string location, string publisherName, CancellationToken cancellationToken = default)
         {
@@ -731,7 +737,8 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Gets a list of virtual machine image publishers for the specified Azure location. </summary>
         /// <param name="location"> The name of a supported Azure region. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="location"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
         /// <returns> An async collection of <see cref="VirtualMachineImageResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<VirtualMachineImageResource> GetPublishersVirtualMachineImagesAsync(string location, CancellationToken cancellationToken = default)
         {
@@ -761,7 +768,8 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Gets a list of virtual machine image publishers for the specified Azure location. </summary>
         /// <param name="location"> The name of a supported Azure region. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="location"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
         /// <returns> A collection of <see cref="VirtualMachineImageResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<VirtualMachineImageResource> GetPublishersVirtualMachineImages(string location, CancellationToken cancellationToken = default)
         {
@@ -793,7 +801,8 @@ namespace Azure.ResourceManager.Sample
         /// <param name="publisherName"> A valid image publisher. </param>
         /// <param name="offer"> A valid image publisher offer. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/>, <paramref name="publisherName"/>, or <paramref name="offer"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="location"/>, <paramref name="publisherName"/>, or <paramref name="offer"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/>, <paramref name="publisherName"/>, or <paramref name="offer"/> is null. </exception>
         /// <returns> An async collection of <see cref="VirtualMachineImageResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<VirtualMachineImageResource> GetSkusVirtualMachineImagesAsync(string location, string publisherName, string offer, CancellationToken cancellationToken = default)
         {
@@ -827,7 +836,8 @@ namespace Azure.ResourceManager.Sample
         /// <param name="publisherName"> A valid image publisher. </param>
         /// <param name="offer"> A valid image publisher offer. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/>, <paramref name="publisherName"/>, or <paramref name="offer"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="location"/>, <paramref name="publisherName"/>, or <paramref name="offer"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/>, <paramref name="publisherName"/>, or <paramref name="offer"/> is null. </exception>
         /// <returns> A collection of <see cref="VirtualMachineImageResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<VirtualMachineImageResource> GetSkusVirtualMachineImages(string location, string publisherName, string offer, CancellationToken cancellationToken = default)
         {
@@ -859,7 +869,8 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Gets, for the specified location, the current compute resource usage information as well as the limits for compute resources under the subscription. </summary>
         /// <param name="location"> The location for which resource usage is queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="location"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
         /// <returns> An async collection of <see cref="Usage" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<Usage> GetUsagesAsync(string location, CancellationToken cancellationToken = default)
         {
@@ -904,7 +915,8 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Gets, for the specified location, the current compute resource usage information as well as the limits for compute resources under the subscription. </summary>
         /// <param name="location"> The location for which resource usage is queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="location"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
         /// <returns> A collection of <see cref="Usage" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<Usage> GetUsages(string location, CancellationToken cancellationToken = default)
         {
@@ -949,7 +961,8 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Gets all the virtual machines under the specified subscription for the specified location. </summary>
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="location"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
         /// <returns> An async collection of <see cref="VirtualMachine" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<VirtualMachine> GetVirtualMachinesByLocationAsync(string location, CancellationToken cancellationToken = default)
         {
@@ -994,7 +1007,8 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Gets all the virtual machines under the specified subscription for the specified location. </summary>
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="location"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
         /// <returns> A collection of <see cref="VirtualMachine" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<VirtualMachine> GetVirtualMachinesByLocation(string location, CancellationToken cancellationToken = default)
         {
@@ -1149,7 +1163,8 @@ namespace Azure.ResourceManager.Sample
         /// <summary> This API is deprecated. Use [Resources Skus](https://docs.microsoft.com/en-us/rest/api/compute/resourceskus/list). </summary>
         /// <param name="location"> The location upon which virtual-machine-sizes is queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="location"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
         /// <returns> An async collection of <see cref="VirtualMachineSize" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<VirtualMachineSize> GetVirtualMachineSizesAsync(string location, CancellationToken cancellationToken = default)
         {
@@ -1179,7 +1194,8 @@ namespace Azure.ResourceManager.Sample
         /// <summary> This API is deprecated. Use [Resources Skus](https://docs.microsoft.com/en-us/rest/api/compute/resourceskus/list). </summary>
         /// <param name="location"> The location upon which virtual-machine-sizes is queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="location"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
         /// <returns> A collection of <see cref="VirtualMachineSize" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<VirtualMachineSize> GetVirtualMachineSizes(string location, CancellationToken cancellationToken = default)
         {
@@ -1427,8 +1443,8 @@ namespace Azure.ResourceManager.Sample
         /// <param name="location"> The location upon which virtual-machine-sizes is queried. </param>
         /// <param name="parameters"> Parameters supplied to the LogAnalytics getRequestRateByInterval Api. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/> is null or empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="location"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<ExportRequestRateByIntervalLogAnalyticOperation> ExportRequestRateByIntervalLogAnalyticAsync(bool waitForCompletion, string location, RequestRateByIntervalInput parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));
@@ -1462,8 +1478,8 @@ namespace Azure.ResourceManager.Sample
         /// <param name="location"> The location upon which virtual-machine-sizes is queried. </param>
         /// <param name="parameters"> Parameters supplied to the LogAnalytics getRequestRateByInterval Api. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/> is null or empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="location"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="parameters"/> is null. </exception>
         public virtual ExportRequestRateByIntervalLogAnalyticOperation ExportRequestRateByIntervalLogAnalytic(bool waitForCompletion, string location, RequestRateByIntervalInput parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));
@@ -1497,8 +1513,8 @@ namespace Azure.ResourceManager.Sample
         /// <param name="location"> The location upon which virtual-machine-sizes is queried. </param>
         /// <param name="parameters"> Parameters supplied to the LogAnalytics getThrottledRequests Api. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/> is null or empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="location"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<ExportThrottledRequestsLogAnalyticOperation> ExportThrottledRequestsLogAnalyticAsync(bool waitForCompletion, string location, ThrottledRequestsInput parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));
@@ -1532,8 +1548,8 @@ namespace Azure.ResourceManager.Sample
         /// <param name="location"> The location upon which virtual-machine-sizes is queried. </param>
         /// <param name="parameters"> Parameters supplied to the LogAnalytics getThrottledRequests Api. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/> is null or empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="location"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="parameters"/> is null. </exception>
         public virtual ExportThrottledRequestsLogAnalyticOperation ExportThrottledRequestsLogAnalytic(bool waitForCompletion, string location, ThrottledRequestsInput parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));

@@ -344,10 +344,7 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
             _writer.Append($"public {GetAsyncKeyword(async)} {GetVirtual(true)} {responseType} {CreateMethodName("AddTag", async)}(string key, string value, {typeof(CancellationToken)} cancellationToken = default)");
             using (_writer.Scope())
             {
-                using (_writer.Scope($"if (string.IsNullOrWhiteSpace(key))"))
-                {
-                    _writer.Line($"throw new {typeof(ArgumentNullException)}(nameof(key), $\"{{nameof(key)}} provided cannot be null or a whitespace.\");");
-                }
+                _writer.WriteVariableNullOrEmptyCheck("key");
                 _writer.Line();
 
                 Diagnostic diagnostic = new Diagnostic($"{TypeOfThis.Name}.AddTag", Array.Empty<DiagnosticAttribute>());
@@ -419,10 +416,7 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
             _writer.Append($"public {GetAsyncKeyword(async)} {GetVirtual(true)} {responseType} {CreateMethodName("RemoveTag", async)}(string key, {typeof(CancellationToken)} cancellationToken = default)");
             using (_writer.Scope())
             {
-                using (_writer.Scope($"if (string.IsNullOrWhiteSpace(key))"))
-                {
-                    _writer.Line($"throw new {typeof(ArgumentNullException)}(nameof(key), $\"{{nameof(key)}} provided cannot be null or a whitespace.\");");
-                }
+                _writer.WriteVariableNullOrEmptyCheck("key");
                 _writer.Line();
 
                 Diagnostic diagnostic = new Diagnostic($"{TypeOfThis.Name}.RemoveTag");

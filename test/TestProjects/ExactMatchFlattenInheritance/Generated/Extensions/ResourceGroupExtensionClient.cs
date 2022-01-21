@@ -112,8 +112,8 @@ namespace ExactMatchFlattenInheritance
         /// <param name="name"> The String to use. </param>
         /// <param name="parameters"> The AzureResourceFlattenModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is null or empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<Response<AzureResourceFlattenModel2>> PutAzureResourceFlattenModel2Async(string name, AzureResourceFlattenModel2 parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
@@ -143,8 +143,8 @@ namespace ExactMatchFlattenInheritance
         /// <param name="name"> The String to use. </param>
         /// <param name="parameters"> The AzureResourceFlattenModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is null or empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
         public virtual Response<AzureResourceFlattenModel2> PutAzureResourceFlattenModel2(string name, AzureResourceFlattenModel2 parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
@@ -173,7 +173,8 @@ namespace ExactMatchFlattenInheritance
         /// <summary> Get an AzureResourceFlattenModel2. </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public async virtual Task<Response<AzureResourceFlattenModel2>> GetAzureResourceFlattenModel2Async(string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
@@ -198,7 +199,8 @@ namespace ExactMatchFlattenInheritance
         /// <summary> Get an AzureResourceFlattenModel2. </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public virtual Response<AzureResourceFlattenModel2> GetAzureResourceFlattenModel2(string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
@@ -276,8 +278,8 @@ namespace ExactMatchFlattenInheritance
         /// <param name="name"> The String to use. </param>
         /// <param name="parameters"> The AzureResourceFlattenModel3 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is null or empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<Response<AzureResourceFlattenModel3>> PutAzureResourceFlattenModel3Async(string name, AzureResourceFlattenModel3 parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
@@ -307,8 +309,8 @@ namespace ExactMatchFlattenInheritance
         /// <param name="name"> The String to use. </param>
         /// <param name="parameters"> The AzureResourceFlattenModel3 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is null or empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
         public virtual Response<AzureResourceFlattenModel3> PutAzureResourceFlattenModel3(string name, AzureResourceFlattenModel3 parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
@@ -337,7 +339,8 @@ namespace ExactMatchFlattenInheritance
         /// <summary> Get an AzureResourceFlattenModel3. </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public async virtual Task<Response<AzureResourceFlattenModel3>> GetAzureResourceFlattenModel3Async(string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
@@ -362,7 +365,8 @@ namespace ExactMatchFlattenInheritance
         /// <summary> Get an AzureResourceFlattenModel3. </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public virtual Response<AzureResourceFlattenModel3> GetAzureResourceFlattenModel3(string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
@@ -440,8 +444,8 @@ namespace ExactMatchFlattenInheritance
         /// <param name="name"> The String to use. </param>
         /// <param name="parameters"> The AzureResourceFlattenModel4 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is null or empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<Response<AzureResourceFlattenModel4>> PutAzureResourceFlattenModel4Async(string name, AzureResourceFlattenModel4 parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
@@ -471,8 +475,8 @@ namespace ExactMatchFlattenInheritance
         /// <param name="name"> The String to use. </param>
         /// <param name="parameters"> The AzureResourceFlattenModel4 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is null or empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
         public virtual Response<AzureResourceFlattenModel4> PutAzureResourceFlattenModel4(string name, AzureResourceFlattenModel4 parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
@@ -501,7 +505,8 @@ namespace ExactMatchFlattenInheritance
         /// <summary> Get an AzureResourceFlattenModel4. </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public async virtual Task<Response<AzureResourceFlattenModel4>> GetAzureResourceFlattenModel4Async(string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
@@ -526,7 +531,8 @@ namespace ExactMatchFlattenInheritance
         /// <summary> Get an AzureResourceFlattenModel4. </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public virtual Response<AzureResourceFlattenModel4> GetAzureResourceFlattenModel4(string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
@@ -604,7 +610,8 @@ namespace ExactMatchFlattenInheritance
         /// <param name="name"> The String to use. </param>
         /// <param name="foo"> New property. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public async virtual Task<Response<AzureResourceFlattenModel5>> PutAzureResourceFlattenModel5Async(string name, int? foo = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
@@ -630,7 +637,8 @@ namespace ExactMatchFlattenInheritance
         /// <param name="name"> The String to use. </param>
         /// <param name="foo"> New property. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public virtual Response<AzureResourceFlattenModel5> PutAzureResourceFlattenModel5(string name, int? foo = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
@@ -655,7 +663,8 @@ namespace ExactMatchFlattenInheritance
         /// <summary> Get an AzureResourceFlattenModel5. </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public async virtual Task<Response<AzureResourceFlattenModel5>> GetAzureResourceFlattenModel5Async(string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
@@ -680,7 +689,8 @@ namespace ExactMatchFlattenInheritance
         /// <summary> Get an AzureResourceFlattenModel5. </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public virtual Response<AzureResourceFlattenModel5> GetAzureResourceFlattenModel5(string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));

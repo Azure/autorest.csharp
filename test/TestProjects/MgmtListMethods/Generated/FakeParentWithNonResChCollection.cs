@@ -59,8 +59,8 @@ namespace MgmtListMethods
         /// <param name="fakeParentWithNonResChName"> Name. </param>
         /// <param name="parameters"> Parameters supplied to the Create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="fakeParentWithNonResChName"/> is null or empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="fakeParentWithNonResChName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithNonResChName"/> or <paramref name="parameters"/> is null. </exception>
         public virtual FakeParentWithNonResChCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string fakeParentWithNonResChName, FakeParentWithNonResChData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(fakeParentWithNonResChName, nameof(fakeParentWithNonResChName));
@@ -94,8 +94,8 @@ namespace MgmtListMethods
         /// <param name="fakeParentWithNonResChName"> Name. </param>
         /// <param name="parameters"> Parameters supplied to the Create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="fakeParentWithNonResChName"/> is null or empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="fakeParentWithNonResChName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithNonResChName"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<FakeParentWithNonResChCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string fakeParentWithNonResChName, FakeParentWithNonResChData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(fakeParentWithNonResChName, nameof(fakeParentWithNonResChName));
@@ -127,7 +127,8 @@ namespace MgmtListMethods
         /// <summary> Retrieves information. </summary>
         /// <param name="fakeParentWithNonResChName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="fakeParentWithNonResChName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="fakeParentWithNonResChName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithNonResChName"/> is null. </exception>
         public virtual Response<FakeParentWithNonResCh> Get(string fakeParentWithNonResChName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(fakeParentWithNonResChName, nameof(fakeParentWithNonResChName));
@@ -154,7 +155,8 @@ namespace MgmtListMethods
         /// <summary> Retrieves information. </summary>
         /// <param name="fakeParentWithNonResChName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="fakeParentWithNonResChName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="fakeParentWithNonResChName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithNonResChName"/> is null. </exception>
         public async virtual Task<Response<FakeParentWithNonResCh>> GetAsync(string fakeParentWithNonResChName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(fakeParentWithNonResChName, nameof(fakeParentWithNonResChName));
@@ -178,7 +180,8 @@ namespace MgmtListMethods
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="fakeParentWithNonResChName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="fakeParentWithNonResChName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="fakeParentWithNonResChName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithNonResChName"/> is null. </exception>
         public virtual Response<FakeParentWithNonResCh> GetIfExists(string fakeParentWithNonResChName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(fakeParentWithNonResChName, nameof(fakeParentWithNonResChName));
@@ -202,7 +205,8 @@ namespace MgmtListMethods
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="fakeParentWithNonResChName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="fakeParentWithNonResChName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="fakeParentWithNonResChName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithNonResChName"/> is null. </exception>
         public async virtual Task<Response<FakeParentWithNonResCh>> GetIfExistsAsync(string fakeParentWithNonResChName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(fakeParentWithNonResChName, nameof(fakeParentWithNonResChName));
@@ -226,7 +230,8 @@ namespace MgmtListMethods
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="fakeParentWithNonResChName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="fakeParentWithNonResChName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="fakeParentWithNonResChName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithNonResChName"/> is null. </exception>
         public virtual Response<bool> Exists(string fakeParentWithNonResChName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(fakeParentWithNonResChName, nameof(fakeParentWithNonResChName));
@@ -248,7 +253,8 @@ namespace MgmtListMethods
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="fakeParentWithNonResChName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="fakeParentWithNonResChName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="fakeParentWithNonResChName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithNonResChName"/> is null. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string fakeParentWithNonResChName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(fakeParentWithNonResChName, nameof(fakeParentWithNonResChName));

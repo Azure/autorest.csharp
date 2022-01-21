@@ -57,7 +57,8 @@ namespace MgmtKeyvault
         /// <param name="location"> The location of the deleted vault. </param>
         /// <param name="vaultName"> The name of the vault. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="vaultName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="vaultName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="vaultName"/> is null. </exception>
         public virtual Response<DeletedVault> Get(string location, string vaultName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));
@@ -86,7 +87,8 @@ namespace MgmtKeyvault
         /// <param name="location"> The location of the deleted vault. </param>
         /// <param name="vaultName"> The name of the vault. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="vaultName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="vaultName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="vaultName"/> is null. </exception>
         public async virtual Task<Response<DeletedVault>> GetAsync(string location, string vaultName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));
@@ -112,7 +114,8 @@ namespace MgmtKeyvault
         /// <param name="location"> The location of the deleted vault. </param>
         /// <param name="vaultName"> The name of the vault. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="vaultName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="vaultName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="vaultName"/> is null. </exception>
         public virtual Response<DeletedVault> GetIfExists(string location, string vaultName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));
@@ -138,7 +141,8 @@ namespace MgmtKeyvault
         /// <param name="location"> The location of the deleted vault. </param>
         /// <param name="vaultName"> The name of the vault. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="vaultName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="vaultName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="vaultName"/> is null. </exception>
         public async virtual Task<Response<DeletedVault>> GetIfExistsAsync(string location, string vaultName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));
@@ -164,7 +168,8 @@ namespace MgmtKeyvault
         /// <param name="location"> The location of the deleted vault. </param>
         /// <param name="vaultName"> The name of the vault. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="vaultName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="vaultName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="vaultName"/> is null. </exception>
         public virtual Response<bool> Exists(string location, string vaultName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));
@@ -188,7 +193,8 @@ namespace MgmtKeyvault
         /// <param name="location"> The location of the deleted vault. </param>
         /// <param name="vaultName"> The name of the vault. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="vaultName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="vaultName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="vaultName"/> is null. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string location, string vaultName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));

@@ -59,8 +59,8 @@ namespace Azure.Management.Storage
         /// <param name="objectReplicationPolicyId"> For the destination account, provide the value &apos;default&apos;. Configure the policy on the destination account first. For the source account, provide the value of the policy ID that is returned when you download the policy that was defined on the destination account. The policy is downloaded as a JSON file. </param>
         /// <param name="properties"> The object replication policy set to a storage account. A unique policy ID will be created if absent. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="objectReplicationPolicyId"/> is null or empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="objectReplicationPolicyId"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="objectReplicationPolicyId"/> or <paramref name="properties"/> is null. </exception>
         public virtual ObjectReplicationPolicyCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string objectReplicationPolicyId, ObjectReplicationPolicyData properties, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(objectReplicationPolicyId, nameof(objectReplicationPolicyId));
@@ -94,8 +94,8 @@ namespace Azure.Management.Storage
         /// <param name="objectReplicationPolicyId"> For the destination account, provide the value &apos;default&apos;. Configure the policy on the destination account first. For the source account, provide the value of the policy ID that is returned when you download the policy that was defined on the destination account. The policy is downloaded as a JSON file. </param>
         /// <param name="properties"> The object replication policy set to a storage account. A unique policy ID will be created if absent. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="objectReplicationPolicyId"/> is null or empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="objectReplicationPolicyId"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="objectReplicationPolicyId"/> or <paramref name="properties"/> is null. </exception>
         public async virtual Task<ObjectReplicationPolicyCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string objectReplicationPolicyId, ObjectReplicationPolicyData properties, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(objectReplicationPolicyId, nameof(objectReplicationPolicyId));
@@ -127,7 +127,8 @@ namespace Azure.Management.Storage
         /// <summary> Get the object replication policy of the storage account by policy ID. </summary>
         /// <param name="objectReplicationPolicyId"> For the destination account, provide the value &apos;default&apos;. Configure the policy on the destination account first. For the source account, provide the value of the policy ID that is returned when you download the policy that was defined on the destination account. The policy is downloaded as a JSON file. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="objectReplicationPolicyId"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="objectReplicationPolicyId"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="objectReplicationPolicyId"/> is null. </exception>
         public virtual Response<ObjectReplicationPolicy> Get(string objectReplicationPolicyId, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(objectReplicationPolicyId, nameof(objectReplicationPolicyId));
@@ -154,7 +155,8 @@ namespace Azure.Management.Storage
         /// <summary> Get the object replication policy of the storage account by policy ID. </summary>
         /// <param name="objectReplicationPolicyId"> For the destination account, provide the value &apos;default&apos;. Configure the policy on the destination account first. For the source account, provide the value of the policy ID that is returned when you download the policy that was defined on the destination account. The policy is downloaded as a JSON file. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="objectReplicationPolicyId"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="objectReplicationPolicyId"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="objectReplicationPolicyId"/> is null. </exception>
         public async virtual Task<Response<ObjectReplicationPolicy>> GetAsync(string objectReplicationPolicyId, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(objectReplicationPolicyId, nameof(objectReplicationPolicyId));
@@ -178,7 +180,8 @@ namespace Azure.Management.Storage
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="objectReplicationPolicyId"> For the destination account, provide the value &apos;default&apos;. Configure the policy on the destination account first. For the source account, provide the value of the policy ID that is returned when you download the policy that was defined on the destination account. The policy is downloaded as a JSON file. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="objectReplicationPolicyId"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="objectReplicationPolicyId"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="objectReplicationPolicyId"/> is null. </exception>
         public virtual Response<ObjectReplicationPolicy> GetIfExists(string objectReplicationPolicyId, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(objectReplicationPolicyId, nameof(objectReplicationPolicyId));
@@ -202,7 +205,8 @@ namespace Azure.Management.Storage
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="objectReplicationPolicyId"> For the destination account, provide the value &apos;default&apos;. Configure the policy on the destination account first. For the source account, provide the value of the policy ID that is returned when you download the policy that was defined on the destination account. The policy is downloaded as a JSON file. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="objectReplicationPolicyId"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="objectReplicationPolicyId"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="objectReplicationPolicyId"/> is null. </exception>
         public async virtual Task<Response<ObjectReplicationPolicy>> GetIfExistsAsync(string objectReplicationPolicyId, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(objectReplicationPolicyId, nameof(objectReplicationPolicyId));
@@ -226,7 +230,8 @@ namespace Azure.Management.Storage
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="objectReplicationPolicyId"> For the destination account, provide the value &apos;default&apos;. Configure the policy on the destination account first. For the source account, provide the value of the policy ID that is returned when you download the policy that was defined on the destination account. The policy is downloaded as a JSON file. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="objectReplicationPolicyId"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="objectReplicationPolicyId"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="objectReplicationPolicyId"/> is null. </exception>
         public virtual Response<bool> Exists(string objectReplicationPolicyId, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(objectReplicationPolicyId, nameof(objectReplicationPolicyId));
@@ -248,7 +253,8 @@ namespace Azure.Management.Storage
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="objectReplicationPolicyId"> For the destination account, provide the value &apos;default&apos;. Configure the policy on the destination account first. For the source account, provide the value of the policy ID that is returned when you download the policy that was defined on the destination account. The policy is downloaded as a JSON file. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="objectReplicationPolicyId"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="objectReplicationPolicyId"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="objectReplicationPolicyId"/> is null. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string objectReplicationPolicyId, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(objectReplicationPolicyId, nameof(objectReplicationPolicyId));

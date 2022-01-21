@@ -60,8 +60,8 @@ namespace OmitOperationGroups
         /// <param name="model2SName"> The String to use. </param>
         /// <param name="parameters"> The Model2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="model2SName"/> is null or empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="model2SName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="model2SName"/> or <paramref name="parameters"/> is null. </exception>
         public virtual Model2CreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string model2SName, Model2Data parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(model2SName, nameof(model2SName));
@@ -94,8 +94,8 @@ namespace OmitOperationGroups
         /// <param name="model2SName"> The String to use. </param>
         /// <param name="parameters"> The Model2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="model2SName"/> is null or empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="model2SName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="model2SName"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<Model2CreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string model2SName, Model2Data parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(model2SName, nameof(model2SName));
@@ -126,7 +126,8 @@ namespace OmitOperationGroups
         /// OperationId: Model2s_Get
         /// <param name="model2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="model2SName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="model2SName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="model2SName"/> is null. </exception>
         public virtual Response<Model2> Get(string model2SName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(model2SName, nameof(model2SName));
@@ -152,7 +153,8 @@ namespace OmitOperationGroups
         /// OperationId: Model2s_Get
         /// <param name="model2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="model2SName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="model2SName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="model2SName"/> is null. </exception>
         public async virtual Task<Response<Model2>> GetAsync(string model2SName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(model2SName, nameof(model2SName));
@@ -176,7 +178,8 @@ namespace OmitOperationGroups
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="model2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="model2SName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="model2SName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="model2SName"/> is null. </exception>
         public virtual Response<Model2> GetIfExists(string model2SName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(model2SName, nameof(model2SName));
@@ -200,7 +203,8 @@ namespace OmitOperationGroups
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="model2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="model2SName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="model2SName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="model2SName"/> is null. </exception>
         public async virtual Task<Response<Model2>> GetIfExistsAsync(string model2SName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(model2SName, nameof(model2SName));
@@ -224,7 +228,8 @@ namespace OmitOperationGroups
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="model2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="model2SName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="model2SName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="model2SName"/> is null. </exception>
         public virtual Response<bool> Exists(string model2SName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(model2SName, nameof(model2SName));
@@ -246,7 +251,8 @@ namespace OmitOperationGroups
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="model2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="model2SName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="model2SName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="model2SName"/> is null. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string model2SName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(model2SName, nameof(model2SName));

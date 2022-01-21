@@ -61,8 +61,8 @@ namespace MgmtLRO
         /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="fakeName"/> is null or empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="fakeName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> or <paramref name="parameters"/> is null. </exception>
         public virtual FakeCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string fakeName, FakeData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(fakeName, nameof(fakeName));
@@ -96,8 +96,8 @@ namespace MgmtLRO
         /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="fakeName"/> is null or empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="fakeName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<FakeCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string fakeName, FakeData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(fakeName, nameof(fakeName));
@@ -130,7 +130,8 @@ namespace MgmtLRO
         /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="fakeName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="fakeName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> is null. </exception>
         public virtual Response<Fake> Get(string fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(fakeName, nameof(fakeName));
@@ -158,7 +159,8 @@ namespace MgmtLRO
         /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="fakeName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="fakeName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> is null. </exception>
         public async virtual Task<Response<Fake>> GetAsync(string fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(fakeName, nameof(fakeName));
@@ -183,7 +185,8 @@ namespace MgmtLRO
         /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="fakeName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="fakeName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> is null. </exception>
         public virtual Response<Fake> GetIfExists(string fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(fakeName, nameof(fakeName));
@@ -208,7 +211,8 @@ namespace MgmtLRO
         /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="fakeName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="fakeName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> is null. </exception>
         public async virtual Task<Response<Fake>> GetIfExistsAsync(string fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(fakeName, nameof(fakeName));
@@ -233,7 +237,8 @@ namespace MgmtLRO
         /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="fakeName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="fakeName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> is null. </exception>
         public virtual Response<bool> Exists(string fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(fakeName, nameof(fakeName));
@@ -256,7 +261,8 @@ namespace MgmtLRO
         /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="fakeName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="fakeName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> is null. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(fakeName, nameof(fakeName));

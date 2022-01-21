@@ -97,8 +97,8 @@ namespace OmitOperationGroups
         /// <param name="model5SName"> The String to use. </param>
         /// <param name="parameters"> The Model5 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="model5SName"/> is null or empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="model5SName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="model5SName"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<Response<Model5>> CreateOrUpdateModel5Async(string model5SName, Model5 parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(model5SName, nameof(model5SName));
@@ -127,8 +127,8 @@ namespace OmitOperationGroups
         /// <param name="model5SName"> The String to use. </param>
         /// <param name="parameters"> The Model5 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="model5SName"/> is null or empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="model5SName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="model5SName"/> or <paramref name="parameters"/> is null. </exception>
         public virtual Response<Model5> CreateOrUpdateModel5(string model5SName, Model5 parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(model5SName, nameof(model5SName));
@@ -156,7 +156,8 @@ namespace OmitOperationGroups
         /// OperationId: Model5s_Get
         /// <param name="model5SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="model5SName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="model5SName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="model5SName"/> is null. </exception>
         public async virtual Task<Response<Model5>> GetModel5Async(string model5SName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(model5SName, nameof(model5SName));
@@ -180,7 +181,8 @@ namespace OmitOperationGroups
         /// OperationId: Model5s_Get
         /// <param name="model5SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="model5SName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="model5SName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="model5SName"/> is null. </exception>
         public virtual Response<Model5> GetModel5(string model5SName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(model5SName, nameof(model5SName));

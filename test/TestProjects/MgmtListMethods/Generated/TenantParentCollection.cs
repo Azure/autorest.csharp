@@ -59,8 +59,8 @@ namespace MgmtListMethods
         /// <param name="tenantParentName"> Name. </param>
         /// <param name="parameters"> Parameters supplied to the Create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="tenantParentName"/> is null or empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="tenantParentName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantParentName"/> or <paramref name="parameters"/> is null. </exception>
         public virtual TenantParentCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string tenantParentName, TenantParentData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(tenantParentName, nameof(tenantParentName));
@@ -94,8 +94,8 @@ namespace MgmtListMethods
         /// <param name="tenantParentName"> Name. </param>
         /// <param name="parameters"> Parameters supplied to the Create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="tenantParentName"/> is null or empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="tenantParentName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantParentName"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<TenantParentCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string tenantParentName, TenantParentData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(tenantParentName, nameof(tenantParentName));
@@ -127,7 +127,8 @@ namespace MgmtListMethods
         /// <summary> Retrieves information. </summary>
         /// <param name="tenantParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="tenantParentName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="tenantParentName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantParentName"/> is null. </exception>
         public virtual Response<TenantParent> Get(string tenantParentName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(tenantParentName, nameof(tenantParentName));
@@ -154,7 +155,8 @@ namespace MgmtListMethods
         /// <summary> Retrieves information. </summary>
         /// <param name="tenantParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="tenantParentName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="tenantParentName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantParentName"/> is null. </exception>
         public async virtual Task<Response<TenantParent>> GetAsync(string tenantParentName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(tenantParentName, nameof(tenantParentName));
@@ -178,7 +180,8 @@ namespace MgmtListMethods
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="tenantParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="tenantParentName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="tenantParentName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantParentName"/> is null. </exception>
         public virtual Response<TenantParent> GetIfExists(string tenantParentName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(tenantParentName, nameof(tenantParentName));
@@ -202,7 +205,8 @@ namespace MgmtListMethods
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="tenantParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="tenantParentName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="tenantParentName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantParentName"/> is null. </exception>
         public async virtual Task<Response<TenantParent>> GetIfExistsAsync(string tenantParentName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(tenantParentName, nameof(tenantParentName));
@@ -226,7 +230,8 @@ namespace MgmtListMethods
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="tenantParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="tenantParentName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="tenantParentName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantParentName"/> is null. </exception>
         public virtual Response<bool> Exists(string tenantParentName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(tenantParentName, nameof(tenantParentName));
@@ -248,7 +253,8 @@ namespace MgmtListMethods
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="tenantParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="tenantParentName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="tenantParentName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantParentName"/> is null. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string tenantParentName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(tenantParentName, nameof(tenantParentName));

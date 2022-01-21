@@ -60,8 +60,8 @@ namespace ExactMatchInheritance
         /// <param name="exactMatchModel1SName"> The String to use. </param>
         /// <param name="parameters"> The ExactMatchModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="exactMatchModel1SName"/> is null or empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="exactMatchModel1SName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel1SName"/> or <paramref name="parameters"/> is null. </exception>
         public virtual ExactMatchModel1CreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string exactMatchModel1SName, ExactMatchModel1Data parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(exactMatchModel1SName, nameof(exactMatchModel1SName));
@@ -94,8 +94,8 @@ namespace ExactMatchInheritance
         /// <param name="exactMatchModel1SName"> The String to use. </param>
         /// <param name="parameters"> The ExactMatchModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="exactMatchModel1SName"/> is null or empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="exactMatchModel1SName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel1SName"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<ExactMatchModel1CreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string exactMatchModel1SName, ExactMatchModel1Data parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(exactMatchModel1SName, nameof(exactMatchModel1SName));
@@ -126,7 +126,8 @@ namespace ExactMatchInheritance
         /// OperationId: ExactMatchModel1s_Get
         /// <param name="exactMatchModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="exactMatchModel1SName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="exactMatchModel1SName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel1SName"/> is null. </exception>
         public virtual Response<ExactMatchModel1> Get(string exactMatchModel1SName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(exactMatchModel1SName, nameof(exactMatchModel1SName));
@@ -152,7 +153,8 @@ namespace ExactMatchInheritance
         /// OperationId: ExactMatchModel1s_Get
         /// <param name="exactMatchModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="exactMatchModel1SName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="exactMatchModel1SName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel1SName"/> is null. </exception>
         public async virtual Task<Response<ExactMatchModel1>> GetAsync(string exactMatchModel1SName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(exactMatchModel1SName, nameof(exactMatchModel1SName));
@@ -176,7 +178,8 @@ namespace ExactMatchInheritance
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="exactMatchModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="exactMatchModel1SName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="exactMatchModel1SName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel1SName"/> is null. </exception>
         public virtual Response<ExactMatchModel1> GetIfExists(string exactMatchModel1SName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(exactMatchModel1SName, nameof(exactMatchModel1SName));
@@ -200,7 +203,8 @@ namespace ExactMatchInheritance
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="exactMatchModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="exactMatchModel1SName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="exactMatchModel1SName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel1SName"/> is null. </exception>
         public async virtual Task<Response<ExactMatchModel1>> GetIfExistsAsync(string exactMatchModel1SName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(exactMatchModel1SName, nameof(exactMatchModel1SName));
@@ -224,7 +228,8 @@ namespace ExactMatchInheritance
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="exactMatchModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="exactMatchModel1SName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="exactMatchModel1SName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel1SName"/> is null. </exception>
         public virtual Response<bool> Exists(string exactMatchModel1SName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(exactMatchModel1SName, nameof(exactMatchModel1SName));
@@ -246,7 +251,8 @@ namespace ExactMatchInheritance
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="exactMatchModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="exactMatchModel1SName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="exactMatchModel1SName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel1SName"/> is null. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string exactMatchModel1SName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(exactMatchModel1SName, nameof(exactMatchModel1SName));
