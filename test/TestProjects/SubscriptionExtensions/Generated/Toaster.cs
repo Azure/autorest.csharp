@@ -192,10 +192,7 @@ namespace SubscriptionExtensions
         /// <returns> The updated resource with the tag added. </returns>
         public async virtual Task<Response<Toaster>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrWhiteSpace(key))
-            {
-                throw new ArgumentNullException(nameof(key), $"{nameof(key)} provided cannot be null or a whitespace.");
-            }
+            Argument.AssertNotNullOrEmpty(key, nameof(key));
 
             using var scope = _clientDiagnostics.CreateScope("Toaster.AddTag");
             scope.Start();
@@ -221,10 +218,7 @@ namespace SubscriptionExtensions
         /// <returns> The updated resource with the tag added. </returns>
         public virtual Response<Toaster> AddTag(string key, string value, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrWhiteSpace(key))
-            {
-                throw new ArgumentNullException(nameof(key), $"{nameof(key)} provided cannot be null or a whitespace.");
-            }
+            Argument.AssertNotNullOrEmpty(key, nameof(key));
 
             using var scope = _clientDiagnostics.CreateScope("Toaster.AddTag");
             scope.Start();
@@ -307,10 +301,7 @@ namespace SubscriptionExtensions
         /// <returns> The updated resource with the tag removed. </returns>
         public async virtual Task<Response<Toaster>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrWhiteSpace(key))
-            {
-                throw new ArgumentNullException(nameof(key), $"{nameof(key)} provided cannot be null or a whitespace.");
-            }
+            Argument.AssertNotNullOrEmpty(key, nameof(key));
 
             using var scope = _clientDiagnostics.CreateScope("Toaster.RemoveTag");
             scope.Start();
@@ -335,10 +326,7 @@ namespace SubscriptionExtensions
         /// <returns> The updated resource with the tag removed. </returns>
         public virtual Response<Toaster> RemoveTag(string key, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrWhiteSpace(key))
-            {
-                throw new ArgumentNullException(nameof(key), $"{nameof(key)} provided cannot be null or a whitespace.");
-            }
+            Argument.AssertNotNullOrEmpty(key, nameof(key));
 
             using var scope = _clientDiagnostics.CreateScope("Toaster.RemoveTag");
             scope.Start();

@@ -60,14 +60,11 @@ namespace SupersetFlattenInheritance
         /// <param name="resourceModel1SName"> The String to use. </param>
         /// <param name="parameters"> The ResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="resourceModel1SName"/> is null or empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="resourceModel1SName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceModel1SName"/> or <paramref name="parameters"/> is null. </exception>
         public virtual ResourceModel1CreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string resourceModel1SName, ResourceModel1Data parameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(resourceModel1SName))
-            {
-                throw new ArgumentException($"Parameter {nameof(resourceModel1SName)} cannot be null or empty", nameof(resourceModel1SName));
-            }
+            Argument.AssertNotNullOrEmpty(resourceModel1SName, nameof(resourceModel1SName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -97,14 +94,11 @@ namespace SupersetFlattenInheritance
         /// <param name="resourceModel1SName"> The String to use. </param>
         /// <param name="parameters"> The ResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="resourceModel1SName"/> is null or empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="resourceModel1SName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceModel1SName"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<ResourceModel1CreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string resourceModel1SName, ResourceModel1Data parameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(resourceModel1SName))
-            {
-                throw new ArgumentException($"Parameter {nameof(resourceModel1SName)} cannot be null or empty", nameof(resourceModel1SName));
-            }
+            Argument.AssertNotNullOrEmpty(resourceModel1SName, nameof(resourceModel1SName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -132,13 +126,11 @@ namespace SupersetFlattenInheritance
         /// OperationId: ResourceModel1s_Get
         /// <param name="resourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="resourceModel1SName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="resourceModel1SName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceModel1SName"/> is null. </exception>
         public virtual Response<ResourceModel1> Get(string resourceModel1SName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(resourceModel1SName))
-            {
-                throw new ArgumentException($"Parameter {nameof(resourceModel1SName)} cannot be null or empty", nameof(resourceModel1SName));
-            }
+            Argument.AssertNotNullOrEmpty(resourceModel1SName, nameof(resourceModel1SName));
 
             using var scope = _clientDiagnostics.CreateScope("ResourceModel1Collection.Get");
             scope.Start();
@@ -161,13 +153,11 @@ namespace SupersetFlattenInheritance
         /// OperationId: ResourceModel1s_Get
         /// <param name="resourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="resourceModel1SName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="resourceModel1SName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceModel1SName"/> is null. </exception>
         public async virtual Task<Response<ResourceModel1>> GetAsync(string resourceModel1SName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(resourceModel1SName))
-            {
-                throw new ArgumentException($"Parameter {nameof(resourceModel1SName)} cannot be null or empty", nameof(resourceModel1SName));
-            }
+            Argument.AssertNotNullOrEmpty(resourceModel1SName, nameof(resourceModel1SName));
 
             using var scope = _clientDiagnostics.CreateScope("ResourceModel1Collection.Get");
             scope.Start();
@@ -188,13 +178,11 @@ namespace SupersetFlattenInheritance
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="resourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="resourceModel1SName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="resourceModel1SName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceModel1SName"/> is null. </exception>
         public virtual Response<ResourceModel1> GetIfExists(string resourceModel1SName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(resourceModel1SName))
-            {
-                throw new ArgumentException($"Parameter {nameof(resourceModel1SName)} cannot be null or empty", nameof(resourceModel1SName));
-            }
+            Argument.AssertNotNullOrEmpty(resourceModel1SName, nameof(resourceModel1SName));
 
             using var scope = _clientDiagnostics.CreateScope("ResourceModel1Collection.GetIfExists");
             scope.Start();
@@ -215,13 +203,11 @@ namespace SupersetFlattenInheritance
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="resourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="resourceModel1SName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="resourceModel1SName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceModel1SName"/> is null. </exception>
         public async virtual Task<Response<ResourceModel1>> GetIfExistsAsync(string resourceModel1SName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(resourceModel1SName))
-            {
-                throw new ArgumentException($"Parameter {nameof(resourceModel1SName)} cannot be null or empty", nameof(resourceModel1SName));
-            }
+            Argument.AssertNotNullOrEmpty(resourceModel1SName, nameof(resourceModel1SName));
 
             using var scope = _clientDiagnostics.CreateScope("ResourceModel1Collection.GetIfExists");
             scope.Start();
@@ -242,13 +228,11 @@ namespace SupersetFlattenInheritance
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="resourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="resourceModel1SName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="resourceModel1SName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceModel1SName"/> is null. </exception>
         public virtual Response<bool> Exists(string resourceModel1SName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(resourceModel1SName))
-            {
-                throw new ArgumentException($"Parameter {nameof(resourceModel1SName)} cannot be null or empty", nameof(resourceModel1SName));
-            }
+            Argument.AssertNotNullOrEmpty(resourceModel1SName, nameof(resourceModel1SName));
 
             using var scope = _clientDiagnostics.CreateScope("ResourceModel1Collection.Exists");
             scope.Start();
@@ -267,13 +251,11 @@ namespace SupersetFlattenInheritance
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="resourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="resourceModel1SName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="resourceModel1SName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceModel1SName"/> is null. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string resourceModel1SName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(resourceModel1SName))
-            {
-                throw new ArgumentException($"Parameter {nameof(resourceModel1SName)} cannot be null or empty", nameof(resourceModel1SName));
-            }
+            Argument.AssertNotNullOrEmpty(resourceModel1SName, nameof(resourceModel1SName));
 
             using var scope = _clientDiagnostics.CreateScope("ResourceModel1Collection.Exists");
             scope.Start();

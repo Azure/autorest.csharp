@@ -61,14 +61,11 @@ namespace SubscriptionExtensions
         /// <param name="toasterName"> The name of the availability set. </param>
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="toasterName"/> is null or empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="toasterName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="toasterName"/> or <paramref name="parameters"/> is null. </exception>
         public virtual ToasterCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string toasterName, ToasterData parameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(toasterName))
-            {
-                throw new ArgumentException($"Parameter {nameof(toasterName)} cannot be null or empty", nameof(toasterName));
-            }
+            Argument.AssertNotNullOrEmpty(toasterName, nameof(toasterName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -99,14 +96,11 @@ namespace SubscriptionExtensions
         /// <param name="toasterName"> The name of the availability set. </param>
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="toasterName"/> is null or empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="toasterName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="toasterName"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<ToasterCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string toasterName, ToasterData parameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(toasterName))
-            {
-                throw new ArgumentException($"Parameter {nameof(toasterName)} cannot be null or empty", nameof(toasterName));
-            }
+            Argument.AssertNotNullOrEmpty(toasterName, nameof(toasterName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -134,13 +128,11 @@ namespace SubscriptionExtensions
         /// OperationId: Toasters_Get
         /// <param name="toasterName"> The name of the availability set. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="toasterName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="toasterName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="toasterName"/> is null. </exception>
         public virtual Response<Toaster> Get(string toasterName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(toasterName))
-            {
-                throw new ArgumentException($"Parameter {nameof(toasterName)} cannot be null or empty", nameof(toasterName));
-            }
+            Argument.AssertNotNullOrEmpty(toasterName, nameof(toasterName));
 
             using var scope = _clientDiagnostics.CreateScope("ToasterCollection.Get");
             scope.Start();
@@ -163,13 +155,11 @@ namespace SubscriptionExtensions
         /// OperationId: Toasters_Get
         /// <param name="toasterName"> The name of the availability set. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="toasterName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="toasterName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="toasterName"/> is null. </exception>
         public async virtual Task<Response<Toaster>> GetAsync(string toasterName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(toasterName))
-            {
-                throw new ArgumentException($"Parameter {nameof(toasterName)} cannot be null or empty", nameof(toasterName));
-            }
+            Argument.AssertNotNullOrEmpty(toasterName, nameof(toasterName));
 
             using var scope = _clientDiagnostics.CreateScope("ToasterCollection.Get");
             scope.Start();
@@ -190,13 +180,11 @@ namespace SubscriptionExtensions
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="toasterName"> The name of the availability set. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="toasterName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="toasterName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="toasterName"/> is null. </exception>
         public virtual Response<Toaster> GetIfExists(string toasterName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(toasterName))
-            {
-                throw new ArgumentException($"Parameter {nameof(toasterName)} cannot be null or empty", nameof(toasterName));
-            }
+            Argument.AssertNotNullOrEmpty(toasterName, nameof(toasterName));
 
             using var scope = _clientDiagnostics.CreateScope("ToasterCollection.GetIfExists");
             scope.Start();
@@ -217,13 +205,11 @@ namespace SubscriptionExtensions
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="toasterName"> The name of the availability set. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="toasterName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="toasterName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="toasterName"/> is null. </exception>
         public async virtual Task<Response<Toaster>> GetIfExistsAsync(string toasterName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(toasterName))
-            {
-                throw new ArgumentException($"Parameter {nameof(toasterName)} cannot be null or empty", nameof(toasterName));
-            }
+            Argument.AssertNotNullOrEmpty(toasterName, nameof(toasterName));
 
             using var scope = _clientDiagnostics.CreateScope("ToasterCollection.GetIfExists");
             scope.Start();
@@ -244,13 +230,11 @@ namespace SubscriptionExtensions
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="toasterName"> The name of the availability set. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="toasterName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="toasterName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="toasterName"/> is null. </exception>
         public virtual Response<bool> Exists(string toasterName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(toasterName))
-            {
-                throw new ArgumentException($"Parameter {nameof(toasterName)} cannot be null or empty", nameof(toasterName));
-            }
+            Argument.AssertNotNullOrEmpty(toasterName, nameof(toasterName));
 
             using var scope = _clientDiagnostics.CreateScope("ToasterCollection.Exists");
             scope.Start();
@@ -269,13 +253,11 @@ namespace SubscriptionExtensions
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="toasterName"> The name of the availability set. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="toasterName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="toasterName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="toasterName"/> is null. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string toasterName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(toasterName))
-            {
-                throw new ArgumentException($"Parameter {nameof(toasterName)} cannot be null or empty", nameof(toasterName));
-            }
+            Argument.AssertNotNullOrEmpty(toasterName, nameof(toasterName));
 
             using var scope = _clientDiagnostics.CreateScope("ToasterCollection.Exists");
             scope.Start();
