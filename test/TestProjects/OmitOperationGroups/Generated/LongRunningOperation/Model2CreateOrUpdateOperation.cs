@@ -10,7 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager;
 using OmitOperationGroups;
 
 namespace OmitOperationGroups.Models
@@ -24,9 +24,9 @@ namespace OmitOperationGroups.Models
         {
         }
 
-        internal Model2CreateOrUpdateOperation(ArmResource operationsBase, Response<Model2Data> response)
+        internal Model2CreateOrUpdateOperation(ArmClient armClient, Response<Model2Data> response)
         {
-            _operation = new OperationOrResponseInternals<Model2>(Response.FromValue(new Model2(operationsBase, response.Value), response.GetRawResponse()));
+            _operation = new OperationOrResponseInternals<Model2>(Response.FromValue(new Model2(armClient, response.Value), response.GetRawResponse()));
         }
 
         /// <inheritdoc />

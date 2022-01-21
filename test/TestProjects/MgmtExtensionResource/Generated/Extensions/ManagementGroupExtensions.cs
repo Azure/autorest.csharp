@@ -21,5 +21,14 @@ namespace MgmtExtensionResource
             return new ManagementGroupPolicyDefinitionCollection(managementGroup);
         }
         #endregion
+
+        private static ManagementGroupExtensionClient GetExtensionClient(ManagementGroup managementGroup)
+        {
+            return managementGroup.GetCachedClient((armClient) =>
+            {
+                return new ManagementGroupExtensionClient(armClient, managementGroup.Id);
+            }
+            );
+        }
     }
 }

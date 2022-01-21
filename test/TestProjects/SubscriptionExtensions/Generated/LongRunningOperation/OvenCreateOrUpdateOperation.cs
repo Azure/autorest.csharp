@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager;
 using SubscriptionExtensions;
 
 namespace SubscriptionExtensions.Models
@@ -22,17 +22,17 @@ namespace SubscriptionExtensions.Models
     {
         private readonly OperationInternals<Oven> _operation;
 
-        private readonly ArmResource _operationBase;
+        private readonly ArmClient _armClient;
 
         /// <summary> Initializes a new instance of OvenCreateOrUpdateOperation for mocking. </summary>
         protected OvenCreateOrUpdateOperation()
         {
         }
 
-        internal OvenCreateOrUpdateOperation(ArmResource operationsBase, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
+        internal OvenCreateOrUpdateOperation(ArmClient armClient, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
             _operation = new OperationInternals<Oven>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "OvenCreateOrUpdateOperation");
-            _operationBase = operationsBase;
+            _armClient = armClient;
         }
 
         /// <inheritdoc />
@@ -66,14 +66,14 @@ namespace SubscriptionExtensions.Models
         {
             using var document = JsonDocument.Parse(response.ContentStream);
             var data = OvenData.DeserializeOvenData(document.RootElement);
-            return new Oven(_operationBase, data);
+            return new Oven(_armClient, data);
         }
 
         async ValueTask<Oven> IOperationSource<Oven>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
             var data = OvenData.DeserializeOvenData(document.RootElement);
-            return new Oven(_operationBase, data);
+            return new Oven(_armClient, data);
         }
     }
 }

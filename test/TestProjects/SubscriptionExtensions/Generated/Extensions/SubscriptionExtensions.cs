@@ -21,5 +21,14 @@ namespace SubscriptionExtensions
             return new ToasterCollection(subscription);
         }
         #endregion
+
+        private static SubscriptionExtensionClient GetExtensionClient(Subscription subscription)
+        {
+            return subscription.GetCachedClient((armClient) =>
+            {
+                return new SubscriptionExtensionClient(armClient, subscription.Id);
+            }
+            );
+        }
     }
 }

@@ -10,7 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager;
 using SingletonResource;
 
 namespace SingletonResource.Models
@@ -24,9 +24,9 @@ namespace SingletonResource.Models
         {
         }
 
-        internal ParentResourceCreateOrUpdateOperation(ArmResource operationsBase, Response<ParentResourceData> response)
+        internal ParentResourceCreateOrUpdateOperation(ArmClient armClient, Response<ParentResourceData> response)
         {
-            _operation = new OperationOrResponseInternals<ParentResource>(Response.FromValue(new ParentResource(operationsBase, response.Value), response.GetRawResponse()));
+            _operation = new OperationOrResponseInternals<ParentResource>(Response.FromValue(new ParentResource(armClient, response.Value), response.GetRawResponse()));
         }
 
         /// <inheritdoc />

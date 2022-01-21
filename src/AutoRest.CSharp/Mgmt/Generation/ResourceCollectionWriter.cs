@@ -74,8 +74,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     WriteCtors();
                     WriteProperties();
                     WriteMethods();
-
-                    WriteBuilders();
                 }
             }
         }
@@ -121,7 +119,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
             using (_writer.WriteMethodDeclaration(parentResourceConstructor))
             {
                 var allPossibleTypes = _resourceCollection.ResourceTypes.SelectMany(p => p.Value).Distinct();
-                _writer.Line($"{ClientDiagnosticsField} = new {typeof(ClientDiagnostics)}(ClientOptions);");
+                FormattableString ctorString = ConstructClientDiagnostic(_writer, $"{_resource.Type}.ResourceType.Namespace", DiagnosticOptionsProperty);
+                _writer.Line($"{ClientDiagnosticsField} = {ctorString};");
                 WriteRestClientAssignments();
                 foreach (var parameter in _resourceCollection.ExtraConstructorParameters)
                 {
@@ -269,7 +268,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         private void WriteGetMethodBranch(CodeWriter writer, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMappings, bool async)
         {
             writer.Append($"var response = {GetAwait(async)} ");
-            writer.Append($"{GetRestClientVariableName(operation.RestClient)}.{CreateMethodName(operation.Method.Name, async)}(");
+            writer.Append($"{GetRestFieldName(operation.RestClient)}.{CreateMethodName(operation.Method.Name, async)}(");
             WriteArguments(writer, parameterMappings);
             writer.Line($"cancellationToken: cancellationToken){GetConfigureAwait(async)};");
 
@@ -283,7 +282,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             var newInstanceExpression = _resource.NewInstanceExpression(new[]
             {
-                new ParameterInvocation(_resource.OptionsParameter, w => w.Append($"this")),
+                new ParameterInvocation(_resource.ResourceParameter, w => w.Append($"{ArmClientReference}")),
                 new ParameterInvocation(_resource.ResourceDataParameter, dataExpression),
             });
             writer.Line($"return {typeof(Response)}.FromValue({newInstanceExpression}, response.GetRawResponse());");

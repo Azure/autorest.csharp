@@ -21,7 +21,7 @@ namespace Azure.Management.Storage
         public static BlobService GetBlobService(this ArmClient armClient, ResourceIdentifier id)
         {
             BlobService.ValidateResourceId(id);
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new BlobService(clientOptions, credential, uri, pipeline, id));
+            return new BlobService(armClient, id);
         }
         #endregion
 
@@ -33,7 +33,7 @@ namespace Azure.Management.Storage
         public static BlobContainer GetBlobContainer(this ArmClient armClient, ResourceIdentifier id)
         {
             BlobContainer.ValidateResourceId(id);
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new BlobContainer(clientOptions, credential, uri, pipeline, id));
+            return new BlobContainer(armClient, id);
         }
         #endregion
 
@@ -45,7 +45,7 @@ namespace Azure.Management.Storage
         public static ImmutabilityPolicy GetImmutabilityPolicy(this ArmClient armClient, ResourceIdentifier id)
         {
             ImmutabilityPolicy.ValidateResourceId(id);
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new ImmutabilityPolicy(clientOptions, credential, uri, pipeline, id));
+            return new ImmutabilityPolicy(armClient, id);
         }
         #endregion
 
@@ -57,7 +57,7 @@ namespace Azure.Management.Storage
         public static FileService GetFileService(this ArmClient armClient, ResourceIdentifier id)
         {
             FileService.ValidateResourceId(id);
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new FileService(clientOptions, credential, uri, pipeline, id));
+            return new FileService(armClient, id);
         }
         #endregion
 
@@ -69,7 +69,7 @@ namespace Azure.Management.Storage
         public static FileShare GetFileShare(this ArmClient armClient, ResourceIdentifier id)
         {
             FileShare.ValidateResourceId(id);
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new FileShare(clientOptions, credential, uri, pipeline, id));
+            return new FileShare(armClient, id);
         }
         #endregion
 
@@ -81,7 +81,7 @@ namespace Azure.Management.Storage
         public static StorageAccount GetStorageAccount(this ArmClient armClient, ResourceIdentifier id)
         {
             StorageAccount.ValidateResourceId(id);
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new StorageAccount(clientOptions, credential, uri, pipeline, id));
+            return new StorageAccount(armClient, id);
         }
         #endregion
 
@@ -93,7 +93,7 @@ namespace Azure.Management.Storage
         public static DeletedAccount GetDeletedAccount(this ArmClient armClient, ResourceIdentifier id)
         {
             DeletedAccount.ValidateResourceId(id);
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new DeletedAccount(clientOptions, credential, uri, pipeline, id));
+            return new DeletedAccount(armClient, id);
         }
         #endregion
 
@@ -105,7 +105,7 @@ namespace Azure.Management.Storage
         public static ManagementPolicy GetManagementPolicy(this ArmClient armClient, ResourceIdentifier id)
         {
             ManagementPolicy.ValidateResourceId(id);
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new ManagementPolicy(clientOptions, credential, uri, pipeline, id));
+            return new ManagementPolicy(armClient, id);
         }
         #endregion
 
@@ -117,7 +117,7 @@ namespace Azure.Management.Storage
         public static BlobInventoryPolicy GetBlobInventoryPolicy(this ArmClient armClient, ResourceIdentifier id)
         {
             BlobInventoryPolicy.ValidateResourceId(id);
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new BlobInventoryPolicy(clientOptions, credential, uri, pipeline, id));
+            return new BlobInventoryPolicy(armClient, id);
         }
         #endregion
 
@@ -129,7 +129,7 @@ namespace Azure.Management.Storage
         public static PrivateEndpointConnection GetPrivateEndpointConnection(this ArmClient armClient, ResourceIdentifier id)
         {
             PrivateEndpointConnection.ValidateResourceId(id);
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new PrivateEndpointConnection(clientOptions, credential, uri, pipeline, id));
+            return new PrivateEndpointConnection(armClient, id);
         }
         #endregion
 
@@ -141,7 +141,7 @@ namespace Azure.Management.Storage
         public static ObjectReplicationPolicy GetObjectReplicationPolicy(this ArmClient armClient, ResourceIdentifier id)
         {
             ObjectReplicationPolicy.ValidateResourceId(id);
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new ObjectReplicationPolicy(clientOptions, credential, uri, pipeline, id));
+            return new ObjectReplicationPolicy(armClient, id);
         }
         #endregion
 
@@ -153,7 +153,7 @@ namespace Azure.Management.Storage
         public static EncryptionScope GetEncryptionScope(this ArmClient armClient, ResourceIdentifier id)
         {
             EncryptionScope.ValidateResourceId(id);
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new EncryptionScope(clientOptions, credential, uri, pipeline, id));
+            return new EncryptionScope(armClient, id);
         }
         #endregion
     }

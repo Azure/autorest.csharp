@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Management.Storage;
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager;
 
 namespace Azure.Management.Storage.Models
 {
@@ -25,9 +25,9 @@ namespace Azure.Management.Storage.Models
         {
         }
 
-        internal BlobServiceCreateOrUpdateOperation(ArmResource operationsBase, Response<BlobServiceData> response)
+        internal BlobServiceCreateOrUpdateOperation(ArmClient armClient, Response<BlobServiceData> response)
         {
-            _operation = new OperationOrResponseInternals<BlobService>(Response.FromValue(new BlobService(operationsBase, response.Value), response.GetRawResponse()));
+            _operation = new OperationOrResponseInternals<BlobService>(Response.FromValue(new BlobService(armClient, response.Value), response.GetRawResponse()));
         }
 
         /// <inheritdoc />

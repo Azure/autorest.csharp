@@ -21,7 +21,7 @@ namespace MgmtMultipleParentResource
         public static AnotherParent GetAnotherParent(this ArmClient armClient, ResourceIdentifier id)
         {
             AnotherParent.ValidateResourceId(id);
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new AnotherParent(clientOptions, credential, uri, pipeline, id));
+            return new AnotherParent(armClient, id);
         }
         #endregion
 
@@ -33,7 +33,7 @@ namespace MgmtMultipleParentResource
         public static AnotherParentChild GetAnotherParentChild(this ArmClient armClient, ResourceIdentifier id)
         {
             AnotherParentChild.ValidateResourceId(id);
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new AnotherParentChild(clientOptions, credential, uri, pipeline, id));
+            return new AnotherParentChild(armClient, id);
         }
         #endregion
 
@@ -45,7 +45,7 @@ namespace MgmtMultipleParentResource
         public static TheParentSubParentChild GetTheParentSubParentChild(this ArmClient armClient, ResourceIdentifier id)
         {
             TheParentSubParentChild.ValidateResourceId(id);
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new TheParentSubParentChild(clientOptions, credential, uri, pipeline, id));
+            return new TheParentSubParentChild(armClient, id);
         }
         #endregion
 
@@ -57,7 +57,7 @@ namespace MgmtMultipleParentResource
         public static TheParent GetTheParent(this ArmClient armClient, ResourceIdentifier id)
         {
             TheParent.ValidateResourceId(id);
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new TheParent(clientOptions, credential, uri, pipeline, id));
+            return new TheParent(armClient, id);
         }
         #endregion
 
@@ -69,7 +69,7 @@ namespace MgmtMultipleParentResource
         public static SubParent GetSubParent(this ArmClient armClient, ResourceIdentifier id)
         {
             SubParent.ValidateResourceId(id);
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new SubParent(clientOptions, credential, uri, pipeline, id));
+            return new SubParent(armClient, id);
         }
         #endregion
     }
