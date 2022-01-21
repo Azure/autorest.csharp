@@ -121,19 +121,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 Action<CodeWriter, CodeWriterDelegate> valueCallback = (w, v) =>
                 {
-                    CodeWriterDelegate optionsExpression = w => w.Append($"{_operationBaseField}");
-                    CodeWriterDelegate dataExpression = w => w.Append($"data");
-
-                    w.Line($"var {dataExpression} = {v};");
+                    var data = new CodeWriterDeclaration("data");
+                    w.Line($"var {data:D} = {v};");
                     if (mgmtOperation.WrapperResource.ResourceData.ShouldSetResourceIdentifier)
-                        w.Line($"{dataExpression}.Id = {optionsExpression}.Id;");
-
-                    var newInstanceExpression = mgmtOperation.WrapperResource.NewInstanceExpression(new[]
                     {
-                        new ParameterInvocation(mgmtOperation.WrapperResource.OptionsParameter, optionsExpression),
-                        new ParameterInvocation(mgmtOperation.WrapperResource.ResourceDataParameter, dataExpression),
-                    });
-                    w.Line($"return {newInstanceExpression};");
+                        w.Line($"{data}.Id = {_operationBaseField}.Id;");
+                    }
+                    w.Line($"return new {mgmtOperation.WrapperResource.Type}({_operationBaseField}, {data});");
                 };
 
                 using (writer.Scope($"{mgmtOperation.WrapperResource.Type} {interfaceType}.CreateResult({typeof(Response)} {responseVariable:D}, {typeof(CancellationToken)} cancellationToken)"))

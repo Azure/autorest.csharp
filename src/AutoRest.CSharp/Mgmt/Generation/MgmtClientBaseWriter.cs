@@ -375,49 +375,44 @@ namespace AutoRest.CSharp.Mgmt.Generation
             return new PagingMethodWrapper(pagingMethod);
         }
 
-        protected void WritePageFunctionBody(CSharpType itemType, PagingMethodWrapper pagingMethod, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMappings,
-            bool isAsync, bool isNextPageFunc)
+        protected void WritePageFunctionBody(CSharpType itemType, PagingMethodWrapper pagingMethod, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMappings, bool isAsync, bool isNextPageFunc)
         {
             var wrapResource = WrapResourceDataType(itemType, operation);
             var continuationTokenText = pagingMethod.NextLinkName != null ? $"response.Value.{pagingMethod.NextLinkName}" : "null";
+            var response = new CodeWriterDeclaration("response");
 
-            _writer.Append($"var response = {GetAwait(isAsync)} {GetRestClientVariableName(operation.RestClient)}.{CreateMethodName(isNextPageFunc ? pagingMethod.NextPageMethod!.Name : pagingMethod.Method.Name, isAsync)}({GetNextLink(isNextPageFunc)}");
+            _writer.Append($"var {response:D} = {GetAwait(isAsync)} {GetRestClientVariableName(operation.RestClient)}.{CreateMethodName(isNextPageFunc ? pagingMethod.NextPageMethod!.Name : pagingMethod.Method.Name, isAsync)}({GetNextLink(isNextPageFunc)}");
             WriteArguments(_writer, parameterMappings);
             _writer.Line($"cancellationToken: cancellationToken){GetConfigureAwait(isAsync)};");
 
+            _writer
+                .Append($"return {typeof(Page)}.FromValues(response.Value")
+                .AppendIf($".{pagingMethod.ItemName}", !pagingMethod.ItemName.IsNullOrEmpty());
+
             // only when we are listing ourselves, we use Select to convert XXXResourceData to XXXResource
-            FormattableString converter = $"";
             if (wrapResource != null)
             {
-                CodeWriterDelegate dataExpression = w => w.Append($"value");
+                _writer.UseNamespace(typeof(Enumerable).Namespace!);
 
-                var newInstanceExpression = wrapResource.NewInstanceExpression(new[]
-                {
-                    new ParameterInvocation(wrapResource.OptionsParameter, w => w.Append($"{ContextProperty}")),
-                    new ParameterInvocation(wrapResource.ResourceDataParameter, dataExpression),
-                });
-                CodeWriterDelegate selectBody;
+                var value = new CodeWriterDeclaration("value");
+                _writer.Append($@".Select({value:D} => ");
                 if (wrapResource.ResourceData.ShouldSetResourceIdentifier)
                 {
-                    selectBody = w =>
+                    using (_writer.Scope())
                     {
-                        using (w.Scope())
-                        {
-                            w.Line($"{dataExpression}.Id = {CreateResourceIdentifierExpression(wrapResource, operation.RequestPath, parameterMappings, dataExpression)};");
-                            w.Line($"return {newInstanceExpression};");
-                        }
-                    };
+                        _writer
+                            .Line($"{value}.Id = {CreateResourceIdentifierExpression(wrapResource, operation.RequestPath, parameterMappings, w => w.Append($"value"))};")
+                            .Line($"return new {wrapResource.Type}({ContextProperty}, {value});");
+                    }
                 }
                 else
                 {
-                    selectBody = newInstanceExpression;
+                    _writer.Append($"new {wrapResource.Type}({ContextProperty}, {value})");
                 }
-
-                _writer.UseNamespace("System.Linq");
-                converter = $".Select({dataExpression} => {selectBody})";
+                _writer.AppendRaw(")");
             }
-            var itemName = pagingMethod.ItemName.IsNullOrEmpty() ? string.Empty : $".{pagingMethod.ItemName}";
-            _writer.Line($"return {typeof(Page)}.FromValues(response.Value{itemName}{converter}, {continuationTokenText}, response.GetRawResponse());");
+
+            _writer.Line($", {continuationTokenText}, {response}.GetRawResponse());");
         }
 
         protected virtual void WritePagingMethodSignature(CSharpType actualItemType, string methodName, IReadOnlyList<Parameter> methodParameters, bool async,
@@ -589,8 +584,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected virtual void WriteNormalMethodBranch(MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMappings, bool async, bool shouldThrowExceptionWhenNull = false)
         {
-            _writer.Append($"var response = {GetAwait(async)} ");
-            _writer.Append($"{GetRestClientVariableName(operation.RestClient)}.{CreateMethodName(operation.Method.Name, async)}(");
+            var response = new CodeWriterDeclaration("response");
+            _writer
+                .Append($"var {response:D} = {GetAwait(async)} ")
+                .Append($"{GetRestClientVariableName(operation.RestClient)}.{CreateMethodName(operation.Method.Name, async)}(");
             WriteArguments(_writer, parameterMappings);
             _writer.Line($"cancellationToken){GetConfigureAwait(async)};");
 
@@ -599,27 +596,20 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 if (shouldThrowExceptionWhenNull)
                 {
-                    _writer.Line($"if (response.Value == null)");
-                    _writer.Line($"throw {GetAwait(async)} {ClientDiagnosticsField}.{CreateMethodName("CreateRequestFailedException", async)}(response.GetRawResponse()){GetConfigureAwait(async)};");
+                    _writer.Line($"if ({response}.Value == null)");
+                    _writer.Line($"throw {GetAwait(async)} {ClientDiagnosticsField}.{CreateMethodName("CreateRequestFailedException", async)}({response}.GetRawResponse()){GetConfigureAwait(async)};");
                 }
 
-                CodeWriterDelegate dataExpression = w => w.Append($"response.Value");
-
                 if (wrapResource.ResourceData.ShouldSetResourceIdentifier)
-                    _writer.Line($"{dataExpression}.Id = {CreateResourceIdentifierExpression(wrapResource, operation.RequestPath, parameterMappings, dataExpression)};");
+                {
+                    _writer.Line($"{response}.Value.Id = {CreateResourceIdentifierExpression(wrapResource, operation.RequestPath, parameterMappings, w => w.Append($"{response}.Value"))};");
+                }
 
-                var newInstanceExpression = wrapResource.NewInstanceExpression(new[]
-                    {
-                        new ParameterInvocation(wrapResource.OptionsParameter, w => w.Append($"{ContextProperty}")),
-                        //new ParameterInvocation(wrapResource.ResourceIdentifierParameter, idExpression),
-                        new ParameterInvocation(wrapResource.ResourceDataParameter, dataExpression),
-                    });
-
-                _writer.Line($"return {typeof(Response)}.FromValue({newInstanceExpression}, response.GetRawResponse());");
+                _writer.Line($"return {typeof(Response)}.FromValue(new {wrapResource.Type}({ContextProperty}, {response}.Value), {response}.GetRawResponse());");
             }
             else
             {
-                _writer.Line($"return response;");
+                _writer.Line($"return {response};");
             }
         }
         #endregion

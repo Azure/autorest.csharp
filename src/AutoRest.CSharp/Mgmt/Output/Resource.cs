@@ -350,42 +350,25 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             return RequestPaths.ToDictionary(requestPath => requestPath,
                 requestPath => new MethodSignature(
-                    name: "CreateResourceIdentifier",
-                    description: $"Generate the resource identifier of a <see cref=\"{Type.Name}\"/> instance.",
-                    modifiers: "public static",
-                    returnType: typeof(Azure.Core.ResourceIdentifier),
-                    returnDescription: null,
-                    parameters: requestPath.Where(segment => segment.IsReference).Select(segment => new Parameter(segment.Reference.Name, null, segment.Reference.Type, null, true)).ToArray()));
+                    Name: "CreateResourceIdentifier",
+                    Description: $"Generate the resource identifier of a <see cref=\"{Type.Name}\"/> instance.",
+                    Modifiers: "public static",
+                    ReturnType: typeof(ResourceIdentifier),
+                    ReturnDescription: null,
+                    Parameters: requestPath.Where(segment => segment.IsReference).Select(segment => new Parameter(segment.Reference.Name, null, segment.Reference.Type, null, true)).ToArray()));
         }
 
-        public CodeWriterDelegate NewInstanceExpression(IEnumerable<ParameterInvocation> parameterInvocations)
-        {
-            return w =>
-            {
-                w.Append($"new {Type}(");
-                foreach (var parameter in parameterInvocations)
-                {
-                    if (parameter.Invocation != null)
-                        w.Append($"{parameter.Invocation}, ");
-                    else
-                        w.Append($"{parameter.Name:I}, ");
-                }
-                w.RemoveTrailingComma();
-                w.Append($")");
-            };
-        }
-
-        public CodeWriterDelegate ResourceDataIdExpression(CodeWriterDelegate dataExpression)
+        public FormattableString ResourceDataIdExpression(FormattableString dataExpression)
         {
             var typeOfId = ResourceData.TypeOfId;
             if (typeOfId != null && typeOfId.Equals(typeof(string)))
             {
-                return w => w.Append($"new {typeof(ResourceIdentifier)}({dataExpression}.Id)");
+                return $"new {typeof(ResourceIdentifier)}({dataExpression}.Id)";
             }
             else
             {
                 // we have ensured other cases we would have an Id of Azure.Core.ResourceIdentifier type
-                return w => w.Append($"{dataExpression}.Id");
+                return $"{dataExpression}.Id";
             }
         }
 
