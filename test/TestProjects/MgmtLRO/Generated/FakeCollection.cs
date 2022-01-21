@@ -37,9 +37,9 @@ namespace MgmtLRO
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal FakeCollection(ArmResource parent) : base(parent)
         {
-            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            ClientOptions.TryGetApiVersion(Fake.ResourceType, out string apiVersion);
-            _fakesRestClient = new FakesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
+            _clientDiagnostics = new ClientDiagnostics("MgmtLRO", Fake.ResourceType.Namespace, DiagnosticOptions);
+            ArmClient.TryGetApiVersion(Fake.ResourceType, out string apiVersion);
+            _fakesRestClient = new FakesRestOperations(_clientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, apiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -61,14 +61,11 @@ namespace MgmtLRO
         /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="fakeName"/> is null or empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="fakeName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> or <paramref name="parameters"/> is null. </exception>
         public virtual FakeCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string fakeName, FakeData parameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(fakeName))
-            {
-                throw new ArgumentException($"Parameter {nameof(fakeName)} cannot be null or empty", nameof(fakeName));
-            }
+            Argument.AssertNotNullOrEmpty(fakeName, nameof(fakeName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -79,7 +76,7 @@ namespace MgmtLRO
             try
             {
                 var response = _fakesRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, fakeName, parameters, cancellationToken);
-                var operation = new FakeCreateOrUpdateOperation(this, _clientDiagnostics, Pipeline, _fakesRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, fakeName, parameters).Request, response);
+                var operation = new FakeCreateOrUpdateOperation(ArmClient, _clientDiagnostics, Pipeline, _fakesRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, fakeName, parameters).Request, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -99,14 +96,11 @@ namespace MgmtLRO
         /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="fakeName"/> is null or empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="fakeName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<FakeCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string fakeName, FakeData parameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(fakeName))
-            {
-                throw new ArgumentException($"Parameter {nameof(fakeName)} cannot be null or empty", nameof(fakeName));
-            }
+            Argument.AssertNotNullOrEmpty(fakeName, nameof(fakeName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -117,7 +111,7 @@ namespace MgmtLRO
             try
             {
                 var response = await _fakesRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, fakeName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new FakeCreateOrUpdateOperation(this, _clientDiagnostics, Pipeline, _fakesRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, fakeName, parameters).Request, response);
+                var operation = new FakeCreateOrUpdateOperation(ArmClient, _clientDiagnostics, Pipeline, _fakesRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, fakeName, parameters).Request, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -136,13 +130,11 @@ namespace MgmtLRO
         /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="fakeName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="fakeName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> is null. </exception>
         public virtual Response<Fake> Get(string fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(fakeName))
-            {
-                throw new ArgumentException($"Parameter {nameof(fakeName)} cannot be null or empty", nameof(fakeName));
-            }
+            Argument.AssertNotNullOrEmpty(fakeName, nameof(fakeName));
 
             using var scope = _clientDiagnostics.CreateScope("FakeCollection.Get");
             scope.Start();
@@ -151,7 +143,7 @@ namespace MgmtLRO
                 var response = _fakesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, fakeName, expand, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new Fake(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Fake(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -167,13 +159,11 @@ namespace MgmtLRO
         /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="fakeName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="fakeName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> is null. </exception>
         public async virtual Task<Response<Fake>> GetAsync(string fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(fakeName))
-            {
-                throw new ArgumentException($"Parameter {nameof(fakeName)} cannot be null or empty", nameof(fakeName));
-            }
+            Argument.AssertNotNullOrEmpty(fakeName, nameof(fakeName));
 
             using var scope = _clientDiagnostics.CreateScope("FakeCollection.Get");
             scope.Start();
@@ -182,7 +172,7 @@ namespace MgmtLRO
                 var response = await _fakesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, fakeName, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new Fake(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Fake(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -195,13 +185,11 @@ namespace MgmtLRO
         /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="fakeName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="fakeName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> is null. </exception>
         public virtual Response<Fake> GetIfExists(string fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(fakeName))
-            {
-                throw new ArgumentException($"Parameter {nameof(fakeName)} cannot be null or empty", nameof(fakeName));
-            }
+            Argument.AssertNotNullOrEmpty(fakeName, nameof(fakeName));
 
             using var scope = _clientDiagnostics.CreateScope("FakeCollection.GetIfExists");
             scope.Start();
@@ -210,7 +198,7 @@ namespace MgmtLRO
                 var response = _fakesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, fakeName, expand, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<Fake>(null, response.GetRawResponse());
-                return Response.FromValue(new Fake(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Fake(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -223,13 +211,11 @@ namespace MgmtLRO
         /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="fakeName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="fakeName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> is null. </exception>
         public async virtual Task<Response<Fake>> GetIfExistsAsync(string fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(fakeName))
-            {
-                throw new ArgumentException($"Parameter {nameof(fakeName)} cannot be null or empty", nameof(fakeName));
-            }
+            Argument.AssertNotNullOrEmpty(fakeName, nameof(fakeName));
 
             using var scope = _clientDiagnostics.CreateScope("FakeCollection.GetIfExists");
             scope.Start();
@@ -238,7 +224,7 @@ namespace MgmtLRO
                 var response = await _fakesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, fakeName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<Fake>(null, response.GetRawResponse());
-                return Response.FromValue(new Fake(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Fake(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -251,13 +237,11 @@ namespace MgmtLRO
         /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="fakeName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="fakeName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> is null. </exception>
         public virtual Response<bool> Exists(string fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(fakeName))
-            {
-                throw new ArgumentException($"Parameter {nameof(fakeName)} cannot be null or empty", nameof(fakeName));
-            }
+            Argument.AssertNotNullOrEmpty(fakeName, nameof(fakeName));
 
             using var scope = _clientDiagnostics.CreateScope("FakeCollection.Exists");
             scope.Start();
@@ -277,13 +261,11 @@ namespace MgmtLRO
         /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="fakeName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="fakeName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> is null. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(fakeName))
-            {
-                throw new ArgumentException($"Parameter {nameof(fakeName)} cannot be null or empty", nameof(fakeName));
-            }
+            Argument.AssertNotNullOrEmpty(fakeName, nameof(fakeName));
 
             using var scope = _clientDiagnostics.CreateScope("FakeCollection.Exists");
             scope.Start();
@@ -315,7 +297,7 @@ namespace MgmtLRO
                 try
                 {
                     var response = _fakesRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, optionalParam, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new Fake(this, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new Fake(ArmClient, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -342,7 +324,7 @@ namespace MgmtLRO
                 try
                 {
                     var response = await _fakesRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, optionalParam, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new Fake(this, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new Fake(ArmClient, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -413,8 +395,5 @@ namespace MgmtLRO
         {
             return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
-
-        // Builders.
-        // public ArmBuilder<Azure.Core.ResourceIdentifier, Fake, FakeData> Construct() { }
     }
 }

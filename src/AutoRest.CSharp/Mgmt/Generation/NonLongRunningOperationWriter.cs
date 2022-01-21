@@ -10,6 +10,7 @@ using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.Output;
 using Azure;
 using Azure.Core;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 
 namespace AutoRest.CSharp.Mgmt.Generation
@@ -53,7 +54,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         if (operation.WrapperResource != null)
                         {
                             // todo: programmatically get the type of operationBase from the definition of [Resource]
-                            writer.Append($"{typeof(ArmResource)} operationsBase, ");
+                            writer.Append($"{typeof(ArmClient)} armClient, ");
                             writer.Append($"{typeof(Response)}<{operation.WrapperResource.ResourceData.Type}> {responseVariable}");
                         }
                         else
@@ -75,10 +76,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
                             var resource = operation.WrapperResource;
                             if (resource.ResourceData.ShouldSetResourceIdentifier)
                             {
-                                writer.Line($"{responseVariable}.Value.Id = operationsBase.Id;");
+                                writer.Line($"{responseVariable}.Value.Id = armClient.Id;");
                             }
 
-                            writer.Append($"{typeof(Response)}.FromValue(new {operation.WrapperResource.Type}(operationsBase, {responseVariable}.Value), {responseVariable}.GetRawResponse())");
+                            writer.Append($"{typeof(Response)}.FromValue(new {operation.WrapperResource.Type}(armClient, {responseVariable}.Value), {responseVariable}.GetRawResponse())");
                         }
                         else
                         {

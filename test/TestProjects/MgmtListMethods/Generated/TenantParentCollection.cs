@@ -35,9 +35,9 @@ namespace MgmtListMethods
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal TenantParentCollection(ArmResource parent) : base(parent)
         {
-            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            ClientOptions.TryGetApiVersion(TenantParent.ResourceType, out string apiVersion);
-            _tenantParentsRestClient = new TenantParentsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
+            _clientDiagnostics = new ClientDiagnostics("MgmtListMethods", TenantParent.ResourceType.Namespace, DiagnosticOptions);
+            ArmClient.TryGetApiVersion(TenantParent.ResourceType, out string apiVersion);
+            _tenantParentsRestClient = new TenantParentsRestOperations(_clientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, apiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -59,14 +59,11 @@ namespace MgmtListMethods
         /// <param name="tenantParentName"> Name. </param>
         /// <param name="parameters"> Parameters supplied to the Create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="tenantParentName"/> is null or empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="tenantParentName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantParentName"/> or <paramref name="parameters"/> is null. </exception>
         public virtual TenantParentCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string tenantParentName, TenantParentData parameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(tenantParentName))
-            {
-                throw new ArgumentException($"Parameter {nameof(tenantParentName)} cannot be null or empty", nameof(tenantParentName));
-            }
+            Argument.AssertNotNullOrEmpty(tenantParentName, nameof(tenantParentName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -77,7 +74,7 @@ namespace MgmtListMethods
             try
             {
                 var response = _tenantParentsRestClient.CreateOrUpdate(Id.Name, tenantParentName, parameters, cancellationToken);
-                var operation = new TenantParentCreateOrUpdateOperation(this, response);
+                var operation = new TenantParentCreateOrUpdateOperation(ArmClient, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -97,14 +94,11 @@ namespace MgmtListMethods
         /// <param name="tenantParentName"> Name. </param>
         /// <param name="parameters"> Parameters supplied to the Create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="tenantParentName"/> is null or empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="tenantParentName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantParentName"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<TenantParentCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string tenantParentName, TenantParentData parameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(tenantParentName))
-            {
-                throw new ArgumentException($"Parameter {nameof(tenantParentName)} cannot be null or empty", nameof(tenantParentName));
-            }
+            Argument.AssertNotNullOrEmpty(tenantParentName, nameof(tenantParentName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -115,7 +109,7 @@ namespace MgmtListMethods
             try
             {
                 var response = await _tenantParentsRestClient.CreateOrUpdateAsync(Id.Name, tenantParentName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new TenantParentCreateOrUpdateOperation(this, response);
+                var operation = new TenantParentCreateOrUpdateOperation(ArmClient, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -133,13 +127,11 @@ namespace MgmtListMethods
         /// <summary> Retrieves information. </summary>
         /// <param name="tenantParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="tenantParentName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="tenantParentName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantParentName"/> is null. </exception>
         public virtual Response<TenantParent> Get(string tenantParentName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(tenantParentName))
-            {
-                throw new ArgumentException($"Parameter {nameof(tenantParentName)} cannot be null or empty", nameof(tenantParentName));
-            }
+            Argument.AssertNotNullOrEmpty(tenantParentName, nameof(tenantParentName));
 
             using var scope = _clientDiagnostics.CreateScope("TenantParentCollection.Get");
             scope.Start();
@@ -148,7 +140,7 @@ namespace MgmtListMethods
                 var response = _tenantParentsRestClient.Get(Id.Name, tenantParentName, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new TenantParent(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new TenantParent(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -163,13 +155,11 @@ namespace MgmtListMethods
         /// <summary> Retrieves information. </summary>
         /// <param name="tenantParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="tenantParentName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="tenantParentName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantParentName"/> is null. </exception>
         public async virtual Task<Response<TenantParent>> GetAsync(string tenantParentName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(tenantParentName))
-            {
-                throw new ArgumentException($"Parameter {nameof(tenantParentName)} cannot be null or empty", nameof(tenantParentName));
-            }
+            Argument.AssertNotNullOrEmpty(tenantParentName, nameof(tenantParentName));
 
             using var scope = _clientDiagnostics.CreateScope("TenantParentCollection.Get");
             scope.Start();
@@ -178,7 +168,7 @@ namespace MgmtListMethods
                 var response = await _tenantParentsRestClient.GetAsync(Id.Name, tenantParentName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new TenantParent(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new TenantParent(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -190,13 +180,11 @@ namespace MgmtListMethods
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="tenantParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="tenantParentName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="tenantParentName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantParentName"/> is null. </exception>
         public virtual Response<TenantParent> GetIfExists(string tenantParentName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(tenantParentName))
-            {
-                throw new ArgumentException($"Parameter {nameof(tenantParentName)} cannot be null or empty", nameof(tenantParentName));
-            }
+            Argument.AssertNotNullOrEmpty(tenantParentName, nameof(tenantParentName));
 
             using var scope = _clientDiagnostics.CreateScope("TenantParentCollection.GetIfExists");
             scope.Start();
@@ -205,7 +193,7 @@ namespace MgmtListMethods
                 var response = _tenantParentsRestClient.Get(Id.Name, tenantParentName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<TenantParent>(null, response.GetRawResponse());
-                return Response.FromValue(new TenantParent(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new TenantParent(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -217,13 +205,11 @@ namespace MgmtListMethods
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="tenantParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="tenantParentName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="tenantParentName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantParentName"/> is null. </exception>
         public async virtual Task<Response<TenantParent>> GetIfExistsAsync(string tenantParentName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(tenantParentName))
-            {
-                throw new ArgumentException($"Parameter {nameof(tenantParentName)} cannot be null or empty", nameof(tenantParentName));
-            }
+            Argument.AssertNotNullOrEmpty(tenantParentName, nameof(tenantParentName));
 
             using var scope = _clientDiagnostics.CreateScope("TenantParentCollection.GetIfExists");
             scope.Start();
@@ -232,7 +218,7 @@ namespace MgmtListMethods
                 var response = await _tenantParentsRestClient.GetAsync(Id.Name, tenantParentName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<TenantParent>(null, response.GetRawResponse());
-                return Response.FromValue(new TenantParent(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new TenantParent(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -244,13 +230,11 @@ namespace MgmtListMethods
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="tenantParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="tenantParentName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="tenantParentName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantParentName"/> is null. </exception>
         public virtual Response<bool> Exists(string tenantParentName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(tenantParentName))
-            {
-                throw new ArgumentException($"Parameter {nameof(tenantParentName)} cannot be null or empty", nameof(tenantParentName));
-            }
+            Argument.AssertNotNullOrEmpty(tenantParentName, nameof(tenantParentName));
 
             using var scope = _clientDiagnostics.CreateScope("TenantParentCollection.Exists");
             scope.Start();
@@ -269,13 +253,11 @@ namespace MgmtListMethods
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="tenantParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="tenantParentName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="tenantParentName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantParentName"/> is null. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string tenantParentName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(tenantParentName))
-            {
-                throw new ArgumentException($"Parameter {nameof(tenantParentName)} cannot be null or empty", nameof(tenantParentName));
-            }
+            Argument.AssertNotNullOrEmpty(tenantParentName, nameof(tenantParentName));
 
             using var scope = _clientDiagnostics.CreateScope("TenantParentCollection.Exists");
             scope.Start();
@@ -306,7 +288,7 @@ namespace MgmtListMethods
                 try
                 {
                     var response = _tenantParentsRestClient.List(Id.Name, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new TenantParent(this, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new TenantParent(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -321,7 +303,7 @@ namespace MgmtListMethods
                 try
                 {
                     var response = _tenantParentsRestClient.ListNextPage(nextLink, Id.Name, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new TenantParent(this, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new TenantParent(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -347,7 +329,7 @@ namespace MgmtListMethods
                 try
                 {
                     var response = await _tenantParentsRestClient.ListAsync(Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new TenantParent(this, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new TenantParent(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -362,7 +344,7 @@ namespace MgmtListMethods
                 try
                 {
                     var response = await _tenantParentsRestClient.ListNextPageAsync(nextLink, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new TenantParent(this, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new TenantParent(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -387,8 +369,5 @@ namespace MgmtListMethods
         {
             return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
-
-        // Builders.
-        // public ArmBuilder<Azure.Core.ResourceIdentifier, TenantParent, TenantParentData> Construct() { }
     }
 }

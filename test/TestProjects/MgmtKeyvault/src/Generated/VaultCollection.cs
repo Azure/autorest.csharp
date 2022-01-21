@@ -37,9 +37,9 @@ namespace MgmtKeyvault
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal VaultCollection(ArmResource parent) : base(parent)
         {
-            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            ClientOptions.TryGetApiVersion(Vault.ResourceType, out string apiVersion);
-            _vaultsRestClient = new VaultsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
+            _clientDiagnostics = new ClientDiagnostics("MgmtKeyvault", Vault.ResourceType.Namespace, DiagnosticOptions);
+            ArmClient.TryGetApiVersion(Vault.ResourceType, out string apiVersion);
+            _vaultsRestClient = new VaultsRestOperations(_clientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, apiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -61,14 +61,11 @@ namespace MgmtKeyvault
         /// <param name="vaultName"> Name of the vault. </param>
         /// <param name="parameters"> Parameters to create or update the vault. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="vaultName"/> is null or empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="vaultName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="vaultName"/> or <paramref name="parameters"/> is null. </exception>
         public virtual VaultCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string vaultName, VaultCreateOrUpdateParameters parameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(vaultName))
-            {
-                throw new ArgumentException($"Parameter {nameof(vaultName)} cannot be null or empty", nameof(vaultName));
-            }
+            Argument.AssertNotNullOrEmpty(vaultName, nameof(vaultName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -79,7 +76,7 @@ namespace MgmtKeyvault
             try
             {
                 var response = _vaultsRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, vaultName, parameters, cancellationToken);
-                var operation = new VaultCreateOrUpdateOperation(this, _clientDiagnostics, Pipeline, _vaultsRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, vaultName, parameters).Request, response);
+                var operation = new VaultCreateOrUpdateOperation(ArmClient, _clientDiagnostics, Pipeline, _vaultsRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, vaultName, parameters).Request, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -99,14 +96,11 @@ namespace MgmtKeyvault
         /// <param name="vaultName"> Name of the vault. </param>
         /// <param name="parameters"> Parameters to create or update the vault. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="vaultName"/> is null or empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="vaultName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="vaultName"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<VaultCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string vaultName, VaultCreateOrUpdateParameters parameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(vaultName))
-            {
-                throw new ArgumentException($"Parameter {nameof(vaultName)} cannot be null or empty", nameof(vaultName));
-            }
+            Argument.AssertNotNullOrEmpty(vaultName, nameof(vaultName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -117,7 +111,7 @@ namespace MgmtKeyvault
             try
             {
                 var response = await _vaultsRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, vaultName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new VaultCreateOrUpdateOperation(this, _clientDiagnostics, Pipeline, _vaultsRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, vaultName, parameters).Request, response);
+                var operation = new VaultCreateOrUpdateOperation(ArmClient, _clientDiagnostics, Pipeline, _vaultsRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, vaultName, parameters).Request, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -135,13 +129,11 @@ namespace MgmtKeyvault
         /// <summary> Gets the specified Azure key vault. </summary>
         /// <param name="vaultName"> The name of the vault. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="vaultName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="vaultName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="vaultName"/> is null. </exception>
         public virtual Response<Vault> Get(string vaultName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(vaultName))
-            {
-                throw new ArgumentException($"Parameter {nameof(vaultName)} cannot be null or empty", nameof(vaultName));
-            }
+            Argument.AssertNotNullOrEmpty(vaultName, nameof(vaultName));
 
             using var scope = _clientDiagnostics.CreateScope("VaultCollection.Get");
             scope.Start();
@@ -150,7 +142,7 @@ namespace MgmtKeyvault
                 var response = _vaultsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, vaultName, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new Vault(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Vault(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -165,13 +157,11 @@ namespace MgmtKeyvault
         /// <summary> Gets the specified Azure key vault. </summary>
         /// <param name="vaultName"> The name of the vault. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="vaultName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="vaultName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="vaultName"/> is null. </exception>
         public async virtual Task<Response<Vault>> GetAsync(string vaultName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(vaultName))
-            {
-                throw new ArgumentException($"Parameter {nameof(vaultName)} cannot be null or empty", nameof(vaultName));
-            }
+            Argument.AssertNotNullOrEmpty(vaultName, nameof(vaultName));
 
             using var scope = _clientDiagnostics.CreateScope("VaultCollection.Get");
             scope.Start();
@@ -180,7 +170,7 @@ namespace MgmtKeyvault
                 var response = await _vaultsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, vaultName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new Vault(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Vault(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -192,13 +182,11 @@ namespace MgmtKeyvault
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="vaultName"> The name of the vault. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="vaultName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="vaultName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="vaultName"/> is null. </exception>
         public virtual Response<Vault> GetIfExists(string vaultName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(vaultName))
-            {
-                throw new ArgumentException($"Parameter {nameof(vaultName)} cannot be null or empty", nameof(vaultName));
-            }
+            Argument.AssertNotNullOrEmpty(vaultName, nameof(vaultName));
 
             using var scope = _clientDiagnostics.CreateScope("VaultCollection.GetIfExists");
             scope.Start();
@@ -207,7 +195,7 @@ namespace MgmtKeyvault
                 var response = _vaultsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, vaultName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<Vault>(null, response.GetRawResponse());
-                return Response.FromValue(new Vault(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Vault(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -219,13 +207,11 @@ namespace MgmtKeyvault
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="vaultName"> The name of the vault. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="vaultName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="vaultName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="vaultName"/> is null. </exception>
         public async virtual Task<Response<Vault>> GetIfExistsAsync(string vaultName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(vaultName))
-            {
-                throw new ArgumentException($"Parameter {nameof(vaultName)} cannot be null or empty", nameof(vaultName));
-            }
+            Argument.AssertNotNullOrEmpty(vaultName, nameof(vaultName));
 
             using var scope = _clientDiagnostics.CreateScope("VaultCollection.GetIfExists");
             scope.Start();
@@ -234,7 +220,7 @@ namespace MgmtKeyvault
                 var response = await _vaultsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, vaultName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<Vault>(null, response.GetRawResponse());
-                return Response.FromValue(new Vault(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Vault(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -246,13 +232,11 @@ namespace MgmtKeyvault
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="vaultName"> The name of the vault. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="vaultName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="vaultName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="vaultName"/> is null. </exception>
         public virtual Response<bool> Exists(string vaultName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(vaultName))
-            {
-                throw new ArgumentException($"Parameter {nameof(vaultName)} cannot be null or empty", nameof(vaultName));
-            }
+            Argument.AssertNotNullOrEmpty(vaultName, nameof(vaultName));
 
             using var scope = _clientDiagnostics.CreateScope("VaultCollection.Exists");
             scope.Start();
@@ -271,13 +255,11 @@ namespace MgmtKeyvault
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="vaultName"> The name of the vault. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="vaultName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="vaultName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="vaultName"/> is null. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string vaultName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(vaultName))
-            {
-                throw new ArgumentException($"Parameter {nameof(vaultName)} cannot be null or empty", nameof(vaultName));
-            }
+            Argument.AssertNotNullOrEmpty(vaultName, nameof(vaultName));
 
             using var scope = _clientDiagnostics.CreateScope("VaultCollection.Exists");
             scope.Start();
@@ -309,7 +291,7 @@ namespace MgmtKeyvault
                 try
                 {
                     var response = _vaultsRestClient.ListByResourceGroup(Id.SubscriptionId, Id.ResourceGroupName, top, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new Vault(this, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new Vault(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -324,7 +306,7 @@ namespace MgmtKeyvault
                 try
                 {
                     var response = _vaultsRestClient.ListByResourceGroupNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, top, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new Vault(this, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new Vault(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -351,7 +333,7 @@ namespace MgmtKeyvault
                 try
                 {
                     var response = await _vaultsRestClient.ListByResourceGroupAsync(Id.SubscriptionId, Id.ResourceGroupName, top, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new Vault(this, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new Vault(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -366,7 +348,7 @@ namespace MgmtKeyvault
                 try
                 {
                     var response = await _vaultsRestClient.ListByResourceGroupNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, top, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new Vault(this, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new Vault(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -437,8 +419,5 @@ namespace MgmtKeyvault
         {
             return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
-
-        // Builders.
-        // public ArmBuilder<Azure.Core.ResourceIdentifier, Vault, VaultData> Construct() { }
     }
 }

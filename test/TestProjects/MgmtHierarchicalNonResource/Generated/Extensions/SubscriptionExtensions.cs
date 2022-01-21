@@ -22,5 +22,14 @@ namespace MgmtHierarchicalNonResource
             return new SharedGalleryCollection(subscription, location);
         }
         #endregion
+
+        private static SubscriptionExtensionClient GetExtensionClient(Subscription subscription)
+        {
+            return subscription.GetCachedClient((armClient) =>
+            {
+                return new SubscriptionExtensionClient(armClient, subscription.Id);
+            }
+            );
+        }
     }
 }

@@ -10,7 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Models
@@ -25,9 +25,9 @@ namespace Azure.ResourceManager.Sample.Models
         {
         }
 
-        internal ProximityPlacementGroupCreateOrUpdateOperation(ArmResource operationsBase, Response<ProximityPlacementGroupData> response)
+        internal ProximityPlacementGroupCreateOrUpdateOperation(ArmClient armClient, Response<ProximityPlacementGroupData> response)
         {
-            _operation = new OperationOrResponseInternals<ProximityPlacementGroup>(Response.FromValue(new ProximityPlacementGroup(operationsBase, response.Value), response.GetRawResponse()));
+            _operation = new OperationOrResponseInternals<ProximityPlacementGroup>(Response.FromValue(new ProximityPlacementGroup(armClient, response.Value), response.GetRawResponse()));
         }
 
         /// <inheritdoc />

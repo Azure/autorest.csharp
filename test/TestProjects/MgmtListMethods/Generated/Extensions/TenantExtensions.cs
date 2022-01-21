@@ -21,5 +21,14 @@ namespace MgmtListMethods
             return new TenantTestCollection(tenant);
         }
         #endregion
+
+        private static TenantExtensionClient GetExtensionClient(Tenant tenant)
+        {
+            return tenant.GetCachedClient((armClient) =>
+            {
+                return new TenantExtensionClient(armClient, tenant.Id);
+            }
+            );
+        }
     }
 }

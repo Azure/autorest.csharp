@@ -6,16 +6,9 @@
 #nullable disable
 
 using System;
-using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using Azure;
-using Azure.Core;
-using Azure.Core.Pipeline;
-using Azure.ResourceManager;
-using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources;
-using MgmtScopeResource.Models;
 
 namespace MgmtScopeResource
 {
@@ -32,109 +25,37 @@ namespace MgmtScopeResource
         }
         #endregion
 
-        private static ResourceLinksRestOperations GetResourceLinksRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = default)
+        private static SubscriptionExtensionClient GetExtensionClient(Subscription subscription)
         {
-            return new ResourceLinksRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);
+            return subscription.GetCachedClient((armClient) =>
+            {
+                return new SubscriptionExtensionClient(armClient, subscription.Id);
+            }
+            );
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Resources/links
         /// ContextualPath: /subscriptions/{subscriptionId}
         /// OperationId: ResourceLinks_ListAtSubscription
-        /// <summary> Lists the ResourceLinks for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="filter"> The filter to apply on the list resource links operation. The supported filter for list resource links is targetId. For example, $filter=targetId eq {value}. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<ResourceLink> GetResourceLinksAsync(this Subscription subscription, string filter = null, CancellationToken cancellationToken = default)
         {
-            return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                options.TryGetApiVersion(ResourceLink.ResourceType, out string apiVersion);
-                ResourceLinksRestOperations restOperations = GetResourceLinksRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
-                async Task<Page<ResourceLink>> FirstPageFunc(int? pageSizeHint)
-                {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetResourceLinks");
-                    scope.Start();
-                    try
-                    {
-                        var response = await restOperations.ListAtSubscriptionAsync(subscription.Id.SubscriptionId, filter, cancellationToken: cancellationToken).ConfigureAwait(false);
-                        return Page.FromValues(response.Value.Value.Select(value => new ResourceLink(subscription, value)), response.Value.NextLink, response.GetRawResponse());
-                    }
-                    catch (Exception e)
-                    {
-                        scope.Failed(e);
-                        throw;
-                    }
-                }
-                async Task<Page<ResourceLink>> NextPageFunc(string nextLink, int? pageSizeHint)
-                {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetResourceLinks");
-                    scope.Start();
-                    try
-                    {
-                        var response = await restOperations.ListAtSubscriptionNextPageAsync(nextLink, subscription.Id.SubscriptionId, filter, cancellationToken: cancellationToken).ConfigureAwait(false);
-                        return Page.FromValues(response.Value.Value.Select(value => new ResourceLink(subscription, value)), response.Value.NextLink, response.GetRawResponse());
-                    }
-                    catch (Exception e)
-                    {
-                        scope.Failed(e);
-                        throw;
-                    }
-                }
-                return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
-            }
-            );
+            return GetExtensionClient(subscription).GetResourceLinksAsync(filter, cancellationToken);
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Resources/links
         /// ContextualPath: /subscriptions/{subscriptionId}
         /// OperationId: ResourceLinks_ListAtSubscription
-        /// <summary> Lists the ResourceLinks for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="filter"> The filter to apply on the list resource links operation. The supported filter for list resource links is targetId. For example, $filter=targetId eq {value}. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static Pageable<ResourceLink> GetResourceLinks(this Subscription subscription, string filter = null, CancellationToken cancellationToken = default)
         {
-            return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                options.TryGetApiVersion(ResourceLink.ResourceType, out string apiVersion);
-                ResourceLinksRestOperations restOperations = GetResourceLinksRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
-                Page<ResourceLink> FirstPageFunc(int? pageSizeHint)
-                {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetResourceLinks");
-                    scope.Start();
-                    try
-                    {
-                        var response = restOperations.ListAtSubscription(subscription.Id.SubscriptionId, filter, cancellationToken: cancellationToken);
-                        return Page.FromValues(response.Value.Value.Select(value => new ResourceLink(subscription, value)), response.Value.NextLink, response.GetRawResponse());
-                    }
-                    catch (Exception e)
-                    {
-                        scope.Failed(e);
-                        throw;
-                    }
-                }
-                Page<ResourceLink> NextPageFunc(string nextLink, int? pageSizeHint)
-                {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetResourceLinks");
-                    scope.Start();
-                    try
-                    {
-                        var response = restOperations.ListAtSubscriptionNextPage(nextLink, subscription.Id.SubscriptionId, filter, cancellationToken: cancellationToken);
-                        return Page.FromValues(response.Value.Value.Select(value => new ResourceLink(subscription, value)), response.Value.NextLink, response.GetRawResponse());
-                    }
-                    catch (Exception e)
-                    {
-                        scope.Failed(e);
-                        throw;
-                    }
-                }
-                return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
-            }
-            );
+            return GetExtensionClient(subscription).GetResourceLinks(filter, cancellationToken);
         }
 
         /// <summary> Filters the list of ResourceLinks for a <see cref="Subscription" /> represented as generic resources. </summary>
@@ -146,9 +67,7 @@ namespace MgmtScopeResource
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<GenericResource> GetResourceLinksAsGenericResourcesAsync(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
         {
-            ResourceFilterCollection filters = new(ResourceLink.ResourceType);
-            filters.SubstringFilter = filter;
-            return ResourceListOperations.GetAtContextAsync(subscription, filters, expand, top, cancellationToken);
+            return GetExtensionClient(subscription).GetResourceLinksAsGenericResourcesAsync(filter, expand, top, cancellationToken);
         }
 
         /// <summary> Filters the list of ResourceLinks for a <see cref="Subscription" /> represented as generic resources. </summary>
@@ -160,9 +79,7 @@ namespace MgmtScopeResource
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static Pageable<GenericResource> GetResourceLinksAsGenericResources(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
         {
-            ResourceFilterCollection filters = new(ResourceLink.ResourceType);
-            filters.SubstringFilter = filter;
-            return ResourceListOperations.GetAtContext(subscription, filters, expand, top, cancellationToken);
+            return GetExtensionClient(subscription).GetResourceLinksAsGenericResources(filter, expand, top, cancellationToken);
         }
     }
 }

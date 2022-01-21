@@ -35,9 +35,9 @@ namespace MgmtParent
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal DedicatedHostCollection(ArmResource parent) : base(parent)
         {
-            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            ClientOptions.TryGetApiVersion(DedicatedHost.ResourceType, out string apiVersion);
-            _dedicatedHostsRestClient = new DedicatedHostsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
+            _clientDiagnostics = new ClientDiagnostics("MgmtParent", DedicatedHost.ResourceType.Namespace, DiagnosticOptions);
+            ArmClient.TryGetApiVersion(DedicatedHost.ResourceType, out string apiVersion);
+            _dedicatedHostsRestClient = new DedicatedHostsRestOperations(_clientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, apiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -59,14 +59,11 @@ namespace MgmtParent
         /// <param name="hostName"> The name of the dedicated host . </param>
         /// <param name="parameters"> Parameters supplied to the Create Dedicated Host. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="hostName"/> is null or empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="hostName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="hostName"/> or <paramref name="parameters"/> is null. </exception>
         public virtual DedicatedHostCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string hostName, DedicatedHostData parameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(hostName))
-            {
-                throw new ArgumentException($"Parameter {nameof(hostName)} cannot be null or empty", nameof(hostName));
-            }
+            Argument.AssertNotNullOrEmpty(hostName, nameof(hostName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -77,7 +74,7 @@ namespace MgmtParent
             try
             {
                 var response = _dedicatedHostsRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, hostName, parameters, cancellationToken);
-                var operation = new DedicatedHostCreateOrUpdateOperation(this, _clientDiagnostics, Pipeline, _dedicatedHostsRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, hostName, parameters).Request, response);
+                var operation = new DedicatedHostCreateOrUpdateOperation(ArmClient, _clientDiagnostics, Pipeline, _dedicatedHostsRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, hostName, parameters).Request, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -97,14 +94,11 @@ namespace MgmtParent
         /// <param name="hostName"> The name of the dedicated host . </param>
         /// <param name="parameters"> Parameters supplied to the Create Dedicated Host. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="hostName"/> is null or empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="hostName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="hostName"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<DedicatedHostCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string hostName, DedicatedHostData parameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(hostName))
-            {
-                throw new ArgumentException($"Parameter {nameof(hostName)} cannot be null or empty", nameof(hostName));
-            }
+            Argument.AssertNotNullOrEmpty(hostName, nameof(hostName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -115,7 +109,7 @@ namespace MgmtParent
             try
             {
                 var response = await _dedicatedHostsRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, hostName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new DedicatedHostCreateOrUpdateOperation(this, _clientDiagnostics, Pipeline, _dedicatedHostsRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, hostName, parameters).Request, response);
+                var operation = new DedicatedHostCreateOrUpdateOperation(ArmClient, _clientDiagnostics, Pipeline, _dedicatedHostsRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, hostName, parameters).Request, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -133,13 +127,11 @@ namespace MgmtParent
         /// <summary> Retrieves information about a dedicated host. </summary>
         /// <param name="hostName"> The name of the dedicated host. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="hostName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="hostName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="hostName"/> is null. </exception>
         public virtual Response<DedicatedHost> Get(string hostName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(hostName))
-            {
-                throw new ArgumentException($"Parameter {nameof(hostName)} cannot be null or empty", nameof(hostName));
-            }
+            Argument.AssertNotNullOrEmpty(hostName, nameof(hostName));
 
             using var scope = _clientDiagnostics.CreateScope("DedicatedHostCollection.Get");
             scope.Start();
@@ -148,7 +140,7 @@ namespace MgmtParent
                 var response = _dedicatedHostsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, hostName, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new DedicatedHost(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new DedicatedHost(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -163,13 +155,11 @@ namespace MgmtParent
         /// <summary> Retrieves information about a dedicated host. </summary>
         /// <param name="hostName"> The name of the dedicated host. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="hostName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="hostName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="hostName"/> is null. </exception>
         public async virtual Task<Response<DedicatedHost>> GetAsync(string hostName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(hostName))
-            {
-                throw new ArgumentException($"Parameter {nameof(hostName)} cannot be null or empty", nameof(hostName));
-            }
+            Argument.AssertNotNullOrEmpty(hostName, nameof(hostName));
 
             using var scope = _clientDiagnostics.CreateScope("DedicatedHostCollection.Get");
             scope.Start();
@@ -178,7 +168,7 @@ namespace MgmtParent
                 var response = await _dedicatedHostsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, hostName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new DedicatedHost(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new DedicatedHost(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -190,13 +180,11 @@ namespace MgmtParent
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="hostName"> The name of the dedicated host. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="hostName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="hostName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="hostName"/> is null. </exception>
         public virtual Response<DedicatedHost> GetIfExists(string hostName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(hostName))
-            {
-                throw new ArgumentException($"Parameter {nameof(hostName)} cannot be null or empty", nameof(hostName));
-            }
+            Argument.AssertNotNullOrEmpty(hostName, nameof(hostName));
 
             using var scope = _clientDiagnostics.CreateScope("DedicatedHostCollection.GetIfExists");
             scope.Start();
@@ -205,7 +193,7 @@ namespace MgmtParent
                 var response = _dedicatedHostsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, hostName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<DedicatedHost>(null, response.GetRawResponse());
-                return Response.FromValue(new DedicatedHost(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new DedicatedHost(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -217,13 +205,11 @@ namespace MgmtParent
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="hostName"> The name of the dedicated host. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="hostName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="hostName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="hostName"/> is null. </exception>
         public async virtual Task<Response<DedicatedHost>> GetIfExistsAsync(string hostName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(hostName))
-            {
-                throw new ArgumentException($"Parameter {nameof(hostName)} cannot be null or empty", nameof(hostName));
-            }
+            Argument.AssertNotNullOrEmpty(hostName, nameof(hostName));
 
             using var scope = _clientDiagnostics.CreateScope("DedicatedHostCollection.GetIfExists");
             scope.Start();
@@ -232,7 +218,7 @@ namespace MgmtParent
                 var response = await _dedicatedHostsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, hostName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<DedicatedHost>(null, response.GetRawResponse());
-                return Response.FromValue(new DedicatedHost(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new DedicatedHost(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -244,13 +230,11 @@ namespace MgmtParent
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="hostName"> The name of the dedicated host. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="hostName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="hostName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="hostName"/> is null. </exception>
         public virtual Response<bool> Exists(string hostName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(hostName))
-            {
-                throw new ArgumentException($"Parameter {nameof(hostName)} cannot be null or empty", nameof(hostName));
-            }
+            Argument.AssertNotNullOrEmpty(hostName, nameof(hostName));
 
             using var scope = _clientDiagnostics.CreateScope("DedicatedHostCollection.Exists");
             scope.Start();
@@ -269,13 +253,11 @@ namespace MgmtParent
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="hostName"> The name of the dedicated host. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="hostName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="hostName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="hostName"/> is null. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string hostName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(hostName))
-            {
-                throw new ArgumentException($"Parameter {nameof(hostName)} cannot be null or empty", nameof(hostName));
-            }
+            Argument.AssertNotNullOrEmpty(hostName, nameof(hostName));
 
             using var scope = _clientDiagnostics.CreateScope("DedicatedHostCollection.Exists");
             scope.Start();
@@ -306,7 +288,7 @@ namespace MgmtParent
                 try
                 {
                     var response = _dedicatedHostsRestClient.ListByHostGroup(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new DedicatedHost(this, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new DedicatedHost(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -321,7 +303,7 @@ namespace MgmtParent
                 try
                 {
                     var response = _dedicatedHostsRestClient.ListByHostGroupNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new DedicatedHost(this, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new DedicatedHost(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -347,7 +329,7 @@ namespace MgmtParent
                 try
                 {
                     var response = await _dedicatedHostsRestClient.ListByHostGroupAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new DedicatedHost(this, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new DedicatedHost(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -362,7 +344,7 @@ namespace MgmtParent
                 try
                 {
                     var response = await _dedicatedHostsRestClient.ListByHostGroupNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new DedicatedHost(this, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new DedicatedHost(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -387,8 +369,5 @@ namespace MgmtParent
         {
             return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
-
-        // Builders.
-        // public ArmBuilder<Azure.Core.ResourceIdentifier, DedicatedHost, DedicatedHostData> Construct() { }
     }
 }

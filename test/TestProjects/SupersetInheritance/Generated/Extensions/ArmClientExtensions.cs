@@ -21,7 +21,7 @@ namespace SupersetInheritance
         public static SupersetModel1 GetSupersetModel1(this ArmClient armClient, ResourceIdentifier id)
         {
             SupersetModel1.ValidateResourceId(id);
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new SupersetModel1(clientOptions, credential, uri, pipeline, id));
+            return new SupersetModel1(armClient, id);
         }
         #endregion
 
@@ -33,7 +33,7 @@ namespace SupersetInheritance
         public static SupersetModel4 GetSupersetModel4(this ArmClient armClient, ResourceIdentifier id)
         {
             SupersetModel4.ValidateResourceId(id);
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new SupersetModel4(clientOptions, credential, uri, pipeline, id));
+            return new SupersetModel4(armClient, id);
         }
         #endregion
     }

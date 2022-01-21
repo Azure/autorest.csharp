@@ -36,9 +36,9 @@ namespace MgmtExtensionResource
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal ManagementGroupPolicyDefinitionCollection(ArmResource parent) : base(parent)
         {
-            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            ClientOptions.TryGetApiVersion(ManagementGroupPolicyDefinition.ResourceType, out string apiVersion);
-            _policyDefinitionsRestClient = new PolicyDefinitionsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
+            _clientDiagnostics = new ClientDiagnostics("MgmtExtensionResource", ManagementGroupPolicyDefinition.ResourceType.Namespace, DiagnosticOptions);
+            ArmClient.TryGetApiVersion(ManagementGroupPolicyDefinition.ResourceType, out string apiVersion);
+            _policyDefinitionsRestClient = new PolicyDefinitionsRestOperations(_clientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, apiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -60,14 +60,11 @@ namespace MgmtExtensionResource
         /// <param name="policyDefinitionName"> The name of the policy definition to create. </param>
         /// <param name="parameters"> The policy definition properties. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is null or empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> or <paramref name="parameters"/> is null. </exception>
         public virtual ManagementGroupPolicyDefinitionCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string policyDefinitionName, PolicyDefinitionData parameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(policyDefinitionName))
-            {
-                throw new ArgumentException($"Parameter {nameof(policyDefinitionName)} cannot be null or empty", nameof(policyDefinitionName));
-            }
+            Argument.AssertNotNullOrEmpty(policyDefinitionName, nameof(policyDefinitionName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -78,7 +75,7 @@ namespace MgmtExtensionResource
             try
             {
                 var response = _policyDefinitionsRestClient.CreateOrUpdateAtManagementGroup(Id.Name, policyDefinitionName, parameters, cancellationToken);
-                var operation = new ManagementGroupPolicyDefinitionCreateOrUpdateOperation(this, response);
+                var operation = new ManagementGroupPolicyDefinitionCreateOrUpdateOperation(ArmClient, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -98,14 +95,11 @@ namespace MgmtExtensionResource
         /// <param name="policyDefinitionName"> The name of the policy definition to create. </param>
         /// <param name="parameters"> The policy definition properties. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is null or empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<ManagementGroupPolicyDefinitionCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string policyDefinitionName, PolicyDefinitionData parameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(policyDefinitionName))
-            {
-                throw new ArgumentException($"Parameter {nameof(policyDefinitionName)} cannot be null or empty", nameof(policyDefinitionName));
-            }
+            Argument.AssertNotNullOrEmpty(policyDefinitionName, nameof(policyDefinitionName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -116,7 +110,7 @@ namespace MgmtExtensionResource
             try
             {
                 var response = await _policyDefinitionsRestClient.CreateOrUpdateAtManagementGroupAsync(Id.Name, policyDefinitionName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new ManagementGroupPolicyDefinitionCreateOrUpdateOperation(this, response);
+                var operation = new ManagementGroupPolicyDefinitionCreateOrUpdateOperation(ArmClient, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -134,13 +128,11 @@ namespace MgmtExtensionResource
         /// <summary> This operation retrieves the policy definition in the given management group with the given name. </summary>
         /// <param name="policyDefinitionName"> The name of the policy definition to get. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
         public virtual Response<ManagementGroupPolicyDefinition> Get(string policyDefinitionName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(policyDefinitionName))
-            {
-                throw new ArgumentException($"Parameter {nameof(policyDefinitionName)} cannot be null or empty", nameof(policyDefinitionName));
-            }
+            Argument.AssertNotNullOrEmpty(policyDefinitionName, nameof(policyDefinitionName));
 
             using var scope = _clientDiagnostics.CreateScope("ManagementGroupPolicyDefinitionCollection.Get");
             scope.Start();
@@ -149,7 +141,7 @@ namespace MgmtExtensionResource
                 var response = _policyDefinitionsRestClient.GetAtManagementGroup(Id.Name, policyDefinitionName, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new ManagementGroupPolicyDefinition(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ManagementGroupPolicyDefinition(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -164,13 +156,11 @@ namespace MgmtExtensionResource
         /// <summary> This operation retrieves the policy definition in the given management group with the given name. </summary>
         /// <param name="policyDefinitionName"> The name of the policy definition to get. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
         public async virtual Task<Response<ManagementGroupPolicyDefinition>> GetAsync(string policyDefinitionName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(policyDefinitionName))
-            {
-                throw new ArgumentException($"Parameter {nameof(policyDefinitionName)} cannot be null or empty", nameof(policyDefinitionName));
-            }
+            Argument.AssertNotNullOrEmpty(policyDefinitionName, nameof(policyDefinitionName));
 
             using var scope = _clientDiagnostics.CreateScope("ManagementGroupPolicyDefinitionCollection.Get");
             scope.Start();
@@ -179,7 +169,7 @@ namespace MgmtExtensionResource
                 var response = await _policyDefinitionsRestClient.GetAtManagementGroupAsync(Id.Name, policyDefinitionName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new ManagementGroupPolicyDefinition(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ManagementGroupPolicyDefinition(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -191,13 +181,11 @@ namespace MgmtExtensionResource
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="policyDefinitionName"> The name of the policy definition to get. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
         public virtual Response<ManagementGroupPolicyDefinition> GetIfExists(string policyDefinitionName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(policyDefinitionName))
-            {
-                throw new ArgumentException($"Parameter {nameof(policyDefinitionName)} cannot be null or empty", nameof(policyDefinitionName));
-            }
+            Argument.AssertNotNullOrEmpty(policyDefinitionName, nameof(policyDefinitionName));
 
             using var scope = _clientDiagnostics.CreateScope("ManagementGroupPolicyDefinitionCollection.GetIfExists");
             scope.Start();
@@ -206,7 +194,7 @@ namespace MgmtExtensionResource
                 var response = _policyDefinitionsRestClient.GetAtManagementGroup(Id.Name, policyDefinitionName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<ManagementGroupPolicyDefinition>(null, response.GetRawResponse());
-                return Response.FromValue(new ManagementGroupPolicyDefinition(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ManagementGroupPolicyDefinition(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -218,13 +206,11 @@ namespace MgmtExtensionResource
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="policyDefinitionName"> The name of the policy definition to get. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
         public async virtual Task<Response<ManagementGroupPolicyDefinition>> GetIfExistsAsync(string policyDefinitionName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(policyDefinitionName))
-            {
-                throw new ArgumentException($"Parameter {nameof(policyDefinitionName)} cannot be null or empty", nameof(policyDefinitionName));
-            }
+            Argument.AssertNotNullOrEmpty(policyDefinitionName, nameof(policyDefinitionName));
 
             using var scope = _clientDiagnostics.CreateScope("ManagementGroupPolicyDefinitionCollection.GetIfExists");
             scope.Start();
@@ -233,7 +219,7 @@ namespace MgmtExtensionResource
                 var response = await _policyDefinitionsRestClient.GetAtManagementGroupAsync(Id.Name, policyDefinitionName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<ManagementGroupPolicyDefinition>(null, response.GetRawResponse());
-                return Response.FromValue(new ManagementGroupPolicyDefinition(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ManagementGroupPolicyDefinition(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -245,13 +231,11 @@ namespace MgmtExtensionResource
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="policyDefinitionName"> The name of the policy definition to get. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
         public virtual Response<bool> Exists(string policyDefinitionName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(policyDefinitionName))
-            {
-                throw new ArgumentException($"Parameter {nameof(policyDefinitionName)} cannot be null or empty", nameof(policyDefinitionName));
-            }
+            Argument.AssertNotNullOrEmpty(policyDefinitionName, nameof(policyDefinitionName));
 
             using var scope = _clientDiagnostics.CreateScope("ManagementGroupPolicyDefinitionCollection.Exists");
             scope.Start();
@@ -270,13 +254,11 @@ namespace MgmtExtensionResource
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="policyDefinitionName"> The name of the policy definition to get. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string policyDefinitionName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(policyDefinitionName))
-            {
-                throw new ArgumentException($"Parameter {nameof(policyDefinitionName)} cannot be null or empty", nameof(policyDefinitionName));
-            }
+            Argument.AssertNotNullOrEmpty(policyDefinitionName, nameof(policyDefinitionName));
 
             using var scope = _clientDiagnostics.CreateScope("ManagementGroupPolicyDefinitionCollection.Exists");
             scope.Start();
@@ -309,7 +291,7 @@ namespace MgmtExtensionResource
                 try
                 {
                     var response = _policyDefinitionsRestClient.ListByManagementGroup(Id.Name, filter, top, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new ManagementGroupPolicyDefinition(this, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new ManagementGroupPolicyDefinition(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -324,7 +306,7 @@ namespace MgmtExtensionResource
                 try
                 {
                     var response = _policyDefinitionsRestClient.ListByManagementGroupNextPage(nextLink, Id.Name, filter, top, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new ManagementGroupPolicyDefinition(this, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new ManagementGroupPolicyDefinition(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -352,7 +334,7 @@ namespace MgmtExtensionResource
                 try
                 {
                     var response = await _policyDefinitionsRestClient.ListByManagementGroupAsync(Id.Name, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new ManagementGroupPolicyDefinition(this, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new ManagementGroupPolicyDefinition(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -367,7 +349,7 @@ namespace MgmtExtensionResource
                 try
                 {
                     var response = await _policyDefinitionsRestClient.ListByManagementGroupNextPageAsync(nextLink, Id.Name, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new ManagementGroupPolicyDefinition(this, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new ManagementGroupPolicyDefinition(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -392,8 +374,5 @@ namespace MgmtExtensionResource
         {
             return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
-
-        // Builders.
-        // public ArmBuilder<Azure.Core.ResourceIdentifier, ManagementGroupPolicyDefinition, PolicyDefinitionData> Construct() { }
     }
 }

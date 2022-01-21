@@ -89,8 +89,9 @@ namespace AutoRest.CSharp.Mgmt.Models
         {
             var segment = new List<Segment>();
             // find providers
-            int index = path.ToList().LastIndexOf(Segment.Providers);
-            if (index < 0)
+            var paths = path.ToList();
+            int index = paths.LastIndexOf(Segment.Providers);
+            if (index < 0 || index == paths.Count - 1)
             {
                 if (path.SerializedPath.StartsWith(RequestPath.ResourceGroupScopePrefix, StringComparison.InvariantCultureIgnoreCase))
                     return ResourceTypeSegment.ResourceGroup;

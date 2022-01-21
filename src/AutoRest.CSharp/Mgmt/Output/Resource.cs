@@ -372,19 +372,13 @@ namespace AutoRest.CSharp.Mgmt.Output
             }
         }
 
-        public Parameter OptionsParameter => new Parameter(Name: "options", Description: $"The client parameters to use in these operations.",
+        public static Parameter ArmClientParameter => new Parameter(Name: "armClient", Description: $"The client parameters to use in these operations.",
+                    Type: typeof(Azure.ResourceManager.ArmClient), DefaultValue: null, ValidateNotNull: false);
+        public Parameter ResourceParameter => new Parameter(Name: "resource", Description: $"The client parameters to use in these operations.",
                             Type: typeof(Azure.ResourceManager.Core.ArmResource), DefaultValue: null, ValidateNotNull: false);
         public Parameter ResourceDataParameter => new Parameter(Name: "data", Description: $"The resource that is the target of operations.",
                         Type: ResourceData.Type, DefaultValue: null, ValidateNotNull: false);
-        public Parameter ResourceIdentifierParameter => new Parameter(Name: "id", Description: $"The identifier of the resource that is the target of operations.",
+        public static Parameter ResourceIdentifierParameter => new Parameter(Name: "id", Description: $"The identifier of the resource that is the target of operations.",
                         Type: typeof(Azure.Core.ResourceIdentifier), DefaultValue: null, ValidateNotNull: false);
-        public Parameter ClientOptionsParameter => new Parameter(Name: "clientOptions", Description: $"The client options to build client context.",
-                        Type: typeof(Azure.ResourceManager.ArmClientOptions), DefaultValue: null, ValidateNotNull: false);
-        public Parameter CredentialParameter => new Parameter(Name: "credential", Description: $"The credential to build client context.",
-                        Type: typeof(Azure.Core.TokenCredential), DefaultValue: null, ValidateNotNull: false);
-        public Parameter UriParameter => new Parameter(Name: "uri", Description: $"The uri to build client context.",
-                        Type: typeof(Uri), DefaultValue: null, ValidateNotNull: false);
-        public Parameter PipelineParameter => new Parameter(Name: "pipeline", Description: $"The pipeline to build client context.",
-                        Type: typeof(Azure.Core.Pipeline.HttpPipeline), DefaultValue: null, ValidateNotNull: false);
     }
 }

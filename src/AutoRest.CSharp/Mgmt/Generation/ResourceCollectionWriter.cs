@@ -74,8 +74,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     WriteCtors();
                     WriteProperties();
                     WriteMethods();
-
-                    WriteBuilders();
                 }
             }
         }
@@ -119,7 +117,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
             using (_writer.WriteMethodDeclaration(parentResourceConstructor))
             {
                 var allPossibleTypes = _resourceCollection.ResourceTypes.SelectMany(p => p.Value).Distinct();
-                _writer.Line($"{ClientDiagnosticsField} = new {typeof(ClientDiagnostics)}(ClientOptions);");
+                FormattableString ctorString = ConstructClientDiagnostic(_writer, $"{_resource.Type}.ResourceType.Namespace", DiagnosticOptionsProperty);
+                _writer.Line($"{ClientDiagnosticsField} = {ctorString};");
                 WriteRestClientAssignments();
                 foreach (var parameter in _resourceCollection.ExtraConstructorParameters)
                 {
@@ -269,7 +268,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var response = new CodeWriterDeclaration("response");
             writer
                 .Append($"var {response:D} = {GetAwait(async)} ")
-                .Append($"{GetRestClientVariableName(operation.RestClient)}.{CreateMethodName(operation.Method.Name, async)}(");
+                .Append($"{GetRestFieldName(operation.RestClient)}.{CreateMethodName(operation.Method.Name, async)}(");
             WriteArguments(writer, parameterMappings);
             writer.Line($"cancellationToken: cancellationToken){GetConfigureAwait(async)};");
 
@@ -281,7 +280,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 writer.Line($"{response}.Value.Id = {CreateResourceIdentifierExpression(_resource, operation.RequestPath, parameterMappings, $"{response}.Value")};");
             }
 
-            writer.Line($"return {typeof(Response)}.FromValue(new {_resource.Type}(this, {response}.Value), {response}.GetRawResponse());");
+            writer.Line($"return {typeof(Response)}.FromValue(new {_resource.Type}({ArmClientReference}, {response}.Value), {response}.GetRawResponse());");
         }
 
         /// <summary>

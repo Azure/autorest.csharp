@@ -10,7 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager;
 using MgmtExtensionResource;
 
 namespace MgmtExtensionResource.Models
@@ -25,9 +25,9 @@ namespace MgmtExtensionResource.Models
         {
         }
 
-        internal ManagementGroupPolicyDefinitionCreateOrUpdateOperation(ArmResource operationsBase, Response<PolicyDefinitionData> response)
+        internal ManagementGroupPolicyDefinitionCreateOrUpdateOperation(ArmClient armClient, Response<PolicyDefinitionData> response)
         {
-            _operation = new OperationOrResponseInternals<ManagementGroupPolicyDefinition>(Response.FromValue(new ManagementGroupPolicyDefinition(operationsBase, response.Value), response.GetRawResponse()));
+            _operation = new OperationOrResponseInternals<ManagementGroupPolicyDefinition>(Response.FromValue(new ManagementGroupPolicyDefinition(armClient, response.Value), response.GetRawResponse()));
         }
 
         /// <inheritdoc />

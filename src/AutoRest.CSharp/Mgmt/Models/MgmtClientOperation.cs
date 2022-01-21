@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Shared;
 
 namespace AutoRest.CSharp.Mgmt.Models
@@ -62,5 +63,7 @@ namespace AutoRest.CSharp.Mgmt.Models
         public IEnumerator<MgmtRestOperation> GetEnumerator() => _operations.GetEnumerator();
 
         IEnumerator IEnumerable.GetEnumerator() => _operations.GetEnumerator();
+
+        public MgmtRestClient RestClient => _operations.First().RestClient;
     }
 }

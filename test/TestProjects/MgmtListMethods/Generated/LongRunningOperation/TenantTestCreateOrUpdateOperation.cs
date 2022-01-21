@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager;
 using MgmtListMethods;
 
 namespace MgmtListMethods.Models
@@ -22,17 +22,17 @@ namespace MgmtListMethods.Models
     {
         private readonly OperationInternals<TenantTest> _operation;
 
-        private readonly ArmResource _operationBase;
+        private readonly ArmClient _armClient;
 
         /// <summary> Initializes a new instance of TenantTestCreateOrUpdateOperation for mocking. </summary>
         protected TenantTestCreateOrUpdateOperation()
         {
         }
 
-        internal TenantTestCreateOrUpdateOperation(ArmResource operationsBase, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
+        internal TenantTestCreateOrUpdateOperation(ArmClient armClient, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
             _operation = new OperationInternals<TenantTest>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.AzureAsyncOperation, "TenantTestCreateOrUpdateOperation");
-            _operationBase = operationsBase;
+            _armClient = armClient;
         }
 
         /// <inheritdoc />
@@ -66,14 +66,14 @@ namespace MgmtListMethods.Models
         {
             using var document = JsonDocument.Parse(response.ContentStream);
             var data = TenantTestData.DeserializeTenantTestData(document.RootElement);
-            return new TenantTest(_operationBase, data);
+            return new TenantTest(_armClient, data);
         }
 
         async ValueTask<TenantTest> IOperationSource<TenantTest>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
             var data = TenantTestData.DeserializeTenantTestData(document.RootElement);
-            return new TenantTest(_operationBase, data);
+            return new TenantTest(_armClient, data);
         }
     }
 }

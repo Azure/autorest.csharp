@@ -13,6 +13,7 @@ using AutoRest.CSharp.Output.Models.Requests;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using Request = Azure.Core.Request;
 
@@ -20,7 +21,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal class MgmtLongRunningOperationWriter : LongRunningOperationWriter
     {
-        private const string _operationBaseField = "_operationBase";
+        private const string _armClientField = "_armClient";
 
         protected override CSharpType GetBaseType(LongRunningOperation operation)
         {
@@ -55,7 +56,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             if (mgmtOperation.WrapperResource != null)
             {
                 writer.Line();
-                writer.Line($"private readonly {typeof(ArmResource)} {_operationBaseField};");
+                writer.Line($"private readonly {typeof(ArmClient)} {_armClientField};");
             }
         }
 
@@ -66,7 +67,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             if (mgmtOperation.WrapperResource != null)
             {
                 // pass operationsBase in so that the construction of [Resource] is possible
-                writer.Append($"internal {cs.Name}({typeof(ArmResource)} operationsBase, {typeof(ClientDiagnostics)} clientDiagnostics, {typeof(HttpPipeline)} pipeline, {typeof(Request)} request, {typeof(Response)} response");
+                writer.Append($"internal {cs.Name}({typeof(ArmClient)} armClient, {typeof(ClientDiagnostics)} clientDiagnostics, {typeof(HttpPipeline)} pipeline, {typeof(Request)} request, {typeof(Response)} response");
 
                 if (pagingResponse != null)
                 {
@@ -88,7 +89,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         writer.Line($"_nextPageFunc = nextPageFunc;");
                     }
 
-                    writer.Line($"{_operationBaseField} = operationsBase;");
+                    writer.Line($"{_armClientField} = armClient;");
                 }
             }
             else
@@ -125,9 +126,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     w.Line($"var {data:D} = {v};");
                     if (mgmtOperation.WrapperResource.ResourceData.ShouldSetResourceIdentifier)
                     {
-                        w.Line($"{data}.Id = {_operationBaseField}.Id;");
+                        w.Line($"{data}.Id = {_armClientField}.Id;");
                     }
-                    w.Line($"return new {mgmtOperation.WrapperResource.Type}({_operationBaseField}, {data});");
+                    w.Line($"return new {mgmtOperation.WrapperResource.Type}({_armClientField}, {data});");
                 };
 
                 using (writer.Scope($"{mgmtOperation.WrapperResource.Type} {interfaceType}.CreateResult({typeof(Response)} {responseVariable:D}, {typeof(CancellationToken)} cancellationToken)"))

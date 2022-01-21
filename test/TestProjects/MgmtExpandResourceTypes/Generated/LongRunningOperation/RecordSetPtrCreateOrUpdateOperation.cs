@@ -10,7 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager;
 using MgmtExpandResourceTypes;
 
 namespace MgmtExpandResourceTypes.Models
@@ -25,9 +25,9 @@ namespace MgmtExpandResourceTypes.Models
         {
         }
 
-        internal RecordSetPtrCreateOrUpdateOperation(ArmResource operationsBase, Response<RecordSetData> response)
+        internal RecordSetPtrCreateOrUpdateOperation(ArmClient armClient, Response<RecordSetData> response)
         {
-            _operation = new OperationOrResponseInternals<RecordSetPtr>(Response.FromValue(new RecordSetPtr(operationsBase, response.Value), response.GetRawResponse()));
+            _operation = new OperationOrResponseInternals<RecordSetPtr>(Response.FromValue(new RecordSetPtr(armClient, response.Value), response.GetRawResponse()));
         }
 
         /// <inheritdoc />

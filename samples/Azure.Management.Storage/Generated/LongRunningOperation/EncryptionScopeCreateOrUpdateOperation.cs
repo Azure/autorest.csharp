@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Management.Storage;
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager;
 
 namespace Azure.Management.Storage.Models
 {
@@ -25,9 +25,9 @@ namespace Azure.Management.Storage.Models
         {
         }
 
-        internal EncryptionScopeCreateOrUpdateOperation(ArmResource operationsBase, Response<EncryptionScopeData> response)
+        internal EncryptionScopeCreateOrUpdateOperation(ArmClient armClient, Response<EncryptionScopeData> response)
         {
-            _operation = new OperationOrResponseInternals<EncryptionScope>(Response.FromValue(new EncryptionScope(operationsBase, response.Value), response.GetRawResponse()));
+            _operation = new OperationOrResponseInternals<EncryptionScope>(Response.FromValue(new EncryptionScope(armClient, response.Value), response.GetRawResponse()));
         }
 
         /// <inheritdoc />

@@ -21,7 +21,7 @@ namespace MgmtCollectionParent
         public static OrderResource GetOrderResource(this ArmClient armClient, ResourceIdentifier id)
         {
             OrderResource.ValidateResourceId(id);
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new OrderResource(clientOptions, credential, uri, pipeline, id));
+            return new OrderResource(armClient, id);
         }
         #endregion
     }

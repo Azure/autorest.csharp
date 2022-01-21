@@ -21,7 +21,7 @@ namespace MgmtExtensionResource
         public static SubscriptionPolicyDefinition GetSubscriptionPolicyDefinition(this ArmClient armClient, ResourceIdentifier id)
         {
             SubscriptionPolicyDefinition.ValidateResourceId(id);
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new SubscriptionPolicyDefinition(clientOptions, credential, uri, pipeline, id));
+            return new SubscriptionPolicyDefinition(armClient, id);
         }
         #endregion
 
@@ -33,7 +33,7 @@ namespace MgmtExtensionResource
         public static BuiltInPolicyDefinition GetBuiltInPolicyDefinition(this ArmClient armClient, ResourceIdentifier id)
         {
             BuiltInPolicyDefinition.ValidateResourceId(id);
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new BuiltInPolicyDefinition(clientOptions, credential, uri, pipeline, id));
+            return new BuiltInPolicyDefinition(armClient, id);
         }
         #endregion
 
@@ -45,7 +45,7 @@ namespace MgmtExtensionResource
         public static ManagementGroupPolicyDefinition GetManagementGroupPolicyDefinition(this ArmClient armClient, ResourceIdentifier id)
         {
             ManagementGroupPolicyDefinition.ValidateResourceId(id);
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new ManagementGroupPolicyDefinition(clientOptions, credential, uri, pipeline, id));
+            return new ManagementGroupPolicyDefinition(armClient, id);
         }
         #endregion
     }

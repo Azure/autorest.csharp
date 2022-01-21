@@ -10,7 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager;
 using MgmtListMethods;
 
 namespace MgmtListMethods.Models
@@ -25,9 +25,9 @@ namespace MgmtListMethods.Models
         {
         }
 
-        internal TenantParentWithLocCreateOrUpdateOperation(ArmResource operationsBase, Response<TenantParentWithLocData> response)
+        internal TenantParentWithLocCreateOrUpdateOperation(ArmClient armClient, Response<TenantParentWithLocData> response)
         {
-            _operation = new OperationOrResponseInternals<TenantParentWithLoc>(Response.FromValue(new TenantParentWithLoc(operationsBase, response.Value), response.GetRawResponse()));
+            _operation = new OperationOrResponseInternals<TenantParentWithLoc>(Response.FromValue(new TenantParentWithLoc(armClient, response.Value), response.GetRawResponse()));
         }
 
         /// <inheritdoc />
