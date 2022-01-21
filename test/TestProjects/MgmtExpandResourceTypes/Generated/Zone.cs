@@ -250,7 +250,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> The updated resource with the tag added. </returns>
         public async virtual Task<Response<Zone>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(key, nameof(key));
+            Argument.AssertNotNullOrWhiteSpace(key, nameof(key));
 
             using var scope = _clientDiagnostics.CreateScope("Zone.AddTag");
             scope.Start();
@@ -276,7 +276,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> The updated resource with the tag added. </returns>
         public virtual Response<Zone> AddTag(string key, string value, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(key, nameof(key));
+            Argument.AssertNotNullOrWhiteSpace(key, nameof(key));
 
             using var scope = _clientDiagnostics.CreateScope("Zone.AddTag");
             scope.Start();
@@ -359,7 +359,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> The updated resource with the tag removed. </returns>
         public async virtual Task<Response<Zone>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(key, nameof(key));
+            Argument.AssertNotNullOrWhiteSpace(key, nameof(key));
 
             using var scope = _clientDiagnostics.CreateScope("Zone.RemoveTag");
             scope.Start();
@@ -384,7 +384,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> The updated resource with the tag removed. </returns>
         public virtual Response<Zone> RemoveTag(string key, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(key, nameof(key));
+            Argument.AssertNotNullOrWhiteSpace(key, nameof(key));
 
             using var scope = _clientDiagnostics.CreateScope("Zone.RemoveTag");
             scope.Start();

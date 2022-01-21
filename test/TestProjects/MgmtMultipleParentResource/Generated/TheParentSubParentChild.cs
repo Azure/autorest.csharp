@@ -246,7 +246,7 @@ namespace MgmtMultipleParentResource
         /// <returns> The updated resource with the tag added. </returns>
         public async virtual Task<Response<TheParentSubParentChild>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(key, nameof(key));
+            Argument.AssertNotNullOrWhiteSpace(key, nameof(key));
 
             using var scope = _clientDiagnostics.CreateScope("TheParentSubParentChild.AddTag");
             scope.Start();
@@ -272,7 +272,7 @@ namespace MgmtMultipleParentResource
         /// <returns> The updated resource with the tag added. </returns>
         public virtual Response<TheParentSubParentChild> AddTag(string key, string value, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(key, nameof(key));
+            Argument.AssertNotNullOrWhiteSpace(key, nameof(key));
 
             using var scope = _clientDiagnostics.CreateScope("TheParentSubParentChild.AddTag");
             scope.Start();
@@ -355,7 +355,7 @@ namespace MgmtMultipleParentResource
         /// <returns> The updated resource with the tag removed. </returns>
         public async virtual Task<Response<TheParentSubParentChild>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(key, nameof(key));
+            Argument.AssertNotNullOrWhiteSpace(key, nameof(key));
 
             using var scope = _clientDiagnostics.CreateScope("TheParentSubParentChild.RemoveTag");
             scope.Start();
@@ -380,7 +380,7 @@ namespace MgmtMultipleParentResource
         /// <returns> The updated resource with the tag removed. </returns>
         public virtual Response<TheParentSubParentChild> RemoveTag(string key, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(key, nameof(key));
+            Argument.AssertNotNullOrWhiteSpace(key, nameof(key));
 
             using var scope = _clientDiagnostics.CreateScope("TheParentSubParentChild.RemoveTag");
             scope.Start();

@@ -244,7 +244,7 @@ namespace MgmtLRO
         /// <returns> The updated resource with the tag added. </returns>
         public async virtual Task<Response<Bar>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(key, nameof(key));
+            Argument.AssertNotNullOrWhiteSpace(key, nameof(key));
 
             using var scope = _clientDiagnostics.CreateScope("Bar.AddTag");
             scope.Start();
@@ -270,7 +270,7 @@ namespace MgmtLRO
         /// <returns> The updated resource with the tag added. </returns>
         public virtual Response<Bar> AddTag(string key, string value, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(key, nameof(key));
+            Argument.AssertNotNullOrWhiteSpace(key, nameof(key));
 
             using var scope = _clientDiagnostics.CreateScope("Bar.AddTag");
             scope.Start();
@@ -353,7 +353,7 @@ namespace MgmtLRO
         /// <returns> The updated resource with the tag removed. </returns>
         public async virtual Task<Response<Bar>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(key, nameof(key));
+            Argument.AssertNotNullOrWhiteSpace(key, nameof(key));
 
             using var scope = _clientDiagnostics.CreateScope("Bar.RemoveTag");
             scope.Start();
@@ -378,7 +378,7 @@ namespace MgmtLRO
         /// <returns> The updated resource with the tag removed. </returns>
         public virtual Response<Bar> RemoveTag(string key, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(key, nameof(key));
+            Argument.AssertNotNullOrWhiteSpace(key, nameof(key));
 
             using var scope = _clientDiagnostics.CreateScope("Bar.RemoveTag");
             scope.Start();

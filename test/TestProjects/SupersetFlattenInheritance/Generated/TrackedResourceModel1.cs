@@ -192,7 +192,7 @@ namespace SupersetFlattenInheritance
         /// <returns> The updated resource with the tag added. </returns>
         public async virtual Task<Response<TrackedResourceModel1>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(key, nameof(key));
+            Argument.AssertNotNullOrWhiteSpace(key, nameof(key));
 
             using var scope = _clientDiagnostics.CreateScope("TrackedResourceModel1.AddTag");
             scope.Start();
@@ -218,7 +218,7 @@ namespace SupersetFlattenInheritance
         /// <returns> The updated resource with the tag added. </returns>
         public virtual Response<TrackedResourceModel1> AddTag(string key, string value, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(key, nameof(key));
+            Argument.AssertNotNullOrWhiteSpace(key, nameof(key));
 
             using var scope = _clientDiagnostics.CreateScope("TrackedResourceModel1.AddTag");
             scope.Start();
@@ -301,7 +301,7 @@ namespace SupersetFlattenInheritance
         /// <returns> The updated resource with the tag removed. </returns>
         public async virtual Task<Response<TrackedResourceModel1>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(key, nameof(key));
+            Argument.AssertNotNullOrWhiteSpace(key, nameof(key));
 
             using var scope = _clientDiagnostics.CreateScope("TrackedResourceModel1.RemoveTag");
             scope.Start();
@@ -326,7 +326,7 @@ namespace SupersetFlattenInheritance
         /// <returns> The updated resource with the tag removed. </returns>
         public virtual Response<TrackedResourceModel1> RemoveTag(string key, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(key, nameof(key));
+            Argument.AssertNotNullOrWhiteSpace(key, nameof(key));
 
             using var scope = _clientDiagnostics.CreateScope("TrackedResourceModel1.RemoveTag");
             scope.Start();
