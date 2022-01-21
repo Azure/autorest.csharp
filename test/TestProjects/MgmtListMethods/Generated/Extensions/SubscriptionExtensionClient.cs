@@ -189,7 +189,8 @@ namespace MgmtListMethods
         /// <summary> Gets all under the specified subscription for the specified location. </summary>
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="location"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
         /// <returns> An async collection of <see cref="NonResourceChild" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<NonResourceChild> GetTestByLocationsFakeParentWithAncestorWithNonResChWithLocsAsync(string location, CancellationToken cancellationToken = default)
         {
@@ -219,7 +220,8 @@ namespace MgmtListMethods
         /// <summary> Gets all under the specified subscription for the specified location. </summary>
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="location"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
         /// <returns> A collection of <see cref="NonResourceChild" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<NonResourceChild> GetTestByLocationsFakeParentWithAncestorWithNonResChWithLocs(string location, CancellationToken cancellationToken = default)
         {
@@ -465,7 +467,8 @@ namespace MgmtListMethods
         /// <summary> Gets all under the specified subscription for the specified location. </summary>
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="location"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
         /// <returns> An async collection of <see cref="FakeParentWithAncestorWithLoc" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<FakeParentWithAncestorWithLoc> GetFakeParentWithAncestorWithLocsByLocationAsync(string location, CancellationToken cancellationToken = default)
         {
@@ -510,7 +513,8 @@ namespace MgmtListMethods
         /// <summary> Gets all under the specified subscription for the specified location. </summary>
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="location"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
         /// <returns> A collection of <see cref="FakeParentWithAncestorWithLoc" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<FakeParentWithAncestorWithLoc> GetFakeParentWithAncestorWithLocsByLocation(string location, CancellationToken cancellationToken = default)
         {
@@ -991,7 +995,8 @@ namespace MgmtListMethods
         /// <summary> Gets all under the specified subscription for the specified location. </summary>
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="location"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
         /// <returns> An async collection of <see cref="ResGrpParentWithAncestorWithNonResChWithLoc" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<ResGrpParentWithAncestorWithNonResChWithLoc> GetResGrpParentWithAncestorWithNonResChWithLocsByLocationResGrpParentWithAncestorWithLocAsync(string location, CancellationToken cancellationToken = default)
         {
@@ -1036,7 +1041,8 @@ namespace MgmtListMethods
         /// <summary> Gets all under the specified subscription for the specified location. </summary>
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="location"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
         /// <returns> A collection of <see cref="ResGrpParentWithAncestorWithNonResChWithLoc" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<ResGrpParentWithAncestorWithNonResChWithLoc> GetResGrpParentWithAncestorWithNonResChWithLocsByLocationResGrpParentWithAncestorWithLoc(string location, CancellationToken cancellationToken = default)
         {
@@ -1160,8 +1166,8 @@ namespace MgmtListMethods
         /// <param name="location"> The location for update quota is queried. </param>
         /// <param name="parameters"> Quota update parameters. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/> is null or empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="location"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="parameters"/> is null. </exception>
         /// <returns> An async collection of <see cref="UpdateWorkspaceQuotas" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<UpdateWorkspaceQuotas> UpdateQuotasAsync(string location, QuotaUpdateParameters parameters, CancellationToken cancellationToken = default)
         {
@@ -1196,8 +1202,8 @@ namespace MgmtListMethods
         /// <param name="location"> The location for update quota is queried. </param>
         /// <param name="parameters"> Quota update parameters. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/> is null or empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="location"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="parameters"/> is null. </exception>
         /// <returns> A collection of <see cref="UpdateWorkspaceQuotas" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<UpdateWorkspaceQuotas> UpdateQuotas(string location, QuotaUpdateParameters parameters, CancellationToken cancellationToken = default)
         {

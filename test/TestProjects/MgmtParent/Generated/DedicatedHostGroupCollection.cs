@@ -58,8 +58,8 @@ namespace MgmtParent
         /// <param name="hostGroupName"> The name of the dedicated host group. </param>
         /// <param name="parameters"> Parameters supplied to the Create Dedicated Host Group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="hostGroupName"/> is null or empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="hostGroupName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="hostGroupName"/> or <paramref name="parameters"/> is null. </exception>
         public virtual DedicatedHostGroupCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string hostGroupName, DedicatedHostGroupData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(hostGroupName, nameof(hostGroupName));
@@ -93,8 +93,8 @@ namespace MgmtParent
         /// <param name="hostGroupName"> The name of the dedicated host group. </param>
         /// <param name="parameters"> Parameters supplied to the Create Dedicated Host Group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="hostGroupName"/> is null or empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="hostGroupName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="hostGroupName"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<DedicatedHostGroupCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string hostGroupName, DedicatedHostGroupData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(hostGroupName, nameof(hostGroupName));
@@ -126,7 +126,8 @@ namespace MgmtParent
         /// <summary> Retrieves information about a dedicated host group. </summary>
         /// <param name="hostGroupName"> The name of the dedicated host group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="hostGroupName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="hostGroupName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="hostGroupName"/> is null. </exception>
         public virtual Response<DedicatedHostGroup> Get(string hostGroupName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(hostGroupName, nameof(hostGroupName));
@@ -153,7 +154,8 @@ namespace MgmtParent
         /// <summary> Retrieves information about a dedicated host group. </summary>
         /// <param name="hostGroupName"> The name of the dedicated host group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="hostGroupName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="hostGroupName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="hostGroupName"/> is null. </exception>
         public async virtual Task<Response<DedicatedHostGroup>> GetAsync(string hostGroupName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(hostGroupName, nameof(hostGroupName));
@@ -177,7 +179,8 @@ namespace MgmtParent
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="hostGroupName"> The name of the dedicated host group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="hostGroupName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="hostGroupName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="hostGroupName"/> is null. </exception>
         public virtual Response<DedicatedHostGroup> GetIfExists(string hostGroupName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(hostGroupName, nameof(hostGroupName));
@@ -201,7 +204,8 @@ namespace MgmtParent
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="hostGroupName"> The name of the dedicated host group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="hostGroupName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="hostGroupName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="hostGroupName"/> is null. </exception>
         public async virtual Task<Response<DedicatedHostGroup>> GetIfExistsAsync(string hostGroupName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(hostGroupName, nameof(hostGroupName));
@@ -225,7 +229,8 @@ namespace MgmtParent
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="hostGroupName"> The name of the dedicated host group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="hostGroupName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="hostGroupName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="hostGroupName"/> is null. </exception>
         public virtual Response<bool> Exists(string hostGroupName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(hostGroupName, nameof(hostGroupName));
@@ -247,7 +252,8 @@ namespace MgmtParent
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="hostGroupName"> The name of the dedicated host group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="hostGroupName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="hostGroupName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="hostGroupName"/> is null. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string hostGroupName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(hostGroupName, nameof(hostGroupName));

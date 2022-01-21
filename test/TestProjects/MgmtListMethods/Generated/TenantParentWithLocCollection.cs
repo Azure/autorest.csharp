@@ -59,8 +59,8 @@ namespace MgmtListMethods
         /// <param name="tenantParentWithLocName"> Name. </param>
         /// <param name="parameters"> Parameters supplied to the Create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="tenantParentWithLocName"/> is null or empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="tenantParentWithLocName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithLocName"/> or <paramref name="parameters"/> is null. </exception>
         public virtual TenantParentWithLocCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string tenantParentWithLocName, TenantParentWithLocData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(tenantParentWithLocName, nameof(tenantParentWithLocName));
@@ -94,8 +94,8 @@ namespace MgmtListMethods
         /// <param name="tenantParentWithLocName"> Name. </param>
         /// <param name="parameters"> Parameters supplied to the Create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="tenantParentWithLocName"/> is null or empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="tenantParentWithLocName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithLocName"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<TenantParentWithLocCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string tenantParentWithLocName, TenantParentWithLocData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(tenantParentWithLocName, nameof(tenantParentWithLocName));
@@ -127,7 +127,8 @@ namespace MgmtListMethods
         /// <summary> Retrieves information. </summary>
         /// <param name="tenantParentWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="tenantParentWithLocName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="tenantParentWithLocName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithLocName"/> is null. </exception>
         public virtual Response<TenantParentWithLoc> Get(string tenantParentWithLocName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(tenantParentWithLocName, nameof(tenantParentWithLocName));
@@ -154,7 +155,8 @@ namespace MgmtListMethods
         /// <summary> Retrieves information. </summary>
         /// <param name="tenantParentWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="tenantParentWithLocName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="tenantParentWithLocName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithLocName"/> is null. </exception>
         public async virtual Task<Response<TenantParentWithLoc>> GetAsync(string tenantParentWithLocName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(tenantParentWithLocName, nameof(tenantParentWithLocName));
@@ -178,7 +180,8 @@ namespace MgmtListMethods
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="tenantParentWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="tenantParentWithLocName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="tenantParentWithLocName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithLocName"/> is null. </exception>
         public virtual Response<TenantParentWithLoc> GetIfExists(string tenantParentWithLocName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(tenantParentWithLocName, nameof(tenantParentWithLocName));
@@ -202,7 +205,8 @@ namespace MgmtListMethods
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="tenantParentWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="tenantParentWithLocName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="tenantParentWithLocName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithLocName"/> is null. </exception>
         public async virtual Task<Response<TenantParentWithLoc>> GetIfExistsAsync(string tenantParentWithLocName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(tenantParentWithLocName, nameof(tenantParentWithLocName));
@@ -226,7 +230,8 @@ namespace MgmtListMethods
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="tenantParentWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="tenantParentWithLocName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="tenantParentWithLocName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithLocName"/> is null. </exception>
         public virtual Response<bool> Exists(string tenantParentWithLocName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(tenantParentWithLocName, nameof(tenantParentWithLocName));
@@ -248,7 +253,8 @@ namespace MgmtListMethods
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="tenantParentWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="tenantParentWithLocName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="tenantParentWithLocName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithLocName"/> is null. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string tenantParentWithLocName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(tenantParentWithLocName, nameof(tenantParentWithLocName));

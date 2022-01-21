@@ -520,7 +520,8 @@ namespace MgmtScopeResource
         /// <summary> Gets a deployments operation. </summary>
         /// <param name="operationId"> The ID of the operation to get. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="operationId"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="operationId"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="operationId"/> is null. </exception>
         public async virtual Task<Response<DeploymentOperation>> GetAtScopeDeploymentOperationAsync(string operationId, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(operationId, nameof(operationId));
@@ -545,7 +546,8 @@ namespace MgmtScopeResource
         /// <summary> Gets a deployments operation. </summary>
         /// <param name="operationId"> The ID of the operation to get. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="operationId"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="operationId"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="operationId"/> is null. </exception>
         public virtual Response<DeploymentOperation> GetAtScopeDeploymentOperation(string operationId, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(operationId, nameof(operationId));

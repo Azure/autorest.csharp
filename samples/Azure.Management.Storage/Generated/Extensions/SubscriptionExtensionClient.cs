@@ -217,7 +217,8 @@ namespace Azure.Management.Storage
         /// <summary> Gets the current usage count and the limit for the resources of the location under the subscription. </summary>
         /// <param name="location"> The location of the Azure Storage resource. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="location"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
         /// <returns> An async collection of <see cref="Usage" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<Usage> GetUsagesByLocationAsync(string location, CancellationToken cancellationToken = default)
         {
@@ -247,7 +248,8 @@ namespace Azure.Management.Storage
         /// <summary> Gets the current usage count and the limit for the resources of the location under the subscription. </summary>
         /// <param name="location"> The location of the Azure Storage resource. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="location"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
         /// <returns> A collection of <see cref="Usage" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<Usage> GetUsagesByLocation(string location, CancellationToken cancellationToken = default)
         {

@@ -60,8 +60,8 @@ namespace SupersetFlattenInheritance
         /// <param name="resourceModel1SName"> The String to use. </param>
         /// <param name="parameters"> The ResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="resourceModel1SName"/> is null or empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="resourceModel1SName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceModel1SName"/> or <paramref name="parameters"/> is null. </exception>
         public virtual ResourceModel1CreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string resourceModel1SName, ResourceModel1Data parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(resourceModel1SName, nameof(resourceModel1SName));
@@ -94,8 +94,8 @@ namespace SupersetFlattenInheritance
         /// <param name="resourceModel1SName"> The String to use. </param>
         /// <param name="parameters"> The ResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="resourceModel1SName"/> is null or empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="resourceModel1SName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceModel1SName"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<ResourceModel1CreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string resourceModel1SName, ResourceModel1Data parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(resourceModel1SName, nameof(resourceModel1SName));
@@ -126,7 +126,8 @@ namespace SupersetFlattenInheritance
         /// OperationId: ResourceModel1s_Get
         /// <param name="resourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="resourceModel1SName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="resourceModel1SName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceModel1SName"/> is null. </exception>
         public virtual Response<ResourceModel1> Get(string resourceModel1SName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(resourceModel1SName, nameof(resourceModel1SName));
@@ -152,7 +153,8 @@ namespace SupersetFlattenInheritance
         /// OperationId: ResourceModel1s_Get
         /// <param name="resourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="resourceModel1SName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="resourceModel1SName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceModel1SName"/> is null. </exception>
         public async virtual Task<Response<ResourceModel1>> GetAsync(string resourceModel1SName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(resourceModel1SName, nameof(resourceModel1SName));
@@ -176,7 +178,8 @@ namespace SupersetFlattenInheritance
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="resourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="resourceModel1SName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="resourceModel1SName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceModel1SName"/> is null. </exception>
         public virtual Response<ResourceModel1> GetIfExists(string resourceModel1SName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(resourceModel1SName, nameof(resourceModel1SName));
@@ -200,7 +203,8 @@ namespace SupersetFlattenInheritance
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="resourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="resourceModel1SName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="resourceModel1SName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceModel1SName"/> is null. </exception>
         public async virtual Task<Response<ResourceModel1>> GetIfExistsAsync(string resourceModel1SName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(resourceModel1SName, nameof(resourceModel1SName));
@@ -224,7 +228,8 @@ namespace SupersetFlattenInheritance
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="resourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="resourceModel1SName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="resourceModel1SName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceModel1SName"/> is null. </exception>
         public virtual Response<bool> Exists(string resourceModel1SName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(resourceModel1SName, nameof(resourceModel1SName));
@@ -246,7 +251,8 @@ namespace SupersetFlattenInheritance
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="resourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="resourceModel1SName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="resourceModel1SName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceModel1SName"/> is null. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string resourceModel1SName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(resourceModel1SName, nameof(resourceModel1SName));

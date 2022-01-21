@@ -63,7 +63,8 @@ namespace MgmtHierarchicalNonResource
         /// <summary> Get a shared gallery by subscription id or tenant id. </summary>
         /// <param name="galleryUniqueName"> The unique name of the Shared Gallery. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="galleryUniqueName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="galleryUniqueName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="galleryUniqueName"/> is null. </exception>
         public virtual Response<SharedGallery> Get(string galleryUniqueName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(galleryUniqueName, nameof(galleryUniqueName));
@@ -91,7 +92,8 @@ namespace MgmtHierarchicalNonResource
         /// <summary> Get a shared gallery by subscription id or tenant id. </summary>
         /// <param name="galleryUniqueName"> The unique name of the Shared Gallery. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="galleryUniqueName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="galleryUniqueName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="galleryUniqueName"/> is null. </exception>
         public async virtual Task<Response<SharedGallery>> GetAsync(string galleryUniqueName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(galleryUniqueName, nameof(galleryUniqueName));
@@ -116,7 +118,8 @@ namespace MgmtHierarchicalNonResource
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="galleryUniqueName"> The unique name of the Shared Gallery. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="galleryUniqueName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="galleryUniqueName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="galleryUniqueName"/> is null. </exception>
         public virtual Response<SharedGallery> GetIfExists(string galleryUniqueName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(galleryUniqueName, nameof(galleryUniqueName));
@@ -141,7 +144,8 @@ namespace MgmtHierarchicalNonResource
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="galleryUniqueName"> The unique name of the Shared Gallery. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="galleryUniqueName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="galleryUniqueName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="galleryUniqueName"/> is null. </exception>
         public async virtual Task<Response<SharedGallery>> GetIfExistsAsync(string galleryUniqueName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(galleryUniqueName, nameof(galleryUniqueName));
@@ -166,7 +170,8 @@ namespace MgmtHierarchicalNonResource
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="galleryUniqueName"> The unique name of the Shared Gallery. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="galleryUniqueName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="galleryUniqueName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="galleryUniqueName"/> is null. </exception>
         public virtual Response<bool> Exists(string galleryUniqueName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(galleryUniqueName, nameof(galleryUniqueName));
@@ -188,7 +193,8 @@ namespace MgmtHierarchicalNonResource
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="galleryUniqueName"> The unique name of the Shared Gallery. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="galleryUniqueName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="galleryUniqueName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="galleryUniqueName"/> is null. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string galleryUniqueName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(galleryUniqueName, nameof(galleryUniqueName));

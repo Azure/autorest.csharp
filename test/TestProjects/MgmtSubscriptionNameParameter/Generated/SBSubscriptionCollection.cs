@@ -61,8 +61,8 @@ namespace MgmtSubscriptionNameParameter
         /// <param name="subscriptionName"> The subscription name. </param>
         /// <param name="parameters"> Parameters supplied to create a subscription resource. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="subscriptionName"/> is null or empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionName"/> or <paramref name="parameters"/> is null. </exception>
         public virtual SBSubscriptionCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string subscriptionName, SBSubscriptionData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionName, nameof(subscriptionName));
@@ -96,8 +96,8 @@ namespace MgmtSubscriptionNameParameter
         /// <param name="subscriptionName"> The subscription name. </param>
         /// <param name="parameters"> Parameters supplied to create a subscription resource. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="subscriptionName"/> is null or empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionName"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<SBSubscriptionCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string subscriptionName, SBSubscriptionData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionName, nameof(subscriptionName));
@@ -129,7 +129,8 @@ namespace MgmtSubscriptionNameParameter
         /// <summary> Returns a subscription description for the specified topic. </summary>
         /// <param name="subscriptionName"> The subscription name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="subscriptionName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionName"/> is null. </exception>
         public virtual Response<SBSubscription> Get(string subscriptionName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionName, nameof(subscriptionName));
@@ -156,7 +157,8 @@ namespace MgmtSubscriptionNameParameter
         /// <summary> Returns a subscription description for the specified topic. </summary>
         /// <param name="subscriptionName"> The subscription name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="subscriptionName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionName"/> is null. </exception>
         public async virtual Task<Response<SBSubscription>> GetAsync(string subscriptionName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionName, nameof(subscriptionName));
@@ -180,7 +182,8 @@ namespace MgmtSubscriptionNameParameter
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="subscriptionName"> The subscription name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="subscriptionName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionName"/> is null. </exception>
         public virtual Response<SBSubscription> GetIfExists(string subscriptionName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionName, nameof(subscriptionName));
@@ -204,7 +207,8 @@ namespace MgmtSubscriptionNameParameter
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="subscriptionName"> The subscription name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="subscriptionName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionName"/> is null. </exception>
         public async virtual Task<Response<SBSubscription>> GetIfExistsAsync(string subscriptionName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionName, nameof(subscriptionName));
@@ -228,7 +232,8 @@ namespace MgmtSubscriptionNameParameter
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="subscriptionName"> The subscription name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="subscriptionName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionName"/> is null. </exception>
         public virtual Response<bool> Exists(string subscriptionName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionName, nameof(subscriptionName));
@@ -250,7 +255,8 @@ namespace MgmtSubscriptionNameParameter
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="subscriptionName"> The subscription name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="subscriptionName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionName"/> is null. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string subscriptionName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionName, nameof(subscriptionName));

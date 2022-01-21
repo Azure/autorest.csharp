@@ -61,8 +61,8 @@ namespace SubscriptionExtensions
         /// <param name="ovenName"> The name of the virtual machine. </param>
         /// <param name="parameters"> Parameters supplied to the Create Virtual Machine operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="ovenName"/> is null or empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="ovenName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="ovenName"/> or <paramref name="parameters"/> is null. </exception>
         public virtual OvenCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string ovenName, OvenData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(ovenName, nameof(ovenName));
@@ -96,8 +96,8 @@ namespace SubscriptionExtensions
         /// <param name="ovenName"> The name of the virtual machine. </param>
         /// <param name="parameters"> Parameters supplied to the Create Virtual Machine operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="ovenName"/> is null or empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="ovenName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="ovenName"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<OvenCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string ovenName, OvenData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(ovenName, nameof(ovenName));
@@ -128,7 +128,8 @@ namespace SubscriptionExtensions
         /// OperationId: Ovens_Get
         /// <param name="ovenName"> The name of the virtual machine. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="ovenName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="ovenName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="ovenName"/> is null. </exception>
         public virtual Response<Oven> Get(string ovenName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(ovenName, nameof(ovenName));
@@ -154,7 +155,8 @@ namespace SubscriptionExtensions
         /// OperationId: Ovens_Get
         /// <param name="ovenName"> The name of the virtual machine. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="ovenName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="ovenName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="ovenName"/> is null. </exception>
         public async virtual Task<Response<Oven>> GetAsync(string ovenName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(ovenName, nameof(ovenName));
@@ -178,7 +180,8 @@ namespace SubscriptionExtensions
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="ovenName"> The name of the virtual machine. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="ovenName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="ovenName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="ovenName"/> is null. </exception>
         public virtual Response<Oven> GetIfExists(string ovenName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(ovenName, nameof(ovenName));
@@ -202,7 +205,8 @@ namespace SubscriptionExtensions
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="ovenName"> The name of the virtual machine. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="ovenName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="ovenName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="ovenName"/> is null. </exception>
         public async virtual Task<Response<Oven>> GetIfExistsAsync(string ovenName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(ovenName, nameof(ovenName));
@@ -226,7 +230,8 @@ namespace SubscriptionExtensions
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="ovenName"> The name of the virtual machine. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="ovenName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="ovenName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="ovenName"/> is null. </exception>
         public virtual Response<bool> Exists(string ovenName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(ovenName, nameof(ovenName));
@@ -248,7 +253,8 @@ namespace SubscriptionExtensions
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="ovenName"> The name of the virtual machine. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="ovenName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="ovenName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="ovenName"/> is null. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string ovenName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(ovenName, nameof(ovenName));

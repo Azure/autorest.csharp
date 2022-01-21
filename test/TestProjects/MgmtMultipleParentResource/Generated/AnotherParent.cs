@@ -225,10 +225,7 @@ namespace MgmtMultipleParentResource
         /// <returns> The updated resource with the tag added. </returns>
         public async virtual Task<Response<AnotherParent>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrWhiteSpace(key))
-            {
-                throw new ArgumentNullException(nameof(key), $"{nameof(key)} provided cannot be null or a whitespace.");
-            }
+            Argument.AssertNotNullOrEmpty(key, nameof(key));
 
             using var scope = _clientDiagnostics.CreateScope("AnotherParent.AddTag");
             scope.Start();
@@ -254,10 +251,7 @@ namespace MgmtMultipleParentResource
         /// <returns> The updated resource with the tag added. </returns>
         public virtual Response<AnotherParent> AddTag(string key, string value, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrWhiteSpace(key))
-            {
-                throw new ArgumentNullException(nameof(key), $"{nameof(key)} provided cannot be null or a whitespace.");
-            }
+            Argument.AssertNotNullOrEmpty(key, nameof(key));
 
             using var scope = _clientDiagnostics.CreateScope("AnotherParent.AddTag");
             scope.Start();
@@ -340,10 +334,7 @@ namespace MgmtMultipleParentResource
         /// <returns> The updated resource with the tag removed. </returns>
         public async virtual Task<Response<AnotherParent>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrWhiteSpace(key))
-            {
-                throw new ArgumentNullException(nameof(key), $"{nameof(key)} provided cannot be null or a whitespace.");
-            }
+            Argument.AssertNotNullOrEmpty(key, nameof(key));
 
             using var scope = _clientDiagnostics.CreateScope("AnotherParent.RemoveTag");
             scope.Start();
@@ -368,10 +359,7 @@ namespace MgmtMultipleParentResource
         /// <returns> The updated resource with the tag removed. </returns>
         public virtual Response<AnotherParent> RemoveTag(string key, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrWhiteSpace(key))
-            {
-                throw new ArgumentNullException(nameof(key), $"{nameof(key)} provided cannot be null or a whitespace.");
-            }
+            Argument.AssertNotNullOrEmpty(key, nameof(key));
 
             using var scope = _clientDiagnostics.CreateScope("AnotherParent.RemoveTag");
             scope.Start();

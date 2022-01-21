@@ -64,8 +64,8 @@ namespace OmitOperationGroups
         /// <param name="model5SName"> The String to use. </param>
         /// <param name="parameters"> The Model5 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="System.ArgumentException"> <paramref name="model5SName"/> is null or empty. </exception>
-        /// <exception cref="System.ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="System.ArgumentException"> <paramref name="model5SName"/> is empty. </exception>
+        /// <exception cref="System.ArgumentNullException"> <paramref name="model5SName"/> or <paramref name="parameters"/> is null. </exception>
         public static async Task<Model5> CreateOrUpdateModel5Async(this ResourceGroup resourceGroup, string model5SName, Model5 parameters, CancellationToken cancellationToken = default)
         {
             return await GetExtensionClient(resourceGroup).CreateOrUpdateModel5Async(model5SName, parameters, cancellationToken).ConfigureAwait(false);
@@ -78,8 +78,8 @@ namespace OmitOperationGroups
         /// <param name="model5SName"> The String to use. </param>
         /// <param name="parameters"> The Model5 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="System.ArgumentException"> <paramref name="model5SName"/> is null or empty. </exception>
-        /// <exception cref="System.ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="System.ArgumentException"> <paramref name="model5SName"/> is empty. </exception>
+        /// <exception cref="System.ArgumentNullException"> <paramref name="model5SName"/> or <paramref name="parameters"/> is null. </exception>
         public static Model5 CreateOrUpdateModel5(this ResourceGroup resourceGroup, string model5SName, Model5 parameters, CancellationToken cancellationToken = default)
         {
             return GetExtensionClient(resourceGroup).CreateOrUpdateModel5(model5SName, parameters, cancellationToken);
@@ -91,7 +91,8 @@ namespace OmitOperationGroups
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="model5SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="System.ArgumentException"> <paramref name="model5SName"/> is null or empty. </exception>
+        /// <exception cref="System.ArgumentException"> <paramref name="model5SName"/> is empty. </exception>
+        /// <exception cref="System.ArgumentNullException"> <paramref name="model5SName"/> is null. </exception>
         public static async Task<Model5> GetModel5Async(this ResourceGroup resourceGroup, string model5SName, CancellationToken cancellationToken = default)
         {
             return await GetExtensionClient(resourceGroup).GetModel5Async(model5SName, cancellationToken).ConfigureAwait(false);
@@ -103,7 +104,8 @@ namespace OmitOperationGroups
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="model5SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="System.ArgumentException"> <paramref name="model5SName"/> is null or empty. </exception>
+        /// <exception cref="System.ArgumentException"> <paramref name="model5SName"/> is empty. </exception>
+        /// <exception cref="System.ArgumentNullException"> <paramref name="model5SName"/> is null. </exception>
         public static Model5 GetModel5(this ResourceGroup resourceGroup, string model5SName, CancellationToken cancellationToken = default)
         {
             return GetExtensionClient(resourceGroup).GetModel5(model5SName, cancellationToken);

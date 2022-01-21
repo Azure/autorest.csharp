@@ -59,8 +59,8 @@ namespace MgmtMultipleParentResource
         /// <param name="instanceId"> The instance ID of the virtual machine. </param>
         /// <param name="subBody"> Parameters supplied to the Create Virtual Machine RunCommand operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="instanceId"/> is null or empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="subBody"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="instanceId"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="instanceId"/> or <paramref name="subBody"/> is null. </exception>
         public virtual SubParentCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string instanceId, SubParentData subBody, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(instanceId, nameof(instanceId));
@@ -94,8 +94,8 @@ namespace MgmtMultipleParentResource
         /// <param name="instanceId"> The instance ID of the virtual machine. </param>
         /// <param name="subBody"> Parameters supplied to the Create Virtual Machine RunCommand operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="instanceId"/> is null or empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="subBody"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="instanceId"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="instanceId"/> or <paramref name="subBody"/> is null. </exception>
         public async virtual Task<SubParentCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string instanceId, SubParentData subBody, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(instanceId, nameof(instanceId));
@@ -128,7 +128,8 @@ namespace MgmtMultipleParentResource
         /// <param name="instanceId"> The instance ID of the virtual machine. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="instanceId"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="instanceId"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="instanceId"/> is null. </exception>
         public virtual Response<SubParent> Get(string instanceId, string expand = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(instanceId, nameof(instanceId));
@@ -156,7 +157,8 @@ namespace MgmtMultipleParentResource
         /// <param name="instanceId"> The instance ID of the virtual machine. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="instanceId"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="instanceId"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="instanceId"/> is null. </exception>
         public async virtual Task<Response<SubParent>> GetAsync(string instanceId, string expand = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(instanceId, nameof(instanceId));
@@ -181,7 +183,8 @@ namespace MgmtMultipleParentResource
         /// <param name="instanceId"> The instance ID of the virtual machine. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="instanceId"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="instanceId"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="instanceId"/> is null. </exception>
         public virtual Response<SubParent> GetIfExists(string instanceId, string expand = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(instanceId, nameof(instanceId));
@@ -206,7 +209,8 @@ namespace MgmtMultipleParentResource
         /// <param name="instanceId"> The instance ID of the virtual machine. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="instanceId"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="instanceId"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="instanceId"/> is null. </exception>
         public async virtual Task<Response<SubParent>> GetIfExistsAsync(string instanceId, string expand = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(instanceId, nameof(instanceId));
@@ -231,7 +235,8 @@ namespace MgmtMultipleParentResource
         /// <param name="instanceId"> The instance ID of the virtual machine. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="instanceId"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="instanceId"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="instanceId"/> is null. </exception>
         public virtual Response<bool> Exists(string instanceId, string expand = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(instanceId, nameof(instanceId));
@@ -254,7 +259,8 @@ namespace MgmtMultipleParentResource
         /// <param name="instanceId"> The instance ID of the virtual machine. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="instanceId"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="instanceId"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="instanceId"/> is null. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string instanceId, string expand = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(instanceId, nameof(instanceId));

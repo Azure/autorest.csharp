@@ -223,10 +223,7 @@ namespace MgmtParamOrdering
         /// <returns> The updated resource with the tag added. </returns>
         public async virtual Task<Response<EnvironmentContainerResource>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrWhiteSpace(key))
-            {
-                throw new ArgumentNullException(nameof(key), $"{nameof(key)} provided cannot be null or a whitespace.");
-            }
+            Argument.AssertNotNullOrEmpty(key, nameof(key));
 
             using var scope = _clientDiagnostics.CreateScope("EnvironmentContainerResource.AddTag");
             scope.Start();
@@ -252,10 +249,7 @@ namespace MgmtParamOrdering
         /// <returns> The updated resource with the tag added. </returns>
         public virtual Response<EnvironmentContainerResource> AddTag(string key, string value, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrWhiteSpace(key))
-            {
-                throw new ArgumentNullException(nameof(key), $"{nameof(key)} provided cannot be null or a whitespace.");
-            }
+            Argument.AssertNotNullOrEmpty(key, nameof(key));
 
             using var scope = _clientDiagnostics.CreateScope("EnvironmentContainerResource.AddTag");
             scope.Start();
@@ -338,10 +332,7 @@ namespace MgmtParamOrdering
         /// <returns> The updated resource with the tag removed. </returns>
         public async virtual Task<Response<EnvironmentContainerResource>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrWhiteSpace(key))
-            {
-                throw new ArgumentNullException(nameof(key), $"{nameof(key)} provided cannot be null or a whitespace.");
-            }
+            Argument.AssertNotNullOrEmpty(key, nameof(key));
 
             using var scope = _clientDiagnostics.CreateScope("EnvironmentContainerResource.RemoveTag");
             scope.Start();
@@ -366,10 +357,7 @@ namespace MgmtParamOrdering
         /// <returns> The updated resource with the tag removed. </returns>
         public virtual Response<EnvironmentContainerResource> RemoveTag(string key, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrWhiteSpace(key))
-            {
-                throw new ArgumentNullException(nameof(key), $"{nameof(key)} provided cannot be null or a whitespace.");
-            }
+            Argument.AssertNotNullOrEmpty(key, nameof(key));
 
             using var scope = _clientDiagnostics.CreateScope("EnvironmentContainerResource.RemoveTag");
             scope.Start();

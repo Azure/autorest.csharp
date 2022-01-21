@@ -61,8 +61,8 @@ namespace MgmtListMethods
         /// <param name="subParentName"> Name. </param>
         /// <param name="parameters"> Parameters supplied to the Create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="subParentName"/> is null or empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subParentName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subParentName"/> or <paramref name="parameters"/> is null. </exception>
         public virtual SubParentCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string subParentName, SubParentData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subParentName, nameof(subParentName));
@@ -96,8 +96,8 @@ namespace MgmtListMethods
         /// <param name="subParentName"> Name. </param>
         /// <param name="parameters"> Parameters supplied to the Create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="subParentName"/> is null or empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subParentName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subParentName"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<SubParentCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string subParentName, SubParentData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subParentName, nameof(subParentName));
@@ -129,7 +129,8 @@ namespace MgmtListMethods
         /// <summary> Retrieves information. </summary>
         /// <param name="subParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="subParentName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subParentName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subParentName"/> is null. </exception>
         public virtual Response<SubParent> Get(string subParentName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subParentName, nameof(subParentName));
@@ -156,7 +157,8 @@ namespace MgmtListMethods
         /// <summary> Retrieves information. </summary>
         /// <param name="subParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="subParentName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subParentName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subParentName"/> is null. </exception>
         public async virtual Task<Response<SubParent>> GetAsync(string subParentName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subParentName, nameof(subParentName));
@@ -180,7 +182,8 @@ namespace MgmtListMethods
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="subParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="subParentName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subParentName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subParentName"/> is null. </exception>
         public virtual Response<SubParent> GetIfExists(string subParentName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subParentName, nameof(subParentName));
@@ -204,7 +207,8 @@ namespace MgmtListMethods
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="subParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="subParentName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subParentName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subParentName"/> is null. </exception>
         public async virtual Task<Response<SubParent>> GetIfExistsAsync(string subParentName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subParentName, nameof(subParentName));
@@ -228,7 +232,8 @@ namespace MgmtListMethods
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="subParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="subParentName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subParentName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subParentName"/> is null. </exception>
         public virtual Response<bool> Exists(string subParentName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subParentName, nameof(subParentName));
@@ -250,7 +255,8 @@ namespace MgmtListMethods
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="subParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="subParentName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subParentName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subParentName"/> is null. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string subParentName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subParentName, nameof(subParentName));

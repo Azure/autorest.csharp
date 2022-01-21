@@ -84,8 +84,8 @@ namespace ExactMatchFlattenInheritance
         /// <param name="name"> The String to use. </param>
         /// <param name="parameters"> The AzureResourceFlattenModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="System.ArgumentException"> <paramref name="name"/> is null or empty. </exception>
-        /// <exception cref="System.ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="System.ArgumentException"> <paramref name="name"/> is empty. </exception>
+        /// <exception cref="System.ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
         public static async Task<AzureResourceFlattenModel2> PutAzureResourceFlattenModel2Async(this ResourceGroup resourceGroup, string name, AzureResourceFlattenModel2 parameters, CancellationToken cancellationToken = default)
         {
             return await GetExtensionClient(resourceGroup).PutAzureResourceFlattenModel2Async(name, parameters, cancellationToken).ConfigureAwait(false);
@@ -98,8 +98,8 @@ namespace ExactMatchFlattenInheritance
         /// <param name="name"> The String to use. </param>
         /// <param name="parameters"> The AzureResourceFlattenModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="System.ArgumentException"> <paramref name="name"/> is null or empty. </exception>
-        /// <exception cref="System.ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="System.ArgumentException"> <paramref name="name"/> is empty. </exception>
+        /// <exception cref="System.ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
         public static AzureResourceFlattenModel2 PutAzureResourceFlattenModel2(this ResourceGroup resourceGroup, string name, AzureResourceFlattenModel2 parameters, CancellationToken cancellationToken = default)
         {
             return GetExtensionClient(resourceGroup).PutAzureResourceFlattenModel2(name, parameters, cancellationToken);
@@ -111,7 +111,8 @@ namespace ExactMatchFlattenInheritance
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="System.ArgumentException"> <paramref name="name"/> is null or empty. </exception>
+        /// <exception cref="System.ArgumentException"> <paramref name="name"/> is empty. </exception>
+        /// <exception cref="System.ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public static async Task<AzureResourceFlattenModel2> GetAzureResourceFlattenModel2Async(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
         {
             return await GetExtensionClient(resourceGroup).GetAzureResourceFlattenModel2Async(name, cancellationToken).ConfigureAwait(false);
@@ -123,7 +124,8 @@ namespace ExactMatchFlattenInheritance
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="System.ArgumentException"> <paramref name="name"/> is null or empty. </exception>
+        /// <exception cref="System.ArgumentException"> <paramref name="name"/> is empty. </exception>
+        /// <exception cref="System.ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public static AzureResourceFlattenModel2 GetAzureResourceFlattenModel2(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
         {
             return GetExtensionClient(resourceGroup).GetAzureResourceFlattenModel2(name, cancellationToken);
@@ -158,8 +160,8 @@ namespace ExactMatchFlattenInheritance
         /// <param name="name"> The String to use. </param>
         /// <param name="parameters"> The AzureResourceFlattenModel3 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="System.ArgumentException"> <paramref name="name"/> is null or empty. </exception>
-        /// <exception cref="System.ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="System.ArgumentException"> <paramref name="name"/> is empty. </exception>
+        /// <exception cref="System.ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
         public static async Task<AzureResourceFlattenModel3> PutAzureResourceFlattenModel3Async(this ResourceGroup resourceGroup, string name, AzureResourceFlattenModel3 parameters, CancellationToken cancellationToken = default)
         {
             return await GetExtensionClient(resourceGroup).PutAzureResourceFlattenModel3Async(name, parameters, cancellationToken).ConfigureAwait(false);
@@ -172,8 +174,8 @@ namespace ExactMatchFlattenInheritance
         /// <param name="name"> The String to use. </param>
         /// <param name="parameters"> The AzureResourceFlattenModel3 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="System.ArgumentException"> <paramref name="name"/> is null or empty. </exception>
-        /// <exception cref="System.ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="System.ArgumentException"> <paramref name="name"/> is empty. </exception>
+        /// <exception cref="System.ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
         public static AzureResourceFlattenModel3 PutAzureResourceFlattenModel3(this ResourceGroup resourceGroup, string name, AzureResourceFlattenModel3 parameters, CancellationToken cancellationToken = default)
         {
             return GetExtensionClient(resourceGroup).PutAzureResourceFlattenModel3(name, parameters, cancellationToken);
@@ -185,7 +187,8 @@ namespace ExactMatchFlattenInheritance
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="System.ArgumentException"> <paramref name="name"/> is null or empty. </exception>
+        /// <exception cref="System.ArgumentException"> <paramref name="name"/> is empty. </exception>
+        /// <exception cref="System.ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public static async Task<AzureResourceFlattenModel3> GetAzureResourceFlattenModel3Async(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
         {
             return await GetExtensionClient(resourceGroup).GetAzureResourceFlattenModel3Async(name, cancellationToken).ConfigureAwait(false);
@@ -197,7 +200,8 @@ namespace ExactMatchFlattenInheritance
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="System.ArgumentException"> <paramref name="name"/> is null or empty. </exception>
+        /// <exception cref="System.ArgumentException"> <paramref name="name"/> is empty. </exception>
+        /// <exception cref="System.ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public static AzureResourceFlattenModel3 GetAzureResourceFlattenModel3(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
         {
             return GetExtensionClient(resourceGroup).GetAzureResourceFlattenModel3(name, cancellationToken);
@@ -232,8 +236,8 @@ namespace ExactMatchFlattenInheritance
         /// <param name="name"> The String to use. </param>
         /// <param name="parameters"> The AzureResourceFlattenModel4 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="System.ArgumentException"> <paramref name="name"/> is null or empty. </exception>
-        /// <exception cref="System.ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="System.ArgumentException"> <paramref name="name"/> is empty. </exception>
+        /// <exception cref="System.ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
         public static async Task<AzureResourceFlattenModel4> PutAzureResourceFlattenModel4Async(this ResourceGroup resourceGroup, string name, AzureResourceFlattenModel4 parameters, CancellationToken cancellationToken = default)
         {
             return await GetExtensionClient(resourceGroup).PutAzureResourceFlattenModel4Async(name, parameters, cancellationToken).ConfigureAwait(false);
@@ -246,8 +250,8 @@ namespace ExactMatchFlattenInheritance
         /// <param name="name"> The String to use. </param>
         /// <param name="parameters"> The AzureResourceFlattenModel4 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="System.ArgumentException"> <paramref name="name"/> is null or empty. </exception>
-        /// <exception cref="System.ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="System.ArgumentException"> <paramref name="name"/> is empty. </exception>
+        /// <exception cref="System.ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
         public static AzureResourceFlattenModel4 PutAzureResourceFlattenModel4(this ResourceGroup resourceGroup, string name, AzureResourceFlattenModel4 parameters, CancellationToken cancellationToken = default)
         {
             return GetExtensionClient(resourceGroup).PutAzureResourceFlattenModel4(name, parameters, cancellationToken);
@@ -259,7 +263,8 @@ namespace ExactMatchFlattenInheritance
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="System.ArgumentException"> <paramref name="name"/> is null or empty. </exception>
+        /// <exception cref="System.ArgumentException"> <paramref name="name"/> is empty. </exception>
+        /// <exception cref="System.ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public static async Task<AzureResourceFlattenModel4> GetAzureResourceFlattenModel4Async(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
         {
             return await GetExtensionClient(resourceGroup).GetAzureResourceFlattenModel4Async(name, cancellationToken).ConfigureAwait(false);
@@ -271,7 +276,8 @@ namespace ExactMatchFlattenInheritance
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="System.ArgumentException"> <paramref name="name"/> is null or empty. </exception>
+        /// <exception cref="System.ArgumentException"> <paramref name="name"/> is empty. </exception>
+        /// <exception cref="System.ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public static AzureResourceFlattenModel4 GetAzureResourceFlattenModel4(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
         {
             return GetExtensionClient(resourceGroup).GetAzureResourceFlattenModel4(name, cancellationToken);
@@ -306,7 +312,8 @@ namespace ExactMatchFlattenInheritance
         /// <param name="name"> The String to use. </param>
         /// <param name="foo"> New property. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="System.ArgumentException"> <paramref name="name"/> is null or empty. </exception>
+        /// <exception cref="System.ArgumentException"> <paramref name="name"/> is empty. </exception>
+        /// <exception cref="System.ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public static async Task<AzureResourceFlattenModel5> PutAzureResourceFlattenModel5Async(this ResourceGroup resourceGroup, string name, int? foo = null, CancellationToken cancellationToken = default)
         {
             return await GetExtensionClient(resourceGroup).PutAzureResourceFlattenModel5Async(name, foo, cancellationToken).ConfigureAwait(false);
@@ -319,7 +326,8 @@ namespace ExactMatchFlattenInheritance
         /// <param name="name"> The String to use. </param>
         /// <param name="foo"> New property. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="System.ArgumentException"> <paramref name="name"/> is null or empty. </exception>
+        /// <exception cref="System.ArgumentException"> <paramref name="name"/> is empty. </exception>
+        /// <exception cref="System.ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public static AzureResourceFlattenModel5 PutAzureResourceFlattenModel5(this ResourceGroup resourceGroup, string name, int? foo = null, CancellationToken cancellationToken = default)
         {
             return GetExtensionClient(resourceGroup).PutAzureResourceFlattenModel5(name, foo, cancellationToken);
@@ -331,7 +339,8 @@ namespace ExactMatchFlattenInheritance
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="System.ArgumentException"> <paramref name="name"/> is null or empty. </exception>
+        /// <exception cref="System.ArgumentException"> <paramref name="name"/> is empty. </exception>
+        /// <exception cref="System.ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public static async Task<AzureResourceFlattenModel5> GetAzureResourceFlattenModel5Async(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
         {
             return await GetExtensionClient(resourceGroup).GetAzureResourceFlattenModel5Async(name, cancellationToken).ConfigureAwait(false);
@@ -343,7 +352,8 @@ namespace ExactMatchFlattenInheritance
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="System.ArgumentException"> <paramref name="name"/> is null or empty. </exception>
+        /// <exception cref="System.ArgumentException"> <paramref name="name"/> is empty. </exception>
+        /// <exception cref="System.ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public static AzureResourceFlattenModel5 GetAzureResourceFlattenModel5(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
         {
             return GetExtensionClient(resourceGroup).GetAzureResourceFlattenModel5(name, cancellationToken);

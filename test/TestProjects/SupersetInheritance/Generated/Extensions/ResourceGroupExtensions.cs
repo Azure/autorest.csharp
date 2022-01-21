@@ -51,8 +51,8 @@ namespace SupersetInheritance
         /// <param name="supersetModel2SName"> The String to use. </param>
         /// <param name="parameters"> The SupersetModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="System.ArgumentException"> <paramref name="supersetModel2SName"/> is null or empty. </exception>
-        /// <exception cref="System.ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="System.ArgumentException"> <paramref name="supersetModel2SName"/> is empty. </exception>
+        /// <exception cref="System.ArgumentNullException"> <paramref name="supersetModel2SName"/> or <paramref name="parameters"/> is null. </exception>
         public static async Task<SupersetModel2> PutSupersetModel2Async(this ResourceGroup resourceGroup, string supersetModel2SName, SupersetModel2 parameters, CancellationToken cancellationToken = default)
         {
             return await GetExtensionClient(resourceGroup).PutSupersetModel2Async(supersetModel2SName, parameters, cancellationToken).ConfigureAwait(false);
@@ -65,8 +65,8 @@ namespace SupersetInheritance
         /// <param name="supersetModel2SName"> The String to use. </param>
         /// <param name="parameters"> The SupersetModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="System.ArgumentException"> <paramref name="supersetModel2SName"/> is null or empty. </exception>
-        /// <exception cref="System.ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="System.ArgumentException"> <paramref name="supersetModel2SName"/> is empty. </exception>
+        /// <exception cref="System.ArgumentNullException"> <paramref name="supersetModel2SName"/> or <paramref name="parameters"/> is null. </exception>
         public static SupersetModel2 PutSupersetModel2(this ResourceGroup resourceGroup, string supersetModel2SName, SupersetModel2 parameters, CancellationToken cancellationToken = default)
         {
             return GetExtensionClient(resourceGroup).PutSupersetModel2(supersetModel2SName, parameters, cancellationToken);
@@ -78,7 +78,8 @@ namespace SupersetInheritance
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="supersetModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="System.ArgumentException"> <paramref name="supersetModel2SName"/> is null or empty. </exception>
+        /// <exception cref="System.ArgumentException"> <paramref name="supersetModel2SName"/> is empty. </exception>
+        /// <exception cref="System.ArgumentNullException"> <paramref name="supersetModel2SName"/> is null. </exception>
         public static async Task<SupersetModel2> GetSupersetModel2Async(this ResourceGroup resourceGroup, string supersetModel2SName, CancellationToken cancellationToken = default)
         {
             return await GetExtensionClient(resourceGroup).GetSupersetModel2Async(supersetModel2SName, cancellationToken).ConfigureAwait(false);
@@ -90,7 +91,8 @@ namespace SupersetInheritance
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="supersetModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="System.ArgumentException"> <paramref name="supersetModel2SName"/> is null or empty. </exception>
+        /// <exception cref="System.ArgumentException"> <paramref name="supersetModel2SName"/> is empty. </exception>
+        /// <exception cref="System.ArgumentNullException"> <paramref name="supersetModel2SName"/> is null. </exception>
         public static SupersetModel2 GetSupersetModel2(this ResourceGroup resourceGroup, string supersetModel2SName, CancellationToken cancellationToken = default)
         {
             return GetExtensionClient(resourceGroup).GetSupersetModel2(supersetModel2SName, cancellationToken);
@@ -103,8 +105,8 @@ namespace SupersetInheritance
         /// <param name="supersetModel3SName"> The String to use. </param>
         /// <param name="parameters"> The SupersetModel3 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="System.ArgumentException"> <paramref name="supersetModel3SName"/> is null or empty. </exception>
-        /// <exception cref="System.ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="System.ArgumentException"> <paramref name="supersetModel3SName"/> is empty. </exception>
+        /// <exception cref="System.ArgumentNullException"> <paramref name="supersetModel3SName"/> or <paramref name="parameters"/> is null. </exception>
         public static async Task<SupersetModel3> PutSupersetModel3Async(this ResourceGroup resourceGroup, string supersetModel3SName, SupersetModel3 parameters, CancellationToken cancellationToken = default)
         {
             return await GetExtensionClient(resourceGroup).PutSupersetModel3Async(supersetModel3SName, parameters, cancellationToken).ConfigureAwait(false);
@@ -117,8 +119,8 @@ namespace SupersetInheritance
         /// <param name="supersetModel3SName"> The String to use. </param>
         /// <param name="parameters"> The SupersetModel3 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="System.ArgumentException"> <paramref name="supersetModel3SName"/> is null or empty. </exception>
-        /// <exception cref="System.ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="System.ArgumentException"> <paramref name="supersetModel3SName"/> is empty. </exception>
+        /// <exception cref="System.ArgumentNullException"> <paramref name="supersetModel3SName"/> or <paramref name="parameters"/> is null. </exception>
         public static SupersetModel3 PutSupersetModel3(this ResourceGroup resourceGroup, string supersetModel3SName, SupersetModel3 parameters, CancellationToken cancellationToken = default)
         {
             return GetExtensionClient(resourceGroup).PutSupersetModel3(supersetModel3SName, parameters, cancellationToken);
@@ -130,7 +132,8 @@ namespace SupersetInheritance
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="supersetModel3SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="System.ArgumentException"> <paramref name="supersetModel3SName"/> is null or empty. </exception>
+        /// <exception cref="System.ArgumentException"> <paramref name="supersetModel3SName"/> is empty. </exception>
+        /// <exception cref="System.ArgumentNullException"> <paramref name="supersetModel3SName"/> is null. </exception>
         public static async Task<SupersetModel3> GetSupersetModel3Async(this ResourceGroup resourceGroup, string supersetModel3SName, CancellationToken cancellationToken = default)
         {
             return await GetExtensionClient(resourceGroup).GetSupersetModel3Async(supersetModel3SName, cancellationToken).ConfigureAwait(false);
@@ -142,7 +145,8 @@ namespace SupersetInheritance
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="supersetModel3SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="System.ArgumentException"> <paramref name="supersetModel3SName"/> is null or empty. </exception>
+        /// <exception cref="System.ArgumentException"> <paramref name="supersetModel3SName"/> is empty. </exception>
+        /// <exception cref="System.ArgumentNullException"> <paramref name="supersetModel3SName"/> is null. </exception>
         public static SupersetModel3 GetSupersetModel3(this ResourceGroup resourceGroup, string supersetModel3SName, CancellationToken cancellationToken = default)
         {
             return GetExtensionClient(resourceGroup).GetSupersetModel3(supersetModel3SName, cancellationToken);

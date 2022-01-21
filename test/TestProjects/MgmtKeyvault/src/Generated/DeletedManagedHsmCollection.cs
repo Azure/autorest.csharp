@@ -57,7 +57,8 @@ namespace MgmtKeyvault
         /// <param name="location"> The location of the deleted managed HSM. </param>
         /// <param name="name"> The name of the deleted managed HSM. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="name"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="name"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="name"/> is null. </exception>
         public virtual Response<DeletedManagedHsm> Get(string location, string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));
@@ -86,7 +87,8 @@ namespace MgmtKeyvault
         /// <param name="location"> The location of the deleted managed HSM. </param>
         /// <param name="name"> The name of the deleted managed HSM. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="name"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="name"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="name"/> is null. </exception>
         public async virtual Task<Response<DeletedManagedHsm>> GetAsync(string location, string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));
@@ -112,7 +114,8 @@ namespace MgmtKeyvault
         /// <param name="location"> The location of the deleted managed HSM. </param>
         /// <param name="name"> The name of the deleted managed HSM. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="name"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="name"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="name"/> is null. </exception>
         public virtual Response<DeletedManagedHsm> GetIfExists(string location, string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));
@@ -138,7 +141,8 @@ namespace MgmtKeyvault
         /// <param name="location"> The location of the deleted managed HSM. </param>
         /// <param name="name"> The name of the deleted managed HSM. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="name"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="name"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="name"/> is null. </exception>
         public async virtual Task<Response<DeletedManagedHsm>> GetIfExistsAsync(string location, string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));
@@ -164,7 +168,8 @@ namespace MgmtKeyvault
         /// <param name="location"> The location of the deleted managed HSM. </param>
         /// <param name="name"> The name of the deleted managed HSM. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="name"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="name"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="name"/> is null. </exception>
         public virtual Response<bool> Exists(string location, string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));
@@ -188,7 +193,8 @@ namespace MgmtKeyvault
         /// <param name="location"> The location of the deleted managed HSM. </param>
         /// <param name="name"> The name of the deleted managed HSM. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="name"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="name"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="name"/> is null. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string location, string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));

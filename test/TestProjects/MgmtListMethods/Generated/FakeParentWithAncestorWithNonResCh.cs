@@ -173,10 +173,7 @@ namespace MgmtListMethods
         /// <returns> The updated resource with the tag added. </returns>
         public async virtual Task<Response<FakeParentWithAncestorWithNonResCh>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrWhiteSpace(key))
-            {
-                throw new ArgumentNullException(nameof(key), $"{nameof(key)} provided cannot be null or a whitespace.");
-            }
+            Argument.AssertNotNullOrEmpty(key, nameof(key));
 
             using var scope = _clientDiagnostics.CreateScope("FakeParentWithAncestorWithNonResCh.AddTag");
             scope.Start();
@@ -202,10 +199,7 @@ namespace MgmtListMethods
         /// <returns> The updated resource with the tag added. </returns>
         public virtual Response<FakeParentWithAncestorWithNonResCh> AddTag(string key, string value, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrWhiteSpace(key))
-            {
-                throw new ArgumentNullException(nameof(key), $"{nameof(key)} provided cannot be null or a whitespace.");
-            }
+            Argument.AssertNotNullOrEmpty(key, nameof(key));
 
             using var scope = _clientDiagnostics.CreateScope("FakeParentWithAncestorWithNonResCh.AddTag");
             scope.Start();
@@ -288,10 +282,7 @@ namespace MgmtListMethods
         /// <returns> The updated resource with the tag removed. </returns>
         public async virtual Task<Response<FakeParentWithAncestorWithNonResCh>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrWhiteSpace(key))
-            {
-                throw new ArgumentNullException(nameof(key), $"{nameof(key)} provided cannot be null or a whitespace.");
-            }
+            Argument.AssertNotNullOrEmpty(key, nameof(key));
 
             using var scope = _clientDiagnostics.CreateScope("FakeParentWithAncestorWithNonResCh.RemoveTag");
             scope.Start();
@@ -316,10 +307,7 @@ namespace MgmtListMethods
         /// <returns> The updated resource with the tag removed. </returns>
         public virtual Response<FakeParentWithAncestorWithNonResCh> RemoveTag(string key, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrWhiteSpace(key))
-            {
-                throw new ArgumentNullException(nameof(key), $"{nameof(key)} provided cannot be null or a whitespace.");
-            }
+            Argument.AssertNotNullOrEmpty(key, nameof(key));
 
             using var scope = _clientDiagnostics.CreateScope("FakeParentWithAncestorWithNonResCh.RemoveTag");
             scope.Start();

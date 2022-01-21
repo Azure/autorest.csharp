@@ -171,10 +171,7 @@ namespace SupersetInheritance
         /// <returns> The updated resource with the tag added. </returns>
         public async virtual Task<Response<SupersetModel4>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrWhiteSpace(key))
-            {
-                throw new ArgumentNullException(nameof(key), $"{nameof(key)} provided cannot be null or a whitespace.");
-            }
+            Argument.AssertNotNullOrEmpty(key, nameof(key));
 
             using var scope = _clientDiagnostics.CreateScope("SupersetModel4.AddTag");
             scope.Start();
@@ -200,10 +197,7 @@ namespace SupersetInheritance
         /// <returns> The updated resource with the tag added. </returns>
         public virtual Response<SupersetModel4> AddTag(string key, string value, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrWhiteSpace(key))
-            {
-                throw new ArgumentNullException(nameof(key), $"{nameof(key)} provided cannot be null or a whitespace.");
-            }
+            Argument.AssertNotNullOrEmpty(key, nameof(key));
 
             using var scope = _clientDiagnostics.CreateScope("SupersetModel4.AddTag");
             scope.Start();
@@ -286,10 +280,7 @@ namespace SupersetInheritance
         /// <returns> The updated resource with the tag removed. </returns>
         public async virtual Task<Response<SupersetModel4>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrWhiteSpace(key))
-            {
-                throw new ArgumentNullException(nameof(key), $"{nameof(key)} provided cannot be null or a whitespace.");
-            }
+            Argument.AssertNotNullOrEmpty(key, nameof(key));
 
             using var scope = _clientDiagnostics.CreateScope("SupersetModel4.RemoveTag");
             scope.Start();
@@ -314,10 +305,7 @@ namespace SupersetInheritance
         /// <returns> The updated resource with the tag removed. </returns>
         public virtual Response<SupersetModel4> RemoveTag(string key, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrWhiteSpace(key))
-            {
-                throw new ArgumentNullException(nameof(key), $"{nameof(key)} provided cannot be null or a whitespace.");
-            }
+            Argument.AssertNotNullOrEmpty(key, nameof(key));
 
             using var scope = _clientDiagnostics.CreateScope("SupersetModel4.RemoveTag");
             scope.Start();

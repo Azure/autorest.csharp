@@ -60,8 +60,8 @@ namespace MgmtListMethods
         /// <param name="mgmtGrpParentWithNonResChName"> Name. </param>
         /// <param name="parameters"> Parameters supplied to the Create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="mgmtGrpParentWithNonResChName"/> is null or empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="mgmtGrpParentWithNonResChName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="mgmtGrpParentWithNonResChName"/> or <paramref name="parameters"/> is null. </exception>
         public virtual MgmtGrpParentWithNonResChCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string mgmtGrpParentWithNonResChName, MgmtGrpParentWithNonResChData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(mgmtGrpParentWithNonResChName, nameof(mgmtGrpParentWithNonResChName));
@@ -95,8 +95,8 @@ namespace MgmtListMethods
         /// <param name="mgmtGrpParentWithNonResChName"> Name. </param>
         /// <param name="parameters"> Parameters supplied to the Create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="mgmtGrpParentWithNonResChName"/> is null or empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="mgmtGrpParentWithNonResChName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="mgmtGrpParentWithNonResChName"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<MgmtGrpParentWithNonResChCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string mgmtGrpParentWithNonResChName, MgmtGrpParentWithNonResChData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(mgmtGrpParentWithNonResChName, nameof(mgmtGrpParentWithNonResChName));
@@ -128,7 +128,8 @@ namespace MgmtListMethods
         /// <summary> Retrieves information. </summary>
         /// <param name="mgmtGrpParentWithNonResChName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="mgmtGrpParentWithNonResChName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="mgmtGrpParentWithNonResChName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="mgmtGrpParentWithNonResChName"/> is null. </exception>
         public virtual Response<MgmtGrpParentWithNonResCh> Get(string mgmtGrpParentWithNonResChName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(mgmtGrpParentWithNonResChName, nameof(mgmtGrpParentWithNonResChName));
@@ -155,7 +156,8 @@ namespace MgmtListMethods
         /// <summary> Retrieves information. </summary>
         /// <param name="mgmtGrpParentWithNonResChName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="mgmtGrpParentWithNonResChName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="mgmtGrpParentWithNonResChName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="mgmtGrpParentWithNonResChName"/> is null. </exception>
         public async virtual Task<Response<MgmtGrpParentWithNonResCh>> GetAsync(string mgmtGrpParentWithNonResChName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(mgmtGrpParentWithNonResChName, nameof(mgmtGrpParentWithNonResChName));
@@ -179,7 +181,8 @@ namespace MgmtListMethods
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="mgmtGrpParentWithNonResChName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="mgmtGrpParentWithNonResChName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="mgmtGrpParentWithNonResChName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="mgmtGrpParentWithNonResChName"/> is null. </exception>
         public virtual Response<MgmtGrpParentWithNonResCh> GetIfExists(string mgmtGrpParentWithNonResChName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(mgmtGrpParentWithNonResChName, nameof(mgmtGrpParentWithNonResChName));
@@ -203,7 +206,8 @@ namespace MgmtListMethods
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="mgmtGrpParentWithNonResChName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="mgmtGrpParentWithNonResChName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="mgmtGrpParentWithNonResChName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="mgmtGrpParentWithNonResChName"/> is null. </exception>
         public async virtual Task<Response<MgmtGrpParentWithNonResCh>> GetIfExistsAsync(string mgmtGrpParentWithNonResChName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(mgmtGrpParentWithNonResChName, nameof(mgmtGrpParentWithNonResChName));
@@ -227,7 +231,8 @@ namespace MgmtListMethods
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="mgmtGrpParentWithNonResChName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="mgmtGrpParentWithNonResChName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="mgmtGrpParentWithNonResChName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="mgmtGrpParentWithNonResChName"/> is null. </exception>
         public virtual Response<bool> Exists(string mgmtGrpParentWithNonResChName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(mgmtGrpParentWithNonResChName, nameof(mgmtGrpParentWithNonResChName));
@@ -249,7 +254,8 @@ namespace MgmtListMethods
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="mgmtGrpParentWithNonResChName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="mgmtGrpParentWithNonResChName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="mgmtGrpParentWithNonResChName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="mgmtGrpParentWithNonResChName"/> is null. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string mgmtGrpParentWithNonResChName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(mgmtGrpParentWithNonResChName, nameof(mgmtGrpParentWithNonResChName));
