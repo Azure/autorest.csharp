@@ -88,7 +88,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             using (_writer.Scope($"private string GetApiVersionOrNull({typeof(ResourceType)} resourceType)"))
             {
-                _writer.Line($"ArmClient.TryGetApiVersion(resourceType, out string apiVersion);");
+                _writer.Line($"{ArmClientReference}.TryGetApiVersion(resourceType, out string apiVersion);");
                 _writer.Line($"return apiVersion;");
             }
         }
@@ -98,7 +98,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             foreach (var client in This.RestClients)
             {
                 string? resourceName = client.Resource?.Type.Name;
-                string diagOptionsCtor = ConstructClientDiagnostic(_writer, GetProviderNamespaceFromReturnType(resourceName), DiagnosticOptionsProperty);
+                FormattableString diagOptionsCtor = ConstructClientDiagnostic(_writer, GetProviderNamespaceFromReturnType(resourceName), DiagnosticOptionsProperty);
                 _writer.Line($"private {typeof(ClientDiagnostics)} {GetClientDiagnosticsPropertyName(client)} => {GetClientDiagnosticFieldName(client)} ??= {diagOptionsCtor};");
                 string apiVersionString = resourceName == null ? string.Empty : $", GetApiVersionOrNull({resourceName}.ResourceType)";
                 string restCtor = GetRestConstructorString("new ", client, GetClientDiagnosticsPropertyName(client), PipelineProperty, DiagnosticOptionsProperty, ", Id.SubscriptionId", "BaseUri", apiVersionString);
@@ -143,7 +143,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 var filters = new CodeWriterDeclaration("filters");
                 _writer.Line($"{typeof(ResourceFilterCollection)} {filters:D} = new({resource.Type}.ResourceType);");
                 _writer.Line($"{filters}.SubstringFilter = filter;");
-                _writer.Line($"return {typeof(ResourceListOperations)}.{CreateMethodName("GetAtContext", async)}(ArmClient.GetSubscription(Id), {filters}, expand, top, cancellationToken);");
+                _writer.Line($"return {typeof(ResourceListOperations)}.{CreateMethodName("GetAtContext", async)}({ArmClientReference}.GetSubscription(Id), {filters}, expand, top, cancellationToken);");
             }
         }
     }

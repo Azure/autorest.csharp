@@ -119,7 +119,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             using (_writer.WriteMethodDeclaration(parentResourceConstructor))
             {
                 var allPossibleTypes = _resourceCollection.ResourceTypes.SelectMany(p => p.Value).Distinct();
-                string ctorString = ConstructClientDiagnostic(_writer, $"{_resource.Type.Name}.ResourceType.Namespace", DiagnosticOptionsProperty);
+                FormattableString ctorString = ConstructClientDiagnostic(_writer, $"{_resource.Type}.ResourceType.Namespace", DiagnosticOptionsProperty);
                 _writer.Line($"{ClientDiagnosticsField} = {ctorString};");
                 WriteRestClientAssignments();
                 foreach (var parameter in _resourceCollection.ExtraConstructorParameters)
@@ -282,7 +282,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             var newInstanceExpression = _resource.NewInstanceExpression(new[]
             {
-                new ParameterInvocation(_resource.ResourceParameter, w => w.Append($"ArmClient")),
+                new ParameterInvocation(_resource.ResourceParameter, w => w.Append($"{ArmClientReference}")),
                 new ParameterInvocation(_resource.ResourceDataParameter, dataExpression),
             });
             writer.Line($"return {typeof(Response)}.FromValue({newInstanceExpression}, response.GetRawResponse());");

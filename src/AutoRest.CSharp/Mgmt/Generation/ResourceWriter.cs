@@ -175,7 +175,7 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
             _writer.WriteMethodDocumentation(clientOptionsConstructor);
             using (_writer.WriteMethodDeclaration(clientOptionsConstructor))
             {
-                string ctorString = ConstructClientDiagnostic(_writer, "ResourceType.Namespace", DiagnosticOptionsProperty);
+                FormattableString ctorString = ConstructClientDiagnostic(_writer, $"ResourceType.Namespace", DiagnosticOptionsProperty);
                 _writer.Line($"{ClientDiagnosticsField} = {ctorString};");
                 WriteRestClientAssignments();
                 WriteDebugValidate(_writer);
@@ -184,7 +184,7 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
 
         protected void WriteRestClientAssignments()
         {
-            WriteRestClientConstructionForResource(_resource, This.RestClients, ", Id.SubscriptionId", ClientDiagnosticsField, DiagnosticOptionsProperty, "ArmClient", PipelineProperty, BaseUriField, "new ", false);
+            WriteRestClientConstructionForResource(_resource, This.RestClients, ", Id.SubscriptionId", ClientDiagnosticsField, DiagnosticOptionsProperty, PipelineProperty, BaseUriField, "new ", false);
         }
 
         protected virtual void WriteProperties()
@@ -475,7 +475,7 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
 
             var newInstanceExpression = _resource.NewInstanceExpression(new[]
             {
-                new ParameterInvocation(_resource.ResourceParameter, w => w.Append($"ArmClient")),
+                new ParameterInvocation(_resource.ResourceParameter, w => w.Append($"{ArmClientReference}")),
                 new ParameterInvocation(_resource.ResourceDataParameter, dataExpression),
             });
             _writer.Line($"return {typeof(Response)}.FromValue({newInstanceExpression}, originalResponse.GetRawResponse());");
@@ -519,7 +519,7 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
             {
                 // we cannot guarantee that the singleResourceSuffix can only have two segments (it has many different cases),
                 // therefore instead of using the extension method of ResourceIdentifier, we are just concatting this as a string
-                _writer.Line($"return new {resource.Type.Name}(ArmClient, new {typeof(Azure.Core.ResourceIdentifier)}(Id.ToString() + \"/{singletonResourceIdSuffix}\"));");
+                _writer.Line($"return new {resource.Type.Name}({ArmClientReference}, new {typeof(Azure.Core.ResourceIdentifier)}(Id.ToString() + \"/{singletonResourceIdSuffix}\"));");
             }
         }
     }

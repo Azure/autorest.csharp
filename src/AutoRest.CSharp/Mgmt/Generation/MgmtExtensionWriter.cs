@@ -127,9 +127,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Line();
             using (_writer.Scope($"private static {ExtensionOperationVariableType.Name}ExtensionClient GetExtensionClient({ExtensionOperationVariableType} {ExtensionOperationVariableName})"))
             {
-                using (_writer.Scope($"return {ExtensionOperationVariableName}.GetCachedClient((armClient) =>"))
+                using (_writer.Scope($"return {ExtensionOperationVariableName}.GetCachedClient(({ArmClientReference}) =>"))
                 {
-                    _writer.Line($"return new {ExtensionOperationVariableType.Name}ExtensionClient(armClient, {ExtensionOperationVariableName}.Id);");
+                    _writer.Line($"return new {ExtensionOperationVariableType.Name}ExtensionClient({ArmClientReference}, {ExtensionOperationVariableName}.Id);");
                 }
                 _writer.Line($");");
             }

@@ -132,7 +132,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
             string subIdVaraiable,
             string clientDiagVariable,
             string diagnosticOptionsVariable,
-            string armClientVariable,
             string pipelineVariable,
             string uriVariable,
             string accessType,
@@ -140,7 +139,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             var nameSpace = $"{resource.Type.Namespace}.Models";
             _writer.UseNamespace(nameSpace);
-            _writer.Line($"{armClientVariable}.TryGetApiVersion({resource.Type.Name}.ResourceType, out string apiVersion);");
+            _writer.Line($"{ArmClientReference}.TryGetApiVersion({resource.Type.Name}.ResourceType, out string apiVersion);");
             foreach (var restClient in restClients)
             {
                 var variableDeclaration = writeVariable ? $"{restClient.Type.Name} " : string.Empty;
@@ -148,20 +147,23 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        protected string GetProviderNamespaceFromReturnType(string? returnType)
+        protected FormattableString GetProviderNamespaceFromReturnType(string? returnType)
         {
             if (returnType is null)
-                return "_defaultRpNamespace";
+                return $"_defaultRpNamespace";
 
             var data = Context.Library.ResourceData.FirstOrDefault(data => data.Declaration.Name == returnType);
             if (data is not null)
                 return $"{returnType.Substring(0, returnType.Length - 4)}.ResourceType.Namespace";
 
             var resource = Context.Library.ArmResources.FirstOrDefault(resource => resource.Declaration.Name == returnType);
-            return resource is not null ? $"{returnType}.ResourceType.Namespace" : "_defaultRpNamespace";
+            if (resource is not null)
+                return $"{returnType}.ResourceType.Namespace";
+
+            return $"_defaultRpNamespace";
         }
 
-        protected string ConstructClientDiagnostic(CodeWriter writer, string providerNamespace, string diagnosticsOptionsVariable)
+        protected FormattableString ConstructClientDiagnostic(CodeWriter writer, FormattableString providerNamespace, string diagnosticsOptionsVariable)
         {
             return $"new {typeof(ClientDiagnostics)}(\"{This.Type.Namespace}\", {providerNamespace}, {diagnosticsOptionsVariable})";
         }
