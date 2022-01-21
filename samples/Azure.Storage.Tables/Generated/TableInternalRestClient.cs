@@ -482,7 +482,7 @@ namespace Azure.Storage.Tables
             }
         }
 
-        internal HttpMessage CreateUpdateEntityRequest(Enum1 dataServiceVersion, string table, string partitionKey, string rowKey, IDictionary<string, object> tableEntityProperties, int? timeout, QueryOptions queryOptions)
+        internal HttpMessage CreateUpdateEntityRequest(Enum1 dataServiceVersion, string table, string partitionKey, string rowKey, int? timeout, IDictionary<string, object> tableEntityProperties, QueryOptions queryOptions)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -529,12 +529,12 @@ namespace Azure.Storage.Tables
         /// <param name="table"> The name of the table. </param>
         /// <param name="partitionKey"> The partition key of the entity. </param>
         /// <param name="rowKey"> The row key of the entity. </param>
-        /// <param name="tableEntityProperties"> The properties for the table entity. </param>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
+        /// <param name="tableEntityProperties"> The properties for the table entity. </param>
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="table"/>, <paramref name="partitionKey"/>, or <paramref name="rowKey"/> is null. </exception>
-        public async Task<ResponseWithHeaders<TableInternalUpdateEntityHeaders>> UpdateEntityAsync(Enum1 dataServiceVersion, string table, string partitionKey, string rowKey, IDictionary<string, object> tableEntityProperties = null, int? timeout = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
+        public async Task<ResponseWithHeaders<TableInternalUpdateEntityHeaders>> UpdateEntityAsync(Enum1 dataServiceVersion, string table, string partitionKey, string rowKey, int? timeout = null, IDictionary<string, object> tableEntityProperties = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             if (table == null)
             {
@@ -549,7 +549,7 @@ namespace Azure.Storage.Tables
                 throw new ArgumentNullException(nameof(rowKey));
             }
 
-            using var message = CreateUpdateEntityRequest(dataServiceVersion, table, partitionKey, rowKey, tableEntityProperties, timeout, queryOptions);
+            using var message = CreateUpdateEntityRequest(dataServiceVersion, table, partitionKey, rowKey, timeout, tableEntityProperties, queryOptions);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             var headers = new TableInternalUpdateEntityHeaders(message.Response);
             switch (message.Response.Status)
@@ -566,12 +566,12 @@ namespace Azure.Storage.Tables
         /// <param name="table"> The name of the table. </param>
         /// <param name="partitionKey"> The partition key of the entity. </param>
         /// <param name="rowKey"> The row key of the entity. </param>
-        /// <param name="tableEntityProperties"> The properties for the table entity. </param>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
+        /// <param name="tableEntityProperties"> The properties for the table entity. </param>
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="table"/>, <paramref name="partitionKey"/>, or <paramref name="rowKey"/> is null. </exception>
-        public ResponseWithHeaders<TableInternalUpdateEntityHeaders> UpdateEntity(Enum1 dataServiceVersion, string table, string partitionKey, string rowKey, IDictionary<string, object> tableEntityProperties = null, int? timeout = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<TableInternalUpdateEntityHeaders> UpdateEntity(Enum1 dataServiceVersion, string table, string partitionKey, string rowKey, int? timeout = null, IDictionary<string, object> tableEntityProperties = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             if (table == null)
             {
@@ -586,7 +586,7 @@ namespace Azure.Storage.Tables
                 throw new ArgumentNullException(nameof(rowKey));
             }
 
-            using var message = CreateUpdateEntityRequest(dataServiceVersion, table, partitionKey, rowKey, tableEntityProperties, timeout, queryOptions);
+            using var message = CreateUpdateEntityRequest(dataServiceVersion, table, partitionKey, rowKey, timeout, tableEntityProperties, queryOptions);
             _pipeline.Send(message, cancellationToken);
             var headers = new TableInternalUpdateEntityHeaders(message.Response);
             switch (message.Response.Status)
@@ -699,7 +699,7 @@ namespace Azure.Storage.Tables
             }
         }
 
-        internal HttpMessage CreateInsertEntityRequest(Enum1 dataServiceVersion, string table, IDictionary<string, object> tableEntityProperties, int? timeout, QueryOptions queryOptions)
+        internal HttpMessage CreateInsertEntityRequest(Enum1 dataServiceVersion, string table, int? timeout, IDictionary<string, object> tableEntityProperties, QueryOptions queryOptions)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -739,19 +739,19 @@ namespace Azure.Storage.Tables
         /// <summary> Insert entity in a table. </summary>
         /// <param name="dataServiceVersion"> Specifies the data service version. </param>
         /// <param name="table"> The name of the table. </param>
-        /// <param name="tableEntityProperties"> The properties for the table entity. </param>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
+        /// <param name="tableEntityProperties"> The properties for the table entity. </param>
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="table"/> is null. </exception>
-        public async Task<ResponseWithHeaders<IReadOnlyDictionary<string, object>, TableInternalInsertEntityHeaders>> InsertEntityAsync(Enum1 dataServiceVersion, string table, IDictionary<string, object> tableEntityProperties = null, int? timeout = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
+        public async Task<ResponseWithHeaders<IReadOnlyDictionary<string, object>, TableInternalInsertEntityHeaders>> InsertEntityAsync(Enum1 dataServiceVersion, string table, int? timeout = null, IDictionary<string, object> tableEntityProperties = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             if (table == null)
             {
                 throw new ArgumentNullException(nameof(table));
             }
 
-            using var message = CreateInsertEntityRequest(dataServiceVersion, table, tableEntityProperties, timeout, queryOptions);
+            using var message = CreateInsertEntityRequest(dataServiceVersion, table, timeout, tableEntityProperties, queryOptions);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             var headers = new TableInternalInsertEntityHeaders(message.Response);
             switch (message.Response.Status)
@@ -776,19 +776,19 @@ namespace Azure.Storage.Tables
         /// <summary> Insert entity in a table. </summary>
         /// <param name="dataServiceVersion"> Specifies the data service version. </param>
         /// <param name="table"> The name of the table. </param>
-        /// <param name="tableEntityProperties"> The properties for the table entity. </param>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
+        /// <param name="tableEntityProperties"> The properties for the table entity. </param>
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="table"/> is null. </exception>
-        public ResponseWithHeaders<IReadOnlyDictionary<string, object>, TableInternalInsertEntityHeaders> InsertEntity(Enum1 dataServiceVersion, string table, IDictionary<string, object> tableEntityProperties = null, int? timeout = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<IReadOnlyDictionary<string, object>, TableInternalInsertEntityHeaders> InsertEntity(Enum1 dataServiceVersion, string table, int? timeout = null, IDictionary<string, object> tableEntityProperties = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             if (table == null)
             {
                 throw new ArgumentNullException(nameof(table));
             }
 
-            using var message = CreateInsertEntityRequest(dataServiceVersion, table, tableEntityProperties, timeout, queryOptions);
+            using var message = CreateInsertEntityRequest(dataServiceVersion, table, timeout, tableEntityProperties, queryOptions);
             _pipeline.Send(message, cancellationToken);
             var headers = new TableInternalInsertEntityHeaders(message.Response);
             switch (message.Response.Status)
@@ -906,7 +906,7 @@ namespace Azure.Storage.Tables
             }
         }
 
-        internal HttpMessage CreateSetAccessPolicyRequest(string table, Enum3 comp, IEnumerable<SignedIdentifier> tableAcl, int? timeout)
+        internal HttpMessage CreateSetAccessPolicyRequest(string table, Enum3 comp, int? timeout, IEnumerable<SignedIdentifier> tableAcl)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -941,18 +941,18 @@ namespace Azure.Storage.Tables
         /// <summary> sets stored access policies for the table that may be used with Shared Access Signatures. </summary>
         /// <param name="table"> The name of the table. </param>
         /// <param name="comp"> Required query string to handle stored access policies for the table that may be used with Shared Access Signatures. </param>
-        /// <param name="tableAcl"> the acls for the table. </param>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
+        /// <param name="tableAcl"> the acls for the table. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="table"/> is null. </exception>
-        public async Task<ResponseWithHeaders<TableInternalSetAccessPolicyHeaders>> SetAccessPolicyAsync(string table, Enum3 comp, IEnumerable<SignedIdentifier> tableAcl = null, int? timeout = null, CancellationToken cancellationToken = default)
+        public async Task<ResponseWithHeaders<TableInternalSetAccessPolicyHeaders>> SetAccessPolicyAsync(string table, Enum3 comp, int? timeout = null, IEnumerable<SignedIdentifier> tableAcl = null, CancellationToken cancellationToken = default)
         {
             if (table == null)
             {
                 throw new ArgumentNullException(nameof(table));
             }
 
-            using var message = CreateSetAccessPolicyRequest(table, comp, tableAcl, timeout);
+            using var message = CreateSetAccessPolicyRequest(table, comp, timeout, tableAcl);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             var headers = new TableInternalSetAccessPolicyHeaders(message.Response);
             switch (message.Response.Status)
@@ -967,18 +967,18 @@ namespace Azure.Storage.Tables
         /// <summary> sets stored access policies for the table that may be used with Shared Access Signatures. </summary>
         /// <param name="table"> The name of the table. </param>
         /// <param name="comp"> Required query string to handle stored access policies for the table that may be used with Shared Access Signatures. </param>
-        /// <param name="tableAcl"> the acls for the table. </param>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
+        /// <param name="tableAcl"> the acls for the table. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="table"/> is null. </exception>
-        public ResponseWithHeaders<TableInternalSetAccessPolicyHeaders> SetAccessPolicy(string table, Enum3 comp, IEnumerable<SignedIdentifier> tableAcl = null, int? timeout = null, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<TableInternalSetAccessPolicyHeaders> SetAccessPolicy(string table, Enum3 comp, int? timeout = null, IEnumerable<SignedIdentifier> tableAcl = null, CancellationToken cancellationToken = default)
         {
             if (table == null)
             {
                 throw new ArgumentNullException(nameof(table));
             }
 
-            using var message = CreateSetAccessPolicyRequest(table, comp, tableAcl, timeout);
+            using var message = CreateSetAccessPolicyRequest(table, comp, timeout, tableAcl);
             _pipeline.Send(message, cancellationToken);
             var headers = new TableInternalSetAccessPolicyHeaders(message.Response);
             switch (message.Response.Status)

@@ -173,18 +173,18 @@ namespace AppConfiguration
 
         /// <summary> Creates a key-value. </summary>
         /// <param name="key"> The key of the key-value to create. </param>
-        /// <param name="entity"> The key-value to create. </param>
         /// <param name="label"> The label of the key-value to create. </param>
         /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
         /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
+        /// <param name="entity"> The key-value to create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<KeyValue>> PutKeyValueAsync(string key, KeyValue entity = null, string label = null, string ifMatch = null, string ifNoneMatch = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<KeyValue>> PutKeyValueAsync(string key, string label = null, string ifMatch = null, string ifNoneMatch = null, KeyValue entity = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AppConfigurationClient.PutKeyValue");
             scope.Start();
             try
             {
-                return await RestClient.PutKeyValueAsync(key, entity, label, ifMatch, ifNoneMatch, cancellationToken).ConfigureAwait(false);
+                return await RestClient.PutKeyValueAsync(key, label, ifMatch, ifNoneMatch, entity, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -195,18 +195,18 @@ namespace AppConfiguration
 
         /// <summary> Creates a key-value. </summary>
         /// <param name="key"> The key of the key-value to create. </param>
-        /// <param name="entity"> The key-value to create. </param>
         /// <param name="label"> The label of the key-value to create. </param>
         /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
         /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
+        /// <param name="entity"> The key-value to create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<KeyValue> PutKeyValue(string key, KeyValue entity = null, string label = null, string ifMatch = null, string ifNoneMatch = null, CancellationToken cancellationToken = default)
+        public virtual Response<KeyValue> PutKeyValue(string key, string label = null, string ifMatch = null, string ifNoneMatch = null, KeyValue entity = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AppConfigurationClient.PutKeyValue");
             scope.Start();
             try
             {
-                return RestClient.PutKeyValue(key, entity, label, ifMatch, ifNoneMatch, cancellationToken);
+                return RestClient.PutKeyValue(key, label, ifMatch, ifNoneMatch, entity, cancellationToken);
             }
             catch (Exception e)
             {

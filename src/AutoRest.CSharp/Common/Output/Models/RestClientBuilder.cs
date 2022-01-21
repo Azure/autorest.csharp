@@ -108,15 +108,43 @@ namespace AutoRest.CSharp.Output.Models
             );
         }
 
-        public RestClientMethod BuildMethod(Operation operation, HttpRequest httpRequest, IEnumerable<RequestParameter> requestParameters, DataPlaneResponseHeaderGroupType? responseHeaderModel, string accessibility, Func<string?, bool>? returnNullOn404Func = null)
+        public RestClientMethod BuildMgmtMethod(Operation operation, HttpRequest httpRequest, IEnumerable<RequestParameter> requestParameters, Func<string?, bool> returnNullOn404Func)
+        {
+            var allParameters = GetOperationAllParameters(operation, requestParameters);
+            var methodParameters = BuildMgmtMethodParameters(allParameters);
+            return BuildMethod(operation, httpRequest, allParameters, methodParameters, null, "public", returnNullOn404Func);
+        }
+
+        public RestClientMethod BuildDataPlaneMethod(Operation operation, HttpRequest httpRequest, IEnumerable<RequestParameter> requestParameters, DataPlaneResponseHeaderGroupType? responseHeaderModel, string accessibility)
+        {
+            var allParameters = GetOperationAllParameters(operation, requestParameters);
+            var methodParameters = BuildDataPlaneMethodParameters(allParameters);
+            return BuildMethod(operation, httpRequest, allParameters, methodParameters, responseHeaderModel, accessibility, null);
+        }
+
+        private Dictionary<RequestParameter, Parameter> GetOperationAllParameters(Operation operation, IEnumerable<RequestParameter> requestParameters)
         {
             var parameters = operation.Parameters
                 .Concat(requestParameters)
                 .Where(rp => !IsIgnoredHeaderParameter(rp))
                 .ToArray();
 
-            var allParameters = parameters.ToDictionary(rp => rp, requestParameter => BuildParameter(requestParameter));
-            var methodParameters = BuildMethodParameters(allParameters);
+            return parameters.ToDictionary(rp => rp, requestParameter => BuildParameter(requestParameter));
+        }
+
+        /// <summary>
+        /// Build RestClientMethod for mgmt and HLC
+        /// </summary>
+        /// <param name="operation"></param>
+        /// <param name="httpRequest"></param>
+        /// <param name="allParameters"></param>
+        /// <param name="methodParameters"></param>
+        /// <param name="responseHeaderModel"></param>
+        /// <param name="accessibility"></param>
+        /// <param name="returnNullOn404Func"></param>
+        /// <returns></returns>
+        private RestClientMethod BuildMethod(Operation operation, HttpRequest httpRequest, Dictionary<RequestParameter, Parameter> allParameters, Parameter[] methodParameters, DataPlaneResponseHeaderGroupType? responseHeaderModel, string accessibility, Func<string?, bool>? returnNullOn404Func = null)
+        {
             var references = allParameters.ToDictionary(kvp => GetRequestParameterName(kvp.Key), kvp => new ParameterInfo(kvp.Key, CreateReference(kvp.Key, kvp.Value)));
             var request = BuildRequest(httpRequest, new RequestMethodBuildContext(methodParameters, references));
 
@@ -291,7 +319,7 @@ namespace AutoRest.CSharp.Output.Models
             );
         }
 
-        private Parameter[] BuildMethodParameters(IReadOnlyDictionary<RequestParameter, Parameter> allParameters)
+        private Parameter[] BuildMgmtMethodParameters(IReadOnlyDictionary<RequestParameter, Parameter> allParameters)
         {
             List<Parameter> requiredParameters = new();
             List<Parameter> optionalParameters = new();
@@ -325,6 +353,21 @@ namespace AutoRest.CSharp.Output.Models
             requiredParameters.AddRange(optionalParameters);
 
             return requiredParameters.ToArray();
+        }
+
+        private Parameter[] BuildDataPlaneMethodParameters(IReadOnlyDictionary<RequestParameter, Parameter> allParameters)
+        {
+            List<Parameter> methodParameters = new();
+            foreach (var (requestParameter, parameter) in allParameters)
+            {
+                // Grouped and flattened parameters shouldn't be added to methods
+                if (IsMethodParameter(requestParameter))
+                {
+                    methodParameters.Add(parameter);
+                }
+            }
+
+            return OrderParametersByRequired(methodParameters);
         }
 
         private RequestBody? BuildRequestBody(IReadOnlyDictionary<string, ParameterInfo> allParameters, KnownMediaType mediaType)

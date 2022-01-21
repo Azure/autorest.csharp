@@ -459,7 +459,7 @@ namespace AppConfiguration
             }
         }
 
-        internal HttpMessage CreatePutKeyValueRequest(string key, KeyValue entity, string label, string ifMatch, string ifNoneMatch)
+        internal HttpMessage CreatePutKeyValueRequest(string key, string label, string ifMatch, string ifNoneMatch, KeyValue entity)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -499,20 +499,20 @@ namespace AppConfiguration
 
         /// <summary> Creates a key-value. </summary>
         /// <param name="key"> The key of the key-value to create. </param>
-        /// <param name="entity"> The key-value to create. </param>
         /// <param name="label"> The label of the key-value to create. </param>
         /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
         /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
+        /// <param name="entity"> The key-value to create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
-        public async Task<ResponseWithHeaders<KeyValue, AppConfigurationPutKeyValueHeaders>> PutKeyValueAsync(string key, KeyValue entity = null, string label = null, string ifMatch = null, string ifNoneMatch = null, CancellationToken cancellationToken = default)
+        public async Task<ResponseWithHeaders<KeyValue, AppConfigurationPutKeyValueHeaders>> PutKeyValueAsync(string key, string label = null, string ifMatch = null, string ifNoneMatch = null, KeyValue entity = null, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var message = CreatePutKeyValueRequest(key, entity, label, ifMatch, ifNoneMatch);
+            using var message = CreatePutKeyValueRequest(key, label, ifMatch, ifNoneMatch, entity);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             var headers = new AppConfigurationPutKeyValueHeaders(message.Response);
             switch (message.Response.Status)
@@ -531,20 +531,20 @@ namespace AppConfiguration
 
         /// <summary> Creates a key-value. </summary>
         /// <param name="key"> The key of the key-value to create. </param>
-        /// <param name="entity"> The key-value to create. </param>
         /// <param name="label"> The label of the key-value to create. </param>
         /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
         /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
+        /// <param name="entity"> The key-value to create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
-        public ResponseWithHeaders<KeyValue, AppConfigurationPutKeyValueHeaders> PutKeyValue(string key, KeyValue entity = null, string label = null, string ifMatch = null, string ifNoneMatch = null, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<KeyValue, AppConfigurationPutKeyValueHeaders> PutKeyValue(string key, string label = null, string ifMatch = null, string ifNoneMatch = null, KeyValue entity = null, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var message = CreatePutKeyValueRequest(key, entity, label, ifMatch, ifNoneMatch);
+            using var message = CreatePutKeyValueRequest(key, label, ifMatch, ifNoneMatch, entity);
             _pipeline.Send(message, cancellationToken);
             var headers = new AppConfigurationPutKeyValueHeaders(message.Response);
             switch (message.Response.Status)
