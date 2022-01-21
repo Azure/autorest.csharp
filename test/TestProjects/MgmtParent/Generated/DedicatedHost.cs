@@ -244,7 +244,7 @@ namespace MgmtParent
         /// <returns> The updated resource with the tag added. </returns>
         public async virtual Task<Response<DedicatedHost>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(key, nameof(key));
+            Argument.AssertNotNullOrWhiteSpace(key, nameof(key));
 
             using var scope = _clientDiagnostics.CreateScope("DedicatedHost.AddTag");
             scope.Start();
@@ -270,7 +270,7 @@ namespace MgmtParent
         /// <returns> The updated resource with the tag added. </returns>
         public virtual Response<DedicatedHost> AddTag(string key, string value, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(key, nameof(key));
+            Argument.AssertNotNullOrWhiteSpace(key, nameof(key));
 
             using var scope = _clientDiagnostics.CreateScope("DedicatedHost.AddTag");
             scope.Start();
@@ -353,7 +353,7 @@ namespace MgmtParent
         /// <returns> The updated resource with the tag removed. </returns>
         public async virtual Task<Response<DedicatedHost>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(key, nameof(key));
+            Argument.AssertNotNullOrWhiteSpace(key, nameof(key));
 
             using var scope = _clientDiagnostics.CreateScope("DedicatedHost.RemoveTag");
             scope.Start();
@@ -378,7 +378,7 @@ namespace MgmtParent
         /// <returns> The updated resource with the tag removed. </returns>
         public virtual Response<DedicatedHost> RemoveTag(string key, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(key, nameof(key));
+            Argument.AssertNotNullOrWhiteSpace(key, nameof(key));
 
             using var scope = _clientDiagnostics.CreateScope("DedicatedHost.RemoveTag");
             scope.Start();

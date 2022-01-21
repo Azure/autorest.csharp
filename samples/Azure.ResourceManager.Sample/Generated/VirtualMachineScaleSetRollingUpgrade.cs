@@ -199,7 +199,7 @@ namespace Azure.ResourceManager.Sample
         /// <returns> The updated resource with the tag added. </returns>
         public async virtual Task<Response<VirtualMachineScaleSetRollingUpgrade>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(key, nameof(key));
+            Argument.AssertNotNullOrWhiteSpace(key, nameof(key));
 
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetRollingUpgrade.AddTag");
             scope.Start();
@@ -225,7 +225,7 @@ namespace Azure.ResourceManager.Sample
         /// <returns> The updated resource with the tag added. </returns>
         public virtual Response<VirtualMachineScaleSetRollingUpgrade> AddTag(string key, string value, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(key, nameof(key));
+            Argument.AssertNotNullOrWhiteSpace(key, nameof(key));
 
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetRollingUpgrade.AddTag");
             scope.Start();
@@ -308,7 +308,7 @@ namespace Azure.ResourceManager.Sample
         /// <returns> The updated resource with the tag removed. </returns>
         public async virtual Task<Response<VirtualMachineScaleSetRollingUpgrade>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(key, nameof(key));
+            Argument.AssertNotNullOrWhiteSpace(key, nameof(key));
 
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetRollingUpgrade.RemoveTag");
             scope.Start();
@@ -333,7 +333,7 @@ namespace Azure.ResourceManager.Sample
         /// <returns> The updated resource with the tag removed. </returns>
         public virtual Response<VirtualMachineScaleSetRollingUpgrade> RemoveTag(string key, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(key, nameof(key));
+            Argument.AssertNotNullOrWhiteSpace(key, nameof(key));
 
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetRollingUpgrade.RemoveTag");
             scope.Start();

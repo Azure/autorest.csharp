@@ -244,7 +244,7 @@ namespace MgmtParamOrdering
         /// <returns> The updated resource with the tag added. </returns>
         public async virtual Task<Response<Workspace>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(key, nameof(key));
+            Argument.AssertNotNullOrWhiteSpace(key, nameof(key));
 
             using var scope = _clientDiagnostics.CreateScope("Workspace.AddTag");
             scope.Start();
@@ -270,7 +270,7 @@ namespace MgmtParamOrdering
         /// <returns> The updated resource with the tag added. </returns>
         public virtual Response<Workspace> AddTag(string key, string value, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(key, nameof(key));
+            Argument.AssertNotNullOrWhiteSpace(key, nameof(key));
 
             using var scope = _clientDiagnostics.CreateScope("Workspace.AddTag");
             scope.Start();
@@ -353,7 +353,7 @@ namespace MgmtParamOrdering
         /// <returns> The updated resource with the tag removed. </returns>
         public async virtual Task<Response<Workspace>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(key, nameof(key));
+            Argument.AssertNotNullOrWhiteSpace(key, nameof(key));
 
             using var scope = _clientDiagnostics.CreateScope("Workspace.RemoveTag");
             scope.Start();
@@ -378,7 +378,7 @@ namespace MgmtParamOrdering
         /// <returns> The updated resource with the tag removed. </returns>
         public virtual Response<Workspace> RemoveTag(string key, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(key, nameof(key));
+            Argument.AssertNotNullOrWhiteSpace(key, nameof(key));
 
             using var scope = _clientDiagnostics.CreateScope("Workspace.RemoveTag");
             scope.Start();

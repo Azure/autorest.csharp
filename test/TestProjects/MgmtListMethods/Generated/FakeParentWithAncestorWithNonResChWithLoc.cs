@@ -194,7 +194,7 @@ namespace MgmtListMethods
         /// <returns> The updated resource with the tag added. </returns>
         public async virtual Task<Response<FakeParentWithAncestorWithNonResChWithLoc>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(key, nameof(key));
+            Argument.AssertNotNullOrWhiteSpace(key, nameof(key));
 
             using var scope = _clientDiagnostics.CreateScope("FakeParentWithAncestorWithNonResChWithLoc.AddTag");
             scope.Start();
@@ -220,7 +220,7 @@ namespace MgmtListMethods
         /// <returns> The updated resource with the tag added. </returns>
         public virtual Response<FakeParentWithAncestorWithNonResChWithLoc> AddTag(string key, string value, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(key, nameof(key));
+            Argument.AssertNotNullOrWhiteSpace(key, nameof(key));
 
             using var scope = _clientDiagnostics.CreateScope("FakeParentWithAncestorWithNonResChWithLoc.AddTag");
             scope.Start();
@@ -303,7 +303,7 @@ namespace MgmtListMethods
         /// <returns> The updated resource with the tag removed. </returns>
         public async virtual Task<Response<FakeParentWithAncestorWithNonResChWithLoc>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(key, nameof(key));
+            Argument.AssertNotNullOrWhiteSpace(key, nameof(key));
 
             using var scope = _clientDiagnostics.CreateScope("FakeParentWithAncestorWithNonResChWithLoc.RemoveTag");
             scope.Start();
@@ -328,7 +328,7 @@ namespace MgmtListMethods
         /// <returns> The updated resource with the tag removed. </returns>
         public virtual Response<FakeParentWithAncestorWithNonResChWithLoc> RemoveTag(string key, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(key, nameof(key));
+            Argument.AssertNotNullOrWhiteSpace(key, nameof(key));
 
             using var scope = _clientDiagnostics.CreateScope("FakeParentWithAncestorWithNonResChWithLoc.RemoveTag");
             scope.Start();
