@@ -143,7 +143,7 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
                 Parameters: new[] { Resource.ArmClientParameter, _resource.ResourceDataParameter },
                 Initializer: new(
                     IsBase: false,
-                    Arguments: new FormattableString[] { $"{Resource.ArmClientParameter}", _resource.ResourceDataIdExpression($"{_resource.ResourceDataParameter.Name:I}") })
+                    Arguments: new FormattableString[] { $"{Resource.ArmClientParameter.Name:I}", _resource.ResourceDataIdExpression($"{_resource.ResourceDataParameter.Name:I}") })
                 );
             _writer.WriteMethodDocumentation(resourceDataConstructor);
             using (_writer.WriteMethodDeclaration(resourceDataConstructor))
@@ -463,7 +463,7 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
                 _writer.Line($"{originalResponse}.Value.Id = {CreateResourceIdentifierExpression(_resource, operation.RequestPath, parameterMappings, $"{originalResponse}.Value")};");
             }
 
-            _writer.Line($"return {typeof(Response)}.FromValue(new {_resource.Type}(this, {originalResponse}.Value), {originalResponse}.GetRawResponse());");
+            _writer.Line($"return {typeof(Response)}.FromValue(new {_resource.Type}({ArmClientReference}, {originalResponse}.Value), {originalResponse}.GetRawResponse());");
         }
 
         protected override void WriteResourceCollectionEntry(Resource resource)
