@@ -59,13 +59,11 @@ namespace MgmtListMethods
         /// <param name="fakeParentWithAncestorWithLocName"> Name. </param>
         /// <param name="parameters"> Parameters supplied to the Create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="fakeParentWithAncestorWithLocName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithAncestorWithLocName"/> or <paramref name="parameters"/> is null. </exception>
         public virtual FakeParentWithAncestorWithLocCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string fakeParentWithAncestorWithLocName, FakeParentWithAncestorWithLocData parameters, CancellationToken cancellationToken = default)
         {
-            if (fakeParentWithAncestorWithLocName == null)
-            {
-                throw new ArgumentNullException(nameof(fakeParentWithAncestorWithLocName));
-            }
+            Argument.AssertNotNullOrEmpty(fakeParentWithAncestorWithLocName, nameof(fakeParentWithAncestorWithLocName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -96,13 +94,11 @@ namespace MgmtListMethods
         /// <param name="fakeParentWithAncestorWithLocName"> Name. </param>
         /// <param name="parameters"> Parameters supplied to the Create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="fakeParentWithAncestorWithLocName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithAncestorWithLocName"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<FakeParentWithAncestorWithLocCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string fakeParentWithAncestorWithLocName, FakeParentWithAncestorWithLocData parameters, CancellationToken cancellationToken = default)
         {
-            if (fakeParentWithAncestorWithLocName == null)
-            {
-                throw new ArgumentNullException(nameof(fakeParentWithAncestorWithLocName));
-            }
+            Argument.AssertNotNullOrEmpty(fakeParentWithAncestorWithLocName, nameof(fakeParentWithAncestorWithLocName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -131,13 +127,11 @@ namespace MgmtListMethods
         /// <summary> Retrieves information. </summary>
         /// <param name="fakeParentWithAncestorWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="fakeParentWithAncestorWithLocName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithAncestorWithLocName"/> is null. </exception>
         public virtual Response<FakeParentWithAncestorWithLoc> Get(string fakeParentWithAncestorWithLocName, CancellationToken cancellationToken = default)
         {
-            if (fakeParentWithAncestorWithLocName == null)
-            {
-                throw new ArgumentNullException(nameof(fakeParentWithAncestorWithLocName));
-            }
+            Argument.AssertNotNullOrEmpty(fakeParentWithAncestorWithLocName, nameof(fakeParentWithAncestorWithLocName));
 
             using var scope = _clientDiagnostics.CreateScope("FakeParentWithAncestorWithLocCollection.Get");
             scope.Start();
@@ -161,13 +155,11 @@ namespace MgmtListMethods
         /// <summary> Retrieves information. </summary>
         /// <param name="fakeParentWithAncestorWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="fakeParentWithAncestorWithLocName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithAncestorWithLocName"/> is null. </exception>
         public async virtual Task<Response<FakeParentWithAncestorWithLoc>> GetAsync(string fakeParentWithAncestorWithLocName, CancellationToken cancellationToken = default)
         {
-            if (fakeParentWithAncestorWithLocName == null)
-            {
-                throw new ArgumentNullException(nameof(fakeParentWithAncestorWithLocName));
-            }
+            Argument.AssertNotNullOrEmpty(fakeParentWithAncestorWithLocName, nameof(fakeParentWithAncestorWithLocName));
 
             using var scope = _clientDiagnostics.CreateScope("FakeParentWithAncestorWithLocCollection.Get");
             scope.Start();
@@ -188,13 +180,11 @@ namespace MgmtListMethods
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="fakeParentWithAncestorWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="fakeParentWithAncestorWithLocName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithAncestorWithLocName"/> is null. </exception>
         public virtual Response<FakeParentWithAncestorWithLoc> GetIfExists(string fakeParentWithAncestorWithLocName, CancellationToken cancellationToken = default)
         {
-            if (fakeParentWithAncestorWithLocName == null)
-            {
-                throw new ArgumentNullException(nameof(fakeParentWithAncestorWithLocName));
-            }
+            Argument.AssertNotNullOrEmpty(fakeParentWithAncestorWithLocName, nameof(fakeParentWithAncestorWithLocName));
 
             using var scope = _clientDiagnostics.CreateScope("FakeParentWithAncestorWithLocCollection.GetIfExists");
             scope.Start();
@@ -215,13 +205,11 @@ namespace MgmtListMethods
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="fakeParentWithAncestorWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="fakeParentWithAncestorWithLocName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithAncestorWithLocName"/> is null. </exception>
         public async virtual Task<Response<FakeParentWithAncestorWithLoc>> GetIfExistsAsync(string fakeParentWithAncestorWithLocName, CancellationToken cancellationToken = default)
         {
-            if (fakeParentWithAncestorWithLocName == null)
-            {
-                throw new ArgumentNullException(nameof(fakeParentWithAncestorWithLocName));
-            }
+            Argument.AssertNotNullOrEmpty(fakeParentWithAncestorWithLocName, nameof(fakeParentWithAncestorWithLocName));
 
             using var scope = _clientDiagnostics.CreateScope("FakeParentWithAncestorWithLocCollection.GetIfExists");
             scope.Start();
@@ -242,13 +230,11 @@ namespace MgmtListMethods
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="fakeParentWithAncestorWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="fakeParentWithAncestorWithLocName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithAncestorWithLocName"/> is null. </exception>
         public virtual Response<bool> Exists(string fakeParentWithAncestorWithLocName, CancellationToken cancellationToken = default)
         {
-            if (fakeParentWithAncestorWithLocName == null)
-            {
-                throw new ArgumentNullException(nameof(fakeParentWithAncestorWithLocName));
-            }
+            Argument.AssertNotNullOrEmpty(fakeParentWithAncestorWithLocName, nameof(fakeParentWithAncestorWithLocName));
 
             using var scope = _clientDiagnostics.CreateScope("FakeParentWithAncestorWithLocCollection.Exists");
             scope.Start();
@@ -267,13 +253,11 @@ namespace MgmtListMethods
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="fakeParentWithAncestorWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="fakeParentWithAncestorWithLocName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithAncestorWithLocName"/> is null. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string fakeParentWithAncestorWithLocName, CancellationToken cancellationToken = default)
         {
-            if (fakeParentWithAncestorWithLocName == null)
-            {
-                throw new ArgumentNullException(nameof(fakeParentWithAncestorWithLocName));
-            }
+            Argument.AssertNotNullOrEmpty(fakeParentWithAncestorWithLocName, nameof(fakeParentWithAncestorWithLocName));
 
             using var scope = _clientDiagnostics.CreateScope("FakeParentWithAncestorWithLocCollection.Exists");
             scope.Start();

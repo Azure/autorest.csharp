@@ -61,13 +61,11 @@ namespace MgmtListMethods
         /// <param name="resGrpParentWithAncestorWithNonResChWithLocName"> Name. </param>
         /// <param name="parameters"> Parameters supplied to the Create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="resGrpParentWithAncestorWithNonResChWithLocName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithAncestorWithNonResChWithLocName"/> or <paramref name="parameters"/> is null. </exception>
         public virtual ResGrpParentWithAncestorWithNonResChWithLocCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string resGrpParentWithAncestorWithNonResChWithLocName, ResGrpParentWithAncestorWithNonResChWithLocData parameters, CancellationToken cancellationToken = default)
         {
-            if (resGrpParentWithAncestorWithNonResChWithLocName == null)
-            {
-                throw new ArgumentNullException(nameof(resGrpParentWithAncestorWithNonResChWithLocName));
-            }
+            Argument.AssertNotNullOrEmpty(resGrpParentWithAncestorWithNonResChWithLocName, nameof(resGrpParentWithAncestorWithNonResChWithLocName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -98,13 +96,11 @@ namespace MgmtListMethods
         /// <param name="resGrpParentWithAncestorWithNonResChWithLocName"> Name. </param>
         /// <param name="parameters"> Parameters supplied to the Create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="resGrpParentWithAncestorWithNonResChWithLocName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithAncestorWithNonResChWithLocName"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<ResGrpParentWithAncestorWithNonResChWithLocCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string resGrpParentWithAncestorWithNonResChWithLocName, ResGrpParentWithAncestorWithNonResChWithLocData parameters, CancellationToken cancellationToken = default)
         {
-            if (resGrpParentWithAncestorWithNonResChWithLocName == null)
-            {
-                throw new ArgumentNullException(nameof(resGrpParentWithAncestorWithNonResChWithLocName));
-            }
+            Argument.AssertNotNullOrEmpty(resGrpParentWithAncestorWithNonResChWithLocName, nameof(resGrpParentWithAncestorWithNonResChWithLocName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -133,13 +129,11 @@ namespace MgmtListMethods
         /// <summary> Retrieves information. </summary>
         /// <param name="resGrpParentWithAncestorWithNonResChWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="resGrpParentWithAncestorWithNonResChWithLocName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithAncestorWithNonResChWithLocName"/> is null. </exception>
         public virtual Response<ResGrpParentWithAncestorWithNonResChWithLoc> Get(string resGrpParentWithAncestorWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
-            if (resGrpParentWithAncestorWithNonResChWithLocName == null)
-            {
-                throw new ArgumentNullException(nameof(resGrpParentWithAncestorWithNonResChWithLocName));
-            }
+            Argument.AssertNotNullOrEmpty(resGrpParentWithAncestorWithNonResChWithLocName, nameof(resGrpParentWithAncestorWithNonResChWithLocName));
 
             using var scope = _clientDiagnostics.CreateScope("ResGrpParentWithAncestorWithNonResChWithLocCollection.Get");
             scope.Start();
@@ -163,13 +157,11 @@ namespace MgmtListMethods
         /// <summary> Retrieves information. </summary>
         /// <param name="resGrpParentWithAncestorWithNonResChWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="resGrpParentWithAncestorWithNonResChWithLocName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithAncestorWithNonResChWithLocName"/> is null. </exception>
         public async virtual Task<Response<ResGrpParentWithAncestorWithNonResChWithLoc>> GetAsync(string resGrpParentWithAncestorWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
-            if (resGrpParentWithAncestorWithNonResChWithLocName == null)
-            {
-                throw new ArgumentNullException(nameof(resGrpParentWithAncestorWithNonResChWithLocName));
-            }
+            Argument.AssertNotNullOrEmpty(resGrpParentWithAncestorWithNonResChWithLocName, nameof(resGrpParentWithAncestorWithNonResChWithLocName));
 
             using var scope = _clientDiagnostics.CreateScope("ResGrpParentWithAncestorWithNonResChWithLocCollection.Get");
             scope.Start();
@@ -190,13 +182,11 @@ namespace MgmtListMethods
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="resGrpParentWithAncestorWithNonResChWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="resGrpParentWithAncestorWithNonResChWithLocName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithAncestorWithNonResChWithLocName"/> is null. </exception>
         public virtual Response<ResGrpParentWithAncestorWithNonResChWithLoc> GetIfExists(string resGrpParentWithAncestorWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
-            if (resGrpParentWithAncestorWithNonResChWithLocName == null)
-            {
-                throw new ArgumentNullException(nameof(resGrpParentWithAncestorWithNonResChWithLocName));
-            }
+            Argument.AssertNotNullOrEmpty(resGrpParentWithAncestorWithNonResChWithLocName, nameof(resGrpParentWithAncestorWithNonResChWithLocName));
 
             using var scope = _clientDiagnostics.CreateScope("ResGrpParentWithAncestorWithNonResChWithLocCollection.GetIfExists");
             scope.Start();
@@ -217,13 +207,11 @@ namespace MgmtListMethods
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="resGrpParentWithAncestorWithNonResChWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="resGrpParentWithAncestorWithNonResChWithLocName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithAncestorWithNonResChWithLocName"/> is null. </exception>
         public async virtual Task<Response<ResGrpParentWithAncestorWithNonResChWithLoc>> GetIfExistsAsync(string resGrpParentWithAncestorWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
-            if (resGrpParentWithAncestorWithNonResChWithLocName == null)
-            {
-                throw new ArgumentNullException(nameof(resGrpParentWithAncestorWithNonResChWithLocName));
-            }
+            Argument.AssertNotNullOrEmpty(resGrpParentWithAncestorWithNonResChWithLocName, nameof(resGrpParentWithAncestorWithNonResChWithLocName));
 
             using var scope = _clientDiagnostics.CreateScope("ResGrpParentWithAncestorWithNonResChWithLocCollection.GetIfExists");
             scope.Start();
@@ -244,13 +232,11 @@ namespace MgmtListMethods
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="resGrpParentWithAncestorWithNonResChWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="resGrpParentWithAncestorWithNonResChWithLocName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithAncestorWithNonResChWithLocName"/> is null. </exception>
         public virtual Response<bool> Exists(string resGrpParentWithAncestorWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
-            if (resGrpParentWithAncestorWithNonResChWithLocName == null)
-            {
-                throw new ArgumentNullException(nameof(resGrpParentWithAncestorWithNonResChWithLocName));
-            }
+            Argument.AssertNotNullOrEmpty(resGrpParentWithAncestorWithNonResChWithLocName, nameof(resGrpParentWithAncestorWithNonResChWithLocName));
 
             using var scope = _clientDiagnostics.CreateScope("ResGrpParentWithAncestorWithNonResChWithLocCollection.Exists");
             scope.Start();
@@ -269,13 +255,11 @@ namespace MgmtListMethods
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="resGrpParentWithAncestorWithNonResChWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="resGrpParentWithAncestorWithNonResChWithLocName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithAncestorWithNonResChWithLocName"/> is null. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string resGrpParentWithAncestorWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
-            if (resGrpParentWithAncestorWithNonResChWithLocName == null)
-            {
-                throw new ArgumentNullException(nameof(resGrpParentWithAncestorWithNonResChWithLocName));
-            }
+            Argument.AssertNotNullOrEmpty(resGrpParentWithAncestorWithNonResChWithLocName, nameof(resGrpParentWithAncestorWithNonResChWithLocName));
 
             using var scope = _clientDiagnostics.CreateScope("ResGrpParentWithAncestorWithNonResChWithLocCollection.Exists");
             scope.Start();

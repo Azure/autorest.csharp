@@ -61,13 +61,11 @@ namespace MgmtListMethods
         /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="fakeName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> or <paramref name="parameters"/> is null. </exception>
         public virtual FakeCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string fakeName, FakeData parameters, CancellationToken cancellationToken = default)
         {
-            if (fakeName == null)
-            {
-                throw new ArgumentNullException(nameof(fakeName));
-            }
+            Argument.AssertNotNullOrEmpty(fakeName, nameof(fakeName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -98,13 +96,11 @@ namespace MgmtListMethods
         /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="fakeName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<FakeCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string fakeName, FakeData parameters, CancellationToken cancellationToken = default)
         {
-            if (fakeName == null)
-            {
-                throw new ArgumentNullException(nameof(fakeName));
-            }
+            Argument.AssertNotNullOrEmpty(fakeName, nameof(fakeName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -134,13 +130,11 @@ namespace MgmtListMethods
         /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="fakeName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> is null. </exception>
         public virtual Response<Fake> Get(string fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (fakeName == null)
-            {
-                throw new ArgumentNullException(nameof(fakeName));
-            }
+            Argument.AssertNotNullOrEmpty(fakeName, nameof(fakeName));
 
             using var scope = _clientDiagnostics.CreateScope("FakeCollection.Get");
             scope.Start();
@@ -165,13 +159,11 @@ namespace MgmtListMethods
         /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="fakeName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> is null. </exception>
         public async virtual Task<Response<Fake>> GetAsync(string fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (fakeName == null)
-            {
-                throw new ArgumentNullException(nameof(fakeName));
-            }
+            Argument.AssertNotNullOrEmpty(fakeName, nameof(fakeName));
 
             using var scope = _clientDiagnostics.CreateScope("FakeCollection.Get");
             scope.Start();
@@ -193,13 +185,11 @@ namespace MgmtListMethods
         /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="fakeName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> is null. </exception>
         public virtual Response<Fake> GetIfExists(string fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (fakeName == null)
-            {
-                throw new ArgumentNullException(nameof(fakeName));
-            }
+            Argument.AssertNotNullOrEmpty(fakeName, nameof(fakeName));
 
             using var scope = _clientDiagnostics.CreateScope("FakeCollection.GetIfExists");
             scope.Start();
@@ -221,13 +211,11 @@ namespace MgmtListMethods
         /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="fakeName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> is null. </exception>
         public async virtual Task<Response<Fake>> GetIfExistsAsync(string fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (fakeName == null)
-            {
-                throw new ArgumentNullException(nameof(fakeName));
-            }
+            Argument.AssertNotNullOrEmpty(fakeName, nameof(fakeName));
 
             using var scope = _clientDiagnostics.CreateScope("FakeCollection.GetIfExists");
             scope.Start();
@@ -249,13 +237,11 @@ namespace MgmtListMethods
         /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="fakeName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> is null. </exception>
         public virtual Response<bool> Exists(string fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (fakeName == null)
-            {
-                throw new ArgumentNullException(nameof(fakeName));
-            }
+            Argument.AssertNotNullOrEmpty(fakeName, nameof(fakeName));
 
             using var scope = _clientDiagnostics.CreateScope("FakeCollection.Exists");
             scope.Start();
@@ -275,13 +261,11 @@ namespace MgmtListMethods
         /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="fakeName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> is null. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (fakeName == null)
-            {
-                throw new ArgumentNullException(nameof(fakeName));
-            }
+            Argument.AssertNotNullOrEmpty(fakeName, nameof(fakeName));
 
             using var scope = _clientDiagnostics.CreateScope("FakeCollection.Exists");
             scope.Start();

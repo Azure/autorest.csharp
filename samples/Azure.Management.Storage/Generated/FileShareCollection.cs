@@ -60,13 +60,11 @@ namespace Azure.Management.Storage
         /// <param name="fileShare"> Properties of the file share to create. </param>
         /// <param name="expand"> Optional, used to expand the properties within share&apos;s properties. Valid values are: snapshots. Should be passed as a string with delimiter &apos;,&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="shareName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="shareName"/> or <paramref name="fileShare"/> is null. </exception>
         public virtual FileShareCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string shareName, FileShareData fileShare, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (shareName == null)
-            {
-                throw new ArgumentNullException(nameof(shareName));
-            }
+            Argument.AssertNotNullOrEmpty(shareName, nameof(shareName));
             if (fileShare == null)
             {
                 throw new ArgumentNullException(nameof(fileShare));
@@ -98,13 +96,11 @@ namespace Azure.Management.Storage
         /// <param name="fileShare"> Properties of the file share to create. </param>
         /// <param name="expand"> Optional, used to expand the properties within share&apos;s properties. Valid values are: snapshots. Should be passed as a string with delimiter &apos;,&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="shareName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="shareName"/> or <paramref name="fileShare"/> is null. </exception>
         public async virtual Task<FileShareCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string shareName, FileShareData fileShare, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (shareName == null)
-            {
-                throw new ArgumentNullException(nameof(shareName));
-            }
+            Argument.AssertNotNullOrEmpty(shareName, nameof(shareName));
             if (fileShare == null)
             {
                 throw new ArgumentNullException(nameof(fileShare));
@@ -135,13 +131,11 @@ namespace Azure.Management.Storage
         /// <param name="expand"> Optional, used to expand the properties within share&apos;s properties. Valid values are: stats. Should be passed as a string with delimiter &apos;,&apos;. </param>
         /// <param name="xMsSnapshot"> Optional, used to retrieve properties of a snapshot. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="shareName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="shareName"/> is null. </exception>
         public virtual Response<FileShare> Get(string shareName, string expand = null, string xMsSnapshot = null, CancellationToken cancellationToken = default)
         {
-            if (shareName == null)
-            {
-                throw new ArgumentNullException(nameof(shareName));
-            }
+            Argument.AssertNotNullOrEmpty(shareName, nameof(shareName));
 
             using var scope = _clientDiagnostics.CreateScope("FileShareCollection.Get");
             scope.Start();
@@ -167,13 +161,11 @@ namespace Azure.Management.Storage
         /// <param name="expand"> Optional, used to expand the properties within share&apos;s properties. Valid values are: stats. Should be passed as a string with delimiter &apos;,&apos;. </param>
         /// <param name="xMsSnapshot"> Optional, used to retrieve properties of a snapshot. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="shareName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="shareName"/> is null. </exception>
         public async virtual Task<Response<FileShare>> GetAsync(string shareName, string expand = null, string xMsSnapshot = null, CancellationToken cancellationToken = default)
         {
-            if (shareName == null)
-            {
-                throw new ArgumentNullException(nameof(shareName));
-            }
+            Argument.AssertNotNullOrEmpty(shareName, nameof(shareName));
 
             using var scope = _clientDiagnostics.CreateScope("FileShareCollection.Get");
             scope.Start();
@@ -196,13 +188,11 @@ namespace Azure.Management.Storage
         /// <param name="expand"> Optional, used to expand the properties within share&apos;s properties. Valid values are: stats. Should be passed as a string with delimiter &apos;,&apos;. </param>
         /// <param name="xMsSnapshot"> Optional, used to retrieve properties of a snapshot. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="shareName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="shareName"/> is null. </exception>
         public virtual Response<FileShare> GetIfExists(string shareName, string expand = null, string xMsSnapshot = null, CancellationToken cancellationToken = default)
         {
-            if (shareName == null)
-            {
-                throw new ArgumentNullException(nameof(shareName));
-            }
+            Argument.AssertNotNullOrEmpty(shareName, nameof(shareName));
 
             using var scope = _clientDiagnostics.CreateScope("FileShareCollection.GetIfExists");
             scope.Start();
@@ -225,13 +215,11 @@ namespace Azure.Management.Storage
         /// <param name="expand"> Optional, used to expand the properties within share&apos;s properties. Valid values are: stats. Should be passed as a string with delimiter &apos;,&apos;. </param>
         /// <param name="xMsSnapshot"> Optional, used to retrieve properties of a snapshot. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="shareName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="shareName"/> is null. </exception>
         public async virtual Task<Response<FileShare>> GetIfExistsAsync(string shareName, string expand = null, string xMsSnapshot = null, CancellationToken cancellationToken = default)
         {
-            if (shareName == null)
-            {
-                throw new ArgumentNullException(nameof(shareName));
-            }
+            Argument.AssertNotNullOrEmpty(shareName, nameof(shareName));
 
             using var scope = _clientDiagnostics.CreateScope("FileShareCollection.GetIfExists");
             scope.Start();
@@ -254,13 +242,11 @@ namespace Azure.Management.Storage
         /// <param name="expand"> Optional, used to expand the properties within share&apos;s properties. Valid values are: stats. Should be passed as a string with delimiter &apos;,&apos;. </param>
         /// <param name="xMsSnapshot"> Optional, used to retrieve properties of a snapshot. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="shareName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="shareName"/> is null. </exception>
         public virtual Response<bool> Exists(string shareName, string expand = null, string xMsSnapshot = null, CancellationToken cancellationToken = default)
         {
-            if (shareName == null)
-            {
-                throw new ArgumentNullException(nameof(shareName));
-            }
+            Argument.AssertNotNullOrEmpty(shareName, nameof(shareName));
 
             using var scope = _clientDiagnostics.CreateScope("FileShareCollection.Exists");
             scope.Start();
@@ -281,13 +267,11 @@ namespace Azure.Management.Storage
         /// <param name="expand"> Optional, used to expand the properties within share&apos;s properties. Valid values are: stats. Should be passed as a string with delimiter &apos;,&apos;. </param>
         /// <param name="xMsSnapshot"> Optional, used to retrieve properties of a snapshot. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="shareName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="shareName"/> is null. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string shareName, string expand = null, string xMsSnapshot = null, CancellationToken cancellationToken = default)
         {
-            if (shareName == null)
-            {
-                throw new ArgumentNullException(nameof(shareName));
-            }
+            Argument.AssertNotNullOrEmpty(shareName, nameof(shareName));
 
             using var scope = _clientDiagnostics.CreateScope("FileShareCollection.Exists");
             scope.Start();

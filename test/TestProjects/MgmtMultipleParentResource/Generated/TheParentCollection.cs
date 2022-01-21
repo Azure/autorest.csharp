@@ -61,13 +61,11 @@ namespace MgmtMultipleParentResource
         /// <param name="theParentName"> The name of the VM scale set. </param>
         /// <param name="body"> Parameters supplied to the Create Virtual Machine RunCommand operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="theParentName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="theParentName"/> or <paramref name="body"/> is null. </exception>
         public virtual TheParentCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string theParentName, TheParentData body, CancellationToken cancellationToken = default)
         {
-            if (theParentName == null)
-            {
-                throw new ArgumentNullException(nameof(theParentName));
-            }
+            Argument.AssertNotNullOrEmpty(theParentName, nameof(theParentName));
             if (body == null)
             {
                 throw new ArgumentNullException(nameof(body));
@@ -98,13 +96,11 @@ namespace MgmtMultipleParentResource
         /// <param name="theParentName"> The name of the VM scale set. </param>
         /// <param name="body"> Parameters supplied to the Create Virtual Machine RunCommand operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="theParentName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="theParentName"/> or <paramref name="body"/> is null. </exception>
         public async virtual Task<TheParentCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string theParentName, TheParentData body, CancellationToken cancellationToken = default)
         {
-            if (theParentName == null)
-            {
-                throw new ArgumentNullException(nameof(theParentName));
-            }
+            Argument.AssertNotNullOrEmpty(theParentName, nameof(theParentName));
             if (body == null)
             {
                 throw new ArgumentNullException(nameof(body));
@@ -134,13 +130,11 @@ namespace MgmtMultipleParentResource
         /// <param name="theParentName"> The name of the VM scale set. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="theParentName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="theParentName"/> is null. </exception>
         public virtual Response<TheParent> Get(string theParentName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (theParentName == null)
-            {
-                throw new ArgumentNullException(nameof(theParentName));
-            }
+            Argument.AssertNotNullOrEmpty(theParentName, nameof(theParentName));
 
             using var scope = _clientDiagnostics.CreateScope("TheParentCollection.Get");
             scope.Start();
@@ -165,13 +159,11 @@ namespace MgmtMultipleParentResource
         /// <param name="theParentName"> The name of the VM scale set. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="theParentName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="theParentName"/> is null. </exception>
         public async virtual Task<Response<TheParent>> GetAsync(string theParentName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (theParentName == null)
-            {
-                throw new ArgumentNullException(nameof(theParentName));
-            }
+            Argument.AssertNotNullOrEmpty(theParentName, nameof(theParentName));
 
             using var scope = _clientDiagnostics.CreateScope("TheParentCollection.Get");
             scope.Start();
@@ -193,13 +185,11 @@ namespace MgmtMultipleParentResource
         /// <param name="theParentName"> The name of the VM scale set. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="theParentName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="theParentName"/> is null. </exception>
         public virtual Response<TheParent> GetIfExists(string theParentName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (theParentName == null)
-            {
-                throw new ArgumentNullException(nameof(theParentName));
-            }
+            Argument.AssertNotNullOrEmpty(theParentName, nameof(theParentName));
 
             using var scope = _clientDiagnostics.CreateScope("TheParentCollection.GetIfExists");
             scope.Start();
@@ -221,13 +211,11 @@ namespace MgmtMultipleParentResource
         /// <param name="theParentName"> The name of the VM scale set. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="theParentName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="theParentName"/> is null. </exception>
         public async virtual Task<Response<TheParent>> GetIfExistsAsync(string theParentName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (theParentName == null)
-            {
-                throw new ArgumentNullException(nameof(theParentName));
-            }
+            Argument.AssertNotNullOrEmpty(theParentName, nameof(theParentName));
 
             using var scope = _clientDiagnostics.CreateScope("TheParentCollection.GetIfExists");
             scope.Start();
@@ -249,13 +237,11 @@ namespace MgmtMultipleParentResource
         /// <param name="theParentName"> The name of the VM scale set. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="theParentName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="theParentName"/> is null. </exception>
         public virtual Response<bool> Exists(string theParentName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (theParentName == null)
-            {
-                throw new ArgumentNullException(nameof(theParentName));
-            }
+            Argument.AssertNotNullOrEmpty(theParentName, nameof(theParentName));
 
             using var scope = _clientDiagnostics.CreateScope("TheParentCollection.Exists");
             scope.Start();
@@ -275,13 +261,11 @@ namespace MgmtMultipleParentResource
         /// <param name="theParentName"> The name of the VM scale set. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="theParentName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="theParentName"/> is null. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string theParentName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (theParentName == null)
-            {
-                throw new ArgumentNullException(nameof(theParentName));
-            }
+            Argument.AssertNotNullOrEmpty(theParentName, nameof(theParentName));
 
             using var scope = _clientDiagnostics.CreateScope("TheParentCollection.Exists");
             scope.Start();

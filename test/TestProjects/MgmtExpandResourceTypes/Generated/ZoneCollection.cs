@@ -63,13 +63,11 @@ namespace MgmtExpandResourceTypes
         /// <param name="ifMatch"> The etag of the DNS zone. Omit this value to always overwrite the current zone. Specify the last-seen etag value to prevent accidentally overwriting any concurrent changes. </param>
         /// <param name="ifNoneMatch"> Set to &apos;*&apos; to allow a new DNS zone to be created, but to prevent updating an existing zone. Other values will be ignored. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="zoneName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="zoneName"/> or <paramref name="parameters"/> is null. </exception>
         public virtual ZoneCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string zoneName, ZoneData parameters, string ifMatch = null, string ifNoneMatch = null, CancellationToken cancellationToken = default)
         {
-            if (zoneName == null)
-            {
-                throw new ArgumentNullException(nameof(zoneName));
-            }
+            Argument.AssertNotNullOrEmpty(zoneName, nameof(zoneName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -102,13 +100,11 @@ namespace MgmtExpandResourceTypes
         /// <param name="ifMatch"> The etag of the DNS zone. Omit this value to always overwrite the current zone. Specify the last-seen etag value to prevent accidentally overwriting any concurrent changes. </param>
         /// <param name="ifNoneMatch"> Set to &apos;*&apos; to allow a new DNS zone to be created, but to prevent updating an existing zone. Other values will be ignored. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="zoneName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="zoneName"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<ZoneCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string zoneName, ZoneData parameters, string ifMatch = null, string ifNoneMatch = null, CancellationToken cancellationToken = default)
         {
-            if (zoneName == null)
-            {
-                throw new ArgumentNullException(nameof(zoneName));
-            }
+            Argument.AssertNotNullOrEmpty(zoneName, nameof(zoneName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -137,13 +133,11 @@ namespace MgmtExpandResourceTypes
         /// <summary> Gets a DNS zone. Retrieves the zone properties, but not the record sets within the zone. </summary>
         /// <param name="zoneName"> The name of the DNS zone (without a terminating dot). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="zoneName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="zoneName"/> is null. </exception>
         public virtual Response<Zone> Get(string zoneName, CancellationToken cancellationToken = default)
         {
-            if (zoneName == null)
-            {
-                throw new ArgumentNullException(nameof(zoneName));
-            }
+            Argument.AssertNotNullOrEmpty(zoneName, nameof(zoneName));
 
             using var scope = _clientDiagnostics.CreateScope("ZoneCollection.Get");
             scope.Start();
@@ -167,13 +161,11 @@ namespace MgmtExpandResourceTypes
         /// <summary> Gets a DNS zone. Retrieves the zone properties, but not the record sets within the zone. </summary>
         /// <param name="zoneName"> The name of the DNS zone (without a terminating dot). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="zoneName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="zoneName"/> is null. </exception>
         public async virtual Task<Response<Zone>> GetAsync(string zoneName, CancellationToken cancellationToken = default)
         {
-            if (zoneName == null)
-            {
-                throw new ArgumentNullException(nameof(zoneName));
-            }
+            Argument.AssertNotNullOrEmpty(zoneName, nameof(zoneName));
 
             using var scope = _clientDiagnostics.CreateScope("ZoneCollection.Get");
             scope.Start();
@@ -194,13 +186,11 @@ namespace MgmtExpandResourceTypes
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="zoneName"> The name of the DNS zone (without a terminating dot). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="zoneName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="zoneName"/> is null. </exception>
         public virtual Response<Zone> GetIfExists(string zoneName, CancellationToken cancellationToken = default)
         {
-            if (zoneName == null)
-            {
-                throw new ArgumentNullException(nameof(zoneName));
-            }
+            Argument.AssertNotNullOrEmpty(zoneName, nameof(zoneName));
 
             using var scope = _clientDiagnostics.CreateScope("ZoneCollection.GetIfExists");
             scope.Start();
@@ -221,13 +211,11 @@ namespace MgmtExpandResourceTypes
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="zoneName"> The name of the DNS zone (without a terminating dot). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="zoneName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="zoneName"/> is null. </exception>
         public async virtual Task<Response<Zone>> GetIfExistsAsync(string zoneName, CancellationToken cancellationToken = default)
         {
-            if (zoneName == null)
-            {
-                throw new ArgumentNullException(nameof(zoneName));
-            }
+            Argument.AssertNotNullOrEmpty(zoneName, nameof(zoneName));
 
             using var scope = _clientDiagnostics.CreateScope("ZoneCollection.GetIfExists");
             scope.Start();
@@ -248,13 +236,11 @@ namespace MgmtExpandResourceTypes
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="zoneName"> The name of the DNS zone (without a terminating dot). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="zoneName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="zoneName"/> is null. </exception>
         public virtual Response<bool> Exists(string zoneName, CancellationToken cancellationToken = default)
         {
-            if (zoneName == null)
-            {
-                throw new ArgumentNullException(nameof(zoneName));
-            }
+            Argument.AssertNotNullOrEmpty(zoneName, nameof(zoneName));
 
             using var scope = _clientDiagnostics.CreateScope("ZoneCollection.Exists");
             scope.Start();
@@ -273,13 +259,11 @@ namespace MgmtExpandResourceTypes
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="zoneName"> The name of the DNS zone (without a terminating dot). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="zoneName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="zoneName"/> is null. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string zoneName, CancellationToken cancellationToken = default)
         {
-            if (zoneName == null)
-            {
-                throw new ArgumentNullException(nameof(zoneName));
-            }
+            Argument.AssertNotNullOrEmpty(zoneName, nameof(zoneName));
 
             using var scope = _clientDiagnostics.CreateScope("ZoneCollection.Exists");
             scope.Start();

@@ -59,13 +59,11 @@ namespace MgmtMultipleParentResource
         /// <param name="childName"> The name of the virtual machine run command. </param>
         /// <param name="childBody"> Parameters supplied to the Create Virtual Machine RunCommand operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="childName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="childName"/> or <paramref name="childBody"/> is null. </exception>
         public virtual TheParentSubParentChildCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string childName, ChildBodyData childBody, CancellationToken cancellationToken = default)
         {
-            if (childName == null)
-            {
-                throw new ArgumentNullException(nameof(childName));
-            }
+            Argument.AssertNotNullOrEmpty(childName, nameof(childName));
             if (childBody == null)
             {
                 throw new ArgumentNullException(nameof(childBody));
@@ -96,13 +94,11 @@ namespace MgmtMultipleParentResource
         /// <param name="childName"> The name of the virtual machine run command. </param>
         /// <param name="childBody"> Parameters supplied to the Create Virtual Machine RunCommand operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="childName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="childName"/> or <paramref name="childBody"/> is null. </exception>
         public async virtual Task<TheParentSubParentChildCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string childName, ChildBodyData childBody, CancellationToken cancellationToken = default)
         {
-            if (childName == null)
-            {
-                throw new ArgumentNullException(nameof(childName));
-            }
+            Argument.AssertNotNullOrEmpty(childName, nameof(childName));
             if (childBody == null)
             {
                 throw new ArgumentNullException(nameof(childBody));
@@ -132,13 +128,11 @@ namespace MgmtMultipleParentResource
         /// <param name="childName"> The name of the virtual machine run command. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="childName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="childName"/> is null. </exception>
         public virtual Response<TheParentSubParentChild> Get(string childName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (childName == null)
-            {
-                throw new ArgumentNullException(nameof(childName));
-            }
+            Argument.AssertNotNullOrEmpty(childName, nameof(childName));
 
             using var scope = _clientDiagnostics.CreateScope("TheParentSubParentChildCollection.Get");
             scope.Start();
@@ -163,13 +157,11 @@ namespace MgmtMultipleParentResource
         /// <param name="childName"> The name of the virtual machine run command. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="childName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="childName"/> is null. </exception>
         public async virtual Task<Response<TheParentSubParentChild>> GetAsync(string childName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (childName == null)
-            {
-                throw new ArgumentNullException(nameof(childName));
-            }
+            Argument.AssertNotNullOrEmpty(childName, nameof(childName));
 
             using var scope = _clientDiagnostics.CreateScope("TheParentSubParentChildCollection.Get");
             scope.Start();
@@ -191,13 +183,11 @@ namespace MgmtMultipleParentResource
         /// <param name="childName"> The name of the virtual machine run command. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="childName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="childName"/> is null. </exception>
         public virtual Response<TheParentSubParentChild> GetIfExists(string childName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (childName == null)
-            {
-                throw new ArgumentNullException(nameof(childName));
-            }
+            Argument.AssertNotNullOrEmpty(childName, nameof(childName));
 
             using var scope = _clientDiagnostics.CreateScope("TheParentSubParentChildCollection.GetIfExists");
             scope.Start();
@@ -219,13 +209,11 @@ namespace MgmtMultipleParentResource
         /// <param name="childName"> The name of the virtual machine run command. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="childName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="childName"/> is null. </exception>
         public async virtual Task<Response<TheParentSubParentChild>> GetIfExistsAsync(string childName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (childName == null)
-            {
-                throw new ArgumentNullException(nameof(childName));
-            }
+            Argument.AssertNotNullOrEmpty(childName, nameof(childName));
 
             using var scope = _clientDiagnostics.CreateScope("TheParentSubParentChildCollection.GetIfExists");
             scope.Start();
@@ -247,13 +235,11 @@ namespace MgmtMultipleParentResource
         /// <param name="childName"> The name of the virtual machine run command. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="childName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="childName"/> is null. </exception>
         public virtual Response<bool> Exists(string childName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (childName == null)
-            {
-                throw new ArgumentNullException(nameof(childName));
-            }
+            Argument.AssertNotNullOrEmpty(childName, nameof(childName));
 
             using var scope = _clientDiagnostics.CreateScope("TheParentSubParentChildCollection.Exists");
             scope.Start();
@@ -273,13 +259,11 @@ namespace MgmtMultipleParentResource
         /// <param name="childName"> The name of the virtual machine run command. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="childName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="childName"/> is null. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string childName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (childName == null)
-            {
-                throw new ArgumentNullException(nameof(childName));
-            }
+            Argument.AssertNotNullOrEmpty(childName, nameof(childName));
 
             using var scope = _clientDiagnostics.CreateScope("TheParentSubParentChildCollection.Exists");
             scope.Start();

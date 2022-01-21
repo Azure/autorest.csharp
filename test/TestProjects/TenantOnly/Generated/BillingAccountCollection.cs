@@ -60,13 +60,11 @@ namespace TenantOnly
         /// <param name="billingAccountName"> The ID that uniquely identifies a billing account. </param>
         /// <param name="parameters"> Request parameters that are provided to the update billing account operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="billingAccountName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="billingAccountName"/> or <paramref name="parameters"/> is null. </exception>
         public virtual BillingAccountCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string billingAccountName, BillingAccountData parameters, CancellationToken cancellationToken = default)
         {
-            if (billingAccountName == null)
-            {
-                throw new ArgumentNullException(nameof(billingAccountName));
-            }
+            Argument.AssertNotNullOrEmpty(billingAccountName, nameof(billingAccountName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -97,13 +95,11 @@ namespace TenantOnly
         /// <param name="billingAccountName"> The ID that uniquely identifies a billing account. </param>
         /// <param name="parameters"> Request parameters that are provided to the update billing account operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="billingAccountName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="billingAccountName"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<BillingAccountCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string billingAccountName, BillingAccountData parameters, CancellationToken cancellationToken = default)
         {
-            if (billingAccountName == null)
-            {
-                throw new ArgumentNullException(nameof(billingAccountName));
-            }
+            Argument.AssertNotNullOrEmpty(billingAccountName, nameof(billingAccountName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -133,13 +129,11 @@ namespace TenantOnly
         /// <param name="billingAccountName"> The ID that uniquely identifies a billing account. </param>
         /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="billingAccountName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="billingAccountName"/> is null. </exception>
         public virtual Response<BillingAccount> Get(string billingAccountName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (billingAccountName == null)
-            {
-                throw new ArgumentNullException(nameof(billingAccountName));
-            }
+            Argument.AssertNotNullOrEmpty(billingAccountName, nameof(billingAccountName));
 
             using var scope = _clientDiagnostics.CreateScope("BillingAccountCollection.Get");
             scope.Start();
@@ -164,13 +158,11 @@ namespace TenantOnly
         /// <param name="billingAccountName"> The ID that uniquely identifies a billing account. </param>
         /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="billingAccountName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="billingAccountName"/> is null. </exception>
         public async virtual Task<Response<BillingAccount>> GetAsync(string billingAccountName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (billingAccountName == null)
-            {
-                throw new ArgumentNullException(nameof(billingAccountName));
-            }
+            Argument.AssertNotNullOrEmpty(billingAccountName, nameof(billingAccountName));
 
             using var scope = _clientDiagnostics.CreateScope("BillingAccountCollection.Get");
             scope.Start();
@@ -192,13 +184,11 @@ namespace TenantOnly
         /// <param name="billingAccountName"> The ID that uniquely identifies a billing account. </param>
         /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="billingAccountName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="billingAccountName"/> is null. </exception>
         public virtual Response<BillingAccount> GetIfExists(string billingAccountName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (billingAccountName == null)
-            {
-                throw new ArgumentNullException(nameof(billingAccountName));
-            }
+            Argument.AssertNotNullOrEmpty(billingAccountName, nameof(billingAccountName));
 
             using var scope = _clientDiagnostics.CreateScope("BillingAccountCollection.GetIfExists");
             scope.Start();
@@ -220,13 +210,11 @@ namespace TenantOnly
         /// <param name="billingAccountName"> The ID that uniquely identifies a billing account. </param>
         /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="billingAccountName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="billingAccountName"/> is null. </exception>
         public async virtual Task<Response<BillingAccount>> GetIfExistsAsync(string billingAccountName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (billingAccountName == null)
-            {
-                throw new ArgumentNullException(nameof(billingAccountName));
-            }
+            Argument.AssertNotNullOrEmpty(billingAccountName, nameof(billingAccountName));
 
             using var scope = _clientDiagnostics.CreateScope("BillingAccountCollection.GetIfExists");
             scope.Start();
@@ -248,13 +236,11 @@ namespace TenantOnly
         /// <param name="billingAccountName"> The ID that uniquely identifies a billing account. </param>
         /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="billingAccountName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="billingAccountName"/> is null. </exception>
         public virtual Response<bool> Exists(string billingAccountName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (billingAccountName == null)
-            {
-                throw new ArgumentNullException(nameof(billingAccountName));
-            }
+            Argument.AssertNotNullOrEmpty(billingAccountName, nameof(billingAccountName));
 
             using var scope = _clientDiagnostics.CreateScope("BillingAccountCollection.Exists");
             scope.Start();
@@ -274,13 +260,11 @@ namespace TenantOnly
         /// <param name="billingAccountName"> The ID that uniquely identifies a billing account. </param>
         /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="billingAccountName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="billingAccountName"/> is null. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string billingAccountName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (billingAccountName == null)
-            {
-                throw new ArgumentNullException(nameof(billingAccountName));
-            }
+            Argument.AssertNotNullOrEmpty(billingAccountName, nameof(billingAccountName));
 
             using var scope = _clientDiagnostics.CreateScope("BillingAccountCollection.Exists");
             scope.Start();

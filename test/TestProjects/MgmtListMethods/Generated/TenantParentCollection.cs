@@ -59,13 +59,11 @@ namespace MgmtListMethods
         /// <param name="tenantParentName"> Name. </param>
         /// <param name="parameters"> Parameters supplied to the Create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="tenantParentName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantParentName"/> or <paramref name="parameters"/> is null. </exception>
         public virtual TenantParentCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string tenantParentName, TenantParentData parameters, CancellationToken cancellationToken = default)
         {
-            if (tenantParentName == null)
-            {
-                throw new ArgumentNullException(nameof(tenantParentName));
-            }
+            Argument.AssertNotNullOrEmpty(tenantParentName, nameof(tenantParentName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -96,13 +94,11 @@ namespace MgmtListMethods
         /// <param name="tenantParentName"> Name. </param>
         /// <param name="parameters"> Parameters supplied to the Create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="tenantParentName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantParentName"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<TenantParentCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string tenantParentName, TenantParentData parameters, CancellationToken cancellationToken = default)
         {
-            if (tenantParentName == null)
-            {
-                throw new ArgumentNullException(nameof(tenantParentName));
-            }
+            Argument.AssertNotNullOrEmpty(tenantParentName, nameof(tenantParentName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -131,13 +127,11 @@ namespace MgmtListMethods
         /// <summary> Retrieves information. </summary>
         /// <param name="tenantParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="tenantParentName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantParentName"/> is null. </exception>
         public virtual Response<TenantParent> Get(string tenantParentName, CancellationToken cancellationToken = default)
         {
-            if (tenantParentName == null)
-            {
-                throw new ArgumentNullException(nameof(tenantParentName));
-            }
+            Argument.AssertNotNullOrEmpty(tenantParentName, nameof(tenantParentName));
 
             using var scope = _clientDiagnostics.CreateScope("TenantParentCollection.Get");
             scope.Start();
@@ -161,13 +155,11 @@ namespace MgmtListMethods
         /// <summary> Retrieves information. </summary>
         /// <param name="tenantParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="tenantParentName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantParentName"/> is null. </exception>
         public async virtual Task<Response<TenantParent>> GetAsync(string tenantParentName, CancellationToken cancellationToken = default)
         {
-            if (tenantParentName == null)
-            {
-                throw new ArgumentNullException(nameof(tenantParentName));
-            }
+            Argument.AssertNotNullOrEmpty(tenantParentName, nameof(tenantParentName));
 
             using var scope = _clientDiagnostics.CreateScope("TenantParentCollection.Get");
             scope.Start();
@@ -188,13 +180,11 @@ namespace MgmtListMethods
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="tenantParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="tenantParentName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantParentName"/> is null. </exception>
         public virtual Response<TenantParent> GetIfExists(string tenantParentName, CancellationToken cancellationToken = default)
         {
-            if (tenantParentName == null)
-            {
-                throw new ArgumentNullException(nameof(tenantParentName));
-            }
+            Argument.AssertNotNullOrEmpty(tenantParentName, nameof(tenantParentName));
 
             using var scope = _clientDiagnostics.CreateScope("TenantParentCollection.GetIfExists");
             scope.Start();
@@ -215,13 +205,11 @@ namespace MgmtListMethods
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="tenantParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="tenantParentName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantParentName"/> is null. </exception>
         public async virtual Task<Response<TenantParent>> GetIfExistsAsync(string tenantParentName, CancellationToken cancellationToken = default)
         {
-            if (tenantParentName == null)
-            {
-                throw new ArgumentNullException(nameof(tenantParentName));
-            }
+            Argument.AssertNotNullOrEmpty(tenantParentName, nameof(tenantParentName));
 
             using var scope = _clientDiagnostics.CreateScope("TenantParentCollection.GetIfExists");
             scope.Start();
@@ -242,13 +230,11 @@ namespace MgmtListMethods
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="tenantParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="tenantParentName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantParentName"/> is null. </exception>
         public virtual Response<bool> Exists(string tenantParentName, CancellationToken cancellationToken = default)
         {
-            if (tenantParentName == null)
-            {
-                throw new ArgumentNullException(nameof(tenantParentName));
-            }
+            Argument.AssertNotNullOrEmpty(tenantParentName, nameof(tenantParentName));
 
             using var scope = _clientDiagnostics.CreateScope("TenantParentCollection.Exists");
             scope.Start();
@@ -267,13 +253,11 @@ namespace MgmtListMethods
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="tenantParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="tenantParentName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantParentName"/> is null. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string tenantParentName, CancellationToken cancellationToken = default)
         {
-            if (tenantParentName == null)
-            {
-                throw new ArgumentNullException(nameof(tenantParentName));
-            }
+            Argument.AssertNotNullOrEmpty(tenantParentName, nameof(tenantParentName));
 
             using var scope = _clientDiagnostics.CreateScope("TenantParentCollection.Exists");
             scope.Start();

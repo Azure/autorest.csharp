@@ -61,13 +61,11 @@ namespace MgmtPropertyChooser
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="parameters"> Parameters supplied to the Create Virtual Machine operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="vmName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="vmName"/> or <paramref name="parameters"/> is null. </exception>
         public virtual VirtualMachineCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string vmName, VirtualMachineData parameters, CancellationToken cancellationToken = default)
         {
-            if (vmName == null)
-            {
-                throw new ArgumentNullException(nameof(vmName));
-            }
+            Argument.AssertNotNullOrEmpty(vmName, nameof(vmName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -98,13 +96,11 @@ namespace MgmtPropertyChooser
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="parameters"> Parameters supplied to the Create Virtual Machine operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="vmName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="vmName"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<VirtualMachineCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string vmName, VirtualMachineData parameters, CancellationToken cancellationToken = default)
         {
-            if (vmName == null)
-            {
-                throw new ArgumentNullException(nameof(vmName));
-            }
+            Argument.AssertNotNullOrEmpty(vmName, nameof(vmName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -133,13 +129,11 @@ namespace MgmtPropertyChooser
         /// <summary> Retrieves information about the model view or the instance view of a virtual machine. </summary>
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="vmName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="vmName"/> is null. </exception>
         public virtual Response<VirtualMachine> Get(string vmName, CancellationToken cancellationToken = default)
         {
-            if (vmName == null)
-            {
-                throw new ArgumentNullException(nameof(vmName));
-            }
+            Argument.AssertNotNullOrEmpty(vmName, nameof(vmName));
 
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineCollection.Get");
             scope.Start();
@@ -163,13 +157,11 @@ namespace MgmtPropertyChooser
         /// <summary> Retrieves information about the model view or the instance view of a virtual machine. </summary>
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="vmName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="vmName"/> is null. </exception>
         public async virtual Task<Response<VirtualMachine>> GetAsync(string vmName, CancellationToken cancellationToken = default)
         {
-            if (vmName == null)
-            {
-                throw new ArgumentNullException(nameof(vmName));
-            }
+            Argument.AssertNotNullOrEmpty(vmName, nameof(vmName));
 
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineCollection.Get");
             scope.Start();
@@ -190,13 +182,11 @@ namespace MgmtPropertyChooser
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="vmName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="vmName"/> is null. </exception>
         public virtual Response<VirtualMachine> GetIfExists(string vmName, CancellationToken cancellationToken = default)
         {
-            if (vmName == null)
-            {
-                throw new ArgumentNullException(nameof(vmName));
-            }
+            Argument.AssertNotNullOrEmpty(vmName, nameof(vmName));
 
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineCollection.GetIfExists");
             scope.Start();
@@ -217,13 +207,11 @@ namespace MgmtPropertyChooser
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="vmName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="vmName"/> is null. </exception>
         public async virtual Task<Response<VirtualMachine>> GetIfExistsAsync(string vmName, CancellationToken cancellationToken = default)
         {
-            if (vmName == null)
-            {
-                throw new ArgumentNullException(nameof(vmName));
-            }
+            Argument.AssertNotNullOrEmpty(vmName, nameof(vmName));
 
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineCollection.GetIfExists");
             scope.Start();
@@ -244,13 +232,11 @@ namespace MgmtPropertyChooser
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="vmName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="vmName"/> is null. </exception>
         public virtual Response<bool> Exists(string vmName, CancellationToken cancellationToken = default)
         {
-            if (vmName == null)
-            {
-                throw new ArgumentNullException(nameof(vmName));
-            }
+            Argument.AssertNotNullOrEmpty(vmName, nameof(vmName));
 
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineCollection.Exists");
             scope.Start();
@@ -269,13 +255,11 @@ namespace MgmtPropertyChooser
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="vmName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="vmName"/> is null. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string vmName, CancellationToken cancellationToken = default)
         {
-            if (vmName == null)
-            {
-                throw new ArgumentNullException(nameof(vmName));
-            }
+            Argument.AssertNotNullOrEmpty(vmName, nameof(vmName));
 
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineCollection.Exists");
             scope.Start();

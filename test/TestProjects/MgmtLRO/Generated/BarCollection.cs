@@ -61,13 +61,11 @@ namespace MgmtLRO
         /// <param name="barName"> The name of the fake. </param>
         /// <param name="body"> The Bar to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="barName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="barName"/> or <paramref name="body"/> is null. </exception>
         public virtual BarCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string barName, BarData body, CancellationToken cancellationToken = default)
         {
-            if (barName == null)
-            {
-                throw new ArgumentNullException(nameof(barName));
-            }
+            Argument.AssertNotNullOrEmpty(barName, nameof(barName));
             if (body == null)
             {
                 throw new ArgumentNullException(nameof(body));
@@ -98,13 +96,11 @@ namespace MgmtLRO
         /// <param name="barName"> The name of the fake. </param>
         /// <param name="body"> The Bar to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="barName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="barName"/> or <paramref name="body"/> is null. </exception>
         public async virtual Task<BarCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string barName, BarData body, CancellationToken cancellationToken = default)
         {
-            if (barName == null)
-            {
-                throw new ArgumentNullException(nameof(barName));
-            }
+            Argument.AssertNotNullOrEmpty(barName, nameof(barName));
             if (body == null)
             {
                 throw new ArgumentNullException(nameof(body));
@@ -133,13 +129,11 @@ namespace MgmtLRO
         /// <summary> Retrieves information about an fake. </summary>
         /// <param name="barName"> The name of the fake. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="barName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="barName"/> is null. </exception>
         public virtual Response<Bar> Get(string barName, CancellationToken cancellationToken = default)
         {
-            if (barName == null)
-            {
-                throw new ArgumentNullException(nameof(barName));
-            }
+            Argument.AssertNotNullOrEmpty(barName, nameof(barName));
 
             using var scope = _clientDiagnostics.CreateScope("BarCollection.Get");
             scope.Start();
@@ -163,13 +157,11 @@ namespace MgmtLRO
         /// <summary> Retrieves information about an fake. </summary>
         /// <param name="barName"> The name of the fake. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="barName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="barName"/> is null. </exception>
         public async virtual Task<Response<Bar>> GetAsync(string barName, CancellationToken cancellationToken = default)
         {
-            if (barName == null)
-            {
-                throw new ArgumentNullException(nameof(barName));
-            }
+            Argument.AssertNotNullOrEmpty(barName, nameof(barName));
 
             using var scope = _clientDiagnostics.CreateScope("BarCollection.Get");
             scope.Start();
@@ -190,13 +182,11 @@ namespace MgmtLRO
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="barName"> The name of the fake. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="barName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="barName"/> is null. </exception>
         public virtual Response<Bar> GetIfExists(string barName, CancellationToken cancellationToken = default)
         {
-            if (barName == null)
-            {
-                throw new ArgumentNullException(nameof(barName));
-            }
+            Argument.AssertNotNullOrEmpty(barName, nameof(barName));
 
             using var scope = _clientDiagnostics.CreateScope("BarCollection.GetIfExists");
             scope.Start();
@@ -217,13 +207,11 @@ namespace MgmtLRO
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="barName"> The name of the fake. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="barName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="barName"/> is null. </exception>
         public async virtual Task<Response<Bar>> GetIfExistsAsync(string barName, CancellationToken cancellationToken = default)
         {
-            if (barName == null)
-            {
-                throw new ArgumentNullException(nameof(barName));
-            }
+            Argument.AssertNotNullOrEmpty(barName, nameof(barName));
 
             using var scope = _clientDiagnostics.CreateScope("BarCollection.GetIfExists");
             scope.Start();
@@ -244,13 +232,11 @@ namespace MgmtLRO
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="barName"> The name of the fake. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="barName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="barName"/> is null. </exception>
         public virtual Response<bool> Exists(string barName, CancellationToken cancellationToken = default)
         {
-            if (barName == null)
-            {
-                throw new ArgumentNullException(nameof(barName));
-            }
+            Argument.AssertNotNullOrEmpty(barName, nameof(barName));
 
             using var scope = _clientDiagnostics.CreateScope("BarCollection.Exists");
             scope.Start();
@@ -269,13 +255,11 @@ namespace MgmtLRO
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="barName"> The name of the fake. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="barName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="barName"/> is null. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string barName, CancellationToken cancellationToken = default)
         {
-            if (barName == null)
-            {
-                throw new ArgumentNullException(nameof(barName));
-            }
+            Argument.AssertNotNullOrEmpty(barName, nameof(barName));
 
             using var scope = _clientDiagnostics.CreateScope("BarCollection.Exists");
             scope.Start();

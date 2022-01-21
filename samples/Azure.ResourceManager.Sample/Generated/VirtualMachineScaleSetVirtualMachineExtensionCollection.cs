@@ -59,13 +59,11 @@ namespace Azure.ResourceManager.Sample
         /// <param name="vmExtensionName"> The name of the virtual machine extension. </param>
         /// <param name="extensionParameters"> Parameters supplied to the Create Virtual Machine Extension operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="vmExtensionName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="vmExtensionName"/> or <paramref name="extensionParameters"/> is null. </exception>
         public virtual VirtualMachineScaleSetVirtualMachineExtensionCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string vmExtensionName, VirtualMachineExtensionData extensionParameters, CancellationToken cancellationToken = default)
         {
-            if (vmExtensionName == null)
-            {
-                throw new ArgumentNullException(nameof(vmExtensionName));
-            }
+            Argument.AssertNotNullOrEmpty(vmExtensionName, nameof(vmExtensionName));
             if (extensionParameters == null)
             {
                 throw new ArgumentNullException(nameof(extensionParameters));
@@ -96,13 +94,11 @@ namespace Azure.ResourceManager.Sample
         /// <param name="vmExtensionName"> The name of the virtual machine extension. </param>
         /// <param name="extensionParameters"> Parameters supplied to the Create Virtual Machine Extension operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="vmExtensionName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="vmExtensionName"/> or <paramref name="extensionParameters"/> is null. </exception>
         public async virtual Task<VirtualMachineScaleSetVirtualMachineExtensionCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string vmExtensionName, VirtualMachineExtensionData extensionParameters, CancellationToken cancellationToken = default)
         {
-            if (vmExtensionName == null)
-            {
-                throw new ArgumentNullException(nameof(vmExtensionName));
-            }
+            Argument.AssertNotNullOrEmpty(vmExtensionName, nameof(vmExtensionName));
             if (extensionParameters == null)
             {
                 throw new ArgumentNullException(nameof(extensionParameters));
@@ -132,13 +128,11 @@ namespace Azure.ResourceManager.Sample
         /// <param name="vmExtensionName"> The name of the virtual machine extension. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="vmExtensionName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="vmExtensionName"/> is null. </exception>
         public virtual Response<VirtualMachineScaleSetVirtualMachineExtension> Get(string vmExtensionName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (vmExtensionName == null)
-            {
-                throw new ArgumentNullException(nameof(vmExtensionName));
-            }
+            Argument.AssertNotNullOrEmpty(vmExtensionName, nameof(vmExtensionName));
 
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetVirtualMachineExtensionCollection.Get");
             scope.Start();
@@ -163,13 +157,11 @@ namespace Azure.ResourceManager.Sample
         /// <param name="vmExtensionName"> The name of the virtual machine extension. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="vmExtensionName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="vmExtensionName"/> is null. </exception>
         public async virtual Task<Response<VirtualMachineScaleSetVirtualMachineExtension>> GetAsync(string vmExtensionName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (vmExtensionName == null)
-            {
-                throw new ArgumentNullException(nameof(vmExtensionName));
-            }
+            Argument.AssertNotNullOrEmpty(vmExtensionName, nameof(vmExtensionName));
 
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetVirtualMachineExtensionCollection.Get");
             scope.Start();
@@ -191,13 +183,11 @@ namespace Azure.ResourceManager.Sample
         /// <param name="vmExtensionName"> The name of the virtual machine extension. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="vmExtensionName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="vmExtensionName"/> is null. </exception>
         public virtual Response<VirtualMachineScaleSetVirtualMachineExtension> GetIfExists(string vmExtensionName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (vmExtensionName == null)
-            {
-                throw new ArgumentNullException(nameof(vmExtensionName));
-            }
+            Argument.AssertNotNullOrEmpty(vmExtensionName, nameof(vmExtensionName));
 
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetVirtualMachineExtensionCollection.GetIfExists");
             scope.Start();
@@ -219,13 +209,11 @@ namespace Azure.ResourceManager.Sample
         /// <param name="vmExtensionName"> The name of the virtual machine extension. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="vmExtensionName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="vmExtensionName"/> is null. </exception>
         public async virtual Task<Response<VirtualMachineScaleSetVirtualMachineExtension>> GetIfExistsAsync(string vmExtensionName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (vmExtensionName == null)
-            {
-                throw new ArgumentNullException(nameof(vmExtensionName));
-            }
+            Argument.AssertNotNullOrEmpty(vmExtensionName, nameof(vmExtensionName));
 
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetVirtualMachineExtensionCollection.GetIfExists");
             scope.Start();
@@ -247,13 +235,11 @@ namespace Azure.ResourceManager.Sample
         /// <param name="vmExtensionName"> The name of the virtual machine extension. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="vmExtensionName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="vmExtensionName"/> is null. </exception>
         public virtual Response<bool> Exists(string vmExtensionName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (vmExtensionName == null)
-            {
-                throw new ArgumentNullException(nameof(vmExtensionName));
-            }
+            Argument.AssertNotNullOrEmpty(vmExtensionName, nameof(vmExtensionName));
 
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetVirtualMachineExtensionCollection.Exists");
             scope.Start();
@@ -273,13 +259,11 @@ namespace Azure.ResourceManager.Sample
         /// <param name="vmExtensionName"> The name of the virtual machine extension. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="vmExtensionName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="vmExtensionName"/> is null. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string vmExtensionName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (vmExtensionName == null)
-            {
-                throw new ArgumentNullException(nameof(vmExtensionName));
-            }
+            Argument.AssertNotNullOrEmpty(vmExtensionName, nameof(vmExtensionName));
 
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetVirtualMachineExtensionCollection.Exists");
             scope.Start();

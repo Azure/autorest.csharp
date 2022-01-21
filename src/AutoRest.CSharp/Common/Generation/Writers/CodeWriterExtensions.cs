@@ -305,7 +305,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static bool CanWriteNullCheck(Parameter parameter) => parameter.ValidateNotNull && !parameter.Type.IsValueType;
 
-        private static bool HasNullCheck(Parameter parameter) => !(parameter.DefaultValue != null && !TypeFactory.CanBeInitializedInline(parameter.Type, parameter.DefaultValue)) && CanWriteNullCheck(parameter);
+        internal static bool HasNullCheck(Parameter parameter) => !(parameter.DefaultValue != null && !TypeFactory.CanBeInitializedInline(parameter.Type, parameter.DefaultValue)) && CanWriteNullCheck(parameter);
 
         public static bool HasAnyNullCheck(this IReadOnlyCollection<Parameter> parameters) => parameters.Any(p => HasNullCheck(p));
 

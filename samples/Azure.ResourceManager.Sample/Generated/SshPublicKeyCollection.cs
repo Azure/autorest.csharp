@@ -61,13 +61,11 @@ namespace Azure.ResourceManager.Sample
         /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
         /// <param name="parameters"> Parameters supplied to create the SSH public key. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="sshPublicKeyName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="sshPublicKeyName"/> or <paramref name="parameters"/> is null. </exception>
         public virtual SshPublicKeyCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string sshPublicKeyName, SshPublicKeyData parameters, CancellationToken cancellationToken = default)
         {
-            if (sshPublicKeyName == null)
-            {
-                throw new ArgumentNullException(nameof(sshPublicKeyName));
-            }
+            Argument.AssertNotNullOrEmpty(sshPublicKeyName, nameof(sshPublicKeyName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -98,13 +96,11 @@ namespace Azure.ResourceManager.Sample
         /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
         /// <param name="parameters"> Parameters supplied to create the SSH public key. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="sshPublicKeyName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="sshPublicKeyName"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<SshPublicKeyCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string sshPublicKeyName, SshPublicKeyData parameters, CancellationToken cancellationToken = default)
         {
-            if (sshPublicKeyName == null)
-            {
-                throw new ArgumentNullException(nameof(sshPublicKeyName));
-            }
+            Argument.AssertNotNullOrEmpty(sshPublicKeyName, nameof(sshPublicKeyName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -133,13 +129,11 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Retrieves information about an SSH public key. </summary>
         /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="sshPublicKeyName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="sshPublicKeyName"/> is null. </exception>
         public virtual Response<SshPublicKey> Get(string sshPublicKeyName, CancellationToken cancellationToken = default)
         {
-            if (sshPublicKeyName == null)
-            {
-                throw new ArgumentNullException(nameof(sshPublicKeyName));
-            }
+            Argument.AssertNotNullOrEmpty(sshPublicKeyName, nameof(sshPublicKeyName));
 
             using var scope = _clientDiagnostics.CreateScope("SshPublicKeyCollection.Get");
             scope.Start();
@@ -163,13 +157,11 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Retrieves information about an SSH public key. </summary>
         /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="sshPublicKeyName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="sshPublicKeyName"/> is null. </exception>
         public async virtual Task<Response<SshPublicKey>> GetAsync(string sshPublicKeyName, CancellationToken cancellationToken = default)
         {
-            if (sshPublicKeyName == null)
-            {
-                throw new ArgumentNullException(nameof(sshPublicKeyName));
-            }
+            Argument.AssertNotNullOrEmpty(sshPublicKeyName, nameof(sshPublicKeyName));
 
             using var scope = _clientDiagnostics.CreateScope("SshPublicKeyCollection.Get");
             scope.Start();
@@ -190,13 +182,11 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="sshPublicKeyName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="sshPublicKeyName"/> is null. </exception>
         public virtual Response<SshPublicKey> GetIfExists(string sshPublicKeyName, CancellationToken cancellationToken = default)
         {
-            if (sshPublicKeyName == null)
-            {
-                throw new ArgumentNullException(nameof(sshPublicKeyName));
-            }
+            Argument.AssertNotNullOrEmpty(sshPublicKeyName, nameof(sshPublicKeyName));
 
             using var scope = _clientDiagnostics.CreateScope("SshPublicKeyCollection.GetIfExists");
             scope.Start();
@@ -217,13 +207,11 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="sshPublicKeyName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="sshPublicKeyName"/> is null. </exception>
         public async virtual Task<Response<SshPublicKey>> GetIfExistsAsync(string sshPublicKeyName, CancellationToken cancellationToken = default)
         {
-            if (sshPublicKeyName == null)
-            {
-                throw new ArgumentNullException(nameof(sshPublicKeyName));
-            }
+            Argument.AssertNotNullOrEmpty(sshPublicKeyName, nameof(sshPublicKeyName));
 
             using var scope = _clientDiagnostics.CreateScope("SshPublicKeyCollection.GetIfExists");
             scope.Start();
@@ -244,13 +232,11 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="sshPublicKeyName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="sshPublicKeyName"/> is null. </exception>
         public virtual Response<bool> Exists(string sshPublicKeyName, CancellationToken cancellationToken = default)
         {
-            if (sshPublicKeyName == null)
-            {
-                throw new ArgumentNullException(nameof(sshPublicKeyName));
-            }
+            Argument.AssertNotNullOrEmpty(sshPublicKeyName, nameof(sshPublicKeyName));
 
             using var scope = _clientDiagnostics.CreateScope("SshPublicKeyCollection.Exists");
             scope.Start();
@@ -269,13 +255,11 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="sshPublicKeyName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="sshPublicKeyName"/> is null. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string sshPublicKeyName, CancellationToken cancellationToken = default)
         {
-            if (sshPublicKeyName == null)
-            {
-                throw new ArgumentNullException(nameof(sshPublicKeyName));
-            }
+            Argument.AssertNotNullOrEmpty(sshPublicKeyName, nameof(sshPublicKeyName));
 
             using var scope = _clientDiagnostics.CreateScope("SshPublicKeyCollection.Exists");
             scope.Start();

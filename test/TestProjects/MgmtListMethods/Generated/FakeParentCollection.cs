@@ -59,13 +59,11 @@ namespace MgmtListMethods
         /// <param name="fakeParentName"> Name. </param>
         /// <param name="parameters"> Parameters supplied to the Create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="fakeParentName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentName"/> or <paramref name="parameters"/> is null. </exception>
         public virtual FakeParentCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string fakeParentName, FakeParentData parameters, CancellationToken cancellationToken = default)
         {
-            if (fakeParentName == null)
-            {
-                throw new ArgumentNullException(nameof(fakeParentName));
-            }
+            Argument.AssertNotNullOrEmpty(fakeParentName, nameof(fakeParentName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -96,13 +94,11 @@ namespace MgmtListMethods
         /// <param name="fakeParentName"> Name. </param>
         /// <param name="parameters"> Parameters supplied to the Create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="fakeParentName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentName"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<FakeParentCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string fakeParentName, FakeParentData parameters, CancellationToken cancellationToken = default)
         {
-            if (fakeParentName == null)
-            {
-                throw new ArgumentNullException(nameof(fakeParentName));
-            }
+            Argument.AssertNotNullOrEmpty(fakeParentName, nameof(fakeParentName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -131,13 +127,11 @@ namespace MgmtListMethods
         /// <summary> Retrieves information. </summary>
         /// <param name="fakeParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="fakeParentName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentName"/> is null. </exception>
         public virtual Response<FakeParent> Get(string fakeParentName, CancellationToken cancellationToken = default)
         {
-            if (fakeParentName == null)
-            {
-                throw new ArgumentNullException(nameof(fakeParentName));
-            }
+            Argument.AssertNotNullOrEmpty(fakeParentName, nameof(fakeParentName));
 
             using var scope = _clientDiagnostics.CreateScope("FakeParentCollection.Get");
             scope.Start();
@@ -161,13 +155,11 @@ namespace MgmtListMethods
         /// <summary> Retrieves information. </summary>
         /// <param name="fakeParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="fakeParentName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentName"/> is null. </exception>
         public async virtual Task<Response<FakeParent>> GetAsync(string fakeParentName, CancellationToken cancellationToken = default)
         {
-            if (fakeParentName == null)
-            {
-                throw new ArgumentNullException(nameof(fakeParentName));
-            }
+            Argument.AssertNotNullOrEmpty(fakeParentName, nameof(fakeParentName));
 
             using var scope = _clientDiagnostics.CreateScope("FakeParentCollection.Get");
             scope.Start();
@@ -188,13 +180,11 @@ namespace MgmtListMethods
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="fakeParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="fakeParentName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentName"/> is null. </exception>
         public virtual Response<FakeParent> GetIfExists(string fakeParentName, CancellationToken cancellationToken = default)
         {
-            if (fakeParentName == null)
-            {
-                throw new ArgumentNullException(nameof(fakeParentName));
-            }
+            Argument.AssertNotNullOrEmpty(fakeParentName, nameof(fakeParentName));
 
             using var scope = _clientDiagnostics.CreateScope("FakeParentCollection.GetIfExists");
             scope.Start();
@@ -215,13 +205,11 @@ namespace MgmtListMethods
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="fakeParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="fakeParentName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentName"/> is null. </exception>
         public async virtual Task<Response<FakeParent>> GetIfExistsAsync(string fakeParentName, CancellationToken cancellationToken = default)
         {
-            if (fakeParentName == null)
-            {
-                throw new ArgumentNullException(nameof(fakeParentName));
-            }
+            Argument.AssertNotNullOrEmpty(fakeParentName, nameof(fakeParentName));
 
             using var scope = _clientDiagnostics.CreateScope("FakeParentCollection.GetIfExists");
             scope.Start();
@@ -242,13 +230,11 @@ namespace MgmtListMethods
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="fakeParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="fakeParentName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentName"/> is null. </exception>
         public virtual Response<bool> Exists(string fakeParentName, CancellationToken cancellationToken = default)
         {
-            if (fakeParentName == null)
-            {
-                throw new ArgumentNullException(nameof(fakeParentName));
-            }
+            Argument.AssertNotNullOrEmpty(fakeParentName, nameof(fakeParentName));
 
             using var scope = _clientDiagnostics.CreateScope("FakeParentCollection.Exists");
             scope.Start();
@@ -267,13 +253,11 @@ namespace MgmtListMethods
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="fakeParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="fakeParentName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentName"/> is null. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string fakeParentName, CancellationToken cancellationToken = default)
         {
-            if (fakeParentName == null)
-            {
-                throw new ArgumentNullException(nameof(fakeParentName));
-            }
+            Argument.AssertNotNullOrEmpty(fakeParentName, nameof(fakeParentName));
 
             using var scope = _clientDiagnostics.CreateScope("FakeParentCollection.Exists");
             scope.Start();
