@@ -496,7 +496,7 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
 
             if (_resource.ResourceData.ShouldSetResourceIdentifier)
             {
-                _writer.Line($"{originalResponse}.Value.Id = {CreateResourceIdentifierExpression(_resource, operation.RequestPath, parameterMappings, w => w.Append($"originalResponse.Value"))};");
+                _writer.Line($"{originalResponse}.Value.Id = {CreateResourceIdentifierExpression(_resource, operation.RequestPath, parameterMappings, $"{originalResponse}.Value")};");
             }
 
             _writer.Line($"return {typeof(Response)}.FromValue(new {_resource.Type}(this, {originalResponse}.Value), {originalResponse}.GetRawResponse());");

@@ -278,7 +278,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             if (_resource.ResourceData.ShouldSetResourceIdentifier)
             {
-                writer.Line($"{response}.Value.Id = {CreateResourceIdentifierExpression(_resource, operation.RequestPath, parameterMappings, w => w.Append($"response.Value"))};");
+                writer.Line($"{response}.Value.Id = {CreateResourceIdentifierExpression(_resource, operation.RequestPath, parameterMappings, $"{response}.Value")};");
             }
 
             writer.Line($"return {typeof(Response)}.FromValue(new {_resource.Type}(this, {response}.Value), {response}.GetRawResponse());");

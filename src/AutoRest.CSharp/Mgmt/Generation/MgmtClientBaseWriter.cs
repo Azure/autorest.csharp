@@ -401,7 +401,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     using (_writer.Scope())
                     {
                         _writer
-                            .Line($"{value}.Id = {CreateResourceIdentifierExpression(wrapResource, operation.RequestPath, parameterMappings, w => w.Append($"value"))};")
+                            .Line($"{value}.Id = {CreateResourceIdentifierExpression(wrapResource, operation.RequestPath, parameterMappings, $"{value}")};")
                             .Line($"return new {wrapResource.Type}({ContextProperty}, {value});");
                     }
                 }
@@ -436,38 +436,32 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Line($"{typeof(CancellationToken)} cancellationToken = default)");
         }
 
-        protected CodeWriterDelegate CreateResourceIdentifierExpression(Resource resource, RequestPath requestPath, IEnumerable<ParameterMapping> parameterMappings, CodeWriterDelegate dataExpression)
+        protected FormattableString CreateResourceIdentifierExpression(Resource resource, RequestPath requestPath, IEnumerable<ParameterMapping> parameterMappings, FormattableString dataExpression)
         {
             var methodWithLeastParameters = resource.CreateResourceIdentifierMethodSignature().Values.OrderBy(method => method.Parameters.Length).First();
             var cache = new List<ParameterMapping>(parameterMappings);
-            return w =>
+
+            var parameterInvocations = new List<FormattableString>();
+            foreach (var reference in requestPath.Where(s => s.IsReference).Select(s => s.Reference))
             {
-                w.Append($"{resource.Type.Name}.CreateResourceIdentifier(");
-                var parameterInvocations = new List<CodeWriterDelegate>();
-                foreach (var reference in requestPath.Where(s => s.IsReference).Select(s => s.Reference))
+                var match = cache.First(p => reference.Name.Equals(p.Parameter.Name, StringComparison.InvariantCultureIgnoreCase) && reference.Type.Equals(p.Parameter.Type));
+                cache.Remove(match);
+                parameterInvocations.Add(match.IsPassThru ? $"{match.Parameter.Name}" : match.ValueExpression);
+            }
+
+            if (parameterInvocations.Count < methodWithLeastParameters.Parameters.Length)
+            {
+                if (resource.ResourceData.GetTypeOfName() != null)
                 {
-                    var match = cache.First(p => reference.Name.Equals(p.Parameter.Name, StringComparison.InvariantCultureIgnoreCase) && reference.Type.Equals(p.Parameter.Type));
-                    cache.Remove(match);
-                    parameterInvocations.Add(match.IsPassThru ? w => w.Append($"{match.Parameter.Name}") : w => w.Append(match.ValueExpression));
+                    parameterInvocations.Add($"{dataExpression}.Name");
                 }
-                if (parameterInvocations.Count < methodWithLeastParameters.Parameters.Length)
+                else
                 {
-                    if (resource.ResourceData.GetTypeOfName() != null)
-                    {
-                        parameterInvocations.Add(w => w.Append($"{dataExpression}.Name"));
-                    }
-                    else
-                    {
-                        throw new ErrorHelpers.ErrorException($"The resource data {resource.ResourceData.Type.Name} does not have a `Name` property, which is required when assigning non-resource as resources");
-                    }
+                    throw new ErrorHelpers.ErrorException($"The resource data {resource.ResourceData.Type.Name} does not have a `Name` property, which is required when assigning non-resource as resources");
                 }
-                foreach (var invocation in parameterInvocations)
-                {
-                    w.Append($"{invocation}, ");
-                }
-                w.RemoveTrailingCharacter();
-                w.Append($")");
-            };
+            }
+
+            return $"{resource.Type.Name}.CreateResourceIdentifier({parameterInvocations.Join(", ")})";
         }
 
         protected class PagingMethodWrapper
@@ -602,7 +596,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
                 if (wrapResource.ResourceData.ShouldSetResourceIdentifier)
                 {
-                    _writer.Line($"{response}.Value.Id = {CreateResourceIdentifierExpression(wrapResource, operation.RequestPath, parameterMappings, w => w.Append($"{response}.Value"))};");
+                    _writer.Line($"{response}.Value.Id = {CreateResourceIdentifierExpression(wrapResource, operation.RequestPath, parameterMappings, $"{response}.Value")};");
                 }
 
                 _writer.Line($"return {typeof(Response)}.FromValue(new {wrapResource.Type}({ContextProperty}, {response}.Value), {response}.GetRawResponse());");
