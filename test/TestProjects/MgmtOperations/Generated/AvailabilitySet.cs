@@ -246,10 +246,7 @@ namespace MgmtOperations
         /// <returns> The updated resource with the tag added. </returns>
         public async virtual Task<Response<AvailabilitySet>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrWhiteSpace(key))
-            {
-                throw new ArgumentNullException(nameof(key), $"{nameof(key)} provided cannot be null or a whitespace.");
-            }
+            Argument.AssertNotNullOrEmpty(key, nameof(key));
 
             using var scope = _clientDiagnostics.CreateScope("AvailabilitySet.AddTag");
             scope.Start();
@@ -275,10 +272,7 @@ namespace MgmtOperations
         /// <returns> The updated resource with the tag added. </returns>
         public virtual Response<AvailabilitySet> AddTag(string key, string value, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrWhiteSpace(key))
-            {
-                throw new ArgumentNullException(nameof(key), $"{nameof(key)} provided cannot be null or a whitespace.");
-            }
+            Argument.AssertNotNullOrEmpty(key, nameof(key));
 
             using var scope = _clientDiagnostics.CreateScope("AvailabilitySet.AddTag");
             scope.Start();
@@ -361,10 +355,7 @@ namespace MgmtOperations
         /// <returns> The updated resource with the tag removed. </returns>
         public async virtual Task<Response<AvailabilitySet>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrWhiteSpace(key))
-            {
-                throw new ArgumentNullException(nameof(key), $"{nameof(key)} provided cannot be null or a whitespace.");
-            }
+            Argument.AssertNotNullOrEmpty(key, nameof(key));
 
             using var scope = _clientDiagnostics.CreateScope("AvailabilitySet.RemoveTag");
             scope.Start();
@@ -389,10 +380,7 @@ namespace MgmtOperations
         /// <returns> The updated resource with the tag removed. </returns>
         public virtual Response<AvailabilitySet> RemoveTag(string key, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrWhiteSpace(key))
-            {
-                throw new ArgumentNullException(nameof(key), $"{nameof(key)} provided cannot be null or a whitespace.");
-            }
+            Argument.AssertNotNullOrEmpty(key, nameof(key));
 
             using var scope = _clientDiagnostics.CreateScope("AvailabilitySet.RemoveTag");
             scope.Start();

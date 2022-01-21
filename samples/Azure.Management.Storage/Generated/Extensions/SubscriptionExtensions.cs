@@ -246,14 +246,12 @@ namespace Azure.Management.Storage
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="location"> The location of the Azure Storage resource. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="location"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<Usage> GetUsagesByLocationAsync(this Subscription subscription, string location, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(location))
-            {
-                throw new ArgumentException($"Parameter {nameof(location)} cannot be null or empty", nameof(location));
-            }
+            Argument.AssertNotNullOrEmpty(location, nameof(location));
 
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
@@ -286,14 +284,12 @@ namespace Azure.Management.Storage
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="location"> The location of the Azure Storage resource. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="location"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static Pageable<Usage> GetUsagesByLocation(this Subscription subscription, string location, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(location))
-            {
-                throw new ArgumentException($"Parameter {nameof(location)} cannot be null or empty", nameof(location));
-            }
+            Argument.AssertNotNullOrEmpty(location, nameof(location));
 
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {

@@ -144,14 +144,11 @@ namespace ExactMatchFlattenInheritance
         /// <param name="name"> The String to use. </param>
         /// <param name="parameters"> The AzureResourceFlattenModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is null or empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
         public static async Task<Response<AzureResourceFlattenModel2>> PutAzureResourceFlattenModel2Async(this ResourceGroup resourceGroup, string name, AzureResourceFlattenModel2 parameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(name))
-            {
-                throw new ArgumentException($"Parameter {nameof(name)} cannot be null or empty", nameof(name));
-            }
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -185,14 +182,11 @@ namespace ExactMatchFlattenInheritance
         /// <param name="name"> The String to use. </param>
         /// <param name="parameters"> The AzureResourceFlattenModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is null or empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
         public static Response<AzureResourceFlattenModel2> PutAzureResourceFlattenModel2(this ResourceGroup resourceGroup, string name, AzureResourceFlattenModel2 parameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(name))
-            {
-                throw new ArgumentException($"Parameter {nameof(name)} cannot be null or empty", nameof(name));
-            }
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -225,13 +219,11 @@ namespace ExactMatchFlattenInheritance
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public static async Task<Response<AzureResourceFlattenModel2>> GetAzureResourceFlattenModel2Async(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(name))
-            {
-                throw new ArgumentException($"Parameter {nameof(name)} cannot be null or empty", nameof(name));
-            }
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
 
             return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
             {
@@ -260,13 +252,11 @@ namespace ExactMatchFlattenInheritance
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public static Response<AzureResourceFlattenModel2> GetAzureResourceFlattenModel2(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(name))
-            {
-                throw new ArgumentException($"Parameter {nameof(name)} cannot be null or empty", nameof(name));
-            }
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
 
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
@@ -362,14 +352,11 @@ namespace ExactMatchFlattenInheritance
         /// <param name="name"> The String to use. </param>
         /// <param name="parameters"> The AzureResourceFlattenModel3 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is null or empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
         public static async Task<Response<AzureResourceFlattenModel3>> PutAzureResourceFlattenModel3Async(this ResourceGroup resourceGroup, string name, AzureResourceFlattenModel3 parameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(name))
-            {
-                throw new ArgumentException($"Parameter {nameof(name)} cannot be null or empty", nameof(name));
-            }
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -403,14 +390,11 @@ namespace ExactMatchFlattenInheritance
         /// <param name="name"> The String to use. </param>
         /// <param name="parameters"> The AzureResourceFlattenModel3 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is null or empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
         public static Response<AzureResourceFlattenModel3> PutAzureResourceFlattenModel3(this ResourceGroup resourceGroup, string name, AzureResourceFlattenModel3 parameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(name))
-            {
-                throw new ArgumentException($"Parameter {nameof(name)} cannot be null or empty", nameof(name));
-            }
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -443,13 +427,11 @@ namespace ExactMatchFlattenInheritance
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public static async Task<Response<AzureResourceFlattenModel3>> GetAzureResourceFlattenModel3Async(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(name))
-            {
-                throw new ArgumentException($"Parameter {nameof(name)} cannot be null or empty", nameof(name));
-            }
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
 
             return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
             {
@@ -478,13 +460,11 @@ namespace ExactMatchFlattenInheritance
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public static Response<AzureResourceFlattenModel3> GetAzureResourceFlattenModel3(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(name))
-            {
-                throw new ArgumentException($"Parameter {nameof(name)} cannot be null or empty", nameof(name));
-            }
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
 
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
@@ -580,14 +560,11 @@ namespace ExactMatchFlattenInheritance
         /// <param name="name"> The String to use. </param>
         /// <param name="parameters"> The AzureResourceFlattenModel4 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is null or empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
         public static async Task<Response<AzureResourceFlattenModel4>> PutAzureResourceFlattenModel4Async(this ResourceGroup resourceGroup, string name, AzureResourceFlattenModel4 parameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(name))
-            {
-                throw new ArgumentException($"Parameter {nameof(name)} cannot be null or empty", nameof(name));
-            }
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -621,14 +598,11 @@ namespace ExactMatchFlattenInheritance
         /// <param name="name"> The String to use. </param>
         /// <param name="parameters"> The AzureResourceFlattenModel4 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is null or empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
         public static Response<AzureResourceFlattenModel4> PutAzureResourceFlattenModel4(this ResourceGroup resourceGroup, string name, AzureResourceFlattenModel4 parameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(name))
-            {
-                throw new ArgumentException($"Parameter {nameof(name)} cannot be null or empty", nameof(name));
-            }
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -661,13 +635,11 @@ namespace ExactMatchFlattenInheritance
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public static async Task<Response<AzureResourceFlattenModel4>> GetAzureResourceFlattenModel4Async(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(name))
-            {
-                throw new ArgumentException($"Parameter {nameof(name)} cannot be null or empty", nameof(name));
-            }
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
 
             return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
             {
@@ -696,13 +668,11 @@ namespace ExactMatchFlattenInheritance
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public static Response<AzureResourceFlattenModel4> GetAzureResourceFlattenModel4(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(name))
-            {
-                throw new ArgumentException($"Parameter {nameof(name)} cannot be null or empty", nameof(name));
-            }
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
 
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
@@ -798,13 +768,11 @@ namespace ExactMatchFlattenInheritance
         /// <param name="name"> The String to use. </param>
         /// <param name="foo"> New property. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public static async Task<Response<AzureResourceFlattenModel5>> PutAzureResourceFlattenModel5Async(this ResourceGroup resourceGroup, string name, int? foo = null, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(name))
-            {
-                throw new ArgumentException($"Parameter {nameof(name)} cannot be null or empty", nameof(name));
-            }
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
 
             return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
             {
@@ -834,13 +802,11 @@ namespace ExactMatchFlattenInheritance
         /// <param name="name"> The String to use. </param>
         /// <param name="foo"> New property. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public static Response<AzureResourceFlattenModel5> PutAzureResourceFlattenModel5(this ResourceGroup resourceGroup, string name, int? foo = null, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(name))
-            {
-                throw new ArgumentException($"Parameter {nameof(name)} cannot be null or empty", nameof(name));
-            }
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
 
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
@@ -869,13 +835,11 @@ namespace ExactMatchFlattenInheritance
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public static async Task<Response<AzureResourceFlattenModel5>> GetAzureResourceFlattenModel5Async(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(name))
-            {
-                throw new ArgumentException($"Parameter {nameof(name)} cannot be null or empty", nameof(name));
-            }
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
 
             return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
             {
@@ -904,13 +868,11 @@ namespace ExactMatchFlattenInheritance
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public static Response<AzureResourceFlattenModel5> GetAzureResourceFlattenModel5(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(name))
-            {
-                throw new ArgumentException($"Parameter {nameof(name)} cannot be null or empty", nameof(name));
-            }
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
 
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {

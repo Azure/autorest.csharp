@@ -57,14 +57,11 @@ namespace Pagination
         /// <param name="name"> The String to use. </param>
         /// <param name="parameters"> The PageSizeStringModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is null or empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
         public virtual PageSizeStringModelCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string name, PageSizeStringModelData parameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(name))
-            {
-                throw new ArgumentException($"Parameter {nameof(name)} cannot be null or empty", nameof(name));
-            }
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -91,14 +88,11 @@ namespace Pagination
         /// <param name="name"> The String to use. </param>
         /// <param name="parameters"> The PageSizeStringModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is null or empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<PageSizeStringModelCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string name, PageSizeStringModelData parameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(name))
-            {
-                throw new ArgumentException($"Parameter {nameof(name)} cannot be null or empty", nameof(name));
-            }
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -123,13 +117,11 @@ namespace Pagination
 
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public virtual Response<PageSizeStringModel> Get(string name, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(name))
-            {
-                throw new ArgumentException($"Parameter {nameof(name)} cannot be null or empty", nameof(name));
-            }
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
 
             using var scope = _clientDiagnostics.CreateScope("PageSizeStringModelCollection.Get");
             scope.Start();
@@ -149,13 +141,11 @@ namespace Pagination
 
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public async virtual Task<Response<PageSizeStringModel>> GetAsync(string name, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(name))
-            {
-                throw new ArgumentException($"Parameter {nameof(name)} cannot be null or empty", nameof(name));
-            }
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
 
             using var scope = _clientDiagnostics.CreateScope("PageSizeStringModelCollection.Get");
             scope.Start();
@@ -176,13 +166,11 @@ namespace Pagination
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public virtual Response<PageSizeStringModel> GetIfExists(string name, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(name))
-            {
-                throw new ArgumentException($"Parameter {nameof(name)} cannot be null or empty", nameof(name));
-            }
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
 
             using var scope = _clientDiagnostics.CreateScope("PageSizeStringModelCollection.GetIfExists");
             scope.Start();
@@ -203,13 +191,11 @@ namespace Pagination
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public async virtual Task<Response<PageSizeStringModel>> GetIfExistsAsync(string name, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(name))
-            {
-                throw new ArgumentException($"Parameter {nameof(name)} cannot be null or empty", nameof(name));
-            }
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
 
             using var scope = _clientDiagnostics.CreateScope("PageSizeStringModelCollection.GetIfExists");
             scope.Start();
@@ -230,13 +216,11 @@ namespace Pagination
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public virtual Response<bool> Exists(string name, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(name))
-            {
-                throw new ArgumentException($"Parameter {nameof(name)} cannot be null or empty", nameof(name));
-            }
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
 
             using var scope = _clientDiagnostics.CreateScope("PageSizeStringModelCollection.Exists");
             scope.Start();
@@ -255,13 +239,11 @@ namespace Pagination
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string name, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(name))
-            {
-                throw new ArgumentException($"Parameter {nameof(name)} cannot be null or empty", nameof(name));
-            }
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
 
             using var scope = _clientDiagnostics.CreateScope("PageSizeStringModelCollection.Exists");
             scope.Start();

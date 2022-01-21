@@ -61,14 +61,11 @@ namespace MgmtListMethods
         /// <param name="subParentWithNonResChName"> Name. </param>
         /// <param name="parameters"> Parameters supplied to the Create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="subParentWithNonResChName"/> is null or empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subParentWithNonResChName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subParentWithNonResChName"/> or <paramref name="parameters"/> is null. </exception>
         public virtual SubParentWithNonResChCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string subParentWithNonResChName, SubParentWithNonResChData parameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(subParentWithNonResChName))
-            {
-                throw new ArgumentException($"Parameter {nameof(subParentWithNonResChName)} cannot be null or empty", nameof(subParentWithNonResChName));
-            }
+            Argument.AssertNotNullOrEmpty(subParentWithNonResChName, nameof(subParentWithNonResChName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -99,14 +96,11 @@ namespace MgmtListMethods
         /// <param name="subParentWithNonResChName"> Name. </param>
         /// <param name="parameters"> Parameters supplied to the Create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="subParentWithNonResChName"/> is null or empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subParentWithNonResChName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subParentWithNonResChName"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<SubParentWithNonResChCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string subParentWithNonResChName, SubParentWithNonResChData parameters, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(subParentWithNonResChName))
-            {
-                throw new ArgumentException($"Parameter {nameof(subParentWithNonResChName)} cannot be null or empty", nameof(subParentWithNonResChName));
-            }
+            Argument.AssertNotNullOrEmpty(subParentWithNonResChName, nameof(subParentWithNonResChName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -135,13 +129,11 @@ namespace MgmtListMethods
         /// <summary> Retrieves information. </summary>
         /// <param name="subParentWithNonResChName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="subParentWithNonResChName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subParentWithNonResChName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subParentWithNonResChName"/> is null. </exception>
         public virtual Response<SubParentWithNonResCh> Get(string subParentWithNonResChName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(subParentWithNonResChName))
-            {
-                throw new ArgumentException($"Parameter {nameof(subParentWithNonResChName)} cannot be null or empty", nameof(subParentWithNonResChName));
-            }
+            Argument.AssertNotNullOrEmpty(subParentWithNonResChName, nameof(subParentWithNonResChName));
 
             using var scope = _clientDiagnostics.CreateScope("SubParentWithNonResChCollection.Get");
             scope.Start();
@@ -165,13 +157,11 @@ namespace MgmtListMethods
         /// <summary> Retrieves information. </summary>
         /// <param name="subParentWithNonResChName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="subParentWithNonResChName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subParentWithNonResChName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subParentWithNonResChName"/> is null. </exception>
         public async virtual Task<Response<SubParentWithNonResCh>> GetAsync(string subParentWithNonResChName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(subParentWithNonResChName))
-            {
-                throw new ArgumentException($"Parameter {nameof(subParentWithNonResChName)} cannot be null or empty", nameof(subParentWithNonResChName));
-            }
+            Argument.AssertNotNullOrEmpty(subParentWithNonResChName, nameof(subParentWithNonResChName));
 
             using var scope = _clientDiagnostics.CreateScope("SubParentWithNonResChCollection.Get");
             scope.Start();
@@ -192,13 +182,11 @@ namespace MgmtListMethods
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="subParentWithNonResChName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="subParentWithNonResChName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subParentWithNonResChName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subParentWithNonResChName"/> is null. </exception>
         public virtual Response<SubParentWithNonResCh> GetIfExists(string subParentWithNonResChName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(subParentWithNonResChName))
-            {
-                throw new ArgumentException($"Parameter {nameof(subParentWithNonResChName)} cannot be null or empty", nameof(subParentWithNonResChName));
-            }
+            Argument.AssertNotNullOrEmpty(subParentWithNonResChName, nameof(subParentWithNonResChName));
 
             using var scope = _clientDiagnostics.CreateScope("SubParentWithNonResChCollection.GetIfExists");
             scope.Start();
@@ -219,13 +207,11 @@ namespace MgmtListMethods
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="subParentWithNonResChName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="subParentWithNonResChName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subParentWithNonResChName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subParentWithNonResChName"/> is null. </exception>
         public async virtual Task<Response<SubParentWithNonResCh>> GetIfExistsAsync(string subParentWithNonResChName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(subParentWithNonResChName))
-            {
-                throw new ArgumentException($"Parameter {nameof(subParentWithNonResChName)} cannot be null or empty", nameof(subParentWithNonResChName));
-            }
+            Argument.AssertNotNullOrEmpty(subParentWithNonResChName, nameof(subParentWithNonResChName));
 
             using var scope = _clientDiagnostics.CreateScope("SubParentWithNonResChCollection.GetIfExists");
             scope.Start();
@@ -246,13 +232,11 @@ namespace MgmtListMethods
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="subParentWithNonResChName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="subParentWithNonResChName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subParentWithNonResChName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subParentWithNonResChName"/> is null. </exception>
         public virtual Response<bool> Exists(string subParentWithNonResChName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(subParentWithNonResChName))
-            {
-                throw new ArgumentException($"Parameter {nameof(subParentWithNonResChName)} cannot be null or empty", nameof(subParentWithNonResChName));
-            }
+            Argument.AssertNotNullOrEmpty(subParentWithNonResChName, nameof(subParentWithNonResChName));
 
             using var scope = _clientDiagnostics.CreateScope("SubParentWithNonResChCollection.Exists");
             scope.Start();
@@ -271,13 +255,11 @@ namespace MgmtListMethods
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="subParentWithNonResChName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="subParentWithNonResChName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subParentWithNonResChName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subParentWithNonResChName"/> is null. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string subParentWithNonResChName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(subParentWithNonResChName))
-            {
-                throw new ArgumentException($"Parameter {nameof(subParentWithNonResChName)} cannot be null or empty", nameof(subParentWithNonResChName));
-            }
+            Argument.AssertNotNullOrEmpty(subParentWithNonResChName, nameof(subParentWithNonResChName));
 
             using var scope = _clientDiagnostics.CreateScope("SubParentWithNonResChCollection.Exists");
             scope.Start();
