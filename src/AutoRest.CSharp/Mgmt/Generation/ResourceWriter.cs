@@ -117,7 +117,7 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
 
         protected virtual void WriteFields()
         {
-            WriteFields(_writer, This.RestClients);
+            WriteFieldSet(_writer, true, This.RestClients.First(), _resource);
             _writer.Line($"private readonly {_resourceData.Type} _data;");
         }
 
@@ -169,7 +169,7 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
             using (_writer.WriteMethodDeclaration(clientOptionsConstructor))
             {
                 FormattableString ctorString = ConstructClientDiagnostic(_writer, $"ResourceType.Namespace", DiagnosticOptionsProperty);
-                _writer.Line($"{ClientDiagnosticsField} = {ctorString};");
+                _writer.Line($"{GetClientDiagnosticFieldName(_resource)} = {ctorString};");
                 WriteRestClientAssignments();
                 WriteDebugValidate(_writer);
             }
@@ -177,7 +177,7 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
 
         protected void WriteRestClientAssignments()
         {
-            WriteRestClientConstructionForResource(_resource, This.RestClients, ", Id.SubscriptionId", ClientDiagnosticsField, DiagnosticOptionsProperty, PipelineProperty, BaseUriField, "new ", false);
+            WriteRestClientConstructionForResource(_resource, This.RestClients, ", Id.SubscriptionId", GetClientDiagnosticFieldName(_resource), DiagnosticOptionsProperty, PipelineProperty, BaseUriField, "new ", false);
         }
 
         protected virtual void WriteProperties()
@@ -316,7 +316,7 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
             using (_writer.Scope($"public {GetAsyncKeyword(async)} {GetVirtual(true)} {responseType} {CreateMethodName("GetAvailableLocations", async)}({typeof(CancellationToken)} cancellationToken = default)"))
             {
                 Diagnostic diagnostic = new Diagnostic($"{TypeOfThis.Name}.GetAvailableLocations", Array.Empty<DiagnosticAttribute>());
-                using (WriteDiagnosticScope(_writer, diagnostic, ClientDiagnosticsField))
+                using (WriteDiagnosticScope(_writer, diagnostic, GetClientDiagnosticFieldName(_resource)))
                 {
                     _writer.Line($"return {GetAwait(async)} {CreateMethodName("ListAvailableLocations", async)}(ResourceType, cancellationToken){GetConfigureAwait(async)};");
                 }
@@ -341,7 +341,7 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
                 _writer.Line();
 
                 Diagnostic diagnostic = new Diagnostic($"{TypeOfThis.Name}.AddTag", Array.Empty<DiagnosticAttribute>());
-                using (WriteDiagnosticScope(_writer, diagnostic, ClientDiagnosticsField))
+                using (WriteDiagnosticScope(_writer, diagnostic, GetClientDiagnosticFieldName(_resource)))
                 {
                     _writer.Append($"var originalTags = ");
                     if (async)
@@ -376,7 +376,7 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
                 _writer.Line();
 
                 Diagnostic diagnostic = new Diagnostic($"{TypeOfThis.Name}.SetTags", Array.Empty<DiagnosticAttribute>());
-                using (WriteDiagnosticScope(_writer, diagnostic, ClientDiagnosticsField))
+                using (WriteDiagnosticScope(_writer, diagnostic, GetClientDiagnosticFieldName(_resource)))
                 {
                     if (async)
                     {
@@ -413,7 +413,7 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
                 _writer.Line();
 
                 Diagnostic diagnostic = new Diagnostic($"{TypeOfThis.Name}.RemoveTag");
-                using (WriteDiagnosticScope(_writer, diagnostic, ClientDiagnosticsField))
+                using (WriteDiagnosticScope(_writer, diagnostic, GetClientDiagnosticFieldName(_resource)))
                 {
                     _writer.Append($"var originalTags = ");
                     if (async)
@@ -453,7 +453,7 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
             var originalResponse = new CodeWriterDeclaration("originalResponse");
             _writer
                 .Append($"var {originalResponse:D} = {GetAwait(async)} ")
-                .Append($"{GetRestFieldName(operation.RestClient)}.{CreateMethodName(operation.Method.Name, async)}(");
+                .Append($"{GetRestFieldName(operation)}.{CreateMethodName(operation.Method.Name, async)}(");
 
             WriteArguments(_writer, parameterMappings, true);
             _writer.Line($"cancellationToken){GetConfigureAwait(async)};");

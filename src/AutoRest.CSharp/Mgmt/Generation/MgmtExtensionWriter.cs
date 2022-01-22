@@ -274,7 +274,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
                 var diagnostic = new Diagnostic($"{TypeNameOfThis}.{methodName}", Array.Empty<DiagnosticAttribute>());
 
-                using (WriteDiagnosticScope(_writer, diagnostic, GetClientDiagnosticsPropertyName(clientOperation.RestClient)))
+                using (WriteDiagnosticScope(_writer, diagnostic, GetClientDiagnosticsPropertyName(clientOperation.RestClient, clientOperation.Resource)))
                 {
                     WriteLROMethodBody(lroObjectType, operationMappings, parameterMappings, async);
                 }
@@ -289,7 +289,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             WriteArguments(_writer, parameterMapping);
             _writer.Line($"cancellationToken){GetConfigureAwait(async)};");
 
-            WriteLROResponse(lroObjectType, GetClientDiagnosticsPropertyName(operation.RestClient), "Pipeline", operation, parameterMapping, async);
+            WriteLROResponse(lroObjectType, GetClientDiagnosticsPropertyName(operation.RestClient, operation.Resource), "Pipeline", operation, parameterMapping, async);
         }
 
         // this method checks if the giving opertion corresponding to a list of resources. If it does, this resource will need a GetByName method.
@@ -315,17 +315,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
             return false;
         }
 
-
-        protected static string GetClientDiagnosticsPropertyName(RestClient client)
-        {
-            return $"{client.OperationGroup.Key}ClientDiagnostics";
-        }
-
         protected override void WritePagingMethodBody(CSharpType itemType, Diagnostic diagnostic, IDictionary<RequestPath, MgmtRestOperation> operationMappings, IDictionary<RequestPath, IEnumerable<ParameterMapping>> parameterMappings, bool async, MgmtClientOperation clientOperation)
         {
             // if we only have one branch, we would not need those if-else statements
             var branch = operationMappings.Keys.First();
-            WritePagingMethodBranch(itemType, diagnostic, GetClientDiagnosticsPropertyName(clientOperation.RestClient), operationMappings[branch], parameterMappings[branch], async);
+            WritePagingMethodBranch(itemType, diagnostic, GetClientDiagnosticsPropertyName(clientOperation.RestClient, clientOperation.Resource), operationMappings[branch], parameterMappings[branch], async);
         }
 
         protected override void WriteNormalMethod(MgmtClientOperation clientOperation, Dictionary<RequestPath, MgmtRestOperation> operationMappings,
@@ -344,7 +338,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
                 var diagnostic = new Diagnostic($"{TypeOfThis.Name}.{methodName}", Array.Empty<DiagnosticAttribute>());
 
-                using (WriteDiagnosticScope(_writer, diagnostic, GetClientDiagnosticsPropertyName(clientOperation.RestClient)))
+                using (WriteDiagnosticScope(_writer, diagnostic, GetClientDiagnosticsPropertyName(clientOperation.RestClient, clientOperation.Resource)))
                 {
                     WriteNormalMethodBody(operationMappings, parameterMappings, async, shouldThrowExceptionWhenNull: shouldThrowExceptionWhenNull);
                 }

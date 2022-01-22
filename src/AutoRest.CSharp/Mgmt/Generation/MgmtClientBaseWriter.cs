@@ -39,7 +39,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected const string BaseUriField = "BaseUri";
 
         protected CodeWriter _writer;
-        protected override string RestClientField => "_" + RestClientVariable;
         protected override string RestClientAccessibility => "private";
         protected virtual string ContextProperty => "";
         protected BuildContext<MgmtOutputLibrary> Context { get; }
@@ -112,18 +111,26 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.Line($"#endif");
         }
 
-        protected void WriteFields(CodeWriter writer, IEnumerable<RestClient> clients, bool useMultipleClientDiagnostics = false, bool useReadonly = true)
+        protected void WriteFields(CodeWriter writer, IEnumerable<MgmtRestClient> clients, bool useReadonly = true)
         {
-            string readOnly = useReadonly ? " readonly" : string.Empty;
-            if (!useMultipleClientDiagnostics)
-                writer.Line($"private{readOnly} {typeof(ClientDiagnostics)} {ClientDiagnosticsField};");
             foreach (var client in clients)
             {
-                // we might have multiple rest client field, if we combined multiple request together in one resource in case of extension resources
-                if (useMultipleClientDiagnostics)
-                    writer.Line($"private{readOnly} {typeof(ClientDiagnostics)} {GetClientDiagnosticFieldName(client)};");
-                writer.Line($"{RestClientAccessibility}{readOnly} {client.Type} {GetRestFieldName(client)};");
+                if (client.Resources.Count == 0)
+                    WriteFieldSet(writer, useReadonly, client, null);
+
+                foreach (var resource in client.Resources)
+                {
+                    // we might have multiple rest client field, if we combined multiple request together in one resource in case of extension resources
+                    WriteFieldSet(writer, useReadonly, client, resource);
+                }
             }
+        }
+
+        protected void WriteFieldSet(CodeWriter writer, bool useReadOnly, MgmtRestClient client, Resource? resource)
+        {
+            string readOnly = useReadOnly ? " readonly" : string.Empty;
+            writer.Line($"private{readOnly} {typeof(ClientDiagnostics)} {GetClientDiagnosticFieldName(client, resource)};");
+            writer.Line($"{RestClientAccessibility}{readOnly} {client.Type} {GetRestFieldName(client, resource)};");
         }
 
         protected void WriteRestClientConstructionForResource(
@@ -143,7 +150,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             foreach (var restClient in restClients)
             {
                 var variableDeclaration = writeVariable ? $"{restClient.Type.Name} " : string.Empty;
-                _writer.Line($"{variableDeclaration}{GetRestFieldName(restClient)} = {GetRestConstructorString(accessType, restClient, clientDiagVariable, pipelineVariable, diagnosticOptionsVariable, subIdVaraiable, uriVariable, ", apiVersion")};");
+                _writer.Line($"{variableDeclaration}{GetRestFieldName(restClient, resource)} = {GetRestConstructorString(accessType, restClient, clientDiagVariable, pipelineVariable, diagnosticOptionsVariable, subIdVaraiable, uriVariable, ", apiVersion")};");
             }
         }
 
@@ -183,29 +190,56 @@ namespace AutoRest.CSharp.Mgmt.Generation
             return $"{accessType}{restClient.Type.Name}({clientDiagVariable}, {pipelineVariable}, {diagnosticOptionsVariable}.ApplicationId{subIdVariable}, {uriVariable}{apiVersionVariable})";
         }
 
-        protected virtual string GetRestFieldOrPropertyName(RestClient client)
+        protected string GetRestFieldOrPropertyName(MgmtRestOperation operation) => GetRestFieldOrPropertyName(operation.RestClient, operation.Resource);
+        protected virtual string GetRestFieldOrPropertyName(RestClient client, Resource? resource = null)
         {
-            return UseRestClientField ? GetRestFieldName(client) : GetRestPropertyName(client);
+            return UseRestClientField ? GetRestFieldName(client, resource) : GetRestPropertyName(client, resource);
         }
 
-        protected string GetRestPropertyName(RestClient client)
+        protected string GetRestPropertyName(MgmtClientOperation operation) => GetRestPropertyName(operation.RestClient, operation.Resource);
+        protected string GetRestPropertyName(RestClient client, Resource? resource = null)
         {
+            if (resource is not null)
+                return $"{resource.ResourceName}RestClient";
+
             return client.OperationGroup.Key.IsNullOrEmpty()
                 ? "RestClient"
                 : $"{client.OperationGroup.Key}RestClient";
         }
 
-        protected virtual string GetRestFieldName(RestClient client)
+        protected string GetRestFieldName(MgmtRestOperation operation) => GetRestFieldName(operation.RestClient, operation.Resource);
+        protected string GetRestFieldName(MgmtClientOperation operation) => GetRestFieldName(operation.RestClient, operation.Resource);
+        protected virtual string GetRestFieldName(RestClient client, Resource? resource = null)
         {
+            if (resource is not null)
+                return $"_{resource.ResourceName.ToVariableName()}RestClient";
+
             return client.OperationGroup.Key.IsNullOrEmpty()
                 ? "_restClient"
                 : $"_{client.OperationGroup.Key.ToVariableName()}RestClient";
         }
 
-        protected virtual string GetClientDiagnosticFieldName(RestClient client)
+        protected string GetClientDiagnosticsPropertyName(MgmtClientOperation operation) => GetClientDiagnosticsPropertyName(operation.RestClient, operation.Resource);
+        protected static string GetClientDiagnosticsPropertyName(RestClient client, Resource? resource)
         {
+            if (resource is not null)
+                return $"{resource.ResourceName}ClientDiagnostics";
+
             return client.OperationGroup.Key.IsNullOrEmpty()
-                ? ClientDiagnosticsField
+                ? "ClientDiagnostics"
+                : $"{client.OperationGroup.Key}ClientDiagnostics";
+        }
+
+        protected string GetClientDiagnosticFieldName(Resource resource) => $"_{resource.ResourceName.ToVariableName()}ClientDiagnostics";
+        protected string GetClientDiagnosticFieldName(MgmtRestOperation operation) => GetClientDiagnosticFieldName(operation.RestClient, operation.Resource);
+        protected string GetClientDiagnosticFieldName(MgmtClientOperation operation) => GetClientDiagnosticFieldName(operation.RestClient, operation.Resource);
+        protected virtual string GetClientDiagnosticFieldName(RestClient client, Resource? resource = null)
+        {
+            if (resource is not null)
+                return GetClientDiagnosticFieldName(resource);
+
+            return client.OperationGroup.Key.IsNullOrEmpty()
+                ? "_clientDiagnostics"
                 : $"_{client.OperationGroup.Key.ToVariableName()}ClientDiagnostics";
         }
 
@@ -356,7 +390,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 // if we only have one branch, we would not need those if-else statements
                 var branch = operationMappings.Keys.First();
-                WritePagingMethodBranch(itemType, diagnostic, ClientDiagnosticsField, operationMappings[branch], parameterMappings[branch], async);
+                WritePagingMethodBranch(itemType, diagnostic, GetClientDiagnosticFieldName(clientOperation), operationMappings[branch], parameterMappings[branch], async);
             }
             else
             {
@@ -373,7 +407,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     }
                     using (_writer.Scope($"{keyword} ({BranchIdVariableName}.ResourceType == {GetResourceTypeExpression(resourceType)})"))
                     {
-                        WritePagingMethodBranch(itemType, diagnostic, ClientDiagnosticsField, operation, parameterMappings[branch], async);
+                        WritePagingMethodBranch(itemType, diagnostic, GetClientDiagnosticFieldName(clientOperation.RestClient, clientOperation.Resource), operation, parameterMappings[branch], async);
                     }
                     keyword = "else if";
                 }
@@ -389,7 +423,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     var branch = escapeBranches.First();
                     using (_writer.Scope($"else"))
                     {
-                        WritePagingMethodBranch(itemType, diagnostic, ClientDiagnosticsField, operationMappings[branch], parameterMappings[branch], async);
+                        WritePagingMethodBranch(itemType, diagnostic, GetClientDiagnosticFieldName(clientOperation), operationMappings[branch], parameterMappings[branch], async);
                     }
                 }
                 else
@@ -445,7 +479,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var continuationTokenText = pagingMethod.NextLinkName != null ? $"response.Value.{pagingMethod.NextLinkName}" : "null";
             var response = new CodeWriterDeclaration("response");
 
-            _writer.Append($"var {response:D} = {GetAwait(isAsync)} {GetRestFieldOrPropertyName(operation.RestClient)}.{CreateMethodName(isNextPageFunc ? pagingMethod.NextPageMethod!.Name : pagingMethod.Method.Name, isAsync)}({GetNextLink(isNextPageFunc)}");
+            _writer.Append($"var {response:D} = {GetAwait(isAsync)} {GetRestFieldOrPropertyName(operation)}.{CreateMethodName(isNextPageFunc ? pagingMethod.NextPageMethod!.Name : pagingMethod.Method.Name, isAsync)}({GetNextLink(isNextPageFunc)}");
             WriteArguments(_writer, parameterMappings);
             _writer.Line($"cancellationToken: cancellationToken){GetConfigureAwait(isAsync)};");
 
@@ -615,7 +649,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 _writer.WriteParameterNullOrEmptyChecks(methodParameters);
                 var diagnostic = new Diagnostic($"{TypeOfThis.Name}.{methodName}", Array.Empty<DiagnosticAttribute>());
-                using (WriteDiagnosticScope(_writer, diagnostic, ClientDiagnosticsField))
+                using (WriteDiagnosticScope(_writer, diagnostic, GetClientDiagnosticFieldName(clientOperation)))
                 {
                     WriteNormalMethodBody(operationMappings, parameterMappings, async, shouldThrowExceptionWhenNull: shouldThrowExceptionWhenNull);
                 }
@@ -645,7 +679,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var response = new CodeWriterDeclaration("response");
             _writer
                 .Append($"var {response:D} = {GetAwait(async)} ")
-                .Append($"{GetRestFieldOrPropertyName(operation.RestClient)}.{CreateMethodName(operation.Method.Name, async)}(");
+                .Append($"{GetRestFieldOrPropertyName(operation)}.{CreateMethodName(operation.Method.Name, async)}(");
             WriteArguments(_writer, parameterMappings);
             _writer.Line($"cancellationToken){GetConfigureAwait(async)};");
 
@@ -655,7 +689,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 if (shouldThrowExceptionWhenNull)
                 {
                     _writer.Line($"if ({response}.Value == null)");
-                    _writer.Line($"throw {GetAwait(async)} {ClientDiagnosticsField}.{CreateMethodName("CreateRequestFailedException", async)}({response}.GetRawResponse()){GetConfigureAwait(async)};");
+                    _writer.Line($"throw {GetAwait(async)} {GetClientDiagnosticFieldName(operation)}.{CreateMethodName("CreateRequestFailedException", async)}({response}.GetRawResponse()){GetConfigureAwait(async)};");
                 }
 
                 if (wrapResource.ResourceData.ShouldSetResourceIdentifier)
@@ -700,7 +734,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.WriteParameterNullOrEmptyChecks(methodParameters);
 
                 Diagnostic diagnostic = new Diagnostic($"{TypeNameOfThis}.{methodName}", Array.Empty<DiagnosticAttribute>());
-                using (WriteDiagnosticScope(_writer, diagnostic, ClientDiagnosticsField))
+                using (WriteDiagnosticScope(_writer, diagnostic, GetClientDiagnosticFieldName(clientOperation)))
                 {
                     WriteLROMethodBody(lroObjectType, operationMappings, parameterMappings, async);
                 }
@@ -763,11 +797,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected virtual void WriteLROMethodBranch(CSharpType lroObjectType, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMapping, bool async)
         {
             _writer.Append($"var response = {GetAwait(async)} ");
-            _writer.Append($"{GetRestFieldOrPropertyName(operation.RestClient)}.{CreateMethodName(operation.Method.Name, async)}(");
+            _writer.Append($"{GetRestFieldOrPropertyName(operation)}.{CreateMethodName(operation.Method.Name, async)}(");
             WriteArguments(_writer, parameterMapping);
             _writer.Line($"cancellationToken){GetConfigureAwait(async)};");
 
-            WriteLROResponse(lroObjectType, ClientDiagnosticsField, PipelineProperty, operation, parameterMapping, async);
+            WriteLROResponse(lroObjectType, GetClientDiagnosticFieldName(operation), PipelineProperty, operation, parameterMapping, async);
         }
 
         protected virtual void WriteLROMethodSignature(CSharpType returnType, string methodName, IReadOnlyList<Parameter> methodParameters, bool async,
@@ -801,7 +835,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     _writer.Append($"{ArmClientReference}, ");
                 }
-                _writer.Append($"{diagnosticsVariableName}, {pipelineVariableName}, {GetRestFieldOrPropertyName(operation.RestClient)}.{RequestWriterHelpers.CreateRequestMethodName(operation.Method.Name)}(");
+                _writer.Append($"{diagnosticsVariableName}, {pipelineVariableName}, {GetRestFieldOrPropertyName(operation)}.{RequestWriterHelpers.CreateRequestMethodName(operation.Method.Name)}(");
                 WriteArguments(_writer, parameterMapping);
                 _writer.RemoveTrailingComma();
                 _writer.Append($").Request, ");

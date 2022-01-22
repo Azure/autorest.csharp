@@ -116,14 +116,18 @@ namespace AutoRest.CSharp.Mgmt.Output
         internal static Resource? GetResourceFromResourceType(Operation operation, BuildContext<MgmtOutputLibrary> context)
         {
             var resourceType = operation.GetRequestPath(context).GetResourceType(context.Configuration.MgmtConfiguration);
-            var candidates = context.Library.ArmResources.Where(resource => resource.ResourceType == resourceType);
-            if (candidates.Count() == 0)
+            Dictionary<string, Resource> candidates = new Dictionary<string, Resource>();
+            foreach (var candidate in context.Library.ArmResources.Where(resource => resource.ResourceType == resourceType))
+            {
+                candidates.TryAdd(candidate.ResourceName, candidate);
+            }
+            if (candidates.Count == 0)
                 return null;
 
-            if (candidates.Count() == 1)
-                return candidates.First();
+            if (candidates.Count == 1)
+                return candidates.Values.First();
 
-            throw new InvalidOperationException($"Found more than 1 candidate for {resourceType}, results were ({string.Join(',', candidates.Select(r => r.ResourceName))})");
+            throw new InvalidOperationException($"Found more than 1 candidate for {resourceType}, results were ({string.Join(',', candidates.Values.Select(r => r.ResourceName))})");
         }
 
         private IEnumerable<MgmtRestClient>? _restClients;

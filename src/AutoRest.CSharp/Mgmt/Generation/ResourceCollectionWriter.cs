@@ -80,7 +80,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected override void WriteFields()
         {
-            WriteFields(_writer, _resourceCollection.RestClients);
+            WriteFieldSet(_writer, true, _resourceCollection.RestClients.First(), _resource);
 
             foreach (var reference in _resourceCollection.ExtraConstructorParameters)
             {
@@ -118,7 +118,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 var allPossibleTypes = _resourceCollection.ResourceTypes.SelectMany(p => p.Value).Distinct();
                 FormattableString ctorString = ConstructClientDiagnostic(_writer, $"{_resource.Type}.ResourceType.Namespace", DiagnosticOptionsProperty);
-                _writer.Line($"{ClientDiagnosticsField} = {ctorString};");
+                _writer.Line($"{GetClientDiagnosticFieldName(_resource)} = {ctorString};");
                 WriteRestClientAssignments();
                 foreach (var parameter in _resourceCollection.ExtraConstructorParameters)
                 {
@@ -268,7 +268,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var response = new CodeWriterDeclaration("response");
             writer
                 .Append($"var {response:D} = {GetAwait(async)} ")
-                .Append($"{GetRestFieldName(operation.RestClient)}.{CreateMethodName(operation.Method.Name, async)}(");
+                .Append($"{GetRestFieldName(operation)}.{CreateMethodName(operation.Method.Name, async)}(");
             WriteArguments(writer, parameterMappings);
             writer.Line($"cancellationToken: cancellationToken){GetConfigureAwait(async)};");
 
@@ -315,7 +315,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             using (_writer.Scope())
             {
                 _writer.WriteParameterNullOrEmptyChecks(methodParameters);
-                using (WriteDiagnosticScope(_writer, new Diagnostic($"{_resourceCollection.Type.Name}.{methodName}"), ClientDiagnosticsField))
+                using (WriteDiagnosticScope(_writer, new Diagnostic($"{_resourceCollection.Type.Name}.{methodName}"), GetClientDiagnosticFieldName(_resource)))
                 {
                     inner(_writer);
                 }
@@ -337,7 +337,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             CSharpType returnType = typeof(GenericResource).WrapPageable(async);
             using (_writer.Scope($"public {GetVirtual(true)} {returnType} {methodName}(string nameFilter, string expand = null, int? top = null, {typeof(CancellationToken)} cancellationToken = default)"))
             {
-                using (WriteDiagnosticScope(_writer, new Diagnostic($"{_resourceCollection.Type.Name}.{syncMethodName}"), ClientDiagnosticsField))
+                using (WriteDiagnosticScope(_writer, new Diagnostic($"{_resourceCollection.Type.Name}.{syncMethodName}"), GetClientDiagnosticFieldName(_resource)))
                 {
                     _writer.Line($"var filters = new {typeof(ResourceFilterCollection)}({_resource.Type}.ResourceType);");
                     _writer.Line($"filters.SubstringFilter = nameFilter;");

@@ -60,6 +60,8 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         public int Count => _operations.Count;
 
+        public Resource? Resource => _operations.First().Resource;
+
         public IEnumerator<MgmtRestOperation> GetEnumerator() => _operations.GetEnumerator();
 
         IEnumerator IEnumerable.GetEnumerator() => _operations.GetEnumerator();

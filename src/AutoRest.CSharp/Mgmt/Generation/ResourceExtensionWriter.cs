@@ -47,7 +47,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.WriteXmlDocumentationSummary($"{Description}");
                 using (_writer.Scope($"{Accessibility} partial class {TypeNameOfThis} : {typeof(ArmResource)}"))
                 {
-                    WriteFields(_writer, This.RestClients, true, false);
+                    WriteFields(_writer, This.RestClients, false);
                     _writer.Line();
 
                     WriteProviderDefaultNamespace(_writer);
@@ -97,13 +97,25 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             foreach (var client in This.RestClients)
             {
-                string? resourceName = client.Resource?.Type.Name;
-                FormattableString diagOptionsCtor = ConstructClientDiagnostic(_writer, GetProviderNamespaceFromReturnType(resourceName), DiagnosticOptionsProperty);
-                _writer.Line($"private {typeof(ClientDiagnostics)} {GetClientDiagnosticsPropertyName(client)} => {GetClientDiagnosticFieldName(client)} ??= {diagOptionsCtor};");
-                string apiVersionString = resourceName == null ? string.Empty : $", GetApiVersionOrNull({resourceName}.ResourceType)";
-                string restCtor = GetRestConstructorString("new ", client, GetClientDiagnosticsPropertyName(client), PipelineProperty, DiagnosticOptionsProperty, ", Id.SubscriptionId", "BaseUri", apiVersionString);
-                _writer.Line($"private {client.Type} {GetRestPropertyName(client)} => {GetRestFieldName(client)} ??= {restCtor};");
+                if (client.Resources.Count == 0)
+                    WriterPropertySet(client, null);
+
+                foreach (var resource in client.Resources)
+                {
+                    WriterPropertySet(client, resource);
+                }
             }
+        }
+
+        private void WriterPropertySet(MgmtRestClient client, Resource? resource)
+        {
+            string? resourceName = resource?.Type.Name;
+            string diagPropertyName = GetClientDiagnosticsPropertyName(client, resource);
+            FormattableString diagOptionsCtor = ConstructClientDiagnostic(_writer, GetProviderNamespaceFromReturnType(resourceName), DiagnosticOptionsProperty);
+            _writer.Line($"private {typeof(ClientDiagnostics)} {diagPropertyName} => {GetClientDiagnosticFieldName(client, resource)} ??= {diagOptionsCtor};");
+            string apiVersionString = resourceName == null ? string.Empty : $", GetApiVersionOrNull({resourceName}.ResourceType)";
+            string restCtor = GetRestConstructorString("new ", client, diagPropertyName, PipelineProperty, DiagnosticOptionsProperty, ", Id.SubscriptionId", "BaseUri", apiVersionString);
+            _writer.Line($"private {client.Type} {GetRestPropertyName(client, resource)} => {GetRestFieldName(client, resource)} ??= {restCtor};");
         }
 
         private void WriteCtor()
