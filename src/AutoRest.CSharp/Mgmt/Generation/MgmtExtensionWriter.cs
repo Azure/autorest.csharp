@@ -62,7 +62,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             if (clientOperation.IsLongRunningOperation() && !clientOperation.IsPagingOperation(Context))
             {
                 // this is a non-pageable long-running operation
-                WriteMethodWrapperImpl(clientOperation, clientOperation.Name, clientOperation.ReturnType!, async, false, true);
+                WriteMethodWrapperImpl(clientOperation, clientOperation.Name, clientOperation.ReturnType, async, false, true);
             }
             else if (clientOperation.IsLongRunningOperation() && clientOperation.IsPagingOperation(Context))
             {
@@ -83,11 +83,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
             else
             {
                 // this is a normal operation
-                WriteMethodWrapperImpl(clientOperation, clientOperation.Name, clientOperation.ReturnType!, async, false, false);
+                WriteMethodWrapperImpl(clientOperation, clientOperation.Name, clientOperation.ReturnType, async, false, false);
             }
         }
 
-        private void WriteMethodSignatureWrapper(CSharpType actualItemType, string methodName, IReadOnlyList<Parameter> methodParameters, bool isAsync, bool isPaging, bool isLro)
+        private void WriteMethodSignatureWrapper(CSharpType? actualItemType, string methodName, IReadOnlyList<Parameter> methodParameters, bool isAsync, bool isPaging, bool isLro)
         {
             _writer.WriteXmlDocumentationParameter($"{ExtensionOperationVariableName}", $"The <see cref=\"{ExtensionOperationVariableType}\" /> instance the method will execute against.");
             if (isLro)
@@ -101,6 +101,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.WriteXmlDocumentationMgmtRequiredParametersException(methodParameters);
             if (isPaging)
                 _writer.WriteXmlDocumentationReturns($"A collection of resource operations that may take multiple service requests to iterate over.");
+
+            actualItemType ??= typeof(Response);
 
             var responseType = isPaging ? actualItemType.WrapPageable(isAsync) : actualItemType.WrapAsync(isAsync);
             string asyncText = isPaging ? string.Empty : GetAsyncKeyword(isAsync);
@@ -138,7 +140,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         private void WriteMethodWrapperImpl(
             MgmtClientOperation clientOperation,
             string methodName,
-            CSharpType itemType,
+            CSharpType? itemType,
             bool async,
             bool isPaging,
             bool isLro)

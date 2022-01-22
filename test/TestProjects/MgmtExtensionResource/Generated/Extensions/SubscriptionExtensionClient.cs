@@ -5,16 +5,24 @@
 
 #nullable disable
 
+using System;
+using System.Threading;
+using System.Threading.Tasks;
+using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
+using MgmtExtensionResource.Models;
 
 namespace MgmtExtensionResource
 {
     /// <summary> An internal class to add extension methods to. </summary>
     internal partial class SubscriptionExtensionClient : ArmResource
     {
+        private ClientDiagnostics _orphanedPostClientDiagnostics;
+        private OrphanedPostRestOperations _orphanedPostRestClient;
+
         private static string _defaultRpNamespace = ClientDiagnostics.GetResourceProviderNamespace(typeof(SubscriptionExtensionClient).Assembly);
 
         /// <summary> Initializes a new instance of the <see cref="SubscriptionExtensionClient"/> class. </summary>
@@ -24,10 +32,69 @@ namespace MgmtExtensionResource
         {
         }
 
+        private ClientDiagnostics OrphanedPostClientDiagnostics => _orphanedPostClientDiagnostics ??= new ClientDiagnostics("MgmtExtensionResource", _defaultRpNamespace, DiagnosticOptions);
+        private OrphanedPostRestOperations OrphanedPostRestClient => _orphanedPostRestClient ??= new OrphanedPostRestOperations(OrphanedPostClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
+
         private string GetApiVersionOrNull(ResourceType resourceType)
         {
             ArmClient.TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
+        }
+
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.OrphanedPost/validateSomething
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: OrphanedPost_ValidateSomething
+        /// <summary> Description for Validate information for a certificate order. </summary>
+        /// <param name="validateSomethingOptions"> Information to validate. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="validateSomethingOptions"/> is null. </exception>
+        public async virtual Task<Response> ValidateSomethingOrphanedPostAsync(ValidateSomethingOptions validateSomethingOptions, CancellationToken cancellationToken = default)
+        {
+            if (validateSomethingOptions == null)
+            {
+                throw new ArgumentNullException(nameof(validateSomethingOptions));
+            }
+
+            using var scope = OrphanedPostClientDiagnostics.CreateScope("SubscriptionExtensionClient.ValidateSomethingOrphanedPost");
+            scope.Start();
+            try
+            {
+                var response = await OrphanedPostRestClient.ValidateSomethingAsync(Id.SubscriptionId, validateSomethingOptions, cancellationToken).ConfigureAwait(false);
+                return response;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.OrphanedPost/validateSomething
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: OrphanedPost_ValidateSomething
+        /// <summary> Description for Validate information for a certificate order. </summary>
+        /// <param name="validateSomethingOptions"> Information to validate. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="validateSomethingOptions"/> is null. </exception>
+        public virtual Response ValidateSomethingOrphanedPost(ValidateSomethingOptions validateSomethingOptions, CancellationToken cancellationToken = default)
+        {
+            if (validateSomethingOptions == null)
+            {
+                throw new ArgumentNullException(nameof(validateSomethingOptions));
+            }
+
+            using var scope = OrphanedPostClientDiagnostics.CreateScope("SubscriptionExtensionClient.ValidateSomethingOrphanedPost");
+            scope.Start();
+            try
+            {
+                var response = OrphanedPostRestClient.ValidateSomething(Id.SubscriptionId, validateSomethingOptions, cancellationToken);
+                return response;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
     }
 }
