@@ -10,7 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager;
 using Pagination;
 
 namespace Pagination.Models
@@ -24,9 +24,9 @@ namespace Pagination.Models
         {
         }
 
-        internal PageSizeFloatModelCreateOrUpdateOperation(ArmResource operationsBase, Response<PageSizeFloatModelData> response)
+        internal PageSizeFloatModelCreateOrUpdateOperation(ArmClient armClient, Response<PageSizeFloatModelData> response)
         {
-            _operation = new OperationOrResponseInternals<PageSizeFloatModel>(Response.FromValue(new PageSizeFloatModel(operationsBase, response.Value), response.GetRawResponse()));
+            _operation = new OperationOrResponseInternals<PageSizeFloatModel>(Response.FromValue(new PageSizeFloatModel(armClient, response.Value), response.GetRawResponse()));
         }
 
         /// <inheritdoc />

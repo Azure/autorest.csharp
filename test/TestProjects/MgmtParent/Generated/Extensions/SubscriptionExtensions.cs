@@ -6,16 +6,9 @@
 #nullable disable
 
 using System;
-using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using Azure;
-using Azure.Core;
-using Azure.Core.Pipeline;
-using Azure.ResourceManager;
-using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources;
-using MgmtParent.Models;
 
 namespace MgmtParent
 {
@@ -34,109 +27,37 @@ namespace MgmtParent
         }
         #endregion
 
-        private static AvailabilitySetsRestOperations GetAvailabilitySetsRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = default)
+        private static SubscriptionExtensionClient GetExtensionClient(Subscription subscription)
         {
-            return new AvailabilitySetsRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);
+            return subscription.GetCachedClient((armClient) =>
+            {
+                return new SubscriptionExtensionClient(armClient, subscription.Id);
+            }
+            );
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/availabilitySets
         /// ContextualPath: /subscriptions/{subscriptionId}
         /// OperationId: AvailabilitySets_ListBySubscription
-        /// <summary> Lists the AvailabilitySets for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="expand"> The expand expression to apply to the operation. Allowed values are &apos;instanceView&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<AvailabilitySet> GetAvailabilitySetsAsync(this Subscription subscription, string expand = null, CancellationToken cancellationToken = default)
         {
-            return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                options.TryGetApiVersion(AvailabilitySet.ResourceType, out string apiVersion);
-                AvailabilitySetsRestOperations restOperations = GetAvailabilitySetsRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
-                async Task<Page<AvailabilitySet>> FirstPageFunc(int? pageSizeHint)
-                {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetAvailabilitySets");
-                    scope.Start();
-                    try
-                    {
-                        var response = await restOperations.ListBySubscriptionAsync(subscription.Id.SubscriptionId, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
-                        return Page.FromValues(response.Value.Value.Select(value => new AvailabilitySet(subscription, value)), response.Value.NextLink, response.GetRawResponse());
-                    }
-                    catch (Exception e)
-                    {
-                        scope.Failed(e);
-                        throw;
-                    }
-                }
-                async Task<Page<AvailabilitySet>> NextPageFunc(string nextLink, int? pageSizeHint)
-                {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetAvailabilitySets");
-                    scope.Start();
-                    try
-                    {
-                        var response = await restOperations.ListBySubscriptionNextPageAsync(nextLink, subscription.Id.SubscriptionId, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
-                        return Page.FromValues(response.Value.Value.Select(value => new AvailabilitySet(subscription, value)), response.Value.NextLink, response.GetRawResponse());
-                    }
-                    catch (Exception e)
-                    {
-                        scope.Failed(e);
-                        throw;
-                    }
-                }
-                return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
-            }
-            );
+            return GetExtensionClient(subscription).GetAvailabilitySetsAsync(expand, cancellationToken);
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/availabilitySets
         /// ContextualPath: /subscriptions/{subscriptionId}
         /// OperationId: AvailabilitySets_ListBySubscription
-        /// <summary> Lists the AvailabilitySets for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="expand"> The expand expression to apply to the operation. Allowed values are &apos;instanceView&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static Pageable<AvailabilitySet> GetAvailabilitySets(this Subscription subscription, string expand = null, CancellationToken cancellationToken = default)
         {
-            return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                options.TryGetApiVersion(AvailabilitySet.ResourceType, out string apiVersion);
-                AvailabilitySetsRestOperations restOperations = GetAvailabilitySetsRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
-                Page<AvailabilitySet> FirstPageFunc(int? pageSizeHint)
-                {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetAvailabilitySets");
-                    scope.Start();
-                    try
-                    {
-                        var response = restOperations.ListBySubscription(subscription.Id.SubscriptionId, expand, cancellationToken: cancellationToken);
-                        return Page.FromValues(response.Value.Value.Select(value => new AvailabilitySet(subscription, value)), response.Value.NextLink, response.GetRawResponse());
-                    }
-                    catch (Exception e)
-                    {
-                        scope.Failed(e);
-                        throw;
-                    }
-                }
-                Page<AvailabilitySet> NextPageFunc(string nextLink, int? pageSizeHint)
-                {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetAvailabilitySets");
-                    scope.Start();
-                    try
-                    {
-                        var response = restOperations.ListBySubscriptionNextPage(nextLink, subscription.Id.SubscriptionId, expand, cancellationToken: cancellationToken);
-                        return Page.FromValues(response.Value.Value.Select(value => new AvailabilitySet(subscription, value)), response.Value.NextLink, response.GetRawResponse());
-                    }
-                    catch (Exception e)
-                    {
-                        scope.Failed(e);
-                        throw;
-                    }
-                }
-                return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
-            }
-            );
+            return GetExtensionClient(subscription).GetAvailabilitySets(expand, cancellationToken);
         }
 
         /// <summary> Filters the list of AvailabilitySets for a <see cref="Subscription" /> represented as generic resources. </summary>
@@ -148,9 +69,7 @@ namespace MgmtParent
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<GenericResource> GetAvailabilitySetsAsGenericResourcesAsync(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
         {
-            ResourceFilterCollection filters = new(AvailabilitySet.ResourceType);
-            filters.SubstringFilter = filter;
-            return ResourceListOperations.GetAtContextAsync(subscription, filters, expand, top, cancellationToken);
+            return GetExtensionClient(subscription).GetAvailabilitySetsAsGenericResourcesAsync(filter, expand, top, cancellationToken);
         }
 
         /// <summary> Filters the list of AvailabilitySets for a <see cref="Subscription" /> represented as generic resources. </summary>
@@ -162,9 +81,7 @@ namespace MgmtParent
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static Pageable<GenericResource> GetAvailabilitySetsAsGenericResources(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
         {
-            ResourceFilterCollection filters = new(AvailabilitySet.ResourceType);
-            filters.SubstringFilter = filter;
-            return ResourceListOperations.GetAtContext(subscription, filters, expand, top, cancellationToken);
+            return GetExtensionClient(subscription).GetAvailabilitySetsAsGenericResources(filter, expand, top, cancellationToken);
         }
     }
 }

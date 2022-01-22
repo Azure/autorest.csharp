@@ -123,6 +123,15 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             }
         }
 
+        [Test]
+        public void ValidateExtensionClient()
+        {
+            foreach (var extensionClient in FindAllExtensionClients())
+            {
+                Assert.IsFalse(extensionClient.IsPublic);
+            }
+        }
+
         [TestCase("SetTags")]
         [TestCase("SetTagsAsync")]
         public void ValidateSetTagsMethod(string methodName)
@@ -204,13 +213,29 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             }
         }
 
+        public IEnumerable<Type> FindAllExtensionClients()
+        {
+            Type[] allTypes = Assembly.GetExecutingAssembly().GetTypes();
+
+            foreach (Type t in allTypes)
+            {
+                if (t.Name.EndsWith("ExtensionClient"))
+                {
+                    yield return t;
+                }
+            }
+        }
+
         public IEnumerable<Type> FindAllResources()
         {
             Type[] allTypes = Assembly.GetExecutingAssembly().GetTypes();
 
             foreach (Type t in allTypes)
             {
-                if (t.BaseType.FullName == typeof(ArmResource).FullName && !t.Name.Contains("Tests") && t.Namespace == _projectName)
+                if (t.BaseType.FullName == typeof(ArmResource).FullName &&
+                    !t.Name.Contains("Tests") &&
+                    t.Namespace == _projectName &&
+                    !t.Name.EndsWith("ExtensionClient"))
                 {
                     yield return t;
                 }

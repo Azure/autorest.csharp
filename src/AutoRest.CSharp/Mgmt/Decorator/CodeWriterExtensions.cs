@@ -8,6 +8,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Models.Shared;
+using Azure.Core;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
@@ -27,7 +28,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         private static CodeWriter WriteParameterNullOrEmptyCheck(this CodeWriter writer, Parameter parameter)
         {
             if (HasEmptyCheck(parameter) && CSharp.Generation.Writers.CodeWriterExtensions.HasNullCheck(parameter))
-                writer.WriteVariableNullOrEmptyCheck(parameter);
+                writer.WriteVariableNullOrEmptyCheck(parameter.Name);
             else
                 writer.WriteVariableAssignmentWithNullCheck(parameter.Name, parameter);
             return writer;
@@ -41,14 +42,14 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 var nonEmptyParameters = requiredParameters.Where(p => HasEmptyCheck(p)).ToArray();
                 if (nonEmptyParameters.Any())
                 {
-                    var nullOrEmptyDescription = GetExceptionDescription(nonEmptyParameters, true);
-                    writer.WriteXmlDocumentationException(typeof(ArgumentException), nullOrEmptyDescription);
+                    var nonEmptyDescription = GetExceptionDescription(nonEmptyParameters, "empty");
+                    writer.WriteXmlDocumentationException(typeof(ArgumentException), nonEmptyDescription);
                 }
 
-                var nonNullParameters = requiredParameters.Except(nonEmptyParameters).ToArray();
+                var nonNullParameters = requiredParameters;
                 if (nonNullParameters.Any())
                 {
-                    var nullDescription = GetExceptionDescription(nonNullParameters, false);
+                    var nullDescription = GetExceptionDescription(nonNullParameters, "null");
                     writer.WriteXmlDocumentationException(typeof(ArgumentNullException), nullDescription);
                 }
             }
@@ -56,10 +57,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return writer;
         }
 
-        private static FormattableString GetExceptionDescription(IReadOnlyList<Parameter> parameters, bool canBeEmpy)
+        private static FormattableString GetExceptionDescription(IReadOnlyList<Parameter> parameters, string nullOrEmpty)
         {
-            var message = canBeEmpy ? "null or empty" : "null";
-            static string FormatParameters(IReadOnlyList<Parameter> parameters, string message)
+            static string FormatParameters(IReadOnlyList<Parameter> parameters, string nullOrEmpty)
             {
                 var sb = new StringBuilder();
 
@@ -69,26 +69,30 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                     sb.Append($"<paramref name=\"{{{i}}}\"/>, ");
                 }
 
-                sb.Append($"or <paramref name=\"{{{i}}}\"/> is {message}.");
+                sb.Append($"or <paramref name=\"{{{i}}}\"/> is {nullOrEmpty}.");
                 return sb.ToString();
             }
 
             var delimitedParameters = parameters.Count switch
             {
-                1 => "<paramref name=\"{0}\"/> is " + message + ".",
-                2 => "<paramref name=\"{0}\"/> or <paramref name=\"{1}\"/> is " + message + ".",
-                _ => FormatParameters(parameters, message),
+                1 => "<paramref name=\"{0}\"/> is " + nullOrEmpty + ".",
+                2 => "<paramref name=\"{0}\"/> or <paramref name=\"{1}\"/> is " + nullOrEmpty + ".",
+                _ => FormatParameters(parameters, nullOrEmpty),
             };
 
             return FormattableStringFactory.Create(delimitedParameters, parameters.Select(p => (object)p.Name).ToArray());
         }
 
-        private static CodeWriter WriteVariableNullOrEmptyCheck(this CodeWriter writer, Parameter parameter)
+        public static CodeWriter WriteVariableNullOrEmptyCheck(this CodeWriter writer, string parameterName)
         {
-            using (writer.Scope($"if ({typeof(string)}.IsNullOrEmpty({parameter.Name:I}))"))
-            {
-                writer.Line($"throw new {typeof(ArgumentException)}($\"Parameter {{nameof({parameter.Name:I})}} cannot be null or empty\", nameof({parameter.Name:I}));");
-            }
+            writer.Line($"{typeof(Argument)}.AssertNotNullOrEmpty({parameterName}, nameof({parameterName}));");
+
+            return writer;
+        }
+
+        public static CodeWriter WriteVariableNullOrWhiteSpaceCheck(this CodeWriter writer, string parameterName)
+        {
+            writer.Line($"{typeof(Argument)}.AssertNotNullOrWhiteSpace({parameterName}, nameof({parameterName}));");
 
             return writer;
         }

@@ -10,7 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager;
 using MgmtListMethods;
 
 namespace MgmtListMethods.Models
@@ -25,9 +25,9 @@ namespace MgmtListMethods.Models
         {
         }
 
-        internal SubParentWithNonResChWithLocCreateOrUpdateOperation(ArmResource operationsBase, Response<SubParentWithNonResChWithLocData> response)
+        internal SubParentWithNonResChWithLocCreateOrUpdateOperation(ArmClient armClient, Response<SubParentWithNonResChWithLocData> response)
         {
-            _operation = new OperationOrResponseInternals<SubParentWithNonResChWithLoc>(Response.FromValue(new SubParentWithNonResChWithLoc(operationsBase, response.Value), response.GetRawResponse()));
+            _operation = new OperationOrResponseInternals<SubParentWithNonResChWithLoc>(Response.FromValue(new SubParentWithNonResChWithLoc(armClient, response.Value), response.GetRawResponse()));
         }
 
         /// <inheritdoc />

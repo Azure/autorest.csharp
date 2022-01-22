@@ -21,7 +21,7 @@ namespace MgmtExpandResourceTypes
         public static RecordSetA GetRecordSetA(this ArmClient armClient, ResourceIdentifier id)
         {
             RecordSetA.ValidateResourceId(id);
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new RecordSetA(clientOptions, credential, uri, pipeline, id));
+            return new RecordSetA(armClient, id);
         }
         #endregion
 
@@ -33,7 +33,7 @@ namespace MgmtExpandResourceTypes
         public static RecordSetAaaa GetRecordSetAaaa(this ArmClient armClient, ResourceIdentifier id)
         {
             RecordSetAaaa.ValidateResourceId(id);
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new RecordSetAaaa(clientOptions, credential, uri, pipeline, id));
+            return new RecordSetAaaa(armClient, id);
         }
         #endregion
 
@@ -45,7 +45,7 @@ namespace MgmtExpandResourceTypes
         public static RecordSetCaa GetRecordSetCaa(this ArmClient armClient, ResourceIdentifier id)
         {
             RecordSetCaa.ValidateResourceId(id);
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new RecordSetCaa(clientOptions, credential, uri, pipeline, id));
+            return new RecordSetCaa(armClient, id);
         }
         #endregion
 
@@ -57,7 +57,7 @@ namespace MgmtExpandResourceTypes
         public static RecordSetCName GetRecordSetCName(this ArmClient armClient, ResourceIdentifier id)
         {
             RecordSetCName.ValidateResourceId(id);
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new RecordSetCName(clientOptions, credential, uri, pipeline, id));
+            return new RecordSetCName(armClient, id);
         }
         #endregion
 
@@ -69,7 +69,7 @@ namespace MgmtExpandResourceTypes
         public static RecordSetMx GetRecordSetMx(this ArmClient armClient, ResourceIdentifier id)
         {
             RecordSetMx.ValidateResourceId(id);
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new RecordSetMx(clientOptions, credential, uri, pipeline, id));
+            return new RecordSetMx(armClient, id);
         }
         #endregion
 
@@ -81,7 +81,7 @@ namespace MgmtExpandResourceTypes
         public static RecordSetNs GetRecordSetNs(this ArmClient armClient, ResourceIdentifier id)
         {
             RecordSetNs.ValidateResourceId(id);
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new RecordSetNs(clientOptions, credential, uri, pipeline, id));
+            return new RecordSetNs(armClient, id);
         }
         #endregion
 
@@ -93,7 +93,7 @@ namespace MgmtExpandResourceTypes
         public static RecordSetPtr GetRecordSetPtr(this ArmClient armClient, ResourceIdentifier id)
         {
             RecordSetPtr.ValidateResourceId(id);
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new RecordSetPtr(clientOptions, credential, uri, pipeline, id));
+            return new RecordSetPtr(armClient, id);
         }
         #endregion
 
@@ -105,7 +105,7 @@ namespace MgmtExpandResourceTypes
         public static RecordSetSoa GetRecordSetSoa(this ArmClient armClient, ResourceIdentifier id)
         {
             RecordSetSoa.ValidateResourceId(id);
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new RecordSetSoa(clientOptions, credential, uri, pipeline, id));
+            return new RecordSetSoa(armClient, id);
         }
         #endregion
 
@@ -117,7 +117,7 @@ namespace MgmtExpandResourceTypes
         public static RecordSetSrv GetRecordSetSrv(this ArmClient armClient, ResourceIdentifier id)
         {
             RecordSetSrv.ValidateResourceId(id);
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new RecordSetSrv(clientOptions, credential, uri, pipeline, id));
+            return new RecordSetSrv(armClient, id);
         }
         #endregion
 
@@ -129,7 +129,7 @@ namespace MgmtExpandResourceTypes
         public static RecordSetTxt GetRecordSetTxt(this ArmClient armClient, ResourceIdentifier id)
         {
             RecordSetTxt.ValidateResourceId(id);
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new RecordSetTxt(clientOptions, credential, uri, pipeline, id));
+            return new RecordSetTxt(armClient, id);
         }
         #endregion
 
@@ -141,7 +141,7 @@ namespace MgmtExpandResourceTypes
         public static Zone GetZone(this ArmClient armClient, ResourceIdentifier id)
         {
             Zone.ValidateResourceId(id);
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new Zone(clientOptions, credential, uri, pipeline, id));
+            return new Zone(armClient, id);
         }
         #endregion
     }

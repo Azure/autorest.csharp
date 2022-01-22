@@ -21,7 +21,7 @@ namespace MgmtScopeResource
         public static PolicyAssignment GetPolicyAssignment(this ArmClient armClient, ResourceIdentifier id)
         {
             PolicyAssignment.ValidateResourceId(id);
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new PolicyAssignment(clientOptions, credential, uri, pipeline, id));
+            return new PolicyAssignment(armClient, id);
         }
         #endregion
 
@@ -33,7 +33,7 @@ namespace MgmtScopeResource
         public static DeploymentExtended GetDeploymentExtended(this ArmClient armClient, ResourceIdentifier id)
         {
             DeploymentExtended.ValidateResourceId(id);
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new DeploymentExtended(clientOptions, credential, uri, pipeline, id));
+            return new DeploymentExtended(armClient, id);
         }
         #endregion
 
@@ -45,7 +45,7 @@ namespace MgmtScopeResource
         public static ResourceLink GetResourceLink(this ArmClient armClient, ResourceIdentifier id)
         {
             ResourceLink.ValidateResourceId(id);
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new ResourceLink(clientOptions, credential, uri, pipeline, id));
+            return new ResourceLink(armClient, id);
         }
         #endregion
     }

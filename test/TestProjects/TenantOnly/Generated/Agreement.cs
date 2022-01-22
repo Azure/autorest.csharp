@@ -28,6 +28,7 @@ namespace TenantOnly
             var resourceId = $"/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements/{agreementName}";
             return new ResourceIdentifier(resourceId);
         }
+
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly AgreementsRestOperations _agreementsRestClient;
         private readonly AgreementData _data;
@@ -38,44 +39,22 @@ namespace TenantOnly
         }
 
         /// <summary> Initializes a new instance of the <see cref = "Agreement"/> class. </summary>
-        /// <param name="options"> The client parameters to use in these operations. </param>
+        /// <param name="armClient"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal Agreement(ArmResource options, AgreementData data) : base(options, data.Id)
+        internal Agreement(ArmClient armClient, AgreementData data) : this(armClient, data.Id)
         {
             HasData = true;
             _data = data;
-            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            ClientOptions.TryGetApiVersion(ResourceType, out string apiVersion);
-            _agreementsRestClient = new AgreementsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
-#if DEBUG
-			ValidateResourceId(Id);
-#endif
         }
 
         /// <summary> Initializes a new instance of the <see cref="Agreement"/> class. </summary>
-        /// <param name="options"> The client parameters to use in these operations. </param>
+        /// <param name="armClient"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal Agreement(ArmResource options, ResourceIdentifier id) : base(options, id)
+        internal Agreement(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
         {
-            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            ClientOptions.TryGetApiVersion(ResourceType, out string apiVersion);
-            _agreementsRestClient = new AgreementsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
-#if DEBUG
-			ValidateResourceId(Id);
-#endif
-        }
-
-        /// <summary> Initializes a new instance of the <see cref="Agreement"/> class. </summary>
-        /// <param name="clientOptions"> The client options to build client context. </param>
-        /// <param name="credential"> The credential to build client context. </param>
-        /// <param name="uri"> The uri to build client context. </param>
-        /// <param name="pipeline"> The pipeline to build client context. </param>
-        /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal Agreement(ArmClientOptions clientOptions, TokenCredential credential, Uri uri, HttpPipeline pipeline, ResourceIdentifier id) : base(clientOptions, credential, uri, pipeline, id)
-        {
-            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            ClientOptions.TryGetApiVersion(ResourceType, out string apiVersion);
-            _agreementsRestClient = new AgreementsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
+            _clientDiagnostics = new ClientDiagnostics("TenantOnly", ResourceType.Namespace, DiagnosticOptions);
+            ArmClient.TryGetApiVersion(ResourceType, out string apiVersion);
+            _agreementsRestClient = new AgreementsRestOperations(_clientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, apiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -120,7 +99,7 @@ namespace TenantOnly
                 var response = await _agreementsRestClient.GetAsync(Id.Parent.Name, Id.Name, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new Agreement(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Agreement(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -144,7 +123,7 @@ namespace TenantOnly
                 var response = _agreementsRestClient.Get(Id.Parent.Name, Id.Name, expand, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new Agreement(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Agreement(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

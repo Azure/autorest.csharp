@@ -21,7 +21,7 @@ namespace MgmtNonStringPathVariable
         public static Fake GetFake(this ArmClient armClient, ResourceIdentifier id)
         {
             Fake.ValidateResourceId(id);
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new Fake(clientOptions, credential, uri, pipeline, id));
+            return new Fake(armClient, id);
         }
         #endregion
 
@@ -33,7 +33,7 @@ namespace MgmtNonStringPathVariable
         public static Bar GetBar(this ArmClient armClient, ResourceIdentifier id)
         {
             Bar.ValidateResourceId(id);
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new Bar(clientOptions, credential, uri, pipeline, id));
+            return new Bar(armClient, id);
         }
         #endregion
     }

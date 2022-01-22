@@ -28,6 +28,7 @@ namespace Azure.Management.Storage
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/inventoryPolicies/{blobInventoryPolicyName}";
             return new ResourceIdentifier(resourceId);
         }
+
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly BlobInventoryPoliciesRestOperations _blobInventoryPoliciesRestClient;
         private readonly BlobInventoryPolicyData _data;
@@ -38,44 +39,22 @@ namespace Azure.Management.Storage
         }
 
         /// <summary> Initializes a new instance of the <see cref = "BlobInventoryPolicy"/> class. </summary>
-        /// <param name="options"> The client parameters to use in these operations. </param>
+        /// <param name="armClient"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal BlobInventoryPolicy(ArmResource options, BlobInventoryPolicyData data) : base(options, data.Id)
+        internal BlobInventoryPolicy(ArmClient armClient, BlobInventoryPolicyData data) : this(armClient, data.Id)
         {
             HasData = true;
             _data = data;
-            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            ClientOptions.TryGetApiVersion(ResourceType, out string apiVersion);
-            _blobInventoryPoliciesRestClient = new BlobInventoryPoliciesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
-#if DEBUG
-			ValidateResourceId(Id);
-#endif
         }
 
         /// <summary> Initializes a new instance of the <see cref="BlobInventoryPolicy"/> class. </summary>
-        /// <param name="options"> The client parameters to use in these operations. </param>
+        /// <param name="armClient"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal BlobInventoryPolicy(ArmResource options, ResourceIdentifier id) : base(options, id)
+        internal BlobInventoryPolicy(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
         {
-            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            ClientOptions.TryGetApiVersion(ResourceType, out string apiVersion);
-            _blobInventoryPoliciesRestClient = new BlobInventoryPoliciesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
-#if DEBUG
-			ValidateResourceId(Id);
-#endif
-        }
-
-        /// <summary> Initializes a new instance of the <see cref="BlobInventoryPolicy"/> class. </summary>
-        /// <param name="clientOptions"> The client options to build client context. </param>
-        /// <param name="credential"> The credential to build client context. </param>
-        /// <param name="uri"> The uri to build client context. </param>
-        /// <param name="pipeline"> The pipeline to build client context. </param>
-        /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal BlobInventoryPolicy(ArmClientOptions clientOptions, TokenCredential credential, Uri uri, HttpPipeline pipeline, ResourceIdentifier id) : base(clientOptions, credential, uri, pipeline, id)
-        {
-            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            ClientOptions.TryGetApiVersion(ResourceType, out string apiVersion);
-            _blobInventoryPoliciesRestClient = new BlobInventoryPoliciesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
+            _clientDiagnostics = new ClientDiagnostics("Azure.Management.Storage", ResourceType.Namespace, DiagnosticOptions);
+            ArmClient.TryGetApiVersion(ResourceType, out string apiVersion);
+            _blobInventoryPoliciesRestClient = new BlobInventoryPoliciesRestOperations(_clientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, apiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -119,7 +98,7 @@ namespace Azure.Management.Storage
                 var response = await _blobInventoryPoliciesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new BlobInventoryPolicy(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new BlobInventoryPolicy(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -142,7 +121,7 @@ namespace Azure.Management.Storage
                 var response = _blobInventoryPoliciesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new BlobInventoryPolicy(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new BlobInventoryPolicy(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

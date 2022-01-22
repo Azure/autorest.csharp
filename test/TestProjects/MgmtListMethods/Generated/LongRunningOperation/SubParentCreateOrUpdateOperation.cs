@@ -10,7 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager;
 using MgmtListMethods;
 
 namespace MgmtListMethods.Models
@@ -25,9 +25,9 @@ namespace MgmtListMethods.Models
         {
         }
 
-        internal SubParentCreateOrUpdateOperation(ArmResource operationsBase, Response<SubParentData> response)
+        internal SubParentCreateOrUpdateOperation(ArmClient armClient, Response<SubParentData> response)
         {
-            _operation = new OperationOrResponseInternals<SubParent>(Response.FromValue(new SubParent(operationsBase, response.Value), response.GetRawResponse()));
+            _operation = new OperationOrResponseInternals<SubParent>(Response.FromValue(new SubParent(armClient, response.Value), response.GetRawResponse()));
         }
 
         /// <inheritdoc />

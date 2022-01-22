@@ -10,7 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager;
 using MgmtExpandResourceTypes;
 
 namespace MgmtExpandResourceTypes.Models
@@ -25,9 +25,9 @@ namespace MgmtExpandResourceTypes.Models
         {
         }
 
-        internal RecordSetCaaCreateOrUpdateOperation(ArmResource operationsBase, Response<RecordSetData> response)
+        internal RecordSetCaaCreateOrUpdateOperation(ArmClient armClient, Response<RecordSetData> response)
         {
-            _operation = new OperationOrResponseInternals<RecordSetCaa>(Response.FromValue(new RecordSetCaa(operationsBase, response.Value), response.GetRawResponse()));
+            _operation = new OperationOrResponseInternals<RecordSetCaa>(Response.FromValue(new RecordSetCaa(armClient, response.Value), response.GetRawResponse()));
         }
 
         /// <inheritdoc />

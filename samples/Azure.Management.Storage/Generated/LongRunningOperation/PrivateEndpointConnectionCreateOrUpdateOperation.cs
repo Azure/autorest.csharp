@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Management.Storage;
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager;
 
 namespace Azure.Management.Storage.Models
 {
@@ -25,9 +25,9 @@ namespace Azure.Management.Storage.Models
         {
         }
 
-        internal PrivateEndpointConnectionCreateOrUpdateOperation(ArmResource operationsBase, Response<PrivateEndpointConnectionData> response)
+        internal PrivateEndpointConnectionCreateOrUpdateOperation(ArmClient armClient, Response<PrivateEndpointConnectionData> response)
         {
-            _operation = new OperationOrResponseInternals<PrivateEndpointConnection>(Response.FromValue(new PrivateEndpointConnection(operationsBase, response.Value), response.GetRawResponse()));
+            _operation = new OperationOrResponseInternals<PrivateEndpointConnection>(Response.FromValue(new PrivateEndpointConnection(armClient, response.Value), response.GetRawResponse()));
         }
 
         /// <inheritdoc />

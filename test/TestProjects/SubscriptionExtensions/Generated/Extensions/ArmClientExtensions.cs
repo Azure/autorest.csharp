@@ -21,7 +21,7 @@ namespace SubscriptionExtensions
         public static Toaster GetToaster(this ArmClient armClient, ResourceIdentifier id)
         {
             Toaster.ValidateResourceId(id);
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new Toaster(clientOptions, credential, uri, pipeline, id));
+            return new Toaster(armClient, id);
         }
         #endregion
 
@@ -33,7 +33,7 @@ namespace SubscriptionExtensions
         public static Oven GetOven(this ArmClient armClient, ResourceIdentifier id)
         {
             Oven.ValidateResourceId(id);
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new Oven(clientOptions, credential, uri, pipeline, id));
+            return new Oven(armClient, id);
         }
         #endregion
     }

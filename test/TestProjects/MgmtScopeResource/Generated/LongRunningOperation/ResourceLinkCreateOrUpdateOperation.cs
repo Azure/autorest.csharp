@@ -10,7 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager;
 using MgmtScopeResource;
 
 namespace MgmtScopeResource.Models
@@ -25,9 +25,9 @@ namespace MgmtScopeResource.Models
         {
         }
 
-        internal ResourceLinkCreateOrUpdateOperation(ArmResource operationsBase, Response<ResourceLinkData> response)
+        internal ResourceLinkCreateOrUpdateOperation(ArmClient armClient, Response<ResourceLinkData> response)
         {
-            _operation = new OperationOrResponseInternals<ResourceLink>(Response.FromValue(new ResourceLink(operationsBase, response.Value), response.GetRawResponse()));
+            _operation = new OperationOrResponseInternals<ResourceLink>(Response.FromValue(new ResourceLink(armClient, response.Value), response.GetRawResponse()));
         }
 
         /// <inheritdoc />

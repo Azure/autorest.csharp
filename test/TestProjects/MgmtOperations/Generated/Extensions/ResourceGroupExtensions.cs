@@ -5,11 +5,8 @@
 
 #nullable disable
 
-using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Azure.Core.Pipeline;
-using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
 using MgmtOperations.Models;
 
@@ -28,89 +25,39 @@ namespace MgmtOperations
         }
         #endregion
 
-        private static AvailabilitySetsRestOperations GetAvailabilitySetsRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = default)
+        private static ResourceGroupExtensionClient GetExtensionClient(ResourceGroup resourceGroup)
         {
-            return new AvailabilitySetsRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);
-        }
-
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: AvailabilitySets_TestLROMethod
-        /// <summary> Update an availability set. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
-        /// <param name="parameters"> Parameters supplied to the Update Availability Set operation. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public static async Task<TestLROMethodAvailabilitySetOperation> TestLROMethodAvailabilitySetAsync(this ResourceGroup resourceGroup, bool waitForCompletion, AvailabilitySetUpdate parameters, CancellationToken cancellationToken = default)
-        {
-            if (parameters == null)
+            return resourceGroup.GetCachedClient((armClient) =>
             {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.TestLROMethodAvailabilitySet");
-                scope.Start();
-                try
-                {
-                    options.TryGetApiVersion(AvailabilitySet.ResourceType, out string apiVersion);
-                    AvailabilitySetsRestOperations restOperations = GetAvailabilitySetsRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
-                    var response = await restOperations.TestLROMethodAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, parameters, cancellationToken).ConfigureAwait(false);
-                    var operation = new TestLROMethodAvailabilitySetOperation(clientDiagnostics, pipeline, restOperations.CreateTestLROMethodRequest(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, parameters).Request, response);
-                    if (waitForCompletion)
-                        await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
-                    return operation;
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            ).ConfigureAwait(false);
-        }
-
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: AvailabilitySets_TestLROMethod
-        /// <summary> Update an availability set. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
-        /// <param name="parameters"> Parameters supplied to the Update Availability Set operation. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public static TestLROMethodAvailabilitySetOperation TestLROMethodAvailabilitySet(this ResourceGroup resourceGroup, bool waitForCompletion, AvailabilitySetUpdate parameters, CancellationToken cancellationToken = default)
-        {
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.TestLROMethodAvailabilitySet");
-                scope.Start();
-                try
-                {
-                    options.TryGetApiVersion(AvailabilitySet.ResourceType, out string apiVersion);
-                    AvailabilitySetsRestOperations restOperations = GetAvailabilitySetsRestOperations(clientDiagnostics, pipeline, options, baseUri, apiVersion);
-                    var response = restOperations.TestLROMethod(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, parameters, cancellationToken);
-                    var operation = new TestLROMethodAvailabilitySetOperation(clientDiagnostics, pipeline, restOperations.CreateTestLROMethodRequest(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, parameters).Request, response);
-                    if (waitForCompletion)
-                        operation.WaitForCompletion(cancellationToken);
-                    return operation;
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                return new ResourceGroupExtensionClient(armClient, resourceGroup.Id);
             }
             );
+        }
+
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
+        /// OperationId: AvailabilitySets_TestLROMethod
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="parameters"> Parameters supplied to the Update Availability Set operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="System.ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        public static async Task<TestLROMethodAvailabilitySetOperation> TestLROMethodAvailabilitySetAsync(this ResourceGroup resourceGroup, bool waitForCompletion, AvailabilitySetUpdate parameters, CancellationToken cancellationToken = default)
+        {
+            return await GetExtensionClient(resourceGroup).TestLROMethodAvailabilitySetAsync(waitForCompletion, parameters, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
+        /// OperationId: AvailabilitySets_TestLROMethod
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="parameters"> Parameters supplied to the Update Availability Set operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="System.ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        public static TestLROMethodAvailabilitySetOperation TestLROMethodAvailabilitySet(this ResourceGroup resourceGroup, bool waitForCompletion, AvailabilitySetUpdate parameters, CancellationToken cancellationToken = default)
+        {
+            return GetExtensionClient(resourceGroup).TestLROMethodAvailabilitySet(waitForCompletion, parameters, cancellationToken);
         }
     }
 }

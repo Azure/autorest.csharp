@@ -10,7 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager;
 using Pagination;
 
 namespace Pagination.Models
@@ -24,9 +24,9 @@ namespace Pagination.Models
         {
         }
 
-        internal PageSizeInt64ModelCreateOrUpdateOperation(ArmResource operationsBase, Response<PageSizeInt64ModelData> response)
+        internal PageSizeInt64ModelCreateOrUpdateOperation(ArmClient armClient, Response<PageSizeInt64ModelData> response)
         {
-            _operation = new OperationOrResponseInternals<PageSizeInt64Model>(Response.FromValue(new PageSizeInt64Model(operationsBase, response.Value), response.GetRawResponse()));
+            _operation = new OperationOrResponseInternals<PageSizeInt64Model>(Response.FromValue(new PageSizeInt64Model(armClient, response.Value), response.GetRawResponse()));
         }
 
         /// <inheritdoc />

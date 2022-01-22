@@ -21,7 +21,7 @@ namespace MgmtOperations
         public static AvailabilitySet GetAvailabilitySet(this ArmClient armClient, ResourceIdentifier id)
         {
             AvailabilitySet.ValidateResourceId(id);
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new AvailabilitySet(clientOptions, credential, uri, pipeline, id));
+            return new AvailabilitySet(armClient, id);
         }
         #endregion
 
@@ -33,7 +33,7 @@ namespace MgmtOperations
         public static AvailabilitySetChild GetAvailabilitySetChild(this ArmClient armClient, ResourceIdentifier id)
         {
             AvailabilitySetChild.ValidateResourceId(id);
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new AvailabilitySetChild(clientOptions, credential, uri, pipeline, id));
+            return new AvailabilitySetChild(armClient, id);
         }
         #endregion
 
@@ -45,7 +45,7 @@ namespace MgmtOperations
         public static AvailabilitySetGrandChild GetAvailabilitySetGrandChild(this ArmClient armClient, ResourceIdentifier id)
         {
             AvailabilitySetGrandChild.ValidateResourceId(id);
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new AvailabilitySetGrandChild(clientOptions, credential, uri, pipeline, id));
+            return new AvailabilitySetGrandChild(armClient, id);
         }
         #endregion
     }
