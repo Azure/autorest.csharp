@@ -127,7 +127,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        private static void WritePublicConstructor(CodeWriter writer, LowLevelClient client, MethodSignature signature)
+        private static void WritePublicConstructor(CodeWriter writer, LowLevelClient client, ConstructorSignature signature)
         {
             writer.WriteMethodDocumentation(signature);
             using (writer.WriteMethodDeclaration(signature))
@@ -181,7 +181,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        private static void WriteSubClientInternalConstructor(CodeWriter writer, LowLevelClient client, MethodSignature signature)
+        private static void WriteSubClientInternalConstructor(CodeWriter writer, LowLevelClient client, ConstructorSignature signature)
         {
             writer.WriteMethodDocumentation(signature);
             using (writer.WriteMethodDeclaration(signature))

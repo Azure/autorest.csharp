@@ -92,27 +92,25 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             _writer.Line();
             // write protected default constructor
-            var mockingConstructor = new MethodSignature(
-                name: TypeOfThis.Name,
-                description: $"Initializes a new instance of the <see cref=\"{TypeOfThis.Name}\"/> class for mocking.",
-                modifiers: "protected",
-                parameters: new Parameter[0]);
+            var mockingConstructor = new ConstructorSignature(
+                Name: TypeOfThis.Name,
+                Description: $"Initializes a new instance of the <see cref=\"{TypeOfThis.Name}\"/> class for mocking.",
+                Modifiers: "protected",
+                Parameters: new Parameter[0]);
             _writer.WriteMethodDocumentation(mockingConstructor);
             using (_writer.WriteMethodDeclaration(mockingConstructor))
             { }
 
             _writer.Line();
             // write "parent resource" constructor
-            var parentResourceConstructor = new MethodSignature(
-                name: TypeOfThis.Name,
-                description: $"Initializes a new instance of the <see cref=\"{TypeNameOfThis}\"/> class.",
-                modifiers: "internal",
-                parameters: _resourceCollection.ParentParameter.AsIEnumerable().Concat(_resourceCollection.ExtraConstructorParameters).ToArray(),
-                baseMethod: new MethodSignature(
-                    name: TypeOfThis.Name,
-                    description: null,
-                    modifiers: "protected",
-                    parameters: new[] { _resourceCollection.ParentParameter })
+            var parentResourceConstructor = new ConstructorSignature(
+                Name: TypeOfThis.Name,
+                Description: $"Initializes a new instance of the <see cref=\"{TypeNameOfThis}\"/> class.",
+                Modifiers: "internal",
+                Parameters: _resourceCollection.ParentParameter.AsIEnumerable().Concat(_resourceCollection.ExtraConstructorParameters).ToArray(),
+                Initializer: new(
+                    isBase: true,
+                    arguments: new[] { _resourceCollection.ParentParameter })
                 );
 
             _writer.WriteMethodDocumentation(parentResourceConstructor);
@@ -267,25 +265,22 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteGetMethodBranch(CodeWriter writer, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMappings, bool async)
         {
-            writer.Append($"var response = {GetAwait(async)} ");
-            writer.Append($"{GetRestFieldName(operation.RestClient)}.{CreateMethodName(operation.Method.Name, async)}(");
+            var response = new CodeWriterDeclaration("response");
+            writer
+                .Append($"var {response:D} = {GetAwait(async)} ")
+                .Append($"{GetRestFieldName(operation.RestClient)}.{CreateMethodName(operation.Method.Name, async)}(");
             WriteArguments(writer, parameterMappings);
             writer.Line($"cancellationToken: cancellationToken){GetConfigureAwait(async)};");
 
-            CodeWriterDelegate dataExpression = w => w.Append($"response.Value");
-
-            writer.Line($"if ({dataExpression} == null)");
-            writer.Line($"return {typeof(Response)}.FromValue<{_resource.Type.Name}>(null, response.GetRawResponse());");
+            writer.Line($"if ({response}.Value == null)");
+            writer.Line($"return {typeof(Response)}.FromValue<{_resource.Type}>(null, {response}.GetRawResponse());");
 
             if (_resource.ResourceData.ShouldSetResourceIdentifier)
-                writer.Line($"{dataExpression}.Id = {CreateResourceIdentifierExpression(_resource, operation.RequestPath, parameterMappings, dataExpression)};");
-
-            var newInstanceExpression = _resource.NewInstanceExpression(new[]
             {
-                new ParameterInvocation(_resource.ResourceParameter, w => w.Append($"{ArmClientReference}")),
-                new ParameterInvocation(_resource.ResourceDataParameter, dataExpression),
-            });
-            writer.Line($"return {typeof(Response)}.FromValue({newInstanceExpression}, response.GetRawResponse());");
+                writer.Line($"{response}.Value.Id = {CreateResourceIdentifierExpression(_resource, operation.RequestPath, parameterMappings, $"{response}.Value")};");
+            }
+
+            writer.Line($"return {typeof(Response)}.FromValue(new {_resource.Type}({ArmClientReference}, {response}.Value), {response}.GetRawResponse());");
         }
 
         /// <summary>

@@ -109,16 +109,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
         private void WriteCtor()
         {
             // write "armClient + id" constructor
-            var clientOptionsConstructor = new MethodSignature(
-                name: TypeOfThis.Name,
-                description: $"Initializes a new instance of the <see cref=\"{TypeOfThis.Name}\"/> class.",
-                modifiers: "internal",
-                parameters: new[] { Resource.ArmClientParameter, Resource.ResourceIdentifierParameter },
-                baseMethod: new MethodSignature(
-                    name: TypeOfThis.Name,
-                    description: null,
-                    modifiers: "protected",
-                    parameters: new[] { Resource.ArmClientParameter, Resource.ResourceIdentifierParameter })
+            var clientOptionsConstructor = new ConstructorSignature(
+                Name: TypeOfThis.Name,
+                Description: $"Initializes a new instance of the <see cref=\"{TypeOfThis.Name}\"/> class.",
+                Modifiers: "internal",
+                Parameters: new[] { Resource.ArmClientParameter, Resource.ResourceIdentifierParameter },
+                Initializer: new(
+                    isBase: true,
+                    arguments: new[] { Resource.ArmClientParameter, Resource.ResourceIdentifierParameter })
                 );
 
             _writer.WriteMethodDocumentation(clientOptionsConstructor);

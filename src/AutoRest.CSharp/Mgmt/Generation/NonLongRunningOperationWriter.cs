@@ -74,22 +74,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         if (operation.ResultType != null && operation.WrapperResource != null)
                         {
                             var resource = operation.WrapperResource;
-
-                            CodeWriterDelegate optionsExpression = w => w.Append($"armClient");
-                            CodeWriterDelegate dataExpression = w => w.Append($"{responseVariable}.Value");
-
                             if (resource.ResourceData.ShouldSetResourceIdentifier)
-                                writer.Line($"{dataExpression}.Id = {optionsExpression}.Id;");
-
-                            var newInstanceExpression = operation.WrapperResource.NewInstanceExpression(new[]
                             {
-                                new ParameterInvocation(resource.ResourceParameter, optionsExpression),
-                                new ParameterInvocation(resource.ResourceDataParameter, dataExpression),
-                            });
-                            writer.Append($"{typeof(Response)}.FromValue(");
-                            writer.Append($"{newInstanceExpression}, ");
-                            writer.Append($"{responseVariable}.GetRawResponse()");
-                            writer.Append($")");
+                                writer.Line($"{responseVariable}.Value.Id = armClient.Id;");
+                            }
+
+                            writer.Append($"{typeof(Response)}.FromValue(new {operation.WrapperResource.Type}(armClient, {responseVariable}.Value), {responseVariable}.GetRawResponse())");
                         }
                         else
                         {

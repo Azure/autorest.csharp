@@ -125,32 +125,26 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
         {
             _writer.Line();
             // write protected default constructor
-            var mockingConstructor = new MethodSignature(
-                name: TypeOfThis.Name,
-                description: $"Initializes a new instance of the <see cref=\"{TypeOfThis.Name}\"/> class for mocking.",
-                modifiers: "protected",
-                parameters: new Parameter[0]);
+            var mockingConstructor = new ConstructorSignature(
+                Name: TypeOfThis.Name,
+                Description: $"Initializes a new instance of the <see cref=\"{TypeOfThis.Name}\"/> class for mocking.",
+                Modifiers: "protected",
+                Parameters: new Parameter[0]);
             _writer.WriteMethodDocumentation(mockingConstructor);
             using (_writer.WriteMethodDeclaration(mockingConstructor))
             { }
 
             _writer.Line();
             // write "resource + ResourceData" constructor
-            var resourceDataConstructor = new MethodSignature(
-                name: TypeOfThis.Name,
-                description: $"Initializes a new instance of the <see cref = \"{TypeOfThis.Name}\"/> class.",
-                modifiers: "internal",
-                parameters: new[] { Resource.ArmClientParameter, _resource.ResourceDataParameter },
-                baseMethod: new MethodSignature(
-                    name: TypeOfThis.Name,
-                    description: null,
-                    modifiers: "protected",
-                    parameters: new[]
-                    {
-                        Resource.ArmClientParameter,
-                        new ParameterInvocation(Resource.ResourceIdentifierParameter, _resource.ResourceDataIdExpression(w => w.Append($"{_resource.ResourceDataParameter.Name}")))
-                    }),
-                useBaseKeyword: false);
+            var resourceDataConstructor = new ConstructorSignature(
+                Name: TypeOfThis.Name,
+                Description: $"Initializes a new instance of the <see cref = \"{TypeOfThis.Name}\"/> class.",
+                Modifiers: "internal",
+                Parameters: new[] { Resource.ArmClientParameter, _resource.ResourceDataParameter },
+                Initializer: new(
+                    IsBase: false,
+                    Arguments: new FormattableString[] { $"{Resource.ArmClientParameter.Name:I}", _resource.ResourceDataIdExpression($"{_resource.ResourceDataParameter.Name:I}") })
+                );
             _writer.WriteMethodDocumentation(resourceDataConstructor);
             using (_writer.WriteMethodDeclaration(resourceDataConstructor))
             {
@@ -160,17 +154,16 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
 
             _writer.Line();
             // write "armClient + id" constructor
-            var clientOptionsConstructor = new MethodSignature(
-                name: TypeOfThis.Name,
-                description: $"Initializes a new instance of the <see cref=\"{TypeOfThis.Name}\"/> class.",
-                modifiers: "internal",
-                parameters: new[] { Resource.ArmClientParameter, Resource.ResourceIdentifierParameter },
-                baseMethod: new MethodSignature(
-                    name: TypeOfThis.Name,
-                    description: null,
-                    modifiers: "protected",
-                    parameters: new[] { Resource.ArmClientParameter, Resource.ResourceIdentifierParameter })
-                );
+            var clientOptionsConstructor = new ConstructorSignature(
+                Name: TypeOfThis.Name,
+                Description: $"Initializes a new instance of the <see cref=\"{TypeOfThis.Name}\"/> class.",
+                Modifiers: "internal",
+                Parameters: new[] { Resource.ArmClientParameter, Resource.ResourceIdentifierParameter },
+                Initializer: new(
+                    isBase: true,
+                    arguments: new[] { Resource.ArmClientParameter, Resource.ResourceIdentifierParameter })
+
+            );
 
             _writer.WriteMethodDocumentation(clientOptionsConstructor);
             using (_writer.WriteMethodDeclaration(clientOptionsConstructor))
@@ -457,22 +450,20 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
 
         private void WriteTaggableCommonMethodBranch(MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMappings, bool async)
         {
-            _writer.Append($"var originalResponse = {GetAwait(async)} ");
-            _writer.Append($"{GetRestFieldName(operation.RestClient)}.{CreateMethodName(operation.Method.Name, async)}(");
+            var originalResponse = new CodeWriterDeclaration("originalResponse");
+            _writer
+                .Append($"var {originalResponse:D} = {GetAwait(async)} ")
+                .Append($"{GetRestFieldName(operation.RestClient)}.{CreateMethodName(operation.Method.Name, async)}(");
+
             WriteArguments(_writer, parameterMappings, true);
             _writer.Line($"cancellationToken){GetConfigureAwait(async)};");
 
-            CodeWriterDelegate dataExpression = w => w.Append($"originalResponse.Value");
-
             if (_resource.ResourceData.ShouldSetResourceIdentifier)
-                _writer.Line($"{dataExpression}.Id = {CreateResourceIdentifierExpression(_resource, operation.RequestPath, parameterMappings, dataExpression)};");
-
-            var newInstanceExpression = _resource.NewInstanceExpression(new[]
             {
-                new ParameterInvocation(_resource.ResourceParameter, w => w.Append($"{ArmClientReference}")),
-                new ParameterInvocation(_resource.ResourceDataParameter, dataExpression),
-            });
-            _writer.Line($"return {typeof(Response)}.FromValue({newInstanceExpression}, originalResponse.GetRawResponse());");
+                _writer.Line($"{originalResponse}.Value.Id = {CreateResourceIdentifierExpression(_resource, operation.RequestPath, parameterMappings, $"{originalResponse}.Value")};");
+            }
+
+            _writer.Line($"return {typeof(Response)}.FromValue(new {_resource.Type}({ArmClientReference}, {originalResponse}.Value), {originalResponse}.GetRawResponse());");
         }
 
         protected override void WriteResourceCollectionEntry(Resource resource)
