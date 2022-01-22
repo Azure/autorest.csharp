@@ -1069,6 +1069,7 @@ schemas: !Schemas
                       - !Property 
                         schema: *ref_27
                         readOnly: true
+                        required: false
                         serializedName: principalId
                         language: !Languages 
                           default:
@@ -1078,6 +1079,7 @@ schemas: !Schemas
                       - !Property 
                         schema: *ref_28
                         readOnly: true
+                        required: false
                         serializedName: tenantId
                         language: !Languages 
                           default:
@@ -1086,6 +1088,7 @@ schemas: !Schemas
                         protocol: !Protocols {}
                       - !Property 
                         schema: *ref_29
+                        required: true
                         serializedName: type
                         language: !Languages 
                           default:
@@ -1096,6 +1099,7 @@ schemas: !Schemas
                         protocol: !Protocols {}
                       - !Property 
                         schema: *ref_30
+                        required: false
                         serializedName: userAssignedIdentities
                         language: !Languages 
                           default:

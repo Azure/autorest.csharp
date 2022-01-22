@@ -38,7 +38,7 @@ namespace MgmtKeyvault
         /// <param name="tags"> Tags assigned to the key vault resource. </param>
         /// <param name="systemData"> System metadata for the key vault. </param>
         /// <param name="properties"> Properties of the vault. </param>
-        internal VaultData(ResourceIdentifier id, string name, ResourceType type, string location, IReadOnlyDictionary<string, string> tags, Models.SystemData systemData, VaultProperties properties) : base(id, name, type)
+        internal VaultData(ResourceIdentifier id, string name, ResourceType type, string location, IReadOnlyDictionary<string, string> tags, SystemData systemData, VaultProperties properties) : base(id, name, type)
         {
             Location = location;
             Tags = tags;
@@ -51,7 +51,7 @@ namespace MgmtKeyvault
         /// <summary> Tags assigned to the key vault resource. </summary>
         public IReadOnlyDictionary<string, string> Tags { get; }
         /// <summary> System metadata for the key vault. </summary>
-        public Models.SystemData SystemData { get; }
+        public SystemData SystemData { get; }
         /// <summary> Properties of the vault. </summary>
         public VaultProperties Properties { get; }
     }

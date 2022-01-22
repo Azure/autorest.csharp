@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Models;
 using MgmtKeyvault.Models;
 
 namespace MgmtKeyvault
@@ -79,7 +80,7 @@ namespace MgmtKeyvault
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    systemData = SystemData.DeserializeSystemData(property.Value);
+                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.ToString());
                     continue;
                 }
                 if (property.NameEquals("tags"))
@@ -113,7 +114,7 @@ namespace MgmtKeyvault
                     continue;
                 }
             }
-            return new ManagedHsmData(id, name, type, tags, location, sku.Value, systemData.Value, properties.Value);
+            return new ManagedHsmData(id, name, type, tags, location, sku.Value, systemData, properties.Value);
         }
     }
 }
