@@ -15,7 +15,6 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
-using MgmtExtensionCommonRestOperation.Models;
 
 namespace MgmtExtensionCommonRestOperation
 {
@@ -53,8 +52,8 @@ namespace MgmtExtensionCommonRestOperation
         internal TypeTwo(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
         {
             _typeTwoClientDiagnostics = new ClientDiagnostics("MgmtExtensionCommonRestOperation", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string apiVersion);
-            _typeTwoRestClient = new CommonRestOperations(_typeTwoClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, apiVersion);
+            ArmClient.TryGetApiVersion(ResourceType, out string typeTwoApiVersion);
+            _typeTwoRestClient = new CommonRestOperations(_typeTwoClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, typeTwoApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

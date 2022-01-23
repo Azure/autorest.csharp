@@ -38,8 +38,8 @@ namespace MgmtExtensionCommonRestOperation
         internal TypeTwoCollection(ArmResource parent) : base(parent)
         {
             _typeTwoClientDiagnostics = new ClientDiagnostics("MgmtExtensionCommonRestOperation", TypeTwo.ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(TypeTwo.ResourceType, out string apiVersion);
-            _typeTwoRestClient = new CommonRestOperations(_typeTwoClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, apiVersion);
+            ArmClient.TryGetApiVersion(TypeTwo.ResourceType, out string typeTwoApiVersion);
+            _typeTwoRestClient = new CommonRestOperations(_typeTwoClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, typeTwoApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
