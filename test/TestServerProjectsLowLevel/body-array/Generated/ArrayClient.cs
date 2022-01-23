@@ -19,9 +19,8 @@ namespace body_array_LowLevel
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
-        internal readonly ClientDiagnostics _clientDiagnostics;
         private readonly Uri _endpoint;
-
+        internal ClientDiagnostics ClientDiagnostics { get; }
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
@@ -41,7 +40,7 @@ namespace body_array_LowLevel
             endpoint ??= new Uri("http://localhost:3000");
             options ??= new ArrayClientOptions();
 
-            _clientDiagnostics = new ClientDiagnostics(options);
+            ClientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
@@ -62,12 +61,12 @@ namespace body_array_LowLevel
         public virtual async Task<Response> GetNullAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetNull");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetNull");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetNullRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -91,12 +90,12 @@ namespace body_array_LowLevel
         public virtual Response GetNull(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetNull");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetNull");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetNullRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -120,12 +119,12 @@ namespace body_array_LowLevel
         public virtual async Task<Response> GetInvalidAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetInvalid");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetInvalid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetInvalidRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -149,12 +148,12 @@ namespace body_array_LowLevel
         public virtual Response GetInvalid(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetInvalid");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetInvalid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetInvalidRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -178,12 +177,12 @@ namespace body_array_LowLevel
         public virtual async Task<Response> GetEmptyAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetEmpty");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetEmpty");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetEmptyRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -207,12 +206,12 @@ namespace body_array_LowLevel
         public virtual Response GetEmpty(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetEmpty");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetEmpty");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetEmptyRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -240,12 +239,12 @@ namespace body_array_LowLevel
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutEmpty");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.PutEmpty");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutEmptyRequest(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -273,12 +272,12 @@ namespace body_array_LowLevel
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutEmpty");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.PutEmpty");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutEmptyRequest(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -302,12 +301,12 @@ namespace body_array_LowLevel
         public virtual async Task<Response> GetBooleanTfftAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetBooleanTfft");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetBooleanTfft");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetBooleanTfftRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -331,12 +330,12 @@ namespace body_array_LowLevel
         public virtual Response GetBooleanTfft(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetBooleanTfft");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetBooleanTfft");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetBooleanTfftRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -364,12 +363,12 @@ namespace body_array_LowLevel
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutBooleanTfft");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.PutBooleanTfft");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutBooleanTfftRequest(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -397,12 +396,12 @@ namespace body_array_LowLevel
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutBooleanTfft");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.PutBooleanTfft");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutBooleanTfftRequest(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -426,12 +425,12 @@ namespace body_array_LowLevel
         public virtual async Task<Response> GetBooleanInvalidNullAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetBooleanInvalidNull");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetBooleanInvalidNull");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetBooleanInvalidNullRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -455,12 +454,12 @@ namespace body_array_LowLevel
         public virtual Response GetBooleanInvalidNull(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetBooleanInvalidNull");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetBooleanInvalidNull");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetBooleanInvalidNullRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -484,12 +483,12 @@ namespace body_array_LowLevel
         public virtual async Task<Response> GetBooleanInvalidStringAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetBooleanInvalidString");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetBooleanInvalidString");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetBooleanInvalidStringRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -513,12 +512,12 @@ namespace body_array_LowLevel
         public virtual Response GetBooleanInvalidString(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetBooleanInvalidString");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetBooleanInvalidString");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetBooleanInvalidStringRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -542,12 +541,12 @@ namespace body_array_LowLevel
         public virtual async Task<Response> GetIntegerValidAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetIntegerValid");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetIntegerValid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetIntegerValidRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -571,12 +570,12 @@ namespace body_array_LowLevel
         public virtual Response GetIntegerValid(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetIntegerValid");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetIntegerValid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetIntegerValidRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -604,12 +603,12 @@ namespace body_array_LowLevel
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutIntegerValid");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.PutIntegerValid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutIntegerValidRequest(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -637,12 +636,12 @@ namespace body_array_LowLevel
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutIntegerValid");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.PutIntegerValid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutIntegerValidRequest(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -666,12 +665,12 @@ namespace body_array_LowLevel
         public virtual async Task<Response> GetIntInvalidNullAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetIntInvalidNull");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetIntInvalidNull");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetIntInvalidNullRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -695,12 +694,12 @@ namespace body_array_LowLevel
         public virtual Response GetIntInvalidNull(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetIntInvalidNull");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetIntInvalidNull");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetIntInvalidNullRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -724,12 +723,12 @@ namespace body_array_LowLevel
         public virtual async Task<Response> GetIntInvalidStringAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetIntInvalidString");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetIntInvalidString");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetIntInvalidStringRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -753,12 +752,12 @@ namespace body_array_LowLevel
         public virtual Response GetIntInvalidString(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetIntInvalidString");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetIntInvalidString");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetIntInvalidStringRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -782,12 +781,12 @@ namespace body_array_LowLevel
         public virtual async Task<Response> GetLongValidAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetLongValid");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetLongValid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetLongValidRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -811,12 +810,12 @@ namespace body_array_LowLevel
         public virtual Response GetLongValid(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetLongValid");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetLongValid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetLongValidRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -844,12 +843,12 @@ namespace body_array_LowLevel
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutLongValid");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.PutLongValid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutLongValidRequest(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -877,12 +876,12 @@ namespace body_array_LowLevel
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutLongValid");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.PutLongValid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutLongValidRequest(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -906,12 +905,12 @@ namespace body_array_LowLevel
         public virtual async Task<Response> GetLongInvalidNullAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetLongInvalidNull");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetLongInvalidNull");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetLongInvalidNullRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -935,12 +934,12 @@ namespace body_array_LowLevel
         public virtual Response GetLongInvalidNull(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetLongInvalidNull");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetLongInvalidNull");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetLongInvalidNullRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -964,12 +963,12 @@ namespace body_array_LowLevel
         public virtual async Task<Response> GetLongInvalidStringAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetLongInvalidString");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetLongInvalidString");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetLongInvalidStringRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -993,12 +992,12 @@ namespace body_array_LowLevel
         public virtual Response GetLongInvalidString(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetLongInvalidString");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetLongInvalidString");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetLongInvalidStringRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -1022,12 +1021,12 @@ namespace body_array_LowLevel
         public virtual async Task<Response> GetFloatValidAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetFloatValid");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetFloatValid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetFloatValidRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1051,12 +1050,12 @@ namespace body_array_LowLevel
         public virtual Response GetFloatValid(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetFloatValid");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetFloatValid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetFloatValidRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -1084,12 +1083,12 @@ namespace body_array_LowLevel
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutFloatValid");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.PutFloatValid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutFloatValidRequest(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1117,12 +1116,12 @@ namespace body_array_LowLevel
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutFloatValid");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.PutFloatValid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutFloatValidRequest(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -1146,12 +1145,12 @@ namespace body_array_LowLevel
         public virtual async Task<Response> GetFloatInvalidNullAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetFloatInvalidNull");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetFloatInvalidNull");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetFloatInvalidNullRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1175,12 +1174,12 @@ namespace body_array_LowLevel
         public virtual Response GetFloatInvalidNull(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetFloatInvalidNull");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetFloatInvalidNull");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetFloatInvalidNullRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -1204,12 +1203,12 @@ namespace body_array_LowLevel
         public virtual async Task<Response> GetFloatInvalidStringAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetFloatInvalidString");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetFloatInvalidString");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetFloatInvalidStringRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1233,12 +1232,12 @@ namespace body_array_LowLevel
         public virtual Response GetFloatInvalidString(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetFloatInvalidString");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetFloatInvalidString");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetFloatInvalidStringRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -1262,12 +1261,12 @@ namespace body_array_LowLevel
         public virtual async Task<Response> GetDoubleValidAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDoubleValid");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDoubleValid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetDoubleValidRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1291,12 +1290,12 @@ namespace body_array_LowLevel
         public virtual Response GetDoubleValid(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDoubleValid");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDoubleValid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetDoubleValidRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -1324,12 +1323,12 @@ namespace body_array_LowLevel
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutDoubleValid");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.PutDoubleValid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutDoubleValidRequest(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1357,12 +1356,12 @@ namespace body_array_LowLevel
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutDoubleValid");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.PutDoubleValid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutDoubleValidRequest(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -1386,12 +1385,12 @@ namespace body_array_LowLevel
         public virtual async Task<Response> GetDoubleInvalidNullAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDoubleInvalidNull");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDoubleInvalidNull");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetDoubleInvalidNullRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1415,12 +1414,12 @@ namespace body_array_LowLevel
         public virtual Response GetDoubleInvalidNull(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDoubleInvalidNull");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDoubleInvalidNull");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetDoubleInvalidNullRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -1444,12 +1443,12 @@ namespace body_array_LowLevel
         public virtual async Task<Response> GetDoubleInvalidStringAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDoubleInvalidString");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDoubleInvalidString");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetDoubleInvalidStringRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1473,12 +1472,12 @@ namespace body_array_LowLevel
         public virtual Response GetDoubleInvalidString(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDoubleInvalidString");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDoubleInvalidString");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetDoubleInvalidStringRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -1502,12 +1501,12 @@ namespace body_array_LowLevel
         public virtual async Task<Response> GetStringValidAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetStringValid");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetStringValid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetStringValidRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1531,12 +1530,12 @@ namespace body_array_LowLevel
         public virtual Response GetStringValid(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetStringValid");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetStringValid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetStringValidRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -1564,12 +1563,12 @@ namespace body_array_LowLevel
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutStringValid");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.PutStringValid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutStringValidRequest(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1597,12 +1596,12 @@ namespace body_array_LowLevel
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutStringValid");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.PutStringValid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutStringValidRequest(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -1626,12 +1625,12 @@ namespace body_array_LowLevel
         public virtual async Task<Response> GetEnumValidAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetEnumValid");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetEnumValid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetEnumValidRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1655,12 +1654,12 @@ namespace body_array_LowLevel
         public virtual Response GetEnumValid(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetEnumValid");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetEnumValid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetEnumValidRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -1688,12 +1687,12 @@ namespace body_array_LowLevel
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutEnumValid");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.PutEnumValid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutEnumValidRequest(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1721,12 +1720,12 @@ namespace body_array_LowLevel
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutEnumValid");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.PutEnumValid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutEnumValidRequest(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -1750,12 +1749,12 @@ namespace body_array_LowLevel
         public virtual async Task<Response> GetStringEnumValidAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetStringEnumValid");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetStringEnumValid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetStringEnumValidRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1779,12 +1778,12 @@ namespace body_array_LowLevel
         public virtual Response GetStringEnumValid(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetStringEnumValid");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetStringEnumValid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetStringEnumValidRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -1812,12 +1811,12 @@ namespace body_array_LowLevel
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutStringEnumValid");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.PutStringEnumValid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutStringEnumValidRequest(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1845,12 +1844,12 @@ namespace body_array_LowLevel
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutStringEnumValid");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.PutStringEnumValid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutStringEnumValidRequest(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -1874,12 +1873,12 @@ namespace body_array_LowLevel
         public virtual async Task<Response> GetStringWithNullAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetStringWithNull");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetStringWithNull");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetStringWithNullRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1903,12 +1902,12 @@ namespace body_array_LowLevel
         public virtual Response GetStringWithNull(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetStringWithNull");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetStringWithNull");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetStringWithNullRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -1932,12 +1931,12 @@ namespace body_array_LowLevel
         public virtual async Task<Response> GetStringWithInvalidAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetStringWithInvalid");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetStringWithInvalid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetStringWithInvalidRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1961,12 +1960,12 @@ namespace body_array_LowLevel
         public virtual Response GetStringWithInvalid(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetStringWithInvalid");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetStringWithInvalid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetStringWithInvalidRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -1990,12 +1989,12 @@ namespace body_array_LowLevel
         public virtual async Task<Response> GetUuidValidAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetUuidValid");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetUuidValid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetUuidValidRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2019,12 +2018,12 @@ namespace body_array_LowLevel
         public virtual Response GetUuidValid(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetUuidValid");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetUuidValid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetUuidValidRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -2052,12 +2051,12 @@ namespace body_array_LowLevel
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutUuidValid");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.PutUuidValid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutUuidValidRequest(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2085,12 +2084,12 @@ namespace body_array_LowLevel
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutUuidValid");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.PutUuidValid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutUuidValidRequest(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -2114,12 +2113,12 @@ namespace body_array_LowLevel
         public virtual async Task<Response> GetUuidInvalidCharsAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetUuidInvalidChars");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetUuidInvalidChars");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetUuidInvalidCharsRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2143,12 +2142,12 @@ namespace body_array_LowLevel
         public virtual Response GetUuidInvalidChars(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetUuidInvalidChars");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetUuidInvalidChars");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetUuidInvalidCharsRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -2172,12 +2171,12 @@ namespace body_array_LowLevel
         public virtual async Task<Response> GetDateValidAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDateValid");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDateValid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetDateValidRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2201,12 +2200,12 @@ namespace body_array_LowLevel
         public virtual Response GetDateValid(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDateValid");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDateValid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetDateValidRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -2234,12 +2233,12 @@ namespace body_array_LowLevel
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutDateValid");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.PutDateValid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutDateValidRequest(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2267,12 +2266,12 @@ namespace body_array_LowLevel
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutDateValid");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.PutDateValid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutDateValidRequest(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -2296,12 +2295,12 @@ namespace body_array_LowLevel
         public virtual async Task<Response> GetDateInvalidNullAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDateInvalidNull");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDateInvalidNull");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetDateInvalidNullRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2325,12 +2324,12 @@ namespace body_array_LowLevel
         public virtual Response GetDateInvalidNull(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDateInvalidNull");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDateInvalidNull");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetDateInvalidNullRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -2354,12 +2353,12 @@ namespace body_array_LowLevel
         public virtual async Task<Response> GetDateInvalidCharsAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDateInvalidChars");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDateInvalidChars");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetDateInvalidCharsRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2383,12 +2382,12 @@ namespace body_array_LowLevel
         public virtual Response GetDateInvalidChars(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDateInvalidChars");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDateInvalidChars");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetDateInvalidCharsRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -2412,12 +2411,12 @@ namespace body_array_LowLevel
         public virtual async Task<Response> GetDateTimeValidAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDateTimeValid");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDateTimeValid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetDateTimeValidRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2441,12 +2440,12 @@ namespace body_array_LowLevel
         public virtual Response GetDateTimeValid(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDateTimeValid");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDateTimeValid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetDateTimeValidRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -2474,12 +2473,12 @@ namespace body_array_LowLevel
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutDateTimeValid");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.PutDateTimeValid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutDateTimeValidRequest(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2507,12 +2506,12 @@ namespace body_array_LowLevel
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutDateTimeValid");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.PutDateTimeValid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutDateTimeValidRequest(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -2536,12 +2535,12 @@ namespace body_array_LowLevel
         public virtual async Task<Response> GetDateTimeInvalidNullAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDateTimeInvalidNull");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDateTimeInvalidNull");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetDateTimeInvalidNullRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2565,12 +2564,12 @@ namespace body_array_LowLevel
         public virtual Response GetDateTimeInvalidNull(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDateTimeInvalidNull");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDateTimeInvalidNull");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetDateTimeInvalidNullRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -2594,12 +2593,12 @@ namespace body_array_LowLevel
         public virtual async Task<Response> GetDateTimeInvalidCharsAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDateTimeInvalidChars");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDateTimeInvalidChars");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetDateTimeInvalidCharsRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2623,12 +2622,12 @@ namespace body_array_LowLevel
         public virtual Response GetDateTimeInvalidChars(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDateTimeInvalidChars");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDateTimeInvalidChars");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetDateTimeInvalidCharsRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -2652,12 +2651,12 @@ namespace body_array_LowLevel
         public virtual async Task<Response> GetDateTimeRfc1123ValidAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDateTimeRfc1123Valid");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDateTimeRfc1123Valid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetDateTimeRfc1123ValidRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2681,12 +2680,12 @@ namespace body_array_LowLevel
         public virtual Response GetDateTimeRfc1123Valid(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDateTimeRfc1123Valid");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDateTimeRfc1123Valid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetDateTimeRfc1123ValidRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -2714,12 +2713,12 @@ namespace body_array_LowLevel
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutDateTimeRfc1123Valid");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.PutDateTimeRfc1123Valid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutDateTimeRfc1123ValidRequest(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2747,12 +2746,12 @@ namespace body_array_LowLevel
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutDateTimeRfc1123Valid");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.PutDateTimeRfc1123Valid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutDateTimeRfc1123ValidRequest(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -2776,12 +2775,12 @@ namespace body_array_LowLevel
         public virtual async Task<Response> GetDurationValidAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDurationValid");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDurationValid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetDurationValidRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2805,12 +2804,12 @@ namespace body_array_LowLevel
         public virtual Response GetDurationValid(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDurationValid");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDurationValid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetDurationValidRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -2838,12 +2837,12 @@ namespace body_array_LowLevel
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutDurationValid");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.PutDurationValid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutDurationValidRequest(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2871,12 +2870,12 @@ namespace body_array_LowLevel
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutDurationValid");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.PutDurationValid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutDurationValidRequest(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -2900,12 +2899,12 @@ namespace body_array_LowLevel
         public virtual async Task<Response> GetByteValidAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetByteValid");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetByteValid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetByteValidRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2929,12 +2928,12 @@ namespace body_array_LowLevel
         public virtual Response GetByteValid(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetByteValid");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetByteValid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetByteValidRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -2962,12 +2961,12 @@ namespace body_array_LowLevel
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutByteValid");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.PutByteValid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutByteValidRequest(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2995,12 +2994,12 @@ namespace body_array_LowLevel
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutByteValid");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.PutByteValid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutByteValidRequest(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -3024,12 +3023,12 @@ namespace body_array_LowLevel
         public virtual async Task<Response> GetByteInvalidNullAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetByteInvalidNull");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetByteInvalidNull");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetByteInvalidNullRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -3053,12 +3052,12 @@ namespace body_array_LowLevel
         public virtual Response GetByteInvalidNull(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetByteInvalidNull");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetByteInvalidNull");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetByteInvalidNullRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -3082,12 +3081,12 @@ namespace body_array_LowLevel
         public virtual async Task<Response> GetBase64UrlAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetBase64Url");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetBase64Url");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetBase64UrlRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -3111,12 +3110,12 @@ namespace body_array_LowLevel
         public virtual Response GetBase64Url(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetBase64Url");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetBase64Url");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetBase64UrlRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -3146,12 +3145,12 @@ namespace body_array_LowLevel
         public virtual async Task<Response> GetComplexNullAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetComplexNull");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetComplexNull");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetComplexNullRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -3181,12 +3180,12 @@ namespace body_array_LowLevel
         public virtual Response GetComplexNull(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetComplexNull");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetComplexNull");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetComplexNullRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -3216,12 +3215,12 @@ namespace body_array_LowLevel
         public virtual async Task<Response> GetComplexEmptyAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetComplexEmpty");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetComplexEmpty");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetComplexEmptyRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -3251,12 +3250,12 @@ namespace body_array_LowLevel
         public virtual Response GetComplexEmpty(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetComplexEmpty");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetComplexEmpty");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetComplexEmptyRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -3286,12 +3285,12 @@ namespace body_array_LowLevel
         public virtual async Task<Response> GetComplexItemNullAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetComplexItemNull");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetComplexItemNull");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetComplexItemNullRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -3321,12 +3320,12 @@ namespace body_array_LowLevel
         public virtual Response GetComplexItemNull(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetComplexItemNull");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetComplexItemNull");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetComplexItemNullRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -3356,12 +3355,12 @@ namespace body_array_LowLevel
         public virtual async Task<Response> GetComplexItemEmptyAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetComplexItemEmpty");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetComplexItemEmpty");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetComplexItemEmptyRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -3391,12 +3390,12 @@ namespace body_array_LowLevel
         public virtual Response GetComplexItemEmpty(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetComplexItemEmpty");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetComplexItemEmpty");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetComplexItemEmptyRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -3426,12 +3425,12 @@ namespace body_array_LowLevel
         public virtual async Task<Response> GetComplexValidAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetComplexValid");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetComplexValid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetComplexValidRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -3461,12 +3460,12 @@ namespace body_array_LowLevel
         public virtual Response GetComplexValid(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetComplexValid");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetComplexValid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetComplexValidRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -3500,12 +3499,12 @@ namespace body_array_LowLevel
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutComplexValid");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.PutComplexValid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutComplexValidRequest(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -3539,12 +3538,12 @@ namespace body_array_LowLevel
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutComplexValid");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.PutComplexValid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutComplexValidRequest(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -3568,12 +3567,12 @@ namespace body_array_LowLevel
         public virtual async Task<Response> GetArrayNullAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetArrayNull");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetArrayNull");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetArrayNullRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -3597,12 +3596,12 @@ namespace body_array_LowLevel
         public virtual Response GetArrayNull(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetArrayNull");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetArrayNull");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetArrayNullRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -3626,12 +3625,12 @@ namespace body_array_LowLevel
         public virtual async Task<Response> GetArrayEmptyAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetArrayEmpty");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetArrayEmpty");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetArrayEmptyRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -3655,12 +3654,12 @@ namespace body_array_LowLevel
         public virtual Response GetArrayEmpty(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetArrayEmpty");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetArrayEmpty");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetArrayEmptyRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -3684,12 +3683,12 @@ namespace body_array_LowLevel
         public virtual async Task<Response> GetArrayItemNullAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetArrayItemNull");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetArrayItemNull");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetArrayItemNullRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -3713,12 +3712,12 @@ namespace body_array_LowLevel
         public virtual Response GetArrayItemNull(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetArrayItemNull");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetArrayItemNull");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetArrayItemNullRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -3742,12 +3741,12 @@ namespace body_array_LowLevel
         public virtual async Task<Response> GetArrayItemEmptyAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetArrayItemEmpty");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetArrayItemEmpty");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetArrayItemEmptyRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -3771,12 +3770,12 @@ namespace body_array_LowLevel
         public virtual Response GetArrayItemEmpty(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetArrayItemEmpty");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetArrayItemEmpty");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetArrayItemEmptyRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -3800,12 +3799,12 @@ namespace body_array_LowLevel
         public virtual async Task<Response> GetArrayValidAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetArrayValid");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetArrayValid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetArrayValidRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -3829,12 +3828,12 @@ namespace body_array_LowLevel
         public virtual Response GetArrayValid(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetArrayValid");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetArrayValid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetArrayValidRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -3862,12 +3861,12 @@ namespace body_array_LowLevel
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutArrayValid");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.PutArrayValid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutArrayValidRequest(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -3895,12 +3894,12 @@ namespace body_array_LowLevel
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutArrayValid");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.PutArrayValid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutArrayValidRequest(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -3924,12 +3923,12 @@ namespace body_array_LowLevel
         public virtual async Task<Response> GetDictionaryNullAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDictionaryNull");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDictionaryNull");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetDictionaryNullRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -3953,12 +3952,12 @@ namespace body_array_LowLevel
         public virtual Response GetDictionaryNull(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDictionaryNull");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDictionaryNull");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetDictionaryNullRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -3982,12 +3981,12 @@ namespace body_array_LowLevel
         public virtual async Task<Response> GetDictionaryEmptyAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDictionaryEmpty");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDictionaryEmpty");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetDictionaryEmptyRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -4011,12 +4010,12 @@ namespace body_array_LowLevel
         public virtual Response GetDictionaryEmpty(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDictionaryEmpty");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDictionaryEmpty");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetDictionaryEmptyRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -4040,12 +4039,12 @@ namespace body_array_LowLevel
         public virtual async Task<Response> GetDictionaryItemNullAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDictionaryItemNull");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDictionaryItemNull");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetDictionaryItemNullRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -4069,12 +4068,12 @@ namespace body_array_LowLevel
         public virtual Response GetDictionaryItemNull(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDictionaryItemNull");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDictionaryItemNull");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetDictionaryItemNullRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -4098,12 +4097,12 @@ namespace body_array_LowLevel
         public virtual async Task<Response> GetDictionaryItemEmptyAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDictionaryItemEmpty");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDictionaryItemEmpty");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetDictionaryItemEmptyRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -4127,12 +4126,12 @@ namespace body_array_LowLevel
         public virtual Response GetDictionaryItemEmpty(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDictionaryItemEmpty");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDictionaryItemEmpty");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetDictionaryItemEmptyRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -4156,12 +4155,12 @@ namespace body_array_LowLevel
         public virtual async Task<Response> GetDictionaryValidAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDictionaryValid");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDictionaryValid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetDictionaryValidRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -4185,12 +4184,12 @@ namespace body_array_LowLevel
         public virtual Response GetDictionaryValid(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDictionaryValid");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDictionaryValid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetDictionaryValidRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -4218,12 +4217,12 @@ namespace body_array_LowLevel
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutDictionaryValid");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.PutDictionaryValid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutDictionaryValidRequest(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -4251,12 +4250,12 @@ namespace body_array_LowLevel
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutDictionaryValid");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.PutDictionaryValid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutDictionaryValidRequest(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {

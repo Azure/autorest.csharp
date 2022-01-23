@@ -19,10 +19,9 @@ namespace custom_baseUrl_more_options_LowLevel
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
-        internal readonly ClientDiagnostics _clientDiagnostics;
         private readonly string _subscriptionId;
         private readonly string _dnsSuffix;
-
+        internal ClientDiagnostics ClientDiagnostics { get; }
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
@@ -44,7 +43,7 @@ namespace custom_baseUrl_more_options_LowLevel
             Argument.AssertNotNull(dnsSuffix, nameof(dnsSuffix));
             options ??= new PathsClientOptions();
 
-            _clientDiagnostics = new ClientDiagnostics(options);
+            ClientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _subscriptionId = subscriptionId;
@@ -75,12 +74,12 @@ namespace custom_baseUrl_more_options_LowLevel
             Argument.AssertNotNull(secret, nameof(secret));
             Argument.AssertNotNull(keyName, nameof(keyName));
 
-            using var scope = _clientDiagnostics.CreateScope("PathsClient.GetEmpty");
+            using var scope = ClientDiagnostics.CreateScope("PathsClient.GetEmpty");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetEmptyRequest(vault, secret, keyName, keyVersion, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -113,12 +112,12 @@ namespace custom_baseUrl_more_options_LowLevel
             Argument.AssertNotNull(secret, nameof(secret));
             Argument.AssertNotNull(keyName, nameof(keyName));
 
-            using var scope = _clientDiagnostics.CreateScope("PathsClient.GetEmpty");
+            using var scope = ClientDiagnostics.CreateScope("PathsClient.GetEmpty");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetEmptyRequest(vault, secret, keyName, keyVersion, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {

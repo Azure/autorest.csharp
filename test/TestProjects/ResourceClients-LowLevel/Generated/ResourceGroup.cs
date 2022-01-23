@@ -22,11 +22,11 @@ namespace ResourceClients_LowLevel
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
-        internal readonly ClientDiagnostics _clientDiagnostics;
         private readonly Uri _endpoint;
 
         /// <summary> Group identifier. </summary>
-        public virtual string GroupId { get; }
+        public string GroupId { get; }
+        internal ClientDiagnostics ClientDiagnostics { get; }
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
@@ -49,7 +49,7 @@ namespace ResourceClients_LowLevel
             Argument.AssertNotNull(groupId, nameof(groupId));
             endpoint ??= new Uri("http://localhost:3000");
 
-            _clientDiagnostics = clientDiagnostics;
+            ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
             _keyCredential = keyCredential;
             GroupId = groupId;
@@ -62,12 +62,12 @@ namespace ResourceClients_LowLevel
         public virtual async Task<Response> GetGroupAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ResourceGroup.GetGroup");
+            using var scope = ClientDiagnostics.CreateScope("ResourceGroup.GetGroup");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetGroupRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -82,12 +82,12 @@ namespace ResourceClients_LowLevel
         public virtual Response GetGroup(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ResourceGroup.GetGroup");
+            using var scope = ClientDiagnostics.CreateScope("ResourceGroup.GetGroup");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetGroupRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -102,7 +102,7 @@ namespace ResourceClients_LowLevel
         public virtual AsyncPageable<BinaryData> GetItemsAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "ResourceGroup.GetItems");
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "ResourceGroup.GetItems");
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
@@ -110,7 +110,7 @@ namespace ResourceClients_LowLevel
                     var message = string.IsNullOrEmpty(nextLink)
                         ? CreateGetItemsRequest(context)
                         : CreateGetItemsNextPageRequest(nextLink, context);
-                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, context, "value", "nextLink", cancellationToken).ConfigureAwait(false);
+                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, context, "value", "nextLink", cancellationToken).ConfigureAwait(false);
                     nextLink = page.ContinuationToken;
                     yield return page;
                 } while (!string.IsNullOrEmpty(nextLink));
@@ -123,7 +123,7 @@ namespace ResourceClients_LowLevel
         public virtual Pageable<BinaryData> GetItems(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "ResourceGroup.GetItems");
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "ResourceGroup.GetItems");
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do
@@ -131,7 +131,7 @@ namespace ResourceClients_LowLevel
                     var message = string.IsNullOrEmpty(nextLink)
                         ? CreateGetItemsRequest(context)
                         : CreateGetItemsNextPageRequest(nextLink, context);
-                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, context, "value", "nextLink");
+                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, context, "value", "nextLink");
                     nextLink = page.ContinuationToken;
                     yield return page;
                 } while (!string.IsNullOrEmpty(nextLink));
@@ -145,7 +145,7 @@ namespace ResourceClients_LowLevel
         {
             Argument.AssertNotNull(itemId, nameof(itemId));
 
-            return new Resource(_clientDiagnostics, _pipeline, _keyCredential, GroupId, itemId, _endpoint);
+            return new Resource(ClientDiagnostics, _pipeline, _keyCredential, GroupId, itemId, _endpoint);
         }
 
         internal HttpMessage CreateGetGroupRequest(RequestContext context)

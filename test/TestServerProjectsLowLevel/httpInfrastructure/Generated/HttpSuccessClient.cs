@@ -19,9 +19,8 @@ namespace httpInfrastructure_LowLevel
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
-        internal readonly ClientDiagnostics _clientDiagnostics;
         private readonly Uri _endpoint;
-
+        internal ClientDiagnostics ClientDiagnostics { get; }
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
@@ -41,7 +40,7 @@ namespace httpInfrastructure_LowLevel
             endpoint ??= new Uri("http://localhost:3000");
             options ??= new AutoRestHttpInfrastructureTestServiceClientOptions();
 
-            _clientDiagnostics = new ClientDiagnostics(options);
+            ClientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
@@ -62,12 +61,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> Head200Async(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Head200");
+            using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Head200");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateHead200Request(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -91,12 +90,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response Head200(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Head200");
+            using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Head200");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateHead200Request(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -120,12 +119,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> Get200Async(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Get200");
+            using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Get200");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGet200Request(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -149,12 +148,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response Get200(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Get200");
+            using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Get200");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGet200Request(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -178,12 +177,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> Options200Async(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Options200");
+            using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Options200");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateOptions200Request(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -207,12 +206,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response Options200(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Options200");
+            using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Options200");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateOptions200Request(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -237,12 +236,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> Put200Async(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Put200");
+            using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Put200");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePut200Request(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -267,12 +266,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response Put200(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Put200");
+            using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Put200");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePut200Request(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -297,12 +296,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> Patch200Async(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Patch200");
+            using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Patch200");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePatch200Request(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -327,12 +326,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response Patch200(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Patch200");
+            using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Patch200");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePatch200Request(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -357,12 +356,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> Post200Async(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Post200");
+            using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Post200");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePost200Request(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -387,12 +386,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response Post200(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Post200");
+            using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Post200");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePost200Request(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -417,12 +416,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> Delete200Async(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Delete200");
+            using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Delete200");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateDelete200Request(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -447,12 +446,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response Delete200(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Delete200");
+            using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Delete200");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateDelete200Request(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -477,12 +476,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> Put201Async(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Put201");
+            using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Put201");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePut201Request(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -507,12 +506,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response Put201(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Put201");
+            using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Put201");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePut201Request(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -537,12 +536,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> Post201Async(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Post201");
+            using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Post201");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePost201Request(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -567,12 +566,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response Post201(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Post201");
+            using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Post201");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePost201Request(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -597,12 +596,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> Put202Async(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Put202");
+            using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Put202");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePut202Request(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -627,12 +626,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response Put202(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Put202");
+            using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Put202");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePut202Request(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -657,12 +656,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> Patch202Async(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Patch202");
+            using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Patch202");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePatch202Request(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -687,12 +686,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response Patch202(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Patch202");
+            using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Patch202");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePatch202Request(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -717,12 +716,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> Post202Async(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Post202");
+            using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Post202");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePost202Request(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -747,12 +746,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response Post202(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Post202");
+            using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Post202");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePost202Request(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -777,12 +776,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> Delete202Async(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Delete202");
+            using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Delete202");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateDelete202Request(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -807,12 +806,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response Delete202(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Delete202");
+            using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Delete202");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateDelete202Request(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -836,12 +835,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> Head204Async(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Head204");
+            using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Head204");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateHead204Request(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -865,12 +864,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response Head204(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Head204");
+            using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Head204");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateHead204Request(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -895,12 +894,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> Put204Async(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Put204");
+            using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Put204");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePut204Request(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -925,12 +924,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response Put204(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Put204");
+            using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Put204");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePut204Request(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -955,12 +954,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> Patch204Async(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Patch204");
+            using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Patch204");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePatch204Request(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -985,12 +984,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response Patch204(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Patch204");
+            using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Patch204");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePatch204Request(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -1015,12 +1014,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> Post204Async(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Post204");
+            using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Post204");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePost204Request(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1045,12 +1044,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response Post204(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Post204");
+            using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Post204");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePost204Request(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -1075,12 +1074,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> Delete204Async(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Delete204");
+            using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Delete204");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateDelete204Request(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1105,12 +1104,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response Delete204(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Delete204");
+            using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Delete204");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateDelete204Request(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -1134,12 +1133,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> Head404Async(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Head404");
+            using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Head404");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateHead404Request(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1163,12 +1162,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response Head404(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Head404");
+            using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Head404");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateHead404Request(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {

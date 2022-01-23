@@ -19,9 +19,8 @@ namespace body_file_LowLevel
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
-        internal readonly ClientDiagnostics _clientDiagnostics;
         private readonly Uri _endpoint;
-
+        internal ClientDiagnostics ClientDiagnostics { get; }
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
@@ -41,7 +40,7 @@ namespace body_file_LowLevel
             endpoint ??= new Uri("http://localhost:3000");
             options ??= new FilesClientOptions();
 
-            _clientDiagnostics = new ClientDiagnostics(options);
+            ClientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
@@ -62,12 +61,12 @@ namespace body_file_LowLevel
         public virtual async Task<Response> GetFileAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("FilesClient.GetFile");
+            using var scope = ClientDiagnostics.CreateScope("FilesClient.GetFile");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetFileRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -91,12 +90,12 @@ namespace body_file_LowLevel
         public virtual Response GetFile(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("FilesClient.GetFile");
+            using var scope = ClientDiagnostics.CreateScope("FilesClient.GetFile");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetFileRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -120,12 +119,12 @@ namespace body_file_LowLevel
         public virtual async Task<Response> GetFileLargeAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("FilesClient.GetFileLarge");
+            using var scope = ClientDiagnostics.CreateScope("FilesClient.GetFileLarge");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetFileLargeRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -149,12 +148,12 @@ namespace body_file_LowLevel
         public virtual Response GetFileLarge(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("FilesClient.GetFileLarge");
+            using var scope = ClientDiagnostics.CreateScope("FilesClient.GetFileLarge");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetFileLargeRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -178,12 +177,12 @@ namespace body_file_LowLevel
         public virtual async Task<Response> GetEmptyFileAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("FilesClient.GetEmptyFile");
+            using var scope = ClientDiagnostics.CreateScope("FilesClient.GetEmptyFile");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetEmptyFileRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -207,12 +206,12 @@ namespace body_file_LowLevel
         public virtual Response GetEmptyFile(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("FilesClient.GetEmptyFile");
+            using var scope = ClientDiagnostics.CreateScope("FilesClient.GetEmptyFile");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetEmptyFileRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {

@@ -19,9 +19,8 @@ namespace body_string_LowLevel
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
-        internal readonly ClientDiagnostics _clientDiagnostics;
         private readonly Uri _endpoint;
-
+        internal ClientDiagnostics ClientDiagnostics { get; }
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
@@ -41,7 +40,7 @@ namespace body_string_LowLevel
             endpoint ??= new Uri("http://localhost:3000");
             options ??= new AutoRestSwaggerBATServiceClientOptions();
 
-            _clientDiagnostics = new ClientDiagnostics(options);
+            ClientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
@@ -62,12 +61,12 @@ namespace body_string_LowLevel
         public virtual async Task<Response> GetNullAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("StringClient.GetNull");
+            using var scope = ClientDiagnostics.CreateScope("StringClient.GetNull");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetNullRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -91,12 +90,12 @@ namespace body_string_LowLevel
         public virtual Response GetNull(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("StringClient.GetNull");
+            using var scope = ClientDiagnostics.CreateScope("StringClient.GetNull");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetNullRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -121,12 +120,12 @@ namespace body_string_LowLevel
         public virtual async Task<Response> PutNullAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("StringClient.PutNull");
+            using var scope = ClientDiagnostics.CreateScope("StringClient.PutNull");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutNullRequest(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -151,12 +150,12 @@ namespace body_string_LowLevel
         public virtual Response PutNull(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("StringClient.PutNull");
+            using var scope = ClientDiagnostics.CreateScope("StringClient.PutNull");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutNullRequest(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -180,12 +179,12 @@ namespace body_string_LowLevel
         public virtual async Task<Response> GetEmptyAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("StringClient.GetEmpty");
+            using var scope = ClientDiagnostics.CreateScope("StringClient.GetEmpty");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetEmptyRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -209,12 +208,12 @@ namespace body_string_LowLevel
         public virtual Response GetEmpty(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("StringClient.GetEmpty");
+            using var scope = ClientDiagnostics.CreateScope("StringClient.GetEmpty");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetEmptyRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -242,12 +241,12 @@ namespace body_string_LowLevel
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = _clientDiagnostics.CreateScope("StringClient.PutEmpty");
+            using var scope = ClientDiagnostics.CreateScope("StringClient.PutEmpty");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutEmptyRequest(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -275,12 +274,12 @@ namespace body_string_LowLevel
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = _clientDiagnostics.CreateScope("StringClient.PutEmpty");
+            using var scope = ClientDiagnostics.CreateScope("StringClient.PutEmpty");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutEmptyRequest(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -304,12 +303,12 @@ namespace body_string_LowLevel
         public virtual async Task<Response> GetMbcsAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("StringClient.GetMbcs");
+            using var scope = ClientDiagnostics.CreateScope("StringClient.GetMbcs");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetMbcsRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -333,12 +332,12 @@ namespace body_string_LowLevel
         public virtual Response GetMbcs(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("StringClient.GetMbcs");
+            using var scope = ClientDiagnostics.CreateScope("StringClient.GetMbcs");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetMbcsRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -366,12 +365,12 @@ namespace body_string_LowLevel
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = _clientDiagnostics.CreateScope("StringClient.PutMbcs");
+            using var scope = ClientDiagnostics.CreateScope("StringClient.PutMbcs");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutMbcsRequest(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -399,12 +398,12 @@ namespace body_string_LowLevel
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = _clientDiagnostics.CreateScope("StringClient.PutMbcs");
+            using var scope = ClientDiagnostics.CreateScope("StringClient.PutMbcs");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutMbcsRequest(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -428,12 +427,12 @@ namespace body_string_LowLevel
         public virtual async Task<Response> GetWhitespaceAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("StringClient.GetWhitespace");
+            using var scope = ClientDiagnostics.CreateScope("StringClient.GetWhitespace");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetWhitespaceRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -457,12 +456,12 @@ namespace body_string_LowLevel
         public virtual Response GetWhitespace(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("StringClient.GetWhitespace");
+            using var scope = ClientDiagnostics.CreateScope("StringClient.GetWhitespace");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetWhitespaceRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -490,12 +489,12 @@ namespace body_string_LowLevel
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = _clientDiagnostics.CreateScope("StringClient.PutWhitespace");
+            using var scope = ClientDiagnostics.CreateScope("StringClient.PutWhitespace");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutWhitespaceRequest(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -523,12 +522,12 @@ namespace body_string_LowLevel
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = _clientDiagnostics.CreateScope("StringClient.PutWhitespace");
+            using var scope = ClientDiagnostics.CreateScope("StringClient.PutWhitespace");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutWhitespaceRequest(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -552,12 +551,12 @@ namespace body_string_LowLevel
         public virtual async Task<Response> GetNotProvidedAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("StringClient.GetNotProvided");
+            using var scope = ClientDiagnostics.CreateScope("StringClient.GetNotProvided");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetNotProvidedRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -581,12 +580,12 @@ namespace body_string_LowLevel
         public virtual Response GetNotProvided(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("StringClient.GetNotProvided");
+            using var scope = ClientDiagnostics.CreateScope("StringClient.GetNotProvided");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetNotProvidedRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -610,12 +609,12 @@ namespace body_string_LowLevel
         public virtual async Task<Response> GetBase64EncodedAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("StringClient.GetBase64Encoded");
+            using var scope = ClientDiagnostics.CreateScope("StringClient.GetBase64Encoded");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetBase64EncodedRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -639,12 +638,12 @@ namespace body_string_LowLevel
         public virtual Response GetBase64Encoded(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("StringClient.GetBase64Encoded");
+            using var scope = ClientDiagnostics.CreateScope("StringClient.GetBase64Encoded");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetBase64EncodedRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -668,12 +667,12 @@ namespace body_string_LowLevel
         public virtual async Task<Response> GetBase64UrlEncodedAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("StringClient.GetBase64UrlEncoded");
+            using var scope = ClientDiagnostics.CreateScope("StringClient.GetBase64UrlEncoded");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetBase64UrlEncodedRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -697,12 +696,12 @@ namespace body_string_LowLevel
         public virtual Response GetBase64UrlEncoded(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("StringClient.GetBase64UrlEncoded");
+            using var scope = ClientDiagnostics.CreateScope("StringClient.GetBase64UrlEncoded");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetBase64UrlEncodedRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -730,12 +729,12 @@ namespace body_string_LowLevel
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = _clientDiagnostics.CreateScope("StringClient.PutBase64UrlEncoded");
+            using var scope = ClientDiagnostics.CreateScope("StringClient.PutBase64UrlEncoded");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutBase64UrlEncodedRequest(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -763,12 +762,12 @@ namespace body_string_LowLevel
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = _clientDiagnostics.CreateScope("StringClient.PutBase64UrlEncoded");
+            using var scope = ClientDiagnostics.CreateScope("StringClient.PutBase64UrlEncoded");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutBase64UrlEncodedRequest(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -792,12 +791,12 @@ namespace body_string_LowLevel
         public virtual async Task<Response> GetNullBase64UrlEncodedAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("StringClient.GetNullBase64UrlEncoded");
+            using var scope = ClientDiagnostics.CreateScope("StringClient.GetNullBase64UrlEncoded");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetNullBase64UrlEncodedRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -821,12 +820,12 @@ namespace body_string_LowLevel
         public virtual Response GetNullBase64UrlEncoded(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("StringClient.GetNullBase64UrlEncoded");
+            using var scope = ClientDiagnostics.CreateScope("StringClient.GetNullBase64UrlEncoded");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetNullBase64UrlEncodedRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
