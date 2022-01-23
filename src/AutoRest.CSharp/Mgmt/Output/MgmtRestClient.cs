@@ -18,7 +18,6 @@ namespace AutoRest.CSharp.Mgmt.Output
     {
         private BuildContext<MgmtOutputLibrary> _context;
         private MgmtRestClientBuilder _builder;
-        private Resource? _resource;
         private IReadOnlyList<Resource>? _resources;
 
         public MgmtRestClient(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context)
@@ -42,8 +41,6 @@ namespace AutoRest.CSharp.Mgmt.Output
             return f;
         }
 
-        public Resource? Resource => _resource ??= GetResource();
-
         public IReadOnlyList<Resource> Resources => _resources ??= GetResources();
 
         private IReadOnlyList<Resource> GetResources()
@@ -58,14 +55,6 @@ namespace AutoRest.CSharp.Mgmt.Output
                 }
             }
             return candidates.Values.ToList();
-        }
-
-        private Resource? GetResource()
-        {
-            if (Resources.Count == 1)
-                return Resources[0];
-
-            return null;
         }
     }
 }

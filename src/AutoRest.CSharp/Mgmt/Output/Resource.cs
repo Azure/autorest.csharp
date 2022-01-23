@@ -91,14 +91,15 @@ namespace AutoRest.CSharp.Mgmt.Output
                 var operation = operationSet.GetOperation(method);
                 if (operation is not null)
                 {
+                    var restClient = _context.Library.GetRestClient(operation);
                     var requestPath = operation.GetRequestPath(_context);
+                    var contextualPath = GetContextualPath(operationSet, requestPath);
                     var restOperation = new MgmtRestOperation(
                         _context.Library.GetRestClientMethod(operation),
-                        _context.Library.GetRestClient(operation),
+                        restClient,
                         requestPath,
-                        GetContextualPath(operationSet, requestPath),
+                        contextualPath,
                         operationName,
-                        this,
                         operation.GetReturnTypeAsLongRunningOperation(this, operationName, _context));
                     result.Add(restOperation);
                 }
@@ -270,13 +271,13 @@ namespace AutoRest.CSharp.Mgmt.Output
                         "GetAll" :// hard-code the name of a resource collection operation to "GetAll"
                         GetOperationName(operation, resourceRestClient.OperationGroup.Key);
                     // get the MgmtRestOperation with a proper name
+                    var restClient = _context.Library.GetRestClient(operation);
                     var restOperation = new MgmtRestOperation(
                         _context.Library.GetRestClientMethod(operation),
-                        _context.Library.GetRestClient(operation),
+                        restClient,
                         requestPath,
                         contextualPath,
                         methodName,
-                        this,
                         operation.GetReturnTypeAsLongRunningOperation(this, methodName, _context));
 
                     if (result.TryGetValue(key, out var list))
@@ -332,6 +333,12 @@ namespace AutoRest.CSharp.Mgmt.Output
 
             return resourceRestClients.Concat(childRestClients).Distinct();
         }
+
+        private MgmtRestClient? _myRestClient;
+        public MgmtRestClient MyRestClient => _myRestClient ??= RestClients.First(client => client.Resources.Any(resource => resource.ResourceName == ResourceName));
+
+        private IEnumerable<MgmtRestClient>? _otherRestClients;
+        public IEnumerable<MgmtRestClient> OtherRestClients => _otherRestClients ??= RestClients.Where(client => client != MyRestClient);
 
         public ResourceTypeSegment ResourceType { get; }
 

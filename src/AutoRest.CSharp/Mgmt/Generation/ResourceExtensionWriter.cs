@@ -50,9 +50,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     WriteFields(_writer, This.RestClients, false);
                     _writer.Line();
 
-                    WriteProviderDefaultNamespace(_writer);
-                    _writer.Line();
-
                     WriteCtor();
                     _writer.Line();
 
@@ -114,7 +111,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             FormattableString diagOptionsCtor = ConstructClientDiagnostic(_writer, GetProviderNamespaceFromReturnType(resourceName), DiagnosticOptionsProperty);
             _writer.Line($"private {typeof(ClientDiagnostics)} {diagPropertyName} => {GetClientDiagnosticFieldName(client, resource)} ??= {diagOptionsCtor};");
             string apiVersionString = resourceName == null ? string.Empty : $", GetApiVersionOrNull({resourceName}.ResourceType)";
-            string restCtor = GetRestConstructorString("new ", client, diagPropertyName, PipelineProperty, DiagnosticOptionsProperty, ", Id.SubscriptionId", "BaseUri", apiVersionString);
+            string restCtor = GetRestConstructorString(client, diagPropertyName, apiVersionString);
             _writer.Line($"private {client.Type} {GetRestPropertyName(client, resource)} => {GetRestFieldName(client, resource)} ??= {restCtor};");
         }
 

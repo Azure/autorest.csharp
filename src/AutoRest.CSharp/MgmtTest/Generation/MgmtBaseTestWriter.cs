@@ -27,7 +27,7 @@ using Azure.Core;
 
 namespace AutoRest.CSharp.MgmtTest.Generation
 {
-    internal partial class MgmtBaseTestWriter: MgmtClientBaseWriter
+    internal partial class MgmtBaseTestWriter: MgmtClientBaseWriter<MgmtTypeProvider>
     {
         public static CodeWriter _tagsWriter = new CodeWriter();
         public static HashSet<string>  variableNames = new HashSet<string>();

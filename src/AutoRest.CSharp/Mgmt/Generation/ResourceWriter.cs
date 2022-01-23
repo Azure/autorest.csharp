@@ -30,7 +30,7 @@ using Resource = AutoRest.CSharp.Mgmt.Output.Resource;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
-    internal class ResourceWriter : MgmtClientBaseWriter
+    internal class ResourceWriter : MgmtClientBaseWriter<Resource>
     {
         protected Resource _resource;
         protected ResourceData _resourceData;
@@ -117,7 +117,12 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
 
         protected virtual void WriteFields()
         {
-            WriteFieldSet(_writer, true, This.RestClients.First(), _resource);
+            //write the resource field
+            WriteFieldSet(_writer, true, This.MyRestClient, _resource);
+
+            //write any others not included in above
+            WriteFields(_writer, This.OtherRestClients);
+
             _writer.Line($"private readonly {_resourceData.Type} _data;");
         }
 
@@ -168,16 +173,50 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
             _writer.WriteMethodDocumentation(clientOptionsConstructor);
             using (_writer.WriteMethodDeclaration(clientOptionsConstructor))
             {
-                FormattableString ctorString = ConstructClientDiagnostic(_writer, $"ResourceType.Namespace", DiagnosticOptionsProperty);
-                _writer.Line($"{GetClientDiagnosticFieldName(_resource)} = {ctorString};");
-                WriteRestClientAssignments();
+                WriteRestClientConstructorPair(This.MyRestClient, _resource);
+                WriteRestClientAssignments(This.OtherRestClients);
                 WriteDebugValidate(_writer);
             }
         }
 
-        protected void WriteRestClientAssignments()
+        protected void WriteRestClientAssignments(IEnumerable<MgmtRestClient> clients)
         {
-            WriteRestClientConstructionForResource(_resource, This.RestClients, ", Id.SubscriptionId", GetClientDiagnosticFieldName(_resource), DiagnosticOptionsProperty, PipelineProperty, BaseUriField, "new ", false);
+            foreach (var restClient in clients)
+            {
+                if (restClient.Resources.Count == 0)
+                    WriteRestClientConstructorPair(restClient, null);
+
+                foreach (var resource in restClient.Resources)
+                {
+                    WriteRestClientConstructorPair(restClient, resource);
+                }
+            }
+        }
+
+        protected void WriteRestClientConstructorPair(MgmtRestClient restClient, Resource? resource)
+        {
+            string? resourceName = resource?.Type.Name;
+            FormattableString ctorString = ConstructClientDiagnostic(_writer, $"{GetProviderNamespaceFromReturnType(resourceName)}", DiagnosticOptionsProperty);
+            string diagFieldName = GetClientDiagnosticFieldName(restClient, resource);
+            _writer.Line($"{diagFieldName} = {ctorString};");
+            string apiVersionText = string.Empty;
+            if (resource is not null)
+            {
+                string apiVersionVariable = GetApiVersionVariableName(restClient, resource);
+                _writer.Line($"{ArmClientReference}.TryGetApiVersion({resourceName}.ResourceType, out string {apiVersionVariable});");
+                apiVersionText = $", {apiVersionVariable}";
+            }
+            _writer.Line($"{GetRestFieldName(restClient, resource)} = {GetRestConstructorString(restClient, diagFieldName, apiVersionText)};");
+        }
+
+        protected virtual string GetApiVersionVariableName(MgmtRestClient client, Resource? resource)
+        {
+            if (resource is not null)
+                return $"{resource.ResourceName.ToVariableName()}ApiVersion";
+
+            return client.OperationGroup.Key.IsNullOrEmpty()
+                ? "apiVersion"
+                : $"{client.OperationGroup.Key.ToVariableName()}ApiVersion";
         }
 
         protected virtual void WriteProperties()

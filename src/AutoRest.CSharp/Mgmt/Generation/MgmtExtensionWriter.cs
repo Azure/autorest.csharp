@@ -27,7 +27,7 @@ using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
-    internal abstract class MgmtExtensionWriter : MgmtClientBaseWriter
+    internal abstract class MgmtExtensionWriter : MgmtClientBaseWriter<MgmtExtensions>
     {
         protected MgmtExtensions _extensions;
 
@@ -50,11 +50,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected override string BranchIdVariableName => $"{ExtensionOperationVariableName}.Id";
 
         protected override string ContextProperty => ExtensionOperationVariableName;
-
-        protected void WriteProviderDefaultNamespace(CodeWriter writer)
-        {
-            writer.Line($"private static string _defaultRpNamespace = {typeof(ClientDiagnostics)}.GetResourceProviderNamespace(typeof({TypeNameOfThis}).Assembly);");
-        }
 
         protected void WriteMethodWrapper(MgmtClientOperation clientOperation, bool async)
         {

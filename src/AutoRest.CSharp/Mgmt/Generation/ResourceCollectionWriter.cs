@@ -43,15 +43,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected override string ContextProperty => "this";
 
-        protected override MgmtTypeProvider This => _resourceCollection;
-
         protected override string BranchIdVariableName => "Id";
 
         private MgmtClientOperation? _getAllOperation;
 
         public ResourceCollectionWriter(CodeWriter writer, ResourceCollection resourceCollection, BuildContext<MgmtOutputLibrary> context)
-            : base(writer, resourceCollection.Resource, context)
+            : base(writer, resourceCollection, context)
         {
+            _resource = resourceCollection.Resource;
             _resourceCollection = resourceCollection;
             _getAllOperation = _resourceCollection.GetAllOperation;
         }
@@ -80,7 +79,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected override void WriteFields()
         {
-            WriteFieldSet(_writer, true, _resourceCollection.RestClients.First(), _resource);
+            WriteFieldSet(_writer, true, _resourceCollection.MyRestClient, _resource);
 
             foreach (var reference in _resourceCollection.ExtraConstructorParameters)
             {
@@ -117,9 +116,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             using (_writer.WriteMethodDeclaration(parentResourceConstructor))
             {
                 var allPossibleTypes = _resourceCollection.ResourceTypes.SelectMany(p => p.Value).Distinct();
-                FormattableString ctorString = ConstructClientDiagnostic(_writer, $"{_resource.Type}.ResourceType.Namespace", DiagnosticOptionsProperty);
-                _writer.Line($"{GetClientDiagnosticFieldName(_resource)} = {ctorString};");
-                WriteRestClientAssignments();
+                WriteRestClientConstructorPair(This.MyRestClient, _resource);
                 foreach (var parameter in _resourceCollection.ExtraConstructorParameters)
                 {
                     _writer.Line($"{_resourceCollection.GetFieldName(parameter)} = {parameter.Name};");

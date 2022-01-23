@@ -54,7 +54,6 @@ namespace AutoRest.CSharp.Mgmt.Output
                         operation.GetRequestPath(_context),
                         ContextualPath,
                         operationName,
-                        GetResourceFromResourceType(operation, _context),
                         operation.GetReturnTypeAsLongRunningOperation(null, operationName, _context)));
             });
         }
