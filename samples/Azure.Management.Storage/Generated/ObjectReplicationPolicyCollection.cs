@@ -23,8 +23,8 @@ namespace Azure.Management.Storage
     /// <summary> A class representing collection of ObjectReplicationPolicy and their operations over its parent. </summary>
     public partial class ObjectReplicationPolicyCollection : ArmCollection, IEnumerable<ObjectReplicationPolicy>, IAsyncEnumerable<ObjectReplicationPolicy>
     {
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly ObjectReplicationPoliciesRestOperations _objectReplicationPoliciesRestClient;
+        private readonly ClientDiagnostics _objectReplicationPolicyClientDiagnostics;
+        private readonly ObjectReplicationPoliciesRestOperations _objectReplicationPolicyRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="ObjectReplicationPolicyCollection"/> class for mocking. </summary>
         protected ObjectReplicationPolicyCollection()
@@ -35,9 +35,9 @@ namespace Azure.Management.Storage
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal ObjectReplicationPolicyCollection(ArmResource parent) : base(parent)
         {
-            _clientDiagnostics = new ClientDiagnostics("Azure.Management.Storage", ObjectReplicationPolicy.ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ObjectReplicationPolicy.ResourceType, out string apiVersion);
-            _objectReplicationPoliciesRestClient = new ObjectReplicationPoliciesRestOperations(_clientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, apiVersion);
+            _objectReplicationPolicyClientDiagnostics = new ClientDiagnostics("Azure.Management.Storage", ObjectReplicationPolicy.ResourceType.Namespace, DiagnosticOptions);
+            ArmClient.TryGetApiVersion(ObjectReplicationPolicy.ResourceType, out string objectReplicationPolicyApiVersion);
+            _objectReplicationPolicyRestClient = new ObjectReplicationPoliciesRestOperations(_objectReplicationPolicyClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, objectReplicationPolicyApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -69,11 +69,11 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(properties));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ObjectReplicationPolicyCollection.CreateOrUpdate");
+            using var scope = _objectReplicationPolicyClientDiagnostics.CreateScope("ObjectReplicationPolicyCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _objectReplicationPoliciesRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, objectReplicationPolicyId, properties, cancellationToken);
+                var response = _objectReplicationPolicyRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, objectReplicationPolicyId, properties, cancellationToken);
                 var operation = new ObjectReplicationPolicyCreateOrUpdateOperation(ArmClient, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
@@ -104,11 +104,11 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(properties));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ObjectReplicationPolicyCollection.CreateOrUpdate");
+            using var scope = _objectReplicationPolicyClientDiagnostics.CreateScope("ObjectReplicationPolicyCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _objectReplicationPoliciesRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, objectReplicationPolicyId, properties, cancellationToken).ConfigureAwait(false);
+                var response = await _objectReplicationPolicyRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, objectReplicationPolicyId, properties, cancellationToken).ConfigureAwait(false);
                 var operation = new ObjectReplicationPolicyCreateOrUpdateOperation(ArmClient, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -133,13 +133,13 @@ namespace Azure.Management.Storage
         {
             Argument.AssertNotNullOrEmpty(objectReplicationPolicyId, nameof(objectReplicationPolicyId));
 
-            using var scope = _clientDiagnostics.CreateScope("ObjectReplicationPolicyCollection.Get");
+            using var scope = _objectReplicationPolicyClientDiagnostics.CreateScope("ObjectReplicationPolicyCollection.Get");
             scope.Start();
             try
             {
-                var response = _objectReplicationPoliciesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, objectReplicationPolicyId, cancellationToken);
+                var response = _objectReplicationPolicyRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, objectReplicationPolicyId, cancellationToken);
                 if (response.Value == null)
-                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                    throw _objectReplicationPolicyClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new ObjectReplicationPolicy(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -161,13 +161,13 @@ namespace Azure.Management.Storage
         {
             Argument.AssertNotNullOrEmpty(objectReplicationPolicyId, nameof(objectReplicationPolicyId));
 
-            using var scope = _clientDiagnostics.CreateScope("ObjectReplicationPolicyCollection.Get");
+            using var scope = _objectReplicationPolicyClientDiagnostics.CreateScope("ObjectReplicationPolicyCollection.Get");
             scope.Start();
             try
             {
-                var response = await _objectReplicationPoliciesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, objectReplicationPolicyId, cancellationToken).ConfigureAwait(false);
+                var response = await _objectReplicationPolicyRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, objectReplicationPolicyId, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                    throw await _objectReplicationPolicyClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new ObjectReplicationPolicy(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -186,11 +186,11 @@ namespace Azure.Management.Storage
         {
             Argument.AssertNotNullOrEmpty(objectReplicationPolicyId, nameof(objectReplicationPolicyId));
 
-            using var scope = _clientDiagnostics.CreateScope("ObjectReplicationPolicyCollection.GetIfExists");
+            using var scope = _objectReplicationPolicyClientDiagnostics.CreateScope("ObjectReplicationPolicyCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _objectReplicationPoliciesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, objectReplicationPolicyId, cancellationToken: cancellationToken);
+                var response = _objectReplicationPolicyRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, objectReplicationPolicyId, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<ObjectReplicationPolicy>(null, response.GetRawResponse());
                 return Response.FromValue(new ObjectReplicationPolicy(ArmClient, response.Value), response.GetRawResponse());
@@ -211,11 +211,11 @@ namespace Azure.Management.Storage
         {
             Argument.AssertNotNullOrEmpty(objectReplicationPolicyId, nameof(objectReplicationPolicyId));
 
-            using var scope = _clientDiagnostics.CreateScope("ObjectReplicationPolicyCollection.GetIfExists");
+            using var scope = _objectReplicationPolicyClientDiagnostics.CreateScope("ObjectReplicationPolicyCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _objectReplicationPoliciesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, objectReplicationPolicyId, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _objectReplicationPolicyRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, objectReplicationPolicyId, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<ObjectReplicationPolicy>(null, response.GetRawResponse());
                 return Response.FromValue(new ObjectReplicationPolicy(ArmClient, response.Value), response.GetRawResponse());
@@ -236,7 +236,7 @@ namespace Azure.Management.Storage
         {
             Argument.AssertNotNullOrEmpty(objectReplicationPolicyId, nameof(objectReplicationPolicyId));
 
-            using var scope = _clientDiagnostics.CreateScope("ObjectReplicationPolicyCollection.Exists");
+            using var scope = _objectReplicationPolicyClientDiagnostics.CreateScope("ObjectReplicationPolicyCollection.Exists");
             scope.Start();
             try
             {
@@ -259,7 +259,7 @@ namespace Azure.Management.Storage
         {
             Argument.AssertNotNullOrEmpty(objectReplicationPolicyId, nameof(objectReplicationPolicyId));
 
-            using var scope = _clientDiagnostics.CreateScope("ObjectReplicationPolicyCollection.Exists");
+            using var scope = _objectReplicationPolicyClientDiagnostics.CreateScope("ObjectReplicationPolicyCollection.Exists");
             scope.Start();
             try
             {
@@ -283,11 +283,11 @@ namespace Azure.Management.Storage
         {
             Page<ObjectReplicationPolicy> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("ObjectReplicationPolicyCollection.GetAll");
+                using var scope = _objectReplicationPolicyClientDiagnostics.CreateScope("ObjectReplicationPolicyCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _objectReplicationPoliciesRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken);
+                    var response = _objectReplicationPolicyRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new ObjectReplicationPolicy(ArmClient, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -309,11 +309,11 @@ namespace Azure.Management.Storage
         {
             async Task<Page<ObjectReplicationPolicy>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("ObjectReplicationPolicyCollection.GetAll");
+                using var scope = _objectReplicationPolicyClientDiagnostics.CreateScope("ObjectReplicationPolicyCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _objectReplicationPoliciesRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _objectReplicationPolicyRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new ObjectReplicationPolicy(ArmClient, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)

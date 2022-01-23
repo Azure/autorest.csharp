@@ -23,8 +23,8 @@ namespace Azure.Management.Storage
     /// <summary> A class representing collection of BlobContainer and their operations over its parent. </summary>
     public partial class BlobContainerCollection : ArmCollection, IEnumerable<BlobContainer>, IAsyncEnumerable<BlobContainer>
     {
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly BlobContainersRestOperations _blobContainersRestClient;
+        private readonly ClientDiagnostics _blobContainerClientDiagnostics;
+        private readonly BlobContainersRestOperations _blobContainerRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="BlobContainerCollection"/> class for mocking. </summary>
         protected BlobContainerCollection()
@@ -35,9 +35,9 @@ namespace Azure.Management.Storage
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal BlobContainerCollection(ArmResource parent) : base(parent)
         {
-            _clientDiagnostics = new ClientDiagnostics("Azure.Management.Storage", BlobContainer.ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(BlobContainer.ResourceType, out string apiVersion);
-            _blobContainersRestClient = new BlobContainersRestOperations(_clientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, apiVersion);
+            _blobContainerClientDiagnostics = new ClientDiagnostics("Azure.Management.Storage", BlobContainer.ResourceType.Namespace, DiagnosticOptions);
+            ArmClient.TryGetApiVersion(BlobContainer.ResourceType, out string blobContainerApiVersion);
+            _blobContainerRestClient = new BlobContainersRestOperations(_blobContainerClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, blobContainerApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -69,11 +69,11 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(blobContainer));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("BlobContainerCollection.CreateOrUpdate");
+            using var scope = _blobContainerClientDiagnostics.CreateScope("BlobContainerCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _blobContainersRestClient.Create(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, containerName, blobContainer, cancellationToken);
+                var response = _blobContainerRestClient.Create(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, containerName, blobContainer, cancellationToken);
                 var operation = new BlobContainerCreateOrUpdateOperation(ArmClient, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
@@ -104,11 +104,11 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(blobContainer));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("BlobContainerCollection.CreateOrUpdate");
+            using var scope = _blobContainerClientDiagnostics.CreateScope("BlobContainerCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _blobContainersRestClient.CreateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, containerName, blobContainer, cancellationToken).ConfigureAwait(false);
+                var response = await _blobContainerRestClient.CreateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, containerName, blobContainer, cancellationToken).ConfigureAwait(false);
                 var operation = new BlobContainerCreateOrUpdateOperation(ArmClient, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -133,13 +133,13 @@ namespace Azure.Management.Storage
         {
             Argument.AssertNotNullOrEmpty(containerName, nameof(containerName));
 
-            using var scope = _clientDiagnostics.CreateScope("BlobContainerCollection.Get");
+            using var scope = _blobContainerClientDiagnostics.CreateScope("BlobContainerCollection.Get");
             scope.Start();
             try
             {
-                var response = _blobContainersRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, containerName, cancellationToken);
+                var response = _blobContainerRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, containerName, cancellationToken);
                 if (response.Value == null)
-                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                    throw _blobContainerClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new BlobContainer(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -161,13 +161,13 @@ namespace Azure.Management.Storage
         {
             Argument.AssertNotNullOrEmpty(containerName, nameof(containerName));
 
-            using var scope = _clientDiagnostics.CreateScope("BlobContainerCollection.Get");
+            using var scope = _blobContainerClientDiagnostics.CreateScope("BlobContainerCollection.Get");
             scope.Start();
             try
             {
-                var response = await _blobContainersRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, containerName, cancellationToken).ConfigureAwait(false);
+                var response = await _blobContainerRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, containerName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                    throw await _blobContainerClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new BlobContainer(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -186,11 +186,11 @@ namespace Azure.Management.Storage
         {
             Argument.AssertNotNullOrEmpty(containerName, nameof(containerName));
 
-            using var scope = _clientDiagnostics.CreateScope("BlobContainerCollection.GetIfExists");
+            using var scope = _blobContainerClientDiagnostics.CreateScope("BlobContainerCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _blobContainersRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, containerName, cancellationToken: cancellationToken);
+                var response = _blobContainerRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, containerName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<BlobContainer>(null, response.GetRawResponse());
                 return Response.FromValue(new BlobContainer(ArmClient, response.Value), response.GetRawResponse());
@@ -211,11 +211,11 @@ namespace Azure.Management.Storage
         {
             Argument.AssertNotNullOrEmpty(containerName, nameof(containerName));
 
-            using var scope = _clientDiagnostics.CreateScope("BlobContainerCollection.GetIfExists");
+            using var scope = _blobContainerClientDiagnostics.CreateScope("BlobContainerCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _blobContainersRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, containerName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _blobContainerRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, containerName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<BlobContainer>(null, response.GetRawResponse());
                 return Response.FromValue(new BlobContainer(ArmClient, response.Value), response.GetRawResponse());
@@ -236,7 +236,7 @@ namespace Azure.Management.Storage
         {
             Argument.AssertNotNullOrEmpty(containerName, nameof(containerName));
 
-            using var scope = _clientDiagnostics.CreateScope("BlobContainerCollection.Exists");
+            using var scope = _blobContainerClientDiagnostics.CreateScope("BlobContainerCollection.Exists");
             scope.Start();
             try
             {
@@ -259,7 +259,7 @@ namespace Azure.Management.Storage
         {
             Argument.AssertNotNullOrEmpty(containerName, nameof(containerName));
 
-            using var scope = _clientDiagnostics.CreateScope("BlobContainerCollection.Exists");
+            using var scope = _blobContainerClientDiagnostics.CreateScope("BlobContainerCollection.Exists");
             scope.Start();
             try
             {
@@ -286,11 +286,11 @@ namespace Azure.Management.Storage
         {
             Page<BlobContainer> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("BlobContainerCollection.GetAll");
+                using var scope = _blobContainerClientDiagnostics.CreateScope("BlobContainerCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _blobContainersRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, pageSizeHint, filter, include, cancellationToken: cancellationToken);
+                    var response = _blobContainerRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, pageSizeHint, filter, include, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new BlobContainer(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -301,11 +301,11 @@ namespace Azure.Management.Storage
             }
             Page<BlobContainer> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("BlobContainerCollection.GetAll");
+                using var scope = _blobContainerClientDiagnostics.CreateScope("BlobContainerCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _blobContainersRestClient.ListNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, pageSizeHint, filter, include, cancellationToken: cancellationToken);
+                    var response = _blobContainerRestClient.ListNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, pageSizeHint, filter, include, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new BlobContainer(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -330,11 +330,11 @@ namespace Azure.Management.Storage
         {
             async Task<Page<BlobContainer>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("BlobContainerCollection.GetAll");
+                using var scope = _blobContainerClientDiagnostics.CreateScope("BlobContainerCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _blobContainersRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, pageSizeHint, filter, include, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _blobContainerRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, pageSizeHint, filter, include, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new BlobContainer(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -345,11 +345,11 @@ namespace Azure.Management.Storage
             }
             async Task<Page<BlobContainer>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("BlobContainerCollection.GetAll");
+                using var scope = _blobContainerClientDiagnostics.CreateScope("BlobContainerCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _blobContainersRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, pageSizeHint, filter, include, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _blobContainerRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, pageSizeHint, filter, include, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new BlobContainer(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
