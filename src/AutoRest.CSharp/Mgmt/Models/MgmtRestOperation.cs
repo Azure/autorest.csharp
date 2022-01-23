@@ -73,6 +73,9 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         private static Resource? GetResourceMatch(MgmtRestClient restClient, RestClientMethod method, RequestPath requestPath)
         {
+            if (restClient.Resources.Count == 1)
+                return restClient.Resources[0];
+
             foreach (var resource in restClient.Resources)
             {
                 if (resource.RequestPaths.Any(path => { return DoesPathMatch(method, path, requestPath); }))
@@ -87,17 +90,27 @@ namespace AutoRest.CSharp.Mgmt.Models
             if (path == requestPath)
                 return true;
 
-            //check for a list by an ancestor
-            var lastSegment = requestPath[requestPath.Count - 1];
-            if (path.Count >= 2 && requestPath.Count < path.Count && lastSegment.IsConstant && path[path.Count - 2] == lastSegment)
-                return true;
+            var httpMethod = method.Operation.GetHttpMethod();
+
+            //check for a list by an ancestor, for path we need to check - 2 for normal and - 4 for tuple
+            var requestLastSegment = requestPath[requestPath.Count - 1];
+            if (path.Count >= 2 && requestPath.Count < path.Count && requestLastSegment.IsConstant)
+            {
+                if (path[path.Count - 2] == requestLastSegment || (httpMethod == HttpMethod.Get && path[path.Count - 4] == requestLastSegment))
+                    return true;
+            }
 
             if (requestPath.Count < 2)
                 return false;
 
             var secondToLastSegment = requestPath[requestPath.Count - 2];
+            var pathLastSegement = path[path.Count - 1];
             //check for single value methods after the GET path which are typically POST methods
-            if (path.Count == requestPath.Count - 1 && lastSegment.IsConstant && path[path.Count - 1] == secondToLastSegment)
+            if (path.Count == requestPath.Count - 1 && requestLastSegment.IsConstant && pathLastSegement == secondToLastSegment)
+                return true;
+
+            //sometimes for singletons the POST methods show up at the same level
+            if (path.Count == requestPath.Count && requestLastSegment.IsConstant && pathLastSegement.IsConstant && secondToLastSegment == path[path.Count - 2])
                 return true;
 
             //catch check name availability where the provider ending matches
