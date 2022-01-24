@@ -116,7 +116,13 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             var resourceType = operation.GetRequestPath(context).GetResourceType(context.Configuration.MgmtConfiguration);
             Dictionary<string, Resource> candidates = new Dictionary<string, Resource>();
-            foreach (var candidate in context.Library.ArmResources.Where(resource => resource.ResourceType == resourceType))
+            foreach (var candidate in context.Library.ArmResources.Where(resource =>
+            {
+                if (resourceType[resourceType.Count - 1].IsConstant)
+                    return resource.ResourceType == resourceType;
+
+                return DoAllButLastItemMatch(resourceType, resource.ResourceType);
+            }))
             {
                 candidates.TryAdd(candidate.ResourceName, candidate);
             }
@@ -127,6 +133,19 @@ namespace AutoRest.CSharp.Mgmt.Output
                 return candidates.Values.First();
 
             throw new InvalidOperationException($"Found more than 1 candidate for {resourceType}, results were ({string.Join(',', candidates.Values.Select(r => r.ResourceName))})");
+        }
+
+        private static bool DoAllButLastItemMatch(ResourceTypeSegment resourceType1, ResourceTypeSegment resourceType2)
+        {
+            if (resourceType1.Count != resourceType2.Count)
+                return false;
+
+            for (int i = 0; i < resourceType1.Count - 1; i++)
+            {
+                if (resourceType1[i] != resourceType2[i])
+                    return false;
+            }
+            return true;
         }
 
         private IEnumerable<MgmtRestClient>? _restClients;

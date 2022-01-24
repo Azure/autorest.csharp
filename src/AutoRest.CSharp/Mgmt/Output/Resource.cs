@@ -335,7 +335,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         }
 
         private MgmtRestClient? _myRestClient;
-        public MgmtRestClient MyRestClient => _myRestClient ??= RestClients.First(client => client.Resources.Any(resource => resource.ResourceName == ResourceName));
+        public MgmtRestClient MyRestClient => _myRestClient ??= RestClients.FirstOrDefault(client => client.Resources.Any(resource => resource.ResourceName == ResourceName)) ?? RestClients.First();
 
         private IEnumerable<MgmtRestClient>? _otherRestClients;
         public IEnumerable<MgmtRestClient> OtherRestClients => _otherRestClients ??= RestClients.Where(client => client != MyRestClient);
