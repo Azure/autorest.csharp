@@ -15,7 +15,6 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
-using MgmtOperations.Models;
 
 namespace MgmtOperations
 {
@@ -29,7 +28,7 @@ namespace MgmtOperations
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly ClientDiagnostics _availabilitySetGrandChildClientDiagnostics;
         private readonly AvailabilitySetGrandChildRestOperations _availabilitySetGrandChildRestClient;
         private readonly AvailabilitySetGrandChildData _data;
 
@@ -52,9 +51,9 @@ namespace MgmtOperations
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal AvailabilitySetGrandChild(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
         {
-            _clientDiagnostics = new ClientDiagnostics("MgmtOperations", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string apiVersion);
-            _availabilitySetGrandChildRestClient = new AvailabilitySetGrandChildRestOperations(_clientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, apiVersion);
+            _availabilitySetGrandChildClientDiagnostics = new ClientDiagnostics("MgmtOperations", ResourceType.Namespace, DiagnosticOptions);
+            ArmClient.TryGetApiVersion(ResourceType, out string availabilitySetGrandChildApiVersion);
+            _availabilitySetGrandChildRestClient = new AvailabilitySetGrandChildRestOperations(_availabilitySetGrandChildClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, availabilitySetGrandChildApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -91,13 +90,13 @@ namespace MgmtOperations
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<AvailabilitySetGrandChild>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChild.Get");
+            using var scope = _availabilitySetGrandChildClientDiagnostics.CreateScope("AvailabilitySetGrandChild.Get");
             scope.Start();
             try
             {
                 var response = await _availabilitySetGrandChildRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                    throw await _availabilitySetGrandChildClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new AvailabilitySetGrandChild(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -114,13 +113,13 @@ namespace MgmtOperations
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<AvailabilitySetGrandChild> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChild.Get");
+            using var scope = _availabilitySetGrandChildClientDiagnostics.CreateScope("AvailabilitySetGrandChild.Get");
             scope.Start();
             try
             {
                 var response = _availabilitySetGrandChildRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, cancellationToken);
                 if (response.Value == null)
-                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                    throw _availabilitySetGrandChildClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new AvailabilitySetGrandChild(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -135,7 +134,7 @@ namespace MgmtOperations
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
         public async virtual Task<IEnumerable<AzureLocation>> GetAvailableLocationsAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChild.GetAvailableLocations");
+            using var scope = _availabilitySetGrandChildClientDiagnostics.CreateScope("AvailabilitySetGrandChild.GetAvailableLocations");
             scope.Start();
             try
             {
@@ -153,7 +152,7 @@ namespace MgmtOperations
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
         public virtual IEnumerable<AzureLocation> GetAvailableLocations(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChild.GetAvailableLocations");
+            using var scope = _availabilitySetGrandChildClientDiagnostics.CreateScope("AvailabilitySetGrandChild.GetAvailableLocations");
             scope.Start();
             try
             {
@@ -175,7 +174,7 @@ namespace MgmtOperations
         {
             Argument.AssertNotNullOrWhiteSpace(key, nameof(key));
 
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChild.AddTag");
+            using var scope = _availabilitySetGrandChildClientDiagnostics.CreateScope("AvailabilitySetGrandChild.AddTag");
             scope.Start();
             try
             {
@@ -201,7 +200,7 @@ namespace MgmtOperations
         {
             Argument.AssertNotNullOrWhiteSpace(key, nameof(key));
 
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChild.AddTag");
+            using var scope = _availabilitySetGrandChildClientDiagnostics.CreateScope("AvailabilitySetGrandChild.AddTag");
             scope.Start();
             try
             {
@@ -229,7 +228,7 @@ namespace MgmtOperations
                 throw new ArgumentNullException(nameof(tags), $"{nameof(tags)} provided cannot be null.");
             }
 
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChild.SetTags");
+            using var scope = _availabilitySetGrandChildClientDiagnostics.CreateScope("AvailabilitySetGrandChild.SetTags");
             scope.Start();
             try
             {
@@ -258,7 +257,7 @@ namespace MgmtOperations
                 throw new ArgumentNullException(nameof(tags), $"{nameof(tags)} provided cannot be null.");
             }
 
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChild.SetTags");
+            using var scope = _availabilitySetGrandChildClientDiagnostics.CreateScope("AvailabilitySetGrandChild.SetTags");
             scope.Start();
             try
             {
@@ -284,7 +283,7 @@ namespace MgmtOperations
         {
             Argument.AssertNotNullOrWhiteSpace(key, nameof(key));
 
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChild.RemoveTag");
+            using var scope = _availabilitySetGrandChildClientDiagnostics.CreateScope("AvailabilitySetGrandChild.RemoveTag");
             scope.Start();
             try
             {
@@ -309,7 +308,7 @@ namespace MgmtOperations
         {
             Argument.AssertNotNullOrWhiteSpace(key, nameof(key));
 
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChild.RemoveTag");
+            using var scope = _availabilitySetGrandChildClientDiagnostics.CreateScope("AvailabilitySetGrandChild.RemoveTag");
             scope.Start();
             try
             {

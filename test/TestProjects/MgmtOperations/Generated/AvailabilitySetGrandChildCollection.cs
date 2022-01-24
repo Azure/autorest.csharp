@@ -23,7 +23,7 @@ namespace MgmtOperations
     /// <summary> A class representing collection of AvailabilitySetGrandChild and their operations over its parent. </summary>
     public partial class AvailabilitySetGrandChildCollection : ArmCollection, IEnumerable<AvailabilitySetGrandChild>, IAsyncEnumerable<AvailabilitySetGrandChild>
     {
-        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly ClientDiagnostics _availabilitySetGrandChildClientDiagnostics;
         private readonly AvailabilitySetGrandChildRestOperations _availabilitySetGrandChildRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="AvailabilitySetGrandChildCollection"/> class for mocking. </summary>
@@ -35,9 +35,9 @@ namespace MgmtOperations
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal AvailabilitySetGrandChildCollection(ArmResource parent) : base(parent)
         {
-            _clientDiagnostics = new ClientDiagnostics("MgmtOperations", AvailabilitySetGrandChild.ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(AvailabilitySetGrandChild.ResourceType, out string apiVersion);
-            _availabilitySetGrandChildRestClient = new AvailabilitySetGrandChildRestOperations(_clientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, apiVersion);
+            _availabilitySetGrandChildClientDiagnostics = new ClientDiagnostics("MgmtOperations", AvailabilitySetGrandChild.ResourceType.Namespace, DiagnosticOptions);
+            ArmClient.TryGetApiVersion(AvailabilitySetGrandChild.ResourceType, out string availabilitySetGrandChildApiVersion);
+            _availabilitySetGrandChildRestClient = new AvailabilitySetGrandChildRestOperations(_availabilitySetGrandChildClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, availabilitySetGrandChildApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -69,7 +69,7 @@ namespace MgmtOperations
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChildCollection.CreateOrUpdate");
+            using var scope = _availabilitySetGrandChildClientDiagnostics.CreateScope("AvailabilitySetGrandChildCollection.CreateOrUpdate");
             scope.Start();
             try
             {
@@ -104,7 +104,7 @@ namespace MgmtOperations
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChildCollection.CreateOrUpdate");
+            using var scope = _availabilitySetGrandChildClientDiagnostics.CreateScope("AvailabilitySetGrandChildCollection.CreateOrUpdate");
             scope.Start();
             try
             {
@@ -133,13 +133,13 @@ namespace MgmtOperations
         {
             Argument.AssertNotNullOrEmpty(availabilitySetGrandChildName, nameof(availabilitySetGrandChildName));
 
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChildCollection.Get");
+            using var scope = _availabilitySetGrandChildClientDiagnostics.CreateScope("AvailabilitySetGrandChildCollection.Get");
             scope.Start();
             try
             {
                 var response = _availabilitySetGrandChildRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, availabilitySetGrandChildName, cancellationToken);
                 if (response.Value == null)
-                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                    throw _availabilitySetGrandChildClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new AvailabilitySetGrandChild(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -161,13 +161,13 @@ namespace MgmtOperations
         {
             Argument.AssertNotNullOrEmpty(availabilitySetGrandChildName, nameof(availabilitySetGrandChildName));
 
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChildCollection.Get");
+            using var scope = _availabilitySetGrandChildClientDiagnostics.CreateScope("AvailabilitySetGrandChildCollection.Get");
             scope.Start();
             try
             {
                 var response = await _availabilitySetGrandChildRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, availabilitySetGrandChildName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                    throw await _availabilitySetGrandChildClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new AvailabilitySetGrandChild(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -186,7 +186,7 @@ namespace MgmtOperations
         {
             Argument.AssertNotNullOrEmpty(availabilitySetGrandChildName, nameof(availabilitySetGrandChildName));
 
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChildCollection.GetIfExists");
+            using var scope = _availabilitySetGrandChildClientDiagnostics.CreateScope("AvailabilitySetGrandChildCollection.GetIfExists");
             scope.Start();
             try
             {
@@ -211,7 +211,7 @@ namespace MgmtOperations
         {
             Argument.AssertNotNullOrEmpty(availabilitySetGrandChildName, nameof(availabilitySetGrandChildName));
 
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChildCollection.GetIfExists");
+            using var scope = _availabilitySetGrandChildClientDiagnostics.CreateScope("AvailabilitySetGrandChildCollection.GetIfExists");
             scope.Start();
             try
             {
@@ -236,7 +236,7 @@ namespace MgmtOperations
         {
             Argument.AssertNotNullOrEmpty(availabilitySetGrandChildName, nameof(availabilitySetGrandChildName));
 
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChildCollection.Exists");
+            using var scope = _availabilitySetGrandChildClientDiagnostics.CreateScope("AvailabilitySetGrandChildCollection.Exists");
             scope.Start();
             try
             {
@@ -259,7 +259,7 @@ namespace MgmtOperations
         {
             Argument.AssertNotNullOrEmpty(availabilitySetGrandChildName, nameof(availabilitySetGrandChildName));
 
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChildCollection.Exists");
+            using var scope = _availabilitySetGrandChildClientDiagnostics.CreateScope("AvailabilitySetGrandChildCollection.Exists");
             scope.Start();
             try
             {
@@ -283,7 +283,7 @@ namespace MgmtOperations
         {
             Page<AvailabilitySetGrandChild> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChildCollection.GetAll");
+                using var scope = _availabilitySetGrandChildClientDiagnostics.CreateScope("AvailabilitySetGrandChildCollection.GetAll");
                 scope.Start();
                 try
                 {
@@ -309,7 +309,7 @@ namespace MgmtOperations
         {
             async Task<Page<AvailabilitySetGrandChild>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChildCollection.GetAll");
+                using var scope = _availabilitySetGrandChildClientDiagnostics.CreateScope("AvailabilitySetGrandChildCollection.GetAll");
                 scope.Start();
                 try
                 {

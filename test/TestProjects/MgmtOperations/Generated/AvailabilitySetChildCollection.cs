@@ -23,7 +23,7 @@ namespace MgmtOperations
     /// <summary> A class representing collection of AvailabilitySetChild and their operations over its parent. </summary>
     public partial class AvailabilitySetChildCollection : ArmCollection, IEnumerable<AvailabilitySetChild>, IAsyncEnumerable<AvailabilitySetChild>
     {
-        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly ClientDiagnostics _availabilitySetChildClientDiagnostics;
         private readonly AvailabilitySetChildRestOperations _availabilitySetChildRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="AvailabilitySetChildCollection"/> class for mocking. </summary>
@@ -35,9 +35,9 @@ namespace MgmtOperations
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal AvailabilitySetChildCollection(ArmResource parent) : base(parent)
         {
-            _clientDiagnostics = new ClientDiagnostics("MgmtOperations", AvailabilitySetChild.ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(AvailabilitySetChild.ResourceType, out string apiVersion);
-            _availabilitySetChildRestClient = new AvailabilitySetChildRestOperations(_clientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, apiVersion);
+            _availabilitySetChildClientDiagnostics = new ClientDiagnostics("MgmtOperations", AvailabilitySetChild.ResourceType.Namespace, DiagnosticOptions);
+            ArmClient.TryGetApiVersion(AvailabilitySetChild.ResourceType, out string availabilitySetChildApiVersion);
+            _availabilitySetChildRestClient = new AvailabilitySetChildRestOperations(_availabilitySetChildClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, availabilitySetChildApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -69,7 +69,7 @@ namespace MgmtOperations
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetChildCollection.CreateOrUpdate");
+            using var scope = _availabilitySetChildClientDiagnostics.CreateScope("AvailabilitySetChildCollection.CreateOrUpdate");
             scope.Start();
             try
             {
@@ -104,7 +104,7 @@ namespace MgmtOperations
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetChildCollection.CreateOrUpdate");
+            using var scope = _availabilitySetChildClientDiagnostics.CreateScope("AvailabilitySetChildCollection.CreateOrUpdate");
             scope.Start();
             try
             {
@@ -133,13 +133,13 @@ namespace MgmtOperations
         {
             Argument.AssertNotNullOrEmpty(availabilitySetChildName, nameof(availabilitySetChildName));
 
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetChildCollection.Get");
+            using var scope = _availabilitySetChildClientDiagnostics.CreateScope("AvailabilitySetChildCollection.Get");
             scope.Start();
             try
             {
                 var response = _availabilitySetChildRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, availabilitySetChildName, cancellationToken);
                 if (response.Value == null)
-                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                    throw _availabilitySetChildClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new AvailabilitySetChild(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -161,13 +161,13 @@ namespace MgmtOperations
         {
             Argument.AssertNotNullOrEmpty(availabilitySetChildName, nameof(availabilitySetChildName));
 
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetChildCollection.Get");
+            using var scope = _availabilitySetChildClientDiagnostics.CreateScope("AvailabilitySetChildCollection.Get");
             scope.Start();
             try
             {
                 var response = await _availabilitySetChildRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, availabilitySetChildName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                    throw await _availabilitySetChildClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new AvailabilitySetChild(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -186,7 +186,7 @@ namespace MgmtOperations
         {
             Argument.AssertNotNullOrEmpty(availabilitySetChildName, nameof(availabilitySetChildName));
 
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetChildCollection.GetIfExists");
+            using var scope = _availabilitySetChildClientDiagnostics.CreateScope("AvailabilitySetChildCollection.GetIfExists");
             scope.Start();
             try
             {
@@ -211,7 +211,7 @@ namespace MgmtOperations
         {
             Argument.AssertNotNullOrEmpty(availabilitySetChildName, nameof(availabilitySetChildName));
 
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetChildCollection.GetIfExists");
+            using var scope = _availabilitySetChildClientDiagnostics.CreateScope("AvailabilitySetChildCollection.GetIfExists");
             scope.Start();
             try
             {
@@ -236,7 +236,7 @@ namespace MgmtOperations
         {
             Argument.AssertNotNullOrEmpty(availabilitySetChildName, nameof(availabilitySetChildName));
 
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetChildCollection.Exists");
+            using var scope = _availabilitySetChildClientDiagnostics.CreateScope("AvailabilitySetChildCollection.Exists");
             scope.Start();
             try
             {
@@ -259,7 +259,7 @@ namespace MgmtOperations
         {
             Argument.AssertNotNullOrEmpty(availabilitySetChildName, nameof(availabilitySetChildName));
 
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetChildCollection.Exists");
+            using var scope = _availabilitySetChildClientDiagnostics.CreateScope("AvailabilitySetChildCollection.Exists");
             scope.Start();
             try
             {
@@ -283,7 +283,7 @@ namespace MgmtOperations
         {
             Page<AvailabilitySetChild> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("AvailabilitySetChildCollection.GetAll");
+                using var scope = _availabilitySetChildClientDiagnostics.CreateScope("AvailabilitySetChildCollection.GetAll");
                 scope.Start();
                 try
                 {
@@ -309,7 +309,7 @@ namespace MgmtOperations
         {
             async Task<Page<AvailabilitySetChild>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("AvailabilitySetChildCollection.GetAll");
+                using var scope = _availabilitySetChildClientDiagnostics.CreateScope("AvailabilitySetChildCollection.GetAll");
                 scope.Start();
                 try
                 {

@@ -19,10 +19,8 @@ namespace MgmtOperations
     /// <summary> An internal class to add extension methods to. </summary>
     internal partial class ResourceGroupExtensionClient : ArmResource
     {
-        private ClientDiagnostics _availabilitySetsClientDiagnostics;
-        private AvailabilitySetsRestOperations _availabilitySetsRestClient;
-
-        private static string _defaultRpNamespace = ClientDiagnostics.GetResourceProviderNamespace(typeof(ResourceGroupExtensionClient).Assembly);
+        private ClientDiagnostics _availabilitySetClientDiagnostics;
+        private AvailabilitySetsRestOperations _availabilitySetRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="ResourceGroupExtensionClient"/> class. </summary>
         /// <param name="armClient"> The client parameters to use in these operations. </param>
@@ -31,8 +29,8 @@ namespace MgmtOperations
         {
         }
 
-        private ClientDiagnostics AvailabilitySetsClientDiagnostics => _availabilitySetsClientDiagnostics ??= new ClientDiagnostics("MgmtOperations", AvailabilitySet.ResourceType.Namespace, DiagnosticOptions);
-        private AvailabilitySetsRestOperations AvailabilitySetsRestClient => _availabilitySetsRestClient ??= new AvailabilitySetsRestOperations(AvailabilitySetsClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(AvailabilitySet.ResourceType));
+        private ClientDiagnostics AvailabilitySetClientDiagnostics => _availabilitySetClientDiagnostics ??= new ClientDiagnostics("MgmtOperations", AvailabilitySet.ResourceType.Namespace, DiagnosticOptions);
+        private AvailabilitySetsRestOperations AvailabilitySetRestClient => _availabilitySetRestClient ??= new AvailabilitySetsRestOperations(AvailabilitySetClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(AvailabilitySet.ResourceType));
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {
@@ -40,7 +38,7 @@ namespace MgmtOperations
             return apiVersion;
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/patchAvailabilitySets
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
         /// OperationId: AvailabilitySets_TestLROMethod
         /// <summary> Update an availability set. </summary>
@@ -55,12 +53,12 @@ namespace MgmtOperations
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = AvailabilitySetsClientDiagnostics.CreateScope("ResourceGroupExtensionClient.TestLROMethodAvailabilitySet");
+            using var scope = AvailabilitySetClientDiagnostics.CreateScope("ResourceGroupExtensionClient.TestLROMethodAvailabilitySet");
             scope.Start();
             try
             {
-                var response = await _availabilitySetsRestClient.TestLROMethodAsync(Id.SubscriptionId, Id.ResourceGroupName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new TestLROMethodAvailabilitySetOperation(AvailabilitySetsClientDiagnostics, Pipeline, AvailabilitySetsRestClient.CreateTestLROMethodRequest(Id.SubscriptionId, Id.ResourceGroupName, parameters).Request, response);
+                var response = await AvailabilitySetRestClient.TestLROMethodAsync(Id.SubscriptionId, Id.ResourceGroupName, parameters, cancellationToken).ConfigureAwait(false);
+                var operation = new TestLROMethodAvailabilitySetOperation(AvailabilitySetClientDiagnostics, Pipeline, AvailabilitySetRestClient.CreateTestLROMethodRequest(Id.SubscriptionId, Id.ResourceGroupName, parameters).Request, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -72,7 +70,7 @@ namespace MgmtOperations
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/patchAvailabilitySets
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
         /// OperationId: AvailabilitySets_TestLROMethod
         /// <summary> Update an availability set. </summary>
@@ -87,12 +85,12 @@ namespace MgmtOperations
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = AvailabilitySetsClientDiagnostics.CreateScope("ResourceGroupExtensionClient.TestLROMethodAvailabilitySet");
+            using var scope = AvailabilitySetClientDiagnostics.CreateScope("ResourceGroupExtensionClient.TestLROMethodAvailabilitySet");
             scope.Start();
             try
             {
-                var response = _availabilitySetsRestClient.TestLROMethod(Id.SubscriptionId, Id.ResourceGroupName, parameters, cancellationToken);
-                var operation = new TestLROMethodAvailabilitySetOperation(AvailabilitySetsClientDiagnostics, Pipeline, AvailabilitySetsRestClient.CreateTestLROMethodRequest(Id.SubscriptionId, Id.ResourceGroupName, parameters).Request, response);
+                var response = AvailabilitySetRestClient.TestLROMethod(Id.SubscriptionId, Id.ResourceGroupName, parameters, cancellationToken);
+                var operation = new TestLROMethodAvailabilitySetOperation(AvailabilitySetClientDiagnostics, Pipeline, AvailabilitySetRestClient.CreateTestLROMethodRequest(Id.SubscriptionId, Id.ResourceGroupName, parameters).Request, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
