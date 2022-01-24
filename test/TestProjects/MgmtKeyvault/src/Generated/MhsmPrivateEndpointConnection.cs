@@ -29,8 +29,8 @@ namespace MgmtKeyvault
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly MhsmPrivateEndpointConnectionsRestOperations _mHSMPrivateEndpointConnectionsRestClient;
+        private readonly ClientDiagnostics _mhsmPrivateEndpointConnectionClientDiagnostics;
+        private readonly MhsmPrivateEndpointConnectionsRestOperations _mhsmPrivateEndpointConnectionRestClient;
         private readonly MhsmPrivateEndpointConnectionData _data;
 
         /// <summary> Initializes a new instance of the <see cref="MhsmPrivateEndpointConnection"/> class for mocking. </summary>
@@ -52,9 +52,9 @@ namespace MgmtKeyvault
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal MhsmPrivateEndpointConnection(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
         {
-            _clientDiagnostics = new ClientDiagnostics("MgmtKeyvault", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string apiVersion);
-            _mHSMPrivateEndpointConnectionsRestClient = new MhsmPrivateEndpointConnectionsRestOperations(_clientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, apiVersion);
+            _mhsmPrivateEndpointConnectionClientDiagnostics = new ClientDiagnostics("MgmtKeyvault", ResourceType.Namespace, DiagnosticOptions);
+            ArmClient.TryGetApiVersion(ResourceType, out string mhsmPrivateEndpointConnectionApiVersion);
+            _mhsmPrivateEndpointConnectionRestClient = new MhsmPrivateEndpointConnectionsRestOperations(_mhsmPrivateEndpointConnectionClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, mhsmPrivateEndpointConnectionApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -91,13 +91,13 @@ namespace MgmtKeyvault
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<MhsmPrivateEndpointConnection>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MhsmPrivateEndpointConnection.Get");
+            using var scope = _mhsmPrivateEndpointConnectionClientDiagnostics.CreateScope("MhsmPrivateEndpointConnection.Get");
             scope.Start();
             try
             {
-                var response = await _mHSMPrivateEndpointConnectionsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _mhsmPrivateEndpointConnectionRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                    throw await _mhsmPrivateEndpointConnectionClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new MhsmPrivateEndpointConnection(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -114,13 +114,13 @@ namespace MgmtKeyvault
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<MhsmPrivateEndpointConnection> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MhsmPrivateEndpointConnection.Get");
+            using var scope = _mhsmPrivateEndpointConnectionClientDiagnostics.CreateScope("MhsmPrivateEndpointConnection.Get");
             scope.Start();
             try
             {
-                var response = _mHSMPrivateEndpointConnectionsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
+                var response = _mhsmPrivateEndpointConnectionRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
                 if (response.Value == null)
-                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                    throw _mhsmPrivateEndpointConnectionClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new MhsmPrivateEndpointConnection(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -135,7 +135,7 @@ namespace MgmtKeyvault
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
         public async virtual Task<IEnumerable<AzureLocation>> GetAvailableLocationsAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MhsmPrivateEndpointConnection.GetAvailableLocations");
+            using var scope = _mhsmPrivateEndpointConnectionClientDiagnostics.CreateScope("MhsmPrivateEndpointConnection.GetAvailableLocations");
             scope.Start();
             try
             {
@@ -153,7 +153,7 @@ namespace MgmtKeyvault
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
         public virtual IEnumerable<AzureLocation> GetAvailableLocations(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MhsmPrivateEndpointConnection.GetAvailableLocations");
+            using var scope = _mhsmPrivateEndpointConnectionClientDiagnostics.CreateScope("MhsmPrivateEndpointConnection.GetAvailableLocations");
             scope.Start();
             try
             {
@@ -174,12 +174,12 @@ namespace MgmtKeyvault
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<MhsmPrivateEndpointConnectionDeleteOperation> DeleteAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MhsmPrivateEndpointConnection.Delete");
+            using var scope = _mhsmPrivateEndpointConnectionClientDiagnostics.CreateScope("MhsmPrivateEndpointConnection.Delete");
             scope.Start();
             try
             {
-                var response = await _mHSMPrivateEndpointConnectionsRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
-                var operation = new MhsmPrivateEndpointConnectionDeleteOperation(_clientDiagnostics, Pipeline, _mHSMPrivateEndpointConnectionsRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name).Request, response);
+                var response = await _mhsmPrivateEndpointConnectionRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var operation = new MhsmPrivateEndpointConnectionDeleteOperation(_mhsmPrivateEndpointConnectionClientDiagnostics, Pipeline, _mhsmPrivateEndpointConnectionRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name).Request, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -199,12 +199,12 @@ namespace MgmtKeyvault
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual MhsmPrivateEndpointConnectionDeleteOperation Delete(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MhsmPrivateEndpointConnection.Delete");
+            using var scope = _mhsmPrivateEndpointConnectionClientDiagnostics.CreateScope("MhsmPrivateEndpointConnection.Delete");
             scope.Start();
             try
             {
-                var response = _mHSMPrivateEndpointConnectionsRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
-                var operation = new MhsmPrivateEndpointConnectionDeleteOperation(_clientDiagnostics, Pipeline, _mHSMPrivateEndpointConnectionsRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name).Request, response);
+                var response = _mhsmPrivateEndpointConnectionRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
+                var operation = new MhsmPrivateEndpointConnectionDeleteOperation(_mhsmPrivateEndpointConnectionClientDiagnostics, Pipeline, _mhsmPrivateEndpointConnectionRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name).Request, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
