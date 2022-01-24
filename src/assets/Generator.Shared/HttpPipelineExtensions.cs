@@ -24,12 +24,12 @@ namespace Azure.Core
                 await pipeline.SendAsync(message, cts.Token).ConfigureAwait(false);
             }
 
-            if (statusOption == ErrorOptions.NoThrow || !message.ResponseClassifier.IsErrorResponse(message))
+            if (!message.Response.IsError || statusOption == ErrorOptions.NoThrow)
             {
                 return message.Response;
             }
 
-            throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+            throw new RequestFailedException(message.Response);
         }
 
         public static Response ProcessMessage(this HttpPipeline pipeline, HttpMessage message, ClientDiagnostics clientDiagnostics, RequestContext? requestContext, CancellationToken cancellationToken = default)
@@ -45,12 +45,12 @@ namespace Azure.Core
                 pipeline.Send(message, cts.Token);
             }
 
-            if (statusOption == ErrorOptions.NoThrow || !message.ResponseClassifier.IsErrorResponse(message))
+            if (!message.Response.IsError || statusOption == ErrorOptions.NoThrow)
             {
                 return message.Response;
             }
 
-            throw clientDiagnostics.CreateRequestFailedException(message.Response);
+            throw new RequestFailedException(message.Response);
         }
 
         public static async ValueTask<Response<bool>> ProcessHeadAsBoolMessageAsync(this HttpPipeline pipeline, HttpMessage message, ClientDiagnostics clientDiagnostics, RequestContext? requestContext)
