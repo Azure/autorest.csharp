@@ -1455,7 +1455,7 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                var response = await _logAnalyticsRestClient.ExportRequestRateByIntervalAsync(Id.SubscriptionId, location, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await LogAnalyticsRestClient.ExportRequestRateByIntervalAsync(Id.SubscriptionId, location, parameters, cancellationToken).ConfigureAwait(false);
                 var operation = new ExportRequestRateByIntervalLogAnalyticOperation(LogAnalyticsClientDiagnostics, Pipeline, LogAnalyticsRestClient.CreateExportRequestRateByIntervalRequest(Id.SubscriptionId, location, parameters).Request, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -1490,7 +1490,7 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                var response = _logAnalyticsRestClient.ExportRequestRateByInterval(Id.SubscriptionId, location, parameters, cancellationToken);
+                var response = LogAnalyticsRestClient.ExportRequestRateByInterval(Id.SubscriptionId, location, parameters, cancellationToken);
                 var operation = new ExportRequestRateByIntervalLogAnalyticOperation(LogAnalyticsClientDiagnostics, Pipeline, LogAnalyticsRestClient.CreateExportRequestRateByIntervalRequest(Id.SubscriptionId, location, parameters).Request, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
@@ -1525,7 +1525,7 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                var response = await _logAnalyticsRestClient.ExportThrottledRequestsAsync(Id.SubscriptionId, location, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await LogAnalyticsRestClient.ExportThrottledRequestsAsync(Id.SubscriptionId, location, parameters, cancellationToken).ConfigureAwait(false);
                 var operation = new ExportThrottledRequestsLogAnalyticOperation(LogAnalyticsClientDiagnostics, Pipeline, LogAnalyticsRestClient.CreateExportThrottledRequestsRequest(Id.SubscriptionId, location, parameters).Request, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -1560,7 +1560,7 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                var response = _logAnalyticsRestClient.ExportThrottledRequests(Id.SubscriptionId, location, parameters, cancellationToken);
+                var response = LogAnalyticsRestClient.ExportThrottledRequests(Id.SubscriptionId, location, parameters, cancellationToken);
                 var operation = new ExportThrottledRequestsLogAnalyticOperation(LogAnalyticsClientDiagnostics, Pipeline, LogAnalyticsRestClient.CreateExportThrottledRequestsRequest(Id.SubscriptionId, location, parameters).Request, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
