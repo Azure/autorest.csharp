@@ -21,7 +21,7 @@ namespace NoTypeReplacement
         public static NoTypeReplacementModel1 GetNoTypeReplacementModel1(this ArmClient armClient, ResourceIdentifier id)
         {
             NoTypeReplacementModel1.ValidateResourceId(id);
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new NoTypeReplacementModel1(clientOptions, credential, uri, pipeline, id));
+            return new NoTypeReplacementModel1(armClient, id);
         }
         #endregion
 
@@ -33,7 +33,7 @@ namespace NoTypeReplacement
         public static NoTypeReplacementModel2 GetNoTypeReplacementModel2(this ArmClient armClient, ResourceIdentifier id)
         {
             NoTypeReplacementModel2.ValidateResourceId(id);
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new NoTypeReplacementModel2(clientOptions, credential, uri, pipeline, id));
+            return new NoTypeReplacementModel2(armClient, id);
         }
         #endregion
 
@@ -45,7 +45,7 @@ namespace NoTypeReplacement
         public static NoTypeReplacementModel3 GetNoTypeReplacementModel3(this ArmClient armClient, ResourceIdentifier id)
         {
             NoTypeReplacementModel3.ValidateResourceId(id);
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new NoTypeReplacementModel3(clientOptions, credential, uri, pipeline, id));
+            return new NoTypeReplacementModel3(armClient, id);
         }
         #endregion
     }

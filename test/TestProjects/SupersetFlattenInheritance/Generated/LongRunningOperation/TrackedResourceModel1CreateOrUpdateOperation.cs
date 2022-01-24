@@ -10,7 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager;
 using SupersetFlattenInheritance;
 
 namespace SupersetFlattenInheritance.Models
@@ -24,9 +24,9 @@ namespace SupersetFlattenInheritance.Models
         {
         }
 
-        internal TrackedResourceModel1CreateOrUpdateOperation(ArmResource operationsBase, Response<TrackedResourceModel1Data> response)
+        internal TrackedResourceModel1CreateOrUpdateOperation(ArmClient armClient, Response<TrackedResourceModel1Data> response)
         {
-            _operation = new OperationOrResponseInternals<TrackedResourceModel1>(Response.FromValue(new TrackedResourceModel1(operationsBase, response.Value), response.GetRawResponse()));
+            _operation = new OperationOrResponseInternals<TrackedResourceModel1>(Response.FromValue(new TrackedResourceModel1(armClient, response.Value), response.GetRawResponse()));
         }
 
         /// <inheritdoc />

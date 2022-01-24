@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager;
 using MgmtMultipleParentResource;
 
 namespace MgmtMultipleParentResource.Models
@@ -22,17 +22,17 @@ namespace MgmtMultipleParentResource.Models
     {
         private readonly OperationInternals<AnotherParent> _operation;
 
-        private readonly ArmResource _operationBase;
+        private readonly ArmClient _armClient;
 
         /// <summary> Initializes a new instance of AnotherParentUpdateOperation for mocking. </summary>
         protected AnotherParentUpdateOperation()
         {
         }
 
-        internal AnotherParentUpdateOperation(ArmResource operationsBase, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
+        internal AnotherParentUpdateOperation(ArmClient armClient, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
             _operation = new OperationInternals<AnotherParent>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "AnotherParentUpdateOperation");
-            _operationBase = operationsBase;
+            _armClient = armClient;
         }
 
         /// <inheritdoc />
@@ -66,14 +66,14 @@ namespace MgmtMultipleParentResource.Models
         {
             using var document = JsonDocument.Parse(response.ContentStream);
             var data = AnotherParentData.DeserializeAnotherParentData(document.RootElement);
-            return new AnotherParent(_operationBase, data);
+            return new AnotherParent(_armClient, data);
         }
 
         async ValueTask<AnotherParent> IOperationSource<AnotherParent>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
             var data = AnotherParentData.DeserializeAnotherParentData(document.RootElement);
-            return new AnotherParent(_operationBase, data);
+            return new AnotherParent(_armClient, data);
         }
     }
 }

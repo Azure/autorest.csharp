@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Management.Storage;
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager;
 
 namespace Azure.Management.Storage.Models
 {
@@ -25,9 +25,9 @@ namespace Azure.Management.Storage.Models
         {
         }
 
-        internal BlobInventoryPolicyCreateOrUpdateOperation(ArmResource operationsBase, Response<BlobInventoryPolicyData> response)
+        internal BlobInventoryPolicyCreateOrUpdateOperation(ArmClient armClient, Response<BlobInventoryPolicyData> response)
         {
-            _operation = new OperationOrResponseInternals<BlobInventoryPolicy>(Response.FromValue(new BlobInventoryPolicy(operationsBase, response.Value), response.GetRawResponse()));
+            _operation = new OperationOrResponseInternals<BlobInventoryPolicy>(Response.FromValue(new BlobInventoryPolicy(armClient, response.Value), response.GetRawResponse()));
         }
 
         /// <inheritdoc />

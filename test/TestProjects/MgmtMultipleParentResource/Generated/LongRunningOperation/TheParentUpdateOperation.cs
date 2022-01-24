@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager;
 using MgmtMultipleParentResource;
 
 namespace MgmtMultipleParentResource.Models
@@ -22,17 +22,17 @@ namespace MgmtMultipleParentResource.Models
     {
         private readonly OperationInternals<TheParent> _operation;
 
-        private readonly ArmResource _operationBase;
+        private readonly ArmClient _armClient;
 
         /// <summary> Initializes a new instance of TheParentUpdateOperation for mocking. </summary>
         protected TheParentUpdateOperation()
         {
         }
 
-        internal TheParentUpdateOperation(ArmResource operationsBase, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
+        internal TheParentUpdateOperation(ArmClient armClient, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
             _operation = new OperationInternals<TheParent>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "TheParentUpdateOperation");
-            _operationBase = operationsBase;
+            _armClient = armClient;
         }
 
         /// <inheritdoc />
@@ -66,14 +66,14 @@ namespace MgmtMultipleParentResource.Models
         {
             using var document = JsonDocument.Parse(response.ContentStream);
             var data = TheParentData.DeserializeTheParentData(document.RootElement);
-            return new TheParent(_operationBase, data);
+            return new TheParent(_armClient, data);
         }
 
         async ValueTask<TheParent> IOperationSource<TheParent>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
             var data = TheParentData.DeserializeTheParentData(document.RootElement);
-            return new TheParent(_operationBase, data);
+            return new TheParent(_armClient, data);
         }
     }
 }

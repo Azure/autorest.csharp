@@ -10,7 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager;
 using NoTypeReplacement;
 
 namespace NoTypeReplacement.Models
@@ -24,9 +24,9 @@ namespace NoTypeReplacement.Models
         {
         }
 
-        internal NoTypeReplacementModel2CreateOrUpdateOperation(ArmResource operationsBase, Response<NoTypeReplacementModel2Data> response)
+        internal NoTypeReplacementModel2CreateOrUpdateOperation(ArmClient armClient, Response<NoTypeReplacementModel2Data> response)
         {
-            _operation = new OperationOrResponseInternals<NoTypeReplacementModel2>(Response.FromValue(new NoTypeReplacementModel2(operationsBase, response.Value), response.GetRawResponse()));
+            _operation = new OperationOrResponseInternals<NoTypeReplacementModel2>(Response.FromValue(new NoTypeReplacementModel2(armClient, response.Value), response.GetRawResponse()));
         }
 
         /// <inheritdoc />

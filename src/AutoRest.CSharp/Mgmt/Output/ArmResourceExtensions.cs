@@ -11,12 +11,9 @@ namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class ArmResourceExtensions : MgmtExtensions
     {
-        public ArmResourceExtensions(IEnumerable<Operation> allOperations, BuildContext<MgmtOutputLibrary> context) : base(allOperations, "ArmResource", context)
+        public ArmResourceExtensions(IEnumerable<Operation> allOperations, BuildContext<MgmtOutputLibrary> context)
+            : base(allOperations, "ArmResource", context, "ArmResourceExtensions", RequestPath.Any)
         {
         }
-
-        protected override string DefaultName => "ArmResourceExtensions";
-
-        protected override RequestPath ContextualPath => RequestPath.Any;
     }
 }

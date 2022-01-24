@@ -10,7 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager;
 using SingletonResource;
 
 namespace SingletonResource.Models
@@ -24,9 +24,9 @@ namespace SingletonResource.Models
         {
         }
 
-        internal CarCreateOrUpdateOperation(ArmResource operationsBase, Response<CarData> response)
+        internal CarCreateOrUpdateOperation(ArmClient armClient, Response<CarData> response)
         {
-            _operation = new OperationOrResponseInternals<Car>(Response.FromValue(new Car(operationsBase, response.Value), response.GetRawResponse()));
+            _operation = new OperationOrResponseInternals<Car>(Response.FromValue(new Car(armClient, response.Value), response.GetRawResponse()));
         }
 
         /// <inheritdoc />

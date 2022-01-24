@@ -21,7 +21,7 @@ namespace MgmtParamOrdering
         public static AvailabilitySet GetAvailabilitySet(this ArmClient armClient, ResourceIdentifier id)
         {
             AvailabilitySet.ValidateResourceId(id);
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new AvailabilitySet(clientOptions, credential, uri, pipeline, id));
+            return new AvailabilitySet(armClient, id);
         }
         #endregion
 
@@ -33,7 +33,7 @@ namespace MgmtParamOrdering
         public static DedicatedHostGroup GetDedicatedHostGroup(this ArmClient armClient, ResourceIdentifier id)
         {
             DedicatedHostGroup.ValidateResourceId(id);
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new DedicatedHostGroup(clientOptions, credential, uri, pipeline, id));
+            return new DedicatedHostGroup(armClient, id);
         }
         #endregion
 
@@ -45,7 +45,7 @@ namespace MgmtParamOrdering
         public static DedicatedHost GetDedicatedHost(this ArmClient armClient, ResourceIdentifier id)
         {
             DedicatedHost.ValidateResourceId(id);
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new DedicatedHost(clientOptions, credential, uri, pipeline, id));
+            return new DedicatedHost(armClient, id);
         }
         #endregion
 
@@ -57,7 +57,7 @@ namespace MgmtParamOrdering
         public static VirtualMachineExtensionImage GetVirtualMachineExtensionImage(this ArmClient armClient, ResourceIdentifier id)
         {
             VirtualMachineExtensionImage.ValidateResourceId(id);
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new VirtualMachineExtensionImage(clientOptions, credential, uri, pipeline, id));
+            return new VirtualMachineExtensionImage(armClient, id);
         }
         #endregion
 
@@ -69,7 +69,7 @@ namespace MgmtParamOrdering
         public static EnvironmentContainerResource GetEnvironmentContainerResource(this ArmClient armClient, ResourceIdentifier id)
         {
             EnvironmentContainerResource.ValidateResourceId(id);
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new EnvironmentContainerResource(clientOptions, credential, uri, pipeline, id));
+            return new EnvironmentContainerResource(armClient, id);
         }
         #endregion
 
@@ -81,7 +81,7 @@ namespace MgmtParamOrdering
         public static Workspace GetWorkspace(this ArmClient armClient, ResourceIdentifier id)
         {
             Workspace.ValidateResourceId(id);
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new Workspace(clientOptions, credential, uri, pipeline, id));
+            return new Workspace(armClient, id);
         }
         #endregion
     }

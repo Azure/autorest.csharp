@@ -21,7 +21,7 @@ namespace ResourceRename
         public static SshPublicKeyInfo GetSshPublicKeyInfo(this ArmClient armClient, ResourceIdentifier id)
         {
             SshPublicKeyInfo.ValidateResourceId(id);
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new SshPublicKeyInfo(clientOptions, credential, uri, pipeline, id));
+            return new SshPublicKeyInfo(armClient, id);
         }
         #endregion
     }

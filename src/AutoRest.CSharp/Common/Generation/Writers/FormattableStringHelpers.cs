@@ -13,6 +13,14 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal static class FormattableStringHelpers
     {
+        public static FormattableString Join(this ICollection<FormattableString> fss, string separator)
+            => fss.Count switch
+            {
+                0 => $"",
+                1 => fss.First(),
+                _ => FormattableStringFactory.Create(string.Join(separator, Enumerable.Range(0, fss.Count).Select(i => $"{{{i}}}")), fss.ToArray<object>())
+            };
+
         public static FormattableString GetLiteralsFormattable(this ICollection<Parameter> parameters)
             => GetLiteralsFormattable(parameters.Select(p => p.Name), parameters.Count);
 

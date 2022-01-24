@@ -10,7 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager;
 using ResourceRename;
 
 namespace ResourceRename.Models
@@ -25,9 +25,9 @@ namespace ResourceRename.Models
         {
         }
 
-        internal SshPublicKeyInfoCreateOrUpdateOperation(ArmResource operationsBase, Response<SshPublicKeyInfoData> response)
+        internal SshPublicKeyInfoCreateOrUpdateOperation(ArmClient armClient, Response<SshPublicKeyInfoData> response)
         {
-            _operation = new OperationOrResponseInternals<SshPublicKeyInfo>(Response.FromValue(new SshPublicKeyInfo(operationsBase, response.Value), response.GetRawResponse()));
+            _operation = new OperationOrResponseInternals<SshPublicKeyInfo>(Response.FromValue(new SshPublicKeyInfo(armClient, response.Value), response.GetRawResponse()));
         }
 
         /// <inheritdoc />

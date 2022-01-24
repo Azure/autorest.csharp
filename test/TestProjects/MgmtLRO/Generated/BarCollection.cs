@@ -37,9 +37,9 @@ namespace MgmtLRO
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal BarCollection(ArmResource parent) : base(parent)
         {
-            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            ClientOptions.TryGetApiVersion(Bar.ResourceType, out string apiVersion);
-            _barsRestClient = new BarsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
+            _clientDiagnostics = new ClientDiagnostics("MgmtLRO", Bar.ResourceType.Namespace, DiagnosticOptions);
+            ArmClient.TryGetApiVersion(Bar.ResourceType, out string apiVersion);
+            _barsRestClient = new BarsRestOperations(_clientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, apiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -61,14 +61,11 @@ namespace MgmtLRO
         /// <param name="barName"> The name of the fake. </param>
         /// <param name="body"> The Bar to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="barName"/> is null or empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="barName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="barName"/> or <paramref name="body"/> is null. </exception>
         public virtual BarCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string barName, BarData body, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(barName))
-            {
-                throw new ArgumentException($"Parameter {nameof(barName)} cannot be null or empty", nameof(barName));
-            }
+            Argument.AssertNotNullOrEmpty(barName, nameof(barName));
             if (body == null)
             {
                 throw new ArgumentNullException(nameof(body));
@@ -79,7 +76,7 @@ namespace MgmtLRO
             try
             {
                 var response = _barsRestClient.Create(Id.SubscriptionId, Id.ResourceGroupName, barName, body, cancellationToken);
-                var operation = new BarCreateOrUpdateOperation(this, _clientDiagnostics, Pipeline, _barsRestClient.CreateCreateRequest(Id.SubscriptionId, Id.ResourceGroupName, barName, body).Request, response);
+                var operation = new BarCreateOrUpdateOperation(ArmClient, _clientDiagnostics, Pipeline, _barsRestClient.CreateCreateRequest(Id.SubscriptionId, Id.ResourceGroupName, barName, body).Request, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -99,14 +96,11 @@ namespace MgmtLRO
         /// <param name="barName"> The name of the fake. </param>
         /// <param name="body"> The Bar to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="barName"/> is null or empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="barName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="barName"/> or <paramref name="body"/> is null. </exception>
         public async virtual Task<BarCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string barName, BarData body, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(barName))
-            {
-                throw new ArgumentException($"Parameter {nameof(barName)} cannot be null or empty", nameof(barName));
-            }
+            Argument.AssertNotNullOrEmpty(barName, nameof(barName));
             if (body == null)
             {
                 throw new ArgumentNullException(nameof(body));
@@ -117,7 +111,7 @@ namespace MgmtLRO
             try
             {
                 var response = await _barsRestClient.CreateAsync(Id.SubscriptionId, Id.ResourceGroupName, barName, body, cancellationToken).ConfigureAwait(false);
-                var operation = new BarCreateOrUpdateOperation(this, _clientDiagnostics, Pipeline, _barsRestClient.CreateCreateRequest(Id.SubscriptionId, Id.ResourceGroupName, barName, body).Request, response);
+                var operation = new BarCreateOrUpdateOperation(ArmClient, _clientDiagnostics, Pipeline, _barsRestClient.CreateCreateRequest(Id.SubscriptionId, Id.ResourceGroupName, barName, body).Request, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -135,13 +129,11 @@ namespace MgmtLRO
         /// <summary> Retrieves information about an fake. </summary>
         /// <param name="barName"> The name of the fake. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="barName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="barName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="barName"/> is null. </exception>
         public virtual Response<Bar> Get(string barName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(barName))
-            {
-                throw new ArgumentException($"Parameter {nameof(barName)} cannot be null or empty", nameof(barName));
-            }
+            Argument.AssertNotNullOrEmpty(barName, nameof(barName));
 
             using var scope = _clientDiagnostics.CreateScope("BarCollection.Get");
             scope.Start();
@@ -150,7 +142,7 @@ namespace MgmtLRO
                 var response = _barsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, barName, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new Bar(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Bar(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -165,13 +157,11 @@ namespace MgmtLRO
         /// <summary> Retrieves information about an fake. </summary>
         /// <param name="barName"> The name of the fake. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="barName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="barName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="barName"/> is null. </exception>
         public async virtual Task<Response<Bar>> GetAsync(string barName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(barName))
-            {
-                throw new ArgumentException($"Parameter {nameof(barName)} cannot be null or empty", nameof(barName));
-            }
+            Argument.AssertNotNullOrEmpty(barName, nameof(barName));
 
             using var scope = _clientDiagnostics.CreateScope("BarCollection.Get");
             scope.Start();
@@ -180,7 +170,7 @@ namespace MgmtLRO
                 var response = await _barsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, barName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new Bar(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Bar(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -192,13 +182,11 @@ namespace MgmtLRO
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="barName"> The name of the fake. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="barName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="barName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="barName"/> is null. </exception>
         public virtual Response<Bar> GetIfExists(string barName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(barName))
-            {
-                throw new ArgumentException($"Parameter {nameof(barName)} cannot be null or empty", nameof(barName));
-            }
+            Argument.AssertNotNullOrEmpty(barName, nameof(barName));
 
             using var scope = _clientDiagnostics.CreateScope("BarCollection.GetIfExists");
             scope.Start();
@@ -207,7 +195,7 @@ namespace MgmtLRO
                 var response = _barsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, barName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<Bar>(null, response.GetRawResponse());
-                return Response.FromValue(new Bar(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Bar(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -219,13 +207,11 @@ namespace MgmtLRO
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="barName"> The name of the fake. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="barName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="barName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="barName"/> is null. </exception>
         public async virtual Task<Response<Bar>> GetIfExistsAsync(string barName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(barName))
-            {
-                throw new ArgumentException($"Parameter {nameof(barName)} cannot be null or empty", nameof(barName));
-            }
+            Argument.AssertNotNullOrEmpty(barName, nameof(barName));
 
             using var scope = _clientDiagnostics.CreateScope("BarCollection.GetIfExists");
             scope.Start();
@@ -234,7 +220,7 @@ namespace MgmtLRO
                 var response = await _barsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, barName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<Bar>(null, response.GetRawResponse());
-                return Response.FromValue(new Bar(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Bar(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -246,13 +232,11 @@ namespace MgmtLRO
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="barName"> The name of the fake. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="barName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="barName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="barName"/> is null. </exception>
         public virtual Response<bool> Exists(string barName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(barName))
-            {
-                throw new ArgumentException($"Parameter {nameof(barName)} cannot be null or empty", nameof(barName));
-            }
+            Argument.AssertNotNullOrEmpty(barName, nameof(barName));
 
             using var scope = _clientDiagnostics.CreateScope("BarCollection.Exists");
             scope.Start();
@@ -271,13 +255,11 @@ namespace MgmtLRO
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="barName"> The name of the fake. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="barName"/> is null or empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="barName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="barName"/> is null. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string barName, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(barName))
-            {
-                throw new ArgumentException($"Parameter {nameof(barName)} cannot be null or empty", nameof(barName));
-            }
+            Argument.AssertNotNullOrEmpty(barName, nameof(barName));
 
             using var scope = _clientDiagnostics.CreateScope("BarCollection.Exists");
             scope.Start();
@@ -308,7 +290,7 @@ namespace MgmtLRO
                 try
                 {
                     var response = _barsRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new Bar(this, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new Bar(ArmClient, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -334,7 +316,7 @@ namespace MgmtLRO
                 try
                 {
                     var response = await _barsRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new Bar(this, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new Bar(ArmClient, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -405,8 +387,5 @@ namespace MgmtLRO
         {
             return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
-
-        // Builders.
-        // public ArmBuilder<Azure.Core.ResourceIdentifier, Bar, BarData> Construct() { }
     }
 }
