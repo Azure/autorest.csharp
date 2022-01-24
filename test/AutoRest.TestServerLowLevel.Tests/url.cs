@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
@@ -91,5 +92,20 @@ namespace AutoRest.TestServer.Tests
 
         [Test]
         public Task UrlPathsDoublePositive() => TestStatus(async (host) => await new PathsClient(Key, host).DoubleDecimalPositiveAsync());
+
+        [Test]
+        public void UriPropertyGenerated()
+        {
+            // Arrange
+            Type uriClient = typeof(PathsClient);
+            Type expectedType = uriClient.GetField("_endpoint", BindingFlags.NonPublic | BindingFlags.Instance).FieldType;
+
+            // Act
+            var publicProperty = uriClient.GetProperty("Uri");
+
+            // Assert
+            Assert.NotNull(publicProperty);
+            Assert.AreEqual(expectedType, publicProperty.PropertyType);
+        }
     }
 }

@@ -107,7 +107,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer
                     .Line()
                     .WriteXmlDocumentationSummary($"The HTTP Uri.")
-                    .Line($"public virtual {typeof(Uri)} Uri => {uriField.Declaration.ActualName};");
+                    .Line($"public virtual {uriField.Type} Uri => {uriField.Declaration.ActualName};");
             }
 
             writer.Line();

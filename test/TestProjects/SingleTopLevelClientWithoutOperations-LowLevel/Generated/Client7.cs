@@ -25,6 +25,9 @@ namespace SingleTopLevelClientWithoutOperations_LowLevel
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
+        /// <summary> The HTTP Uri. </summary>
+        public virtual Uri Uri => _endpoint;
+
         /// <summary> Initializes a new instance of Client7 for mocking. </summary>
         protected Client7()
         {

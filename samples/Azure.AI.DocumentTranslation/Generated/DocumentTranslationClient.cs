@@ -28,6 +28,9 @@ namespace Azure.AI.DocumentTranslation
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
+        /// <summary> The HTTP Uri. </summary>
+        public virtual string Uri => _endpoint;
+
         /// <summary> Initializes a new instance of DocumentTranslationClient for mocking. </summary>
         protected DocumentTranslationClient()
         {
