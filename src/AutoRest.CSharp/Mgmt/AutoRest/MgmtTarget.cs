@@ -52,10 +52,13 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var serializeWriter = new SerializationWriter();
             var isArmCore = context.Configuration.MgmtConfiguration.IsArmCore;
 
-            var utilCodeWriter = new CodeWriter();
-            var staticUtilWriter = new StaticUtilWriter(utilCodeWriter, context);
-            staticUtilWriter.Write();
-            AddGeneratedFile(project, $"ProviderConstants.cs", utilCodeWriter.ToString());
+            if (!context.Configuration.MgmtConfiguration.IsArmCore)
+            {
+                var utilCodeWriter = new CodeWriter();
+                var staticUtilWriter = new StaticUtilWriter(utilCodeWriter, context);
+                staticUtilWriter.Write();
+                AddGeneratedFile(project, $"ProviderConstants.cs", utilCodeWriter.ToString());
+            }
 
             foreach (var model in context.Library.Models)
             {
