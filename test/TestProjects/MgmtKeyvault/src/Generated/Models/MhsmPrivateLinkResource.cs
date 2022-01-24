@@ -7,6 +7,7 @@
 
 using System.Collections.Generic;
 using Azure.Core;
+using Azure.ResourceManager.Models;
 
 namespace MgmtKeyvault.Models
 {
@@ -27,12 +28,12 @@ namespace MgmtKeyvault.Models
         /// <param name="type"> The type. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
+        /// <param name="systemData"> The systemData. </param>
         /// <param name="sku"> SKU details. </param>
-        /// <param name="systemData"> Metadata pertaining to creation and last modification of the key vault resource. </param>
         /// <param name="groupId"> Group identifier of private link resource. </param>
         /// <param name="requiredMembers"> Required member names of private link resource. </param>
         /// <param name="requiredZoneNames"> Required DNS zone names of the the private link resource. </param>
-        internal MhsmPrivateLinkResource(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, AzureLocation location, ManagedHsmSku sku, SystemData systemData, string groupId, IReadOnlyList<string> requiredMembers, IList<string> requiredZoneNames) : base(id, name, type, tags, location, sku, systemData)
+        internal MhsmPrivateLinkResource(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, AzureLocation location, SystemData systemData, ManagedHsmSku sku, string groupId, IReadOnlyList<string> requiredMembers, IList<string> requiredZoneNames) : base(id, name, type, tags, location, systemData, sku)
         {
             GroupId = groupId;
             RequiredMembers = requiredMembers;

@@ -7,6 +7,7 @@
 
 using System.Collections.Generic;
 using Azure.Core;
+using Azure.ResourceManager.Models;
 using MgmtKeyvault.Models;
 
 namespace MgmtKeyvault
@@ -26,10 +27,10 @@ namespace MgmtKeyvault
         /// <param name="type"> The type. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
+        /// <param name="systemData"> The systemData. </param>
         /// <param name="sku"> SKU details. </param>
-        /// <param name="systemData"> Metadata pertaining to creation and last modification of the key vault resource. </param>
         /// <param name="properties"> Properties of the managed HSM. </param>
-        internal ManagedHsmData(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, AzureLocation location, ManagedHsmSku sku, SystemData systemData, ManagedHsmProperties properties) : base(id, name, type, tags, location, sku, systemData)
+        internal ManagedHsmData(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, AzureLocation location, SystemData systemData, ManagedHsmSku sku, ManagedHsmProperties properties) : base(id, name, type, tags, location, systemData, sku)
         {
             Properties = properties;
         }

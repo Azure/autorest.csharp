@@ -98,12 +98,12 @@ namespace MgmtParamOrdering
 
         internal static WorkspaceData DeserializeWorkspaceData(JsonElement element)
         {
-            Optional<SystemData> systemData = default;
             IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
+            SystemData systemData = default;
             Optional<string> workspaceId = default;
             Optional<string> description = default;
             Optional<string> friendlyName = default;
@@ -122,16 +122,6 @@ namespace MgmtParamOrdering
             Optional<string> tenantId = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("systemData"))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
-                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.ToString());
-                    continue;
-                }
                 if (property.NameEquals("tags"))
                 {
                     Dictionary<string, string> dictionary = new Dictionary<string, string>();
@@ -160,6 +150,11 @@ namespace MgmtParamOrdering
                 if (property.NameEquals("type"))
                 {
                     type = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("systemData"))
+                {
+                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.ToString());
                     continue;
                 }
                 if (property.NameEquals("properties"))

@@ -39,6 +39,26 @@ namespace SupersetInheritance
         }
         #endregion
 
+        #region SupersetModel6
+        /// <summary> Gets an object representing a SupersetModel6Collection along with the instance operations that can be performed on it. </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <returns> Returns a <see cref="SupersetModel6Collection" /> object. </returns>
+        public static SupersetModel6Collection GetSupersetModel6s(this ResourceGroup resourceGroup)
+        {
+            return new SupersetModel6Collection(resourceGroup);
+        }
+        #endregion
+
+        #region SupersetModel7
+        /// <summary> Gets an object representing a SupersetModel7Collection along with the instance operations that can be performed on it. </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <returns> Returns a <see cref="SupersetModel7Collection" /> object. </returns>
+        public static SupersetModel7Collection GetSupersetModel7s(this ResourceGroup resourceGroup)
+        {
+            return new SupersetModel7Collection(resourceGroup);
+        }
+        #endregion
+
         private static SupersetModel2SRestOperations GetSupersetModel2SRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = default)
         {
             return new SupersetModel2SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);

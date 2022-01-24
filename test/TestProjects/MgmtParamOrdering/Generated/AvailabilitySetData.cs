@@ -26,8 +26,9 @@ namespace MgmtParamOrdering
         /// <param name="type"> The type. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
+        /// <param name="systemData"> The systemData. </param>
         /// <param name="bar"> specifies the bar. </param>
-        internal AvailabilitySetData(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, AzureLocation location, string bar) : base(id, name, type, tags, location)
+        internal AvailabilitySetData(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, AzureLocation location, SystemData systemData, string bar) : base(id, name, type, tags, location, systemData)
         {
             Bar = bar;
         }

@@ -17,6 +17,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class InheritanceChooser
     {
+        internal const string ReferenceAttributeName = "ReferenceTypeAttribute";
+
         private static ConcurrentDictionary<Schema, CSharpType?> _valueCache = new ConcurrentDictionary<Schema, CSharpType?>();
 
         public static bool TryGetCachedExactMatch(Schema schema, out CSharpType? result)
@@ -28,9 +30,12 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         {
             if (_valueCache.TryGetValue(originalType.ObjectSchema, out var result))
                 return result;
+            var propertyNames = properties.Select(p => p.Declaration.Name).ToHashSet();
             foreach (System.Type parentType in ReferenceClassFinder.GetReferenceClassCollection(context))
             {
-                List<PropertyInfo> parentProperties = parentType.GetProperties(BindingFlags.Public | BindingFlags.Instance).ToList();
+                var attributeObj = parentType.GetCustomAttributes()?.Where(a => a.GetType().Name == ReferenceAttributeName).First();
+                var optionalPropertiesForMatch = new HashSet<string>((attributeObj?.GetType().GetProperty("OptionalProperties")?.GetValue(attributeObj) as string[])!);
+                List<PropertyInfo> parentProperties = parentType.GetProperties(BindingFlags.Public | BindingFlags.Instance).Where(p => !optionalPropertiesForMatch.Contains(p.PropertyType.Name) || propertyNames.Contains(p.PropertyType.Name)).ToList();
                 if (PropertyMatchDetection.IsEqual(parentProperties, properties.ToList()))
                 {
                     result = GetCSharpType(originalType, parentType);
@@ -62,7 +67,10 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         private static bool IsSuperset(System.Type parentType, ObjectTypeProperty[] properties)
         {
             var childProperties = properties.ToList();
-            List<PropertyInfo> parentProperties = parentType.GetProperties(BindingFlags.Public | BindingFlags.Instance).ToList();
+            var propertyNames = properties.Select(p => p.Declaration.Name).ToHashSet();
+            var attributeObj = parentType.GetCustomAttributes()?.Where(a => a.GetType().Name == ReferenceAttributeName).First();
+            var optionalPropertiesForMatch = new HashSet<string>((attributeObj?.GetType().GetProperty("OptionalProperties")?.GetValue(attributeObj) as string[])!);
+            List<PropertyInfo> parentProperties = parentType.GetProperties(BindingFlags.Public | BindingFlags.Instance).Where(p => !optionalPropertiesForMatch.Contains(p.PropertyType.Name) || propertyNames.Contains(p.PropertyType.Name)).ToList();
 
             if (parentProperties.Count >= childProperties.Count)
                 return false;

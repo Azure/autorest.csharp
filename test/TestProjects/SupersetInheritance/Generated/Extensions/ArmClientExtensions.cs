@@ -36,5 +36,29 @@ namespace SupersetInheritance
             return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new SupersetModel4(clientOptions, credential, uri, pipeline, id));
         }
         #endregion
+
+        #region SupersetModel6
+        /// <summary> Gets an object representing a SupersetModel6 along with the instance operations that can be performed on it but with no data. </summary>
+        /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="SupersetModel6" /> object. </returns>
+        public static SupersetModel6 GetSupersetModel6(this ArmClient armClient, ResourceIdentifier id)
+        {
+            SupersetModel6.ValidateResourceId(id);
+            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new SupersetModel6(clientOptions, credential, uri, pipeline, id));
+        }
+        #endregion
+
+        #region SupersetModel7
+        /// <summary> Gets an object representing a SupersetModel7 along with the instance operations that can be performed on it but with no data. </summary>
+        /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="SupersetModel7" /> object. </returns>
+        public static SupersetModel7 GetSupersetModel7(this ArmClient armClient, ResourceIdentifier id)
+        {
+            SupersetModel7.ValidateResourceId(id);
+            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new SupersetModel7(clientOptions, credential, uri, pipeline, id));
+        }
+        #endregion
     }
 }

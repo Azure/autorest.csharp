@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Models;
 using Azure.ResourceManager.Resources.Models;
 using MgmtKeyvault.Models;
 
@@ -52,6 +53,7 @@ namespace MgmtKeyvault
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
+            SystemData systemData = default;
             Optional<SubResource> privateEndpoint = default;
             Optional<PrivateLinkServiceConnectionState> privateLinkServiceConnectionState = default;
             Optional<PrivateEndpointConnectionProvisioningState> provisioningState = default;
@@ -97,6 +99,11 @@ namespace MgmtKeyvault
                     type = property.Value.GetString();
                     continue;
                 }
+                if (property.NameEquals("systemData"))
+                {
+                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.ToString());
+                    continue;
+                }
                 if (property.NameEquals("properties"))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
@@ -140,7 +147,7 @@ namespace MgmtKeyvault
                     continue;
                 }
             }
-            return new PrivateEndpointConnectionData(id, name, type, location.Value, Optional.ToDictionary(tags), etag.Value, privateEndpoint, privateLinkServiceConnectionState.Value, Optional.ToNullable(provisioningState));
+            return new PrivateEndpointConnectionData(id, name, type, systemData, location.Value, Optional.ToDictionary(tags), etag.Value, privateEndpoint, privateLinkServiceConnectionState.Value, Optional.ToNullable(provisioningState));
         }
     }
 }

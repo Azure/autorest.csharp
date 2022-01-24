@@ -26,17 +26,14 @@ namespace MgmtKeyvault.Models
         /// <param name="type"> The type. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
+        /// <param name="systemData"> The systemData. </param>
         /// <param name="sku"> SKU details. </param>
-        /// <param name="systemData"> Metadata pertaining to creation and last modification of the key vault resource. </param>
-        internal ManagedHsmResource(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, AzureLocation location, ManagedHsmSku sku, SystemData systemData) : base(id, name, type, tags, location)
+        internal ManagedHsmResource(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, AzureLocation location, SystemData systemData, ManagedHsmSku sku) : base(id, name, type, tags, location, systemData)
         {
             Sku = sku;
-            SystemData = systemData;
         }
 
         /// <summary> SKU details. </summary>
         public ManagedHsmSku Sku { get; set; }
-        /// <summary> Metadata pertaining to creation and last modification of the key vault resource. </summary>
-        public SystemData SystemData { get; }
     }
 }

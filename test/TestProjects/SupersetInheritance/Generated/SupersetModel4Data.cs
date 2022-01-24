@@ -26,8 +26,9 @@ namespace SupersetInheritance
         /// <param name="type"> The type. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
+        /// <param name="systemData"> The systemData. </param>
         /// <param name="new"></param>
-        internal SupersetModel4Data(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, AzureLocation location, string @new) : base(id, name, type, tags, location)
+        internal SupersetModel4Data(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, AzureLocation location, SystemData systemData, string @new) : base(id, name, type, tags, location, systemData)
         {
             New = @new;
         }
