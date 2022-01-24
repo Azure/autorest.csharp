@@ -114,22 +114,22 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.Line($"#endif");
         }
 
-        protected void WriteFields(CodeWriter writer, IEnumerable<MgmtRestClient> clients, bool useReadonly = true)
+        protected HashSet<NameSetKey> WriteFields(CodeWriter writer, IEnumerable<MgmtClientOperation> operations, bool useReadonly = true)
         {
-            foreach (var client in clients)
+            HashSet<NameSetKey> uniqueSets = new HashSet<NameSetKey>();
+            foreach (var operation in operations)
             {
-                if (client.Resources.Count == 0)
-                    WriteFieldSet(writer, useReadonly, client, null);
-
-                foreach (var resource in client.Resources)
-                {
-                    // we might have multiple rest client field, if we combined multiple request together in one resource in case of extension resources
-                    WriteFieldSet(writer, useReadonly, client, resource);
-                }
+                Resource? resource = operation.Resource ?? DefaultResource;
+                NameSetKey key = new NameSetKey(operation.RestClient, resource);
+                if (uniqueSets.Contains(key))
+                    continue;
+                uniqueSets.Add(key);
+                WriteFields(writer, operation.RestClient, resource, useReadonly);
             }
+            return uniqueSets;
         }
 
-        protected void WriteFieldSet(CodeWriter writer, bool useReadOnly, MgmtRestClient client, Resource? resource)
+        private void WriteFields(CodeWriter writer, MgmtRestClient client, Resource? resource, bool useReadOnly)
         {
             string readOnly = useReadOnly ? " readonly" : string.Empty;
             writer.Line($"private{readOnly} {typeof(ClientDiagnostics)} {GetClientDiagnosticFieldName(client, resource)};");
@@ -169,66 +169,83 @@ namespace AutoRest.CSharp.Mgmt.Generation
         }
 
         protected string GetRestFieldOrPropertyName(MgmtRestOperation operation) => GetRestFieldOrPropertyName(operation.RestClient, operation.Resource);
-        protected string GetRestFieldOrPropertyName(MgmtRestClient client, Resource? resource = null)
+        protected string GetRestFieldOrPropertyName(MgmtRestClient client, Resource? resource)
         {
-            return UseRestClientField ? GetRestFieldName(client, resource) : GetRestPropertyName(client, resource);
+            var names = GetRestDiagNames(client, resource);
+            return UseRestClientField ? names.RestField : names.RestProperty;
         }
 
-        protected string GetRestPropertyName(MgmtRestOperation operation) => GetRestPropertyName(operation.RestClient, operation.Resource);
-        protected string GetRestPropertyName(MgmtRestClient client, Resource? resource = null)
+        protected string GetRestPropertyName(MgmtRestOperation operation) => GetRestDiagNames(operation.RestClient, operation.Resource).RestProperty;
+        protected string GetRestPropertyName(MgmtRestClient client, Resource? resource) => GetRestDiagNames(client, resource).RestProperty;
+        protected string GetRestFieldName(MgmtRestOperation operation) => GetRestDiagNames(operation.RestClient, operation.Resource).RestField;
+        protected string GetRestFieldName(MgmtRestClient client, Resource? resource) => GetRestDiagNames(client, resource).RestField;
+        protected string GetClientDiagnosticsPropertyName(MgmtRestOperation operation) => GetRestDiagNames(operation.RestClient, operation.Resource).DiagnosticProperty;
+        protected string GetClientDiagnosticsPropertyName(MgmtRestClient client, Resource? resource) => GetRestDiagNames(client, resource).DiagnosticProperty;
+        protected string GetClientDiagnosticFieldName(MgmtRestOperation operation) => GetRestDiagNames(operation.RestClient, operation.Resource).DiagnosticField;
+        protected string GetClientDiagnosticFieldName(MgmtRestClient client, Resource? resource) => GetRestDiagNames(client, resource).DiagnosticField;
+        protected virtual string GetApiVersionVariableName(MgmtRestClient client, Resource? resource) => GetRestDiagNames(client, resource).ApiVersionVariable;
+
+    private readonly struct NameSet
         {
-            if (resource is not null)
-                return $"{resource.ResourceName}RestClient";
+            public string DiagnosticField { get; }
+            public string DiagnosticProperty { get; }
+            public string RestField { get; }
+            public string RestProperty { get; }
+            public string ApiVersionVariable { get; }
 
-            if (DefaultResource != null && client.Resources.Contains(DefaultResource))
-                return $"{DefaultResource.ResourceName}RestClient";
-
-            return client.OperationGroup.Key.IsNullOrEmpty()
-                ? "RestClient"
-                : $"{client.OperationGroup.Key}RestClient";
+            public NameSet(string diagField, string diagProperty, string restField, string restProperty, string apiVariable)
+            {
+                DiagnosticField = diagField;
+                DiagnosticProperty = diagProperty;
+                RestField = restField;
+                RestProperty = restProperty;
+                ApiVersionVariable = apiVariable;
+            }
         }
 
-        protected string GetRestFieldName(MgmtRestOperation operation) => GetRestFieldName(operation.RestClient, operation.Resource);
-        protected string GetRestFieldName(MgmtRestClient client, Resource? resource = null)
+        private Dictionary<NameSetKey, NameSet> _nameCache = new Dictionary<NameSetKey, NameSet>();
+        private NameSet GetRestDiagNames(MgmtRestClient client, Resource? resource)
         {
-            if (resource is not null)
-                return $"_{resource.ResourceName.ToVariableName()}RestClient";
+            NameSetKey key = new NameSetKey(client, resource);
+            if (_nameCache.TryGetValue(key, out NameSet names))
+                return names;
 
-            if (DefaultResource != null && client.Resources.Contains(DefaultResource))
-                return $"_{DefaultResource.ResourceName.ToVariableName()}RestClient";
+            string? resourceName = resource is not null ? resource.Type.Name : client.Resources.Contains(DefaultResource) ? DefaultResource?.Type.Name : null;
 
-            return client.OperationGroup.Key.IsNullOrEmpty()
-                ? "_restClient"
-                : $"_{client.OperationGroup.Key.ToVariableName()}RestClient";
+            string uniqueName = GetUniqueName(resourceName, client.OperationGroup.Key);
+
+            string uniqueVariable = uniqueName.ToVariableName();
+            var result = new NameSet(
+                $"_{uniqueVariable}ClientDiagnostics",
+                $"{uniqueName}ClientDiagnostics",
+                $"_{uniqueVariable}RestClient",
+                $"{uniqueName}RestClient",
+                $"{uniqueVariable}ApiVersion");
+            _nameCache.Add(key, result);
+
+            return result;
         }
 
-        protected string GetClientDiagnosticsPropertyName(MgmtRestOperation operation) => GetClientDiagnosticsPropertyName(operation.RestClient, operation.Resource);
-        protected string GetClientDiagnosticsPropertyName(MgmtRestClient client, Resource? resource)
+        private string GetUniqueName(string? resourceName, string clientName)
         {
-            if (resource is not null)
-                return $"{resource.ResourceName}ClientDiagnostics";
-
-            if (DefaultResource != null && client.Resources.Contains(DefaultResource))
-                return $"{DefaultResource.ResourceName}ClientDiagnostics";
-
-            return client.OperationGroup.Key.IsNullOrEmpty()
-                ? "ClientDiagnostics"
-                : $"{client.OperationGroup.Key}ClientDiagnostics";
-        }
-
-        protected string GetClientDiagnosticFieldName(Resource resource) => $"_{resource.ResourceName.ToVariableName()}ClientDiagnostics";
-        protected string GetClientDiagnosticFieldName(MgmtRestOperation operation) => GetClientDiagnosticFieldName(operation.RestClient, operation.Resource);
-        protected string GetClientDiagnosticFieldName(MgmtRestClient client, Resource? resource = null)
-        {
-            if (resource is not null)
-                return GetClientDiagnosticFieldName(resource);
-
-            if (DefaultResource != null && client.Resources.Contains(DefaultResource))
-                return GetClientDiagnosticFieldName(DefaultResource);
-
-            return client.OperationGroup.Key.IsNullOrEmpty()
-                ? "_clientDiagnostics"
-                : $"_{client.OperationGroup.Key.ToVariableName()}ClientDiagnostics";
+            if (resourceName is not null)
+            {
+                if (string.IsNullOrEmpty(clientName))
+                {
+                    return resourceName;
+                }
+                else
+                {
+                    var singularClientName = clientName.ToSingular(true);
+                    return resourceName.Equals(singularClientName, StringComparison.Ordinal)
+                        ? resourceName
+                        : $"{resourceName}{clientName}";
+                }
+            }
+            else
+            {
+                return string.IsNullOrEmpty(clientName) ? "Default" : clientName;
+            }
         }
 
         protected internal static CSharpType GetResponseType(CSharpType? returnType, bool async)

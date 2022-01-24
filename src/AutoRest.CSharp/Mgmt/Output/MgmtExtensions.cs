@@ -54,7 +54,8 @@ namespace AutoRest.CSharp.Mgmt.Output
                         operation.GetRequestPath(_context),
                         ContextualPath,
                         operationName,
-                        operation.GetReturnTypeAsLongRunningOperation(null, operationName, _context)));
+                        operation.GetReturnTypeAsLongRunningOperation(null, operationName, _context),
+                        _context));
             });
         }
 
@@ -115,24 +116,36 @@ namespace AutoRest.CSharp.Mgmt.Output
         internal static Resource? GetResourceFromResourceType(Operation operation, BuildContext<MgmtOutputLibrary> context)
         {
             var resourceType = operation.GetRequestPath(context).GetResourceType(context.Configuration.MgmtConfiguration);
-            Dictionary<string, Resource> candidates = new Dictionary<string, Resource>();
-            foreach (var candidate in context.Library.ArmResources.Where(resource =>
-            {
-                if (resourceType[resourceType.Count - 1].IsConstant)
-                    return resource.ResourceType == resourceType;
+            var candidates = context.Library.ArmResources.Where(resource => DoResourceTypesMatch(resourceType, resource.ResourceType));
 
-                return DoAllButLastItemMatch(resourceType, resource.ResourceType);
-            }))
-            {
-                candidates.TryAdd(candidate.ResourceName, candidate);
-            }
-            if (candidates.Count == 0)
+            int candidateCount = candidates.Count();
+
+            if (candidateCount == 0)
                 return null;
 
-            if (candidates.Count == 1)
-                return candidates.Values.First();
+            if (candidateCount == 1)
+                return candidates.First();
 
-            throw new InvalidOperationException($"Found more than 1 candidate for {resourceType}, results were ({string.Join(',', candidates.Values.Select(r => r.ResourceName))})");
+            foreach (var candidate in candidates)
+            {
+                if (candidate.IsInOperationMap(operation))
+                    return candidate;
+            }
+
+            var parentCanddidate = candidates.First().Parent(context).FirstOrDefault();
+
+            if (parentCanddidate is not null && parentCanddidate is Resource)
+                return parentCanddidate as Resource;
+
+            throw new InvalidOperationException($"Found more than 1 candidate for {resourceType}, results were ({string.Join(',', candidates.Select(r => r.ResourceName))})");
+        }
+
+        private static bool DoResourceTypesMatch(ResourceTypeSegment rt1, ResourceTypeSegment rt2)
+        {
+            if (rt1[rt1.Count - 1].IsConstant)
+                return rt1 == rt2;
+
+            return DoAllButLastItemMatch(rt1, rt2); //TODO: limit matching to the enum values
         }
 
         private static bool DoAllButLastItemMatch(ResourceTypeSegment resourceType1, ResourceTypeSegment resourceType2)

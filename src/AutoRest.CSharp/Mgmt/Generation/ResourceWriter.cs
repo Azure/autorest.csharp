@@ -76,8 +76,8 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
                 using (_writer.Scope())
                 {
                     WriteStaticMethods();
-                    WriteFields();
-                    WriteCtors();
+                    var uniqueSets = WriteFields();
+                    WriteCtors(uniqueSets);
                     WriteProperties();
                     WriteMethods();
 
@@ -117,18 +117,16 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
             }
         }
 
-        protected virtual void WriteFields()
+        protected virtual HashSet<NameSetKey> WriteFields()
         {
-            //write the resource field
-            WriteFieldSet(_writer, true, This.MyRestClient, _resource);
-
-            //write any others not included in above
-            WriteFields(_writer, This.OtherRestClients);
+            var uniqueSets = WriteFields(_writer, This.AllOperations);
 
             _writer.Line($"private readonly {_resourceData.Type} _data;");
+
+            return uniqueSets;
         }
 
-        protected virtual void WriteCtors()
+        protected virtual void WriteCtors(HashSet<NameSetKey> uniqueSets)
         {
             _writer.Line();
             // write protected default constructor
@@ -175,23 +173,11 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
             _writer.WriteMethodDocumentation(clientOptionsConstructor);
             using (_writer.WriteMethodDeclaration(clientOptionsConstructor))
             {
-                WriteRestClientConstructorPair(This.MyRestClient, _resource);
-                WriteRestClientAssignments(This.OtherRestClients);
-                WriteDebugValidate(_writer);
-            }
-        }
-
-        protected void WriteRestClientAssignments(IEnumerable<MgmtRestClient> clients)
-        {
-            foreach (var restClient in clients)
-            {
-                if (restClient.Resources.Count == 0)
-                    WriteRestClientConstructorPair(restClient, null);
-
-                foreach (var resource in restClient.Resources)
+                foreach (var set in uniqueSets)
                 {
-                    WriteRestClientConstructorPair(restClient, resource);
+                    WriteRestClientConstructorPair(set.RestClient, set.Resource);
                 }
+                WriteDebugValidate(_writer);
             }
         }
 
@@ -209,16 +195,6 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
                 apiVersionText = $", {apiVersionVariable}";
             }
             _writer.Line($"{GetRestFieldName(restClient, resource)} = {GetRestConstructorString(restClient, diagFieldName, apiVersionText)};");
-        }
-
-        protected virtual string GetApiVersionVariableName(MgmtRestClient client, Resource? resource)
-        {
-            if (resource is not null)
-                return $"{resource.ResourceName.ToVariableName()}ApiVersion";
-
-            return client.OperationGroup.Key.IsNullOrEmpty()
-                ? "apiVersion"
-                : $"{client.OperationGroup.Key.ToVariableName()}ApiVersion";
         }
 
         protected virtual void WriteProperties()
@@ -357,7 +333,7 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
             using (_writer.Scope($"public {GetAsyncKeyword(async)} {GetVirtual(true)} {responseType} {CreateMethodName("GetAvailableLocations", async)}({typeof(CancellationToken)} cancellationToken = default)"))
             {
                 Diagnostic diagnostic = new Diagnostic($"{TypeOfThis.Name}.GetAvailableLocations", Array.Empty<DiagnosticAttribute>());
-                using (WriteDiagnosticScope(_writer, diagnostic, GetClientDiagnosticFieldName(_resource)))
+                using (WriteDiagnosticScope(_writer, diagnostic, GetClientDiagnosticFieldName(_resource.GetOperation.RestClient, _resource)))
                 {
                     _writer.Line($"return {GetAwait(async)} {CreateMethodName("ListAvailableLocations", async)}(ResourceType, cancellationToken){GetConfigureAwait(async)};");
                 }
@@ -382,7 +358,7 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
                 _writer.Line();
 
                 Diagnostic diagnostic = new Diagnostic($"{TypeOfThis.Name}.AddTag", Array.Empty<DiagnosticAttribute>());
-                using (WriteDiagnosticScope(_writer, diagnostic, GetClientDiagnosticFieldName(_resource)))
+                using (WriteDiagnosticScope(_writer, diagnostic, GetClientDiagnosticFieldName(_resource.GetOperation.RestClient, _resource)))
                 {
                     _writer.Append($"var originalTags = ");
                     if (async)
@@ -417,7 +393,7 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
                 _writer.Line();
 
                 Diagnostic diagnostic = new Diagnostic($"{TypeOfThis.Name}.SetTags", Array.Empty<DiagnosticAttribute>());
-                using (WriteDiagnosticScope(_writer, diagnostic, GetClientDiagnosticFieldName(_resource)))
+                using (WriteDiagnosticScope(_writer, diagnostic, GetClientDiagnosticFieldName(_resource.GetOperation.RestClient, _resource)))
                 {
                     if (async)
                     {
@@ -454,7 +430,7 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
                 _writer.Line();
 
                 Diagnostic diagnostic = new Diagnostic($"{TypeOfThis.Name}.RemoveTag");
-                using (WriteDiagnosticScope(_writer, diagnostic, GetClientDiagnosticFieldName(_resource)))
+                using (WriteDiagnosticScope(_writer, diagnostic, GetClientDiagnosticFieldName(_resource.GetOperation.RestClient, _resource)))
                 {
                     _writer.Append($"var originalTags = ");
                     if (async)

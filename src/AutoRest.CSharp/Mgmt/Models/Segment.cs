@@ -31,10 +31,10 @@ namespace AutoRest.CSharp.Mgmt.Models
             Escape = escape;
         }
 
-        public Segment(string value, bool escape = true, bool strict = false)
+        public Segment(string value, bool escape = true, bool strict = false, bool isConstant = true)
         {
             _stringValue = value;
-            _value = new Constant(value, typeof(string));
+            _value = isConstant ? new Constant(value, typeof(string)) : new Reference(value, typeof(string));
             IsStrict = strict;
             Escape = escape;
         }
@@ -103,7 +103,7 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         private static bool ExactEquals(Segment left, Segment right)
         {
-            return left._stringValue.Equals(right._stringValue, StringComparison.InvariantCultureIgnoreCase);
+            return left._stringValue.Equals(right._stringValue, StringComparison.OrdinalIgnoreCase);
         }
 
         /// <summary>

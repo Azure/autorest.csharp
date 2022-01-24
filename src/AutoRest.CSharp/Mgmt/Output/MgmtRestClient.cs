@@ -45,16 +45,16 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         private IReadOnlyList<Resource> GetResources()
         {
-            Dictionary<string, Resource> candidates = new Dictionary<string, Resource>();
+            HashSet<Resource> candidates = new HashSet<Resource>();
             foreach (var operation in OperationGroup.Operations)
             {
                 var resource = MgmtExtensions.GetResourceFromResourceType(operation, _context);
                 if (resource is not null)
                 {
-                    candidates.TryAdd(resource.ResourceName, resource);
+                    candidates.Add(resource);
                 }
             }
-            return candidates.Values.ToList();
+            return candidates.ToList();
         }
     }
 }

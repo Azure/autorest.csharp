@@ -47,13 +47,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.WriteXmlDocumentationSummary($"{Description}");
                 using (_writer.Scope($"{Accessibility} partial class {TypeNameOfThis} : {typeof(ArmResource)}"))
                 {
-                    WriteFields(_writer, This.RestClients, false);
+                    var uniqueSets = WriteFields(_writer, _extensions.ClientOperations, false);
                     _writer.Line();
 
                     WriteCtor();
                     _writer.Line();
 
-                    WriteProperties();
+                    WriteProperties(uniqueSets);
                     _writer.Line();
 
                     WritePrivateHelpers();
@@ -90,17 +90,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        private void WriteProperties()
+        private void WriteProperties(HashSet<NameSetKey> uniqueSets)
         {
-            foreach (var client in This.RestClients)
+            foreach (var set in uniqueSets)
             {
-                if (client.Resources.Count == 0)
-                    WriterPropertySet(client, null);
-
-                foreach (var resource in client.Resources)
-                {
-                    WriterPropertySet(client, resource);
-                }
+                WriterPropertySet(set.RestClient, set.Resource);
             }
         }
 

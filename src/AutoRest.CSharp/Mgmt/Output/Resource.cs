@@ -81,6 +81,23 @@ namespace AutoRest.CSharp.Mgmt.Output
             return result;
         }
 
+        public bool IsInOperationMap(Operation operation)
+        {
+            foreach (var opSet in _allOperationMap.Keys)
+            {
+                if (opSet.Contains(operation))
+                    return true;
+            }
+
+            foreach (var opSet in _allOperationMap.Values)
+            {
+                if (opSet.Contains(operation))
+                    return true;
+            }
+
+            return false;
+        }
+
         protected bool IsById { get; }
 
         protected MgmtClientOperation? GetOperationWithVerb(HttpMethod method, string operationName)
@@ -100,7 +117,8 @@ namespace AutoRest.CSharp.Mgmt.Output
                         requestPath,
                         contextualPath,
                         operationName,
-                        operation.GetReturnTypeAsLongRunningOperation(this, operationName, _context));
+                        operation.GetReturnTypeAsLongRunningOperation(this, operationName, _context),
+                        _context);
                     result.Add(restOperation);
                 }
             }
@@ -199,7 +217,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         public ResourceData ResourceData { get; }
 
         public MgmtClientOperation? CreateOperation => GetOperationWithVerb(HttpMethod.Put, "CreateOrUpdate");
-        public MgmtClientOperation? GetOperation => GetOperationWithVerb(HttpMethod.Get, "Get");
+        public MgmtClientOperation GetOperation => GetOperationWithVerb(HttpMethod.Get, "Get")!;
         public MgmtClientOperation? DeleteOperation => GetOperationWithVerb(HttpMethod.Delete, "Delete");
         public MgmtClientOperation? UpdateOperation => GetOperationWithVerb(HttpMethod.Patch, "Update");
 
@@ -278,7 +296,8 @@ namespace AutoRest.CSharp.Mgmt.Output
                         requestPath,
                         contextualPath,
                         methodName,
-                        operation.GetReturnTypeAsLongRunningOperation(this, methodName, _context));
+                        operation.GetReturnTypeAsLongRunningOperation(this, methodName, _context),
+                        _context);
 
                     if (result.TryGetValue(key, out var list))
                     {
