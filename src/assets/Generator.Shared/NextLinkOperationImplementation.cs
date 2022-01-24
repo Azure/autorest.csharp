@@ -16,6 +16,7 @@ namespace Azure.Core
 {
     internal class NextLinkOperationImplementation : IOperation
     {
+        private const string ApiVersionParam = "api-version";
         private static readonly string[] FailureStates = { "failed", "canceled" };
         private static readonly string[] SuccessStates = { "succeeded" };
 
@@ -119,34 +120,51 @@ namespace Azure.Core
 
         internal static string AppendOrReplaceApiVersion(string uri, Uri startRequestUri)
         {
-            const string apiVersionQuery = "api-version";
-            NameValueCollection startRequestUriQueries = HttpUtility.ParseQueryString(startRequestUri.Query);
-            var apiVersion = startRequestUriQueries.Get("api-version");
-            if (apiVersion != null)
+            if (TryGetApiString(startRequestUri, out ReadOnlySpan<char> apiVersion))
             {
                 var uriSpan = uri.AsSpan();
-                if (uri.Contains(apiVersionQuery))
+                var apiVersionParamSpan = ApiVersionParam.AsSpan();
+                var apiVersionIndex = uriSpan.IndexOf(apiVersionParamSpan);
+                if (apiVersionIndex == -1)
                 {
-                    var apiVersionIndex = uri.IndexOf(apiVersionQuery, StringComparison.OrdinalIgnoreCase);
-                    var indexOfFirstSignAfterApiVersion = uri.IndexOf("&", apiVersionIndex);
-                    ReadOnlySpan<char> uriBeforeApiVersion = uriSpan.Slice(0, apiVersionIndex + apiVersionQuery.Length + "=".Length);
-                    if (indexOfFirstSignAfterApiVersion == -1)
-                    {
-                        return string.Concat(uriBeforeApiVersion.ToString(), apiVersion);
-                    }
-                    else
-                    {
-                        ReadOnlySpan<char> uriAfterApiVersion = uriSpan.Slice(indexOfFirstSignAfterApiVersion);
-                        return string.Concat(uriBeforeApiVersion.ToString(), apiVersion, uriAfterApiVersion.ToString());
-                    }
+                    var concatSymbol = uriSpan.IndexOf('?') > -1 ? "&" : "?";
+                    return $"{uri}{concatSymbol}api-version={apiVersion.ToString()}";
                 }
                 else
                 {
-                    var concatSymbol = uriSpan.IndexOf('?') > -1 ? "&" : "?";
-                    return $"{uri}{concatSymbol}api-version={apiVersion}";
+                    var lengthToEqualSignAfterApiVersionParam = apiVersionIndex + ApiVersionParam.Length + 1;
+                    ReadOnlySpan<char> remaining = uriSpan.Slice(lengthToEqualSignAfterApiVersionParam);
+                    var indexOfFirstSignAfterApiVersion = remaining.IndexOf('&');
+                    ReadOnlySpan<char> uriBeforeApiVersion = uriSpan.Slice(0, lengthToEqualSignAfterApiVersionParam);
+                    if (indexOfFirstSignAfterApiVersion == -1)
+                    {
+                        return string.Concat(uriBeforeApiVersion.ToString(), apiVersion.ToString());
+                    }
+                    else
+                    {
+                        ReadOnlySpan<char> uriAfterApiVersion = uriSpan.Slice(indexOfFirstSignAfterApiVersion + lengthToEqualSignAfterApiVersionParam);
+                        return string.Concat(uriBeforeApiVersion.ToString(), apiVersion.ToString(), uriAfterApiVersion.ToString());
+                    }
                 }
             }
             return uri;
+        }
+
+        private static bool TryGetApiString(Uri startRequestUri, out ReadOnlySpan<char> apiVersion)
+        {
+            apiVersion = null;
+            ReadOnlySpan<char> uriSpan = startRequestUri.Query.AsSpan();
+            int startIndex = uriSpan.IndexOf(ApiVersionParam.AsSpan());
+            if (startIndex == -1)
+            {
+                return false;
+            }
+            startIndex += ApiVersionParam.Length + 1;
+            ReadOnlySpan<char> remaining = uriSpan.Slice(startIndex);
+            int endIndex = remaining.IndexOf('&');
+            int length = endIndex == -1 ? uriSpan.Length - startIndex : endIndex;
+            apiVersion = uriSpan.Slice(startIndex, length);
+            return true;
         }
 
         /// <summary>
