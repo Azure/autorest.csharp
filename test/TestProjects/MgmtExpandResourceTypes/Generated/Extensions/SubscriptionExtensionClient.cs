@@ -22,12 +22,10 @@ namespace MgmtExpandResourceTypes
     /// <summary> An internal class to add extension methods to. </summary>
     internal partial class SubscriptionExtensionClient : ArmResource
     {
-        private ClientDiagnostics _zonesClientDiagnostics;
-        private ZonesRestOperations _zonesRestClient;
+        private ClientDiagnostics _zoneClientDiagnostics;
+        private ZonesRestOperations _zoneRestClient;
         private ClientDiagnostics _dnsResourceReferenceClientDiagnostics;
         private DnsResourceReferenceRestOperations _dnsResourceReferenceRestClient;
-
-        private static string _defaultRpNamespace = ClientDiagnostics.GetResourceProviderNamespace(typeof(SubscriptionExtensionClient).Assembly);
 
         /// <summary> Initializes a new instance of the <see cref="SubscriptionExtensionClient"/> class. </summary>
         /// <param name="armClient"> The client parameters to use in these operations. </param>
@@ -36,9 +34,9 @@ namespace MgmtExpandResourceTypes
         {
         }
 
-        private ClientDiagnostics ZonesClientDiagnostics => _zonesClientDiagnostics ??= new ClientDiagnostics("MgmtExpandResourceTypes", Zone.ResourceType.Namespace, DiagnosticOptions);
-        private ZonesRestOperations ZonesRestClient => _zonesRestClient ??= new ZonesRestOperations(ZonesClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(Zone.ResourceType));
-        private ClientDiagnostics DnsResourceReferenceClientDiagnostics => _dnsResourceReferenceClientDiagnostics ??= new ClientDiagnostics("MgmtExpandResourceTypes", _defaultRpNamespace, DiagnosticOptions);
+        private ClientDiagnostics ZoneClientDiagnostics => _zoneClientDiagnostics ??= new ClientDiagnostics("MgmtExpandResourceTypes", Zone.ResourceType.Namespace, DiagnosticOptions);
+        private ZonesRestOperations ZoneRestClient => _zoneRestClient ??= new ZonesRestOperations(ZoneClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(Zone.ResourceType));
+        private ClientDiagnostics DnsResourceReferenceClientDiagnostics => _dnsResourceReferenceClientDiagnostics ??= new ClientDiagnostics("MgmtExpandResourceTypes", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
         private DnsResourceReferenceRestOperations DnsResourceReferenceRestClient => _dnsResourceReferenceRestClient ??= new DnsResourceReferenceRestOperations(DnsResourceReferenceClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
 
         private string GetApiVersionOrNull(ResourceType resourceType)
@@ -58,11 +56,11 @@ namespace MgmtExpandResourceTypes
         {
             async Task<Page<Zone>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = ZonesClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetZonesByDnszone");
+                using var scope = ZoneClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetZonesByDnszone");
                 scope.Start();
                 try
                 {
-                    var response = await ZonesRestClient.ListAsync(Id.SubscriptionId, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await ZoneRestClient.ListAsync(Id.SubscriptionId, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new Zone(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -73,11 +71,11 @@ namespace MgmtExpandResourceTypes
             }
             async Task<Page<Zone>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = ZonesClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetZonesByDnszone");
+                using var scope = ZoneClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetZonesByDnszone");
                 scope.Start();
                 try
                 {
-                    var response = await ZonesRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await ZoneRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new Zone(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -100,11 +98,11 @@ namespace MgmtExpandResourceTypes
         {
             Page<Zone> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = ZonesClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetZonesByDnszone");
+                using var scope = ZoneClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetZonesByDnszone");
                 scope.Start();
                 try
                 {
-                    var response = ZonesRestClient.List(Id.SubscriptionId, top, cancellationToken: cancellationToken);
+                    var response = ZoneRestClient.List(Id.SubscriptionId, top, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new Zone(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -115,11 +113,11 @@ namespace MgmtExpandResourceTypes
             }
             Page<Zone> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = ZonesClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetZonesByDnszone");
+                using var scope = ZoneClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetZonesByDnszone");
                 scope.Start();
                 try
                 {
-                    var response = ZonesRestClient.ListNextPage(nextLink, Id.SubscriptionId, top, cancellationToken: cancellationToken);
+                    var response = ZoneRestClient.ListNextPage(nextLink, Id.SubscriptionId, top, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new Zone(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
