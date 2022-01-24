@@ -38,7 +38,7 @@
                 "tags": [
                     "Cars"
                 ],
-                "operationId": "Cars",
+                "operationId": "Cars_List",
                 "parameters": [
                     {
                         "name": "resourceGroupName",

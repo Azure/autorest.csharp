@@ -15,7 +15,6 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
-using Pagination.Models;
 
 namespace Pagination
 {
@@ -29,8 +28,8 @@ namespace Pagination
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly PageSizeStringModelsRestOperations _pageSizeStringModelsRestClient;
+        private readonly ClientDiagnostics _pageSizeStringModelClientDiagnostics;
+        private readonly PageSizeStringModelsRestOperations _pageSizeStringModelRestClient;
         private readonly PageSizeStringModelData _data;
 
         /// <summary> Initializes a new instance of the <see cref="PageSizeStringModel"/> class for mocking. </summary>
@@ -52,9 +51,9 @@ namespace Pagination
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal PageSizeStringModel(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
         {
-            _clientDiagnostics = new ClientDiagnostics("Pagination", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string apiVersion);
-            _pageSizeStringModelsRestClient = new PageSizeStringModelsRestOperations(_clientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, apiVersion);
+            _pageSizeStringModelClientDiagnostics = new ClientDiagnostics("Pagination", ResourceType.Namespace, DiagnosticOptions);
+            ArmClient.TryGetApiVersion(ResourceType, out string pageSizeStringModelApiVersion);
+            _pageSizeStringModelRestClient = new PageSizeStringModelsRestOperations(_pageSizeStringModelClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, pageSizeStringModelApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -87,13 +86,13 @@ namespace Pagination
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<PageSizeStringModel>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PageSizeStringModel.Get");
+            using var scope = _pageSizeStringModelClientDiagnostics.CreateScope("PageSizeStringModel.Get");
             scope.Start();
             try
             {
-                var response = await _pageSizeStringModelsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _pageSizeStringModelRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                    throw await _pageSizeStringModelClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new PageSizeStringModel(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -106,13 +105,13 @@ namespace Pagination
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<PageSizeStringModel> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PageSizeStringModel.Get");
+            using var scope = _pageSizeStringModelClientDiagnostics.CreateScope("PageSizeStringModel.Get");
             scope.Start();
             try
             {
-                var response = _pageSizeStringModelsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _pageSizeStringModelRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
-                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                    throw _pageSizeStringModelClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new PageSizeStringModel(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -127,7 +126,7 @@ namespace Pagination
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
         public async virtual Task<IEnumerable<AzureLocation>> GetAvailableLocationsAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PageSizeStringModel.GetAvailableLocations");
+            using var scope = _pageSizeStringModelClientDiagnostics.CreateScope("PageSizeStringModel.GetAvailableLocations");
             scope.Start();
             try
             {
@@ -145,7 +144,7 @@ namespace Pagination
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
         public virtual IEnumerable<AzureLocation> GetAvailableLocations(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PageSizeStringModel.GetAvailableLocations");
+            using var scope = _pageSizeStringModelClientDiagnostics.CreateScope("PageSizeStringModel.GetAvailableLocations");
             scope.Start();
             try
             {

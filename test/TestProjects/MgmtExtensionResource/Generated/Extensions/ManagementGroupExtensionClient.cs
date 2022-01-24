@@ -6,7 +6,6 @@
 #nullable disable
 
 using Azure.Core;
-using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 
@@ -15,8 +14,6 @@ namespace MgmtExtensionResource
     /// <summary> An internal class to add extension methods to. </summary>
     internal partial class ManagementGroupExtensionClient : ArmResource
     {
-        private static string _defaultRpNamespace = ClientDiagnostics.GetResourceProviderNamespace(typeof(ManagementGroupExtensionClient).Assembly);
-
         /// <summary> Initializes a new instance of the <see cref="ManagementGroupExtensionClient"/> class. </summary>
         /// <param name="armClient"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>

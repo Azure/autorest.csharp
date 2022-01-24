@@ -21,10 +21,8 @@ namespace MgmtCollectionParent
     /// <summary> An internal class to add extension methods to. </summary>
     internal partial class SubscriptionExtensionClient : ArmResource
     {
-        private ClientDiagnostics _clientDiagnostics;
-        private ComputeManagementRestOperations _restClient;
-
-        private static string _defaultRpNamespace = ClientDiagnostics.GetResourceProviderNamespace(typeof(SubscriptionExtensionClient).Assembly);
+        private ClientDiagnostics _orderResourceClientDiagnostics;
+        private ComputeManagementRestOperations _orderResourceRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="SubscriptionExtensionClient"/> class. </summary>
         /// <param name="armClient"> The client parameters to use in these operations. </param>
@@ -33,8 +31,8 @@ namespace MgmtCollectionParent
         {
         }
 
-        private ClientDiagnostics ClientDiagnostics => _clientDiagnostics ??= new ClientDiagnostics("MgmtCollectionParent", OrderResource.ResourceType.Namespace, DiagnosticOptions);
-        private ComputeManagementRestOperations RestClient => _restClient ??= new ComputeManagementRestOperations(ClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(OrderResource.ResourceType));
+        private ClientDiagnostics OrderResourceClientDiagnostics => _orderResourceClientDiagnostics ??= new ClientDiagnostics("MgmtCollectionParent", OrderResource.ResourceType.Namespace, DiagnosticOptions);
+        private ComputeManagementRestOperations OrderResourceRestClient => _orderResourceRestClient ??= new ComputeManagementRestOperations(OrderResourceClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(OrderResource.ResourceType));
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {
@@ -53,11 +51,11 @@ namespace MgmtCollectionParent
         {
             async Task<Page<OrderResource>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = ClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetOrderResources");
+                using var scope = OrderResourceClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetOrderResources");
                 scope.Start();
                 try
                 {
-                    var response = await RestClient.ListOrderAtSubscriptionLevelAsync(Id.SubscriptionId, skipToken, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await OrderResourceRestClient.ListOrderAtSubscriptionLevelAsync(Id.SubscriptionId, skipToken, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new OrderResource(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -68,11 +66,11 @@ namespace MgmtCollectionParent
             }
             async Task<Page<OrderResource>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = ClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetOrderResources");
+                using var scope = OrderResourceClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetOrderResources");
                 scope.Start();
                 try
                 {
-                    var response = await RestClient.ListOrderAtSubscriptionLevelNextPageAsync(nextLink, Id.SubscriptionId, skipToken, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await OrderResourceRestClient.ListOrderAtSubscriptionLevelNextPageAsync(nextLink, Id.SubscriptionId, skipToken, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new OrderResource(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -95,11 +93,11 @@ namespace MgmtCollectionParent
         {
             Page<OrderResource> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = ClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetOrderResources");
+                using var scope = OrderResourceClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetOrderResources");
                 scope.Start();
                 try
                 {
-                    var response = RestClient.ListOrderAtSubscriptionLevel(Id.SubscriptionId, skipToken, cancellationToken: cancellationToken);
+                    var response = OrderResourceRestClient.ListOrderAtSubscriptionLevel(Id.SubscriptionId, skipToken, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new OrderResource(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -110,11 +108,11 @@ namespace MgmtCollectionParent
             }
             Page<OrderResource> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = ClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetOrderResources");
+                using var scope = OrderResourceClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetOrderResources");
                 scope.Start();
                 try
                 {
-                    var response = RestClient.ListOrderAtSubscriptionLevelNextPage(nextLink, Id.SubscriptionId, skipToken, cancellationToken: cancellationToken);
+                    var response = OrderResourceRestClient.ListOrderAtSubscriptionLevelNextPage(nextLink, Id.SubscriptionId, skipToken, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new OrderResource(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)

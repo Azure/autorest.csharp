@@ -24,8 +24,8 @@ namespace MgmtListMethods
     /// <summary> A class representing collection of MgmtGrpParentWithNonResCh and their operations over its parent. </summary>
     public partial class MgmtGrpParentWithNonResChCollection : ArmCollection, IEnumerable<MgmtGrpParentWithNonResCh>, IAsyncEnumerable<MgmtGrpParentWithNonResCh>
     {
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly MgmtGrpParentWithNonResChesRestOperations _mgmtGrpParentWithNonResChesRestClient;
+        private readonly ClientDiagnostics _mgmtGrpParentWithNonResChClientDiagnostics;
+        private readonly MgmtGrpParentWithNonResChesRestOperations _mgmtGrpParentWithNonResChRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="MgmtGrpParentWithNonResChCollection"/> class for mocking. </summary>
         protected MgmtGrpParentWithNonResChCollection()
@@ -36,9 +36,9 @@ namespace MgmtListMethods
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal MgmtGrpParentWithNonResChCollection(ArmResource parent) : base(parent)
         {
-            _clientDiagnostics = new ClientDiagnostics("MgmtListMethods", MgmtGrpParentWithNonResCh.ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(MgmtGrpParentWithNonResCh.ResourceType, out string apiVersion);
-            _mgmtGrpParentWithNonResChesRestClient = new MgmtGrpParentWithNonResChesRestOperations(_clientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, apiVersion);
+            _mgmtGrpParentWithNonResChClientDiagnostics = new ClientDiagnostics("MgmtListMethods", MgmtGrpParentWithNonResCh.ResourceType.Namespace, DiagnosticOptions);
+            ArmClient.TryGetApiVersion(MgmtGrpParentWithNonResCh.ResourceType, out string mgmtGrpParentWithNonResChApiVersion);
+            _mgmtGrpParentWithNonResChRestClient = new MgmtGrpParentWithNonResChesRestOperations(_mgmtGrpParentWithNonResChClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, mgmtGrpParentWithNonResChApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -70,11 +70,11 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("MgmtGrpParentWithNonResChCollection.CreateOrUpdate");
+            using var scope = _mgmtGrpParentWithNonResChClientDiagnostics.CreateScope("MgmtGrpParentWithNonResChCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _mgmtGrpParentWithNonResChesRestClient.CreateOrUpdate(Id.Name, mgmtGrpParentWithNonResChName, parameters, cancellationToken);
+                var response = _mgmtGrpParentWithNonResChRestClient.CreateOrUpdate(Id.Name, mgmtGrpParentWithNonResChName, parameters, cancellationToken);
                 var operation = new MgmtGrpParentWithNonResChCreateOrUpdateOperation(ArmClient, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
@@ -105,11 +105,11 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("MgmtGrpParentWithNonResChCollection.CreateOrUpdate");
+            using var scope = _mgmtGrpParentWithNonResChClientDiagnostics.CreateScope("MgmtGrpParentWithNonResChCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _mgmtGrpParentWithNonResChesRestClient.CreateOrUpdateAsync(Id.Name, mgmtGrpParentWithNonResChName, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _mgmtGrpParentWithNonResChRestClient.CreateOrUpdateAsync(Id.Name, mgmtGrpParentWithNonResChName, parameters, cancellationToken).ConfigureAwait(false);
                 var operation = new MgmtGrpParentWithNonResChCreateOrUpdateOperation(ArmClient, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -134,13 +134,13 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrEmpty(mgmtGrpParentWithNonResChName, nameof(mgmtGrpParentWithNonResChName));
 
-            using var scope = _clientDiagnostics.CreateScope("MgmtGrpParentWithNonResChCollection.Get");
+            using var scope = _mgmtGrpParentWithNonResChClientDiagnostics.CreateScope("MgmtGrpParentWithNonResChCollection.Get");
             scope.Start();
             try
             {
-                var response = _mgmtGrpParentWithNonResChesRestClient.Get(Id.Name, mgmtGrpParentWithNonResChName, cancellationToken);
+                var response = _mgmtGrpParentWithNonResChRestClient.Get(Id.Name, mgmtGrpParentWithNonResChName, cancellationToken);
                 if (response.Value == null)
-                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                    throw _mgmtGrpParentWithNonResChClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new MgmtGrpParentWithNonResCh(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -162,13 +162,13 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrEmpty(mgmtGrpParentWithNonResChName, nameof(mgmtGrpParentWithNonResChName));
 
-            using var scope = _clientDiagnostics.CreateScope("MgmtGrpParentWithNonResChCollection.Get");
+            using var scope = _mgmtGrpParentWithNonResChClientDiagnostics.CreateScope("MgmtGrpParentWithNonResChCollection.Get");
             scope.Start();
             try
             {
-                var response = await _mgmtGrpParentWithNonResChesRestClient.GetAsync(Id.Name, mgmtGrpParentWithNonResChName, cancellationToken).ConfigureAwait(false);
+                var response = await _mgmtGrpParentWithNonResChRestClient.GetAsync(Id.Name, mgmtGrpParentWithNonResChName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                    throw await _mgmtGrpParentWithNonResChClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new MgmtGrpParentWithNonResCh(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -187,11 +187,11 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrEmpty(mgmtGrpParentWithNonResChName, nameof(mgmtGrpParentWithNonResChName));
 
-            using var scope = _clientDiagnostics.CreateScope("MgmtGrpParentWithNonResChCollection.GetIfExists");
+            using var scope = _mgmtGrpParentWithNonResChClientDiagnostics.CreateScope("MgmtGrpParentWithNonResChCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _mgmtGrpParentWithNonResChesRestClient.Get(Id.Name, mgmtGrpParentWithNonResChName, cancellationToken: cancellationToken);
+                var response = _mgmtGrpParentWithNonResChRestClient.Get(Id.Name, mgmtGrpParentWithNonResChName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<MgmtGrpParentWithNonResCh>(null, response.GetRawResponse());
                 return Response.FromValue(new MgmtGrpParentWithNonResCh(ArmClient, response.Value), response.GetRawResponse());
@@ -212,11 +212,11 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrEmpty(mgmtGrpParentWithNonResChName, nameof(mgmtGrpParentWithNonResChName));
 
-            using var scope = _clientDiagnostics.CreateScope("MgmtGrpParentWithNonResChCollection.GetIfExists");
+            using var scope = _mgmtGrpParentWithNonResChClientDiagnostics.CreateScope("MgmtGrpParentWithNonResChCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _mgmtGrpParentWithNonResChesRestClient.GetAsync(Id.Name, mgmtGrpParentWithNonResChName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _mgmtGrpParentWithNonResChRestClient.GetAsync(Id.Name, mgmtGrpParentWithNonResChName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<MgmtGrpParentWithNonResCh>(null, response.GetRawResponse());
                 return Response.FromValue(new MgmtGrpParentWithNonResCh(ArmClient, response.Value), response.GetRawResponse());
@@ -237,7 +237,7 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrEmpty(mgmtGrpParentWithNonResChName, nameof(mgmtGrpParentWithNonResChName));
 
-            using var scope = _clientDiagnostics.CreateScope("MgmtGrpParentWithNonResChCollection.Exists");
+            using var scope = _mgmtGrpParentWithNonResChClientDiagnostics.CreateScope("MgmtGrpParentWithNonResChCollection.Exists");
             scope.Start();
             try
             {
@@ -260,7 +260,7 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrEmpty(mgmtGrpParentWithNonResChName, nameof(mgmtGrpParentWithNonResChName));
 
-            using var scope = _clientDiagnostics.CreateScope("MgmtGrpParentWithNonResChCollection.Exists");
+            using var scope = _mgmtGrpParentWithNonResChClientDiagnostics.CreateScope("MgmtGrpParentWithNonResChCollection.Exists");
             scope.Start();
             try
             {
@@ -284,11 +284,11 @@ namespace MgmtListMethods
         {
             Page<MgmtGrpParentWithNonResCh> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("MgmtGrpParentWithNonResChCollection.GetAll");
+                using var scope = _mgmtGrpParentWithNonResChClientDiagnostics.CreateScope("MgmtGrpParentWithNonResChCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _mgmtGrpParentWithNonResChesRestClient.List(Id.Name, cancellationToken: cancellationToken);
+                    var response = _mgmtGrpParentWithNonResChRestClient.List(Id.Name, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new MgmtGrpParentWithNonResCh(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -299,11 +299,11 @@ namespace MgmtListMethods
             }
             Page<MgmtGrpParentWithNonResCh> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("MgmtGrpParentWithNonResChCollection.GetAll");
+                using var scope = _mgmtGrpParentWithNonResChClientDiagnostics.CreateScope("MgmtGrpParentWithNonResChCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _mgmtGrpParentWithNonResChesRestClient.ListNextPage(nextLink, Id.Name, cancellationToken: cancellationToken);
+                    var response = _mgmtGrpParentWithNonResChRestClient.ListNextPage(nextLink, Id.Name, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new MgmtGrpParentWithNonResCh(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -325,11 +325,11 @@ namespace MgmtListMethods
         {
             async Task<Page<MgmtGrpParentWithNonResCh>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("MgmtGrpParentWithNonResChCollection.GetAll");
+                using var scope = _mgmtGrpParentWithNonResChClientDiagnostics.CreateScope("MgmtGrpParentWithNonResChCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _mgmtGrpParentWithNonResChesRestClient.ListAsync(Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _mgmtGrpParentWithNonResChRestClient.ListAsync(Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new MgmtGrpParentWithNonResCh(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -340,11 +340,11 @@ namespace MgmtListMethods
             }
             async Task<Page<MgmtGrpParentWithNonResCh>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("MgmtGrpParentWithNonResChCollection.GetAll");
+                using var scope = _mgmtGrpParentWithNonResChClientDiagnostics.CreateScope("MgmtGrpParentWithNonResChCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _mgmtGrpParentWithNonResChesRestClient.ListNextPageAsync(nextLink, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _mgmtGrpParentWithNonResChRestClient.ListNextPageAsync(nextLink, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new MgmtGrpParentWithNonResCh(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)

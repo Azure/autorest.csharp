@@ -23,8 +23,6 @@ namespace MgmtExtensionResource
         private ClientDiagnostics _orphanedPostClientDiagnostics;
         private OrphanedPostRestOperations _orphanedPostRestClient;
 
-        private static string _defaultRpNamespace = ClientDiagnostics.GetResourceProviderNamespace(typeof(SubscriptionExtensionClient).Assembly);
-
         /// <summary> Initializes a new instance of the <see cref="SubscriptionExtensionClient"/> class. </summary>
         /// <param name="armClient"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
@@ -32,7 +30,7 @@ namespace MgmtExtensionResource
         {
         }
 
-        private ClientDiagnostics OrphanedPostClientDiagnostics => _orphanedPostClientDiagnostics ??= new ClientDiagnostics("MgmtExtensionResource", _defaultRpNamespace, DiagnosticOptions);
+        private ClientDiagnostics OrphanedPostClientDiagnostics => _orphanedPostClientDiagnostics ??= new ClientDiagnostics("MgmtExtensionResource", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
         private OrphanedPostRestOperations OrphanedPostRestClient => _orphanedPostRestClient ??= new OrphanedPostRestOperations(OrphanedPostClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
 
         private string GetApiVersionOrNull(ResourceType resourceType)

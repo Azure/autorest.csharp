@@ -29,8 +29,8 @@ namespace MgmtListMethods
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly FakeParentWithAncestorWithNonResChesRestOperations _fakeParentWithAncestorWithNonResChesRestClient;
+        private readonly ClientDiagnostics _fakeParentWithAncestorWithNonResChClientDiagnostics;
+        private readonly FakeParentWithAncestorWithNonResChesRestOperations _fakeParentWithAncestorWithNonResChRestClient;
         private readonly FakeParentWithAncestorWithNonResChData _data;
 
         /// <summary> Initializes a new instance of the <see cref="FakeParentWithAncestorWithNonResCh"/> class for mocking. </summary>
@@ -52,9 +52,9 @@ namespace MgmtListMethods
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal FakeParentWithAncestorWithNonResCh(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
         {
-            _clientDiagnostics = new ClientDiagnostics("MgmtListMethods", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string apiVersion);
-            _fakeParentWithAncestorWithNonResChesRestClient = new FakeParentWithAncestorWithNonResChesRestOperations(_clientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, apiVersion);
+            _fakeParentWithAncestorWithNonResChClientDiagnostics = new ClientDiagnostics("MgmtListMethods", ResourceType.Namespace, DiagnosticOptions);
+            ArmClient.TryGetApiVersion(ResourceType, out string fakeParentWithAncestorWithNonResChApiVersion);
+            _fakeParentWithAncestorWithNonResChRestClient = new FakeParentWithAncestorWithNonResChesRestOperations(_fakeParentWithAncestorWithNonResChClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, fakeParentWithAncestorWithNonResChApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -91,13 +91,13 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<FakeParentWithAncestorWithNonResCh>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("FakeParentWithAncestorWithNonResCh.Get");
+            using var scope = _fakeParentWithAncestorWithNonResChClientDiagnostics.CreateScope("FakeParentWithAncestorWithNonResCh.Get");
             scope.Start();
             try
             {
-                var response = await _fakeParentWithAncestorWithNonResChesRestClient.GetAsync(Id.SubscriptionId, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _fakeParentWithAncestorWithNonResChRestClient.GetAsync(Id.SubscriptionId, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                    throw await _fakeParentWithAncestorWithNonResChClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new FakeParentWithAncestorWithNonResCh(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -114,13 +114,13 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<FakeParentWithAncestorWithNonResCh> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("FakeParentWithAncestorWithNonResCh.Get");
+            using var scope = _fakeParentWithAncestorWithNonResChClientDiagnostics.CreateScope("FakeParentWithAncestorWithNonResCh.Get");
             scope.Start();
             try
             {
-                var response = _fakeParentWithAncestorWithNonResChesRestClient.Get(Id.SubscriptionId, Id.Parent.Name, Id.Name, cancellationToken);
+                var response = _fakeParentWithAncestorWithNonResChRestClient.Get(Id.SubscriptionId, Id.Parent.Name, Id.Name, cancellationToken);
                 if (response.Value == null)
-                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                    throw _fakeParentWithAncestorWithNonResChClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new FakeParentWithAncestorWithNonResCh(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -135,7 +135,7 @@ namespace MgmtListMethods
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
         public async virtual Task<IEnumerable<AzureLocation>> GetAvailableLocationsAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("FakeParentWithAncestorWithNonResCh.GetAvailableLocations");
+            using var scope = _fakeParentWithAncestorWithNonResChClientDiagnostics.CreateScope("FakeParentWithAncestorWithNonResCh.GetAvailableLocations");
             scope.Start();
             try
             {
@@ -153,7 +153,7 @@ namespace MgmtListMethods
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
         public virtual IEnumerable<AzureLocation> GetAvailableLocations(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("FakeParentWithAncestorWithNonResCh.GetAvailableLocations");
+            using var scope = _fakeParentWithAncestorWithNonResChClientDiagnostics.CreateScope("FakeParentWithAncestorWithNonResCh.GetAvailableLocations");
             scope.Start();
             try
             {
@@ -175,14 +175,14 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrWhiteSpace(key, nameof(key));
 
-            using var scope = _clientDiagnostics.CreateScope("FakeParentWithAncestorWithNonResCh.AddTag");
+            using var scope = _fakeParentWithAncestorWithNonResChClientDiagnostics.CreateScope("FakeParentWithAncestorWithNonResCh.AddTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _fakeParentWithAncestorWithNonResChesRestClient.GetAsync(Id.SubscriptionId, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _fakeParentWithAncestorWithNonResChRestClient.GetAsync(Id.SubscriptionId, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new FakeParentWithAncestorWithNonResCh(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -201,14 +201,14 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrWhiteSpace(key, nameof(key));
 
-            using var scope = _clientDiagnostics.CreateScope("FakeParentWithAncestorWithNonResCh.AddTag");
+            using var scope = _fakeParentWithAncestorWithNonResChClientDiagnostics.CreateScope("FakeParentWithAncestorWithNonResCh.AddTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _fakeParentWithAncestorWithNonResChesRestClient.Get(Id.SubscriptionId, Id.Parent.Name, Id.Name, cancellationToken);
+                var originalResponse = _fakeParentWithAncestorWithNonResChRestClient.Get(Id.SubscriptionId, Id.Parent.Name, Id.Name, cancellationToken);
                 return Response.FromValue(new FakeParentWithAncestorWithNonResCh(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -229,7 +229,7 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(tags), $"{nameof(tags)} provided cannot be null.");
             }
 
-            using var scope = _clientDiagnostics.CreateScope("FakeParentWithAncestorWithNonResCh.SetTags");
+            using var scope = _fakeParentWithAncestorWithNonResChClientDiagnostics.CreateScope("FakeParentWithAncestorWithNonResCh.SetTags");
             scope.Start();
             try
             {
@@ -237,7 +237,7 @@ namespace MgmtListMethods
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _fakeParentWithAncestorWithNonResChesRestClient.GetAsync(Id.SubscriptionId, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _fakeParentWithAncestorWithNonResChRestClient.GetAsync(Id.SubscriptionId, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new FakeParentWithAncestorWithNonResCh(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -258,7 +258,7 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(tags), $"{nameof(tags)} provided cannot be null.");
             }
 
-            using var scope = _clientDiagnostics.CreateScope("FakeParentWithAncestorWithNonResCh.SetTags");
+            using var scope = _fakeParentWithAncestorWithNonResChClientDiagnostics.CreateScope("FakeParentWithAncestorWithNonResCh.SetTags");
             scope.Start();
             try
             {
@@ -266,7 +266,7 @@ namespace MgmtListMethods
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _fakeParentWithAncestorWithNonResChesRestClient.Get(Id.SubscriptionId, Id.Parent.Name, Id.Name, cancellationToken);
+                var originalResponse = _fakeParentWithAncestorWithNonResChRestClient.Get(Id.SubscriptionId, Id.Parent.Name, Id.Name, cancellationToken);
                 return Response.FromValue(new FakeParentWithAncestorWithNonResCh(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -284,14 +284,14 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrWhiteSpace(key, nameof(key));
 
-            using var scope = _clientDiagnostics.CreateScope("FakeParentWithAncestorWithNonResCh.RemoveTag");
+            using var scope = _fakeParentWithAncestorWithNonResChClientDiagnostics.CreateScope("FakeParentWithAncestorWithNonResCh.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _fakeParentWithAncestorWithNonResChesRestClient.GetAsync(Id.SubscriptionId, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _fakeParentWithAncestorWithNonResChRestClient.GetAsync(Id.SubscriptionId, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new FakeParentWithAncestorWithNonResCh(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -309,14 +309,14 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrWhiteSpace(key, nameof(key));
 
-            using var scope = _clientDiagnostics.CreateScope("FakeParentWithAncestorWithNonResCh.RemoveTag");
+            using var scope = _fakeParentWithAncestorWithNonResChClientDiagnostics.CreateScope("FakeParentWithAncestorWithNonResCh.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _fakeParentWithAncestorWithNonResChesRestClient.Get(Id.SubscriptionId, Id.Parent.Name, Id.Name, cancellationToken);
+                var originalResponse = _fakeParentWithAncestorWithNonResChRestClient.Get(Id.SubscriptionId, Id.Parent.Name, Id.Name, cancellationToken);
                 return Response.FromValue(new FakeParentWithAncestorWithNonResCh(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -336,11 +336,11 @@ namespace MgmtListMethods
         {
             async Task<Page<NonResourceChild>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("FakeParentWithAncestorWithNonResCh.GetNonResourceChild");
+                using var scope = _fakeParentWithAncestorWithNonResChClientDiagnostics.CreateScope("FakeParentWithAncestorWithNonResCh.GetNonResourceChild");
                 scope.Start();
                 try
                 {
-                    var response = await _fakeParentWithAncestorWithNonResChesRestClient.ListNonResourceChildAsync(Id.SubscriptionId, Id.Parent.Name, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _fakeParentWithAncestorWithNonResChRestClient.ListNonResourceChildAsync(Id.SubscriptionId, Id.Parent.Name, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -362,11 +362,11 @@ namespace MgmtListMethods
         {
             Page<NonResourceChild> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("FakeParentWithAncestorWithNonResCh.GetNonResourceChild");
+                using var scope = _fakeParentWithAncestorWithNonResChClientDiagnostics.CreateScope("FakeParentWithAncestorWithNonResCh.GetNonResourceChild");
                 scope.Start();
                 try
                 {
-                    var response = _fakeParentWithAncestorWithNonResChesRestClient.ListNonResourceChild(Id.SubscriptionId, Id.Parent.Name, Id.Name, cancellationToken: cancellationToken);
+                    var response = _fakeParentWithAncestorWithNonResChRestClient.ListNonResourceChild(Id.SubscriptionId, Id.Parent.Name, Id.Name, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
                 }
                 catch (Exception e)

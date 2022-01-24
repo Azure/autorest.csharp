@@ -29,8 +29,6 @@ namespace ExactMatchFlattenInheritance
         private ClientDiagnostics _azureResourceFlattenModel5sClientDiagnostics;
         private AzureResourceFlattenModel5SRestOperations _azureResourceFlattenModel5sRestClient;
 
-        private static string _defaultRpNamespace = ClientDiagnostics.GetResourceProviderNamespace(typeof(ResourceGroupExtensionClient).Assembly);
-
         /// <summary> Initializes a new instance of the <see cref="ResourceGroupExtensionClient"/> class. </summary>
         /// <param name="armClient"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
@@ -38,13 +36,13 @@ namespace ExactMatchFlattenInheritance
         {
         }
 
-        private ClientDiagnostics AzureResourceFlattenModel2sClientDiagnostics => _azureResourceFlattenModel2sClientDiagnostics ??= new ClientDiagnostics("ExactMatchFlattenInheritance", _defaultRpNamespace, DiagnosticOptions);
+        private ClientDiagnostics AzureResourceFlattenModel2sClientDiagnostics => _azureResourceFlattenModel2sClientDiagnostics ??= new ClientDiagnostics("ExactMatchFlattenInheritance", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
         private AzureResourceFlattenModel2SRestOperations AzureResourceFlattenModel2sRestClient => _azureResourceFlattenModel2sRestClient ??= new AzureResourceFlattenModel2SRestOperations(AzureResourceFlattenModel2sClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
-        private ClientDiagnostics AzureResourceFlattenModel3sClientDiagnostics => _azureResourceFlattenModel3sClientDiagnostics ??= new ClientDiagnostics("ExactMatchFlattenInheritance", _defaultRpNamespace, DiagnosticOptions);
+        private ClientDiagnostics AzureResourceFlattenModel3sClientDiagnostics => _azureResourceFlattenModel3sClientDiagnostics ??= new ClientDiagnostics("ExactMatchFlattenInheritance", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
         private AzureResourceFlattenModel3SRestOperations AzureResourceFlattenModel3sRestClient => _azureResourceFlattenModel3sRestClient ??= new AzureResourceFlattenModel3SRestOperations(AzureResourceFlattenModel3sClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
-        private ClientDiagnostics AzureResourceFlattenModel4sClientDiagnostics => _azureResourceFlattenModel4sClientDiagnostics ??= new ClientDiagnostics("ExactMatchFlattenInheritance", _defaultRpNamespace, DiagnosticOptions);
+        private ClientDiagnostics AzureResourceFlattenModel4sClientDiagnostics => _azureResourceFlattenModel4sClientDiagnostics ??= new ClientDiagnostics("ExactMatchFlattenInheritance", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
         private AzureResourceFlattenModel4SRestOperations AzureResourceFlattenModel4sRestClient => _azureResourceFlattenModel4sRestClient ??= new AzureResourceFlattenModel4SRestOperations(AzureResourceFlattenModel4sClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
-        private ClientDiagnostics AzureResourceFlattenModel5sClientDiagnostics => _azureResourceFlattenModel5sClientDiagnostics ??= new ClientDiagnostics("ExactMatchFlattenInheritance", _defaultRpNamespace, DiagnosticOptions);
+        private ClientDiagnostics AzureResourceFlattenModel5sClientDiagnostics => _azureResourceFlattenModel5sClientDiagnostics ??= new ClientDiagnostics("ExactMatchFlattenInheritance", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
         private AzureResourceFlattenModel5SRestOperations AzureResourceFlattenModel5sRestClient => _azureResourceFlattenModel5sRestClient ??= new AzureResourceFlattenModel5SRestOperations(AzureResourceFlattenModel5sClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
 
         private string GetApiVersionOrNull(ResourceType resourceType)

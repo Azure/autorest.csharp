@@ -22,8 +22,8 @@ namespace MgmtParent
     /// <summary> A class representing collection of DedicatedHostGroup and their operations over its parent. </summary>
     public partial class DedicatedHostGroupCollection : ArmCollection
     {
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly DedicatedHostGroupsRestOperations _dedicatedHostGroupsRestClient;
+        private readonly ClientDiagnostics _dedicatedHostGroupClientDiagnostics;
+        private readonly DedicatedHostGroupsRestOperations _dedicatedHostGroupRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="DedicatedHostGroupCollection"/> class for mocking. </summary>
         protected DedicatedHostGroupCollection()
@@ -34,9 +34,9 @@ namespace MgmtParent
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal DedicatedHostGroupCollection(ArmResource parent) : base(parent)
         {
-            _clientDiagnostics = new ClientDiagnostics("MgmtParent", DedicatedHostGroup.ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(DedicatedHostGroup.ResourceType, out string apiVersion);
-            _dedicatedHostGroupsRestClient = new DedicatedHostGroupsRestOperations(_clientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, apiVersion);
+            _dedicatedHostGroupClientDiagnostics = new ClientDiagnostics("MgmtParent", DedicatedHostGroup.ResourceType.Namespace, DiagnosticOptions);
+            ArmClient.TryGetApiVersion(DedicatedHostGroup.ResourceType, out string dedicatedHostGroupApiVersion);
+            _dedicatedHostGroupRestClient = new DedicatedHostGroupsRestOperations(_dedicatedHostGroupClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, dedicatedHostGroupApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -68,11 +68,11 @@ namespace MgmtParent
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupCollection.CreateOrUpdate");
+            using var scope = _dedicatedHostGroupClientDiagnostics.CreateScope("DedicatedHostGroupCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _dedicatedHostGroupsRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, hostGroupName, parameters, cancellationToken);
+                var response = _dedicatedHostGroupRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, hostGroupName, parameters, cancellationToken);
                 var operation = new DedicatedHostGroupCreateOrUpdateOperation(ArmClient, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
@@ -103,11 +103,11 @@ namespace MgmtParent
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupCollection.CreateOrUpdate");
+            using var scope = _dedicatedHostGroupClientDiagnostics.CreateScope("DedicatedHostGroupCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _dedicatedHostGroupsRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, hostGroupName, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _dedicatedHostGroupRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, hostGroupName, parameters, cancellationToken).ConfigureAwait(false);
                 var operation = new DedicatedHostGroupCreateOrUpdateOperation(ArmClient, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -132,13 +132,13 @@ namespace MgmtParent
         {
             Argument.AssertNotNullOrEmpty(hostGroupName, nameof(hostGroupName));
 
-            using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupCollection.Get");
+            using var scope = _dedicatedHostGroupClientDiagnostics.CreateScope("DedicatedHostGroupCollection.Get");
             scope.Start();
             try
             {
-                var response = _dedicatedHostGroupsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, hostGroupName, cancellationToken);
+                var response = _dedicatedHostGroupRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, hostGroupName, cancellationToken);
                 if (response.Value == null)
-                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                    throw _dedicatedHostGroupClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new DedicatedHostGroup(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -160,13 +160,13 @@ namespace MgmtParent
         {
             Argument.AssertNotNullOrEmpty(hostGroupName, nameof(hostGroupName));
 
-            using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupCollection.Get");
+            using var scope = _dedicatedHostGroupClientDiagnostics.CreateScope("DedicatedHostGroupCollection.Get");
             scope.Start();
             try
             {
-                var response = await _dedicatedHostGroupsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, hostGroupName, cancellationToken).ConfigureAwait(false);
+                var response = await _dedicatedHostGroupRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, hostGroupName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                    throw await _dedicatedHostGroupClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new DedicatedHostGroup(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -185,11 +185,11 @@ namespace MgmtParent
         {
             Argument.AssertNotNullOrEmpty(hostGroupName, nameof(hostGroupName));
 
-            using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupCollection.GetIfExists");
+            using var scope = _dedicatedHostGroupClientDiagnostics.CreateScope("DedicatedHostGroupCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _dedicatedHostGroupsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, hostGroupName, cancellationToken: cancellationToken);
+                var response = _dedicatedHostGroupRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, hostGroupName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<DedicatedHostGroup>(null, response.GetRawResponse());
                 return Response.FromValue(new DedicatedHostGroup(ArmClient, response.Value), response.GetRawResponse());
@@ -210,11 +210,11 @@ namespace MgmtParent
         {
             Argument.AssertNotNullOrEmpty(hostGroupName, nameof(hostGroupName));
 
-            using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupCollection.GetIfExists");
+            using var scope = _dedicatedHostGroupClientDiagnostics.CreateScope("DedicatedHostGroupCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _dedicatedHostGroupsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, hostGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _dedicatedHostGroupRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, hostGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<DedicatedHostGroup>(null, response.GetRawResponse());
                 return Response.FromValue(new DedicatedHostGroup(ArmClient, response.Value), response.GetRawResponse());
@@ -235,7 +235,7 @@ namespace MgmtParent
         {
             Argument.AssertNotNullOrEmpty(hostGroupName, nameof(hostGroupName));
 
-            using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupCollection.Exists");
+            using var scope = _dedicatedHostGroupClientDiagnostics.CreateScope("DedicatedHostGroupCollection.Exists");
             scope.Start();
             try
             {
@@ -258,7 +258,7 @@ namespace MgmtParent
         {
             Argument.AssertNotNullOrEmpty(hostGroupName, nameof(hostGroupName));
 
-            using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupCollection.Exists");
+            using var scope = _dedicatedHostGroupClientDiagnostics.CreateScope("DedicatedHostGroupCollection.Exists");
             scope.Start();
             try
             {
@@ -280,7 +280,7 @@ namespace MgmtParent
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<GenericResource> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupCollection.GetAllAsGenericResources");
+            using var scope = _dedicatedHostGroupClientDiagnostics.CreateScope("DedicatedHostGroupCollection.GetAllAsGenericResources");
             scope.Start();
             try
             {
@@ -303,7 +303,7 @@ namespace MgmtParent
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<GenericResource> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupCollection.GetAllAsGenericResources");
+            using var scope = _dedicatedHostGroupClientDiagnostics.CreateScope("DedicatedHostGroupCollection.GetAllAsGenericResources");
             scope.Start();
             try
             {

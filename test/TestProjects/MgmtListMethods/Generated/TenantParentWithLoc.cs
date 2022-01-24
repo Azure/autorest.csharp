@@ -15,7 +15,6 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
-using MgmtListMethods.Models;
 
 namespace MgmtListMethods
 {
@@ -29,8 +28,8 @@ namespace MgmtListMethods
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly TenantParentWithLocsRestOperations _tenantParentWithLocsRestClient;
+        private readonly ClientDiagnostics _tenantParentWithLocClientDiagnostics;
+        private readonly TenantParentWithLocsRestOperations _tenantParentWithLocRestClient;
         private readonly TenantParentWithLocData _data;
 
         /// <summary> Initializes a new instance of the <see cref="TenantParentWithLoc"/> class for mocking. </summary>
@@ -52,9 +51,9 @@ namespace MgmtListMethods
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal TenantParentWithLoc(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
         {
-            _clientDiagnostics = new ClientDiagnostics("MgmtListMethods", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string apiVersion);
-            _tenantParentWithLocsRestClient = new TenantParentWithLocsRestOperations(_clientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, apiVersion);
+            _tenantParentWithLocClientDiagnostics = new ClientDiagnostics("MgmtListMethods", ResourceType.Namespace, DiagnosticOptions);
+            ArmClient.TryGetApiVersion(ResourceType, out string tenantParentWithLocApiVersion);
+            _tenantParentWithLocRestClient = new TenantParentWithLocsRestOperations(_tenantParentWithLocClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, tenantParentWithLocApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -91,13 +90,13 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<TenantParentWithLoc>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("TenantParentWithLoc.Get");
+            using var scope = _tenantParentWithLocClientDiagnostics.CreateScope("TenantParentWithLoc.Get");
             scope.Start();
             try
             {
-                var response = await _tenantParentWithLocsRestClient.GetAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _tenantParentWithLocRestClient.GetAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                    throw await _tenantParentWithLocClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new TenantParentWithLoc(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -114,13 +113,13 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<TenantParentWithLoc> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("TenantParentWithLoc.Get");
+            using var scope = _tenantParentWithLocClientDiagnostics.CreateScope("TenantParentWithLoc.Get");
             scope.Start();
             try
             {
-                var response = _tenantParentWithLocsRestClient.Get(Id.Parent.Name, Id.Name, cancellationToken);
+                var response = _tenantParentWithLocRestClient.Get(Id.Parent.Name, Id.Name, cancellationToken);
                 if (response.Value == null)
-                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                    throw _tenantParentWithLocClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new TenantParentWithLoc(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -135,7 +134,7 @@ namespace MgmtListMethods
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
         public async virtual Task<IEnumerable<AzureLocation>> GetAvailableLocationsAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("TenantParentWithLoc.GetAvailableLocations");
+            using var scope = _tenantParentWithLocClientDiagnostics.CreateScope("TenantParentWithLoc.GetAvailableLocations");
             scope.Start();
             try
             {
@@ -153,7 +152,7 @@ namespace MgmtListMethods
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
         public virtual IEnumerable<AzureLocation> GetAvailableLocations(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("TenantParentWithLoc.GetAvailableLocations");
+            using var scope = _tenantParentWithLocClientDiagnostics.CreateScope("TenantParentWithLoc.GetAvailableLocations");
             scope.Start();
             try
             {
@@ -175,14 +174,14 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrWhiteSpace(key, nameof(key));
 
-            using var scope = _clientDiagnostics.CreateScope("TenantParentWithLoc.AddTag");
+            using var scope = _tenantParentWithLocClientDiagnostics.CreateScope("TenantParentWithLoc.AddTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _tenantParentWithLocsRestClient.GetAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _tenantParentWithLocRestClient.GetAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new TenantParentWithLoc(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -201,14 +200,14 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrWhiteSpace(key, nameof(key));
 
-            using var scope = _clientDiagnostics.CreateScope("TenantParentWithLoc.AddTag");
+            using var scope = _tenantParentWithLocClientDiagnostics.CreateScope("TenantParentWithLoc.AddTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _tenantParentWithLocsRestClient.Get(Id.Parent.Name, Id.Name, cancellationToken);
+                var originalResponse = _tenantParentWithLocRestClient.Get(Id.Parent.Name, Id.Name, cancellationToken);
                 return Response.FromValue(new TenantParentWithLoc(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -229,7 +228,7 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(tags), $"{nameof(tags)} provided cannot be null.");
             }
 
-            using var scope = _clientDiagnostics.CreateScope("TenantParentWithLoc.SetTags");
+            using var scope = _tenantParentWithLocClientDiagnostics.CreateScope("TenantParentWithLoc.SetTags");
             scope.Start();
             try
             {
@@ -237,7 +236,7 @@ namespace MgmtListMethods
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _tenantParentWithLocsRestClient.GetAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _tenantParentWithLocRestClient.GetAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new TenantParentWithLoc(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -258,7 +257,7 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(tags), $"{nameof(tags)} provided cannot be null.");
             }
 
-            using var scope = _clientDiagnostics.CreateScope("TenantParentWithLoc.SetTags");
+            using var scope = _tenantParentWithLocClientDiagnostics.CreateScope("TenantParentWithLoc.SetTags");
             scope.Start();
             try
             {
@@ -266,7 +265,7 @@ namespace MgmtListMethods
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _tenantParentWithLocsRestClient.Get(Id.Parent.Name, Id.Name, cancellationToken);
+                var originalResponse = _tenantParentWithLocRestClient.Get(Id.Parent.Name, Id.Name, cancellationToken);
                 return Response.FromValue(new TenantParentWithLoc(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -284,14 +283,14 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrWhiteSpace(key, nameof(key));
 
-            using var scope = _clientDiagnostics.CreateScope("TenantParentWithLoc.RemoveTag");
+            using var scope = _tenantParentWithLocClientDiagnostics.CreateScope("TenantParentWithLoc.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _tenantParentWithLocsRestClient.GetAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _tenantParentWithLocRestClient.GetAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new TenantParentWithLoc(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -309,14 +308,14 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrWhiteSpace(key, nameof(key));
 
-            using var scope = _clientDiagnostics.CreateScope("TenantParentWithLoc.RemoveTag");
+            using var scope = _tenantParentWithLocClientDiagnostics.CreateScope("TenantParentWithLoc.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _tenantParentWithLocsRestClient.Get(Id.Parent.Name, Id.Name, cancellationToken);
+                var originalResponse = _tenantParentWithLocRestClient.Get(Id.Parent.Name, Id.Name, cancellationToken);
                 return Response.FromValue(new TenantParentWithLoc(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)

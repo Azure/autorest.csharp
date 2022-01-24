@@ -15,7 +15,6 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
-using MgmtListMethods.Models;
 
 namespace MgmtListMethods
 {
@@ -29,8 +28,8 @@ namespace MgmtListMethods
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly ResGrpParentsRestOperations _resGrpParentsRestClient;
+        private readonly ClientDiagnostics _resGrpParentClientDiagnostics;
+        private readonly ResGrpParentsRestOperations _resGrpParentRestClient;
         private readonly ResGrpParentData _data;
 
         /// <summary> Initializes a new instance of the <see cref="ResGrpParent"/> class for mocking. </summary>
@@ -52,9 +51,9 @@ namespace MgmtListMethods
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal ResGrpParent(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
         {
-            _clientDiagnostics = new ClientDiagnostics("MgmtListMethods", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string apiVersion);
-            _resGrpParentsRestClient = new ResGrpParentsRestOperations(_clientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, apiVersion);
+            _resGrpParentClientDiagnostics = new ClientDiagnostics("MgmtListMethods", ResourceType.Namespace, DiagnosticOptions);
+            ArmClient.TryGetApiVersion(ResourceType, out string resGrpParentApiVersion);
+            _resGrpParentRestClient = new ResGrpParentsRestOperations(_resGrpParentClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, resGrpParentApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -91,13 +90,13 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<ResGrpParent>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ResGrpParent.Get");
+            using var scope = _resGrpParentClientDiagnostics.CreateScope("ResGrpParent.Get");
             scope.Start();
             try
             {
-                var response = await _resGrpParentsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _resGrpParentRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                    throw await _resGrpParentClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new ResGrpParent(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -114,13 +113,13 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<ResGrpParent> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ResGrpParent.Get");
+            using var scope = _resGrpParentClientDiagnostics.CreateScope("ResGrpParent.Get");
             scope.Start();
             try
             {
-                var response = _resGrpParentsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _resGrpParentRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
-                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                    throw _resGrpParentClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new ResGrpParent(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -135,7 +134,7 @@ namespace MgmtListMethods
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
         public async virtual Task<IEnumerable<AzureLocation>> GetAvailableLocationsAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ResGrpParent.GetAvailableLocations");
+            using var scope = _resGrpParentClientDiagnostics.CreateScope("ResGrpParent.GetAvailableLocations");
             scope.Start();
             try
             {
@@ -153,7 +152,7 @@ namespace MgmtListMethods
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
         public virtual IEnumerable<AzureLocation> GetAvailableLocations(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ResGrpParent.GetAvailableLocations");
+            using var scope = _resGrpParentClientDiagnostics.CreateScope("ResGrpParent.GetAvailableLocations");
             scope.Start();
             try
             {
@@ -175,14 +174,14 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrWhiteSpace(key, nameof(key));
 
-            using var scope = _clientDiagnostics.CreateScope("ResGrpParent.AddTag");
+            using var scope = _resGrpParentClientDiagnostics.CreateScope("ResGrpParent.AddTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _resGrpParentsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _resGrpParentRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new ResGrpParent(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -201,14 +200,14 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrWhiteSpace(key, nameof(key));
 
-            using var scope = _clientDiagnostics.CreateScope("ResGrpParent.AddTag");
+            using var scope = _resGrpParentClientDiagnostics.CreateScope("ResGrpParent.AddTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _resGrpParentsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var originalResponse = _resGrpParentRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new ResGrpParent(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -229,7 +228,7 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(tags), $"{nameof(tags)} provided cannot be null.");
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ResGrpParent.SetTags");
+            using var scope = _resGrpParentClientDiagnostics.CreateScope("ResGrpParent.SetTags");
             scope.Start();
             try
             {
@@ -237,7 +236,7 @@ namespace MgmtListMethods
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _resGrpParentsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _resGrpParentRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new ResGrpParent(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -258,7 +257,7 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(tags), $"{nameof(tags)} provided cannot be null.");
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ResGrpParent.SetTags");
+            using var scope = _resGrpParentClientDiagnostics.CreateScope("ResGrpParent.SetTags");
             scope.Start();
             try
             {
@@ -266,7 +265,7 @@ namespace MgmtListMethods
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _resGrpParentsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var originalResponse = _resGrpParentRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new ResGrpParent(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -284,14 +283,14 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrWhiteSpace(key, nameof(key));
 
-            using var scope = _clientDiagnostics.CreateScope("ResGrpParent.RemoveTag");
+            using var scope = _resGrpParentClientDiagnostics.CreateScope("ResGrpParent.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _resGrpParentsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _resGrpParentRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new ResGrpParent(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -309,14 +308,14 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrWhiteSpace(key, nameof(key));
 
-            using var scope = _clientDiagnostics.CreateScope("ResGrpParent.RemoveTag");
+            using var scope = _resGrpParentClientDiagnostics.CreateScope("ResGrpParent.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _resGrpParentsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var originalResponse = _resGrpParentRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new ResGrpParent(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)

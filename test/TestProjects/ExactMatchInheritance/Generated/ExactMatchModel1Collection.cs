@@ -25,8 +25,8 @@ namespace ExactMatchInheritance
     /// <summary> A class representing collection of ExactMatchModel1 and their operations over its parent. </summary>
     public partial class ExactMatchModel1Collection : ArmCollection, IEnumerable<ExactMatchModel1>, IAsyncEnumerable<ExactMatchModel1>
     {
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly ExactMatchModel1SRestOperations _exactMatchModel1sRestClient;
+        private readonly ClientDiagnostics _exactMatchModel1ClientDiagnostics;
+        private readonly ExactMatchModel1SRestOperations _exactMatchModel1RestClient;
 
         /// <summary> Initializes a new instance of the <see cref="ExactMatchModel1Collection"/> class for mocking. </summary>
         protected ExactMatchModel1Collection()
@@ -37,9 +37,9 @@ namespace ExactMatchInheritance
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal ExactMatchModel1Collection(ArmResource parent) : base(parent)
         {
-            _clientDiagnostics = new ClientDiagnostics("ExactMatchInheritance", ExactMatchModel1.ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ExactMatchModel1.ResourceType, out string apiVersion);
-            _exactMatchModel1sRestClient = new ExactMatchModel1SRestOperations(_clientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, apiVersion);
+            _exactMatchModel1ClientDiagnostics = new ClientDiagnostics("ExactMatchInheritance", ExactMatchModel1.ResourceType.Namespace, DiagnosticOptions);
+            ArmClient.TryGetApiVersion(ExactMatchModel1.ResourceType, out string exactMatchModel1ApiVersion);
+            _exactMatchModel1RestClient = new ExactMatchModel1SRestOperations(_exactMatchModel1ClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, exactMatchModel1ApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -70,11 +70,11 @@ namespace ExactMatchInheritance
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ExactMatchModel1Collection.CreateOrUpdate");
+            using var scope = _exactMatchModel1ClientDiagnostics.CreateScope("ExactMatchModel1Collection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _exactMatchModel1sRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, exactMatchModel1SName, parameters, cancellationToken);
+                var response = _exactMatchModel1RestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, exactMatchModel1SName, parameters, cancellationToken);
                 var operation = new ExactMatchModel1CreateOrUpdateOperation(ArmClient, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
@@ -104,11 +104,11 @@ namespace ExactMatchInheritance
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ExactMatchModel1Collection.CreateOrUpdate");
+            using var scope = _exactMatchModel1ClientDiagnostics.CreateScope("ExactMatchModel1Collection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _exactMatchModel1sRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, exactMatchModel1SName, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _exactMatchModel1RestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, exactMatchModel1SName, parameters, cancellationToken).ConfigureAwait(false);
                 var operation = new ExactMatchModel1CreateOrUpdateOperation(ArmClient, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -132,13 +132,13 @@ namespace ExactMatchInheritance
         {
             Argument.AssertNotNullOrEmpty(exactMatchModel1SName, nameof(exactMatchModel1SName));
 
-            using var scope = _clientDiagnostics.CreateScope("ExactMatchModel1Collection.Get");
+            using var scope = _exactMatchModel1ClientDiagnostics.CreateScope("ExactMatchModel1Collection.Get");
             scope.Start();
             try
             {
-                var response = _exactMatchModel1sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, exactMatchModel1SName, cancellationToken);
+                var response = _exactMatchModel1RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, exactMatchModel1SName, cancellationToken);
                 if (response.Value == null)
-                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                    throw _exactMatchModel1ClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new ExactMatchModel1(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -159,13 +159,13 @@ namespace ExactMatchInheritance
         {
             Argument.AssertNotNullOrEmpty(exactMatchModel1SName, nameof(exactMatchModel1SName));
 
-            using var scope = _clientDiagnostics.CreateScope("ExactMatchModel1Collection.Get");
+            using var scope = _exactMatchModel1ClientDiagnostics.CreateScope("ExactMatchModel1Collection.Get");
             scope.Start();
             try
             {
-                var response = await _exactMatchModel1sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, exactMatchModel1SName, cancellationToken).ConfigureAwait(false);
+                var response = await _exactMatchModel1RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, exactMatchModel1SName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                    throw await _exactMatchModel1ClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new ExactMatchModel1(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -184,11 +184,11 @@ namespace ExactMatchInheritance
         {
             Argument.AssertNotNullOrEmpty(exactMatchModel1SName, nameof(exactMatchModel1SName));
 
-            using var scope = _clientDiagnostics.CreateScope("ExactMatchModel1Collection.GetIfExists");
+            using var scope = _exactMatchModel1ClientDiagnostics.CreateScope("ExactMatchModel1Collection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _exactMatchModel1sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, exactMatchModel1SName, cancellationToken: cancellationToken);
+                var response = _exactMatchModel1RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, exactMatchModel1SName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<ExactMatchModel1>(null, response.GetRawResponse());
                 return Response.FromValue(new ExactMatchModel1(ArmClient, response.Value), response.GetRawResponse());
@@ -209,11 +209,11 @@ namespace ExactMatchInheritance
         {
             Argument.AssertNotNullOrEmpty(exactMatchModel1SName, nameof(exactMatchModel1SName));
 
-            using var scope = _clientDiagnostics.CreateScope("ExactMatchModel1Collection.GetIfExists");
+            using var scope = _exactMatchModel1ClientDiagnostics.CreateScope("ExactMatchModel1Collection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _exactMatchModel1sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, exactMatchModel1SName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _exactMatchModel1RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, exactMatchModel1SName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<ExactMatchModel1>(null, response.GetRawResponse());
                 return Response.FromValue(new ExactMatchModel1(ArmClient, response.Value), response.GetRawResponse());
@@ -234,7 +234,7 @@ namespace ExactMatchInheritance
         {
             Argument.AssertNotNullOrEmpty(exactMatchModel1SName, nameof(exactMatchModel1SName));
 
-            using var scope = _clientDiagnostics.CreateScope("ExactMatchModel1Collection.Exists");
+            using var scope = _exactMatchModel1ClientDiagnostics.CreateScope("ExactMatchModel1Collection.Exists");
             scope.Start();
             try
             {
@@ -257,7 +257,7 @@ namespace ExactMatchInheritance
         {
             Argument.AssertNotNullOrEmpty(exactMatchModel1SName, nameof(exactMatchModel1SName));
 
-            using var scope = _clientDiagnostics.CreateScope("ExactMatchModel1Collection.Exists");
+            using var scope = _exactMatchModel1ClientDiagnostics.CreateScope("ExactMatchModel1Collection.Exists");
             scope.Start();
             try
             {
@@ -280,11 +280,11 @@ namespace ExactMatchInheritance
         {
             Page<ExactMatchModel1> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("ExactMatchModel1Collection.GetAll");
+                using var scope = _exactMatchModel1ClientDiagnostics.CreateScope("ExactMatchModel1Collection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _exactMatchModel1sRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
+                    var response = _exactMatchModel1RestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new ExactMatchModel1(ArmClient, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -305,11 +305,11 @@ namespace ExactMatchInheritance
         {
             async Task<Page<ExactMatchModel1>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("ExactMatchModel1Collection.GetAll");
+                using var scope = _exactMatchModel1ClientDiagnostics.CreateScope("ExactMatchModel1Collection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _exactMatchModel1sRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _exactMatchModel1RestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new ExactMatchModel1(ArmClient, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -329,7 +329,7 @@ namespace ExactMatchInheritance
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<GenericResource> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ExactMatchModel1Collection.GetAllAsGenericResources");
+            using var scope = _exactMatchModel1ClientDiagnostics.CreateScope("ExactMatchModel1Collection.GetAllAsGenericResources");
             scope.Start();
             try
             {
@@ -352,7 +352,7 @@ namespace ExactMatchInheritance
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<GenericResource> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ExactMatchModel1Collection.GetAllAsGenericResources");
+            using var scope = _exactMatchModel1ClientDiagnostics.CreateScope("ExactMatchModel1Collection.GetAllAsGenericResources");
             scope.Start();
             try
             {

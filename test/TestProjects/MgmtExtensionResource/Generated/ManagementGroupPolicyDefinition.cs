@@ -29,8 +29,8 @@ namespace MgmtExtensionResource
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly PolicyDefinitionsRestOperations _policyDefinitionsRestClient;
+        private readonly ClientDiagnostics _policyDefinitionClientDiagnostics;
+        private readonly PolicyDefinitionsRestOperations _policyDefinitionRestClient;
         private readonly PolicyDefinitionData _data;
 
         /// <summary> Initializes a new instance of the <see cref="ManagementGroupPolicyDefinition"/> class for mocking. </summary>
@@ -52,9 +52,9 @@ namespace MgmtExtensionResource
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal ManagementGroupPolicyDefinition(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
         {
-            _clientDiagnostics = new ClientDiagnostics("MgmtExtensionResource", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string apiVersion);
-            _policyDefinitionsRestClient = new PolicyDefinitionsRestOperations(_clientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, apiVersion);
+            _policyDefinitionClientDiagnostics = new ClientDiagnostics("MgmtExtensionResource", ResourceType.Namespace, DiagnosticOptions);
+            ArmClient.TryGetApiVersion(ResourceType, out string policyDefinitionApiVersion);
+            _policyDefinitionRestClient = new PolicyDefinitionsRestOperations(_policyDefinitionClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, policyDefinitionApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -91,13 +91,13 @@ namespace MgmtExtensionResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<ManagementGroupPolicyDefinition>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ManagementGroupPolicyDefinition.Get");
+            using var scope = _policyDefinitionClientDiagnostics.CreateScope("ManagementGroupPolicyDefinition.Get");
             scope.Start();
             try
             {
-                var response = await _policyDefinitionsRestClient.GetAtManagementGroupAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _policyDefinitionRestClient.GetAtManagementGroupAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                    throw await _policyDefinitionClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new ManagementGroupPolicyDefinition(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -114,13 +114,13 @@ namespace MgmtExtensionResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<ManagementGroupPolicyDefinition> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ManagementGroupPolicyDefinition.Get");
+            using var scope = _policyDefinitionClientDiagnostics.CreateScope("ManagementGroupPolicyDefinition.Get");
             scope.Start();
             try
             {
-                var response = _policyDefinitionsRestClient.GetAtManagementGroup(Id.Parent.Name, Id.Name, cancellationToken);
+                var response = _policyDefinitionRestClient.GetAtManagementGroup(Id.Parent.Name, Id.Name, cancellationToken);
                 if (response.Value == null)
-                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                    throw _policyDefinitionClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new ManagementGroupPolicyDefinition(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -135,7 +135,7 @@ namespace MgmtExtensionResource
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
         public async virtual Task<IEnumerable<AzureLocation>> GetAvailableLocationsAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ManagementGroupPolicyDefinition.GetAvailableLocations");
+            using var scope = _policyDefinitionClientDiagnostics.CreateScope("ManagementGroupPolicyDefinition.GetAvailableLocations");
             scope.Start();
             try
             {
@@ -153,7 +153,7 @@ namespace MgmtExtensionResource
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
         public virtual IEnumerable<AzureLocation> GetAvailableLocations(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ManagementGroupPolicyDefinition.GetAvailableLocations");
+            using var scope = _policyDefinitionClientDiagnostics.CreateScope("ManagementGroupPolicyDefinition.GetAvailableLocations");
             scope.Start();
             try
             {
@@ -174,11 +174,11 @@ namespace MgmtExtensionResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<ManagementGroupPolicyDefinitionDeleteOperation> DeleteAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ManagementGroupPolicyDefinition.Delete");
+            using var scope = _policyDefinitionClientDiagnostics.CreateScope("ManagementGroupPolicyDefinition.Delete");
             scope.Start();
             try
             {
-                var response = await _policyDefinitionsRestClient.DeleteAtManagementGroupAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _policyDefinitionRestClient.DeleteAtManagementGroupAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 var operation = new ManagementGroupPolicyDefinitionDeleteOperation(response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
@@ -199,11 +199,11 @@ namespace MgmtExtensionResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual ManagementGroupPolicyDefinitionDeleteOperation Delete(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ManagementGroupPolicyDefinition.Delete");
+            using var scope = _policyDefinitionClientDiagnostics.CreateScope("ManagementGroupPolicyDefinition.Delete");
             scope.Start();
             try
             {
-                var response = _policyDefinitionsRestClient.DeleteAtManagementGroup(Id.Parent.Name, Id.Name, cancellationToken);
+                var response = _policyDefinitionRestClient.DeleteAtManagementGroup(Id.Parent.Name, Id.Name, cancellationToken);
                 var operation = new ManagementGroupPolicyDefinitionDeleteOperation(response);
                 if (waitForCompletion)
                     operation.WaitForCompletionResponse(cancellationToken);

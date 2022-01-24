@@ -23,8 +23,6 @@ namespace OmitOperationGroups
         private ClientDiagnostics _model5sClientDiagnostics;
         private Model5SRestOperations _model5sRestClient;
 
-        private static string _defaultRpNamespace = ClientDiagnostics.GetResourceProviderNamespace(typeof(ResourceGroupExtensionClient).Assembly);
-
         /// <summary> Initializes a new instance of the <see cref="ResourceGroupExtensionClient"/> class. </summary>
         /// <param name="armClient"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
@@ -32,7 +30,7 @@ namespace OmitOperationGroups
         {
         }
 
-        private ClientDiagnostics Model5sClientDiagnostics => _model5sClientDiagnostics ??= new ClientDiagnostics("OmitOperationGroups", _defaultRpNamespace, DiagnosticOptions);
+        private ClientDiagnostics Model5sClientDiagnostics => _model5sClientDiagnostics ??= new ClientDiagnostics("OmitOperationGroups", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
         private Model5SRestOperations Model5sRestClient => _model5sRestClient ??= new Model5SRestOperations(Model5sClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
 
         private string GetApiVersionOrNull(ResourceType resourceType)

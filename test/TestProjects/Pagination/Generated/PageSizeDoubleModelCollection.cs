@@ -25,8 +25,8 @@ namespace Pagination
     /// <summary> A class representing collection of PageSizeDoubleModel and their operations over its parent. </summary>
     public partial class PageSizeDoubleModelCollection : ArmCollection, IEnumerable<PageSizeDoubleModel>, IAsyncEnumerable<PageSizeDoubleModel>
     {
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly PageSizeDoubleModelsRestOperations _pageSizeDoubleModelsRestClient;
+        private readonly ClientDiagnostics _pageSizeDoubleModelClientDiagnostics;
+        private readonly PageSizeDoubleModelsRestOperations _pageSizeDoubleModelRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="PageSizeDoubleModelCollection"/> class for mocking. </summary>
         protected PageSizeDoubleModelCollection()
@@ -37,9 +37,9 @@ namespace Pagination
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal PageSizeDoubleModelCollection(ArmResource parent) : base(parent)
         {
-            _clientDiagnostics = new ClientDiagnostics("Pagination", PageSizeDoubleModel.ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(PageSizeDoubleModel.ResourceType, out string apiVersion);
-            _pageSizeDoubleModelsRestClient = new PageSizeDoubleModelsRestOperations(_clientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, apiVersion);
+            _pageSizeDoubleModelClientDiagnostics = new ClientDiagnostics("Pagination", PageSizeDoubleModel.ResourceType.Namespace, DiagnosticOptions);
+            ArmClient.TryGetApiVersion(PageSizeDoubleModel.ResourceType, out string pageSizeDoubleModelApiVersion);
+            _pageSizeDoubleModelRestClient = new PageSizeDoubleModelsRestOperations(_pageSizeDoubleModelClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, pageSizeDoubleModelApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -67,11 +67,11 @@ namespace Pagination
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("PageSizeDoubleModelCollection.CreateOrUpdate");
+            using var scope = _pageSizeDoubleModelClientDiagnostics.CreateScope("PageSizeDoubleModelCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _pageSizeDoubleModelsRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, name, parameters, cancellationToken);
+                var response = _pageSizeDoubleModelRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, name, parameters, cancellationToken);
                 var operation = new PageSizeDoubleModelCreateOrUpdateOperation(ArmClient, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
@@ -98,11 +98,11 @@ namespace Pagination
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("PageSizeDoubleModelCollection.CreateOrUpdate");
+            using var scope = _pageSizeDoubleModelClientDiagnostics.CreateScope("PageSizeDoubleModelCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _pageSizeDoubleModelsRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, name, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _pageSizeDoubleModelRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, name, parameters, cancellationToken).ConfigureAwait(false);
                 var operation = new PageSizeDoubleModelCreateOrUpdateOperation(ArmClient, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -123,13 +123,13 @@ namespace Pagination
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
-            using var scope = _clientDiagnostics.CreateScope("PageSizeDoubleModelCollection.Get");
+            using var scope = _pageSizeDoubleModelClientDiagnostics.CreateScope("PageSizeDoubleModelCollection.Get");
             scope.Start();
             try
             {
-                var response = _pageSizeDoubleModelsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken);
+                var response = _pageSizeDoubleModelRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken);
                 if (response.Value == null)
-                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                    throw _pageSizeDoubleModelClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new PageSizeDoubleModel(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -147,13 +147,13 @@ namespace Pagination
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
-            using var scope = _clientDiagnostics.CreateScope("PageSizeDoubleModelCollection.Get");
+            using var scope = _pageSizeDoubleModelClientDiagnostics.CreateScope("PageSizeDoubleModelCollection.Get");
             scope.Start();
             try
             {
-                var response = await _pageSizeDoubleModelsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken).ConfigureAwait(false);
+                var response = await _pageSizeDoubleModelRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                    throw await _pageSizeDoubleModelClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new PageSizeDoubleModel(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -172,11 +172,11 @@ namespace Pagination
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
-            using var scope = _clientDiagnostics.CreateScope("PageSizeDoubleModelCollection.GetIfExists");
+            using var scope = _pageSizeDoubleModelClientDiagnostics.CreateScope("PageSizeDoubleModelCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _pageSizeDoubleModelsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken);
+                var response = _pageSizeDoubleModelRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<PageSizeDoubleModel>(null, response.GetRawResponse());
                 return Response.FromValue(new PageSizeDoubleModel(ArmClient, response.Value), response.GetRawResponse());
@@ -197,11 +197,11 @@ namespace Pagination
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
-            using var scope = _clientDiagnostics.CreateScope("PageSizeDoubleModelCollection.GetIfExists");
+            using var scope = _pageSizeDoubleModelClientDiagnostics.CreateScope("PageSizeDoubleModelCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _pageSizeDoubleModelsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _pageSizeDoubleModelRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<PageSizeDoubleModel>(null, response.GetRawResponse());
                 return Response.FromValue(new PageSizeDoubleModel(ArmClient, response.Value), response.GetRawResponse());
@@ -222,7 +222,7 @@ namespace Pagination
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
-            using var scope = _clientDiagnostics.CreateScope("PageSizeDoubleModelCollection.Exists");
+            using var scope = _pageSizeDoubleModelClientDiagnostics.CreateScope("PageSizeDoubleModelCollection.Exists");
             scope.Start();
             try
             {
@@ -245,7 +245,7 @@ namespace Pagination
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
-            using var scope = _clientDiagnostics.CreateScope("PageSizeDoubleModelCollection.Exists");
+            using var scope = _pageSizeDoubleModelClientDiagnostics.CreateScope("PageSizeDoubleModelCollection.Exists");
             scope.Start();
             try
             {
@@ -266,11 +266,11 @@ namespace Pagination
         {
             Page<PageSizeDoubleModel> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("PageSizeDoubleModelCollection.GetAll");
+                using var scope = _pageSizeDoubleModelClientDiagnostics.CreateScope("PageSizeDoubleModelCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _pageSizeDoubleModelsRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint, cancellationToken: cancellationToken);
+                    var response = _pageSizeDoubleModelRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new PageSizeDoubleModel(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -281,11 +281,11 @@ namespace Pagination
             }
             Page<PageSizeDoubleModel> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("PageSizeDoubleModelCollection.GetAll");
+                using var scope = _pageSizeDoubleModelClientDiagnostics.CreateScope("PageSizeDoubleModelCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _pageSizeDoubleModelsRestClient.ListNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint, cancellationToken: cancellationToken);
+                    var response = _pageSizeDoubleModelRestClient.ListNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new PageSizeDoubleModel(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -304,11 +304,11 @@ namespace Pagination
         {
             async Task<Page<PageSizeDoubleModel>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("PageSizeDoubleModelCollection.GetAll");
+                using var scope = _pageSizeDoubleModelClientDiagnostics.CreateScope("PageSizeDoubleModelCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _pageSizeDoubleModelsRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _pageSizeDoubleModelRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new PageSizeDoubleModel(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -319,11 +319,11 @@ namespace Pagination
             }
             async Task<Page<PageSizeDoubleModel>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("PageSizeDoubleModelCollection.GetAll");
+                using var scope = _pageSizeDoubleModelClientDiagnostics.CreateScope("PageSizeDoubleModelCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _pageSizeDoubleModelsRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _pageSizeDoubleModelRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new PageSizeDoubleModel(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -343,7 +343,7 @@ namespace Pagination
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<GenericResource> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PageSizeDoubleModelCollection.GetAllAsGenericResources");
+            using var scope = _pageSizeDoubleModelClientDiagnostics.CreateScope("PageSizeDoubleModelCollection.GetAllAsGenericResources");
             scope.Start();
             try
             {
@@ -366,7 +366,7 @@ namespace Pagination
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<GenericResource> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PageSizeDoubleModelCollection.GetAllAsGenericResources");
+            using var scope = _pageSizeDoubleModelClientDiagnostics.CreateScope("PageSizeDoubleModelCollection.GetAllAsGenericResources");
             scope.Start();
             try
             {

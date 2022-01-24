@@ -15,7 +15,6 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
-using NoTypeReplacement.Models;
 
 namespace NoTypeReplacement
 {
@@ -29,8 +28,8 @@ namespace NoTypeReplacement
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly NoTypeReplacementModel3SRestOperations _noTypeReplacementModel3sRestClient;
+        private readonly ClientDiagnostics _noTypeReplacementModel3ClientDiagnostics;
+        private readonly NoTypeReplacementModel3SRestOperations _noTypeReplacementModel3RestClient;
         private readonly NoTypeReplacementModel3Data _data;
 
         /// <summary> Initializes a new instance of the <see cref="NoTypeReplacementModel3"/> class for mocking. </summary>
@@ -52,9 +51,9 @@ namespace NoTypeReplacement
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal NoTypeReplacementModel3(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
         {
-            _clientDiagnostics = new ClientDiagnostics("NoTypeReplacement", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string apiVersion);
-            _noTypeReplacementModel3sRestClient = new NoTypeReplacementModel3SRestOperations(_clientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, apiVersion);
+            _noTypeReplacementModel3ClientDiagnostics = new ClientDiagnostics("NoTypeReplacement", ResourceType.Namespace, DiagnosticOptions);
+            ArmClient.TryGetApiVersion(ResourceType, out string noTypeReplacementModel3ApiVersion);
+            _noTypeReplacementModel3RestClient = new NoTypeReplacementModel3SRestOperations(_noTypeReplacementModel3ClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, noTypeReplacementModel3ApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -87,13 +86,13 @@ namespace NoTypeReplacement
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<NoTypeReplacementModel3>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("NoTypeReplacementModel3.Get");
+            using var scope = _noTypeReplacementModel3ClientDiagnostics.CreateScope("NoTypeReplacementModel3.Get");
             scope.Start();
             try
             {
-                var response = await _noTypeReplacementModel3sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _noTypeReplacementModel3RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                    throw await _noTypeReplacementModel3ClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new NoTypeReplacementModel3(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -106,13 +105,13 @@ namespace NoTypeReplacement
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<NoTypeReplacementModel3> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("NoTypeReplacementModel3.Get");
+            using var scope = _noTypeReplacementModel3ClientDiagnostics.CreateScope("NoTypeReplacementModel3.Get");
             scope.Start();
             try
             {
-                var response = _noTypeReplacementModel3sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _noTypeReplacementModel3RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
-                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                    throw _noTypeReplacementModel3ClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new NoTypeReplacementModel3(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -127,7 +126,7 @@ namespace NoTypeReplacement
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
         public async virtual Task<IEnumerable<AzureLocation>> GetAvailableLocationsAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("NoTypeReplacementModel3.GetAvailableLocations");
+            using var scope = _noTypeReplacementModel3ClientDiagnostics.CreateScope("NoTypeReplacementModel3.GetAvailableLocations");
             scope.Start();
             try
             {
@@ -145,7 +144,7 @@ namespace NoTypeReplacement
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
         public virtual IEnumerable<AzureLocation> GetAvailableLocations(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("NoTypeReplacementModel3.GetAvailableLocations");
+            using var scope = _noTypeReplacementModel3ClientDiagnostics.CreateScope("NoTypeReplacementModel3.GetAvailableLocations");
             scope.Start();
             try
             {

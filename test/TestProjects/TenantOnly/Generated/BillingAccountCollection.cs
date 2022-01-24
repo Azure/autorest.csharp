@@ -24,8 +24,8 @@ namespace TenantOnly
     /// <summary> A class representing collection of BillingAccount and their operations over its parent. </summary>
     public partial class BillingAccountCollection : ArmCollection, IEnumerable<BillingAccount>, IAsyncEnumerable<BillingAccount>
     {
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly BillingAccountsRestOperations _billingAccountsRestClient;
+        private readonly ClientDiagnostics _billingAccountClientDiagnostics;
+        private readonly BillingAccountsRestOperations _billingAccountRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="BillingAccountCollection"/> class for mocking. </summary>
         protected BillingAccountCollection()
@@ -36,9 +36,9 @@ namespace TenantOnly
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal BillingAccountCollection(ArmResource parent) : base(parent)
         {
-            _clientDiagnostics = new ClientDiagnostics("TenantOnly", BillingAccount.ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(BillingAccount.ResourceType, out string apiVersion);
-            _billingAccountsRestClient = new BillingAccountsRestOperations(_clientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, apiVersion);
+            _billingAccountClientDiagnostics = new ClientDiagnostics("TenantOnly", BillingAccount.ResourceType.Namespace, DiagnosticOptions);
+            ArmClient.TryGetApiVersion(BillingAccount.ResourceType, out string billingAccountApiVersion);
+            _billingAccountRestClient = new BillingAccountsRestOperations(_billingAccountClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, billingAccountApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -70,12 +70,12 @@ namespace TenantOnly
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("BillingAccountCollection.CreateOrUpdate");
+            using var scope = _billingAccountClientDiagnostics.CreateScope("BillingAccountCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _billingAccountsRestClient.Create(billingAccountName, parameters, cancellationToken);
-                var operation = new BillingAccountCreateOrUpdateOperation(ArmClient, _clientDiagnostics, Pipeline, _billingAccountsRestClient.CreateCreateRequest(billingAccountName, parameters).Request, response);
+                var response = _billingAccountRestClient.Create(billingAccountName, parameters, cancellationToken);
+                var operation = new BillingAccountCreateOrUpdateOperation(ArmClient, _billingAccountClientDiagnostics, Pipeline, _billingAccountRestClient.CreateCreateRequest(billingAccountName, parameters).Request, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -105,12 +105,12 @@ namespace TenantOnly
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("BillingAccountCollection.CreateOrUpdate");
+            using var scope = _billingAccountClientDiagnostics.CreateScope("BillingAccountCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _billingAccountsRestClient.CreateAsync(billingAccountName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new BillingAccountCreateOrUpdateOperation(ArmClient, _clientDiagnostics, Pipeline, _billingAccountsRestClient.CreateCreateRequest(billingAccountName, parameters).Request, response);
+                var response = await _billingAccountRestClient.CreateAsync(billingAccountName, parameters, cancellationToken).ConfigureAwait(false);
+                var operation = new BillingAccountCreateOrUpdateOperation(ArmClient, _billingAccountClientDiagnostics, Pipeline, _billingAccountRestClient.CreateCreateRequest(billingAccountName, parameters).Request, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -135,13 +135,13 @@ namespace TenantOnly
         {
             Argument.AssertNotNullOrEmpty(billingAccountName, nameof(billingAccountName));
 
-            using var scope = _clientDiagnostics.CreateScope("BillingAccountCollection.Get");
+            using var scope = _billingAccountClientDiagnostics.CreateScope("BillingAccountCollection.Get");
             scope.Start();
             try
             {
-                var response = _billingAccountsRestClient.Get(billingAccountName, expand, cancellationToken);
+                var response = _billingAccountRestClient.Get(billingAccountName, expand, cancellationToken);
                 if (response.Value == null)
-                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                    throw _billingAccountClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new BillingAccount(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -164,13 +164,13 @@ namespace TenantOnly
         {
             Argument.AssertNotNullOrEmpty(billingAccountName, nameof(billingAccountName));
 
-            using var scope = _clientDiagnostics.CreateScope("BillingAccountCollection.Get");
+            using var scope = _billingAccountClientDiagnostics.CreateScope("BillingAccountCollection.Get");
             scope.Start();
             try
             {
-                var response = await _billingAccountsRestClient.GetAsync(billingAccountName, expand, cancellationToken).ConfigureAwait(false);
+                var response = await _billingAccountRestClient.GetAsync(billingAccountName, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                    throw await _billingAccountClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new BillingAccount(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -190,11 +190,11 @@ namespace TenantOnly
         {
             Argument.AssertNotNullOrEmpty(billingAccountName, nameof(billingAccountName));
 
-            using var scope = _clientDiagnostics.CreateScope("BillingAccountCollection.GetIfExists");
+            using var scope = _billingAccountClientDiagnostics.CreateScope("BillingAccountCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _billingAccountsRestClient.Get(billingAccountName, expand, cancellationToken: cancellationToken);
+                var response = _billingAccountRestClient.Get(billingAccountName, expand, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<BillingAccount>(null, response.GetRawResponse());
                 return Response.FromValue(new BillingAccount(ArmClient, response.Value), response.GetRawResponse());
@@ -216,11 +216,11 @@ namespace TenantOnly
         {
             Argument.AssertNotNullOrEmpty(billingAccountName, nameof(billingAccountName));
 
-            using var scope = _clientDiagnostics.CreateScope("BillingAccountCollection.GetIfExists");
+            using var scope = _billingAccountClientDiagnostics.CreateScope("BillingAccountCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _billingAccountsRestClient.GetAsync(billingAccountName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _billingAccountRestClient.GetAsync(billingAccountName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<BillingAccount>(null, response.GetRawResponse());
                 return Response.FromValue(new BillingAccount(ArmClient, response.Value), response.GetRawResponse());
@@ -242,7 +242,7 @@ namespace TenantOnly
         {
             Argument.AssertNotNullOrEmpty(billingAccountName, nameof(billingAccountName));
 
-            using var scope = _clientDiagnostics.CreateScope("BillingAccountCollection.Exists");
+            using var scope = _billingAccountClientDiagnostics.CreateScope("BillingAccountCollection.Exists");
             scope.Start();
             try
             {
@@ -266,7 +266,7 @@ namespace TenantOnly
         {
             Argument.AssertNotNullOrEmpty(billingAccountName, nameof(billingAccountName));
 
-            using var scope = _clientDiagnostics.CreateScope("BillingAccountCollection.Exists");
+            using var scope = _billingAccountClientDiagnostics.CreateScope("BillingAccountCollection.Exists");
             scope.Start();
             try
             {
@@ -291,11 +291,11 @@ namespace TenantOnly
         {
             Page<BillingAccount> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("BillingAccountCollection.GetAll");
+                using var scope = _billingAccountClientDiagnostics.CreateScope("BillingAccountCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _billingAccountsRestClient.List(expand, cancellationToken: cancellationToken);
+                    var response = _billingAccountRestClient.List(expand, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new BillingAccount(ArmClient, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -318,11 +318,11 @@ namespace TenantOnly
         {
             async Task<Page<BillingAccount>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("BillingAccountCollection.GetAll");
+                using var scope = _billingAccountClientDiagnostics.CreateScope("BillingAccountCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _billingAccountsRestClient.ListAsync(expand, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _billingAccountRestClient.ListAsync(expand, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new BillingAccount(ArmClient, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)

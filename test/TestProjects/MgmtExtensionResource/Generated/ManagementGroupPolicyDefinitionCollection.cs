@@ -24,8 +24,8 @@ namespace MgmtExtensionResource
     /// <summary> A class representing collection of PolicyDefinition and their operations over its parent. </summary>
     public partial class ManagementGroupPolicyDefinitionCollection : ArmCollection, IEnumerable<ManagementGroupPolicyDefinition>, IAsyncEnumerable<ManagementGroupPolicyDefinition>
     {
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly PolicyDefinitionsRestOperations _policyDefinitionsRestClient;
+        private readonly ClientDiagnostics _policyDefinitionClientDiagnostics;
+        private readonly PolicyDefinitionsRestOperations _policyDefinitionRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="ManagementGroupPolicyDefinitionCollection"/> class for mocking. </summary>
         protected ManagementGroupPolicyDefinitionCollection()
@@ -36,9 +36,9 @@ namespace MgmtExtensionResource
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal ManagementGroupPolicyDefinitionCollection(ArmResource parent) : base(parent)
         {
-            _clientDiagnostics = new ClientDiagnostics("MgmtExtensionResource", ManagementGroupPolicyDefinition.ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ManagementGroupPolicyDefinition.ResourceType, out string apiVersion);
-            _policyDefinitionsRestClient = new PolicyDefinitionsRestOperations(_clientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, apiVersion);
+            _policyDefinitionClientDiagnostics = new ClientDiagnostics("MgmtExtensionResource", ManagementGroupPolicyDefinition.ResourceType.Namespace, DiagnosticOptions);
+            ArmClient.TryGetApiVersion(ManagementGroupPolicyDefinition.ResourceType, out string policyDefinitionApiVersion);
+            _policyDefinitionRestClient = new PolicyDefinitionsRestOperations(_policyDefinitionClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, policyDefinitionApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -70,11 +70,11 @@ namespace MgmtExtensionResource
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ManagementGroupPolicyDefinitionCollection.CreateOrUpdate");
+            using var scope = _policyDefinitionClientDiagnostics.CreateScope("ManagementGroupPolicyDefinitionCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _policyDefinitionsRestClient.CreateOrUpdateAtManagementGroup(Id.Name, policyDefinitionName, parameters, cancellationToken);
+                var response = _policyDefinitionRestClient.CreateOrUpdateAtManagementGroup(Id.Name, policyDefinitionName, parameters, cancellationToken);
                 var operation = new ManagementGroupPolicyDefinitionCreateOrUpdateOperation(ArmClient, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
@@ -105,11 +105,11 @@ namespace MgmtExtensionResource
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ManagementGroupPolicyDefinitionCollection.CreateOrUpdate");
+            using var scope = _policyDefinitionClientDiagnostics.CreateScope("ManagementGroupPolicyDefinitionCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _policyDefinitionsRestClient.CreateOrUpdateAtManagementGroupAsync(Id.Name, policyDefinitionName, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _policyDefinitionRestClient.CreateOrUpdateAtManagementGroupAsync(Id.Name, policyDefinitionName, parameters, cancellationToken).ConfigureAwait(false);
                 var operation = new ManagementGroupPolicyDefinitionCreateOrUpdateOperation(ArmClient, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -134,13 +134,13 @@ namespace MgmtExtensionResource
         {
             Argument.AssertNotNullOrEmpty(policyDefinitionName, nameof(policyDefinitionName));
 
-            using var scope = _clientDiagnostics.CreateScope("ManagementGroupPolicyDefinitionCollection.Get");
+            using var scope = _policyDefinitionClientDiagnostics.CreateScope("ManagementGroupPolicyDefinitionCollection.Get");
             scope.Start();
             try
             {
-                var response = _policyDefinitionsRestClient.GetAtManagementGroup(Id.Name, policyDefinitionName, cancellationToken);
+                var response = _policyDefinitionRestClient.GetAtManagementGroup(Id.Name, policyDefinitionName, cancellationToken);
                 if (response.Value == null)
-                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                    throw _policyDefinitionClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new ManagementGroupPolicyDefinition(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -162,13 +162,13 @@ namespace MgmtExtensionResource
         {
             Argument.AssertNotNullOrEmpty(policyDefinitionName, nameof(policyDefinitionName));
 
-            using var scope = _clientDiagnostics.CreateScope("ManagementGroupPolicyDefinitionCollection.Get");
+            using var scope = _policyDefinitionClientDiagnostics.CreateScope("ManagementGroupPolicyDefinitionCollection.Get");
             scope.Start();
             try
             {
-                var response = await _policyDefinitionsRestClient.GetAtManagementGroupAsync(Id.Name, policyDefinitionName, cancellationToken).ConfigureAwait(false);
+                var response = await _policyDefinitionRestClient.GetAtManagementGroupAsync(Id.Name, policyDefinitionName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                    throw await _policyDefinitionClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new ManagementGroupPolicyDefinition(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -187,11 +187,11 @@ namespace MgmtExtensionResource
         {
             Argument.AssertNotNullOrEmpty(policyDefinitionName, nameof(policyDefinitionName));
 
-            using var scope = _clientDiagnostics.CreateScope("ManagementGroupPolicyDefinitionCollection.GetIfExists");
+            using var scope = _policyDefinitionClientDiagnostics.CreateScope("ManagementGroupPolicyDefinitionCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _policyDefinitionsRestClient.GetAtManagementGroup(Id.Name, policyDefinitionName, cancellationToken: cancellationToken);
+                var response = _policyDefinitionRestClient.GetAtManagementGroup(Id.Name, policyDefinitionName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<ManagementGroupPolicyDefinition>(null, response.GetRawResponse());
                 return Response.FromValue(new ManagementGroupPolicyDefinition(ArmClient, response.Value), response.GetRawResponse());
@@ -212,11 +212,11 @@ namespace MgmtExtensionResource
         {
             Argument.AssertNotNullOrEmpty(policyDefinitionName, nameof(policyDefinitionName));
 
-            using var scope = _clientDiagnostics.CreateScope("ManagementGroupPolicyDefinitionCollection.GetIfExists");
+            using var scope = _policyDefinitionClientDiagnostics.CreateScope("ManagementGroupPolicyDefinitionCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _policyDefinitionsRestClient.GetAtManagementGroupAsync(Id.Name, policyDefinitionName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _policyDefinitionRestClient.GetAtManagementGroupAsync(Id.Name, policyDefinitionName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<ManagementGroupPolicyDefinition>(null, response.GetRawResponse());
                 return Response.FromValue(new ManagementGroupPolicyDefinition(ArmClient, response.Value), response.GetRawResponse());
@@ -237,7 +237,7 @@ namespace MgmtExtensionResource
         {
             Argument.AssertNotNullOrEmpty(policyDefinitionName, nameof(policyDefinitionName));
 
-            using var scope = _clientDiagnostics.CreateScope("ManagementGroupPolicyDefinitionCollection.Exists");
+            using var scope = _policyDefinitionClientDiagnostics.CreateScope("ManagementGroupPolicyDefinitionCollection.Exists");
             scope.Start();
             try
             {
@@ -260,7 +260,7 @@ namespace MgmtExtensionResource
         {
             Argument.AssertNotNullOrEmpty(policyDefinitionName, nameof(policyDefinitionName));
 
-            using var scope = _clientDiagnostics.CreateScope("ManagementGroupPolicyDefinitionCollection.Exists");
+            using var scope = _policyDefinitionClientDiagnostics.CreateScope("ManagementGroupPolicyDefinitionCollection.Exists");
             scope.Start();
             try
             {
@@ -286,11 +286,11 @@ namespace MgmtExtensionResource
         {
             Page<ManagementGroupPolicyDefinition> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("ManagementGroupPolicyDefinitionCollection.GetAll");
+                using var scope = _policyDefinitionClientDiagnostics.CreateScope("ManagementGroupPolicyDefinitionCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _policyDefinitionsRestClient.ListByManagementGroup(Id.Name, filter, top, cancellationToken: cancellationToken);
+                    var response = _policyDefinitionRestClient.ListByManagementGroup(Id.Name, filter, top, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new ManagementGroupPolicyDefinition(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -301,11 +301,11 @@ namespace MgmtExtensionResource
             }
             Page<ManagementGroupPolicyDefinition> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("ManagementGroupPolicyDefinitionCollection.GetAll");
+                using var scope = _policyDefinitionClientDiagnostics.CreateScope("ManagementGroupPolicyDefinitionCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _policyDefinitionsRestClient.ListByManagementGroupNextPage(nextLink, Id.Name, filter, top, cancellationToken: cancellationToken);
+                    var response = _policyDefinitionRestClient.ListByManagementGroupNextPage(nextLink, Id.Name, filter, top, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new ManagementGroupPolicyDefinition(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -329,11 +329,11 @@ namespace MgmtExtensionResource
         {
             async Task<Page<ManagementGroupPolicyDefinition>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("ManagementGroupPolicyDefinitionCollection.GetAll");
+                using var scope = _policyDefinitionClientDiagnostics.CreateScope("ManagementGroupPolicyDefinitionCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _policyDefinitionsRestClient.ListByManagementGroupAsync(Id.Name, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _policyDefinitionRestClient.ListByManagementGroupAsync(Id.Name, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new ManagementGroupPolicyDefinition(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -344,11 +344,11 @@ namespace MgmtExtensionResource
             }
             async Task<Page<ManagementGroupPolicyDefinition>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("ManagementGroupPolicyDefinitionCollection.GetAll");
+                using var scope = _policyDefinitionClientDiagnostics.CreateScope("ManagementGroupPolicyDefinitionCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _policyDefinitionsRestClient.ListByManagementGroupNextPageAsync(nextLink, Id.Name, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _policyDefinitionRestClient.ListByManagementGroupNextPageAsync(nextLink, Id.Name, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new ManagementGroupPolicyDefinition(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)

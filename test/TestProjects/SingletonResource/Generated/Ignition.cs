@@ -15,7 +15,6 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
-using SingletonResource.Models;
 
 namespace SingletonResource
 {
@@ -29,8 +28,8 @@ namespace SingletonResource
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly IgnitionsRestOperations _ignitionsRestClient;
+        private readonly ClientDiagnostics _ignitionClientDiagnostics;
+        private readonly IgnitionsRestOperations _ignitionRestClient;
         private readonly IgnitionData _data;
 
         /// <summary> Initializes a new instance of the <see cref="Ignition"/> class for mocking. </summary>
@@ -52,9 +51,9 @@ namespace SingletonResource
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal Ignition(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
         {
-            _clientDiagnostics = new ClientDiagnostics("SingletonResource", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string apiVersion);
-            _ignitionsRestClient = new IgnitionsRestOperations(_clientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, apiVersion);
+            _ignitionClientDiagnostics = new ClientDiagnostics("SingletonResource", ResourceType.Namespace, DiagnosticOptions);
+            ArmClient.TryGetApiVersion(ResourceType, out string ignitionApiVersion);
+            _ignitionRestClient = new IgnitionsRestOperations(_ignitionClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, ignitionApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -90,13 +89,13 @@ namespace SingletonResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<Ignition>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("Ignition.Get");
+            using var scope = _ignitionClientDiagnostics.CreateScope("Ignition.Get");
             scope.Start();
             try
             {
-                var response = await _ignitionsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _ignitionRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                    throw await _ignitionClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new Ignition(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -112,13 +111,13 @@ namespace SingletonResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<Ignition> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("Ignition.Get");
+            using var scope = _ignitionClientDiagnostics.CreateScope("Ignition.Get");
             scope.Start();
             try
             {
-                var response = _ignitionsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, cancellationToken);
+                var response = _ignitionRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, cancellationToken);
                 if (response.Value == null)
-                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                    throw _ignitionClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new Ignition(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -133,7 +132,7 @@ namespace SingletonResource
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
         public async virtual Task<IEnumerable<AzureLocation>> GetAvailableLocationsAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("Ignition.GetAvailableLocations");
+            using var scope = _ignitionClientDiagnostics.CreateScope("Ignition.GetAvailableLocations");
             scope.Start();
             try
             {
@@ -151,7 +150,7 @@ namespace SingletonResource
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
         public virtual IEnumerable<AzureLocation> GetAvailableLocations(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("Ignition.GetAvailableLocations");
+            using var scope = _ignitionClientDiagnostics.CreateScope("Ignition.GetAvailableLocations");
             scope.Start();
             try
             {
