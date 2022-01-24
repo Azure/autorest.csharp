@@ -174,6 +174,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             return UseRestClientField ? GetRestFieldName(client, resource) : GetRestPropertyName(client, resource);
         }
 
+        protected string GetRestPropertyName(MgmtRestOperation operation) => GetRestPropertyName(operation.RestClient, operation.Resource);
         protected string GetRestPropertyName(MgmtRestClient client, Resource? resource = null)
         {
             if (resource is not null)

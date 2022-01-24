@@ -280,7 +280,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected override void WriteLROMethodBranch(CSharpType lroObjectType, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMapping, bool async)
         {
             _writer.Append($"var response = {GetAwait(async)} ");
-            _writer.Append($"{GetRestFieldName(operation.RestClient)}.{CreateMethodName(operation.Method.Name, async)}(");
+            _writer.Append($"{GetRestPropertyName(operation)}.{CreateMethodName(operation.Method.Name, async)}(");
             WriteArguments(_writer, parameterMapping);
             _writer.Line($"cancellationToken){GetConfigureAwait(async)};");
 
