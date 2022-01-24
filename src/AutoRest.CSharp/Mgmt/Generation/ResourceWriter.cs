@@ -46,6 +46,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private bool IsSingleton => _resource.IsSingleton;
 
+        protected override Resource? DefaultResource => _resource;
+
         public ResourceWriter(CodeWriter writer, Resource resource, BuildContext<MgmtOutputLibrary> context) : base(writer, resource, context)
         {
             _resource = resource;

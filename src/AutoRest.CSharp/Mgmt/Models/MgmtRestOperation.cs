@@ -90,31 +90,43 @@ namespace AutoRest.CSharp.Mgmt.Models
             if (path == requestPath)
                 return true;
 
+            if (path.Count < 2)
+                return false;
+
+            var pathSecondToLast = path[path.Count - 2];
             var httpMethod = method.Operation.GetHttpMethod();
 
             //check for a list by an ancestor, for path we need to check - 2 for normal and - 4 for tuple
             var requestLastSegment = requestPath[requestPath.Count - 1];
-            if (path.Count >= 2 && requestPath.Count < path.Count && requestLastSegment.IsConstant)
+            if (requestPath.Count < path.Count && requestLastSegment.IsConstant)
             {
-                if (path[path.Count - 2] == requestLastSegment || (httpMethod == HttpMethod.Get && path[path.Count - 4] == requestLastSegment))
+                if (pathSecondToLast == requestLastSegment || (path.Count >= 4 && httpMethod == HttpMethod.Get && path[path.Count - 4] == requestLastSegment))
                     return true;
             }
 
-            if (requestPath.Count < 2)
+            if (requestPath.Count < 3)
                 return false;
 
-            var secondToLastSegment = requestPath[requestPath.Count - 2];
+            var reqestSecondToLast = requestPath[requestPath.Count - 2];
+            var requestThirdToLast = requestPath[requestPath.Count - 3];
             var pathLastSegement = path[path.Count - 1];
             //check for single value methods after the GET path which are typically POST methods
-            if (path.Count == requestPath.Count - 1 && requestLastSegment.IsConstant && pathLastSegement == secondToLastSegment)
+            if (path.Count == requestPath.Count - 1 && requestLastSegment.IsConstant && pathLastSegement == reqestSecondToLast && pathSecondToLast == requestThirdToLast)
                 return true;
 
+            if (path.Count < 3)
+                return false;
+
+            var pathThirdToLast = path[path.Count - 3];
             //sometimes for singletons the POST methods show up at the same level
-            if (path.Count == requestPath.Count && requestLastSegment.IsConstant && pathLastSegement.IsConstant && secondToLastSegment == path[path.Count - 2])
+            if (path.Count == requestPath.Count && requestLastSegment.IsConstant && pathLastSegement.IsConstant && reqestSecondToLast == pathSecondToLast && requestThirdToLast == pathThirdToLast)
                 return true;
+
+            if (path.Count < 4)
+                return false;
 
             //catch check name availability where the provider ending matches
-            if (path.Count >= 4 && secondToLastSegment.IsConstant && secondToLastSegment == path[path.Count - 3] && path[path.Count - 4].ToString() == "providers")
+            if (reqestSecondToLast.IsConstant && reqestSecondToLast == pathThirdToLast && path[path.Count - 4] == Segment.Providers)
                 return true;
 
             return false;

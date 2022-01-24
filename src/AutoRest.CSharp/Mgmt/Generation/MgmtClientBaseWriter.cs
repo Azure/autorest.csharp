@@ -46,6 +46,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected MgmtConfiguration Config => Context.Configuration.MgmtConfiguration;
         protected bool ShowRequestPathAndOperationId => Config.MgmtDebug.ShowRequestPath;
 
+        protected virtual Resource? DefaultResource { get; } = null;
+
         private T _provider;
         protected virtual T This => _provider;
         protected virtual CSharpType TypeOfThis => This.Type;
@@ -167,15 +169,18 @@ namespace AutoRest.CSharp.Mgmt.Generation
         }
 
         protected string GetRestFieldOrPropertyName(MgmtRestOperation operation) => GetRestFieldOrPropertyName(operation.RestClient, operation.Resource);
-        protected virtual string GetRestFieldOrPropertyName(RestClient client, Resource? resource = null)
+        protected string GetRestFieldOrPropertyName(MgmtRestClient client, Resource? resource = null)
         {
             return UseRestClientField ? GetRestFieldName(client, resource) : GetRestPropertyName(client, resource);
         }
 
-        protected string GetRestPropertyName(RestClient client, Resource? resource = null)
+        protected string GetRestPropertyName(MgmtRestClient client, Resource? resource = null)
         {
             if (resource is not null)
                 return $"{resource.ResourceName}RestClient";
+
+            if (DefaultResource != null && client.Resources.Contains(DefaultResource))
+                return $"{DefaultResource.ResourceName}RestClient";
 
             return client.OperationGroup.Key.IsNullOrEmpty()
                 ? "RestClient"
@@ -183,20 +188,27 @@ namespace AutoRest.CSharp.Mgmt.Generation
         }
 
         protected string GetRestFieldName(MgmtRestOperation operation) => GetRestFieldName(operation.RestClient, operation.Resource);
-        protected virtual string GetRestFieldName(RestClient client, Resource? resource = null)
+        protected string GetRestFieldName(MgmtRestClient client, Resource? resource = null)
         {
             if (resource is not null)
                 return $"_{resource.ResourceName.ToVariableName()}RestClient";
+
+            if (DefaultResource != null && client.Resources.Contains(DefaultResource))
+                return $"_{DefaultResource.ResourceName.ToVariableName()}RestClient";
 
             return client.OperationGroup.Key.IsNullOrEmpty()
                 ? "_restClient"
                 : $"_{client.OperationGroup.Key.ToVariableName()}RestClient";
         }
 
-        protected static string GetClientDiagnosticsPropertyName(RestClient client, Resource? resource)
+        protected string GetClientDiagnosticsPropertyName(MgmtRestOperation operation) => GetClientDiagnosticsPropertyName(operation.RestClient, operation.Resource);
+        protected string GetClientDiagnosticsPropertyName(MgmtRestClient client, Resource? resource)
         {
             if (resource is not null)
                 return $"{resource.ResourceName}ClientDiagnostics";
+
+            if (DefaultResource != null && client.Resources.Contains(DefaultResource))
+                return $"{DefaultResource.ResourceName}ClientDiagnostics";
 
             return client.OperationGroup.Key.IsNullOrEmpty()
                 ? "ClientDiagnostics"
@@ -205,10 +217,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected string GetClientDiagnosticFieldName(Resource resource) => $"_{resource.ResourceName.ToVariableName()}ClientDiagnostics";
         protected string GetClientDiagnosticFieldName(MgmtRestOperation operation) => GetClientDiagnosticFieldName(operation.RestClient, operation.Resource);
-        protected virtual string GetClientDiagnosticFieldName(RestClient client, Resource? resource = null)
+        protected string GetClientDiagnosticFieldName(MgmtRestClient client, Resource? resource = null)
         {
             if (resource is not null)
                 return GetClientDiagnosticFieldName(resource);
+
+            if (DefaultResource != null && client.Resources.Contains(DefaultResource))
+                return GetClientDiagnosticFieldName(DefaultResource);
 
             return client.OperationGroup.Key.IsNullOrEmpty()
                 ? "_clientDiagnostics"
