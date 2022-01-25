@@ -74,6 +74,7 @@ namespace AutoRest.CSharp.Mgmt.Models
         {
             Exact,
             ParentList,
+            AncestorList,
             ChildList,
             Context,
             CheckName,
@@ -105,14 +106,18 @@ namespace AutoRest.CSharp.Mgmt.Models
                 }
             }
 
-            string errorText = $"{restClient.Type.Name}.{method.Name}";
-            return GetMatch(ResourceMatchType.ParentList, matches, context, errorText) ??
-                GetMatch(ResourceMatchType.ChildList, matches, context, errorText) ??
-                GetMatch(ResourceMatchType.Context, matches, context, errorText) ??
-                GetMatch(ResourceMatchType.CheckName, matches, context, errorText);
+            FormattableString errorText = (FormattableString)$"{restClient.Type.Name}.{method.Name}";
+            foreach (ResourceMatchType? matchType in Enum.GetValues(typeof(ResourceMatchType)))
+            {
+                var resource = GetMatch(matchType!.Value, matches, context, errorText);
+
+                if (resource is not null)
+                    return resource;
+            }
+            return null;
         }
 
-        private static Resource? GetMatch(ResourceMatchType matchType, Dictionary<ResourceMatchType, HashSet<Resource>> matches, BuildContext<MgmtOutputLibrary> context, string error)
+        private static Resource? GetMatch(ResourceMatchType matchType, Dictionary<ResourceMatchType, HashSet<Resource>> matches, BuildContext<MgmtOutputLibrary> context, FormattableString error)
         {
             if (!matches.TryGetValue(matchType, out var matchTypeMatches))
                 return null;
@@ -159,7 +164,9 @@ namespace AutoRest.CSharp.Mgmt.Models
                 resourcePath[0] == requestPath[0] && //first two items much be the same
                 resourcePath[1] == requestPath[1] &&
                 AreEqualBackToProvider(resourcePath, requestPath, 1, 0))
-                return ResourceMatchType.ParentList;
+            {
+                return AreEqualUpToProvider(resourcePath, requestPath) ? ResourceMatchType.ParentList : ResourceMatchType.AncestorList;
+            }
 
             //check for single value methods after the GET path which are typically POST methods
             if (resourcePath.Count == requestPath.Count - 1 && requestLastSegment.IsConstant && AreEqualBackToProvider(resourcePath, requestPath, 0, 1))
@@ -199,6 +206,19 @@ namespace AutoRest.CSharp.Mgmt.Models
 
                 if (resourcePath[resourceIndex] == Segment.Providers)
                     return true;
+            }
+            return true;
+        }
+
+        private static bool AreEqualUpToProvider(RequestPath resourcePath, RequestPath requestPath)
+        {
+            for (int i = 0; i < Math.Min(resourcePath.Count, requestPath.Count); i++)
+            {
+                if (resourcePath[i] == Segment.Providers)
+                    return true;
+
+                if (resourcePath[i] != requestPath[i])
+                    return false;
             }
             return true;
         }
