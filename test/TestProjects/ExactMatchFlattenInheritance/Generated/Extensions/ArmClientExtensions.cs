@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using Azure.Core;
 using Azure.ResourceManager;
 
 namespace ExactMatchFlattenInheritance
@@ -19,7 +20,8 @@ namespace ExactMatchFlattenInheritance
         /// <returns> Returns a <see cref="AzureResourceFlattenModel1" /> object. </returns>
         public static AzureResourceFlattenModel1 GetAzureResourceFlattenModel1(this ArmClient armClient, ResourceIdentifier id)
         {
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new AzureResourceFlattenModel1(clientOptions, credential, uri, pipeline, id));
+            AzureResourceFlattenModel1.ValidateResourceId(id);
+            return new AzureResourceFlattenModel1(armClient, id);
         }
         #endregion
 
@@ -30,7 +32,8 @@ namespace ExactMatchFlattenInheritance
         /// <returns> Returns a <see cref="CustomModel2" /> object. </returns>
         public static CustomModel2 GetCustomModel2(this ArmClient armClient, ResourceIdentifier id)
         {
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new CustomModel2(clientOptions, credential, uri, pipeline, id));
+            CustomModel2.ValidateResourceId(id);
+            return new CustomModel2(armClient, id);
         }
         #endregion
 
@@ -41,7 +44,8 @@ namespace ExactMatchFlattenInheritance
         /// <returns> Returns a <see cref="CustomModel3" /> object. </returns>
         public static CustomModel3 GetCustomModel3(this ArmClient armClient, ResourceIdentifier id)
         {
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new CustomModel3(clientOptions, credential, uri, pipeline, id));
+            CustomModel3.ValidateResourceId(id);
+            return new CustomModel3(armClient, id);
         }
         #endregion
     }

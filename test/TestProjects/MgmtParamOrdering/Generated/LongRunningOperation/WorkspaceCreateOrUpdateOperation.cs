@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager;
 using MgmtParamOrdering;
 
 namespace MgmtParamOrdering.Models
@@ -22,17 +22,17 @@ namespace MgmtParamOrdering.Models
     {
         private readonly OperationInternals<Workspace> _operation;
 
-        private readonly ArmResource _operationBase;
+        private readonly ArmClient _armClient;
 
         /// <summary> Initializes a new instance of WorkspaceCreateOrUpdateOperation for mocking. </summary>
         protected WorkspaceCreateOrUpdateOperation()
         {
         }
 
-        internal WorkspaceCreateOrUpdateOperation(ArmResource operationsBase, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
+        internal WorkspaceCreateOrUpdateOperation(ArmClient armClient, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
             _operation = new OperationInternals<Workspace>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "WorkspaceCreateOrUpdateOperation");
-            _operationBase = operationsBase;
+            _armClient = armClient;
         }
 
         /// <inheritdoc />
@@ -65,13 +65,15 @@ namespace MgmtParamOrdering.Models
         Workspace IOperationSource<Workspace>.CreateResult(Response response, CancellationToken cancellationToken)
         {
             using var document = JsonDocument.Parse(response.ContentStream);
-            return new Workspace(_operationBase, WorkspaceData.DeserializeWorkspaceData(document.RootElement));
+            var data = WorkspaceData.DeserializeWorkspaceData(document.RootElement);
+            return new Workspace(_armClient, data);
         }
 
         async ValueTask<Workspace> IOperationSource<Workspace>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-            return new Workspace(_operationBase, WorkspaceData.DeserializeWorkspaceData(document.RootElement));
+            var data = WorkspaceData.DeserializeWorkspaceData(document.RootElement);
+            return new Workspace(_armClient, data);
         }
     }
 }

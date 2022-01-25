@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using Azure.Core;
 using Azure.ResourceManager;
 
 namespace SupersetFlattenInheritance
@@ -19,7 +20,8 @@ namespace SupersetFlattenInheritance
         /// <returns> Returns a <see cref="ResourceModel1" /> object. </returns>
         public static ResourceModel1 GetResourceModel1(this ArmClient armClient, ResourceIdentifier id)
         {
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new ResourceModel1(clientOptions, credential, uri, pipeline, id));
+            ResourceModel1.ValidateResourceId(id);
+            return new ResourceModel1(armClient, id);
         }
         #endregion
 
@@ -30,7 +32,8 @@ namespace SupersetFlattenInheritance
         /// <returns> Returns a <see cref="TrackedResourceModel1" /> object. </returns>
         public static TrackedResourceModel1 GetTrackedResourceModel1(this ArmClient armClient, ResourceIdentifier id)
         {
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new TrackedResourceModel1(clientOptions, credential, uri, pipeline, id));
+            TrackedResourceModel1.ValidateResourceId(id);
+            return new TrackedResourceModel1(armClient, id);
         }
         #endregion
     }

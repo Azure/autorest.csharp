@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using Azure.Core;
 using Azure.ResourceManager;
 
 namespace MgmtLRO
@@ -19,7 +20,8 @@ namespace MgmtLRO
         /// <returns> Returns a <see cref="Fake" /> object. </returns>
         public static Fake GetFake(this ArmClient armClient, ResourceIdentifier id)
         {
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new Fake(clientOptions, credential, uri, pipeline, id));
+            Fake.ValidateResourceId(id);
+            return new Fake(armClient, id);
         }
         #endregion
 
@@ -30,7 +32,8 @@ namespace MgmtLRO
         /// <returns> Returns a <see cref="Bar" /> object. </returns>
         public static Bar GetBar(this ArmClient armClient, ResourceIdentifier id)
         {
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new Bar(clientOptions, credential, uri, pipeline, id));
+            Bar.ValidateResourceId(id);
+            return new Bar(armClient, id);
         }
         #endregion
     }

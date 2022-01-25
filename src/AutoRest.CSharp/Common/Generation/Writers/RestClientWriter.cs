@@ -34,7 +34,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
                     foreach (var method in restClient.Methods)
                     {
-                        WriteRequestCreation(writer, method);
+                        WriteRequestCreation(writer, method, restClient.Parameters);
                         WriteOperation(writer, method, true);
                         WriteOperation(writer, method, false);
                     }
@@ -119,9 +119,9 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private string CreateMethodName(string name, bool async) => $"{name}{(async ? "Async" : string.Empty)}";
 
-        private void WriteRequestCreation(CodeWriter writer, RestClientMethod clientMethod)
+        private void WriteRequestCreation(CodeWriter writer, RestClientMethod clientMethod, Parameter[] parameters)
         {
-            RequestWriterHelpers.WriteRequestCreation(writer, clientMethod, "internal", null, null, UseUserAgentOverride());
+            RequestWriterHelpers.WriteRequestCreation(writer, clientMethod, "internal", null, null, UseUserAgentOverride(), parameters);
         }
 
         private void WriteOperation(CodeWriter writer, RestClientMethod operation, bool async)

@@ -14,6 +14,7 @@ using AutoRest.CSharp.Mgmt.Generation;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Types;
+using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources.Models;
@@ -27,18 +28,13 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         private static ConcurrentDictionary<Schema, CSharpType?> _valueCache = new ConcurrentDictionary<Schema, CSharpType?>();
 
-        private static readonly Type _locationType = typeof(Location);
-        private static readonly Type _resourceIdentifierType = typeof(ResourceIdentifier);
-        private static readonly Type _resourceTypeType = typeof(ResourceType);
+        private static readonly Type _locationType = typeof(AzureLocation);
+        private static readonly Type _resourceIdentifierType = typeof(Azure.Core.ResourceIdentifier);
+        private static readonly Type _resourceTypeType = typeof(Azure.Core.ResourceType);
 
         private static IList<System.Type> GetReferenceClassCollection()
         {
-            var assembly = Assembly.GetAssembly(typeof(ArmClient));
-            if (assembly == null)
-            {
-                return new List<System.Type>();
-            }
-            return assembly.GetTypes().Where(t => t.GetCustomAttributes(false).Where(a => a.GetType().Name == PropertyReferenceAttributeName).Count() > 0).ToList();
+            return ReferenceClassFinder.ExternalTypes.Where(t => t.GetCustomAttributes(false).Where(a => a.GetType().Name == PropertyReferenceAttributeName).Count() > 0).ToList();
         }
 
         public static ObjectTypeProperty? GetExactMatchForReferenceType(ObjectTypeProperty originalType, Type frameworkType, BuildContext context)

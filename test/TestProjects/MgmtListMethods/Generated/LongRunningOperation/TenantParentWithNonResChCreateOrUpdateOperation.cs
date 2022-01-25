@@ -10,7 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager;
 using MgmtListMethods;
 
 namespace MgmtListMethods.Models
@@ -25,9 +25,9 @@ namespace MgmtListMethods.Models
         {
         }
 
-        internal TenantParentWithNonResChCreateOrUpdateOperation(ArmResource operationsBase, Response<TenantParentWithNonResChData> response)
+        internal TenantParentWithNonResChCreateOrUpdateOperation(ArmClient armClient, Response<TenantParentWithNonResChData> response)
         {
-            _operation = new OperationOrResponseInternals<TenantParentWithNonResCh>(Response.FromValue(new TenantParentWithNonResCh(operationsBase, response.Value), response.GetRawResponse()));
+            _operation = new OperationOrResponseInternals<TenantParentWithNonResCh>(Response.FromValue(new TenantParentWithNonResCh(armClient, response.Value), response.GetRawResponse()));
         }
 
         /// <inheritdoc />

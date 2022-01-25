@@ -40,7 +40,7 @@ namespace Azure.Core
         {
             if (headers.TryGetValue(name, out string? stringValue))
             {
-                value = DateTimeOffset.Parse(stringValue, CultureInfo.InvariantCulture);
+                value = TypeFormatters.ParseDateTimeOffset(stringValue, "");
                 return true;
             }
 

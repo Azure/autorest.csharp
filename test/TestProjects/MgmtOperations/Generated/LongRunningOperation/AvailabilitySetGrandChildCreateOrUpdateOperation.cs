@@ -10,7 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager;
 using MgmtOperations;
 
 namespace MgmtOperations.Models
@@ -25,9 +25,9 @@ namespace MgmtOperations.Models
         {
         }
 
-        internal AvailabilitySetGrandChildCreateOrUpdateOperation(ArmResource operationsBase, Response<AvailabilitySetGrandChildData> response)
+        internal AvailabilitySetGrandChildCreateOrUpdateOperation(ArmClient armClient, Response<AvailabilitySetGrandChildData> response)
         {
-            _operation = new OperationOrResponseInternals<AvailabilitySetGrandChild>(Response.FromValue(new AvailabilitySetGrandChild(operationsBase, response.Value), response.GetRawResponse()));
+            _operation = new OperationOrResponseInternals<AvailabilitySetGrandChild>(Response.FromValue(new AvailabilitySetGrandChild(armClient, response.Value), response.GetRawResponse()));
         }
 
         /// <inheritdoc />

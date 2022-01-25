@@ -37,7 +37,7 @@ namespace AutoRest.CSharp.Mgmt.Models
         public string Name { get; }
         public string? Description => Method.Description;
         public IEnumerable<Parameter> Parameters => Method.Parameters;
-        public CSharpType? ReturnType => Method.ReturnType;
+        public CSharpType? ReturnType { get; }
         public string Accessibility => Method.Accessibility;
         /// <summary>
         /// The actual operation
@@ -56,13 +56,17 @@ namespace AutoRest.CSharp.Mgmt.Models
         /// </summary>
         public MgmtRestClient RestClient { get; }
 
-        public MgmtRestOperation(RestClientMethod method, MgmtRestClient restClient, RequestPath requestPath, RequestPath contextualPath, string methodName)
+        public Resource? Resource { get; }
+
+        public MgmtRestOperation(RestClientMethod method, MgmtRestClient restClient, RequestPath requestPath, RequestPath contextualPath, string methodName, Resource? resource, CSharpType? returnType)
         {
             Method = method;
             RestClient = restClient;
             RequestPath = requestPath;
             ContextualPath = contextualPath;
             Name = methodName;
+            Resource = resource;
+            ReturnType = returnType ?? method.ReturnType;
         }
     }
 }

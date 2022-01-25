@@ -8,7 +8,9 @@ using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Utilities;
 using Azure.Core.Pipeline;
+using static AutoRest.CSharp.Output.Models.FieldModifiers;
 
 namespace AutoRest.CSharp.Output.Models
 {
@@ -29,8 +31,8 @@ namespace AutoRest.CSharp.Output.Models
 
         public ClientFields(BuildContext<LowLevelOutputLibrary> context, IEnumerable<Parameter> parameters)
         {
-            ClientDiagnosticsField = new("private readonly", typeof(ClientDiagnostics), "_" + KnownParameters.ClientDiagnostics.Name);
-            PipelineField = new("private readonly", typeof(HttpPipeline), "_" + KnownParameters.Pipeline.Name);
+            ClientDiagnosticsField = new(Private | ReadOnly, typeof(ClientDiagnostics), "_" + KnownParameters.ClientDiagnostics.Name);
+            PipelineField = new(Private | ReadOnly, typeof(HttpPipeline), "_" + KnownParameters.Pipeline.Name);
 
             var parameterNamesToFields = new Dictionary<string, FieldDeclaration>
             {
@@ -40,13 +42,14 @@ namespace AutoRest.CSharp.Output.Models
 
             var fields = new List<FieldDeclaration>();
             var credentialFields = new List<FieldDeclaration>();
+            var properties = new List<FieldDeclaration>();
             foreach (var scheme in context.CodeModel.Security.Schemes)
             {
                 switch (scheme)
                 {
                     case AzureKeySecurityScheme azureKeySecurityScheme:
-                        AuthorizationHeaderConstant = new("private const", typeof(string), "AuthorizationHeader", $"{azureKeySecurityScheme.HeaderName:L}");
-                        _keyAuthField = new("private readonly", KnownParameters.KeyAuth.Type.WithNullable(true), "_" + KnownParameters.KeyAuth.Name);
+                        AuthorizationHeaderConstant = new(Private | Const, typeof(string), "AuthorizationHeader", $"{azureKeySecurityScheme.HeaderName:L}");
+                        _keyAuthField = new(Private | ReadOnly, KnownParameters.KeyAuth.Type.WithNullable(true), "_" + KnownParameters.KeyAuth.Name);
 
                         fields.Add(AuthorizationHeaderConstant);
                         fields.Add(_keyAuthField);
@@ -54,8 +57,8 @@ namespace AutoRest.CSharp.Output.Models
                         parameterNamesToFields[KnownParameters.KeyAuth.Name] = _keyAuthField;
                         break;
                     case AADTokenSecurityScheme aadTokenSecurityScheme:
-                        ScopesConstant = new("private static readonly", typeof(string[]), "AuthorizationScopes", $"new string[]{{ {aadTokenSecurityScheme.Scopes.GetLiteralsFormattable()} }}");
-                        _tokenAuthField = new("private readonly", KnownParameters.TokenAuth.Type.WithNullable(true), "_" + KnownParameters.TokenAuth.Name);
+                        ScopesConstant = new(Private | Static | ReadOnly, typeof(string[]), "AuthorizationScopes", $"new string[]{{ {aadTokenSecurityScheme.Scopes.GetLiteralsFormattable()} }}");
+                        _tokenAuthField = new(Private | ReadOnly, KnownParameters.TokenAuth.Type.WithNullable(true), "_" + KnownParameters.TokenAuth.Name);
 
                         fields.Add(ScopesConstant);
                         fields.Add(_tokenAuthField);
@@ -70,11 +73,22 @@ namespace AutoRest.CSharp.Output.Models
 
             foreach (Parameter parameter in parameters)
             {
-                var field = new FieldDeclaration("private readonly", parameter.Type, "_" + parameter.Name);
-                fields.Add(field);
+                var field = parameter.IsResourceIdentifier
+                    ? new FieldDeclaration($"{parameter.Description}", Public | ReadOnly, parameter.Type, parameter.Name.FirstCharToUpperCase(), writeAsProperty: true)
+                    : new FieldDeclaration(Private | ReadOnly, parameter.Type, "_" + parameter.Name);
+
+                if (field.WriteAsProperty)
+                {
+                    properties.Add(field);
+                }
+                else
+                {
+                    fields.Add(field);
+                }
                 parameterNamesToFields.Add(parameter.Name, field);
             }
 
+            fields.AddRange(properties);
             _fields = fields;
             _parameterNamesToFields = parameterNamesToFields;
             CredentialFields = credentialFields;

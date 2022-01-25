@@ -10,7 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager;
 using MgmtParent;
 
 namespace MgmtParent.Models
@@ -25,9 +25,9 @@ namespace MgmtParent.Models
         {
         }
 
-        internal DedicatedHostGroupCreateOrUpdateOperation(ArmResource operationsBase, Response<DedicatedHostGroupData> response)
+        internal DedicatedHostGroupCreateOrUpdateOperation(ArmClient armClient, Response<DedicatedHostGroupData> response)
         {
-            _operation = new OperationOrResponseInternals<DedicatedHostGroup>(Response.FromValue(new DedicatedHostGroup(operationsBase, response.Value), response.GetRawResponse()));
+            _operation = new OperationOrResponseInternals<DedicatedHostGroup>(Response.FromValue(new DedicatedHostGroup(armClient, response.Value), response.GetRawResponse()));
         }
 
         /// <inheritdoc />

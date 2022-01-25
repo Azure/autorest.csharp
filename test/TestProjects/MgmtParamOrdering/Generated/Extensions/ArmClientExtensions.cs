@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using Azure.Core;
 using Azure.ResourceManager;
 
 namespace MgmtParamOrdering
@@ -19,7 +20,8 @@ namespace MgmtParamOrdering
         /// <returns> Returns a <see cref="AvailabilitySet" /> object. </returns>
         public static AvailabilitySet GetAvailabilitySet(this ArmClient armClient, ResourceIdentifier id)
         {
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new AvailabilitySet(clientOptions, credential, uri, pipeline, id));
+            AvailabilitySet.ValidateResourceId(id);
+            return new AvailabilitySet(armClient, id);
         }
         #endregion
 
@@ -30,7 +32,8 @@ namespace MgmtParamOrdering
         /// <returns> Returns a <see cref="DedicatedHostGroup" /> object. </returns>
         public static DedicatedHostGroup GetDedicatedHostGroup(this ArmClient armClient, ResourceIdentifier id)
         {
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new DedicatedHostGroup(clientOptions, credential, uri, pipeline, id));
+            DedicatedHostGroup.ValidateResourceId(id);
+            return new DedicatedHostGroup(armClient, id);
         }
         #endregion
 
@@ -41,7 +44,8 @@ namespace MgmtParamOrdering
         /// <returns> Returns a <see cref="DedicatedHost" /> object. </returns>
         public static DedicatedHost GetDedicatedHost(this ArmClient armClient, ResourceIdentifier id)
         {
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new DedicatedHost(clientOptions, credential, uri, pipeline, id));
+            DedicatedHost.ValidateResourceId(id);
+            return new DedicatedHost(armClient, id);
         }
         #endregion
 
@@ -52,7 +56,8 @@ namespace MgmtParamOrdering
         /// <returns> Returns a <see cref="VirtualMachineExtensionImage" /> object. </returns>
         public static VirtualMachineExtensionImage GetVirtualMachineExtensionImage(this ArmClient armClient, ResourceIdentifier id)
         {
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new VirtualMachineExtensionImage(clientOptions, credential, uri, pipeline, id));
+            VirtualMachineExtensionImage.ValidateResourceId(id);
+            return new VirtualMachineExtensionImage(armClient, id);
         }
         #endregion
 
@@ -63,7 +68,8 @@ namespace MgmtParamOrdering
         /// <returns> Returns a <see cref="EnvironmentContainerResource" /> object. </returns>
         public static EnvironmentContainerResource GetEnvironmentContainerResource(this ArmClient armClient, ResourceIdentifier id)
         {
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new EnvironmentContainerResource(clientOptions, credential, uri, pipeline, id));
+            EnvironmentContainerResource.ValidateResourceId(id);
+            return new EnvironmentContainerResource(armClient, id);
         }
         #endregion
 
@@ -74,7 +80,8 @@ namespace MgmtParamOrdering
         /// <returns> Returns a <see cref="Workspace" /> object. </returns>
         public static Workspace GetWorkspace(this ArmClient armClient, ResourceIdentifier id)
         {
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new Workspace(clientOptions, credential, uri, pipeline, id));
+            Workspace.ValidateResourceId(id);
+            return new Workspace(armClient, id);
         }
         #endregion
     }

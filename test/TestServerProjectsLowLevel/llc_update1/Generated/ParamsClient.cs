@@ -35,14 +35,11 @@ namespace llc_update1_LowLevel
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public ParamsClient(AzureKeyCredential credential, Uri endpoint = null, LLCClientOptions options = null)
+        public ParamsClient(AzureKeyCredential credential, Uri endpoint = null, ParamsClientOptions options = null)
         {
-            if (credential == null)
-            {
-                throw new ArgumentNullException(nameof(credential));
-            }
+            Argument.AssertNotNull(credential, nameof(credential));
             endpoint ??= new Uri("http://localhost:3000");
-            options ??= new LLCClientOptions();
+            options ??= new ParamsClientOptions();
 
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
@@ -101,6 +98,8 @@ namespace llc_update1_LowLevel
         public virtual async Task<Response> GetRequiredAsync(string parameter, string newParameter = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(parameter, nameof(parameter));
+
             using var scope = _clientDiagnostics.CreateScope("ParamsClient.GetRequired");
             scope.Start();
             try
@@ -124,6 +123,8 @@ namespace llc_update1_LowLevel
         public virtual Response GetRequired(string parameter, string newParameter = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(parameter, nameof(parameter));
+
             using var scope = _clientDiagnostics.CreateScope("ParamsClient.GetRequired");
             scope.Start();
             try
@@ -148,6 +149,8 @@ namespace llc_update1_LowLevel
         public virtual async Task<Response> PutRequiredOptionalAsync(string requiredParam, string optionalParam = null, string newParameter = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(requiredParam, nameof(requiredParam));
+
             using var scope = _clientDiagnostics.CreateScope("ParamsClient.PutRequiredOptional");
             scope.Start();
             try
@@ -172,6 +175,8 @@ namespace llc_update1_LowLevel
         public virtual Response PutRequiredOptional(string requiredParam, string optionalParam = null, string newParameter = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(requiredParam, nameof(requiredParam));
+
             using var scope = _clientDiagnostics.CreateScope("ParamsClient.PutRequiredOptional");
             scope.Start();
             try

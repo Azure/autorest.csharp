@@ -19,7 +19,7 @@ namespace AutoRest.CSharp.Mgmt.Output
     /// </summary>
     internal class NonLongRunningOperation : TypeProvider
     {
-        public NonLongRunningOperation(Operation operation, LongRunningOperationInfo lroInfo, BuildContext<MgmtOutputLibrary> context)
+        public NonLongRunningOperation(Operation operation, LongRunningOperationInfo lroInfo, Resource? resource, string defaultName, BuildContext<MgmtOutputLibrary> context)
             : base(context)
         {
             Debug.Assert(!operation.IsLongRunning);
@@ -33,29 +33,25 @@ namespace AutoRest.CSharp.Mgmt.Output
                 ResultType = TypeFactory.GetOutputType(context.TypeFactory.CreateType(responseSchema, false));
             }
 
-            if (operation.ShouldWrapResultType(ResultType, context))
+            if (operation.ShouldWrapResultType(ResultType, resource))
             {
-                ResultType = context.Library.GetArmResource(operation.GetHttpPath()).Type;
-                ResultDataType = context.Library.GetResourceData(operation.GetHttpPath()).Type;
+                WrapperResource = resource;
+                ResultType = resource?.Type;
             }
 
-            DefaultName = lroInfo.ClientPrefix.LastWordToSingular() + operation.CSharpName() + "Operation";
+            DefaultName = defaultName;
             DefaultNamespace = $"{context.DefaultNamespace}.Models";
             Description = BuilderHelpers.EscapeXmlDescription(operation.Language.Default.Description);
             DefaultAccessibility = lroInfo.Accessibility;
         }
+
+        public Resource? WrapperResource { get; }
 
         /// <summary>
         /// Type of the result of the operation.
         /// </summary>
         /// <value></value>
         public CSharpType? ResultType { get; }
-
-        /// <summary>
-        /// Type of the inner data of the operation.
-        /// </summary>
-        /// <value></value>
-        public CSharpType? ResultDataType { get; }
 
         protected override string DefaultName { get; }
 

@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager;
 using MgmtMultipleParentResource;
 
 namespace MgmtMultipleParentResource.Models
@@ -22,17 +22,17 @@ namespace MgmtMultipleParentResource.Models
     {
         private readonly OperationInternals<SubParent> _operation;
 
-        private readonly ArmResource _operationBase;
+        private readonly ArmClient _armClient;
 
         /// <summary> Initializes a new instance of SubParentUpdateOperation for mocking. </summary>
         protected SubParentUpdateOperation()
         {
         }
 
-        internal SubParentUpdateOperation(ArmResource operationsBase, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
+        internal SubParentUpdateOperation(ArmClient armClient, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
             _operation = new OperationInternals<SubParent>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "SubParentUpdateOperation");
-            _operationBase = operationsBase;
+            _armClient = armClient;
         }
 
         /// <inheritdoc />
@@ -65,13 +65,15 @@ namespace MgmtMultipleParentResource.Models
         SubParent IOperationSource<SubParent>.CreateResult(Response response, CancellationToken cancellationToken)
         {
             using var document = JsonDocument.Parse(response.ContentStream);
-            return new SubParent(_operationBase, SubParentData.DeserializeSubParentData(document.RootElement));
+            var data = SubParentData.DeserializeSubParentData(document.RootElement);
+            return new SubParent(_armClient, data);
         }
 
         async ValueTask<SubParent> IOperationSource<SubParent>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-            return new SubParent(_operationBase, SubParentData.DeserializeSubParentData(document.RootElement));
+            var data = SubParentData.DeserializeSubParentData(document.RootElement);
+            return new SubParent(_armClient, data);
         }
     }
 }

@@ -47,7 +47,14 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             }
             else if (configuration.AzureArm)
             {
-                MgmtTarget.Execute(project, codeModel, sourceInputModel, configuration);
+                if (configuration.MgmtConfiguration.TestModeler is not null)
+                {
+                    MgmtTestTarget.Execute(project, codeModel, sourceInputModel, configuration);
+                }
+                else
+                {
+                    MgmtTarget.Execute(project, codeModel, sourceInputModel, configuration);
+                }
             }
             else
             {
@@ -108,9 +115,13 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             {
                 try
                 {
-                    // We are unsuspectingly crashing, so output anything that might help us reproduce the issue
-                    await autoRest.WriteFile("Configuration.json", StandaloneGeneratorRunner.SaveConfiguration(configuration), "source-file-csharp");
-                    await autoRest.WriteFile("CodeModel.yaml", codeModelYaml, "source-file-csharp");
+                    if (configuration.SaveInputs)
+                    {
+                        // We are unsuspectingly crashing, so output anything that might help us reproduce the issue
+                        File.WriteAllText(Path.Combine(configuration.OutputFolder, "Configuration.json"), StandaloneGeneratorRunner.SaveConfiguration(configuration));
+                        await codeModelTask;
+                        File.WriteAllText(Path.Combine(configuration.OutputFolder, "CodeModel.yaml"), codeModelYaml);
+                    }
                 }
                 catch
                 {

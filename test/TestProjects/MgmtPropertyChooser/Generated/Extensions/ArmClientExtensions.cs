@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using Azure.Core;
 using Azure.ResourceManager;
 
 namespace MgmtPropertyChooser
@@ -19,7 +20,8 @@ namespace MgmtPropertyChooser
         /// <returns> Returns a <see cref="VirtualMachine" /> object. </returns>
         public static VirtualMachine GetVirtualMachine(this ArmClient armClient, ResourceIdentifier id)
         {
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new VirtualMachine(clientOptions, credential, uri, pipeline, id));
+            VirtualMachine.ValidateResourceId(id);
+            return new VirtualMachine(armClient, id);
         }
         #endregion
     }

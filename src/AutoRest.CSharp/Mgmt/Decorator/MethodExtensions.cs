@@ -15,9 +15,11 @@ namespace AutoRest.CSharp.Mgmt.Decorator
     internal static class MethodExtensions
     {
         /// <summary>
-        /// Return true if this operation is a list method. Also returns the itemType and a collection of <see cref="Segment"/> as the extra scope
-        /// For instance, /subscriptions/{}/providers/M.F/fakes will give you an empty collection for extra scope
-        /// /subscriptions/{}/providers/M.F/locations/{location}/fakes will give you a collection [locations] as extra scope
+        /// Return true if this operation is a list method. Also returns the itemType of what this operation is listing of.
+        /// This function will return true in the following circumstances:
+        /// 1. This operation is a paging method.
+        /// 2. This operation is not a paging method, but the return value is a collection type (IReadOnlyList)
+        /// 3. This operation is not a paging method and the return value is not a collection type, but it has similar structure as paging method (has a value property, and value property is a collection)
         /// </summary>
         /// <param name="operation"></param>
         /// <param name="itemType">The type of the item in the collection</param>
@@ -71,11 +73,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return clientOperation.First().IsLongRunningOperation();
         }
 
-        public static bool IsLongRunningReallyLong(this MgmtClientOperation clientOperation)
-        {
-            return clientOperation.First().IsLongRunningReallyLong();
-        }
-
         public static bool IsPagingOperation(this MgmtRestOperation restOperation, BuildContext<MgmtOutputLibrary> context)
         {
             return restOperation.Operation.Language.Default.Paging != null;
@@ -92,11 +89,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         public static bool IsLongRunningOperation(this MgmtRestOperation restOperation)
         {
             return restOperation.Operation.IsLongRunning;
-        }
-
-        public static bool IsLongRunningReallyLong(this MgmtRestOperation restOperation)
-        {
-            return restOperation.Operation.IsLongRunningReallyLong ?? false;
         }
     }
 }
