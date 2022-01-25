@@ -50,28 +50,21 @@ function Update-Branch([string]$CommitId, [string]$Path) {
     }
     $store | Out-File -FilePath $file
 }
-function Remove-EmptyTrack2Folder {
-    # Remove exist sdk from $RPMapping
-    $sdkFolder = Get-ChildItem $PSScriptRoot\..\..\sdk
-    $sdkFolder  | ForEach-Object {
-        $curSdkFolder = @(Get-ChildItem $_) 
-        foreach ($existSdk in $curSdkFolder) {
-            if ($existSdk.Name -match "Azure.ResourceManager.") {
-                $curSdk = Get-ChildItem $existSdk.FullName
-                if ($curSdk.Length -le 3) {
-                    Remove-Item -Path $existSdk.FullName -Recurse -Force
-                    Write-Host "["$existSdk.FullName"] has been deleted"
-                }
-            }
-        }
-    }
-}
-function Test-PathExist([string]$Path) {
-    if (-not(Test-Path $Path)) {
-        Write-Host -ForegroundColor Red "Cannot found $Path, please input correct Path."
+function Send-ErrorMessage([string]$message) {
+        Write-Host -ForegroundColor Red $message
         Write-Host -ForegroundColor Red "MockTestInit script exit."
         exit
+}
+function Update-AutorestTarget([string]$file, [string]$autorestVersion) {
+    $fileContent = Get-Content $file
+    $store = @()
+    foreach ($item in $fileContent) {
+        if ($item.Contains("</_AutoRestCSharpVersion>")) {
+            $store+= "<_AutoRestCSharpVersion>$autorestVersion</_AutoRestCSharpVersion>"
+        }
+        $store += $item
     }
+    $store | Out-File -FilePath $file
 }
 function Update-AllGeneratedCode([string]$path, [string]$autorestVersion) {
     $count = $path.IndexOf("ResourceManager.")
@@ -114,8 +107,6 @@ function Update-AllGeneratedCode([string]$path, [string]$autorestVersion) {
 
     # Generate MockTest code
     if ((Test-Path $mockMd) -and (Test-Path $csproj)) {
-        # please check luanch MockTest-Host. 
-        # Ref: https://github.com/changlong-liu/azure-sdk-for-net/blob/20211222-doc-for-mock-test/doc/dev/Using-Mock-Test-Generation.md
         & autorest --use=$autorestVersion $mockMd --testmodeler="{}" --debug
         if ($?) {
             $Script:testGenerateSuccessedRps += $RPName
@@ -140,19 +131,12 @@ function Update-AllGeneratedCode([string]$path, [string]$autorestVersion) {
 function  MockTestInit {
     param(
         [Parameter()]
-        [string] $SpecsRepoPath,
+        [string] $CommitId = "322d0edbc46e10b04a56f3279cecaa8fe4d3b69b",
         [Parameter()]
-        [string] $AutorestVersion,
-        [Parameter()]
-        [string] $SpecsVersion,
-        [Parameter()]
-        [string] $CommitId,
-        [Parameter()]
-        [bool] $GenerateNewSDKs = $false
+        [bool]$GenerateNewSDKs = $false
     )
     begin {
         Write-Host "Mock Test Initialize Start."
-        Remove-EmptyTrack2Folder
         $Script:allTrack2Sdk = 0
         $Script:newGenerateSdk = 0
         $Script:srcGenerateSuccessedRps = @()
@@ -167,12 +151,33 @@ function  MockTestInit {
         $Script:RPMapping = [ordered]@{ }
     }
     process {
-        Test-PathExist($AutorestVersion)
-        
+        # Build current autorest project 
+        $projRoot = Join-Path $PSScriptRoot "..\"
+        & cd $projRoot
+        & dotnet build
+        if (-not $?) {
+            Send-ErrorMessage -message "Autorest build fail."
+        }
+        $autorestVersion = Join-Path $projRoot "\artifacts\bin\AutoRest.CSharp\Debug\netcoreapp3.1"
+
+        # Clone Template project and add 'dotnet new' ref
+        & git clone https://github.com/dvbb/MgmtTemplate.git $projRoot\MgmtTemplate
+        & dotnet new -i $projRoot\MgmtTemplate\Azure.ResourceManager.Template
+        & dotnet new -i $projRoot\MgmtTemplate\mocktests
+
+        # Clone Azure/azure-sdk-for-net
+        # & git clone https://github.com/Azure/azure-sdk-for-net.git $projRoot\azure-sdk-for-net
+        $netRepoRoot =Join-Path $projRoot "azure-sdk-for-net"
+        $netRepoRoot =Join-Path $projRoot "..\azure-sdk-for-net"
+        $CodeGenTargetFile = Join-Path $netRepoRoot "\eng\CodeGeneration.targets"
+        Update-AutorestTarget -file $netRepoRoot -autorestVersion $autorestVersion
+
+        # Clone Azure/azure-rest-api-specs
+        # & git clone https://github.com/Azure/azure-rest-api-specs.git $projRoot\azure-rest-api-specs
+        $SpecsRepoPath  =Join-Path $projRoot "azure-rest-api-specs" 
+
         # Generate Track2 SDK Template
         if ($GenerateNewSDKs) {
-            Test-PathExist($SpecsRepoPath)
-
             # Get RP Mapping from azure-rest-api-specs repo of local
             Write-Output "Start RP mapping "
             $folderNames = Get-ChildItem $SpecsRepoPath/specification
@@ -212,6 +217,8 @@ function  MockTestInit {
             }
         }
 
+
+
         # Init All Track2 Sdk
         $sdkFolder = Get-ChildItem $PSScriptRoot\..\..\sdk
         $sdkFolder  | ForEach-Object {
@@ -220,7 +227,7 @@ function  MockTestInit {
                 if ($item.Name.Contains("Azure.ResourceManager")) {
                     # Create mocktests folder if it not exist
                     $Script:allTrack2Sdk++
-                    Update-AllGeneratedCode -path $item.FullName -autorestVersion $AutorestVersion
+                    # Update-AllGeneratedCode -path $item.FullName -autorestVersion $AutorestVersion
                 }
             }
         }
@@ -246,8 +253,6 @@ function  MockTestInit {
 #     Change [eng\CodeGeneration.targets] file _AutoRestCSharpVersion property to $AutorestVersion, 
 #     let src and mock be generated with same version of autorest
 #   2.Run 'dotnet new -l' make sure [azmocktests]&[azmgmt] already exist and they are latest.
-$SpecsRepoPath = "D:\repo\azure-rest-api-specs"
 $commitId = "322d0edbc46e10b04a56f3279cecaa8fe4d3b69b"
-$AutorestVersion = "D:\repo\Changlong\autorest.csharp\artifacts\bin\AutoRest.CSharp\Debug\netcoreapp3.1"
-$GenerateNewSDKs = $true
-MockTestInit -SpecsRepoPath $SpecsRepoPath -CommitId $commitId -AutorestVersion $AutorestVersion -GenerateNewSDKs $GenerateNewSDKs
+$GenerateNewSDKs = $false
+MockTestInit -CommitId $commitId -GenerateNewSDKs $GenerateNewSDKs
