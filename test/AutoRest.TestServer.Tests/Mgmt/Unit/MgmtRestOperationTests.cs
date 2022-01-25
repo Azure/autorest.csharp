@@ -132,5 +132,26 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
             "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability")]
         public void ValidateCheckNameAvailability(ResourceMatchType expected, HttpMethod httpMethod, bool isList, string resourcePathStr, string requestPathStr)
             => TestPair(expected, httpMethod, resourcePathStr, requestPathStr, isList);
+
+        [TestCase(ResourceMatchType.ParentList, HttpMethod.Get, true,
+            "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}",
+            "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policyDefinitions")]
+        [TestCase(ResourceMatchType.None, HttpMethod.Get, true,
+            "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}",
+            "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policyDefinitions")]
+        [TestCase(ResourceMatchType.None, HttpMethod.Get, true,
+            "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}",
+            "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Authorization/policyDefinitions")]
+        [TestCase(ResourceMatchType.ParentList, HttpMethod.Get, true,
+            "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}",
+            "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Authorization/policyDefinitions")]
+        [TestCase(ResourceMatchType.ParentList, HttpMethod.Get, true,
+            "/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}",
+            "/providers/Microsoft.Authorization/policyDefinitions")]
+        [TestCase(ResourceMatchType.None, HttpMethod.Get, true,
+            "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}",
+            "/providers/Microsoft.Authorization/policyDefinitions")]
+        public void PolicyDefinitionMultiParent(ResourceMatchType expected, HttpMethod httpMethod, bool isList, string resourcePathStr, string requestPathStr)
+            => TestPair(expected, httpMethod, resourcePathStr, requestPathStr, isList);
     }
 }

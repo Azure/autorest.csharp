@@ -218,7 +218,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.WriteXmlDocumentationSummary($"Tries to get details for this resource from the service.");
 
             BuildParameters(clientOperation, out var operationMappings, out _, out var methodParameters);
-            WriteCollectionMethodScope(typeof(bool).WrapResponse(async), "Exists", methodParameters, clientOperation.RestClient, writer =>
+            WriteCollectionMethodScope(typeof(bool).WrapResponse(async), "Exists", methodParameters, operationMappings.Values.First(), writer =>
             {
                 WriteExistsBody(methodParameters, async);
             }, async, isOverride: false);
@@ -242,7 +242,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.WriteXmlDocumentationSummary($"Tries to get details for this resource from the service.");
 
             BuildParameters(clientOperation, out var operationMappings, out var parameterMappings, out var methodParameters);
-            WriteCollectionMethodScope(_resource.Type.WrapResponse(async), "GetIfExists", methodParameters, clientOperation.RestClient, writer =>
+            WriteCollectionMethodScope(_resource.Type.WrapResponse(async), "GetIfExists", methodParameters, operationMappings.Values.First(), writer =>
             {
                 WriteGetMethodBody(writer, operationMappings, parameterMappings, async);
             }, async, isOverride: false);
@@ -294,7 +294,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         /// <param name="inner">Main logic of the method writer.</param>
         /// <param name="async"></param>
         /// <param name="isOverride"></param>
-        private void WriteCollectionMethodScope(CSharpType returnType, string methodName, IReadOnlyList<Parameter> methodParameters, MgmtRestClient client,
+        private void WriteCollectionMethodScope(CSharpType returnType, string methodName, IReadOnlyList<Parameter> methodParameters, MgmtRestOperation operation,
             CodeWriterDelegate inner, bool async, bool isOverride = false)
         {
             var fullMethodName = CreateMethodName(methodName, async);
@@ -317,7 +317,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             using (_writer.Scope())
             {
                 _writer.WriteParameterNullOrEmptyChecks(methodParameters);
-                using (WriteDiagnosticScope(_writer, new Diagnostic($"{_resourceCollection.Type.Name}.{methodName}"), GetClientDiagnosticFieldName(client, _resource)))
+                using (WriteDiagnosticScope(_writer, new Diagnostic($"{_resourceCollection.Type.Name}.{methodName}"), GetClientDiagnosticFieldName(operation)))
                 {
                     inner(_writer);
                 }
@@ -339,7 +339,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
             CSharpType returnType = typeof(GenericResource).WrapPageable(async);
             using (_writer.Scope($"public {GetVirtual(true)} {returnType} {methodName}(string nameFilter, string expand = null, int? top = null, {typeof(CancellationToken)} cancellationToken = default)"))
             {
-                using (WriteDiagnosticScope(_writer, new Diagnostic($"{_resourceCollection.Type.Name}.{syncMethodName}"), GetClientDiagnosticFieldName(_resource.GetOperation.RestClient, _resource)))
+                BuildParameters(_resource.GetOperation, out var operationMappings, out var parameterMappings, out var methodParameters);
+                using (WriteDiagnosticScope(_writer, new Diagnostic($"{_resourceCollection.Type.Name}.{syncMethodName}"), GetClientDiagnosticFieldName(operationMappings.Values.First())))
                 {
                     _writer.Line($"var filters = new {typeof(ResourceFilterCollection)}({_resource.Type}.ResourceType);");
                     _writer.Line($"filters.SubstringFilter = nameFilter;");

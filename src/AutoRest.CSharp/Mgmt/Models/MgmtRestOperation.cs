@@ -153,7 +153,13 @@ namespace AutoRest.CSharp.Mgmt.Models
 
             //check for a list by an ancestor
             var requestLastSegment = requestPath[requestPath.Count - 1];
-            if (isList && httpMethod == HttpMethod.Get && requestPath.Count < resourcePath.Count && requestLastSegment.IsConstant && AreEqualBackToProvider(resourcePath, requestPath, 1, 0))
+            if (isList &&
+                httpMethod == HttpMethod.Get &&
+                requestPath.Count < resourcePath.Count &&
+                requestLastSegment.IsConstant &&
+                resourcePath[0] == requestPath[0] && //first two items much be the same
+                resourcePath[1] == requestPath[1] &&
+                AreEqualBackToProvider(resourcePath, requestPath, 1, 0))
                 return ResourceMatchType.ParentList;
 
             //check for single value methods after the GET path which are typically POST methods
