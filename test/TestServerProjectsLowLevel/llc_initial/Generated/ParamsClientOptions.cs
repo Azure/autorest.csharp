@@ -10,8 +10,8 @@ using Azure.Core;
 
 namespace llc_initial_LowLevel
 {
-    /// <summary> Client options for LLCClient. </summary>
-    public partial class LLCClientOptions : ClientOptions
+    /// <summary> Client options for ParamsClient. </summary>
+    public partial class ParamsClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V1_0_0;
 
@@ -24,8 +24,8 @@ namespace llc_initial_LowLevel
 
         internal string Version { get; }
 
-        /// <summary> Initializes new instance of LLCClientOptions. </summary>
-        public LLCClientOptions(ServiceVersion version = LatestVersion)
+        /// <summary> Initializes new instance of ParamsClientOptions. </summary>
+        public ParamsClientOptions(ServiceVersion version = LatestVersion)
         {
             Version = version switch
             {
