@@ -48,9 +48,6 @@ namespace MgmtExtensionResource
         }
         #endregion
 
-        #region SubscriptionPolicyDefinition
-        #endregion
-
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.OrphanedPost/validateSomething
         /// ContextualPath: /subscriptions/{subscriptionId}
         /// OperationId: OrphanedPost_ValidateSomething
