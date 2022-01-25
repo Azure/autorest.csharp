@@ -119,7 +119,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
             HashSet<NameSetKey> uniqueSets = new HashSet<NameSetKey>();
             foreach (var operation in operations)
             {
-                Resource? resource = operation.Resource ?? DefaultResource;
+                Resource? resource = operation.Resource;
+                if (resource is null && operation.RestClient.Resources.Contains(DefaultResource))
+                    resource = DefaultResource;
+
                 NameSetKey key = new NameSetKey(operation.RestClient, resource);
                 if (uniqueSets.Contains(key))
                     continue;
