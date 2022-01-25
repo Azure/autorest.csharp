@@ -80,17 +80,21 @@ namespace AutoRest.CSharp.Mgmt.Generation
             foreach (var resource in This.ChildResources)
             {
                 _writer.Line();
-                _writer.Line($"#region {resource.Type.Name}");
                 if (resource.IsSingleton)
                 {
+                    _writer.Line($"#region {resource.Type.Name}");
                     WriteSingletonResourceEntry(resource, resource.SingletonResourceIdSuffix!);
+                    _writer.Line($"#endregion");
                 }
                 else
                 {
                     if (!singletonOnly)
+                    {
+                        _writer.Line($"#region {resource.Type.Name}");
                         WriteResourceCollectionEntry(resource);
+                        _writer.Line($"#endregion");
+                    }
                 }
-                _writer.Line($"#endregion");
             }
         }
 
