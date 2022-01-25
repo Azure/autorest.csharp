@@ -240,7 +240,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             {
                 var targetProperty = constructor.FindPropertyInitializedByParameter(p);
                 var paramValue = FindPropertyValue(sot, ev, targetProperty!);
-                writer.Append($"{p.Name}: ");
+                writer.Append($"{p.Name:D}: ");
                 if (paramValue is not null)
                 {
                     WriteExampleValue(writer, p.Type, paramValue!, $"{variableName}.{targetProperty!.Declaration.Name}");
@@ -313,7 +313,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                             }
                             else
                             {
-                                writer.Append($"{targetProperty.Declaration.Name} = ");
+                                writer.Append($"{targetProperty.Declaration.Name:D} = ");
                                 WriteExampleValue(writer, targetProperty.ValueType, paramValue!, newVariableName);
                                 writer.Append($", ");
                             }
