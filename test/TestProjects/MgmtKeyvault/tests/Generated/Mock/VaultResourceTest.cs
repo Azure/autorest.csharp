@@ -63,6 +63,45 @@ namespace MgmtKeyvault.Tests.Mock
                     EnabledForTemplateDeployment = true,
                 },
             };
+            options.Properties.AccessPolicies.Add(new MgmtKeyvault.Models.AccessPolicyEntry(tenantId: Guid.Parse("00000000-0000-0000-0000-000000000000"), objectId: "00000000-0000-0000-0000-000000000000", permissions: new MgmtKeyvault.Models.Permissions()));
+            options.Properties.AccessPolicies[0].Permissions.Keys.Add(new MgmtKeyvault.Models.KeyPermissions("encrypt"));
+            options.Properties.AccessPolicies[0].Permissions.Keys.Add(new MgmtKeyvault.Models.KeyPermissions("decrypt"));
+            options.Properties.AccessPolicies[0].Permissions.Keys.Add(new MgmtKeyvault.Models.KeyPermissions("wrapKey"));
+            options.Properties.AccessPolicies[0].Permissions.Keys.Add(new MgmtKeyvault.Models.KeyPermissions("unwrapKey"));
+            options.Properties.AccessPolicies[0].Permissions.Keys.Add(new MgmtKeyvault.Models.KeyPermissions("sign"));
+            options.Properties.AccessPolicies[0].Permissions.Keys.Add(new MgmtKeyvault.Models.KeyPermissions("verify"));
+            options.Properties.AccessPolicies[0].Permissions.Keys.Add(new MgmtKeyvault.Models.KeyPermissions("get"));
+            options.Properties.AccessPolicies[0].Permissions.Keys.Add(new MgmtKeyvault.Models.KeyPermissions("list"));
+            options.Properties.AccessPolicies[0].Permissions.Keys.Add(new MgmtKeyvault.Models.KeyPermissions("create"));
+            options.Properties.AccessPolicies[0].Permissions.Keys.Add(new MgmtKeyvault.Models.KeyPermissions("update"));
+            options.Properties.AccessPolicies[0].Permissions.Keys.Add(new MgmtKeyvault.Models.KeyPermissions("import"));
+            options.Properties.AccessPolicies[0].Permissions.Keys.Add(new MgmtKeyvault.Models.KeyPermissions("delete"));
+            options.Properties.AccessPolicies[0].Permissions.Keys.Add(new MgmtKeyvault.Models.KeyPermissions("backup"));
+            options.Properties.AccessPolicies[0].Permissions.Keys.Add(new MgmtKeyvault.Models.KeyPermissions("restore"));
+            options.Properties.AccessPolicies[0].Permissions.Keys.Add(new MgmtKeyvault.Models.KeyPermissions("recover"));
+            options.Properties.AccessPolicies[0].Permissions.Keys.Add(new MgmtKeyvault.Models.KeyPermissions("purge"));
+            options.Properties.AccessPolicies[0].Permissions.Secrets.Add(new MgmtKeyvault.Models.SecretPermissions("get"));
+            options.Properties.AccessPolicies[0].Permissions.Secrets.Add(new MgmtKeyvault.Models.SecretPermissions("list"));
+            options.Properties.AccessPolicies[0].Permissions.Secrets.Add(new MgmtKeyvault.Models.SecretPermissions("set"));
+            options.Properties.AccessPolicies[0].Permissions.Secrets.Add(new MgmtKeyvault.Models.SecretPermissions("delete"));
+            options.Properties.AccessPolicies[0].Permissions.Secrets.Add(new MgmtKeyvault.Models.SecretPermissions("backup"));
+            options.Properties.AccessPolicies[0].Permissions.Secrets.Add(new MgmtKeyvault.Models.SecretPermissions("restore"));
+            options.Properties.AccessPolicies[0].Permissions.Secrets.Add(new MgmtKeyvault.Models.SecretPermissions("recover"));
+            options.Properties.AccessPolicies[0].Permissions.Secrets.Add(new MgmtKeyvault.Models.SecretPermissions("purge"));
+            options.Properties.AccessPolicies[0].Permissions.Certificates.Add(new MgmtKeyvault.Models.CertificatePermissions("get"));
+            options.Properties.AccessPolicies[0].Permissions.Certificates.Add(new MgmtKeyvault.Models.CertificatePermissions("list"));
+            options.Properties.AccessPolicies[0].Permissions.Certificates.Add(new MgmtKeyvault.Models.CertificatePermissions("delete"));
+            options.Properties.AccessPolicies[0].Permissions.Certificates.Add(new MgmtKeyvault.Models.CertificatePermissions("create"));
+            options.Properties.AccessPolicies[0].Permissions.Certificates.Add(new MgmtKeyvault.Models.CertificatePermissions("import"));
+            options.Properties.AccessPolicies[0].Permissions.Certificates.Add(new MgmtKeyvault.Models.CertificatePermissions("update"));
+            options.Properties.AccessPolicies[0].Permissions.Certificates.Add(new MgmtKeyvault.Models.CertificatePermissions("managecontacts"));
+            options.Properties.AccessPolicies[0].Permissions.Certificates.Add(new MgmtKeyvault.Models.CertificatePermissions("getissuers"));
+            options.Properties.AccessPolicies[0].Permissions.Certificates.Add(new MgmtKeyvault.Models.CertificatePermissions("listissuers"));
+            options.Properties.AccessPolicies[0].Permissions.Certificates.Add(new MgmtKeyvault.Models.CertificatePermissions("setissuers"));
+            options.Properties.AccessPolicies[0].Permissions.Certificates.Add(new MgmtKeyvault.Models.CertificatePermissions("deleteissuers"));
+            options.Properties.AccessPolicies[0].Permissions.Certificates.Add(new MgmtKeyvault.Models.CertificatePermissions("manageissuers"));
+            options.Properties.AccessPolicies[0].Permissions.Certificates.Add(new MgmtKeyvault.Models.CertificatePermissions("recover"));
+            options.Properties.AccessPolicies[0].Permissions.Certificates.Add(new MgmtKeyvault.Models.CertificatePermissions("purge"));
 
             await vaultResource.UpdateAsync(patch);
         }
@@ -77,6 +116,9 @@ namespace MgmtKeyvault.Tests.Mock
             MgmtKeyvault.Models.VaultAccessPolicyParameters vaultAccessPolicyParameters = new MgmtKeyvault.Models.VaultAccessPolicyParameters(properties: new MgmtKeyvault.Models.VaultAccessPolicyProperties(accessPolicies: new List<MgmtKeyvault.Models.AccessPolicyEntry>()
 {
 new MgmtKeyvault.Models.AccessPolicyEntry(tenantId: Guid.Parse("00000000-0000-0000-0000-000000000000"),objectId: "00000000-0000-0000-0000-000000000000",permissions: new MgmtKeyvault.Models.Permissions()),}));
+            parameters.Properties.AccessPolicies[0].Permissions.Keys.Add(new MgmtKeyvault.Models.KeyPermissions("encrypt"));
+            parameters.Properties.AccessPolicies[0].Permissions.Secrets.Add(new MgmtKeyvault.Models.SecretPermissions("get"));
+            parameters.Properties.AccessPolicies[0].Permissions.Certificates.Add(new MgmtKeyvault.Models.CertificatePermissions("get"));
 
             await vaultResource.UpdateAccessPolicyAsync(operationKind, vaultAccessPolicyParameters);
         }

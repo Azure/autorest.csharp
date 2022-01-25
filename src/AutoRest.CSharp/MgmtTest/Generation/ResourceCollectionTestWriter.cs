@@ -39,7 +39,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
         public List<Tuple<Parameter, MgmtClientOperation?>> collectionInitiateParameters = new List<Tuple<Parameter, MgmtClientOperation?>>();
         public Dictionary<Tuple<Parameter, MgmtClientOperation?>, string> collectionInitiateParametersMap = new Dictionary<Tuple<Parameter, MgmtClientOperation?>, string>();
 
-        public ResourceCollectionTestWriter(CodeWriter writer, ResourceCollection resourceCollection) : base(writer, resourceCollection)
+        public ResourceCollectionTestWriter(CodeWriter writer, ResourceCollection resourceCollection, IEnumerable<string>? scenarioVariables = default) : base(writer, resourceCollection, scenarioVariables)
         {
             This = resourceCollection;
             _getAllOperation = resourceCollection.GetAllOperation;
@@ -129,7 +129,12 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     }
                 case MgmtExtensions extension:
                     {
-                        _writer.Append($"var collection = GetArmClient().Get{extension.ArmCoreType.Name}(new {typeof(Azure.Core.ResourceIdentifier)}({MgmtBaseTestWriter.FormatResourceId(realRequestPath):L}))");
+                        if (extension == MgmtContext.Library.TenantExtensions) {
+                            _writer.Append($"var collection = GetArmClient().GetTenants().GetAll().GetEnumerator().Current");
+                        }
+                        else {
+                            _writer.Append($"var collection = GetArmClient().Get{extension.ArmCoreType.Name}(new {typeof(Azure.Core.ResourceIdentifier)}({FormatResourceId(realRequestPath).RefScenariDefinedVariables(scenarioVariables)}))");
+                        }
                         break;
                     }
                 default:
@@ -241,15 +246,27 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     using (_writer.Scope())
                     {
                         _writer.Line($"// Example: {exampleModel.Name}");
-                        List<KeyValuePair<string, FormattableString>> parameterValues = WriteOperationParameters(clientOperation.MethodParameters, exampleModel);
-                        _writer.Line();
-                        WriteGetCollection(parentTp, operation.RequestPath.SerializedPath, exampleModel, parameterValues);
-                        WriteMethodTestInvocation(async, clientOperation, isLroOperation, $"collection.{testMethodName}", parameterValues.Select(pv => pv.Value));
+                        WriteOperationInvocation(This, clientOperation, operation, exampleModel, async, isLroOperation);
                     }
                     _writer.Line();
                     exampleIdx++;
                 }
             }
+        }
+
+        public bool WriteOperationInvocation(ResourceCollection collection, MgmtClientOperation clientOperation, MgmtRestOperation restOperation, ExampleModel exampleModel, bool async, bool isLroOperation)
+        {
+            MgmtTypeProvider? parentTp = FindParentByRequestPath(restOperation.RequestPath.SerializedPath, exampleModel);
+            if (parentTp is null) {
+                return false;
+            }
+
+            var testMethodName = CreateMethodName(clientOperation.Name, async);
+            List<KeyValuePair<string, FormattableString>> parameterValues = WriteOperationParameters(clientOperation.MethodParameters, exampleModel);
+            _writer.Line();
+            WriteGetCollection(parentTp, restOperation.RequestPath.SerializedPath, exampleModel, parameterValues);
+            WriteMethodTestInvocation(async, clientOperation, isLroOperation, $"collection.{testMethodName}", parameterValues.Select(pv => pv.Value));
+            return true;
         }
 
         public string GenExampleInstanceMethodName(string methodName, bool isAsync)
