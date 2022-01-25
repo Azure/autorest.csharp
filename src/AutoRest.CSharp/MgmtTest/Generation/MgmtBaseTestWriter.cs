@@ -26,10 +26,15 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 {
     internal partial class MgmtBaseTestWriter: MgmtClientBaseWriter
     {
-        public CodeWriterDelegate? _tagsWriterDelegate = null;
+        public Queue<CodeWriterDelegate> assignmentWriterDelegates = new Queue<CodeWriterDelegate>();
 
-        public MgmtBaseTestWriter(CodeWriter writer, MgmtTypeProvider provider) : base(writer, provider)
+        protected IEnumerable<string>? scenarioVariables;
+
+        protected bool inScenario => scenarioVariables is not null;
+
+        public MgmtBaseTestWriter(CodeWriter writer, MgmtTypeProvider provider, IEnumerable<string>? scenarioVariables) : base(writer, provider)
         {
+            this.scenarioVariables = scenarioVariables;
         }
 
         public void WriteTestDecorator()
@@ -45,7 +50,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             }
         }
 
-        public static string FormatResourceId(string resourceId)
+        public string FormatResourceId(string resourceId)
         {
             if (resourceId.Length == 0)
             {
@@ -59,7 +64,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             var elements = resourceId.Split("/");
             for (int i = 2; i< elements.Length; i+=2)
             {
-                if (elements[i-1].ToLower()== "subscriptions")
+                if (elements[i-1].ToLower()== "subscriptions" && !inScenario)
                 {
                     Regex regex = new Regex("^{[A-Z0-9]{8}-([A-Z0-9]{4}-){3}[A-Z0-9]{12}}$");
                     Match match = regex.Match(elements[i]);
@@ -192,14 +197,14 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
             foreach (var c in sot.Constructors)
             {
-                if (!c.Signature.Modifiers.HasFlag(Public) && !(c.Signature.Modifiers.HasFlag(Internal) && sot is SchemaObjectType))
+                if (c.Signature.Modifiers.HasFlag(Public))
                     continue;
                 var missAnyRequiredParameter = false;
                 foreach (var p in c.Signature.Parameters)
                 {
                     if (!p.IsRequired)
                         continue;
-                    var targetProperty = constructor.FindPropertyInitializedByParameter(p);
+                    var targetProperty = c.FindPropertyInitializedByParameter(p);
                     if (targetProperty is null)
                     {
                         missAnyRequiredParameter = true;
@@ -283,16 +288,61 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
             if (hasUnconsumedProperties)
                 WriteSchemaObjectExampleProperties(writer, sot, ev, variableName, consumedProperties);
+
+            // assign readonly list and dictionary properties.
+            foreach (var objectType in sot.EnumerateHierarchy())
+            {
+                foreach (var targetProperty in objectType.Properties)
+                {
+                    if (consumedProperties.Contains(targetProperty))
+                        continue;
+                    var paramValue = FindPropertyValue(sot, ev, targetProperty!);
+                    if (paramValue is not null)
+                    {
+                        assignmentWriterDelegates.Enqueue(CreateAssignmentWriterDelegate(targetProperty.ValueType, paramValue, $"{variableName}.{targetProperty.Declaration.Name}"));
+                    }
+                }
+            }
         }
 
-        protected void CreateTagWriterDelegate(FormattableString newVariableName, CSharpType valueType, ExampleValue ev)
+        public CodeWriterDelegate CreateAssignmentWriterDelegate(CSharpType cst, ExampleValue exampleValue, FormattableString variableName)
         {
-            _tagsWriterDelegate = new CodeWriterDelegate(writer =>
+            return new CodeWriterDelegate(writer =>
+            {
+                if (cst.Name == "IList" || cst.Name == "IEnumerable")
+                {
+                    writer.UseNamespace("System.Collections.Generic");
+                    var idx = 0;
+                    foreach (var element in exampleValue.Elements ?? new List<ExampleValue>())
+                    {
+                        writer.Append($"{variableName}.Add(");
+                        WriteExampleValue(writer, cst.Arguments[0], element, $"{variableName}[{idx}]");
+                        writer.Line($");");
+                        idx++;
+                    }
+                }
+                else if (cst.Name == "IDictionary")
+                {
+                    writer.UseNamespace("System.Collections.Generic");
+                    foreach (var entry in exampleValue.Properties ?? new DictionaryOfExamplValue() { })
+                    {
+                        var k = entry.Key.RefScenariDefinedVariables(scenarioVariables);
+                        writer.Append($"${variableName}[{k}] = ");
+                        WriteExampleValue(writer, cst.Arguments[1], entry.Value, $"{variableName}[{k}]");
+                        writer.Line($";");
+                    }
+                }
+            });
+        }
+
+        protected void AddTagWriterDelegate(FormattableString newVariableName, CSharpType valueType, ExampleValue ev)
+        {
+            assignmentWriterDelegates.Enqueue(new CodeWriterDelegate(writer =>
             {
                 writer.Append($"{newVariableName}.ReplaceWith(");
                 WriteExampleValue(writer, valueType, ev, newVariableName);
-                writer.Append($");");
-            });
+                writer.Line($");");
+            }));
         }
 
         private void WriteSchemaObjectExampleProperties(CodeWriter writer, ObjectType sot, ExampleValue ev, FormattableString variableName, HashSet<ObjectTypeProperty> consumedProperties)
@@ -311,7 +361,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                             FormattableString newVariableName = $"{variableName}.{targetProperty.Declaration.Name}";
                             if (targetProperty.Declaration.Name == "Tags" && targetProperty.ValueType.Name == "IDictionary")
                             {
-                                CreateTagWriterDelegate(newVariableName, targetProperty.ValueType, paramValue);
+                                AddTagWriterDelegate(newVariableName, targetProperty.ValueType, paramValue);
                             }
                             else
                             {
@@ -323,59 +373,6 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                         }
                     }
                 }
-            }
-        }
-
-        internal readonly struct JsonRawValue
-        {
-            public readonly object? RawValue;
-
-            public JsonRawValue(object? rawValue)
-            {
-                RawValue = rawValue;
-            }
-
-            public bool IsNull()
-            {
-                return RawValue is null;
-            }
-
-            public bool IsEnumerable()
-            {
-                if (RawValue == null)
-                    return false;
-                return typeof(IEnumerable<object>).IsAssignableFrom(RawValue.GetType());
-            }
-            public IEnumerable<object> AsEnumerable() {
-                return RawValue is null ? new List<object>() : (IEnumerable<object>)RawValue;
-            }
-
-            public bool IsString()
-            {
-                if (RawValue == null)
-                    return false;
-                return RawValue is string;
-            }
-            public string? AsString() {
-                return RawValue?.ToString();
-            }
-
-            public bool IsDictionary()
-            {
-                if (RawValue == null)
-                    return false;
-                Type t = RawValue.GetType();
-                return t.IsGenericType && t.GetGenericTypeDefinition() == typeof(Dictionary<,>);
-            }
-            public Dictionary<string, object?> AsDictionary() {
-                var ret = new Dictionary<string, object?>();
-                if (RawValue is null)
-                    return ret;
-                foreach (KeyValuePair<object, object> entry in (IEnumerable< KeyValuePair<object, object>>)RawValue)
-                {
-                    ret.Add(entry.Key.ToString()!, entry.Value);
-                }
-                return ret;
             }
         }
 
@@ -394,14 +391,14 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 {
                     foreach (var entry in jsonRawValue.AsDictionary())
                     {
-                        writer.Append($"[{entry.Key:L}] = ");
+                        writer.Append($"[{entry.Key.RefScenariDefinedVariables(scenarioVariables)}] = ");
                         WriteJsonRawValue(writer, new JsonRawValue(entry.Value));
                         writer.Line($",");
                     }
                 }
             }
             else if (jsonRawValue.IsString()) {
-                writer.Append($"{jsonRawValue.AsString():L}");
+                writer.Append($"{jsonRawValue.AsString().RefScenariDefinedVariables(scenarioVariables)}");
             }
             else if (jsonRawValue.IsNull())
             {
@@ -435,8 +432,9 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 {
                     foreach (var entry in exampleValue.Properties ?? new DictionaryOfExamplValue() { })
                     {
-                        writer.Append($"[{entry.Key:L}] = ");
-                        WriteExampleValue(writer, cst.Arguments[1], entry.Value, $"{variableName}[{entry.Key:L}]");
+                        var k = entry.Key.RefScenariDefinedVariables(scenarioVariables);
+                        writer.Append($"[{k}] = ");
+                        WriteExampleValue(writer, cst.Arguments[1], entry.Value, $"{variableName}[{k}]");
                         writer.Append($",");
                     }
                 }
@@ -447,25 +445,25 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             }
             else if (cst.Name == "ResourceIdentifier" || cst.Name == "ResourceType")
             {
-                writer.Append($"new {cst}(${MgmtBaseTestWriter.FormatResourceId(exampleValue.RawValue!.ToString()!):L})");
+                writer.Append($"new {cst}(${FormatResourceId(exampleValue.RawValue!.ToString()!).RefScenariDefinedVariables(scenarioVariables):L})");
             }
-            else if (cst.Name == "DateTimeOffset")
+            else if (cst.Name == "DateTimeOffset" && exampleValue.RawValue is string dtValue)
             {
-                writer.Append($"{typeof(DateTimeOffset)}.Parse({exampleValue.RawValue:L})");
+                writer.Append($"{typeof(DateTimeOffset)}.Parse({dtValue.RefScenariDefinedVariables(scenarioVariables)})");
             }
-            else if (cst.Name == "Guid")
+            else if (cst.Name == "Guid" && exampleValue.RawValue is string guidValue)
             {
-                writer.Append($"System.Guid.Parse({exampleValue.RawValue:L})");
+                writer.Append($"System.Guid.Parse({guidValue.RefScenariDefinedVariables(scenarioVariables)})");
             }
-            else if (cst.Name == "TimeSpan")
+            else if (cst.Name == "TimeSpan" && exampleValue.RawValue is string tsValue)
             {
-                writer.Append($"System.TimeSpan.Parse({exampleValue.RawValue:L})");
+                writer.Append($"System.TimeSpan.Parse({tsValue.RefScenariDefinedVariables(scenarioVariables)})");
             }
-            else if (exampleValue.RawValue is not null)
+            else if (exampleValue.RawValue is not null && exampleValue.RawValue is string strValue)
             {
                 if (new string[] { "String", "AzureLocation" }.Contains(cst.FrameworkType.Name))
                 {
-                    writer.Append($"{exampleValue.RawValue:L}");
+                    writer.Append($"{strValue.RefScenariDefinedVariables(scenarioVariables)}");
                 }
                 else
                 {
@@ -493,13 +491,13 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             }
         }
 
-        public static void WriteEnumTypeExampleValue(CodeWriter writer, EnumType enumType, ExampleValue exampleValue)
+        public void WriteEnumTypeExampleValue(CodeWriter writer, EnumType enumType, ExampleValue exampleValue)
         {
             if (enumType.IsExtendable)
             {
-                if (new string[] { "String" }.Contains(enumType.BaseType.FrameworkType.Name))
+                if (new string[] { "String" }.Contains(enumType.BaseType.FrameworkType.Name) && exampleValue.RawValue is string strValue)
                 {
-                    writer.AppendEnumFromString(enumType, w => w.Append($"{exampleValue.RawValue:L}"));
+                    writer.AppendEnumFromString(enumType, w => w.Append($"{strValue.RefScenariDefinedVariables(scenarioVariables)}"));
                 }
                 else
                 {
@@ -548,10 +546,10 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             WriteExampleValue(writer, parameter.Type, exampleParameter.ExampleValue, formattableVariableName);
             writer.Line($";");
 
-            if (_tagsWriterDelegate != null) {
-                writer.Line($"{_tagsWriterDelegate}");
+            while (assignmentWriterDelegates.Count > 0)
+            {
+                writer.Append($"{assignmentWriterDelegates.Dequeue()}");
             }
-            _tagsWriterDelegate = null;
             return formattableVariableName;
         }
 
@@ -699,7 +697,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     }
                 }
 
-                if (segment.ReferenceName == "subscriptionId")
+                if (segment.ReferenceName == "subscriptionId" && !inScenario)
                 {
                     Regex regex = new Regex("^{[A-Z0-9]{8}-([A-Z0-9]{4}-){3}[A-Z0-9]{12}}$");
                     Match match = regex.Match(value);
@@ -708,7 +706,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                         value = "\"00000000-0000-0000-0000-000000000000\"";
                     }
                 }
-                return value;
+                return value.RefScenariDefinedVariables(scenarioVariables);
             }));
             return $"{identifierParams}";
         }

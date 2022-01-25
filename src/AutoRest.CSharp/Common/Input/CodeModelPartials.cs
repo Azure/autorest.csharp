@@ -276,87 +276,261 @@ namespace AutoRest.CSharp.Input
                 .Concat(Schemas.Groups);
     }
 
-    internal partial class TestDefinitionModel
+    internal readonly struct JsonRawValue
     {
+        public readonly object? RawValue;
+
+        public JsonRawValue(object? rawValue)
+        {
+            RawValue = rawValue;
+        }
+
+        public bool IsNull()
+        {
+            return RawValue is null;
+        }
+
+        public bool IsEnumerable()
+        {
+            if (RawValue == null)
+                return false;
+            return typeof(IEnumerable<object>).IsAssignableFrom(RawValue.GetType());
+        }
+        public IEnumerable<object> AsEnumerable()
+        {
+            return RawValue is null ? new List<object>() : (IEnumerable<object>)RawValue;
+        }
+
+        public bool IsString()
+        {
+            if (RawValue == null)
+                return false;
+            return RawValue is string;
+        }
+        public string? AsString()
+        {
+            return RawValue?.ToString();
+        }
+
+        public bool IsDictionary()
+        {
+            if (RawValue == null)
+                return false;
+            Type t = RawValue.GetType();
+            return t.IsGenericType && t.GetGenericTypeDefinition() == typeof(Dictionary<,>) || t.Name == "DictionaryOfAny";
+        }
+        public Dictionary<string, object?> AsDictionary()
+        {
+            var ret = new Dictionary<string, object?>();
+            if (RawValue is null)
+                return ret;
+            if (RawValue is DictionaryOfAny)
+            {
+                return (DictionaryOfAny)RawValue;
+            }
+            foreach (KeyValuePair<object, object?> entry in (IEnumerable<KeyValuePair<object, object?>>)RawValue)
+            {
+                ret.Add(entry.Key.ToString()!, entry.Value);
+            }
+            return ret;
+        }
+    }
+
+    internal partial class OavVariableScope
+    {
+        [YamlMember(Alias = "requiredVariables")]
+        public ICollection<string>? RequiredVariables;
+
+        [YamlMember(Alias = "requiredVariablesDefault")]
+        public Dictionary<string, string> RequiredVariablesDefault;
+
+        [YamlMember(Alias = "secretVariables")]
+        public ICollection<string>? SecretVariables;
+
+        [YamlMember(Alias = "variables")]
+        public Dictionary<string, object?> Variables;
+
+        [YamlMember(Alias = "outputVariables")]
+        public Dictionary<string, string>? OutputVariables;
+
+        [YamlMember(Alias = "outputVariableNames")]
+        public ICollection<string>? OutputVariableNames;
+
+        public string GetVariableDefaultValue(string variableKey, string defaultValue = "default")
+        {
+            if (Variables is not null)
+            {
+                if (Variables.ContainsKey(variableKey))
+                {
+                    var rawValue = new JsonRawValue(Variables[variableKey]);
+                    if (rawValue.IsString())
+                    {
+                        return rawValue.AsString()!;
+                    }
+                    else if (rawValue.IsDictionary())
+                    {
+                        var dict = rawValue.AsDictionary();
+                        if (dict.ContainsKey("defaultValue"))
+                        {
+                            return dict["defaultValue"]?.ToString() ?? defaultValue;
+                        }
+                    }
+                }
+            }
+            return defaultValue;
+        }
+
+        public HashSet<string> GetAllVariableNames()
+        {
+            HashSet<string> variableNames = new HashSet<string>();
+            if (this.RequiredVariables is not null)
+            {
+                variableNames.UnionWith(this.RequiredVariables);
+            }
+            if (this.Variables is not null)
+            {
+                variableNames.UnionWith(this.Variables.Keys);
+            }
+            if (this.OutputVariables is not null)
+            {
+                variableNames.UnionWith(this.OutputVariables.Keys);
+            }
+            return variableNames;
+        }
+    }
+
+    internal partial class TestDefinitionModel: OavVariableScope
+    {
+        public const string Scope_ResourceGroup = "ResourceGroup";
 
         [YamlMember(Alias = "useArmTemplate")]
         public Boolean UseArmTemplate;
 
-        [YamlMember(Alias = "requiredVariablesDefault")]
-        public System.Collections.Generic.Dictionary<string, string> RequiredVariablesDefault;
-
-        [YamlMember(Alias = "outputVariableNames")]
-        public System.Collections.Generic.ICollection<string> OutputVariableNames;
-
         [YamlMember(Alias = "prepareSteps")]
-        public System.Collections.Generic.ICollection<TestStep> PrepareSteps;
+        public ICollection<TestStep> PrepareSteps;
 
-        [YamlMember(Alias = "testScenarios")]
-        public System.Collections.Generic.ICollection<TestScenario> TestScenarios;
+        [YamlMember(Alias = "cleanUpSteps")]
+        public ICollection<TestStep> CleanUpSteps;
+
+        [YamlMember(Alias = "scenarios")]
+        public ICollection<Scenario> Scenarios;
 
         [YamlMember(Alias = "_filePath")]
         public string FilePath;
 
         [YamlMember(Alias = "scope")]
         public string? Scope;
-
-        [YamlMember(Alias = "requiredVariables")]
-        public System.Collections.Generic.ICollection<string>? RequiredVariables;
     };
 
-    internal partial class TestStep
+    internal partial class JsonPatchOp
     {
+        [YamlMember(Alias = "add")]
+        public string? Add;
+
+        [YamlMember(Alias = "remove")]
+        public string? Remove;
+
+        [YamlMember(Alias = "replace")]
+        public string? Replace;
+
+        [YamlMember(Alias = "copy")]
+        public string? Copy;
+
+        [YamlMember(Alias = "move")]
+        public string? Move;
+
+        [YamlMember(Alias = "test")]
+        public string? Test;
+
+        [YamlMember(Alias = "value")]
+        public object? Value;
+
+        [YamlMember(Alias = "oldValue")]
+        public object? OldValue;
+
+        [YamlMember(Alias = "from")]
+        public string? From;
+    };
+
+    internal partial class TestStep: OavVariableScope
+    {
+        public const string StepType_RestCall = "restCall";
+        public const string StepType_ArmTemplateDeployment = "armTemplateDeployment";
 
         [YamlMember(Alias = "type")]
         public string Type;
 
-        // for TestStepArmTemplateDeployment (type==armTemplateDeployment)
+        [YamlMember(Alias = "description")]
+        public string? Description;
+
         [YamlMember(Alias = "step")]
-        public string Step;
+        public string? Step;
+
+        [YamlMember(Alias = "requestUpdate")]
+        public ICollection<JsonPatchOp>? RequestUpdate;
+
+        [YamlMember(Alias = "resourceUpdate")]
+        public ICollection<JsonPatchOp>? ResourceUpdate;
+
+        [YamlMember(Alias = "responseUpdate")]
+        public ICollection<JsonPatchOp>? ResponseUpdate;
+
+        [YamlMember(Alias = "statusCode")]
+        public int? StatusCode;
+
+        [YamlMember(Alias = "isPrepareStep")]
+        public bool? IsPrepareStep;
+
+        [YamlMember(Alias = "isCleanUpStep")]
+        public bool? IsCleanUpStep;
+
+        // for TestStepArmTemplateDeployment (type==armTemplateDeployment)
+        [YamlMember(Alias = "armTemplate")]
+        public String? ArmTemplate;
 
         [YamlMember(Alias = "armTemplatePayload")]
         public RecordOfStringAndAny? ArmTemplatePayload;
 
-        [YamlMember(Alias = "armTemplateParametersPayload")]
-        public RecordOfStringAndAny? ArmTemplateParametersPayload;
-
         // for TestStepRestCall (type==restCall)
-        [YamlMember(Alias = "operation")]
-        public RecordOfStringAndAny? Operation;
+        [YamlMember(Alias = "operationId")]
+        public String? OperationId;
 
-        [YamlMember(Alias = "exampleId")]
-        public string? ExampleId;
+        [YamlMember(Alias = "exampleName")]
+        public string? ExampleName;
 
-        [YamlMember(Alias = "exampleFilePath")]
-        public string? ExampleFilePath;
+        [YamlMember(Alias = "exampleFile")]
+        public string? ExampleFile;
 
         [YamlMember(Alias = "requestParameters")]
         public RecordOfStringAndAny? RequestParameters;
 
-        [YamlMember(Alias = "ResponseExpected")]
-        public RecordOfStringAndAny? responseExpected;
+        [YamlMember(Alias = "expectedResponse")]
+        public object? ExpectedResponse;
 
         // test-modeler properties
         [YamlMember(Alias = "exampleModel")]
         public ExampleModel? ExampleModel;
-
-        [YamlMember(Alias = "outputVariableNames")]
-        public System.Collections.Generic.ICollection<string>? OutputVariableNames;
     };
 
-    internal partial class TestScenario
+    internal partial class Scenario: OavVariableScope
     {
-        [YamlMember(Alias = "requiredVariablesDefault")]
-        public System.Collections.Generic.Dictionary<string, string> RequiredVariablesDefault;
+        [YamlMember(Alias = "description")]
+        public string Description;
+
+        [YamlMember(Alias = "scenario")]
+        public string ScenarioName;
 
         [YamlMember(Alias = "steps")]
-        public System.Collections.Generic.ICollection<TestStep> Steps;
+        public ICollection<TestStep> Steps;
 
-        [YamlMember(Alias = "_testDef")]
-        public TestDefinitionModel? TestDef;
+        [YamlMember(Alias = "_scenarioDef")]
+        public TestDefinitionModel? ScenarioDef;
 
         [YamlMember(Alias = "_resolvedSteps")]
-        public System.Collections.Generic.ICollection<TestStep>? ResolvedSteps;
+        public ICollection<TestStep>? ResolvedSteps;
+
+        [YamlMember(Alias = "shareScope")]
+        public bool ShareScope;
     };
 
 
@@ -366,13 +540,13 @@ namespace AutoRest.CSharp.Input
         public MockTestDefinitionModel MockTest;
 
         [YamlMember(Alias = "scenarioTests")]
-        public System.Collections.Generic.ICollection<TestDefinitionModel> ScenarioTests;
+        public ICollection<TestDefinitionModel> ScenarioTests;
     }
 
     internal partial class MockTestDefinitionModel
     {
         [YamlMember(Alias = "exampleGroups")]
-        public System.Collections.Generic.ICollection<ExampleGroup> ExampleGroups;
+        public ICollection<ExampleGroup> ExampleGroups;
     }
 
     internal partial class ExampleGroup
@@ -381,7 +555,7 @@ namespace AutoRest.CSharp.Input
         public string OperationId;
 
         [YamlMember(Alias = "examples")]
-        public System.Collections.Generic.ICollection<ExampleModel> Examples;
+        public ICollection<ExampleModel> Examples;
 
         [YamlMember(Alias = "operationGroup")]
         public OperationGroup OperationGroup;
@@ -405,13 +579,13 @@ namespace AutoRest.CSharp.Input
         public string? OriginalFile;
 
         [YamlMember(Alias = "clientParameters")]
-        public System.Collections.Generic.ICollection<ExampleParameter> ClientParameters;
+        public ICollection<ExampleParameter> ClientParameters;
 
         [YamlMember(Alias = "methodParameters")]
-        public System.Collections.Generic.ICollection<ExampleParameter> MethodParameters;
+        public ICollection<ExampleParameter> MethodParameters;
 
         [YamlMember(Alias = "responses")]
-        public System.Collections.Generic.Dictionary<string, ExampleResponse> Responses; // statusCode-->ExampleResponse
+        public Dictionary<string, ExampleResponse> Responses; // statusCode-->ExampleResponse
 
         public IEnumerable<ExampleParameter> AllParameter => this.ClientParameters.Concat(this.MethodParameters);
     }
@@ -445,7 +619,7 @@ namespace AutoRest.CSharp.Input
         public Schema Schema;
 
         [YamlMember(Alias = "flattenedNames")]
-        public System.Collections.Generic.ICollection<string>? FlattenedNames;
+        public ICollection<string>? FlattenedNames;
 
         /**Use elements if schema.type==Array, use properties if schema.type==Object/Dictionary, otherwise use rawValue */
         [YamlMember(Alias = "rawValue")]
