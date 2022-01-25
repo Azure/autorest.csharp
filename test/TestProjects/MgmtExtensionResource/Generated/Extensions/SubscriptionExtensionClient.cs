@@ -39,6 +39,18 @@ namespace MgmtExtensionResource
             return apiVersion;
         }
 
+        #region SubSingleton
+        /// <summary> Gets an object representing a SubSingleton along with the instance operations that can be performed on it. </summary>
+        /// <returns> Returns a <see cref="SubSingleton" /> object. </returns>
+        public virtual SubSingleton GetSubSingleton()
+        {
+            return new SubSingleton(ArmClient, new ResourceIdentifier(Id + "/providers/Microsoft.Singleton/subSingletons/default"));
+        }
+        #endregion
+
+        #region SubscriptionPolicyDefinition
+        #endregion
+
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.OrphanedPost/validateSomething
         /// ContextualPath: /subscriptions/{subscriptionId}
         /// OperationId: OrphanedPost_ValidateSomething

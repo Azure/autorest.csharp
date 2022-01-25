@@ -26,5 +26,8 @@ namespace MgmtExtensionResource
             ArmClient.TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
         }
+
+        #region ManagementGroupPolicyDefinition
+        #endregion
     }
 }

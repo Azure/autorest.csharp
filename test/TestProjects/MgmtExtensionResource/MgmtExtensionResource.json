@@ -34,6 +34,67 @@
         }
     },
     "paths": {
+        "/subscriptions/{subscriptionId}/providers/Microsoft.Singleton/subSingletons/default": {
+            "get": {
+                "tags": [
+                    "SubSingletons"
+                ],
+                "operationId": "SubSingletons_Get",
+                "summary": "Singleton that belongs to a subscription.",
+                "description": "Singleton that belongs to a subscription.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The singleton object",
+                        "schema": {
+                            "$ref": "#/definitions/SubSingleton"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/providers/Microsoft.Singleton/subSingletons/default/execute": {
+            "post": {
+                "tags": [
+                    "SubSingletons"
+                ],
+                "operationId": "SubSingletons_Execute",
+                "summary": "Singleton that belongs to a subscription.",
+                "description": "Singleton that belongs to a subscription.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    }
+                }
+            }
+        },
         "/subscriptions/{subscriptionId}/providers/Microsoft.OrphanedPost/validateSomething": {
             "post": {
                 "tags": [
@@ -705,6 +766,30 @@
                 }
             },
             "description": "Validate something options."
+        },
+        "SubSingleton": {
+            "properties": {
+                "something": {
+                    "type": "string",
+                    "description": "The something."
+                },
+                "id": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "The ID of the policy definition."
+                },
+                "name": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "The name of the policy definition."
+                },
+                "type": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "The type of the resource (Microsoft.Authorization/policyDefinitions)."
+                }
+            },
+            "description": "SubSingleton object."
         }
     },
     "parameters": {
