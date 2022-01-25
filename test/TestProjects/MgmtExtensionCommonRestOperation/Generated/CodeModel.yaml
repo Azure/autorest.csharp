@@ -507,7 +507,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpRequest 
                 path: /subscriptions/{subscriptionId}/providers/Microsoft.TypeOne/typeOnes
-                method: post
+                method: get
                 uri: '{$host}'
         signatureParameters: []
         responses:
@@ -576,7 +576,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpRequest 
                 path: /subscriptions/{subscriptionId}/providers/Microsoft.TypeTwo/typeTwos
-                method: post
+                method: get
                 uri: '{$host}'
         signatureParameters: []
         responses:
