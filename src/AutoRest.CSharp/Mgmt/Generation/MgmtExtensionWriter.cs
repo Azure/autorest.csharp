@@ -78,7 +78,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             else
             {
                 // this is a normal operation
-                WriteMethodWrapperImpl(clientOperation, clientOperation.Name, clientOperation.ReturnType, async, false, false);
+                WriteMethodWrapperImpl(clientOperation, clientOperation.Name, GetActualItemType(clientOperation, clientOperation.ReturnType), async, false, false);
             }
         }
 
@@ -116,8 +116,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Line($")");
         }
 
-        private CSharpType GetActualItemType(MgmtClientOperation clientOperation, CSharpType itemType)
+        private CSharpType? GetActualItemType(MgmtClientOperation clientOperation, CSharpType? itemType)
         {
+            if (itemType is null)
+                return null;
+
             var wrapResource = WrapResourceDataType(itemType, clientOperation.First());
             CSharpType actualItemType = wrapResource?.Type ?? itemType;
             return actualItemType;
