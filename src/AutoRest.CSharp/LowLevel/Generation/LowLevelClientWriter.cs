@@ -101,13 +101,18 @@ namespace AutoRest.CSharp.Generation.Writers
                 .WriteXmlDocumentationSummary($"The HTTP pipeline for sending and receiving REST requests and responses.")
                 .Line($"public virtual {typeof(HttpPipeline)} Pipeline => {client.Fields.PipelineField.Name};");
 
-            var uriField = client.Fields.GetFieldByParameter("endpoint", new CSharpType(typeof(Uri)));
-            if (uriField != null)
+            var endpointParameter = client.Parameters.FirstOrDefault(parameter => parameter.Name == "endpoint");
+            if (endpointParameter != null)
             {
-                writer
-                    .Line()
-                    .WriteXmlDocumentationSummary($"The HTTP Uri.")
-                    .Line($"public virtual {uriField.Type} Uri => {uriField.Declaration.ActualName};");
+                var uriField = client.Fields.GetFieldByParameter(endpointParameter);
+                if (uriField != null)
+                {
+                    writer
+                        .Line()
+                        .WriteXmlDocumentationSummary($"The HTTP Uri.")
+                        .Line($"public virtual {uriField.Type} Uri => {uriField.Declaration.ActualName};");
+                }
+
             }
 
             writer.Line();
