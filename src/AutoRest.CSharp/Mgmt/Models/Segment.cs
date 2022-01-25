@@ -88,7 +88,7 @@ namespace AutoRest.CSharp.Mgmt.Models
         /// <exception cref="InvalidOperationException">if this.IsReference is false</exception>
         public string ReferenceName => _value.Reference.Name;
 
-        private bool Equals(Segment other, bool strict)
+        internal bool Equals(Segment other, bool strict)
         {
             if (strict)
                 return ExactEquals(this, other);

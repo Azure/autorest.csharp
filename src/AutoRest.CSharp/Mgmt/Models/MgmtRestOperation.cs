@@ -109,8 +109,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             return GetMatch(ResourceMatchType.ParentList, matches, context, errorText) ??
                 GetMatch(ResourceMatchType.ChildList, matches, context, errorText) ??
                 GetMatch(ResourceMatchType.Context, matches, context, errorText) ??
-            GetMatch(ResourceMatchType.CheckName, matches, context, errorText);
-
+                GetMatch(ResourceMatchType.CheckName, matches, context, errorText);
         }
 
         private static Resource? GetMatch(ResourceMatchType matchType, Dictionary<ResourceMatchType, HashSet<Resource>> matches, BuildContext<MgmtOutputLibrary> context, string error)
@@ -192,7 +191,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             //resourcePath will have an extra reference segment for the resource name.  Skip this and walk back to the providers or beginning of array and everything must match to that point
             for (int resourceIndex = resourceStart, requestIndex = requestStart; resourceIndex >= 0 && requestIndex >= 0; resourceIndex--, requestIndex--)
             {
-                if (resourcePath[resourceIndex].IsReference == true && requestPath[requestIndex].IsReference == true)
+                if (resourcePath[resourceIndex].Equals(requestPath[requestIndex], false))
                     continue; //there are sometimes name differences in the path variable used but the rest of the context is the same
 
                 if (resourcePath[resourceIndex] != requestPath[requestIndex])
