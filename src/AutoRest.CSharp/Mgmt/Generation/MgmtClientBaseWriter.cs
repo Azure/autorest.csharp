@@ -75,16 +75,21 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         public abstract void Write();
 
-        protected virtual void WriteChildResourceEntries()
+        protected virtual void WriteChildResourceEntries(bool singletonOnly = false)
         {
             foreach (var resource in This.ChildResources)
             {
                 _writer.Line();
                 _writer.Line($"#region {resource.Type.Name}");
                 if (resource.IsSingleton)
+                {
                     WriteSingletonResourceEntry(resource, resource.SingletonResourceIdSuffix!);
+                }
                 else
-                    WriteResourceCollectionEntry(resource);
+                {
+                    if (!singletonOnly)
+                        WriteResourceCollectionEntry(resource);
+                }
                 _writer.Line($"#endregion");
             }
         }

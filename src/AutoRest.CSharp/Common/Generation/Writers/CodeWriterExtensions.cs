@@ -157,8 +157,11 @@ namespace AutoRest.CSharp.Generation.Writers
             return writer;
         }
 
-        public static void WriteParameter(this CodeWriter writer, Parameter clientParameter, bool enforceDefaultValue = false)
+        public static void WriteParameter(this CodeWriter writer, Parameter clientParameter, bool enforceDefaultValue = false, bool isTrailingComma = true)
         {
+            if (!isTrailingComma)
+                writer.AppendRaw(",");
+
             if (clientParameter.Attributes.Any())
             {
                 writer.AppendRaw("[");
@@ -198,7 +201,8 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.Append($" = default");
             }
 
-            writer.AppendRaw(",");
+            if (isTrailingComma)
+                writer.AppendRaw(",");
         }
 
         public static CodeWriter WriteParametersValidation(this CodeWriter writer, IReadOnlyCollection<Parameter> parameters)

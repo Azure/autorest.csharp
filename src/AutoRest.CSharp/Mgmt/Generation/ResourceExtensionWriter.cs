@@ -57,6 +57,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     _writer.Line();
 
                     WritePrivateHelpers();
+                    _writer.Line();
+
+                    WriteChildResourceEntries(true);
 
                     var resourcesWithGetAllAsGenericMethod = new HashSet<Resource>();
                     // Write other orphan operations with the parent of ResourceGroup
@@ -145,6 +148,16 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.Line($"{typeof(ResourceFilterCollection)} {filters:D} = new({resource.Type}.ResourceType);");
                 _writer.Line($"{filters}.SubstringFilter = filter;");
                 _writer.Line($"return {typeof(ResourceListOperations)}.{CreateMethodName("GetAtContext", async)}({ArmClientReference}.GetSubscription(Id), {filters}, expand, top, cancellationToken);");
+            }
+        }
+
+        protected override void WriteSingletonResourceEntry(Resource resource, string singletonResourceSuffix)
+        {
+            _writer.WriteXmlDocumentationSummary($"Gets an object representing a {resource.Type.Name} along with the instance operations that can be performed on it.");
+            _writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{resource.Type.Name}\" /> object.");
+            using (_writer.Scope($"public virtual {resource.Type.Name} Get{resource.Type.Name}()"))
+            {
+                _writer.Line($"return new {resource.Type.Name}({ArmClientReference}, new {typeof(Azure.Core.ResourceIdentifier)}(Id + \"/{singletonResourceSuffix}\"));");
             }
         }
     }

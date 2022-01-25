@@ -82,7 +82,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        private void WriteMethodSignatureWrapper(CSharpType? actualItemType, string methodName, IReadOnlyList<Parameter> methodParameters, bool isAsync, bool isPaging, bool isLro)
+        private void WriteMethodSignatureWrapper(CSharpType? actualItemType, string methodName, IReadOnlyList<Parameter> methodParameters, bool isAsync, bool isPaging, bool isLro, bool isApiCall = true)
         {
             _writer.WriteXmlDocumentationParameter($"{ExtensionOperationVariableName}", $"The <see cref=\"{ExtensionOperationVariableType}\" /> instance the method will execute against.");
             if (isLro)
@@ -92,7 +92,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 _writer.WriteXmlDocumentationParameter(parameter);
             }
-            _writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
+
+            if (isApiCall)
+                _writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
             _writer.WriteXmlDocumentationMgmtRequiredParametersException(methodParameters);
             if (isPaging)
                 _writer.WriteXmlDocumentationReturns($"A collection of resource operations that may take multiple service requests to iterate over.");
@@ -101,15 +103,17 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             var responseType = isPaging ? actualItemType.WrapPageable(isAsync) : actualItemType.WrapAsync(isAsync);
             string asyncText = isPaging ? string.Empty : GetAsyncKeyword(isAsync);
-            _writer.Append($"public static {asyncText} {responseType} {CreateMethodName(methodName, isAsync)}(this {ExtensionOperationVariableType} {ExtensionOperationVariableName}, ");
+            _writer.Append($"public static {asyncText} {responseType} {CreateMethodName(methodName, isAsync)}(this {ExtensionOperationVariableType} {ExtensionOperationVariableName}");
 
             if (isLro)
-                _writer.Append($"bool waitForCompletion, ");
+                _writer.Append($", bool waitForCompletion");
             foreach (var parameter in methodParameters)
             {
-                _writer.WriteParameter(parameter);
+                _writer.WriteParameter(parameter, isTrailingComma: false);
             }
-            _writer.Line($"{typeof(CancellationToken)} cancellationToken = default)");
+            if (isApiCall)
+                _writer.Append($", {typeof(CancellationToken)} cancellationToken = default");
+            _writer.Line($")");
         }
 
         private CSharpType GetActualItemType(MgmtClientOperation clientOperation, CSharpType itemType)
@@ -152,7 +156,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        private void WriteMethodBodyWrapper(string methodName, IReadOnlyList<Parameter> methodParameters, bool isAsync, bool isPaging, bool isLro)
+        private void WriteMethodBodyWrapper(string methodName, IReadOnlyList<Parameter> methodParameters, bool isAsync, bool isPaging, bool isLro, bool isApiCall = true)
         {
             string asyncText = isAsync ? "Async" : string.Empty;
             string configureAwait = isAsync & !isPaging ? ".ConfigureAwait(false)" : string.Empty;
@@ -173,9 +177,16 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.Append($"{parameter.Name}");
                 isFirst = false;
             }
-            if (!isFirst)
-                _writer.Append($", ");
-            _writer.Line($"cancellationToken){configureAwait};");
+            if (isApiCall)
+            {
+                if (!isFirst)
+                    _writer.Append($", ");
+                _writer.Append($"cancellationToken){configureAwait};");
+            }
+            else
+            {
+                _writer.Line($");");
+            }
         }
 
         protected void WriteGetRestOperations(MgmtRestClient restClient)
@@ -238,17 +249,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected override void WriteSingletonResourceEntry(Resource resource, string singletonResourceSuffix)
         {
-            _writer.WriteXmlDocumentationSummary($"Gets an object representing a {resource.Type.Name} along with the instance operations that can be performed on it.");
-            if (!IsArmCore)
+            string methodName = $"Get{resource.Type.Name}";
+            List<Parameter> parameters = new List<Parameter>();
+            WriteMethodSignatureWrapper(resource.Type, methodName, parameters, false, false, false, false);
+            using (_writer.Scope())
             {
-                _writer.WriteXmlDocumentationParameter($"{ExtensionOperationVariableName}", $"The <see cref=\"{ExtensionOperationVariableType}\" /> instance the method will execute against.");
-            }
-            _writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{resource.Type.Name}\" /> object.");
-            var modifier = IsArmCore ? "virtual" : "static";
-            var instanceParameter = IsArmCore ? string.Empty : $"this {ExtensionOperationVariableType} {ExtensionOperationVariableName}";
-            using (_writer.Scope($"public {modifier} {resource.Type.Name} Get{resource.Type.Name}({instanceParameter})"))
-            {
-                _writer.Line($"return new {resource.Type.Name}({ExtensionOperationVariableName}, new {typeof(Azure.Core.ResourceIdentifier)}({ExtensionOperationVariableName}.Id + \"/{singletonResourceSuffix}\"));");
+                WriteMethodBodyWrapper(methodName, parameters, false, false, false, false);
             }
         }
 
