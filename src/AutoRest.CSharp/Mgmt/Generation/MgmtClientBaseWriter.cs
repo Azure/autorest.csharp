@@ -153,13 +153,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
             if (returnType is null)
                 return $"ProviderConstants.DefaultProviderNamespace";
 
-            var data = Context.Library.ResourceData.FirstOrDefault(data => data.Declaration.Name == returnType);
-            if (data is not null)
-                return $"{returnType.Substring(0, returnType.Length - 4)}.ResourceType.Namespace";
-
             var resource = Context.Library.ArmResources.FirstOrDefault(resource => resource.Declaration.Name == returnType);
             if (resource is not null)
                 return $"{returnType}.ResourceType.Namespace";
+
+            if (Context.Library.TryGetTypeProvider(returnType, out var p) && p is ResourceData data)
+                return $"{returnType.Substring(0, returnType.Length - 4)}.ResourceType.Namespace";
 
             return $"ProviderConstants.DefaultProviderNamespace";
         }
