@@ -448,7 +448,7 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
 
         private void WriteTaggableCommonMethod(bool async)
         {
-            _writer.Line($"{GetAwait(async)} TagResource.{CreateMethodName("CreateOrUpdate", async)}(originalTags.Value.Data, cancellationToken: cancellationToken){GetConfigureAwait(async)};");
+            _writer.Line($"{GetAwait(async)} TagResource.{CreateMethodName("CreateOrUpdate", async)}(true, originalTags.Value.Data, cancellationToken: cancellationToken){GetConfigureAwait(async)};");
 
             BuildParameters(_resource.GetOperation!, out var operationMappings, out var parameterMappings, out _);
 
