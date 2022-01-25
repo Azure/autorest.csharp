@@ -30,7 +30,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
         protected string TestBaseName => $"MockTestBase";
         private Resource This { get; }
 
-        public ResourceTestWriter(CodeWriter writer, Resource resource) : base(writer, resource)
+        public ResourceTestWriter(CodeWriter writer, Resource resource, IEnumerable<string>? scenarioVariables = default) : base(writer, resource, scenarioVariables)
         {
             This = resource;
             _allOperation = resource.AllOperations;
@@ -127,7 +127,6 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 var exampleGroup = MgmtBaseTestWriter.FindExampleGroup(operation);
                 if (exampleGroup is null || exampleGroup.Examples.Count() == 0)
                     return;
-                var testMethodName = CreateMethodName(methodName, async);
 
                 foreach (var exampleModel in exampleGroup?.Examples ?? Enumerable.Empty<ExampleModel>())
                 {
@@ -138,16 +137,22 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     using (_writer.Scope())
                     {
                         _writer.LineRaw($"// Example: {exampleModel.Name}");
-                        var resourceIdentifierParams = ComposeResourceIdentifierParams(resource.RequestPath, exampleModel);
-                        var resourceVariableName = WriteGetResource(resource, resourceIdentifierParams, exampleModel);
-                        List<KeyValuePair<string, FormattableString>> parameterValues = WriteOperationParameters(clientOperation.MethodParameters, exampleModel);
-                        _writer.Line();
-                        WriteMethodTestInvocation(async, clientOperation, isLroOperation, $"{resourceVariableName}.{testMethodName}", parameterValues.Select(pv => pv.Value));
+                        WriteOperationInvocation(resource, clientOperation, operation, exampleModel, async, isLroOperation);
                     }
                     _writer.Line();
                     exampleIdx++;
                 }
             }
+        }
+
+        public void WriteOperationInvocation(Resource resource, MgmtClientOperation clientOperation, MgmtRestOperation restOperation, ExampleModel exampleModel, bool async, bool isLroOperation)
+        {
+            var testMethodName = CreateMethodName(clientOperation.Name, async);
+            var resourceIdentifierParams = ComposeResourceIdentifierParams(resource.RequestPath, exampleModel);
+            var resourceVariableName = WriteGetResource(resource, resourceIdentifierParams, exampleModel);
+            List<KeyValuePair<string, FormattableString>> parameterValues = WriteOperationParameters(clientOperation.MethodParameters, exampleModel);
+            _writer.Line();
+            WriteMethodTestInvocation(async, clientOperation, isLroOperation, $"{resourceVariableName}.{testMethodName}", parameterValues.Select(pv => pv.Value));
         }
     }
 }
