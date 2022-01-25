@@ -40,16 +40,16 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         {
             var extensionClient = typeof(SubscriptionExtensionClient);
             var fields = extensionClient.GetFields(BindingFlags.Instance | BindingFlags.NonPublic);
-            var field = fields.FirstOrDefault(f => f.Name.Contains("_typeOneRestClient", StringComparison.OrdinalIgnoreCase));
+            var field = fields.FirstOrDefault(f => f.Name.Contains("_typeOneCommonRestClient", StringComparison.OrdinalIgnoreCase));
             Assert.NotNull(field);
             Assert.AreEqual(field.FieldType, typeof(CommonRestOperations));
-            field = fields.FirstOrDefault(f => f.Name.Contains("_typeTwoRestClient", StringComparison.OrdinalIgnoreCase));
+            field = fields.FirstOrDefault(f => f.Name.Contains("_typeTwoCommonRestClient", StringComparison.OrdinalIgnoreCase));
             Assert.NotNull(field);
             Assert.AreEqual(field.FieldType, typeof(CommonRestOperations));
-            field = fields.FirstOrDefault(f => f.Name.Contains("_typeOneClientDiagnostics", StringComparison.OrdinalIgnoreCase));
+            field = fields.FirstOrDefault(f => f.Name.Contains("_typeOneCommonClientDiagnostics", StringComparison.OrdinalIgnoreCase));
             Assert.NotNull(field);
             Assert.AreEqual(field.FieldType, typeof(ClientDiagnostics));
-            field = fields.FirstOrDefault(f => f.Name.Contains("_typeTwoClientDiagnostics", StringComparison.OrdinalIgnoreCase));
+            field = fields.FirstOrDefault(f => f.Name.Contains("_typeTwoCommonClientDiagnostics", StringComparison.OrdinalIgnoreCase));
             Assert.NotNull(field);
             Assert.AreEqual(field.FieldType, typeof(ClientDiagnostics));
         }
