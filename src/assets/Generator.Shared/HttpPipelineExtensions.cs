@@ -11,7 +11,7 @@ namespace Azure.Core
 {
     internal static class HttpPipelineExtensions
     {
-        public static async ValueTask<Response> ProcessMessageAsync(this HttpPipeline pipeline, HttpMessage message, ClientDiagnostics clientDiagnostics, RequestContext? requestContext, CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> ProcessMessageAsync(this HttpPipeline pipeline, HttpMessage message, RequestContext? requestContext, CancellationToken cancellationToken = default)
         {
             var (userCt, statusOption) = ApplyRequestContext(requestContext);
             if (!userCt.CanBeCanceled || !cancellationToken.CanBeCanceled)
@@ -32,7 +32,7 @@ namespace Azure.Core
             throw new RequestFailedException(message.Response);
         }
 
-        public static Response ProcessMessage(this HttpPipeline pipeline, HttpMessage message, ClientDiagnostics clientDiagnostics, RequestContext? requestContext, CancellationToken cancellationToken = default)
+        public static Response ProcessMessage(this HttpPipeline pipeline, HttpMessage message, RequestContext? requestContext, CancellationToken cancellationToken = default)
         {
             var (userCt, statusOption) = ApplyRequestContext(requestContext);
             if (!userCt.CanBeCanceled || !cancellationToken.CanBeCanceled)
@@ -55,7 +55,7 @@ namespace Azure.Core
 
         public static async ValueTask<Response<bool>> ProcessHeadAsBoolMessageAsync(this HttpPipeline pipeline, HttpMessage message, ClientDiagnostics clientDiagnostics, RequestContext? requestContext)
         {
-            var response = await pipeline.ProcessMessageAsync(message, clientDiagnostics, requestContext).ConfigureAwait(false);
+            var response = await pipeline.ProcessMessageAsync(message, requestContext).ConfigureAwait(false);
             switch (response.Status)
             {
                 case >= 200 and < 300:
@@ -70,7 +70,7 @@ namespace Azure.Core
 
         public static Response<bool> ProcessHeadAsBoolMessage(this HttpPipeline pipeline, HttpMessage message, ClientDiagnostics clientDiagnostics, RequestContext? requestContext)
         {
-            var response = pipeline.ProcessMessage(message, clientDiagnostics, requestContext);
+            var response = pipeline.ProcessMessage(message, requestContext);
             switch (response.Status)
             {
                 case >= 200 and < 300:
