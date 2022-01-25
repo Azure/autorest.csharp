@@ -117,9 +117,9 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             {
                 case Resource parentResource:
                     {
-                        var idVar = useVariableName($"{parentResource.Type.Name.FirstCharToLowerCase()}Id");
-                        _writer.Line($"var {idVar} = {parentResource.Type}.CreateResourceIdentifier({ComposeResourceIdentifierParams(parentResource.RequestPaths.First(), exampleModel)});");
-                        _writer.Append($"var collection = GetArmClient().Get{parentResource.Type.Name}({idVar})");
+                        var idVar = new CodeWriterDeclaration($"{parentResource.Type.Name.FirstCharToLowerCase()}Id");
+                        _writer.Line($"var {idVar:D} = {parentResource.Type}.CreateResourceIdentifier({ComposeResourceIdentifierParams(parentResource.RequestPaths.First(), exampleModel)});");
+                        _writer.Append($"var collection = GetArmClient().Get{parentResource.Type.Name}({GetDeclaredActualName(idVar)})");
                         break;
                     }
                 case Mgmt.Output.ResourceGroupExtensions:
@@ -251,7 +251,6 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     using (_writer.Scope())
                     {
                         _writer.Line($"// Example: {exampleModel.Name}");
-                        clearVariableNames();
                         List<string> paramNames = WriteOperationParameters(methodParameters, new List<Parameter>(), exampleModel);
                         _writer.Line();
                         WriteGetCollection(parentTp, operation.RequestPath.SerializedPath, exampleModel, paramNames);

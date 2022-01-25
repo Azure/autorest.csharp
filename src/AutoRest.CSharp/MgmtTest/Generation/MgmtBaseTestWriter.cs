@@ -24,7 +24,6 @@ namespace AutoRest.CSharp.MgmtTest.Generation
     internal partial class MgmtBaseTestWriter: MgmtClientBaseWriter<MgmtTypeProvider>
     {
         public CodeWriterDelegate? _tagsWriterDelegate = null;
-        public HashSet<string>  variableNames = new HashSet<string>();
 
         public MgmtBaseTestWriter(CodeWriter writer, MgmtTypeProvider provider, BuildContext<MgmtOutputLibrary> context) : base(writer, provider, context)
         {
@@ -538,46 +537,29 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             }
         }
 
-        public string useVariableName(string variableName)
+        public string GetDeclaredActualName(CodeWriterDeclaration decalration)
         {
-            if (Utilities.StringExtensions.IsCSharpKeyword(variableName))
+            var actualName = decalration.ActualName;
+            if (Utilities.StringExtensions.IsCSharpKeyword(actualName))
             {
-                variableName = $"@{variableName}";
+                actualName = $"@{actualName}";
             }
-            if (!variableNames.Contains(variableName))
-            {
-                variableNames.Add(variableName);
-                return variableName;
-            }
-
-            for (int i = 2; true; i++)
-            {
-                var newName = $"{variableName}{i}";
-                if (!variableNames.Contains(newName))
-                {
-                    variableNames.Add(newName);
-                    return newName;
-                }
-            }
-            throw new Exception($"Can't find a valid variable name start with {variableName}");
-        }
-
-        public void clearVariableNames() {
-            variableNames = new HashSet<string>();
+            return actualName;
         }
 
         public string WriteExampleParameterDeclaration(CodeWriter writer, ExampleParameter exampleParameter, Parameter parameter)
         {
-            var variableName = useVariableName(exampleParameter.Parameter.CSharpName());
-            writer.Append($"{parameter.Type} {variableName} = ");
-            WriteExampleValue(writer, parameter.Type, exampleParameter.ExampleValue, variableName);
+            var variableName = new CodeWriterDeclaration(exampleParameter.Parameter.CSharpName());
+            writer.Append($"{parameter.Type} {variableName:D} = ");
+            var declaredActualName = GetDeclaredActualName(variableName);
+            WriteExampleValue(writer, parameter.Type, exampleParameter.ExampleValue, declaredActualName);
             writer.Line($";");
 
             if (_tagsWriterDelegate != null) {
                 writer.Line($"{_tagsWriterDelegate}");
             }
             _tagsWriterDelegate = null;
-            return variableName;
+            return declaredActualName;
         }
 
         public static string BuildValueString(ExampleValue exampleValue, Schema schema)
@@ -625,15 +607,16 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 }
                 if (paramName is null)
                 {
-                    paramName = useVariableName(passThruParameter.Name);
+                    var paramNameDeclare = new CodeWriterDeclaration(passThruParameter.Name);
                     if (passThruParameter.ValidateNotNull)
                     {
-                        _writer.Line($"{passThruParameter.Type} {paramName} = null; /* Can't find this parameter in example, please provide value here!*/");
+                        _writer.Line($"{passThruParameter.Type} {paramNameDeclare:D} = null; /* Can't find this parameter in example, please provide value here!*/");
                     }
                     else
                     {
-                        _writer.Line($"{passThruParameter.Type} {paramName} = null;");
+                        _writer.Line($"{passThruParameter.Type} {paramNameDeclare:D} = null;");
                     }
+                    paramName = GetDeclaredActualName(paramNameDeclare);
                 }
                 paramNames.Add(paramName);
             }
@@ -715,9 +698,9 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             return String.Join("/", result.ToArray());
         }
 
-        public string ComposeResourceIdentifierParams(RequestPath requestPath, ExampleModel exampleModel)
+        public FormattableString ComposeResourceIdentifierParams(RequestPath requestPath, ExampleModel exampleModel)
         {
-            return string.Join(", ", requestPath.Where(segment => segment.IsReference).Select(segment => {
+            var identifierParams = string.Join(", ", requestPath.Where(segment => segment.IsReference).Select(segment => {
                 var value = "\"default\"";
                 foreach (var parameterValue in exampleModel.AllParameter)
                 {
@@ -738,6 +721,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 }
                 return value;
             }));
+            return $"{identifierParams}";
         }
 
         public string? FindParameterValueByName(ExampleModel exampleModel, string parameterName)

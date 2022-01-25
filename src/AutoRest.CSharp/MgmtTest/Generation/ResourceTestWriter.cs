@@ -24,7 +24,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
     internal class ResourceTestWriter : MgmtBaseTestWriter
     {
         protected Resource _resource;
-        private IEnumerable<MgmtClientOperation> _getAllOperation;
+        private IEnumerable<MgmtClientOperation> _allOperation;
         protected string TestNamespace => _resource.Type.Namespace + ".Tests.Mock";
         protected override string TypeNameOfThis => _resource.Type.Name + "MockTests";
 
@@ -33,7 +33,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
         public ResourceTestWriter(CodeWriter writer, Resource resource, BuildContext<MgmtOutputLibrary> context): base(writer, resource, context)
         {
             _resource = resource;
-            _getAllOperation = _resource.AllOperations;
+            _allOperation = _resource.AllOperations;
         }
 
         public void WriteCollectionTest()
@@ -107,13 +107,13 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             }
         }
 
-        public string WriteGetResource(Resource resource, string resourceIdentifierParams, ExampleModel exampleModel)
+        public string WriteGetResource(Resource resource, FormattableString resourceIdentifierParams, ExampleModel exampleModel)
         {
-            var resourceVariableName = useVariableName(resource.Type.Name.FirstCharToLowerCase());
-            var idVar = useVariableName($"{resource.Type.Name.FirstCharToLowerCase()}Id");
-            _writer.Line($"var {idVar} = {resource.Type}.CreateResourceIdentifier({resourceIdentifierParams});");
-            _writer.Line($"var {resourceVariableName} = GetArmClient().Get{resource.Type.Name}({idVar});");
-            return resourceVariableName;
+            var resourceVariableName = new CodeWriterDeclaration(resource.Type.Name.FirstCharToLowerCase());
+            var idVar = new CodeWriterDeclaration($"{resource.Type.Name.FirstCharToLowerCase()}Id");
+            _writer.Line($"var {idVar:D} = {resource.Type}.CreateResourceIdentifier({resourceIdentifierParams});");
+            _writer.Line($"var {resourceVariableName:D} = GetArmClient().Get{resource.Type.Name}({idVar});");
+            return GetDeclaredActualName(resourceVariableName);
         }
 
         protected override Resource? WrapResourceDataType(CSharpType? type, MgmtRestOperation operation)
@@ -158,8 +158,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     using (_writer.Scope())
                     {
                         _writer.LineRaw($"// Example: {exampleModel.Name}");
-                        clearVariableNames();
-                        string resourceIdentifierParams = ComposeResourceIdentifierParams(resource.RequestPaths.First(), exampleModel);
+                        var resourceIdentifierParams = ComposeResourceIdentifierParams(resource.RequestPaths.First(), exampleModel);
                         var resourceVariableName = WriteGetResource(resource, resourceIdentifierParams, exampleModel);
                         List<string> paramNames = WriteOperationParameters(methodParameters, Enumerable.Empty<Parameter> (), exampleModel);
                         _writer.Line();
