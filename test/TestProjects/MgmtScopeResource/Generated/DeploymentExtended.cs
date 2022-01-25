@@ -31,10 +31,8 @@ namespace MgmtScopeResource
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _deploymentExtendedClientDiagnostics;
-        private readonly DeploymentsRestOperations _deploymentExtendedRestClient;
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly ResourceManagementRestOperations _restClient;
+        private readonly ClientDiagnostics _deploymentExtendedDeploymentsClientDiagnostics;
+        private readonly DeploymentsRestOperations _deploymentExtendedDeploymentsRestClient;
         private readonly ClientDiagnostics _deploymentOperationsClientDiagnostics;
         private readonly DeploymentRestOperations _deploymentOperationsRestClient;
         private readonly DeploymentExtendedData _data;
@@ -58,11 +56,9 @@ namespace MgmtScopeResource
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal DeploymentExtended(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
         {
-            _deploymentExtendedClientDiagnostics = new ClientDiagnostics("MgmtScopeResource", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string deploymentExtendedApiVersion);
-            _deploymentExtendedRestClient = new DeploymentsRestOperations(_deploymentExtendedClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, deploymentExtendedApiVersion);
-            _clientDiagnostics = new ClientDiagnostics("MgmtScopeResource", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
-            _restClient = new ResourceManagementRestOperations(_clientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
+            _deploymentExtendedDeploymentsClientDiagnostics = new ClientDiagnostics("MgmtScopeResource", ResourceType.Namespace, DiagnosticOptions);
+            ArmClient.TryGetApiVersion(ResourceType, out string deploymentExtendedDeploymentsApiVersion);
+            _deploymentExtendedDeploymentsRestClient = new DeploymentsRestOperations(_deploymentExtendedDeploymentsClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, deploymentExtendedDeploymentsApiVersion);
             _deploymentOperationsClientDiagnostics = new ClientDiagnostics("MgmtScopeResource", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
             _deploymentOperationsRestClient = new DeploymentRestOperations(_deploymentOperationsClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
 #if DEBUG
@@ -101,13 +97,13 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<DeploymentExtended>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _deploymentExtendedClientDiagnostics.CreateScope("DeploymentExtended.Get");
+            using var scope = _deploymentExtendedDeploymentsClientDiagnostics.CreateScope("DeploymentExtended.Get");
             scope.Start();
             try
             {
-                var response = await _deploymentExtendedRestClient.GetAtScopeAsync(Id.Parent, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _deploymentExtendedDeploymentsRestClient.GetAtScopeAsync(Id.Parent, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _deploymentExtendedClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                    throw await _deploymentExtendedDeploymentsClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new DeploymentExtended(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -124,13 +120,13 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<DeploymentExtended> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _deploymentExtendedClientDiagnostics.CreateScope("DeploymentExtended.Get");
+            using var scope = _deploymentExtendedDeploymentsClientDiagnostics.CreateScope("DeploymentExtended.Get");
             scope.Start();
             try
             {
-                var response = _deploymentExtendedRestClient.GetAtScope(Id.Parent, Id.Name, cancellationToken);
+                var response = _deploymentExtendedDeploymentsRestClient.GetAtScope(Id.Parent, Id.Name, cancellationToken);
                 if (response.Value == null)
-                    throw _deploymentExtendedClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                    throw _deploymentExtendedDeploymentsClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new DeploymentExtended(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -145,7 +141,7 @@ namespace MgmtScopeResource
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
         public async virtual Task<IEnumerable<AzureLocation>> GetAvailableLocationsAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _deploymentExtendedClientDiagnostics.CreateScope("DeploymentExtended.GetAvailableLocations");
+            using var scope = _deploymentExtendedDeploymentsClientDiagnostics.CreateScope("DeploymentExtended.GetAvailableLocations");
             scope.Start();
             try
             {
@@ -163,7 +159,7 @@ namespace MgmtScopeResource
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
         public virtual IEnumerable<AzureLocation> GetAvailableLocations(CancellationToken cancellationToken = default)
         {
-            using var scope = _deploymentExtendedClientDiagnostics.CreateScope("DeploymentExtended.GetAvailableLocations");
+            using var scope = _deploymentExtendedDeploymentsClientDiagnostics.CreateScope("DeploymentExtended.GetAvailableLocations");
             scope.Start();
             try
             {
@@ -184,12 +180,12 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<DeploymentExtendedDeleteOperation> DeleteAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
-            using var scope = _deploymentExtendedClientDiagnostics.CreateScope("DeploymentExtended.Delete");
+            using var scope = _deploymentExtendedDeploymentsClientDiagnostics.CreateScope("DeploymentExtended.Delete");
             scope.Start();
             try
             {
-                var response = await _deploymentExtendedRestClient.DeleteAtScopeAsync(Id.Parent, Id.Name, cancellationToken).ConfigureAwait(false);
-                var operation = new DeploymentExtendedDeleteOperation(_deploymentExtendedClientDiagnostics, Pipeline, _deploymentExtendedRestClient.CreateDeleteAtScopeRequest(Id.Parent, Id.Name).Request, response);
+                var response = await _deploymentExtendedDeploymentsRestClient.DeleteAtScopeAsync(Id.Parent, Id.Name, cancellationToken).ConfigureAwait(false);
+                var operation = new DeploymentExtendedDeleteOperation(_deploymentExtendedDeploymentsClientDiagnostics, Pipeline, _deploymentExtendedDeploymentsRestClient.CreateDeleteAtScopeRequest(Id.Parent, Id.Name).Request, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -209,12 +205,12 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual DeploymentExtendedDeleteOperation Delete(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
-            using var scope = _deploymentExtendedClientDiagnostics.CreateScope("DeploymentExtended.Delete");
+            using var scope = _deploymentExtendedDeploymentsClientDiagnostics.CreateScope("DeploymentExtended.Delete");
             scope.Start();
             try
             {
-                var response = _deploymentExtendedRestClient.DeleteAtScope(Id.Parent, Id.Name, cancellationToken);
-                var operation = new DeploymentExtendedDeleteOperation(_deploymentExtendedClientDiagnostics, Pipeline, _deploymentExtendedRestClient.CreateDeleteAtScopeRequest(Id.Parent, Id.Name).Request, response);
+                var response = _deploymentExtendedDeploymentsRestClient.DeleteAtScope(Id.Parent, Id.Name, cancellationToken);
+                var operation = new DeploymentExtendedDeleteOperation(_deploymentExtendedDeploymentsClientDiagnostics, Pipeline, _deploymentExtendedDeploymentsRestClient.CreateDeleteAtScopeRequest(Id.Parent, Id.Name).Request, response);
                 if (waitForCompletion)
                     operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
@@ -233,11 +229,11 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response> CancelAtScopeAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _deploymentExtendedClientDiagnostics.CreateScope("DeploymentExtended.CancelAtScope");
+            using var scope = _deploymentExtendedDeploymentsClientDiagnostics.CreateScope("DeploymentExtended.CancelAtScope");
             scope.Start();
             try
             {
-                var response = await _deploymentExtendedRestClient.CancelAtScopeAsync(Id.Parent, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _deploymentExtendedDeploymentsRestClient.CancelAtScopeAsync(Id.Parent, Id.Name, cancellationToken).ConfigureAwait(false);
                 return response;
             }
             catch (Exception e)
@@ -254,11 +250,11 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response CancelAtScope(CancellationToken cancellationToken = default)
         {
-            using var scope = _deploymentExtendedClientDiagnostics.CreateScope("DeploymentExtended.CancelAtScope");
+            using var scope = _deploymentExtendedDeploymentsClientDiagnostics.CreateScope("DeploymentExtended.CancelAtScope");
             scope.Start();
             try
             {
-                var response = _deploymentExtendedRestClient.CancelAtScope(Id.Parent, Id.Name, cancellationToken);
+                var response = _deploymentExtendedDeploymentsRestClient.CancelAtScope(Id.Parent, Id.Name, cancellationToken);
                 return response;
             }
             catch (Exception e)
@@ -283,12 +279,12 @@ namespace MgmtScopeResource
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _deploymentExtendedClientDiagnostics.CreateScope("DeploymentExtended.ValidateAtScope");
+            using var scope = _deploymentExtendedDeploymentsClientDiagnostics.CreateScope("DeploymentExtended.ValidateAtScope");
             scope.Start();
             try
             {
-                var response = await _deploymentExtendedRestClient.ValidateAtScopeAsync(Id.Parent, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new DeploymentExtendedValidateAtScopeOperation(_deploymentExtendedClientDiagnostics, Pipeline, _deploymentExtendedRestClient.CreateValidateAtScopeRequest(Id.Parent, Id.Name, parameters).Request, response);
+                var response = await _deploymentExtendedDeploymentsRestClient.ValidateAtScopeAsync(Id.Parent, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
+                var operation = new DeploymentExtendedValidateAtScopeOperation(_deploymentExtendedDeploymentsClientDiagnostics, Pipeline, _deploymentExtendedDeploymentsRestClient.CreateValidateAtScopeRequest(Id.Parent, Id.Name, parameters).Request, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -315,12 +311,12 @@ namespace MgmtScopeResource
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _deploymentExtendedClientDiagnostics.CreateScope("DeploymentExtended.ValidateAtScope");
+            using var scope = _deploymentExtendedDeploymentsClientDiagnostics.CreateScope("DeploymentExtended.ValidateAtScope");
             scope.Start();
             try
             {
-                var response = _deploymentExtendedRestClient.ValidateAtScope(Id.Parent, Id.Name, parameters, cancellationToken);
-                var operation = new DeploymentExtendedValidateAtScopeOperation(_deploymentExtendedClientDiagnostics, Pipeline, _deploymentExtendedRestClient.CreateValidateAtScopeRequest(Id.Parent, Id.Name, parameters).Request, response);
+                var response = _deploymentExtendedDeploymentsRestClient.ValidateAtScope(Id.Parent, Id.Name, parameters, cancellationToken);
+                var operation = new DeploymentExtendedValidateAtScopeOperation(_deploymentExtendedDeploymentsClientDiagnostics, Pipeline, _deploymentExtendedDeploymentsRestClient.CreateValidateAtScopeRequest(Id.Parent, Id.Name, parameters).Request, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -339,11 +335,11 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<DeploymentExportResult>> ExportTemplateAtScopeAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _deploymentExtendedClientDiagnostics.CreateScope("DeploymentExtended.ExportTemplateAtScope");
+            using var scope = _deploymentExtendedDeploymentsClientDiagnostics.CreateScope("DeploymentExtended.ExportTemplateAtScope");
             scope.Start();
             try
             {
-                var response = await _deploymentExtendedRestClient.ExportTemplateAtScopeAsync(Id.Parent, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _deploymentExtendedDeploymentsRestClient.ExportTemplateAtScopeAsync(Id.Parent, Id.Name, cancellationToken).ConfigureAwait(false);
                 return response;
             }
             catch (Exception e)
@@ -360,11 +356,11 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<DeploymentExportResult> ExportTemplateAtScope(CancellationToken cancellationToken = default)
         {
-            using var scope = _deploymentExtendedClientDiagnostics.CreateScope("DeploymentExtended.ExportTemplateAtScope");
+            using var scope = _deploymentExtendedDeploymentsClientDiagnostics.CreateScope("DeploymentExtended.ExportTemplateAtScope");
             scope.Start();
             try
             {
-                var response = _deploymentExtendedRestClient.ExportTemplateAtScope(Id.Parent, Id.Name, cancellationToken);
+                var response = _deploymentExtendedDeploymentsRestClient.ExportTemplateAtScope(Id.Parent, Id.Name, cancellationToken);
                 return response;
             }
             catch (Exception e)
@@ -377,15 +373,15 @@ namespace MgmtScopeResource
         /// RequestPath: /subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Resources/deployments/{deploymentName}/whatIf
         /// ContextualPath: /subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Resources/deployments/{deploymentName}
         /// OperationId: Deployments_WhatIf
-        /// RequestPath: /providers/Microsoft.Resources/deployments/{deploymentName}/whatIf
-        /// ContextualPath: /providers/Microsoft.Resources/deployments/{deploymentName}
-        /// OperationId: WhatIf
         /// RequestPath: /providers/Microsoft.Management/managementGroups/{groupId}/providers/Microsoft.Resources/deployments/{deploymentName}/whatIf
         /// ContextualPath: /providers/Microsoft.Management/managementGroups/{groupId}/providers/Microsoft.Resources/deployments/{deploymentName}
         /// OperationId: Deployments_WhatIfAtManagementGroupScope
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Resources/deployments/{deploymentName}/whatIf
         /// ContextualPath: /subscriptions/{subscriptionId}/providers/Microsoft.Resources/deployments/{deploymentName}
         /// OperationId: Deployments_WhatIfAtSubscriptionScope
+        /// RequestPath: /providers/Microsoft.Resources/deployments/{deploymentName}/whatIf
+        /// ContextualPath: /providers/Microsoft.Resources/deployments/{deploymentName}
+        /// OperationId: Deployments_WhatIfAtTenantScope
         /// <summary> Returns changes that will be made by the deployment if executed at the scope of the resource group. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="parameters"> Parameters to validate. </param>
@@ -398,38 +394,38 @@ namespace MgmtScopeResource
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _deploymentExtendedClientDiagnostics.CreateScope("DeploymentExtended.WhatIf");
+            using var scope = _deploymentExtendedDeploymentsClientDiagnostics.CreateScope("DeploymentExtended.WhatIf");
             scope.Start();
             try
             {
                 if (Id.Parent.ResourceType == ResourceGroup.ResourceType)
                 {
-                    var response = await _deploymentExtendedRestClient.WhatIfAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
-                    var operation = new DeploymentExtendedWhatIfOperation(_deploymentExtendedClientDiagnostics, Pipeline, _deploymentExtendedRestClient.CreateWhatIfRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters).Request, response);
-                    if (waitForCompletion)
-                        await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
-                    return operation;
-                }
-                else if (Id.Parent.ResourceType == Tenant.ResourceType)
-                {
-                    var response = await _restClient.WhatIfAsync(Id.Name, parameters, cancellationToken).ConfigureAwait(false);
-                    var operation = new DeploymentExtendedWhatIfOperation(_clientDiagnostics, Pipeline, _restClient.CreateWhatIfRequest(Id.Name, parameters).Request, response);
+                    var response = await _deploymentExtendedDeploymentsRestClient.WhatIfAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
+                    var operation = new DeploymentExtendedWhatIfOperation(_deploymentExtendedDeploymentsClientDiagnostics, Pipeline, _deploymentExtendedDeploymentsRestClient.CreateWhatIfRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters).Request, response);
                     if (waitForCompletion)
                         await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                     return operation;
                 }
                 else if (Id.Parent.ResourceType == ManagementGroup.ResourceType)
                 {
-                    var response = await _deploymentExtendedRestClient.WhatIfAtManagementGroupScopeAsync(Id.Parent.Name, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
-                    var operation = new DeploymentExtendedWhatIfOperation(_deploymentExtendedClientDiagnostics, Pipeline, _deploymentExtendedRestClient.CreateWhatIfAtManagementGroupScopeRequest(Id.Parent.Name, Id.Name, parameters).Request, response);
+                    var response = await _deploymentExtendedDeploymentsRestClient.WhatIfAtManagementGroupScopeAsync(Id.Parent.Name, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
+                    var operation = new DeploymentExtendedWhatIfOperation(_deploymentExtendedDeploymentsClientDiagnostics, Pipeline, _deploymentExtendedDeploymentsRestClient.CreateWhatIfAtManagementGroupScopeRequest(Id.Parent.Name, Id.Name, parameters).Request, response);
                     if (waitForCompletion)
                         await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                     return operation;
                 }
                 else if (Id.Parent.ResourceType == Subscription.ResourceType)
                 {
-                    var response = await _deploymentExtendedRestClient.WhatIfAtSubscriptionScopeAsync(Id.SubscriptionId, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
-                    var operation = new DeploymentExtendedWhatIfOperation(_deploymentExtendedClientDiagnostics, Pipeline, _deploymentExtendedRestClient.CreateWhatIfAtSubscriptionScopeRequest(Id.SubscriptionId, Id.Name, parameters).Request, response);
+                    var response = await _deploymentExtendedDeploymentsRestClient.WhatIfAtSubscriptionScopeAsync(Id.SubscriptionId, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
+                    var operation = new DeploymentExtendedWhatIfOperation(_deploymentExtendedDeploymentsClientDiagnostics, Pipeline, _deploymentExtendedDeploymentsRestClient.CreateWhatIfAtSubscriptionScopeRequest(Id.SubscriptionId, Id.Name, parameters).Request, response);
+                    if (waitForCompletion)
+                        await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
+                    return operation;
+                }
+                else if (Id.Parent.ResourceType == Tenant.ResourceType)
+                {
+                    var response = await _deploymentExtendedDeploymentsRestClient.WhatIfAtTenantScopeAsync(Id.Name, parameters, cancellationToken).ConfigureAwait(false);
+                    var operation = new DeploymentExtendedWhatIfOperation(_deploymentExtendedDeploymentsClientDiagnostics, Pipeline, _deploymentExtendedDeploymentsRestClient.CreateWhatIfAtTenantScopeRequest(Id.Name, parameters).Request, response);
                     if (waitForCompletion)
                         await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                     return operation;
@@ -449,15 +445,15 @@ namespace MgmtScopeResource
         /// RequestPath: /subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Resources/deployments/{deploymentName}/whatIf
         /// ContextualPath: /subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Resources/deployments/{deploymentName}
         /// OperationId: Deployments_WhatIf
-        /// RequestPath: /providers/Microsoft.Resources/deployments/{deploymentName}/whatIf
-        /// ContextualPath: /providers/Microsoft.Resources/deployments/{deploymentName}
-        /// OperationId: WhatIf
         /// RequestPath: /providers/Microsoft.Management/managementGroups/{groupId}/providers/Microsoft.Resources/deployments/{deploymentName}/whatIf
         /// ContextualPath: /providers/Microsoft.Management/managementGroups/{groupId}/providers/Microsoft.Resources/deployments/{deploymentName}
         /// OperationId: Deployments_WhatIfAtManagementGroupScope
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Resources/deployments/{deploymentName}/whatIf
         /// ContextualPath: /subscriptions/{subscriptionId}/providers/Microsoft.Resources/deployments/{deploymentName}
         /// OperationId: Deployments_WhatIfAtSubscriptionScope
+        /// RequestPath: /providers/Microsoft.Resources/deployments/{deploymentName}/whatIf
+        /// ContextualPath: /providers/Microsoft.Resources/deployments/{deploymentName}
+        /// OperationId: Deployments_WhatIfAtTenantScope
         /// <summary> Returns changes that will be made by the deployment if executed at the scope of the resource group. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="parameters"> Parameters to validate. </param>
@@ -470,38 +466,38 @@ namespace MgmtScopeResource
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _deploymentExtendedClientDiagnostics.CreateScope("DeploymentExtended.WhatIf");
+            using var scope = _deploymentExtendedDeploymentsClientDiagnostics.CreateScope("DeploymentExtended.WhatIf");
             scope.Start();
             try
             {
                 if (Id.Parent.ResourceType == ResourceGroup.ResourceType)
                 {
-                    var response = _deploymentExtendedRestClient.WhatIf(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
-                    var operation = new DeploymentExtendedWhatIfOperation(_deploymentExtendedClientDiagnostics, Pipeline, _deploymentExtendedRestClient.CreateWhatIfRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters).Request, response);
-                    if (waitForCompletion)
-                        operation.WaitForCompletion(cancellationToken);
-                    return operation;
-                }
-                else if (Id.Parent.ResourceType == Tenant.ResourceType)
-                {
-                    var response = _restClient.WhatIf(Id.Name, parameters, cancellationToken);
-                    var operation = new DeploymentExtendedWhatIfOperation(_clientDiagnostics, Pipeline, _restClient.CreateWhatIfRequest(Id.Name, parameters).Request, response);
+                    var response = _deploymentExtendedDeploymentsRestClient.WhatIf(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
+                    var operation = new DeploymentExtendedWhatIfOperation(_deploymentExtendedDeploymentsClientDiagnostics, Pipeline, _deploymentExtendedDeploymentsRestClient.CreateWhatIfRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters).Request, response);
                     if (waitForCompletion)
                         operation.WaitForCompletion(cancellationToken);
                     return operation;
                 }
                 else if (Id.Parent.ResourceType == ManagementGroup.ResourceType)
                 {
-                    var response = _deploymentExtendedRestClient.WhatIfAtManagementGroupScope(Id.Parent.Name, Id.Name, parameters, cancellationToken);
-                    var operation = new DeploymentExtendedWhatIfOperation(_deploymentExtendedClientDiagnostics, Pipeline, _deploymentExtendedRestClient.CreateWhatIfAtManagementGroupScopeRequest(Id.Parent.Name, Id.Name, parameters).Request, response);
+                    var response = _deploymentExtendedDeploymentsRestClient.WhatIfAtManagementGroupScope(Id.Parent.Name, Id.Name, parameters, cancellationToken);
+                    var operation = new DeploymentExtendedWhatIfOperation(_deploymentExtendedDeploymentsClientDiagnostics, Pipeline, _deploymentExtendedDeploymentsRestClient.CreateWhatIfAtManagementGroupScopeRequest(Id.Parent.Name, Id.Name, parameters).Request, response);
                     if (waitForCompletion)
                         operation.WaitForCompletion(cancellationToken);
                     return operation;
                 }
                 else if (Id.Parent.ResourceType == Subscription.ResourceType)
                 {
-                    var response = _deploymentExtendedRestClient.WhatIfAtSubscriptionScope(Id.SubscriptionId, Id.Name, parameters, cancellationToken);
-                    var operation = new DeploymentExtendedWhatIfOperation(_deploymentExtendedClientDiagnostics, Pipeline, _deploymentExtendedRestClient.CreateWhatIfAtSubscriptionScopeRequest(Id.SubscriptionId, Id.Name, parameters).Request, response);
+                    var response = _deploymentExtendedDeploymentsRestClient.WhatIfAtSubscriptionScope(Id.SubscriptionId, Id.Name, parameters, cancellationToken);
+                    var operation = new DeploymentExtendedWhatIfOperation(_deploymentExtendedDeploymentsClientDiagnostics, Pipeline, _deploymentExtendedDeploymentsRestClient.CreateWhatIfAtSubscriptionScopeRequest(Id.SubscriptionId, Id.Name, parameters).Request, response);
+                    if (waitForCompletion)
+                        operation.WaitForCompletion(cancellationToken);
+                    return operation;
+                }
+                else if (Id.Parent.ResourceType == Tenant.ResourceType)
+                {
+                    var response = _deploymentExtendedDeploymentsRestClient.WhatIfAtTenantScope(Id.Name, parameters, cancellationToken);
+                    var operation = new DeploymentExtendedWhatIfOperation(_deploymentExtendedDeploymentsClientDiagnostics, Pipeline, _deploymentExtendedDeploymentsRestClient.CreateWhatIfAtTenantScopeRequest(Id.Name, parameters).Request, response);
                     if (waitForCompletion)
                         operation.WaitForCompletion(cancellationToken);
                     return operation;
@@ -661,11 +657,11 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<bool>> CheckExistenceAtScopeAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _deploymentExtendedClientDiagnostics.CreateScope("DeploymentExtended.CheckExistenceAtScope");
+            using var scope = _deploymentExtendedDeploymentsClientDiagnostics.CreateScope("DeploymentExtended.CheckExistenceAtScope");
             scope.Start();
             try
             {
-                var response = await _deploymentExtendedRestClient.CheckExistenceAtScopeAsync(Id.Parent, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _deploymentExtendedDeploymentsRestClient.CheckExistenceAtScopeAsync(Id.Parent, Id.Name, cancellationToken).ConfigureAwait(false);
                 return response;
             }
             catch (Exception e)
@@ -682,11 +678,11 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<bool> CheckExistenceAtScope(CancellationToken cancellationToken = default)
         {
-            using var scope = _deploymentExtendedClientDiagnostics.CreateScope("DeploymentExtended.CheckExistenceAtScope");
+            using var scope = _deploymentExtendedDeploymentsClientDiagnostics.CreateScope("DeploymentExtended.CheckExistenceAtScope");
             scope.Start();
             try
             {
-                var response = _deploymentExtendedRestClient.CheckExistenceAtScope(Id.Parent, Id.Name, cancellationToken);
+                var response = _deploymentExtendedDeploymentsRestClient.CheckExistenceAtScope(Id.Parent, Id.Name, cancellationToken);
                 return response;
             }
             catch (Exception e)

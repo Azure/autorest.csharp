@@ -28,8 +28,8 @@ namespace MgmtExtensionCommonRestOperation
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _typeTwoClientDiagnostics;
-        private readonly CommonRestOperations _typeTwoRestClient;
+        private readonly ClientDiagnostics _typeTwoCommonClientDiagnostics;
+        private readonly CommonRestOperations _typeTwoCommonRestClient;
         private readonly TypeTwoData _data;
 
         /// <summary> Initializes a new instance of the <see cref="TypeTwo"/> class for mocking. </summary>
@@ -51,9 +51,9 @@ namespace MgmtExtensionCommonRestOperation
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal TypeTwo(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
         {
-            _typeTwoClientDiagnostics = new ClientDiagnostics("MgmtExtensionCommonRestOperation", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string typeTwoApiVersion);
-            _typeTwoRestClient = new CommonRestOperations(_typeTwoClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, typeTwoApiVersion);
+            _typeTwoCommonClientDiagnostics = new ClientDiagnostics("MgmtExtensionCommonRestOperation", ResourceType.Namespace, DiagnosticOptions);
+            ArmClient.TryGetApiVersion(ResourceType, out string typeTwoCommonApiVersion);
+            _typeTwoCommonRestClient = new CommonRestOperations(_typeTwoCommonClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, typeTwoCommonApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -90,13 +90,13 @@ namespace MgmtExtensionCommonRestOperation
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<TypeTwo>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _typeTwoClientDiagnostics.CreateScope("TypeTwo.Get");
+            using var scope = _typeTwoCommonClientDiagnostics.CreateScope("TypeTwo.Get");
             scope.Start();
             try
             {
-                var response = await _typeTwoRestClient.GetTypeTwoAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _typeTwoCommonRestClient.GetTypeTwoAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _typeTwoClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                    throw await _typeTwoCommonClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new TypeTwo(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -113,13 +113,13 @@ namespace MgmtExtensionCommonRestOperation
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<TypeTwo> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _typeTwoClientDiagnostics.CreateScope("TypeTwo.Get");
+            using var scope = _typeTwoCommonClientDiagnostics.CreateScope("TypeTwo.Get");
             scope.Start();
             try
             {
-                var response = _typeTwoRestClient.GetTypeTwo(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _typeTwoCommonRestClient.GetTypeTwo(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
-                    throw _typeTwoClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                    throw _typeTwoCommonClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new TypeTwo(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -134,7 +134,7 @@ namespace MgmtExtensionCommonRestOperation
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
         public async virtual Task<IEnumerable<AzureLocation>> GetAvailableLocationsAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _typeTwoClientDiagnostics.CreateScope("TypeTwo.GetAvailableLocations");
+            using var scope = _typeTwoCommonClientDiagnostics.CreateScope("TypeTwo.GetAvailableLocations");
             scope.Start();
             try
             {
@@ -152,7 +152,7 @@ namespace MgmtExtensionCommonRestOperation
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
         public virtual IEnumerable<AzureLocation> GetAvailableLocations(CancellationToken cancellationToken = default)
         {
-            using var scope = _typeTwoClientDiagnostics.CreateScope("TypeTwo.GetAvailableLocations");
+            using var scope = _typeTwoCommonClientDiagnostics.CreateScope("TypeTwo.GetAvailableLocations");
             scope.Start();
             try
             {
@@ -174,14 +174,14 @@ namespace MgmtExtensionCommonRestOperation
         {
             Argument.AssertNotNullOrWhiteSpace(key, nameof(key));
 
-            using var scope = _typeTwoClientDiagnostics.CreateScope("TypeTwo.AddTag");
+            using var scope = _typeTwoCommonClientDiagnostics.CreateScope("TypeTwo.AddTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _typeTwoRestClient.GetTypeTwoAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _typeTwoCommonRestClient.GetTypeTwoAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new TypeTwo(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -200,14 +200,14 @@ namespace MgmtExtensionCommonRestOperation
         {
             Argument.AssertNotNullOrWhiteSpace(key, nameof(key));
 
-            using var scope = _typeTwoClientDiagnostics.CreateScope("TypeTwo.AddTag");
+            using var scope = _typeTwoCommonClientDiagnostics.CreateScope("TypeTwo.AddTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _typeTwoRestClient.GetTypeTwo(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var originalResponse = _typeTwoCommonRestClient.GetTypeTwo(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new TypeTwo(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -228,7 +228,7 @@ namespace MgmtExtensionCommonRestOperation
                 throw new ArgumentNullException(nameof(tags), $"{nameof(tags)} provided cannot be null.");
             }
 
-            using var scope = _typeTwoClientDiagnostics.CreateScope("TypeTwo.SetTags");
+            using var scope = _typeTwoCommonClientDiagnostics.CreateScope("TypeTwo.SetTags");
             scope.Start();
             try
             {
@@ -236,7 +236,7 @@ namespace MgmtExtensionCommonRestOperation
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _typeTwoRestClient.GetTypeTwoAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _typeTwoCommonRestClient.GetTypeTwoAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new TypeTwo(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -257,7 +257,7 @@ namespace MgmtExtensionCommonRestOperation
                 throw new ArgumentNullException(nameof(tags), $"{nameof(tags)} provided cannot be null.");
             }
 
-            using var scope = _typeTwoClientDiagnostics.CreateScope("TypeTwo.SetTags");
+            using var scope = _typeTwoCommonClientDiagnostics.CreateScope("TypeTwo.SetTags");
             scope.Start();
             try
             {
@@ -265,7 +265,7 @@ namespace MgmtExtensionCommonRestOperation
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _typeTwoRestClient.GetTypeTwo(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var originalResponse = _typeTwoCommonRestClient.GetTypeTwo(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new TypeTwo(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -283,14 +283,14 @@ namespace MgmtExtensionCommonRestOperation
         {
             Argument.AssertNotNullOrWhiteSpace(key, nameof(key));
 
-            using var scope = _typeTwoClientDiagnostics.CreateScope("TypeTwo.RemoveTag");
+            using var scope = _typeTwoCommonClientDiagnostics.CreateScope("TypeTwo.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _typeTwoRestClient.GetTypeTwoAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _typeTwoCommonRestClient.GetTypeTwoAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new TypeTwo(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -308,14 +308,14 @@ namespace MgmtExtensionCommonRestOperation
         {
             Argument.AssertNotNullOrWhiteSpace(key, nameof(key));
 
-            using var scope = _typeTwoClientDiagnostics.CreateScope("TypeTwo.RemoveTag");
+            using var scope = _typeTwoCommonClientDiagnostics.CreateScope("TypeTwo.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _typeTwoRestClient.GetTypeTwo(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var originalResponse = _typeTwoCommonRestClient.GetTypeTwo(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new TypeTwo(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)

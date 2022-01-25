@@ -25,8 +25,8 @@ namespace MgmtExtensionCommonRestOperation
     /// <summary> A class representing collection of TypeOne and their operations over its parent. </summary>
     public partial class TypeOneCollection : ArmCollection, IEnumerable<TypeOne>, IAsyncEnumerable<TypeOne>
     {
-        private readonly ClientDiagnostics _typeOneClientDiagnostics;
-        private readonly CommonRestOperations _typeOneRestClient;
+        private readonly ClientDiagnostics _typeOneCommonClientDiagnostics;
+        private readonly CommonRestOperations _typeOneCommonRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="TypeOneCollection"/> class for mocking. </summary>
         protected TypeOneCollection()
@@ -37,9 +37,9 @@ namespace MgmtExtensionCommonRestOperation
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal TypeOneCollection(ArmResource parent) : base(parent)
         {
-            _typeOneClientDiagnostics = new ClientDiagnostics("MgmtExtensionCommonRestOperation", TypeOne.ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(TypeOne.ResourceType, out string typeOneApiVersion);
-            _typeOneRestClient = new CommonRestOperations(_typeOneClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, typeOneApiVersion);
+            _typeOneCommonClientDiagnostics = new ClientDiagnostics("MgmtExtensionCommonRestOperation", TypeOne.ResourceType.Namespace, DiagnosticOptions);
+            ArmClient.TryGetApiVersion(TypeOne.ResourceType, out string typeOneCommonApiVersion);
+            _typeOneCommonRestClient = new CommonRestOperations(_typeOneCommonClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, typeOneCommonApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -71,11 +71,11 @@ namespace MgmtExtensionCommonRestOperation
                 throw new ArgumentNullException(nameof(typeOne));
             }
 
-            using var scope = _typeOneClientDiagnostics.CreateScope("TypeOneCollection.CreateOrUpdate");
+            using var scope = _typeOneCommonClientDiagnostics.CreateScope("TypeOneCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _typeOneRestClient.CreateOrUpdateTypeOne(Id.SubscriptionId, Id.ResourceGroupName, typeOneName, typeOne, cancellationToken);
+                var response = _typeOneCommonRestClient.CreateOrUpdateTypeOne(Id.SubscriptionId, Id.ResourceGroupName, typeOneName, typeOne, cancellationToken);
                 var operation = new TypeOneCreateOrUpdateOperation(ArmClient, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
@@ -106,11 +106,11 @@ namespace MgmtExtensionCommonRestOperation
                 throw new ArgumentNullException(nameof(typeOne));
             }
 
-            using var scope = _typeOneClientDiagnostics.CreateScope("TypeOneCollection.CreateOrUpdate");
+            using var scope = _typeOneCommonClientDiagnostics.CreateScope("TypeOneCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _typeOneRestClient.CreateOrUpdateTypeOneAsync(Id.SubscriptionId, Id.ResourceGroupName, typeOneName, typeOne, cancellationToken).ConfigureAwait(false);
+                var response = await _typeOneCommonRestClient.CreateOrUpdateTypeOneAsync(Id.SubscriptionId, Id.ResourceGroupName, typeOneName, typeOne, cancellationToken).ConfigureAwait(false);
                 var operation = new TypeOneCreateOrUpdateOperation(ArmClient, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -135,13 +135,13 @@ namespace MgmtExtensionCommonRestOperation
         {
             Argument.AssertNotNullOrEmpty(typeOneName, nameof(typeOneName));
 
-            using var scope = _typeOneClientDiagnostics.CreateScope("TypeOneCollection.Get");
+            using var scope = _typeOneCommonClientDiagnostics.CreateScope("TypeOneCollection.Get");
             scope.Start();
             try
             {
-                var response = _typeOneRestClient.GetTypeOne(Id.SubscriptionId, Id.ResourceGroupName, typeOneName, cancellationToken);
+                var response = _typeOneCommonRestClient.GetTypeOne(Id.SubscriptionId, Id.ResourceGroupName, typeOneName, cancellationToken);
                 if (response.Value == null)
-                    throw _typeOneClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                    throw _typeOneCommonClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new TypeOne(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -163,13 +163,13 @@ namespace MgmtExtensionCommonRestOperation
         {
             Argument.AssertNotNullOrEmpty(typeOneName, nameof(typeOneName));
 
-            using var scope = _typeOneClientDiagnostics.CreateScope("TypeOneCollection.Get");
+            using var scope = _typeOneCommonClientDiagnostics.CreateScope("TypeOneCollection.Get");
             scope.Start();
             try
             {
-                var response = await _typeOneRestClient.GetTypeOneAsync(Id.SubscriptionId, Id.ResourceGroupName, typeOneName, cancellationToken).ConfigureAwait(false);
+                var response = await _typeOneCommonRestClient.GetTypeOneAsync(Id.SubscriptionId, Id.ResourceGroupName, typeOneName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _typeOneClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                    throw await _typeOneCommonClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new TypeOne(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -188,11 +188,11 @@ namespace MgmtExtensionCommonRestOperation
         {
             Argument.AssertNotNullOrEmpty(typeOneName, nameof(typeOneName));
 
-            using var scope = _typeOneClientDiagnostics.CreateScope("TypeOneCollection.GetIfExists");
+            using var scope = _typeOneCommonClientDiagnostics.CreateScope("TypeOneCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _typeOneRestClient.GetTypeOne(Id.SubscriptionId, Id.ResourceGroupName, typeOneName, cancellationToken: cancellationToken);
+                var response = _typeOneCommonRestClient.GetTypeOne(Id.SubscriptionId, Id.ResourceGroupName, typeOneName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<TypeOne>(null, response.GetRawResponse());
                 return Response.FromValue(new TypeOne(ArmClient, response.Value), response.GetRawResponse());
@@ -213,11 +213,11 @@ namespace MgmtExtensionCommonRestOperation
         {
             Argument.AssertNotNullOrEmpty(typeOneName, nameof(typeOneName));
 
-            using var scope = _typeOneClientDiagnostics.CreateScope("TypeOneCollection.GetIfExists");
+            using var scope = _typeOneCommonClientDiagnostics.CreateScope("TypeOneCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _typeOneRestClient.GetTypeOneAsync(Id.SubscriptionId, Id.ResourceGroupName, typeOneName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _typeOneCommonRestClient.GetTypeOneAsync(Id.SubscriptionId, Id.ResourceGroupName, typeOneName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<TypeOne>(null, response.GetRawResponse());
                 return Response.FromValue(new TypeOne(ArmClient, response.Value), response.GetRawResponse());
@@ -238,7 +238,7 @@ namespace MgmtExtensionCommonRestOperation
         {
             Argument.AssertNotNullOrEmpty(typeOneName, nameof(typeOneName));
 
-            using var scope = _typeOneClientDiagnostics.CreateScope("TypeOneCollection.Exists");
+            using var scope = _typeOneCommonClientDiagnostics.CreateScope("TypeOneCollection.Exists");
             scope.Start();
             try
             {
@@ -261,7 +261,7 @@ namespace MgmtExtensionCommonRestOperation
         {
             Argument.AssertNotNullOrEmpty(typeOneName, nameof(typeOneName));
 
-            using var scope = _typeOneClientDiagnostics.CreateScope("TypeOneCollection.Exists");
+            using var scope = _typeOneCommonClientDiagnostics.CreateScope("TypeOneCollection.Exists");
             scope.Start();
             try
             {
@@ -285,11 +285,11 @@ namespace MgmtExtensionCommonRestOperation
         {
             Page<TypeOne> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _typeOneClientDiagnostics.CreateScope("TypeOneCollection.GetAll");
+                using var scope = _typeOneCommonClientDiagnostics.CreateScope("TypeOneCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _typeOneRestClient.ListTypeOnes(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
+                    var response = _typeOneCommonRestClient.ListTypeOnes(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new TypeOne(ArmClient, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -311,11 +311,11 @@ namespace MgmtExtensionCommonRestOperation
         {
             async Task<Page<TypeOne>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _typeOneClientDiagnostics.CreateScope("TypeOneCollection.GetAll");
+                using var scope = _typeOneCommonClientDiagnostics.CreateScope("TypeOneCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _typeOneRestClient.ListTypeOnesAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _typeOneCommonRestClient.ListTypeOnesAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new TypeOne(ArmClient, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -335,7 +335,7 @@ namespace MgmtExtensionCommonRestOperation
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<GenericResource> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _typeOneClientDiagnostics.CreateScope("TypeOneCollection.GetAllAsGenericResources");
+            using var scope = _typeOneCommonClientDiagnostics.CreateScope("TypeOneCollection.GetAllAsGenericResources");
             scope.Start();
             try
             {
@@ -358,7 +358,7 @@ namespace MgmtExtensionCommonRestOperation
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<GenericResource> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _typeOneClientDiagnostics.CreateScope("TypeOneCollection.GetAllAsGenericResources");
+            using var scope = _typeOneCommonClientDiagnostics.CreateScope("TypeOneCollection.GetAllAsGenericResources");
             scope.Start();
             try
             {

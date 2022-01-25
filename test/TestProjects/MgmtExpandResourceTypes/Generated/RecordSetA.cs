@@ -30,8 +30,8 @@ namespace MgmtExpandResourceTypes
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _recordSetClientDiagnostics;
-        private readonly RecordSetsRestOperations _recordSetRestClient;
+        private readonly ClientDiagnostics _recordSetARecordSetsClientDiagnostics;
+        private readonly RecordSetsRestOperations _recordSetARecordSetsRestClient;
         private readonly RecordSetData _data;
 
         /// <summary> Initializes a new instance of the <see cref="RecordSetA"/> class for mocking. </summary>
@@ -53,9 +53,9 @@ namespace MgmtExpandResourceTypes
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal RecordSetA(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
         {
-            _recordSetClientDiagnostics = new ClientDiagnostics("MgmtExpandResourceTypes", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string recordSetApiVersion);
-            _recordSetRestClient = new RecordSetsRestOperations(_recordSetClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, recordSetApiVersion);
+            _recordSetARecordSetsClientDiagnostics = new ClientDiagnostics("MgmtExpandResourceTypes", ResourceType.Namespace, DiagnosticOptions);
+            ArmClient.TryGetApiVersion(ResourceType, out string recordSetARecordSetsApiVersion);
+            _recordSetARecordSetsRestClient = new RecordSetsRestOperations(_recordSetARecordSetsClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, recordSetARecordSetsApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -92,13 +92,13 @@ namespace MgmtExpandResourceTypes
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<RecordSetA>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _recordSetClientDiagnostics.CreateScope("RecordSetA.Get");
+            using var scope = _recordSetARecordSetsClientDiagnostics.CreateScope("RecordSetA.Get");
             scope.Start();
             try
             {
-                var response = await _recordSetRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.ResourceType.GetLastType().ToRecordType(), Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _recordSetARecordSetsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.ResourceType.GetLastType().ToRecordType(), Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _recordSetClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                    throw await _recordSetARecordSetsClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new RecordSetA(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -115,13 +115,13 @@ namespace MgmtExpandResourceTypes
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<RecordSetA> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _recordSetClientDiagnostics.CreateScope("RecordSetA.Get");
+            using var scope = _recordSetARecordSetsClientDiagnostics.CreateScope("RecordSetA.Get");
             scope.Start();
             try
             {
-                var response = _recordSetRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.ResourceType.GetLastType().ToRecordType(), Id.Name, cancellationToken);
+                var response = _recordSetARecordSetsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.ResourceType.GetLastType().ToRecordType(), Id.Name, cancellationToken);
                 if (response.Value == null)
-                    throw _recordSetClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                    throw _recordSetARecordSetsClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new RecordSetA(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -136,7 +136,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
         public async virtual Task<IEnumerable<AzureLocation>> GetAvailableLocationsAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _recordSetClientDiagnostics.CreateScope("RecordSetA.GetAvailableLocations");
+            using var scope = _recordSetARecordSetsClientDiagnostics.CreateScope("RecordSetA.GetAvailableLocations");
             scope.Start();
             try
             {
@@ -154,7 +154,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
         public virtual IEnumerable<AzureLocation> GetAvailableLocations(CancellationToken cancellationToken = default)
         {
-            using var scope = _recordSetClientDiagnostics.CreateScope("RecordSetA.GetAvailableLocations");
+            using var scope = _recordSetARecordSetsClientDiagnostics.CreateScope("RecordSetA.GetAvailableLocations");
             scope.Start();
             try
             {
@@ -176,11 +176,11 @@ namespace MgmtExpandResourceTypes
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<RecordSetADeleteOperation> DeleteAsync(bool waitForCompletion, string ifMatch = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _recordSetClientDiagnostics.CreateScope("RecordSetA.Delete");
+            using var scope = _recordSetARecordSetsClientDiagnostics.CreateScope("RecordSetA.Delete");
             scope.Start();
             try
             {
-                var response = await _recordSetRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.ResourceType.GetLastType().ToRecordType(), Id.Name, ifMatch, cancellationToken).ConfigureAwait(false);
+                var response = await _recordSetARecordSetsRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.ResourceType.GetLastType().ToRecordType(), Id.Name, ifMatch, cancellationToken).ConfigureAwait(false);
                 var operation = new RecordSetADeleteOperation(response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
@@ -202,11 +202,11 @@ namespace MgmtExpandResourceTypes
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual RecordSetADeleteOperation Delete(bool waitForCompletion, string ifMatch = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _recordSetClientDiagnostics.CreateScope("RecordSetA.Delete");
+            using var scope = _recordSetARecordSetsClientDiagnostics.CreateScope("RecordSetA.Delete");
             scope.Start();
             try
             {
-                var response = _recordSetRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.ResourceType.GetLastType().ToRecordType(), Id.Name, ifMatch, cancellationToken);
+                var response = _recordSetARecordSetsRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.ResourceType.GetLastType().ToRecordType(), Id.Name, ifMatch, cancellationToken);
                 var operation = new RecordSetADeleteOperation(response);
                 if (waitForCompletion)
                     operation.WaitForCompletionResponse(cancellationToken);
@@ -234,11 +234,11 @@ namespace MgmtExpandResourceTypes
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _recordSetClientDiagnostics.CreateScope("RecordSetA.Update");
+            using var scope = _recordSetARecordSetsClientDiagnostics.CreateScope("RecordSetA.Update");
             scope.Start();
             try
             {
-                var response = await _recordSetRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.ResourceType.GetLastType().ToRecordType(), Id.Name, parameters, ifMatch, cancellationToken).ConfigureAwait(false);
+                var response = await _recordSetARecordSetsRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.ResourceType.GetLastType().ToRecordType(), Id.Name, parameters, ifMatch, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new RecordSetA(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -263,11 +263,11 @@ namespace MgmtExpandResourceTypes
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _recordSetClientDiagnostics.CreateScope("RecordSetA.Update");
+            using var scope = _recordSetARecordSetsClientDiagnostics.CreateScope("RecordSetA.Update");
             scope.Start();
             try
             {
-                var response = _recordSetRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.ResourceType.GetLastType().ToRecordType(), Id.Name, parameters, ifMatch, cancellationToken);
+                var response = _recordSetARecordSetsRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.ResourceType.GetLastType().ToRecordType(), Id.Name, parameters, ifMatch, cancellationToken);
                 return Response.FromValue(new RecordSetA(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)

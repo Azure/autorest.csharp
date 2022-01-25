@@ -21,10 +21,8 @@ namespace MgmtExtensionCommonRestOperation
     /// <summary> An internal class to add extension methods to. </summary>
     internal partial class SubscriptionExtensionClient : ArmResource
     {
-        private ClientDiagnostics _typeOneClientDiagnostics;
-        private CommonRestOperations _typeOneRestClient;
-        private ClientDiagnostics _typeTwoClientDiagnostics;
-        private CommonRestOperations _typeTwoRestClient;
+        private ClientDiagnostics _commonClientDiagnostics;
+        private CommonRestOperations _commonRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="SubscriptionExtensionClient"/> class. </summary>
         /// <param name="armClient"> The client parameters to use in these operations. </param>
@@ -33,10 +31,8 @@ namespace MgmtExtensionCommonRestOperation
         {
         }
 
-        private ClientDiagnostics TypeOneClientDiagnostics => _typeOneClientDiagnostics ??= new ClientDiagnostics("MgmtExtensionCommonRestOperation", TypeOne.ResourceType.Namespace, DiagnosticOptions);
-        private CommonRestOperations TypeOneRestClient => _typeOneRestClient ??= new CommonRestOperations(TypeOneClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(TypeOne.ResourceType));
-        private ClientDiagnostics TypeTwoClientDiagnostics => _typeTwoClientDiagnostics ??= new ClientDiagnostics("MgmtExtensionCommonRestOperation", TypeTwo.ResourceType.Namespace, DiagnosticOptions);
-        private CommonRestOperations TypeTwoRestClient => _typeTwoRestClient ??= new CommonRestOperations(TypeTwoClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(TypeTwo.ResourceType));
+        private ClientDiagnostics CommonClientDiagnostics => _commonClientDiagnostics ??= new ClientDiagnostics("MgmtExtensionCommonRestOperation", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
+        private CommonRestOperations CommonRestClient => _commonRestClient ??= new CommonRestOperations(CommonClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {
@@ -54,11 +50,11 @@ namespace MgmtExtensionCommonRestOperation
         {
             async Task<Page<TypeOne>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = TypeOneClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetTypeOnes");
+                using var scope = CommonClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetTypeOnes");
                 scope.Start();
                 try
                 {
-                    var response = await TypeOneRestClient.ListTypeOnesBySubscriptionAsync(Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await CommonRestClient.ListTypeOnesBySubscriptionAsync(Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new TypeOne(ArmClient, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -80,11 +76,11 @@ namespace MgmtExtensionCommonRestOperation
         {
             Page<TypeOne> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = TypeOneClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetTypeOnes");
+                using var scope = CommonClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetTypeOnes");
                 scope.Start();
                 try
                 {
-                    var response = TypeOneRestClient.ListTypeOnesBySubscription(Id.SubscriptionId, cancellationToken: cancellationToken);
+                    var response = CommonRestClient.ListTypeOnesBySubscription(Id.SubscriptionId, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new TypeOne(ArmClient, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -132,11 +128,11 @@ namespace MgmtExtensionCommonRestOperation
         {
             async Task<Page<TypeTwo>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = TypeTwoClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetTypeTwos");
+                using var scope = CommonClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetTypeTwos");
                 scope.Start();
                 try
                 {
-                    var response = await TypeTwoRestClient.ListTypeTwosBySubscriptionAsync(Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await CommonRestClient.ListTypeTwosBySubscriptionAsync(Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new TypeTwo(ArmClient, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -158,11 +154,11 @@ namespace MgmtExtensionCommonRestOperation
         {
             Page<TypeTwo> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = TypeTwoClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetTypeTwos");
+                using var scope = CommonClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetTypeTwos");
                 scope.Start();
                 try
                 {
-                    var response = TypeTwoRestClient.ListTypeTwosBySubscription(Id.SubscriptionId, cancellationToken: cancellationToken);
+                    var response = CommonRestClient.ListTypeTwosBySubscription(Id.SubscriptionId, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new TypeTwo(ArmClient, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)

@@ -25,8 +25,8 @@ namespace MgmtExtensionCommonRestOperation
     /// <summary> A class representing collection of TypeTwo and their operations over its parent. </summary>
     public partial class TypeTwoCollection : ArmCollection, IEnumerable<TypeTwo>, IAsyncEnumerable<TypeTwo>
     {
-        private readonly ClientDiagnostics _typeTwoClientDiagnostics;
-        private readonly CommonRestOperations _typeTwoRestClient;
+        private readonly ClientDiagnostics _typeTwoCommonClientDiagnostics;
+        private readonly CommonRestOperations _typeTwoCommonRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="TypeTwoCollection"/> class for mocking. </summary>
         protected TypeTwoCollection()
@@ -37,9 +37,9 @@ namespace MgmtExtensionCommonRestOperation
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal TypeTwoCollection(ArmResource parent) : base(parent)
         {
-            _typeTwoClientDiagnostics = new ClientDiagnostics("MgmtExtensionCommonRestOperation", TypeTwo.ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(TypeTwo.ResourceType, out string typeTwoApiVersion);
-            _typeTwoRestClient = new CommonRestOperations(_typeTwoClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, typeTwoApiVersion);
+            _typeTwoCommonClientDiagnostics = new ClientDiagnostics("MgmtExtensionCommonRestOperation", TypeTwo.ResourceType.Namespace, DiagnosticOptions);
+            ArmClient.TryGetApiVersion(TypeTwo.ResourceType, out string typeTwoCommonApiVersion);
+            _typeTwoCommonRestClient = new CommonRestOperations(_typeTwoCommonClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, typeTwoCommonApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -71,11 +71,11 @@ namespace MgmtExtensionCommonRestOperation
                 throw new ArgumentNullException(nameof(typeTwo));
             }
 
-            using var scope = _typeTwoClientDiagnostics.CreateScope("TypeTwoCollection.CreateOrUpdate");
+            using var scope = _typeTwoCommonClientDiagnostics.CreateScope("TypeTwoCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _typeTwoRestClient.CreateOrUpdateTypeTwo(Id.SubscriptionId, Id.ResourceGroupName, typeTwoName, typeTwo, cancellationToken);
+                var response = _typeTwoCommonRestClient.CreateOrUpdateTypeTwo(Id.SubscriptionId, Id.ResourceGroupName, typeTwoName, typeTwo, cancellationToken);
                 var operation = new TypeTwoCreateOrUpdateOperation(ArmClient, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
@@ -106,11 +106,11 @@ namespace MgmtExtensionCommonRestOperation
                 throw new ArgumentNullException(nameof(typeTwo));
             }
 
-            using var scope = _typeTwoClientDiagnostics.CreateScope("TypeTwoCollection.CreateOrUpdate");
+            using var scope = _typeTwoCommonClientDiagnostics.CreateScope("TypeTwoCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _typeTwoRestClient.CreateOrUpdateTypeTwoAsync(Id.SubscriptionId, Id.ResourceGroupName, typeTwoName, typeTwo, cancellationToken).ConfigureAwait(false);
+                var response = await _typeTwoCommonRestClient.CreateOrUpdateTypeTwoAsync(Id.SubscriptionId, Id.ResourceGroupName, typeTwoName, typeTwo, cancellationToken).ConfigureAwait(false);
                 var operation = new TypeTwoCreateOrUpdateOperation(ArmClient, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -135,13 +135,13 @@ namespace MgmtExtensionCommonRestOperation
         {
             Argument.AssertNotNullOrEmpty(typeTwoName, nameof(typeTwoName));
 
-            using var scope = _typeTwoClientDiagnostics.CreateScope("TypeTwoCollection.Get");
+            using var scope = _typeTwoCommonClientDiagnostics.CreateScope("TypeTwoCollection.Get");
             scope.Start();
             try
             {
-                var response = _typeTwoRestClient.GetTypeTwo(Id.SubscriptionId, Id.ResourceGroupName, typeTwoName, cancellationToken);
+                var response = _typeTwoCommonRestClient.GetTypeTwo(Id.SubscriptionId, Id.ResourceGroupName, typeTwoName, cancellationToken);
                 if (response.Value == null)
-                    throw _typeTwoClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                    throw _typeTwoCommonClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new TypeTwo(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -163,13 +163,13 @@ namespace MgmtExtensionCommonRestOperation
         {
             Argument.AssertNotNullOrEmpty(typeTwoName, nameof(typeTwoName));
 
-            using var scope = _typeTwoClientDiagnostics.CreateScope("TypeTwoCollection.Get");
+            using var scope = _typeTwoCommonClientDiagnostics.CreateScope("TypeTwoCollection.Get");
             scope.Start();
             try
             {
-                var response = await _typeTwoRestClient.GetTypeTwoAsync(Id.SubscriptionId, Id.ResourceGroupName, typeTwoName, cancellationToken).ConfigureAwait(false);
+                var response = await _typeTwoCommonRestClient.GetTypeTwoAsync(Id.SubscriptionId, Id.ResourceGroupName, typeTwoName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _typeTwoClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                    throw await _typeTwoCommonClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new TypeTwo(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -188,11 +188,11 @@ namespace MgmtExtensionCommonRestOperation
         {
             Argument.AssertNotNullOrEmpty(typeTwoName, nameof(typeTwoName));
 
-            using var scope = _typeTwoClientDiagnostics.CreateScope("TypeTwoCollection.GetIfExists");
+            using var scope = _typeTwoCommonClientDiagnostics.CreateScope("TypeTwoCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _typeTwoRestClient.GetTypeTwo(Id.SubscriptionId, Id.ResourceGroupName, typeTwoName, cancellationToken: cancellationToken);
+                var response = _typeTwoCommonRestClient.GetTypeTwo(Id.SubscriptionId, Id.ResourceGroupName, typeTwoName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<TypeTwo>(null, response.GetRawResponse());
                 return Response.FromValue(new TypeTwo(ArmClient, response.Value), response.GetRawResponse());
@@ -213,11 +213,11 @@ namespace MgmtExtensionCommonRestOperation
         {
             Argument.AssertNotNullOrEmpty(typeTwoName, nameof(typeTwoName));
 
-            using var scope = _typeTwoClientDiagnostics.CreateScope("TypeTwoCollection.GetIfExists");
+            using var scope = _typeTwoCommonClientDiagnostics.CreateScope("TypeTwoCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _typeTwoRestClient.GetTypeTwoAsync(Id.SubscriptionId, Id.ResourceGroupName, typeTwoName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _typeTwoCommonRestClient.GetTypeTwoAsync(Id.SubscriptionId, Id.ResourceGroupName, typeTwoName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<TypeTwo>(null, response.GetRawResponse());
                 return Response.FromValue(new TypeTwo(ArmClient, response.Value), response.GetRawResponse());
@@ -238,7 +238,7 @@ namespace MgmtExtensionCommonRestOperation
         {
             Argument.AssertNotNullOrEmpty(typeTwoName, nameof(typeTwoName));
 
-            using var scope = _typeTwoClientDiagnostics.CreateScope("TypeTwoCollection.Exists");
+            using var scope = _typeTwoCommonClientDiagnostics.CreateScope("TypeTwoCollection.Exists");
             scope.Start();
             try
             {
@@ -261,7 +261,7 @@ namespace MgmtExtensionCommonRestOperation
         {
             Argument.AssertNotNullOrEmpty(typeTwoName, nameof(typeTwoName));
 
-            using var scope = _typeTwoClientDiagnostics.CreateScope("TypeTwoCollection.Exists");
+            using var scope = _typeTwoCommonClientDiagnostics.CreateScope("TypeTwoCollection.Exists");
             scope.Start();
             try
             {
@@ -285,11 +285,11 @@ namespace MgmtExtensionCommonRestOperation
         {
             Page<TypeTwo> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _typeTwoClientDiagnostics.CreateScope("TypeTwoCollection.GetAll");
+                using var scope = _typeTwoCommonClientDiagnostics.CreateScope("TypeTwoCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _typeTwoRestClient.ListTypeTwos(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
+                    var response = _typeTwoCommonRestClient.ListTypeTwos(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new TypeTwo(ArmClient, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -311,11 +311,11 @@ namespace MgmtExtensionCommonRestOperation
         {
             async Task<Page<TypeTwo>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _typeTwoClientDiagnostics.CreateScope("TypeTwoCollection.GetAll");
+                using var scope = _typeTwoCommonClientDiagnostics.CreateScope("TypeTwoCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _typeTwoRestClient.ListTypeTwosAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _typeTwoCommonRestClient.ListTypeTwosAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new TypeTwo(ArmClient, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -335,7 +335,7 @@ namespace MgmtExtensionCommonRestOperation
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<GenericResource> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _typeTwoClientDiagnostics.CreateScope("TypeTwoCollection.GetAllAsGenericResources");
+            using var scope = _typeTwoCommonClientDiagnostics.CreateScope("TypeTwoCollection.GetAllAsGenericResources");
             scope.Start();
             try
             {
@@ -358,7 +358,7 @@ namespace MgmtExtensionCommonRestOperation
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<GenericResource> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _typeTwoClientDiagnostics.CreateScope("TypeTwoCollection.GetAllAsGenericResources");
+            using var scope = _typeTwoCommonClientDiagnostics.CreateScope("TypeTwoCollection.GetAllAsGenericResources");
             scope.Start();
             try
             {
