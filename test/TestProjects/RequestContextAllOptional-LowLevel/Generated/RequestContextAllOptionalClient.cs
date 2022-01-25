@@ -62,7 +62,7 @@ namespace RequestContextAllOptional_LowLevel
             try
             {
                 using HttpMessage message = CreateNoRequestBodyResponseBodyRequest(id, top, skip, status, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -86,7 +86,7 @@ namespace RequestContextAllOptional_LowLevel
             try
             {
                 using HttpMessage message = CreateNoRequestBodyResponseBodyRequest(id, top, skip, status, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -122,7 +122,7 @@ namespace RequestContextAllOptional_LowLevel
             try
             {
                 using HttpMessage message = CreateRequestBodyResponseBodyRequest(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -158,7 +158,7 @@ namespace RequestContextAllOptional_LowLevel
             try
             {
                 using HttpMessage message = CreateRequestBodyResponseBodyRequest(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -182,7 +182,7 @@ namespace RequestContextAllOptional_LowLevel
             try
             {
                 using HttpMessage message = CreateDeleteNoRequestBodyResponseBodyRequest(resourceName, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -206,7 +206,7 @@ namespace RequestContextAllOptional_LowLevel
             try
             {
                 using HttpMessage message = CreateDeleteNoRequestBodyResponseBodyRequest(resourceName, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -226,7 +226,7 @@ namespace RequestContextAllOptional_LowLevel
             try
             {
                 using HttpMessage message = CreateNoRequestBodyNoResponseBodyRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -246,7 +246,7 @@ namespace RequestContextAllOptional_LowLevel
             try
             {
                 using HttpMessage message = CreateNoRequestBodyNoResponseBodyRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -267,7 +267,7 @@ namespace RequestContextAllOptional_LowLevel
             try
             {
                 using HttpMessage message = CreateRequestBodyNoResponseBodyRequest(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -288,7 +288,7 @@ namespace RequestContextAllOptional_LowLevel
             try
             {
                 using HttpMessage message = CreateRequestBodyNoResponseBodyRequest(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {

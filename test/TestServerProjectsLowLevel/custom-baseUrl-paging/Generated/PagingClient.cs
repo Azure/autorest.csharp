@@ -83,7 +83,7 @@ namespace custom_baseUrl_paging_LowLevel
                     var message = string.IsNullOrEmpty(nextLink)
                         ? CreateGetPagesPartialUrlRequest(accountName, context)
                         : CreateGetPagesPartialUrlNextPageRequest(nextLink, accountName, context);
-                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, context, "values", "nextLink", cancellationToken).ConfigureAwait(false);
+                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, context, "values", "nextLink", cancellationToken).ConfigureAwait(false);
                     nextLink = page.ContinuationToken;
                     yield return page;
                 } while (!string.IsNullOrEmpty(nextLink));
@@ -124,7 +124,7 @@ namespace custom_baseUrl_paging_LowLevel
                     var message = string.IsNullOrEmpty(nextLink)
                         ? CreateGetPagesPartialUrlRequest(accountName, context)
                         : CreateGetPagesPartialUrlNextPageRequest(nextLink, accountName, context);
-                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, context, "values", "nextLink");
+                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, context, "values", "nextLink");
                     nextLink = page.ContinuationToken;
                     yield return page;
                 } while (!string.IsNullOrEmpty(nextLink));
@@ -165,7 +165,7 @@ namespace custom_baseUrl_paging_LowLevel
                     var message = string.IsNullOrEmpty(nextLink)
                         ? CreateGetPagesPartialUrlOperationRequest(accountName, context)
                         : CreateGetPagesPartialUrlOperationNextRequest(accountName, nextLink, context);
-                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, context, "values", "nextLink", cancellationToken).ConfigureAwait(false);
+                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, context, "values", "nextLink", cancellationToken).ConfigureAwait(false);
                     nextLink = page.ContinuationToken;
                     yield return page;
                 } while (!string.IsNullOrEmpty(nextLink));
@@ -206,7 +206,7 @@ namespace custom_baseUrl_paging_LowLevel
                     var message = string.IsNullOrEmpty(nextLink)
                         ? CreateGetPagesPartialUrlOperationRequest(accountName, context)
                         : CreateGetPagesPartialUrlOperationNextRequest(accountName, nextLink, context);
-                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, context, "values", "nextLink");
+                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, context, "values", "nextLink");
                     nextLink = page.ContinuationToken;
                     yield return page;
                 } while (!string.IsNullOrEmpty(nextLink));
@@ -247,7 +247,7 @@ namespace custom_baseUrl_paging_LowLevel
                 do
                 {
                     var message = CreateGetPagesPartialUrlOperationNextRequest(accountName, nextLink, context);
-                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, context, "values", "nextLink", cancellationToken).ConfigureAwait(false);
+                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, context, "values", "nextLink", cancellationToken).ConfigureAwait(false);
                     nextLink = page.ContinuationToken;
                     yield return page;
                 } while (!string.IsNullOrEmpty(nextLink));
@@ -288,7 +288,7 @@ namespace custom_baseUrl_paging_LowLevel
                 do
                 {
                     var message = CreateGetPagesPartialUrlOperationNextRequest(accountName, nextLink, context);
-                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, context, "values", "nextLink");
+                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, context, "values", "nextLink");
                     nextLink = page.ContinuationToken;
                     yield return page;
                 } while (!string.IsNullOrEmpty(nextLink));

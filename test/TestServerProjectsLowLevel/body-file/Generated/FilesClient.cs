@@ -67,7 +67,7 @@ namespace body_file_LowLevel
             try
             {
                 using HttpMessage message = CreateGetFileRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -96,7 +96,7 @@ namespace body_file_LowLevel
             try
             {
                 using HttpMessage message = CreateGetFileRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -125,7 +125,7 @@ namespace body_file_LowLevel
             try
             {
                 using HttpMessage message = CreateGetFileLargeRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -154,7 +154,7 @@ namespace body_file_LowLevel
             try
             {
                 using HttpMessage message = CreateGetFileLargeRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -183,7 +183,7 @@ namespace body_file_LowLevel
             try
             {
                 using HttpMessage message = CreateGetEmptyFileRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -212,7 +212,7 @@ namespace body_file_LowLevel
             try
             {
                 using HttpMessage message = CreateGetEmptyFileRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {

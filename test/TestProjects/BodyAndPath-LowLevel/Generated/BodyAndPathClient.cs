@@ -65,7 +65,7 @@ namespace BodyAndPath_LowLevel
             try
             {
                 using HttpMessage message = CreateCreateRequest(itemName, content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -91,7 +91,7 @@ namespace BodyAndPath_LowLevel
             try
             {
                 using HttpMessage message = CreateCreateRequest(itemName, content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -119,7 +119,7 @@ namespace BodyAndPath_LowLevel
             try
             {
                 using HttpMessage message = CreateCreateStreamRequest(itemNameStream, content, contentType, excluded, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -147,7 +147,7 @@ namespace BodyAndPath_LowLevel
             try
             {
                 using HttpMessage message = CreateCreateStreamRequest(itemNameStream, content, contentType, excluded, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -175,7 +175,7 @@ namespace BodyAndPath_LowLevel
             try
             {
                 using HttpMessage message = CreateCreateEnumRequest(enumName1, enumName2, content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -203,7 +203,7 @@ namespace BodyAndPath_LowLevel
             try
             {
                 using HttpMessage message = CreateCreateEnumRequest(enumName1, enumName2, content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -223,7 +223,7 @@ namespace BodyAndPath_LowLevel
             try
             {
                 using HttpMessage message = CreateGetBodyAndPathsRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -243,7 +243,7 @@ namespace BodyAndPath_LowLevel
             try
             {
                 using HttpMessage message = CreateGetBodyAndPathsRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -263,7 +263,7 @@ namespace BodyAndPath_LowLevel
             try
             {
                 using HttpMessage message = CreateGetItemsRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -283,7 +283,7 @@ namespace BodyAndPath_LowLevel
             try
             {
                 using HttpMessage message = CreateGetItemsRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -314,7 +314,7 @@ namespace BodyAndPath_LowLevel
             try
             {
                 using HttpMessage message = CreateUpdateRequest(item3, item2, item4, content, item5, item1, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -345,7 +345,7 @@ namespace BodyAndPath_LowLevel
             try
             {
                 using HttpMessage message = CreateUpdateRequest(item3, item2, item4, content, item5, item1, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {

@@ -71,7 +71,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateParamExistingKeyRequest(userAgent, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -104,7 +104,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateParamExistingKeyRequest(userAgent, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -133,7 +133,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateResponseExistingKeyRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -162,7 +162,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateResponseExistingKeyRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -195,7 +195,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateParamProtectedKeyRequest(contentType, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -228,7 +228,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateParamProtectedKeyRequest(contentType, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -257,7 +257,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateResponseProtectedKeyRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -286,7 +286,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateResponseProtectedKeyRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -320,7 +320,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateParamIntegerRequest(scenario, value, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -354,7 +354,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateParamIntegerRequest(scenario, value, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -387,7 +387,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateResponseIntegerRequest(scenario, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -420,7 +420,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateResponseIntegerRequest(scenario, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -454,7 +454,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateParamLongRequest(scenario, value, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -488,7 +488,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateParamLongRequest(scenario, value, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -521,7 +521,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateResponseLongRequest(scenario, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -554,7 +554,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateResponseLongRequest(scenario, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -588,7 +588,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateParamFloatRequest(scenario, value, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -622,7 +622,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateParamFloatRequest(scenario, value, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -655,7 +655,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateResponseFloatRequest(scenario, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -688,7 +688,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateResponseFloatRequest(scenario, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -722,7 +722,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateParamDoubleRequest(scenario, value, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -756,7 +756,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateParamDoubleRequest(scenario, value, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -789,7 +789,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateResponseDoubleRequest(scenario, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -822,7 +822,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateResponseDoubleRequest(scenario, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -856,7 +856,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateParamBoolRequest(scenario, value, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -890,7 +890,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateParamBoolRequest(scenario, value, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -923,7 +923,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateResponseBoolRequest(scenario, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -956,7 +956,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateResponseBoolRequest(scenario, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -990,7 +990,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateParamStringRequest(scenario, value, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1024,7 +1024,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateParamStringRequest(scenario, value, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1057,7 +1057,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateResponseStringRequest(scenario, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1090,7 +1090,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateResponseStringRequest(scenario, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1124,7 +1124,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateParamDateRequest(scenario, value, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1158,7 +1158,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateParamDateRequest(scenario, value, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1191,7 +1191,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateResponseDateRequest(scenario, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1224,7 +1224,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateResponseDateRequest(scenario, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1258,7 +1258,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateParamDatetimeRequest(scenario, value, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1292,7 +1292,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateParamDatetimeRequest(scenario, value, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1325,7 +1325,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateResponseDatetimeRequest(scenario, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1358,7 +1358,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateResponseDatetimeRequest(scenario, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1392,7 +1392,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateParamDatetimeRfc1123Request(scenario, value, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1426,7 +1426,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateParamDatetimeRfc1123Request(scenario, value, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1459,7 +1459,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateResponseDatetimeRfc1123Request(scenario, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1492,7 +1492,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateResponseDatetimeRfc1123Request(scenario, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1526,7 +1526,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateParamDurationRequest(scenario, value, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1560,7 +1560,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateParamDurationRequest(scenario, value, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1593,7 +1593,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateResponseDurationRequest(scenario, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1626,7 +1626,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateResponseDurationRequest(scenario, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1661,7 +1661,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateParamByteRequest(scenario, value, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1696,7 +1696,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateParamByteRequest(scenario, value, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1729,7 +1729,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateResponseByteRequest(scenario, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1762,7 +1762,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateResponseByteRequest(scenario, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1796,7 +1796,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateParamEnumRequest(scenario, value, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1830,7 +1830,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateParamEnumRequest(scenario, value, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1863,7 +1863,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateResponseEnumRequest(scenario, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1896,7 +1896,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateResponseEnumRequest(scenario, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1925,7 +1925,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateCustomRequestIdRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1954,7 +1954,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateCustomRequestIdRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {

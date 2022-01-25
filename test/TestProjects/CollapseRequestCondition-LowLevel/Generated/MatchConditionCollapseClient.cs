@@ -59,7 +59,7 @@ namespace CollapseRequestCondition_LowLevel
             try
             {
                 using HttpMessage message = CreateCollapseGetWithHeadRequest(otherHeader, matchConditions, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -80,7 +80,7 @@ namespace CollapseRequestCondition_LowLevel
             try
             {
                 using HttpMessage message = CreateCollapseGetWithHeadRequest(otherHeader, matchConditions, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -101,7 +101,7 @@ namespace CollapseRequestCondition_LowLevel
             try
             {
                 using HttpMessage message = CreateCollapsePutRequest(content, matchConditions, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -122,7 +122,7 @@ namespace CollapseRequestCondition_LowLevel
             try
             {
                 using HttpMessage message = CreateCollapsePutRequest(content, matchConditions, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -142,7 +142,7 @@ namespace CollapseRequestCondition_LowLevel
             try
             {
                 using HttpMessage message = CreateCollapseGetRequest(matchConditions, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -162,7 +162,7 @@ namespace CollapseRequestCondition_LowLevel
             try
             {
                 using HttpMessage message = CreateCollapseGetRequest(matchConditions, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -182,7 +182,7 @@ namespace CollapseRequestCondition_LowLevel
             try
             {
                 using HttpMessage message = CreateMulticollapseGetRequest(requestConditions, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -202,7 +202,7 @@ namespace CollapseRequestCondition_LowLevel
             try
             {
                 using HttpMessage message = CreateMulticollapseGetRequest(requestConditions, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
