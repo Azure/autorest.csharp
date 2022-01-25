@@ -364,6 +364,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtScopeResource\\Generated"
     },
+    "MgmtSignalR": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtSignalR\\src\\Generated"
+    },
     "MgmtSubscriptionNameParameter": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtSubscriptionNameParameter\\Generated"

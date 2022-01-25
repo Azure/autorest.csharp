@@ -1,10 +1,12 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System.Collections.Generic;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.MgmtTest.Generation;
 using AutoRest.CSharp.Output.Models.Types;
 
@@ -49,6 +51,39 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
                 project.AddGeneratedFile($"Mock/{resource.Type.Name}Test.cs", codeWriter.ToString());
             }
+
+            WriteExtensionTest(project, MgmtContext.Library.SubscriptionExtensionsClient);
+            if (!MgmtContext.Library.TenantExtensions.IsEmpty)
+            {
+                WriteExtensionTest(project, MgmtContext.Library.TenantExtensionsClient);
+            }
+
+            bool hasScenarioTest = false;
+            foreach (var scenarioTestDefinition in codeModel.TestModel?.ScenarioTests ?? new List<TestDefinitionModel>())
+            {
+                var codeWriter = new CodeWriter();
+                var scenarioTestWriter = new ScenarioTestWriter(codeWriter, scenarioTestDefinition);
+                scenarioTestWriter.WriteScenarioTest();
+
+                project.AddGeneratedFile($"Scenario/{scenarioTestWriter.TypeName}Test.cs", codeWriter.ToString());
+                hasScenarioTest = true;
+            }
+
+            if (hasScenarioTest)
+            {
+                var codeWriter = new CodeWriter();
+                var testEnvironmentWriter = new TestEnvironmentWriter(codeWriter);
+                testEnvironmentWriter.WriteTestEnvironment();
+
+                project.AddGeneratedFile($"Scenario/{testEnvironmentWriter.TypeName}Test.cs", codeWriter.ToString());
+            }
+        }
+
+        private static void WriteExtensionTest(GeneratedCodeWorkspace project, MgmtExtensionClient extensionClient)
+        {
+            var subscriptionExtensionsCodeWriter = new CodeWriter();
+            new MgmtExtensionTestWriter(subscriptionExtensionsCodeWriter, extensionClient.Extension).Write();
+            project.AddGeneratedFile($"Mock/{extensionClient.Extension.Type.Name}Test.cs", subscriptionExtensionsCodeWriter.ToString());
         }
     }
 }
