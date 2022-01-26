@@ -31,12 +31,16 @@ namespace AutoRest.CSharp.Mgmt.Models
             Escape = escape;
         }
 
+        /// <summary>
+        /// Creates a new instance of <see cref="Segment"/>.
+        /// </summary>
+        /// <param name="value"> The string value for the segment. </param>
+        /// <param name="escape"> Wether or not this segment is escaped. </param>
+        /// <param name="strict"> Wether or not to use strict validate for this segment. </param>
+        /// <param name="isConstant"> Whether this segment is a constant vs a reference. </param>
         public Segment(string value, bool escape = true, bool strict = false, bool isConstant = true)
+             : this(isConstant ? new Constant(value, typeof(string)) : new Reference(value, typeof(string)), escape, strict)
         {
-            _stringValue = value;
-            _value = isConstant ? new Constant(value, typeof(string)) : new Reference(value, typeof(string));
-            IsStrict = strict;
-            Escape = escape;
         }
 
         /// <summary>

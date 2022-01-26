@@ -110,54 +110,6 @@ namespace AutoRest.CSharp.Mgmt.Output
             return null;
         }
 
-        internal static Resource? GetResourceFromResourceType(Operation operation, BuildContext<MgmtOutputLibrary> context)
-        {
-            var resourceType = operation.GetRequestPath(context).GetResourceType(context.Configuration.MgmtConfiguration);
-            var candidates = context.Library.ArmResources.Where(resource => DoResourceTypesMatch(resourceType, resource.ResourceType));
-
-            int candidateCount = candidates.Count();
-
-            if (candidateCount == 0)
-                return null;
-
-            if (candidateCount == 1)
-                return candidates.First();
-
-            foreach (var candidate in candidates)
-            {
-                if (candidate.IsInOperationMap(operation))
-                    return candidate;
-            }
-
-            var parentCanddidate = candidates.First().Parent(context).FirstOrDefault();
-
-            if (parentCanddidate is not null && parentCanddidate is Resource)
-                return parentCanddidate as Resource;
-
-            throw new InvalidOperationException($"Found more than 1 candidate for {resourceType}, results were ({string.Join(',', candidates.Select(r => r.ResourceName))})");
-        }
-
-        private static bool DoResourceTypesMatch(ResourceTypeSegment rt1, ResourceTypeSegment rt2)
-        {
-            if (rt1[rt1.Count - 1].IsConstant)
-                return rt1 == rt2;
-
-            return DoAllButLastItemMatch(rt1, rt2); //TODO: limit matching to the enum values
-        }
-
-        private static bool DoAllButLastItemMatch(ResourceTypeSegment resourceType1, ResourceTypeSegment resourceType2)
-        {
-            if (resourceType1.Count != resourceType2.Count)
-                return false;
-
-            for (int i = 0; i < resourceType1.Count - 1; i++)
-            {
-                if (resourceType1[i] != resourceType2[i])
-                    return false;
-            }
-            return true;
-        }
-
         private IEnumerable<MgmtRestClient>? _restClients;
         public override IEnumerable<MgmtRestClient> RestClients => _restClients ??= EnsureRestClients();
 

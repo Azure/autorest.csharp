@@ -143,7 +143,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                     continue;
                 // In the case that the full path of requestPath and resourceRequestPath are both scopes (trimmed path is empty), comparing the scope part is enough.
                 // We should not compare the remaining paths as both will be empty path and Tenant.IsAncestorOf(Tenant) always returns false.
-                else if ( trimmedRequestPath.Count != 0 || trimmedResourceRequestPath.Count != 0)
+                else if (trimmedRequestPath.Count != 0 || trimmedResourceRequestPath.Count != 0)
                 {
                     if (!trimmedRequestPath.IsAncestorOf(trimmedResourceRequestPath))
                         continue;
@@ -216,6 +216,43 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             if (!operationSet.IsResource(context.Configuration.MgmtConfiguration))
                 return false;
             return responseBodyType == resourceData.Type.Name;
+        }
+
+        private static Dictionary<Operation, Resource?> _operationToResourceCache = new Dictionary<Operation, Resource?>();
+        internal static Resource? GetResourceFromResourceType(this Operation operation, BuildContext<MgmtOutputLibrary> context)
+        {
+            if (_operationToResourceCache.TryGetValue(operation, out Resource? cacheResult))
+                return cacheResult;
+
+            var resourceType = operation.GetRequestPath(context).GetResourceType(context.Configuration.MgmtConfiguration);
+            var candidates = context.Library.ArmResources.Where(resource => resource.ResourceType.DoesMatch(resourceType));
+
+            int candidateCount = candidates.Count();
+
+            Func<Resource?, Resource?> setAndReturn = (result) =>
+            {
+                _operationToResourceCache.TryAdd(operation, result);
+                return result;
+            };
+
+            if (candidateCount == 0)
+                return setAndReturn(null);
+
+            if (candidateCount == 1)
+                return setAndReturn(candidates.First());
+
+            foreach (var candidate in candidates)
+            {
+                if (candidate.IsInOperationMap(operation))
+                    return setAndReturn(candidate);
+            }
+
+            var parentCanddidate = candidates.First().Parent(context).FirstOrDefault();
+
+            if (parentCanddidate is not null && parentCanddidate is Resource)
+                return setAndReturn(parentCanddidate as Resource);
+
+            throw new InvalidOperationException($"Found more than 1 candidate for {resourceType}, results were ({string.Join(',', candidates.Select(r => r.ResourceName))})");
         }
     }
 }

@@ -95,6 +95,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             if (isApiCall)
                 _writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
+
             _writer.WriteXmlDocumentationMgmtRequiredParametersException(methodParameters);
             if (isPaging)
                 _writer.WriteXmlDocumentationReturns($"A collection of resource operations that may take multiple service requests to iterate over.");
@@ -103,17 +104,25 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             var responseType = isPaging ? actualItemType.WrapPageable(isAsync) : actualItemType.WrapAsync(isAsync);
             string asyncText = isPaging ? string.Empty : GetAsyncKeyword(isAsync);
-            _writer.Append($"public static {asyncText} {responseType} {CreateMethodName(methodName, isAsync)}(this {ExtensionOperationVariableType} {ExtensionOperationVariableName}");
+            _writer.Append($"public static {asyncText} {responseType} {CreateMethodName(methodName, isAsync)}(this {ExtensionOperationVariableType} {ExtensionOperationVariableName},");
 
             if (isLro)
-                _writer.Append($", bool waitForCompletion");
+                _writer.Append($"bool waitForCompletion,");
+
             foreach (var parameter in methodParameters)
             {
-                _writer.WriteParameter(parameter, isTrailingComma: false);
+                _writer.WriteParameter(parameter);
             }
+
             if (isApiCall)
-                _writer.Append($", {typeof(CancellationToken)} cancellationToken = default");
-            _writer.Line($")");
+            {
+                _writer.Line($"{typeof(CancellationToken)} cancellationToken = default)");
+            }
+            else
+            {
+                _writer.RemoveTrailingComma();
+                _writer.Line($")");
+            }
         }
 
         private CSharpType? GetActualItemType(MgmtClientOperation clientOperation, CSharpType? itemType)
@@ -165,29 +174,21 @@ namespace AutoRest.CSharp.Mgmt.Generation
             string configureAwait = isAsync & !isPaging ? ".ConfigureAwait(false)" : string.Empty;
             string awaitText = isAsync & !isPaging ? " await" : string.Empty;
             _writer.Append($"return{awaitText} GetExtensionClient({ExtensionOperationVariableName}).{methodName}{asyncText}(");
-            bool isFirst = true;
             if (isLro)
-            {
-                _writer.Append($"waitForCompletion");
-                isFirst = false;
-            }
+                _writer.Append($"waitForCompletion,");
+
             foreach (var parameter in methodParameters)
             {
-                if (!isFirst)
-                {
-                    _writer.Append($", ");
-                }
-                _writer.Append($"{parameter.Name}");
-                isFirst = false;
+                _writer.Append($"{parameter.Name},");
             }
+
             if (isApiCall)
             {
-                if (!isFirst)
-                    _writer.Append($", ");
                 _writer.Append($"cancellationToken){configureAwait};");
             }
             else
             {
+                _writer.RemoveTrailingComma();
                 _writer.Line($");");
             }
         }
@@ -254,10 +255,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             string methodName = $"Get{resource.Type.Name}";
             List<Parameter> parameters = new List<Parameter>();
-            WriteMethodSignatureWrapper(resource.Type, methodName, parameters, false, false, false, false);
+            WriteMethodSignatureWrapper(resource.Type, methodName, parameters, isAsync: false, isPaging: false, isLro: false, isApiCall: false);
             using (_writer.Scope())
             {
-                WriteMethodBodyWrapper(methodName, parameters, false, false, false, false);
+                WriteMethodBodyWrapper(methodName, parameters, isAsync: false, isPaging: false, isLro: false, isApiCall: false);
             }
         }
 

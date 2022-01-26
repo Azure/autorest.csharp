@@ -149,5 +149,26 @@ namespace AutoRest.CSharp.Mgmt.Models
         {
             return !(left == right);
         }
+
+        internal bool DoesMatch(ResourceTypeSegment other)
+        {
+            if (this[Count - 1].IsConstant)
+                return this == other;
+
+            return DoAllButLastItemMatch(other); //TODO: limit matching to the enum values
+        }
+
+        private bool DoAllButLastItemMatch(ResourceTypeSegment other)
+        {
+            if (Count != other.Count)
+                return false;
+
+            for (int i = 0; i < Count - 1; i++)
+            {
+                if (this[i] != other[i])
+                    return false;
+            }
+            return true;
+        }
     }
 }
