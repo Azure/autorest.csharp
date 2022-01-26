@@ -7,6 +7,7 @@
 
 using System.Threading;
 using System.Threading.Tasks;
+using Azure;
 using Azure.ResourceManager.Resources;
 using MgmtScopeResource.Models;
 
@@ -51,7 +52,7 @@ namespace MgmtScopeResource
         /// <param name="template"> The template provided to calculate hash. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="System.ArgumentNullException"> <paramref name="template"/> is null. </exception>
-        public static async Task<TemplateHashResult> CalculateTemplateHashDeploymentAsync(this Tenant tenant, object template, CancellationToken cancellationToken = default)
+        public static async Task<Response<TemplateHashResult>> CalculateTemplateHashDeploymentAsync(this Tenant tenant, object template, CancellationToken cancellationToken = default)
         {
             return await GetExtensionClient(tenant).CalculateTemplateHashDeploymentAsync(template, cancellationToken).ConfigureAwait(false);
         }
@@ -63,7 +64,7 @@ namespace MgmtScopeResource
         /// <param name="template"> The template provided to calculate hash. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="System.ArgumentNullException"> <paramref name="template"/> is null. </exception>
-        public static TemplateHashResult CalculateTemplateHashDeployment(this Tenant tenant, object template, CancellationToken cancellationToken = default)
+        public static Response<TemplateHashResult> CalculateTemplateHashDeployment(this Tenant tenant, object template, CancellationToken cancellationToken = default)
         {
             return GetExtensionClient(tenant).CalculateTemplateHashDeployment(template, cancellationToken);
         }
