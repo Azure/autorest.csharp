@@ -81,7 +81,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="parameters"> Properties for dns resource reference request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public static async Task<DnsResourceReferenceResult> GetByTargetResourcesDnsResourceReferenceAsync(this Subscription subscription, DnsResourceReferenceRequest parameters, CancellationToken cancellationToken = default)
+        public static async Task<Response<DnsResourceReferenceResult>> GetByTargetResourcesDnsResourceReferenceAsync(this Subscription subscription, DnsResourceReferenceRequest parameters, CancellationToken cancellationToken = default)
         {
             return await GetExtensionClient(subscription).GetByTargetResourcesDnsResourceReferenceAsync(parameters, cancellationToken).ConfigureAwait(false);
         }
@@ -93,7 +93,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="parameters"> Properties for dns resource reference request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public static DnsResourceReferenceResult GetByTargetResourcesDnsResourceReference(this Subscription subscription, DnsResourceReferenceRequest parameters, CancellationToken cancellationToken = default)
+        public static Response<DnsResourceReferenceResult> GetByTargetResourcesDnsResourceReference(this Subscription subscription, DnsResourceReferenceRequest parameters, CancellationToken cancellationToken = default)
         {
             return GetExtensionClient(subscription).GetByTargetResourcesDnsResourceReference(parameters, cancellationToken);
         }
