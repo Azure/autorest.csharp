@@ -15,7 +15,6 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
-using ExactMatchFlattenInheritance.Models;
 
 namespace ExactMatchFlattenInheritance
 {
@@ -29,8 +28,8 @@ namespace ExactMatchFlattenInheritance
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly CustomModel3SRestOperations _customModel3sRestClient;
+        private readonly ClientDiagnostics _customModel3ClientDiagnostics;
+        private readonly CustomModel3SRestOperations _customModel3RestClient;
         private readonly CustomModel3Data _data;
 
         /// <summary> Initializes a new instance of the <see cref="CustomModel3"/> class for mocking. </summary>
@@ -52,9 +51,9 @@ namespace ExactMatchFlattenInheritance
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal CustomModel3(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
         {
-            _clientDiagnostics = new ClientDiagnostics("ExactMatchFlattenInheritance", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string apiVersion);
-            _customModel3sRestClient = new CustomModel3SRestOperations(_clientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, apiVersion);
+            _customModel3ClientDiagnostics = new ClientDiagnostics("ExactMatchFlattenInheritance", ResourceType.Namespace, DiagnosticOptions);
+            ArmClient.TryGetApiVersion(ResourceType, out string customModel3ApiVersion);
+            _customModel3RestClient = new CustomModel3SRestOperations(_customModel3ClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, customModel3ApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -91,13 +90,13 @@ namespace ExactMatchFlattenInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<CustomModel3>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("CustomModel3.Get");
+            using var scope = _customModel3ClientDiagnostics.CreateScope("CustomModel3.Get");
             scope.Start();
             try
             {
-                var response = await _customModel3sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _customModel3RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                    throw await _customModel3ClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new CustomModel3(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -114,13 +113,13 @@ namespace ExactMatchFlattenInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<CustomModel3> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("CustomModel3.Get");
+            using var scope = _customModel3ClientDiagnostics.CreateScope("CustomModel3.Get");
             scope.Start();
             try
             {
-                var response = _customModel3sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _customModel3RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
-                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                    throw _customModel3ClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new CustomModel3(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -135,7 +134,7 @@ namespace ExactMatchFlattenInheritance
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
         public async virtual Task<IEnumerable<AzureLocation>> GetAvailableLocationsAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("CustomModel3.GetAvailableLocations");
+            using var scope = _customModel3ClientDiagnostics.CreateScope("CustomModel3.GetAvailableLocations");
             scope.Start();
             try
             {
@@ -153,7 +152,7 @@ namespace ExactMatchFlattenInheritance
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
         public virtual IEnumerable<AzureLocation> GetAvailableLocations(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("CustomModel3.GetAvailableLocations");
+            using var scope = _customModel3ClientDiagnostics.CreateScope("CustomModel3.GetAvailableLocations");
             scope.Start();
             try
             {

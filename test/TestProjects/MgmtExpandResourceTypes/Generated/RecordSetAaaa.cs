@@ -30,7 +30,7 @@ namespace MgmtExpandResourceTypes
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly ClientDiagnostics _recordSetsClientDiagnostics;
         private readonly RecordSetsRestOperations _recordSetsRestClient;
         private readonly RecordSetData _data;
 
@@ -53,9 +53,8 @@ namespace MgmtExpandResourceTypes
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal RecordSetAaaa(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
         {
-            _clientDiagnostics = new ClientDiagnostics("MgmtExpandResourceTypes", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string apiVersion);
-            _recordSetsRestClient = new RecordSetsRestOperations(_clientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, apiVersion);
+            _recordSetsClientDiagnostics = new ClientDiagnostics("MgmtExpandResourceTypes", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
+            _recordSetsRestClient = new RecordSetsRestOperations(_recordSetsClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -92,13 +91,13 @@ namespace MgmtExpandResourceTypes
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<RecordSetAaaa>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("RecordSetAaaa.Get");
+            using var scope = _recordSetsClientDiagnostics.CreateScope("RecordSetAaaa.Get");
             scope.Start();
             try
             {
                 var response = await _recordSetsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.ResourceType.GetLastType().ToRecordType(), Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                    throw await _recordSetsClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new RecordSetAaaa(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -115,13 +114,13 @@ namespace MgmtExpandResourceTypes
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<RecordSetAaaa> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("RecordSetAaaa.Get");
+            using var scope = _recordSetsClientDiagnostics.CreateScope("RecordSetAaaa.Get");
             scope.Start();
             try
             {
                 var response = _recordSetsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.ResourceType.GetLastType().ToRecordType(), Id.Name, cancellationToken);
                 if (response.Value == null)
-                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                    throw _recordSetsClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new RecordSetAaaa(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -136,7 +135,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
         public async virtual Task<IEnumerable<AzureLocation>> GetAvailableLocationsAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("RecordSetAaaa.GetAvailableLocations");
+            using var scope = _recordSetsClientDiagnostics.CreateScope("RecordSetAaaa.GetAvailableLocations");
             scope.Start();
             try
             {
@@ -154,7 +153,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
         public virtual IEnumerable<AzureLocation> GetAvailableLocations(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("RecordSetAaaa.GetAvailableLocations");
+            using var scope = _recordSetsClientDiagnostics.CreateScope("RecordSetAaaa.GetAvailableLocations");
             scope.Start();
             try
             {
@@ -176,7 +175,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<RecordSetAaaaDeleteOperation> DeleteAsync(bool waitForCompletion, string ifMatch = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("RecordSetAaaa.Delete");
+            using var scope = _recordSetsClientDiagnostics.CreateScope("RecordSetAaaa.Delete");
             scope.Start();
             try
             {
@@ -202,7 +201,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual RecordSetAaaaDeleteOperation Delete(bool waitForCompletion, string ifMatch = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("RecordSetAaaa.Delete");
+            using var scope = _recordSetsClientDiagnostics.CreateScope("RecordSetAaaa.Delete");
             scope.Start();
             try
             {
@@ -234,7 +233,7 @@ namespace MgmtExpandResourceTypes
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("RecordSetAaaa.Update");
+            using var scope = _recordSetsClientDiagnostics.CreateScope("RecordSetAaaa.Update");
             scope.Start();
             try
             {
@@ -263,7 +262,7 @@ namespace MgmtExpandResourceTypes
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("RecordSetAaaa.Update");
+            using var scope = _recordSetsClientDiagnostics.CreateScope("RecordSetAaaa.Update");
             scope.Start();
             try
             {

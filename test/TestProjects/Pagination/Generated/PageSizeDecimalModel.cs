@@ -15,7 +15,6 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
-using Pagination.Models;
 
 namespace Pagination
 {
@@ -29,8 +28,8 @@ namespace Pagination
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly PageSizeDecimalModelsRestOperations _pageSizeDecimalModelsRestClient;
+        private readonly ClientDiagnostics _pageSizeDecimalModelClientDiagnostics;
+        private readonly PageSizeDecimalModelsRestOperations _pageSizeDecimalModelRestClient;
         private readonly PageSizeDecimalModelData _data;
 
         /// <summary> Initializes a new instance of the <see cref="PageSizeDecimalModel"/> class for mocking. </summary>
@@ -52,9 +51,9 @@ namespace Pagination
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal PageSizeDecimalModel(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
         {
-            _clientDiagnostics = new ClientDiagnostics("Pagination", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string apiVersion);
-            _pageSizeDecimalModelsRestClient = new PageSizeDecimalModelsRestOperations(_clientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, apiVersion);
+            _pageSizeDecimalModelClientDiagnostics = new ClientDiagnostics("Pagination", ResourceType.Namespace, DiagnosticOptions);
+            ArmClient.TryGetApiVersion(ResourceType, out string pageSizeDecimalModelApiVersion);
+            _pageSizeDecimalModelRestClient = new PageSizeDecimalModelsRestOperations(_pageSizeDecimalModelClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, pageSizeDecimalModelApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -87,13 +86,13 @@ namespace Pagination
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<PageSizeDecimalModel>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PageSizeDecimalModel.Get");
+            using var scope = _pageSizeDecimalModelClientDiagnostics.CreateScope("PageSizeDecimalModel.Get");
             scope.Start();
             try
             {
-                var response = await _pageSizeDecimalModelsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _pageSizeDecimalModelRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                    throw await _pageSizeDecimalModelClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new PageSizeDecimalModel(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -106,13 +105,13 @@ namespace Pagination
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<PageSizeDecimalModel> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PageSizeDecimalModel.Get");
+            using var scope = _pageSizeDecimalModelClientDiagnostics.CreateScope("PageSizeDecimalModel.Get");
             scope.Start();
             try
             {
-                var response = _pageSizeDecimalModelsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _pageSizeDecimalModelRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
-                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                    throw _pageSizeDecimalModelClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new PageSizeDecimalModel(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -127,7 +126,7 @@ namespace Pagination
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
         public async virtual Task<IEnumerable<AzureLocation>> GetAvailableLocationsAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PageSizeDecimalModel.GetAvailableLocations");
+            using var scope = _pageSizeDecimalModelClientDiagnostics.CreateScope("PageSizeDecimalModel.GetAvailableLocations");
             scope.Start();
             try
             {
@@ -145,7 +144,7 @@ namespace Pagination
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
         public virtual IEnumerable<AzureLocation> GetAvailableLocations(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PageSizeDecimalModel.GetAvailableLocations");
+            using var scope = _pageSizeDecimalModelClientDiagnostics.CreateScope("PageSizeDecimalModel.GetAvailableLocations");
             scope.Start();
             try
             {

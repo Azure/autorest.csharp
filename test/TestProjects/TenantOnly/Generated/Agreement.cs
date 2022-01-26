@@ -15,7 +15,6 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
-using TenantOnly.Models;
 
 namespace TenantOnly
 {
@@ -29,8 +28,8 @@ namespace TenantOnly
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly AgreementsRestOperations _agreementsRestClient;
+        private readonly ClientDiagnostics _agreementClientDiagnostics;
+        private readonly AgreementsRestOperations _agreementRestClient;
         private readonly AgreementData _data;
 
         /// <summary> Initializes a new instance of the <see cref="Agreement"/> class for mocking. </summary>
@@ -52,9 +51,9 @@ namespace TenantOnly
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal Agreement(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
         {
-            _clientDiagnostics = new ClientDiagnostics("TenantOnly", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string apiVersion);
-            _agreementsRestClient = new AgreementsRestOperations(_clientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, apiVersion);
+            _agreementClientDiagnostics = new ClientDiagnostics("TenantOnly", ResourceType.Namespace, DiagnosticOptions);
+            ArmClient.TryGetApiVersion(ResourceType, out string agreementApiVersion);
+            _agreementRestClient = new AgreementsRestOperations(_agreementClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, agreementApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -92,13 +91,13 @@ namespace TenantOnly
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<Agreement>> GetAsync(string expand = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("Agreement.Get");
+            using var scope = _agreementClientDiagnostics.CreateScope("Agreement.Get");
             scope.Start();
             try
             {
-                var response = await _agreementsRestClient.GetAsync(Id.Parent.Name, Id.Name, expand, cancellationToken).ConfigureAwait(false);
+                var response = await _agreementRestClient.GetAsync(Id.Parent.Name, Id.Name, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                    throw await _agreementClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new Agreement(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -116,13 +115,13 @@ namespace TenantOnly
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<Agreement> Get(string expand = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("Agreement.Get");
+            using var scope = _agreementClientDiagnostics.CreateScope("Agreement.Get");
             scope.Start();
             try
             {
-                var response = _agreementsRestClient.Get(Id.Parent.Name, Id.Name, expand, cancellationToken);
+                var response = _agreementRestClient.Get(Id.Parent.Name, Id.Name, expand, cancellationToken);
                 if (response.Value == null)
-                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                    throw _agreementClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new Agreement(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -137,7 +136,7 @@ namespace TenantOnly
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
         public async virtual Task<IEnumerable<AzureLocation>> GetAvailableLocationsAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("Agreement.GetAvailableLocations");
+            using var scope = _agreementClientDiagnostics.CreateScope("Agreement.GetAvailableLocations");
             scope.Start();
             try
             {
@@ -155,7 +154,7 @@ namespace TenantOnly
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
         public virtual IEnumerable<AzureLocation> GetAvailableLocations(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("Agreement.GetAvailableLocations");
+            using var scope = _agreementClientDiagnostics.CreateScope("Agreement.GetAvailableLocations");
             scope.Start();
             try
             {

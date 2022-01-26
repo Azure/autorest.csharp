@@ -18,8 +18,7 @@ namespace AutoRest.CSharp.Mgmt.Output
     {
         private BuildContext<MgmtOutputLibrary> _context;
         private MgmtRestClientBuilder _builder;
-        private Resource? _resource;
-        private bool _evaluatedResource = false;
+        private IReadOnlyList<Resource>? _resources;
 
         public MgmtRestClient(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context)
             : base(operationGroup, context, operationGroup.Language.Default.Name, new MgmtRestClientBuilder(operationGroup, context))
@@ -42,27 +41,20 @@ namespace AutoRest.CSharp.Mgmt.Output
             return f;
         }
 
-        public Resource? Resource => _resource ??= GetResource();
+        public IReadOnlyList<Resource> Resources => _resources ??= GetResources();
 
-        private Resource? GetResource()
+        private IReadOnlyList<Resource> GetResources()
         {
-            if (_evaluatedResource)
-                return _resource;
-
-            Dictionary<string, Resource> candidates = new Dictionary<string, Resource>();
-            _evaluatedResource = true;
+            HashSet<Resource> candidates = new HashSet<Resource>();
             foreach (var operation in OperationGroup.Operations)
             {
-                var resource = MgmtExtensions.GetResourceFromResourceType(operation, _context);
+                var resource = operation.GetResourceFromResourceType(_context);
                 if (resource is not null)
                 {
-                    candidates.TryAdd(resource.ResourceName, resource);
+                    candidates.Add(resource);
                 }
             }
-            if (candidates.Count == 1)
-                return candidates.Values.First();
-
-            return null;
+            return candidates.ToList();
         }
     }
 }

@@ -15,7 +15,6 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
-using MgmtCollectionParent.Models;
 
 namespace MgmtCollectionParent
 {
@@ -29,8 +28,8 @@ namespace MgmtCollectionParent
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly ComputeManagementRestOperations _restClient;
+        private readonly ClientDiagnostics _orderResourceClientDiagnostics;
+        private readonly ComputeManagementRestOperations _orderResourceRestClient;
         private readonly OrderResourceData _data;
 
         /// <summary> Initializes a new instance of the <see cref="OrderResource"/> class for mocking. </summary>
@@ -52,9 +51,9 @@ namespace MgmtCollectionParent
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal OrderResource(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
         {
-            _clientDiagnostics = new ClientDiagnostics("MgmtCollectionParent", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string apiVersion);
-            _restClient = new ComputeManagementRestOperations(_clientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, apiVersion);
+            _orderResourceClientDiagnostics = new ClientDiagnostics("MgmtCollectionParent", ResourceType.Namespace, DiagnosticOptions);
+            ArmClient.TryGetApiVersion(ResourceType, out string orderResourceApiVersion);
+            _orderResourceRestClient = new ComputeManagementRestOperations(_orderResourceClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, orderResourceApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -91,13 +90,13 @@ namespace MgmtCollectionParent
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<OrderResource>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("OrderResource.Get");
+            using var scope = _orderResourceClientDiagnostics.CreateScope("OrderResource.Get");
             scope.Start();
             try
             {
-                var response = await _restClient.GetOrderByNameAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _orderResourceRestClient.GetOrderByNameAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                    throw await _orderResourceClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new OrderResource(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -114,13 +113,13 @@ namespace MgmtCollectionParent
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<OrderResource> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("OrderResource.Get");
+            using var scope = _orderResourceClientDiagnostics.CreateScope("OrderResource.Get");
             scope.Start();
             try
             {
-                var response = _restClient.GetOrderByName(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
+                var response = _orderResourceRestClient.GetOrderByName(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
                 if (response.Value == null)
-                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                    throw _orderResourceClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new OrderResource(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -135,7 +134,7 @@ namespace MgmtCollectionParent
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
         public async virtual Task<IEnumerable<AzureLocation>> GetAvailableLocationsAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("OrderResource.GetAvailableLocations");
+            using var scope = _orderResourceClientDiagnostics.CreateScope("OrderResource.GetAvailableLocations");
             scope.Start();
             try
             {
@@ -153,7 +152,7 @@ namespace MgmtCollectionParent
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
         public virtual IEnumerable<AzureLocation> GetAvailableLocations(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("OrderResource.GetAvailableLocations");
+            using var scope = _orderResourceClientDiagnostics.CreateScope("OrderResource.GetAvailableLocations");
             scope.Start();
             try
             {

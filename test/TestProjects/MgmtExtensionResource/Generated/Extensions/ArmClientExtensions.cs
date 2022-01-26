@@ -13,6 +13,18 @@ namespace MgmtExtensionResource
     /// <summary> A class to add extension methods to ArmClient. </summary>
     public static partial class ArmClientExtensions
     {
+        #region SubSingleton
+        /// <summary> Gets an object representing a SubSingleton along with the instance operations that can be performed on it but with no data. </summary>
+        /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="SubSingleton" /> object. </returns>
+        public static SubSingleton GetSubSingleton(this ArmClient armClient, ResourceIdentifier id)
+        {
+            SubSingleton.ValidateResourceId(id);
+            return new SubSingleton(armClient, id);
+        }
+        #endregion
+
         #region SubscriptionPolicyDefinition
         /// <summary> Gets an object representing a SubscriptionPolicyDefinition along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>

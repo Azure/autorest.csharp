@@ -31,12 +31,16 @@ namespace AutoRest.CSharp.Mgmt.Models
             Escape = escape;
         }
 
-        public Segment(string value, bool escape = true, bool strict = false)
+        /// <summary>
+        /// Creates a new instance of <see cref="Segment"/>.
+        /// </summary>
+        /// <param name="value"> The string value for the segment. </param>
+        /// <param name="escape"> Wether or not this segment is escaped. </param>
+        /// <param name="strict"> Wether or not to use strict validate for this segment. </param>
+        /// <param name="isConstant"> Whether this segment is a constant vs a reference. </param>
+        public Segment(string value, bool escape = true, bool strict = false, bool isConstant = true)
+             : this(isConstant ? new Constant(value, typeof(string)) : new Reference(value, typeof(string)), escape, strict)
         {
-            _stringValue = value;
-            _value = new Constant(value, typeof(string));
-            IsStrict = strict;
-            Escape = escape;
         }
 
         /// <summary>
@@ -88,7 +92,7 @@ namespace AutoRest.CSharp.Mgmt.Models
         /// <exception cref="InvalidOperationException">if this.IsReference is false</exception>
         public string ReferenceName => _value.Reference.Name;
 
-        private bool Equals(Segment other, bool strict)
+        internal bool Equals(Segment other, bool strict)
         {
             if (strict)
                 return ExactEquals(this, other);
@@ -103,7 +107,7 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         private static bool ExactEquals(Segment left, Segment right)
         {
-            return left._stringValue.Equals(right._stringValue, StringComparison.InvariantCultureIgnoreCase);
+            return left._stringValue.Equals(right._stringValue, StringComparison.OrdinalIgnoreCase);
         }
 
         /// <summary>

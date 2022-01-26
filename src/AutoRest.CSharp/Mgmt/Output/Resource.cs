@@ -81,6 +81,23 @@ namespace AutoRest.CSharp.Mgmt.Output
             return result;
         }
 
+        public bool IsInOperationMap(Operation operation)
+        {
+            foreach (var opSet in _allOperationMap.Keys)
+            {
+                if (opSet.Contains(operation))
+                    return true;
+            }
+
+            foreach (var opSet in _allOperationMap.Values)
+            {
+                if (opSet.Contains(operation))
+                    return true;
+            }
+
+            return false;
+        }
+
         protected bool IsById { get; }
 
         protected MgmtClientOperation? GetOperationWithVerb(HttpMethod method, string operationName)
@@ -91,15 +108,17 @@ namespace AutoRest.CSharp.Mgmt.Output
                 var operation = operationSet.GetOperation(method);
                 if (operation is not null)
                 {
+                    var restClient = _context.Library.GetRestClient(operation);
                     var requestPath = operation.GetRequestPath(_context);
+                    var contextualPath = GetContextualPath(operationSet, requestPath);
                     var restOperation = new MgmtRestOperation(
                         _context.Library.GetRestClientMethod(operation),
-                        _context.Library.GetRestClient(operation),
+                        restClient,
                         requestPath,
-                        GetContextualPath(operationSet, requestPath),
+                        contextualPath,
                         operationName,
-                        this,
-                        operation.GetReturnTypeAsLongRunningOperation(this, operationName, _context));
+                        operation.GetReturnTypeAsLongRunningOperation(this, operationName, _context),
+                        _context);
                     result.Add(restOperation);
                 }
             }
@@ -198,7 +217,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         public ResourceData ResourceData { get; }
 
         public MgmtClientOperation? CreateOperation => GetOperationWithVerb(HttpMethod.Put, "CreateOrUpdate");
-        public MgmtClientOperation? GetOperation => GetOperationWithVerb(HttpMethod.Get, "Get");
+        public MgmtClientOperation GetOperation => GetOperationWithVerb(HttpMethod.Get, "Get")!;
         public MgmtClientOperation? DeleteOperation => GetOperationWithVerb(HttpMethod.Delete, "Delete");
         public MgmtClientOperation? UpdateOperation => GetOperationWithVerb(HttpMethod.Patch, "Update");
 
@@ -270,14 +289,15 @@ namespace AutoRest.CSharp.Mgmt.Output
                         "GetAll" :// hard-code the name of a resource collection operation to "GetAll"
                         GetOperationName(operation, resourceRestClient.OperationGroup.Key);
                     // get the MgmtRestOperation with a proper name
+                    var restClient = _context.Library.GetRestClient(operation);
                     var restOperation = new MgmtRestOperation(
                         _context.Library.GetRestClientMethod(operation),
-                        _context.Library.GetRestClient(operation),
+                        restClient,
                         requestPath,
                         contextualPath,
                         methodName,
-                        this,
-                        operation.GetReturnTypeAsLongRunningOperation(this, methodName, _context));
+                        operation.GetReturnTypeAsLongRunningOperation(this, methodName, _context),
+                        _context);
 
                     if (result.TryGetValue(key, out var list))
                     {
@@ -332,6 +352,12 @@ namespace AutoRest.CSharp.Mgmt.Output
 
             return resourceRestClients.Concat(childRestClients).Distinct();
         }
+
+        private MgmtRestClient? _myRestClient;
+        public MgmtRestClient MyRestClient => _myRestClient ??= RestClients.FirstOrDefault(client => client.Resources.Any(resource => resource.ResourceName == ResourceName)) ?? RestClients.First();
+
+        private IEnumerable<MgmtRestClient>? _otherRestClients;
+        public IEnumerable<MgmtRestClient> OtherRestClients => _otherRestClients ??= RestClients.Where(client => client != MyRestClient);
 
         public ResourceTypeSegment ResourceType { get; }
 

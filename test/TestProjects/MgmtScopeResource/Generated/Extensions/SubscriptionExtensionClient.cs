@@ -21,10 +21,8 @@ namespace MgmtScopeResource
     /// <summary> An internal class to add extension methods to. </summary>
     internal partial class SubscriptionExtensionClient : ArmResource
     {
-        private ClientDiagnostics _resourceLinksClientDiagnostics;
-        private ResourceLinksRestOperations _resourceLinksRestClient;
-
-        private static string _defaultRpNamespace = ClientDiagnostics.GetResourceProviderNamespace(typeof(SubscriptionExtensionClient).Assembly);
+        private ClientDiagnostics _resourceLinkClientDiagnostics;
+        private ResourceLinksRestOperations _resourceLinkRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="SubscriptionExtensionClient"/> class. </summary>
         /// <param name="armClient"> The client parameters to use in these operations. </param>
@@ -33,8 +31,8 @@ namespace MgmtScopeResource
         {
         }
 
-        private ClientDiagnostics ResourceLinksClientDiagnostics => _resourceLinksClientDiagnostics ??= new ClientDiagnostics("MgmtScopeResource", ResourceLink.ResourceType.Namespace, DiagnosticOptions);
-        private ResourceLinksRestOperations ResourceLinksRestClient => _resourceLinksRestClient ??= new ResourceLinksRestOperations(ResourceLinksClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(ResourceLink.ResourceType));
+        private ClientDiagnostics ResourceLinkClientDiagnostics => _resourceLinkClientDiagnostics ??= new ClientDiagnostics("MgmtScopeResource", ResourceLink.ResourceType.Namespace, DiagnosticOptions);
+        private ResourceLinksRestOperations ResourceLinkRestClient => _resourceLinkRestClient ??= new ResourceLinksRestOperations(ResourceLinkClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(ResourceLink.ResourceType));
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {
@@ -53,11 +51,11 @@ namespace MgmtScopeResource
         {
             async Task<Page<ResourceLink>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = ResourceLinksClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetResourceLinks");
+                using var scope = ResourceLinkClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetResourceLinks");
                 scope.Start();
                 try
                 {
-                    var response = await ResourceLinksRestClient.ListAtSubscriptionAsync(Id.SubscriptionId, filter, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await ResourceLinkRestClient.ListAtSubscriptionAsync(Id.SubscriptionId, filter, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new ResourceLink(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -68,11 +66,11 @@ namespace MgmtScopeResource
             }
             async Task<Page<ResourceLink>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = ResourceLinksClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetResourceLinks");
+                using var scope = ResourceLinkClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetResourceLinks");
                 scope.Start();
                 try
                 {
-                    var response = await ResourceLinksRestClient.ListAtSubscriptionNextPageAsync(nextLink, Id.SubscriptionId, filter, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await ResourceLinkRestClient.ListAtSubscriptionNextPageAsync(nextLink, Id.SubscriptionId, filter, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new ResourceLink(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -95,11 +93,11 @@ namespace MgmtScopeResource
         {
             Page<ResourceLink> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = ResourceLinksClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetResourceLinks");
+                using var scope = ResourceLinkClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetResourceLinks");
                 scope.Start();
                 try
                 {
-                    var response = ResourceLinksRestClient.ListAtSubscription(Id.SubscriptionId, filter, cancellationToken: cancellationToken);
+                    var response = ResourceLinkRestClient.ListAtSubscription(Id.SubscriptionId, filter, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new ResourceLink(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -110,11 +108,11 @@ namespace MgmtScopeResource
             }
             Page<ResourceLink> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = ResourceLinksClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetResourceLinks");
+                using var scope = ResourceLinkClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetResourceLinks");
                 scope.Start();
                 try
                 {
-                    var response = ResourceLinksRestClient.ListAtSubscriptionNextPage(nextLink, Id.SubscriptionId, filter, cancellationToken: cancellationToken);
+                    var response = ResourceLinkRestClient.ListAtSubscriptionNextPage(nextLink, Id.SubscriptionId, filter, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new ResourceLink(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)

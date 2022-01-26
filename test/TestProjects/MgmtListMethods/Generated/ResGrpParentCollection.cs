@@ -25,8 +25,8 @@ namespace MgmtListMethods
     /// <summary> A class representing collection of ResGrpParent and their operations over its parent. </summary>
     public partial class ResGrpParentCollection : ArmCollection, IEnumerable<ResGrpParent>, IAsyncEnumerable<ResGrpParent>
     {
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly ResGrpParentsRestOperations _resGrpParentsRestClient;
+        private readonly ClientDiagnostics _resGrpParentClientDiagnostics;
+        private readonly ResGrpParentsRestOperations _resGrpParentRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="ResGrpParentCollection"/> class for mocking. </summary>
         protected ResGrpParentCollection()
@@ -37,9 +37,9 @@ namespace MgmtListMethods
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal ResGrpParentCollection(ArmResource parent) : base(parent)
         {
-            _clientDiagnostics = new ClientDiagnostics("MgmtListMethods", ResGrpParent.ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResGrpParent.ResourceType, out string apiVersion);
-            _resGrpParentsRestClient = new ResGrpParentsRestOperations(_clientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, apiVersion);
+            _resGrpParentClientDiagnostics = new ClientDiagnostics("MgmtListMethods", ResGrpParent.ResourceType.Namespace, DiagnosticOptions);
+            ArmClient.TryGetApiVersion(ResGrpParent.ResourceType, out string resGrpParentApiVersion);
+            _resGrpParentRestClient = new ResGrpParentsRestOperations(_resGrpParentClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, resGrpParentApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -71,11 +71,11 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ResGrpParentCollection.CreateOrUpdate");
+            using var scope = _resGrpParentClientDiagnostics.CreateScope("ResGrpParentCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _resGrpParentsRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentName, parameters, cancellationToken);
+                var response = _resGrpParentRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentName, parameters, cancellationToken);
                 var operation = new ResGrpParentCreateOrUpdateOperation(ArmClient, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
@@ -106,11 +106,11 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ResGrpParentCollection.CreateOrUpdate");
+            using var scope = _resGrpParentClientDiagnostics.CreateScope("ResGrpParentCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _resGrpParentsRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentName, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _resGrpParentRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentName, parameters, cancellationToken).ConfigureAwait(false);
                 var operation = new ResGrpParentCreateOrUpdateOperation(ArmClient, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -135,13 +135,13 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrEmpty(resGrpParentName, nameof(resGrpParentName));
 
-            using var scope = _clientDiagnostics.CreateScope("ResGrpParentCollection.Get");
+            using var scope = _resGrpParentClientDiagnostics.CreateScope("ResGrpParentCollection.Get");
             scope.Start();
             try
             {
-                var response = _resGrpParentsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentName, cancellationToken);
+                var response = _resGrpParentRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentName, cancellationToken);
                 if (response.Value == null)
-                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                    throw _resGrpParentClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new ResGrpParent(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -163,13 +163,13 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrEmpty(resGrpParentName, nameof(resGrpParentName));
 
-            using var scope = _clientDiagnostics.CreateScope("ResGrpParentCollection.Get");
+            using var scope = _resGrpParentClientDiagnostics.CreateScope("ResGrpParentCollection.Get");
             scope.Start();
             try
             {
-                var response = await _resGrpParentsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentName, cancellationToken).ConfigureAwait(false);
+                var response = await _resGrpParentRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                    throw await _resGrpParentClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new ResGrpParent(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -188,11 +188,11 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrEmpty(resGrpParentName, nameof(resGrpParentName));
 
-            using var scope = _clientDiagnostics.CreateScope("ResGrpParentCollection.GetIfExists");
+            using var scope = _resGrpParentClientDiagnostics.CreateScope("ResGrpParentCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _resGrpParentsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentName, cancellationToken: cancellationToken);
+                var response = _resGrpParentRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<ResGrpParent>(null, response.GetRawResponse());
                 return Response.FromValue(new ResGrpParent(ArmClient, response.Value), response.GetRawResponse());
@@ -213,11 +213,11 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrEmpty(resGrpParentName, nameof(resGrpParentName));
 
-            using var scope = _clientDiagnostics.CreateScope("ResGrpParentCollection.GetIfExists");
+            using var scope = _resGrpParentClientDiagnostics.CreateScope("ResGrpParentCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _resGrpParentsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _resGrpParentRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<ResGrpParent>(null, response.GetRawResponse());
                 return Response.FromValue(new ResGrpParent(ArmClient, response.Value), response.GetRawResponse());
@@ -238,7 +238,7 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrEmpty(resGrpParentName, nameof(resGrpParentName));
 
-            using var scope = _clientDiagnostics.CreateScope("ResGrpParentCollection.Exists");
+            using var scope = _resGrpParentClientDiagnostics.CreateScope("ResGrpParentCollection.Exists");
             scope.Start();
             try
             {
@@ -261,7 +261,7 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrEmpty(resGrpParentName, nameof(resGrpParentName));
 
-            using var scope = _clientDiagnostics.CreateScope("ResGrpParentCollection.Exists");
+            using var scope = _resGrpParentClientDiagnostics.CreateScope("ResGrpParentCollection.Exists");
             scope.Start();
             try
             {
@@ -285,11 +285,11 @@ namespace MgmtListMethods
         {
             Page<ResGrpParent> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("ResGrpParentCollection.GetAll");
+                using var scope = _resGrpParentClientDiagnostics.CreateScope("ResGrpParentCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _resGrpParentsRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
+                    var response = _resGrpParentRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new ResGrpParent(ArmClient, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -311,11 +311,11 @@ namespace MgmtListMethods
         {
             async Task<Page<ResGrpParent>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("ResGrpParentCollection.GetAll");
+                using var scope = _resGrpParentClientDiagnostics.CreateScope("ResGrpParentCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _resGrpParentsRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _resGrpParentRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new ResGrpParent(ArmClient, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -335,7 +335,7 @@ namespace MgmtListMethods
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<GenericResource> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ResGrpParentCollection.GetAllAsGenericResources");
+            using var scope = _resGrpParentClientDiagnostics.CreateScope("ResGrpParentCollection.GetAllAsGenericResources");
             scope.Start();
             try
             {
@@ -358,7 +358,7 @@ namespace MgmtListMethods
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<GenericResource> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ResGrpParentCollection.GetAllAsGenericResources");
+            using var scope = _resGrpParentClientDiagnostics.CreateScope("ResGrpParentCollection.GetAllAsGenericResources");
             scope.Start();
             try
             {

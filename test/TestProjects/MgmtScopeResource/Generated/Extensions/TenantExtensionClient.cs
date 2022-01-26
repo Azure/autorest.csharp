@@ -20,10 +20,8 @@ namespace MgmtScopeResource
     /// <summary> An internal class to add extension methods to. </summary>
     internal partial class TenantExtensionClient : ArmResource
     {
-        private ClientDiagnostics _deploymentsClientDiagnostics;
-        private DeploymentsRestOperations _deploymentsRestClient;
-
-        private static string _defaultRpNamespace = ClientDiagnostics.GetResourceProviderNamespace(typeof(TenantExtensionClient).Assembly);
+        private ClientDiagnostics _deploymentExtendedDeploymentsClientDiagnostics;
+        private DeploymentsRestOperations _deploymentExtendedDeploymentsRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="TenantExtensionClient"/> class. </summary>
         /// <param name="armClient"> The client parameters to use in these operations. </param>
@@ -32,8 +30,8 @@ namespace MgmtScopeResource
         {
         }
 
-        private ClientDiagnostics DeploymentsClientDiagnostics => _deploymentsClientDiagnostics ??= new ClientDiagnostics("MgmtScopeResource", DeploymentExtended.ResourceType.Namespace, DiagnosticOptions);
-        private DeploymentsRestOperations DeploymentsRestClient => _deploymentsRestClient ??= new DeploymentsRestOperations(DeploymentsClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(DeploymentExtended.ResourceType));
+        private ClientDiagnostics DeploymentExtendedDeploymentsClientDiagnostics => _deploymentExtendedDeploymentsClientDiagnostics ??= new ClientDiagnostics("MgmtScopeResource", DeploymentExtended.ResourceType.Namespace, DiagnosticOptions);
+        private DeploymentsRestOperations DeploymentExtendedDeploymentsRestClient => _deploymentExtendedDeploymentsRestClient ??= new DeploymentsRestOperations(DeploymentExtendedDeploymentsClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(DeploymentExtended.ResourceType));
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {
@@ -55,11 +53,11 @@ namespace MgmtScopeResource
                 throw new ArgumentNullException(nameof(template));
             }
 
-            using var scope = DeploymentsClientDiagnostics.CreateScope("TenantExtensionClient.CalculateTemplateHashDeployment");
+            using var scope = DeploymentExtendedDeploymentsClientDiagnostics.CreateScope("TenantExtensionClient.CalculateTemplateHashDeployment");
             scope.Start();
             try
             {
-                var response = await DeploymentsRestClient.CalculateTemplateHashAsync(template, cancellationToken).ConfigureAwait(false);
+                var response = await DeploymentExtendedDeploymentsRestClient.CalculateTemplateHashAsync(template, cancellationToken).ConfigureAwait(false);
                 return response;
             }
             catch (Exception e)
@@ -83,11 +81,11 @@ namespace MgmtScopeResource
                 throw new ArgumentNullException(nameof(template));
             }
 
-            using var scope = DeploymentsClientDiagnostics.CreateScope("TenantExtensionClient.CalculateTemplateHashDeployment");
+            using var scope = DeploymentExtendedDeploymentsClientDiagnostics.CreateScope("TenantExtensionClient.CalculateTemplateHashDeployment");
             scope.Start();
             try
             {
-                var response = DeploymentsRestClient.CalculateTemplateHash(template, cancellationToken);
+                var response = DeploymentExtendedDeploymentsRestClient.CalculateTemplateHash(template, cancellationToken);
                 return response;
             }
             catch (Exception e)

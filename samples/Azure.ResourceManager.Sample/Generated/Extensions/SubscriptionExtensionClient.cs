@@ -22,30 +22,28 @@ namespace Azure.ResourceManager.Sample
     /// <summary> An internal class to add extension methods to. </summary>
     internal partial class SubscriptionExtensionClient : ArmResource
     {
-        private ClientDiagnostics _availabilitySetsClientDiagnostics;
-        private AvailabilitySetsRestOperations _availabilitySetsRestClient;
-        private ClientDiagnostics _proximityPlacementGroupsClientDiagnostics;
-        private ProximityPlacementGroupsRestOperations _proximityPlacementGroupsRestClient;
-        private ClientDiagnostics _dedicatedHostGroupsClientDiagnostics;
-        private DedicatedHostGroupsRestOperations _dedicatedHostGroupsRestClient;
-        private ClientDiagnostics _sshPublicKeysClientDiagnostics;
-        private SshPublicKeysRestOperations _sshPublicKeysRestClient;
+        private ClientDiagnostics _availabilitySetClientDiagnostics;
+        private AvailabilitySetsRestOperations _availabilitySetRestClient;
+        private ClientDiagnostics _proximityPlacementGroupClientDiagnostics;
+        private ProximityPlacementGroupsRestOperations _proximityPlacementGroupRestClient;
+        private ClientDiagnostics _dedicatedHostGroupClientDiagnostics;
+        private DedicatedHostGroupsRestOperations _dedicatedHostGroupRestClient;
+        private ClientDiagnostics _sshPublicKeyClientDiagnostics;
+        private SshPublicKeysRestOperations _sshPublicKeyRestClient;
         private ClientDiagnostics _virtualMachineImagesClientDiagnostics;
         private VirtualMachineImagesRestOperations _virtualMachineImagesRestClient;
         private ClientDiagnostics _usageClientDiagnostics;
         private UsageRestOperations _usageRestClient;
-        private ClientDiagnostics _virtualMachinesClientDiagnostics;
-        private VirtualMachinesRestOperations _virtualMachinesRestClient;
+        private ClientDiagnostics _virtualMachineClientDiagnostics;
+        private VirtualMachinesRestOperations _virtualMachineRestClient;
         private ClientDiagnostics _virtualMachineSizesClientDiagnostics;
         private VirtualMachineSizesRestOperations _virtualMachineSizesRestClient;
-        private ClientDiagnostics _imagesClientDiagnostics;
-        private ImagesRestOperations _imagesRestClient;
-        private ClientDiagnostics _virtualMachineScaleSetsClientDiagnostics;
-        private VirtualMachineScaleSetsRestOperations _virtualMachineScaleSetsRestClient;
+        private ClientDiagnostics _imageClientDiagnostics;
+        private ImagesRestOperations _imageRestClient;
+        private ClientDiagnostics _virtualMachineScaleSetClientDiagnostics;
+        private VirtualMachineScaleSetsRestOperations _virtualMachineScaleSetRestClient;
         private ClientDiagnostics _logAnalyticsClientDiagnostics;
         private LogAnalyticsRestOperations _logAnalyticsRestClient;
-
-        private static string _defaultRpNamespace = ClientDiagnostics.GetResourceProviderNamespace(typeof(SubscriptionExtensionClient).Assembly);
 
         /// <summary> Initializes a new instance of the <see cref="SubscriptionExtensionClient"/> class. </summary>
         /// <param name="armClient"> The client parameters to use in these operations. </param>
@@ -54,27 +52,27 @@ namespace Azure.ResourceManager.Sample
         {
         }
 
-        private ClientDiagnostics AvailabilitySetsClientDiagnostics => _availabilitySetsClientDiagnostics ??= new ClientDiagnostics("Azure.ResourceManager.Sample", AvailabilitySet.ResourceType.Namespace, DiagnosticOptions);
-        private AvailabilitySetsRestOperations AvailabilitySetsRestClient => _availabilitySetsRestClient ??= new AvailabilitySetsRestOperations(AvailabilitySetsClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(AvailabilitySet.ResourceType));
-        private ClientDiagnostics ProximityPlacementGroupsClientDiagnostics => _proximityPlacementGroupsClientDiagnostics ??= new ClientDiagnostics("Azure.ResourceManager.Sample", ProximityPlacementGroup.ResourceType.Namespace, DiagnosticOptions);
-        private ProximityPlacementGroupsRestOperations ProximityPlacementGroupsRestClient => _proximityPlacementGroupsRestClient ??= new ProximityPlacementGroupsRestOperations(ProximityPlacementGroupsClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(ProximityPlacementGroup.ResourceType));
-        private ClientDiagnostics DedicatedHostGroupsClientDiagnostics => _dedicatedHostGroupsClientDiagnostics ??= new ClientDiagnostics("Azure.ResourceManager.Sample", DedicatedHostGroup.ResourceType.Namespace, DiagnosticOptions);
-        private DedicatedHostGroupsRestOperations DedicatedHostGroupsRestClient => _dedicatedHostGroupsRestClient ??= new DedicatedHostGroupsRestOperations(DedicatedHostGroupsClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(DedicatedHostGroup.ResourceType));
-        private ClientDiagnostics SshPublicKeysClientDiagnostics => _sshPublicKeysClientDiagnostics ??= new ClientDiagnostics("Azure.ResourceManager.Sample", SshPublicKey.ResourceType.Namespace, DiagnosticOptions);
-        private SshPublicKeysRestOperations SshPublicKeysRestClient => _sshPublicKeysRestClient ??= new SshPublicKeysRestOperations(SshPublicKeysClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(SshPublicKey.ResourceType));
-        private ClientDiagnostics VirtualMachineImagesClientDiagnostics => _virtualMachineImagesClientDiagnostics ??= new ClientDiagnostics("Azure.ResourceManager.Sample", _defaultRpNamespace, DiagnosticOptions);
+        private ClientDiagnostics AvailabilitySetClientDiagnostics => _availabilitySetClientDiagnostics ??= new ClientDiagnostics("Azure.ResourceManager.Sample", AvailabilitySet.ResourceType.Namespace, DiagnosticOptions);
+        private AvailabilitySetsRestOperations AvailabilitySetRestClient => _availabilitySetRestClient ??= new AvailabilitySetsRestOperations(AvailabilitySetClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(AvailabilitySet.ResourceType));
+        private ClientDiagnostics ProximityPlacementGroupClientDiagnostics => _proximityPlacementGroupClientDiagnostics ??= new ClientDiagnostics("Azure.ResourceManager.Sample", ProximityPlacementGroup.ResourceType.Namespace, DiagnosticOptions);
+        private ProximityPlacementGroupsRestOperations ProximityPlacementGroupRestClient => _proximityPlacementGroupRestClient ??= new ProximityPlacementGroupsRestOperations(ProximityPlacementGroupClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(ProximityPlacementGroup.ResourceType));
+        private ClientDiagnostics DedicatedHostGroupClientDiagnostics => _dedicatedHostGroupClientDiagnostics ??= new ClientDiagnostics("Azure.ResourceManager.Sample", DedicatedHostGroup.ResourceType.Namespace, DiagnosticOptions);
+        private DedicatedHostGroupsRestOperations DedicatedHostGroupRestClient => _dedicatedHostGroupRestClient ??= new DedicatedHostGroupsRestOperations(DedicatedHostGroupClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(DedicatedHostGroup.ResourceType));
+        private ClientDiagnostics SshPublicKeyClientDiagnostics => _sshPublicKeyClientDiagnostics ??= new ClientDiagnostics("Azure.ResourceManager.Sample", SshPublicKey.ResourceType.Namespace, DiagnosticOptions);
+        private SshPublicKeysRestOperations SshPublicKeyRestClient => _sshPublicKeyRestClient ??= new SshPublicKeysRestOperations(SshPublicKeyClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(SshPublicKey.ResourceType));
+        private ClientDiagnostics VirtualMachineImagesClientDiagnostics => _virtualMachineImagesClientDiagnostics ??= new ClientDiagnostics("Azure.ResourceManager.Sample", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
         private VirtualMachineImagesRestOperations VirtualMachineImagesRestClient => _virtualMachineImagesRestClient ??= new VirtualMachineImagesRestOperations(VirtualMachineImagesClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
-        private ClientDiagnostics UsageClientDiagnostics => _usageClientDiagnostics ??= new ClientDiagnostics("Azure.ResourceManager.Sample", _defaultRpNamespace, DiagnosticOptions);
+        private ClientDiagnostics UsageClientDiagnostics => _usageClientDiagnostics ??= new ClientDiagnostics("Azure.ResourceManager.Sample", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
         private UsageRestOperations UsageRestClient => _usageRestClient ??= new UsageRestOperations(UsageClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
-        private ClientDiagnostics VirtualMachinesClientDiagnostics => _virtualMachinesClientDiagnostics ??= new ClientDiagnostics("Azure.ResourceManager.Sample", VirtualMachine.ResourceType.Namespace, DiagnosticOptions);
-        private VirtualMachinesRestOperations VirtualMachinesRestClient => _virtualMachinesRestClient ??= new VirtualMachinesRestOperations(VirtualMachinesClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(VirtualMachine.ResourceType));
-        private ClientDiagnostics VirtualMachineSizesClientDiagnostics => _virtualMachineSizesClientDiagnostics ??= new ClientDiagnostics("Azure.ResourceManager.Sample", _defaultRpNamespace, DiagnosticOptions);
+        private ClientDiagnostics VirtualMachineClientDiagnostics => _virtualMachineClientDiagnostics ??= new ClientDiagnostics("Azure.ResourceManager.Sample", VirtualMachine.ResourceType.Namespace, DiagnosticOptions);
+        private VirtualMachinesRestOperations VirtualMachineRestClient => _virtualMachineRestClient ??= new VirtualMachinesRestOperations(VirtualMachineClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(VirtualMachine.ResourceType));
+        private ClientDiagnostics VirtualMachineSizesClientDiagnostics => _virtualMachineSizesClientDiagnostics ??= new ClientDiagnostics("Azure.ResourceManager.Sample", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
         private VirtualMachineSizesRestOperations VirtualMachineSizesRestClient => _virtualMachineSizesRestClient ??= new VirtualMachineSizesRestOperations(VirtualMachineSizesClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
-        private ClientDiagnostics ImagesClientDiagnostics => _imagesClientDiagnostics ??= new ClientDiagnostics("Azure.ResourceManager.Sample", Image.ResourceType.Namespace, DiagnosticOptions);
-        private ImagesRestOperations ImagesRestClient => _imagesRestClient ??= new ImagesRestOperations(ImagesClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(Image.ResourceType));
-        private ClientDiagnostics VirtualMachineScaleSetsClientDiagnostics => _virtualMachineScaleSetsClientDiagnostics ??= new ClientDiagnostics("Azure.ResourceManager.Sample", VirtualMachineScaleSet.ResourceType.Namespace, DiagnosticOptions);
-        private VirtualMachineScaleSetsRestOperations VirtualMachineScaleSetsRestClient => _virtualMachineScaleSetsRestClient ??= new VirtualMachineScaleSetsRestOperations(VirtualMachineScaleSetsClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(VirtualMachineScaleSet.ResourceType));
-        private ClientDiagnostics LogAnalyticsClientDiagnostics => _logAnalyticsClientDiagnostics ??= new ClientDiagnostics("Azure.ResourceManager.Sample", _defaultRpNamespace, DiagnosticOptions);
+        private ClientDiagnostics ImageClientDiagnostics => _imageClientDiagnostics ??= new ClientDiagnostics("Azure.ResourceManager.Sample", Image.ResourceType.Namespace, DiagnosticOptions);
+        private ImagesRestOperations ImageRestClient => _imageRestClient ??= new ImagesRestOperations(ImageClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(Image.ResourceType));
+        private ClientDiagnostics VirtualMachineScaleSetClientDiagnostics => _virtualMachineScaleSetClientDiagnostics ??= new ClientDiagnostics("Azure.ResourceManager.Sample", VirtualMachineScaleSet.ResourceType.Namespace, DiagnosticOptions);
+        private VirtualMachineScaleSetsRestOperations VirtualMachineScaleSetRestClient => _virtualMachineScaleSetRestClient ??= new VirtualMachineScaleSetsRestOperations(VirtualMachineScaleSetClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(VirtualMachineScaleSet.ResourceType));
+        private ClientDiagnostics LogAnalyticsClientDiagnostics => _logAnalyticsClientDiagnostics ??= new ClientDiagnostics("Azure.ResourceManager.Sample", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
         private LogAnalyticsRestOperations LogAnalyticsRestClient => _logAnalyticsRestClient ??= new LogAnalyticsRestOperations(LogAnalyticsClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
 
         private string GetApiVersionOrNull(ResourceType resourceType)
@@ -94,11 +92,11 @@ namespace Azure.ResourceManager.Sample
         {
             async Task<Page<AvailabilitySet>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = AvailabilitySetsClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetAvailabilitySets");
+                using var scope = AvailabilitySetClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetAvailabilitySets");
                 scope.Start();
                 try
                 {
-                    var response = await AvailabilitySetsRestClient.ListBySubscriptionAsync(Id.SubscriptionId, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await AvailabilitySetRestClient.ListBySubscriptionAsync(Id.SubscriptionId, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new AvailabilitySet(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -109,11 +107,11 @@ namespace Azure.ResourceManager.Sample
             }
             async Task<Page<AvailabilitySet>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = AvailabilitySetsClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetAvailabilitySets");
+                using var scope = AvailabilitySetClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetAvailabilitySets");
                 scope.Start();
                 try
                 {
-                    var response = await AvailabilitySetsRestClient.ListBySubscriptionNextPageAsync(nextLink, Id.SubscriptionId, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await AvailabilitySetRestClient.ListBySubscriptionNextPageAsync(nextLink, Id.SubscriptionId, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new AvailabilitySet(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -136,11 +134,11 @@ namespace Azure.ResourceManager.Sample
         {
             Page<AvailabilitySet> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = AvailabilitySetsClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetAvailabilitySets");
+                using var scope = AvailabilitySetClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetAvailabilitySets");
                 scope.Start();
                 try
                 {
-                    var response = AvailabilitySetsRestClient.ListBySubscription(Id.SubscriptionId, expand, cancellationToken: cancellationToken);
+                    var response = AvailabilitySetRestClient.ListBySubscription(Id.SubscriptionId, expand, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new AvailabilitySet(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -151,11 +149,11 @@ namespace Azure.ResourceManager.Sample
             }
             Page<AvailabilitySet> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = AvailabilitySetsClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetAvailabilitySets");
+                using var scope = AvailabilitySetClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetAvailabilitySets");
                 scope.Start();
                 try
                 {
-                    var response = AvailabilitySetsRestClient.ListBySubscriptionNextPage(nextLink, Id.SubscriptionId, expand, cancellationToken: cancellationToken);
+                    var response = AvailabilitySetRestClient.ListBySubscriptionNextPage(nextLink, Id.SubscriptionId, expand, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new AvailabilitySet(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -203,11 +201,11 @@ namespace Azure.ResourceManager.Sample
         {
             async Task<Page<ProximityPlacementGroup>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = ProximityPlacementGroupsClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetProximityPlacementGroups");
+                using var scope = ProximityPlacementGroupClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetProximityPlacementGroups");
                 scope.Start();
                 try
                 {
-                    var response = await ProximityPlacementGroupsRestClient.ListBySubscriptionAsync(Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await ProximityPlacementGroupRestClient.ListBySubscriptionAsync(Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new ProximityPlacementGroup(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -218,11 +216,11 @@ namespace Azure.ResourceManager.Sample
             }
             async Task<Page<ProximityPlacementGroup>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = ProximityPlacementGroupsClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetProximityPlacementGroups");
+                using var scope = ProximityPlacementGroupClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetProximityPlacementGroups");
                 scope.Start();
                 try
                 {
-                    var response = await ProximityPlacementGroupsRestClient.ListBySubscriptionNextPageAsync(nextLink, Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await ProximityPlacementGroupRestClient.ListBySubscriptionNextPageAsync(nextLink, Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new ProximityPlacementGroup(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -244,11 +242,11 @@ namespace Azure.ResourceManager.Sample
         {
             Page<ProximityPlacementGroup> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = ProximityPlacementGroupsClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetProximityPlacementGroups");
+                using var scope = ProximityPlacementGroupClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetProximityPlacementGroups");
                 scope.Start();
                 try
                 {
-                    var response = ProximityPlacementGroupsRestClient.ListBySubscription(Id.SubscriptionId, cancellationToken: cancellationToken);
+                    var response = ProximityPlacementGroupRestClient.ListBySubscription(Id.SubscriptionId, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new ProximityPlacementGroup(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -259,11 +257,11 @@ namespace Azure.ResourceManager.Sample
             }
             Page<ProximityPlacementGroup> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = ProximityPlacementGroupsClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetProximityPlacementGroups");
+                using var scope = ProximityPlacementGroupClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetProximityPlacementGroups");
                 scope.Start();
                 try
                 {
-                    var response = ProximityPlacementGroupsRestClient.ListBySubscriptionNextPage(nextLink, Id.SubscriptionId, cancellationToken: cancellationToken);
+                    var response = ProximityPlacementGroupRestClient.ListBySubscriptionNextPage(nextLink, Id.SubscriptionId, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new ProximityPlacementGroup(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -311,11 +309,11 @@ namespace Azure.ResourceManager.Sample
         {
             async Task<Page<DedicatedHostGroup>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = DedicatedHostGroupsClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetDedicatedHostGroups");
+                using var scope = DedicatedHostGroupClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetDedicatedHostGroups");
                 scope.Start();
                 try
                 {
-                    var response = await DedicatedHostGroupsRestClient.ListBySubscriptionAsync(Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await DedicatedHostGroupRestClient.ListBySubscriptionAsync(Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new DedicatedHostGroup(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -326,11 +324,11 @@ namespace Azure.ResourceManager.Sample
             }
             async Task<Page<DedicatedHostGroup>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = DedicatedHostGroupsClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetDedicatedHostGroups");
+                using var scope = DedicatedHostGroupClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetDedicatedHostGroups");
                 scope.Start();
                 try
                 {
-                    var response = await DedicatedHostGroupsRestClient.ListBySubscriptionNextPageAsync(nextLink, Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await DedicatedHostGroupRestClient.ListBySubscriptionNextPageAsync(nextLink, Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new DedicatedHostGroup(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -352,11 +350,11 @@ namespace Azure.ResourceManager.Sample
         {
             Page<DedicatedHostGroup> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = DedicatedHostGroupsClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetDedicatedHostGroups");
+                using var scope = DedicatedHostGroupClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetDedicatedHostGroups");
                 scope.Start();
                 try
                 {
-                    var response = DedicatedHostGroupsRestClient.ListBySubscription(Id.SubscriptionId, cancellationToken: cancellationToken);
+                    var response = DedicatedHostGroupRestClient.ListBySubscription(Id.SubscriptionId, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new DedicatedHostGroup(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -367,11 +365,11 @@ namespace Azure.ResourceManager.Sample
             }
             Page<DedicatedHostGroup> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = DedicatedHostGroupsClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetDedicatedHostGroups");
+                using var scope = DedicatedHostGroupClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetDedicatedHostGroups");
                 scope.Start();
                 try
                 {
-                    var response = DedicatedHostGroupsRestClient.ListBySubscriptionNextPage(nextLink, Id.SubscriptionId, cancellationToken: cancellationToken);
+                    var response = DedicatedHostGroupRestClient.ListBySubscriptionNextPage(nextLink, Id.SubscriptionId, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new DedicatedHostGroup(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -419,11 +417,11 @@ namespace Azure.ResourceManager.Sample
         {
             async Task<Page<SshPublicKey>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = SshPublicKeysClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetSshPublicKeys");
+                using var scope = SshPublicKeyClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetSshPublicKeys");
                 scope.Start();
                 try
                 {
-                    var response = await SshPublicKeysRestClient.ListBySubscriptionAsync(Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await SshPublicKeyRestClient.ListBySubscriptionAsync(Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new SshPublicKey(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -434,11 +432,11 @@ namespace Azure.ResourceManager.Sample
             }
             async Task<Page<SshPublicKey>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = SshPublicKeysClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetSshPublicKeys");
+                using var scope = SshPublicKeyClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetSshPublicKeys");
                 scope.Start();
                 try
                 {
-                    var response = await SshPublicKeysRestClient.ListBySubscriptionNextPageAsync(nextLink, Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await SshPublicKeyRestClient.ListBySubscriptionNextPageAsync(nextLink, Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new SshPublicKey(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -460,11 +458,11 @@ namespace Azure.ResourceManager.Sample
         {
             Page<SshPublicKey> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = SshPublicKeysClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetSshPublicKeys");
+                using var scope = SshPublicKeyClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetSshPublicKeys");
                 scope.Start();
                 try
                 {
-                    var response = SshPublicKeysRestClient.ListBySubscription(Id.SubscriptionId, cancellationToken: cancellationToken);
+                    var response = SshPublicKeyRestClient.ListBySubscription(Id.SubscriptionId, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new SshPublicKey(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -475,11 +473,11 @@ namespace Azure.ResourceManager.Sample
             }
             Page<SshPublicKey> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = SshPublicKeysClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetSshPublicKeys");
+                using var scope = SshPublicKeyClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetSshPublicKeys");
                 scope.Start();
                 try
                 {
-                    var response = SshPublicKeysRestClient.ListBySubscriptionNextPage(nextLink, Id.SubscriptionId, cancellationToken: cancellationToken);
+                    var response = SshPublicKeyRestClient.ListBySubscriptionNextPage(nextLink, Id.SubscriptionId, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new SshPublicKey(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -970,11 +968,11 @@ namespace Azure.ResourceManager.Sample
 
             async Task<Page<VirtualMachine>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = VirtualMachinesClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetVirtualMachinesByLocation");
+                using var scope = VirtualMachineClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetVirtualMachinesByLocation");
                 scope.Start();
                 try
                 {
-                    var response = await VirtualMachinesRestClient.ListByLocationAsync(Id.SubscriptionId, location, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await VirtualMachineRestClient.ListByLocationAsync(Id.SubscriptionId, location, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new VirtualMachine(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -985,11 +983,11 @@ namespace Azure.ResourceManager.Sample
             }
             async Task<Page<VirtualMachine>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = VirtualMachinesClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetVirtualMachinesByLocation");
+                using var scope = VirtualMachineClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetVirtualMachinesByLocation");
                 scope.Start();
                 try
                 {
-                    var response = await VirtualMachinesRestClient.ListByLocationNextPageAsync(nextLink, Id.SubscriptionId, location, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await VirtualMachineRestClient.ListByLocationNextPageAsync(nextLink, Id.SubscriptionId, location, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new VirtualMachine(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -1016,11 +1014,11 @@ namespace Azure.ResourceManager.Sample
 
             Page<VirtualMachine> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = VirtualMachinesClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetVirtualMachinesByLocation");
+                using var scope = VirtualMachineClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetVirtualMachinesByLocation");
                 scope.Start();
                 try
                 {
-                    var response = VirtualMachinesRestClient.ListByLocation(Id.SubscriptionId, location, cancellationToken: cancellationToken);
+                    var response = VirtualMachineRestClient.ListByLocation(Id.SubscriptionId, location, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new VirtualMachine(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -1031,11 +1029,11 @@ namespace Azure.ResourceManager.Sample
             }
             Page<VirtualMachine> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = VirtualMachinesClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetVirtualMachinesByLocation");
+                using var scope = VirtualMachineClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetVirtualMachinesByLocation");
                 scope.Start();
                 try
                 {
-                    var response = VirtualMachinesRestClient.ListByLocationNextPage(nextLink, Id.SubscriptionId, location, cancellationToken: cancellationToken);
+                    var response = VirtualMachineRestClient.ListByLocationNextPage(nextLink, Id.SubscriptionId, location, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new VirtualMachine(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -1084,11 +1082,11 @@ namespace Azure.ResourceManager.Sample
         {
             async Task<Page<VirtualMachine>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = VirtualMachinesClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetVirtualMachines");
+                using var scope = VirtualMachineClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetVirtualMachines");
                 scope.Start();
                 try
                 {
-                    var response = await VirtualMachinesRestClient.ListAllAsync(Id.SubscriptionId, statusOnly, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await VirtualMachineRestClient.ListAllAsync(Id.SubscriptionId, statusOnly, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new VirtualMachine(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -1099,11 +1097,11 @@ namespace Azure.ResourceManager.Sample
             }
             async Task<Page<VirtualMachine>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = VirtualMachinesClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetVirtualMachines");
+                using var scope = VirtualMachineClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetVirtualMachines");
                 scope.Start();
                 try
                 {
-                    var response = await VirtualMachinesRestClient.ListAllNextPageAsync(nextLink, Id.SubscriptionId, statusOnly, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await VirtualMachineRestClient.ListAllNextPageAsync(nextLink, Id.SubscriptionId, statusOnly, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new VirtualMachine(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -1126,11 +1124,11 @@ namespace Azure.ResourceManager.Sample
         {
             Page<VirtualMachine> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = VirtualMachinesClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetVirtualMachines");
+                using var scope = VirtualMachineClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetVirtualMachines");
                 scope.Start();
                 try
                 {
-                    var response = VirtualMachinesRestClient.ListAll(Id.SubscriptionId, statusOnly, cancellationToken: cancellationToken);
+                    var response = VirtualMachineRestClient.ListAll(Id.SubscriptionId, statusOnly, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new VirtualMachine(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -1141,11 +1139,11 @@ namespace Azure.ResourceManager.Sample
             }
             Page<VirtualMachine> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = VirtualMachinesClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetVirtualMachines");
+                using var scope = VirtualMachineClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetVirtualMachines");
                 scope.Start();
                 try
                 {
-                    var response = VirtualMachinesRestClient.ListAllNextPage(nextLink, Id.SubscriptionId, statusOnly, cancellationToken: cancellationToken);
+                    var response = VirtualMachineRestClient.ListAllNextPage(nextLink, Id.SubscriptionId, statusOnly, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new VirtualMachine(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -1229,11 +1227,11 @@ namespace Azure.ResourceManager.Sample
         {
             async Task<Page<Image>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = ImagesClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetImages");
+                using var scope = ImageClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetImages");
                 scope.Start();
                 try
                 {
-                    var response = await ImagesRestClient.ListAsync(Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await ImageRestClient.ListAsync(Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new Image(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -1244,11 +1242,11 @@ namespace Azure.ResourceManager.Sample
             }
             async Task<Page<Image>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = ImagesClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetImages");
+                using var scope = ImageClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetImages");
                 scope.Start();
                 try
                 {
-                    var response = await ImagesRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await ImageRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new Image(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -1270,11 +1268,11 @@ namespace Azure.ResourceManager.Sample
         {
             Page<Image> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = ImagesClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetImages");
+                using var scope = ImageClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetImages");
                 scope.Start();
                 try
                 {
-                    var response = ImagesRestClient.List(Id.SubscriptionId, cancellationToken: cancellationToken);
+                    var response = ImageRestClient.List(Id.SubscriptionId, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new Image(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -1285,11 +1283,11 @@ namespace Azure.ResourceManager.Sample
             }
             Page<Image> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = ImagesClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetImages");
+                using var scope = ImageClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetImages");
                 scope.Start();
                 try
                 {
-                    var response = ImagesRestClient.ListNextPage(nextLink, Id.SubscriptionId, cancellationToken: cancellationToken);
+                    var response = ImageRestClient.ListNextPage(nextLink, Id.SubscriptionId, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new Image(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -1337,11 +1335,11 @@ namespace Azure.ResourceManager.Sample
         {
             async Task<Page<VirtualMachineScaleSet>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = VirtualMachineScaleSetsClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetVirtualMachineScaleSets");
+                using var scope = VirtualMachineScaleSetClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetVirtualMachineScaleSets");
                 scope.Start();
                 try
                 {
-                    var response = await VirtualMachineScaleSetsRestClient.ListAllAsync(Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await VirtualMachineScaleSetRestClient.ListAllAsync(Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new VirtualMachineScaleSet(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -1352,11 +1350,11 @@ namespace Azure.ResourceManager.Sample
             }
             async Task<Page<VirtualMachineScaleSet>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = VirtualMachineScaleSetsClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetVirtualMachineScaleSets");
+                using var scope = VirtualMachineScaleSetClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetVirtualMachineScaleSets");
                 scope.Start();
                 try
                 {
-                    var response = await VirtualMachineScaleSetsRestClient.ListAllNextPageAsync(nextLink, Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await VirtualMachineScaleSetRestClient.ListAllNextPageAsync(nextLink, Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new VirtualMachineScaleSet(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -1378,11 +1376,11 @@ namespace Azure.ResourceManager.Sample
         {
             Page<VirtualMachineScaleSet> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = VirtualMachineScaleSetsClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetVirtualMachineScaleSets");
+                using var scope = VirtualMachineScaleSetClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetVirtualMachineScaleSets");
                 scope.Start();
                 try
                 {
-                    var response = VirtualMachineScaleSetsRestClient.ListAll(Id.SubscriptionId, cancellationToken: cancellationToken);
+                    var response = VirtualMachineScaleSetRestClient.ListAll(Id.SubscriptionId, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new VirtualMachineScaleSet(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -1393,11 +1391,11 @@ namespace Azure.ResourceManager.Sample
             }
             Page<VirtualMachineScaleSet> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = VirtualMachineScaleSetsClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetVirtualMachineScaleSets");
+                using var scope = VirtualMachineScaleSetClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetVirtualMachineScaleSets");
                 scope.Start();
                 try
                 {
-                    var response = VirtualMachineScaleSetsRestClient.ListAllNextPage(nextLink, Id.SubscriptionId, cancellationToken: cancellationToken);
+                    var response = VirtualMachineScaleSetRestClient.ListAllNextPage(nextLink, Id.SubscriptionId, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new VirtualMachineScaleSet(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -1457,7 +1455,7 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                var response = await _logAnalyticsRestClient.ExportRequestRateByIntervalAsync(Id.SubscriptionId, location, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await LogAnalyticsRestClient.ExportRequestRateByIntervalAsync(Id.SubscriptionId, location, parameters, cancellationToken).ConfigureAwait(false);
                 var operation = new ExportRequestRateByIntervalLogAnalyticOperation(LogAnalyticsClientDiagnostics, Pipeline, LogAnalyticsRestClient.CreateExportRequestRateByIntervalRequest(Id.SubscriptionId, location, parameters).Request, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -1492,7 +1490,7 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                var response = _logAnalyticsRestClient.ExportRequestRateByInterval(Id.SubscriptionId, location, parameters, cancellationToken);
+                var response = LogAnalyticsRestClient.ExportRequestRateByInterval(Id.SubscriptionId, location, parameters, cancellationToken);
                 var operation = new ExportRequestRateByIntervalLogAnalyticOperation(LogAnalyticsClientDiagnostics, Pipeline, LogAnalyticsRestClient.CreateExportRequestRateByIntervalRequest(Id.SubscriptionId, location, parameters).Request, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
@@ -1527,7 +1525,7 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                var response = await _logAnalyticsRestClient.ExportThrottledRequestsAsync(Id.SubscriptionId, location, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await LogAnalyticsRestClient.ExportThrottledRequestsAsync(Id.SubscriptionId, location, parameters, cancellationToken).ConfigureAwait(false);
                 var operation = new ExportThrottledRequestsLogAnalyticOperation(LogAnalyticsClientDiagnostics, Pipeline, LogAnalyticsRestClient.CreateExportThrottledRequestsRequest(Id.SubscriptionId, location, parameters).Request, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -1562,7 +1560,7 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                var response = _logAnalyticsRestClient.ExportThrottledRequests(Id.SubscriptionId, location, parameters, cancellationToken);
+                var response = LogAnalyticsRestClient.ExportThrottledRequests(Id.SubscriptionId, location, parameters, cancellationToken);
                 var operation = new ExportThrottledRequestsLogAnalyticOperation(LogAnalyticsClientDiagnostics, Pipeline, LogAnalyticsRestClient.CreateExportThrottledRequestsRequest(Id.SubscriptionId, location, parameters).Request, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);

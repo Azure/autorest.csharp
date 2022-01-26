@@ -52,7 +52,7 @@ namespace Accessibility_LowLevel_NoAuth
             try
             {
                 using HttpMessage message = CreateOperationRequest(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -72,7 +72,7 @@ namespace Accessibility_LowLevel_NoAuth
             try
             {
                 using HttpMessage message = CreateOperationRequest(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -92,7 +92,7 @@ namespace Accessibility_LowLevel_NoAuth
             try
             {
                 using HttpMessage message = CreateOperationInternalRequest(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -112,7 +112,7 @@ namespace Accessibility_LowLevel_NoAuth
             try
             {
                 using HttpMessage message = CreateOperationInternalRequest(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {

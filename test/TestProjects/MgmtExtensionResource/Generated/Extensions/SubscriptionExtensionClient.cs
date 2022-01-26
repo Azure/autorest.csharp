@@ -23,8 +23,6 @@ namespace MgmtExtensionResource
         private ClientDiagnostics _orphanedPostClientDiagnostics;
         private OrphanedPostRestOperations _orphanedPostRestClient;
 
-        private static string _defaultRpNamespace = ClientDiagnostics.GetResourceProviderNamespace(typeof(SubscriptionExtensionClient).Assembly);
-
         /// <summary> Initializes a new instance of the <see cref="SubscriptionExtensionClient"/> class. </summary>
         /// <param name="armClient"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
@@ -32,7 +30,7 @@ namespace MgmtExtensionResource
         {
         }
 
-        private ClientDiagnostics OrphanedPostClientDiagnostics => _orphanedPostClientDiagnostics ??= new ClientDiagnostics("MgmtExtensionResource", _defaultRpNamespace, DiagnosticOptions);
+        private ClientDiagnostics OrphanedPostClientDiagnostics => _orphanedPostClientDiagnostics ??= new ClientDiagnostics("MgmtExtensionResource", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
         private OrphanedPostRestOperations OrphanedPostRestClient => _orphanedPostRestClient ??= new OrphanedPostRestOperations(OrphanedPostClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
 
         private string GetApiVersionOrNull(ResourceType resourceType)
@@ -40,6 +38,15 @@ namespace MgmtExtensionResource
             ArmClient.TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
         }
+
+        #region SubSingleton
+        /// <summary> Gets an object representing a SubSingleton along with the instance operations that can be performed on it. </summary>
+        /// <returns> Returns a <see cref="SubSingleton" /> object. </returns>
+        public virtual SubSingleton GetSubSingleton()
+        {
+            return new SubSingleton(ArmClient, new ResourceIdentifier(Id + "/providers/Microsoft.Singleton/subSingletons/default"));
+        }
+        #endregion
 
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.OrphanedPost/validateSomething
         /// ContextualPath: /subscriptions/{subscriptionId}

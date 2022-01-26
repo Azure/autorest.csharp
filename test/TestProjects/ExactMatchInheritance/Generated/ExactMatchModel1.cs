@@ -15,7 +15,6 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
-using ExactMatchInheritance.Models;
 
 namespace ExactMatchInheritance
 {
@@ -29,8 +28,8 @@ namespace ExactMatchInheritance
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly ExactMatchModel1SRestOperations _exactMatchModel1sRestClient;
+        private readonly ClientDiagnostics _exactMatchModel1ClientDiagnostics;
+        private readonly ExactMatchModel1SRestOperations _exactMatchModel1RestClient;
         private readonly ExactMatchModel1Data _data;
 
         /// <summary> Initializes a new instance of the <see cref="ExactMatchModel1"/> class for mocking. </summary>
@@ -52,9 +51,9 @@ namespace ExactMatchInheritance
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal ExactMatchModel1(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
         {
-            _clientDiagnostics = new ClientDiagnostics("ExactMatchInheritance", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string apiVersion);
-            _exactMatchModel1sRestClient = new ExactMatchModel1SRestOperations(_clientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, apiVersion);
+            _exactMatchModel1ClientDiagnostics = new ClientDiagnostics("ExactMatchInheritance", ResourceType.Namespace, DiagnosticOptions);
+            ArmClient.TryGetApiVersion(ResourceType, out string exactMatchModel1ApiVersion);
+            _exactMatchModel1RestClient = new ExactMatchModel1SRestOperations(_exactMatchModel1ClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, exactMatchModel1ApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -90,13 +89,13 @@ namespace ExactMatchInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<ExactMatchModel1>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ExactMatchModel1.Get");
+            using var scope = _exactMatchModel1ClientDiagnostics.CreateScope("ExactMatchModel1.Get");
             scope.Start();
             try
             {
-                var response = await _exactMatchModel1sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _exactMatchModel1RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                    throw await _exactMatchModel1ClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new ExactMatchModel1(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -112,13 +111,13 @@ namespace ExactMatchInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<ExactMatchModel1> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ExactMatchModel1.Get");
+            using var scope = _exactMatchModel1ClientDiagnostics.CreateScope("ExactMatchModel1.Get");
             scope.Start();
             try
             {
-                var response = _exactMatchModel1sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _exactMatchModel1RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
-                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                    throw _exactMatchModel1ClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new ExactMatchModel1(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -133,7 +132,7 @@ namespace ExactMatchInheritance
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
         public async virtual Task<IEnumerable<AzureLocation>> GetAvailableLocationsAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ExactMatchModel1.GetAvailableLocations");
+            using var scope = _exactMatchModel1ClientDiagnostics.CreateScope("ExactMatchModel1.GetAvailableLocations");
             scope.Start();
             try
             {
@@ -151,7 +150,7 @@ namespace ExactMatchInheritance
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
         public virtual IEnumerable<AzureLocation> GetAvailableLocations(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ExactMatchModel1.GetAvailableLocations");
+            using var scope = _exactMatchModel1ClientDiagnostics.CreateScope("ExactMatchModel1.GetAvailableLocations");
             scope.Start();
             try
             {

@@ -111,7 +111,7 @@ namespace Azure.Analytics.Purview.Account
             try
             {
                 using HttpMessage message = CreateGetCollectionRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -171,7 +171,7 @@ namespace Azure.Analytics.Purview.Account
             try
             {
                 using HttpMessage message = CreateGetCollectionRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -255,7 +255,7 @@ namespace Azure.Analytics.Purview.Account
             try
             {
                 using HttpMessage message = CreateCreateOrUpdateCollectionRequest(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -339,7 +339,7 @@ namespace Azure.Analytics.Purview.Account
             try
             {
                 using HttpMessage message = CreateCreateOrUpdateCollectionRequest(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -379,7 +379,7 @@ namespace Azure.Analytics.Purview.Account
             try
             {
                 using HttpMessage message = CreateDeleteCollectionRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -419,7 +419,7 @@ namespace Azure.Analytics.Purview.Account
             try
             {
                 using HttpMessage message = CreateDeleteCollectionRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -465,7 +465,7 @@ namespace Azure.Analytics.Purview.Account
             try
             {
                 using HttpMessage message = CreateGetCollectionPathRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -511,7 +511,7 @@ namespace Azure.Analytics.Purview.Account
             try
             {
                 using HttpMessage message = CreateGetCollectionPathRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -567,7 +567,7 @@ namespace Azure.Analytics.Purview.Account
                     var message = string.IsNullOrEmpty(nextLink)
                         ? CreateGetChildCollectionNamesRequest(skipToken, context)
                         : CreateGetChildCollectionNamesNextPageRequest(nextLink, skipToken, context);
-                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, context, "value", "nextLink", cancellationToken).ConfigureAwait(false);
+                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, context, "value", "nextLink", cancellationToken).ConfigureAwait(false);
                     nextLink = page.ContinuationToken;
                     yield return page;
                 } while (!string.IsNullOrEmpty(nextLink));
@@ -621,7 +621,7 @@ namespace Azure.Analytics.Purview.Account
                     var message = string.IsNullOrEmpty(nextLink)
                         ? CreateGetChildCollectionNamesRequest(skipToken, context)
                         : CreateGetChildCollectionNamesNextPageRequest(nextLink, skipToken, context);
-                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, context, "value", "nextLink");
+                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, context, "value", "nextLink");
                     nextLink = page.ContinuationToken;
                     yield return page;
                 } while (!string.IsNullOrEmpty(nextLink));

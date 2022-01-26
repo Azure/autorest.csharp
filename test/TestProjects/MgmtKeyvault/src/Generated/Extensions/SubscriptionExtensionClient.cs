@@ -22,12 +22,14 @@ namespace MgmtKeyvault
     /// <summary> An internal class to add extension methods to. </summary>
     internal partial class SubscriptionExtensionClient : ArmResource
     {
+        private ClientDiagnostics _vaultClientDiagnostics;
+        private VaultsRestOperations _vaultRestClient;
         private ClientDiagnostics _vaultsClientDiagnostics;
         private VaultsRestOperations _vaultsRestClient;
+        private ClientDiagnostics _managedHsmClientDiagnostics;
+        private ManagedHsmsRestOperations _managedHsmRestClient;
         private ClientDiagnostics _managedHsmsClientDiagnostics;
         private ManagedHsmsRestOperations _managedHsmsRestClient;
-
-        private static string _defaultRpNamespace = ClientDiagnostics.GetResourceProviderNamespace(typeof(SubscriptionExtensionClient).Assembly);
 
         /// <summary> Initializes a new instance of the <see cref="SubscriptionExtensionClient"/> class. </summary>
         /// <param name="armClient"> The client parameters to use in these operations. </param>
@@ -36,9 +38,13 @@ namespace MgmtKeyvault
         {
         }
 
-        private ClientDiagnostics VaultsClientDiagnostics => _vaultsClientDiagnostics ??= new ClientDiagnostics("MgmtKeyvault", _defaultRpNamespace, DiagnosticOptions);
+        private ClientDiagnostics VaultClientDiagnostics => _vaultClientDiagnostics ??= new ClientDiagnostics("MgmtKeyvault", Vault.ResourceType.Namespace, DiagnosticOptions);
+        private VaultsRestOperations VaultRestClient => _vaultRestClient ??= new VaultsRestOperations(VaultClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(Vault.ResourceType));
+        private ClientDiagnostics VaultsClientDiagnostics => _vaultsClientDiagnostics ??= new ClientDiagnostics("MgmtKeyvault", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
         private VaultsRestOperations VaultsRestClient => _vaultsRestClient ??= new VaultsRestOperations(VaultsClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
-        private ClientDiagnostics ManagedHsmsClientDiagnostics => _managedHsmsClientDiagnostics ??= new ClientDiagnostics("MgmtKeyvault", _defaultRpNamespace, DiagnosticOptions);
+        private ClientDiagnostics ManagedHsmClientDiagnostics => _managedHsmClientDiagnostics ??= new ClientDiagnostics("MgmtKeyvault", ManagedHsm.ResourceType.Namespace, DiagnosticOptions);
+        private ManagedHsmsRestOperations ManagedHsmRestClient => _managedHsmRestClient ??= new ManagedHsmsRestOperations(ManagedHsmClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(ManagedHsm.ResourceType));
+        private ClientDiagnostics ManagedHsmsClientDiagnostics => _managedHsmsClientDiagnostics ??= new ClientDiagnostics("MgmtKeyvault", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
         private ManagedHsmsRestOperations ManagedHsmsRestClient => _managedHsmsRestClient ??= new ManagedHsmsRestOperations(ManagedHsmsClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
 
         private string GetApiVersionOrNull(ResourceType resourceType)
@@ -58,11 +64,11 @@ namespace MgmtKeyvault
         {
             async Task<Page<Vault>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = VaultsClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetVaults");
+                using var scope = VaultClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetVaults");
                 scope.Start();
                 try
                 {
-                    var response = await VaultsRestClient.ListBySubscriptionAsync(Id.SubscriptionId, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await VaultRestClient.ListBySubscriptionAsync(Id.SubscriptionId, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new Vault(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -73,11 +79,11 @@ namespace MgmtKeyvault
             }
             async Task<Page<Vault>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = VaultsClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetVaults");
+                using var scope = VaultClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetVaults");
                 scope.Start();
                 try
                 {
-                    var response = await VaultsRestClient.ListBySubscriptionNextPageAsync(nextLink, Id.SubscriptionId, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await VaultRestClient.ListBySubscriptionNextPageAsync(nextLink, Id.SubscriptionId, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new Vault(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -100,11 +106,11 @@ namespace MgmtKeyvault
         {
             Page<Vault> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = VaultsClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetVaults");
+                using var scope = VaultClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetVaults");
                 scope.Start();
                 try
                 {
-                    var response = VaultsRestClient.ListBySubscription(Id.SubscriptionId, top, cancellationToken: cancellationToken);
+                    var response = VaultRestClient.ListBySubscription(Id.SubscriptionId, top, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new Vault(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -115,11 +121,11 @@ namespace MgmtKeyvault
             }
             Page<Vault> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = VaultsClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetVaults");
+                using var scope = VaultClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetVaults");
                 scope.Start();
                 try
                 {
-                    var response = VaultsRestClient.ListBySubscriptionNextPage(nextLink, Id.SubscriptionId, top, cancellationToken: cancellationToken);
+                    var response = VaultRestClient.ListBySubscriptionNextPage(nextLink, Id.SubscriptionId, top, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new Vault(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -332,11 +338,11 @@ namespace MgmtKeyvault
         {
             async Task<Page<ManagedHsm>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = ManagedHsmsClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetManagedHsms");
+                using var scope = ManagedHsmClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetManagedHsms");
                 scope.Start();
                 try
                 {
-                    var response = await ManagedHsmsRestClient.ListBySubscriptionAsync(Id.SubscriptionId, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await ManagedHsmRestClient.ListBySubscriptionAsync(Id.SubscriptionId, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new ManagedHsm(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -347,11 +353,11 @@ namespace MgmtKeyvault
             }
             async Task<Page<ManagedHsm>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = ManagedHsmsClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetManagedHsms");
+                using var scope = ManagedHsmClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetManagedHsms");
                 scope.Start();
                 try
                 {
-                    var response = await ManagedHsmsRestClient.ListBySubscriptionNextPageAsync(nextLink, Id.SubscriptionId, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await ManagedHsmRestClient.ListBySubscriptionNextPageAsync(nextLink, Id.SubscriptionId, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new ManagedHsm(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -374,11 +380,11 @@ namespace MgmtKeyvault
         {
             Page<ManagedHsm> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = ManagedHsmsClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetManagedHsms");
+                using var scope = ManagedHsmClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetManagedHsms");
                 scope.Start();
                 try
                 {
-                    var response = ManagedHsmsRestClient.ListBySubscription(Id.SubscriptionId, top, cancellationToken: cancellationToken);
+                    var response = ManagedHsmRestClient.ListBySubscription(Id.SubscriptionId, top, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new ManagedHsm(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -389,11 +395,11 @@ namespace MgmtKeyvault
             }
             Page<ManagedHsm> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = ManagedHsmsClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetManagedHsms");
+                using var scope = ManagedHsmClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetManagedHsms");
                 scope.Start();
                 try
                 {
-                    var response = ManagedHsmsRestClient.ListBySubscriptionNextPage(nextLink, Id.SubscriptionId, top, cancellationToken: cancellationToken);
+                    var response = ManagedHsmRestClient.ListBySubscriptionNextPage(nextLink, Id.SubscriptionId, top, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new ManagedHsm(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)

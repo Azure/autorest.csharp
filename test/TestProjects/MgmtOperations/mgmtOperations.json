@@ -607,7 +607,9 @@
                         }
                     }
                 }
-            },
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/patchAvailabilitySets": {
             "patch": {
                 "tags": [
                     "AvailabilitySets"

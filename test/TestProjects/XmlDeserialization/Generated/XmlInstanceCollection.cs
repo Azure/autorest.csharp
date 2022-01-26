@@ -25,8 +25,8 @@ namespace XmlDeserialization
     /// <summary> A class representing collection of XmlInstance and their operations over its parent. </summary>
     public partial class XmlInstanceCollection : ArmCollection, IEnumerable<XmlInstance>, IAsyncEnumerable<XmlInstance>
     {
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly XmlDeserializationRestOperations _xmlDeserializationRestClient;
+        private readonly ClientDiagnostics _xmlInstanceXmlDeserializationClientDiagnostics;
+        private readonly XmlDeserializationRestOperations _xmlInstanceXmlDeserializationRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="XmlInstanceCollection"/> class for mocking. </summary>
         protected XmlInstanceCollection()
@@ -37,9 +37,9 @@ namespace XmlDeserialization
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal XmlInstanceCollection(ArmResource parent) : base(parent)
         {
-            _clientDiagnostics = new ClientDiagnostics("XmlDeserialization", XmlInstance.ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(XmlInstance.ResourceType, out string apiVersion);
-            _xmlDeserializationRestClient = new XmlDeserializationRestOperations(_clientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, apiVersion);
+            _xmlInstanceXmlDeserializationClientDiagnostics = new ClientDiagnostics("XmlDeserialization", XmlInstance.ResourceType.Namespace, DiagnosticOptions);
+            ArmClient.TryGetApiVersion(XmlInstance.ResourceType, out string xmlInstanceXmlDeserializationApiVersion);
+            _xmlInstanceXmlDeserializationRestClient = new XmlDeserializationRestOperations(_xmlInstanceXmlDeserializationClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, xmlInstanceXmlDeserializationApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -72,11 +72,11 @@ namespace XmlDeserialization
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("XmlInstanceCollection.CreateOrUpdate");
+            using var scope = _xmlInstanceXmlDeserializationClientDiagnostics.CreateScope("XmlInstanceCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _xmlDeserializationRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, xmlName, parameters, ifMatch, cancellationToken);
+                var response = _xmlInstanceXmlDeserializationRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, xmlName, parameters, ifMatch, cancellationToken);
                 var operation = new XmlInstanceCreateOrUpdateOperation(ArmClient, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
@@ -108,11 +108,11 @@ namespace XmlDeserialization
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("XmlInstanceCollection.CreateOrUpdate");
+            using var scope = _xmlInstanceXmlDeserializationClientDiagnostics.CreateScope("XmlInstanceCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _xmlDeserializationRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, xmlName, parameters, ifMatch, cancellationToken).ConfigureAwait(false);
+                var response = await _xmlInstanceXmlDeserializationRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, xmlName, parameters, ifMatch, cancellationToken).ConfigureAwait(false);
                 var operation = new XmlInstanceCreateOrUpdateOperation(ArmClient, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -137,13 +137,13 @@ namespace XmlDeserialization
         {
             Argument.AssertNotNullOrEmpty(xmlName, nameof(xmlName));
 
-            using var scope = _clientDiagnostics.CreateScope("XmlInstanceCollection.Get");
+            using var scope = _xmlInstanceXmlDeserializationClientDiagnostics.CreateScope("XmlInstanceCollection.Get");
             scope.Start();
             try
             {
-                var response = _xmlDeserializationRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, xmlName, cancellationToken);
+                var response = _xmlInstanceXmlDeserializationRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, xmlName, cancellationToken);
                 if (response.Value == null)
-                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                    throw _xmlInstanceXmlDeserializationClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new XmlInstance(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -165,13 +165,13 @@ namespace XmlDeserialization
         {
             Argument.AssertNotNullOrEmpty(xmlName, nameof(xmlName));
 
-            using var scope = _clientDiagnostics.CreateScope("XmlInstanceCollection.Get");
+            using var scope = _xmlInstanceXmlDeserializationClientDiagnostics.CreateScope("XmlInstanceCollection.Get");
             scope.Start();
             try
             {
-                var response = await _xmlDeserializationRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, xmlName, cancellationToken).ConfigureAwait(false);
+                var response = await _xmlInstanceXmlDeserializationRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, xmlName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                    throw await _xmlInstanceXmlDeserializationClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new XmlInstance(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -190,11 +190,11 @@ namespace XmlDeserialization
         {
             Argument.AssertNotNullOrEmpty(xmlName, nameof(xmlName));
 
-            using var scope = _clientDiagnostics.CreateScope("XmlInstanceCollection.GetIfExists");
+            using var scope = _xmlInstanceXmlDeserializationClientDiagnostics.CreateScope("XmlInstanceCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _xmlDeserializationRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, xmlName, cancellationToken: cancellationToken);
+                var response = _xmlInstanceXmlDeserializationRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, xmlName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<XmlInstance>(null, response.GetRawResponse());
                 return Response.FromValue(new XmlInstance(ArmClient, response.Value), response.GetRawResponse());
@@ -215,11 +215,11 @@ namespace XmlDeserialization
         {
             Argument.AssertNotNullOrEmpty(xmlName, nameof(xmlName));
 
-            using var scope = _clientDiagnostics.CreateScope("XmlInstanceCollection.GetIfExists");
+            using var scope = _xmlInstanceXmlDeserializationClientDiagnostics.CreateScope("XmlInstanceCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _xmlDeserializationRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, xmlName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _xmlInstanceXmlDeserializationRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, xmlName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<XmlInstance>(null, response.GetRawResponse());
                 return Response.FromValue(new XmlInstance(ArmClient, response.Value), response.GetRawResponse());
@@ -240,7 +240,7 @@ namespace XmlDeserialization
         {
             Argument.AssertNotNullOrEmpty(xmlName, nameof(xmlName));
 
-            using var scope = _clientDiagnostics.CreateScope("XmlInstanceCollection.Exists");
+            using var scope = _xmlInstanceXmlDeserializationClientDiagnostics.CreateScope("XmlInstanceCollection.Exists");
             scope.Start();
             try
             {
@@ -263,7 +263,7 @@ namespace XmlDeserialization
         {
             Argument.AssertNotNullOrEmpty(xmlName, nameof(xmlName));
 
-            using var scope = _clientDiagnostics.CreateScope("XmlInstanceCollection.Exists");
+            using var scope = _xmlInstanceXmlDeserializationClientDiagnostics.CreateScope("XmlInstanceCollection.Exists");
             scope.Start();
             try
             {
@@ -290,11 +290,11 @@ namespace XmlDeserialization
         {
             Page<XmlInstance> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("XmlInstanceCollection.GetAll");
+                using var scope = _xmlInstanceXmlDeserializationClientDiagnostics.CreateScope("XmlInstanceCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _xmlDeserializationRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, filter, top, skip, cancellationToken: cancellationToken);
+                    var response = _xmlInstanceXmlDeserializationRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, filter, top, skip, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new XmlInstance(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -305,11 +305,11 @@ namespace XmlDeserialization
             }
             Page<XmlInstance> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("XmlInstanceCollection.GetAll");
+                using var scope = _xmlInstanceXmlDeserializationClientDiagnostics.CreateScope("XmlInstanceCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _xmlDeserializationRestClient.ListNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, filter, top, skip, cancellationToken: cancellationToken);
+                    var response = _xmlInstanceXmlDeserializationRestClient.ListNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, filter, top, skip, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new XmlInstance(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -334,11 +334,11 @@ namespace XmlDeserialization
         {
             async Task<Page<XmlInstance>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("XmlInstanceCollection.GetAll");
+                using var scope = _xmlInstanceXmlDeserializationClientDiagnostics.CreateScope("XmlInstanceCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _xmlDeserializationRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, filter, top, skip, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _xmlInstanceXmlDeserializationRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, filter, top, skip, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new XmlInstance(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -349,11 +349,11 @@ namespace XmlDeserialization
             }
             async Task<Page<XmlInstance>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("XmlInstanceCollection.GetAll");
+                using var scope = _xmlInstanceXmlDeserializationClientDiagnostics.CreateScope("XmlInstanceCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _xmlDeserializationRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, filter, top, skip, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _xmlInstanceXmlDeserializationRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, filter, top, skip, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new XmlInstance(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -373,7 +373,7 @@ namespace XmlDeserialization
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<GenericResource> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("XmlInstanceCollection.GetAllAsGenericResources");
+            using var scope = _xmlInstanceXmlDeserializationClientDiagnostics.CreateScope("XmlInstanceCollection.GetAllAsGenericResources");
             scope.Start();
             try
             {
@@ -396,7 +396,7 @@ namespace XmlDeserialization
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<GenericResource> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("XmlInstanceCollection.GetAllAsGenericResources");
+            using var scope = _xmlInstanceXmlDeserializationClientDiagnostics.CreateScope("XmlInstanceCollection.GetAllAsGenericResources");
             scope.Start();
             try
             {

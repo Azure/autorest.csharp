@@ -3,10 +3,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Text;
-using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
@@ -54,8 +51,8 @@ namespace AutoRest.CSharp.Mgmt.Output
                         operation.GetRequestPath(_context),
                         ContextualPath,
                         operationName,
-                        GetResourceFromResourceType(operation, _context),
-                        operation.GetReturnTypeAsLongRunningOperation(null, operationName, _context)));
+                        operation.GetReturnTypeAsLongRunningOperation(null, operationName, _context),
+                        _context));
             });
         }
 
@@ -111,19 +108,6 @@ namespace AutoRest.CSharp.Mgmt.Output
                 return filteredResources.Single();
 
             return null;
-        }
-
-        internal static Resource? GetResourceFromResourceType(Operation operation, BuildContext<MgmtOutputLibrary> context)
-        {
-            var resourceType = operation.GetRequestPath(context).GetResourceType(context.Configuration.MgmtConfiguration);
-            var candidates = context.Library.ArmResources.Where(resource => resource.ResourceType == resourceType);
-            if (candidates.Count() == 0)
-                return null;
-
-            if (candidates.Count() == 1)
-                return candidates.First();
-
-            throw new InvalidOperationException($"Found more than 1 candidate for {resourceType}, results were ({string.Join(',', candidates.Select(r => r.ResourceName))})");
         }
 
         private IEnumerable<MgmtRestClient>? _restClients;
