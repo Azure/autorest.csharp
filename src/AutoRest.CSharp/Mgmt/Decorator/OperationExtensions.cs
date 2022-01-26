@@ -218,7 +218,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return responseBodyType == resourceData.Type.Name;
         }
 
-        private static Dictionary<Operation, Resource?> _operationToResourceCache = new Dictionary<Operation, Resource?>();
+        private static ConcurrentDictionary<Operation, Resource?> _operationToResourceCache = new ConcurrentDictionary<Operation, Resource?>();
         internal static Resource? GetResourceFromResourceType(this Operation operation, BuildContext<MgmtOutputLibrary> context)
         {
             if (_operationToResourceCache.TryGetValue(operation, out Resource? cacheResult))
