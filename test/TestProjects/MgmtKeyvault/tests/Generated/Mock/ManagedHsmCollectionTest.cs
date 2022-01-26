@@ -66,7 +66,7 @@ namespace MgmtKeyvault.Tests.Mock
         public async Task GetAll()
         {
             // Example: List managed HSM Pools in a resource group
-            int? top = null;
+            int? top = default;
 
             var collection = GetArmClient().GetResourceGroup(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hsm-group")).GetManagedHsms();
             await foreach (var _ in collection.GetAllAsync(top))

@@ -110,7 +110,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             }
         }
 
-        public void WriteGetCollection(MgmtTypeProvider parentTp, string requestPath, ExampleModel exampleModel, List<string> paramNames)
+        public void WriteGetCollection(MgmtTypeProvider parentTp, string requestPath, ExampleModel exampleModel, List<KeyValuePair<string, FormattableString>> parameterValues)
         {
             var realRequestPath = ParseRequestPath(parentTp, requestPath, exampleModel)!;
             switch (parentTp)
@@ -119,7 +119,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     {
                         var idVar = new CodeWriterDeclaration($"{parentResource.Type.Name.FirstCharToLowerCase()}Id");
                         _writer.Line($"var {idVar:D} = {parentResource.Type}.CreateResourceIdentifier({ComposeResourceIdentifierParams(parentResource.RequestPaths.First(), exampleModel)});");
-                        _writer.Append($"var collection = GetArmClient().Get{parentResource.Type.Name}({GetDeclaredActualName(idVar)})");
+                        _writer.Append($"var collection = GetArmClient().Get{parentResource.Type.Name}({idVar})");
                         break;
                     }
                 case Mgmt.Output.ResourceGroupExtensions:
@@ -140,17 +140,18 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 default:
                     throw new Exception($"Unknown parent {parentTp}");
             }
-            List<string> extraParamNames = new List<string>();
+            List<FormattableString> extraParamNames = new List<FormattableString>();
+            var paramsMap = parameterValues.ToDictionary(pv => pv.Key, pv => pv);
             foreach (var extraParam in _resourceCollection.ExtraConstructorParameters)
             {
-                if (paramNames.Contains(extraParam.Name))
+                if (paramsMap.ContainsKey(extraParam.Name))
                 {
-                    extraParamNames.Add(extraParam.Name);
-                    paramNames.Remove(extraParam.Name);
+                    extraParamNames.Add(paramsMap[extraParam.Name].Value);
+                    parameterValues.Remove(paramsMap[extraParam.Name]);
                 }
                 else
                 {
-                    extraParamNames.Add("default");
+                    extraParamNames.Add($"default");
                 }
             }
             _writer.Line($".{WriteMethodInvocation($"Get{_resourceCollection.Resource.Type.Name.ResourceNameToPlural()}", extraParamNames)};");
@@ -251,10 +252,10 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     using (_writer.Scope())
                     {
                         _writer.Line($"// Example: {exampleModel.Name}");
-                        List<string> paramNames = WriteOperationParameters(methodParameters, new List<Parameter>(), exampleModel);
+                        List<KeyValuePair<string, FormattableString>> parameterValues = WriteOperationParameters(methodParameters, exampleModel);
                         _writer.Line();
-                        WriteGetCollection(parentTp, operation.RequestPath.SerializedPath, exampleModel, paramNames);
-                        WriteMethodTestInvocation(async, clientOperation, isLroOperation, $"collection.{testMethodName}", paramNames);
+                        WriteGetCollection(parentTp, operation.RequestPath.SerializedPath, exampleModel, parameterValues);
+                        WriteMethodTestInvocation(async, clientOperation, isLroOperation, $"collection.{testMethodName}", parameterValues.Select(pv => pv.Value));
                     }
                     _writer.Line();
                     exampleIdx++;

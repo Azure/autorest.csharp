@@ -24,7 +24,6 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
         public void WriteMockExtension()
         {
-
             using (_writer.Namespace(TestNamespace))
             {
                 _writer.WriteXmlDocumentationSummary($"Test Extension for {_context.DefaultNamespace}");

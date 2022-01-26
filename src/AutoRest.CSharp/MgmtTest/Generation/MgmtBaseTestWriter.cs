@@ -218,7 +218,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             return constructor;
         }
 
-        public void WriteSchemaObjectExampleValue(CodeWriter writer, ObjectType sot, ExampleValue ev, string variableName)
+        public void WriteSchemaObjectExampleValue(CodeWriter writer, ObjectType sot, ExampleValue ev, FormattableString variableName)
         {
             // Find Polimophismed schema
             if (sot is SchemaObjectType && Context.Library.SchemaMap.ContainsKey(ev.Schema))
@@ -282,7 +282,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 WriteSchemaObjectExampleProperties(writer, sot, ev, variableName, consumedProperties);
         }
 
-        protected void CreateTagWriterDelegate(string newVariableName, CSharpType valueType, ExampleValue ev)
+        protected void CreateTagWriterDelegate(FormattableString newVariableName, CSharpType valueType, ExampleValue ev)
         {
             _tagsWriterDelegate = new CodeWriterDelegate(writer =>
             {
@@ -292,7 +292,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             });
         }
 
-        private void WriteSchemaObjectExampleProperties(CodeWriter writer, ObjectType sot, ExampleValue ev, string variableName, HashSet<ObjectTypeProperty> consumedProperties)
+        private void WriteSchemaObjectExampleProperties(CodeWriter writer, ObjectType sot, ExampleValue ev, FormattableString variableName, HashSet<ObjectTypeProperty> consumedProperties)
         {
             using (writer.Scope($"", newLine: false))
             {
@@ -305,7 +305,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                         var paramValue = FindPropertyValue(sot, ev, targetProperty!);
                         if (paramValue is not null)
                         {
-                            var newVariableName = $"{variableName}.{targetProperty.Declaration.Name}";
+                            FormattableString newVariableName = $"{variableName}.{targetProperty.Declaration.Name}";
                             if (targetProperty.Declaration.Name == "Tags" && targetProperty.ValueType.Name == "IDictionary")
                             {
                                 CreateTagWriterDelegate(newVariableName, targetProperty.ValueType, paramValue);
@@ -409,7 +409,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             }
         }
 
-        public void WriteFrameworkTypeExampleValue(CodeWriter writer, CSharpType cst, ExampleValue exampleValue, string variableName)
+        public void WriteFrameworkTypeExampleValue(CodeWriter writer, CSharpType cst, ExampleValue exampleValue, FormattableString variableName)
         {
             if (cst.Name == "IList" || cst.Name == "IEnumerable")
             {
@@ -517,7 +517,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             }
         }
 
-        public void WriteExampleValue(CodeWriter writer, CSharpType cst, ExampleValue exampleValue, string variableName)
+        public void WriteExampleValue(CodeWriter writer, CSharpType cst, ExampleValue exampleValue, FormattableString variableName)
         {
             TypeProvider? tp = cst.IsFrameworkType ? null : cst.Implementation;
             switch (tp)
@@ -537,29 +537,19 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             }
         }
 
-        public string GetDeclaredActualName(CodeWriterDeclaration decalration)
-        {
-            var actualName = decalration.ActualName;
-            if (Utilities.StringExtensions.IsCSharpKeyword(actualName))
-            {
-                actualName = $"@{actualName}";
-            }
-            return actualName;
-        }
-
-        public string WriteExampleParameterDeclaration(CodeWriter writer, ExampleParameter exampleParameter, Parameter parameter)
+        public FormattableString WriteExampleParameterDeclaration(CodeWriter writer, ExampleParameter exampleParameter, Parameter parameter)
         {
             var variableName = new CodeWriterDeclaration(exampleParameter.Parameter.CSharpName());
             writer.Append($"{parameter.Type} {variableName:D} = ");
-            var declaredActualName = GetDeclaredActualName(variableName);
-            WriteExampleValue(writer, parameter.Type, exampleParameter.ExampleValue, declaredActualName);
+            FormattableString formattableVariableName = $"{variableName}";
+            WriteExampleValue(writer, parameter.Type, exampleParameter.ExampleValue, formattableVariableName);
             writer.Line($";");
 
             if (_tagsWriterDelegate != null) {
                 writer.Line($"{_tagsWriterDelegate}");
             }
             _tagsWriterDelegate = null;
-            return declaredActualName;
+            return formattableVariableName;
         }
 
         public static string BuildValueString(ExampleValue exampleValue, Schema schema)
@@ -587,17 +577,13 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             throw new NotImplementedException();
         }
 
-        public List<string> WriteOperationParameters(IEnumerable<Parameter> methodParameters, IEnumerable<Parameter> testMethodParameters, ExampleModel exampleModel)
+        // return a list of pair <parameter-name, value-variable>
+        public List<KeyValuePair<string, FormattableString>> WriteOperationParameters(IEnumerable<Parameter> methodParameters, ExampleModel exampleModel)
         {
-            var paramNames = new List<string>();
+            var parameterValues = new List<KeyValuePair<string, FormattableString>>();
             foreach (var passThruParameter in methodParameters)
             {
-                if (testMethodParameters.Contains(passThruParameter))
-                {
-                    paramNames.Add(passThruParameter.Name);
-                    continue;
-                }
-                string? paramName = null;
+                FormattableString? paramName = null;
                 foreach (ExampleParameter exampleParameter in exampleModel.AllParameter)
                 {
                     if (passThruParameter.Name == exampleParameter.Parameter.CSharpName())
@@ -610,17 +596,17 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     var paramNameDeclare = new CodeWriterDeclaration(passThruParameter.Name);
                     if (passThruParameter.ValidateNotNull)
                     {
-                        _writer.Line($"{passThruParameter.Type} {paramNameDeclare:D} = null; /* Can't find this parameter in example, please provide value here!*/");
+                        _writer.Line($"{passThruParameter.Type} {paramNameDeclare:D} = default; /* Can't find this parameter in example, please provide value here!*/");
                     }
                     else
                     {
-                        _writer.Line($"{passThruParameter.Type} {paramNameDeclare:D} = null;");
+                        _writer.Line($"{passThruParameter.Type} {paramNameDeclare:D} = default;");
                     }
-                    paramName = GetDeclaredActualName(paramNameDeclare);
+                    paramName = $"{paramNameDeclare}";
                 }
-                paramNames.Add(paramName);
+                parameterValues.Add(new KeyValuePair<string, FormattableString>(passThruParameter.Name, paramName));
             }
-            return paramNames;
+            return parameterValues;
         }
 
         public string? ParseRequestPath(MgmtTypeProvider tp, string requestPath, ExampleModel exampleModel)
@@ -736,7 +722,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             return null;
         }
 
-        protected static CodeWriterDelegate WriteMethodInvocation(string methodName, IEnumerable<string> paramNames)
+        protected static CodeWriterDelegate WriteMethodInvocation(FormattableString methodName, IEnumerable<FormattableString> paramNames)
         {
             return new CodeWriterDelegate(writer =>
             {
@@ -750,11 +736,11 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             });
         }
 
-        protected void WriteMethodTestInvocation(bool async, MgmtClientOperation clientOperation, bool isLroOperation, string methodName, IEnumerable<string> paramNames)
+        protected void WriteMethodTestInvocation(bool async, MgmtClientOperation clientOperation, bool isLroOperation, FormattableString methodName, IEnumerable<FormattableString> paramNames)
         {
             _writer.Append($"{GetAwait(async)}");
             if (isLroOperation || clientOperation.IsLongRunningOperation() && !clientOperation.IsPagingOperation(Context)) {
-                paramNames = new List<string>().Append("true").Concat(paramNames);   // assign  waitForCompletion = true
+                paramNames = new List<FormattableString>().Append<FormattableString>($"true").Concat(paramNames);   // assign  waitForCompletion = true
             }
             var isPagingOperation = clientOperation.IsPagingOperation(Context)|| clientOperation.IsListOperation(Context, out var _);
             if (isPagingOperation)

@@ -107,13 +107,13 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             }
         }
 
-        public string WriteGetResource(Resource resource, FormattableString resourceIdentifierParams, ExampleModel exampleModel)
+        public FormattableString WriteGetResource(Resource resource, FormattableString resourceIdentifierParams, ExampleModel exampleModel)
         {
             var resourceVariableName = new CodeWriterDeclaration(resource.Type.Name.FirstCharToLowerCase());
             var idVar = new CodeWriterDeclaration($"{resource.Type.Name.FirstCharToLowerCase()}Id");
             _writer.Line($"var {idVar:D} = {resource.Type}.CreateResourceIdentifier({resourceIdentifierParams});");
             _writer.Line($"var {resourceVariableName:D} = GetArmClient().Get{resource.Type.Name}({idVar});");
-            return GetDeclaredActualName(resourceVariableName);
+            return $"{resourceVariableName}";
         }
 
         protected override Resource? WrapResourceDataType(CSharpType? type, MgmtRestOperation operation)
@@ -160,9 +160,9 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                         _writer.LineRaw($"// Example: {exampleModel.Name}");
                         var resourceIdentifierParams = ComposeResourceIdentifierParams(resource.RequestPaths.First(), exampleModel);
                         var resourceVariableName = WriteGetResource(resource, resourceIdentifierParams, exampleModel);
-                        List<string> paramNames = WriteOperationParameters(methodParameters, Enumerable.Empty<Parameter> (), exampleModel);
+                        List<KeyValuePair<string, FormattableString>> parameterValues = WriteOperationParameters(methodParameters, exampleModel);
                         _writer.Line();
-                        WriteMethodTestInvocation(async, clientOperation, isLroOperation, $"{resourceVariableName}.{testMethodName}", paramNames);
+                        WriteMethodTestInvocation(async, clientOperation, isLroOperation, $"{resourceVariableName}.{testMethodName}", parameterValues.Select(pv => pv.Value));
                     }
                     _writer.Line();
                     exampleIdx++;
