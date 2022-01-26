@@ -50,6 +50,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 using (writer.Scope($"{client.Declaration.Accessibility} partial class {cs.Name}"))
                 {
                     WriteClientFields(writer, client);
+                    WriteClientProperties(writer, client);
                     WriteConstructors(writer, client);
 
                     foreach (var clientMethod in client.ClientMethods)
@@ -95,24 +96,30 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 writer.WriteFieldDeclaration(field);
             }
+        }
 
+        private static void WriteClientProperties(CodeWriter writer, LowLevelClient client)
+        {
             writer
                 .Line()
                 .WriteXmlDocumentationSummary($"The HTTP pipeline for sending and receiving REST requests and responses.")
                 .Line($"public virtual {typeof(HttpPipeline)} Pipeline => {client.Fields.PipelineField.Name};");
 
-            var endpointParameter = client.Parameters.FirstOrDefault(parameter => parameter.Name == "endpoint");
-            if (endpointParameter != null)
+            if (!client.IsSubClient)
             {
-                var uriField = client.Fields.GetFieldByParameter(endpointParameter);
-                if (uriField != null)
+                var endpointParameter = client.Parameters.FirstOrDefault(parameter => parameter.Name == "endpoint");
+                if (endpointParameter != null)
                 {
-                    writer
-                        .Line()
-                        .WriteXmlDocumentationSummary($"The HTTP Uri.")
-                        .Line($"public virtual {uriField.Type} Uri => {uriField.Declaration.ActualName};");
-                }
+                    var uriField = client.Fields.GetFieldByParameter(endpointParameter);
+                    if (uriField != null)
+                    {
+                        writer
+                            .Line()
+                            .WriteXmlDocumentationSummary($"The HTTP Uri.")
+                            .Line($"public virtual {uriField.Type} Uri => {uriField.Declaration.ActualName};");
+                    }
 
+                }
             }
 
             writer.Line();
