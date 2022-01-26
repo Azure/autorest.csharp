@@ -23,8 +23,8 @@ namespace MgmtExpandResourceTypes
     /// <summary> A class representing collection of RecordSet and their operations over its parent. </summary>
     public partial class RecordSetACollection : ArmCollection, IEnumerable<RecordSetA>, IAsyncEnumerable<RecordSetA>
     {
-        private readonly ClientDiagnostics _recordSetARecordSetsClientDiagnostics;
-        private readonly RecordSetsRestOperations _recordSetARecordSetsRestClient;
+        private readonly ClientDiagnostics _recordSetsClientDiagnostics;
+        private readonly RecordSetsRestOperations _recordSetsRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="RecordSetACollection"/> class for mocking. </summary>
         protected RecordSetACollection()
@@ -35,9 +35,8 @@ namespace MgmtExpandResourceTypes
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal RecordSetACollection(ArmResource parent) : base(parent)
         {
-            _recordSetARecordSetsClientDiagnostics = new ClientDiagnostics("MgmtExpandResourceTypes", RecordSetA.ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(RecordSetA.ResourceType, out string recordSetARecordSetsApiVersion);
-            _recordSetARecordSetsRestClient = new RecordSetsRestOperations(_recordSetARecordSetsClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, recordSetARecordSetsApiVersion);
+            _recordSetsClientDiagnostics = new ClientDiagnostics("MgmtExpandResourceTypes", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
+            _recordSetsRestClient = new RecordSetsRestOperations(_recordSetsClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -73,11 +72,11 @@ namespace MgmtExpandResourceTypes
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _recordSetARecordSetsClientDiagnostics.CreateScope("RecordSetACollection.CreateOrUpdate");
+            using var scope = _recordSetsClientDiagnostics.CreateScope("RecordSetACollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _recordSetARecordSetsRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "A".ToRecordType(), relativeRecordSetName, parameters, ifMatch, ifNoneMatch, cancellationToken);
+                var response = _recordSetsRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "A".ToRecordType(), relativeRecordSetName, parameters, ifMatch, ifNoneMatch, cancellationToken);
                 var operation = new RecordSetACreateOrUpdateOperation(ArmClient, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
@@ -112,11 +111,11 @@ namespace MgmtExpandResourceTypes
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _recordSetARecordSetsClientDiagnostics.CreateScope("RecordSetACollection.CreateOrUpdate");
+            using var scope = _recordSetsClientDiagnostics.CreateScope("RecordSetACollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _recordSetARecordSetsRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "A".ToRecordType(), relativeRecordSetName, parameters, ifMatch, ifNoneMatch, cancellationToken).ConfigureAwait(false);
+                var response = await _recordSetsRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "A".ToRecordType(), relativeRecordSetName, parameters, ifMatch, ifNoneMatch, cancellationToken).ConfigureAwait(false);
                 var operation = new RecordSetACreateOrUpdateOperation(ArmClient, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -143,13 +142,13 @@ namespace MgmtExpandResourceTypes
                 throw new ArgumentNullException(nameof(relativeRecordSetName));
             }
 
-            using var scope = _recordSetARecordSetsClientDiagnostics.CreateScope("RecordSetACollection.Get");
+            using var scope = _recordSetsClientDiagnostics.CreateScope("RecordSetACollection.Get");
             scope.Start();
             try
             {
-                var response = _recordSetARecordSetsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "A".ToRecordType(), relativeRecordSetName, cancellationToken);
+                var response = _recordSetsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "A".ToRecordType(), relativeRecordSetName, cancellationToken);
                 if (response.Value == null)
-                    throw _recordSetARecordSetsClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                    throw _recordSetsClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new RecordSetA(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -173,13 +172,13 @@ namespace MgmtExpandResourceTypes
                 throw new ArgumentNullException(nameof(relativeRecordSetName));
             }
 
-            using var scope = _recordSetARecordSetsClientDiagnostics.CreateScope("RecordSetACollection.Get");
+            using var scope = _recordSetsClientDiagnostics.CreateScope("RecordSetACollection.Get");
             scope.Start();
             try
             {
-                var response = await _recordSetARecordSetsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "A".ToRecordType(), relativeRecordSetName, cancellationToken).ConfigureAwait(false);
+                var response = await _recordSetsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "A".ToRecordType(), relativeRecordSetName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _recordSetARecordSetsClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                    throw await _recordSetsClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new RecordSetA(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -200,11 +199,11 @@ namespace MgmtExpandResourceTypes
                 throw new ArgumentNullException(nameof(relativeRecordSetName));
             }
 
-            using var scope = _recordSetARecordSetsClientDiagnostics.CreateScope("RecordSetACollection.GetIfExists");
+            using var scope = _recordSetsClientDiagnostics.CreateScope("RecordSetACollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _recordSetARecordSetsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "A".ToRecordType(), relativeRecordSetName, cancellationToken: cancellationToken);
+                var response = _recordSetsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "A".ToRecordType(), relativeRecordSetName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<RecordSetA>(null, response.GetRawResponse());
                 return Response.FromValue(new RecordSetA(ArmClient, response.Value), response.GetRawResponse());
@@ -227,11 +226,11 @@ namespace MgmtExpandResourceTypes
                 throw new ArgumentNullException(nameof(relativeRecordSetName));
             }
 
-            using var scope = _recordSetARecordSetsClientDiagnostics.CreateScope("RecordSetACollection.GetIfExists");
+            using var scope = _recordSetsClientDiagnostics.CreateScope("RecordSetACollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _recordSetARecordSetsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "A".ToRecordType(), relativeRecordSetName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _recordSetsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "A".ToRecordType(), relativeRecordSetName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<RecordSetA>(null, response.GetRawResponse());
                 return Response.FromValue(new RecordSetA(ArmClient, response.Value), response.GetRawResponse());
@@ -254,7 +253,7 @@ namespace MgmtExpandResourceTypes
                 throw new ArgumentNullException(nameof(relativeRecordSetName));
             }
 
-            using var scope = _recordSetARecordSetsClientDiagnostics.CreateScope("RecordSetACollection.Exists");
+            using var scope = _recordSetsClientDiagnostics.CreateScope("RecordSetACollection.Exists");
             scope.Start();
             try
             {
@@ -279,7 +278,7 @@ namespace MgmtExpandResourceTypes
                 throw new ArgumentNullException(nameof(relativeRecordSetName));
             }
 
-            using var scope = _recordSetARecordSetsClientDiagnostics.CreateScope("RecordSetACollection.Exists");
+            using var scope = _recordSetsClientDiagnostics.CreateScope("RecordSetACollection.Exists");
             scope.Start();
             try
             {
@@ -305,11 +304,11 @@ namespace MgmtExpandResourceTypes
         {
             Page<RecordSetA> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _recordSetARecordSetsClientDiagnostics.CreateScope("RecordSetACollection.GetAll");
+                using var scope = _recordSetsClientDiagnostics.CreateScope("RecordSetACollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _recordSetARecordSetsRestClient.ListByType(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "A".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken);
+                    var response = _recordSetsRestClient.ListByType(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "A".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new RecordSetA(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -320,11 +319,11 @@ namespace MgmtExpandResourceTypes
             }
             Page<RecordSetA> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _recordSetARecordSetsClientDiagnostics.CreateScope("RecordSetACollection.GetAll");
+                using var scope = _recordSetsClientDiagnostics.CreateScope("RecordSetACollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _recordSetARecordSetsRestClient.ListByTypeNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "A".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken);
+                    var response = _recordSetsRestClient.ListByTypeNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "A".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new RecordSetA(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -348,11 +347,11 @@ namespace MgmtExpandResourceTypes
         {
             async Task<Page<RecordSetA>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _recordSetARecordSetsClientDiagnostics.CreateScope("RecordSetACollection.GetAll");
+                using var scope = _recordSetsClientDiagnostics.CreateScope("RecordSetACollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _recordSetARecordSetsRestClient.ListByTypeAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "A".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _recordSetsRestClient.ListByTypeAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "A".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new RecordSetA(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -363,11 +362,11 @@ namespace MgmtExpandResourceTypes
             }
             async Task<Page<RecordSetA>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _recordSetARecordSetsClientDiagnostics.CreateScope("RecordSetACollection.GetAll");
+                using var scope = _recordSetsClientDiagnostics.CreateScope("RecordSetACollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _recordSetARecordSetsRestClient.ListByTypeNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "A".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _recordSetsRestClient.ListByTypeNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "A".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new RecordSetA(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)

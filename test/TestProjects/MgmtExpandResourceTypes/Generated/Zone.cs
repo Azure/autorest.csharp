@@ -31,8 +31,8 @@ namespace MgmtExpandResourceTypes
 
         private readonly ClientDiagnostics _zoneClientDiagnostics;
         private readonly ZonesRestOperations _zoneRestClient;
-        private readonly ClientDiagnostics _recordSetARecordSetsClientDiagnostics;
-        private readonly RecordSetsRestOperations _recordSetARecordSetsRestClient;
+        private readonly ClientDiagnostics _recordSetsClientDiagnostics;
+        private readonly RecordSetsRestOperations _recordSetsRestClient;
         private readonly ZoneData _data;
 
         /// <summary> Initializes a new instance of the <see cref="Zone"/> class for mocking. </summary>
@@ -57,9 +57,8 @@ namespace MgmtExpandResourceTypes
             _zoneClientDiagnostics = new ClientDiagnostics("MgmtExpandResourceTypes", ResourceType.Namespace, DiagnosticOptions);
             ArmClient.TryGetApiVersion(ResourceType, out string zoneApiVersion);
             _zoneRestClient = new ZonesRestOperations(_zoneClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, zoneApiVersion);
-            _recordSetARecordSetsClientDiagnostics = new ClientDiagnostics("MgmtExpandResourceTypes", RecordSetA.ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(RecordSetA.ResourceType, out string recordSetARecordSetsApiVersion);
-            _recordSetARecordSetsRestClient = new RecordSetsRestOperations(_recordSetARecordSetsClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, recordSetARecordSetsApiVersion);
+            _recordSetsClientDiagnostics = new ClientDiagnostics("MgmtExpandResourceTypes", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
+            _recordSetsRestClient = new RecordSetsRestOperations(_recordSetsClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -453,11 +452,11 @@ namespace MgmtExpandResourceTypes
         {
             async Task<Page<RecordSetData>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _recordSetARecordSetsClientDiagnostics.CreateScope("Zone.GetRecordSets");
+                using var scope = _recordSetsClientDiagnostics.CreateScope("Zone.GetRecordSets");
                 scope.Start();
                 try
                 {
-                    var response = await _recordSetARecordSetsRestClient.ListByDnsZoneAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, top, recordsetnamesuffix, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _recordSetsRestClient.ListByDnsZoneAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, top, recordsetnamesuffix, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -468,11 +467,11 @@ namespace MgmtExpandResourceTypes
             }
             async Task<Page<RecordSetData>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _recordSetARecordSetsClientDiagnostics.CreateScope("Zone.GetRecordSets");
+                using var scope = _recordSetsClientDiagnostics.CreateScope("Zone.GetRecordSets");
                 scope.Start();
                 try
                 {
-                    var response = await _recordSetARecordSetsRestClient.ListByDnsZoneNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, top, recordsetnamesuffix, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _recordSetsRestClient.ListByDnsZoneNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, top, recordsetnamesuffix, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -496,11 +495,11 @@ namespace MgmtExpandResourceTypes
         {
             Page<RecordSetData> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _recordSetARecordSetsClientDiagnostics.CreateScope("Zone.GetRecordSets");
+                using var scope = _recordSetsClientDiagnostics.CreateScope("Zone.GetRecordSets");
                 scope.Start();
                 try
                 {
-                    var response = _recordSetARecordSetsRestClient.ListByDnsZone(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, top, recordsetnamesuffix, cancellationToken: cancellationToken);
+                    var response = _recordSetsRestClient.ListByDnsZone(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, top, recordsetnamesuffix, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -511,11 +510,11 @@ namespace MgmtExpandResourceTypes
             }
             Page<RecordSetData> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _recordSetARecordSetsClientDiagnostics.CreateScope("Zone.GetRecordSets");
+                using var scope = _recordSetsClientDiagnostics.CreateScope("Zone.GetRecordSets");
                 scope.Start();
                 try
                 {
-                    var response = _recordSetARecordSetsRestClient.ListByDnsZoneNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, top, recordsetnamesuffix, cancellationToken: cancellationToken);
+                    var response = _recordSetsRestClient.ListByDnsZoneNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, top, recordsetnamesuffix, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -539,11 +538,11 @@ namespace MgmtExpandResourceTypes
         {
             async Task<Page<RecordSetData>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _recordSetARecordSetsClientDiagnostics.CreateScope("Zone.GetAllRecordSets");
+                using var scope = _recordSetsClientDiagnostics.CreateScope("Zone.GetAllRecordSets");
                 scope.Start();
                 try
                 {
-                    var response = await _recordSetARecordSetsRestClient.ListAllByDnsZoneAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, top, recordSetNameSuffix, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _recordSetsRestClient.ListAllByDnsZoneAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, top, recordSetNameSuffix, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -554,11 +553,11 @@ namespace MgmtExpandResourceTypes
             }
             async Task<Page<RecordSetData>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _recordSetARecordSetsClientDiagnostics.CreateScope("Zone.GetAllRecordSets");
+                using var scope = _recordSetsClientDiagnostics.CreateScope("Zone.GetAllRecordSets");
                 scope.Start();
                 try
                 {
-                    var response = await _recordSetARecordSetsRestClient.ListAllByDnsZoneNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, top, recordSetNameSuffix, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _recordSetsRestClient.ListAllByDnsZoneNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, top, recordSetNameSuffix, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -582,11 +581,11 @@ namespace MgmtExpandResourceTypes
         {
             Page<RecordSetData> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _recordSetARecordSetsClientDiagnostics.CreateScope("Zone.GetAllRecordSets");
+                using var scope = _recordSetsClientDiagnostics.CreateScope("Zone.GetAllRecordSets");
                 scope.Start();
                 try
                 {
-                    var response = _recordSetARecordSetsRestClient.ListAllByDnsZone(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, top, recordSetNameSuffix, cancellationToken: cancellationToken);
+                    var response = _recordSetsRestClient.ListAllByDnsZone(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, top, recordSetNameSuffix, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -597,11 +596,11 @@ namespace MgmtExpandResourceTypes
             }
             Page<RecordSetData> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _recordSetARecordSetsClientDiagnostics.CreateScope("Zone.GetAllRecordSets");
+                using var scope = _recordSetsClientDiagnostics.CreateScope("Zone.GetAllRecordSets");
                 scope.Start();
                 try
                 {
-                    var response = _recordSetARecordSetsRestClient.ListAllByDnsZoneNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, top, recordSetNameSuffix, cancellationToken: cancellationToken);
+                    var response = _recordSetsRestClient.ListAllByDnsZoneNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, top, recordSetNameSuffix, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
