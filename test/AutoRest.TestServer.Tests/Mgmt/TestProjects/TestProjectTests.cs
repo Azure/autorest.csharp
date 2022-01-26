@@ -4,15 +4,14 @@ using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
-using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Utilities;
-using AutoRest.TestServer.Tests.Mgmt.OutputLibrary;
+using Azure;
 using Azure.Core;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Models;
 using Azure.ResourceManager.Resources;
+using Microsoft.VisualStudio.TestPlatform.ObjectModel;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
@@ -45,6 +44,27 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         }
 
         protected Type? GetType(string name) => MyTypes().FirstOrDefault(t => t.Name == name);
+
+        [Test]
+        public void ValidateReturnTypesInPublicExtension()
+        {
+            foreach (var type in MyTypes().Where(t => t.Name.EndsWith("Extensions")))
+            {
+                foreach (var method in type.GetMethods(BindingFlags.Public | BindingFlags.Static).Where(m => m.ReturnType.IsSubclassOf(typeof(Task))))
+                {
+                    var typeArg = method.ReturnType.GenericTypeArguments.FirstOrDefault();
+                    Assert.IsNotNull(typeArg);
+                    if (typeArg.IsGenericType)
+                    {
+                        Assert.AreEqual(typeof(Response<>), typeArg.GetGenericTypeDefinition());
+                    }
+                    else
+                    {
+                        Assert.AreEqual(typeof(Response), typeArg);
+                    }
+                }
+            }
+        }
 
         [Test]
         public void ValidateNoListMethods()

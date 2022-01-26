@@ -34,6 +34,48 @@
         }
     },
     "paths": {
+        "/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/CheckDnsNameAvailability": {
+            "get": {
+                "operationId": "CheckDnsNameAvailability",
+                "description": "Checks whether a domain name in the cloudapp.azure.com zone is available for use.",
+                "parameters": [
+                    {
+                        "name": "location",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The location of the domain name."
+                    },
+                    {
+                        "name": "domainNameLabel",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "description": "The domain name to be verified. It must conform to the following regular expression: ^[a-z][a-z0-9-]{1,61}[a-z0-9]$."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request successful. Returns whether the DNS name is available.",
+                        "schema": {
+                            "$ref": "#/definitions/DnsNameAvailabilityResult"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    }
+                }
+            }
+        },
         "/subscriptions/{subscriptionId}/providers/Microsoft.Singleton/subSingletons/default": {
             "get": {
                 "tags": [
@@ -790,6 +832,15 @@
                 }
             },
             "description": "SubSingleton object."
+        },
+        "DnsNameAvailabilityResult": {
+            "properties": {
+                "available": {
+                    "type": "boolean",
+                    "description": "Domain availability (True/False)."
+                }
+            },
+            "description": "Response for the CheckDnsNameAvailability API service call."
         }
     },
     "parameters": {

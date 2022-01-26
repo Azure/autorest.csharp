@@ -59,7 +59,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected Parameter ExtensionParameter { get; }
 
-        protected void WriteMethodWrapper(MgmtClientOperation clientOperation, bool async)
+        protected void WriteMethodWrapper(MgmtClientOperation clientOperation, bool isAsync)
         {
             BuildParameters(clientOperation, out var operationMappings, out var parameterMappings, out var methodParameters);
             if (!IsArmCore)
@@ -69,8 +69,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
             if (clientOperation.IsLongRunningOperation() && !clientOperation.IsPagingOperation(Context))
             {
                 methodParameters.Insert(1, WaitForCompletionParameter);
+                if (clientOperation.ReturnType is null)
+                    throw new InvalidOperationException($"LRO method had null return type {clientOperation.RestClient.Type.Name}.{clientOperation.Name}");
                 // this is a non-pageable long-running operation
-                WriteMethodWrapperImpl(clientOperation, clientOperation.Name, clientOperation.ReturnType, methodParameters, async, false);
+                WriteMethodWrapperImpl(clientOperation, clientOperation.Name, clientOperation.ReturnType.WrapAsync(isAsync), methodParameters, isAsync, false);
             }
             else if (clientOperation.IsLongRunningOperation() && clientOperation.IsPagingOperation(Context))
             {
@@ -81,21 +83,30 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 // this is a paging operation
                 var itemType = clientOperation.First(restOperation => restOperation.IsPagingOperation(Context)).GetPagingMethod(Context)!.PagingResponse.ItemType;
-                WriteMethodWrapperImpl(clientOperation, clientOperation.Name, GetActualItemType(clientOperation, itemType), methodParameters, async, true);
+                itemType = GetActualItemType(clientOperation, itemType);
+                if (itemType is null)
+                    throw new InvalidOperationException($"Paging method had null item type {clientOperation.RestClient.Type.Name}.{clientOperation.Name}");
+                CSharpType actualReturnType = itemType.WrapPageable(isAsync);
+                WriteMethodWrapperImpl(clientOperation, clientOperation.Name, actualReturnType, methodParameters, isAsync, true);
             }
             else if (clientOperation.IsListOperation(Context, out var itemType))
             {
                 // this is a normal list operation
-                WriteMethodWrapperImpl(clientOperation, clientOperation.Name, GetActualItemType(clientOperation, itemType), methodParameters, async, true);
+                itemType = GetActualItemType(clientOperation, itemType);
+                if (itemType is null)
+                    throw new InvalidOperationException($"Paging method had null item type {clientOperation.RestClient.Type.Name}.{clientOperation.Name}");
+                CSharpType actualReturnType = itemType.WrapPageable(isAsync);
+                WriteMethodWrapperImpl(clientOperation, clientOperation.Name, actualReturnType, methodParameters, isAsync, true);
             }
             else
             {
+                CSharpType actualReturnType = GetResponseType(GetActualItemType(clientOperation, clientOperation.ReturnType), isAsync);
                 // this is a normal operation
-                WriteMethodWrapperImpl(clientOperation, clientOperation.Name, GetActualItemType(clientOperation, clientOperation.ReturnType), methodParameters, async, false);
+                WriteMethodWrapperImpl(clientOperation, clientOperation.Name, actualReturnType, methodParameters, isAsync, false);
             }
         }
 
-        private void WriteMethodSignatureWrapper(CSharpType? actualItemType, string methodName, IReadOnlyList<Parameter> methodParameters, bool isAsync, bool isPaging)
+        private void WriteMethodSignatureWrapper(CSharpType actualItemType, string methodName, IReadOnlyList<Parameter> methodParameters, bool isAsync, bool isPaging)
         {
             foreach (var parameter in methodParameters)
             {
@@ -106,12 +117,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
             if (isPaging)
                 _writer.WriteXmlDocumentationReturns($"A collection of resource operations that may take multiple service requests to iterate over.");
 
-            actualItemType ??= typeof(Response);
-
-            var responseType = isPaging ? actualItemType.WrapPageable(isAsync) : actualItemType.WrapAsync(isAsync);
             string asyncText = isPaging ? string.Empty : GetAsyncKeyword(isAsync);
             string thisText = methodParameters.Count > 0 && methodParameters.First().Equals(ExtensionParameter) ? "this " : string.Empty;
-            _writer.Append($"public static {asyncText} {responseType} {CreateMethodName(methodName, isAsync)}({thisText}");
+            _writer.Append($"public static {asyncText} {actualItemType} {CreateMethodName(methodName, isAsync)}({thisText}");
 
             foreach (var parameter in methodParameters)
             {
@@ -150,7 +158,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         private void WriteMethodWrapperImpl(
             MgmtClientOperation clientOperation,
             string methodName,
-            CSharpType? itemType,
+            CSharpType itemType,
             IReadOnlyList<Parameter> methodParameters,
             bool async,
             bool isPaging)
