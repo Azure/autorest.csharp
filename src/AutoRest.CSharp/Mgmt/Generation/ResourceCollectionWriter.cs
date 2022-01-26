@@ -189,7 +189,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
             WriteEnumerableImpl(_writer);
         }
 
-        protected override void BuildParameters(MgmtClientOperation clientOperation, out Dictionary<RequestPath, MgmtRestOperation> operationMappings, out Dictionary<RequestPath, IEnumerable<ParameterMapping>> parameterMappings, out IReadOnlyList<Parameter> methodParameters)
+        protected override void BuildParameters(
+            MgmtClientOperation clientOperation,
+            out Dictionary<RequestPath, MgmtRestOperation> operationMappings,
+            out Dictionary<RequestPath, IEnumerable<ParameterMapping>> parameterMappings,
+            out List<Parameter> methodParameters)
         {
             // get the corresponding MgmtClientOperation mapping
             operationMappings = clientOperation.ToDictionary(

@@ -48,6 +48,20 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected virtual Resource? DefaultResource { get; } = null;
 
+        protected static readonly Parameter CancellationTokenParameter = new Parameter(
+            "cancellationToken",
+            "The cancellation token to use.",
+            typeof(CancellationToken),
+            Constant.NewInstanceOf(typeof(CancellationToken)),
+            false);
+
+        protected static readonly Parameter WaitForCompletionParameter = new Parameter(
+            "waitForCompletion",
+            "Waits for the completion of the long running operations.",
+            typeof(bool),
+            null,
+            false);
+
         private T _provider;
         protected virtual T This => _provider;
         protected virtual CSharpType TypeOfThis => This.Type;
@@ -888,7 +902,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         }
 
         protected virtual void BuildParameters(MgmtClientOperation clientOperation, out Dictionary<RequestPath, MgmtRestOperation> operationMappings,
-            out Dictionary<RequestPath, IEnumerable<ParameterMapping>> parameterMappings, out IReadOnlyList<Parameter> methodParameters)
+            out Dictionary<RequestPath, IEnumerable<ParameterMapping>> parameterMappings, out List<Parameter> methodParameters)
         {
             // get the corresponding MgmtClientOperation mapping
             operationMappings = clientOperation.ToDictionary(
