@@ -309,16 +309,51 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
 
         protected override Resource? WrapResourceDataType(CSharpType? type, MgmtRestOperation operation)
         {
-            if (!IsResourceDataType(type, operation, out _))
+            if (!IsResourceDataType(type, operation, out var data))
                 return null;
+            if (Config.IsArmCore)
+            {
+                // we need to find the correct resource type that links with this resource data
+                var candidates = Context.Library.FindResources(data);
 
+                // return null when there is no match
+                if (!candidates.Any())
+                    return null;
+
+                // when we only find one result, just return it.
+                if (candidates.Count() == 1)
+                    return candidates.Single();
+
+                // if there is more candidates than one, we are going to some more matching to see if we could determine one
+                var resourceType = operation.RequestPath.GetResourceType(Config);
+                var filteredResources = candidates.Where(resource => resource.ResourceType == resourceType);
+
+                if (filteredResources.Count() == 1)
+                    return filteredResources.Single();
+            }
             return _resource;
         }
 
         protected override bool IsResourceDataType(CSharpType? type, MgmtRestOperation clientOperation, [MaybeNullWhen(false)] out ResourceData data)
         {
-            data = _resourceData;
-            return data.Type.Equals(type);
+            if (Config.IsArmCore)
+            {
+                data = null;
+                if (type == null || type.IsFrameworkType)
+                    return false;
+
+                if (Context.Library.TryGetTypeProvider(type.Name, out var provider))
+                {
+                    data = provider as ResourceData;
+                    return data != null;
+                }
+                return false;
+            }
+            else
+            {
+                data = _resourceData;
+                return data.Type.Equals(type);
+            }
         }
 
         private void WriteListAvailableLocationsMethod(bool async)
