@@ -152,6 +152,12 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         internal bool DoesMatch(ResourceTypeSegment other)
         {
+            if (Count == 0)
+                return other.Count == 0;
+
+            if (Count != other.Count)
+                return false;
+
             if (this[Count - 1].IsConstant)
                 return this == other;
 
@@ -160,9 +166,6 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         private bool DoAllButLastItemMatch(ResourceTypeSegment other)
         {
-            if (Count != other.Count)
-                return false;
-
             for (int i = 0; i < Count - 1; i++)
             {
                 if (this[i] != other[i])
