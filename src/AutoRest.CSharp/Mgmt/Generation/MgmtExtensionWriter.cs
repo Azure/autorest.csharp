@@ -136,7 +136,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             _writer.Line();
             string staticText = IsArmCore ? string.Empty : "static ";
-            string signatureParamText = IsArmCore ? string.Empty : $"{ExtensionOperationVariableType} {ExtensionOperationVariableName}";
+            FormattableString signatureParamText = IsArmCore ? (FormattableString)$"" : (FormattableString)$"{ExtensionOperationVariableType} {ExtensionOperationVariableName}";
             using (_writer.Scope($"private {staticText}{ExtensionOperationVariableType.Name}ExtensionClient GetExtensionClient({signatureParamText})"))
             {
                 using (_writer.Scope($"return {ExtensionOperationVariableName}.GetCachedClient(({ArmClientReference}) =>"))
@@ -244,6 +244,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             string methodName = $"Get{resource.Type.Name}";
             List<Parameter> parameters = new List<Parameter>();
+            if (!IsArmCore)
+                parameters.Add(ExtensionParameter);
             WriteMethodSignatureWrapper(resource.Type, methodName, parameters, isAsync: false, isPaging: false);
             using (_writer.Scope())
             {
