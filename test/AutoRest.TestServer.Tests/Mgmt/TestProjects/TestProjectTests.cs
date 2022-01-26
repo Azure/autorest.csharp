@@ -53,6 +53,9 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 foreach (var method in type.GetMethods(BindingFlags.Public | BindingFlags.Static).Where(m => m.ReturnType.IsSubclassOf(typeof(Task))))
                 {
                     var typeArg = method.ReturnType.GenericTypeArguments.FirstOrDefault();
+                    if (typeArg.IsSubclassOf(typeof(Operation)))
+                        continue; //skip LROs
+
                     Assert.IsNotNull(typeArg);
                     if (typeArg.IsGenericType)
                     {
