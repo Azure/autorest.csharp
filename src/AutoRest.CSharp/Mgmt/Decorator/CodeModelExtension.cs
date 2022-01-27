@@ -38,11 +38,20 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
         }
 
+        private static void ApplyAcronymsDictionary(MgmtConfiguration config)
+        {
+            foreach ((var key, var value) in config.AcroynmsDictionary)
+            {
+                CommonAcronyms.Add(key, value);
+            }
+        }
+
         public static void UpdateAcronyms(this CodeModel codeModel, MgmtConfiguration config)
         {
+            ApplyAcronymsDictionary(config);
             foreach (var schema in codeModel.GetAllSchemas())
             {
-                TransformSchema(schema, config);
+                TransformSchema(schema);
             }
         }
 
@@ -54,7 +63,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 .Concat(codeModel.Schemas.Groups);
         }
 
-        private static void TransformSchema(Schema schema, MgmtConfiguration config)
+        private static void TransformSchema(Schema schema)
         {
             switch (schema)
             {
