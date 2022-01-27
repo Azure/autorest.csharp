@@ -51,16 +51,31 @@ function Update-Branch([string]$CommitId, [string]$Path) {
     $store | Out-File -FilePath $file
 }
 function Send-ErrorMessage([string]$message) {
-        Write-Host -ForegroundColor Red $message
-        Write-Host -ForegroundColor Red "MockTestInit script exit."
-        exit
+    Write-Host -ForegroundColor Red $message
+    Write-Host -ForegroundColor Red "MockTestInit script exit."
+    exit
+}
+function Show-Result([array]$list) {
+    $i = 0
+    foreach ($item in $list) {
+        if ($i % 3 -eq 0) {
+            $result = $result -join "`t"
+            Write-Host $result
+            $result = @()
+        }
+        $i += 1
+        $result += $item
+    }
+    $result = $result -join "`t"
+    Write-Host $result
+    Write-Host ""
 }
 function Update-AutorestTarget([string]$file, [string]$autorestVersion) {
     $fileContent = Get-Content $file
     $store = @()
     foreach ($item in $fileContent) {
         if ($item.Contains("</_AutoRestCSharpVersion>")) {
-            $store+= "<_AutoRestCSharpVersion>$autorestVersion</_AutoRestCSharpVersion>"
+            $store += "<_AutoRestCSharpVersion>$autorestVersion</_AutoRestCSharpVersion>"
         }
         $store += $item
     }
@@ -166,18 +181,18 @@ function  MockTestInit {
         & dotnet new -i $projRoot\MgmtTemplate\mocktests
 
         # Clone Azure/azure-sdk-for-net
-        # & git clone https://github.com/Azure/azure-sdk-for-net.git $projRoot\azure-sdk-for-net
-        $netRepoRoot =Join-Path $projRoot "azure-sdk-for-net"
-        $netRepoRoot =Join-Path $projRoot "..\azure-sdk-for-net"
+        & git clone https://github.com/Azure/azure-sdk-for-net.git $projRoot\azure-sdk-for-net
+        $netRepoRoot = Join-Path $projRoot "azure-sdk-for-net"
+        $netRepoSdkFolder = Join-Path $netRepoRoot "sdk"
         $CodeGenTargetFile = Join-Path $netRepoRoot "\eng\CodeGeneration.targets"
-        Update-AutorestTarget -file $netRepoRoot -autorestVersion $autorestVersion
-
-        # Clone Azure/azure-rest-api-specs
-        # & git clone https://github.com/Azure/azure-rest-api-specs.git $projRoot\azure-rest-api-specs
-        $SpecsRepoPath  =Join-Path $projRoot "azure-rest-api-specs" 
+        Update-AutorestTarget -file $CodeGenTargetFile -autorestVersion $autorestVersion
 
         # Generate Track2 SDK Template
         if ($GenerateNewSDKs) {
+            # Clone Azure/azure-rest-api-specs
+            & git clone https://github.com/Azure/azure-rest-api-specs.git $projRoot\azure-rest-api-specs
+            $SpecsRepoPath = Join-Path $projRoot "azure-rest-api-specs" 
+        
             # Get RP Mapping from azure-rest-api-specs repo of local
             Write-Output "Start RP mapping "
             $folderNames = Get-ChildItem $SpecsRepoPath/specification
@@ -194,7 +209,7 @@ function  MockTestInit {
 
             # Remove exist sdk from $Script:RPMapping
             $sdkExistFolder = @()
-            $sdkFolder = Get-ChildItem $PSScriptRoot\..\..\sdk
+            $sdkFolder = Get-ChildItem $netRepoSdkFolder
             $sdkFolder  | ForEach-Object {
                 $sdkExistFolder += $_.Name
                 $curSdkFolder = @(Get-ChildItem $_) 
@@ -209,8 +224,8 @@ function  MockTestInit {
             foreach ($sdkName in $Script:RPMapping.Keys) {
                 if ($sdkExistFolder.Contains($Script:RPMapping[$sdkName])) {
                     $generateSdkName = $sdkName.ToString().Replace("Azure.ResourceManager.", "")
-                    $generateSdkPath = $PSScriptRoot.ToString().Replace("eng\scripts", "sdk\") + $Script:RPMapping[$sdkName] + "\Azure.ResourceManager." + $generateSdkName
-                    dotnet new azuremgmt -p $generateSdkName -o $generateSdkPath
+                    $generateSdkPath = $netRepoSdkFolder.ToString() + "\" + $Script:RPMapping[$sdkName] + "\Azure.ResourceManager." + $generateSdkName
+                    & dotnet new azuremgmt -p $generateSdkName -o $generateSdkPath
                     Update-Branch -CommitId $CommitId -Path $generateSdkPath
                     $Script:newGenerateSdk ++
                 }
@@ -220,7 +235,7 @@ function  MockTestInit {
 
 
         # Init All Track2 Sdk
-        $sdkFolder = Get-ChildItem $PSScriptRoot\..\..\sdk
+        $sdkFolder = Get-ChildItem $netRepoSdkFolder
         $sdkFolder  | ForEach-Object {
             $curFolderPRs = Get-ChildItem($_)
             foreach ($item in $curFolderPRs) {
@@ -235,24 +250,27 @@ function  MockTestInit {
     end {
         # All Successed Output statistical results
         Write-Host "Mock Test Initialize Completed."
-        Write-Host "Track2 SDK Total: $Script:allTrack2Sdk"
-        Write-Host "New generated track2 RPs: $Script:newGenerateSdk" 
-        Write-Host "srcGenerateSuccessedRps: "$Script:srcGenerateSuccessedRps.Count 
-        Write-Host "srcBuildSuccessedRps: "$Script:srcBuildSuccessedRps.Count 
-        Write-Host "testGenerateSuccesseddRps: "$Script:testGenerateSuccessedRps.Count 
-        Write-Host "testBuildSuccessedRps: "$Script:testBuildSuccessedRps.Count 
-        Write-Host "Src generate error RPs: $Script:srcGenerateErrorRps"
-        Write-Host "Src build error RPs: $Script:srcBuildErrorRps"
-        Write-Host "Mock test generate error RPs: $Script:testGenerateErrorRps"
-        Write-Host "Mock test build error RPs: $Script:testBuildErrorRps"
+        Write-Host -ForegroundColor Blue "Track2 SDK Total: $Script:allTrack2Sdk"
+        Write-Host -ForegroundColor Blue "New generated track2 RPs: $Script:newGenerateSdk" 
+        Write-Host -ForegroundColor Green "srcGenerateSuccessedRps: "$Script:srcGenerateSuccessedRps.Count
+        Show-Result($Script:srcGenerateSuccessedRps) 
+        Write-Host-ForegroundColor Green "srcBuildSuccessedRps: "$Script:srcBuildSuccessedRps.Count 
+        Show-Result($Script:srcBuildSuccessedRps) 
+        Write-Host-ForegroundColor Green "testGenerateSuccesseddRps: "$Script:testGenerateSuccessedRps.Count 
+        Show-Result($Script:testGenerateSuccessedRps) 
+        Write-Host -ForegroundColor Green "testBuildSuccessedRps: "$Script:testBuildSuccessedRps.Count 
+        Show-Result($Script:testBuildSuccessedRps) 
+        Write-Host -ForegroundColor Red "Src generate error RPs: "$Script:srcGenerateErrorRps.Count 
+        Show-Result($Script:srcGenerateErrorRps) 
+        Write-Host -ForegroundColor Red "Src build error RPs: "$Script:srcBuildErrorRps.Count 
+        Show-Result($Script:srcBuildErrorRps) 
+        Write-Host -ForegroundColor Red "Mock test generate error RPs: "$Script:testGenerateErrorRps.Count 
+        Show-Result($Script:testGenerateErrorRps) 
+        Write-Host -ForegroundColor Red "Mock test build error RPs: "$Script:testBuildErrorRps.Count 
+        Show-Result($Script:testBuildErrorRps) 
     }
 }
 
-# prerequisites: 
-#   1.[Warning] Make this change locally only. Do not commit to main branch.
-#     Change [eng\CodeGeneration.targets] file _AutoRestCSharpVersion property to $AutorestVersion, 
-#     let src and mock be generated with same version of autorest
-#   2.Run 'dotnet new -l' make sure [azmocktests]&[azmgmt] already exist and they are latest.
 $commitId = "322d0edbc46e10b04a56f3279cecaa8fe4d3b69b"
 $GenerateNewSDKs = $false
 MockTestInit -CommitId $commitId -GenerateNewSDKs $GenerateNewSDKs
