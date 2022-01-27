@@ -84,5 +84,17 @@ namespace MgmtParamOrdering
             return new Workspace(armClient, id);
         }
         #endregion
+
+        #region VirtualMachineScaleSet
+        /// <summary> Gets an object representing a VirtualMachineScaleSet along with the instance operations that can be performed on it but with no data. </summary>
+        /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="VirtualMachineScaleSet" /> object. </returns>
+        public static VirtualMachineScaleSet GetVirtualMachineScaleSet(this ArmClient armClient, ResourceIdentifier id)
+        {
+            VirtualMachineScaleSet.ValidateResourceId(id);
+            return new VirtualMachineScaleSet(armClient, id);
+        }
+        #endregion
     }
 }

@@ -38,7 +38,7 @@ namespace AutoRest.CSharp.Output.Models
             _requestMethods = new CachedDictionary<ServiceRequest, RestClientMethod>(EnsureNormalMethods);
             _nextPageRequestMethods = new CachedDictionary<ServiceRequest, RestClientMethod>(EnsureGetNextPageMethods);
 
-            Parameters = Builder.GetOrderedParameters();
+            Parameters = Builder.GetOrderedParametersByRequired();
 
             ClientPrefix = clientPrefix;
             DefaultName = clientPrefix + defaultClientSuffix;
