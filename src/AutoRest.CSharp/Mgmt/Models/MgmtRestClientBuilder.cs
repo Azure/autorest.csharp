@@ -52,5 +52,41 @@ namespace AutoRest.CSharp.Mgmt.Models
             var parameter = base.BuildConstructorParameter(requestParameter);
             return parameter.IsApiVersionParameter ? parameter with { UseDefaultValueInCtorParam = false } : parameter;
         }
+
+        protected override Parameter[] BuildMethodParameters(IReadOnlyDictionary<RequestParameter, Parameter> allParameters)
+        {
+            List<Parameter> requiredParameters = new();
+            List<Parameter> optionalParameters = new();
+            List<Parameter> bodyParameters = new();
+            foreach (var (requestParameter, parameter) in allParameters)
+            {
+                // Grouped and flattened parameters shouldn't be added to methods
+                if (IsMethodParameter(requestParameter))
+                {
+                    // sort the parameters by the following sequence:
+                    // 1. required parameters
+                    // 2. body parameters (if exists), note that form data can generate multiple body parameters (e.g. "in": "formdata")
+                    //    see test project `body-formdata` for more details
+                    // 3. optional parameters
+                    if (parameter.RequestLocation == RequestLocation.Body)
+                    {
+                        bodyParameters.Add(parameter);
+                    }
+                    else if (parameter.DefaultValue == null)
+                    {
+                        requiredParameters.Add(parameter);
+                    }
+                    else
+                    {
+                        optionalParameters.Add(parameter);
+                    }
+                }
+            }
+
+            requiredParameters.AddRange(bodyParameters.OrderBy(p => p.DefaultValue != null)); // move required body parameters at the beginning
+            requiredParameters.AddRange(optionalParameters);
+
+            return requiredParameters.ToArray();
+        }
     }
 }

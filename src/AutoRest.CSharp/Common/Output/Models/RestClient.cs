@@ -90,7 +90,7 @@ namespace AutoRest.CSharp.Output.Models
                     {
                         continue;
                     }
-                    requestMethods.Add(serviceRequest, Builder.BuildMgmtMethod(operation, httpRequest, serviceRequest.Parameters, ShouldReturnNullOn404(operation)));
+                    requestMethods.Add(serviceRequest, Builder.BuildMethod(operation, httpRequest, serviceRequest.Parameters, null, "public", ShouldReturnNullOn404(operation)));
                 }
             }
 

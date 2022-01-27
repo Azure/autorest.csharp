@@ -33,7 +33,7 @@ namespace AutoRest.CSharp.Output.Models
                     }
                     var headerModel = _context.Library.FindHeaderModel(operation);
                     var accessibility = operation.Accessibility ?? "public";
-                    requestMethods.Add(serviceRequest, Builder.BuildDataPlaneMethod(operation, httpRequest, serviceRequest.Parameters, headerModel, accessibility));
+                    requestMethods.Add(serviceRequest, Builder.BuildMethod(operation, httpRequest, serviceRequest.Parameters, headerModel, accessibility));
                 }
             }
 
