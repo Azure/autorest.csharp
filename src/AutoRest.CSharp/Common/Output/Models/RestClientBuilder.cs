@@ -101,7 +101,8 @@ namespace AutoRest.CSharp.Output.Models
                 null,
                 operation.Extensions?.BufferResponse ?? true,
                 accessibility: accessibility,
-                operation
+                operation,
+                buildContext.RequestConditionFlag
             );
         }
 

@@ -17,6 +17,8 @@ using AutoRest.CSharp.Utilities;
 using Microsoft.CodeAnalysis.Options;
 using System.Diagnostics.CodeAnalysis;
 using AutoRest.CSharp.Output.Models;
+using Azure;
+using AutoRest.CSharp.Common.Output.Models;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -160,6 +162,38 @@ namespace AutoRest.CSharp.Generation.Writers
             foreach (Parameter parameter in parameters)
             {
                 writer.WriteVariableAssignmentWithNullCheck(parameter.Name, parameter);
+            }
+
+            writer.Line();
+            return writer;
+        }
+
+        private static Dictionary<RequestConditionHeaders, string> requestConditionHeaderNames = new Dictionary<RequestConditionHeaders, string> {
+            {RequestConditionHeaders.None, "" },
+            {RequestConditionHeaders.IfMatch, "If-Match" },
+            {RequestConditionHeaders.IfNoneMatch, "If-None-Match" },
+            {RequestConditionHeaders.IfModifiedSince, "If-Modified-Since" },
+            {RequestConditionHeaders.IfUnmodifiedSince, "If-Unmodified-Since" }
+        };
+        public static CodeWriter WriteRequestConditionParameterChecks(this CodeWriter writer, IReadOnlyCollection<Parameter> parameters, RequestConditionHeaders requestConditionFlag)
+        {
+            foreach (Parameter parameter in parameters)
+            {
+                if (parameter.Type.Equals(typeof(RequestConditions)))
+                {
+                    //writer.Append($"Argument.AssertHasOnlySupportedHeaders({parameter.Name:I}, \"{parameter.Name:I}\", {supportedHeaders});");
+                    writer.Append($"Argument.AssertHasOnlySupportedHeaders({parameter.Name:I}, \"{parameter.Name:I}\"");
+#pragma warning disable CS8605 // Unboxing a possibly null value.
+                    foreach (RequestConditionHeaders val in Enum.GetValues(typeof(RequestConditionHeaders)))
+#pragma warning restore CS8605 // Unboxing a possibly null value.
+                    {
+                        if (val != RequestConditionHeaders.None && requestConditionFlag.HasFlag(val))
+                        {
+                            writer.Append($", \"{requestConditionHeaderNames[val]}\"");
+                        }
+                    }
+                    writer.Append($");");
+                }
             }
 
             writer.Line();
