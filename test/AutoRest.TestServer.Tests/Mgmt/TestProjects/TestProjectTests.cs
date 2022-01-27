@@ -46,6 +46,26 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         protected Type? GetType(string name) => MyTypes().FirstOrDefault(t => t.Name == name);
 
         [Test]
+        public void AllClientsShouldHaveMockingCtor()
+        {
+            foreach (var type in FindAllResources())
+            {
+                var mockCtor = type.GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic).Where(c=>c.IsFamily && c.GetParameters().Length == 0).FirstOrDefault();
+                Assert.IsNotNull(mockCtor);
+            }
+            foreach (var type in FindAllCollections())
+            {
+                var mockCtor = type.GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic).Where(c => c.IsFamily && c.GetParameters().Length == 0).FirstOrDefault();
+                Assert.IsNotNull(mockCtor);
+            }
+            foreach (var type in FindAllExtensionClients())
+            {
+                var mockCtor = type.GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic).Where(c => c.IsFamily && c.GetParameters().Length == 0).FirstOrDefault();
+                Assert.IsNotNull(mockCtor);
+            }
+        }
+
+        [Test]
         public void ValidateReturnTypesInPublicExtension()
         {
             foreach (var type in MyTypes().Where(t => t.Name.EndsWith("Extensions")))
