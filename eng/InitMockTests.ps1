@@ -58,7 +58,7 @@ function Send-ErrorMessage([string]$message) {
 function Show-Result([array]$list) {
     $i = 0
     foreach ($item in $list) {
-        if ($i % 3 -eq 0) {
+        if (($i % 8 -eq 0) -and ($i -ne 0)) {
             $result = $result -join "`t"
             Write-Host $result
             $result = @()
@@ -148,7 +148,9 @@ function  MockTestInit {
         [Parameter()]
         [string] $CommitId = "322d0edbc46e10b04a56f3279cecaa8fe4d3b69b",
         [Parameter()]
-        [bool]$GenerateNewSDKs = $false
+        [bool]$GenerateNewSDKs = $false,
+        [Parameter()]
+        [string]$netSdkRepoUri = "https://github.com/Azure/azure-sdk-for-net.git"
     )
     begin {
         Write-Host "Mock Test Initialize Start."
@@ -181,7 +183,7 @@ function  MockTestInit {
         & dotnet new -i $projRoot\MgmtTemplate\mocktests
 
         # Clone Azure/azure-sdk-for-net
-        & git clone https://github.com/Azure/azure-sdk-for-net.git $projRoot\azure-sdk-for-net
+        & git clone $netSdkRepoUri $projRoot\azure-sdk-for-net
         $netRepoRoot = Join-Path $projRoot "azure-sdk-for-net"
         $netRepoSdkFolder = Join-Path $netRepoRoot "sdk"
         $CodeGenTargetFile = Join-Path $netRepoRoot "\eng\CodeGeneration.targets"
@@ -232,17 +234,15 @@ function  MockTestInit {
             }
         }
 
-
-
         # Init All Track2 Sdk
         $sdkFolder = Get-ChildItem $netRepoSdkFolder
         $sdkFolder  | ForEach-Object {
             $curFolderPRs = Get-ChildItem($_)
             foreach ($item in $curFolderPRs) {
-                if ($item.Name.Contains("Azure.ResourceManager")) {
+                if ($item.Name.Contains("Azure.ResourceManager.")) {
                     # Create mocktests folder if it not exist
                     $Script:allTrack2Sdk++
-                    # Update-AllGeneratedCode -path $item.FullName -autorestVersion $AutorestVersion
+                    Update-AllGeneratedCode -path $item.FullName -autorestVersion $AutorestVersion
                 }
             }
         }
@@ -254,9 +254,9 @@ function  MockTestInit {
         Write-Host -ForegroundColor Blue "New generated track2 RPs: $Script:newGenerateSdk" 
         Write-Host -ForegroundColor Green "srcGenerateSuccessedRps: "$Script:srcGenerateSuccessedRps.Count
         Show-Result($Script:srcGenerateSuccessedRps) 
-        Write-Host-ForegroundColor Green "srcBuildSuccessedRps: "$Script:srcBuildSuccessedRps.Count 
+        Write-Host -ForegroundColor Green "srcBuildSuccessedRps: "$Script:srcBuildSuccessedRps.Count 
         Show-Result($Script:srcBuildSuccessedRps) 
-        Write-Host-ForegroundColor Green "testGenerateSuccesseddRps: "$Script:testGenerateSuccessedRps.Count 
+        Write-Host -ForegroundColor Green "testGenerateSuccesseddRps: "$Script:testGenerateSuccessedRps.Count 
         Show-Result($Script:testGenerateSuccessedRps) 
         Write-Host -ForegroundColor Green "testBuildSuccessedRps: "$Script:testBuildSuccessedRps.Count 
         Show-Result($Script:testBuildSuccessedRps) 
@@ -273,4 +273,5 @@ function  MockTestInit {
 
 $commitId = "322d0edbc46e10b04a56f3279cecaa8fe4d3b69b"
 $GenerateNewSDKs = $false
-MockTestInit -CommitId $commitId -GenerateNewSDKs $GenerateNewSDKs
+$netSdkRepoUri = "https://github.com/Azure/azure-sdk-for-net.git"
+MockTestInit -CommitId $commitId -GenerateNewSDKs $GenerateNewSDKs -netSdkRepoUri $netSdkRepoUri
