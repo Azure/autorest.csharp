@@ -112,6 +112,20 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
+        protected void WriteMockingCtor()
+        {
+            _writer.Line();
+            // write protected default constructor
+            var mockingConstructor = new ConstructorSignature(
+                Name: TypeOfThis.Name,
+                Description: $"Initializes a new instance of the <see cref=\"{TypeOfThis.Name}\"/> class for mocking.",
+                Modifiers: "protected",
+                Parameters: new Parameter[0]);
+            _writer.WriteMethodDocumentation(mockingConstructor);
+            using (_writer.WriteMethodDeclaration(mockingConstructor))
+            { }
+        }
+
         protected abstract void WriteSingletonResourceEntry(Resource resource, string singletonResourceIdSuffix);
 
         protected abstract void WriteResourceCollectionEntry(Resource resource);

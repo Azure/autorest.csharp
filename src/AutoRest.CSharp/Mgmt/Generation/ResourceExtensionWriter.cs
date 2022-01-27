@@ -50,7 +50,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     var uniqueSets = WriteFields(_writer, _extensions.ClientOperations, false);
                     _writer.Line();
 
-                    WriteCtor();
+                    WriteCtors();
                     _writer.Line();
 
                     WriteProperties(uniqueSets);
@@ -112,8 +112,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Line($"private {client.Type} {GetRestPropertyName(client, resource)} => {GetRestFieldName(client, resource)} ??= {restCtor};");
         }
 
-        private void WriteCtor()
+        private void WriteCtors()
         {
+            WriteMockingCtor();
+
+            _writer.Line();
             // write "armClient + id" constructor
             var clientOptionsConstructor = new ConstructorSignature(
                 Name: TypeOfThis.Name,

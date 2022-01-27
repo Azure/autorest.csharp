@@ -91,16 +91,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected override void WriteCtors(HashSet<NameSetKey> uniqueSets)
         {
-            _writer.Line();
-            // write protected default constructor
-            var mockingConstructor = new ConstructorSignature(
-                Name: TypeOfThis.Name,
-                Description: $"Initializes a new instance of the <see cref=\"{TypeOfThis.Name}\"/> class for mocking.",
-                Modifiers: "protected",
-                Parameters: new Parameter[0]);
-            _writer.WriteMethodDocumentation(mockingConstructor);
-            using (_writer.WriteMethodDeclaration(mockingConstructor))
-            { }
+            WriteMockingCtor();
 
             _writer.Line();
             // write "parent resource" constructor
