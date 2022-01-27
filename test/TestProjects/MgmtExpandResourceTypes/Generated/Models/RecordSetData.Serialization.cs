@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Models;
 using Azure.ResourceManager.Resources.Models;
 using MgmtExpandResourceTypes.Models;
 
@@ -146,6 +147,7 @@ namespace MgmtExpandResourceTypes
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
+            SystemData systemData = default;
             Optional<IDictionary<string, string>> metadata = default;
             Optional<long> tTL = default;
             Optional<string> fqdn = default;
@@ -181,6 +183,11 @@ namespace MgmtExpandResourceTypes
                 if (property.NameEquals("type"))
                 {
                     type = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("systemData"))
+                {
+                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.ToString());
                     continue;
                 }
                 if (property.NameEquals("properties"))
@@ -381,7 +388,7 @@ namespace MgmtExpandResourceTypes
                     continue;
                 }
             }
-            return new RecordSetData(id, name, type, etag.Value, Optional.ToDictionary(metadata), Optional.ToNullable(tTL), fqdn.Value, provisioningState.Value, targetResource, Optional.ToList(aRecords), Optional.ToList(aAAARecords), Optional.ToList(mXRecords), Optional.ToList(nSRecords), Optional.ToList(pTRRecords), Optional.ToList(sRVRecords), Optional.ToList(tXTRecords), cNAMERecord.Value, sOARecord.Value, Optional.ToList(caaRecords));
+            return new RecordSetData(id, name, type, systemData, etag.Value, Optional.ToDictionary(metadata), Optional.ToNullable(tTL), fqdn.Value, provisioningState.Value, targetResource, Optional.ToList(aRecords), Optional.ToList(aAAARecords), Optional.ToList(mXRecords), Optional.ToList(nSRecords), Optional.ToList(pTRRecords), Optional.ToList(sRVRecords), Optional.ToList(tXTRecords), cNAMERecord.Value, sOARecord.Value, Optional.ToList(caaRecords));
         }
     }
 }

@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Models;
 
 namespace MgmtOperations.Models
 {
@@ -39,6 +40,7 @@ namespace MgmtOperations.Models
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
+            SystemData systemData = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"))
@@ -76,8 +78,13 @@ namespace MgmtOperations.Models
                     type = property.Value.GetString();
                     continue;
                 }
+                if (property.NameEquals("systemData"))
+                {
+                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.ToString());
+                    continue;
+                }
             }
-            return new ConnectionSharedKey(id, name, type, tags, location, value);
+            return new ConnectionSharedKey(id, name, type, systemData, tags, location, value);
         }
     }
 }

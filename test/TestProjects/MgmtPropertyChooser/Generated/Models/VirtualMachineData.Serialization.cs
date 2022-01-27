@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Models;
 using Azure.ResourceManager.Resources.Models;
 using MgmtPropertyChooser.Models;
 
@@ -96,7 +97,7 @@ namespace MgmtPropertyChooser
 
         internal static VirtualMachineData DeserializeVirtualMachineData(JsonElement element)
         {
-            Optional<Plan> plan = default;
+            Optional<Models.Plan> plan = default;
             Optional<IReadOnlyList<VirtualMachineExtension>> resources = default;
             Optional<ResourceIdentity> identity = default;
             Optional<IdentityWithRenamedProperty> identityWithRenamedProperty = default;
@@ -104,7 +105,7 @@ namespace MgmtPropertyChooser
             Optional<IdentityWithNoUserIdentity> identityWithNoUserIdentity = default;
             Optional<IdentityWithNoSystemIdentity> identityWithNoSystemIdentity = default;
             Optional<IList<string>> zones = default;
-            Optional<IReadOnlyList<Resource>> fakeResources = default;
+            Optional<IReadOnlyList<Models.Resource>> fakeResources = default;
             Optional<SubResource> fakeSubResource = default;
             Optional<WritableSubResource> fakeWritableSubResource = default;
             IDictionary<string, string> tags = default;
@@ -112,6 +113,7 @@ namespace MgmtPropertyChooser
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
+            SystemData systemData = default;
             Optional<string> provisioningState = default;
             Optional<string> licenseType = default;
             Optional<string> vmId = default;
@@ -125,7 +127,7 @@ namespace MgmtPropertyChooser
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    plan = Plan.DeserializePlan(property.Value);
+                    plan = Models.Plan.DeserializePlan(property.Value);
                     continue;
                 }
                 if (property.NameEquals("resources"))
@@ -215,10 +217,10 @@ namespace MgmtPropertyChooser
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    List<Resource> array = new List<Resource>();
+                    List<Models.Resource> array = new List<Models.Resource>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(Resource.DeserializeResource(item));
+                        array.Add(Models.Resource.DeserializeResource(item));
                     }
                     fakeResources = array;
                     continue;
@@ -273,6 +275,11 @@ namespace MgmtPropertyChooser
                     type = property.Value.GetString();
                     continue;
                 }
+                if (property.NameEquals("systemData"))
+                {
+                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.ToString());
+                    continue;
+                }
                 if (property.NameEquals("properties"))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
@@ -306,7 +313,7 @@ namespace MgmtPropertyChooser
                     continue;
                 }
             }
-            return new VirtualMachineData(id, name, type, tags, location, plan.Value, Optional.ToList(resources), identity, identityWithRenamedProperty.Value, identityWithDifferentPropertyType.Value, identityWithNoUserIdentity.Value, identityWithNoSystemIdentity.Value, Optional.ToList(zones), Optional.ToList(fakeResources), fakeSubResource, fakeWritableSubResource, provisioningState.Value, licenseType.Value, vmId.Value, extensionsTimeBudget.Value);
+            return new VirtualMachineData(id, name, type, systemData, tags, location, plan.Value, Optional.ToList(resources), identity, identityWithRenamedProperty.Value, identityWithDifferentPropertyType.Value, identityWithNoUserIdentity.Value, identityWithNoSystemIdentity.Value, Optional.ToList(zones), Optional.ToList(fakeResources), fakeSubResource, fakeWritableSubResource, provisioningState.Value, licenseType.Value, vmId.Value, extensionsTimeBudget.Value);
         }
     }
 }

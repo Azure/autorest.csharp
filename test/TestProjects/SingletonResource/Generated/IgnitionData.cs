@@ -22,8 +22,9 @@ namespace SingletonResource
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="type"> The type. </param>
+        /// <param name="systemData"> The systemData. </param>
         /// <param name="pushButton"></param>
-        internal IgnitionData(ResourceIdentifier id, string name, ResourceType type, bool? pushButton) : base(id, name, type)
+        internal IgnitionData(ResourceIdentifier id, string name, ResourceType type, SystemData systemData, bool? pushButton) : base(id, name, type, systemData)
         {
             PushButton = pushButton;
         }

@@ -23,8 +23,9 @@ namespace NoTypeReplacement
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="type"> The type. </param>
+        /// <param name="systemData"> The systemData. </param>
         /// <param name="foo"></param>
-        internal NoTypeReplacementModel1Data(ResourceIdentifier id, string name, ResourceType type, SubResource foo) : base(id, name, type)
+        internal NoTypeReplacementModel1Data(ResourceIdentifier id, string name, ResourceType type, SystemData systemData, SubResource foo) : base(id, name, type, systemData)
         {
             Foo = foo;
         }

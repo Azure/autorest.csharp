@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Models;
 
 namespace MgmtParamOrdering
 {
@@ -47,6 +48,7 @@ namespace MgmtParamOrdering
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
+            SystemData systemData = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("zones"))
@@ -94,8 +96,13 @@ namespace MgmtParamOrdering
                     type = property.Value.GetString();
                     continue;
                 }
+                if (property.NameEquals("systemData"))
+                {
+                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.ToString());
+                    continue;
+                }
             }
-            return new VirtualMachineScaleSetData(id, name, type, tags, location, Optional.ToList(zones));
+            return new VirtualMachineScaleSetData(id, name, type, systemData, tags, location, Optional.ToList(zones));
         }
     }
 }
