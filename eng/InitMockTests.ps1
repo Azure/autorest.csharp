@@ -57,6 +57,7 @@ function Send-ErrorMessage([string]$message) {
 }
 function Show-Result([array]$list) {
     $i = 0
+    $result = @()
     foreach ($item in $list) {
         if (($i % 8 -eq 0) -and ($i -ne 0)) {
             $result = $result -join "`t"
