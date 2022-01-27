@@ -127,7 +127,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        private static void WritePublicConstructor(CodeWriter writer, LowLevelClient client, MethodSignature signature)
+        private static void WritePublicConstructor(CodeWriter writer, LowLevelClient client, ConstructorSignature signature)
         {
             writer.WriteMethodDocumentation(signature);
             using (writer.WriteMethodDeclaration(signature))
@@ -181,7 +181,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        private static void WriteSubClientInternalConstructor(CodeWriter writer, LowLevelClient client, MethodSignature signature)
+        private static void WriteSubClientInternalConstructor(CodeWriter writer, LowLevelClient client, ConstructorSignature signature)
         {
             writer.WriteMethodDocumentation(signature);
             using (writer.WriteMethodDeclaration(signature))
@@ -221,7 +221,11 @@ namespace AutoRest.CSharp.Generation.Writers
                         ? headAsBoolean ? nameof(HttpPipelineExtensions.ProcessHeadAsBoolMessageAsync) : nameof(HttpPipelineExtensions.ProcessMessageAsync)
                         : headAsBoolean ? nameof(HttpPipelineExtensions.ProcessHeadAsBoolMessage) : nameof(HttpPipelineExtensions.ProcessMessage);
 
-                    writer.AppendRaw("return ").WriteMethodCall(async, $"{client.Fields.PipelineField.Name:I}.{methodName}", $"{messageVariable}, {client.Fields.ClientDiagnosticsProperty.Name}, {KnownParameters.RequestContext.Name:I}");
+                    FormattableString paramString = headAsBoolean
+                        ? (FormattableString)$"{messageVariable}, {client.Fields.ClientDiagnosticsProperty.Name}, {KnownParameters.RequestContext.Name:I}"
+                        : (FormattableString)$"{messageVariable}, {KnownParameters.RequestContext.Name:I}";
+
+                    writer.AppendRaw("return ").WriteMethodCall(async, $"{client.Fields.PipelineField.Name:I}.{methodName}", paramString);
                 }
             }
             writer.Line();
@@ -251,7 +255,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     var messageVariable = new CodeWriterDeclaration("message");
                     var pageVariable = new CodeWriterDeclaration("page");
-                    FormattableString processMessageMethodParameters = $"{fields.PipelineField.Name:I}, {messageVariable}, {fields.ClientDiagnosticsProperty.Name:I}, {KnownParameters.RequestContext.Name:I}, {pagingInfo.ItemName:L}, {pagingInfo.NextLinkName:L}{(async ? $", {EnumeratorCancellationTokenParameter.Name:I}" : "")}";
+                    FormattableString processMessageMethodParameters = $"{fields.PipelineField.Name:I}, {messageVariable}, {KnownParameters.RequestContext.Name:I}, {pagingInfo.ItemName:L}, {pagingInfo.NextLinkName:L}{(async ? $", {EnumeratorCancellationTokenParameter.Name:I}" : "")}";
 
                     if (nextPageMethod == null)
                     {
@@ -346,7 +350,7 @@ namespace AutoRest.CSharp.Generation.Writers
                             var messageVariable = new CodeWriterDeclaration("message");
                             writer.Line($"var {messageVariable:D} = Create{nextPageMethod.Name}Request({nextPageMethod.Parameters.GetIdentifiersFormattable()});");
 
-                            FormattableString pageableProcessMessageParameters = $"{fields.PipelineField.Name:I}, {messageVariable}, {fields.ClientDiagnosticsProperty.Name:I}, {KnownParameters.RequestContext.Name:I}, {pagingInfo.ItemName:L}, {pagingInfo.NextLinkName:L}{(async ? $", {EnumeratorCancellationTokenParameter.Name:I}" : "")}";
+                            FormattableString pageableProcessMessageParameters = $"{fields.PipelineField.Name:I}, {messageVariable}, {KnownParameters.RequestContext.Name:I}, {pagingInfo.ItemName:L}, {pagingInfo.NextLinkName:L}{(async ? $", {EnumeratorCancellationTokenParameter.Name:I}" : "")}";
 
                             writer
                                 .Append($"{pageVariable} = ").WriteMethodCall(async, PageableProcessMessageMethodAsyncName, PageableProcessMessageMethodName, pageableProcessMessageParameters)

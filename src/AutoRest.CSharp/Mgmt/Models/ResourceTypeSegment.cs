@@ -89,8 +89,9 @@ namespace AutoRest.CSharp.Mgmt.Models
         {
             var segment = new List<Segment>();
             // find providers
-            int index = path.ToList().LastIndexOf(Segment.Providers);
-            if (index < 0)
+            var paths = path.ToList();
+            int index = paths.LastIndexOf(Segment.Providers);
+            if (index < 0 || index == paths.Count - 1)
             {
                 if (path.SerializedPath.StartsWith(RequestPath.ResourceGroupScopePrefix, StringComparison.InvariantCultureIgnoreCase))
                     return ResourceTypeSegment.ResourceGroup;
@@ -147,6 +148,30 @@ namespace AutoRest.CSharp.Mgmt.Models
         public static bool operator !=(ResourceTypeSegment left, ResourceTypeSegment right)
         {
             return !(left == right);
+        }
+
+        internal bool DoesMatch(ResourceTypeSegment other)
+        {
+            if (Count == 0)
+                return other.Count == 0;
+
+            if (Count != other.Count)
+                return false;
+
+            if (this[Count - 1].IsConstant)
+                return this == other;
+
+            return DoAllButLastItemMatch(other); //TODO: limit matching to the enum values
+        }
+
+        private bool DoAllButLastItemMatch(ResourceTypeSegment other)
+        {
+            for (int i = 0; i < Count - 1; i++)
+            {
+                if (this[i] != other[i])
+                    return false;
+            }
+            return true;
         }
     }
 }

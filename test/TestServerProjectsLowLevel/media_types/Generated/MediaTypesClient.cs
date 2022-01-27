@@ -59,7 +59,7 @@ namespace media_types_LowLevel
             try
             {
                 using HttpMessage message = CreateAnalyzeBodyRequest(content, contentType, context);
-                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -81,7 +81,7 @@ namespace media_types_LowLevel
             try
             {
                 using HttpMessage message = CreateAnalyzeBodyRequest(content, contentType, context);
-                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -110,7 +110,7 @@ namespace media_types_LowLevel
             try
             {
                 using HttpMessage message = CreateAnalyzeBodyRequest(content, context);
-                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -139,7 +139,7 @@ namespace media_types_LowLevel
             try
             {
                 using HttpMessage message = CreateAnalyzeBodyRequest(content, context);
-                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -161,7 +161,7 @@ namespace media_types_LowLevel
             try
             {
                 using HttpMessage message = CreateAnalyzeBodyNoAcceptHeaderRequest(content, contentType, context);
-                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -183,7 +183,7 @@ namespace media_types_LowLevel
             try
             {
                 using HttpMessage message = CreateAnalyzeBodyNoAcceptHeaderRequest(content, contentType, context);
-                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -212,7 +212,7 @@ namespace media_types_LowLevel
             try
             {
                 using HttpMessage message = CreateAnalyzeBodyNoAcceptHeaderRequest(content, context);
-                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -241,7 +241,7 @@ namespace media_types_LowLevel
             try
             {
                 using HttpMessage message = CreateAnalyzeBodyNoAcceptHeaderRequest(content, context);
-                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -262,7 +262,7 @@ namespace media_types_LowLevel
             try
             {
                 using HttpMessage message = CreateContentTypeWithEncodingRequest(content, context);
-                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -283,7 +283,7 @@ namespace media_types_LowLevel
             try
             {
                 using HttpMessage message = CreateContentTypeWithEncodingRequest(content, context);
-                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -308,7 +308,7 @@ namespace media_types_LowLevel
             try
             {
                 using HttpMessage message = CreateBinaryBodyWithTwoContentTypesRequest(content, contentType, context);
-                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -333,7 +333,7 @@ namespace media_types_LowLevel
             try
             {
                 using HttpMessage message = CreateBinaryBodyWithTwoContentTypesRequest(content, contentType, context);
-                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -358,7 +358,7 @@ namespace media_types_LowLevel
             try
             {
                 using HttpMessage message = CreateBinaryBodyWithThreeContentTypesRequest(content, contentType, context);
-                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -383,7 +383,7 @@ namespace media_types_LowLevel
             try
             {
                 using HttpMessage message = CreateBinaryBodyWithThreeContentTypesRequest(content, contentType, context);
-                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -407,7 +407,7 @@ namespace media_types_LowLevel
             try
             {
                 using HttpMessage message = CreateBinaryBodyWithThreeContentTypesRequest(content, context);
-                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -431,7 +431,7 @@ namespace media_types_LowLevel
             try
             {
                 using HttpMessage message = CreateBinaryBodyWithThreeContentTypesRequest(content, context);
-                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {

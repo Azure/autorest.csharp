@@ -66,7 +66,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateGetEmptyErrorRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -95,7 +95,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateGetEmptyErrorRequest(context);
-                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -115,7 +115,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateGetNoModelErrorRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -135,7 +135,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateGetNoModelErrorRequest(context);
-                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -155,7 +155,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateGetNoModelEmptyRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -175,7 +175,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateGetNoModelEmptyRequest(context);
-                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {

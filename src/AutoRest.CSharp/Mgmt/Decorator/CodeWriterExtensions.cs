@@ -90,6 +90,13 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return writer;
         }
 
+        public static CodeWriter WriteVariableNullOrWhiteSpaceCheck(this CodeWriter writer, string parameterName)
+        {
+            writer.Line($"{typeof(Argument)}.AssertNotNullOrWhiteSpace({parameterName}, nameof({parameterName}));");
+
+            return writer;
+        }
+
         private static bool HasEmptyCheck(Parameter parameter) => parameter.RequestLocation == RequestLocation.Path && parameter.Type.IsStringLike() && !parameter.SkipUrlEncoding;
     }
 }

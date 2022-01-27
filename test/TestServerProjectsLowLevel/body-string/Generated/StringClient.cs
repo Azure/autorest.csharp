@@ -66,7 +66,7 @@ namespace body_string_LowLevel
             try
             {
                 using HttpMessage message = CreateGetNullRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -95,7 +95,7 @@ namespace body_string_LowLevel
             try
             {
                 using HttpMessage message = CreateGetNullRequest(context);
-                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -125,7 +125,7 @@ namespace body_string_LowLevel
             try
             {
                 using HttpMessage message = CreatePutNullRequest(content, context);
-                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -155,7 +155,7 @@ namespace body_string_LowLevel
             try
             {
                 using HttpMessage message = CreatePutNullRequest(content, context);
-                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -184,7 +184,7 @@ namespace body_string_LowLevel
             try
             {
                 using HttpMessage message = CreateGetEmptyRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -213,7 +213,7 @@ namespace body_string_LowLevel
             try
             {
                 using HttpMessage message = CreateGetEmptyRequest(context);
-                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -246,7 +246,7 @@ namespace body_string_LowLevel
             try
             {
                 using HttpMessage message = CreatePutEmptyRequest(content, context);
-                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -279,7 +279,7 @@ namespace body_string_LowLevel
             try
             {
                 using HttpMessage message = CreatePutEmptyRequest(content, context);
-                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -308,7 +308,7 @@ namespace body_string_LowLevel
             try
             {
                 using HttpMessage message = CreateGetMbcsRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -337,7 +337,7 @@ namespace body_string_LowLevel
             try
             {
                 using HttpMessage message = CreateGetMbcsRequest(context);
-                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -370,7 +370,7 @@ namespace body_string_LowLevel
             try
             {
                 using HttpMessage message = CreatePutMbcsRequest(content, context);
-                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -403,7 +403,7 @@ namespace body_string_LowLevel
             try
             {
                 using HttpMessage message = CreatePutMbcsRequest(content, context);
-                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -432,7 +432,7 @@ namespace body_string_LowLevel
             try
             {
                 using HttpMessage message = CreateGetWhitespaceRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -461,7 +461,7 @@ namespace body_string_LowLevel
             try
             {
                 using HttpMessage message = CreateGetWhitespaceRequest(context);
-                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -494,7 +494,7 @@ namespace body_string_LowLevel
             try
             {
                 using HttpMessage message = CreatePutWhitespaceRequest(content, context);
-                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -527,7 +527,7 @@ namespace body_string_LowLevel
             try
             {
                 using HttpMessage message = CreatePutWhitespaceRequest(content, context);
-                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -556,7 +556,7 @@ namespace body_string_LowLevel
             try
             {
                 using HttpMessage message = CreateGetNotProvidedRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -585,7 +585,7 @@ namespace body_string_LowLevel
             try
             {
                 using HttpMessage message = CreateGetNotProvidedRequest(context);
-                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -614,7 +614,7 @@ namespace body_string_LowLevel
             try
             {
                 using HttpMessage message = CreateGetBase64EncodedRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -643,7 +643,7 @@ namespace body_string_LowLevel
             try
             {
                 using HttpMessage message = CreateGetBase64EncodedRequest(context);
-                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -672,7 +672,7 @@ namespace body_string_LowLevel
             try
             {
                 using HttpMessage message = CreateGetBase64UrlEncodedRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -701,7 +701,7 @@ namespace body_string_LowLevel
             try
             {
                 using HttpMessage message = CreateGetBase64UrlEncodedRequest(context);
-                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -734,7 +734,7 @@ namespace body_string_LowLevel
             try
             {
                 using HttpMessage message = CreatePutBase64UrlEncodedRequest(content, context);
-                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -767,7 +767,7 @@ namespace body_string_LowLevel
             try
             {
                 using HttpMessage message = CreatePutBase64UrlEncodedRequest(content, context);
-                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -796,7 +796,7 @@ namespace body_string_LowLevel
             try
             {
                 using HttpMessage message = CreateGetNullBase64UrlEncodedRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -825,7 +825,7 @@ namespace body_string_LowLevel
             try
             {
                 using HttpMessage message = CreateGetNullBase64UrlEncodedRequest(context);
-                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {

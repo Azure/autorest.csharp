@@ -3,10 +3,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Text;
-using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
@@ -16,17 +13,22 @@ using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
-    internal abstract class MgmtExtensions : MgmtTypeProvider
+    internal class MgmtExtensions : MgmtTypeProvider
     {
         protected IEnumerable<Operation> _allOperations;
 
-        public MgmtExtensions(IEnumerable<Operation> allOperations, string resourceName, BuildContext<MgmtOutputLibrary> context) : base(context, resourceName)
+        public MgmtExtensions(IEnumerable<Operation> allOperations, string resourceName, BuildContext<MgmtOutputLibrary> context, string defaultName, RequestPath contextualPath)
+            : base(context, resourceName)
         {
             _context = context;
             _allOperations = allOperations;
+            DefaultName = defaultName;
+            ContextualPath = contextualPath;
         }
 
-        protected abstract RequestPath ContextualPath { get; }
+        protected override string DefaultName { get; }
+
+        protected virtual RequestPath ContextualPath { get; }
 
         protected override string DefaultAccessibility => "public";
 
@@ -49,8 +51,8 @@ namespace AutoRest.CSharp.Mgmt.Output
                         operation.GetRequestPath(_context),
                         ContextualPath,
                         operationName,
-                        GetResourceFromResourceType(operation.GetRequestPath(_context).GetResourceType(_context.Configuration.MgmtConfiguration)),
-                        operation.GetReturnTypeAsLongRunningOperation(null, operationName, _context)));
+                        operation.GetReturnTypeAsLongRunningOperation(null, operationName, _context),
+                        _context));
             });
         }
 
@@ -106,18 +108,6 @@ namespace AutoRest.CSharp.Mgmt.Output
                 return filteredResources.Single();
 
             return null;
-        }
-
-        private Resource? GetResourceFromResourceType(ResourceTypeSegment resourceType)
-        {
-            var candidates = _context.Library.ArmResources.Where(resource => resource.ResourceType == resourceType);
-            if (candidates.Count() == 0)
-                return null;
-
-            if (candidates.Count() == 1)
-                return candidates.First();
-
-            throw new InvalidOperationException($"Found more than 1 candidate for {resourceType}, results were ({string.Join(',', candidates.Select(r => r.ResourceName))})");
         }
 
         private IEnumerable<MgmtRestClient>? _restClients;

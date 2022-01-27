@@ -15,7 +15,6 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
-using MgmtListMethods.Models;
 
 namespace MgmtListMethods
 {
@@ -28,8 +27,9 @@ namespace MgmtListMethods
             var resourceId = $"/providers/Microsoft.Management/managementGroups/{groupId}/mgmtGroupParents/{mgmtGroupParentName}";
             return new ResourceIdentifier(resourceId);
         }
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly MgmtGroupParentsRestOperations _mgmtGroupParentsRestClient;
+
+        private readonly ClientDiagnostics _mgmtGroupParentClientDiagnostics;
+        private readonly MgmtGroupParentsRestOperations _mgmtGroupParentRestClient;
         private readonly MgmtGroupParentData _data;
 
         /// <summary> Initializes a new instance of the <see cref="MgmtGroupParent"/> class for mocking. </summary>
@@ -38,44 +38,22 @@ namespace MgmtListMethods
         }
 
         /// <summary> Initializes a new instance of the <see cref = "MgmtGroupParent"/> class. </summary>
-        /// <param name="options"> The client parameters to use in these operations. </param>
+        /// <param name="armClient"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal MgmtGroupParent(ArmResource options, MgmtGroupParentData data) : base(options, data.Id)
+        internal MgmtGroupParent(ArmClient armClient, MgmtGroupParentData data) : this(armClient, data.Id)
         {
             HasData = true;
             _data = data;
-            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            ClientOptions.TryGetApiVersion(ResourceType, out string apiVersion);
-            _mgmtGroupParentsRestClient = new MgmtGroupParentsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
-#if DEBUG
-			ValidateResourceId(Id);
-#endif
         }
 
         /// <summary> Initializes a new instance of the <see cref="MgmtGroupParent"/> class. </summary>
-        /// <param name="options"> The client parameters to use in these operations. </param>
+        /// <param name="armClient"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal MgmtGroupParent(ArmResource options, ResourceIdentifier id) : base(options, id)
+        internal MgmtGroupParent(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
         {
-            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            ClientOptions.TryGetApiVersion(ResourceType, out string apiVersion);
-            _mgmtGroupParentsRestClient = new MgmtGroupParentsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
-#if DEBUG
-			ValidateResourceId(Id);
-#endif
-        }
-
-        /// <summary> Initializes a new instance of the <see cref="MgmtGroupParent"/> class. </summary>
-        /// <param name="clientOptions"> The client options to build client context. </param>
-        /// <param name="credential"> The credential to build client context. </param>
-        /// <param name="uri"> The uri to build client context. </param>
-        /// <param name="pipeline"> The pipeline to build client context. </param>
-        /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal MgmtGroupParent(ArmClientOptions clientOptions, TokenCredential credential, Uri uri, HttpPipeline pipeline, ResourceIdentifier id) : base(clientOptions, credential, uri, pipeline, id)
-        {
-            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            ClientOptions.TryGetApiVersion(ResourceType, out string apiVersion);
-            _mgmtGroupParentsRestClient = new MgmtGroupParentsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
+            _mgmtGroupParentClientDiagnostics = new ClientDiagnostics("MgmtListMethods", ResourceType.Namespace, DiagnosticOptions);
+            ArmClient.TryGetApiVersion(ResourceType, out string mgmtGroupParentApiVersion);
+            _mgmtGroupParentRestClient = new MgmtGroupParentsRestOperations(_mgmtGroupParentClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, mgmtGroupParentApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -112,14 +90,14 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<MgmtGroupParent>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MgmtGroupParent.Get");
+            using var scope = _mgmtGroupParentClientDiagnostics.CreateScope("MgmtGroupParent.Get");
             scope.Start();
             try
             {
-                var response = await _mgmtGroupParentsRestClient.GetAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _mgmtGroupParentRestClient.GetAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new MgmtGroupParent(this, response.Value), response.GetRawResponse());
+                    throw await _mgmtGroupParentClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                return Response.FromValue(new MgmtGroupParent(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -135,14 +113,14 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<MgmtGroupParent> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MgmtGroupParent.Get");
+            using var scope = _mgmtGroupParentClientDiagnostics.CreateScope("MgmtGroupParent.Get");
             scope.Start();
             try
             {
-                var response = _mgmtGroupParentsRestClient.Get(Id.Parent.Name, Id.Name, cancellationToken);
+                var response = _mgmtGroupParentRestClient.Get(Id.Parent.Name, Id.Name, cancellationToken);
                 if (response.Value == null)
-                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new MgmtGroupParent(this, response.Value), response.GetRawResponse());
+                    throw _mgmtGroupParentClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                return Response.FromValue(new MgmtGroupParent(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -156,7 +134,7 @@ namespace MgmtListMethods
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
         public async virtual Task<IEnumerable<AzureLocation>> GetAvailableLocationsAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MgmtGroupParent.GetAvailableLocations");
+            using var scope = _mgmtGroupParentClientDiagnostics.CreateScope("MgmtGroupParent.GetAvailableLocations");
             scope.Start();
             try
             {
@@ -174,7 +152,7 @@ namespace MgmtListMethods
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
         public virtual IEnumerable<AzureLocation> GetAvailableLocations(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MgmtGroupParent.GetAvailableLocations");
+            using var scope = _mgmtGroupParentClientDiagnostics.CreateScope("MgmtGroupParent.GetAvailableLocations");
             scope.Start();
             try
             {
@@ -194,17 +172,17 @@ namespace MgmtListMethods
         /// <returns> The updated resource with the tag added. </returns>
         public async virtual Task<Response<MgmtGroupParent>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(key, nameof(key));
+            Argument.AssertNotNullOrWhiteSpace(key, nameof(key));
 
-            using var scope = _clientDiagnostics.CreateScope("MgmtGroupParent.AddTag");
+            using var scope = _mgmtGroupParentClientDiagnostics.CreateScope("MgmtGroupParent.AddTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _mgmtGroupParentsRestClient.GetAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new MgmtGroupParent(this, originalResponse.Value), originalResponse.GetRawResponse());
+                var originalResponse = await _mgmtGroupParentRestClient.GetAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(new MgmtGroupParent(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -220,17 +198,17 @@ namespace MgmtListMethods
         /// <returns> The updated resource with the tag added. </returns>
         public virtual Response<MgmtGroupParent> AddTag(string key, string value, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(key, nameof(key));
+            Argument.AssertNotNullOrWhiteSpace(key, nameof(key));
 
-            using var scope = _clientDiagnostics.CreateScope("MgmtGroupParent.AddTag");
+            using var scope = _mgmtGroupParentClientDiagnostics.CreateScope("MgmtGroupParent.AddTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _mgmtGroupParentsRestClient.Get(Id.Parent.Name, Id.Name, cancellationToken);
-                return Response.FromValue(new MgmtGroupParent(this, originalResponse.Value), originalResponse.GetRawResponse());
+                var originalResponse = _mgmtGroupParentRestClient.Get(Id.Parent.Name, Id.Name, cancellationToken);
+                return Response.FromValue(new MgmtGroupParent(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -250,7 +228,7 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(tags), $"{nameof(tags)} provided cannot be null.");
             }
 
-            using var scope = _clientDiagnostics.CreateScope("MgmtGroupParent.SetTags");
+            using var scope = _mgmtGroupParentClientDiagnostics.CreateScope("MgmtGroupParent.SetTags");
             scope.Start();
             try
             {
@@ -258,8 +236,8 @@ namespace MgmtListMethods
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _mgmtGroupParentsRestClient.GetAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new MgmtGroupParent(this, originalResponse.Value), originalResponse.GetRawResponse());
+                var originalResponse = await _mgmtGroupParentRestClient.GetAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(new MgmtGroupParent(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -279,7 +257,7 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(tags), $"{nameof(tags)} provided cannot be null.");
             }
 
-            using var scope = _clientDiagnostics.CreateScope("MgmtGroupParent.SetTags");
+            using var scope = _mgmtGroupParentClientDiagnostics.CreateScope("MgmtGroupParent.SetTags");
             scope.Start();
             try
             {
@@ -287,8 +265,8 @@ namespace MgmtListMethods
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _mgmtGroupParentsRestClient.Get(Id.Parent.Name, Id.Name, cancellationToken);
-                return Response.FromValue(new MgmtGroupParent(this, originalResponse.Value), originalResponse.GetRawResponse());
+                var originalResponse = _mgmtGroupParentRestClient.Get(Id.Parent.Name, Id.Name, cancellationToken);
+                return Response.FromValue(new MgmtGroupParent(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -303,17 +281,17 @@ namespace MgmtListMethods
         /// <returns> The updated resource with the tag removed. </returns>
         public async virtual Task<Response<MgmtGroupParent>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(key, nameof(key));
+            Argument.AssertNotNullOrWhiteSpace(key, nameof(key));
 
-            using var scope = _clientDiagnostics.CreateScope("MgmtGroupParent.RemoveTag");
+            using var scope = _mgmtGroupParentClientDiagnostics.CreateScope("MgmtGroupParent.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _mgmtGroupParentsRestClient.GetAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new MgmtGroupParent(this, originalResponse.Value), originalResponse.GetRawResponse());
+                var originalResponse = await _mgmtGroupParentRestClient.GetAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(new MgmtGroupParent(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -328,17 +306,17 @@ namespace MgmtListMethods
         /// <returns> The updated resource with the tag removed. </returns>
         public virtual Response<MgmtGroupParent> RemoveTag(string key, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(key, nameof(key));
+            Argument.AssertNotNullOrWhiteSpace(key, nameof(key));
 
-            using var scope = _clientDiagnostics.CreateScope("MgmtGroupParent.RemoveTag");
+            using var scope = _mgmtGroupParentClientDiagnostics.CreateScope("MgmtGroupParent.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _mgmtGroupParentsRestClient.Get(Id.Parent.Name, Id.Name, cancellationToken);
-                return Response.FromValue(new MgmtGroupParent(this, originalResponse.Value), originalResponse.GetRawResponse());
+                var originalResponse = _mgmtGroupParentRestClient.Get(Id.Parent.Name, Id.Name, cancellationToken);
+                return Response.FromValue(new MgmtGroupParent(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {

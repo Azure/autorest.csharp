@@ -74,7 +74,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreateGetValidRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -111,7 +111,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreateGetValidRequest(context);
-                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -152,7 +152,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreatePutValidRequest(content, context);
-                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -193,7 +193,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreatePutValidRequest(content, context);
-                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -228,7 +228,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreateGetDotSyntaxRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -263,7 +263,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreateGetDotSyntaxRequest(context);
-                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -308,7 +308,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreateGetComposedWithDiscriminatorRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -353,7 +353,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreateGetComposedWithDiscriminatorRequest(context);
-                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -398,7 +398,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreateGetComposedWithoutDiscriminatorRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -443,7 +443,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreateGetComposedWithoutDiscriminatorRequest(context);
-                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -489,7 +489,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreateGetComplicatedRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -535,7 +535,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreateGetComplicatedRequest(context);
-                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -585,7 +585,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreatePutComplicatedRequest(content, context);
-                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -635,7 +635,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreatePutComplicatedRequest(content, context);
-                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -702,7 +702,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreatePutMissingDiscriminatorRequest(content, context);
-                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -769,7 +769,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreatePutMissingDiscriminatorRequest(content, context);
-                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -810,7 +810,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreatePutValidMissingRequiredRequest(content, context);
-                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -851,7 +851,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreatePutValidMissingRequiredRequest(content, context);
-                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {

@@ -25,8 +25,8 @@ namespace ResourceRename
     /// <summary> A class representing collection of SshPublicKeyInfo and their operations over its parent. </summary>
     public partial class SshPublicKeyInfoCollection : ArmCollection, IEnumerable<SshPublicKeyInfo>, IAsyncEnumerable<SshPublicKeyInfo>
     {
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly SshPublicKeysRestOperations _sshPublicKeysRestClient;
+        private readonly ClientDiagnostics _sshPublicKeyInfoSshPublicKeysClientDiagnostics;
+        private readonly SshPublicKeysRestOperations _sshPublicKeyInfoSshPublicKeysRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="SshPublicKeyInfoCollection"/> class for mocking. </summary>
         protected SshPublicKeyInfoCollection()
@@ -37,9 +37,9 @@ namespace ResourceRename
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal SshPublicKeyInfoCollection(ArmResource parent) : base(parent)
         {
-            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            ClientOptions.TryGetApiVersion(SshPublicKeyInfo.ResourceType, out string apiVersion);
-            _sshPublicKeysRestClient = new SshPublicKeysRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
+            _sshPublicKeyInfoSshPublicKeysClientDiagnostics = new ClientDiagnostics("ResourceRename", SshPublicKeyInfo.ResourceType.Namespace, DiagnosticOptions);
+            ArmClient.TryGetApiVersion(SshPublicKeyInfo.ResourceType, out string sshPublicKeyInfoSshPublicKeysApiVersion);
+            _sshPublicKeyInfoSshPublicKeysRestClient = new SshPublicKeysRestOperations(_sshPublicKeyInfoSshPublicKeysClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, sshPublicKeyInfoSshPublicKeysApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -67,12 +67,12 @@ namespace ResourceRename
         {
             Argument.AssertNotNullOrEmpty(sshPublicKeyName, nameof(sshPublicKeyName));
 
-            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyInfoCollection.CreateOrUpdate");
+            using var scope = _sshPublicKeyInfoSshPublicKeysClientDiagnostics.CreateScope("SshPublicKeyInfoCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _sshPublicKeysRestClient.Create(Id.SubscriptionId, Id.ResourceGroupName, sshPublicKeyName, properties, cancellationToken);
-                var operation = new SshPublicKeyInfoCreateOrUpdateOperation(this, response);
+                var response = _sshPublicKeyInfoSshPublicKeysRestClient.Create(Id.SubscriptionId, Id.ResourceGroupName, sshPublicKeyName, properties, cancellationToken);
+                var operation = new SshPublicKeyInfoCreateOrUpdateOperation(ArmClient, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -98,12 +98,12 @@ namespace ResourceRename
         {
             Argument.AssertNotNullOrEmpty(sshPublicKeyName, nameof(sshPublicKeyName));
 
-            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyInfoCollection.CreateOrUpdate");
+            using var scope = _sshPublicKeyInfoSshPublicKeysClientDiagnostics.CreateScope("SshPublicKeyInfoCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _sshPublicKeysRestClient.CreateAsync(Id.SubscriptionId, Id.ResourceGroupName, sshPublicKeyName, properties, cancellationToken).ConfigureAwait(false);
-                var operation = new SshPublicKeyInfoCreateOrUpdateOperation(this, response);
+                var response = await _sshPublicKeyInfoSshPublicKeysRestClient.CreateAsync(Id.SubscriptionId, Id.ResourceGroupName, sshPublicKeyName, properties, cancellationToken).ConfigureAwait(false);
+                var operation = new SshPublicKeyInfoCreateOrUpdateOperation(ArmClient, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -127,14 +127,14 @@ namespace ResourceRename
         {
             Argument.AssertNotNullOrEmpty(sshPublicKeyName, nameof(sshPublicKeyName));
 
-            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyInfoCollection.Get");
+            using var scope = _sshPublicKeyInfoSshPublicKeysClientDiagnostics.CreateScope("SshPublicKeyInfoCollection.Get");
             scope.Start();
             try
             {
-                var response = _sshPublicKeysRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, sshPublicKeyName, cancellationToken);
+                var response = _sshPublicKeyInfoSshPublicKeysRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, sshPublicKeyName, cancellationToken);
                 if (response.Value == null)
-                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new SshPublicKeyInfo(this, response.Value), response.GetRawResponse());
+                    throw _sshPublicKeyInfoSshPublicKeysClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                return Response.FromValue(new SshPublicKeyInfo(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -155,14 +155,14 @@ namespace ResourceRename
         {
             Argument.AssertNotNullOrEmpty(sshPublicKeyName, nameof(sshPublicKeyName));
 
-            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyInfoCollection.Get");
+            using var scope = _sshPublicKeyInfoSshPublicKeysClientDiagnostics.CreateScope("SshPublicKeyInfoCollection.Get");
             scope.Start();
             try
             {
-                var response = await _sshPublicKeysRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, sshPublicKeyName, cancellationToken).ConfigureAwait(false);
+                var response = await _sshPublicKeyInfoSshPublicKeysRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, sshPublicKeyName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new SshPublicKeyInfo(this, response.Value), response.GetRawResponse());
+                    throw await _sshPublicKeyInfoSshPublicKeysClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                return Response.FromValue(new SshPublicKeyInfo(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -180,14 +180,14 @@ namespace ResourceRename
         {
             Argument.AssertNotNullOrEmpty(sshPublicKeyName, nameof(sshPublicKeyName));
 
-            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyInfoCollection.GetIfExists");
+            using var scope = _sshPublicKeyInfoSshPublicKeysClientDiagnostics.CreateScope("SshPublicKeyInfoCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _sshPublicKeysRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, sshPublicKeyName, cancellationToken: cancellationToken);
+                var response = _sshPublicKeyInfoSshPublicKeysRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, sshPublicKeyName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<SshPublicKeyInfo>(null, response.GetRawResponse());
-                return Response.FromValue(new SshPublicKeyInfo(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SshPublicKeyInfo(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -205,14 +205,14 @@ namespace ResourceRename
         {
             Argument.AssertNotNullOrEmpty(sshPublicKeyName, nameof(sshPublicKeyName));
 
-            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyInfoCollection.GetIfExists");
+            using var scope = _sshPublicKeyInfoSshPublicKeysClientDiagnostics.CreateScope("SshPublicKeyInfoCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _sshPublicKeysRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, sshPublicKeyName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _sshPublicKeyInfoSshPublicKeysRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, sshPublicKeyName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<SshPublicKeyInfo>(null, response.GetRawResponse());
-                return Response.FromValue(new SshPublicKeyInfo(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SshPublicKeyInfo(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -230,7 +230,7 @@ namespace ResourceRename
         {
             Argument.AssertNotNullOrEmpty(sshPublicKeyName, nameof(sshPublicKeyName));
 
-            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyInfoCollection.Exists");
+            using var scope = _sshPublicKeyInfoSshPublicKeysClientDiagnostics.CreateScope("SshPublicKeyInfoCollection.Exists");
             scope.Start();
             try
             {
@@ -253,7 +253,7 @@ namespace ResourceRename
         {
             Argument.AssertNotNullOrEmpty(sshPublicKeyName, nameof(sshPublicKeyName));
 
-            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyInfoCollection.Exists");
+            using var scope = _sshPublicKeyInfoSshPublicKeysClientDiagnostics.CreateScope("SshPublicKeyInfoCollection.Exists");
             scope.Start();
             try
             {
@@ -277,12 +277,12 @@ namespace ResourceRename
         {
             Page<SshPublicKeyInfo> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("SshPublicKeyInfoCollection.GetAll");
+                using var scope = _sshPublicKeyInfoSshPublicKeysClientDiagnostics.CreateScope("SshPublicKeyInfoCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _sshPublicKeysRestClient.ListByResourceGroup(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new SshPublicKeyInfo(this, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = _sshPublicKeyInfoSshPublicKeysRestClient.ListByResourceGroup(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new SshPublicKeyInfo(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -292,12 +292,12 @@ namespace ResourceRename
             }
             Page<SshPublicKeyInfo> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("SshPublicKeyInfoCollection.GetAll");
+                using var scope = _sshPublicKeyInfoSshPublicKeysClientDiagnostics.CreateScope("SshPublicKeyInfoCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _sshPublicKeysRestClient.ListByResourceGroupNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new SshPublicKeyInfo(this, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = _sshPublicKeyInfoSshPublicKeysRestClient.ListByResourceGroupNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new SshPublicKeyInfo(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -318,12 +318,12 @@ namespace ResourceRename
         {
             async Task<Page<SshPublicKeyInfo>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("SshPublicKeyInfoCollection.GetAll");
+                using var scope = _sshPublicKeyInfoSshPublicKeysClientDiagnostics.CreateScope("SshPublicKeyInfoCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _sshPublicKeysRestClient.ListByResourceGroupAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new SshPublicKeyInfo(this, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = await _sshPublicKeyInfoSshPublicKeysRestClient.ListByResourceGroupAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new SshPublicKeyInfo(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -333,12 +333,12 @@ namespace ResourceRename
             }
             async Task<Page<SshPublicKeyInfo>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("SshPublicKeyInfoCollection.GetAll");
+                using var scope = _sshPublicKeyInfoSshPublicKeysClientDiagnostics.CreateScope("SshPublicKeyInfoCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _sshPublicKeysRestClient.ListByResourceGroupNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new SshPublicKeyInfo(this, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = await _sshPublicKeyInfoSshPublicKeysRestClient.ListByResourceGroupNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new SshPublicKeyInfo(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -357,7 +357,7 @@ namespace ResourceRename
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<GenericResource> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyInfoCollection.GetAllAsGenericResources");
+            using var scope = _sshPublicKeyInfoSshPublicKeysClientDiagnostics.CreateScope("SshPublicKeyInfoCollection.GetAllAsGenericResources");
             scope.Start();
             try
             {
@@ -380,7 +380,7 @@ namespace ResourceRename
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<GenericResource> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyInfoCollection.GetAllAsGenericResources");
+            using var scope = _sshPublicKeyInfoSshPublicKeysClientDiagnostics.CreateScope("SshPublicKeyInfoCollection.GetAllAsGenericResources");
             scope.Start();
             try
             {
@@ -409,8 +409,5 @@ namespace ResourceRename
         {
             return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
-
-        // Builders.
-        // public ArmBuilder<Azure.Core.ResourceIdentifier, SshPublicKeyInfo, SshPublicKeyInfoData> Construct() { }
     }
 }

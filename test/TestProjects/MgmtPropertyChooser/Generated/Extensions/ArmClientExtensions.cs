@@ -21,7 +21,7 @@ namespace MgmtPropertyChooser
         public static VirtualMachine GetVirtualMachine(this ArmClient armClient, ResourceIdentifier id)
         {
             VirtualMachine.ValidateResourceId(id);
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new VirtualMachine(clientOptions, credential, uri, pipeline, id));
+            return new VirtualMachine(armClient, id);
         }
         #endregion
     }

@@ -23,7 +23,7 @@ namespace MgmtExpandResourceTypes
     /// <summary> A class representing collection of RecordSet and their operations over its parent. </summary>
     public partial class RecordSetSoaCollection : ArmCollection, IEnumerable<RecordSetSoa>, IAsyncEnumerable<RecordSetSoa>
     {
-        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly ClientDiagnostics _recordSetsClientDiagnostics;
         private readonly RecordSetsRestOperations _recordSetsRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="RecordSetSoaCollection"/> class for mocking. </summary>
@@ -35,9 +35,8 @@ namespace MgmtExpandResourceTypes
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal RecordSetSoaCollection(ArmResource parent) : base(parent)
         {
-            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            ClientOptions.TryGetApiVersion(RecordSetSoa.ResourceType, out string apiVersion);
-            _recordSetsRestClient = new RecordSetsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
+            _recordSetsClientDiagnostics = new ClientDiagnostics("MgmtExpandResourceTypes", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
+            _recordSetsRestClient = new RecordSetsRestOperations(_recordSetsClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -73,12 +72,12 @@ namespace MgmtExpandResourceTypes
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("RecordSetSoaCollection.CreateOrUpdate");
+            using var scope = _recordSetsClientDiagnostics.CreateScope("RecordSetSoaCollection.CreateOrUpdate");
             scope.Start();
             try
             {
                 var response = _recordSetsRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "SOA".ToRecordType(), relativeRecordSetName, parameters, ifMatch, ifNoneMatch, cancellationToken);
-                var operation = new RecordSetSoaCreateOrUpdateOperation(this, response);
+                var operation = new RecordSetSoaCreateOrUpdateOperation(ArmClient, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -112,12 +111,12 @@ namespace MgmtExpandResourceTypes
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("RecordSetSoaCollection.CreateOrUpdate");
+            using var scope = _recordSetsClientDiagnostics.CreateScope("RecordSetSoaCollection.CreateOrUpdate");
             scope.Start();
             try
             {
                 var response = await _recordSetsRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "SOA".ToRecordType(), relativeRecordSetName, parameters, ifMatch, ifNoneMatch, cancellationToken).ConfigureAwait(false);
-                var operation = new RecordSetSoaCreateOrUpdateOperation(this, response);
+                var operation = new RecordSetSoaCreateOrUpdateOperation(ArmClient, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -143,14 +142,14 @@ namespace MgmtExpandResourceTypes
                 throw new ArgumentNullException(nameof(relativeRecordSetName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("RecordSetSoaCollection.Get");
+            using var scope = _recordSetsClientDiagnostics.CreateScope("RecordSetSoaCollection.Get");
             scope.Start();
             try
             {
                 var response = _recordSetsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "SOA".ToRecordType(), relativeRecordSetName, cancellationToken);
                 if (response.Value == null)
-                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new RecordSetSoa(this, response.Value), response.GetRawResponse());
+                    throw _recordSetsClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                return Response.FromValue(new RecordSetSoa(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -173,14 +172,14 @@ namespace MgmtExpandResourceTypes
                 throw new ArgumentNullException(nameof(relativeRecordSetName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("RecordSetSoaCollection.Get");
+            using var scope = _recordSetsClientDiagnostics.CreateScope("RecordSetSoaCollection.Get");
             scope.Start();
             try
             {
                 var response = await _recordSetsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "SOA".ToRecordType(), relativeRecordSetName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new RecordSetSoa(this, response.Value), response.GetRawResponse());
+                    throw await _recordSetsClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                return Response.FromValue(new RecordSetSoa(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -200,14 +199,14 @@ namespace MgmtExpandResourceTypes
                 throw new ArgumentNullException(nameof(relativeRecordSetName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("RecordSetSoaCollection.GetIfExists");
+            using var scope = _recordSetsClientDiagnostics.CreateScope("RecordSetSoaCollection.GetIfExists");
             scope.Start();
             try
             {
                 var response = _recordSetsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "SOA".ToRecordType(), relativeRecordSetName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<RecordSetSoa>(null, response.GetRawResponse());
-                return Response.FromValue(new RecordSetSoa(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new RecordSetSoa(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -227,14 +226,14 @@ namespace MgmtExpandResourceTypes
                 throw new ArgumentNullException(nameof(relativeRecordSetName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("RecordSetSoaCollection.GetIfExists");
+            using var scope = _recordSetsClientDiagnostics.CreateScope("RecordSetSoaCollection.GetIfExists");
             scope.Start();
             try
             {
                 var response = await _recordSetsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "SOA".ToRecordType(), relativeRecordSetName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<RecordSetSoa>(null, response.GetRawResponse());
-                return Response.FromValue(new RecordSetSoa(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new RecordSetSoa(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -254,7 +253,7 @@ namespace MgmtExpandResourceTypes
                 throw new ArgumentNullException(nameof(relativeRecordSetName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("RecordSetSoaCollection.Exists");
+            using var scope = _recordSetsClientDiagnostics.CreateScope("RecordSetSoaCollection.Exists");
             scope.Start();
             try
             {
@@ -279,7 +278,7 @@ namespace MgmtExpandResourceTypes
                 throw new ArgumentNullException(nameof(relativeRecordSetName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("RecordSetSoaCollection.Exists");
+            using var scope = _recordSetsClientDiagnostics.CreateScope("RecordSetSoaCollection.Exists");
             scope.Start();
             try
             {
@@ -305,12 +304,12 @@ namespace MgmtExpandResourceTypes
         {
             Page<RecordSetSoa> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("RecordSetSoaCollection.GetAll");
+                using var scope = _recordSetsClientDiagnostics.CreateScope("RecordSetSoaCollection.GetAll");
                 scope.Start();
                 try
                 {
                     var response = _recordSetsRestClient.ListByType(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "SOA".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetSoa(this, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetSoa(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -320,12 +319,12 @@ namespace MgmtExpandResourceTypes
             }
             Page<RecordSetSoa> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("RecordSetSoaCollection.GetAll");
+                using var scope = _recordSetsClientDiagnostics.CreateScope("RecordSetSoaCollection.GetAll");
                 scope.Start();
                 try
                 {
                     var response = _recordSetsRestClient.ListByTypeNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "SOA".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetSoa(this, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetSoa(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -348,12 +347,12 @@ namespace MgmtExpandResourceTypes
         {
             async Task<Page<RecordSetSoa>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("RecordSetSoaCollection.GetAll");
+                using var scope = _recordSetsClientDiagnostics.CreateScope("RecordSetSoaCollection.GetAll");
                 scope.Start();
                 try
                 {
                     var response = await _recordSetsRestClient.ListByTypeAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "SOA".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetSoa(this, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetSoa(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -363,12 +362,12 @@ namespace MgmtExpandResourceTypes
             }
             async Task<Page<RecordSetSoa>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("RecordSetSoaCollection.GetAll");
+                using var scope = _recordSetsClientDiagnostics.CreateScope("RecordSetSoaCollection.GetAll");
                 scope.Start();
                 try
                 {
                     var response = await _recordSetsRestClient.ListByTypeNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "SOA".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetSoa(this, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetSoa(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -393,8 +392,5 @@ namespace MgmtExpandResourceTypes
         {
             return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
-
-        // Builders.
-        // public ArmBuilder<Azure.Core.ResourceIdentifier, RecordSetSoa, RecordSetData> Construct() { }
     }
 }

@@ -10,7 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager;
 using ExactMatchInheritance;
 
 namespace ExactMatchInheritance.Models
@@ -24,9 +24,9 @@ namespace ExactMatchInheritance.Models
         {
         }
 
-        internal ExactMatchModel1CreateOrUpdateOperation(ArmResource operationsBase, Response<ExactMatchModel1Data> response)
+        internal ExactMatchModel1CreateOrUpdateOperation(ArmClient armClient, Response<ExactMatchModel1Data> response)
         {
-            _operation = new OperationOrResponseInternals<ExactMatchModel1>(Response.FromValue(new ExactMatchModel1(operationsBase, response.Value), response.GetRawResponse()));
+            _operation = new OperationOrResponseInternals<ExactMatchModel1>(Response.FromValue(new ExactMatchModel1(armClient, response.Value), response.GetRawResponse()));
         }
 
         /// <inheritdoc />

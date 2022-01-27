@@ -25,8 +25,8 @@ namespace SupersetInheritance
     /// <summary> A class representing collection of SupersetModel1 and their operations over its parent. </summary>
     public partial class SupersetModel1Collection : ArmCollection, IEnumerable<SupersetModel1>, IAsyncEnumerable<SupersetModel1>
     {
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly SupersetModel1SRestOperations _supersetModel1sRestClient;
+        private readonly ClientDiagnostics _supersetModel1ClientDiagnostics;
+        private readonly SupersetModel1SRestOperations _supersetModel1RestClient;
 
         /// <summary> Initializes a new instance of the <see cref="SupersetModel1Collection"/> class for mocking. </summary>
         protected SupersetModel1Collection()
@@ -37,9 +37,9 @@ namespace SupersetInheritance
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal SupersetModel1Collection(ArmResource parent) : base(parent)
         {
-            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            ClientOptions.TryGetApiVersion(SupersetModel1.ResourceType, out string apiVersion);
-            _supersetModel1sRestClient = new SupersetModel1SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
+            _supersetModel1ClientDiagnostics = new ClientDiagnostics("SupersetInheritance", SupersetModel1.ResourceType.Namespace, DiagnosticOptions);
+            ArmClient.TryGetApiVersion(SupersetModel1.ResourceType, out string supersetModel1ApiVersion);
+            _supersetModel1RestClient = new SupersetModel1SRestOperations(_supersetModel1ClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, supersetModel1ApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -70,12 +70,12 @@ namespace SupersetInheritance
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SupersetModel1Collection.CreateOrUpdate");
+            using var scope = _supersetModel1ClientDiagnostics.CreateScope("SupersetModel1Collection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _supersetModel1sRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, supersetModel1SName, parameters, cancellationToken);
-                var operation = new SupersetModel1CreateOrUpdateOperation(this, response);
+                var response = _supersetModel1RestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, supersetModel1SName, parameters, cancellationToken);
+                var operation = new SupersetModel1CreateOrUpdateOperation(ArmClient, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -104,12 +104,12 @@ namespace SupersetInheritance
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SupersetModel1Collection.CreateOrUpdate");
+            using var scope = _supersetModel1ClientDiagnostics.CreateScope("SupersetModel1Collection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _supersetModel1sRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, supersetModel1SName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new SupersetModel1CreateOrUpdateOperation(this, response);
+                var response = await _supersetModel1RestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, supersetModel1SName, parameters, cancellationToken).ConfigureAwait(false);
+                var operation = new SupersetModel1CreateOrUpdateOperation(ArmClient, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -132,14 +132,14 @@ namespace SupersetInheritance
         {
             Argument.AssertNotNullOrEmpty(supersetModel1SName, nameof(supersetModel1SName));
 
-            using var scope = _clientDiagnostics.CreateScope("SupersetModel1Collection.Get");
+            using var scope = _supersetModel1ClientDiagnostics.CreateScope("SupersetModel1Collection.Get");
             scope.Start();
             try
             {
-                var response = _supersetModel1sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, supersetModel1SName, cancellationToken);
+                var response = _supersetModel1RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, supersetModel1SName, cancellationToken);
                 if (response.Value == null)
-                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new SupersetModel1(this, response.Value), response.GetRawResponse());
+                    throw _supersetModel1ClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                return Response.FromValue(new SupersetModel1(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -159,14 +159,14 @@ namespace SupersetInheritance
         {
             Argument.AssertNotNullOrEmpty(supersetModel1SName, nameof(supersetModel1SName));
 
-            using var scope = _clientDiagnostics.CreateScope("SupersetModel1Collection.Get");
+            using var scope = _supersetModel1ClientDiagnostics.CreateScope("SupersetModel1Collection.Get");
             scope.Start();
             try
             {
-                var response = await _supersetModel1sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, supersetModel1SName, cancellationToken).ConfigureAwait(false);
+                var response = await _supersetModel1RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, supersetModel1SName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new SupersetModel1(this, response.Value), response.GetRawResponse());
+                    throw await _supersetModel1ClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                return Response.FromValue(new SupersetModel1(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -184,14 +184,14 @@ namespace SupersetInheritance
         {
             Argument.AssertNotNullOrEmpty(supersetModel1SName, nameof(supersetModel1SName));
 
-            using var scope = _clientDiagnostics.CreateScope("SupersetModel1Collection.GetIfExists");
+            using var scope = _supersetModel1ClientDiagnostics.CreateScope("SupersetModel1Collection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _supersetModel1sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, supersetModel1SName, cancellationToken: cancellationToken);
+                var response = _supersetModel1RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, supersetModel1SName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<SupersetModel1>(null, response.GetRawResponse());
-                return Response.FromValue(new SupersetModel1(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SupersetModel1(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -209,14 +209,14 @@ namespace SupersetInheritance
         {
             Argument.AssertNotNullOrEmpty(supersetModel1SName, nameof(supersetModel1SName));
 
-            using var scope = _clientDiagnostics.CreateScope("SupersetModel1Collection.GetIfExists");
+            using var scope = _supersetModel1ClientDiagnostics.CreateScope("SupersetModel1Collection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _supersetModel1sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, supersetModel1SName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _supersetModel1RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, supersetModel1SName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<SupersetModel1>(null, response.GetRawResponse());
-                return Response.FromValue(new SupersetModel1(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SupersetModel1(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -234,7 +234,7 @@ namespace SupersetInheritance
         {
             Argument.AssertNotNullOrEmpty(supersetModel1SName, nameof(supersetModel1SName));
 
-            using var scope = _clientDiagnostics.CreateScope("SupersetModel1Collection.Exists");
+            using var scope = _supersetModel1ClientDiagnostics.CreateScope("SupersetModel1Collection.Exists");
             scope.Start();
             try
             {
@@ -257,7 +257,7 @@ namespace SupersetInheritance
         {
             Argument.AssertNotNullOrEmpty(supersetModel1SName, nameof(supersetModel1SName));
 
-            using var scope = _clientDiagnostics.CreateScope("SupersetModel1Collection.Exists");
+            using var scope = _supersetModel1ClientDiagnostics.CreateScope("SupersetModel1Collection.Exists");
             scope.Start();
             try
             {
@@ -280,12 +280,12 @@ namespace SupersetInheritance
         {
             Page<SupersetModel1> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("SupersetModel1Collection.GetAll");
+                using var scope = _supersetModel1ClientDiagnostics.CreateScope("SupersetModel1Collection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _supersetModel1sRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new SupersetModel1(this, value)), null, response.GetRawResponse());
+                    var response = _supersetModel1RestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new SupersetModel1(ArmClient, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -305,12 +305,12 @@ namespace SupersetInheritance
         {
             async Task<Page<SupersetModel1>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("SupersetModel1Collection.GetAll");
+                using var scope = _supersetModel1ClientDiagnostics.CreateScope("SupersetModel1Collection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _supersetModel1sRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new SupersetModel1(this, value)), null, response.GetRawResponse());
+                    var response = await _supersetModel1RestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new SupersetModel1(ArmClient, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -329,7 +329,7 @@ namespace SupersetInheritance
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<GenericResource> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SupersetModel1Collection.GetAllAsGenericResources");
+            using var scope = _supersetModel1ClientDiagnostics.CreateScope("SupersetModel1Collection.GetAllAsGenericResources");
             scope.Start();
             try
             {
@@ -352,7 +352,7 @@ namespace SupersetInheritance
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<GenericResource> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SupersetModel1Collection.GetAllAsGenericResources");
+            using var scope = _supersetModel1ClientDiagnostics.CreateScope("SupersetModel1Collection.GetAllAsGenericResources");
             scope.Start();
             try
             {
@@ -381,8 +381,5 @@ namespace SupersetInheritance
         {
             return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
-
-        // Builders.
-        // public ArmBuilder<Azure.Core.ResourceIdentifier, SupersetModel1, SupersetModel1Data> Construct() { }
     }
 }

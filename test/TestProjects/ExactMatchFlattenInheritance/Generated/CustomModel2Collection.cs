@@ -25,8 +25,8 @@ namespace ExactMatchFlattenInheritance
     /// <summary> A class representing collection of CustomModel2 and their operations over its parent. </summary>
     public partial class CustomModel2Collection : ArmCollection, IEnumerable<CustomModel2>, IAsyncEnumerable<CustomModel2>
     {
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly CustomModel2SRestOperations _customModel2sRestClient;
+        private readonly ClientDiagnostics _customModel2ClientDiagnostics;
+        private readonly CustomModel2SRestOperations _customModel2RestClient;
 
         /// <summary> Initializes a new instance of the <see cref="CustomModel2Collection"/> class for mocking. </summary>
         protected CustomModel2Collection()
@@ -37,9 +37,9 @@ namespace ExactMatchFlattenInheritance
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal CustomModel2Collection(ArmResource parent) : base(parent)
         {
-            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            ClientOptions.TryGetApiVersion(CustomModel2.ResourceType, out string apiVersion);
-            _customModel2sRestClient = new CustomModel2SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
+            _customModel2ClientDiagnostics = new ClientDiagnostics("ExactMatchFlattenInheritance", CustomModel2.ResourceType.Namespace, DiagnosticOptions);
+            ArmClient.TryGetApiVersion(CustomModel2.ResourceType, out string customModel2ApiVersion);
+            _customModel2RestClient = new CustomModel2SRestOperations(_customModel2ClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, customModel2ApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -67,12 +67,12 @@ namespace ExactMatchFlattenInheritance
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
-            using var scope = _clientDiagnostics.CreateScope("CustomModel2Collection.CreateOrUpdate");
+            using var scope = _customModel2ClientDiagnostics.CreateScope("CustomModel2Collection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _customModel2sRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, name, foo, cancellationToken);
-                var operation = new CustomModel2CreateOrUpdateOperation(this, response);
+                var response = _customModel2RestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, name, foo, cancellationToken);
+                var operation = new CustomModel2CreateOrUpdateOperation(ArmClient, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -98,12 +98,12 @@ namespace ExactMatchFlattenInheritance
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
-            using var scope = _clientDiagnostics.CreateScope("CustomModel2Collection.CreateOrUpdate");
+            using var scope = _customModel2ClientDiagnostics.CreateScope("CustomModel2Collection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _customModel2sRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, name, foo, cancellationToken).ConfigureAwait(false);
-                var operation = new CustomModel2CreateOrUpdateOperation(this, response);
+                var response = await _customModel2RestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, name, foo, cancellationToken).ConfigureAwait(false);
+                var operation = new CustomModel2CreateOrUpdateOperation(ArmClient, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -127,14 +127,14 @@ namespace ExactMatchFlattenInheritance
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
-            using var scope = _clientDiagnostics.CreateScope("CustomModel2Collection.Get");
+            using var scope = _customModel2ClientDiagnostics.CreateScope("CustomModel2Collection.Get");
             scope.Start();
             try
             {
-                var response = _customModel2sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken);
+                var response = _customModel2RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken);
                 if (response.Value == null)
-                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new CustomModel2(this, response.Value), response.GetRawResponse());
+                    throw _customModel2ClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                return Response.FromValue(new CustomModel2(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -155,14 +155,14 @@ namespace ExactMatchFlattenInheritance
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
-            using var scope = _clientDiagnostics.CreateScope("CustomModel2Collection.Get");
+            using var scope = _customModel2ClientDiagnostics.CreateScope("CustomModel2Collection.Get");
             scope.Start();
             try
             {
-                var response = await _customModel2sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken).ConfigureAwait(false);
+                var response = await _customModel2RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new CustomModel2(this, response.Value), response.GetRawResponse());
+                    throw await _customModel2ClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                return Response.FromValue(new CustomModel2(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -180,14 +180,14 @@ namespace ExactMatchFlattenInheritance
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
-            using var scope = _clientDiagnostics.CreateScope("CustomModel2Collection.GetIfExists");
+            using var scope = _customModel2ClientDiagnostics.CreateScope("CustomModel2Collection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _customModel2sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken);
+                var response = _customModel2RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<CustomModel2>(null, response.GetRawResponse());
-                return Response.FromValue(new CustomModel2(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new CustomModel2(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -205,14 +205,14 @@ namespace ExactMatchFlattenInheritance
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
-            using var scope = _clientDiagnostics.CreateScope("CustomModel2Collection.GetIfExists");
+            using var scope = _customModel2ClientDiagnostics.CreateScope("CustomModel2Collection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _customModel2sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _customModel2RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<CustomModel2>(null, response.GetRawResponse());
-                return Response.FromValue(new CustomModel2(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new CustomModel2(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -230,7 +230,7 @@ namespace ExactMatchFlattenInheritance
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
-            using var scope = _clientDiagnostics.CreateScope("CustomModel2Collection.Exists");
+            using var scope = _customModel2ClientDiagnostics.CreateScope("CustomModel2Collection.Exists");
             scope.Start();
             try
             {
@@ -253,7 +253,7 @@ namespace ExactMatchFlattenInheritance
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
-            using var scope = _clientDiagnostics.CreateScope("CustomModel2Collection.Exists");
+            using var scope = _customModel2ClientDiagnostics.CreateScope("CustomModel2Collection.Exists");
             scope.Start();
             try
             {
@@ -277,12 +277,12 @@ namespace ExactMatchFlattenInheritance
         {
             Page<CustomModel2> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("CustomModel2Collection.GetAll");
+                using var scope = _customModel2ClientDiagnostics.CreateScope("CustomModel2Collection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _customModel2sRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new CustomModel2(this, value)), null, response.GetRawResponse());
+                    var response = _customModel2RestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new CustomModel2(ArmClient, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -303,12 +303,12 @@ namespace ExactMatchFlattenInheritance
         {
             async Task<Page<CustomModel2>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("CustomModel2Collection.GetAll");
+                using var scope = _customModel2ClientDiagnostics.CreateScope("CustomModel2Collection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _customModel2sRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new CustomModel2(this, value)), null, response.GetRawResponse());
+                    var response = await _customModel2RestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new CustomModel2(ArmClient, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -327,7 +327,7 @@ namespace ExactMatchFlattenInheritance
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<GenericResource> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("CustomModel2Collection.GetAllAsGenericResources");
+            using var scope = _customModel2ClientDiagnostics.CreateScope("CustomModel2Collection.GetAllAsGenericResources");
             scope.Start();
             try
             {
@@ -350,7 +350,7 @@ namespace ExactMatchFlattenInheritance
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<GenericResource> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("CustomModel2Collection.GetAllAsGenericResources");
+            using var scope = _customModel2ClientDiagnostics.CreateScope("CustomModel2Collection.GetAllAsGenericResources");
             scope.Start();
             try
             {
@@ -379,8 +379,5 @@ namespace ExactMatchFlattenInheritance
         {
             return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
-
-        // Builders.
-        // public ArmBuilder<Azure.Core.ResourceIdentifier, CustomModel2, CustomModel2Data> Construct() { }
     }
 }

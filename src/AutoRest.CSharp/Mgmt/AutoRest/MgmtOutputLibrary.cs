@@ -263,6 +263,18 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public SubscriptionExtensions SubscriptionExtensions => EnsureSubscriptionExtensions();
 
+        private MgmtExtensions? _subscriptionExtensionClient;
+        public MgmtExtensions SubscriptionExtensionsClient => EnsureExtensionsClient(ref _subscriptionExtensionClient, "Subscription", RequestPath.Subscription, SubscriptionExtensions);
+
+        private MgmtExtensions? _resourceGroupExtensionClient;
+        public MgmtExtensions ResourceGroupExtensionsClient => EnsureExtensionsClient(ref _resourceGroupExtensionClient, "ResourceGroup", RequestPath.ResourceGroup, ResourceGroupExtensions);
+
+        private MgmtExtensions? _tenantExtensionClient;
+        public MgmtExtensions TenantExtensionsClient => EnsureExtensionsClient(ref _tenantExtensionClient, "Tenant", RequestPath.Tenant, TenantExtensions);
+
+        private MgmtExtensions? _managementGroupExtensionClient;
+        public MgmtExtensions ManagementGroupExtensionsClient => EnsureExtensionsClient(ref _managementGroupExtensionClient, "ManagementGroup", RequestPath.ManagementGroup, ManagementGroupExtensions);
+
         public ResourceGroupExtensions ResourceGroupExtensions => EnsureResourceGroupExtensions();
 
         public ManagementGroupExtensions ManagementGroupExtensions => EnsureManagementExtensions();
@@ -290,6 +302,16 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             _subscriptionExtensions = new SubscriptionExtensions(GetChildOperations(RequestPath.Subscription), _context);
             return _subscriptionExtensions;
         }
+
+        private MgmtExtensions EnsureExtensionsClient(ref MgmtExtensions? extensionField, string typePrefix, RequestPath path, MgmtExtensions publicExtension)
+        {
+            if (extensionField != null)
+                return extensionField;
+
+            extensionField = new MgmtExtensionClient(GetChildOperations(path), typePrefix, _context, $"{typePrefix}ExtensionClient", path, publicExtension);
+            return extensionField;
+        }
+
 
         private ManagementGroupExtensions? _managementGroupExtensions;
         private ManagementGroupExtensions EnsureManagementExtensions()

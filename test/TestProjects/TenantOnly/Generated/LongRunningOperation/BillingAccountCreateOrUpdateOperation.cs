@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager;
 using TenantOnly;
 
 namespace TenantOnly.Models
@@ -22,17 +22,17 @@ namespace TenantOnly.Models
     {
         private readonly OperationInternals<BillingAccount> _operation;
 
-        private readonly ArmResource _operationBase;
+        private readonly ArmClient _armClient;
 
         /// <summary> Initializes a new instance of BillingAccountCreateOrUpdateOperation for mocking. </summary>
         protected BillingAccountCreateOrUpdateOperation()
         {
         }
 
-        internal BillingAccountCreateOrUpdateOperation(ArmResource operationsBase, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
+        internal BillingAccountCreateOrUpdateOperation(ArmClient armClient, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
             _operation = new OperationInternals<BillingAccount>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.AzureAsyncOperation, "BillingAccountCreateOrUpdateOperation");
-            _operationBase = operationsBase;
+            _armClient = armClient;
         }
 
         /// <inheritdoc />
@@ -66,14 +66,14 @@ namespace TenantOnly.Models
         {
             using var document = JsonDocument.Parse(response.ContentStream);
             var data = BillingAccountData.DeserializeBillingAccountData(document.RootElement);
-            return new BillingAccount(_operationBase, data);
+            return new BillingAccount(_armClient, data);
         }
 
         async ValueTask<BillingAccount> IOperationSource<BillingAccount>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
             var data = BillingAccountData.DeserializeBillingAccountData(document.RootElement);
-            return new BillingAccount(_operationBase, data);
+            return new BillingAccount(_armClient, data);
         }
     }
 }

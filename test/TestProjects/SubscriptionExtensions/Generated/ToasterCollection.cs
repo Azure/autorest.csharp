@@ -25,8 +25,8 @@ namespace SubscriptionExtensions
     /// <summary> A class representing collection of Toaster and their operations over its parent. </summary>
     public partial class ToasterCollection : ArmCollection, IEnumerable<Toaster>, IAsyncEnumerable<Toaster>
     {
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly ToastersRestOperations _toastersRestClient;
+        private readonly ClientDiagnostics _toasterClientDiagnostics;
+        private readonly ToastersRestOperations _toasterRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="ToasterCollection"/> class for mocking. </summary>
         protected ToasterCollection()
@@ -37,9 +37,9 @@ namespace SubscriptionExtensions
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal ToasterCollection(ArmResource parent) : base(parent)
         {
-            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            ClientOptions.TryGetApiVersion(Toaster.ResourceType, out string apiVersion);
-            _toastersRestClient = new ToastersRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
+            _toasterClientDiagnostics = new ClientDiagnostics("SubscriptionExtensions", Toaster.ResourceType.Namespace, DiagnosticOptions);
+            ArmClient.TryGetApiVersion(Toaster.ResourceType, out string toasterApiVersion);
+            _toasterRestClient = new ToastersRestOperations(_toasterClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, toasterApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -71,12 +71,12 @@ namespace SubscriptionExtensions
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ToasterCollection.CreateOrUpdate");
+            using var scope = _toasterClientDiagnostics.CreateScope("ToasterCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _toastersRestClient.CreateOrUpdate(Id.SubscriptionId, toasterName, parameters, cancellationToken);
-                var operation = new ToasterCreateOrUpdateOperation(this, response);
+                var response = _toasterRestClient.CreateOrUpdate(Id.SubscriptionId, toasterName, parameters, cancellationToken);
+                var operation = new ToasterCreateOrUpdateOperation(ArmClient, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -106,12 +106,12 @@ namespace SubscriptionExtensions
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ToasterCollection.CreateOrUpdate");
+            using var scope = _toasterClientDiagnostics.CreateScope("ToasterCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _toastersRestClient.CreateOrUpdateAsync(Id.SubscriptionId, toasterName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new ToasterCreateOrUpdateOperation(this, response);
+                var response = await _toasterRestClient.CreateOrUpdateAsync(Id.SubscriptionId, toasterName, parameters, cancellationToken).ConfigureAwait(false);
+                var operation = new ToasterCreateOrUpdateOperation(ArmClient, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -134,14 +134,14 @@ namespace SubscriptionExtensions
         {
             Argument.AssertNotNullOrEmpty(toasterName, nameof(toasterName));
 
-            using var scope = _clientDiagnostics.CreateScope("ToasterCollection.Get");
+            using var scope = _toasterClientDiagnostics.CreateScope("ToasterCollection.Get");
             scope.Start();
             try
             {
-                var response = _toastersRestClient.Get(Id.SubscriptionId, toasterName, cancellationToken);
+                var response = _toasterRestClient.Get(Id.SubscriptionId, toasterName, cancellationToken);
                 if (response.Value == null)
-                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new Toaster(this, response.Value), response.GetRawResponse());
+                    throw _toasterClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                return Response.FromValue(new Toaster(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -161,14 +161,14 @@ namespace SubscriptionExtensions
         {
             Argument.AssertNotNullOrEmpty(toasterName, nameof(toasterName));
 
-            using var scope = _clientDiagnostics.CreateScope("ToasterCollection.Get");
+            using var scope = _toasterClientDiagnostics.CreateScope("ToasterCollection.Get");
             scope.Start();
             try
             {
-                var response = await _toastersRestClient.GetAsync(Id.SubscriptionId, toasterName, cancellationToken).ConfigureAwait(false);
+                var response = await _toasterRestClient.GetAsync(Id.SubscriptionId, toasterName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new Toaster(this, response.Value), response.GetRawResponse());
+                    throw await _toasterClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                return Response.FromValue(new Toaster(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -186,14 +186,14 @@ namespace SubscriptionExtensions
         {
             Argument.AssertNotNullOrEmpty(toasterName, nameof(toasterName));
 
-            using var scope = _clientDiagnostics.CreateScope("ToasterCollection.GetIfExists");
+            using var scope = _toasterClientDiagnostics.CreateScope("ToasterCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _toastersRestClient.Get(Id.SubscriptionId, toasterName, cancellationToken: cancellationToken);
+                var response = _toasterRestClient.Get(Id.SubscriptionId, toasterName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<Toaster>(null, response.GetRawResponse());
-                return Response.FromValue(new Toaster(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Toaster(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -211,14 +211,14 @@ namespace SubscriptionExtensions
         {
             Argument.AssertNotNullOrEmpty(toasterName, nameof(toasterName));
 
-            using var scope = _clientDiagnostics.CreateScope("ToasterCollection.GetIfExists");
+            using var scope = _toasterClientDiagnostics.CreateScope("ToasterCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _toastersRestClient.GetAsync(Id.SubscriptionId, toasterName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _toasterRestClient.GetAsync(Id.SubscriptionId, toasterName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<Toaster>(null, response.GetRawResponse());
-                return Response.FromValue(new Toaster(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Toaster(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -236,7 +236,7 @@ namespace SubscriptionExtensions
         {
             Argument.AssertNotNullOrEmpty(toasterName, nameof(toasterName));
 
-            using var scope = _clientDiagnostics.CreateScope("ToasterCollection.Exists");
+            using var scope = _toasterClientDiagnostics.CreateScope("ToasterCollection.Exists");
             scope.Start();
             try
             {
@@ -259,7 +259,7 @@ namespace SubscriptionExtensions
         {
             Argument.AssertNotNullOrEmpty(toasterName, nameof(toasterName));
 
-            using var scope = _clientDiagnostics.CreateScope("ToasterCollection.Exists");
+            using var scope = _toasterClientDiagnostics.CreateScope("ToasterCollection.Exists");
             scope.Start();
             try
             {
@@ -282,12 +282,12 @@ namespace SubscriptionExtensions
         {
             Page<Toaster> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("ToasterCollection.GetAll");
+                using var scope = _toasterClientDiagnostics.CreateScope("ToasterCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _toastersRestClient.List(Id.SubscriptionId, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new Toaster(this, value)), null, response.GetRawResponse());
+                    var response = _toasterRestClient.List(Id.SubscriptionId, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new Toaster(ArmClient, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -307,12 +307,12 @@ namespace SubscriptionExtensions
         {
             async Task<Page<Toaster>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("ToasterCollection.GetAll");
+                using var scope = _toasterClientDiagnostics.CreateScope("ToasterCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _toastersRestClient.ListAsync(Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new Toaster(this, value)), null, response.GetRawResponse());
+                    var response = await _toasterRestClient.ListAsync(Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new Toaster(ArmClient, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -331,7 +331,7 @@ namespace SubscriptionExtensions
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<GenericResource> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ToasterCollection.GetAllAsGenericResources");
+            using var scope = _toasterClientDiagnostics.CreateScope("ToasterCollection.GetAllAsGenericResources");
             scope.Start();
             try
             {
@@ -354,7 +354,7 @@ namespace SubscriptionExtensions
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<GenericResource> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ToasterCollection.GetAllAsGenericResources");
+            using var scope = _toasterClientDiagnostics.CreateScope("ToasterCollection.GetAllAsGenericResources");
             scope.Start();
             try
             {
@@ -383,8 +383,5 @@ namespace SubscriptionExtensions
         {
             return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
-
-        // Builders.
-        // public ArmBuilder<Azure.Core.ResourceIdentifier, Toaster, ToasterData> Construct() { }
     }
 }

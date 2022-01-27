@@ -15,7 +15,6 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
-using SupersetFlattenInheritance.Models;
 
 namespace SupersetFlattenInheritance
 {
@@ -28,8 +27,9 @@ namespace SupersetFlattenInheritance
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/trackedResourceModel1s/{trackedResourceModel1SName}";
             return new ResourceIdentifier(resourceId);
         }
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly TrackedResourceModel1SRestOperations _trackedResourceModel1sRestClient;
+
+        private readonly ClientDiagnostics _trackedResourceModel1ClientDiagnostics;
+        private readonly TrackedResourceModel1SRestOperations _trackedResourceModel1RestClient;
         private readonly TrackedResourceModel1Data _data;
 
         /// <summary> Initializes a new instance of the <see cref="TrackedResourceModel1"/> class for mocking. </summary>
@@ -38,44 +38,22 @@ namespace SupersetFlattenInheritance
         }
 
         /// <summary> Initializes a new instance of the <see cref = "TrackedResourceModel1"/> class. </summary>
-        /// <param name="options"> The client parameters to use in these operations. </param>
+        /// <param name="armClient"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal TrackedResourceModel1(ArmResource options, TrackedResourceModel1Data data) : base(options, data.Id)
+        internal TrackedResourceModel1(ArmClient armClient, TrackedResourceModel1Data data) : this(armClient, data.Id)
         {
             HasData = true;
             _data = data;
-            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            ClientOptions.TryGetApiVersion(ResourceType, out string apiVersion);
-            _trackedResourceModel1sRestClient = new TrackedResourceModel1SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
-#if DEBUG
-			ValidateResourceId(Id);
-#endif
         }
 
         /// <summary> Initializes a new instance of the <see cref="TrackedResourceModel1"/> class. </summary>
-        /// <param name="options"> The client parameters to use in these operations. </param>
+        /// <param name="armClient"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal TrackedResourceModel1(ArmResource options, ResourceIdentifier id) : base(options, id)
+        internal TrackedResourceModel1(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
         {
-            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            ClientOptions.TryGetApiVersion(ResourceType, out string apiVersion);
-            _trackedResourceModel1sRestClient = new TrackedResourceModel1SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
-#if DEBUG
-			ValidateResourceId(Id);
-#endif
-        }
-
-        /// <summary> Initializes a new instance of the <see cref="TrackedResourceModel1"/> class. </summary>
-        /// <param name="clientOptions"> The client options to build client context. </param>
-        /// <param name="credential"> The credential to build client context. </param>
-        /// <param name="uri"> The uri to build client context. </param>
-        /// <param name="pipeline"> The pipeline to build client context. </param>
-        /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal TrackedResourceModel1(ArmClientOptions clientOptions, TokenCredential credential, Uri uri, HttpPipeline pipeline, ResourceIdentifier id) : base(clientOptions, credential, uri, pipeline, id)
-        {
-            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            ClientOptions.TryGetApiVersion(ResourceType, out string apiVersion);
-            _trackedResourceModel1sRestClient = new TrackedResourceModel1SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
+            _trackedResourceModel1ClientDiagnostics = new ClientDiagnostics("SupersetFlattenInheritance", ResourceType.Namespace, DiagnosticOptions);
+            ArmClient.TryGetApiVersion(ResourceType, out string trackedResourceModel1ApiVersion);
+            _trackedResourceModel1RestClient = new TrackedResourceModel1SRestOperations(_trackedResourceModel1ClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, trackedResourceModel1ApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -111,14 +89,14 @@ namespace SupersetFlattenInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<TrackedResourceModel1>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("TrackedResourceModel1.Get");
+            using var scope = _trackedResourceModel1ClientDiagnostics.CreateScope("TrackedResourceModel1.Get");
             scope.Start();
             try
             {
-                var response = await _trackedResourceModel1sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _trackedResourceModel1RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new TrackedResourceModel1(this, response.Value), response.GetRawResponse());
+                    throw await _trackedResourceModel1ClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                return Response.FromValue(new TrackedResourceModel1(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -133,14 +111,14 @@ namespace SupersetFlattenInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<TrackedResourceModel1> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("TrackedResourceModel1.Get");
+            using var scope = _trackedResourceModel1ClientDiagnostics.CreateScope("TrackedResourceModel1.Get");
             scope.Start();
             try
             {
-                var response = _trackedResourceModel1sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _trackedResourceModel1RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
-                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new TrackedResourceModel1(this, response.Value), response.GetRawResponse());
+                    throw _trackedResourceModel1ClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                return Response.FromValue(new TrackedResourceModel1(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -154,7 +132,7 @@ namespace SupersetFlattenInheritance
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
         public async virtual Task<IEnumerable<AzureLocation>> GetAvailableLocationsAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("TrackedResourceModel1.GetAvailableLocations");
+            using var scope = _trackedResourceModel1ClientDiagnostics.CreateScope("TrackedResourceModel1.GetAvailableLocations");
             scope.Start();
             try
             {
@@ -172,7 +150,7 @@ namespace SupersetFlattenInheritance
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
         public virtual IEnumerable<AzureLocation> GetAvailableLocations(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("TrackedResourceModel1.GetAvailableLocations");
+            using var scope = _trackedResourceModel1ClientDiagnostics.CreateScope("TrackedResourceModel1.GetAvailableLocations");
             scope.Start();
             try
             {
@@ -192,17 +170,17 @@ namespace SupersetFlattenInheritance
         /// <returns> The updated resource with the tag added. </returns>
         public async virtual Task<Response<TrackedResourceModel1>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(key, nameof(key));
+            Argument.AssertNotNullOrWhiteSpace(key, nameof(key));
 
-            using var scope = _clientDiagnostics.CreateScope("TrackedResourceModel1.AddTag");
+            using var scope = _trackedResourceModel1ClientDiagnostics.CreateScope("TrackedResourceModel1.AddTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _trackedResourceModel1sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new TrackedResourceModel1(this, originalResponse.Value), originalResponse.GetRawResponse());
+                var originalResponse = await _trackedResourceModel1RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(new TrackedResourceModel1(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -218,17 +196,17 @@ namespace SupersetFlattenInheritance
         /// <returns> The updated resource with the tag added. </returns>
         public virtual Response<TrackedResourceModel1> AddTag(string key, string value, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(key, nameof(key));
+            Argument.AssertNotNullOrWhiteSpace(key, nameof(key));
 
-            using var scope = _clientDiagnostics.CreateScope("TrackedResourceModel1.AddTag");
+            using var scope = _trackedResourceModel1ClientDiagnostics.CreateScope("TrackedResourceModel1.AddTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _trackedResourceModel1sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
-                return Response.FromValue(new TrackedResourceModel1(this, originalResponse.Value), originalResponse.GetRawResponse());
+                var originalResponse = _trackedResourceModel1RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                return Response.FromValue(new TrackedResourceModel1(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -248,7 +226,7 @@ namespace SupersetFlattenInheritance
                 throw new ArgumentNullException(nameof(tags), $"{nameof(tags)} provided cannot be null.");
             }
 
-            using var scope = _clientDiagnostics.CreateScope("TrackedResourceModel1.SetTags");
+            using var scope = _trackedResourceModel1ClientDiagnostics.CreateScope("TrackedResourceModel1.SetTags");
             scope.Start();
             try
             {
@@ -256,8 +234,8 @@ namespace SupersetFlattenInheritance
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _trackedResourceModel1sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new TrackedResourceModel1(this, originalResponse.Value), originalResponse.GetRawResponse());
+                var originalResponse = await _trackedResourceModel1RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(new TrackedResourceModel1(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -277,7 +255,7 @@ namespace SupersetFlattenInheritance
                 throw new ArgumentNullException(nameof(tags), $"{nameof(tags)} provided cannot be null.");
             }
 
-            using var scope = _clientDiagnostics.CreateScope("TrackedResourceModel1.SetTags");
+            using var scope = _trackedResourceModel1ClientDiagnostics.CreateScope("TrackedResourceModel1.SetTags");
             scope.Start();
             try
             {
@@ -285,8 +263,8 @@ namespace SupersetFlattenInheritance
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _trackedResourceModel1sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
-                return Response.FromValue(new TrackedResourceModel1(this, originalResponse.Value), originalResponse.GetRawResponse());
+                var originalResponse = _trackedResourceModel1RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                return Response.FromValue(new TrackedResourceModel1(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -301,17 +279,17 @@ namespace SupersetFlattenInheritance
         /// <returns> The updated resource with the tag removed. </returns>
         public async virtual Task<Response<TrackedResourceModel1>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(key, nameof(key));
+            Argument.AssertNotNullOrWhiteSpace(key, nameof(key));
 
-            using var scope = _clientDiagnostics.CreateScope("TrackedResourceModel1.RemoveTag");
+            using var scope = _trackedResourceModel1ClientDiagnostics.CreateScope("TrackedResourceModel1.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _trackedResourceModel1sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new TrackedResourceModel1(this, originalResponse.Value), originalResponse.GetRawResponse());
+                var originalResponse = await _trackedResourceModel1RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(new TrackedResourceModel1(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -326,17 +304,17 @@ namespace SupersetFlattenInheritance
         /// <returns> The updated resource with the tag removed. </returns>
         public virtual Response<TrackedResourceModel1> RemoveTag(string key, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(key, nameof(key));
+            Argument.AssertNotNullOrWhiteSpace(key, nameof(key));
 
-            using var scope = _clientDiagnostics.CreateScope("TrackedResourceModel1.RemoveTag");
+            using var scope = _trackedResourceModel1ClientDiagnostics.CreateScope("TrackedResourceModel1.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _trackedResourceModel1sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
-                return Response.FromValue(new TrackedResourceModel1(this, originalResponse.Value), originalResponse.GetRawResponse());
+                var originalResponse = _trackedResourceModel1RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                return Response.FromValue(new TrackedResourceModel1(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {

@@ -644,7 +644,7 @@ globalParameters:
         in: query
 operationGroups:
   - !OperationGroup 
-    $key: ''
+    $key: Cars
     operations:
       - !Operation 
         apiVersions:
@@ -710,17 +710,9 @@ operationGroups:
                   - '200'
         language: !Languages 
           default:
-            name: Cars
+            name: List
             description: ''
         protocol: !Protocols {}
-    language: !Languages 
-      default:
-        name: ''
-        description: ''
-    protocol: !Protocols {}
-  - !OperationGroup 
-    $key: Cars
-    operations:
       - !Operation 
         apiVersions:
           - !ApiVersion 

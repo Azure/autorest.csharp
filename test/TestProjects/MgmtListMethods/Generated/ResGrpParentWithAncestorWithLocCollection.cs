@@ -25,8 +25,8 @@ namespace MgmtListMethods
     /// <summary> A class representing collection of ResGrpParentWithAncestorWithLoc and their operations over its parent. </summary>
     public partial class ResGrpParentWithAncestorWithLocCollection : ArmCollection, IEnumerable<ResGrpParentWithAncestorWithLoc>, IAsyncEnumerable<ResGrpParentWithAncestorWithLoc>
     {
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly ResGrpParentWithAncestorWithLocsRestOperations _resGrpParentWithAncestorWithLocsRestClient;
+        private readonly ClientDiagnostics _resGrpParentWithAncestorWithLocClientDiagnostics;
+        private readonly ResGrpParentWithAncestorWithLocsRestOperations _resGrpParentWithAncestorWithLocRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="ResGrpParentWithAncestorWithLocCollection"/> class for mocking. </summary>
         protected ResGrpParentWithAncestorWithLocCollection()
@@ -37,9 +37,9 @@ namespace MgmtListMethods
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal ResGrpParentWithAncestorWithLocCollection(ArmResource parent) : base(parent)
         {
-            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            ClientOptions.TryGetApiVersion(ResGrpParentWithAncestorWithLoc.ResourceType, out string apiVersion);
-            _resGrpParentWithAncestorWithLocsRestClient = new ResGrpParentWithAncestorWithLocsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
+            _resGrpParentWithAncestorWithLocClientDiagnostics = new ClientDiagnostics("MgmtListMethods", ResGrpParentWithAncestorWithLoc.ResourceType.Namespace, DiagnosticOptions);
+            ArmClient.TryGetApiVersion(ResGrpParentWithAncestorWithLoc.ResourceType, out string resGrpParentWithAncestorWithLocApiVersion);
+            _resGrpParentWithAncestorWithLocRestClient = new ResGrpParentWithAncestorWithLocsRestOperations(_resGrpParentWithAncestorWithLocClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, resGrpParentWithAncestorWithLocApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -71,12 +71,12 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ResGrpParentWithAncestorWithLocCollection.CreateOrUpdate");
+            using var scope = _resGrpParentWithAncestorWithLocClientDiagnostics.CreateScope("ResGrpParentWithAncestorWithLocCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _resGrpParentWithAncestorWithLocsRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentWithAncestorWithLocName, parameters, cancellationToken);
-                var operation = new ResGrpParentWithAncestorWithLocCreateOrUpdateOperation(this, response);
+                var response = _resGrpParentWithAncestorWithLocRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentWithAncestorWithLocName, parameters, cancellationToken);
+                var operation = new ResGrpParentWithAncestorWithLocCreateOrUpdateOperation(ArmClient, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -106,12 +106,12 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ResGrpParentWithAncestorWithLocCollection.CreateOrUpdate");
+            using var scope = _resGrpParentWithAncestorWithLocClientDiagnostics.CreateScope("ResGrpParentWithAncestorWithLocCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _resGrpParentWithAncestorWithLocsRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentWithAncestorWithLocName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new ResGrpParentWithAncestorWithLocCreateOrUpdateOperation(this, response);
+                var response = await _resGrpParentWithAncestorWithLocRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentWithAncestorWithLocName, parameters, cancellationToken).ConfigureAwait(false);
+                var operation = new ResGrpParentWithAncestorWithLocCreateOrUpdateOperation(ArmClient, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -135,14 +135,14 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrEmpty(resGrpParentWithAncestorWithLocName, nameof(resGrpParentWithAncestorWithLocName));
 
-            using var scope = _clientDiagnostics.CreateScope("ResGrpParentWithAncestorWithLocCollection.Get");
+            using var scope = _resGrpParentWithAncestorWithLocClientDiagnostics.CreateScope("ResGrpParentWithAncestorWithLocCollection.Get");
             scope.Start();
             try
             {
-                var response = _resGrpParentWithAncestorWithLocsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentWithAncestorWithLocName, cancellationToken);
+                var response = _resGrpParentWithAncestorWithLocRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentWithAncestorWithLocName, cancellationToken);
                 if (response.Value == null)
-                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new ResGrpParentWithAncestorWithLoc(this, response.Value), response.GetRawResponse());
+                    throw _resGrpParentWithAncestorWithLocClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                return Response.FromValue(new ResGrpParentWithAncestorWithLoc(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -163,14 +163,14 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrEmpty(resGrpParentWithAncestorWithLocName, nameof(resGrpParentWithAncestorWithLocName));
 
-            using var scope = _clientDiagnostics.CreateScope("ResGrpParentWithAncestorWithLocCollection.Get");
+            using var scope = _resGrpParentWithAncestorWithLocClientDiagnostics.CreateScope("ResGrpParentWithAncestorWithLocCollection.Get");
             scope.Start();
             try
             {
-                var response = await _resGrpParentWithAncestorWithLocsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentWithAncestorWithLocName, cancellationToken).ConfigureAwait(false);
+                var response = await _resGrpParentWithAncestorWithLocRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentWithAncestorWithLocName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new ResGrpParentWithAncestorWithLoc(this, response.Value), response.GetRawResponse());
+                    throw await _resGrpParentWithAncestorWithLocClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                return Response.FromValue(new ResGrpParentWithAncestorWithLoc(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -188,14 +188,14 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrEmpty(resGrpParentWithAncestorWithLocName, nameof(resGrpParentWithAncestorWithLocName));
 
-            using var scope = _clientDiagnostics.CreateScope("ResGrpParentWithAncestorWithLocCollection.GetIfExists");
+            using var scope = _resGrpParentWithAncestorWithLocClientDiagnostics.CreateScope("ResGrpParentWithAncestorWithLocCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _resGrpParentWithAncestorWithLocsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentWithAncestorWithLocName, cancellationToken: cancellationToken);
+                var response = _resGrpParentWithAncestorWithLocRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentWithAncestorWithLocName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<ResGrpParentWithAncestorWithLoc>(null, response.GetRawResponse());
-                return Response.FromValue(new ResGrpParentWithAncestorWithLoc(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ResGrpParentWithAncestorWithLoc(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -213,14 +213,14 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrEmpty(resGrpParentWithAncestorWithLocName, nameof(resGrpParentWithAncestorWithLocName));
 
-            using var scope = _clientDiagnostics.CreateScope("ResGrpParentWithAncestorWithLocCollection.GetIfExists");
+            using var scope = _resGrpParentWithAncestorWithLocClientDiagnostics.CreateScope("ResGrpParentWithAncestorWithLocCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _resGrpParentWithAncestorWithLocsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentWithAncestorWithLocName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _resGrpParentWithAncestorWithLocRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentWithAncestorWithLocName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<ResGrpParentWithAncestorWithLoc>(null, response.GetRawResponse());
-                return Response.FromValue(new ResGrpParentWithAncestorWithLoc(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ResGrpParentWithAncestorWithLoc(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -238,7 +238,7 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrEmpty(resGrpParentWithAncestorWithLocName, nameof(resGrpParentWithAncestorWithLocName));
 
-            using var scope = _clientDiagnostics.CreateScope("ResGrpParentWithAncestorWithLocCollection.Exists");
+            using var scope = _resGrpParentWithAncestorWithLocClientDiagnostics.CreateScope("ResGrpParentWithAncestorWithLocCollection.Exists");
             scope.Start();
             try
             {
@@ -261,7 +261,7 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrEmpty(resGrpParentWithAncestorWithLocName, nameof(resGrpParentWithAncestorWithLocName));
 
-            using var scope = _clientDiagnostics.CreateScope("ResGrpParentWithAncestorWithLocCollection.Exists");
+            using var scope = _resGrpParentWithAncestorWithLocClientDiagnostics.CreateScope("ResGrpParentWithAncestorWithLocCollection.Exists");
             scope.Start();
             try
             {
@@ -285,12 +285,12 @@ namespace MgmtListMethods
         {
             Page<ResGrpParentWithAncestorWithLoc> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("ResGrpParentWithAncestorWithLocCollection.GetAll");
+                using var scope = _resGrpParentWithAncestorWithLocClientDiagnostics.CreateScope("ResGrpParentWithAncestorWithLocCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _resGrpParentWithAncestorWithLocsRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentWithAncestorWithLoc(this, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = _resGrpParentWithAncestorWithLocRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentWithAncestorWithLoc(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -300,12 +300,12 @@ namespace MgmtListMethods
             }
             Page<ResGrpParentWithAncestorWithLoc> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("ResGrpParentWithAncestorWithLocCollection.GetAll");
+                using var scope = _resGrpParentWithAncestorWithLocClientDiagnostics.CreateScope("ResGrpParentWithAncestorWithLocCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _resGrpParentWithAncestorWithLocsRestClient.ListNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentWithAncestorWithLoc(this, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = _resGrpParentWithAncestorWithLocRestClient.ListNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentWithAncestorWithLoc(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -326,12 +326,12 @@ namespace MgmtListMethods
         {
             async Task<Page<ResGrpParentWithAncestorWithLoc>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("ResGrpParentWithAncestorWithLocCollection.GetAll");
+                using var scope = _resGrpParentWithAncestorWithLocClientDiagnostics.CreateScope("ResGrpParentWithAncestorWithLocCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _resGrpParentWithAncestorWithLocsRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentWithAncestorWithLoc(this, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = await _resGrpParentWithAncestorWithLocRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentWithAncestorWithLoc(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -341,12 +341,12 @@ namespace MgmtListMethods
             }
             async Task<Page<ResGrpParentWithAncestorWithLoc>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("ResGrpParentWithAncestorWithLocCollection.GetAll");
+                using var scope = _resGrpParentWithAncestorWithLocClientDiagnostics.CreateScope("ResGrpParentWithAncestorWithLocCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _resGrpParentWithAncestorWithLocsRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentWithAncestorWithLoc(this, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = await _resGrpParentWithAncestorWithLocRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentWithAncestorWithLoc(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -365,7 +365,7 @@ namespace MgmtListMethods
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<GenericResource> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ResGrpParentWithAncestorWithLocCollection.GetAllAsGenericResources");
+            using var scope = _resGrpParentWithAncestorWithLocClientDiagnostics.CreateScope("ResGrpParentWithAncestorWithLocCollection.GetAllAsGenericResources");
             scope.Start();
             try
             {
@@ -388,7 +388,7 @@ namespace MgmtListMethods
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<GenericResource> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ResGrpParentWithAncestorWithLocCollection.GetAllAsGenericResources");
+            using var scope = _resGrpParentWithAncestorWithLocClientDiagnostics.CreateScope("ResGrpParentWithAncestorWithLocCollection.GetAllAsGenericResources");
             scope.Start();
             try
             {
@@ -417,8 +417,5 @@ namespace MgmtListMethods
         {
             return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
-
-        // Builders.
-        // public ArmBuilder<Azure.Core.ResourceIdentifier, ResGrpParentWithAncestorWithLoc, ResGrpParentWithAncestorWithLocData> Construct() { }
     }
 }

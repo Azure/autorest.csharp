@@ -18,15 +18,14 @@ using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources;
-using MgmtCollectionParent.Models;
 
 namespace MgmtCollectionParent
 {
     /// <summary> A class representing collection of OrderResource and their operations over its parent. </summary>
     public partial class OrderResourceCollection : ArmCollection, IEnumerable<OrderResource>, IAsyncEnumerable<OrderResource>
     {
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly ComputeManagementRestOperations _restClient;
+        private readonly ClientDiagnostics _orderResourceClientDiagnostics;
+        private readonly ComputeManagementRestOperations _orderResourceRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="OrderResourceCollection"/> class for mocking. </summary>
         protected OrderResourceCollection()
@@ -37,9 +36,9 @@ namespace MgmtCollectionParent
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal OrderResourceCollection(ArmResource parent) : base(parent)
         {
-            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            ClientOptions.TryGetApiVersion(OrderResource.ResourceType, out string apiVersion);
-            _restClient = new ComputeManagementRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
+            _orderResourceClientDiagnostics = new ClientDiagnostics("MgmtCollectionParent", OrderResource.ResourceType.Namespace, DiagnosticOptions);
+            ArmClient.TryGetApiVersion(OrderResource.ResourceType, out string orderResourceApiVersion);
+            _orderResourceRestClient = new ComputeManagementRestOperations(_orderResourceClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, orderResourceApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -67,14 +66,14 @@ namespace MgmtCollectionParent
             Argument.AssertNotNullOrEmpty(location, nameof(location));
             Argument.AssertNotNullOrEmpty(orderName, nameof(orderName));
 
-            using var scope = _clientDiagnostics.CreateScope("OrderResourceCollection.Get");
+            using var scope = _orderResourceClientDiagnostics.CreateScope("OrderResourceCollection.Get");
             scope.Start();
             try
             {
-                var response = _restClient.GetOrderByName(Id.SubscriptionId, Id.ResourceGroupName, location, orderName, cancellationToken);
+                var response = _orderResourceRestClient.GetOrderByName(Id.SubscriptionId, Id.ResourceGroupName, location, orderName, cancellationToken);
                 if (response.Value == null)
-                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new OrderResource(this, response.Value), response.GetRawResponse());
+                    throw _orderResourceClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                return Response.FromValue(new OrderResource(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -97,14 +96,14 @@ namespace MgmtCollectionParent
             Argument.AssertNotNullOrEmpty(location, nameof(location));
             Argument.AssertNotNullOrEmpty(orderName, nameof(orderName));
 
-            using var scope = _clientDiagnostics.CreateScope("OrderResourceCollection.Get");
+            using var scope = _orderResourceClientDiagnostics.CreateScope("OrderResourceCollection.Get");
             scope.Start();
             try
             {
-                var response = await _restClient.GetOrderByNameAsync(Id.SubscriptionId, Id.ResourceGroupName, location, orderName, cancellationToken).ConfigureAwait(false);
+                var response = await _orderResourceRestClient.GetOrderByNameAsync(Id.SubscriptionId, Id.ResourceGroupName, location, orderName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new OrderResource(this, response.Value), response.GetRawResponse());
+                    throw await _orderResourceClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                return Response.FromValue(new OrderResource(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -124,14 +123,14 @@ namespace MgmtCollectionParent
             Argument.AssertNotNullOrEmpty(location, nameof(location));
             Argument.AssertNotNullOrEmpty(orderName, nameof(orderName));
 
-            using var scope = _clientDiagnostics.CreateScope("OrderResourceCollection.GetIfExists");
+            using var scope = _orderResourceClientDiagnostics.CreateScope("OrderResourceCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _restClient.GetOrderByName(Id.SubscriptionId, Id.ResourceGroupName, location, orderName, cancellationToken: cancellationToken);
+                var response = _orderResourceRestClient.GetOrderByName(Id.SubscriptionId, Id.ResourceGroupName, location, orderName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<OrderResource>(null, response.GetRawResponse());
-                return Response.FromValue(new OrderResource(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new OrderResource(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -151,14 +150,14 @@ namespace MgmtCollectionParent
             Argument.AssertNotNullOrEmpty(location, nameof(location));
             Argument.AssertNotNullOrEmpty(orderName, nameof(orderName));
 
-            using var scope = _clientDiagnostics.CreateScope("OrderResourceCollection.GetIfExists");
+            using var scope = _orderResourceClientDiagnostics.CreateScope("OrderResourceCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _restClient.GetOrderByNameAsync(Id.SubscriptionId, Id.ResourceGroupName, location, orderName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _orderResourceRestClient.GetOrderByNameAsync(Id.SubscriptionId, Id.ResourceGroupName, location, orderName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<OrderResource>(null, response.GetRawResponse());
-                return Response.FromValue(new OrderResource(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new OrderResource(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -178,7 +177,7 @@ namespace MgmtCollectionParent
             Argument.AssertNotNullOrEmpty(location, nameof(location));
             Argument.AssertNotNullOrEmpty(orderName, nameof(orderName));
 
-            using var scope = _clientDiagnostics.CreateScope("OrderResourceCollection.Exists");
+            using var scope = _orderResourceClientDiagnostics.CreateScope("OrderResourceCollection.Exists");
             scope.Start();
             try
             {
@@ -203,7 +202,7 @@ namespace MgmtCollectionParent
             Argument.AssertNotNullOrEmpty(location, nameof(location));
             Argument.AssertNotNullOrEmpty(orderName, nameof(orderName));
 
-            using var scope = _clientDiagnostics.CreateScope("OrderResourceCollection.Exists");
+            using var scope = _orderResourceClientDiagnostics.CreateScope("OrderResourceCollection.Exists");
             scope.Start();
             try
             {
@@ -228,12 +227,12 @@ namespace MgmtCollectionParent
         {
             Page<OrderResource> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("OrderResourceCollection.GetAll");
+                using var scope = _orderResourceClientDiagnostics.CreateScope("OrderResourceCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _restClient.ListOrderAtResourceGroupLevel(Id.SubscriptionId, Id.ResourceGroupName, skipToken, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new OrderResource(this, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = _orderResourceRestClient.ListOrderAtResourceGroupLevel(Id.SubscriptionId, Id.ResourceGroupName, skipToken, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new OrderResource(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -243,12 +242,12 @@ namespace MgmtCollectionParent
             }
             Page<OrderResource> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("OrderResourceCollection.GetAll");
+                using var scope = _orderResourceClientDiagnostics.CreateScope("OrderResourceCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _restClient.ListOrderAtResourceGroupLevelNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, skipToken, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new OrderResource(this, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = _orderResourceRestClient.ListOrderAtResourceGroupLevelNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, skipToken, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new OrderResource(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -270,12 +269,12 @@ namespace MgmtCollectionParent
         {
             async Task<Page<OrderResource>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("OrderResourceCollection.GetAll");
+                using var scope = _orderResourceClientDiagnostics.CreateScope("OrderResourceCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _restClient.ListOrderAtResourceGroupLevelAsync(Id.SubscriptionId, Id.ResourceGroupName, skipToken, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new OrderResource(this, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = await _orderResourceRestClient.ListOrderAtResourceGroupLevelAsync(Id.SubscriptionId, Id.ResourceGroupName, skipToken, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new OrderResource(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -285,12 +284,12 @@ namespace MgmtCollectionParent
             }
             async Task<Page<OrderResource>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("OrderResourceCollection.GetAll");
+                using var scope = _orderResourceClientDiagnostics.CreateScope("OrderResourceCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _restClient.ListOrderAtResourceGroupLevelNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, skipToken, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new OrderResource(this, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = await _orderResourceRestClient.ListOrderAtResourceGroupLevelNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, skipToken, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new OrderResource(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -309,7 +308,7 @@ namespace MgmtCollectionParent
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<GenericResource> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("OrderResourceCollection.GetAllAsGenericResources");
+            using var scope = _orderResourceClientDiagnostics.CreateScope("OrderResourceCollection.GetAllAsGenericResources");
             scope.Start();
             try
             {
@@ -332,7 +331,7 @@ namespace MgmtCollectionParent
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<GenericResource> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("OrderResourceCollection.GetAllAsGenericResources");
+            using var scope = _orderResourceClientDiagnostics.CreateScope("OrderResourceCollection.GetAllAsGenericResources");
             scope.Start();
             try
             {
@@ -361,8 +360,5 @@ namespace MgmtCollectionParent
         {
             return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
-
-        // Builders.
-        // public ArmBuilder<Azure.Core.ResourceIdentifier, OrderResource, OrderResourceData> Construct() { }
     }
 }

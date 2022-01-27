@@ -4,15 +4,14 @@ using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
-using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Utilities;
-using AutoRest.TestServer.Tests.Mgmt.OutputLibrary;
+using Azure;
 using Azure.Core;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Models;
 using Azure.ResourceManager.Resources;
+using Microsoft.VisualStudio.TestPlatform.ObjectModel;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
@@ -45,6 +44,50 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         }
 
         protected Type? GetType(string name) => MyTypes().FirstOrDefault(t => t.Name == name);
+
+        [Test]
+        public void AllClientsShouldHaveMockingCtor()
+        {
+            foreach (var type in FindAllResources())
+            {
+                var mockCtor = type.GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic).Where(c=>c.IsFamily && c.GetParameters().Length == 0).FirstOrDefault();
+                Assert.IsNotNull(mockCtor);
+            }
+            foreach (var type in FindAllCollections())
+            {
+                var mockCtor = type.GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic).Where(c => c.IsFamily && c.GetParameters().Length == 0).FirstOrDefault();
+                Assert.IsNotNull(mockCtor);
+            }
+            foreach (var type in FindAllExtensionClients())
+            {
+                var mockCtor = type.GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic).Where(c => c.IsFamily && c.GetParameters().Length == 0).FirstOrDefault();
+                Assert.IsNotNull(mockCtor);
+            }
+        }
+
+        [Test]
+        public void ValidateReturnTypesInPublicExtension()
+        {
+            foreach (var type in MyTypes().Where(t => t.Name.EndsWith("Extensions")))
+            {
+                foreach (var method in type.GetMethods(BindingFlags.Public | BindingFlags.Static).Where(m => m.ReturnType.IsSubclassOf(typeof(Task))))
+                {
+                    var typeArg = method.ReturnType.GenericTypeArguments.FirstOrDefault();
+                    if (typeArg.IsSubclassOf(typeof(Operation)))
+                        continue; //skip LROs
+
+                    Assert.IsNotNull(typeArg);
+                    if (typeArg.IsGenericType)
+                    {
+                        Assert.AreEqual(typeof(Response<>), typeArg.GetGenericTypeDefinition());
+                    }
+                    else
+                    {
+                        Assert.AreEqual(typeof(Response), typeArg);
+                    }
+                }
+            }
+        }
 
         [Test]
         public void ValidateNoListMethods()
@@ -120,6 +163,15 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 Assert.AreEqual(typeof(string), param2.ParameterType);
                 var param3 = TypeAsserts.HasParameter(method, "cancellationToken");
                 Assert.AreEqual(typeof(CancellationToken), param3.ParameterType);
+            }
+        }
+
+        [Test]
+        public void ValidateExtensionClient()
+        {
+            foreach (var extensionClient in FindAllExtensionClients())
+            {
+                Assert.IsFalse(extensionClient.IsPublic);
             }
         }
 
@@ -204,13 +256,29 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             }
         }
 
+        public IEnumerable<Type> FindAllExtensionClients()
+        {
+            Type[] allTypes = Assembly.GetExecutingAssembly().GetTypes();
+
+            foreach (Type t in allTypes)
+            {
+                if (t.Name.EndsWith("ExtensionClient"))
+                {
+                    yield return t;
+                }
+            }
+        }
+
         public IEnumerable<Type> FindAllResources()
         {
             Type[] allTypes = Assembly.GetExecutingAssembly().GetTypes();
 
             foreach (Type t in allTypes)
             {
-                if (t.BaseType.FullName == typeof(ArmResource).FullName && !t.Name.Contains("Tests") && t.Namespace == _projectName)
+                if (t.BaseType.FullName == typeof(ArmResource).FullName &&
+                    !t.Name.Contains("Tests") &&
+                    t.Namespace == _projectName &&
+                    !t.Name.EndsWith("ExtensionClient"))
                 {
                     yield return t;
                 }

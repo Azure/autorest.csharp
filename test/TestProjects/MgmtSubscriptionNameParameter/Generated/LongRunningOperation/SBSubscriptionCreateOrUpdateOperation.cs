@@ -10,7 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager;
 using MgmtSubscriptionNameParameter;
 
 namespace MgmtSubscriptionNameParameter.Models
@@ -25,9 +25,9 @@ namespace MgmtSubscriptionNameParameter.Models
         {
         }
 
-        internal SBSubscriptionCreateOrUpdateOperation(ArmResource operationsBase, Response<SBSubscriptionData> response)
+        internal SBSubscriptionCreateOrUpdateOperation(ArmClient armClient, Response<SBSubscriptionData> response)
         {
-            _operation = new OperationOrResponseInternals<SBSubscription>(Response.FromValue(new SBSubscription(operationsBase, response.Value), response.GetRawResponse()));
+            _operation = new OperationOrResponseInternals<SBSubscription>(Response.FromValue(new SBSubscription(armClient, response.Value), response.GetRawResponse()));
         }
 
         /// <inheritdoc />

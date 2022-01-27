@@ -25,8 +25,8 @@ namespace NoTypeReplacement
     /// <summary> A class representing collection of NoTypeReplacementModel3 and their operations over its parent. </summary>
     public partial class NoTypeReplacementModel3Collection : ArmCollection, IEnumerable<NoTypeReplacementModel3>, IAsyncEnumerable<NoTypeReplacementModel3>
     {
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly NoTypeReplacementModel3SRestOperations _noTypeReplacementModel3sRestClient;
+        private readonly ClientDiagnostics _noTypeReplacementModel3ClientDiagnostics;
+        private readonly NoTypeReplacementModel3SRestOperations _noTypeReplacementModel3RestClient;
 
         /// <summary> Initializes a new instance of the <see cref="NoTypeReplacementModel3Collection"/> class for mocking. </summary>
         protected NoTypeReplacementModel3Collection()
@@ -37,9 +37,9 @@ namespace NoTypeReplacement
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal NoTypeReplacementModel3Collection(ArmResource parent) : base(parent)
         {
-            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            ClientOptions.TryGetApiVersion(NoTypeReplacementModel3.ResourceType, out string apiVersion);
-            _noTypeReplacementModel3sRestClient = new NoTypeReplacementModel3SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
+            _noTypeReplacementModel3ClientDiagnostics = new ClientDiagnostics("NoTypeReplacement", NoTypeReplacementModel3.ResourceType.Namespace, DiagnosticOptions);
+            ArmClient.TryGetApiVersion(NoTypeReplacementModel3.ResourceType, out string noTypeReplacementModel3ApiVersion);
+            _noTypeReplacementModel3RestClient = new NoTypeReplacementModel3SRestOperations(_noTypeReplacementModel3ClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, noTypeReplacementModel3ApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -67,12 +67,12 @@ namespace NoTypeReplacement
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("NoTypeReplacementModel3Collection.CreateOrUpdate");
+            using var scope = _noTypeReplacementModel3ClientDiagnostics.CreateScope("NoTypeReplacementModel3Collection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _noTypeReplacementModel3sRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, noTypeReplacementModel3SName, parameters, cancellationToken);
-                var operation = new NoTypeReplacementModel3CreateOrUpdateOperation(this, response);
+                var response = _noTypeReplacementModel3RestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, noTypeReplacementModel3SName, parameters, cancellationToken);
+                var operation = new NoTypeReplacementModel3CreateOrUpdateOperation(ArmClient, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -98,12 +98,12 @@ namespace NoTypeReplacement
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("NoTypeReplacementModel3Collection.CreateOrUpdate");
+            using var scope = _noTypeReplacementModel3ClientDiagnostics.CreateScope("NoTypeReplacementModel3Collection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _noTypeReplacementModel3sRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, noTypeReplacementModel3SName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new NoTypeReplacementModel3CreateOrUpdateOperation(this, response);
+                var response = await _noTypeReplacementModel3RestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, noTypeReplacementModel3SName, parameters, cancellationToken).ConfigureAwait(false);
+                var operation = new NoTypeReplacementModel3CreateOrUpdateOperation(ArmClient, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -123,14 +123,14 @@ namespace NoTypeReplacement
         {
             Argument.AssertNotNullOrEmpty(noTypeReplacementModel3SName, nameof(noTypeReplacementModel3SName));
 
-            using var scope = _clientDiagnostics.CreateScope("NoTypeReplacementModel3Collection.Get");
+            using var scope = _noTypeReplacementModel3ClientDiagnostics.CreateScope("NoTypeReplacementModel3Collection.Get");
             scope.Start();
             try
             {
-                var response = _noTypeReplacementModel3sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, noTypeReplacementModel3SName, cancellationToken);
+                var response = _noTypeReplacementModel3RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, noTypeReplacementModel3SName, cancellationToken);
                 if (response.Value == null)
-                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new NoTypeReplacementModel3(this, response.Value), response.GetRawResponse());
+                    throw _noTypeReplacementModel3ClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                return Response.FromValue(new NoTypeReplacementModel3(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -147,14 +147,14 @@ namespace NoTypeReplacement
         {
             Argument.AssertNotNullOrEmpty(noTypeReplacementModel3SName, nameof(noTypeReplacementModel3SName));
 
-            using var scope = _clientDiagnostics.CreateScope("NoTypeReplacementModel3Collection.Get");
+            using var scope = _noTypeReplacementModel3ClientDiagnostics.CreateScope("NoTypeReplacementModel3Collection.Get");
             scope.Start();
             try
             {
-                var response = await _noTypeReplacementModel3sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, noTypeReplacementModel3SName, cancellationToken).ConfigureAwait(false);
+                var response = await _noTypeReplacementModel3RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, noTypeReplacementModel3SName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new NoTypeReplacementModel3(this, response.Value), response.GetRawResponse());
+                    throw await _noTypeReplacementModel3ClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                return Response.FromValue(new NoTypeReplacementModel3(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -172,14 +172,14 @@ namespace NoTypeReplacement
         {
             Argument.AssertNotNullOrEmpty(noTypeReplacementModel3SName, nameof(noTypeReplacementModel3SName));
 
-            using var scope = _clientDiagnostics.CreateScope("NoTypeReplacementModel3Collection.GetIfExists");
+            using var scope = _noTypeReplacementModel3ClientDiagnostics.CreateScope("NoTypeReplacementModel3Collection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _noTypeReplacementModel3sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, noTypeReplacementModel3SName, cancellationToken: cancellationToken);
+                var response = _noTypeReplacementModel3RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, noTypeReplacementModel3SName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<NoTypeReplacementModel3>(null, response.GetRawResponse());
-                return Response.FromValue(new NoTypeReplacementModel3(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new NoTypeReplacementModel3(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -197,14 +197,14 @@ namespace NoTypeReplacement
         {
             Argument.AssertNotNullOrEmpty(noTypeReplacementModel3SName, nameof(noTypeReplacementModel3SName));
 
-            using var scope = _clientDiagnostics.CreateScope("NoTypeReplacementModel3Collection.GetIfExists");
+            using var scope = _noTypeReplacementModel3ClientDiagnostics.CreateScope("NoTypeReplacementModel3Collection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _noTypeReplacementModel3sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, noTypeReplacementModel3SName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _noTypeReplacementModel3RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, noTypeReplacementModel3SName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<NoTypeReplacementModel3>(null, response.GetRawResponse());
-                return Response.FromValue(new NoTypeReplacementModel3(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new NoTypeReplacementModel3(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -222,7 +222,7 @@ namespace NoTypeReplacement
         {
             Argument.AssertNotNullOrEmpty(noTypeReplacementModel3SName, nameof(noTypeReplacementModel3SName));
 
-            using var scope = _clientDiagnostics.CreateScope("NoTypeReplacementModel3Collection.Exists");
+            using var scope = _noTypeReplacementModel3ClientDiagnostics.CreateScope("NoTypeReplacementModel3Collection.Exists");
             scope.Start();
             try
             {
@@ -245,7 +245,7 @@ namespace NoTypeReplacement
         {
             Argument.AssertNotNullOrEmpty(noTypeReplacementModel3SName, nameof(noTypeReplacementModel3SName));
 
-            using var scope = _clientDiagnostics.CreateScope("NoTypeReplacementModel3Collection.Exists");
+            using var scope = _noTypeReplacementModel3ClientDiagnostics.CreateScope("NoTypeReplacementModel3Collection.Exists");
             scope.Start();
             try
             {
@@ -265,12 +265,12 @@ namespace NoTypeReplacement
         {
             Page<NoTypeReplacementModel3> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("NoTypeReplacementModel3Collection.GetAll");
+                using var scope = _noTypeReplacementModel3ClientDiagnostics.CreateScope("NoTypeReplacementModel3Collection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _noTypeReplacementModel3sRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new NoTypeReplacementModel3(this, value)), null, response.GetRawResponse());
+                    var response = _noTypeReplacementModel3RestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new NoTypeReplacementModel3(ArmClient, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -287,12 +287,12 @@ namespace NoTypeReplacement
         {
             async Task<Page<NoTypeReplacementModel3>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("NoTypeReplacementModel3Collection.GetAll");
+                using var scope = _noTypeReplacementModel3ClientDiagnostics.CreateScope("NoTypeReplacementModel3Collection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _noTypeReplacementModel3sRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new NoTypeReplacementModel3(this, value)), null, response.GetRawResponse());
+                    var response = await _noTypeReplacementModel3RestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new NoTypeReplacementModel3(ArmClient, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -311,7 +311,7 @@ namespace NoTypeReplacement
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<GenericResource> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("NoTypeReplacementModel3Collection.GetAllAsGenericResources");
+            using var scope = _noTypeReplacementModel3ClientDiagnostics.CreateScope("NoTypeReplacementModel3Collection.GetAllAsGenericResources");
             scope.Start();
             try
             {
@@ -334,7 +334,7 @@ namespace NoTypeReplacement
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<GenericResource> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("NoTypeReplacementModel3Collection.GetAllAsGenericResources");
+            using var scope = _noTypeReplacementModel3ClientDiagnostics.CreateScope("NoTypeReplacementModel3Collection.GetAllAsGenericResources");
             scope.Start();
             try
             {
@@ -363,8 +363,5 @@ namespace NoTypeReplacement
         {
             return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
-
-        // Builders.
-        // public ArmBuilder<Azure.Core.ResourceIdentifier, NoTypeReplacementModel3, NoTypeReplacementModel3Data> Construct() { }
     }
 }

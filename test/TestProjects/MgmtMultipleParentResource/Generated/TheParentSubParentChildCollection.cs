@@ -23,8 +23,8 @@ namespace MgmtMultipleParentResource
     /// <summary> A class representing collection of ChildBody and their operations over its parent. </summary>
     public partial class TheParentSubParentChildCollection : ArmCollection, IEnumerable<TheParentSubParentChild>, IAsyncEnumerable<TheParentSubParentChild>
     {
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly ChildrenRestOperations _childrenRestClient;
+        private readonly ClientDiagnostics _theParentSubParentChildChildrenClientDiagnostics;
+        private readonly ChildrenRestOperations _theParentSubParentChildChildrenRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="TheParentSubParentChildCollection"/> class for mocking. </summary>
         protected TheParentSubParentChildCollection()
@@ -35,9 +35,9 @@ namespace MgmtMultipleParentResource
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal TheParentSubParentChildCollection(ArmResource parent) : base(parent)
         {
-            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            ClientOptions.TryGetApiVersion(TheParentSubParentChild.ResourceType, out string apiVersion);
-            _childrenRestClient = new ChildrenRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
+            _theParentSubParentChildChildrenClientDiagnostics = new ClientDiagnostics("MgmtMultipleParentResource", TheParentSubParentChild.ResourceType.Namespace, DiagnosticOptions);
+            ArmClient.TryGetApiVersion(TheParentSubParentChild.ResourceType, out string theParentSubParentChildChildrenApiVersion);
+            _theParentSubParentChildChildrenRestClient = new ChildrenRestOperations(_theParentSubParentChildChildrenClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, theParentSubParentChildChildrenApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -69,12 +69,12 @@ namespace MgmtMultipleParentResource
                 throw new ArgumentNullException(nameof(childBody));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("TheParentSubParentChildCollection.CreateOrUpdate");
+            using var scope = _theParentSubParentChildChildrenClientDiagnostics.CreateScope("TheParentSubParentChildCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _childrenRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, childName, childBody, cancellationToken);
-                var operation = new TheParentSubParentChildCreateOrUpdateOperation(this, _clientDiagnostics, Pipeline, _childrenRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, childName, childBody).Request, response);
+                var response = _theParentSubParentChildChildrenRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, childName, childBody, cancellationToken);
+                var operation = new TheParentSubParentChildCreateOrUpdateOperation(ArmClient, _theParentSubParentChildChildrenClientDiagnostics, Pipeline, _theParentSubParentChildChildrenRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, childName, childBody).Request, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -104,12 +104,12 @@ namespace MgmtMultipleParentResource
                 throw new ArgumentNullException(nameof(childBody));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("TheParentSubParentChildCollection.CreateOrUpdate");
+            using var scope = _theParentSubParentChildChildrenClientDiagnostics.CreateScope("TheParentSubParentChildCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _childrenRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, childName, childBody, cancellationToken).ConfigureAwait(false);
-                var operation = new TheParentSubParentChildCreateOrUpdateOperation(this, _clientDiagnostics, Pipeline, _childrenRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, childName, childBody).Request, response);
+                var response = await _theParentSubParentChildChildrenRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, childName, childBody, cancellationToken).ConfigureAwait(false);
+                var operation = new TheParentSubParentChildCreateOrUpdateOperation(ArmClient, _theParentSubParentChildChildrenClientDiagnostics, Pipeline, _theParentSubParentChildChildrenRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, childName, childBody).Request, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -134,14 +134,14 @@ namespace MgmtMultipleParentResource
         {
             Argument.AssertNotNullOrEmpty(childName, nameof(childName));
 
-            using var scope = _clientDiagnostics.CreateScope("TheParentSubParentChildCollection.Get");
+            using var scope = _theParentSubParentChildChildrenClientDiagnostics.CreateScope("TheParentSubParentChildCollection.Get");
             scope.Start();
             try
             {
-                var response = _childrenRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, childName, expand, cancellationToken);
+                var response = _theParentSubParentChildChildrenRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, childName, expand, cancellationToken);
                 if (response.Value == null)
-                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new TheParentSubParentChild(this, response.Value), response.GetRawResponse());
+                    throw _theParentSubParentChildChildrenClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                return Response.FromValue(new TheParentSubParentChild(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -163,14 +163,14 @@ namespace MgmtMultipleParentResource
         {
             Argument.AssertNotNullOrEmpty(childName, nameof(childName));
 
-            using var scope = _clientDiagnostics.CreateScope("TheParentSubParentChildCollection.Get");
+            using var scope = _theParentSubParentChildChildrenClientDiagnostics.CreateScope("TheParentSubParentChildCollection.Get");
             scope.Start();
             try
             {
-                var response = await _childrenRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, childName, expand, cancellationToken).ConfigureAwait(false);
+                var response = await _theParentSubParentChildChildrenRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, childName, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new TheParentSubParentChild(this, response.Value), response.GetRawResponse());
+                    throw await _theParentSubParentChildChildrenClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                return Response.FromValue(new TheParentSubParentChild(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -189,14 +189,14 @@ namespace MgmtMultipleParentResource
         {
             Argument.AssertNotNullOrEmpty(childName, nameof(childName));
 
-            using var scope = _clientDiagnostics.CreateScope("TheParentSubParentChildCollection.GetIfExists");
+            using var scope = _theParentSubParentChildChildrenClientDiagnostics.CreateScope("TheParentSubParentChildCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _childrenRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, childName, expand, cancellationToken: cancellationToken);
+                var response = _theParentSubParentChildChildrenRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, childName, expand, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<TheParentSubParentChild>(null, response.GetRawResponse());
-                return Response.FromValue(new TheParentSubParentChild(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new TheParentSubParentChild(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -215,14 +215,14 @@ namespace MgmtMultipleParentResource
         {
             Argument.AssertNotNullOrEmpty(childName, nameof(childName));
 
-            using var scope = _clientDiagnostics.CreateScope("TheParentSubParentChildCollection.GetIfExists");
+            using var scope = _theParentSubParentChildChildrenClientDiagnostics.CreateScope("TheParentSubParentChildCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _childrenRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, childName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _theParentSubParentChildChildrenRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, childName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<TheParentSubParentChild>(null, response.GetRawResponse());
-                return Response.FromValue(new TheParentSubParentChild(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new TheParentSubParentChild(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -241,7 +241,7 @@ namespace MgmtMultipleParentResource
         {
             Argument.AssertNotNullOrEmpty(childName, nameof(childName));
 
-            using var scope = _clientDiagnostics.CreateScope("TheParentSubParentChildCollection.Exists");
+            using var scope = _theParentSubParentChildChildrenClientDiagnostics.CreateScope("TheParentSubParentChildCollection.Exists");
             scope.Start();
             try
             {
@@ -265,7 +265,7 @@ namespace MgmtMultipleParentResource
         {
             Argument.AssertNotNullOrEmpty(childName, nameof(childName));
 
-            using var scope = _clientDiagnostics.CreateScope("TheParentSubParentChildCollection.Exists");
+            using var scope = _theParentSubParentChildChildrenClientDiagnostics.CreateScope("TheParentSubParentChildCollection.Exists");
             scope.Start();
             try
             {
@@ -290,12 +290,12 @@ namespace MgmtMultipleParentResource
         {
             Page<TheParentSubParentChild> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("TheParentSubParentChildCollection.GetAll");
+                using var scope = _theParentSubParentChildChildrenClientDiagnostics.CreateScope("TheParentSubParentChildCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _childrenRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, expand, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new TheParentSubParentChild(this, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = _theParentSubParentChildChildrenRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, expand, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new TheParentSubParentChild(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -305,12 +305,12 @@ namespace MgmtMultipleParentResource
             }
             Page<TheParentSubParentChild> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("TheParentSubParentChildCollection.GetAll");
+                using var scope = _theParentSubParentChildChildrenClientDiagnostics.CreateScope("TheParentSubParentChildCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _childrenRestClient.ListNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, expand, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new TheParentSubParentChild(this, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = _theParentSubParentChildChildrenRestClient.ListNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, expand, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new TheParentSubParentChild(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -332,12 +332,12 @@ namespace MgmtMultipleParentResource
         {
             async Task<Page<TheParentSubParentChild>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("TheParentSubParentChildCollection.GetAll");
+                using var scope = _theParentSubParentChildChildrenClientDiagnostics.CreateScope("TheParentSubParentChildCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _childrenRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new TheParentSubParentChild(this, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = await _theParentSubParentChildChildrenRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new TheParentSubParentChild(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -347,12 +347,12 @@ namespace MgmtMultipleParentResource
             }
             async Task<Page<TheParentSubParentChild>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("TheParentSubParentChildCollection.GetAll");
+                using var scope = _theParentSubParentChildChildrenClientDiagnostics.CreateScope("TheParentSubParentChildCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _childrenRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new TheParentSubParentChild(this, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = await _theParentSubParentChildChildrenRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new TheParentSubParentChild(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -377,8 +377,5 @@ namespace MgmtMultipleParentResource
         {
             return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
-
-        // Builders.
-        // public ArmBuilder<Azure.Core.ResourceIdentifier, TheParentSubParentChild, ChildBodyData> Construct() { }
     }
 }

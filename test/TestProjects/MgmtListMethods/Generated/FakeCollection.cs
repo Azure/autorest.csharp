@@ -25,8 +25,8 @@ namespace MgmtListMethods
     /// <summary> A class representing collection of Fake and their operations over its parent. </summary>
     public partial class FakeCollection : ArmCollection, IEnumerable<Fake>, IAsyncEnumerable<Fake>
     {
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly FakesRestOperations _fakesRestClient;
+        private readonly ClientDiagnostics _fakeClientDiagnostics;
+        private readonly FakesRestOperations _fakeRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="FakeCollection"/> class for mocking. </summary>
         protected FakeCollection()
@@ -37,9 +37,9 @@ namespace MgmtListMethods
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal FakeCollection(ArmResource parent) : base(parent)
         {
-            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            ClientOptions.TryGetApiVersion(Fake.ResourceType, out string apiVersion);
-            _fakesRestClient = new FakesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
+            _fakeClientDiagnostics = new ClientDiagnostics("MgmtListMethods", Fake.ResourceType.Namespace, DiagnosticOptions);
+            ArmClient.TryGetApiVersion(Fake.ResourceType, out string fakeApiVersion);
+            _fakeRestClient = new FakesRestOperations(_fakeClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, fakeApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -71,12 +71,12 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("FakeCollection.CreateOrUpdate");
+            using var scope = _fakeClientDiagnostics.CreateScope("FakeCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _fakesRestClient.CreateOrUpdate(Id.SubscriptionId, fakeName, parameters, cancellationToken);
-                var operation = new FakeCreateOrUpdateOperation(this, response);
+                var response = _fakeRestClient.CreateOrUpdate(Id.SubscriptionId, fakeName, parameters, cancellationToken);
+                var operation = new FakeCreateOrUpdateOperation(ArmClient, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -106,12 +106,12 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("FakeCollection.CreateOrUpdate");
+            using var scope = _fakeClientDiagnostics.CreateScope("FakeCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _fakesRestClient.CreateOrUpdateAsync(Id.SubscriptionId, fakeName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new FakeCreateOrUpdateOperation(this, response);
+                var response = await _fakeRestClient.CreateOrUpdateAsync(Id.SubscriptionId, fakeName, parameters, cancellationToken).ConfigureAwait(false);
+                var operation = new FakeCreateOrUpdateOperation(ArmClient, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -136,14 +136,14 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrEmpty(fakeName, nameof(fakeName));
 
-            using var scope = _clientDiagnostics.CreateScope("FakeCollection.Get");
+            using var scope = _fakeClientDiagnostics.CreateScope("FakeCollection.Get");
             scope.Start();
             try
             {
-                var response = _fakesRestClient.Get(Id.SubscriptionId, fakeName, expand, cancellationToken);
+                var response = _fakeRestClient.Get(Id.SubscriptionId, fakeName, expand, cancellationToken);
                 if (response.Value == null)
-                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new Fake(this, response.Value), response.GetRawResponse());
+                    throw _fakeClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                return Response.FromValue(new Fake(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -165,14 +165,14 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrEmpty(fakeName, nameof(fakeName));
 
-            using var scope = _clientDiagnostics.CreateScope("FakeCollection.Get");
+            using var scope = _fakeClientDiagnostics.CreateScope("FakeCollection.Get");
             scope.Start();
             try
             {
-                var response = await _fakesRestClient.GetAsync(Id.SubscriptionId, fakeName, expand, cancellationToken).ConfigureAwait(false);
+                var response = await _fakeRestClient.GetAsync(Id.SubscriptionId, fakeName, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new Fake(this, response.Value), response.GetRawResponse());
+                    throw await _fakeClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                return Response.FromValue(new Fake(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -191,14 +191,14 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrEmpty(fakeName, nameof(fakeName));
 
-            using var scope = _clientDiagnostics.CreateScope("FakeCollection.GetIfExists");
+            using var scope = _fakeClientDiagnostics.CreateScope("FakeCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _fakesRestClient.Get(Id.SubscriptionId, fakeName, expand, cancellationToken: cancellationToken);
+                var response = _fakeRestClient.Get(Id.SubscriptionId, fakeName, expand, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<Fake>(null, response.GetRawResponse());
-                return Response.FromValue(new Fake(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Fake(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -217,14 +217,14 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrEmpty(fakeName, nameof(fakeName));
 
-            using var scope = _clientDiagnostics.CreateScope("FakeCollection.GetIfExists");
+            using var scope = _fakeClientDiagnostics.CreateScope("FakeCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _fakesRestClient.GetAsync(Id.SubscriptionId, fakeName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _fakeRestClient.GetAsync(Id.SubscriptionId, fakeName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<Fake>(null, response.GetRawResponse());
-                return Response.FromValue(new Fake(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Fake(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -243,7 +243,7 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrEmpty(fakeName, nameof(fakeName));
 
-            using var scope = _clientDiagnostics.CreateScope("FakeCollection.Exists");
+            using var scope = _fakeClientDiagnostics.CreateScope("FakeCollection.Exists");
             scope.Start();
             try
             {
@@ -267,7 +267,7 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrEmpty(fakeName, nameof(fakeName));
 
-            using var scope = _clientDiagnostics.CreateScope("FakeCollection.Exists");
+            using var scope = _fakeClientDiagnostics.CreateScope("FakeCollection.Exists");
             scope.Start();
             try
             {
@@ -292,12 +292,12 @@ namespace MgmtListMethods
         {
             Page<Fake> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("FakeCollection.GetAll");
+                using var scope = _fakeClientDiagnostics.CreateScope("FakeCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _fakesRestClient.List(Id.SubscriptionId, optionalParam, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new Fake(this, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = _fakeRestClient.List(Id.SubscriptionId, optionalParam, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new Fake(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -307,12 +307,12 @@ namespace MgmtListMethods
             }
             Page<Fake> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("FakeCollection.GetAll");
+                using var scope = _fakeClientDiagnostics.CreateScope("FakeCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _fakesRestClient.ListNextPage(nextLink, Id.SubscriptionId, optionalParam, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new Fake(this, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = _fakeRestClient.ListNextPage(nextLink, Id.SubscriptionId, optionalParam, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new Fake(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -334,12 +334,12 @@ namespace MgmtListMethods
         {
             async Task<Page<Fake>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("FakeCollection.GetAll");
+                using var scope = _fakeClientDiagnostics.CreateScope("FakeCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _fakesRestClient.ListAsync(Id.SubscriptionId, optionalParam, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new Fake(this, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = await _fakeRestClient.ListAsync(Id.SubscriptionId, optionalParam, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new Fake(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -349,12 +349,12 @@ namespace MgmtListMethods
             }
             async Task<Page<Fake>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("FakeCollection.GetAll");
+                using var scope = _fakeClientDiagnostics.CreateScope("FakeCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _fakesRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, optionalParam, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new Fake(this, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = await _fakeRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, optionalParam, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new Fake(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -373,7 +373,7 @@ namespace MgmtListMethods
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<GenericResource> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("FakeCollection.GetAllAsGenericResources");
+            using var scope = _fakeClientDiagnostics.CreateScope("FakeCollection.GetAllAsGenericResources");
             scope.Start();
             try
             {
@@ -396,7 +396,7 @@ namespace MgmtListMethods
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<GenericResource> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("FakeCollection.GetAllAsGenericResources");
+            using var scope = _fakeClientDiagnostics.CreateScope("FakeCollection.GetAllAsGenericResources");
             scope.Start();
             try
             {
@@ -425,8 +425,5 @@ namespace MgmtListMethods
         {
             return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
-
-        // Builders.
-        // public ArmBuilder<Azure.Core.ResourceIdentifier, Fake, FakeData> Construct() { }
     }
 }

@@ -66,7 +66,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateHead400Request(context);
-                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -95,7 +95,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateHead400Request(context);
-                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -124,7 +124,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateGet400Request(context);
-                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -153,7 +153,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateGet400Request(context);
-                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -182,7 +182,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateOptions400Request(context);
-                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -211,7 +211,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateOptions400Request(context);
-                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -241,7 +241,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreatePut400Request(content, context);
-                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -271,7 +271,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreatePut400Request(content, context);
-                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -301,7 +301,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreatePatch400Request(content, context);
-                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -331,7 +331,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreatePatch400Request(content, context);
-                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -361,7 +361,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreatePost400Request(content, context);
-                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -391,7 +391,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreatePost400Request(content, context);
-                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -421,7 +421,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateDelete400Request(content, context);
-                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -451,7 +451,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateDelete400Request(content, context);
-                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -480,7 +480,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateHead401Request(context);
-                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -509,7 +509,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateHead401Request(context);
-                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -538,7 +538,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateGet402Request(context);
-                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -567,7 +567,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateGet402Request(context);
-                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -596,7 +596,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateOptions403Request(context);
-                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -625,7 +625,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateOptions403Request(context);
-                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -654,7 +654,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateGet403Request(context);
-                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -683,7 +683,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateGet403Request(context);
-                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -713,7 +713,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreatePut404Request(content, context);
-                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -743,7 +743,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreatePut404Request(content, context);
-                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -773,7 +773,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreatePatch405Request(content, context);
-                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -803,7 +803,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreatePatch405Request(content, context);
-                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -833,7 +833,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreatePost406Request(content, context);
-                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -863,7 +863,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreatePost406Request(content, context);
-                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -893,7 +893,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateDelete407Request(content, context);
-                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -923,7 +923,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateDelete407Request(content, context);
-                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -953,7 +953,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreatePut409Request(content, context);
-                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -983,7 +983,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreatePut409Request(content, context);
-                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1012,7 +1012,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateHead410Request(context);
-                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1041,7 +1041,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateHead410Request(context);
-                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1070,7 +1070,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateGet411Request(context);
-                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1099,7 +1099,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateGet411Request(context);
-                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1128,7 +1128,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateOptions412Request(context);
-                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1157,7 +1157,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateOptions412Request(context);
-                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1186,7 +1186,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateGet412Request(context);
-                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1215,7 +1215,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateGet412Request(context);
-                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1245,7 +1245,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreatePut413Request(content, context);
-                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1275,7 +1275,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreatePut413Request(content, context);
-                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1305,7 +1305,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreatePatch414Request(content, context);
-                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1335,7 +1335,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreatePatch414Request(content, context);
-                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1365,7 +1365,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreatePost415Request(content, context);
-                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1395,7 +1395,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreatePost415Request(content, context);
-                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1424,7 +1424,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateGet416Request(context);
-                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1453,7 +1453,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateGet416Request(context);
-                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1483,7 +1483,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateDelete417Request(content, context);
-                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1513,7 +1513,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateDelete417Request(content, context);
-                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1542,7 +1542,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateHead429Request(context);
-                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1571,7 +1571,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateHead429Request(context);
-                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {

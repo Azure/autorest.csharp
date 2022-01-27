@@ -10,7 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager;
 using SupersetInheritance;
 
 namespace SupersetInheritance.Models
@@ -24,9 +24,9 @@ namespace SupersetInheritance.Models
         {
         }
 
-        internal SupersetModel4CreateOrUpdateOperation(ArmResource operationsBase, Response<SupersetModel4Data> response)
+        internal SupersetModel4CreateOrUpdateOperation(ArmClient armClient, Response<SupersetModel4Data> response)
         {
-            _operation = new OperationOrResponseInternals<SupersetModel4>(Response.FromValue(new SupersetModel4(operationsBase, response.Value), response.GetRawResponse()));
+            _operation = new OperationOrResponseInternals<SupersetModel4>(Response.FromValue(new SupersetModel4(armClient, response.Value), response.GetRawResponse()));
         }
 
         /// <inheritdoc />

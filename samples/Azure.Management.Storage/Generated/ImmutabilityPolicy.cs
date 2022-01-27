@@ -28,8 +28,9 @@ namespace Azure.Management.Storage
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/immutabilityPolicies/default";
             return new ResourceIdentifier(resourceId);
         }
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly BlobContainersRestOperations _blobContainersRestClient;
+
+        private readonly ClientDiagnostics _immutabilityPolicyBlobContainersClientDiagnostics;
+        private readonly BlobContainersRestOperations _immutabilityPolicyBlobContainersRestClient;
         private readonly ImmutabilityPolicyData _data;
 
         /// <summary> Initializes a new instance of the <see cref="ImmutabilityPolicy"/> class for mocking. </summary>
@@ -38,46 +39,22 @@ namespace Azure.Management.Storage
         }
 
         /// <summary> Initializes a new instance of the <see cref = "ImmutabilityPolicy"/> class. </summary>
-        /// <param name="options"> The client parameters to use in these operations. </param>
+        /// <param name="armClient"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal ImmutabilityPolicy(ArmResource options, ImmutabilityPolicyData data) : base(options, data.Id)
+        internal ImmutabilityPolicy(ArmClient armClient, ImmutabilityPolicyData data) : this(armClient, data.Id)
         {
             HasData = true;
             _data = data;
-            Parent = options;
-            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            ClientOptions.TryGetApiVersion(ResourceType, out string apiVersion);
-            _blobContainersRestClient = new BlobContainersRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
-#if DEBUG
-			ValidateResourceId(Id);
-#endif
         }
 
         /// <summary> Initializes a new instance of the <see cref="ImmutabilityPolicy"/> class. </summary>
-        /// <param name="options"> The client parameters to use in these operations. </param>
+        /// <param name="armClient"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal ImmutabilityPolicy(ArmResource options, ResourceIdentifier id) : base(options, id)
+        internal ImmutabilityPolicy(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
         {
-            Parent = options;
-            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            ClientOptions.TryGetApiVersion(ResourceType, out string apiVersion);
-            _blobContainersRestClient = new BlobContainersRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
-#if DEBUG
-			ValidateResourceId(Id);
-#endif
-        }
-
-        /// <summary> Initializes a new instance of the <see cref="ImmutabilityPolicy"/> class. </summary>
-        /// <param name="clientOptions"> The client options to build client context. </param>
-        /// <param name="credential"> The credential to build client context. </param>
-        /// <param name="uri"> The uri to build client context. </param>
-        /// <param name="pipeline"> The pipeline to build client context. </param>
-        /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal ImmutabilityPolicy(ArmClientOptions clientOptions, TokenCredential credential, Uri uri, HttpPipeline pipeline, ResourceIdentifier id) : base(clientOptions, credential, uri, pipeline, id)
-        {
-            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            ClientOptions.TryGetApiVersion(ResourceType, out string apiVersion);
-            _blobContainersRestClient = new BlobContainersRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
+            _immutabilityPolicyBlobContainersClientDiagnostics = new ClientDiagnostics("Azure.Management.Storage", ResourceType.Namespace, DiagnosticOptions);
+            ArmClient.TryGetApiVersion(ResourceType, out string immutabilityPolicyBlobContainersApiVersion);
+            _immutabilityPolicyBlobContainersRestClient = new BlobContainersRestOperations(_immutabilityPolicyBlobContainersClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, immutabilityPolicyBlobContainersApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -107,9 +84,6 @@ namespace Azure.Management.Storage
                 throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ResourceType), nameof(id));
         }
 
-        /// <summary> Gets the parent resource of this resource. </summary>
-        public ArmResource Parent { get; }
-
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/immutabilityPolicies/{immutabilityPolicyName}
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/immutabilityPolicies/{immutabilityPolicyName}
         /// OperationId: BlobContainers_GetImmutabilityPolicy
@@ -118,14 +92,14 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<ImmutabilityPolicy>> GetAsync(string ifMatch = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ImmutabilityPolicy.Get");
+            using var scope = _immutabilityPolicyBlobContainersClientDiagnostics.CreateScope("ImmutabilityPolicy.Get");
             scope.Start();
             try
             {
-                var response = await _blobContainersRestClient.GetImmutabilityPolicyAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Parent.Name, Id.Parent.Name, ifMatch, cancellationToken).ConfigureAwait(false);
+                var response = await _immutabilityPolicyBlobContainersRestClient.GetImmutabilityPolicyAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Parent.Name, Id.Parent.Name, ifMatch, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new ImmutabilityPolicy(this, response.Value), response.GetRawResponse());
+                    throw await _immutabilityPolicyBlobContainersClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                return Response.FromValue(new ImmutabilityPolicy(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -142,14 +116,14 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<ImmutabilityPolicy> Get(string ifMatch = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ImmutabilityPolicy.Get");
+            using var scope = _immutabilityPolicyBlobContainersClientDiagnostics.CreateScope("ImmutabilityPolicy.Get");
             scope.Start();
             try
             {
-                var response = _blobContainersRestClient.GetImmutabilityPolicy(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Parent.Name, Id.Parent.Name, ifMatch, cancellationToken);
+                var response = _immutabilityPolicyBlobContainersRestClient.GetImmutabilityPolicy(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Parent.Name, Id.Parent.Name, ifMatch, cancellationToken);
                 if (response.Value == null)
-                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new ImmutabilityPolicy(this, response.Value), response.GetRawResponse());
+                    throw _immutabilityPolicyBlobContainersClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                return Response.FromValue(new ImmutabilityPolicy(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -163,7 +137,7 @@ namespace Azure.Management.Storage
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
         public async virtual Task<IEnumerable<AzureLocation>> GetAvailableLocationsAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ImmutabilityPolicy.GetAvailableLocations");
+            using var scope = _immutabilityPolicyBlobContainersClientDiagnostics.CreateScope("ImmutabilityPolicy.GetAvailableLocations");
             scope.Start();
             try
             {
@@ -181,7 +155,7 @@ namespace Azure.Management.Storage
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
         public virtual IEnumerable<AzureLocation> GetAvailableLocations(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ImmutabilityPolicy.GetAvailableLocations");
+            using var scope = _immutabilityPolicyBlobContainersClientDiagnostics.CreateScope("ImmutabilityPolicy.GetAvailableLocations");
             scope.Start();
             try
             {
@@ -209,11 +183,11 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(ifMatch));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ImmutabilityPolicy.Delete");
+            using var scope = _immutabilityPolicyBlobContainersClientDiagnostics.CreateScope("ImmutabilityPolicy.Delete");
             scope.Start();
             try
             {
-                var response = await _blobContainersRestClient.DeleteImmutabilityPolicyAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Parent.Name, Id.Parent.Name, ifMatch, cancellationToken).ConfigureAwait(false);
+                var response = await _immutabilityPolicyBlobContainersRestClient.DeleteImmutabilityPolicyAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Parent.Name, Id.Parent.Name, ifMatch, cancellationToken).ConfigureAwait(false);
                 var operation = new ImmutabilityPolicyDeleteOperation(response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -241,11 +215,11 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(ifMatch));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ImmutabilityPolicy.Delete");
+            using var scope = _immutabilityPolicyBlobContainersClientDiagnostics.CreateScope("ImmutabilityPolicy.Delete");
             scope.Start();
             try
             {
-                var response = _blobContainersRestClient.DeleteImmutabilityPolicy(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Parent.Name, Id.Parent.Name, ifMatch, cancellationToken);
+                var response = _immutabilityPolicyBlobContainersRestClient.DeleteImmutabilityPolicy(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Parent.Name, Id.Parent.Name, ifMatch, cancellationToken);
                 var operation = new ImmutabilityPolicyDeleteOperation(response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
@@ -268,12 +242,12 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<ImmutabilityPolicyCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string ifMatch = null, ImmutabilityPolicyData parameters = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ImmutabilityPolicy.CreateOrUpdate");
+            using var scope = _immutabilityPolicyBlobContainersClientDiagnostics.CreateScope("ImmutabilityPolicy.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _blobContainersRestClient.CreateOrUpdateImmutabilityPolicyAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Parent.Name, Id.Parent.Name, ifMatch, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new ImmutabilityPolicyCreateOrUpdateOperation(this, response);
+                var response = await _immutabilityPolicyBlobContainersRestClient.CreateOrUpdateImmutabilityPolicyAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Parent.Name, Id.Parent.Name, ifMatch, parameters, cancellationToken).ConfigureAwait(false);
+                var operation = new ImmutabilityPolicyCreateOrUpdateOperation(ArmClient, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -295,12 +269,12 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual ImmutabilityPolicyCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string ifMatch = null, ImmutabilityPolicyData parameters = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ImmutabilityPolicy.CreateOrUpdate");
+            using var scope = _immutabilityPolicyBlobContainersClientDiagnostics.CreateScope("ImmutabilityPolicy.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _blobContainersRestClient.CreateOrUpdateImmutabilityPolicy(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Parent.Name, Id.Parent.Name, ifMatch, parameters, cancellationToken);
-                var operation = new ImmutabilityPolicyCreateOrUpdateOperation(this, response);
+                var response = _immutabilityPolicyBlobContainersRestClient.CreateOrUpdateImmutabilityPolicy(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Parent.Name, Id.Parent.Name, ifMatch, parameters, cancellationToken);
+                var operation = new ImmutabilityPolicyCreateOrUpdateOperation(ArmClient, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -326,12 +300,12 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(ifMatch));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ImmutabilityPolicy.LockImmutabilityPolicy");
+            using var scope = _immutabilityPolicyBlobContainersClientDiagnostics.CreateScope("ImmutabilityPolicy.LockImmutabilityPolicy");
             scope.Start();
             try
             {
-                var response = await _blobContainersRestClient.LockImmutabilityPolicyAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Parent.Name, Id.Parent.Name, ifMatch, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new ImmutabilityPolicy(this, response.Value), response.GetRawResponse());
+                var response = await _immutabilityPolicyBlobContainersRestClient.LockImmutabilityPolicyAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Parent.Name, Id.Parent.Name, ifMatch, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(new ImmutabilityPolicy(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -354,12 +328,12 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(ifMatch));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ImmutabilityPolicy.LockImmutabilityPolicy");
+            using var scope = _immutabilityPolicyBlobContainersClientDiagnostics.CreateScope("ImmutabilityPolicy.LockImmutabilityPolicy");
             scope.Start();
             try
             {
-                var response = _blobContainersRestClient.LockImmutabilityPolicy(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Parent.Name, Id.Parent.Name, ifMatch, cancellationToken);
-                return Response.FromValue(new ImmutabilityPolicy(this, response.Value), response.GetRawResponse());
+                var response = _immutabilityPolicyBlobContainersRestClient.LockImmutabilityPolicy(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Parent.Name, Id.Parent.Name, ifMatch, cancellationToken);
+                return Response.FromValue(new ImmutabilityPolicy(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -383,12 +357,12 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(ifMatch));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ImmutabilityPolicy.ExtendImmutabilityPolicy");
+            using var scope = _immutabilityPolicyBlobContainersClientDiagnostics.CreateScope("ImmutabilityPolicy.ExtendImmutabilityPolicy");
             scope.Start();
             try
             {
-                var response = await _blobContainersRestClient.ExtendImmutabilityPolicyAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Parent.Name, Id.Parent.Name, ifMatch, parameters, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new ImmutabilityPolicy(this, response.Value), response.GetRawResponse());
+                var response = await _immutabilityPolicyBlobContainersRestClient.ExtendImmutabilityPolicyAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Parent.Name, Id.Parent.Name, ifMatch, parameters, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(new ImmutabilityPolicy(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -412,12 +386,12 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(ifMatch));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ImmutabilityPolicy.ExtendImmutabilityPolicy");
+            using var scope = _immutabilityPolicyBlobContainersClientDiagnostics.CreateScope("ImmutabilityPolicy.ExtendImmutabilityPolicy");
             scope.Start();
             try
             {
-                var response = _blobContainersRestClient.ExtendImmutabilityPolicy(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Parent.Name, Id.Parent.Name, ifMatch, parameters, cancellationToken);
-                return Response.FromValue(new ImmutabilityPolicy(this, response.Value), response.GetRawResponse());
+                var response = _immutabilityPolicyBlobContainersRestClient.ExtendImmutabilityPolicy(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Parent.Name, Id.Parent.Name, ifMatch, parameters, cancellationToken);
+                return Response.FromValue(new ImmutabilityPolicy(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

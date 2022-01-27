@@ -10,7 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager;
 using ExactMatchFlattenInheritance;
 
 namespace ExactMatchFlattenInheritance.Models
@@ -25,9 +25,9 @@ namespace ExactMatchFlattenInheritance.Models
         {
         }
 
-        internal CustomModel3CreateOrUpdateOperation(ArmResource operationsBase, Response<CustomModel3Data> response)
+        internal CustomModel3CreateOrUpdateOperation(ArmClient armClient, Response<CustomModel3Data> response)
         {
-            _operation = new OperationOrResponseInternals<CustomModel3>(Response.FromValue(new CustomModel3(operationsBase, response.Value), response.GetRawResponse()));
+            _operation = new OperationOrResponseInternals<CustomModel3>(Response.FromValue(new CustomModel3(armClient, response.Value), response.GetRawResponse()));
         }
 
         /// <inheritdoc />

@@ -21,5 +21,14 @@ namespace MgmtExpandResourceTypes
             return new ZoneCollection(resourceGroup);
         }
         #endregion
+
+        private static ResourceGroupExtensionClient GetExtensionClient(ResourceGroup resourceGroup)
+        {
+            return resourceGroup.GetCachedClient((armClient) =>
+            {
+                return new ResourceGroupExtensionClient(armClient, resourceGroup.Id);
+            }
+            );
+        }
     }
 }

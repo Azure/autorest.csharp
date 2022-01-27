@@ -15,7 +15,6 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
-using ExactMatchFlattenInheritance.Models;
 
 namespace ExactMatchFlattenInheritance
 {
@@ -28,8 +27,9 @@ namespace ExactMatchFlattenInheritance
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel2s/{name}";
             return new ResourceIdentifier(resourceId);
         }
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly CustomModel2SRestOperations _customModel2sRestClient;
+
+        private readonly ClientDiagnostics _customModel2ClientDiagnostics;
+        private readonly CustomModel2SRestOperations _customModel2RestClient;
         private readonly CustomModel2Data _data;
 
         /// <summary> Initializes a new instance of the <see cref="CustomModel2"/> class for mocking. </summary>
@@ -38,44 +38,22 @@ namespace ExactMatchFlattenInheritance
         }
 
         /// <summary> Initializes a new instance of the <see cref = "CustomModel2"/> class. </summary>
-        /// <param name="options"> The client parameters to use in these operations. </param>
+        /// <param name="armClient"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal CustomModel2(ArmResource options, CustomModel2Data data) : base(options, data.Id)
+        internal CustomModel2(ArmClient armClient, CustomModel2Data data) : this(armClient, data.Id)
         {
             HasData = true;
             _data = data;
-            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            ClientOptions.TryGetApiVersion(ResourceType, out string apiVersion);
-            _customModel2sRestClient = new CustomModel2SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
-#if DEBUG
-			ValidateResourceId(Id);
-#endif
         }
 
         /// <summary> Initializes a new instance of the <see cref="CustomModel2"/> class. </summary>
-        /// <param name="options"> The client parameters to use in these operations. </param>
+        /// <param name="armClient"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal CustomModel2(ArmResource options, ResourceIdentifier id) : base(options, id)
+        internal CustomModel2(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
         {
-            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            ClientOptions.TryGetApiVersion(ResourceType, out string apiVersion);
-            _customModel2sRestClient = new CustomModel2SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
-#if DEBUG
-			ValidateResourceId(Id);
-#endif
-        }
-
-        /// <summary> Initializes a new instance of the <see cref="CustomModel2"/> class. </summary>
-        /// <param name="clientOptions"> The client options to build client context. </param>
-        /// <param name="credential"> The credential to build client context. </param>
-        /// <param name="uri"> The uri to build client context. </param>
-        /// <param name="pipeline"> The pipeline to build client context. </param>
-        /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal CustomModel2(ArmClientOptions clientOptions, TokenCredential credential, Uri uri, HttpPipeline pipeline, ResourceIdentifier id) : base(clientOptions, credential, uri, pipeline, id)
-        {
-            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            ClientOptions.TryGetApiVersion(ResourceType, out string apiVersion);
-            _customModel2sRestClient = new CustomModel2SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
+            _customModel2ClientDiagnostics = new ClientDiagnostics("ExactMatchFlattenInheritance", ResourceType.Namespace, DiagnosticOptions);
+            ArmClient.TryGetApiVersion(ResourceType, out string customModel2ApiVersion);
+            _customModel2RestClient = new CustomModel2SRestOperations(_customModel2ClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, customModel2ApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -112,14 +90,14 @@ namespace ExactMatchFlattenInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<CustomModel2>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("CustomModel2.Get");
+            using var scope = _customModel2ClientDiagnostics.CreateScope("CustomModel2.Get");
             scope.Start();
             try
             {
-                var response = await _customModel2sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _customModel2RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new CustomModel2(this, response.Value), response.GetRawResponse());
+                    throw await _customModel2ClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                return Response.FromValue(new CustomModel2(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -135,14 +113,14 @@ namespace ExactMatchFlattenInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<CustomModel2> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("CustomModel2.Get");
+            using var scope = _customModel2ClientDiagnostics.CreateScope("CustomModel2.Get");
             scope.Start();
             try
             {
-                var response = _customModel2sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _customModel2RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
-                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new CustomModel2(this, response.Value), response.GetRawResponse());
+                    throw _customModel2ClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                return Response.FromValue(new CustomModel2(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -156,7 +134,7 @@ namespace ExactMatchFlattenInheritance
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
         public async virtual Task<IEnumerable<AzureLocation>> GetAvailableLocationsAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("CustomModel2.GetAvailableLocations");
+            using var scope = _customModel2ClientDiagnostics.CreateScope("CustomModel2.GetAvailableLocations");
             scope.Start();
             try
             {
@@ -174,7 +152,7 @@ namespace ExactMatchFlattenInheritance
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
         public virtual IEnumerable<AzureLocation> GetAvailableLocations(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("CustomModel2.GetAvailableLocations");
+            using var scope = _customModel2ClientDiagnostics.CreateScope("CustomModel2.GetAvailableLocations");
             scope.Start();
             try
             {

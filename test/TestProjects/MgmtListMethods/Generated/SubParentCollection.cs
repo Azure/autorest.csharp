@@ -25,8 +25,8 @@ namespace MgmtListMethods
     /// <summary> A class representing collection of SubParent and their operations over its parent. </summary>
     public partial class SubParentCollection : ArmCollection, IEnumerable<SubParent>, IAsyncEnumerable<SubParent>
     {
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly SubParentsRestOperations _subParentsRestClient;
+        private readonly ClientDiagnostics _subParentClientDiagnostics;
+        private readonly SubParentsRestOperations _subParentRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="SubParentCollection"/> class for mocking. </summary>
         protected SubParentCollection()
@@ -37,9 +37,9 @@ namespace MgmtListMethods
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal SubParentCollection(ArmResource parent) : base(parent)
         {
-            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            ClientOptions.TryGetApiVersion(SubParent.ResourceType, out string apiVersion);
-            _subParentsRestClient = new SubParentsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
+            _subParentClientDiagnostics = new ClientDiagnostics("MgmtListMethods", SubParent.ResourceType.Namespace, DiagnosticOptions);
+            ArmClient.TryGetApiVersion(SubParent.ResourceType, out string subParentApiVersion);
+            _subParentRestClient = new SubParentsRestOperations(_subParentClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, subParentApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -71,12 +71,12 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SubParentCollection.CreateOrUpdate");
+            using var scope = _subParentClientDiagnostics.CreateScope("SubParentCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _subParentsRestClient.CreateOrUpdate(Id.SubscriptionId, subParentName, parameters, cancellationToken);
-                var operation = new SubParentCreateOrUpdateOperation(this, response);
+                var response = _subParentRestClient.CreateOrUpdate(Id.SubscriptionId, subParentName, parameters, cancellationToken);
+                var operation = new SubParentCreateOrUpdateOperation(ArmClient, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -106,12 +106,12 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SubParentCollection.CreateOrUpdate");
+            using var scope = _subParentClientDiagnostics.CreateScope("SubParentCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _subParentsRestClient.CreateOrUpdateAsync(Id.SubscriptionId, subParentName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new SubParentCreateOrUpdateOperation(this, response);
+                var response = await _subParentRestClient.CreateOrUpdateAsync(Id.SubscriptionId, subParentName, parameters, cancellationToken).ConfigureAwait(false);
+                var operation = new SubParentCreateOrUpdateOperation(ArmClient, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -135,14 +135,14 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrEmpty(subParentName, nameof(subParentName));
 
-            using var scope = _clientDiagnostics.CreateScope("SubParentCollection.Get");
+            using var scope = _subParentClientDiagnostics.CreateScope("SubParentCollection.Get");
             scope.Start();
             try
             {
-                var response = _subParentsRestClient.Get(Id.SubscriptionId, subParentName, cancellationToken);
+                var response = _subParentRestClient.Get(Id.SubscriptionId, subParentName, cancellationToken);
                 if (response.Value == null)
-                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new SubParent(this, response.Value), response.GetRawResponse());
+                    throw _subParentClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                return Response.FromValue(new SubParent(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -163,14 +163,14 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrEmpty(subParentName, nameof(subParentName));
 
-            using var scope = _clientDiagnostics.CreateScope("SubParentCollection.Get");
+            using var scope = _subParentClientDiagnostics.CreateScope("SubParentCollection.Get");
             scope.Start();
             try
             {
-                var response = await _subParentsRestClient.GetAsync(Id.SubscriptionId, subParentName, cancellationToken).ConfigureAwait(false);
+                var response = await _subParentRestClient.GetAsync(Id.SubscriptionId, subParentName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new SubParent(this, response.Value), response.GetRawResponse());
+                    throw await _subParentClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                return Response.FromValue(new SubParent(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -188,14 +188,14 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrEmpty(subParentName, nameof(subParentName));
 
-            using var scope = _clientDiagnostics.CreateScope("SubParentCollection.GetIfExists");
+            using var scope = _subParentClientDiagnostics.CreateScope("SubParentCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _subParentsRestClient.Get(Id.SubscriptionId, subParentName, cancellationToken: cancellationToken);
+                var response = _subParentRestClient.Get(Id.SubscriptionId, subParentName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<SubParent>(null, response.GetRawResponse());
-                return Response.FromValue(new SubParent(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SubParent(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -213,14 +213,14 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrEmpty(subParentName, nameof(subParentName));
 
-            using var scope = _clientDiagnostics.CreateScope("SubParentCollection.GetIfExists");
+            using var scope = _subParentClientDiagnostics.CreateScope("SubParentCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _subParentsRestClient.GetAsync(Id.SubscriptionId, subParentName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _subParentRestClient.GetAsync(Id.SubscriptionId, subParentName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<SubParent>(null, response.GetRawResponse());
-                return Response.FromValue(new SubParent(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SubParent(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -238,7 +238,7 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrEmpty(subParentName, nameof(subParentName));
 
-            using var scope = _clientDiagnostics.CreateScope("SubParentCollection.Exists");
+            using var scope = _subParentClientDiagnostics.CreateScope("SubParentCollection.Exists");
             scope.Start();
             try
             {
@@ -261,7 +261,7 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrEmpty(subParentName, nameof(subParentName));
 
-            using var scope = _clientDiagnostics.CreateScope("SubParentCollection.Exists");
+            using var scope = _subParentClientDiagnostics.CreateScope("SubParentCollection.Exists");
             scope.Start();
             try
             {
@@ -285,12 +285,12 @@ namespace MgmtListMethods
         {
             Page<SubParent> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("SubParentCollection.GetAll");
+                using var scope = _subParentClientDiagnostics.CreateScope("SubParentCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _subParentsRestClient.List(Id.SubscriptionId, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new SubParent(this, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = _subParentRestClient.List(Id.SubscriptionId, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new SubParent(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -300,12 +300,12 @@ namespace MgmtListMethods
             }
             Page<SubParent> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("SubParentCollection.GetAll");
+                using var scope = _subParentClientDiagnostics.CreateScope("SubParentCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _subParentsRestClient.ListNextPage(nextLink, Id.SubscriptionId, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new SubParent(this, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = _subParentRestClient.ListNextPage(nextLink, Id.SubscriptionId, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new SubParent(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -326,12 +326,12 @@ namespace MgmtListMethods
         {
             async Task<Page<SubParent>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("SubParentCollection.GetAll");
+                using var scope = _subParentClientDiagnostics.CreateScope("SubParentCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _subParentsRestClient.ListAsync(Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new SubParent(this, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = await _subParentRestClient.ListAsync(Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new SubParent(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -341,12 +341,12 @@ namespace MgmtListMethods
             }
             async Task<Page<SubParent>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("SubParentCollection.GetAll");
+                using var scope = _subParentClientDiagnostics.CreateScope("SubParentCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _subParentsRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new SubParent(this, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = await _subParentRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new SubParent(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -365,7 +365,7 @@ namespace MgmtListMethods
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<GenericResource> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SubParentCollection.GetAllAsGenericResources");
+            using var scope = _subParentClientDiagnostics.CreateScope("SubParentCollection.GetAllAsGenericResources");
             scope.Start();
             try
             {
@@ -388,7 +388,7 @@ namespace MgmtListMethods
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<GenericResource> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SubParentCollection.GetAllAsGenericResources");
+            using var scope = _subParentClientDiagnostics.CreateScope("SubParentCollection.GetAllAsGenericResources");
             scope.Start();
             try
             {
@@ -417,8 +417,5 @@ namespace MgmtListMethods
         {
             return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
-
-        // Builders.
-        // public ArmBuilder<Azure.Core.ResourceIdentifier, SubParent, SubParentData> Construct() { }
     }
 }

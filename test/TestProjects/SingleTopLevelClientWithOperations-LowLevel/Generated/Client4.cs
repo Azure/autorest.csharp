@@ -68,7 +68,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
             try
             {
                 using HttpMessage message = CreatePatchRequest(filter, context);
-                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -92,7 +92,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
             try
             {
                 using HttpMessage message = CreatePatchRequest(filter, context);
-                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {

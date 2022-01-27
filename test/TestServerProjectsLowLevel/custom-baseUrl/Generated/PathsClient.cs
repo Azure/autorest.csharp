@@ -70,7 +70,7 @@ namespace custom_baseUrl_LowLevel
             try
             {
                 using HttpMessage message = CreateGetEmptyRequest(accountName, context);
-                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -103,7 +103,7 @@ namespace custom_baseUrl_LowLevel
             try
             {
                 using HttpMessage message = CreateGetEmptyRequest(accountName, context);
-                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {

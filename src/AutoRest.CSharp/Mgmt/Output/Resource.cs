@@ -81,6 +81,23 @@ namespace AutoRest.CSharp.Mgmt.Output
             return result;
         }
 
+        public bool IsInOperationMap(Operation operation)
+        {
+            foreach (var opSet in _allOperationMap.Keys)
+            {
+                if (opSet.Contains(operation))
+                    return true;
+            }
+
+            foreach (var opSet in _allOperationMap.Values)
+            {
+                if (opSet.Contains(operation))
+                    return true;
+            }
+
+            return false;
+        }
+
         protected bool IsById { get; }
 
         protected MgmtClientOperation? GetOperationWithVerb(HttpMethod method, string operationName)
@@ -91,15 +108,17 @@ namespace AutoRest.CSharp.Mgmt.Output
                 var operation = operationSet.GetOperation(method);
                 if (operation is not null)
                 {
+                    var restClient = _context.Library.GetRestClient(operation);
                     var requestPath = operation.GetRequestPath(_context);
+                    var contextualPath = GetContextualPath(operationSet, requestPath);
                     var restOperation = new MgmtRestOperation(
                         _context.Library.GetRestClientMethod(operation),
-                        _context.Library.GetRestClient(operation),
+                        restClient,
                         requestPath,
-                        GetContextualPath(operationSet, requestPath),
+                        contextualPath,
                         operationName,
-                        this,
-                        operation.GetReturnTypeAsLongRunningOperation(this, operationName, _context));
+                        operation.GetReturnTypeAsLongRunningOperation(this, operationName, _context),
+                        _context);
                     result.Add(restOperation);
                 }
             }
@@ -198,7 +217,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         public ResourceData ResourceData { get; }
 
         public MgmtClientOperation? CreateOperation => GetOperationWithVerb(HttpMethod.Put, "CreateOrUpdate");
-        public MgmtClientOperation? GetOperation => GetOperationWithVerb(HttpMethod.Get, "Get");
+        public MgmtClientOperation GetOperation => GetOperationWithVerb(HttpMethod.Get, "Get")!;
         public MgmtClientOperation? DeleteOperation => GetOperationWithVerb(HttpMethod.Delete, "Delete");
         public MgmtClientOperation? UpdateOperation => GetOperationWithVerb(HttpMethod.Patch, "Update");
 
@@ -270,14 +289,15 @@ namespace AutoRest.CSharp.Mgmt.Output
                         "GetAll" :// hard-code the name of a resource collection operation to "GetAll"
                         GetOperationName(operation, resourceRestClient.OperationGroup.Key);
                     // get the MgmtRestOperation with a proper name
+                    var restClient = _context.Library.GetRestClient(operation);
                     var restOperation = new MgmtRestOperation(
                         _context.Library.GetRestClientMethod(operation),
-                        _context.Library.GetRestClient(operation),
+                        restClient,
                         requestPath,
                         contextualPath,
                         methodName,
-                        this,
-                        operation.GetReturnTypeAsLongRunningOperation(this, methodName, _context));
+                        operation.GetReturnTypeAsLongRunningOperation(this, methodName, _context),
+                        _context);
 
                     if (result.TryGetValue(key, out var list))
                     {
@@ -333,6 +353,12 @@ namespace AutoRest.CSharp.Mgmt.Output
             return resourceRestClients.Concat(childRestClients).Distinct();
         }
 
+        private MgmtRestClient? _myRestClient;
+        public MgmtRestClient MyRestClient => _myRestClient ??= RestClients.FirstOrDefault(client => client.Resources.Any(resource => resource.ResourceName == ResourceName)) ?? RestClients.First();
+
+        private IEnumerable<MgmtRestClient>? _otherRestClients;
+        public IEnumerable<MgmtRestClient> OtherRestClients => _otherRestClients ??= RestClients.Where(client => client != MyRestClient);
+
         public ResourceTypeSegment ResourceType { get; }
 
         protected virtual string CreateDescription(string clientPrefix)
@@ -350,58 +376,35 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             return RequestPaths.ToDictionary(requestPath => requestPath,
                 requestPath => new MethodSignature(
-                    name: "CreateResourceIdentifier",
-                    description: $"Generate the resource identifier of a <see cref=\"{Type.Name}\"/> instance.",
-                    modifiers: "public static",
-                    returnType: typeof(Azure.Core.ResourceIdentifier),
-                    returnDescription: null,
-                    parameters: requestPath.Where(segment => segment.IsReference).Select(segment => new Parameter(segment.Reference.Name, null, segment.Reference.Type, null, true)).ToArray()));
+                    Name: "CreateResourceIdentifier",
+                    Description: $"Generate the resource identifier of a <see cref=\"{Type.Name}\"/> instance.",
+                    Modifiers: "public static",
+                    ReturnType: typeof(ResourceIdentifier),
+                    ReturnDescription: null,
+                    Parameters: requestPath.Where(segment => segment.IsReference).Select(segment => new Parameter(segment.Reference.Name, null, segment.Reference.Type, null, true)).ToArray()));
         }
 
-        public CodeWriterDelegate NewInstanceExpression(IEnumerable<ParameterInvocation> parameterInvocations)
-        {
-            return w =>
-            {
-                w.Append($"new {Type}(");
-                foreach (var parameter in parameterInvocations)
-                {
-                    if (parameter.Invocation != null)
-                        w.Append($"{parameter.Invocation}, ");
-                    else
-                        w.Append($"{parameter.Name:I}, ");
-                }
-                w.RemoveTrailingComma();
-                w.Append($")");
-            };
-        }
-
-        public CodeWriterDelegate ResourceDataIdExpression(CodeWriterDelegate dataExpression)
+        public FormattableString ResourceDataIdExpression(FormattableString dataExpression)
         {
             var typeOfId = ResourceData.TypeOfId;
             if (typeOfId != null && typeOfId.Equals(typeof(string)))
             {
-                return w => w.Append($"new {typeof(ResourceIdentifier)}({dataExpression}.Id)");
+                return $"new {typeof(ResourceIdentifier)}({dataExpression}.Id)";
             }
             else
             {
                 // we have ensured other cases we would have an Id of Azure.Core.ResourceIdentifier type
-                return w => w.Append($"{dataExpression}.Id");
+                return $"{dataExpression}.Id";
             }
         }
 
-        public Parameter OptionsParameter => new Parameter(Name: "options", Description: $"The client parameters to use in these operations.",
+        public static Parameter ArmClientParameter => new Parameter(Name: "armClient", Description: $"The client parameters to use in these operations.",
+                    Type: typeof(Azure.ResourceManager.ArmClient), DefaultValue: null, ValidateNotNull: false);
+        public Parameter ResourceParameter => new Parameter(Name: "resource", Description: $"The client parameters to use in these operations.",
                             Type: typeof(Azure.ResourceManager.Core.ArmResource), DefaultValue: null, ValidateNotNull: false);
         public Parameter ResourceDataParameter => new Parameter(Name: "data", Description: $"The resource that is the target of operations.",
                         Type: ResourceData.Type, DefaultValue: null, ValidateNotNull: false);
-        public Parameter ResourceIdentifierParameter => new Parameter(Name: "id", Description: $"The identifier of the resource that is the target of operations.",
+        public static Parameter ResourceIdentifierParameter => new Parameter(Name: "id", Description: $"The identifier of the resource that is the target of operations.",
                         Type: typeof(Azure.Core.ResourceIdentifier), DefaultValue: null, ValidateNotNull: false);
-        public Parameter ClientOptionsParameter => new Parameter(Name: "clientOptions", Description: $"The client options to build client context.",
-                        Type: typeof(Azure.ResourceManager.ArmClientOptions), DefaultValue: null, ValidateNotNull: false);
-        public Parameter CredentialParameter => new Parameter(Name: "credential", Description: $"The credential to build client context.",
-                        Type: typeof(Azure.Core.TokenCredential), DefaultValue: null, ValidateNotNull: false);
-        public Parameter UriParameter => new Parameter(Name: "uri", Description: $"The uri to build client context.",
-                        Type: typeof(Uri), DefaultValue: null, ValidateNotNull: false);
-        public Parameter PipelineParameter => new Parameter(Name: "pipeline", Description: $"The pipeline to build client context.",
-                        Type: typeof(Azure.Core.Pipeline.HttpPipeline), DefaultValue: null, ValidateNotNull: false);
     }
 }

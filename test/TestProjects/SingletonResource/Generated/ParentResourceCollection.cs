@@ -25,8 +25,8 @@ namespace SingletonResource
     /// <summary> A class representing collection of ParentResource and their operations over its parent. </summary>
     public partial class ParentResourceCollection : ArmCollection, IEnumerable<ParentResource>, IAsyncEnumerable<ParentResource>
     {
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly ParentResourcesRestOperations _parentResourcesRestClient;
+        private readonly ClientDiagnostics _parentResourceClientDiagnostics;
+        private readonly ParentResourcesRestOperations _parentResourceRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="ParentResourceCollection"/> class for mocking. </summary>
         protected ParentResourceCollection()
@@ -37,9 +37,9 @@ namespace SingletonResource
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal ParentResourceCollection(ArmResource parent) : base(parent)
         {
-            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            ClientOptions.TryGetApiVersion(ParentResource.ResourceType, out string apiVersion);
-            _parentResourcesRestClient = new ParentResourcesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
+            _parentResourceClientDiagnostics = new ClientDiagnostics("SingletonResource", ParentResource.ResourceType.Namespace, DiagnosticOptions);
+            ArmClient.TryGetApiVersion(ParentResource.ResourceType, out string parentResourceApiVersion);
+            _parentResourceRestClient = new ParentResourcesRestOperations(_parentResourceClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, parentResourceApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -70,12 +70,12 @@ namespace SingletonResource
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ParentResourceCollection.CreateOrUpdate");
+            using var scope = _parentResourceClientDiagnostics.CreateScope("ParentResourceCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _parentResourcesRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, parentName, parameters, cancellationToken);
-                var operation = new ParentResourceCreateOrUpdateOperation(this, response);
+                var response = _parentResourceRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, parentName, parameters, cancellationToken);
+                var operation = new ParentResourceCreateOrUpdateOperation(ArmClient, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -104,12 +104,12 @@ namespace SingletonResource
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ParentResourceCollection.CreateOrUpdate");
+            using var scope = _parentResourceClientDiagnostics.CreateScope("ParentResourceCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _parentResourcesRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, parentName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new ParentResourceCreateOrUpdateOperation(this, response);
+                var response = await _parentResourceRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, parentName, parameters, cancellationToken).ConfigureAwait(false);
+                var operation = new ParentResourceCreateOrUpdateOperation(ArmClient, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -133,14 +133,14 @@ namespace SingletonResource
         {
             Argument.AssertNotNullOrEmpty(parentName, nameof(parentName));
 
-            using var scope = _clientDiagnostics.CreateScope("ParentResourceCollection.Get");
+            using var scope = _parentResourceClientDiagnostics.CreateScope("ParentResourceCollection.Get");
             scope.Start();
             try
             {
-                var response = _parentResourcesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, parentName, cancellationToken);
+                var response = _parentResourceRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, parentName, cancellationToken);
                 if (response.Value == null)
-                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new ParentResource(this, response.Value), response.GetRawResponse());
+                    throw _parentResourceClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                return Response.FromValue(new ParentResource(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -161,14 +161,14 @@ namespace SingletonResource
         {
             Argument.AssertNotNullOrEmpty(parentName, nameof(parentName));
 
-            using var scope = _clientDiagnostics.CreateScope("ParentResourceCollection.Get");
+            using var scope = _parentResourceClientDiagnostics.CreateScope("ParentResourceCollection.Get");
             scope.Start();
             try
             {
-                var response = await _parentResourcesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, parentName, cancellationToken).ConfigureAwait(false);
+                var response = await _parentResourceRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, parentName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new ParentResource(this, response.Value), response.GetRawResponse());
+                    throw await _parentResourceClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                return Response.FromValue(new ParentResource(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -186,14 +186,14 @@ namespace SingletonResource
         {
             Argument.AssertNotNullOrEmpty(parentName, nameof(parentName));
 
-            using var scope = _clientDiagnostics.CreateScope("ParentResourceCollection.GetIfExists");
+            using var scope = _parentResourceClientDiagnostics.CreateScope("ParentResourceCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _parentResourcesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, parentName, cancellationToken: cancellationToken);
+                var response = _parentResourceRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, parentName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<ParentResource>(null, response.GetRawResponse());
-                return Response.FromValue(new ParentResource(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ParentResource(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -211,14 +211,14 @@ namespace SingletonResource
         {
             Argument.AssertNotNullOrEmpty(parentName, nameof(parentName));
 
-            using var scope = _clientDiagnostics.CreateScope("ParentResourceCollection.GetIfExists");
+            using var scope = _parentResourceClientDiagnostics.CreateScope("ParentResourceCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _parentResourcesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, parentName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _parentResourceRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, parentName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<ParentResource>(null, response.GetRawResponse());
-                return Response.FromValue(new ParentResource(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ParentResource(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -236,7 +236,7 @@ namespace SingletonResource
         {
             Argument.AssertNotNullOrEmpty(parentName, nameof(parentName));
 
-            using var scope = _clientDiagnostics.CreateScope("ParentResourceCollection.Exists");
+            using var scope = _parentResourceClientDiagnostics.CreateScope("ParentResourceCollection.Exists");
             scope.Start();
             try
             {
@@ -259,7 +259,7 @@ namespace SingletonResource
         {
             Argument.AssertNotNullOrEmpty(parentName, nameof(parentName));
 
-            using var scope = _clientDiagnostics.CreateScope("ParentResourceCollection.Exists");
+            using var scope = _parentResourceClientDiagnostics.CreateScope("ParentResourceCollection.Exists");
             scope.Start();
             try
             {
@@ -283,12 +283,12 @@ namespace SingletonResource
         {
             Page<ParentResource> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("ParentResourceCollection.GetAll");
+                using var scope = _parentResourceClientDiagnostics.CreateScope("ParentResourceCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _parentResourcesRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new ParentResource(this, value)), null, response.GetRawResponse());
+                    var response = _parentResourceRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new ParentResource(ArmClient, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -309,12 +309,12 @@ namespace SingletonResource
         {
             async Task<Page<ParentResource>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("ParentResourceCollection.GetAll");
+                using var scope = _parentResourceClientDiagnostics.CreateScope("ParentResourceCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _parentResourcesRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new ParentResource(this, value)), null, response.GetRawResponse());
+                    var response = await _parentResourceRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new ParentResource(ArmClient, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -333,7 +333,7 @@ namespace SingletonResource
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<GenericResource> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ParentResourceCollection.GetAllAsGenericResources");
+            using var scope = _parentResourceClientDiagnostics.CreateScope("ParentResourceCollection.GetAllAsGenericResources");
             scope.Start();
             try
             {
@@ -356,7 +356,7 @@ namespace SingletonResource
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<GenericResource> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ParentResourceCollection.GetAllAsGenericResources");
+            using var scope = _parentResourceClientDiagnostics.CreateScope("ParentResourceCollection.GetAllAsGenericResources");
             scope.Start();
             try
             {
@@ -385,8 +385,5 @@ namespace SingletonResource
         {
             return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
-
-        // Builders.
-        // public ArmBuilder<Azure.Core.ResourceIdentifier, ParentResource, ParentResourceData> Construct() { }
     }
 }

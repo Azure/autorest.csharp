@@ -343,7 +343,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return keySegment.IsConstant ? keySegment.ConstantValue : string.Empty;
         }
 
-        public static IReadOnlyList<Parameter> GetPassThroughParameters(this IEnumerable<ParameterMapping> parameterMappings)
+        public static List<Parameter> GetPassThroughParameters(this IEnumerable<ParameterMapping> parameterMappings)
         {
             return parameterMappings.Where(p => p.IsPassThru).Select(p => p.Parameter).ToList();
         }

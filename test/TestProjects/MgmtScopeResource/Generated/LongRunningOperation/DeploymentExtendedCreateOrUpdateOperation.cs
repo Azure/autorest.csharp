@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager;
 using MgmtScopeResource;
 
 namespace MgmtScopeResource.Models
@@ -22,17 +22,17 @@ namespace MgmtScopeResource.Models
     {
         private readonly OperationInternals<DeploymentExtended> _operation;
 
-        private readonly ArmResource _operationBase;
+        private readonly ArmClient _armClient;
 
         /// <summary> Initializes a new instance of DeploymentExtendedCreateOrUpdateOperation for mocking. </summary>
         protected DeploymentExtendedCreateOrUpdateOperation()
         {
         }
 
-        internal DeploymentExtendedCreateOrUpdateOperation(ArmResource operationsBase, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
+        internal DeploymentExtendedCreateOrUpdateOperation(ArmClient armClient, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
             _operation = new OperationInternals<DeploymentExtended>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "DeploymentExtendedCreateOrUpdateOperation");
-            _operationBase = operationsBase;
+            _armClient = armClient;
         }
 
         /// <inheritdoc />
@@ -66,14 +66,14 @@ namespace MgmtScopeResource.Models
         {
             using var document = JsonDocument.Parse(response.ContentStream);
             var data = DeploymentExtendedData.DeserializeDeploymentExtendedData(document.RootElement);
-            return new DeploymentExtended(_operationBase, data);
+            return new DeploymentExtended(_armClient, data);
         }
 
         async ValueTask<DeploymentExtended> IOperationSource<DeploymentExtended>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
             var data = DeploymentExtendedData.DeserializeDeploymentExtendedData(document.RootElement);
-            return new DeploymentExtended(_operationBase, data);
+            return new DeploymentExtended(_armClient, data);
         }
     }
 }

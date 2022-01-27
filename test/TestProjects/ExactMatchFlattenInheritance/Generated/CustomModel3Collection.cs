@@ -25,8 +25,8 @@ namespace ExactMatchFlattenInheritance
     /// <summary> A class representing collection of CustomModel3 and their operations over its parent. </summary>
     public partial class CustomModel3Collection : ArmCollection, IEnumerable<CustomModel3>, IAsyncEnumerable<CustomModel3>
     {
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly CustomModel3SRestOperations _customModel3sRestClient;
+        private readonly ClientDiagnostics _customModel3ClientDiagnostics;
+        private readonly CustomModel3SRestOperations _customModel3RestClient;
 
         /// <summary> Initializes a new instance of the <see cref="CustomModel3Collection"/> class for mocking. </summary>
         protected CustomModel3Collection()
@@ -37,9 +37,9 @@ namespace ExactMatchFlattenInheritance
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal CustomModel3Collection(ArmResource parent) : base(parent)
         {
-            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            ClientOptions.TryGetApiVersion(CustomModel3.ResourceType, out string apiVersion);
-            _customModel3sRestClient = new CustomModel3SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
+            _customModel3ClientDiagnostics = new ClientDiagnostics("ExactMatchFlattenInheritance", CustomModel3.ResourceType.Namespace, DiagnosticOptions);
+            ArmClient.TryGetApiVersion(CustomModel3.ResourceType, out string customModel3ApiVersion);
+            _customModel3RestClient = new CustomModel3SRestOperations(_customModel3ClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, customModel3ApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -71,12 +71,12 @@ namespace ExactMatchFlattenInheritance
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("CustomModel3Collection.CreateOrUpdate");
+            using var scope = _customModel3ClientDiagnostics.CreateScope("CustomModel3Collection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _customModel3sRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, name, parameters, cancellationToken);
-                var operation = new CustomModel3CreateOrUpdateOperation(this, response);
+                var response = _customModel3RestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, name, parameters, cancellationToken);
+                var operation = new CustomModel3CreateOrUpdateOperation(ArmClient, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -106,12 +106,12 @@ namespace ExactMatchFlattenInheritance
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("CustomModel3Collection.CreateOrUpdate");
+            using var scope = _customModel3ClientDiagnostics.CreateScope("CustomModel3Collection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _customModel3sRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, name, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new CustomModel3CreateOrUpdateOperation(this, response);
+                var response = await _customModel3RestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, name, parameters, cancellationToken).ConfigureAwait(false);
+                var operation = new CustomModel3CreateOrUpdateOperation(ArmClient, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -135,14 +135,14 @@ namespace ExactMatchFlattenInheritance
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
-            using var scope = _clientDiagnostics.CreateScope("CustomModel3Collection.Get");
+            using var scope = _customModel3ClientDiagnostics.CreateScope("CustomModel3Collection.Get");
             scope.Start();
             try
             {
-                var response = _customModel3sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken);
+                var response = _customModel3RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken);
                 if (response.Value == null)
-                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new CustomModel3(this, response.Value), response.GetRawResponse());
+                    throw _customModel3ClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                return Response.FromValue(new CustomModel3(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -163,14 +163,14 @@ namespace ExactMatchFlattenInheritance
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
-            using var scope = _clientDiagnostics.CreateScope("CustomModel3Collection.Get");
+            using var scope = _customModel3ClientDiagnostics.CreateScope("CustomModel3Collection.Get");
             scope.Start();
             try
             {
-                var response = await _customModel3sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken).ConfigureAwait(false);
+                var response = await _customModel3RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new CustomModel3(this, response.Value), response.GetRawResponse());
+                    throw await _customModel3ClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                return Response.FromValue(new CustomModel3(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -188,14 +188,14 @@ namespace ExactMatchFlattenInheritance
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
-            using var scope = _clientDiagnostics.CreateScope("CustomModel3Collection.GetIfExists");
+            using var scope = _customModel3ClientDiagnostics.CreateScope("CustomModel3Collection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _customModel3sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken);
+                var response = _customModel3RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<CustomModel3>(null, response.GetRawResponse());
-                return Response.FromValue(new CustomModel3(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new CustomModel3(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -213,14 +213,14 @@ namespace ExactMatchFlattenInheritance
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
-            using var scope = _clientDiagnostics.CreateScope("CustomModel3Collection.GetIfExists");
+            using var scope = _customModel3ClientDiagnostics.CreateScope("CustomModel3Collection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _customModel3sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _customModel3RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<CustomModel3>(null, response.GetRawResponse());
-                return Response.FromValue(new CustomModel3(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new CustomModel3(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -238,7 +238,7 @@ namespace ExactMatchFlattenInheritance
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
-            using var scope = _clientDiagnostics.CreateScope("CustomModel3Collection.Exists");
+            using var scope = _customModel3ClientDiagnostics.CreateScope("CustomModel3Collection.Exists");
             scope.Start();
             try
             {
@@ -261,7 +261,7 @@ namespace ExactMatchFlattenInheritance
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
-            using var scope = _clientDiagnostics.CreateScope("CustomModel3Collection.Exists");
+            using var scope = _customModel3ClientDiagnostics.CreateScope("CustomModel3Collection.Exists");
             scope.Start();
             try
             {
@@ -285,12 +285,12 @@ namespace ExactMatchFlattenInheritance
         {
             Page<CustomModel3> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("CustomModel3Collection.GetAll");
+                using var scope = _customModel3ClientDiagnostics.CreateScope("CustomModel3Collection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _customModel3sRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new CustomModel3(this, value)), null, response.GetRawResponse());
+                    var response = _customModel3RestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new CustomModel3(ArmClient, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -311,12 +311,12 @@ namespace ExactMatchFlattenInheritance
         {
             async Task<Page<CustomModel3>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("CustomModel3Collection.GetAll");
+                using var scope = _customModel3ClientDiagnostics.CreateScope("CustomModel3Collection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _customModel3sRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new CustomModel3(this, value)), null, response.GetRawResponse());
+                    var response = await _customModel3RestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new CustomModel3(ArmClient, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -335,7 +335,7 @@ namespace ExactMatchFlattenInheritance
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<GenericResource> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("CustomModel3Collection.GetAllAsGenericResources");
+            using var scope = _customModel3ClientDiagnostics.CreateScope("CustomModel3Collection.GetAllAsGenericResources");
             scope.Start();
             try
             {
@@ -358,7 +358,7 @@ namespace ExactMatchFlattenInheritance
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<GenericResource> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("CustomModel3Collection.GetAllAsGenericResources");
+            using var scope = _customModel3ClientDiagnostics.CreateScope("CustomModel3Collection.GetAllAsGenericResources");
             scope.Start();
             try
             {
@@ -387,8 +387,5 @@ namespace ExactMatchFlattenInheritance
         {
             return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
-
-        // Builders.
-        // public ArmBuilder<Azure.Core.ResourceIdentifier, CustomModel3, CustomModel3Data> Construct() { }
     }
 }

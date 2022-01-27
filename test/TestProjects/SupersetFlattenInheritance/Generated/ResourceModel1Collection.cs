@@ -25,8 +25,8 @@ namespace SupersetFlattenInheritance
     /// <summary> A class representing collection of ResourceModel1 and their operations over its parent. </summary>
     public partial class ResourceModel1Collection : ArmCollection, IEnumerable<ResourceModel1>, IAsyncEnumerable<ResourceModel1>
     {
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly ResourceModel1SRestOperations _resourceModel1sRestClient;
+        private readonly ClientDiagnostics _resourceModel1ClientDiagnostics;
+        private readonly ResourceModel1SRestOperations _resourceModel1RestClient;
 
         /// <summary> Initializes a new instance of the <see cref="ResourceModel1Collection"/> class for mocking. </summary>
         protected ResourceModel1Collection()
@@ -37,9 +37,9 @@ namespace SupersetFlattenInheritance
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal ResourceModel1Collection(ArmResource parent) : base(parent)
         {
-            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            ClientOptions.TryGetApiVersion(ResourceModel1.ResourceType, out string apiVersion);
-            _resourceModel1sRestClient = new ResourceModel1SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
+            _resourceModel1ClientDiagnostics = new ClientDiagnostics("SupersetFlattenInheritance", ResourceModel1.ResourceType.Namespace, DiagnosticOptions);
+            ArmClient.TryGetApiVersion(ResourceModel1.ResourceType, out string resourceModel1ApiVersion);
+            _resourceModel1RestClient = new ResourceModel1SRestOperations(_resourceModel1ClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, resourceModel1ApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -70,12 +70,12 @@ namespace SupersetFlattenInheritance
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ResourceModel1Collection.CreateOrUpdate");
+            using var scope = _resourceModel1ClientDiagnostics.CreateScope("ResourceModel1Collection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _resourceModel1sRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, resourceModel1SName, parameters, cancellationToken);
-                var operation = new ResourceModel1CreateOrUpdateOperation(this, response);
+                var response = _resourceModel1RestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, resourceModel1SName, parameters, cancellationToken);
+                var operation = new ResourceModel1CreateOrUpdateOperation(ArmClient, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -104,12 +104,12 @@ namespace SupersetFlattenInheritance
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ResourceModel1Collection.CreateOrUpdate");
+            using var scope = _resourceModel1ClientDiagnostics.CreateScope("ResourceModel1Collection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _resourceModel1sRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, resourceModel1SName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new ResourceModel1CreateOrUpdateOperation(this, response);
+                var response = await _resourceModel1RestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, resourceModel1SName, parameters, cancellationToken).ConfigureAwait(false);
+                var operation = new ResourceModel1CreateOrUpdateOperation(ArmClient, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -132,14 +132,14 @@ namespace SupersetFlattenInheritance
         {
             Argument.AssertNotNullOrEmpty(resourceModel1SName, nameof(resourceModel1SName));
 
-            using var scope = _clientDiagnostics.CreateScope("ResourceModel1Collection.Get");
+            using var scope = _resourceModel1ClientDiagnostics.CreateScope("ResourceModel1Collection.Get");
             scope.Start();
             try
             {
-                var response = _resourceModel1sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, resourceModel1SName, cancellationToken);
+                var response = _resourceModel1RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, resourceModel1SName, cancellationToken);
                 if (response.Value == null)
-                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new ResourceModel1(this, response.Value), response.GetRawResponse());
+                    throw _resourceModel1ClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                return Response.FromValue(new ResourceModel1(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -159,14 +159,14 @@ namespace SupersetFlattenInheritance
         {
             Argument.AssertNotNullOrEmpty(resourceModel1SName, nameof(resourceModel1SName));
 
-            using var scope = _clientDiagnostics.CreateScope("ResourceModel1Collection.Get");
+            using var scope = _resourceModel1ClientDiagnostics.CreateScope("ResourceModel1Collection.Get");
             scope.Start();
             try
             {
-                var response = await _resourceModel1sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, resourceModel1SName, cancellationToken).ConfigureAwait(false);
+                var response = await _resourceModel1RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, resourceModel1SName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new ResourceModel1(this, response.Value), response.GetRawResponse());
+                    throw await _resourceModel1ClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                return Response.FromValue(new ResourceModel1(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -184,14 +184,14 @@ namespace SupersetFlattenInheritance
         {
             Argument.AssertNotNullOrEmpty(resourceModel1SName, nameof(resourceModel1SName));
 
-            using var scope = _clientDiagnostics.CreateScope("ResourceModel1Collection.GetIfExists");
+            using var scope = _resourceModel1ClientDiagnostics.CreateScope("ResourceModel1Collection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _resourceModel1sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, resourceModel1SName, cancellationToken: cancellationToken);
+                var response = _resourceModel1RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, resourceModel1SName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<ResourceModel1>(null, response.GetRawResponse());
-                return Response.FromValue(new ResourceModel1(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ResourceModel1(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -209,14 +209,14 @@ namespace SupersetFlattenInheritance
         {
             Argument.AssertNotNullOrEmpty(resourceModel1SName, nameof(resourceModel1SName));
 
-            using var scope = _clientDiagnostics.CreateScope("ResourceModel1Collection.GetIfExists");
+            using var scope = _resourceModel1ClientDiagnostics.CreateScope("ResourceModel1Collection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _resourceModel1sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, resourceModel1SName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _resourceModel1RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, resourceModel1SName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<ResourceModel1>(null, response.GetRawResponse());
-                return Response.FromValue(new ResourceModel1(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ResourceModel1(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -234,7 +234,7 @@ namespace SupersetFlattenInheritance
         {
             Argument.AssertNotNullOrEmpty(resourceModel1SName, nameof(resourceModel1SName));
 
-            using var scope = _clientDiagnostics.CreateScope("ResourceModel1Collection.Exists");
+            using var scope = _resourceModel1ClientDiagnostics.CreateScope("ResourceModel1Collection.Exists");
             scope.Start();
             try
             {
@@ -257,7 +257,7 @@ namespace SupersetFlattenInheritance
         {
             Argument.AssertNotNullOrEmpty(resourceModel1SName, nameof(resourceModel1SName));
 
-            using var scope = _clientDiagnostics.CreateScope("ResourceModel1Collection.Exists");
+            using var scope = _resourceModel1ClientDiagnostics.CreateScope("ResourceModel1Collection.Exists");
             scope.Start();
             try
             {
@@ -280,12 +280,12 @@ namespace SupersetFlattenInheritance
         {
             Page<ResourceModel1> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("ResourceModel1Collection.GetAll");
+                using var scope = _resourceModel1ClientDiagnostics.CreateScope("ResourceModel1Collection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _resourceModel1sRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new ResourceModel1(this, value)), null, response.GetRawResponse());
+                    var response = _resourceModel1RestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new ResourceModel1(ArmClient, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -305,12 +305,12 @@ namespace SupersetFlattenInheritance
         {
             async Task<Page<ResourceModel1>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("ResourceModel1Collection.GetAll");
+                using var scope = _resourceModel1ClientDiagnostics.CreateScope("ResourceModel1Collection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _resourceModel1sRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new ResourceModel1(this, value)), null, response.GetRawResponse());
+                    var response = await _resourceModel1RestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new ResourceModel1(ArmClient, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -329,7 +329,7 @@ namespace SupersetFlattenInheritance
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<GenericResource> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ResourceModel1Collection.GetAllAsGenericResources");
+            using var scope = _resourceModel1ClientDiagnostics.CreateScope("ResourceModel1Collection.GetAllAsGenericResources");
             scope.Start();
             try
             {
@@ -352,7 +352,7 @@ namespace SupersetFlattenInheritance
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<GenericResource> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ResourceModel1Collection.GetAllAsGenericResources");
+            using var scope = _resourceModel1ClientDiagnostics.CreateScope("ResourceModel1Collection.GetAllAsGenericResources");
             scope.Start();
             try
             {
@@ -381,8 +381,5 @@ namespace SupersetFlattenInheritance
         {
             return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
-
-        // Builders.
-        // public ArmBuilder<Azure.Core.ResourceIdentifier, ResourceModel1, ResourceModel1Data> Construct() { }
     }
 }

@@ -15,7 +15,6 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
-using SingletonResource.Models;
 
 namespace SingletonResource
 {
@@ -28,8 +27,9 @@ namespace SingletonResource
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cars/{carName}";
             return new ResourceIdentifier(resourceId);
         }
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly CarsRestOperations _carsRestClient;
+
+        private readonly ClientDiagnostics _carClientDiagnostics;
+        private readonly CarsRestOperations _carRestClient;
         private readonly CarData _data;
 
         /// <summary> Initializes a new instance of the <see cref="Car"/> class for mocking. </summary>
@@ -38,44 +38,22 @@ namespace SingletonResource
         }
 
         /// <summary> Initializes a new instance of the <see cref = "Car"/> class. </summary>
-        /// <param name="options"> The client parameters to use in these operations. </param>
+        /// <param name="armClient"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal Car(ArmResource options, CarData data) : base(options, data.Id)
+        internal Car(ArmClient armClient, CarData data) : this(armClient, data.Id)
         {
             HasData = true;
             _data = data;
-            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            ClientOptions.TryGetApiVersion(ResourceType, out string apiVersion);
-            _carsRestClient = new CarsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
-#if DEBUG
-			ValidateResourceId(Id);
-#endif
         }
 
         /// <summary> Initializes a new instance of the <see cref="Car"/> class. </summary>
-        /// <param name="options"> The client parameters to use in these operations. </param>
+        /// <param name="armClient"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal Car(ArmResource options, ResourceIdentifier id) : base(options, id)
+        internal Car(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
         {
-            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            ClientOptions.TryGetApiVersion(ResourceType, out string apiVersion);
-            _carsRestClient = new CarsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
-#if DEBUG
-			ValidateResourceId(Id);
-#endif
-        }
-
-        /// <summary> Initializes a new instance of the <see cref="Car"/> class. </summary>
-        /// <param name="clientOptions"> The client options to build client context. </param>
-        /// <param name="credential"> The credential to build client context. </param>
-        /// <param name="uri"> The uri to build client context. </param>
-        /// <param name="pipeline"> The pipeline to build client context. </param>
-        /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal Car(ArmClientOptions clientOptions, TokenCredential credential, Uri uri, HttpPipeline pipeline, ResourceIdentifier id) : base(clientOptions, credential, uri, pipeline, id)
-        {
-            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            ClientOptions.TryGetApiVersion(ResourceType, out string apiVersion);
-            _carsRestClient = new CarsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
+            _carClientDiagnostics = new ClientDiagnostics("SingletonResource", ResourceType.Namespace, DiagnosticOptions);
+            ArmClient.TryGetApiVersion(ResourceType, out string carApiVersion);
+            _carRestClient = new CarsRestOperations(_carClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, carApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -111,14 +89,14 @@ namespace SingletonResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<Car>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("Car.Get");
+            using var scope = _carClientDiagnostics.CreateScope("Car.Get");
             scope.Start();
             try
             {
-                var response = await _carsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _carRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new Car(this, response.Value), response.GetRawResponse());
+                    throw await _carClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                return Response.FromValue(new Car(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -133,14 +111,14 @@ namespace SingletonResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<Car> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("Car.Get");
+            using var scope = _carClientDiagnostics.CreateScope("Car.Get");
             scope.Start();
             try
             {
-                var response = _carsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _carRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
-                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new Car(this, response.Value), response.GetRawResponse());
+                    throw _carClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                return Response.FromValue(new Car(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -154,7 +132,7 @@ namespace SingletonResource
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
         public async virtual Task<IEnumerable<AzureLocation>> GetAvailableLocationsAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("Car.GetAvailableLocations");
+            using var scope = _carClientDiagnostics.CreateScope("Car.GetAvailableLocations");
             scope.Start();
             try
             {
@@ -172,7 +150,7 @@ namespace SingletonResource
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
         public virtual IEnumerable<AzureLocation> GetAvailableLocations(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("Car.GetAvailableLocations");
+            using var scope = _carClientDiagnostics.CreateScope("Car.GetAvailableLocations");
             scope.Start();
             try
             {
@@ -191,7 +169,7 @@ namespace SingletonResource
         /// <returns> Returns a <see cref="Ignition" /> object. </returns>
         public virtual Ignition GetIgnition()
         {
-            return new Ignition(this, new ResourceIdentifier(Id.ToString() + "/ignitions/default"));
+            return new Ignition(ArmClient, new ResourceIdentifier(Id.ToString() + "/ignitions/default"));
         }
         #endregion
     }

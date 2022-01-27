@@ -20,13 +20,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal class ArmClientExtensionsWriter : MgmtExtensionWriter
     {
-        public ArmClientExtensionsWriter(CodeWriter writer, MgmtExtensions extensions, BuildContext<MgmtOutputLibrary> context, bool isArmCore = false) : base(writer, extensions, context, isArmCore)
+        public ArmClientExtensionsWriter(CodeWriter writer, MgmtExtensions extensions, BuildContext<MgmtOutputLibrary> context, bool isArmCore = false)
+            : base(writer, extensions, context, typeof(ArmClient), isArmCore)
         {
         }
         protected override string Description => IsArmCore ? "The entry point for all ARM clients." : "A class to add extension methods to ArmClient.";
         protected override string ExtensionOperationVariableName => IsArmCore ? "this" : "armClient";
-
-        protected override Type ExtensionOperationVariableType => typeof(ArmClient);
 
         public override void Write()
         {
@@ -63,14 +62,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             using (writer.Scope($"public {modifier} {resource.Type} Get{resource.Type.Name}({instanceParameter}{typeof(Azure.Core.ResourceIdentifier)} id)"))
             {
                 writer.Line($"{resource.Type.Name}.ValidateResourceId(id);");
-                if (IsArmCore)
-                {
-                    writer.Line($"return new {resource.Type.Name}(ClientOptions, Credential, BaseUri, Pipeline, id);");
-                }
-                else
-                {
-                    writer.Line($"return {ExtensionOperationVariableName}.UseClientContext((uri, credential, clientOptions, pipeline) => new {resource.Type.Name}(clientOptions, credential, uri, pipeline, id));");
-                }
+                writer.Line($"return new {resource.Type.Name}({ContextProperty}, id);");
             }
         }
     }

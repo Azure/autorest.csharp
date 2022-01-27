@@ -25,9 +25,8 @@ namespace SingletonResource
     /// <summary> A class representing collection of Car and their operations over its parent. </summary>
     public partial class CarCollection : ArmCollection, IEnumerable<Car>, IAsyncEnumerable<Car>
     {
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly CarsRestOperations _carsRestClient;
-        private readonly SingletonResourceRestOperations _restClient;
+        private readonly ClientDiagnostics _carClientDiagnostics;
+        private readonly CarsRestOperations _carRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="CarCollection"/> class for mocking. </summary>
         protected CarCollection()
@@ -38,10 +37,9 @@ namespace SingletonResource
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal CarCollection(ArmResource parent) : base(parent)
         {
-            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            ClientOptions.TryGetApiVersion(Car.ResourceType, out string apiVersion);
-            _carsRestClient = new CarsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
-            _restClient = new SingletonResourceRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
+            _carClientDiagnostics = new ClientDiagnostics("SingletonResource", Car.ResourceType.Namespace, DiagnosticOptions);
+            ArmClient.TryGetApiVersion(Car.ResourceType, out string carApiVersion);
+            _carRestClient = new CarsRestOperations(_carClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, carApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -72,12 +70,12 @@ namespace SingletonResource
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("CarCollection.CreateOrUpdate");
+            using var scope = _carClientDiagnostics.CreateScope("CarCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _carsRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, carName, parameters, cancellationToken);
-                var operation = new CarCreateOrUpdateOperation(this, response);
+                var response = _carRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, carName, parameters, cancellationToken);
+                var operation = new CarCreateOrUpdateOperation(ArmClient, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -106,12 +104,12 @@ namespace SingletonResource
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("CarCollection.CreateOrUpdate");
+            using var scope = _carClientDiagnostics.CreateScope("CarCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _carsRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, carName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new CarCreateOrUpdateOperation(this, response);
+                var response = await _carRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, carName, parameters, cancellationToken).ConfigureAwait(false);
+                var operation = new CarCreateOrUpdateOperation(ArmClient, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -134,14 +132,14 @@ namespace SingletonResource
         {
             Argument.AssertNotNullOrEmpty(carName, nameof(carName));
 
-            using var scope = _clientDiagnostics.CreateScope("CarCollection.Get");
+            using var scope = _carClientDiagnostics.CreateScope("CarCollection.Get");
             scope.Start();
             try
             {
-                var response = _carsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, carName, cancellationToken);
+                var response = _carRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, carName, cancellationToken);
                 if (response.Value == null)
-                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new Car(this, response.Value), response.GetRawResponse());
+                    throw _carClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                return Response.FromValue(new Car(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -161,14 +159,14 @@ namespace SingletonResource
         {
             Argument.AssertNotNullOrEmpty(carName, nameof(carName));
 
-            using var scope = _clientDiagnostics.CreateScope("CarCollection.Get");
+            using var scope = _carClientDiagnostics.CreateScope("CarCollection.Get");
             scope.Start();
             try
             {
-                var response = await _carsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, carName, cancellationToken).ConfigureAwait(false);
+                var response = await _carRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, carName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new Car(this, response.Value), response.GetRawResponse());
+                    throw await _carClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                return Response.FromValue(new Car(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -186,14 +184,14 @@ namespace SingletonResource
         {
             Argument.AssertNotNullOrEmpty(carName, nameof(carName));
 
-            using var scope = _clientDiagnostics.CreateScope("CarCollection.GetIfExists");
+            using var scope = _carClientDiagnostics.CreateScope("CarCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _carsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, carName, cancellationToken: cancellationToken);
+                var response = _carRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, carName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<Car>(null, response.GetRawResponse());
-                return Response.FromValue(new Car(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Car(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -211,14 +209,14 @@ namespace SingletonResource
         {
             Argument.AssertNotNullOrEmpty(carName, nameof(carName));
 
-            using var scope = _clientDiagnostics.CreateScope("CarCollection.GetIfExists");
+            using var scope = _carClientDiagnostics.CreateScope("CarCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _carsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, carName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _carRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, carName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<Car>(null, response.GetRawResponse());
-                return Response.FromValue(new Car(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Car(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -236,7 +234,7 @@ namespace SingletonResource
         {
             Argument.AssertNotNullOrEmpty(carName, nameof(carName));
 
-            using var scope = _clientDiagnostics.CreateScope("CarCollection.Exists");
+            using var scope = _carClientDiagnostics.CreateScope("CarCollection.Exists");
             scope.Start();
             try
             {
@@ -259,7 +257,7 @@ namespace SingletonResource
         {
             Argument.AssertNotNullOrEmpty(carName, nameof(carName));
 
-            using var scope = _clientDiagnostics.CreateScope("CarCollection.Exists");
+            using var scope = _carClientDiagnostics.CreateScope("CarCollection.Exists");
             scope.Start();
             try
             {
@@ -275,19 +273,19 @@ namespace SingletonResource
 
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cars
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: Cars
+        /// OperationId: Cars_List
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="Car" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<Car> GetAll(CancellationToken cancellationToken = default)
         {
             Page<Car> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("CarCollection.GetAll");
+                using var scope = _carClientDiagnostics.CreateScope("CarCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _restClient.Cars(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new Car(this, value)), null, response.GetRawResponse());
+                    var response = _carRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new Car(ArmClient, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -300,19 +298,19 @@ namespace SingletonResource
 
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cars
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: Cars
+        /// OperationId: Cars_List
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="Car" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<Car> GetAllAsync(CancellationToken cancellationToken = default)
         {
             async Task<Page<Car>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("CarCollection.GetAll");
+                using var scope = _carClientDiagnostics.CreateScope("CarCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _restClient.CarsAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new Car(this, value)), null, response.GetRawResponse());
+                    var response = await _carRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new Car(ArmClient, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -331,7 +329,7 @@ namespace SingletonResource
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<GenericResource> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("CarCollection.GetAllAsGenericResources");
+            using var scope = _carClientDiagnostics.CreateScope("CarCollection.GetAllAsGenericResources");
             scope.Start();
             try
             {
@@ -354,7 +352,7 @@ namespace SingletonResource
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<GenericResource> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("CarCollection.GetAllAsGenericResources");
+            using var scope = _carClientDiagnostics.CreateScope("CarCollection.GetAllAsGenericResources");
             scope.Start();
             try
             {
@@ -383,8 +381,5 @@ namespace SingletonResource
         {
             return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
-
-        // Builders.
-        // public ArmBuilder<Azure.Core.ResourceIdentifier, Car, CarData> Construct() { }
     }
 }

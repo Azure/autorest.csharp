@@ -15,7 +15,6 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
-using TenantOnly.Models;
 
 namespace TenantOnly
 {
@@ -28,8 +27,9 @@ namespace TenantOnly
             var resourceId = $"/providers/Microsoft.Billing/billingAccounts/{billingAccountName}";
             return new ResourceIdentifier(resourceId);
         }
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly BillingAccountsRestOperations _billingAccountsRestClient;
+
+        private readonly ClientDiagnostics _billingAccountClientDiagnostics;
+        private readonly BillingAccountsRestOperations _billingAccountRestClient;
         private readonly BillingAccountData _data;
 
         /// <summary> Initializes a new instance of the <see cref="BillingAccount"/> class for mocking. </summary>
@@ -38,44 +38,22 @@ namespace TenantOnly
         }
 
         /// <summary> Initializes a new instance of the <see cref = "BillingAccount"/> class. </summary>
-        /// <param name="options"> The client parameters to use in these operations. </param>
+        /// <param name="armClient"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal BillingAccount(ArmResource options, BillingAccountData data) : base(options, data.Id)
+        internal BillingAccount(ArmClient armClient, BillingAccountData data) : this(armClient, data.Id)
         {
             HasData = true;
             _data = data;
-            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            ClientOptions.TryGetApiVersion(ResourceType, out string apiVersion);
-            _billingAccountsRestClient = new BillingAccountsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
-#if DEBUG
-			ValidateResourceId(Id);
-#endif
         }
 
         /// <summary> Initializes a new instance of the <see cref="BillingAccount"/> class. </summary>
-        /// <param name="options"> The client parameters to use in these operations. </param>
+        /// <param name="armClient"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal BillingAccount(ArmResource options, ResourceIdentifier id) : base(options, id)
+        internal BillingAccount(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
         {
-            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            ClientOptions.TryGetApiVersion(ResourceType, out string apiVersion);
-            _billingAccountsRestClient = new BillingAccountsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
-#if DEBUG
-			ValidateResourceId(Id);
-#endif
-        }
-
-        /// <summary> Initializes a new instance of the <see cref="BillingAccount"/> class. </summary>
-        /// <param name="clientOptions"> The client options to build client context. </param>
-        /// <param name="credential"> The credential to build client context. </param>
-        /// <param name="uri"> The uri to build client context. </param>
-        /// <param name="pipeline"> The pipeline to build client context. </param>
-        /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal BillingAccount(ArmClientOptions clientOptions, TokenCredential credential, Uri uri, HttpPipeline pipeline, ResourceIdentifier id) : base(clientOptions, credential, uri, pipeline, id)
-        {
-            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            ClientOptions.TryGetApiVersion(ResourceType, out string apiVersion);
-            _billingAccountsRestClient = new BillingAccountsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
+            _billingAccountClientDiagnostics = new ClientDiagnostics("TenantOnly", ResourceType.Namespace, DiagnosticOptions);
+            ArmClient.TryGetApiVersion(ResourceType, out string billingAccountApiVersion);
+            _billingAccountRestClient = new BillingAccountsRestOperations(_billingAccountClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, billingAccountApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -113,14 +91,14 @@ namespace TenantOnly
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<BillingAccount>> GetAsync(string expand = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BillingAccount.Get");
+            using var scope = _billingAccountClientDiagnostics.CreateScope("BillingAccount.Get");
             scope.Start();
             try
             {
-                var response = await _billingAccountsRestClient.GetAsync(Id.Name, expand, cancellationToken).ConfigureAwait(false);
+                var response = await _billingAccountRestClient.GetAsync(Id.Name, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new BillingAccount(this, response.Value), response.GetRawResponse());
+                    throw await _billingAccountClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                return Response.FromValue(new BillingAccount(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -137,14 +115,14 @@ namespace TenantOnly
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<BillingAccount> Get(string expand = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BillingAccount.Get");
+            using var scope = _billingAccountClientDiagnostics.CreateScope("BillingAccount.Get");
             scope.Start();
             try
             {
-                var response = _billingAccountsRestClient.Get(Id.Name, expand, cancellationToken);
+                var response = _billingAccountRestClient.Get(Id.Name, expand, cancellationToken);
                 if (response.Value == null)
-                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new BillingAccount(this, response.Value), response.GetRawResponse());
+                    throw _billingAccountClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                return Response.FromValue(new BillingAccount(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -158,7 +136,7 @@ namespace TenantOnly
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
         public async virtual Task<IEnumerable<AzureLocation>> GetAvailableLocationsAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BillingAccount.GetAvailableLocations");
+            using var scope = _billingAccountClientDiagnostics.CreateScope("BillingAccount.GetAvailableLocations");
             scope.Start();
             try
             {
@@ -176,7 +154,7 @@ namespace TenantOnly
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
         public virtual IEnumerable<AzureLocation> GetAvailableLocations(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BillingAccount.GetAvailableLocations");
+            using var scope = _billingAccountClientDiagnostics.CreateScope("BillingAccount.GetAvailableLocations");
             scope.Start();
             try
             {
@@ -196,17 +174,17 @@ namespace TenantOnly
         /// <returns> The updated resource with the tag added. </returns>
         public async virtual Task<Response<BillingAccount>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(key, nameof(key));
+            Argument.AssertNotNullOrWhiteSpace(key, nameof(key));
 
-            using var scope = _clientDiagnostics.CreateScope("BillingAccount.AddTag");
+            using var scope = _billingAccountClientDiagnostics.CreateScope("BillingAccount.AddTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _billingAccountsRestClient.GetAsync(Id.Name, null, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new BillingAccount(this, originalResponse.Value), originalResponse.GetRawResponse());
+                var originalResponse = await _billingAccountRestClient.GetAsync(Id.Name, null, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(new BillingAccount(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -222,17 +200,17 @@ namespace TenantOnly
         /// <returns> The updated resource with the tag added. </returns>
         public virtual Response<BillingAccount> AddTag(string key, string value, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(key, nameof(key));
+            Argument.AssertNotNullOrWhiteSpace(key, nameof(key));
 
-            using var scope = _clientDiagnostics.CreateScope("BillingAccount.AddTag");
+            using var scope = _billingAccountClientDiagnostics.CreateScope("BillingAccount.AddTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _billingAccountsRestClient.Get(Id.Name, null, cancellationToken);
-                return Response.FromValue(new BillingAccount(this, originalResponse.Value), originalResponse.GetRawResponse());
+                var originalResponse = _billingAccountRestClient.Get(Id.Name, null, cancellationToken);
+                return Response.FromValue(new BillingAccount(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -252,7 +230,7 @@ namespace TenantOnly
                 throw new ArgumentNullException(nameof(tags), $"{nameof(tags)} provided cannot be null.");
             }
 
-            using var scope = _clientDiagnostics.CreateScope("BillingAccount.SetTags");
+            using var scope = _billingAccountClientDiagnostics.CreateScope("BillingAccount.SetTags");
             scope.Start();
             try
             {
@@ -260,8 +238,8 @@ namespace TenantOnly
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _billingAccountsRestClient.GetAsync(Id.Name, null, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new BillingAccount(this, originalResponse.Value), originalResponse.GetRawResponse());
+                var originalResponse = await _billingAccountRestClient.GetAsync(Id.Name, null, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(new BillingAccount(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -281,7 +259,7 @@ namespace TenantOnly
                 throw new ArgumentNullException(nameof(tags), $"{nameof(tags)} provided cannot be null.");
             }
 
-            using var scope = _clientDiagnostics.CreateScope("BillingAccount.SetTags");
+            using var scope = _billingAccountClientDiagnostics.CreateScope("BillingAccount.SetTags");
             scope.Start();
             try
             {
@@ -289,8 +267,8 @@ namespace TenantOnly
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _billingAccountsRestClient.Get(Id.Name, null, cancellationToken);
-                return Response.FromValue(new BillingAccount(this, originalResponse.Value), originalResponse.GetRawResponse());
+                var originalResponse = _billingAccountRestClient.Get(Id.Name, null, cancellationToken);
+                return Response.FromValue(new BillingAccount(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -305,17 +283,17 @@ namespace TenantOnly
         /// <returns> The updated resource with the tag removed. </returns>
         public async virtual Task<Response<BillingAccount>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(key, nameof(key));
+            Argument.AssertNotNullOrWhiteSpace(key, nameof(key));
 
-            using var scope = _clientDiagnostics.CreateScope("BillingAccount.RemoveTag");
+            using var scope = _billingAccountClientDiagnostics.CreateScope("BillingAccount.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _billingAccountsRestClient.GetAsync(Id.Name, null, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new BillingAccount(this, originalResponse.Value), originalResponse.GetRawResponse());
+                var originalResponse = await _billingAccountRestClient.GetAsync(Id.Name, null, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(new BillingAccount(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -330,17 +308,17 @@ namespace TenantOnly
         /// <returns> The updated resource with the tag removed. </returns>
         public virtual Response<BillingAccount> RemoveTag(string key, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(key, nameof(key));
+            Argument.AssertNotNullOrWhiteSpace(key, nameof(key));
 
-            using var scope = _clientDiagnostics.CreateScope("BillingAccount.RemoveTag");
+            using var scope = _billingAccountClientDiagnostics.CreateScope("BillingAccount.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _billingAccountsRestClient.Get(Id.Name, null, cancellationToken);
-                return Response.FromValue(new BillingAccount(this, originalResponse.Value), originalResponse.GetRawResponse());
+                var originalResponse = _billingAccountRestClient.Get(Id.Name, null, cancellationToken);
+                return Response.FromValue(new BillingAccount(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {

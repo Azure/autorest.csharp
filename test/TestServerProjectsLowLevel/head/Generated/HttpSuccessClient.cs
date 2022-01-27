@@ -57,7 +57,7 @@ namespace head_LowLevel
             try
             {
                 using HttpMessage message = CreateHead200Request(context);
-                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -77,7 +77,7 @@ namespace head_LowLevel
             try
             {
                 using HttpMessage message = CreateHead200Request(context);
-                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -97,7 +97,7 @@ namespace head_LowLevel
             try
             {
                 using HttpMessage message = CreateHead204Request(context);
-                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -117,7 +117,7 @@ namespace head_LowLevel
             try
             {
                 using HttpMessage message = CreateHead204Request(context);
-                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -137,7 +137,7 @@ namespace head_LowLevel
             try
             {
                 using HttpMessage message = CreateHead404Request(context);
-                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -157,7 +157,7 @@ namespace head_LowLevel
             try
             {
                 using HttpMessage message = CreateHead404Request(context);
-                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {

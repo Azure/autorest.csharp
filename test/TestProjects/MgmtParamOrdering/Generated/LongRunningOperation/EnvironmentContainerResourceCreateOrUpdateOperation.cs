@@ -10,7 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager;
 using MgmtParamOrdering;
 
 namespace MgmtParamOrdering.Models
@@ -25,9 +25,9 @@ namespace MgmtParamOrdering.Models
         {
         }
 
-        internal EnvironmentContainerResourceCreateOrUpdateOperation(ArmResource operationsBase, Response<EnvironmentContainerResourceData> response)
+        internal EnvironmentContainerResourceCreateOrUpdateOperation(ArmClient armClient, Response<EnvironmentContainerResourceData> response)
         {
-            _operation = new OperationOrResponseInternals<EnvironmentContainerResource>(Response.FromValue(new EnvironmentContainerResource(operationsBase, response.Value), response.GetRawResponse()));
+            _operation = new OperationOrResponseInternals<EnvironmentContainerResource>(Response.FromValue(new EnvironmentContainerResource(armClient, response.Value), response.GetRawResponse()));
         }
 
         /// <inheritdoc />

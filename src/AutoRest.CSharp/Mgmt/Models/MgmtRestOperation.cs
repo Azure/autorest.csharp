@@ -1,16 +1,17 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
+using System.Linq;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
-using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
-using AutoRest.CSharp.Utilities;
+using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Mgmt.Models
 {
@@ -58,15 +59,168 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         public Resource? Resource { get; }
 
-        public MgmtRestOperation(RestClientMethod method, MgmtRestClient restClient, RequestPath requestPath, RequestPath contextualPath, string methodName, Resource? resource, CSharpType? returnType)
+        public MgmtRestOperation(RestClientMethod method, MgmtRestClient restClient, RequestPath requestPath, RequestPath contextualPath, string methodName, CSharpType? returnType, BuildContext<MgmtOutputLibrary> context)
         {
             Method = method;
             RestClient = restClient;
             RequestPath = requestPath;
             ContextualPath = contextualPath;
             Name = methodName;
-            Resource = resource;
+            Resource = GetResourceMatch(restClient, method, requestPath, context);
             ReturnType = returnType ?? method.ReturnType;
+        }
+
+        internal enum ResourceMatchType
+        {
+            Exact,
+            ParentList,
+            AncestorList,
+            ChildList,
+            Context,
+            CheckName,
+            None
+        }
+
+        private static Resource? GetResourceMatch(MgmtRestClient restClient, RestClientMethod method, RequestPath requestPath, BuildContext<MgmtOutputLibrary> context)
+        {
+            if (restClient.Resources.Count == 1)
+                return restClient.Resources[0];
+
+            Dictionary<ResourceMatchType, HashSet<Resource>> matches = new Dictionary<ResourceMatchType, HashSet<Resource>>();
+            foreach (var resource in restClient.Resources)
+            {
+                foreach (var resourcePath in resource.RequestPaths)
+                {
+                    var match = GetMatchType(method.Operation.GetHttpMethod(), resourcePath, requestPath, method.IsListMethod(out var _));
+                    if (match == ResourceMatchType.Exact)
+                        return resource;
+                    if (match != ResourceMatchType.None)
+                    {
+                        if (!matches.TryGetValue(match, out var result))
+                        {
+                            result = new HashSet<Resource>();
+                            matches.Add(match, result);
+                        }
+                        result.Add(resource);
+                    }
+                }
+            }
+
+            FormattableString errorText = (FormattableString)$"{restClient.Type.Name}.{method.Name}";
+            foreach (ResourceMatchType? matchType in Enum.GetValues(typeof(ResourceMatchType)))
+            {
+                var resource = GetMatch(matchType!.Value, matches, context, errorText);
+
+                if (resource is not null)
+                    return resource;
+            }
+            return null;
+        }
+
+        private static Resource? GetMatch(ResourceMatchType matchType, Dictionary<ResourceMatchType, HashSet<Resource>> matches, BuildContext<MgmtOutputLibrary> context, FormattableString error)
+        {
+            if (!matches.TryGetValue(matchType, out var matchTypeMatches))
+                return null;
+
+            var first = matchTypeMatches.First();
+            if (matchTypeMatches.Count == 1)
+                return first;
+
+            var parent = first.Parent(context).First();
+            if (parent is not null && AllMatchesSameParent(matchTypeMatches, context, parent, out bool areAllSingleton) && areAllSingleton)
+                return parent as Resource;
+
+            //this throw catches anything we do not expect if it ever fires it means our logic is either incomplete or we need a directive to adjust the request paths
+            throw new InvalidOperationException($"Found more than 1 candidate for {error}, results were ({string.Join(',', matchTypeMatches.Select(r => r.Type.Name))})");
+        }
+
+        private static bool AllMatchesSameParent(HashSet<Resource> matches, BuildContext<MgmtOutputLibrary> context, MgmtTypeProvider parent, out bool areAllSingleton)
+        {
+            areAllSingleton = true;
+            foreach (var resource in matches)
+            {
+                areAllSingleton &= resource.IsSingleton;
+                var current = resource.Parent(context).FirstOrDefault();
+                if (current is null)
+                    return false;
+                if (!current.Equals(parent))
+                    return false;
+            }
+            return true;
+        }
+
+        internal static ResourceMatchType GetMatchType(HttpMethod httpMethod, RequestPath resourcePath, RequestPath requestPath, bool isList)
+        {
+            //check exact match
+            if (resourcePath == requestPath)
+                return ResourceMatchType.Exact;
+
+            //check for a list by an ancestor
+            var requestLastSegment = requestPath[requestPath.Count - 1];
+            if (isList &&
+                httpMethod == HttpMethod.Get &&
+                requestPath.Count < resourcePath.Count &&
+                requestLastSegment.IsConstant &&
+                resourcePath[0] == requestPath[0] && //first two items much be the same
+                resourcePath[1] == requestPath[1] &&
+                AreEqualBackToProvider(resourcePath, requestPath, 1, 0))
+            {
+                return AreEqualUpToProvider(resourcePath, requestPath) ? ResourceMatchType.ParentList : ResourceMatchType.AncestorList;
+            }
+
+            //check for single value methods after the GET path which are typically POST methods
+            if (resourcePath.Count == requestPath.Count - 1 && requestLastSegment.IsConstant && AreEqualBackToProvider(resourcePath, requestPath, 0, 1))
+                return isList ? ResourceMatchType.ChildList : ResourceMatchType.Context;
+
+            if (httpMethod == HttpMethod.Get)
+                return ResourceMatchType.None;
+
+            var resourceLastSegement = resourcePath[resourcePath.Count - 1];
+            //sometimes for singletons the POST methods show up at the same level
+            if (resourcePath.Count == requestPath.Count && requestLastSegment.IsConstant && resourceLastSegement.IsConstant && AreEqualBackToProvider(resourcePath, requestPath, 1, 1))
+                return ResourceMatchType.Context;
+
+            //catch check name availability where the provider ending matches
+            //this one catches a lot so we are narrowing it down to containing "name" dont know all the checknameavailability name types
+            if (requestLastSegment.IsConstant &&
+                requestPath.ToString()!.StartsWith("/subscriptions/{{subscriptionId}}", StringComparison.Ordinal) &&
+                requestLastSegment.ToString()!.Contains("name", StringComparison.OrdinalIgnoreCase) &&
+                AreEqualBackToProvider(resourcePath, requestPath, 2, 1))
+                return ResourceMatchType.CheckName;
+
+            return ResourceMatchType.None;
+        }
+
+        private static bool AreEqualBackToProvider(RequestPath resourcePath, RequestPath requestPath, int resourceSkips, int requestSkips)
+        {
+            int resourceStart = resourcePath.Count - 1 - resourceSkips;
+            int requestStart = requestPath.Count - 1 - requestSkips;
+            //resourcePath will have an extra reference segment for the resource name.  Skip this and walk back to the providers or beginning of array and everything must match to that point
+            for (int resourceIndex = resourceStart, requestIndex = requestStart; resourceIndex >= 0 && requestIndex >= 0; resourceIndex--, requestIndex--)
+            {
+                if (resourcePath[resourceIndex].IsReference && resourcePath[resourceIndex].Equals(requestPath[requestIndex], false))
+                    continue; //there are sometimes name differences in the path variable used but the rest of the context is the same
+
+                if (resourcePath[resourceIndex] != requestPath[requestIndex])
+                    return false;
+
+                if (resourcePath[resourceIndex] == Segment.Providers)
+                    return true;
+            }
+            return true;
+        }
+
+        private static bool AreEqualUpToProvider(RequestPath resourcePath, RequestPath requestPath)
+        {
+            for (int i = 0; i < Math.Min(resourcePath.Count, requestPath.Count); i++)
+            {
+                if (resourcePath[i] == Segment.Providers)
+                    return true;
+
+                if (resourcePath[i] != requestPath[i])
+                    return false;
+            }
+            return true;
         }
     }
 }

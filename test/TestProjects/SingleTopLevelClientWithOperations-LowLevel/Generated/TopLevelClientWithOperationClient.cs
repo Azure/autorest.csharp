@@ -59,7 +59,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
             try
             {
                 using HttpMessage message = CreateOperationRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -78,7 +78,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
             try
             {
                 using HttpMessage message = CreateOperationRequest(context);
-                return _pipeline.ProcessMessage(message, ClientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -105,7 +105,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
                     var message = string.IsNullOrEmpty(nextLink)
                         ? CreateGetAllRequest(filter, context)
                         : CreateGetAllNextPageRequest(nextLink, filter, context);
-                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, context, "value", "nextLink", cancellationToken).ConfigureAwait(false);
+                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, context, "value", "nextLink", cancellationToken).ConfigureAwait(false);
                     nextLink = page.ContinuationToken;
                     yield return page;
                 } while (!string.IsNullOrEmpty(nextLink));
@@ -130,7 +130,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
                     var message = string.IsNullOrEmpty(nextLink)
                         ? CreateGetAllRequest(filter, context)
                         : CreateGetAllNextPageRequest(nextLink, filter, context);
-                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, context, "value", "nextLink");
+                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, context, "value", "nextLink");
                     nextLink = page.ContinuationToken;
                     yield return page;
                 } while (!string.IsNullOrEmpty(nextLink));
