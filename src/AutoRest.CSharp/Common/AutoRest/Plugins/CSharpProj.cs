@@ -39,7 +39,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include=""Azure.ResourceManager"" Version=""1.0.0-alpha.20220127.2"" />
+    <PackageReference Include=""Azure.ResourceManager"" Version=""1.0.0-alpha.20220127.3"" />
   </ItemGroup>
 ";
 

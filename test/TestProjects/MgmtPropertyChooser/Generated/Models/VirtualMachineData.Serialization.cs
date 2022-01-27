@@ -99,7 +99,7 @@ namespace MgmtPropertyChooser
         {
             Optional<Models.Plan> plan = default;
             Optional<IReadOnlyList<VirtualMachineExtension>> resources = default;
-            Optional<ResourceIdentity> identity = default;
+            Optional<ManagedServiceIdentity> identity = default;
             Optional<IdentityWithRenamedProperty> identityWithRenamedProperty = default;
             Optional<IdentityWithDifferentPropertyType> identityWithDifferentPropertyType = default;
             Optional<IdentityWithNoUserIdentity> identityWithNoUserIdentity = default;
@@ -152,7 +152,7 @@ namespace MgmtPropertyChooser
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    identity = JsonSerializer.Deserialize<ResourceIdentity>(property.Value.ToString());
+                    identity = JsonSerializer.Deserialize<ManagedServiceIdentity>(property.Value.ToString());
                     continue;
                 }
                 if (property.NameEquals("identityWithRenamedProperty"))
