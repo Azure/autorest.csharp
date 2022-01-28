@@ -59,17 +59,22 @@ function Show-Result([array]$list) {
     $i = 0
     $result = @()
     foreach ($item in $list) {
-        if (($i % 8 -eq 0) -and ($i -ne 0)) {
+        if (($i % 10 -eq 0) -and ($i -ne 0)) {
             $result = $result -join "`t"
             Write-Host $result
             $result = @()
+        }
+        if ($item.ToString().Length -le 4) {
+            $item += "        "
+        }
+        if ($item.ToString().Length -le 8) {
+            $item += "    "
         }
         $i += 1
         $result += $item
     }
     $result = $result -join "`t"
     Write-Host $result
-    Write-Host ""
 }
 function Update-AutorestTarget([string]$file, [string]$autorestVersion) {
     $fileContent = Get-Content $file
@@ -250,6 +255,7 @@ function  MockTestInit {
     }
     end {
         # All Successed Output statistical results
+        Start-Sleep 10
         Write-Host "Mock Test Initialize Completed."
         Write-Host -ForegroundColor Blue "Track2 SDK Total: $Script:allTrack2Sdk"
         Write-Host -ForegroundColor Blue "New generated track2 RPs: $Script:newGenerateSdk" 
@@ -269,10 +275,11 @@ function  MockTestInit {
         Show-Result($Script:testGenerateErrorRps) 
         Write-Host -ForegroundColor Red "Mock test build error RPs: "$Script:testBuildErrorRps.Count 
         Show-Result($Script:testBuildErrorRps) 
+        Write-Host ""
     }
 }
 
 $commitId = "322d0edbc46e10b04a56f3279cecaa8fe4d3b69b"
-$GenerateNewSDKs = $false
+$GenerateNewSDKs = $true
 $netSdkRepoUri = "https://github.com/Azure/azure-sdk-for-net.git"
 MockTestInit -CommitId $commitId -GenerateNewSDKs $GenerateNewSDKs -netSdkRepoUri $netSdkRepoUri
