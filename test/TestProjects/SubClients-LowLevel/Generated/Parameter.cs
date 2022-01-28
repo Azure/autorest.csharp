@@ -19,9 +19,8 @@ namespace SubClients_LowLevel
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
-        private readonly ClientDiagnostics _clientDiagnostics;
         private readonly Uri _endpoint;
-
+        internal ClientDiagnostics ClientDiagnostics { get; }
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
@@ -42,7 +41,7 @@ namespace SubClients_LowLevel
             Argument.AssertNotNull(pipeline, nameof(pipeline));
             endpoint ??= new Uri("http://localhost:3000");
 
-            _clientDiagnostics = clientDiagnostics;
+            ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
             _keyCredential = keyCredential;
             _endpoint = endpoint;
@@ -57,7 +56,7 @@ namespace SubClients_LowLevel
         {
             Argument.AssertNotNull(subParameter, nameof(subParameter));
 
-            using var scope = _clientDiagnostics.CreateScope("Parameter.GetSubParameter");
+            using var scope = ClientDiagnostics.CreateScope("Parameter.GetSubParameter");
             scope.Start();
             try
             {
@@ -80,7 +79,7 @@ namespace SubClients_LowLevel
         {
             Argument.AssertNotNull(subParameter, nameof(subParameter));
 
-            using var scope = _clientDiagnostics.CreateScope("Parameter.GetSubParameter");
+            using var scope = ClientDiagnostics.CreateScope("Parameter.GetSubParameter");
             scope.Start();
             try
             {

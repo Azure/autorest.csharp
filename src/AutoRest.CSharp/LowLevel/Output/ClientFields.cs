@@ -19,7 +19,7 @@ namespace AutoRest.CSharp.Output.Models
         public FieldDeclaration? AuthorizationHeaderConstant { get; }
         public FieldDeclaration? ScopesConstant { get; }
 
-        public FieldDeclaration ClientDiagnosticsField { get; }
+        public FieldDeclaration ClientDiagnosticsProperty { get; }
         public FieldDeclaration PipelineField { get; }
 
         private readonly FieldDeclaration? _keyAuthField;
@@ -31,13 +31,13 @@ namespace AutoRest.CSharp.Output.Models
 
         public ClientFields(BuildContext<LowLevelOutputLibrary> context, IEnumerable<Parameter> parameters)
         {
-            ClientDiagnosticsField = new(Private | ReadOnly, typeof(ClientDiagnostics), "_" + KnownParameters.ClientDiagnostics.Name);
+            ClientDiagnosticsProperty = new(Internal | ReadOnly, typeof(ClientDiagnostics), KnownParameters.ClientDiagnostics.Name.FirstCharToUpperCase(), writeAsProperty: true);
             PipelineField = new(Private | ReadOnly, typeof(HttpPipeline), "_" + KnownParameters.Pipeline.Name);
 
             var parameterNamesToFields = new Dictionary<string, FieldDeclaration>
             {
                 [KnownParameters.Pipeline.Name] = PipelineField,
-                [KnownParameters.ClientDiagnostics.Name] = ClientDiagnosticsField
+                [KnownParameters.ClientDiagnostics.Name] = ClientDiagnosticsProperty
             };
 
             var fields = new List<FieldDeclaration>();
@@ -69,7 +69,6 @@ namespace AutoRest.CSharp.Output.Models
             }
 
             fields.Add(PipelineField);
-            fields.Add(ClientDiagnosticsField);
 
             foreach (Parameter parameter in parameters)
             {
@@ -89,6 +88,7 @@ namespace AutoRest.CSharp.Output.Models
             }
 
             fields.AddRange(properties);
+            fields.Add(ClientDiagnosticsProperty);
             _fields = fields;
             _parameterNamesToFields = parameterNamesToFields;
             CredentialFields = credentialFields;

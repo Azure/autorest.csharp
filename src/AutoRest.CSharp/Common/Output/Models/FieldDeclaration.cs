@@ -21,9 +21,10 @@ namespace AutoRest.CSharp.Output.Models
     internal enum FieldModifiers
     {
         Public = 1,
-        Private = 2,
-        Static = 4,
-        ReadOnly = 8,
-        Const = 16
+        Internal = 2,
+        Private = 4,
+        Static = 8,
+        ReadOnly = 16,
+        Const = 32
     }
 }

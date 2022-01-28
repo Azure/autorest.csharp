@@ -63,12 +63,12 @@ namespace AutoRest.CSharp.Generation.Writers
             if (field.WriteAsProperty)
             {
                 writer
-                    .AppendRaw(modifiers.HasFlag(FieldModifiers.Public) ? "public virtual " : "private ");
+                    .AppendRaw(modifiers.HasFlag(FieldModifiers.Public) ? "public " : (modifiers.HasFlag(FieldModifiers.Internal) ? "internal " : "private "));
             }
             else
             {
                 writer
-                    .AppendRaw(modifiers.HasFlag(FieldModifiers.Public) ? "public " : "private ")
+                    .AppendRaw(modifiers.HasFlag(FieldModifiers.Public) ? "public " : (modifiers.HasFlag(FieldModifiers.Internal) ? "internal " : "private "))
                     .AppendRawIf("const ", modifiers.HasFlag(FieldModifiers.Const))
                     .AppendRawIf("static ", modifiers.HasFlag(FieldModifiers.Static))
                     .AppendRawIf("readonly ", modifiers.HasFlag(FieldModifiers.ReadOnly));

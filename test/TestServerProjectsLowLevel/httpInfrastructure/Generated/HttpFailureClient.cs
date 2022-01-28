@@ -19,9 +19,8 @@ namespace httpInfrastructure_LowLevel
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
-        private readonly ClientDiagnostics _clientDiagnostics;
         private readonly Uri _endpoint;
-
+        internal ClientDiagnostics ClientDiagnostics { get; }
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
@@ -41,7 +40,7 @@ namespace httpInfrastructure_LowLevel
             endpoint ??= new Uri("http://localhost:3000");
             options ??= new AutoRestHttpInfrastructureTestServiceClientOptions();
 
-            _clientDiagnostics = new ClientDiagnostics(options);
+            ClientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
@@ -62,7 +61,7 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> GetEmptyErrorAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpFailureClient.GetEmptyError");
+            using var scope = ClientDiagnostics.CreateScope("HttpFailureClient.GetEmptyError");
             scope.Start();
             try
             {
@@ -91,7 +90,7 @@ namespace httpInfrastructure_LowLevel
         public virtual Response GetEmptyError(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpFailureClient.GetEmptyError");
+            using var scope = ClientDiagnostics.CreateScope("HttpFailureClient.GetEmptyError");
             scope.Start();
             try
             {
@@ -111,7 +110,7 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> GetNoModelErrorAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpFailureClient.GetNoModelError");
+            using var scope = ClientDiagnostics.CreateScope("HttpFailureClient.GetNoModelError");
             scope.Start();
             try
             {
@@ -131,7 +130,7 @@ namespace httpInfrastructure_LowLevel
         public virtual Response GetNoModelError(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpFailureClient.GetNoModelError");
+            using var scope = ClientDiagnostics.CreateScope("HttpFailureClient.GetNoModelError");
             scope.Start();
             try
             {
@@ -151,7 +150,7 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> GetNoModelEmptyAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpFailureClient.GetNoModelEmpty");
+            using var scope = ClientDiagnostics.CreateScope("HttpFailureClient.GetNoModelEmpty");
             scope.Start();
             try
             {
@@ -171,7 +170,7 @@ namespace httpInfrastructure_LowLevel
         public virtual Response GetNoModelEmpty(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpFailureClient.GetNoModelEmpty");
+            using var scope = ClientDiagnostics.CreateScope("HttpFailureClient.GetNoModelEmpty");
             scope.Start();
             try
             {

@@ -19,11 +19,10 @@ namespace url_LowLevel
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
-        private readonly ClientDiagnostics _clientDiagnostics;
         private readonly string _globalStringPath;
         private readonly Uri _endpoint;
         private readonly string _globalStringQuery;
-
+        internal ClientDiagnostics ClientDiagnostics { get; }
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
@@ -46,7 +45,7 @@ namespace url_LowLevel
             endpoint ??= new Uri("http://localhost:3000");
             options ??= new AutoRestUrlTestServiceClientOptions();
 
-            _clientDiagnostics = new ClientDiagnostics(options);
+            ClientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _globalStringPath = globalStringPath;
@@ -77,7 +76,7 @@ namespace url_LowLevel
             Argument.AssertNotNull(pathItemStringPath, nameof(pathItemStringPath));
             Argument.AssertNotNull(localStringPath, nameof(localStringPath));
 
-            using var scope = _clientDiagnostics.CreateScope("PathItemsClient.GetAllWithValues");
+            using var scope = ClientDiagnostics.CreateScope("PathItemsClient.GetAllWithValues");
             scope.Start();
             try
             {
@@ -114,7 +113,7 @@ namespace url_LowLevel
             Argument.AssertNotNull(pathItemStringPath, nameof(pathItemStringPath));
             Argument.AssertNotNull(localStringPath, nameof(localStringPath));
 
-            using var scope = _clientDiagnostics.CreateScope("PathItemsClient.GetAllWithValues");
+            using var scope = ClientDiagnostics.CreateScope("PathItemsClient.GetAllWithValues");
             scope.Start();
             try
             {
@@ -151,7 +150,7 @@ namespace url_LowLevel
             Argument.AssertNotNull(pathItemStringPath, nameof(pathItemStringPath));
             Argument.AssertNotNull(localStringPath, nameof(localStringPath));
 
-            using var scope = _clientDiagnostics.CreateScope("PathItemsClient.GetGlobalQueryNull");
+            using var scope = ClientDiagnostics.CreateScope("PathItemsClient.GetGlobalQueryNull");
             scope.Start();
             try
             {
@@ -188,7 +187,7 @@ namespace url_LowLevel
             Argument.AssertNotNull(pathItemStringPath, nameof(pathItemStringPath));
             Argument.AssertNotNull(localStringPath, nameof(localStringPath));
 
-            using var scope = _clientDiagnostics.CreateScope("PathItemsClient.GetGlobalQueryNull");
+            using var scope = ClientDiagnostics.CreateScope("PathItemsClient.GetGlobalQueryNull");
             scope.Start();
             try
             {
@@ -225,7 +224,7 @@ namespace url_LowLevel
             Argument.AssertNotNull(pathItemStringPath, nameof(pathItemStringPath));
             Argument.AssertNotNull(localStringPath, nameof(localStringPath));
 
-            using var scope = _clientDiagnostics.CreateScope("PathItemsClient.GetGlobalAndLocalQueryNull");
+            using var scope = ClientDiagnostics.CreateScope("PathItemsClient.GetGlobalAndLocalQueryNull");
             scope.Start();
             try
             {
@@ -262,7 +261,7 @@ namespace url_LowLevel
             Argument.AssertNotNull(pathItemStringPath, nameof(pathItemStringPath));
             Argument.AssertNotNull(localStringPath, nameof(localStringPath));
 
-            using var scope = _clientDiagnostics.CreateScope("PathItemsClient.GetGlobalAndLocalQueryNull");
+            using var scope = ClientDiagnostics.CreateScope("PathItemsClient.GetGlobalAndLocalQueryNull");
             scope.Start();
             try
             {
@@ -299,7 +298,7 @@ namespace url_LowLevel
             Argument.AssertNotNull(pathItemStringPath, nameof(pathItemStringPath));
             Argument.AssertNotNull(localStringPath, nameof(localStringPath));
 
-            using var scope = _clientDiagnostics.CreateScope("PathItemsClient.GetLocalPathItemQueryNull");
+            using var scope = ClientDiagnostics.CreateScope("PathItemsClient.GetLocalPathItemQueryNull");
             scope.Start();
             try
             {
@@ -336,7 +335,7 @@ namespace url_LowLevel
             Argument.AssertNotNull(pathItemStringPath, nameof(pathItemStringPath));
             Argument.AssertNotNull(localStringPath, nameof(localStringPath));
 
-            using var scope = _clientDiagnostics.CreateScope("PathItemsClient.GetLocalPathItemQueryNull");
+            using var scope = ClientDiagnostics.CreateScope("PathItemsClient.GetLocalPathItemQueryNull");
             scope.Start();
             try
             {
