@@ -264,9 +264,7 @@ namespace AutoRest.CSharp.Output.Models
                 {
                     if (parameterName == KnownParameters.MatchConditionsParameter.Name || parameterName == KnownParameters.RequestConditionsParameter.Name)
                     {
-                        var requestConditionHeader = new RequestHeader(parameterName, reference, RequestParameterSerializationStyle.Simple, buildContext.ConditionalRequestSerializationFormat);
-                        requestConditionHeader.ConditionHeaderFlag = buildContext.RequestConditionFlag;
-                        headerParameters.Add(requestConditionHeader);
+                        headerParameters.Add(new RequestHeader(parameterName, reference, RequestParameterSerializationStyle.Simple, buildContext.ConditionalRequestSerializationFormat));
                     }
                     continue;
                 }

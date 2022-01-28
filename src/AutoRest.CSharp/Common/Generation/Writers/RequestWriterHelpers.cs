@@ -282,21 +282,6 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 if (header.Value.Type.Equals(typeof(MatchConditions)) || header.Value.Type.Equals(typeof(RequestConditions)))
                 {
-                    if (header.Value.Type.Equals(typeof(RequestConditions)) && header.ConditionHeaderFlag != RequestConditionHeaders.None)
-                    {
-                        // check if the request condition is supported or not
-#pragma warning disable CS8605 // Unboxing a possibly null value.
-                        foreach (RequestConditionHeaders val in Enum.GetValues(typeof(RequestConditionHeaders)))
-#pragma warning restore CS8605 // Unboxing a possibly null value.
-                        {
-                            //Console.WriteLine(val);
-                            if (!header.ConditionHeaderFlag.HasFlag(val))
-                            {
-                                writer.Append($"if ({header.Name}.{requestConditionFieldNames[val]} != null) ");
-                                writer.Line($"throw new NotSupportedException($\"{requestConditionFieldNames[val]} head is not supported here\");");
-                            }
-                        }
-                    }
                     writer.Append($"{request}.Headers.{method}(");
                 } else
                 {
@@ -450,14 +435,6 @@ namespace AutoRest.CSharp.Generation.Writers
             RequestParameterSerializationStyle.SpaceDelimited => " ",
             RequestParameterSerializationStyle.CommaDelimited => ",",
             _ => null
-        };
-
-        private static Dictionary<RequestConditionHeaders, string> requestConditionFieldNames = new Dictionary<RequestConditionHeaders, string> {
-            {RequestConditionHeaders.None, "" },
-            {RequestConditionHeaders.IfMatch, "IfMatch" },
-            {RequestConditionHeaders.IfNoneMatch, "IfNoneMatch" },
-            {RequestConditionHeaders.IfModifiedSince, "IfModifiedSince" },
-            {RequestConditionHeaders.IfUnmodifiedSince, "IfUnmodifiedSince" }
         };
     }
 }

@@ -3,7 +3,6 @@
 
 using System;
 using System.Collections.Generic;
-using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Output.Models.Serialization;
 
 namespace AutoRest.CSharp.Output.Models.Requests
@@ -31,7 +30,6 @@ namespace AutoRest.CSharp.Output.Models.Requests
         public SerializationFormat Format { get; }
         public bool IsContentHeader { get; }
 
-        public RequestConditionHeaders ConditionHeaderFlag { get; set; }
         public RequestHeader(string name, ReferenceOrConstant value, RequestParameterSerializationStyle serializationStyle, SerializationFormat format = SerializationFormat.Default)
         {
             Name = name;
@@ -39,7 +37,6 @@ namespace AutoRest.CSharp.Output.Models.Requests
             SerializationStyle = serializationStyle;
             Format = format;
             IsContentHeader = ContentHeaders.Contains(name);
-            ConditionHeaderFlag = RequestConditionHeaders.None;
         }
     }
 }
