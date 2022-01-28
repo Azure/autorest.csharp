@@ -9,8 +9,8 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
+using Azure.Core;
 using Azure.Core.TestFramework;
-using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
 using Azure.ResourceManager.Resources.Models;
 using Azure.ResourceManager.TestFramework;
@@ -42,7 +42,7 @@ namespace MgmtKeyvault.Tests.Mock
             // Example: Delete a vault
             var vault = GetArmClient().GetVault(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group/providers/Microsoft.KeyVault/vaults/sample-vault"));
 
-            await vault.DeleteAsync();
+            await vault.DeleteAsync(true);
         }
 
         [RecordedTest]
@@ -50,17 +50,32 @@ namespace MgmtKeyvault.Tests.Mock
         {
             // Example: Update an existing vault
             var vault = GetArmClient().GetVault(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group/providers/Microsoft.KeyVault/vaults/sample-vault"));
-            IDictionary<string, string> tags = null;
-            MgmtKeyvault.Models.VaultPatchProperties properties = new MgmtKeyvault.Models.VaultPatchProperties()
+            MgmtKeyvault.Models.VaultPatchParameters parameters = new MgmtKeyvault.Models.VaultPatchParameters()
             {
-                TenantId = Guid.Parse("00000000-0000-0000-0000-000000000000"),
-                Sku = new MgmtKeyvault.Models.Sku(family: new MgmtKeyvault.Models.SkuFamily("A"), name: MgmtKeyvault.Models.SkuName.Standard),
-                EnabledForDeployment = true,
-                EnabledForDiskEncryption = true,
-                EnabledForTemplateDeployment = true,
+                Properties = new MgmtKeyvault.Models.VaultPatchProperties()
+                {
+                    TenantId = Guid.Parse("00000000-0000-0000-0000-000000000000"),
+                    Sku = new MgmtKeyvault.Models.Sku(family: new MgmtKeyvault.Models.SkuFamily("A"), name: MgmtKeyvault.Models.SkuName.Standard),
+                    EnabledForDeployment = true,
+                    EnabledForDiskEncryption = true,
+                    EnabledForTemplateDeployment = true,
+                },
             };
 
-            await vault.UpdateAsync(tags, properties);
+            await vault.UpdateAsync(parameters);
+        }
+
+        [RecordedTest]
+        public async Task UpdateAccessPolicyAsync()
+        {
+            // Example: Add an access policy, or update an access policy with new permissions
+            var vault = GetArmClient().GetVault(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/vaults/sample-vault"));
+            MgmtKeyvault.Models.AccessPolicyUpdateKind operationKind = MgmtKeyvault.Models.AccessPolicyUpdateKind.Add;
+            MgmtKeyvault.Models.VaultAccessPolicyParameters parameters = new MgmtKeyvault.Models.VaultAccessPolicyParameters(properties: new MgmtKeyvault.Models.VaultAccessPolicyProperties(accessPolicies: new List<MgmtKeyvault.Models.AccessPolicyEntry>()
+{
+new MgmtKeyvault.Models.AccessPolicyEntry(tenantId: Guid.Parse("00000000-0000-0000-0000-000000000000"),objectId: "00000000-0000-0000-0000-000000000000",permissions: new MgmtKeyvault.Models.Permissions()),}));
+
+            await vault.UpdateAccessPolicyAsync(operationKind, parameters);
         }
 
         [RecordedTest]
@@ -69,7 +84,9 @@ namespace MgmtKeyvault.Tests.Mock
             // Example: KeyVaultListPrivateLinkResources
             var vault = GetArmClient().GetVault(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/vaults/sample-vault"));
 
-            await vault.GetPrivateLinkResourcesAsync();
+            await foreach (var _ in vault.GetPrivateLinkResourcesAsync())
+            {
+            }
         }
     }
 }

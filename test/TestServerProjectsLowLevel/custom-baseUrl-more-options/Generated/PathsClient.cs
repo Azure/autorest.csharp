@@ -37,21 +37,12 @@ namespace custom_baseUrl_more_options_LowLevel
         /// <param name="dnsSuffix"> A string value that is used as a global part of the parameterized host. Default value &apos;host&apos;. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="credential"/>, or <paramref name="dnsSuffix"/> is null. </exception>
-        public PathsClient(string subscriptionId, AzureKeyCredential credential, string dnsSuffix = "host", AutoRestParameterizedCustomHostTestClientOptions options = null)
+        public PathsClient(string subscriptionId, AzureKeyCredential credential, string dnsSuffix = "host", PathsClientOptions options = null)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (credential == null)
-            {
-                throw new ArgumentNullException(nameof(credential));
-            }
-            if (dnsSuffix == null)
-            {
-                throw new ArgumentNullException(nameof(dnsSuffix));
-            }
-            options ??= new AutoRestParameterizedCustomHostTestClientOptions();
+            Argument.AssertNotNull(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNull(credential, nameof(credential));
+            Argument.AssertNotNull(dnsSuffix, nameof(dnsSuffix));
+            options ??= new PathsClientOptions();
 
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
@@ -80,12 +71,16 @@ namespace custom_baseUrl_more_options_LowLevel
         public virtual async Task<Response> GetEmptyAsync(string vault, string secret, string keyName, string keyVersion = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(vault, nameof(vault));
+            Argument.AssertNotNull(secret, nameof(secret));
+            Argument.AssertNotNull(keyName, nameof(keyName));
+
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetEmpty");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetEmptyRequest(vault, secret, keyName, keyVersion, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -114,12 +109,16 @@ namespace custom_baseUrl_more_options_LowLevel
         public virtual Response GetEmpty(string vault, string secret, string keyName, string keyVersion = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(vault, nameof(vault));
+            Argument.AssertNotNull(secret, nameof(secret));
+            Argument.AssertNotNull(keyName, nameof(keyName));
+
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetEmpty");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetEmptyRequest(vault, secret, keyName, keyVersion, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {

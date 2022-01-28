@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Models
@@ -22,17 +22,17 @@ namespace Azure.ResourceManager.Sample.Models
     {
         private readonly OperationInternals<Image> _operation;
 
-        private readonly ArmResource _operationBase;
+        private readonly ArmClient _armClient;
 
         /// <summary> Initializes a new instance of ImageCreateOrUpdateOperation for mocking. </summary>
         protected ImageCreateOrUpdateOperation()
         {
         }
 
-        internal ImageCreateOrUpdateOperation(ArmResource operationsBase, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
+        internal ImageCreateOrUpdateOperation(ArmClient armClient, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
             _operation = new OperationInternals<Image>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "ImageCreateOrUpdateOperation");
-            _operationBase = operationsBase;
+            _armClient = armClient;
         }
 
         /// <inheritdoc />
@@ -65,13 +65,15 @@ namespace Azure.ResourceManager.Sample.Models
         Image IOperationSource<Image>.CreateResult(Response response, CancellationToken cancellationToken)
         {
             using var document = JsonDocument.Parse(response.ContentStream);
-            return new Image(_operationBase, ImageData.DeserializeImageData(document.RootElement));
+            var data = ImageData.DeserializeImageData(document.RootElement);
+            return new Image(_armClient, data);
         }
 
         async ValueTask<Image> IOperationSource<Image>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-            return new Image(_operationBase, ImageData.DeserializeImageData(document.RootElement));
+            var data = ImageData.DeserializeImageData(document.RootElement);
+            return new Image(_armClient, data);
         }
     }
 }

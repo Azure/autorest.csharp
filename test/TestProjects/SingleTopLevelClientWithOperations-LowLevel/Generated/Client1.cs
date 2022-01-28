@@ -38,14 +38,8 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/> or <paramref name="pipeline"/> is null. </exception>
         internal Client1(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, AzureKeyCredential keyCredential, Uri endpoint = null)
         {
-            if (clientDiagnostics == null)
-            {
-                throw new ArgumentNullException(nameof(clientDiagnostics));
-            }
-            if (pipeline == null)
-            {
-                throw new ArgumentNullException(nameof(pipeline));
-            }
+            Argument.AssertNotNull(clientDiagnostics, nameof(clientDiagnostics));
+            Argument.AssertNotNull(pipeline, nameof(pipeline));
             endpoint ??= new Uri("http://localhost:3000");
 
             _clientDiagnostics = clientDiagnostics;
@@ -64,7 +58,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
             try
             {
                 using HttpMessage message = CreateOperationRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -83,7 +77,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
             try
             {
                 using HttpMessage message = CreateOperationRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {

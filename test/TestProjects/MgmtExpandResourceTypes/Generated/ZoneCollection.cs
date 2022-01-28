@@ -8,6 +8,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -23,26 +24,32 @@ namespace MgmtExpandResourceTypes
 {
     /// <summary> A class representing collection of Zone and their operations over its parent. </summary>
     public partial class ZoneCollection : ArmCollection, IEnumerable<Zone>, IAsyncEnumerable<Zone>
-
     {
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly ZonesRestOperations _zonesRestClient;
+        private readonly ClientDiagnostics _zoneClientDiagnostics;
+        private readonly ZonesRestOperations _zoneRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="ZoneCollection"/> class for mocking. </summary>
         protected ZoneCollection()
         {
         }
 
-        /// <summary> Initializes a new instance of ZoneCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="ZoneCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal ZoneCollection(ArmResource parent) : base(parent)
         {
-            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _zonesRestClient = new ZonesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            _zoneClientDiagnostics = new ClientDiagnostics("MgmtExpandResourceTypes", Zone.ResourceType.Namespace, DiagnosticOptions);
+            ArmClient.TryGetApiVersion(Zone.ResourceType, out string zoneApiVersion);
+            _zoneRestClient = new ZonesRestOperations(_zoneClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, zoneApiVersion);
+#if DEBUG
+			ValidateResourceId(Id);
+#endif
         }
 
-        /// <summary> Gets the valid resource type for this object. </summary>
-        protected override ResourceType ValidResourceType => ResourceGroup.ResourceType;
+        internal static void ValidateResourceId(ResourceIdentifier id)
+        {
+            if (id.ResourceType != ResourceGroup.ResourceType)
+                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ResourceGroup.ResourceType), nameof(id));
+        }
 
         // Collection level operations.
 
@@ -50,30 +57,28 @@ namespace MgmtExpandResourceTypes
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
         /// OperationId: Zones_CreateOrUpdate
         /// <summary> Creates or updates a DNS zone. Does not modify DNS records within the zone. </summary>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="zoneName"> The name of the DNS zone (without a terminating dot). </param>
         /// <param name="parameters"> Parameters supplied to the CreateOrUpdate operation. </param>
         /// <param name="ifMatch"> The etag of the DNS zone. Omit this value to always overwrite the current zone. Specify the last-seen etag value to prevent accidentally overwriting any concurrent changes. </param>
         /// <param name="ifNoneMatch"> Set to &apos;*&apos; to allow a new DNS zone to be created, but to prevent updating an existing zone. Other values will be ignored. </param>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="zoneName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="zoneName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ZoneCreateOrUpdateOperation CreateOrUpdate(string zoneName, ZoneData parameters, string ifMatch = null, string ifNoneMatch = null, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual ZoneCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string zoneName, ZoneData parameters, string ifMatch = null, string ifNoneMatch = null, CancellationToken cancellationToken = default)
         {
-            if (zoneName == null)
-            {
-                throw new ArgumentNullException(nameof(zoneName));
-            }
+            Argument.AssertNotNullOrEmpty(zoneName, nameof(zoneName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ZoneCollection.CreateOrUpdate");
+            using var scope = _zoneClientDiagnostics.CreateScope("ZoneCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _zonesRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, zoneName, parameters, ifMatch, ifNoneMatch, cancellationToken);
-                var operation = new ZoneCreateOrUpdateOperation(Parent, response);
+                var response = _zoneRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, zoneName, parameters, ifMatch, ifNoneMatch, cancellationToken);
+                var operation = new ZoneCreateOrUpdateOperation(ArmClient, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -89,30 +94,28 @@ namespace MgmtExpandResourceTypes
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
         /// OperationId: Zones_CreateOrUpdate
         /// <summary> Creates or updates a DNS zone. Does not modify DNS records within the zone. </summary>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="zoneName"> The name of the DNS zone (without a terminating dot). </param>
         /// <param name="parameters"> Parameters supplied to the CreateOrUpdate operation. </param>
         /// <param name="ifMatch"> The etag of the DNS zone. Omit this value to always overwrite the current zone. Specify the last-seen etag value to prevent accidentally overwriting any concurrent changes. </param>
         /// <param name="ifNoneMatch"> Set to &apos;*&apos; to allow a new DNS zone to be created, but to prevent updating an existing zone. Other values will be ignored. </param>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="zoneName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="zoneName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<ZoneCreateOrUpdateOperation> CreateOrUpdateAsync(string zoneName, ZoneData parameters, string ifMatch = null, string ifNoneMatch = null, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<ZoneCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string zoneName, ZoneData parameters, string ifMatch = null, string ifNoneMatch = null, CancellationToken cancellationToken = default)
         {
-            if (zoneName == null)
-            {
-                throw new ArgumentNullException(nameof(zoneName));
-            }
+            Argument.AssertNotNullOrEmpty(zoneName, nameof(zoneName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ZoneCollection.CreateOrUpdate");
+            using var scope = _zoneClientDiagnostics.CreateScope("ZoneCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _zonesRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, zoneName, parameters, ifMatch, ifNoneMatch, cancellationToken).ConfigureAwait(false);
-                var operation = new ZoneCreateOrUpdateOperation(Parent, response);
+                var response = await _zoneRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, zoneName, parameters, ifMatch, ifNoneMatch, cancellationToken).ConfigureAwait(false);
+                var operation = new ZoneCreateOrUpdateOperation(ArmClient, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -130,22 +133,20 @@ namespace MgmtExpandResourceTypes
         /// <summary> Gets a DNS zone. Retrieves the zone properties, but not the record sets within the zone. </summary>
         /// <param name="zoneName"> The name of the DNS zone (without a terminating dot). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="zoneName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="zoneName"/> is null. </exception>
         public virtual Response<Zone> Get(string zoneName, CancellationToken cancellationToken = default)
         {
-            if (zoneName == null)
-            {
-                throw new ArgumentNullException(nameof(zoneName));
-            }
+            Argument.AssertNotNullOrEmpty(zoneName, nameof(zoneName));
 
-            using var scope = _clientDiagnostics.CreateScope("ZoneCollection.Get");
+            using var scope = _zoneClientDiagnostics.CreateScope("ZoneCollection.Get");
             scope.Start();
             try
             {
-                var response = _zonesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, zoneName, cancellationToken);
+                var response = _zoneRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, zoneName, cancellationToken);
                 if (response.Value == null)
-                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new Zone(Parent, response.Value), response.GetRawResponse());
+                    throw _zoneClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                return Response.FromValue(new Zone(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -160,22 +161,20 @@ namespace MgmtExpandResourceTypes
         /// <summary> Gets a DNS zone. Retrieves the zone properties, but not the record sets within the zone. </summary>
         /// <param name="zoneName"> The name of the DNS zone (without a terminating dot). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="zoneName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="zoneName"/> is null. </exception>
         public async virtual Task<Response<Zone>> GetAsync(string zoneName, CancellationToken cancellationToken = default)
         {
-            if (zoneName == null)
-            {
-                throw new ArgumentNullException(nameof(zoneName));
-            }
+            Argument.AssertNotNullOrEmpty(zoneName, nameof(zoneName));
 
-            using var scope = _clientDiagnostics.CreateScope("ZoneCollection.Get");
+            using var scope = _zoneClientDiagnostics.CreateScope("ZoneCollection.Get");
             scope.Start();
             try
             {
-                var response = await _zonesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, zoneName, cancellationToken).ConfigureAwait(false);
+                var response = await _zoneRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, zoneName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new Zone(Parent, response.Value), response.GetRawResponse());
+                    throw await _zoneClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                return Response.FromValue(new Zone(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -187,22 +186,20 @@ namespace MgmtExpandResourceTypes
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="zoneName"> The name of the DNS zone (without a terminating dot). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="zoneName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="zoneName"/> is null. </exception>
         public virtual Response<Zone> GetIfExists(string zoneName, CancellationToken cancellationToken = default)
         {
-            if (zoneName == null)
-            {
-                throw new ArgumentNullException(nameof(zoneName));
-            }
+            Argument.AssertNotNullOrEmpty(zoneName, nameof(zoneName));
 
-            using var scope = _clientDiagnostics.CreateScope("ZoneCollection.GetIfExists");
+            using var scope = _zoneClientDiagnostics.CreateScope("ZoneCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _zonesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, zoneName, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<Zone>(null, response.GetRawResponse())
-                    : Response.FromValue(new Zone(this, response.Value), response.GetRawResponse());
+                var response = _zoneRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, zoneName, cancellationToken: cancellationToken);
+                if (response.Value == null)
+                    return Response.FromValue<Zone>(null, response.GetRawResponse());
+                return Response.FromValue(new Zone(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -214,22 +211,20 @@ namespace MgmtExpandResourceTypes
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="zoneName"> The name of the DNS zone (without a terminating dot). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="zoneName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="zoneName"/> is null. </exception>
         public async virtual Task<Response<Zone>> GetIfExistsAsync(string zoneName, CancellationToken cancellationToken = default)
         {
-            if (zoneName == null)
-            {
-                throw new ArgumentNullException(nameof(zoneName));
-            }
+            Argument.AssertNotNullOrEmpty(zoneName, nameof(zoneName));
 
-            using var scope = _clientDiagnostics.CreateScope("ZoneCollection.GetIfExistsAsync");
+            using var scope = _zoneClientDiagnostics.CreateScope("ZoneCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _zonesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, zoneName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<Zone>(null, response.GetRawResponse())
-                    : Response.FromValue(new Zone(this, response.Value), response.GetRawResponse());
+                var response = await _zoneRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, zoneName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                if (response.Value == null)
+                    return Response.FromValue<Zone>(null, response.GetRawResponse());
+                return Response.FromValue(new Zone(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -241,15 +236,13 @@ namespace MgmtExpandResourceTypes
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="zoneName"> The name of the DNS zone (without a terminating dot). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="zoneName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="zoneName"/> is null. </exception>
         public virtual Response<bool> Exists(string zoneName, CancellationToken cancellationToken = default)
         {
-            if (zoneName == null)
-            {
-                throw new ArgumentNullException(nameof(zoneName));
-            }
+            Argument.AssertNotNullOrEmpty(zoneName, nameof(zoneName));
 
-            using var scope = _clientDiagnostics.CreateScope("ZoneCollection.Exists");
+            using var scope = _zoneClientDiagnostics.CreateScope("ZoneCollection.Exists");
             scope.Start();
             try
             {
@@ -266,15 +259,13 @@ namespace MgmtExpandResourceTypes
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="zoneName"> The name of the DNS zone (without a terminating dot). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="zoneName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="zoneName"/> is null. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string zoneName, CancellationToken cancellationToken = default)
         {
-            if (zoneName == null)
-            {
-                throw new ArgumentNullException(nameof(zoneName));
-            }
+            Argument.AssertNotNullOrEmpty(zoneName, nameof(zoneName));
 
-            using var scope = _clientDiagnostics.CreateScope("ZoneCollection.ExistsAsync");
+            using var scope = _zoneClientDiagnostics.CreateScope("ZoneCollection.Exists");
             scope.Start();
             try
             {
@@ -299,12 +290,12 @@ namespace MgmtExpandResourceTypes
         {
             Page<Zone> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("ZoneCollection.GetAll");
+                using var scope = _zoneClientDiagnostics.CreateScope("ZoneCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _zonesRestClient.ListByResourceGroup(Id.SubscriptionId, Id.ResourceGroupName, top, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new Zone(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = _zoneRestClient.ListByResourceGroup(Id.SubscriptionId, Id.ResourceGroupName, top, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new Zone(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -314,12 +305,12 @@ namespace MgmtExpandResourceTypes
             }
             Page<Zone> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("ZoneCollection.GetAll");
+                using var scope = _zoneClientDiagnostics.CreateScope("ZoneCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _zonesRestClient.ListByResourceGroupNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, top, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new Zone(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = _zoneRestClient.ListByResourceGroupNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, top, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new Zone(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -341,12 +332,12 @@ namespace MgmtExpandResourceTypes
         {
             async Task<Page<Zone>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("ZoneCollection.GetAll");
+                using var scope = _zoneClientDiagnostics.CreateScope("ZoneCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _zonesRestClient.ListByResourceGroupAsync(Id.SubscriptionId, Id.ResourceGroupName, top, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new Zone(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = await _zoneRestClient.ListByResourceGroupAsync(Id.SubscriptionId, Id.ResourceGroupName, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new Zone(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -356,12 +347,12 @@ namespace MgmtExpandResourceTypes
             }
             async Task<Page<Zone>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("ZoneCollection.GetAll");
+                using var scope = _zoneClientDiagnostics.CreateScope("ZoneCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _zonesRestClient.ListByResourceGroupNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, top, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new Zone(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = await _zoneRestClient.ListByResourceGroupNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new Zone(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -380,7 +371,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<GenericResource> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ZoneCollection.GetAllAsGenericResources");
+            using var scope = _zoneClientDiagnostics.CreateScope("ZoneCollection.GetAllAsGenericResources");
             scope.Start();
             try
             {
@@ -403,7 +394,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<GenericResource> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ZoneCollection.GetAllAsGenericResources");
+            using var scope = _zoneClientDiagnostics.CreateScope("ZoneCollection.GetAllAsGenericResources");
             scope.Start();
             try
             {
@@ -432,8 +423,5 @@ namespace MgmtExpandResourceTypes
         {
             return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
-
-        // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, Zone, ZoneData> Construct() { }
     }
 }

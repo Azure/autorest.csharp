@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager;
 using MgmtLRO;
 
 namespace MgmtLRO.Models
@@ -22,17 +22,17 @@ namespace MgmtLRO.Models
     {
         private readonly OperationInternals<Bar> _operation;
 
-        private readonly ArmResource _operationBase;
+        private readonly ArmClient _armClient;
 
         /// <summary> Initializes a new instance of BarUpdateOperation for mocking. </summary>
         protected BarUpdateOperation()
         {
         }
 
-        internal BarUpdateOperation(ArmResource operationsBase, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
+        internal BarUpdateOperation(ArmClient armClient, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
             _operation = new OperationInternals<Bar>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "BarUpdateOperation");
-            _operationBase = operationsBase;
+            _armClient = armClient;
         }
 
         /// <inheritdoc />
@@ -65,13 +65,15 @@ namespace MgmtLRO.Models
         Bar IOperationSource<Bar>.CreateResult(Response response, CancellationToken cancellationToken)
         {
             using var document = JsonDocument.Parse(response.ContentStream);
-            return new Bar(_operationBase, BarData.DeserializeBarData(document.RootElement));
+            var data = BarData.DeserializeBarData(document.RootElement);
+            return new Bar(_armClient, data);
         }
 
         async ValueTask<Bar> IOperationSource<Bar>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-            return new Bar(_operationBase, BarData.DeserializeBarData(document.RootElement));
+            var data = BarData.DeserializeBarData(document.RootElement);
+            return new Bar(_armClient, data);
         }
     }
 }

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Reflection;
 using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Models;
@@ -42,7 +43,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private IDictionary<string, ResourceData>? _rawRequestPathToResourceData;
 
         /// <summary>
-        /// TODO -- add description
+        /// This is a map from request path to the <see cref="ResourceObjectAssociation"/> which consists from <see cref="ResourceTypeSegment"/>, <see cref="Output.ResourceData"/>, <see cref="Resource"/> and <see cref="ResouColl"/>
         /// </summary>
         private Dictionary<RequestPath, ResourceObjectAssociation>? _requestPathToResources;
 
@@ -56,8 +57,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private Dictionary<Schema, TypeProvider>? _resourceModels;
         private Dictionary<string, TypeProvider> _nameToTypeProvider;
         private IEnumerable<Schema> _allSchemas;
-        private Dictionary<Operation, MgmtLongRunningOperation>? _longRunningOperations;
-        private Dictionary<Operation, NonLongRunningOperation>? _nonLongRunningOperations;
 
         private Dictionary<string, string> _mergedOperations;
 
@@ -101,6 +100,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         private void UpdateSubscriptionIdForAllResource(CodeModel codeModel)
         {
+            bool setSubParam = false;
             foreach (var operationGroup in codeModel.OperationGroups)
             {
                 foreach (var op in operationGroup.Operations)
@@ -108,12 +108,91 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     foreach (var p in op.Parameters)
                     {
                         //updater the first subscriptionId to be 'method'
-                        if (p.Language.Default.Name.Equals("subscriptionId", StringComparison.InvariantCultureIgnoreCase))
+                        if (!setSubParam && p.Language.Default.Name.Equals("subscriptionId", StringComparison.OrdinalIgnoreCase))
                         {
+                            setSubParam = true;
                             p.Implementation = ImplementationLocation.Method;
-                            break;
+                        }
+                        //updater the first subscriptionId to be 'method'
+                        if (p.Language.Default.Name.Equals("apiVersion", StringComparison.OrdinalIgnoreCase))
+                        {
+                            p.Implementation = ImplementationLocation.Client;
                         }
                     }
+                }
+            }
+        }
+
+        // Initialize ResourceData, Models and resource manager common types
+        private void InitializeModels()
+        {
+            _models = new Dictionary<Schema, TypeProvider>();
+            _resourceModels = new Dictionary<Schema, TypeProvider>();
+
+            // first, construct models and resource data models
+            foreach (var schema in _allSchemas)
+            {
+                if (_resourceDataSchemaNameToOperationSets.ContainsKey(schema.Name))
+                {
+                    var model = BuildResourceModel(schema);
+                    _resourceModels.Add(schema, model);
+                    _nameToTypeProvider.Add(schema.Name, model); // TODO: ADO #5829 create new dictionary that allows look-up with multiple key types to eliminate duplicate dictionaries
+                }
+                else
+                {
+                    var model = BuildModel(schema);
+                    _models.Add(schema, model);
+                    _nameToTypeProvider.Add(schema.Name, model);
+                }
+
+            }
+
+            // second, collect any model which can be replaced as whole (not as a property or as a base class)
+            var replacedTypes = new List<MgmtObjectType>();
+            foreach (var schema in _codeModel.Schemas.Objects)
+            {
+                TypeProvider? type;
+
+                if (_models.TryGetValue(schema, out type) || _resourceModels.TryGetValue(schema, out type))
+                {
+                    if (type is MgmtObjectType mgmtObjectType)
+                    {
+                        var csharpType = TypeReferenceTypeChooser.GetExactMatch(mgmtObjectType);
+                        if (csharpType != null)
+                        {
+                            // re-construct the model with replaced csharp type (e.g. the type in Resource Manager)
+                            switch (mgmtObjectType)
+                            {
+                                case ResourceData resourceData:
+                                    replacedTypes.Add(new ResourceData(schema, _context, csharpType.Name, csharpType.Namespace));
+                                    break;
+                                case MgmtReferenceType referenceType:
+                                    replacedTypes.Add(new MgmtReferenceType(schema, _context, csharpType.Name, csharpType.Namespace));
+                                    break;
+                                default:
+                                    replacedTypes.Add(new MgmtObjectType(schema, _context, csharpType.Name, csharpType.Namespace));
+                                    break;
+                            }
+                        }
+                    }
+                }
+            }
+
+            // third, update the entries in cache maps with the new model instances
+            foreach (var replacedType in replacedTypes)
+            {
+                var schema = replacedType.ObjectSchema;
+                var name = schema.Name;
+
+                _nameToTypeProvider[name] = replacedType;
+
+                if (replacedType is ResourceData replacedResourceData)
+                {
+                    _resourceModels[schema] = replacedType;
+                }
+                else
+                {
+                    _models[schema] = replacedType;
                 }
             }
         }
@@ -132,7 +211,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return _rawRequestPathToOperationSets[requestPath];
         }
 
-        public IDictionary<Operation, RestClientMethod> RestClientMethods => EnsureRestClientMethods();
+        public RestClientMethod GetRestClientMethod(Operation operation) => EnsureRestClientMethods()[operation];
 
         public IDictionary<RestClientMethod, PagingMethod> PagingMethods => EnsurePagingMethods();
 
@@ -184,6 +263,18 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public SubscriptionExtensions SubscriptionExtensions => EnsureSubscriptionExtensions();
 
+        private MgmtExtensions? _subscriptionExtensionClient;
+        public MgmtExtensions SubscriptionExtensionsClient => EnsureExtensionsClient(ref _subscriptionExtensionClient, "Subscription", RequestPath.Subscription, SubscriptionExtensions);
+
+        private MgmtExtensions? _resourceGroupExtensionClient;
+        public MgmtExtensions ResourceGroupExtensionsClient => EnsureExtensionsClient(ref _resourceGroupExtensionClient, "ResourceGroup", RequestPath.ResourceGroup, ResourceGroupExtensions);
+
+        private MgmtExtensions? _tenantExtensionClient;
+        public MgmtExtensions TenantExtensionsClient => EnsureExtensionsClient(ref _tenantExtensionClient, "Tenant", RequestPath.Tenant, TenantExtensions);
+
+        private MgmtExtensions? _managementGroupExtensionClient;
+        public MgmtExtensions ManagementGroupExtensionsClient => EnsureExtensionsClient(ref _managementGroupExtensionClient, "ManagementGroup", RequestPath.ManagementGroup, ManagementGroupExtensions);
+
         public ResourceGroupExtensions ResourceGroupExtensions => EnsureResourceGroupExtensions();
 
         public ManagementGroupExtensions ManagementGroupExtensions => EnsureManagementExtensions();
@@ -211,6 +302,16 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             _subscriptionExtensions = new SubscriptionExtensions(GetChildOperations(RequestPath.Subscription), _context);
             return _subscriptionExtensions;
         }
+
+        private MgmtExtensions EnsureExtensionsClient(ref MgmtExtensions? extensionField, string typePrefix, RequestPath path, MgmtExtensions publicExtension)
+        {
+            if (extensionField != null)
+                return extensionField;
+
+            extensionField = new MgmtExtensionClient(GetChildOperations(path), typePrefix, _context, $"{typePrefix}ExtensionClient", path, publicExtension);
+            return extensionField;
+        }
+
 
         private ManagementGroupExtensions? _managementGroupExtensions;
         private ManagementGroupExtensions EnsureManagementExtensions()
@@ -265,15 +366,71 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private IEnumerable<ResourceCollection>? _resourceCollections;
         public IEnumerable<ResourceCollection> ResourceCollections => _resourceCollections ??= EnsureRequestPathToResourcesMap().Values.Select(bag => bag.ResourceCollection).WhereNotNull().Distinct();
 
-        public IEnumerable<MgmtLongRunningOperation> LongRunningOperations => EnsureLongRunningOperations().Values;
+        public IEnumerable<MgmtLongRunningOperation> LongRunningOperations
+        {
+            get
+            {
+                // TODO -- refactor so that in the future we no longer need to iterate everything to ensure they are initialized
+                // force initialization on resources, collections, etc
+                foreach (var resource in ArmResources)
+                {
+                    _ = resource.ClientOperations;
+                }
+                foreach (var collection in ResourceCollections)
+                {
+                    _ = collection.ClientOperations;
+                }
+                _ = ResourceGroupExtensions.ClientOperations;
+                _ = SubscriptionExtensions.ClientOperations;
+                _ = ManagementGroupExtensions.ClientOperations;
+                _ = TenantExtensions.ClientOperations;
+                return _mgmtLongRunningOperations.Values;
+            }
+        }
 
-        public IEnumerable<NonLongRunningOperation> NonLongRunningOperations => EnsureNonLongRunningOperations().Values;
+        public IEnumerable<NonLongRunningOperation> NonLongRunningOperations
+        {
+            get
+            {
+                // TODO -- refactor so that in the future we no longer need to iterate everything to ensure they are initialized
+                // force initialization on resources, collections, etc
+                foreach (var resource in ArmResources)
+                {
+                    _ = resource.ClientOperations;
+                }
+                foreach (var collection in ResourceCollections)
+                {
+                    _ = collection.ClientOperations;
+                }
+                _ = ResourceGroupExtensions.ClientOperations;
+                _ = SubscriptionExtensions.ClientOperations;
+                _ = ManagementGroupExtensions.ClientOperations;
+                _ = TenantExtensions.ClientOperations;
+                return _mgmtNonLongRunningOperations.Values;
+            }
+        }
 
         private Dictionary<Schema, TypeProvider>? _models;
 
-        public Dictionary<Schema, TypeProvider> ResourceSchemaMap => _resourceModels ??= BuildResourceModels();
+        public Dictionary<Schema, TypeProvider> ResourceSchemaMap
+        {
+            get
+            {
+                if (_resourceModels == null)
+                    InitializeModels();
+                return _resourceModels!;
+            }
+        }
 
-        internal Dictionary<Schema, TypeProvider> SchemaMap => _models ??= BuildModels();
+        internal Dictionary<Schema, TypeProvider> SchemaMap
+        {
+            get
+            {
+                if (_models == null)
+                    InitializeModels();
+                return _models!;
+            }
+        }
 
         public IEnumerable<TypeProvider> Models => GetModels();
 
@@ -379,9 +536,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return EnsureRestClients().TryGetValue(requestPath, out restClients);
         }
 
-        internal LongRunningOperation GetLongRunningOperation(Operation op) => EnsureLongRunningOperations()[op];
+        internal MgmtLongRunningOperation GetLongRunningOperation(CSharpType type) => _mgmtLongRunningOperations[type.Name];
 
-        internal NonLongRunningOperation GetNonLongRunningOperation(Operation op) => EnsureNonLongRunningOperations()[op];
+        internal NonLongRunningOperation GetNonLongRunningOperation(CSharpType type) => _mgmtNonLongRunningOperations[type.Name];
 
         private Dictionary<string, HashSet<MgmtRestClient>> EnsureRestClients()
         {
@@ -537,67 +694,28 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return _rawRequestPathToResourceData;
         }
 
-        private Dictionary<Operation, MgmtLongRunningOperation> EnsureLongRunningOperations()
+        private Dictionary<string, MgmtLongRunningOperation> _mgmtLongRunningOperations = new();
+
+        public MgmtLongRunningOperation AddLongRunningOperation(Operation operation, Resource? resource, string lroName)
         {
-            if (_longRunningOperations != null)
-            {
-                return _longRunningOperations;
-            }
+            if (_mgmtLongRunningOperations.TryGetValue(lroName, out var longRunningOperation))
+                return longRunningOperation;
 
-            _longRunningOperations = new Dictionary<Operation, MgmtLongRunningOperation>();
-
-            if (_context.Configuration.PublicClients)
-            {
-                foreach (var operationSet in OperationSets)
-                {
-                    foreach (var operation in operationSet)
-                    {
-                        if (operation.IsLongRunning)
-                        {
-                            _longRunningOperations.Add(
-                                operation,
-                                new MgmtLongRunningOperation(
-                                    operation,
-                                    operation.FindLongRunningOperationInfo(_context),
-                                    _context));
-                        }
-                    }
-                }
-            }
-            return _longRunningOperations;
+            longRunningOperation = new MgmtLongRunningOperation(operation, operation.FindLongRunningOperationInfo(_context), resource, lroName, _context);
+            _mgmtLongRunningOperations.Add(lroName, longRunningOperation);
+            return longRunningOperation;
         }
 
-        private Dictionary<Operation, NonLongRunningOperation> EnsureNonLongRunningOperations()
+        private Dictionary<string, NonLongRunningOperation> _mgmtNonLongRunningOperations = new();
+
+        public NonLongRunningOperation AddNonLongRunningOperation(Operation operation, Resource? resource, string nonLroName)
         {
-            if (_nonLongRunningOperations != null)
-            {
-                return _nonLongRunningOperations;
-            }
+            if (_mgmtNonLongRunningOperations.TryGetValue(nonLroName, out var nonLongRunningOperation))
+                return nonLongRunningOperation;
 
-            _nonLongRunningOperations = new Dictionary<Operation, NonLongRunningOperation>();
-            var desiredHttpMethods = new HttpMethod[] { HttpMethod.Put, HttpMethod.Delete, HttpMethod.Patch };
-
-            if (_context.Configuration.PublicClients)
-            {
-                foreach (var operationSet in OperationSets)
-                {
-                    if (operationSet.IsResource(_mgmtConfiguration))
-                    {
-                        foreach (var operation in operationSet)
-                        {
-                            var httpRequest = operation.GetHttpRequest();
-                            if (!operation.IsLongRunning && httpRequest != null && desiredHttpMethods.Contains(httpRequest.Method))
-                            {
-                                _nonLongRunningOperations.Add(
-                                    operation,
-                                    new NonLongRunningOperation(operation, operation.FindLongRunningOperationInfo(_context), _context));
-                            }
-                        }
-                    }
-                }
-            }
-
-            return _nonLongRunningOperations;
+            nonLongRunningOperation = new NonLongRunningOperation(operation, operation.FindLongRunningOperationInfo(_context), resource, nonLroName, _context);
+            _mgmtNonLongRunningOperations.Add(nonLroName, nonLongRunningOperation);
+            return nonLongRunningOperation;
         }
 
         public override CSharpType FindTypeForSchema(Schema schema)
@@ -629,48 +747,15 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public IEnumerable<Resource> FindResources(ResourceData resourceData)
         {
-            var requestPaths = EnsureRequestPathToResourceData().Where(pair => pair.Value == resourceData).Select(pair => pair.Key).ToHashSet();
-            return EnsureRequestPathToResourcesMap().Where(pair => requestPaths.Contains(pair.Key)).Select(pair => pair.Value.Resource);
+            return ArmResources.Where(resource => resource.ResourceData == resourceData);
         }
 
-        private Dictionary<Schema, TypeProvider> BuildModels()
-        {
-            var models = new Dictionary<Schema, TypeProvider>();
-
-            foreach (var schema in _allSchemas)
-            {
-                if (_resourceDataSchemaNameToOperationSets.ContainsKey(schema.Name))
-                {
-                    continue;
-                }
-                TypeProvider typeOfModel = BuildModel(schema);
-                models.Add(schema, typeOfModel);
-                _nameToTypeProvider.Add(schema.Name, typeOfModel);
-            }
-            return models;
-        }
-
-        private Dictionary<Schema, TypeProvider> BuildResourceModels()
-        {
-            var resourceModels = new Dictionary<Schema, TypeProvider>();
-
-            foreach (var schema in _allSchemas)
-            {
-                if (_resourceDataSchemaNameToOperationSets.ContainsKey(schema.Name))
-                {
-                    TypeProvider typeOfModel = BuildResourceModel(schema);
-                    resourceModels.Add(schema, typeOfModel);
-                    _nameToTypeProvider.Add(schema.Name, typeOfModel); // TODO: ADO #5829 create new dictionary that allows look-up with multiple key types to eliminate duplicate dictionaries
-                }
-            }
-            return resourceModels;
-        }
 
         private TypeProvider BuildModel(Schema schema) => schema switch
         {
             SealedChoiceSchema sealedChoiceSchema => (TypeProvider)new EnumType(sealedChoiceSchema, _context),
             ChoiceSchema choiceSchema => new EnumType(choiceSchema, _context),
-            ObjectSchema objectSchema => schema.Extensions != null && (schema.Extensions.MgmtReferenceType || schema.Extensions.MgmtPropertyReferenceType)
+            ObjectSchema objectSchema => schema.Extensions != null && (schema.Extensions.MgmtReferenceType || schema.Extensions.MgmtPropertyReferenceType || schema.Extensions.MgmtTypeReferenceType)
             ? new MgmtReferenceType(objectSchema, _context)
             : new MgmtObjectType(objectSchema, _context),
             _ => throw new NotImplementedException()

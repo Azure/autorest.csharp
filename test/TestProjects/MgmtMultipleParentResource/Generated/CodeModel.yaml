@@ -43,7 +43,7 @@ schemas: !Schemas
       precision: 32
       language: !Languages 
         default:
-          name: ParentPropertiesTimeoutInSeconds
+          name: TheParentPropertiesTimeoutInSeconds
           description: The timeout in seconds to execute the run command.
       protocol: !Protocols {}
     - !NumberSchema &ref_19
@@ -322,7 +322,7 @@ schemas: !Schemas
           version: '2021-03-01'
       language: !Languages 
         default:
-          name: ParentPropertiesRunAsUser
+          name: TheParentPropertiesRunAsUser
           description: Specifies the user account on the VM when executing the run command.
       protocol: !Protocols {}
     - !StringSchema &ref_12
@@ -332,7 +332,7 @@ schemas: !Schemas
           version: '2021-03-01'
       language: !Languages 
         default:
-          name: ParentPropertiesRunAsPassword
+          name: TheParentPropertiesRunAsPassword
           description: Specifies the user account password on the VM when executing the run command.
       protocol: !Protocols {}
     - !StringSchema &ref_14
@@ -342,7 +342,7 @@ schemas: !Schemas
           version: '2021-03-01'
       language: !Languages 
         default:
-          name: ParentPropertiesOutputBlobUri
+          name: TheParentPropertiesOutputBlobUri
           description: Specifies the Azure storage blob where script output stream will be uploaded.
       protocol: !Protocols {}
     - !StringSchema &ref_15
@@ -352,7 +352,7 @@ schemas: !Schemas
           version: '2021-03-01'
       language: !Languages 
         default:
-          name: ParentPropertiesErrorBlobUri
+          name: TheParentPropertiesErrorBlobUri
           description: Specifies the Azure storage blob where script error stream will be uploaded.
       protocol: !Protocols {}
     - !StringSchema &ref_16
@@ -362,7 +362,7 @@ schemas: !Schemas
           version: '2021-03-01'
       language: !Languages 
         default:
-          name: ParentPropertiesProvisioningState
+          name: TheParentPropertiesProvisioningState
           description: The provisioning state, which only appears in the response.
       protocol: !Protocols {}
     - !StringSchema &ref_56
@@ -372,7 +372,7 @@ schemas: !Schemas
           version: '2021-03-01'
       language: !Languages 
         default:
-          name: ParentsListResultNextLink
+          name: TheParentsListResultNextLink
           description: The uri to fetch the next page of run commands.
       protocol: !Protocols {}
     - !StringSchema &ref_17
@@ -695,7 +695,7 @@ schemas: !Schemas
                     - output
                   language: !Languages 
                     default:
-                      name: Parent
+                      name: TheParent
                       description: Describes a Virtual Machine run command.
                       namespace: ''
                   protocol: !Protocols {}
@@ -1332,7 +1332,7 @@ schemas: !Schemas
                     - input
                   language: !Languages 
                     default:
-                      name: ParentUpdate
+                      name: TheParentUpdate
                       description: Describes a Virtual Machine run command.
                       namespace: ''
                   protocol: !Protocols {}
@@ -1658,7 +1658,7 @@ schemas: !Schemas
             elementType: *ref_24
             language: !Languages 
               default:
-                name: ParentsListResultValue
+                name: TheParentsListResultValue
                 description: The list of run commands
             protocol: !Protocols {}
           required: true
@@ -1683,7 +1683,7 @@ schemas: !Schemas
         - output
       language: !Languages 
         default:
-          name: ParentsListResult
+          name: TheParentsListResult
           description: The List run command operation response
           namespace: ''
       protocol: !Protocols {}
@@ -3044,7 +3044,7 @@ operationGroups:
         description: ''
     protocol: !Protocols {}
   - !OperationGroup 
-    $key: Parents
+    $key: TheParents
     operations:
       - !Operation 
         apiVersions:
@@ -3070,9 +3070,9 @@ operationGroups:
             required: true
             language: !Languages 
               default:
-                name: parentName
+                name: theParentName
                 description: The name of the VM scale set.
-                serializedName: parentName
+                serializedName: theParentName
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
@@ -3127,7 +3127,7 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpWithBodyRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/parents/{parentName}
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/theParents/{theParentName}
                 method: put
                 knownMediaType: json
                 mediaTypes:
@@ -3212,9 +3212,9 @@ operationGroups:
             required: true
             language: !Languages 
               default:
-                name: parentName
+                name: theParentName
                 description: The name of the VM scale set.
-                serializedName: parentName
+                serializedName: theParentName
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
@@ -3269,7 +3269,7 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpWithBodyRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/parents/{parentName}
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/theParents/{theParentName}
                 method: patch
                 knownMediaType: json
                 mediaTypes:
@@ -3340,9 +3340,9 @@ operationGroups:
             required: true
             language: !Languages 
               default:
-                name: parentName
+                name: theParentName
                 description: The name of the VM scale set.
-                serializedName: parentName
+                serializedName: theParentName
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
@@ -3371,7 +3371,7 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/parents/{parentName}
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/theParents/{theParentName}
                 method: delete
                 uri: '{$host}'
         signatureParameters:
@@ -3451,9 +3451,9 @@ operationGroups:
             required: true
             language: !Languages 
               default:
-                name: parentName
+                name: theParentName
                 description: The name of the VM scale set.
-                serializedName: parentName
+                serializedName: theParentName
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
@@ -3493,7 +3493,7 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/parents/{parentName}
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/theParents/{theParentName}
                 method: get
                 uri: '{$host}'
         signatureParameters:
@@ -3589,7 +3589,7 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/parents
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/theParents
                 method: get
                 uri: '{$host}'
         signatureParameters:
@@ -3637,7 +3637,7 @@ operationGroups:
         protocol: !Protocols {}
     language: !Languages 
       default:
-        name: Parents
+        name: TheParents
         description: ''
     protocol: !Protocols {}
   - !OperationGroup 
@@ -3667,9 +3667,9 @@ operationGroups:
             required: true
             language: !Languages 
               default:
-                name: parentName
+                name: theParentName
                 description: The name of the VM scale set.
-                serializedName: parentName
+                serializedName: theParentName
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
@@ -3736,7 +3736,7 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpWithBodyRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/parents/{parentName}/subParents/{instanceId}
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/theParents/{theParentName}/subParents/{instanceId}
                 method: put
                 knownMediaType: json
                 mediaTypes:
@@ -3822,9 +3822,9 @@ operationGroups:
             required: true
             language: !Languages 
               default:
-                name: parentName
+                name: theParentName
                 description: The name of the VM scale set.
-                serializedName: parentName
+                serializedName: theParentName
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
@@ -3891,7 +3891,7 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpWithBodyRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/parents/{parentName}/subParents/{instanceId}
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/theParents/{theParentName}/subParents/{instanceId}
                 method: patch
                 knownMediaType: json
                 mediaTypes:
@@ -3963,9 +3963,9 @@ operationGroups:
             required: true
             language: !Languages 
               default:
-                name: parentName
+                name: theParentName
                 description: The name of the VM scale set.
-                serializedName: parentName
+                serializedName: theParentName
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
@@ -4006,7 +4006,7 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/parents/{parentName}/subParents/{instanceId}
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/theParents/{theParentName}/subParents/{instanceId}
                 method: delete
                 uri: '{$host}'
         signatureParameters:
@@ -4087,9 +4087,9 @@ operationGroups:
             required: true
             language: !Languages 
               default:
-                name: parentName
+                name: theParentName
                 description: The name of the VM scale set.
-                serializedName: parentName
+                serializedName: theParentName
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
@@ -4141,7 +4141,7 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/parents/{parentName}/subParents/{instanceId}
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/theParents/{theParentName}/subParents/{instanceId}
                 method: get
                 uri: '{$host}'
         signatureParameters:
@@ -4208,9 +4208,9 @@ operationGroups:
             required: true
             language: !Languages 
               default:
-                name: parentName
+                name: theParentName
                 description: The name of the VM scale set.
-                serializedName: parentName
+                serializedName: theParentName
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
@@ -4250,7 +4250,7 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/parents/{parentName}/subParents
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/theParents/{theParentName}/subParents
                 method: get
                 uri: '{$host}'
         signatureParameters:
@@ -4329,9 +4329,9 @@ operationGroups:
             required: true
             language: !Languages 
               default:
-                name: parentName
+                name: theParentName
                 description: The name of the VM scale set.
-                serializedName: parentName
+                serializedName: theParentName
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
@@ -4410,7 +4410,7 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpWithBodyRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/parents/{parentName}/subParents/{instanceId}/children/{childName}
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/theParents/{theParentName}/subParents/{instanceId}/children/{childName}
                 method: put
                 knownMediaType: json
                 mediaTypes:
@@ -4497,9 +4497,9 @@ operationGroups:
             required: true
             language: !Languages 
               default:
-                name: parentName
+                name: theParentName
                 description: The name of the VM scale set.
-                serializedName: parentName
+                serializedName: theParentName
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
@@ -4578,7 +4578,7 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpWithBodyRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/parents/{parentName}/subParents/{instanceId}/children/{childName}
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/theParents/{theParentName}/subParents/{instanceId}/children/{childName}
                 method: patch
                 knownMediaType: json
                 mediaTypes:
@@ -4651,9 +4651,9 @@ operationGroups:
             required: true
             language: !Languages 
               default:
-                name: parentName
+                name: theParentName
                 description: The name of the VM scale set.
-                serializedName: parentName
+                serializedName: theParentName
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
@@ -4706,7 +4706,7 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/parents/{parentName}/subParents/{instanceId}/children/{childName}
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/theParents/{theParentName}/subParents/{instanceId}/children/{childName}
                 method: delete
                 uri: '{$host}'
         signatureParameters:
@@ -4788,9 +4788,9 @@ operationGroups:
             required: true
             language: !Languages 
               default:
-                name: parentName
+                name: theParentName
                 description: The name of the VM scale set.
-                serializedName: parentName
+                serializedName: theParentName
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
@@ -4854,7 +4854,7 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/parents/{parentName}/subParents/{instanceId}/children/{childName}
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/theParents/{theParentName}/subParents/{instanceId}/children/{childName}
                 method: get
                 uri: '{$host}'
         signatureParameters:
@@ -4922,9 +4922,9 @@ operationGroups:
             required: true
             language: !Languages 
               default:
-                name: parentName
+                name: theParentName
                 description: The name of the VM scale set.
-                serializedName: parentName
+                serializedName: theParentName
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
@@ -4976,7 +4976,7 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/parents/{parentName}/subParents/{instanceId}/children
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/theParents/{theParentName}/subParents/{instanceId}/children
                 method: get
                 uri: '{$host}'
         signatureParameters:

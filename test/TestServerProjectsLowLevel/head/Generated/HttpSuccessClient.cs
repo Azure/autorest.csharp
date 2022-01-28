@@ -35,14 +35,11 @@ namespace head_LowLevel
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public HttpSuccessClient(AzureKeyCredential credential, Uri endpoint = null, AutoRestHeadTestServiceClientOptions options = null)
+        public HttpSuccessClient(AzureKeyCredential credential, Uri endpoint = null, HttpSuccessClientOptions options = null)
         {
-            if (credential == null)
-            {
-                throw new ArgumentNullException(nameof(credential));
-            }
+            Argument.AssertNotNull(credential, nameof(credential));
             endpoint ??= new Uri("http://localhost:3000");
-            options ??= new AutoRestHeadTestServiceClientOptions();
+            options ??= new HttpSuccessClientOptions();
 
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
@@ -61,7 +58,7 @@ namespace head_LowLevel
             try
             {
                 using HttpMessage message = CreateHead200Request(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -81,7 +78,7 @@ namespace head_LowLevel
             try
             {
                 using HttpMessage message = CreateHead200Request(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -101,7 +98,7 @@ namespace head_LowLevel
             try
             {
                 using HttpMessage message = CreateHead204Request(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -121,7 +118,7 @@ namespace head_LowLevel
             try
             {
                 using HttpMessage message = CreateHead204Request(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -141,7 +138,7 @@ namespace head_LowLevel
             try
             {
                 using HttpMessage message = CreateHead404Request(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -161,7 +158,7 @@ namespace head_LowLevel
             try
             {
                 using HttpMessage message = CreateHead404Request(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {

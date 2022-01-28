@@ -35,7 +35,9 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             string name = "fakeXml";
             string type = "Microsoft.XmlDeserialization/xmls";
             XElement xElement = BuildXElement(id, name, type);
-            Assert.Throws<ArgumentOutOfRangeException>(() => XmlInstanceData.DeserializeXmlInstanceData(xElement));
+            // ResourceIdentifier changes to lazy initialization, so you won't get the parsing error until you fetch properties
+            Assert.DoesNotThrow(() => XmlInstanceData.DeserializeXmlInstanceData(xElement));
+            Assert.Throws<FormatException>(() => { var _ = XmlInstanceData.DeserializeXmlInstanceData(xElement).Id.SubscriptionId; });
         }
 
         [Test]

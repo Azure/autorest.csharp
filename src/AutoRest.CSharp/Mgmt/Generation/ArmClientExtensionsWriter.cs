@@ -20,43 +20,49 @@ namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal class ArmClientExtensionsWriter : MgmtExtensionWriter
     {
-        public ArmClientExtensionsWriter(CodeWriter writer, MgmtExtensions extensions, BuildContext<MgmtOutputLibrary> context) : base(writer, extensions, context)
+        public ArmClientExtensionsWriter(CodeWriter writer, MgmtExtensions extensions, BuildContext<MgmtOutputLibrary> context, bool isArmCore = false)
+            : base(writer, extensions, context, typeof(ArmClient), isArmCore)
         {
         }
-
-        protected override string Description => "A class to add extension methods to ArmClient.";
-        protected override string ExtensionOperationVariableName => "armClient";
-
-        protected override Type ExtensionOperationVariableType => typeof(ArmClient);
+        protected override string Description => IsArmCore ? "The entry point for all ARM clients." : "A class to add extension methods to ArmClient.";
+        protected override string ExtensionOperationVariableName => IsArmCore ? "this" : "armClient";
 
         public override void Write()
         {
-            using (_writer.Namespace(Context.DefaultNamespace))
+            var theNamespace = IsArmCore ? "Azure.ResourceManager" : Context.DefaultNamespace;
+            var staticKeyWord = IsArmCore ? string.Empty : "static ";
+            var className = IsArmCore ? nameof(ArmClient) : TypeNameOfThis;
+            using (_writer.Namespace(theNamespace))
             {
                 _writer.WriteXmlDocumentationSummary($"{Description}");
-                using (_writer.Scope($"{Accessibility} static partial class {TypeNameOfThis}"))
+                using (_writer.Scope($"{Accessibility} {staticKeyWord}partial class {className}"))
                 {
                     foreach (var resource in Context.Library.ArmResources)
                     {
                         _writer.Line($"#region {resource.Type.Name}");
-                        WriteExtensionGetResourceFromIdMethod(_writer, resource);
+                        WriteGetResourceFromIdMethod(_writer, resource);
                         _writer.LineRaw("#endregion");
                         _writer.Line();
                     }
-
                 }
             }
         }
 
-        protected void WriteExtensionGetResourceFromIdMethod(CodeWriter writer, Resource resource)
+        protected void WriteGetResourceFromIdMethod(CodeWriter writer, Resource resource)
         {
             writer.WriteXmlDocumentationSummary($"Gets an object representing a {resource.Type.Name} along with the instance operations that can be performed on it but with no data.");
-            writer.WriteXmlDocumentationParameter($"{ExtensionOperationVariableName}", $"The <see cref=\"{ExtensionOperationVariableType}\" /> instance the method will execute against.");
+            if (!IsArmCore)
+            {
+                writer.WriteXmlDocumentationParameter($"{ExtensionOperationVariableName}", $"The <see cref=\"{ExtensionOperationVariableType}\" /> instance the method will execute against.");
+            }
             writer.WriteXmlDocumentationParameter("id", $"The resource ID of the resource to get.");
             writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{resource.Type.Name}\" /> object.");
-            using (writer.Scope($"public static {resource.Type} Get{resource.Type.Name}(this {ExtensionOperationVariableType} {ExtensionOperationVariableName}, {typeof(ResourceIdentifier)} id)"))
+            var modifier = IsArmCore ? "virtual" : "static";
+            var instanceParameter = IsArmCore ? string.Empty : $"this {ExtensionOperationVariableType} {ExtensionOperationVariableName}, ";
+            using (writer.Scope($"public {modifier} {resource.Type} Get{resource.Type.Name}({instanceParameter}{typeof(Azure.Core.ResourceIdentifier)} id)"))
             {
-                writer.Line($"return {ExtensionOperationVariableName}.UseClientContext((uri, credential, clientOptions, pipeline) => new {resource.Type.Name}(clientOptions, credential, uri, pipeline, id));");
+                writer.Line($"{resource.Type.Name}.ValidateResourceId(id);");
+                writer.Line($"return new {resource.Type.Name}({ContextProperty}, id);");
             }
         }
     }

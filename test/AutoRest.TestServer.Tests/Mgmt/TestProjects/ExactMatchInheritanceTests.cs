@@ -2,9 +2,8 @@
 // Licensed under the MIT License.
 
 using System;
-using Azure.ResourceManager;
+using Azure.Core;
 using Azure.ResourceManager.Models;
-using Azure.ResourceManager.Resources.Models;
 using ExactMatchInheritance;
 using ExactMatchInheritance.Models;
 using NUnit.Framework;
@@ -39,7 +38,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase(typeof(ExactMatchModel2), new string[] { }, new Type[] { })]
         [TestCase(typeof(ExactMatchModel3), new string[] { }, new Type[] { })]
         [TestCase(typeof(ExactMatchModel4), new string[] { }, new Type[] { })]
-        [TestCase(typeof(ExactMatchModel5Data), new string[] { "location" }, new Type[] { typeof(Location) })]
+        [TestCase(typeof(ExactMatchModel5Data), new string[] { "location" }, new Type[] { typeof(AzureLocation) })]
         [TestCase(typeof(ExactMatchModel7), new string[] { }, new Type[] { })]
         [TestCase(typeof(ExactMatchModel8), new string[] { }, new Type[] { })]
         [TestCase(typeof(ExactMatchModel9), new string[] { }, new Type[] { })]

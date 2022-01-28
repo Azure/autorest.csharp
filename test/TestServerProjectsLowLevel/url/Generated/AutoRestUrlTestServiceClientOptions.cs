@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace url_LowLevel
 {
-    /// <summary> Client options for AutoRestUrlTestServiceClient. </summary>
+    /// <summary> Client options for AutoRestUrlTestService library clients. </summary>
     public partial class AutoRestUrlTestServiceClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V1_0_0;

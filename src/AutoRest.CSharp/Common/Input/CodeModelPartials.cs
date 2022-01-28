@@ -39,14 +39,6 @@ namespace AutoRest.CSharp.Input
             }
         }
 
-        public bool? IsLongRunningReallyLong
-        {
-            get
-            {
-                return Convert.ToBoolean(Extensions.GetValue<IDictionary<object, object>>("x-ms-long-running-operation-options")?.GetValue<string>("x-ms-long-running-reallyLong"));
-            }
-        }
-
         public string? Accessibility => Extensions.GetValue<string>("x-accessibility");
 
         public ServiceResponse LongRunningInitialResponse
@@ -131,6 +123,12 @@ namespace AutoRest.CSharp.Input
         public bool MgmtReferenceType => TryGetValue("x-ms-mgmt-referenceType", out var value) && Convert.ToBoolean(value);
 
         public bool MgmtPropertyReferenceType => TryGetValue("x-ms-mgmt-propertyReferenceType", out var value) && Convert.ToBoolean(value);
+
+        /// <summary>
+        /// Indicate whether the definition has property <c>x-ms-mgmt-typeReferenceType</c> defined as <c>true</c>.
+        /// See: https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/resourcemanager/Azure.ResourceManager/src/autorest.md
+        /// </summary>
+        public bool MgmtTypeReferenceType => TryGetValue("x-ms-mgmt-typeReferenceType", out var value) && Convert.ToBoolean(value);
     }
 
     internal partial class ServiceResponse
@@ -141,7 +139,7 @@ namespace AutoRest.CSharp.Input
 
     internal partial class RequestParameter
     {
-        public bool IsResourceParameter => Convert.ToBoolean(Extensions.GetValue<string>("x-ms-resource-parameter"));
+        public bool IsResourceParameter => Convert.ToBoolean(Extensions.GetValue<string>("x-ms-resource-identifier"));
 
         public ParameterLocation In => Protocol.Http is HttpParameter httpParameter ? httpParameter.In : ParameterLocation.None;
         public bool IsFlattened => Flattened ?? false;

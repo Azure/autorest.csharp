@@ -28,17 +28,17 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Initializes a new instance of VirtualMachineScaleSetsRestOperations. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="options"> The client options used to construct the current client. </param>
+        /// <param name="applicationId"> The application id to use for user agent. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="apiVersion"> Api Version. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public VirtualMachineScaleSetsRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ClientOptions options, Uri endpoint = null, string apiVersion = "2020-06-01")
+        public VirtualMachineScaleSetsRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string applicationId, Uri endpoint = null, string apiVersion = default)
         {
             this.endpoint = endpoint ?? new Uri("https://management.azure.com");
-            this.apiVersion = apiVersion ?? throw new ArgumentNullException(nameof(apiVersion));
+            this.apiVersion = apiVersion ?? "2020-06-01";
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
-            _userAgent = HttpMessageUtilities.GetUserAgentName(this, options);
+            _userAgent = Core.HttpMessageUtilities.GetUserAgentName(this, applicationId);
         }
 
         internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetData parameters)
@@ -1058,7 +1058,7 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        internal HttpMessage CreatePowerOffRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName, bool? skipShutdown, VirtualMachineScaleSetVMInstanceIDs vmInstanceIDs)
+        internal HttpMessage CreatePowerOffRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVMInstanceIDs vmInstanceIDs, bool? skipShutdown)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -1093,11 +1093,11 @@ namespace Azure.ResourceManager.Sample
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
-        /// <param name="skipShutdown"> The parameter to request non-graceful VM shutdown. True value for this flag indicates non-graceful shutdown whereas false indicates otherwise. Default value for this flag is false if not specified. </param>
         /// <param name="vmInstanceIDs"> A list of virtual machine instance IDs from the VM scale set. </param>
+        /// <param name="skipShutdown"> The parameter to request non-graceful VM shutdown. True value for this flag indicates non-graceful shutdown whereas false indicates otherwise. Default value for this flag is false if not specified. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="vmScaleSetName"/> is null. </exception>
-        public async Task<Response> PowerOffAsync(string subscriptionId, string resourceGroupName, string vmScaleSetName, bool? skipShutdown = null, VirtualMachineScaleSetVMInstanceIDs vmInstanceIDs = null, CancellationToken cancellationToken = default)
+        public async Task<Response> PowerOffAsync(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVMInstanceIDs vmInstanceIDs = null, bool? skipShutdown = null, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -1112,7 +1112,7 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentNullException(nameof(vmScaleSetName));
             }
 
-            using var message = CreatePowerOffRequest(subscriptionId, resourceGroupName, vmScaleSetName, skipShutdown, vmInstanceIDs);
+            using var message = CreatePowerOffRequest(subscriptionId, resourceGroupName, vmScaleSetName, vmInstanceIDs, skipShutdown);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -1128,11 +1128,11 @@ namespace Azure.ResourceManager.Sample
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
-        /// <param name="skipShutdown"> The parameter to request non-graceful VM shutdown. True value for this flag indicates non-graceful shutdown whereas false indicates otherwise. Default value for this flag is false if not specified. </param>
         /// <param name="vmInstanceIDs"> A list of virtual machine instance IDs from the VM scale set. </param>
+        /// <param name="skipShutdown"> The parameter to request non-graceful VM shutdown. True value for this flag indicates non-graceful shutdown whereas false indicates otherwise. Default value for this flag is false if not specified. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="vmScaleSetName"/> is null. </exception>
-        public Response PowerOff(string subscriptionId, string resourceGroupName, string vmScaleSetName, bool? skipShutdown = null, VirtualMachineScaleSetVMInstanceIDs vmInstanceIDs = null, CancellationToken cancellationToken = default)
+        public Response PowerOff(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVMInstanceIDs vmInstanceIDs = null, bool? skipShutdown = null, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -1147,7 +1147,7 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentNullException(nameof(vmScaleSetName));
             }
 
-            using var message = CreatePowerOffRequest(subscriptionId, resourceGroupName, vmScaleSetName, skipShutdown, vmInstanceIDs);
+            using var message = CreatePowerOffRequest(subscriptionId, resourceGroupName, vmScaleSetName, vmInstanceIDs, skipShutdown);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

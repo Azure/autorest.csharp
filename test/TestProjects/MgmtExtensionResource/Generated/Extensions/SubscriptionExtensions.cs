@@ -5,13 +5,25 @@
 
 #nullable disable
 
+using System.Threading;
+using System.Threading.Tasks;
+using Azure;
 using Azure.ResourceManager.Resources;
+using MgmtExtensionResource.Models;
 
 namespace MgmtExtensionResource
 {
     /// <summary> A class to add extension methods to Subscription. </summary>
     public static partial class SubscriptionExtensions
     {
+        #region SubSingleton
+        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        public static SubSingleton GetSubSingleton(this Subscription subscription)
+        {
+            return GetExtensionClient(subscription).GetSubSingleton();
+        }
+        #endregion
+
         #region SubscriptionPolicyDefinition
         /// <summary> Gets an object representing a SubscriptionPolicyDefinitionCollection along with the instance operations that can be performed on it. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
@@ -21,5 +33,66 @@ namespace MgmtExtensionResource
             return new SubscriptionPolicyDefinitionCollection(subscription);
         }
         #endregion
+
+        private static SubscriptionExtensionClient GetExtensionClient(Subscription subscription)
+        {
+            return subscription.GetCachedClient((armClient) =>
+            {
+                return new SubscriptionExtensionClient(armClient, subscription.Id);
+            }
+            );
+        }
+
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/CheckDnsNameAvailability
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: CheckDnsNameAvailability
+        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="location"> The location of the domain name. </param>
+        /// <param name="domainNameLabel"> The domain name to be verified. It must conform to the following regular expression: ^[a-z][a-z0-9-]{1,61}[a-z0-9]$. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="System.ArgumentException"> <paramref name="location"/> is empty. </exception>
+        /// <exception cref="System.ArgumentNullException"> <paramref name="location"/> or <paramref name="domainNameLabel"/> is null. </exception>
+        public static async Task<Response<DnsNameAvailabilityResult>> CheckDnsNameAvailabilityAsync(this Subscription subscription, string location, string domainNameLabel, CancellationToken cancellationToken = default)
+        {
+            return await GetExtensionClient(subscription).CheckDnsNameAvailabilityAsync(location, domainNameLabel, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/CheckDnsNameAvailability
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: CheckDnsNameAvailability
+        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="location"> The location of the domain name. </param>
+        /// <param name="domainNameLabel"> The domain name to be verified. It must conform to the following regular expression: ^[a-z][a-z0-9-]{1,61}[a-z0-9]$. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="System.ArgumentException"> <paramref name="location"/> is empty. </exception>
+        /// <exception cref="System.ArgumentNullException"> <paramref name="location"/> or <paramref name="domainNameLabel"/> is null. </exception>
+        public static Response<DnsNameAvailabilityResult> CheckDnsNameAvailability(this Subscription subscription, string location, string domainNameLabel, CancellationToken cancellationToken = default)
+        {
+            return GetExtensionClient(subscription).CheckDnsNameAvailability(location, domainNameLabel, cancellationToken);
+        }
+
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.OrphanedPost/validateSomething
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: OrphanedPost_ValidateSomething
+        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="validateSomethingOptions"> Information to validate. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="System.ArgumentNullException"> <paramref name="validateSomethingOptions"/> is null. </exception>
+        public static async Task<Response> ValidateSomethingOrphanedPostAsync(this Subscription subscription, ValidateSomethingOptions validateSomethingOptions, CancellationToken cancellationToken = default)
+        {
+            return await GetExtensionClient(subscription).ValidateSomethingOrphanedPostAsync(validateSomethingOptions, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.OrphanedPost/validateSomething
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: OrphanedPost_ValidateSomething
+        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="validateSomethingOptions"> Information to validate. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="System.ArgumentNullException"> <paramref name="validateSomethingOptions"/> is null. </exception>
+        public static Response ValidateSomethingOrphanedPost(this Subscription subscription, ValidateSomethingOptions validateSomethingOptions, CancellationToken cancellationToken = default)
+        {
+            return GetExtensionClient(subscription).ValidateSomethingOrphanedPost(validateSomethingOptions, cancellationToken);
+        }
     }
 }

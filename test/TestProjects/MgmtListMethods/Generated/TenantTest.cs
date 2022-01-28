@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -14,7 +15,6 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
-using Azure.ResourceManager.Resources.Models;
 
 namespace MgmtListMethods
 {
@@ -27,8 +27,9 @@ namespace MgmtListMethods
             var resourceId = $"/providers/Microsoft.Tenant/tenantTests/{tenantTestName}";
             return new ResourceIdentifier(resourceId);
         }
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly TenantTestsRestOperations _tenantTestsRestClient;
+
+        private readonly ClientDiagnostics _tenantTestClientDiagnostics;
+        private readonly TenantTestsRestOperations _tenantTestRestClient;
         private readonly TenantTestData _data;
 
         /// <summary> Initializes a new instance of the <see cref="TenantTest"/> class for mocking. </summary>
@@ -37,42 +38,29 @@ namespace MgmtListMethods
         }
 
         /// <summary> Initializes a new instance of the <see cref = "TenantTest"/> class. </summary>
-        /// <param name="options"> The client parameters to use in these operations. </param>
-        /// <param name="resource"> The resource that is the target of operations. </param>
-        internal TenantTest(ArmResource options, TenantTestData resource) : base(options, resource.Id)
+        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="data"> The resource that is the target of operations. </param>
+        internal TenantTest(ArmClient armClient, TenantTestData data) : this(armClient, data.Id)
         {
             HasData = true;
-            _data = resource;
-            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _tenantTestsRestClient = new TenantTestsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            _data = data;
         }
 
         /// <summary> Initializes a new instance of the <see cref="TenantTest"/> class. </summary>
-        /// <param name="options"> The client parameters to use in these operations. </param>
+        /// <param name="armClient"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal TenantTest(ArmResource options, ResourceIdentifier id) : base(options, id)
+        internal TenantTest(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
         {
-            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _tenantTestsRestClient = new TenantTestsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
-        }
-
-        /// <summary> Initializes a new instance of the <see cref="TenantTest"/> class. </summary>
-        /// <param name="clientOptions"> The client options to build client context. </param>
-        /// <param name="credential"> The credential to build client context. </param>
-        /// <param name="uri"> The uri to build client context. </param>
-        /// <param name="pipeline"> The pipeline to build client context. </param>
-        /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal TenantTest(ArmClientOptions clientOptions, TokenCredential credential, Uri uri, HttpPipeline pipeline, ResourceIdentifier id) : base(clientOptions, credential, uri, pipeline, id)
-        {
-            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _tenantTestsRestClient = new TenantTestsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            _tenantTestClientDiagnostics = new ClientDiagnostics("MgmtListMethods", ResourceType.Namespace, DiagnosticOptions);
+            ArmClient.TryGetApiVersion(ResourceType, out string tenantTestApiVersion);
+            _tenantTestRestClient = new TenantTestsRestOperations(_tenantTestClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, tenantTestApiVersion);
+#if DEBUG
+			ValidateResourceId(Id);
+#endif
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
         public static readonly ResourceType ResourceType = "Microsoft.Tenant/tenantTests";
-
-        /// <summary> Gets the valid resource type for the operations. </summary>
-        protected override ResourceType ValidResourceType => ResourceType;
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }
@@ -89,6 +77,12 @@ namespace MgmtListMethods
             }
         }
 
+        internal static void ValidateResourceId(ResourceIdentifier id)
+        {
+            if (id.ResourceType != ResourceType)
+                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ResourceType), nameof(id));
+        }
+
         /// RequestPath: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}
         /// ContextualPath: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}
         /// OperationId: TenantTests_Get
@@ -97,14 +91,14 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<TenantTest>> GetAsync(string expand = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("TenantTest.Get");
+            using var scope = _tenantTestClientDiagnostics.CreateScope("TenantTest.Get");
             scope.Start();
             try
             {
-                var response = await _tenantTestsRestClient.GetAsync(Id.Name, expand, cancellationToken).ConfigureAwait(false);
+                var response = await _tenantTestRestClient.GetAsync(Id.Name, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new TenantTest(this, response.Value), response.GetRawResponse());
+                    throw await _tenantTestClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                return Response.FromValue(new TenantTest(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -121,14 +115,14 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<TenantTest> Get(string expand = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("TenantTest.Get");
+            using var scope = _tenantTestClientDiagnostics.CreateScope("TenantTest.Get");
             scope.Start();
             try
             {
-                var response = _tenantTestsRestClient.Get(Id.Name, expand, cancellationToken);
+                var response = _tenantTestRestClient.Get(Id.Name, expand, cancellationToken);
                 if (response.Value == null)
-                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new TenantTest(this, response.Value), response.GetRawResponse());
+                    throw _tenantTestClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                return Response.FromValue(new TenantTest(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -140,17 +134,37 @@ namespace MgmtListMethods
         /// <summary> Lists all available geo-locations. </summary>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
-        public async virtual Task<IEnumerable<Location>> GetAvailableLocationsAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<IEnumerable<AzureLocation>> GetAvailableLocationsAsync(CancellationToken cancellationToken = default)
         {
-            return await ListAvailableLocationsAsync(ResourceType, cancellationToken).ConfigureAwait(false);
+            using var scope = _tenantTestClientDiagnostics.CreateScope("TenantTest.GetAvailableLocations");
+            scope.Start();
+            try
+            {
+                return await ListAvailableLocationsAsync(ResourceType, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Lists all available geo-locations. </summary>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
-        public virtual IEnumerable<Location> GetAvailableLocations(CancellationToken cancellationToken = default)
+        public virtual IEnumerable<AzureLocation> GetAvailableLocations(CancellationToken cancellationToken = default)
         {
-            return ListAvailableLocations(ResourceType, cancellationToken);
+            using var scope = _tenantTestClientDiagnostics.CreateScope("TenantTest.GetAvailableLocations");
+            scope.Start();
+            try
+            {
+                return ListAvailableLocations(ResourceType, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Add a tag to the current resource. </summary>
@@ -160,20 +174,17 @@ namespace MgmtListMethods
         /// <returns> The updated resource with the tag added. </returns>
         public async virtual Task<Response<TenantTest>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrWhiteSpace(key))
-            {
-                throw new ArgumentNullException($"{nameof(key)} provided cannot be null or a whitespace.", nameof(key));
-            }
+            Argument.AssertNotNullOrWhiteSpace(key, nameof(key));
 
-            using var scope = _clientDiagnostics.CreateScope("TenantTest.AddTag");
+            using var scope = _tenantTestClientDiagnostics.CreateScope("TenantTest.AddTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
-                await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _tenantTestsRestClient.GetAsync(Id.Name, null, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new TenantTest(this, originalResponse.Value), originalResponse.GetRawResponse());
+                await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _tenantTestRestClient.GetAsync(Id.Name, null, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(new TenantTest(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -189,20 +200,17 @@ namespace MgmtListMethods
         /// <returns> The updated resource with the tag added. </returns>
         public virtual Response<TenantTest> AddTag(string key, string value, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrWhiteSpace(key))
-            {
-                throw new ArgumentNullException($"{nameof(key)} provided cannot be null or a whitespace.", nameof(key));
-            }
+            Argument.AssertNotNullOrWhiteSpace(key, nameof(key));
 
-            using var scope = _clientDiagnostics.CreateScope("TenantTest.AddTag");
+            using var scope = _tenantTestClientDiagnostics.CreateScope("TenantTest.AddTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
-                TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _tenantTestsRestClient.Get(Id.Name, null, cancellationToken);
-                return Response.FromValue(new TenantTest(this, originalResponse.Value), originalResponse.GetRawResponse());
+                TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
+                var originalResponse = _tenantTestRestClient.Get(Id.Name, null, cancellationToken);
+                return Response.FromValue(new TenantTest(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -219,19 +227,19 @@ namespace MgmtListMethods
         {
             if (tags == null)
             {
-                throw new ArgumentNullException($"{nameof(tags)} provided cannot be null.", nameof(tags));
+                throw new ArgumentNullException(nameof(tags), $"{nameof(tags)} provided cannot be null.");
             }
 
-            using var scope = _clientDiagnostics.CreateScope("TenantTest.SetTags");
+            using var scope = _tenantTestClientDiagnostics.CreateScope("TenantTest.SetTags");
             scope.Start();
             try
             {
-                await TagResource.DeleteAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
+                await TagResource.DeleteAsync(true, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
-                await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _tenantTestsRestClient.GetAsync(Id.Name, null, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new TenantTest(this, originalResponse.Value), originalResponse.GetRawResponse());
+                await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _tenantTestRestClient.GetAsync(Id.Name, null, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(new TenantTest(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -248,19 +256,19 @@ namespace MgmtListMethods
         {
             if (tags == null)
             {
-                throw new ArgumentNullException($"{nameof(tags)} provided cannot be null.", nameof(tags));
+                throw new ArgumentNullException(nameof(tags), $"{nameof(tags)} provided cannot be null.");
             }
 
-            using var scope = _clientDiagnostics.CreateScope("TenantTest.SetTags");
+            using var scope = _tenantTestClientDiagnostics.CreateScope("TenantTest.SetTags");
             scope.Start();
             try
             {
-                TagResource.Delete(cancellationToken: cancellationToken);
+                TagResource.Delete(true, cancellationToken: cancellationToken);
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
-                TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _tenantTestsRestClient.Get(Id.Name, null, cancellationToken);
-                return Response.FromValue(new TenantTest(this, originalResponse.Value), originalResponse.GetRawResponse());
+                TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
+                var originalResponse = _tenantTestRestClient.Get(Id.Name, null, cancellationToken);
+                return Response.FromValue(new TenantTest(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -275,20 +283,17 @@ namespace MgmtListMethods
         /// <returns> The updated resource with the tag removed. </returns>
         public async virtual Task<Response<TenantTest>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrWhiteSpace(key))
-            {
-                throw new ArgumentNullException($"{nameof(key)} provided cannot be null or a whitespace.", nameof(key));
-            }
+            Argument.AssertNotNullOrWhiteSpace(key, nameof(key));
 
-            using var scope = _clientDiagnostics.CreateScope("TenantTest.RemoveTag");
+            using var scope = _tenantTestClientDiagnostics.CreateScope("TenantTest.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
-                await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _tenantTestsRestClient.GetAsync(Id.Name, null, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new TenantTest(this, originalResponse.Value), originalResponse.GetRawResponse());
+                await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _tenantTestRestClient.GetAsync(Id.Name, null, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(new TenantTest(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -303,20 +308,17 @@ namespace MgmtListMethods
         /// <returns> The updated resource with the tag removed. </returns>
         public virtual Response<TenantTest> RemoveTag(string key, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrWhiteSpace(key))
-            {
-                throw new ArgumentNullException($"{nameof(key)} provided cannot be null or a whitespace.", nameof(key));
-            }
+            Argument.AssertNotNullOrWhiteSpace(key, nameof(key));
 
-            using var scope = _clientDiagnostics.CreateScope("TenantTest.RemoveTag");
+            using var scope = _tenantTestClientDiagnostics.CreateScope("TenantTest.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
-                TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _tenantTestsRestClient.Get(Id.Name, null, cancellationToken);
-                return Response.FromValue(new TenantTest(this, originalResponse.Value), originalResponse.GetRawResponse());
+                TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
+                var originalResponse = _tenantTestRestClient.Get(Id.Name, null, cancellationToken);
+                return Response.FromValue(new TenantTest(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -329,7 +331,7 @@ namespace MgmtListMethods
 
         /// <summary> Gets a collection of TenantParentWithNonResChWithLocs in the TenantTest. </summary>
         /// <returns> An object representing collection of TenantParentWithNonResChWithLocs and their operations over a TenantTest. </returns>
-        public TenantParentWithNonResChWithLocCollection GetTenantParentWithNonResChWithLocs()
+        public virtual TenantParentWithNonResChWithLocCollection GetTenantParentWithNonResChWithLocs()
         {
             return new TenantParentWithNonResChWithLocCollection(this);
         }
@@ -339,7 +341,7 @@ namespace MgmtListMethods
 
         /// <summary> Gets a collection of TenantParentWithNonResChes in the TenantTest. </summary>
         /// <returns> An object representing collection of TenantParentWithNonResChes and their operations over a TenantTest. </returns>
-        public TenantParentWithNonResChCollection GetTenantParentWithNonResChes()
+        public virtual TenantParentWithNonResChCollection GetTenantParentWithNonResChes()
         {
             return new TenantParentWithNonResChCollection(this);
         }
@@ -349,7 +351,7 @@ namespace MgmtListMethods
 
         /// <summary> Gets a collection of TenantParentWithLocs in the TenantTest. </summary>
         /// <returns> An object representing collection of TenantParentWithLocs and their operations over a TenantTest. </returns>
-        public TenantParentWithLocCollection GetTenantParentWithLocs()
+        public virtual TenantParentWithLocCollection GetTenantParentWithLocs()
         {
             return new TenantParentWithLocCollection(this);
         }
@@ -359,7 +361,7 @@ namespace MgmtListMethods
 
         /// <summary> Gets a collection of TenantParents in the TenantTest. </summary>
         /// <returns> An object representing collection of TenantParents and their operations over a TenantTest. </returns>
-        public TenantParentCollection GetTenantParents()
+        public virtual TenantParentCollection GetTenantParents()
         {
             return new TenantParentCollection(this);
         }

@@ -25,7 +25,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
         [TestCase("ResGrpParentWithAncestorWithLocCollection", "GetAll", true, false)]
         [TestCase("ResGrpParentWithAncestorWithLoc", "GetAll", false, false)]
-        [TestCase("SubscriptionExtensions", "GetTestResGrpParentWithAncestorWithLocs", true, false)]
+        [TestCase("SubscriptionExtensions", "GetResGrpParentWithAncestorWithLocs", true, false)]
 
         [TestCase("ResGrpParentWithAncestorCollection", "GetAll", true, false)]
         [TestCase("ResGrpParentWithAncestor", "GetAll", false, false)]

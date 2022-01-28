@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager;
 using MgmtLRO;
 
 namespace MgmtLRO.Models
@@ -22,17 +22,17 @@ namespace MgmtLRO.Models
     {
         private readonly OperationInternals<Fake> _operation;
 
-        private readonly ArmResource _operationBase;
+        private readonly ArmClient _armClient;
 
         /// <summary> Initializes a new instance of FakeUpdateOperation for mocking. </summary>
         protected FakeUpdateOperation()
         {
         }
 
-        internal FakeUpdateOperation(ArmResource operationsBase, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
+        internal FakeUpdateOperation(ArmClient armClient, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
             _operation = new OperationInternals<Fake>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "FakeUpdateOperation");
-            _operationBase = operationsBase;
+            _armClient = armClient;
         }
 
         /// <inheritdoc />
@@ -65,13 +65,15 @@ namespace MgmtLRO.Models
         Fake IOperationSource<Fake>.CreateResult(Response response, CancellationToken cancellationToken)
         {
             using var document = JsonDocument.Parse(response.ContentStream);
-            return new Fake(_operationBase, FakeData.DeserializeFakeData(document.RootElement));
+            var data = FakeData.DeserializeFakeData(document.RootElement);
+            return new Fake(_armClient, data);
         }
 
         async ValueTask<Fake> IOperationSource<Fake>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-            return new Fake(_operationBase, FakeData.DeserializeFakeData(document.RootElement));
+            var data = FakeData.DeserializeFakeData(document.RootElement);
+            return new Fake(_armClient, data);
         }
     }
 }

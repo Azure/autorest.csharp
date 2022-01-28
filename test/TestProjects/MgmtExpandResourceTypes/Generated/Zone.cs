@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -14,7 +15,6 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
-using Azure.ResourceManager.Resources.Models;
 using MgmtExpandResourceTypes.Models;
 
 namespace MgmtExpandResourceTypes
@@ -28,8 +28,10 @@ namespace MgmtExpandResourceTypes
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}";
             return new ResourceIdentifier(resourceId);
         }
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly ZonesRestOperations _zonesRestClient;
+
+        private readonly ClientDiagnostics _zoneClientDiagnostics;
+        private readonly ZonesRestOperations _zoneRestClient;
+        private readonly ClientDiagnostics _recordSetsClientDiagnostics;
         private readonly RecordSetsRestOperations _recordSetsRestClient;
         private readonly ZoneData _data;
 
@@ -39,45 +41,31 @@ namespace MgmtExpandResourceTypes
         }
 
         /// <summary> Initializes a new instance of the <see cref = "Zone"/> class. </summary>
-        /// <param name="options"> The client parameters to use in these operations. </param>
-        /// <param name="resource"> The resource that is the target of operations. </param>
-        internal Zone(ArmResource options, ZoneData resource) : base(options, resource.Id)
+        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="data"> The resource that is the target of operations. </param>
+        internal Zone(ArmClient armClient, ZoneData data) : this(armClient, data.Id)
         {
             HasData = true;
-            _data = resource;
-            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _zonesRestClient = new ZonesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
-            _recordSetsRestClient = new RecordSetsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            _data = data;
         }
 
         /// <summary> Initializes a new instance of the <see cref="Zone"/> class. </summary>
-        /// <param name="options"> The client parameters to use in these operations. </param>
+        /// <param name="armClient"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal Zone(ArmResource options, ResourceIdentifier id) : base(options, id)
+        internal Zone(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
         {
-            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _zonesRestClient = new ZonesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
-            _recordSetsRestClient = new RecordSetsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
-        }
-
-        /// <summary> Initializes a new instance of the <see cref="Zone"/> class. </summary>
-        /// <param name="clientOptions"> The client options to build client context. </param>
-        /// <param name="credential"> The credential to build client context. </param>
-        /// <param name="uri"> The uri to build client context. </param>
-        /// <param name="pipeline"> The pipeline to build client context. </param>
-        /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal Zone(ArmClientOptions clientOptions, TokenCredential credential, Uri uri, HttpPipeline pipeline, ResourceIdentifier id) : base(clientOptions, credential, uri, pipeline, id)
-        {
-            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _zonesRestClient = new ZonesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
-            _recordSetsRestClient = new RecordSetsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            _zoneClientDiagnostics = new ClientDiagnostics("MgmtExpandResourceTypes", ResourceType.Namespace, DiagnosticOptions);
+            ArmClient.TryGetApiVersion(ResourceType, out string zoneApiVersion);
+            _zoneRestClient = new ZonesRestOperations(_zoneClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, zoneApiVersion);
+            _recordSetsClientDiagnostics = new ClientDiagnostics("MgmtExpandResourceTypes", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
+            _recordSetsRestClient = new RecordSetsRestOperations(_recordSetsClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
+#if DEBUG
+			ValidateResourceId(Id);
+#endif
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
         public static readonly ResourceType ResourceType = "Microsoft.Network/dnsZones";
-
-        /// <summary> Gets the valid resource type for the operations. </summary>
-        protected override ResourceType ValidResourceType => ResourceType;
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }
@@ -94,6 +82,12 @@ namespace MgmtExpandResourceTypes
             }
         }
 
+        internal static void ValidateResourceId(ResourceIdentifier id)
+        {
+            if (id.ResourceType != ResourceType)
+                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ResourceType), nameof(id));
+        }
+
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}
         /// OperationId: Zones_Get
@@ -101,14 +95,14 @@ namespace MgmtExpandResourceTypes
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<Zone>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("Zone.Get");
+            using var scope = _zoneClientDiagnostics.CreateScope("Zone.Get");
             scope.Start();
             try
             {
-                var response = await _zonesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _zoneRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new Zone(this, response.Value), response.GetRawResponse());
+                    throw await _zoneClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                return Response.FromValue(new Zone(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -124,14 +118,14 @@ namespace MgmtExpandResourceTypes
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<Zone> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("Zone.Get");
+            using var scope = _zoneClientDiagnostics.CreateScope("Zone.Get");
             scope.Start();
             try
             {
-                var response = _zonesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _zoneRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
-                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new Zone(this, response.Value), response.GetRawResponse());
+                    throw _zoneClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                return Response.FromValue(new Zone(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -143,34 +137,54 @@ namespace MgmtExpandResourceTypes
         /// <summary> Lists all available geo-locations. </summary>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
-        public async virtual Task<IEnumerable<Location>> GetAvailableLocationsAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<IEnumerable<AzureLocation>> GetAvailableLocationsAsync(CancellationToken cancellationToken = default)
         {
-            return await ListAvailableLocationsAsync(ResourceType, cancellationToken).ConfigureAwait(false);
+            using var scope = _zoneClientDiagnostics.CreateScope("Zone.GetAvailableLocations");
+            scope.Start();
+            try
+            {
+                return await ListAvailableLocationsAsync(ResourceType, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Lists all available geo-locations. </summary>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
-        public virtual IEnumerable<Location> GetAvailableLocations(CancellationToken cancellationToken = default)
+        public virtual IEnumerable<AzureLocation> GetAvailableLocations(CancellationToken cancellationToken = default)
         {
-            return ListAvailableLocations(ResourceType, cancellationToken);
+            using var scope = _zoneClientDiagnostics.CreateScope("Zone.GetAvailableLocations");
+            scope.Start();
+            try
+            {
+                return ListAvailableLocations(ResourceType, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}
         /// OperationId: Zones_Delete
         /// <summary> Deletes a DNS zone. WARNING: All DNS records in the zone will also be deleted. This operation cannot be undone. </summary>
-        /// <param name="ifMatch"> The etag of the DNS zone. Omit this value to always delete the current zone. Specify the last-seen etag value to prevent accidentally deleting any concurrent changes. </param>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="ifMatch"> The etag of the DNS zone. Omit this value to always delete the current zone. Specify the last-seen etag value to prevent accidentally deleting any concurrent changes. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<ZoneDeleteOperation> DeleteAsync(string ifMatch = null, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<ZoneDeleteOperation> DeleteAsync(bool waitForCompletion, string ifMatch = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("Zone.Delete");
+            using var scope = _zoneClientDiagnostics.CreateScope("Zone.Delete");
             scope.Start();
             try
             {
-                var response = await _zonesRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, ifMatch, cancellationToken).ConfigureAwait(false);
-                var operation = new ZoneDeleteOperation(_clientDiagnostics, Pipeline, _zonesRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, ifMatch).Request, response);
+                var response = await _zoneRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, ifMatch, cancellationToken).ConfigureAwait(false);
+                var operation = new ZoneDeleteOperation(_zoneClientDiagnostics, Pipeline, _zoneRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, ifMatch).Request, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -186,19 +200,19 @@ namespace MgmtExpandResourceTypes
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}
         /// OperationId: Zones_Delete
         /// <summary> Deletes a DNS zone. WARNING: All DNS records in the zone will also be deleted. This operation cannot be undone. </summary>
-        /// <param name="ifMatch"> The etag of the DNS zone. Omit this value to always delete the current zone. Specify the last-seen etag value to prevent accidentally deleting any concurrent changes. </param>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="ifMatch"> The etag of the DNS zone. Omit this value to always delete the current zone. Specify the last-seen etag value to prevent accidentally deleting any concurrent changes. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual ZoneDeleteOperation Delete(string ifMatch = null, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual ZoneDeleteOperation Delete(bool waitForCompletion, string ifMatch = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("Zone.Delete");
+            using var scope = _zoneClientDiagnostics.CreateScope("Zone.Delete");
             scope.Start();
             try
             {
-                var response = _zonesRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, ifMatch, cancellationToken);
-                var operation = new ZoneDeleteOperation(_clientDiagnostics, Pipeline, _zonesRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, ifMatch).Request, response);
+                var response = _zoneRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, ifMatch, cancellationToken);
+                var operation = new ZoneDeleteOperation(_zoneClientDiagnostics, Pipeline, _zoneRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, ifMatch).Request, response);
                 if (waitForCompletion)
-                    operation.WaitForCompletion(cancellationToken);
+                    operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
             }
             catch (Exception e)
@@ -215,20 +229,17 @@ namespace MgmtExpandResourceTypes
         /// <returns> The updated resource with the tag added. </returns>
         public async virtual Task<Response<Zone>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrWhiteSpace(key))
-            {
-                throw new ArgumentNullException($"{nameof(key)} provided cannot be null or a whitespace.", nameof(key));
-            }
+            Argument.AssertNotNullOrWhiteSpace(key, nameof(key));
 
-            using var scope = _clientDiagnostics.CreateScope("Zone.AddTag");
+            using var scope = _zoneClientDiagnostics.CreateScope("Zone.AddTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
-                await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _zonesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new Zone(this, originalResponse.Value), originalResponse.GetRawResponse());
+                await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _zoneRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(new Zone(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -244,20 +255,17 @@ namespace MgmtExpandResourceTypes
         /// <returns> The updated resource with the tag added. </returns>
         public virtual Response<Zone> AddTag(string key, string value, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrWhiteSpace(key))
-            {
-                throw new ArgumentNullException($"{nameof(key)} provided cannot be null or a whitespace.", nameof(key));
-            }
+            Argument.AssertNotNullOrWhiteSpace(key, nameof(key));
 
-            using var scope = _clientDiagnostics.CreateScope("Zone.AddTag");
+            using var scope = _zoneClientDiagnostics.CreateScope("Zone.AddTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
-                TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _zonesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
-                return Response.FromValue(new Zone(this, originalResponse.Value), originalResponse.GetRawResponse());
+                TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
+                var originalResponse = _zoneRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                return Response.FromValue(new Zone(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -274,19 +282,19 @@ namespace MgmtExpandResourceTypes
         {
             if (tags == null)
             {
-                throw new ArgumentNullException($"{nameof(tags)} provided cannot be null.", nameof(tags));
+                throw new ArgumentNullException(nameof(tags), $"{nameof(tags)} provided cannot be null.");
             }
 
-            using var scope = _clientDiagnostics.CreateScope("Zone.SetTags");
+            using var scope = _zoneClientDiagnostics.CreateScope("Zone.SetTags");
             scope.Start();
             try
             {
-                await TagResource.DeleteAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
+                await TagResource.DeleteAsync(true, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
-                await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _zonesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new Zone(this, originalResponse.Value), originalResponse.GetRawResponse());
+                await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _zoneRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(new Zone(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -303,19 +311,19 @@ namespace MgmtExpandResourceTypes
         {
             if (tags == null)
             {
-                throw new ArgumentNullException($"{nameof(tags)} provided cannot be null.", nameof(tags));
+                throw new ArgumentNullException(nameof(tags), $"{nameof(tags)} provided cannot be null.");
             }
 
-            using var scope = _clientDiagnostics.CreateScope("Zone.SetTags");
+            using var scope = _zoneClientDiagnostics.CreateScope("Zone.SetTags");
             scope.Start();
             try
             {
-                TagResource.Delete(cancellationToken: cancellationToken);
+                TagResource.Delete(true, cancellationToken: cancellationToken);
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
-                TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _zonesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
-                return Response.FromValue(new Zone(this, originalResponse.Value), originalResponse.GetRawResponse());
+                TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
+                var originalResponse = _zoneRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                return Response.FromValue(new Zone(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -330,20 +338,17 @@ namespace MgmtExpandResourceTypes
         /// <returns> The updated resource with the tag removed. </returns>
         public async virtual Task<Response<Zone>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrWhiteSpace(key))
-            {
-                throw new ArgumentNullException($"{nameof(key)} provided cannot be null or a whitespace.", nameof(key));
-            }
+            Argument.AssertNotNullOrWhiteSpace(key, nameof(key));
 
-            using var scope = _clientDiagnostics.CreateScope("Zone.RemoveTag");
+            using var scope = _zoneClientDiagnostics.CreateScope("Zone.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
-                await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _zonesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new Zone(this, originalResponse.Value), originalResponse.GetRawResponse());
+                await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _zoneRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(new Zone(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -358,20 +363,17 @@ namespace MgmtExpandResourceTypes
         /// <returns> The updated resource with the tag removed. </returns>
         public virtual Response<Zone> RemoveTag(string key, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrWhiteSpace(key))
-            {
-                throw new ArgumentNullException($"{nameof(key)} provided cannot be null or a whitespace.", nameof(key));
-            }
+            Argument.AssertNotNullOrWhiteSpace(key, nameof(key));
 
-            using var scope = _clientDiagnostics.CreateScope("Zone.RemoveTag");
+            using var scope = _zoneClientDiagnostics.CreateScope("Zone.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
-                TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _zonesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
-                return Response.FromValue(new Zone(this, originalResponse.Value), originalResponse.GetRawResponse());
+                TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
+                var originalResponse = _zoneRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                return Response.FromValue(new Zone(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -395,12 +397,12 @@ namespace MgmtExpandResourceTypes
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("Zone.Update");
+            using var scope = _zoneClientDiagnostics.CreateScope("Zone.Update");
             scope.Start();
             try
             {
-                var response = await _zonesRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, ifMatch, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new Zone(this, response.Value), response.GetRawResponse());
+                var response = await _zoneRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, ifMatch, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(new Zone(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -424,12 +426,12 @@ namespace MgmtExpandResourceTypes
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("Zone.Update");
+            using var scope = _zoneClientDiagnostics.CreateScope("Zone.Update");
             scope.Start();
             try
             {
-                var response = _zonesRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, ifMatch, cancellationToken);
-                return Response.FromValue(new Zone(this, response.Value), response.GetRawResponse());
+                var response = _zoneRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, ifMatch, cancellationToken);
+                return Response.FromValue(new Zone(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -450,7 +452,7 @@ namespace MgmtExpandResourceTypes
         {
             async Task<Page<RecordSetData>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("Zone.GetRecordSets");
+                using var scope = _recordSetsClientDiagnostics.CreateScope("Zone.GetRecordSets");
                 scope.Start();
                 try
                 {
@@ -465,7 +467,7 @@ namespace MgmtExpandResourceTypes
             }
             async Task<Page<RecordSetData>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("Zone.GetRecordSets");
+                using var scope = _recordSetsClientDiagnostics.CreateScope("Zone.GetRecordSets");
                 scope.Start();
                 try
                 {
@@ -493,7 +495,7 @@ namespace MgmtExpandResourceTypes
         {
             Page<RecordSetData> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("Zone.GetRecordSets");
+                using var scope = _recordSetsClientDiagnostics.CreateScope("Zone.GetRecordSets");
                 scope.Start();
                 try
                 {
@@ -508,7 +510,7 @@ namespace MgmtExpandResourceTypes
             }
             Page<RecordSetData> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("Zone.GetRecordSets");
+                using var scope = _recordSetsClientDiagnostics.CreateScope("Zone.GetRecordSets");
                 scope.Start();
                 try
                 {
@@ -536,7 +538,7 @@ namespace MgmtExpandResourceTypes
         {
             async Task<Page<RecordSetData>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("Zone.GetAllRecordSets");
+                using var scope = _recordSetsClientDiagnostics.CreateScope("Zone.GetAllRecordSets");
                 scope.Start();
                 try
                 {
@@ -551,7 +553,7 @@ namespace MgmtExpandResourceTypes
             }
             async Task<Page<RecordSetData>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("Zone.GetAllRecordSets");
+                using var scope = _recordSetsClientDiagnostics.CreateScope("Zone.GetAllRecordSets");
                 scope.Start();
                 try
                 {
@@ -579,7 +581,7 @@ namespace MgmtExpandResourceTypes
         {
             Page<RecordSetData> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("Zone.GetAllRecordSets");
+                using var scope = _recordSetsClientDiagnostics.CreateScope("Zone.GetAllRecordSets");
                 scope.Start();
                 try
                 {
@@ -594,7 +596,7 @@ namespace MgmtExpandResourceTypes
             }
             Page<RecordSetData> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("Zone.GetAllRecordSets");
+                using var scope = _recordSetsClientDiagnostics.CreateScope("Zone.GetAllRecordSets");
                 scope.Start();
                 try
                 {
@@ -614,7 +616,7 @@ namespace MgmtExpandResourceTypes
 
         /// <summary> Gets a collection of RecordSetAs in the Zone. </summary>
         /// <returns> An object representing collection of RecordSetAs and their operations over a Zone. </returns>
-        public RecordSetACollection GetRecordSetAs()
+        public virtual RecordSetACollection GetRecordSetAs()
         {
             return new RecordSetACollection(this);
         }
@@ -624,7 +626,7 @@ namespace MgmtExpandResourceTypes
 
         /// <summary> Gets a collection of RecordSetAaaas in the Zone. </summary>
         /// <returns> An object representing collection of RecordSetAaaas and their operations over a Zone. </returns>
-        public RecordSetAaaaCollection GetRecordSetAaaas()
+        public virtual RecordSetAaaaCollection GetRecordSetAaaas()
         {
             return new RecordSetAaaaCollection(this);
         }
@@ -634,7 +636,7 @@ namespace MgmtExpandResourceTypes
 
         /// <summary> Gets a collection of RecordSetCaas in the Zone. </summary>
         /// <returns> An object representing collection of RecordSetCaas and their operations over a Zone. </returns>
-        public RecordSetCaaCollection GetRecordSetCaas()
+        public virtual RecordSetCaaCollection GetRecordSetCaas()
         {
             return new RecordSetCaaCollection(this);
         }
@@ -644,7 +646,7 @@ namespace MgmtExpandResourceTypes
 
         /// <summary> Gets a collection of RecordSetCNames in the Zone. </summary>
         /// <returns> An object representing collection of RecordSetCNames and their operations over a Zone. </returns>
-        public RecordSetCNameCollection GetRecordSetCNames()
+        public virtual RecordSetCNameCollection GetRecordSetCNames()
         {
             return new RecordSetCNameCollection(this);
         }
@@ -654,7 +656,7 @@ namespace MgmtExpandResourceTypes
 
         /// <summary> Gets a collection of RecordSetMxes in the Zone. </summary>
         /// <returns> An object representing collection of RecordSetMxes and their operations over a Zone. </returns>
-        public RecordSetMxCollection GetRecordSetMxes()
+        public virtual RecordSetMxCollection GetRecordSetMxes()
         {
             return new RecordSetMxCollection(this);
         }
@@ -664,7 +666,7 @@ namespace MgmtExpandResourceTypes
 
         /// <summary> Gets a collection of RecordSetNs in the Zone. </summary>
         /// <returns> An object representing collection of RecordSetNs and their operations over a Zone. </returns>
-        public RecordSetNsCollection GetRecordSetNs()
+        public virtual RecordSetNsCollection GetRecordSetNs()
         {
             return new RecordSetNsCollection(this);
         }
@@ -674,7 +676,7 @@ namespace MgmtExpandResourceTypes
 
         /// <summary> Gets a collection of RecordSetPtrs in the Zone. </summary>
         /// <returns> An object representing collection of RecordSetPtrs and their operations over a Zone. </returns>
-        public RecordSetPtrCollection GetRecordSetPtrs()
+        public virtual RecordSetPtrCollection GetRecordSetPtrs()
         {
             return new RecordSetPtrCollection(this);
         }
@@ -684,7 +686,7 @@ namespace MgmtExpandResourceTypes
 
         /// <summary> Gets a collection of RecordSetSoas in the Zone. </summary>
         /// <returns> An object representing collection of RecordSetSoas and their operations over a Zone. </returns>
-        public RecordSetSoaCollection GetRecordSetSoas()
+        public virtual RecordSetSoaCollection GetRecordSetSoas()
         {
             return new RecordSetSoaCollection(this);
         }
@@ -694,7 +696,7 @@ namespace MgmtExpandResourceTypes
 
         /// <summary> Gets a collection of RecordSetSrvs in the Zone. </summary>
         /// <returns> An object representing collection of RecordSetSrvs and their operations over a Zone. </returns>
-        public RecordSetSrvCollection GetRecordSetSrvs()
+        public virtual RecordSetSrvCollection GetRecordSetSrvs()
         {
             return new RecordSetSrvCollection(this);
         }
@@ -704,7 +706,7 @@ namespace MgmtExpandResourceTypes
 
         /// <summary> Gets a collection of RecordSetTxts in the Zone. </summary>
         /// <returns> An object representing collection of RecordSetTxts and their operations over a Zone. </returns>
-        public RecordSetTxtCollection GetRecordSetTxts()
+        public virtual RecordSetTxtCollection GetRecordSetTxts()
         {
             return new RecordSetTxtCollection(this);
         }

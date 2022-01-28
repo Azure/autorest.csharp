@@ -37,17 +37,11 @@ namespace custom_baseUrl_paging_LowLevel
         /// <param name="host"> A string value that is used as a global part of the parameterized host. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> or <paramref name="host"/> is null. </exception>
-        public PagingClient(AzureKeyCredential credential, string host = "host", AutoRestParameterizedHostTestPagingClientOptions options = null)
+        public PagingClient(AzureKeyCredential credential, string host = "host", PagingClientOptions options = null)
         {
-            if (credential == null)
-            {
-                throw new ArgumentNullException(nameof(credential));
-            }
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
-            options ??= new AutoRestParameterizedHostTestPagingClientOptions();
+            Argument.AssertNotNull(credential, nameof(credential));
+            Argument.AssertNotNull(host, nameof(host));
+            options ??= new PagingClientOptions();
 
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
@@ -79,10 +73,7 @@ namespace custom_baseUrl_paging_LowLevel
         public virtual AsyncPageable<BinaryData> GetPagesPartialUrlAsync(string accountName, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            if (accountName == null)
-            {
-                throw new ArgumentNullException(nameof(accountName));
-            }
+            Argument.AssertNotNull(accountName, nameof(accountName));
 
             return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingClient.GetPagesPartialUrl");
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
@@ -92,7 +83,7 @@ namespace custom_baseUrl_paging_LowLevel
                     var message = string.IsNullOrEmpty(nextLink)
                         ? CreateGetPagesPartialUrlRequest(accountName, context)
                         : CreateGetPagesPartialUrlNextPageRequest(nextLink, accountName, context);
-                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, context, "values", "nextLink", cancellationToken).ConfigureAwait(false);
+                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, context, "values", "nextLink", cancellationToken).ConfigureAwait(false);
                     nextLink = page.ContinuationToken;
                     yield return page;
                 } while (!string.IsNullOrEmpty(nextLink));
@@ -123,10 +114,7 @@ namespace custom_baseUrl_paging_LowLevel
         public virtual Pageable<BinaryData> GetPagesPartialUrl(string accountName, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            if (accountName == null)
-            {
-                throw new ArgumentNullException(nameof(accountName));
-            }
+            Argument.AssertNotNull(accountName, nameof(accountName));
 
             return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingClient.GetPagesPartialUrl");
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
@@ -136,7 +124,7 @@ namespace custom_baseUrl_paging_LowLevel
                     var message = string.IsNullOrEmpty(nextLink)
                         ? CreateGetPagesPartialUrlRequest(accountName, context)
                         : CreateGetPagesPartialUrlNextPageRequest(nextLink, accountName, context);
-                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, context, "values", "nextLink");
+                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, context, "values", "nextLink");
                     nextLink = page.ContinuationToken;
                     yield return page;
                 } while (!string.IsNullOrEmpty(nextLink));
@@ -167,10 +155,7 @@ namespace custom_baseUrl_paging_LowLevel
         public virtual AsyncPageable<BinaryData> GetPagesPartialUrlOperationAsync(string accountName, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            if (accountName == null)
-            {
-                throw new ArgumentNullException(nameof(accountName));
-            }
+            Argument.AssertNotNull(accountName, nameof(accountName));
 
             return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingClient.GetPagesPartialUrlOperation");
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
@@ -180,7 +165,7 @@ namespace custom_baseUrl_paging_LowLevel
                     var message = string.IsNullOrEmpty(nextLink)
                         ? CreateGetPagesPartialUrlOperationRequest(accountName, context)
                         : CreateGetPagesPartialUrlOperationNextRequest(accountName, nextLink, context);
-                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, context, "values", "nextLink", cancellationToken).ConfigureAwait(false);
+                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, context, "values", "nextLink", cancellationToken).ConfigureAwait(false);
                     nextLink = page.ContinuationToken;
                     yield return page;
                 } while (!string.IsNullOrEmpty(nextLink));
@@ -211,10 +196,7 @@ namespace custom_baseUrl_paging_LowLevel
         public virtual Pageable<BinaryData> GetPagesPartialUrlOperation(string accountName, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            if (accountName == null)
-            {
-                throw new ArgumentNullException(nameof(accountName));
-            }
+            Argument.AssertNotNull(accountName, nameof(accountName));
 
             return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingClient.GetPagesPartialUrlOperation");
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
@@ -224,7 +206,7 @@ namespace custom_baseUrl_paging_LowLevel
                     var message = string.IsNullOrEmpty(nextLink)
                         ? CreateGetPagesPartialUrlOperationRequest(accountName, context)
                         : CreateGetPagesPartialUrlOperationNextRequest(accountName, nextLink, context);
-                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, context, "values", "nextLink");
+                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, context, "values", "nextLink");
                     nextLink = page.ContinuationToken;
                     yield return page;
                 } while (!string.IsNullOrEmpty(nextLink));
@@ -256,14 +238,8 @@ namespace custom_baseUrl_paging_LowLevel
         public virtual AsyncPageable<BinaryData> GetPagesPartialUrlOperationNextAsync(string accountName, string nextLink, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            if (accountName == null)
-            {
-                throw new ArgumentNullException(nameof(accountName));
-            }
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
+            Argument.AssertNotNull(accountName, nameof(accountName));
+            Argument.AssertNotNull(nextLink, nameof(nextLink));
 
             return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingClient.GetPagesPartialUrlOperationNext");
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
@@ -271,7 +247,7 @@ namespace custom_baseUrl_paging_LowLevel
                 do
                 {
                     var message = CreateGetPagesPartialUrlOperationNextRequest(accountName, nextLink, context);
-                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, context, "values", "nextLink", cancellationToken).ConfigureAwait(false);
+                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, context, "values", "nextLink", cancellationToken).ConfigureAwait(false);
                     nextLink = page.ContinuationToken;
                     yield return page;
                 } while (!string.IsNullOrEmpty(nextLink));
@@ -303,14 +279,8 @@ namespace custom_baseUrl_paging_LowLevel
         public virtual Pageable<BinaryData> GetPagesPartialUrlOperationNext(string accountName, string nextLink, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            if (accountName == null)
-            {
-                throw new ArgumentNullException(nameof(accountName));
-            }
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
+            Argument.AssertNotNull(accountName, nameof(accountName));
+            Argument.AssertNotNull(nextLink, nameof(nextLink));
 
             return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingClient.GetPagesPartialUrlOperationNext");
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
@@ -318,7 +288,7 @@ namespace custom_baseUrl_paging_LowLevel
                 do
                 {
                     var message = CreateGetPagesPartialUrlOperationNextRequest(accountName, nextLink, context);
-                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, context, "values", "nextLink");
+                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, context, "values", "nextLink");
                     nextLink = page.ContinuationToken;
                     yield return page;
                 } while (!string.IsNullOrEmpty(nextLink));

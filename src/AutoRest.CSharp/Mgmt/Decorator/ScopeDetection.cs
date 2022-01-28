@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License
 
+using System;
 using System.Collections.Concurrent;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -22,7 +23,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         public const string Any = "*";
 
         private static ConcurrentDictionary<RequestPath, RequestPath> _scopePathCache = new ConcurrentDictionary<RequestPath, RequestPath>();
-        private static ConcurrentDictionary<RequestPath, ResourceType[]?> _scopeTypesCache = new ConcurrentDictionary<RequestPath, ResourceType[]?>();
+        private static ConcurrentDictionary<RequestPath, ResourceTypeSegment[]?> _scopeTypesCache = new ConcurrentDictionary<RequestPath, ResourceTypeSegment[]?>();
 
         public static RequestPath GetScopePath(this RequestPath requestPath)
         {
@@ -58,13 +59,22 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         {
             var indexOfProvider = requestPath.ToList().LastIndexOf(Segment.Providers);
             // if there is no providers segment, myself should be a scope request path. Just return myself
-            if (indexOfProvider < 0)
-                return requestPath;
-
-            return new RequestPath(requestPath.Take(indexOfProvider));
+            if (indexOfProvider >= 0)
+            {
+                if (indexOfProvider == 0 && requestPath.SerializedPath.StartsWith(RequestPath.ManagementGroupScopePrefix, StringComparison.InvariantCultureIgnoreCase))
+                    return RequestPath.ManagementGroup;
+                return new RequestPath(requestPath.Take(indexOfProvider));
+            }
+            if (requestPath.SerializedPath.StartsWith(RequestPath.ResourceGroupScopePrefix, StringComparison.InvariantCultureIgnoreCase))
+                return RequestPath.ResourceGroup;
+            if (requestPath.SerializedPath.StartsWith(RequestPath.SubscriptionScopePrefix, StringComparison.InvariantCultureIgnoreCase))
+                return RequestPath.Subscription;
+            if (requestPath.SerializedPath.Equals(RequestPath.TenantScopePrefix))
+                return RequestPath.Tenant;
+            return requestPath;
         }
 
-        public static ResourceType[]? GetParameterizedScopeResourceTypes(this RequestPath requestPath, MgmtConfiguration config)
+        public static ResourceTypeSegment[]? GetParameterizedScopeResourceTypes(this RequestPath requestPath, MgmtConfiguration config)
         {
             if (_scopeTypesCache.TryGetValue(requestPath, out var result))
                 return result;
@@ -74,24 +84,24 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return result;
         }
 
-        private static ResourceType[]? CalculateScopeResourceTypes(this RequestPath requestPath, MgmtConfiguration config)
+        private static ResourceTypeSegment[]? CalculateScopeResourceTypes(this RequestPath requestPath, MgmtConfiguration config)
         {
             if (!requestPath.GetScopePath().IsParameterizedScope())
                 return null;
             if (config.RequestPathToScopeResourceTypes.TryGetValue(requestPath, out var resourceTypes))
                 return resourceTypes.Select(v => BuildResourceType(v)).ToArray();
             // otherwise we just assume this is scope and this scope could be anything
-            return new[] { ResourceType.Subscription, ResourceType.ResourceGroup, ResourceType.ManagementGroup, ResourceType.Tenant, ResourceType.Any };
+            return new[] { ResourceTypeSegment.Subscription, ResourceTypeSegment.ResourceGroup, ResourceTypeSegment.ManagementGroup, ResourceTypeSegment.Tenant, ResourceTypeSegment.Any };
         }
 
-        private static ResourceType BuildResourceType(string resourceType) => resourceType switch
+        private static ResourceTypeSegment BuildResourceType(string resourceType) => resourceType switch
         {
-            Subscriptions => ResourceType.Subscription,
-            ResourceGroups => ResourceType.ResourceGroup,
-            ManagementGroups => ResourceType.ManagementGroup,
-            Tenant => ResourceType.Tenant,
-            Any => ResourceType.Any,
-            _ => new ResourceType(resourceType)
+            Subscriptions => ResourceTypeSegment.Subscription,
+            ResourceGroups => ResourceTypeSegment.ResourceGroup,
+            ManagementGroups => ResourceTypeSegment.ManagementGroup,
+            Tenant => ResourceTypeSegment.Tenant,
+            Any => ResourceTypeSegment.Any,
+            _ => new ResourceTypeSegment(resourceType)
         };
     }
 }

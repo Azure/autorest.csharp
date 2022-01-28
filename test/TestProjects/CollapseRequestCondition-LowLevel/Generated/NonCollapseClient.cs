@@ -37,10 +37,7 @@ namespace CollapseRequestCondition_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
         public NonCollapseClient(AzureKeyCredential credential, Uri endpoint = null, CollapseRequestConditionsClientOptions options = null)
         {
-            if (credential == null)
-            {
-                throw new ArgumentNullException(nameof(credential));
-            }
+            Argument.AssertNotNull(credential, nameof(credential));
             endpoint ??= new Uri("http://localhost:3000");
             options ??= new CollapseRequestConditionsClientOptions();
 
@@ -61,8 +58,8 @@ namespace CollapseRequestCondition_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateIfMatchPutRequest(content, ifMatch, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                using HttpMessage message = CreateCollapsePutRequest(content, ifMatch, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -82,8 +79,8 @@ namespace CollapseRequestCondition_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateIfMatchPutRequest(content, ifMatch, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                using HttpMessage message = CreateCollapsePutRequest(content, ifMatch, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -103,8 +100,8 @@ namespace CollapseRequestCondition_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateIfNonMatchPutRequest(content, ifNoneMatch, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                using HttpMessage message = CreateCollapseGetRequest(requestConditions, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -124,8 +121,8 @@ namespace CollapseRequestCondition_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateIfNonMatchPutRequest(content, ifNoneMatch, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                using HttpMessage message = CreateCollapseGetRequest(requestConditions, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {

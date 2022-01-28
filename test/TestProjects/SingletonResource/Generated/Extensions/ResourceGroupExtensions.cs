@@ -21,5 +21,24 @@ namespace SingletonResource
             return new CarCollection(resourceGroup);
         }
         #endregion
+
+        #region ParentResource
+        /// <summary> Gets an object representing a ParentResourceCollection along with the instance operations that can be performed on it. </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <returns> Returns a <see cref="ParentResourceCollection" /> object. </returns>
+        public static ParentResourceCollection GetParentResources(this ResourceGroup resourceGroup)
+        {
+            return new ParentResourceCollection(resourceGroup);
+        }
+        #endregion
+
+        private static ResourceGroupExtensionClient GetExtensionClient(ResourceGroup resourceGroup)
+        {
+            return resourceGroup.GetCachedClient((armClient) =>
+            {
+                return new ResourceGroupExtensionClient(armClient, resourceGroup.Id);
+            }
+            );
+        }
     }
 }

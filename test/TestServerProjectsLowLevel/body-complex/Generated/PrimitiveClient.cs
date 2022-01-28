@@ -37,10 +37,7 @@ namespace body_complex_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
         public PrimitiveClient(AzureKeyCredential credential, Uri endpoint = null, AutoRestComplexTestServiceClientOptions options = null)
         {
-            if (credential == null)
-            {
-                throw new ArgumentNullException(nameof(credential));
-            }
+            Argument.AssertNotNull(credential, nameof(credential));
             endpoint ??= new Uri("http://localhost:3000");
             options ??= new AutoRestComplexTestServiceClientOptions();
 
@@ -76,7 +73,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreateGetIntRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -111,7 +108,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreateGetIntRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -143,12 +140,14 @@ namespace body_complex_LowLevel
         public virtual async Task<Response> PutIntAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(content, nameof(content));
+
             using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutInt");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutIntRequest(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -180,12 +179,14 @@ namespace body_complex_LowLevel
         public virtual Response PutInt(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(content, nameof(content));
+
             using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutInt");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutIntRequest(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -220,7 +221,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreateGetLongRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -255,7 +256,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreateGetLongRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -287,12 +288,14 @@ namespace body_complex_LowLevel
         public virtual async Task<Response> PutLongAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(content, nameof(content));
+
             using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutLong");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutLongRequest(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -324,12 +327,14 @@ namespace body_complex_LowLevel
         public virtual Response PutLong(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(content, nameof(content));
+
             using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutLong");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutLongRequest(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -364,7 +369,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreateGetFloatRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -399,7 +404,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreateGetFloatRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -431,12 +436,14 @@ namespace body_complex_LowLevel
         public virtual async Task<Response> PutFloatAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(content, nameof(content));
+
             using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutFloat");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutFloatRequest(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -468,12 +475,14 @@ namespace body_complex_LowLevel
         public virtual Response PutFloat(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(content, nameof(content));
+
             using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutFloat");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutFloatRequest(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -508,7 +517,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreateGetDoubleRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -543,7 +552,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreateGetDoubleRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -575,12 +584,14 @@ namespace body_complex_LowLevel
         public virtual async Task<Response> PutDoubleAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(content, nameof(content));
+
             using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutDouble");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutDoubleRequest(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -612,12 +623,14 @@ namespace body_complex_LowLevel
         public virtual Response PutDouble(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(content, nameof(content));
+
             using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutDouble");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutDoubleRequest(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -652,7 +665,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreateGetBoolRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -687,7 +700,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreateGetBoolRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -719,12 +732,14 @@ namespace body_complex_LowLevel
         public virtual async Task<Response> PutBoolAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(content, nameof(content));
+
             using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutBool");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutBoolRequest(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -756,12 +771,14 @@ namespace body_complex_LowLevel
         public virtual Response PutBool(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(content, nameof(content));
+
             using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutBool");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutBoolRequest(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -797,7 +814,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreateGetStringRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -833,7 +850,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreateGetStringRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -866,12 +883,14 @@ namespace body_complex_LowLevel
         public virtual async Task<Response> PutStringAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(content, nameof(content));
+
             using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutString");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutStringRequest(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -904,12 +923,14 @@ namespace body_complex_LowLevel
         public virtual Response PutString(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(content, nameof(content));
+
             using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutString");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutStringRequest(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -944,7 +965,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreateGetDateRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -979,7 +1000,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreateGetDateRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1011,12 +1032,14 @@ namespace body_complex_LowLevel
         public virtual async Task<Response> PutDateAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(content, nameof(content));
+
             using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutDate");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutDateRequest(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1048,12 +1071,14 @@ namespace body_complex_LowLevel
         public virtual Response PutDate(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(content, nameof(content));
+
             using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutDate");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutDateRequest(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1088,7 +1113,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreateGetDateTimeRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1123,7 +1148,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreateGetDateTimeRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1155,12 +1180,14 @@ namespace body_complex_LowLevel
         public virtual async Task<Response> PutDateTimeAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(content, nameof(content));
+
             using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutDateTime");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutDateTimeRequest(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1192,12 +1219,14 @@ namespace body_complex_LowLevel
         public virtual Response PutDateTime(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(content, nameof(content));
+
             using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutDateTime");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutDateTimeRequest(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1232,7 +1261,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreateGetDateTimeRfc1123Request(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1267,7 +1296,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreateGetDateTimeRfc1123Request(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1299,12 +1328,14 @@ namespace body_complex_LowLevel
         public virtual async Task<Response> PutDateTimeRfc1123Async(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(content, nameof(content));
+
             using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutDateTimeRfc1123");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutDateTimeRfc1123Request(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1336,12 +1367,14 @@ namespace body_complex_LowLevel
         public virtual Response PutDateTimeRfc1123(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(content, nameof(content));
+
             using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutDateTimeRfc1123");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutDateTimeRfc1123Request(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1375,7 +1408,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreateGetDurationRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1409,7 +1442,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreateGetDurationRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1440,12 +1473,14 @@ namespace body_complex_LowLevel
         public virtual async Task<Response> PutDurationAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(content, nameof(content));
+
             using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutDuration");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutDurationRequest(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1476,12 +1511,14 @@ namespace body_complex_LowLevel
         public virtual Response PutDuration(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(content, nameof(content));
+
             using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutDuration");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutDurationRequest(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1515,7 +1552,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreateGetByteRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1549,7 +1586,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreateGetByteRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1580,12 +1617,14 @@ namespace body_complex_LowLevel
         public virtual async Task<Response> PutByteAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(content, nameof(content));
+
             using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutByte");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutByteRequest(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1616,12 +1655,14 @@ namespace body_complex_LowLevel
         public virtual Response PutByte(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(content, nameof(content));
+
             using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutByte");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutByteRequest(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {

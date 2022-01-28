@@ -14,7 +14,6 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using MgmtScopeResource.Models;
 
@@ -22,31 +21,22 @@ namespace MgmtScopeResource
 {
     /// <summary> A class representing collection of DeploymentExtended and their operations over its parent. </summary>
     public partial class DeploymentExtendedCollection : ArmCollection, IEnumerable<DeploymentExtended>, IAsyncEnumerable<DeploymentExtended>
-
     {
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly DeploymentsRestOperations _deploymentsRestClient;
+        private readonly ClientDiagnostics _deploymentExtendedDeploymentsClientDiagnostics;
+        private readonly DeploymentsRestOperations _deploymentExtendedDeploymentsRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="DeploymentExtendedCollection"/> class for mocking. </summary>
         protected DeploymentExtendedCollection()
         {
         }
 
-        /// <summary> Initializes a new instance of DeploymentExtendedCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="DeploymentExtendedCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal DeploymentExtendedCollection(ArmResource parent) : base(parent)
         {
-            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _deploymentsRestClient = new DeploymentsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
-        }
-
-        /// <summary> Gets the valid resource type for this object. </summary>
-        protected override ResourceType ValidResourceType => ResourceIdentifier.Root.ResourceType;
-
-        /// <summary> Verify that the input resource Id is a valid collection for this type. </summary>
-        /// <param name="identifier"> The input resource Id to check. </param>
-        protected override void ValidateResourceType(ResourceIdentifier identifier)
-        {
+            _deploymentExtendedDeploymentsClientDiagnostics = new ClientDiagnostics("MgmtScopeResource", DeploymentExtended.ResourceType.Namespace, DiagnosticOptions);
+            ArmClient.TryGetApiVersion(DeploymentExtended.ResourceType, out string deploymentExtendedDeploymentsApiVersion);
+            _deploymentExtendedDeploymentsRestClient = new DeploymentsRestOperations(_deploymentExtendedDeploymentsClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, deploymentExtendedDeploymentsApiVersion);
         }
 
         // Collection level operations.
@@ -55,28 +45,26 @@ namespace MgmtScopeResource
         /// ContextualPath: /{scope}
         /// OperationId: Deployments_CreateOrUpdateAtScope
         /// <summary> You can provide the template and parameters directly in the request or link to JSON files. </summary>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="deploymentName"> The name of the deployment. </param>
         /// <param name="parameters"> Additional parameters supplied to the operation. </param>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual DeploymentCreateOrUpdateAtScopeOperation CreateOrUpdate(string deploymentName, Deployment parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual DeploymentExtendedCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string deploymentName, Deployment parameters, CancellationToken cancellationToken = default)
         {
-            if (deploymentName == null)
-            {
-                throw new ArgumentNullException(nameof(deploymentName));
-            }
+            Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DeploymentExtendedCollection.CreateOrUpdate");
+            using var scope = _deploymentExtendedDeploymentsClientDiagnostics.CreateScope("DeploymentExtendedCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _deploymentsRestClient.CreateOrUpdateAtScope(Id, deploymentName, parameters, cancellationToken);
-                var operation = new DeploymentCreateOrUpdateAtScopeOperation(Parent, _clientDiagnostics, Pipeline, _deploymentsRestClient.CreateCreateOrUpdateAtScopeRequest(Id, deploymentName, parameters).Request, response);
+                var response = _deploymentExtendedDeploymentsRestClient.CreateOrUpdateAtScope(Id, deploymentName, parameters, cancellationToken);
+                var operation = new DeploymentExtendedCreateOrUpdateOperation(ArmClient, _deploymentExtendedDeploymentsClientDiagnostics, Pipeline, _deploymentExtendedDeploymentsRestClient.CreateCreateOrUpdateAtScopeRequest(Id, deploymentName, parameters).Request, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -92,28 +80,26 @@ namespace MgmtScopeResource
         /// ContextualPath: /{scope}
         /// OperationId: Deployments_CreateOrUpdateAtScope
         /// <summary> You can provide the template and parameters directly in the request or link to JSON files. </summary>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="deploymentName"> The name of the deployment. </param>
         /// <param name="parameters"> Additional parameters supplied to the operation. </param>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<DeploymentCreateOrUpdateAtScopeOperation> CreateOrUpdateAsync(string deploymentName, Deployment parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<DeploymentExtendedCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string deploymentName, Deployment parameters, CancellationToken cancellationToken = default)
         {
-            if (deploymentName == null)
-            {
-                throw new ArgumentNullException(nameof(deploymentName));
-            }
+            Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DeploymentExtendedCollection.CreateOrUpdate");
+            using var scope = _deploymentExtendedDeploymentsClientDiagnostics.CreateScope("DeploymentExtendedCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _deploymentsRestClient.CreateOrUpdateAtScopeAsync(Id, deploymentName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new DeploymentCreateOrUpdateAtScopeOperation(Parent, _clientDiagnostics, Pipeline, _deploymentsRestClient.CreateCreateOrUpdateAtScopeRequest(Id, deploymentName, parameters).Request, response);
+                var response = await _deploymentExtendedDeploymentsRestClient.CreateOrUpdateAtScopeAsync(Id, deploymentName, parameters, cancellationToken).ConfigureAwait(false);
+                var operation = new DeploymentExtendedCreateOrUpdateOperation(ArmClient, _deploymentExtendedDeploymentsClientDiagnostics, Pipeline, _deploymentExtendedDeploymentsRestClient.CreateCreateOrUpdateAtScopeRequest(Id, deploymentName, parameters).Request, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -131,22 +117,20 @@ namespace MgmtScopeResource
         /// <summary> Gets a deployment. </summary>
         /// <param name="deploymentName"> The name of the deployment. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> is null. </exception>
         public virtual Response<DeploymentExtended> Get(string deploymentName, CancellationToken cancellationToken = default)
         {
-            if (deploymentName == null)
-            {
-                throw new ArgumentNullException(nameof(deploymentName));
-            }
+            Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
 
-            using var scope = _clientDiagnostics.CreateScope("DeploymentExtendedCollection.Get");
+            using var scope = _deploymentExtendedDeploymentsClientDiagnostics.CreateScope("DeploymentExtendedCollection.Get");
             scope.Start();
             try
             {
-                var response = _deploymentsRestClient.GetAtScope(Id, deploymentName, cancellationToken);
+                var response = _deploymentExtendedDeploymentsRestClient.GetAtScope(Id, deploymentName, cancellationToken);
                 if (response.Value == null)
-                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new DeploymentExtended(Parent, response.Value), response.GetRawResponse());
+                    throw _deploymentExtendedDeploymentsClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                return Response.FromValue(new DeploymentExtended(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -161,22 +145,20 @@ namespace MgmtScopeResource
         /// <summary> Gets a deployment. </summary>
         /// <param name="deploymentName"> The name of the deployment. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> is null. </exception>
         public async virtual Task<Response<DeploymentExtended>> GetAsync(string deploymentName, CancellationToken cancellationToken = default)
         {
-            if (deploymentName == null)
-            {
-                throw new ArgumentNullException(nameof(deploymentName));
-            }
+            Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
 
-            using var scope = _clientDiagnostics.CreateScope("DeploymentExtendedCollection.Get");
+            using var scope = _deploymentExtendedDeploymentsClientDiagnostics.CreateScope("DeploymentExtendedCollection.Get");
             scope.Start();
             try
             {
-                var response = await _deploymentsRestClient.GetAtScopeAsync(Id, deploymentName, cancellationToken).ConfigureAwait(false);
+                var response = await _deploymentExtendedDeploymentsRestClient.GetAtScopeAsync(Id, deploymentName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new DeploymentExtended(Parent, response.Value), response.GetRawResponse());
+                    throw await _deploymentExtendedDeploymentsClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                return Response.FromValue(new DeploymentExtended(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -188,22 +170,20 @@ namespace MgmtScopeResource
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="deploymentName"> The name of the deployment. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> is null. </exception>
         public virtual Response<DeploymentExtended> GetIfExists(string deploymentName, CancellationToken cancellationToken = default)
         {
-            if (deploymentName == null)
-            {
-                throw new ArgumentNullException(nameof(deploymentName));
-            }
+            Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
 
-            using var scope = _clientDiagnostics.CreateScope("DeploymentExtendedCollection.GetIfExists");
+            using var scope = _deploymentExtendedDeploymentsClientDiagnostics.CreateScope("DeploymentExtendedCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _deploymentsRestClient.GetAtScope(Id, deploymentName, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<DeploymentExtended>(null, response.GetRawResponse())
-                    : Response.FromValue(new DeploymentExtended(this, response.Value), response.GetRawResponse());
+                var response = _deploymentExtendedDeploymentsRestClient.GetAtScope(Id, deploymentName, cancellationToken: cancellationToken);
+                if (response.Value == null)
+                    return Response.FromValue<DeploymentExtended>(null, response.GetRawResponse());
+                return Response.FromValue(new DeploymentExtended(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -215,22 +195,20 @@ namespace MgmtScopeResource
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="deploymentName"> The name of the deployment. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> is null. </exception>
         public async virtual Task<Response<DeploymentExtended>> GetIfExistsAsync(string deploymentName, CancellationToken cancellationToken = default)
         {
-            if (deploymentName == null)
-            {
-                throw new ArgumentNullException(nameof(deploymentName));
-            }
+            Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
 
-            using var scope = _clientDiagnostics.CreateScope("DeploymentExtendedCollection.GetIfExistsAsync");
+            using var scope = _deploymentExtendedDeploymentsClientDiagnostics.CreateScope("DeploymentExtendedCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _deploymentsRestClient.GetAtScopeAsync(Id, deploymentName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<DeploymentExtended>(null, response.GetRawResponse())
-                    : Response.FromValue(new DeploymentExtended(this, response.Value), response.GetRawResponse());
+                var response = await _deploymentExtendedDeploymentsRestClient.GetAtScopeAsync(Id, deploymentName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                if (response.Value == null)
+                    return Response.FromValue<DeploymentExtended>(null, response.GetRawResponse());
+                return Response.FromValue(new DeploymentExtended(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -242,15 +220,13 @@ namespace MgmtScopeResource
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="deploymentName"> The name of the deployment. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> is null. </exception>
         public virtual Response<bool> Exists(string deploymentName, CancellationToken cancellationToken = default)
         {
-            if (deploymentName == null)
-            {
-                throw new ArgumentNullException(nameof(deploymentName));
-            }
+            Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
 
-            using var scope = _clientDiagnostics.CreateScope("DeploymentExtendedCollection.Exists");
+            using var scope = _deploymentExtendedDeploymentsClientDiagnostics.CreateScope("DeploymentExtendedCollection.Exists");
             scope.Start();
             try
             {
@@ -267,15 +243,13 @@ namespace MgmtScopeResource
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="deploymentName"> The name of the deployment. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> is null. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string deploymentName, CancellationToken cancellationToken = default)
         {
-            if (deploymentName == null)
-            {
-                throw new ArgumentNullException(nameof(deploymentName));
-            }
+            Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
 
-            using var scope = _clientDiagnostics.CreateScope("DeploymentExtendedCollection.ExistsAsync");
+            using var scope = _deploymentExtendedDeploymentsClientDiagnostics.CreateScope("DeploymentExtendedCollection.Exists");
             scope.Start();
             try
             {
@@ -301,12 +275,12 @@ namespace MgmtScopeResource
         {
             Page<DeploymentExtended> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("DeploymentExtendedCollection.GetAll");
+                using var scope = _deploymentExtendedDeploymentsClientDiagnostics.CreateScope("DeploymentExtendedCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _deploymentsRestClient.ListAtScope(Id, filter, top, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new DeploymentExtended(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = _deploymentExtendedDeploymentsRestClient.ListAtScope(Id, filter, top, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new DeploymentExtended(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -316,12 +290,12 @@ namespace MgmtScopeResource
             }
             Page<DeploymentExtended> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("DeploymentExtendedCollection.GetAll");
+                using var scope = _deploymentExtendedDeploymentsClientDiagnostics.CreateScope("DeploymentExtendedCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _deploymentsRestClient.ListAtScopeNextPage(nextLink, Id, filter, top, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new DeploymentExtended(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = _deploymentExtendedDeploymentsRestClient.ListAtScopeNextPage(nextLink, Id, filter, top, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new DeploymentExtended(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -344,12 +318,12 @@ namespace MgmtScopeResource
         {
             async Task<Page<DeploymentExtended>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("DeploymentExtendedCollection.GetAll");
+                using var scope = _deploymentExtendedDeploymentsClientDiagnostics.CreateScope("DeploymentExtendedCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _deploymentsRestClient.ListAtScopeAsync(Id, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new DeploymentExtended(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = await _deploymentExtendedDeploymentsRestClient.ListAtScopeAsync(Id, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new DeploymentExtended(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -359,12 +333,12 @@ namespace MgmtScopeResource
             }
             async Task<Page<DeploymentExtended>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("DeploymentExtendedCollection.GetAll");
+                using var scope = _deploymentExtendedDeploymentsClientDiagnostics.CreateScope("DeploymentExtendedCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _deploymentsRestClient.ListAtScopeNextPageAsync(nextLink, Id, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new DeploymentExtended(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = await _deploymentExtendedDeploymentsRestClient.ListAtScopeNextPageAsync(nextLink, Id, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new DeploymentExtended(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -389,8 +363,5 @@ namespace MgmtScopeResource
         {
             return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
-
-        // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, DeploymentExtended, DeploymentExtendedData> Construct() { }
     }
 }

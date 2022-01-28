@@ -37,10 +37,7 @@ namespace body_string_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
         public EnumClient(AzureKeyCredential credential, Uri endpoint = null, AutoRestSwaggerBATServiceClientOptions options = null)
         {
-            if (credential == null)
-            {
-                throw new ArgumentNullException(nameof(credential));
-            }
+            Argument.AssertNotNull(credential, nameof(credential));
             endpoint ??= new Uri("http://localhost:3000");
             options ??= new AutoRestSwaggerBATServiceClientOptions();
 
@@ -70,7 +67,7 @@ namespace body_string_LowLevel
             try
             {
                 using HttpMessage message = CreateGetNotExpandableRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -99,7 +96,7 @@ namespace body_string_LowLevel
             try
             {
                 using HttpMessage message = CreateGetNotExpandableRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -125,12 +122,14 @@ namespace body_string_LowLevel
         public virtual async Task<Response> PutNotExpandableAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(content, nameof(content));
+
             using var scope = _clientDiagnostics.CreateScope("EnumClient.PutNotExpandable");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutNotExpandableRequest(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -156,12 +155,14 @@ namespace body_string_LowLevel
         public virtual Response PutNotExpandable(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(content, nameof(content));
+
             using var scope = _clientDiagnostics.CreateScope("EnumClient.PutNotExpandable");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutNotExpandableRequest(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -190,7 +191,7 @@ namespace body_string_LowLevel
             try
             {
                 using HttpMessage message = CreateGetReferencedRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -219,7 +220,7 @@ namespace body_string_LowLevel
             try
             {
                 using HttpMessage message = CreateGetReferencedRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -245,12 +246,14 @@ namespace body_string_LowLevel
         public virtual async Task<Response> PutReferencedAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(content, nameof(content));
+
             using var scope = _clientDiagnostics.CreateScope("EnumClient.PutReferenced");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutReferencedRequest(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -276,12 +279,14 @@ namespace body_string_LowLevel
         public virtual Response PutReferenced(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(content, nameof(content));
+
             using var scope = _clientDiagnostics.CreateScope("EnumClient.PutReferenced");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutReferencedRequest(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -316,7 +321,7 @@ namespace body_string_LowLevel
             try
             {
                 using HttpMessage message = CreateGetReferencedConstantRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -351,7 +356,7 @@ namespace body_string_LowLevel
             try
             {
                 using HttpMessage message = CreateGetReferencedConstantRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -383,12 +388,14 @@ namespace body_string_LowLevel
         public virtual async Task<Response> PutReferencedConstantAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(content, nameof(content));
+
             using var scope = _clientDiagnostics.CreateScope("EnumClient.PutReferencedConstant");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutReferencedConstantRequest(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -420,12 +427,14 @@ namespace body_string_LowLevel
         public virtual Response PutReferencedConstant(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(content, nameof(content));
+
             using var scope = _clientDiagnostics.CreateScope("EnumClient.PutReferencedConstant");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutReferencedConstantRequest(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {

@@ -6,6 +6,8 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -38,10 +40,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
         public TopLevelClientWithOperationClient(AzureKeyCredential credential, Uri endpoint = null, TopLevelClientWithOperationClientOptions options = null)
         {
-            if (credential == null)
-            {
-                throw new ArgumentNullException(nameof(credential));
-            }
+            Argument.AssertNotNull(credential, nameof(credential));
             endpoint ??= new Uri("http://localhost:3000");
             options ??= new TopLevelClientWithOperationClientOptions();
 
@@ -61,7 +60,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
             try
             {
                 using HttpMessage message = CreateOperationRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -80,12 +79,62 @@ namespace SingleTopLevelClientWithOperations_LowLevel
             try
             {
                 using HttpMessage message = CreateOperationRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
                 scope.Failed(e);
                 throw;
+            }
+        }
+
+        /// <summary> Operation defined in resource client, but must be promoted to the top level client because it doesn&apos;t have a parameter with `x-ms-resource-identifier: true`. </summary>
+        /// <param name="filter"> The String to use. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="filter"/> is null. </exception>
+#pragma warning disable AZC0002
+        public virtual AsyncPageable<BinaryData> GetAllAsync(string filter, RequestContext context = null)
+#pragma warning restore AZC0002
+        {
+            Argument.AssertNotNull(filter, nameof(filter));
+
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "TopLevelClientWithOperationClient.GetAll");
+            async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
+            {
+                do
+                {
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateGetAllRequest(filter, context)
+                        : CreateGetAllNextPageRequest(nextLink, filter, context);
+                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, context, "value", "nextLink", cancellationToken).ConfigureAwait(false);
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
+            }
+        }
+
+        /// <summary> Operation defined in resource client, but must be promoted to the top level client because it doesn&apos;t have a parameter with `x-ms-resource-identifier: true`. </summary>
+        /// <param name="filter"> The String to use. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="filter"/> is null. </exception>
+#pragma warning disable AZC0002
+        public virtual Pageable<BinaryData> GetAll(string filter, RequestContext context = null)
+#pragma warning restore AZC0002
+        {
+            Argument.AssertNotNull(filter, nameof(filter));
+
+            return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "TopLevelClientWithOperationClient.GetAll");
+            IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
+            {
+                do
+                {
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateGetAllRequest(filter, context)
+                        : CreateGetAllNextPageRequest(nextLink, filter, context);
+                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, context, "value", "nextLink");
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
             }
         }
 
@@ -104,6 +153,16 @@ namespace SingleTopLevelClientWithOperations_LowLevel
             return Volatile.Read(ref _cachedClient2) ?? Interlocked.CompareExchange(ref _cachedClient2, new Client2(_clientDiagnostics, _pipeline, _keyCredential, _endpoint), null) ?? _cachedClient2;
         }
 
+        /// <summary> Initializes a new instance of Client4. </summary>
+        /// <param name="clientParameter"> The String to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="clientParameter"/> is null. </exception>
+        public virtual Client4 GetClient4(string clientParameter)
+        {
+            Argument.AssertNotNull(clientParameter, nameof(clientParameter));
+
+            return new Client4(_clientDiagnostics, _pipeline, _keyCredential, clientParameter, _endpoint);
+        }
+
         internal HttpMessage CreateOperationRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context);
@@ -112,6 +171,35 @@ namespace SingleTopLevelClientWithOperations_LowLevel
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/client3", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetAllRequest(string filter, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context);
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/client4", false);
+            uri.AppendQuery("filter", filter, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetAllNextPageRequest(string nextLink, string filter, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context);
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             message.ResponseClassifier = ResponseClassifier200.Instance;

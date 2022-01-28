@@ -43,10 +43,9 @@ request-path-to-scope-resource-types:
     - tenant
 override-operation-name:
   ResourceLinks_ListAtSourceScope: GetAll
+operation-positions:
+  /{scope}/providers/Microsoft.Resources/links: collection
 directive:
-  - rename-operation:
-      from: Deployments_WhatIfAtTenantScope
-      to: WhatIf
   # PolicyDefinition resource has the corresponding method written using `scope`, therefore the "ById" methods are no longer required. Remove those
   - remove-operation: PolicyAssignments_DeleteById
   - remove-operation: PolicyAssignments_CreateById

@@ -21,7 +21,7 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal static class RequestWriterHelpers
     {
-        public static void WriteRequestCreation(CodeWriter writer, RestClientMethod clientMethod, string methodAccessibility, ClientFields? fields, string? responseClassifierType, bool writeUserAgentOverride)
+        public static void WriteRequestCreation(CodeWriter writer, RestClientMethod clientMethod, string methodAccessibility, ClientFields? fields, string? responseClassifierType, bool writeUserAgentOverride, Parameter[]? clientParameters = null)
         {
             using var methodScope = writer.AmbientScope();
             var parameters = clientMethod.Parameters;
@@ -81,7 +81,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 //TODO: Duplicate code between query and header parameter processing logic
                 foreach (var queryParameter in clientMethod.Request.Query)
                 {
-                    WriteQueryParameter(writer, uri, queryParameter, fields);
+                    WriteQueryParameter(writer, uri, queryParameter, fields, clientParameters);
                 }
 
                 writer.Line($"{request}.Uri = {uri};");
@@ -371,7 +371,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private static void WriteQueryParameter(CodeWriter writer, CodeWriterDeclaration uri, QueryParameter queryParameter, ClientFields? fields)
+        private static void WriteQueryParameter(CodeWriter writer, CodeWriterDeclaration uri, QueryParameter queryParameter, ClientFields? fields, Parameter[]? parameters)
         {
             string? delimiter = GetSerializationStyleDelimiter(queryParameter.SerializationStyle);
             bool explode = queryParameter.Explode;
@@ -380,7 +380,8 @@ namespace AutoRest.CSharp.Generation.Writers
                 : nameof(RequestUriBuilderExtensions.AppendQuery);
 
             var value = GetFieldReference(fields, queryParameter.Value);
-            using (WriteValueNullCheck(writer, value))
+            var parameter = parameters != null && queryParameter.Name == "api-version" ? parameters.FirstOrDefault(p => p.Name == "apiVersion") : null;
+            using (parameter != null && parameter.DefaultValue != null ? null : WriteValueNullCheck(writer, value))
             {
                 if (explode)
                 {

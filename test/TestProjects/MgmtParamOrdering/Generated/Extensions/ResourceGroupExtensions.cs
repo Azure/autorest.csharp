@@ -41,5 +41,24 @@ namespace MgmtParamOrdering
             return new WorkspaceCollection(resourceGroup);
         }
         #endregion
+
+        #region VirtualMachineScaleSet
+        /// <summary> Gets an object representing a VirtualMachineScaleSetCollection along with the instance operations that can be performed on it. </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <returns> Returns a <see cref="VirtualMachineScaleSetCollection" /> object. </returns>
+        public static VirtualMachineScaleSetCollection GetVirtualMachineScaleSets(this ResourceGroup resourceGroup)
+        {
+            return new VirtualMachineScaleSetCollection(resourceGroup);
+        }
+        #endregion
+
+        private static ResourceGroupExtensionClient GetExtensionClient(ResourceGroup resourceGroup)
+        {
+            return resourceGroup.GetCachedClient((armClient) =>
+            {
+                return new ResourceGroupExtensionClient(armClient, resourceGroup.Id);
+            }
+            );
+        }
     }
 }

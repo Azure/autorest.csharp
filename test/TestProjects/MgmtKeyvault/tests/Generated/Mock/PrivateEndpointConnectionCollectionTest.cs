@@ -8,8 +8,8 @@
 using System;
 using System.Net;
 using System.Threading.Tasks;
+using Azure.Core;
 using Azure.Core.TestFramework;
-using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
 using Azure.ResourceManager.Resources.Models;
 using Azure.ResourceManager.TestFramework;
@@ -43,7 +43,7 @@ namespace MgmtKeyvault.Tests.Mock
                 },
             };
 
-            await collection.CreateOrUpdateAsync(privateEndpointConnectionName, properties);
+            await collection.CreateOrUpdateAsync(true, privateEndpointConnectionName, properties);
         }
 
         [RecordedTest]
@@ -57,12 +57,14 @@ namespace MgmtKeyvault.Tests.Mock
         }
 
         [RecordedTest]
-        public void GetAllAsync()
+        public async Task GetAllAsync()
         {
             // Example: KeyVaultListPrivateEndpointConnection
             var collection = GetArmClient().GetVault(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/vaults/sample-vault")).GetPrivateEndpointConnections();
 
-            collection.GetAllAsync();
+            await foreach (var _ in collection.GetAllAsync())
+            {
+            }
         }
     }
 }

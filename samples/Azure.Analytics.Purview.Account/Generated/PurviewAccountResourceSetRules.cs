@@ -40,22 +40,10 @@ namespace Azure.Analytics.Purview.Account
         /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/>, <paramref name="pipeline"/>, <paramref name="endpoint"/>, or <paramref name="apiVersion"/> is null. </exception>
         internal PurviewAccountResourceSetRules(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, TokenCredential tokenCredential, Uri endpoint, string apiVersion = "2019-11-01-preview")
         {
-            if (clientDiagnostics == null)
-            {
-                throw new ArgumentNullException(nameof(clientDiagnostics));
-            }
-            if (pipeline == null)
-            {
-                throw new ArgumentNullException(nameof(pipeline));
-            }
-            if (endpoint == null)
-            {
-                throw new ArgumentNullException(nameof(endpoint));
-            }
-            if (apiVersion == null)
-            {
-                throw new ArgumentNullException(nameof(apiVersion));
-            }
+            Argument.AssertNotNull(clientDiagnostics, nameof(clientDiagnostics));
+            Argument.AssertNotNull(pipeline, nameof(pipeline));
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
+            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
@@ -189,7 +177,7 @@ namespace Azure.Analytics.Purview.Account
             try
             {
                 using HttpMessage message = CreateGetResourceSetRuleRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -323,7 +311,7 @@ namespace Azure.Analytics.Purview.Account
             try
             {
                 using HttpMessage message = CreateGetResourceSetRuleRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -548,12 +536,14 @@ namespace Azure.Analytics.Purview.Account
         public virtual async Task<Response> CreateOrUpdateResourceSetRuleAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(content, nameof(content));
+
             using var scope = _clientDiagnostics.CreateScope("PurviewAccountResourceSetRules.CreateOrUpdateResourceSetRule");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateCreateOrUpdateResourceSetRuleRequest(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -778,12 +768,14 @@ namespace Azure.Analytics.Purview.Account
         public virtual Response CreateOrUpdateResourceSetRule(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(content, nameof(content));
+
             using var scope = _clientDiagnostics.CreateScope("PurviewAccountResourceSetRules.CreateOrUpdateResourceSetRule");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateCreateOrUpdateResourceSetRuleRequest(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -823,7 +815,7 @@ namespace Azure.Analytics.Purview.Account
             try
             {
                 using HttpMessage message = CreateDeleteResourceSetRuleRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -863,7 +855,7 @@ namespace Azure.Analytics.Purview.Account
             try
             {
                 using HttpMessage message = CreateDeleteResourceSetRuleRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {

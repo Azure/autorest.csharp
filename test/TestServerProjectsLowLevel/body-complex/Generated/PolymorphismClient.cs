@@ -37,10 +37,7 @@ namespace body_complex_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
         public PolymorphismClient(AzureKeyCredential credential, Uri endpoint = null, AutoRestComplexTestServiceClientOptions options = null)
         {
-            if (credential == null)
-            {
-                throw new ArgumentNullException(nameof(credential));
-            }
+            Argument.AssertNotNull(credential, nameof(credential));
             endpoint ??= new Uri("http://localhost:3000");
             options ??= new AutoRestComplexTestServiceClientOptions();
 
@@ -78,7 +75,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreateGetValidRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -115,7 +112,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreateGetValidRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -149,12 +146,14 @@ namespace body_complex_LowLevel
         public virtual async Task<Response> PutValidAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(content, nameof(content));
+
             using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.PutValid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutValidRequest(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -188,12 +187,14 @@ namespace body_complex_LowLevel
         public virtual Response PutValid(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(content, nameof(content));
+
             using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.PutValid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutValidRequest(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -228,7 +229,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreateGetDotSyntaxRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -263,7 +264,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreateGetDotSyntaxRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -308,7 +309,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreateGetComposedWithDiscriminatorRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -353,7 +354,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreateGetComposedWithDiscriminatorRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -398,7 +399,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreateGetComposedWithoutDiscriminatorRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -443,7 +444,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreateGetComposedWithoutDiscriminatorRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -489,7 +490,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreateGetComplicatedRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -535,7 +536,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreateGetComplicatedRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -578,12 +579,14 @@ namespace body_complex_LowLevel
         public virtual async Task<Response> PutComplicatedAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(content, nameof(content));
+
             using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.PutComplicated");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutComplicatedRequest(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -626,12 +629,14 @@ namespace body_complex_LowLevel
         public virtual Response PutComplicated(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(content, nameof(content));
+
             using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.PutComplicated");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutComplicatedRequest(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -691,12 +696,14 @@ namespace body_complex_LowLevel
         public virtual async Task<Response> PutMissingDiscriminatorAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(content, nameof(content));
+
             using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.PutMissingDiscriminator");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutMissingDiscriminatorRequest(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -756,12 +763,14 @@ namespace body_complex_LowLevel
         public virtual Response PutMissingDiscriminator(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(content, nameof(content));
+
             using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.PutMissingDiscriminator");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutMissingDiscriminatorRequest(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -795,12 +804,14 @@ namespace body_complex_LowLevel
         public virtual async Task<Response> PutValidMissingRequiredAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(content, nameof(content));
+
             using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.PutValidMissingRequired");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutValidMissingRequiredRequest(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -834,12 +845,14 @@ namespace body_complex_LowLevel
         public virtual Response PutValidMissingRequired(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(content, nameof(content));
+
             using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.PutValidMissingRequired");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutValidMissingRequiredRequest(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {

@@ -2,8 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using Azure.ResourceManager;
-using Azure.ResourceManager.Resources.Models;
+using Azure.Core;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
@@ -13,7 +12,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         {
             return frameworkType.IsSubclassOf(typeof(ResourceIdentifier)) ||
                 frameworkType == typeof(ResourceType) ||
-                frameworkType == typeof(Location) ||
+                frameworkType == typeof(AzureLocation) ||
                 frameworkType == typeof(ResourceIdentifier);
         }
     }

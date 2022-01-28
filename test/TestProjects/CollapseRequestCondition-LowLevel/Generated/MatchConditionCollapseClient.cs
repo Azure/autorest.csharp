@@ -37,10 +37,7 @@ namespace CollapseRequestCondition_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
         public MatchConditionCollapseClient(AzureKeyCredential credential, Uri endpoint = null, CollapseRequestConditionsClientOptions options = null)
         {
-            if (credential == null)
-            {
-                throw new ArgumentNullException(nameof(credential));
-            }
+            Argument.AssertNotNull(credential, nameof(credential));
             endpoint ??= new Uri("http://localhost:3000");
             options ??= new CollapseRequestConditionsClientOptions();
 
@@ -62,7 +59,7 @@ namespace CollapseRequestCondition_LowLevel
             try
             {
                 using HttpMessage message = CreateCollapseGetWithHeadRequest(otherHeader, matchConditions, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -83,7 +80,7 @@ namespace CollapseRequestCondition_LowLevel
             try
             {
                 using HttpMessage message = CreateCollapseGetWithHeadRequest(otherHeader, matchConditions, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -104,7 +101,7 @@ namespace CollapseRequestCondition_LowLevel
             try
             {
                 using HttpMessage message = CreateCollapsePutRequest(content, matchConditions, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -125,7 +122,7 @@ namespace CollapseRequestCondition_LowLevel
             try
             {
                 using HttpMessage message = CreateCollapsePutRequest(content, matchConditions, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -145,7 +142,7 @@ namespace CollapseRequestCondition_LowLevel
             try
             {
                 using HttpMessage message = CreateCollapseGetRequest(matchConditions, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -165,7 +162,47 @@ namespace CollapseRequestCondition_LowLevel
             try
             {
                 using HttpMessage message = CreateCollapseGetRequest(matchConditions, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> MulticollapseGetAsync(RequestConditions requestConditions = null, RequestContext context = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("MatchConditionCollapseClient.MulticollapseGet");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateMulticollapseGetRequest(requestConditions, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+#pragma warning disable AZC0002
+        public virtual Response MulticollapseGet(RequestConditions requestConditions = null, RequestContext context = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("MatchConditionCollapseClient.MulticollapseGet");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateMulticollapseGetRequest(requestConditions, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {

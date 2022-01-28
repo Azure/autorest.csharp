@@ -10,7 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager;
 using MgmtExpandResourceTypes;
 
 namespace MgmtExpandResourceTypes.Models
@@ -25,9 +25,9 @@ namespace MgmtExpandResourceTypes.Models
         {
         }
 
-        internal ZoneCreateOrUpdateOperation(ArmResource operationsBase, Response<ZoneData> response)
+        internal ZoneCreateOrUpdateOperation(ArmClient armClient, Response<ZoneData> response)
         {
-            _operation = new OperationOrResponseInternals<Zone>(Response.FromValue(new Zone(operationsBase, response.Value), response.GetRawResponse()));
+            _operation = new OperationOrResponseInternals<Zone>(Response.FromValue(new Zone(armClient, response.Value), response.GetRawResponse()));
         }
 
         /// <inheritdoc />

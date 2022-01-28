@@ -38,10 +38,7 @@ namespace url_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
         public PathsClient(AzureKeyCredential credential, Uri endpoint = null, AutoRestUrlTestServiceClientOptions options = null)
         {
-            if (credential == null)
-            {
-                throw new ArgumentNullException(nameof(credential));
-            }
+            Argument.AssertNotNull(credential, nameof(credential));
             endpoint ??= new Uri("http://localhost:3000");
             options ??= new AutoRestUrlTestServiceClientOptions();
 
@@ -71,7 +68,7 @@ namespace url_LowLevel
             try
             {
                 using HttpMessage message = CreateGetBooleanTrueRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -100,7 +97,7 @@ namespace url_LowLevel
             try
             {
                 using HttpMessage message = CreateGetBooleanTrueRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -129,7 +126,7 @@ namespace url_LowLevel
             try
             {
                 using HttpMessage message = CreateGetBooleanFalseRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -158,7 +155,7 @@ namespace url_LowLevel
             try
             {
                 using HttpMessage message = CreateGetBooleanFalseRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -187,7 +184,7 @@ namespace url_LowLevel
             try
             {
                 using HttpMessage message = CreateGetIntOneMillionRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -216,7 +213,7 @@ namespace url_LowLevel
             try
             {
                 using HttpMessage message = CreateGetIntOneMillionRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -245,7 +242,7 @@ namespace url_LowLevel
             try
             {
                 using HttpMessage message = CreateGetIntNegativeOneMillionRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -274,7 +271,7 @@ namespace url_LowLevel
             try
             {
                 using HttpMessage message = CreateGetIntNegativeOneMillionRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -303,7 +300,7 @@ namespace url_LowLevel
             try
             {
                 using HttpMessage message = CreateGetTenBillionRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -332,7 +329,7 @@ namespace url_LowLevel
             try
             {
                 using HttpMessage message = CreateGetTenBillionRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -361,7 +358,7 @@ namespace url_LowLevel
             try
             {
                 using HttpMessage message = CreateGetNegativeTenBillionRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -390,7 +387,7 @@ namespace url_LowLevel
             try
             {
                 using HttpMessage message = CreateGetNegativeTenBillionRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -419,7 +416,7 @@ namespace url_LowLevel
             try
             {
                 using HttpMessage message = CreateFloatScientificPositiveRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -448,7 +445,7 @@ namespace url_LowLevel
             try
             {
                 using HttpMessage message = CreateFloatScientificPositiveRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -477,7 +474,7 @@ namespace url_LowLevel
             try
             {
                 using HttpMessage message = CreateFloatScientificNegativeRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -506,7 +503,7 @@ namespace url_LowLevel
             try
             {
                 using HttpMessage message = CreateFloatScientificNegativeRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -535,7 +532,7 @@ namespace url_LowLevel
             try
             {
                 using HttpMessage message = CreateDoubleDecimalPositiveRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -564,7 +561,7 @@ namespace url_LowLevel
             try
             {
                 using HttpMessage message = CreateDoubleDecimalPositiveRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -593,7 +590,7 @@ namespace url_LowLevel
             try
             {
                 using HttpMessage message = CreateDoubleDecimalNegativeRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -622,7 +619,7 @@ namespace url_LowLevel
             try
             {
                 using HttpMessage message = CreateDoubleDecimalNegativeRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -651,7 +648,7 @@ namespace url_LowLevel
             try
             {
                 using HttpMessage message = CreateStringUnicodeRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -680,7 +677,7 @@ namespace url_LowLevel
             try
             {
                 using HttpMessage message = CreateStringUnicodeRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -709,7 +706,7 @@ namespace url_LowLevel
             try
             {
                 using HttpMessage message = CreateStringUrlEncodedRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -738,7 +735,7 @@ namespace url_LowLevel
             try
             {
                 using HttpMessage message = CreateStringUrlEncodedRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -767,7 +764,7 @@ namespace url_LowLevel
             try
             {
                 using HttpMessage message = CreateStringUrlNonEncodedRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -796,7 +793,7 @@ namespace url_LowLevel
             try
             {
                 using HttpMessage message = CreateStringUrlNonEncodedRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -825,7 +822,7 @@ namespace url_LowLevel
             try
             {
                 using HttpMessage message = CreateStringEmptyRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -854,7 +851,7 @@ namespace url_LowLevel
             try
             {
                 using HttpMessage message = CreateStringEmptyRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -880,12 +877,14 @@ namespace url_LowLevel
         public virtual async Task<Response> StringNullAsync(string stringPath, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(stringPath, nameof(stringPath));
+
             using var scope = _clientDiagnostics.CreateScope("PathsClient.StringNull");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateStringNullRequest(stringPath, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -911,12 +910,14 @@ namespace url_LowLevel
         public virtual Response StringNull(string stringPath, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(stringPath, nameof(stringPath));
+
             using var scope = _clientDiagnostics.CreateScope("PathsClient.StringNull");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateStringNullRequest(stringPath, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -942,12 +943,14 @@ namespace url_LowLevel
         public virtual async Task<Response> EnumValidAsync(string enumPath, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(enumPath, nameof(enumPath));
+
             using var scope = _clientDiagnostics.CreateScope("PathsClient.EnumValid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateEnumValidRequest(enumPath, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -973,12 +976,14 @@ namespace url_LowLevel
         public virtual Response EnumValid(string enumPath, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(enumPath, nameof(enumPath));
+
             using var scope = _clientDiagnostics.CreateScope("PathsClient.EnumValid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateEnumValidRequest(enumPath, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1004,12 +1009,14 @@ namespace url_LowLevel
         public virtual async Task<Response> EnumNullAsync(string enumPath, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(enumPath, nameof(enumPath));
+
             using var scope = _clientDiagnostics.CreateScope("PathsClient.EnumNull");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateEnumNullRequest(enumPath, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1035,12 +1042,14 @@ namespace url_LowLevel
         public virtual Response EnumNull(string enumPath, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(enumPath, nameof(enumPath));
+
             using var scope = _clientDiagnostics.CreateScope("PathsClient.EnumNull");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateEnumNullRequest(enumPath, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1066,12 +1075,14 @@ namespace url_LowLevel
         public virtual async Task<Response> ByteMultiByteAsync(byte[] bytePath, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(bytePath, nameof(bytePath));
+
             using var scope = _clientDiagnostics.CreateScope("PathsClient.ByteMultiByte");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateByteMultiByteRequest(bytePath, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1097,12 +1108,14 @@ namespace url_LowLevel
         public virtual Response ByteMultiByte(byte[] bytePath, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(bytePath, nameof(bytePath));
+
             using var scope = _clientDiagnostics.CreateScope("PathsClient.ByteMultiByte");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateByteMultiByteRequest(bytePath, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1131,7 +1144,7 @@ namespace url_LowLevel
             try
             {
                 using HttpMessage message = CreateByteEmptyRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1160,7 +1173,7 @@ namespace url_LowLevel
             try
             {
                 using HttpMessage message = CreateByteEmptyRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1186,12 +1199,14 @@ namespace url_LowLevel
         public virtual async Task<Response> ByteNullAsync(byte[] bytePath, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(bytePath, nameof(bytePath));
+
             using var scope = _clientDiagnostics.CreateScope("PathsClient.ByteNull");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateByteNullRequest(bytePath, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1217,12 +1232,14 @@ namespace url_LowLevel
         public virtual Response ByteNull(byte[] bytePath, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(bytePath, nameof(bytePath));
+
             using var scope = _clientDiagnostics.CreateScope("PathsClient.ByteNull");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateByteNullRequest(bytePath, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1251,7 +1268,7 @@ namespace url_LowLevel
             try
             {
                 using HttpMessage message = CreateDateValidRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1280,7 +1297,7 @@ namespace url_LowLevel
             try
             {
                 using HttpMessage message = CreateDateValidRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1310,7 +1327,7 @@ namespace url_LowLevel
             try
             {
                 using HttpMessage message = CreateDateNullRequest(datePath, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1340,7 +1357,7 @@ namespace url_LowLevel
             try
             {
                 using HttpMessage message = CreateDateNullRequest(datePath, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1369,7 +1386,7 @@ namespace url_LowLevel
             try
             {
                 using HttpMessage message = CreateDateTimeValidRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1398,7 +1415,7 @@ namespace url_LowLevel
             try
             {
                 using HttpMessage message = CreateDateTimeValidRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1428,7 +1445,7 @@ namespace url_LowLevel
             try
             {
                 using HttpMessage message = CreateDateTimeNullRequest(dateTimePath, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1458,7 +1475,7 @@ namespace url_LowLevel
             try
             {
                 using HttpMessage message = CreateDateTimeNullRequest(dateTimePath, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1484,12 +1501,14 @@ namespace url_LowLevel
         public virtual async Task<Response> Base64UrlAsync(byte[] base64UrlPath, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(base64UrlPath, nameof(base64UrlPath));
+
             using var scope = _clientDiagnostics.CreateScope("PathsClient.Base64Url");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateBase64UrlRequest(base64UrlPath, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1515,12 +1534,14 @@ namespace url_LowLevel
         public virtual Response Base64Url(byte[] base64UrlPath, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(base64UrlPath, nameof(base64UrlPath));
+
             using var scope = _clientDiagnostics.CreateScope("PathsClient.Base64Url");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateBase64UrlRequest(base64UrlPath, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1546,12 +1567,14 @@ namespace url_LowLevel
         public virtual async Task<Response> ArrayCsvInPathAsync(IEnumerable<string> arrayPath, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(arrayPath, nameof(arrayPath));
+
             using var scope = _clientDiagnostics.CreateScope("PathsClient.ArrayCsvInPath");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateArrayCsvInPathRequest(arrayPath, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1577,12 +1600,14 @@ namespace url_LowLevel
         public virtual Response ArrayCsvInPath(IEnumerable<string> arrayPath, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(arrayPath, nameof(arrayPath));
+
             using var scope = _clientDiagnostics.CreateScope("PathsClient.ArrayCsvInPath");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateArrayCsvInPathRequest(arrayPath, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1612,7 +1637,7 @@ namespace url_LowLevel
             try
             {
                 using HttpMessage message = CreateUnixTimeUrlRequest(unixTimeUrlPath, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1642,7 +1667,7 @@ namespace url_LowLevel
             try
             {
                 using HttpMessage message = CreateUnixTimeUrlRequest(unixTimeUrlPath, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {

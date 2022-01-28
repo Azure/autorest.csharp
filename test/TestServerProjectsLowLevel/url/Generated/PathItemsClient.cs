@@ -41,14 +41,8 @@ namespace url_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="globalStringPath"/> or <paramref name="credential"/> is null. </exception>
         public PathItemsClient(string globalStringPath, AzureKeyCredential credential, Uri endpoint = null, string globalStringQuery = null, AutoRestUrlTestServiceClientOptions options = null)
         {
-            if (globalStringPath == null)
-            {
-                throw new ArgumentNullException(nameof(globalStringPath));
-            }
-            if (credential == null)
-            {
-                throw new ArgumentNullException(nameof(credential));
-            }
+            Argument.AssertNotNull(globalStringPath, nameof(globalStringPath));
+            Argument.AssertNotNull(credential, nameof(credential));
             endpoint ??= new Uri("http://localhost:3000");
             options ??= new AutoRestUrlTestServiceClientOptions();
 
@@ -80,12 +74,15 @@ namespace url_LowLevel
         public virtual async Task<Response> GetAllWithValuesAsync(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(pathItemStringPath, nameof(pathItemStringPath));
+            Argument.AssertNotNull(localStringPath, nameof(localStringPath));
+
             using var scope = _clientDiagnostics.CreateScope("PathItemsClient.GetAllWithValues");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetAllWithValuesRequest(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -114,12 +111,15 @@ namespace url_LowLevel
         public virtual Response GetAllWithValues(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(pathItemStringPath, nameof(pathItemStringPath));
+            Argument.AssertNotNull(localStringPath, nameof(localStringPath));
+
             using var scope = _clientDiagnostics.CreateScope("PathItemsClient.GetAllWithValues");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetAllWithValuesRequest(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -148,12 +148,15 @@ namespace url_LowLevel
         public virtual async Task<Response> GetGlobalQueryNullAsync(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(pathItemStringPath, nameof(pathItemStringPath));
+            Argument.AssertNotNull(localStringPath, nameof(localStringPath));
+
             using var scope = _clientDiagnostics.CreateScope("PathItemsClient.GetGlobalQueryNull");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetGlobalQueryNullRequest(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -182,12 +185,15 @@ namespace url_LowLevel
         public virtual Response GetGlobalQueryNull(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(pathItemStringPath, nameof(pathItemStringPath));
+            Argument.AssertNotNull(localStringPath, nameof(localStringPath));
+
             using var scope = _clientDiagnostics.CreateScope("PathItemsClient.GetGlobalQueryNull");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetGlobalQueryNullRequest(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -216,12 +222,15 @@ namespace url_LowLevel
         public virtual async Task<Response> GetGlobalAndLocalQueryNullAsync(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(pathItemStringPath, nameof(pathItemStringPath));
+            Argument.AssertNotNull(localStringPath, nameof(localStringPath));
+
             using var scope = _clientDiagnostics.CreateScope("PathItemsClient.GetGlobalAndLocalQueryNull");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetGlobalAndLocalQueryNullRequest(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -250,12 +259,15 @@ namespace url_LowLevel
         public virtual Response GetGlobalAndLocalQueryNull(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(pathItemStringPath, nameof(pathItemStringPath));
+            Argument.AssertNotNull(localStringPath, nameof(localStringPath));
+
             using var scope = _clientDiagnostics.CreateScope("PathItemsClient.GetGlobalAndLocalQueryNull");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetGlobalAndLocalQueryNullRequest(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -284,12 +296,15 @@ namespace url_LowLevel
         public virtual async Task<Response> GetLocalPathItemQueryNullAsync(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(pathItemStringPath, nameof(pathItemStringPath));
+            Argument.AssertNotNull(localStringPath, nameof(localStringPath));
+
             using var scope = _clientDiagnostics.CreateScope("PathItemsClient.GetLocalPathItemQueryNull");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetLocalPathItemQueryNullRequest(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -318,12 +333,15 @@ namespace url_LowLevel
         public virtual Response GetLocalPathItemQueryNull(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(pathItemStringPath, nameof(pathItemStringPath));
+            Argument.AssertNotNull(localStringPath, nameof(localStringPath));
+
             using var scope = _clientDiagnostics.CreateScope("PathItemsClient.GetLocalPathItemQueryNull");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetLocalPathItemQueryNullRequest(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {

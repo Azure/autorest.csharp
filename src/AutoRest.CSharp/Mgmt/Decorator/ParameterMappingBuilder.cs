@@ -87,7 +87,14 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                         {
                             if (keySegment == Segment.Providers) // if the key is providers and the value is a parameter
                             {
-                                parameterMappingStack.Push(new ContextualParameterMapping(keySegment.ConstantValue, valueSegment, $"{idVariableName}.ResourceType.Namespace"));
+                                if (current.Count <= 4) // path is /providers/{resourceProviderNamespace} or /subscriptions/{subscriptionId}/providers/{resourceProviderNamespace}
+                                {
+                                    parameterMappingStack.Push(new ContextualParameterMapping(keySegment.ConstantValue, valueSegment, $"{idVariableName}.Provider"));
+                                }
+                                else
+                                {
+                                    parameterMappingStack.Push(new ContextualParameterMapping(keySegment.ConstantValue, valueSegment, $"{idVariableName}.ResourceType.Namespace"));
+                                }
                                 // do not append a new .Parent to the id
                             }
                             else // for all other normal keys
@@ -106,7 +113,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                         }
                         if (keySegment.IsReference)
                         {
-                            parameterMappingStack.Push(new ContextualParameterMapping(string.Empty, keySegment, $"{idVariableName}{invocationSuffix}.ResourceType.Types.Last()", new[] { "System.Linq" }));
+                            parameterMappingStack.Push(new ContextualParameterMapping(string.Empty, keySegment, $"{idVariableName}{invocationSuffix}.ResourceType.GetLastType()", new[] { "System.Linq" }));
                             appendParent = true;
                         }
                         // add .Parent suffix
@@ -271,7 +278,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 var reference = requestPath.First().Reference;
                 if (parameter.Name.Equals(reference.Name, StringComparison.InvariantCultureIgnoreCase) && parameter.Type.EqualsByName(reference.Type))
                 {
-                    return parameter with { Type = typeof(Azure.ResourceManager.ResourceIdentifier) };
+                    return parameter with { Type = typeof(Azure.Core.ResourceIdentifier) };
                 }
             }
 
@@ -336,7 +343,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return keySegment.IsConstant ? keySegment.ConstantValue : string.Empty;
         }
 
-        public static IReadOnlyList<Parameter> GetPassThroughParameters(this IEnumerable<ParameterMapping> parameterMappings)
+        public static List<Parameter> GetPassThroughParameters(this IEnumerable<ParameterMapping> parameterMappings)
         {
             return parameterMappings.Where(p => p.IsPassThru).Select(p => p.Parameter).ToList();
         }

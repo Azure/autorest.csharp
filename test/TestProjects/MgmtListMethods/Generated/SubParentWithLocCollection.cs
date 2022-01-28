@@ -8,6 +8,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -23,26 +24,32 @@ namespace MgmtListMethods
 {
     /// <summary> A class representing collection of SubParentWithLoc and their operations over its parent. </summary>
     public partial class SubParentWithLocCollection : ArmCollection, IEnumerable<SubParentWithLoc>, IAsyncEnumerable<SubParentWithLoc>
-
     {
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly SubParentWithLocsRestOperations _subParentWithLocsRestClient;
+        private readonly ClientDiagnostics _subParentWithLocClientDiagnostics;
+        private readonly SubParentWithLocsRestOperations _subParentWithLocRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="SubParentWithLocCollection"/> class for mocking. </summary>
         protected SubParentWithLocCollection()
         {
         }
 
-        /// <summary> Initializes a new instance of SubParentWithLocCollection class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="SubParentWithLocCollection"/> class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal SubParentWithLocCollection(ArmResource parent) : base(parent)
         {
-            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _subParentWithLocsRestClient = new SubParentWithLocsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            _subParentWithLocClientDiagnostics = new ClientDiagnostics("MgmtListMethods", SubParentWithLoc.ResourceType.Namespace, DiagnosticOptions);
+            ArmClient.TryGetApiVersion(SubParentWithLoc.ResourceType, out string subParentWithLocApiVersion);
+            _subParentWithLocRestClient = new SubParentWithLocsRestOperations(_subParentWithLocClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, subParentWithLocApiVersion);
+#if DEBUG
+			ValidateResourceId(Id);
+#endif
         }
 
-        /// <summary> Gets the valid resource type for this object. </summary>
-        protected override ResourceType ValidResourceType => Subscription.ResourceType;
+        internal static void ValidateResourceId(ResourceIdentifier id)
+        {
+            if (id.ResourceType != Subscription.ResourceType)
+                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, Subscription.ResourceType), nameof(id));
+        }
 
         // Collection level operations.
 
@@ -50,28 +57,26 @@ namespace MgmtListMethods
         /// ContextualPath: /subscriptions/{subscriptionId}
         /// OperationId: SubParentWithLocs_CreateOrUpdate
         /// <summary> Create or update. </summary>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="subParentWithLocName"> Name. </param>
         /// <param name="parameters"> Parameters supplied to the Create. </param>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="subParentWithLocName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="subParentWithLocName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual SubParentWithLocCreateOrUpdateOperation CreateOrUpdate(string subParentWithLocName, SubParentWithLocData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual SubParentWithLocCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string subParentWithLocName, SubParentWithLocData parameters, CancellationToken cancellationToken = default)
         {
-            if (subParentWithLocName == null)
-            {
-                throw new ArgumentNullException(nameof(subParentWithLocName));
-            }
+            Argument.AssertNotNullOrEmpty(subParentWithLocName, nameof(subParentWithLocName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SubParentWithLocCollection.CreateOrUpdate");
+            using var scope = _subParentWithLocClientDiagnostics.CreateScope("SubParentWithLocCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _subParentWithLocsRestClient.CreateOrUpdate(Id.SubscriptionId, subParentWithLocName, parameters, cancellationToken);
-                var operation = new SubParentWithLocCreateOrUpdateOperation(Parent, response);
+                var response = _subParentWithLocRestClient.CreateOrUpdate(Id.SubscriptionId, subParentWithLocName, parameters, cancellationToken);
+                var operation = new SubParentWithLocCreateOrUpdateOperation(ArmClient, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -87,28 +92,26 @@ namespace MgmtListMethods
         /// ContextualPath: /subscriptions/{subscriptionId}
         /// OperationId: SubParentWithLocs_CreateOrUpdate
         /// <summary> Create or update. </summary>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="subParentWithLocName"> Name. </param>
         /// <param name="parameters"> Parameters supplied to the Create. </param>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="subParentWithLocName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="subParentWithLocName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<SubParentWithLocCreateOrUpdateOperation> CreateOrUpdateAsync(string subParentWithLocName, SubParentWithLocData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<SubParentWithLocCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string subParentWithLocName, SubParentWithLocData parameters, CancellationToken cancellationToken = default)
         {
-            if (subParentWithLocName == null)
-            {
-                throw new ArgumentNullException(nameof(subParentWithLocName));
-            }
+            Argument.AssertNotNullOrEmpty(subParentWithLocName, nameof(subParentWithLocName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SubParentWithLocCollection.CreateOrUpdate");
+            using var scope = _subParentWithLocClientDiagnostics.CreateScope("SubParentWithLocCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _subParentWithLocsRestClient.CreateOrUpdateAsync(Id.SubscriptionId, subParentWithLocName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new SubParentWithLocCreateOrUpdateOperation(Parent, response);
+                var response = await _subParentWithLocRestClient.CreateOrUpdateAsync(Id.SubscriptionId, subParentWithLocName, parameters, cancellationToken).ConfigureAwait(false);
+                var operation = new SubParentWithLocCreateOrUpdateOperation(ArmClient, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -126,22 +129,20 @@ namespace MgmtListMethods
         /// <summary> Retrieves information. </summary>
         /// <param name="subParentWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="subParentWithLocName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="subParentWithLocName"/> is null. </exception>
         public virtual Response<SubParentWithLoc> Get(string subParentWithLocName, CancellationToken cancellationToken = default)
         {
-            if (subParentWithLocName == null)
-            {
-                throw new ArgumentNullException(nameof(subParentWithLocName));
-            }
+            Argument.AssertNotNullOrEmpty(subParentWithLocName, nameof(subParentWithLocName));
 
-            using var scope = _clientDiagnostics.CreateScope("SubParentWithLocCollection.Get");
+            using var scope = _subParentWithLocClientDiagnostics.CreateScope("SubParentWithLocCollection.Get");
             scope.Start();
             try
             {
-                var response = _subParentWithLocsRestClient.Get(Id.SubscriptionId, subParentWithLocName, cancellationToken);
+                var response = _subParentWithLocRestClient.Get(Id.SubscriptionId, subParentWithLocName, cancellationToken);
                 if (response.Value == null)
-                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new SubParentWithLoc(Parent, response.Value), response.GetRawResponse());
+                    throw _subParentWithLocClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                return Response.FromValue(new SubParentWithLoc(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -156,22 +157,20 @@ namespace MgmtListMethods
         /// <summary> Retrieves information. </summary>
         /// <param name="subParentWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="subParentWithLocName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="subParentWithLocName"/> is null. </exception>
         public async virtual Task<Response<SubParentWithLoc>> GetAsync(string subParentWithLocName, CancellationToken cancellationToken = default)
         {
-            if (subParentWithLocName == null)
-            {
-                throw new ArgumentNullException(nameof(subParentWithLocName));
-            }
+            Argument.AssertNotNullOrEmpty(subParentWithLocName, nameof(subParentWithLocName));
 
-            using var scope = _clientDiagnostics.CreateScope("SubParentWithLocCollection.Get");
+            using var scope = _subParentWithLocClientDiagnostics.CreateScope("SubParentWithLocCollection.Get");
             scope.Start();
             try
             {
-                var response = await _subParentWithLocsRestClient.GetAsync(Id.SubscriptionId, subParentWithLocName, cancellationToken).ConfigureAwait(false);
+                var response = await _subParentWithLocRestClient.GetAsync(Id.SubscriptionId, subParentWithLocName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new SubParentWithLoc(Parent, response.Value), response.GetRawResponse());
+                    throw await _subParentWithLocClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                return Response.FromValue(new SubParentWithLoc(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -183,22 +182,20 @@ namespace MgmtListMethods
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="subParentWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="subParentWithLocName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="subParentWithLocName"/> is null. </exception>
         public virtual Response<SubParentWithLoc> GetIfExists(string subParentWithLocName, CancellationToken cancellationToken = default)
         {
-            if (subParentWithLocName == null)
-            {
-                throw new ArgumentNullException(nameof(subParentWithLocName));
-            }
+            Argument.AssertNotNullOrEmpty(subParentWithLocName, nameof(subParentWithLocName));
 
-            using var scope = _clientDiagnostics.CreateScope("SubParentWithLocCollection.GetIfExists");
+            using var scope = _subParentWithLocClientDiagnostics.CreateScope("SubParentWithLocCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _subParentWithLocsRestClient.Get(Id.SubscriptionId, subParentWithLocName, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<SubParentWithLoc>(null, response.GetRawResponse())
-                    : Response.FromValue(new SubParentWithLoc(this, response.Value), response.GetRawResponse());
+                var response = _subParentWithLocRestClient.Get(Id.SubscriptionId, subParentWithLocName, cancellationToken: cancellationToken);
+                if (response.Value == null)
+                    return Response.FromValue<SubParentWithLoc>(null, response.GetRawResponse());
+                return Response.FromValue(new SubParentWithLoc(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -210,22 +207,20 @@ namespace MgmtListMethods
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="subParentWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="subParentWithLocName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="subParentWithLocName"/> is null. </exception>
         public async virtual Task<Response<SubParentWithLoc>> GetIfExistsAsync(string subParentWithLocName, CancellationToken cancellationToken = default)
         {
-            if (subParentWithLocName == null)
-            {
-                throw new ArgumentNullException(nameof(subParentWithLocName));
-            }
+            Argument.AssertNotNullOrEmpty(subParentWithLocName, nameof(subParentWithLocName));
 
-            using var scope = _clientDiagnostics.CreateScope("SubParentWithLocCollection.GetIfExistsAsync");
+            using var scope = _subParentWithLocClientDiagnostics.CreateScope("SubParentWithLocCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _subParentWithLocsRestClient.GetAsync(Id.SubscriptionId, subParentWithLocName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<SubParentWithLoc>(null, response.GetRawResponse())
-                    : Response.FromValue(new SubParentWithLoc(this, response.Value), response.GetRawResponse());
+                var response = await _subParentWithLocRestClient.GetAsync(Id.SubscriptionId, subParentWithLocName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                if (response.Value == null)
+                    return Response.FromValue<SubParentWithLoc>(null, response.GetRawResponse());
+                return Response.FromValue(new SubParentWithLoc(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -237,15 +232,13 @@ namespace MgmtListMethods
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="subParentWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="subParentWithLocName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="subParentWithLocName"/> is null. </exception>
         public virtual Response<bool> Exists(string subParentWithLocName, CancellationToken cancellationToken = default)
         {
-            if (subParentWithLocName == null)
-            {
-                throw new ArgumentNullException(nameof(subParentWithLocName));
-            }
+            Argument.AssertNotNullOrEmpty(subParentWithLocName, nameof(subParentWithLocName));
 
-            using var scope = _clientDiagnostics.CreateScope("SubParentWithLocCollection.Exists");
+            using var scope = _subParentWithLocClientDiagnostics.CreateScope("SubParentWithLocCollection.Exists");
             scope.Start();
             try
             {
@@ -262,15 +255,13 @@ namespace MgmtListMethods
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="subParentWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="subParentWithLocName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="subParentWithLocName"/> is null. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string subParentWithLocName, CancellationToken cancellationToken = default)
         {
-            if (subParentWithLocName == null)
-            {
-                throw new ArgumentNullException(nameof(subParentWithLocName));
-            }
+            Argument.AssertNotNullOrEmpty(subParentWithLocName, nameof(subParentWithLocName));
 
-            using var scope = _clientDiagnostics.CreateScope("SubParentWithLocCollection.ExistsAsync");
+            using var scope = _subParentWithLocClientDiagnostics.CreateScope("SubParentWithLocCollection.Exists");
             scope.Start();
             try
             {
@@ -294,12 +285,12 @@ namespace MgmtListMethods
         {
             Page<SubParentWithLoc> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("SubParentWithLocCollection.GetAll");
+                using var scope = _subParentWithLocClientDiagnostics.CreateScope("SubParentWithLocCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _subParentWithLocsRestClient.List(Id.SubscriptionId, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new SubParentWithLoc(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = _subParentWithLocRestClient.List(Id.SubscriptionId, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new SubParentWithLoc(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -309,12 +300,12 @@ namespace MgmtListMethods
             }
             Page<SubParentWithLoc> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("SubParentWithLocCollection.GetAll");
+                using var scope = _subParentWithLocClientDiagnostics.CreateScope("SubParentWithLocCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _subParentWithLocsRestClient.ListNextPage(nextLink, Id.SubscriptionId, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new SubParentWithLoc(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = _subParentWithLocRestClient.ListNextPage(nextLink, Id.SubscriptionId, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new SubParentWithLoc(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -335,12 +326,12 @@ namespace MgmtListMethods
         {
             async Task<Page<SubParentWithLoc>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("SubParentWithLocCollection.GetAll");
+                using var scope = _subParentWithLocClientDiagnostics.CreateScope("SubParentWithLocCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _subParentWithLocsRestClient.ListAsync(Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new SubParentWithLoc(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = await _subParentWithLocRestClient.ListAsync(Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new SubParentWithLoc(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -350,12 +341,12 @@ namespace MgmtListMethods
             }
             async Task<Page<SubParentWithLoc>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("SubParentWithLocCollection.GetAll");
+                using var scope = _subParentWithLocClientDiagnostics.CreateScope("SubParentWithLocCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _subParentWithLocsRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new SubParentWithLoc(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = await _subParentWithLocRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new SubParentWithLoc(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -374,7 +365,7 @@ namespace MgmtListMethods
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<GenericResource> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SubParentWithLocCollection.GetAllAsGenericResources");
+            using var scope = _subParentWithLocClientDiagnostics.CreateScope("SubParentWithLocCollection.GetAllAsGenericResources");
             scope.Start();
             try
             {
@@ -397,7 +388,7 @@ namespace MgmtListMethods
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<GenericResource> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SubParentWithLocCollection.GetAllAsGenericResources");
+            using var scope = _subParentWithLocClientDiagnostics.CreateScope("SubParentWithLocCollection.GetAllAsGenericResources");
             scope.Start();
             try
             {
@@ -426,8 +417,5 @@ namespace MgmtListMethods
         {
             return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
-
-        // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, SubParentWithLoc, SubParentWithLocData> Construct() { }
     }
 }

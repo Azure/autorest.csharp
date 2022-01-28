@@ -276,13 +276,25 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\media_types\\Generated"
     },
+    "MgmtCollectionParent": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtCollectionParent\\Generated"
+    },
     "MgmtExpandResourceTypes": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtExpandResourceTypes\\Generated"
     },
+    "MgmtExtensionCommonRestOperation": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtExtensionCommonRestOperation\\Generated"
+    },
     "MgmtExtensionResource": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtExtensionResource\\Generated"
+    },
+    "MgmtHierarchicalNonResource": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtHierarchicalNonResource\\Generated"
     },
     "MgmtKeyvault": {
       "commandName": "Project",
@@ -323,10 +335,6 @@
     "MgmtScopeResource": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtScopeResource\\Generated"
-    },
-    "MgmtSingleton": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtSingleton\\Generated"
     },
     "MgmtSubscriptionNameParameter": {
       "commandName": "Project",
@@ -403,6 +411,10 @@
     "required-optional": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\required-optional\\Generated"
+    },
+    "ResourceClients-LowLevel": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ResourceClients-LowLevel\\Generated"
     },
     "ResourceRename": {
       "commandName": "Project",

@@ -10,6 +10,7 @@ using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Output.Builders;
+using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 
@@ -52,6 +53,14 @@ namespace AutoRest.CSharp.Mgmt.Output
         /// </summary>
         public virtual IEnumerable<Resource> ChildResources => _childResources ??= _context.Library.ArmResources.Where(resource => resource.Parent(_context).Contains(this));
 
+        protected string GetOperationName(Operation operation, string clientResourceName)
+        {
+            // search the configuration for a override of this operation
+            if (operation.TryGetConfigOperationName(_context, out var name))
+                return name;
+
+            return CalculateOperationName(operation, clientResourceName);
+        }
 
         /// <summary>
         /// If the operationGroup of this operation is the same as the resource operation group, we just use operation.CSharpName()
@@ -60,21 +69,20 @@ namespace AutoRest.CSharp.Mgmt.Output
         /// <param name="operation"></param>
         /// <param name="clientResourceName">For extension classes, use the ResourceName. For resources, use its operation group name</param>
         /// <returns></returns>
-        protected virtual string GetOperationName(Operation operation, string clientResourceName)
+        protected virtual string CalculateOperationName(Operation operation, string clientResourceName)
         {
-            var operationGroup = _context.Library.GetRestClient(operation).OperationGroup;
-            var operationId = operation.OperationId(operationGroup);
             // search the configuration for a override of this operation
-            if (Context.Configuration.MgmtConfiguration.OverrideOperationName.TryGetValue(operationId, out var operationName))
-                return operationName;
+            if (operation.TryGetConfigOperationName(_context, out var name))
+                return name;
 
+            var operationGroup = _context.Library.GetRestClient(operation).OperationGroup;
             if (operationGroup.Key == clientResourceName)
             {
                 return operation.MgmtCSharpName(false);
             }
 
             var resourceName = string.Empty;
-            if (_context.Library.RestClientMethods[operation].IsListMethod(out _))
+            if (_context.Library.GetRestClientMethod(operation).IsListMethod(out _))
             {
                 resourceName = operationGroup.Key.IsNullOrEmpty() ? string.Empty : operationGroup.Key.ResourceNameToPlural();
                 var opName = operation.MgmtCSharpName(!resourceName.IsNullOrEmpty());

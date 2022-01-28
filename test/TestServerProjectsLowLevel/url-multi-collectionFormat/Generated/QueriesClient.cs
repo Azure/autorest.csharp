@@ -36,14 +36,11 @@ namespace url_multi_collectionFormat_LowLevel
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public QueriesClient(AzureKeyCredential credential, Uri endpoint = null, AutoRestUrlMutliCollectionFormatTestServiceClientOptions options = null)
+        public QueriesClient(AzureKeyCredential credential, Uri endpoint = null, QueriesClientOptions options = null)
         {
-            if (credential == null)
-            {
-                throw new ArgumentNullException(nameof(credential));
-            }
+            Argument.AssertNotNull(credential, nameof(credential));
             endpoint ??= new Uri("http://localhost:3000");
-            options ??= new AutoRestUrlMutliCollectionFormatTestServiceClientOptions();
+            options ??= new QueriesClientOptions();
 
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
@@ -72,7 +69,7 @@ namespace url_multi_collectionFormat_LowLevel
             try
             {
                 using HttpMessage message = CreateArrayStringMultiNullRequest(arrayQuery, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -102,7 +99,7 @@ namespace url_multi_collectionFormat_LowLevel
             try
             {
                 using HttpMessage message = CreateArrayStringMultiNullRequest(arrayQuery, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -132,7 +129,7 @@ namespace url_multi_collectionFormat_LowLevel
             try
             {
                 using HttpMessage message = CreateArrayStringMultiEmptyRequest(arrayQuery, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -162,7 +159,7 @@ namespace url_multi_collectionFormat_LowLevel
             try
             {
                 using HttpMessage message = CreateArrayStringMultiEmptyRequest(arrayQuery, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -192,7 +189,7 @@ namespace url_multi_collectionFormat_LowLevel
             try
             {
                 using HttpMessage message = CreateArrayStringMultiValidRequest(arrayQuery, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -222,7 +219,7 @@ namespace url_multi_collectionFormat_LowLevel
             try
             {
                 using HttpMessage message = CreateArrayStringMultiValidRequest(arrayQuery, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {

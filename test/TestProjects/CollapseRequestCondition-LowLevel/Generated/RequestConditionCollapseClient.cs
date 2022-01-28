@@ -37,10 +37,7 @@ namespace CollapseRequestCondition_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
         public RequestConditionCollapseClient(AzureKeyCredential credential, Uri endpoint = null, CollapseRequestConditionsClientOptions options = null)
         {
-            if (credential == null)
-            {
-                throw new ArgumentNullException(nameof(credential));
-            }
+            Argument.AssertNotNull(credential, nameof(credential));
             endpoint ??= new Uri("http://localhost:3000");
             options ??= new CollapseRequestConditionsClientOptions();
 
@@ -62,7 +59,7 @@ namespace CollapseRequestCondition_LowLevel
             try
             {
                 using HttpMessage message = CreateCollapsePutRequest(content, requestConditions, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -83,7 +80,7 @@ namespace CollapseRequestCondition_LowLevel
             try
             {
                 using HttpMessage message = CreateCollapsePutRequest(content, requestConditions, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -103,7 +100,7 @@ namespace CollapseRequestCondition_LowLevel
             try
             {
                 using HttpMessage message = CreateCollapseGetRequest(requestConditions, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -123,7 +120,7 @@ namespace CollapseRequestCondition_LowLevel
             try
             {
                 using HttpMessage message = CreateCollapseGetRequest(requestConditions, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {

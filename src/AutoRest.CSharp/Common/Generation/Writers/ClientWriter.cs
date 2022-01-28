@@ -13,11 +13,10 @@ namespace AutoRest.CSharp.Common.Generation.Writers
     {
         protected const string ClientDiagnosticsVariable = "clientDiagnostics";
         protected const string ClientDiagnosticsField = "_" + ClientDiagnosticsVariable;
-        protected const string RestClientVariable = "restClient";
         protected const string PipelineVariable = "pipeline";
         protected const string PipelineProperty = "Pipeline";
         protected const string PipelineField = "_" + PipelineVariable;
-        protected const string ClientOptionsProperty = "ClientOptions";
+        protected const string DiagnosticOptionsProperty = "DiagnosticOptions";
 
         protected virtual string RestClientAccessibility => "internal";
 

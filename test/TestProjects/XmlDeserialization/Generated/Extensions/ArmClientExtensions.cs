@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using Azure.Core;
 using Azure.ResourceManager;
 
 namespace XmlDeserialization
@@ -19,7 +20,8 @@ namespace XmlDeserialization
         /// <returns> Returns a <see cref="XmlInstance" /> object. </returns>
         public static XmlInstance GetXmlInstance(this ArmClient armClient, ResourceIdentifier id)
         {
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new XmlInstance(clientOptions, credential, uri, pipeline, id));
+            XmlInstance.ValidateResourceId(id);
+            return new XmlInstance(armClient, id);
         }
         #endregion
     }

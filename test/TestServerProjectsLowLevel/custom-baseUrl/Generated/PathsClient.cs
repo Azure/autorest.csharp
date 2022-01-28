@@ -35,17 +35,11 @@ namespace custom_baseUrl_LowLevel
         /// <param name="host"> A string value that is used as a global part of the parameterized host. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> or <paramref name="host"/> is null. </exception>
-        public PathsClient(AzureKeyCredential credential, string host = "host", AutoRestParameterizedHostTestClientOptions options = null)
+        public PathsClient(AzureKeyCredential credential, string host = "host", PathsClientOptions options = null)
         {
-            if (credential == null)
-            {
-                throw new ArgumentNullException(nameof(credential));
-            }
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
-            options ??= new AutoRestParameterizedHostTestClientOptions();
+            Argument.AssertNotNull(credential, nameof(credential));
+            Argument.AssertNotNull(host, nameof(host));
+            options ??= new PathsClientOptions();
 
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
@@ -70,12 +64,14 @@ namespace custom_baseUrl_LowLevel
         public virtual async Task<Response> GetEmptyAsync(string accountName, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(accountName, nameof(accountName));
+
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetEmpty");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetEmptyRequest(accountName, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -101,12 +97,14 @@ namespace custom_baseUrl_LowLevel
         public virtual Response GetEmpty(string accountName, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(accountName, nameof(accountName));
+
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetEmpty");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetEmptyRequest(accountName, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {

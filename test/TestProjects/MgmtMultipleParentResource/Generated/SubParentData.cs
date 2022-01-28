@@ -6,9 +6,8 @@
 #nullable disable
 
 using System.Collections.Generic;
-using Azure.ResourceManager;
+using Azure.Core;
 using Azure.ResourceManager.Models;
-using Azure.ResourceManager.Resources.Models;
 
 namespace MgmtMultipleParentResource
 {
@@ -17,7 +16,7 @@ namespace MgmtMultipleParentResource
     {
         /// <summary> Initializes a new instance of SubParentData. </summary>
         /// <param name="location"> The location. </param>
-        public SubParentData(Location location) : base(location)
+        public SubParentData(AzureLocation location) : base(location)
         {
         }
 
@@ -34,7 +33,7 @@ namespace MgmtMultipleParentResource
         /// <param name="outputBlobUri"> Specifies the Azure storage blob where script output stream will be uploaded. </param>
         /// <param name="errorBlobUri"> Specifies the Azure storage blob where script error stream will be uploaded. </param>
         /// <param name="provisioningState"> The provisioning state, which only appears in the response. </param>
-        internal SubParentData(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, Location location, bool? asyncExecution, string runAsUser, string runAsPassword, int? timeoutInSeconds, string outputBlobUri, string errorBlobUri, string provisioningState) : base(id, name, type, tags, location)
+        internal SubParentData(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, AzureLocation location, bool? asyncExecution, string runAsUser, string runAsPassword, int? timeoutInSeconds, string outputBlobUri, string errorBlobUri, string provisioningState) : base(id, name, type, tags, location)
         {
             AsyncExecution = asyncExecution;
             RunAsUser = runAsUser;

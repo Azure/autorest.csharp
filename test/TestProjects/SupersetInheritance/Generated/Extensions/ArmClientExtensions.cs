@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using Azure.Core;
 using Azure.ResourceManager;
 
 namespace SupersetInheritance
@@ -19,7 +20,8 @@ namespace SupersetInheritance
         /// <returns> Returns a <see cref="SupersetModel1" /> object. </returns>
         public static SupersetModel1 GetSupersetModel1(this ArmClient armClient, ResourceIdentifier id)
         {
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new SupersetModel1(clientOptions, credential, uri, pipeline, id));
+            SupersetModel1.ValidateResourceId(id);
+            return new SupersetModel1(armClient, id);
         }
         #endregion
 
@@ -30,7 +32,8 @@ namespace SupersetInheritance
         /// <returns> Returns a <see cref="SupersetModel4" /> object. </returns>
         public static SupersetModel4 GetSupersetModel4(this ArmClient armClient, ResourceIdentifier id)
         {
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new SupersetModel4(clientOptions, credential, uri, pipeline, id));
+            SupersetModel4.ValidateResourceId(id);
+            return new SupersetModel4(armClient, id);
         }
         #endregion
     }

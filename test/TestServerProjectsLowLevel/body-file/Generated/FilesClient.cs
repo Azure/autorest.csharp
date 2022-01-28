@@ -35,14 +35,11 @@ namespace body_file_LowLevel
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public FilesClient(AzureKeyCredential credential, Uri endpoint = null, AutoRestSwaggerBATFileServiceClientOptions options = null)
+        public FilesClient(AzureKeyCredential credential, Uri endpoint = null, FilesClientOptions options = null)
         {
-            if (credential == null)
-            {
-                throw new ArgumentNullException(nameof(credential));
-            }
+            Argument.AssertNotNull(credential, nameof(credential));
             endpoint ??= new Uri("http://localhost:3000");
-            options ??= new AutoRestSwaggerBATFileServiceClientOptions();
+            options ??= new FilesClientOptions();
 
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
@@ -70,7 +67,7 @@ namespace body_file_LowLevel
             try
             {
                 using HttpMessage message = CreateGetFileRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -99,7 +96,7 @@ namespace body_file_LowLevel
             try
             {
                 using HttpMessage message = CreateGetFileRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -128,7 +125,7 @@ namespace body_file_LowLevel
             try
             {
                 using HttpMessage message = CreateGetFileLargeRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -157,7 +154,7 @@ namespace body_file_LowLevel
             try
             {
                 using HttpMessage message = CreateGetFileLargeRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -186,7 +183,7 @@ namespace body_file_LowLevel
             try
             {
                 using HttpMessage message = CreateGetEmptyFileRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -215,7 +212,7 @@ namespace body_file_LowLevel
             try
             {
                 using HttpMessage message = CreateGetEmptyFileRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
