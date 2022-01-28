@@ -175,11 +175,11 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
         private static void WriteExtensionPair(GeneratedCodeWorkspace project, BuildContext<MgmtOutputLibrary> context, MgmtExtensionClient extensionClient)
         {
-            WriteExtensionPiece(project, context, new MgmtExtensionWriter(extensionClient.PublicExtension, context));
+            WriteExtensionPiece(project, context, new MgmtExtensionWriter(extensionClient.Extension, context));
             WriteExtensionPiece(project, context, new ResourceExtensionWriter(extensionClient, context));
         }
 
-        private static void WriteExtensionPiece(GeneratedCodeWorkspace project, BuildContext<MgmtOutputLibrary> context, MgmtExtensionWriter extensionWriter)
+        private static void WriteExtensionPiece(GeneratedCodeWorkspace project, BuildContext<MgmtOutputLibrary> context, MgmtClientBaseWriter extensionWriter)
         {
             extensionWriter.Write();
             AddGeneratedFile(project, $"Extensions/{extensionWriter.FileName}.cs", extensionWriter.ToString());

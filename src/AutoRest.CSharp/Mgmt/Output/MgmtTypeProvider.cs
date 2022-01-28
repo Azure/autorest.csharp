@@ -4,15 +4,17 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
-using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models;
+using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
+using Azure.Core.Pipeline;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Core;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
@@ -24,11 +26,119 @@ namespace AutoRest.CSharp.Mgmt.Output
     internal abstract class MgmtTypeProvider : TypeProvider
     {
         protected BuildContext<MgmtOutputLibrary> _context;
+        private bool _isArmCore;
 
         protected MgmtTypeProvider(BuildContext<MgmtOutputLibrary> context, string resourceName) : base(context)
         {
             _context = context;
             ResourceName = resourceName;
+            _isArmCore = context.Configuration.MgmtConfiguration.IsArmCore;
+            IsStatic = !_isArmCore && BaseType is null && this is MgmtExtensions extension && extension.ArmCoreType != typeof(ArmResource) && extension.ArmCoreType != typeof(ArmClient);
+        }
+
+        public virtual Parameter ResourceIdentifierParameter => new Parameter(Name: "id", Description: $"The identifier of the resource that is the target of operations.",
+                Type: typeof(Azure.Core.ResourceIdentifier), DefaultValue: null, ValidateNotNull: false);
+        public Parameter ArmClientParameter => new Parameter(Name: "armClient", Description: $"The client parameters to use in these operations.",
+            Type: typeof(Azure.ResourceManager.ArmClient), DefaultValue: null, ValidateNotNull: false);
+
+        public string Accessibility => DefaultAccessibility;
+        protected override string DefaultAccessibility => "public";
+
+        public string Namespace => DefaultNamespace;
+        public abstract Type? BaseType { get; }
+        public bool IsStatic { get; }
+
+        public abstract string Description { get; }
+
+        private HashSet<NameSetKey>? _uniqueSets;
+        public HashSet<NameSetKey> UniqueSets => _uniqueSets ??= EnsureUniqueSets();
+
+        public virtual Resource? DefaultResource { get; } = null;
+
+        protected virtual FieldModifiers FieldModifiers { get; } = FieldModifiers.Private;
+
+        private IEnumerable<FieldDeclaration>? _fields;
+        public IEnumerable<FieldDeclaration> Fields => _fields ??= EnsureFieldDeclaration();
+        protected virtual IEnumerable<FieldDeclaration> EnsureFieldDeclaration()
+        {
+            foreach (var set in UniqueSets)
+            {
+                var nameSet = GetRestDiagNames(set);
+                yield return new FieldDeclaration(
+                    FieldModifiers,
+                    typeof(ClientDiagnostics),
+                    nameSet.DiagnosticField);
+                yield return new FieldDeclaration(
+                    FieldModifiers,
+                    set.RestClient.Type,
+                    nameSet.RestField);
+            }
+
+            var additionalFields = GetAdditionalFields();
+            if (additionalFields is null)
+                yield break;
+
+            foreach (var field in additionalFields)
+            {
+                yield return field;
+            }
+        }
+        protected virtual IEnumerable<FieldDeclaration>? GetAdditionalFields() => null;
+
+        private ConstructorSignature? _mockingCtor;
+        public ConstructorSignature MockingCtor => _mockingCtor ??= new ConstructorSignature(
+                Name: Type.Name,
+                Description: $"Initializes a new instance of the <see cref=\"{Type.Name}\"/> class for mocking.",
+                Modifiers: "protected",
+                Parameters: new Parameter[0]);
+
+        public virtual ConstructorSignature? ArmClientCtor { get; }
+        public virtual ConstructorSignature? ResourceDataCtor { get; }
+
+        private Dictionary<NameSetKey, NameSet> _nameCache = new Dictionary<NameSetKey, NameSet>();
+        public NameSet GetRestDiagNames(NameSetKey set)
+        {
+            if (_nameCache.TryGetValue(set, out NameSet names))
+                return names;
+
+            var resource = set.Resource;
+            var client = set.RestClient;
+            string? resourceName = resource is not null ? resource.Type.Name : client.Resources.Contains(DefaultResource) ? DefaultResource?.Type.Name : null;
+
+            string uniqueName = GetUniqueName(resourceName, client.OperationGroup.Key);
+
+            string uniqueVariable = uniqueName.ToVariableName();
+            var result = new NameSet(
+                $"_{uniqueVariable}ClientDiagnostics",
+                $"{uniqueName}ClientDiagnostics",
+                $"_{uniqueVariable}RestClient",
+                $"{uniqueName}RestClient",
+                $"{uniqueVariable}ApiVersion");
+            _nameCache.Add(set, result);
+
+            return result;
+        }
+
+        private string GetUniqueName(string? resourceName, string clientName)
+        {
+            if (resourceName is not null)
+            {
+                if (string.IsNullOrEmpty(clientName))
+                {
+                    return resourceName;
+                }
+                else
+                {
+                    var singularClientName = clientName.ToSingular(true);
+                    return resourceName.Equals(singularClientName, StringComparison.Ordinal)
+                        ? resourceName
+                        : $"{resourceName}{clientName}";
+                }
+            }
+            else
+            {
+                return string.IsNullOrEmpty(clientName) ? "Default" : clientName;
+            }
         }
 
         /// <summary>
@@ -37,15 +147,17 @@ namespace AutoRest.CSharp.Mgmt.Output
         /// </summary>
         public string ResourceName { get; }
 
-        /// <summary>
-        /// The collection of <see cref="MgmtRestClient"/> of all the operations that will be included in this generated class
-        /// </summary>
-        public abstract IEnumerable<MgmtRestClient> RestClients { get; }
-
+        private IEnumerable<MgmtClientOperation>? _clientOperations;
         /// <summary>
         /// The collection of operations that will be included in this generated class.
         /// </summary>
-        public abstract IEnumerable<MgmtClientOperation> ClientOperations { get; }
+        public IEnumerable<MgmtClientOperation> ClientOperations => _clientOperations ??= EnsureClientOperations();
+        protected abstract IEnumerable<MgmtClientOperation> EnsureClientOperations();
+
+        private IEnumerable<MgmtClientOperation>? _allOperations;
+        public IEnumerable<MgmtClientOperation> AllOperations => _allOperations ??= EnsureAllOperations();
+        protected virtual IEnumerable<MgmtClientOperation> EnsureAllOperations() => ClientOperations;
+
 
         private IEnumerable<Resource>? _childResources;
         /// <summary>
@@ -100,6 +212,31 @@ namespace AutoRest.CSharp.Mgmt.Output
             }
             resourceName = operationGroup.Key.IsNullOrEmpty() ? string.Empty : operationGroup.Key.LastWordToSingular();
             return $"{operation.MgmtCSharpName(!resourceName.IsNullOrEmpty())}{resourceName}";
+        }
+
+        private HashSet<NameSetKey> EnsureUniqueSets()
+        {
+            HashSet<NameSetKey> uniqueSets = new HashSet<NameSetKey>();
+            foreach (var operation in AllOperations)
+            {
+                Resource? resource = operation.Resource;
+                if (resource is null && operation.RestClient.Resources.Contains(DefaultResource))
+                    resource = DefaultResource;
+
+                NameSetKey key = new NameSetKey(operation.RestClient, resource);
+                if (uniqueSets.Contains(key))
+                    continue;
+                uniqueSets.Add(key);
+            }
+            return uniqueSets;
+        }
+
+        private IEnumerable<MgmtRestClient>? _restClients;
+        public IEnumerable<MgmtRestClient> RestClients => _restClients ??= EnsureRestClients();
+
+        protected virtual IEnumerable<MgmtRestClient> EnsureRestClients()
+        {
+            return ClientOperations.SelectMany(operation => operation.Select(restOperation => restOperation.RestClient)).Distinct();
         }
     }
 }

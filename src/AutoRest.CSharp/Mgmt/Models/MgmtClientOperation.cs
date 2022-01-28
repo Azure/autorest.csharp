@@ -1,11 +1,9 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -67,5 +65,11 @@ namespace AutoRest.CSharp.Mgmt.Models
         IEnumerator IEnumerable.GetEnumerator() => _operations.GetEnumerator();
 
         public MgmtRestClient RestClient => _operations.First().RestClient;
+
+        public bool IsLongRunningOperation => _operations.First().IsLongRunningOperation();
+
+        public bool IsListOperation => _operations.First().IsListOperation;
+        public bool IsPagingOperation => _operations.First().IsPagingOperation;
+        public CSharpType? OriginalReturnType => _operations.First().OriginalReturnType;
     }
 }

@@ -25,15 +25,15 @@ namespace AutoRest.CSharp.MgmtTest.Generation
     /// </summary>
     internal class ResourceTestWriter : MgmtBaseTestWriter
     {
-        protected Resource _resource;
-        protected string TestNamespace => _resource.Type.Namespace + ".Tests.Mock";
-        protected override string TypeNameOfThis => _resource.Type.Name + "MockTests";
+        protected string TestNamespace => This.Type.Namespace + ".Tests.Mock";
+        private string TypeNameOfThis => This.Type.Name + "MockTests";
 
         protected string TestBaseName => $"MockTestBase";
+        private Resource This { get; }
 
         public ResourceTestWriter(CodeWriter writer, Resource resource, BuildContext<MgmtOutputLibrary> context): base(writer, resource, context)
         {
-            _resource = resource;
+            This = resource;
         }
 
         public void WriteCollectionTest()
@@ -42,13 +42,13 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
             using (_writer.Namespace(TestNamespace))
             {
-                _writer.WriteXmlDocumentationSummary($"Test for {_resource.ResourceName}");
+                _writer.WriteXmlDocumentationSummary($"Test for {This.ResourceName}");
                 _writer.Append($"public partial class {TypeNameOfThis:D} : ");
                 _writer.Line($"{TestBaseName}");
                 using (_writer.Scope())
                 {
                     WriteTesterCtors();
-                    WriteMethodTestIfExist(_resource);
+                    WriteMethodTestIfExist(This);
 
                     foreach (var childResource in This.ChildResources)
                     {
@@ -117,20 +117,6 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             return resourceVariableName;
         }
 
-        protected override Resource? WrapResourceDataType(CSharpType? type, MgmtRestOperation operation)
-        {
-            if (!IsResourceDataType(type, operation, out _))
-                return null;
-
-            return _resource;
-        }
-
-        protected override bool IsResourceDataType(CSharpType? type, MgmtRestOperation operation, [MaybeNullWhen(false)] out ResourceData data)
-        {
-            data = _resource.ResourceData;
-            return data.Type.Equals(type);
-        }
-
         protected void WriteMethodTest(Resource resource, MgmtClientOperation clientOperation, bool async, bool isLroOperation)
         {
             Debug.Assert(clientOperation != null);
@@ -154,7 +140,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     }
                     WriteTestDecorator();
                     var testCaseSuffix = exampleIdx > 0 ? (exampleIdx + 1).ToString() : String.Empty;
-                    _writer.Append($"public {GetAsyncKeyword(async)} {MgmtBaseTestWriter.GetTaskOrVoid(async)} {(resource == _resource ? "" : resource.Type.Name)}{testMethodName}{testCaseSuffix}()");
+                    _writer.Append($"public {GetAsyncKeyword(async)} {MgmtBaseTestWriter.GetTaskOrVoid(async)} {(resource == This ? "" : resource.Type.Name)}{testMethodName}{testCaseSuffix}()");
 
                     using (_writer.Scope())
                     {

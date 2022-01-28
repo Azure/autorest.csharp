@@ -2,78 +2,33 @@
 // Licensed under the MIT License
 
 using System;
-using System.Collections.Generic;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
-using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Azure.ResourceManager.Core;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
-    internal class ResourceExtensionWriter : MgmtExtensionWriter
+    internal class ResourceExtensionWriter : MgmtClientBaseWriter
     {
-        protected override string ExtensionOperationVariableName => "this";
-
-        protected override string Accessibility => "internal";
+        protected string ExtensionOperationVariableName => "this";
 
         protected override string ArmClientReference => "ArmClient";
 
         protected override bool UseRestClientField => false;
 
-        public ResourceExtensionWriter(MgmtExtensions extensions, BuildContext<MgmtOutputLibrary> context)
-            : base(extensions, context)
+        private MgmtExtensionClient This { get; }
+
+        public ResourceExtensionWriter(MgmtExtensionClient extensions, BuildContext<MgmtOutputLibrary> context)
+            : base(new CodeWriter(), extensions, context)
         {
+            This = extensions;
         }
 
-        public override void Write()
-        {
-            using (_writer.Namespace(Context.DefaultNamespace))
-            {
-                _writer.WriteXmlDocumentationSummary($"{Extension.Description}");
-                using (_writer.Scope($"{Accessibility} partial class {TypeNameOfThis} : {typeof(ArmResource)}"))
-                {
-                    var uniqueSets = WriteFields(_writer, Extension.ClientOperations, false);
-                    _writer.Line();
-
-                    WriteCtors();
-                    _writer.Line();
-
-                    WriteProperties(uniqueSets);
-                    _writer.Line();
-
-                    WritePrivateHelpers();
-                    _writer.Line();
-
-                    WriteChildResourceEntries(true);
-
-                    var resourcesWithGetAllAsGenericMethod = new HashSet<Resource>();
-                    // Write other orphan operations with the parent of ResourceGroup
-                    foreach (var clientOperation in Extension.ClientOperations)
-                    {
-                        WriteMethod(clientOperation, true);
-                        WriteMethod(clientOperation, false);
-
-                        // we only check if a resource needs a GetByName method when it has a List operation in the subscription extension.
-                        // If its parent is Subscription, we will have a GetCollection method of that resource, which contains a GetAllAsGenericResource serves the same purpose.
-                        // if (CheckGetAllAsGenericMethod(clientOperation, out var resource))
-                        // {
-                        //     // in case that a resource has multiple list methods at the subscription level (for instance one ListBySusbcription and one ListByLocation, location is not an available parent therefore it will show up here)
-                        //     if (resourcesWithGetAllAsGenericMethod.Contains(resource))
-                        //         continue;
-                        //     WriteGetAllResourcesAsGenericMethod(resource, true);
-                        //     WriteGetAllResourcesAsGenericMethod(resource, false);
-                        //     resourcesWithGetAllAsGenericMethod.Add(resource);
-                        // }
-                    }
-                }
-            }
-        }
-
-        private void WritePrivateHelpers()
+        protected override void WritePrivateHelpers()
         {
             using (_writer.Scope($"private string GetApiVersionOrNull({typeof(ResourceType)} resourceType)"))
             {
@@ -82,12 +37,18 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        private void WriteProperties(HashSet<NameSetKey> uniqueSets)
+        protected override void WriteProperties()
         {
-            foreach (var set in uniqueSets)
+            foreach (var set in This.UniqueSets)
             {
                 WriterPropertySet(set.RestClient, set.Resource);
             }
+        }
+
+        protected override ResourceTypeSegment GetBranchResourceType(RequestPath branch)
+        {
+            // we should never have a branch in the operations in an extension class, therefore throwing an exception here
+            throw new InvalidOperationException();
         }
 
         private void WriterPropertySet(MgmtRestClient client, Resource? resource)
@@ -99,28 +60,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
             string apiVersionString = resourceName == null ? string.Empty : $", GetApiVersionOrNull({resourceName}.ResourceType)";
             string restCtor = GetRestConstructorString(client, diagPropertyName, apiVersionString);
             _writer.Line($"private {client.Type} {GetRestPropertyName(client, resource)} => {GetRestFieldName(client, resource)} ??= {restCtor};");
-        }
-
-        private void WriteCtors()
-        {
-            WriteMockingCtor();
-
-            _writer.Line();
-            // write "armClient + id" constructor
-            var clientOptionsConstructor = new ConstructorSignature(
-                Name: TypeOfThis.Name,
-                Description: $"Initializes a new instance of the <see cref=\"{TypeOfThis.Name}\"/> class.",
-                Modifiers: "internal",
-                Parameters: new[] { Resource.ArmClientParameter, Resource.ResourceIdentifierParameter },
-                Initializer: new(
-                    isBase: true,
-                    arguments: new[] { Resource.ArmClientParameter, Resource.ResourceIdentifierParameter })
-                );
-
-            _writer.WriteMethodDocumentation(clientOptionsConstructor);
-            using (_writer.WriteMethodDeclaration(clientOptionsConstructor))
-            {
-            }
         }
 
         // private void WriteGetAllResourcesAsGenericMethod(Resource resource, bool async)

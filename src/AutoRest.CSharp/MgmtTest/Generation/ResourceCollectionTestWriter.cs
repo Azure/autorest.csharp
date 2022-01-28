@@ -26,22 +26,22 @@ namespace AutoRest.CSharp.MgmtTest.Generation
     /// </summary>
     internal class ResourceCollectionTestWriter : MgmtBaseTestWriter
     {
-        private ResourceCollection _resourceCollection;
-
-        protected CSharpType TypeOfCollection => _resourceCollection.Type;
+        protected CSharpType TypeOfCollection => This.Type;
         protected string TypeNameOfCollection => TypeOfCollection.Name;
 
         protected string TestNamespace => TypeOfCollection.Namespace + ".Tests.Mock";
-        protected override string TypeNameOfThis => TypeOfCollection.Name + "MockTests";
+        private string TypeNameOfThis => This.Type.Name + "MockTests";
 
         protected string TestBaseName => $"MockTestBase";
+
+        private ResourceCollection This { get; }
 
         public List<Tuple<Parameter, MgmtClientOperation?>> collectionInitiateParameters = new List<Tuple<Parameter, MgmtClientOperation?>>();
         public Dictionary<Tuple<Parameter, MgmtClientOperation?>, string> collectionInitiateParametersMap = new Dictionary<Tuple<Parameter, MgmtClientOperation?>, string>();
 
         public ResourceCollectionTestWriter(CodeWriter writer, ResourceCollection resourceCollection, BuildContext<MgmtOutputLibrary> context): base(writer, resourceCollection, context)
         {
-            _resourceCollection = resourceCollection;
+            This = resourceCollection;
         }
 
         public void WriteCollectionTest()
@@ -50,7 +50,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
             using (_writer.Namespace(TestNamespace))
             {
-                _writer.WriteXmlDocumentationSummary($"Test for {_resourceCollection.ResourceName}");
+                _writer.WriteXmlDocumentationSummary($"Test for {This.ResourceName}");
                 _writer.Append($"public partial class {TypeNameOfThis:D} : ");
                 _writer.Line($"{TestBaseName}");
                 using (_writer.Scope())
@@ -58,7 +58,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     WriteTesterCtors();
                     WriteCreateOrUpdateTest();
                     WriteGetTest();
-                    foreach (var clientOperation in _resourceCollection.ClientOperations)
+                    foreach (var clientOperation in This.ClientOperations)
                     {
                         WriteMethodTest(clientOperation, true, false);
                     }
@@ -97,19 +97,19 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
         protected void WriteCreateOrUpdateTest()
         {
-            if (_resourceCollection.CreateOperation != null)
+            if (This.CreateOperation != null)
             {
                 _writer.Line();
-                WriteMethodTest(_resourceCollection.CreateOperation, true, true);
+                WriteMethodTest(This.CreateOperation, true, true);
             }
         }
 
         protected void WriteGetTest()
         {
-            if (_resourceCollection.GetOperation != null)
+            if (This.GetOperation != null)
             {
                 _writer.Line();
-                WriteMethodTest(_resourceCollection.GetOperation, true, false);
+                WriteMethodTest(This.GetOperation, true, false);
             }
         }
 
@@ -173,13 +173,13 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 default:
                     throw new Exception($"Unknown parent {parentTp}");
             }
-            _writer.Line($".Get{_resourceCollection.Resource.Type.Name.ToPlural()}();");
+            _writer.Line($".Get{This.Resource.Type.Name.ToPlural()}();");
         }
 
         public MgmtTypeProvider? FindParentByRequestPath(string requestPath, ExampleModel exampleModel)
         {
             var mgmtParentResources = new List<MgmtTypeProvider>();
-            foreach (var parent in _resourceCollection.Resource.Parent(Context))
+            foreach (var parent in This.Resource.Parent(Context))
             {
                 if (parent is MgmtExtensions mgmtParent)
                 {
@@ -279,20 +279,6 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     exampleIdx++;
                 }
             }
-        }
-
-        protected override Resource? WrapResourceDataType(CSharpType? type, MgmtRestOperation operation)
-        {
-            if (!IsResourceDataType(type, operation, out _))
-                return null;
-
-            return _resourceCollection.Resource;
-        }
-
-        protected override bool IsResourceDataType(CSharpType? type, MgmtRestOperation operation, [MaybeNullWhen(false)] out ResourceData data)
-        {
-            data = _resourceCollection.ResourceData;
-            return data.Type.Equals(type);
         }
 
         public string GenExampleInstanceMethodName(string methodName, bool isAsync)

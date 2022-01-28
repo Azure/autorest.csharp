@@ -24,11 +24,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         /// <param name="operation"></param>
         /// <param name="itemType">The type of the item in the collection</param>
         /// <returns></returns>
-        public static bool IsListMethod(this MgmtRestOperation operation, [MaybeNullWhen(false)] out CSharpType itemType)
-        {
-            return IsListMethod(operation.Method, out itemType);
-        }
-
         public static bool IsListMethod(this RestClientMethod method, [MaybeNullWhen(false)] out CSharpType itemType)
         {
             itemType = null;
@@ -58,37 +53,5 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 p.Declaration.Type.IsFrameworkType && p.Declaration.Type.FrameworkType == typeof(IReadOnlyList<>));
         }
 
-        public static bool IsPagingOperation(this MgmtClientOperation clientOperation, BuildContext<MgmtOutputLibrary> context)
-        {
-            return clientOperation.First().IsPagingOperation(context);
-        }
-
-        public static bool IsListOperation(this MgmtClientOperation clientOperation, BuildContext<MgmtOutputLibrary> context, [MaybeNullWhen(false)] out CSharpType itemType)
-        {
-            return clientOperation.First().IsListMethod(out itemType);
-        }
-
-        public static bool IsLongRunningOperation(this MgmtClientOperation clientOperation)
-        {
-            return clientOperation.First().IsLongRunningOperation();
-        }
-
-        public static bool IsPagingOperation(this MgmtRestOperation restOperation, BuildContext<MgmtOutputLibrary> context)
-        {
-            return restOperation.Operation.Language.Default.Paging != null;
-        }
-
-        public static PagingMethod? GetPagingMethod(this MgmtRestOperation restOperation, BuildContext<MgmtOutputLibrary> context)
-        {
-            if (context.Library.PagingMethods.TryGetValue(restOperation.Method, out var pagingMethod))
-                return pagingMethod;
-
-            return null;
-        }
-
-        public static bool IsLongRunningOperation(this MgmtRestOperation restOperation)
-        {
-            return restOperation.Operation.IsLongRunning;
-        }
     }
 }

@@ -4,18 +4,15 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
-using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models;
-using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
-using Azure.Core;
+using Azure.ResourceManager.Core;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
 
 namespace AutoRest.CSharp.Mgmt.Output
@@ -30,9 +27,12 @@ namespace AutoRest.CSharp.Mgmt.Output
             Resource = resource;
         }
 
+        public override ConstructorSignature? ResourceDataCtor => default(ConstructorSignature?);
+        public override Type? BaseType => typeof(ArmCollection);
         public Resource Resource { get; }
 
-        public MgmtClientOperation? GetAllOperation => EnsureGetAllOperation();
+        private MgmtClientOperation? _getAllOperation;
+        public MgmtClientOperation? GetAllOperation => _getAllOperation ??= EnsureGetAllOperation();
 
         private Dictionary<Parameter, FormattableString> _extraConstructorParameters = new();
         public IEnumerable<Parameter> ExtraConstructorParameters => _extraConstructorParameters.Keys;
@@ -142,10 +142,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             return $"A class representing collection of {clientPrefix} and their operations over its parent.";
         }
 
-        private IEnumerable<MgmtClientOperation>? _allOperations;
-        public override IEnumerable<MgmtClientOperation> AllOperations => _allOperations ??= EnsureAllOperations();
-
-        private IEnumerable<MgmtClientOperation> EnsureAllOperations()
+        protected override IEnumerable<MgmtClientOperation> EnsureAllOperations()
         {
             var result = new List<MgmtClientOperation>();
             if (CreateOperation != null)
@@ -157,6 +154,14 @@ namespace AutoRest.CSharp.Mgmt.Output
             result.AddRange(ClientOperations);
 
             return result;
+        }
+
+        protected override IEnumerable<FieldDeclaration> GetAdditionalFields()
+        {
+            foreach (var reference in ExtraConstructorParameters)
+            {
+                yield return new FieldDeclaration(FieldModifiers, reference.Type, GetFieldName(reference).ToString());
+            }
         }
 
         private IDictionary<RequestPath, ISet<ResourceTypeSegment>>? _resourceTypes;
@@ -196,5 +201,8 @@ namespace AutoRest.CSharp.Mgmt.Output
             Name = "parent",
             Description = $"The resource representing the parent resource."
         };
+
+        public override Parameter ResourceIdentifierParameter => new Parameter(Name: "id", Description: $"The identifier of the parent resource that is the target of operations.",
+                Type: typeof(Azure.Core.ResourceIdentifier), DefaultValue: null, ValidateNotNull: false);
     }
 }

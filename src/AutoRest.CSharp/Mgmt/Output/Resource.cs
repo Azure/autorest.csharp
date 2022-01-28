@@ -4,8 +4,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using AutoRest.CSharp.Common.Output.Models;
-using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
@@ -16,6 +14,9 @@ using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure.Core;
+using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Models;
+using Azure.ResourceManager.Resources.Models;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
@@ -23,6 +24,7 @@ namespace AutoRest.CSharp.Mgmt.Output
     {
         protected static readonly string ResourcePosition = "resource";
         protected static readonly string CollectionPosition = "collection";
+        private const string DataFieldName = "_data";
 
         private static readonly HttpMethod[] MethodToExclude = new[] { HttpMethod.Put, HttpMethod.Get, HttpMethod.Delete, HttpMethod.Patch };
 
@@ -65,6 +67,36 @@ namespace AutoRest.CSharp.Mgmt.Output
             Position = position;
         }
 
+        private ConstructorSignature? _armClientCtor;
+        public override ConstructorSignature? ArmClientCtor => _armClientCtor ??= new ConstructorSignature(
+              Name: Type.Name,
+              Description: $"Initializes a new instance of the <see cref=\"{Type.Name}\"/> class.",
+              Modifiers: "internal",
+              Parameters: new[] { ArmClientParameter, ResourceIdentifierParameter },
+              Initializer: new(
+                  isBase: true,
+                  arguments: new[] { ArmClientParameter, ResourceIdentifierParameter }));
+        private ConstructorSignature? _resourceDataCtor;
+        public override ConstructorSignature? ResourceDataCtor => _resourceDataCtor ??= new ConstructorSignature(
+                Name: Type.Name,
+                Description: $"Initializes a new instance of the <see cref = \"{Type.Name}\"/> class.",
+                Modifiers: "internal",
+                Parameters: new[] { ArmClientParameter, ResourceDataParameter },
+                Initializer: new(
+                    IsBase: false,
+                    Arguments: new FormattableString[] { $"{ArmClientParameter.Name:I}", ResourceDataIdExpression($"{ResourceDataParameter.Name:I}") }));
+
+        public override Type? BaseType => typeof(ArmResource);
+
+        public override Resource? DefaultResource => this;
+
+        protected override FieldModifiers FieldModifiers => base.FieldModifiers | FieldModifiers.ReadOnly;
+
+        protected override IEnumerable<FieldDeclaration>? GetAdditionalFields()
+        {
+            yield return new FieldDeclaration(FieldModifiers, ResourceData.Type, DataFieldName);
+        }
+
         public Resource(IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> allOperations, string resourceName, ResourceTypeSegment resourceType, ResourceData resourceData, BuildContext<MgmtOutputLibrary> context)
             : this(allOperations, resourceName, resourceType, resourceData, context, ResourcePosition)
         { }
@@ -100,7 +132,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected bool IsById { get; }
 
-        protected MgmtClientOperation? GetOperationWithVerb(HttpMethod method, string operationName)
+        protected MgmtClientOperation? GetOperationWithVerb(HttpMethod method, string operationName, bool? isLongRunning = null, bool throwIfNull = false)
         {
             var result = new List<MgmtRestOperation>();
             foreach (var operationSet in OperationSets)
@@ -118,7 +150,9 @@ namespace AutoRest.CSharp.Mgmt.Output
                         contextualPath,
                         operationName,
                         operation.GetReturnTypeAsLongRunningOperation(this, operationName, _context),
-                        _context);
+                        _context,
+                        isLongRunning,
+                        throwIfNull);
                     result.Add(restOperation);
                 }
             }
@@ -197,13 +231,20 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         private IEnumerable<Resource> ResourcesWithSameResourceType() => _context.Library.ArmResources.Where(resource => resource.ResourceType == ResourceType);
 
-        protected override string DefaultAccessibility => "public";
-
-        public string Description => BuilderHelpers.EscapeXmlDescription(CreateDescription(ResourceName));
+        public override string Description => BuilderHelpers.EscapeXmlDescription(CreateDescription(ResourceName));
 
         public bool IsSingleton => SingletonResourceIdSuffix != null;
 
         public string? SingletonResourceIdSuffix { get; }
+
+        private bool? _isTaggable;
+        public bool IsTaggable => _isTaggable ??= EnsureIsTaggable();
+
+        private bool EnsureIsTaggable()
+        {
+            // TODO: use type.Name after upgrading resourcemanager version
+            return ResourceData.Inherits != null && (ResourceData.Inherits.Name == nameof(TrackedResource) || ResourceData.Inherits.Name == nameof(TrackedResourceExtended));
+        }
 
         /// <summary>
         /// Finds the corresponding <see cref="ResourceCollection"/> of this <see cref="Resource"/>
@@ -216,9 +257,9 @@ namespace AutoRest.CSharp.Mgmt.Output
         /// </summary>
         public ResourceData ResourceData { get; }
 
-        public MgmtClientOperation? CreateOperation => GetOperationWithVerb(HttpMethod.Put, "CreateOrUpdate");
-        public MgmtClientOperation GetOperation => GetOperationWithVerb(HttpMethod.Get, "Get")!;
-        public MgmtClientOperation? DeleteOperation => GetOperationWithVerb(HttpMethod.Delete, "Delete");
+        public MgmtClientOperation? CreateOperation => GetOperationWithVerb(HttpMethod.Put, "CreateOrUpdate", true);
+        public MgmtClientOperation GetOperation => GetOperationWithVerb(HttpMethod.Get, "Get", throwIfNull: true)!;
+        public MgmtClientOperation? DeleteOperation => GetOperationWithVerb(HttpMethod.Delete, "Delete", true);
         public MgmtClientOperation? UpdateOperation => GetOperationWithVerb(HttpMethod.Patch, "Update");
 
         protected virtual bool ShouldIncludeOperation(Operation operation)
@@ -235,14 +276,12 @@ namespace AutoRest.CSharp.Mgmt.Output
             return true;
         }
 
-        private IEnumerable<MgmtClientOperation>? _allOperations;
-        public virtual IEnumerable<MgmtClientOperation> AllOperations => _allOperations ??= EnsureAllOperations();
-
-        private IEnumerable<MgmtClientOperation> EnsureAllOperations()
+        protected override IEnumerable<MgmtClientOperation> EnsureAllOperations()
         {
             var result = new List<MgmtClientOperation>();
             if (GetOperation != null)
                 result.Add(GetOperation);
+//            result.Add(new MgmtClientOperation())
             if (DeleteOperation != null)
                 result.Add(DeleteOperation);
             if (UpdateOperation != null)
@@ -255,7 +294,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         /// A collection of ClientOperations.
         /// The List of <see cref="MgmtRestOperation"/> represents a set of the same operations under different parent (OperationSet)
         /// </summary>
-        public override IEnumerable<MgmtClientOperation> ClientOperations => EnsureClientOperationMap().Values;
+        protected override IEnumerable<MgmtClientOperation> EnsureClientOperations() => EnsureClientOperationMap().Values;
 
         /// <summary>
         /// This is a map from the diff request path between the operation and the contextual path to the actual operations
@@ -342,10 +381,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             return operation.IsResourceCollectionOperation(_context, out var resourceOperationSet) && resourceOperationSet == operationSet;
         }
 
-        private IEnumerable<MgmtRestClient>? _restClients;
-        public override IEnumerable<MgmtRestClient> RestClients => _restClients ??= EnsureRestClients();
-
-        private IEnumerable<MgmtRestClient> EnsureRestClients()
+        protected override IEnumerable<MgmtRestClient> EnsureRestClients()
         {
             var childRestClients = ClientOperations.SelectMany(clientOperation => clientOperation.Select(restOperation => restOperation.RestClient)).Distinct();
             var resourceRestClients = OperationSets.SelectMany(operationSet => operationSet.Select(operation => _context.Library.GetRestClient(operation))).Distinct();
@@ -398,13 +434,9 @@ namespace AutoRest.CSharp.Mgmt.Output
             }
         }
 
-        public static Parameter ArmClientParameter => new Parameter(Name: "armClient", Description: $"The client parameters to use in these operations.",
-                    Type: typeof(Azure.ResourceManager.ArmClient), DefaultValue: null, ValidateNotNull: false);
         public Parameter ResourceParameter => new Parameter(Name: "resource", Description: $"The client parameters to use in these operations.",
                             Type: typeof(Azure.ResourceManager.Core.ArmResource), DefaultValue: null, ValidateNotNull: false);
         public Parameter ResourceDataParameter => new Parameter(Name: "data", Description: $"The resource that is the target of operations.",
                         Type: ResourceData.Type, DefaultValue: null, ValidateNotNull: false);
-        public static Parameter ResourceIdentifierParameter => new Parameter(Name: "id", Description: $"The identifier of the resource that is the target of operations.",
-                        Type: typeof(Azure.Core.ResourceIdentifier), DefaultValue: null, ValidateNotNull: false);
     }
 }

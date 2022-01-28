@@ -5,26 +5,25 @@ using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Types;
-using Azure.ResourceManager;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal class ArmClientExtensionsWriter : MgmtExtensionWriter
     {
+        private MgmtExtensions This { get; }
+
         public ArmClientExtensionsWriter(MgmtExtensions extensions, BuildContext<MgmtOutputLibrary> context)
             : base(extensions, context)
         {
+            This = extensions;
         }
 
         public override void Write()
         {
-            var theNamespace = IsArmCore ? "Azure.ResourceManager" : Context.DefaultNamespace;
-            var staticKeyWord = IsArmCore ? string.Empty : "static ";
-            var className = IsArmCore ? nameof(ArmClient) : TypeNameOfThis;
-            using (_writer.Namespace(theNamespace))
+            using (_writer.Namespace(This.Namespace))
             {
-                _writer.WriteXmlDocumentationSummary($"{Extension.Description}");
-                using (_writer.Scope($"{Accessibility} {staticKeyWord}partial class {className}"))
+                WriteClassDeclaration();
+                using (_writer.Scope())
                 {
                     foreach (var resource in Context.Library.ArmResources)
                     {

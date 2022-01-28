@@ -8,6 +8,7 @@ using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
+using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 
@@ -31,12 +32,14 @@ namespace AutoRest.CSharp.Mgmt.Output
             DefaultName = $"{ResourceName}Extensions";
             ContextualPath = contextualPath;
             ArmCoreNamespace = ArmCoreType.Namespace!;
-            Description = $"A class to add extension methods to {ResourceName}.";
         }
 
-        public Type ArmCoreType { get; }
+        public override Type? BaseType => null;
 
-        public string Description { get; }
+        private string? _description;
+        public override string Description => _description ??= $"A class to add extension methods to {ResourceName}.";
+
+        public Type ArmCoreType { get; }
 
         public string ArmCoreNamespace { get; }
 
@@ -44,14 +47,14 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected virtual RequestPath ContextualPath { get; }
 
-        protected override string DefaultAccessibility => "public";
-
         public virtual bool IsEmpty => !ClientOperations.Any() && !ChildResources.Any();
 
-        public override IEnumerable<MgmtClientOperation> ClientOperations => _clientOperations ??= EnsureClientOperations();
+        protected override IEnumerable<FieldDeclaration> EnsureFieldDeclaration()
+        {
+            yield break;
+        }
 
-        private IEnumerable<MgmtClientOperation>? _clientOperations;
-        private IEnumerable<MgmtClientOperation> EnsureClientOperations()
+        protected override IEnumerable<MgmtClientOperation> EnsureClientOperations()
         {
             return _allOperations.Select(operation =>
             {
@@ -122,14 +125,6 @@ namespace AutoRest.CSharp.Mgmt.Output
                 return filteredResources.Single();
 
             return null;
-        }
-
-        private IEnumerable<MgmtRestClient>? _restClients;
-        public override IEnumerable<MgmtRestClient> RestClients => _restClients ??= EnsureRestClients();
-
-        private IEnumerable<MgmtRestClient> EnsureRestClients()
-        {
-            return ClientOperations.SelectMany(operation => operation.Select(restOperation => restOperation.RestClient)).Distinct();
         }
     }
 }

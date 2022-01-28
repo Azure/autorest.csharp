@@ -20,17 +20,16 @@ using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
-    internal class MgmtExtensionWriter : MgmtClientBaseWriter<MgmtExtensions>
+    internal class MgmtExtensionWriter : MgmtClientBaseWriter
     {
         protected virtual string DiagnosticOptionsVariable { get; } = "diagnosticOptions";
-
-        protected bool IsArmCore;
+        private MgmtExtensions This { get; }
 
         public MgmtExtensionWriter(MgmtExtensions extensions, BuildContext<MgmtOutputLibrary> context)
             : base(new CodeWriter(), extensions, context)
         {
+            This = extensions;
             Extension = extensions;
-            IsArmCore = context.Configuration.MgmtConfiguration.IsArmCore;
             ExtensionOperationVariableType = extensions.ArmCoreType;
             ExtensionOperationVariableName = IsArmCore ? "this" : ExtensionOperationVariableType.Name.ToVariableName();
             ExtensionParameter = new Parameter(
@@ -55,39 +54,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected Parameter ExtensionParameter { get; }
 
-        public override void Write()
-        {
-            var theNamespace = IsArmCore ? Extension.ArmCoreNamespace : Context.DefaultNamespace;
-            var staticKeyWord = IsArmCore ? string.Empty : "static ";
-            var className = IsArmCore ? Extension.ResourceName : TypeNameOfThis;
-            using (_writer.Namespace(theNamespace))
-            {
-                _writer.WriteXmlDocumentationSummary($"{Extension.Description}");
-                using (_writer.Scope($"{Accessibility} {staticKeyWord}partial class {className}"))
-                {
-                    // Write resource collection entries
-                    WriteChildResourceEntries();
-
-                    WriteExtensionClientGet();
-
-                    // Write other orphan operations with the parent of ResourceGroup
-                    foreach (var clientOperation in Extension.ClientOperations)
-                    {
-                        WriteMethodWrapper(clientOperation, true);
-                        WriteMethodWrapper(clientOperation, false);
-                    }
-                }
-            }
-        }
-
-        protected void WriteMethodWrapper(MgmtClientOperation clientOperation, bool isAsync)
+        protected override void WriteMethod(MgmtClientOperation clientOperation, bool isAsync)
         {
             BuildParameters(clientOperation, out var operationMappings, out var parameterMappings, out var methodParameters);
             if (!IsArmCore)
                 methodParameters.Insert(0, ExtensionParameter);
             methodParameters.Add(CancellationTokenParameter);
             // we need to identify this operation belongs to which category: NormalMethod, NormalListMethod, LROMethod or PagingMethod
-            if (clientOperation.IsLongRunningOperation() && !clientOperation.IsPagingOperation(Context))
+            if (clientOperation.IsLongRunningOperation && !clientOperation.IsPagingOperation)
             {
                 methodParameters.Insert(1, WaitForCompletionParameter);
                 if (clientOperation.ReturnType is null)
@@ -95,35 +69,29 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 // this is a non-pageable long-running operation
                 WriteMethodWrapperImpl(clientOperation, clientOperation.Name, clientOperation.ReturnType.WrapAsync(isAsync), methodParameters, isAsync, false);
             }
-            else if (clientOperation.IsLongRunningOperation() && clientOperation.IsPagingOperation(Context))
+            else if (clientOperation.IsLongRunningOperation && clientOperation.IsPagingOperation)
             {
                 // this is a pageable long-running operation
                 throw new NotImplementedException($"Pageable LRO is not implemented yet, please use `remove-operation` directive to remove the following operationIds: {string.Join(", ", clientOperation.Select(o => o.OperationId))}");
             }
-            else if (clientOperation.IsPagingOperation(Context))
+            else if (clientOperation.IsPagingOperation)
             {
                 // this is a paging operation
-                var itemType = clientOperation.First(restOperation => restOperation.IsPagingOperation(Context)).GetPagingMethod(Context)!.PagingResponse.ItemType;
-                itemType = GetActualItemType(clientOperation, itemType);
-                if (itemType is null)
-                    throw new InvalidOperationException($"Paging method had null item type {clientOperation.RestClient.Type.Name}.{clientOperation.Name}");
-                CSharpType actualReturnType = itemType.WrapPageable(isAsync);
-                WriteMethodWrapperImpl(clientOperation, clientOperation.Name, actualReturnType, methodParameters, isAsync, true);
+                if (clientOperation.ReturnType is null)
+                    throw new InvalidOperationException($"Found null return type for {clientOperation.RestClient.Declaration.Name}.{clientOperation.Name}, original was ({clientOperation.OriginalReturnType}).");
+                WriteMethodWrapperImpl(clientOperation, clientOperation.Name, clientOperation.ReturnType.WrapPageable(isAsync), methodParameters, isAsync, true);
             }
-            else if (clientOperation.IsListOperation(Context, out var itemType))
+            else if (clientOperation.IsListOperation)
             {
                 // this is a normal list operation
-                itemType = GetActualItemType(clientOperation, itemType);
-                if (itemType is null)
-                    throw new InvalidOperationException($"Paging method had null item type {clientOperation.RestClient.Type.Name}.{clientOperation.Name}");
-                CSharpType actualReturnType = itemType.WrapPageable(isAsync);
-                WriteMethodWrapperImpl(clientOperation, clientOperation.Name, actualReturnType, methodParameters, isAsync, true);
+                if (clientOperation.ReturnType is null)
+                    throw new InvalidOperationException($"Found null return type for {clientOperation.RestClient.Declaration.Name}.{clientOperation.Name}, original was ({clientOperation.OriginalReturnType}).");
+               WriteMethodWrapperImpl(clientOperation, clientOperation.Name, clientOperation.ReturnType.WrapPageable(isAsync), methodParameters, isAsync, true);
             }
             else
             {
-                CSharpType actualReturnType = GetResponseType(GetActualItemType(clientOperation, clientOperation.ReturnType), isAsync);
                 // this is a normal operation
-                WriteMethodWrapperImpl(clientOperation, clientOperation.Name, actualReturnType, methodParameters, isAsync, false);
+                WriteMethodWrapperImpl(clientOperation, clientOperation.Name, GetResponseType(clientOperation.ReturnType, isAsync), methodParameters, isAsync, false);
             }
         }
 
@@ -151,17 +119,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Line($")");
         }
 
-        private CSharpType? GetActualItemType(MgmtClientOperation clientOperation, CSharpType? itemType)
-        {
-            if (itemType is null)
-                return null;
-
-            var wrapResource = WrapResourceDataType(itemType, clientOperation.First());
-            CSharpType actualItemType = wrapResource?.Type ?? itemType;
-            return actualItemType;
-        }
-
-        protected void WriteExtensionClientGet()
+        protected override void WritePrivateHelpers()
         {
             _writer.Line();
             string staticText = IsArmCore ? string.Empty : "static ";
@@ -297,7 +255,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 _writer.WriteParameterNullOrEmptyChecks(methodParameters);
 
-                var diagnostic = new Diagnostic($"{TypeNameOfThis}.{methodName}", Array.Empty<DiagnosticAttribute>());
+                var diagnostic = new Diagnostic($"{This.Type.Name}.{methodName}", Array.Empty<DiagnosticAttribute>());
 
                 using (WriteDiagnosticScope(_writer, diagnostic, GetClientDiagnosticsPropertyName(operationMappings.Values.First())))
                 {
@@ -321,9 +279,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected bool CheckGetAllAsGenericMethod(MgmtClientOperation clientOperation, [MaybeNullWhen(false)] out Resource resource)
         {
             resource = null;
-            if (clientOperation.First().IsListMethod(out var itemType))
+            if (clientOperation.IsListOperation)
             {
-                if (Context.Library.TryGetTypeProvider(itemType.Name, out var provider) && provider is ResourceData data)
+                if (Context.Library.TryGetTypeProvider(clientOperation.ReturnType!.Name, out var provider) && provider is ResourceData data)
                 {
                     var resourcesOfResourceData = Context.Library.FindResources(data);
                     // TODO -- what if we have multiple resources corresponds to the same resource data?
@@ -352,16 +310,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
             string methodName, bool async, bool shouldThrowExceptionWhenNull = false)
         {
             // TODO -- since we are combining multiple operations under different parents, which description should we leave here?
-            var returnType = WrapResourceDataType(clientOperation.ReturnType, clientOperation.First())?.Type ?? clientOperation.ReturnType;
-
             _writer.WriteXmlDocumentationSummary($"{clientOperation.Description}");
-            WriteNormalMethodSignature(GetResponseType(returnType, async), methodName, methodParameters, async, clientOperation.Accessibility, true);
+            WriteNormalMethodSignature(GetResponseType(clientOperation.ReturnType, async), methodName, methodParameters, async, clientOperation.Accessibility, true);
 
             using (_writer.Scope())
             {
                 _writer.WriteParameterNullOrEmptyChecks(methodParameters);
 
-                var diagnostic = new Diagnostic($"{TypeOfThis.Name}.{methodName}", Array.Empty<DiagnosticAttribute>());
+                var diagnostic = new Diagnostic($"{This.Type.Name}.{methodName}", Array.Empty<DiagnosticAttribute>());
 
                 using (WriteDiagnosticScope(_writer, diagnostic, GetClientDiagnosticsPropertyName(operationMappings.Values.First())))
                 {
@@ -369,58 +325,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 }
                 _writer.Line();
             }
-        }
-
-        /// <summary>
-        /// In the extension class, we need to find the correct resource class that links to this resource data, if this is a resource data
-        /// </summary>
-        /// <param name="type"></param>
-        /// <param name="operation"></param>
-        /// <returns></returns>
-        protected override Resource? WrapResourceDataType(CSharpType? type, MgmtRestOperation operation)
-        {
-            if (!IsResourceDataType(type, operation, out var data))
-                return null;
-
-            // we need to find the correct resource type that links with this resource data
-            var candidates = Context.Library.FindResources(data);
-
-            // return null when there is no match
-            if (!candidates.Any())
-                return null;
-
-            // when we only find one result, just return it.
-            if (candidates.Count() == 1)
-                return candidates.Single();
-
-            // if there is more candidates than one, we are going to some more matching to see if we could determine one
-            var resourceType = operation.RequestPath.GetResourceType(Config);
-            var filteredResources = candidates.Where(resource => resource.ResourceType == resourceType);
-
-            if (filteredResources.Count() == 1)
-                return filteredResources.Single();
-
-            return null;
-        }
-
-        /// <summary>
-        /// In the extension class, we need to check the type is a resource data or not
-        /// </summary>
-        /// <param name="type"></param>
-        /// <param name="operation"></param>
-        /// <returns></returns>
-        protected override bool IsResourceDataType(CSharpType? type, MgmtRestOperation operation, [MaybeNullWhen(false)] out ResourceData data)
-        {
-            data = null;
-            if (type == null || type.IsFrameworkType)
-                return false;
-
-            if (Context.Library.TryGetTypeProvider(type.Name, out var provider))
-            {
-                data = provider as ResourceData;
-                return data != null;
-            }
-            return false;
         }
 
         protected override ResourceTypeSegment GetBranchResourceType(RequestPath branch)
@@ -448,11 +352,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
                 _writer.Line($"){GetConfigureAwait(_async)};");
             }
-        }
-
-        public override string ToString()
-        {
-            return _writer.ToString();
         }
     }
 }

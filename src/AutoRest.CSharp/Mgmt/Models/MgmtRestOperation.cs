@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
@@ -23,6 +24,9 @@ namespace AutoRest.CSharp.Mgmt.Models
     /// </summary>
     internal record MgmtRestOperation
     {
+        private bool? _isLongRunning;
+        private BuildContext<MgmtOutputLibrary> _context;
+
         /// <summary>
         /// The underlying <see cref="Operation"/> object.
         /// </summary>
@@ -38,8 +42,18 @@ namespace AutoRest.CSharp.Mgmt.Models
         public string Name { get; }
         public string? Description => Method.Description;
         public IEnumerable<Parameter> Parameters => Method.Parameters;
-        public CSharpType? ReturnType { get; }
+        private CSharpType? _returnType;
+        public CSharpType? ReturnType => _returnType ??= GetMgmtReturnType(Method.ReturnType) ?? Resource?.Type;
         public string Accessibility => Method.Accessibility;
+        public bool IsPagingOperation => Operation.Language.Default.Paging != null;
+
+        private bool _checkedListItemType;
+        private CSharpType? _listItemType;
+        private CSharpType? ListItemType => _checkedListItemType ? _listItemType : GetListMethodItemType();
+
+        public bool IsListOperation => ListItemType != null;
+        public CSharpType? OriginalReturnType => Method.ReturnType;
+
         /// <summary>
         /// The actual operation
         /// </summary>
@@ -59,15 +73,26 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         public Resource? Resource { get; }
 
-        public MgmtRestOperation(RestClientMethod method, MgmtRestClient restClient, RequestPath requestPath, RequestPath contextualPath, string methodName, CSharpType? returnType, BuildContext<MgmtOutputLibrary> context)
+        public bool ThrowIfNull { get; }
+
+        public bool IsLongRunningOperation()
         {
+            return _isLongRunning.HasValue ? _isLongRunning.Value : Operation.IsLongRunning;
+        }
+
+
+        public MgmtRestOperation(RestClientMethod method, MgmtRestClient restClient, RequestPath requestPath, RequestPath contextualPath, string methodName, CSharpType? returnType, BuildContext<MgmtOutputLibrary> context, bool? isLongRunning = null, bool throwIfNull = false)
+        {
+            _context = context;
+            _isLongRunning = isLongRunning;
+            ThrowIfNull = throwIfNull;
             Method = method;
             RestClient = restClient;
             RequestPath = requestPath;
             ContextualPath = contextualPath;
             Name = methodName;
-            Resource = GetResourceMatch(restClient, method, requestPath, context);
-            ReturnType = returnType ?? method.ReturnType;
+            Resource = GetResourceMatch(restClient, method, requestPath);
+            _returnType = returnType;
         }
 
         internal enum ResourceMatchType
@@ -81,7 +106,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             None
         }
 
-        private static Resource? GetResourceMatch(MgmtRestClient restClient, RestClientMethod method, RequestPath requestPath, BuildContext<MgmtOutputLibrary> context)
+        private Resource? GetResourceMatch(MgmtRestClient restClient, RestClientMethod method, RequestPath requestPath)
         {
             if (restClient.Resources.Count == 1)
                 return restClient.Resources[0];
@@ -109,7 +134,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             FormattableString errorText = (FormattableString)$"{restClient.Type.Name}.{method.Name}";
             foreach (ResourceMatchType? matchType in Enum.GetValues(typeof(ResourceMatchType)))
             {
-                var resource = GetMatch(matchType!.Value, matches, context, errorText);
+                var resource = GetMatch(matchType!.Value, matches, errorText);
 
                 if (resource is not null)
                     return resource;
@@ -117,7 +142,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             return null;
         }
 
-        private static Resource? GetMatch(ResourceMatchType matchType, Dictionary<ResourceMatchType, HashSet<Resource>> matches, BuildContext<MgmtOutputLibrary> context, FormattableString error)
+        private Resource? GetMatch(ResourceMatchType matchType, Dictionary<ResourceMatchType, HashSet<Resource>> matches, FormattableString error)
         {
             if (!matches.TryGetValue(matchType, out var matchTypeMatches))
                 return null;
@@ -126,8 +151,8 @@ namespace AutoRest.CSharp.Mgmt.Models
             if (matchTypeMatches.Count == 1)
                 return first;
 
-            var parent = first.Parent(context).First();
-            if (parent is not null && AllMatchesSameParent(matchTypeMatches, context, parent, out bool areAllSingleton) && areAllSingleton)
+            var parent = first.Parent(_context).First();
+            if (parent is not null && AllMatchesSameParent(matchTypeMatches, _context, parent, out bool areAllSingleton) && areAllSingleton)
                 return parent as Resource;
 
             //this throw catches anything we do not expect if it ever fires it means our logic is either incomplete or we need a directive to adjust the request paths
@@ -221,6 +246,92 @@ namespace AutoRest.CSharp.Mgmt.Models
                     return false;
             }
             return true;
+        }
+
+        private CSharpType? GetMgmtReturnType(CSharpType? originalType)
+        {
+            if (IsPagingOperation)
+            {
+                originalType = GetPagingMethod()!.PagingResponse.ItemType;
+            }
+
+            //try for list method
+            originalType = GetListMethodItemType() ?? originalType;
+
+            if (!IsResourceDataType(originalType, out var data))
+                return originalType;
+
+            if (_context.Configuration.MgmtConfiguration.IsArmCore)
+            {
+                // we need to find the correct resource type that links with this resource data
+                var candidates = _context.Library.FindResources(data);
+
+                // return null when there is no match
+                if (!candidates.Any())
+                    return originalType;
+
+                // when we only find one result, just return it.
+                if (candidates.Count() == 1)
+                    return candidates.Single().Type;
+
+                // if there is more candidates than one, we are going to some more matching to see if we could determine one
+                var resourceType = RequestPath.GetResourceType(_context.Configuration.MgmtConfiguration);
+                var filteredResources = candidates.Where(r => r.ResourceType == resourceType);
+
+                if (filteredResources.Count() == 1)
+                    return filteredResources.Single().Type;
+            }
+            if (Resource is null)
+                throw new InvalidOperationException($"Found a resource data return type but resource was null. {originalType?.Name}");
+            return Resource.Type;
+        }
+
+        public PagingMethod? GetPagingMethod()
+        {
+            if (_context.Library.PagingMethods.TryGetValue(Method, out var pagingMethod))
+                return pagingMethod;
+
+            return null;
+        }
+
+        private bool IsResourceDataType(CSharpType? type, [MaybeNullWhen(false)] out ResourceData data)
+        {
+            data = null;
+            if (_context.Configuration.MgmtConfiguration.IsArmCore)
+            {
+                if (type == null || type.IsFrameworkType)
+                    return false;
+
+                if (_context.Library.TryGetTypeProvider(type.Name, out var provider))
+                {
+                    data = provider as ResourceData;
+                    return data != null;
+                }
+                return false;
+            }
+            else
+            {
+                data = Resource?.ResourceData;
+                return data != null && data.Type.Equals(type);
+            }
+        }
+
+        private CSharpType? GetListMethodItemType()
+        {
+            if (_checkedListItemType)
+                return _listItemType;
+
+            CSharpType? itemType = null;
+            var returnType = Method.ReturnType;
+            if (returnType == null)
+            {
+                _checkedListItemType = true;
+                return itemType;
+            }
+
+            var restClientMethod = _context.Library.GetRestClientMethod(Operation);
+            _checkedListItemType = true;
+            return restClientMethod.IsListMethod(out _listItemType) ? _listItemType : null;
         }
     }
 }

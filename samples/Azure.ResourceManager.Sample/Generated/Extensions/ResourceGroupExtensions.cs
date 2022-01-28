@@ -12,6 +12,15 @@ namespace Azure.ResourceManager.Sample
     /// <summary> A class to add extension methods to ResourceGroup. </summary>
     public static partial class ResourceGroupExtensions
     {
+        private static ResourceGroupExtensionClient GetExtensionClient(ResourceGroup resourceGroup)
+        {
+            return resourceGroup.GetCachedClient((armClient) =>
+            {
+                return new ResourceGroupExtensionClient(armClient, resourceGroup.Id);
+            }
+            );
+        }
+
         #region AvailabilitySet
         /// <summary> Gets an object representing a AvailabilitySetCollection along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
@@ -81,14 +90,5 @@ namespace Azure.ResourceManager.Sample
             return new VirtualMachineScaleSetCollection(resourceGroup);
         }
         #endregion
-
-        private static ResourceGroupExtensionClient GetExtensionClient(ResourceGroup resourceGroup)
-        {
-            return resourceGroup.GetCachedClient((armClient) =>
-            {
-                return new ResourceGroupExtensionClient(armClient, resourceGroup.Id);
-            }
-            );
-        }
     }
 }
