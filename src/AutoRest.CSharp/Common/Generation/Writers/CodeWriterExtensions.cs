@@ -18,6 +18,7 @@ using AutoRest.CSharp.Utilities;
 using Azure;
 using AutoRest.CSharp.Common.Output.Models;
 using Azure.Core;
+using System.Text;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -258,17 +259,21 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 if (parameter.Type.Equals(typeof(RequestConditions)))
                 {
-                    //writer.Append($"Argument.AssertHasOnlySupportedHeaders({parameter.Name:I}, \"{parameter.Name:I}\", {supportedHeaders});");
                     writer.Append($"Argument.AssertHasOnlySupportedHeaders({parameter.Name:I}, \"{parameter.Name:I}\"");
+                    writer.AppendRaw(", new string[]{");
+                    StringBuilder supportedHeaders = new StringBuilder();
 #pragma warning disable CS8605 // Unboxing a possibly null value.
                     foreach (RequestConditionHeaders val in Enum.GetValues(typeof(RequestConditionHeaders)))
 #pragma warning restore CS8605 // Unboxing a possibly null value.
                     {
                         if (val != RequestConditionHeaders.None && requestConditionFlag.HasFlag(val))
                         {
-                            writer.Append($", \"{requestConditionHeaderNames[val]}\"");
+                            supportedHeaders.Append($"\"{requestConditionHeaderNames[val]}\",");
                         }
                     }
+                    supportedHeaders.Length--;
+                    writer.AppendRaw(supportedHeaders.ToString());
+                    writer.AppendRaw("}");
                     writer.Append($");");
                 }
             }
