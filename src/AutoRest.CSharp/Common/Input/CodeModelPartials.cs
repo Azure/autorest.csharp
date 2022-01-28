@@ -244,23 +244,6 @@ namespace AutoRest.CSharp.Input
 
         [YamlMember(Alias = "summary")]
         public string? Summary { get; set; }
-
-        public Language Clone()
-        {
-            return new Language
-            {
-                Name = this.Name,
-                Description = this.Description,
-                Namespace = this.Namespace,
-                DiscriminatorValue = this.DiscriminatorValue,
-                Uid = this.Uid,
-                Internal = this.Internal,
-                SerializedName = this.SerializedName,
-                Paging = this.Paging,
-                Header = this.Header,
-                Summary = this.Summary,
-            };
-        }
     }
 
     internal partial class NoAuthSecurity : SecurityScheme
