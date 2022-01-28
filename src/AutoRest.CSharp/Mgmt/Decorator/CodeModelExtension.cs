@@ -55,12 +55,17 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
         }
 
+        private static IEnumerable<Schema>? _allSchemas;
         public static IEnumerable<Schema> GetAllSchemas(this CodeModel codeModel)
         {
-            return codeModel.Schemas.Choices.Cast<Schema>()
+            if (_allSchemas != null)
+                return _allSchemas;
+
+            _allSchemas = codeModel.Schemas.Choices.Cast<Schema>()
                 .Concat(codeModel.Schemas.SealedChoices)
                 .Concat(codeModel.Schemas.Objects)
                 .Concat(codeModel.Schemas.Groups);
+            return _allSchemas;
         }
 
         private static void TransformSchema(Schema schema)
