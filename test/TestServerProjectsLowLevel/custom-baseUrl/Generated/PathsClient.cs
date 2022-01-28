@@ -19,9 +19,8 @@ namespace custom_baseUrl_LowLevel
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
-        private readonly ClientDiagnostics _clientDiagnostics;
         private readonly string _host;
-
+        internal ClientDiagnostics ClientDiagnostics { get; }
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
@@ -41,7 +40,7 @@ namespace custom_baseUrl_LowLevel
             Argument.AssertNotNull(host, nameof(host));
             options ??= new PathsClientOptions();
 
-            _clientDiagnostics = new ClientDiagnostics(options);
+            ClientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _host = host;
@@ -66,7 +65,7 @@ namespace custom_baseUrl_LowLevel
         {
             Argument.AssertNotNull(accountName, nameof(accountName));
 
-            using var scope = _clientDiagnostics.CreateScope("PathsClient.GetEmpty");
+            using var scope = ClientDiagnostics.CreateScope("PathsClient.GetEmpty");
             scope.Start();
             try
             {
@@ -99,7 +98,7 @@ namespace custom_baseUrl_LowLevel
         {
             Argument.AssertNotNull(accountName, nameof(accountName));
 
-            using var scope = _clientDiagnostics.CreateScope("PathsClient.GetEmpty");
+            using var scope = ClientDiagnostics.CreateScope("PathsClient.GetEmpty");
             scope.Start();
             try
             {

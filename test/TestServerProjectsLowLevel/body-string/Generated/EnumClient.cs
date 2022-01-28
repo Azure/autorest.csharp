@@ -19,9 +19,8 @@ namespace body_string_LowLevel
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
-        private readonly ClientDiagnostics _clientDiagnostics;
         private readonly Uri _endpoint;
-
+        internal ClientDiagnostics ClientDiagnostics { get; }
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
@@ -41,7 +40,7 @@ namespace body_string_LowLevel
             endpoint ??= new Uri("http://localhost:3000");
             options ??= new AutoRestSwaggerBATServiceClientOptions();
 
-            _clientDiagnostics = new ClientDiagnostics(options);
+            ClientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
@@ -62,7 +61,7 @@ namespace body_string_LowLevel
         public virtual async Task<Response> GetNotExpandableAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("EnumClient.GetNotExpandable");
+            using var scope = ClientDiagnostics.CreateScope("EnumClient.GetNotExpandable");
             scope.Start();
             try
             {
@@ -91,7 +90,7 @@ namespace body_string_LowLevel
         public virtual Response GetNotExpandable(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("EnumClient.GetNotExpandable");
+            using var scope = ClientDiagnostics.CreateScope("EnumClient.GetNotExpandable");
             scope.Start();
             try
             {
@@ -124,7 +123,7 @@ namespace body_string_LowLevel
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = _clientDiagnostics.CreateScope("EnumClient.PutNotExpandable");
+            using var scope = ClientDiagnostics.CreateScope("EnumClient.PutNotExpandable");
             scope.Start();
             try
             {
@@ -157,7 +156,7 @@ namespace body_string_LowLevel
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = _clientDiagnostics.CreateScope("EnumClient.PutNotExpandable");
+            using var scope = ClientDiagnostics.CreateScope("EnumClient.PutNotExpandable");
             scope.Start();
             try
             {
@@ -186,7 +185,7 @@ namespace body_string_LowLevel
         public virtual async Task<Response> GetReferencedAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("EnumClient.GetReferenced");
+            using var scope = ClientDiagnostics.CreateScope("EnumClient.GetReferenced");
             scope.Start();
             try
             {
@@ -215,7 +214,7 @@ namespace body_string_LowLevel
         public virtual Response GetReferenced(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("EnumClient.GetReferenced");
+            using var scope = ClientDiagnostics.CreateScope("EnumClient.GetReferenced");
             scope.Start();
             try
             {
@@ -248,7 +247,7 @@ namespace body_string_LowLevel
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = _clientDiagnostics.CreateScope("EnumClient.PutReferenced");
+            using var scope = ClientDiagnostics.CreateScope("EnumClient.PutReferenced");
             scope.Start();
             try
             {
@@ -281,7 +280,7 @@ namespace body_string_LowLevel
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = _clientDiagnostics.CreateScope("EnumClient.PutReferenced");
+            using var scope = ClientDiagnostics.CreateScope("EnumClient.PutReferenced");
             scope.Start();
             try
             {
@@ -316,7 +315,7 @@ namespace body_string_LowLevel
         public virtual async Task<Response> GetReferencedConstantAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("EnumClient.GetReferencedConstant");
+            using var scope = ClientDiagnostics.CreateScope("EnumClient.GetReferencedConstant");
             scope.Start();
             try
             {
@@ -351,7 +350,7 @@ namespace body_string_LowLevel
         public virtual Response GetReferencedConstant(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("EnumClient.GetReferencedConstant");
+            using var scope = ClientDiagnostics.CreateScope("EnumClient.GetReferencedConstant");
             scope.Start();
             try
             {
@@ -390,7 +389,7 @@ namespace body_string_LowLevel
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = _clientDiagnostics.CreateScope("EnumClient.PutReferencedConstant");
+            using var scope = ClientDiagnostics.CreateScope("EnumClient.PutReferencedConstant");
             scope.Start();
             try
             {
@@ -429,7 +428,7 @@ namespace body_string_LowLevel
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = _clientDiagnostics.CreateScope("EnumClient.PutReferencedConstant");
+            using var scope = ClientDiagnostics.CreateScope("EnumClient.PutReferencedConstant");
             scope.Start();
             try
             {

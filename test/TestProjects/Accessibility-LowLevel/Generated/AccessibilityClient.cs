@@ -19,9 +19,8 @@ namespace Accessibility_LowLevel
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
-        private readonly ClientDiagnostics _clientDiagnostics;
         private readonly Uri _endpoint;
-
+        internal ClientDiagnostics ClientDiagnostics { get; }
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
@@ -41,7 +40,7 @@ namespace Accessibility_LowLevel
             endpoint ??= new Uri("http://localhost:3000");
             options ??= new AccessibilityClientOptions();
 
-            _clientDiagnostics = new ClientDiagnostics(options);
+            ClientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
@@ -53,7 +52,7 @@ namespace Accessibility_LowLevel
         public virtual async Task<Response> OperationAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("AccessibilityClient.Operation");
+            using var scope = ClientDiagnostics.CreateScope("AccessibilityClient.Operation");
             scope.Start();
             try
             {
@@ -73,7 +72,7 @@ namespace Accessibility_LowLevel
         public virtual Response Operation(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("AccessibilityClient.Operation");
+            using var scope = ClientDiagnostics.CreateScope("AccessibilityClient.Operation");
             scope.Start();
             try
             {
@@ -93,7 +92,7 @@ namespace Accessibility_LowLevel
         internal virtual async Task<Response> OperationInternalAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("AccessibilityClient.OperationInternal");
+            using var scope = ClientDiagnostics.CreateScope("AccessibilityClient.OperationInternal");
             scope.Start();
             try
             {
@@ -113,7 +112,7 @@ namespace Accessibility_LowLevel
         internal virtual Response OperationInternal(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("AccessibilityClient.OperationInternal");
+            using var scope = ClientDiagnostics.CreateScope("AccessibilityClient.OperationInternal");
             scope.Start();
             try
             {

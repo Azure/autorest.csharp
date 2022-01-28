@@ -19,9 +19,8 @@ namespace RequestContextAllOptional_LowLevel
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
-        private readonly ClientDiagnostics _clientDiagnostics;
         private readonly Uri _endpoint;
-
+        internal ClientDiagnostics ClientDiagnostics { get; }
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
@@ -41,7 +40,7 @@ namespace RequestContextAllOptional_LowLevel
             endpoint ??= new Uri("http://localhost:3000");
             options ??= new RequestContextAllOptionalClientOptions();
 
-            _clientDiagnostics = new ClientDiagnostics(options);
+            ClientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
@@ -57,7 +56,7 @@ namespace RequestContextAllOptional_LowLevel
         public virtual async Task<Response> NoRequestBodyResponseBodyAsync(int id, int? top = null, int skip = 12, string status = "start", RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("RequestContextAllOptionalClient.NoRequestBodyResponseBody");
+            using var scope = ClientDiagnostics.CreateScope("RequestContextAllOptionalClient.NoRequestBodyResponseBody");
             scope.Start();
             try
             {
@@ -81,7 +80,7 @@ namespace RequestContextAllOptional_LowLevel
         public virtual Response NoRequestBodyResponseBody(int id, int? top = null, int skip = 12, string status = "start", RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("RequestContextAllOptionalClient.NoRequestBodyResponseBody");
+            using var scope = ClientDiagnostics.CreateScope("RequestContextAllOptionalClient.NoRequestBodyResponseBody");
             scope.Start();
             try
             {
@@ -117,7 +116,7 @@ namespace RequestContextAllOptional_LowLevel
         public virtual async Task<Response> RequestBodyResponseBodyAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("RequestContextAllOptionalClient.RequestBodyResponseBody");
+            using var scope = ClientDiagnostics.CreateScope("RequestContextAllOptionalClient.RequestBodyResponseBody");
             scope.Start();
             try
             {
@@ -153,7 +152,7 @@ namespace RequestContextAllOptional_LowLevel
         public virtual Response RequestBodyResponseBody(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("RequestContextAllOptionalClient.RequestBodyResponseBody");
+            using var scope = ClientDiagnostics.CreateScope("RequestContextAllOptionalClient.RequestBodyResponseBody");
             scope.Start();
             try
             {
@@ -177,7 +176,7 @@ namespace RequestContextAllOptional_LowLevel
         {
             Argument.AssertNotNull(resourceName, nameof(resourceName));
 
-            using var scope = _clientDiagnostics.CreateScope("RequestContextAllOptionalClient.DeleteNoRequestBodyResponseBody");
+            using var scope = ClientDiagnostics.CreateScope("RequestContextAllOptionalClient.DeleteNoRequestBodyResponseBody");
             scope.Start();
             try
             {
@@ -201,7 +200,7 @@ namespace RequestContextAllOptional_LowLevel
         {
             Argument.AssertNotNull(resourceName, nameof(resourceName));
 
-            using var scope = _clientDiagnostics.CreateScope("RequestContextAllOptionalClient.DeleteNoRequestBodyResponseBody");
+            using var scope = ClientDiagnostics.CreateScope("RequestContextAllOptionalClient.DeleteNoRequestBodyResponseBody");
             scope.Start();
             try
             {
@@ -221,7 +220,7 @@ namespace RequestContextAllOptional_LowLevel
         public virtual async Task<Response> NoRequestBodyNoResponseBodyAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("RequestContextAllOptionalClient.NoRequestBodyNoResponseBody");
+            using var scope = ClientDiagnostics.CreateScope("RequestContextAllOptionalClient.NoRequestBodyNoResponseBody");
             scope.Start();
             try
             {
@@ -241,7 +240,7 @@ namespace RequestContextAllOptional_LowLevel
         public virtual Response NoRequestBodyNoResponseBody(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("RequestContextAllOptionalClient.NoRequestBodyNoResponseBody");
+            using var scope = ClientDiagnostics.CreateScope("RequestContextAllOptionalClient.NoRequestBodyNoResponseBody");
             scope.Start();
             try
             {
@@ -262,7 +261,7 @@ namespace RequestContextAllOptional_LowLevel
         public virtual async Task<Response> RequestBodyNoResponseBodyAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("RequestContextAllOptionalClient.RequestBodyNoResponseBody");
+            using var scope = ClientDiagnostics.CreateScope("RequestContextAllOptionalClient.RequestBodyNoResponseBody");
             scope.Start();
             try
             {
@@ -283,7 +282,7 @@ namespace RequestContextAllOptional_LowLevel
         public virtual Response RequestBodyNoResponseBody(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("RequestContextAllOptionalClient.RequestBodyNoResponseBody");
+            using var scope = ClientDiagnostics.CreateScope("RequestContextAllOptionalClient.RequestBodyNoResponseBody");
             scope.Start();
             try
             {
