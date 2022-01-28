@@ -22,8 +22,9 @@ namespace SupersetFlattenInheritance.Models
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="type"> The type. </param>
+        /// <param name="systemData"> The systemData. </param>
         /// <param name="foo"></param>
-        internal ResourceModel2(ResourceIdentifier id, string name, ResourceType type, string foo) : base(id, name, type)
+        internal ResourceModel2(ResourceIdentifier id, string name, ResourceType type, SystemData systemData, string foo) : base(id, name, type, systemData)
         {
             Foo = foo;
         }

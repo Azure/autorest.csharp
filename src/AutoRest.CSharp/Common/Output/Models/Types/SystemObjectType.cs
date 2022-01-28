@@ -61,6 +61,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private static Type? GetSerializeAs(Type type) => type.Name switch
         {
             "ResourceIdentifier" => type,
+            "SystemData" => type,
             _ => ReferenceTypes.IsMgmtReferenceType (type) ? typeof(string) : null,
         };
 

@@ -97,7 +97,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 return true;
             }
             // Need to compare subproperties recursively when the property Types have different names but should avoid infinite loop in cases like ErrorResponse has a property of List<ErrorResponse>, so we'll check whether we've compared properties in propertiesInComparison.
-            else if (parentPropertyType.IsClass && MatchProperty(parentPropertyType, childPropertyType, propertiesInComparison, fromArePropertyTypesMatch: true))
+            else if (MatchProperty(parentPropertyType, childPropertyType, propertiesInComparison, fromArePropertyTypesMatch: true))
             {
                 return true;
             }
@@ -189,8 +189,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         private static bool MatchEnum(Type parentPropertyType, EnumType childPropertyType)
         {
-            if (parentPropertyType.Name != childPropertyType.Declaration.Name)
-                return false;
             var parentProperties = parentPropertyType.GetProperties().ToList();
             if (parentProperties.Count != childPropertyType.Values.Count)
                 return false;

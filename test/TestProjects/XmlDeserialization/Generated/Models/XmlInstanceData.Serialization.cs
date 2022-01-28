@@ -9,6 +9,7 @@ using System.Text.Json;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
+using Azure.ResourceManager.Models;
 
 namespace XmlDeserialization
 {
@@ -25,6 +26,7 @@ namespace XmlDeserialization
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
+            SystemData systemData = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"))
@@ -42,8 +44,13 @@ namespace XmlDeserialization
                     type = property.Value.GetString();
                     continue;
                 }
+                if (property.NameEquals("systemData"))
+                {
+                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.ToString());
+                    continue;
+                }
             }
-            return new XmlInstanceData(id, name, type);
+            return new XmlInstanceData(id, name, type, systemData);
         }
 
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
@@ -58,27 +65,10 @@ namespace XmlDeserialization
             writer.WriteStartElement("type");
             writer.WriteValue(Type);
             writer.WriteEndElement();
+            writer.WriteStartElement("systemData");
+            writer.WriteValue(SystemData);
             writer.WriteEndElement();
-        }
-
-        internal static XmlInstanceData DeserializeXmlInstanceData(XElement element)
-        {
-            ResourceIdentifier id = default;
-            string name = default;
-            ResourceType type = default;
-            if (element.Element("id") is XElement idElement)
-            {
-                id = new ResourceIdentifier((string)idElement);
-            }
-            if (element.Element("name") is XElement nameElement)
-            {
-                name = (string)nameElement;
-            }
-            if (element.Element("type") is XElement typeElement)
-            {
-                type = (string)typeElement;
-            }
-            return new XmlInstanceData(id, name, type);
+            writer.WriteEndElement();
         }
     }
 }

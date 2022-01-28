@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Models;
 
 namespace MgmtPropertyChooser.Models
 {
@@ -39,6 +40,7 @@ namespace MgmtPropertyChooser.Models
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
+            SystemData systemData = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("location"))
@@ -76,8 +78,13 @@ namespace MgmtPropertyChooser.Models
                     type = property.Value.GetString();
                     continue;
                 }
+                if (property.NameEquals("systemData"))
+                {
+                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.ToString());
+                    continue;
+                }
             }
-            return new Resource(id, name, type, location, Optional.ToDictionary(tags));
+            return new Resource(id, name, type, systemData, location, Optional.ToDictionary(tags));
         }
     }
 }

@@ -70,15 +70,15 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
                         // we only check if a resource needs a GetByName method when it has a List operation in the subscription extension.
                         // If its parent is Subscription, we will have a GetCollection method of that resource, which contains a GetAllAsGenericResource serves the same purpose.
-                        if (CheckGetAllAsGenericMethod(clientOperation, out var resource))
-                        {
-                            // in case that a resource has multiple list methods at the subscription level (for instance one ListBySusbcription and one ListByLocation, location is not an available parent therefore it will show up here)
-                            if (resourcesWithGetAllAsGenericMethod.Contains(resource))
-                                continue;
-                            WriteGetAllResourcesAsGenericMethod(resource, true);
-                            WriteGetAllResourcesAsGenericMethod(resource, false);
-                            resourcesWithGetAllAsGenericMethod.Add(resource);
-                        }
+                        // if (CheckGetAllAsGenericMethod(clientOperation, out var resource))
+                        // {
+                        //     // in case that a resource has multiple list methods at the subscription level (for instance one ListBySusbcription and one ListByLocation, location is not an available parent therefore it will show up here)
+                        //     if (resourcesWithGetAllAsGenericMethod.Contains(resource))
+                        //         continue;
+                        //     WriteGetAllResourcesAsGenericMethod(resource, true);
+                        //     WriteGetAllResourcesAsGenericMethod(resource, false);
+                        //     resourcesWithGetAllAsGenericMethod.Add(resource);
+                        // }
                     }
                 }
             }
@@ -134,25 +134,25 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        private void WriteGetAllResourcesAsGenericMethod(Resource resource, bool async)
-        {
-            _writer.Line();
-            _writer.WriteXmlDocumentationSummary($"Filters the list of {resource.ResourceName.LastWordToPlural()} for a <see cref=\"{typeof(Subscription)}\" /> represented as generic resources.");
-            _writer.WriteXmlDocumentationParameter("filter", $"The string to filter the list.");
-            _writer.WriteXmlDocumentationParameter("expand", $"Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`.");
-            _writer.WriteXmlDocumentationParameter("top", $"The number of results to return.");
-            _writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
-            _writer.WriteXmlDocumentationReturns($"A collection of resource operations that may take multiple service requests to iterate over.");
+        // private void WriteGetAllResourcesAsGenericMethod(Resource resource, bool async)
+        // {
+        //     _writer.Line();
+        //     _writer.WriteXmlDocumentationSummary($"Filters the list of {resource.ResourceName.LastWordToPlural()} for a <see cref=\"{typeof(Subscription)}\" /> represented as generic resources.");
+        //     _writer.WriteXmlDocumentationParameter("filter", $"The string to filter the list.");
+        //     _writer.WriteXmlDocumentationParameter("expand", $"Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`.");
+        //     _writer.WriteXmlDocumentationParameter("top", $"The number of results to return.");
+        //     _writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
+        //     _writer.WriteXmlDocumentationReturns($"A collection of resource operations that may take multiple service requests to iterate over.");
 
-            var responseType = typeof(GenericResource).WrapPageable(async);
-            using (_writer.Scope($"public {responseType} {CreateMethodName($"Get{resource.Type.Name.ResourceNameToPlural()}AsGenericResources", async)}({typeof(string)} filter, {typeof(string)} expand, {typeof(int?)} top, {typeof(CancellationToken)} cancellationToken = default)"))
-            {
-                var filters = new CodeWriterDeclaration("filters");
-                _writer.Line($"{typeof(ResourceFilterCollection)} {filters:D} = new({resource.Type}.ResourceType);");
-                _writer.Line($"{filters}.SubstringFilter = filter;");
-                _writer.Line($"return {typeof(ResourceListOperations)}.{CreateMethodName("GetAtContext", async)}({ArmClientReference}.GetSubscription(Id), {filters}, expand, top, cancellationToken);");
-            }
-        }
+        //     var responseType = typeof(GenericResource).WrapPageable(async);
+        //     using (_writer.Scope($"public {responseType} {CreateMethodName($"Get{resource.Type.Name.ResourceNameToPlural()}AsGenericResources", async)}({typeof(string)} filter, {typeof(string)} expand, {typeof(int?)} top, {typeof(CancellationToken)} cancellationToken = default)"))
+        //     {
+        //         var filters = new CodeWriterDeclaration("filters");
+        //         _writer.Line($"{typeof(ResourceFilterCollection)} {filters:D} = new({resource.Type}.ResourceType);");
+        //         _writer.Line($"{filters}.SubstringFilter = filter;");
+        //         _writer.Line($"return {typeof(ResourceListOperations)}.{CreateMethodName("GetAtContext", async)}({ArmClientReference}.GetSubscription(Id), {filters}, expand, top, cancellationToken);");
+        //     }
+        // }
 
         protected override void WriteSingletonResourceEntry(Resource resource, string singletonResourceSuffix)
         {

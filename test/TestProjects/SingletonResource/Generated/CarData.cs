@@ -22,8 +22,9 @@ namespace SingletonResource
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="type"> The type. </param>
+        /// <param name="systemData"> The systemData. </param>
         /// <param name="horsepower"></param>
-        internal CarData(ResourceIdentifier id, string name, ResourceType type, string horsepower) : base(id, name, type)
+        internal CarData(ResourceIdentifier id, string name, ResourceType type, SystemData systemData, string horsepower) : base(id, name, type, systemData)
         {
             Horsepower = horsepower;
         }

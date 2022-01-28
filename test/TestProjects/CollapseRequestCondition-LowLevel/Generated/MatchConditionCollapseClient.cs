@@ -19,9 +19,8 @@ namespace CollapseRequestCondition_LowLevel
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
-        private readonly ClientDiagnostics _clientDiagnostics;
         private readonly Uri _endpoint;
-
+        internal ClientDiagnostics ClientDiagnostics { get; }
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
@@ -41,7 +40,7 @@ namespace CollapseRequestCondition_LowLevel
             endpoint ??= new Uri("http://localhost:3000");
             options ??= new CollapseRequestConditionsClientOptions();
 
-            _clientDiagnostics = new ClientDiagnostics(options);
+            ClientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
@@ -54,7 +53,7 @@ namespace CollapseRequestCondition_LowLevel
         public virtual async Task<Response> CollapseGetWithHeadAsync(string otherHeader = null, MatchConditions matchConditions = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MatchConditionCollapseClient.CollapseGetWithHead");
+            using var scope = ClientDiagnostics.CreateScope("MatchConditionCollapseClient.CollapseGetWithHead");
             scope.Start();
             try
             {
@@ -75,7 +74,7 @@ namespace CollapseRequestCondition_LowLevel
         public virtual Response CollapseGetWithHead(string otherHeader = null, MatchConditions matchConditions = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MatchConditionCollapseClient.CollapseGetWithHead");
+            using var scope = ClientDiagnostics.CreateScope("MatchConditionCollapseClient.CollapseGetWithHead");
             scope.Start();
             try
             {
@@ -96,7 +95,7 @@ namespace CollapseRequestCondition_LowLevel
         public virtual async Task<Response> CollapsePutAsync(RequestContent content, MatchConditions matchConditions = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MatchConditionCollapseClient.CollapsePut");
+            using var scope = ClientDiagnostics.CreateScope("MatchConditionCollapseClient.CollapsePut");
             scope.Start();
             try
             {
@@ -117,7 +116,7 @@ namespace CollapseRequestCondition_LowLevel
         public virtual Response CollapsePut(RequestContent content, MatchConditions matchConditions = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MatchConditionCollapseClient.CollapsePut");
+            using var scope = ClientDiagnostics.CreateScope("MatchConditionCollapseClient.CollapsePut");
             scope.Start();
             try
             {
@@ -137,7 +136,7 @@ namespace CollapseRequestCondition_LowLevel
         public virtual async Task<Response> CollapseGetAsync(MatchConditions matchConditions = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MatchConditionCollapseClient.CollapseGet");
+            using var scope = ClientDiagnostics.CreateScope("MatchConditionCollapseClient.CollapseGet");
             scope.Start();
             try
             {
@@ -157,7 +156,7 @@ namespace CollapseRequestCondition_LowLevel
         public virtual Response CollapseGet(MatchConditions matchConditions = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MatchConditionCollapseClient.CollapseGet");
+            using var scope = ClientDiagnostics.CreateScope("MatchConditionCollapseClient.CollapseGet");
             scope.Start();
             try
             {
@@ -177,7 +176,7 @@ namespace CollapseRequestCondition_LowLevel
         public virtual async Task<Response> MulticollapseGetAsync(RequestConditions requestConditions = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MatchConditionCollapseClient.MulticollapseGet");
+            using var scope = ClientDiagnostics.CreateScope("MatchConditionCollapseClient.MulticollapseGet");
             scope.Start();
             try
             {
@@ -197,7 +196,7 @@ namespace CollapseRequestCondition_LowLevel
         public virtual Response MulticollapseGet(RequestConditions requestConditions = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MatchConditionCollapseClient.MulticollapseGet");
+            using var scope = ClientDiagnostics.CreateScope("MatchConditionCollapseClient.MulticollapseGet");
             scope.Start();
             try
             {

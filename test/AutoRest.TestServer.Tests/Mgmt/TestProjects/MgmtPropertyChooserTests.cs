@@ -31,15 +31,15 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             Assert.AreEqual(typeof(UserAssignedIdentity), valueType);
 
             var valueProperties = valueType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-            var principalIdProperty = valueProperties[1];
+            var principalIdProperty = valueProperties[0];
             Assert.NotNull(principalIdProperty);
             Assert.AreEqual("PrincipalId", principalIdProperty.Name);
-            Assert.AreEqual(typeof(Guid), principalIdProperty.PropertyType);
+            Assert.AreEqual(typeof(Guid), principalIdProperty.PropertyType.GetGenericArguments()[0]);
 
-            var clientIdProperty = valueProperties[0];
+            var clientIdProperty = valueProperties[1];
             Assert.NotNull(clientIdProperty);
             Assert.AreEqual("ClientId", clientIdProperty.Name);
-            Assert.AreEqual(typeof(Guid), clientIdProperty.PropertyType);
+            Assert.AreEqual(typeof(Guid), clientIdProperty.PropertyType.GetGenericArguments()[0]);
         }
 
         [TestCase]
@@ -74,7 +74,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             Assert.AreEqual(properties.First(p => p.Name == "FakeResources").PropertyType.GetGenericArguments().First(), typeof(MgmtPropertyChooser.Models.Resource));
             // VirtualMachineIdentity is replaced by ResourceIdentity, property name is unchanged, still called Identity.
             Assert.IsFalse(properties.Any(p => p.Name == "ResourceIdentity"));
-            Assert.IsTrue(properties.Any(p => p.Name == "Identity" && p.PropertyType == typeof(ResourceIdentity)));
+            Assert.IsTrue(properties.Any(p => p.Name == "Identity" && p.PropertyType == typeof(ManagedServiceIdentity)));
             // VirtualMachineIdentity is not generated
             var virtualMachineIdentityModel = Assembly.GetExecutingAssembly().GetType("MgmtPropertyChooser.Models.VirtualMachineIdentity");
             Assert.Null(virtualMachineIdentityModel);

@@ -19,10 +19,9 @@ namespace body_complex_LowLevel
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
-        private readonly ClientDiagnostics _clientDiagnostics;
         private readonly Uri _endpoint;
         private readonly string _apiVersion;
-
+        internal ClientDiagnostics ClientDiagnostics { get; }
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
@@ -42,7 +41,7 @@ namespace body_complex_LowLevel
             endpoint ??= new Uri("http://localhost:3000");
             options ??= new AutoRestComplexTestServiceClientOptions();
 
-            _clientDiagnostics = new ClientDiagnostics(options);
+            ClientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
@@ -71,7 +70,7 @@ namespace body_complex_LowLevel
         public virtual async Task<Response> GetValidAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("BasicClient.GetValid");
+            using var scope = ClientDiagnostics.CreateScope("BasicClient.GetValid");
             scope.Start();
             try
             {
@@ -107,7 +106,7 @@ namespace body_complex_LowLevel
         public virtual Response GetValid(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("BasicClient.GetValid");
+            using var scope = ClientDiagnostics.CreateScope("BasicClient.GetValid");
             scope.Start();
             try
             {
@@ -147,7 +146,7 @@ namespace body_complex_LowLevel
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = _clientDiagnostics.CreateScope("BasicClient.PutValid");
+            using var scope = ClientDiagnostics.CreateScope("BasicClient.PutValid");
             scope.Start();
             try
             {
@@ -187,7 +186,7 @@ namespace body_complex_LowLevel
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = _clientDiagnostics.CreateScope("BasicClient.PutValid");
+            using var scope = ClientDiagnostics.CreateScope("BasicClient.PutValid");
             scope.Start();
             try
             {
@@ -223,7 +222,7 @@ namespace body_complex_LowLevel
         public virtual async Task<Response> GetInvalidAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("BasicClient.GetInvalid");
+            using var scope = ClientDiagnostics.CreateScope("BasicClient.GetInvalid");
             scope.Start();
             try
             {
@@ -259,7 +258,7 @@ namespace body_complex_LowLevel
         public virtual Response GetInvalid(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("BasicClient.GetInvalid");
+            using var scope = ClientDiagnostics.CreateScope("BasicClient.GetInvalid");
             scope.Start();
             try
             {
@@ -295,7 +294,7 @@ namespace body_complex_LowLevel
         public virtual async Task<Response> GetEmptyAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("BasicClient.GetEmpty");
+            using var scope = ClientDiagnostics.CreateScope("BasicClient.GetEmpty");
             scope.Start();
             try
             {
@@ -331,7 +330,7 @@ namespace body_complex_LowLevel
         public virtual Response GetEmpty(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("BasicClient.GetEmpty");
+            using var scope = ClientDiagnostics.CreateScope("BasicClient.GetEmpty");
             scope.Start();
             try
             {
@@ -367,7 +366,7 @@ namespace body_complex_LowLevel
         public virtual async Task<Response> GetNullAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("BasicClient.GetNull");
+            using var scope = ClientDiagnostics.CreateScope("BasicClient.GetNull");
             scope.Start();
             try
             {
@@ -403,7 +402,7 @@ namespace body_complex_LowLevel
         public virtual Response GetNull(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("BasicClient.GetNull");
+            using var scope = ClientDiagnostics.CreateScope("BasicClient.GetNull");
             scope.Start();
             try
             {
@@ -439,7 +438,7 @@ namespace body_complex_LowLevel
         public virtual async Task<Response> GetNotProvidedAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("BasicClient.GetNotProvided");
+            using var scope = ClientDiagnostics.CreateScope("BasicClient.GetNotProvided");
             scope.Start();
             try
             {
@@ -475,7 +474,7 @@ namespace body_complex_LowLevel
         public virtual Response GetNotProvided(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("BasicClient.GetNotProvided");
+            using var scope = ClientDiagnostics.CreateScope("BasicClient.GetNotProvided");
             scope.Start();
             try
             {

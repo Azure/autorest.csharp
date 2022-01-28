@@ -32,13 +32,13 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             Assert.AreEqual(isExists, collectionTypeExists);
         }
 
-        [TestCase("AvailabilitySetCollection", "GetAllAsGenericResources", true)]
-        [TestCase("DedicatedHostGroupCollection", "GetAllAsGenericResources", true)]
-        public void ValidateMethods(string className, string methodName, bool exist)
-        {
-            var classesToCheck = FindAllCollections();
-            var classToCheck = classesToCheck.First(t => t.Name == className);
-            Assert.AreEqual(exist, classToCheck.GetMethod(methodName) != null, $"can{(exist ? "not" : string.Empty)} find {className}.{methodName}");
-        }
+        //[TestCase("AvailabilitySetCollection", "GetAllAsGenericResources", true)]
+        //[TestCase("DedicatedHostGroupCollection", "GetAllAsGenericResources", true)]
+        //public void ValidateMethods(string className, string methodName, bool exist)
+        //{
+        //    var classesToCheck = FindAllCollections();
+        //    var classToCheck = classesToCheck.First(t => t.Name == className);
+        //    Assert.AreEqual(exist, classToCheck.GetMethod(methodName) != null, $"can{(exist ? "not" : string.Empty)} find {className}.{methodName}");
+        //}
     }
 }
