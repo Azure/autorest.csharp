@@ -3,6 +3,7 @@
 
 using System;
 using Azure.Core;
+using Azure.ResourceManager.Models;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
@@ -13,7 +14,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return frameworkType.IsSubclassOf(typeof(ResourceIdentifier)) ||
                 frameworkType == typeof(ResourceType) ||
                 frameworkType == typeof(AzureLocation) ||
-                frameworkType == typeof(ResourceIdentifier);
+                frameworkType == typeof(ResourceIdentifier) ||
+                frameworkType == typeof(SystemData);
         }
     }
 }

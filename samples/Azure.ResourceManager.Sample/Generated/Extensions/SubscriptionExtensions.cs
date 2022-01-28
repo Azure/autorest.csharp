@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -62,30 +61,6 @@ namespace Azure.ResourceManager.Sample
             return GetExtensionClient(subscription).GetAvailabilitySets(expand, cancellationToken);
         }
 
-        /// <summary> Filters the list of AvailabilitySets for a <see cref="Subscription" /> represented as generic resources. </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <param name="filter"> The string to filter the list. </param>
-        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<GenericResource> GetAvailabilitySetsAsGenericResourcesAsync(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
-        {
-            return GetExtensionClient(subscription).GetAvailabilitySetsAsGenericResourcesAsync(filter, expand, top, cancellationToken);
-        }
-
-        /// <summary> Filters the list of AvailabilitySets for a <see cref="Subscription" /> represented as generic resources. </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <param name="filter"> The string to filter the list. </param>
-        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static Pageable<GenericResource> GetAvailabilitySetsAsGenericResources(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
-        {
-            return GetExtensionClient(subscription).GetAvailabilitySetsAsGenericResources(filter, expand, top, cancellationToken);
-        }
-
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/proximityPlacementGroups
         /// ContextualPath: /subscriptions/{subscriptionId}
         /// OperationId: ProximityPlacementGroups_ListBySubscription
@@ -106,30 +81,6 @@ namespace Azure.ResourceManager.Sample
         public static Pageable<ProximityPlacementGroup> GetProximityPlacementGroups(this Subscription subscription, CancellationToken cancellationToken = default)
         {
             return GetExtensionClient(subscription).GetProximityPlacementGroups(cancellationToken);
-        }
-
-        /// <summary> Filters the list of ProximityPlacementGroups for a <see cref="Subscription" /> represented as generic resources. </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <param name="filter"> The string to filter the list. </param>
-        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<GenericResource> GetProximityPlacementGroupsAsGenericResourcesAsync(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
-        {
-            return GetExtensionClient(subscription).GetProximityPlacementGroupsAsGenericResourcesAsync(filter, expand, top, cancellationToken);
-        }
-
-        /// <summary> Filters the list of ProximityPlacementGroups for a <see cref="Subscription" /> represented as generic resources. </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <param name="filter"> The string to filter the list. </param>
-        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static Pageable<GenericResource> GetProximityPlacementGroupsAsGenericResources(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
-        {
-            return GetExtensionClient(subscription).GetProximityPlacementGroupsAsGenericResources(filter, expand, top, cancellationToken);
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/hostGroups
@@ -154,30 +105,6 @@ namespace Azure.ResourceManager.Sample
             return GetExtensionClient(subscription).GetDedicatedHostGroups(cancellationToken);
         }
 
-        /// <summary> Filters the list of DedicatedHostGroups for a <see cref="Subscription" /> represented as generic resources. </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <param name="filter"> The string to filter the list. </param>
-        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<GenericResource> GetDedicatedHostGroupsAsGenericResourcesAsync(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
-        {
-            return GetExtensionClient(subscription).GetDedicatedHostGroupsAsGenericResourcesAsync(filter, expand, top, cancellationToken);
-        }
-
-        /// <summary> Filters the list of DedicatedHostGroups for a <see cref="Subscription" /> represented as generic resources. </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <param name="filter"> The string to filter the list. </param>
-        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static Pageable<GenericResource> GetDedicatedHostGroupsAsGenericResources(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
-        {
-            return GetExtensionClient(subscription).GetDedicatedHostGroupsAsGenericResources(filter, expand, top, cancellationToken);
-        }
-
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/sshPublicKeys
         /// ContextualPath: /subscriptions/{subscriptionId}
         /// OperationId: SshPublicKeys_ListBySubscription
@@ -200,30 +127,6 @@ namespace Azure.ResourceManager.Sample
             return GetExtensionClient(subscription).GetSshPublicKeys(cancellationToken);
         }
 
-        /// <summary> Filters the list of SshPublicKeys for a <see cref="Subscription" /> represented as generic resources. </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <param name="filter"> The string to filter the list. </param>
-        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<GenericResource> GetSshPublicKeysAsGenericResourcesAsync(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
-        {
-            return GetExtensionClient(subscription).GetSshPublicKeysAsGenericResourcesAsync(filter, expand, top, cancellationToken);
-        }
-
-        /// <summary> Filters the list of SshPublicKeys for a <see cref="Subscription" /> represented as generic resources. </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <param name="filter"> The string to filter the list. </param>
-        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static Pageable<GenericResource> GetSshPublicKeysAsGenericResources(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
-        {
-            return GetExtensionClient(subscription).GetSshPublicKeysAsGenericResources(filter, expand, top, cancellationToken);
-        }
-
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus/{skus}/versions/{version}
         /// ContextualPath: /subscriptions/{subscriptionId}
         /// OperationId: VirtualMachineImages_Get
@@ -234,8 +137,8 @@ namespace Azure.ResourceManager.Sample
         /// <param name="skus"> A valid image SKU. </param>
         /// <param name="version"> A valid image SKU version. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/>, <paramref name="publisherName"/>, <paramref name="offer"/>, <paramref name="skus"/>, or <paramref name="version"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="location"/>, <paramref name="publisherName"/>, <paramref name="offer"/>, <paramref name="skus"/>, or <paramref name="version"/> is null. </exception>
+        /// <exception cref="System.ArgumentException"> <paramref name="location"/>, <paramref name="publisherName"/>, <paramref name="offer"/>, <paramref name="skus"/>, or <paramref name="version"/> is empty. </exception>
+        /// <exception cref="System.ArgumentNullException"> <paramref name="location"/>, <paramref name="publisherName"/>, <paramref name="offer"/>, <paramref name="skus"/>, or <paramref name="version"/> is null. </exception>
         public static async Task<Response<VirtualMachineImage>> GetVirtualMachineImageAsync(this Subscription subscription, string location, string publisherName, string offer, string skus, string version, CancellationToken cancellationToken = default)
         {
             return await GetExtensionClient(subscription).GetVirtualMachineImageAsync(location, publisherName, offer, skus, version, cancellationToken).ConfigureAwait(false);
@@ -251,8 +154,8 @@ namespace Azure.ResourceManager.Sample
         /// <param name="skus"> A valid image SKU. </param>
         /// <param name="version"> A valid image SKU version. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/>, <paramref name="publisherName"/>, <paramref name="offer"/>, <paramref name="skus"/>, or <paramref name="version"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="location"/>, <paramref name="publisherName"/>, <paramref name="offer"/>, <paramref name="skus"/>, or <paramref name="version"/> is null. </exception>
+        /// <exception cref="System.ArgumentException"> <paramref name="location"/>, <paramref name="publisherName"/>, <paramref name="offer"/>, <paramref name="skus"/>, or <paramref name="version"/> is empty. </exception>
+        /// <exception cref="System.ArgumentNullException"> <paramref name="location"/>, <paramref name="publisherName"/>, <paramref name="offer"/>, <paramref name="skus"/>, or <paramref name="version"/> is null. </exception>
         public static Response<VirtualMachineImage> GetVirtualMachineImage(this Subscription subscription, string location, string publisherName, string offer, string skus, string version, CancellationToken cancellationToken = default)
         {
             return GetExtensionClient(subscription).GetVirtualMachineImage(location, publisherName, offer, skus, version, cancellationToken);
@@ -270,8 +173,8 @@ namespace Azure.ResourceManager.Sample
         /// <param name="top"> The Integer to use. </param>
         /// <param name="orderby"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/>, <paramref name="publisherName"/>, <paramref name="offer"/>, or <paramref name="skus"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="location"/>, <paramref name="publisherName"/>, <paramref name="offer"/>, or <paramref name="skus"/> is null. </exception>
+        /// <exception cref="System.ArgumentException"> <paramref name="location"/>, <paramref name="publisherName"/>, <paramref name="offer"/>, or <paramref name="skus"/> is empty. </exception>
+        /// <exception cref="System.ArgumentNullException"> <paramref name="location"/>, <paramref name="publisherName"/>, <paramref name="offer"/>, or <paramref name="skus"/> is null. </exception>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<VirtualMachineImageResource> GetVirtualMachineImagesAsync(this Subscription subscription, string location, string publisherName, string offer, string skus, string expand = null, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
         {
@@ -290,8 +193,8 @@ namespace Azure.ResourceManager.Sample
         /// <param name="top"> The Integer to use. </param>
         /// <param name="orderby"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/>, <paramref name="publisherName"/>, <paramref name="offer"/>, or <paramref name="skus"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="location"/>, <paramref name="publisherName"/>, <paramref name="offer"/>, or <paramref name="skus"/> is null. </exception>
+        /// <exception cref="System.ArgumentException"> <paramref name="location"/>, <paramref name="publisherName"/>, <paramref name="offer"/>, or <paramref name="skus"/> is empty. </exception>
+        /// <exception cref="System.ArgumentNullException"> <paramref name="location"/>, <paramref name="publisherName"/>, <paramref name="offer"/>, or <paramref name="skus"/> is null. </exception>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static Pageable<VirtualMachineImageResource> GetVirtualMachineImages(this Subscription subscription, string location, string publisherName, string offer, string skus, string expand = null, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
         {
@@ -305,8 +208,8 @@ namespace Azure.ResourceManager.Sample
         /// <param name="location"> The name of a supported Azure region. </param>
         /// <param name="publisherName"> A valid image publisher. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="publisherName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="publisherName"/> is null. </exception>
+        /// <exception cref="System.ArgumentException"> <paramref name="location"/> or <paramref name="publisherName"/> is empty. </exception>
+        /// <exception cref="System.ArgumentNullException"> <paramref name="location"/> or <paramref name="publisherName"/> is null. </exception>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<VirtualMachineImageResource> GetOffersVirtualMachineImagesAsync(this Subscription subscription, string location, string publisherName, CancellationToken cancellationToken = default)
         {
@@ -320,8 +223,8 @@ namespace Azure.ResourceManager.Sample
         /// <param name="location"> The name of a supported Azure region. </param>
         /// <param name="publisherName"> A valid image publisher. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="publisherName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="publisherName"/> is null. </exception>
+        /// <exception cref="System.ArgumentException"> <paramref name="location"/> or <paramref name="publisherName"/> is empty. </exception>
+        /// <exception cref="System.ArgumentNullException"> <paramref name="location"/> or <paramref name="publisherName"/> is null. </exception>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static Pageable<VirtualMachineImageResource> GetOffersVirtualMachineImages(this Subscription subscription, string location, string publisherName, CancellationToken cancellationToken = default)
         {
@@ -334,8 +237,8 @@ namespace Azure.ResourceManager.Sample
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="location"> The name of a supported Azure region. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
+        /// <exception cref="System.ArgumentException"> <paramref name="location"/> is empty. </exception>
+        /// <exception cref="System.ArgumentNullException"> <paramref name="location"/> is null. </exception>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<VirtualMachineImageResource> GetPublishersVirtualMachineImagesAsync(this Subscription subscription, string location, CancellationToken cancellationToken = default)
         {
@@ -348,8 +251,8 @@ namespace Azure.ResourceManager.Sample
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="location"> The name of a supported Azure region. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
+        /// <exception cref="System.ArgumentException"> <paramref name="location"/> is empty. </exception>
+        /// <exception cref="System.ArgumentNullException"> <paramref name="location"/> is null. </exception>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static Pageable<VirtualMachineImageResource> GetPublishersVirtualMachineImages(this Subscription subscription, string location, CancellationToken cancellationToken = default)
         {
@@ -364,8 +267,8 @@ namespace Azure.ResourceManager.Sample
         /// <param name="publisherName"> A valid image publisher. </param>
         /// <param name="offer"> A valid image publisher offer. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/>, <paramref name="publisherName"/>, or <paramref name="offer"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="location"/>, <paramref name="publisherName"/>, or <paramref name="offer"/> is null. </exception>
+        /// <exception cref="System.ArgumentException"> <paramref name="location"/>, <paramref name="publisherName"/>, or <paramref name="offer"/> is empty. </exception>
+        /// <exception cref="System.ArgumentNullException"> <paramref name="location"/>, <paramref name="publisherName"/>, or <paramref name="offer"/> is null. </exception>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<VirtualMachineImageResource> GetSkusVirtualMachineImagesAsync(this Subscription subscription, string location, string publisherName, string offer, CancellationToken cancellationToken = default)
         {
@@ -380,8 +283,8 @@ namespace Azure.ResourceManager.Sample
         /// <param name="publisherName"> A valid image publisher. </param>
         /// <param name="offer"> A valid image publisher offer. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/>, <paramref name="publisherName"/>, or <paramref name="offer"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="location"/>, <paramref name="publisherName"/>, or <paramref name="offer"/> is null. </exception>
+        /// <exception cref="System.ArgumentException"> <paramref name="location"/>, <paramref name="publisherName"/>, or <paramref name="offer"/> is empty. </exception>
+        /// <exception cref="System.ArgumentNullException"> <paramref name="location"/>, <paramref name="publisherName"/>, or <paramref name="offer"/> is null. </exception>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static Pageable<VirtualMachineImageResource> GetSkusVirtualMachineImages(this Subscription subscription, string location, string publisherName, string offer, CancellationToken cancellationToken = default)
         {
@@ -394,8 +297,8 @@ namespace Azure.ResourceManager.Sample
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="location"> The location for which resource usage is queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
+        /// <exception cref="System.ArgumentException"> <paramref name="location"/> is empty. </exception>
+        /// <exception cref="System.ArgumentNullException"> <paramref name="location"/> is null. </exception>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<Usage> GetUsagesAsync(this Subscription subscription, string location, CancellationToken cancellationToken = default)
         {
@@ -408,8 +311,8 @@ namespace Azure.ResourceManager.Sample
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="location"> The location for which resource usage is queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
+        /// <exception cref="System.ArgumentException"> <paramref name="location"/> is empty. </exception>
+        /// <exception cref="System.ArgumentNullException"> <paramref name="location"/> is null. </exception>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static Pageable<Usage> GetUsages(this Subscription subscription, string location, CancellationToken cancellationToken = default)
         {
@@ -422,8 +325,8 @@ namespace Azure.ResourceManager.Sample
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
+        /// <exception cref="System.ArgumentException"> <paramref name="location"/> is empty. </exception>
+        /// <exception cref="System.ArgumentNullException"> <paramref name="location"/> is null. </exception>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<VirtualMachine> GetVirtualMachinesByLocationAsync(this Subscription subscription, string location, CancellationToken cancellationToken = default)
         {
@@ -436,36 +339,12 @@ namespace Azure.ResourceManager.Sample
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
+        /// <exception cref="System.ArgumentException"> <paramref name="location"/> is empty. </exception>
+        /// <exception cref="System.ArgumentNullException"> <paramref name="location"/> is null. </exception>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static Pageable<VirtualMachine> GetVirtualMachinesByLocation(this Subscription subscription, string location, CancellationToken cancellationToken = default)
         {
             return GetExtensionClient(subscription).GetVirtualMachinesByLocation(location, cancellationToken);
-        }
-
-        /// <summary> Filters the list of VirtualMachines for a <see cref="Subscription" /> represented as generic resources. </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <param name="filter"> The string to filter the list. </param>
-        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<GenericResource> GetVirtualMachinesAsGenericResourcesAsync(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
-        {
-            return GetExtensionClient(subscription).GetVirtualMachinesAsGenericResourcesAsync(filter, expand, top, cancellationToken);
-        }
-
-        /// <summary> Filters the list of VirtualMachines for a <see cref="Subscription" /> represented as generic resources. </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <param name="filter"> The string to filter the list. </param>
-        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static Pageable<GenericResource> GetVirtualMachinesAsGenericResources(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
-        {
-            return GetExtensionClient(subscription).GetVirtualMachinesAsGenericResources(filter, expand, top, cancellationToken);
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/virtualMachines
@@ -498,8 +377,8 @@ namespace Azure.ResourceManager.Sample
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="location"> The location upon which virtual-machine-sizes is queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
+        /// <exception cref="System.ArgumentException"> <paramref name="location"/> is empty. </exception>
+        /// <exception cref="System.ArgumentNullException"> <paramref name="location"/> is null. </exception>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<VirtualMachineSize> GetVirtualMachineSizesAsync(this Subscription subscription, string location, CancellationToken cancellationToken = default)
         {
@@ -512,8 +391,8 @@ namespace Azure.ResourceManager.Sample
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="location"> The location upon which virtual-machine-sizes is queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
+        /// <exception cref="System.ArgumentException"> <paramref name="location"/> is empty. </exception>
+        /// <exception cref="System.ArgumentNullException"> <paramref name="location"/> is null. </exception>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static Pageable<VirtualMachineSize> GetVirtualMachineSizes(this Subscription subscription, string location, CancellationToken cancellationToken = default)
         {
@@ -542,30 +421,6 @@ namespace Azure.ResourceManager.Sample
             return GetExtensionClient(subscription).GetImages(cancellationToken);
         }
 
-        /// <summary> Filters the list of Images for a <see cref="Subscription" /> represented as generic resources. </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <param name="filter"> The string to filter the list. </param>
-        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<GenericResource> GetImagesAsGenericResourcesAsync(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
-        {
-            return GetExtensionClient(subscription).GetImagesAsGenericResourcesAsync(filter, expand, top, cancellationToken);
-        }
-
-        /// <summary> Filters the list of Images for a <see cref="Subscription" /> represented as generic resources. </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <param name="filter"> The string to filter the list. </param>
-        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static Pageable<GenericResource> GetImagesAsGenericResources(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
-        {
-            return GetExtensionClient(subscription).GetImagesAsGenericResources(filter, expand, top, cancellationToken);
-        }
-
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/virtualMachineScaleSets
         /// ContextualPath: /subscriptions/{subscriptionId}
         /// OperationId: VirtualMachineScaleSets_ListAll
@@ -588,30 +443,6 @@ namespace Azure.ResourceManager.Sample
             return GetExtensionClient(subscription).GetVirtualMachineScaleSets(cancellationToken);
         }
 
-        /// <summary> Filters the list of VirtualMachineScaleSets for a <see cref="Subscription" /> represented as generic resources. </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <param name="filter"> The string to filter the list. </param>
-        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<GenericResource> GetVirtualMachineScaleSetsAsGenericResourcesAsync(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
-        {
-            return GetExtensionClient(subscription).GetVirtualMachineScaleSetsAsGenericResourcesAsync(filter, expand, top, cancellationToken);
-        }
-
-        /// <summary> Filters the list of VirtualMachineScaleSets for a <see cref="Subscription" /> represented as generic resources. </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <param name="filter"> The string to filter the list. </param>
-        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static Pageable<GenericResource> GetVirtualMachineScaleSetsAsGenericResources(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
-        {
-            return GetExtensionClient(subscription).GetVirtualMachineScaleSetsAsGenericResources(filter, expand, top, cancellationToken);
-        }
-
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/logAnalytics/apiAccess/getRequestRateByInterval
         /// ContextualPath: /subscriptions/{subscriptionId}
         /// OperationId: LogAnalytics_ExportRequestRateByInterval
@@ -620,8 +451,8 @@ namespace Azure.ResourceManager.Sample
         /// <param name="location"> The location upon which virtual-machine-sizes is queried. </param>
         /// <param name="parameters"> Parameters supplied to the LogAnalytics getRequestRateByInterval Api. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="System.ArgumentException"> <paramref name="location"/> is empty. </exception>
+        /// <exception cref="System.ArgumentNullException"> <paramref name="location"/> or <paramref name="parameters"/> is null. </exception>
         public static async Task<ExportRequestRateByIntervalLogAnalyticOperation> ExportRequestRateByIntervalLogAnalyticAsync(this Subscription subscription, bool waitForCompletion, string location, RequestRateByIntervalInput parameters, CancellationToken cancellationToken = default)
         {
             return await GetExtensionClient(subscription).ExportRequestRateByIntervalLogAnalyticAsync(waitForCompletion, location, parameters, cancellationToken).ConfigureAwait(false);
@@ -635,8 +466,8 @@ namespace Azure.ResourceManager.Sample
         /// <param name="location"> The location upon which virtual-machine-sizes is queried. </param>
         /// <param name="parameters"> Parameters supplied to the LogAnalytics getRequestRateByInterval Api. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="System.ArgumentException"> <paramref name="location"/> is empty. </exception>
+        /// <exception cref="System.ArgumentNullException"> <paramref name="location"/> or <paramref name="parameters"/> is null. </exception>
         public static ExportRequestRateByIntervalLogAnalyticOperation ExportRequestRateByIntervalLogAnalytic(this Subscription subscription, bool waitForCompletion, string location, RequestRateByIntervalInput parameters, CancellationToken cancellationToken = default)
         {
             return GetExtensionClient(subscription).ExportRequestRateByIntervalLogAnalytic(waitForCompletion, location, parameters, cancellationToken);
@@ -650,8 +481,8 @@ namespace Azure.ResourceManager.Sample
         /// <param name="location"> The location upon which virtual-machine-sizes is queried. </param>
         /// <param name="parameters"> Parameters supplied to the LogAnalytics getThrottledRequests Api. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="System.ArgumentException"> <paramref name="location"/> is empty. </exception>
+        /// <exception cref="System.ArgumentNullException"> <paramref name="location"/> or <paramref name="parameters"/> is null. </exception>
         public static async Task<ExportThrottledRequestsLogAnalyticOperation> ExportThrottledRequestsLogAnalyticAsync(this Subscription subscription, bool waitForCompletion, string location, ThrottledRequestsInput parameters, CancellationToken cancellationToken = default)
         {
             return await GetExtensionClient(subscription).ExportThrottledRequestsLogAnalyticAsync(waitForCompletion, location, parameters, cancellationToken).ConfigureAwait(false);
@@ -665,8 +496,8 @@ namespace Azure.ResourceManager.Sample
         /// <param name="location"> The location upon which virtual-machine-sizes is queried. </param>
         /// <param name="parameters"> Parameters supplied to the LogAnalytics getThrottledRequests Api. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="System.ArgumentException"> <paramref name="location"/> is empty. </exception>
+        /// <exception cref="System.ArgumentNullException"> <paramref name="location"/> or <paramref name="parameters"/> is null. </exception>
         public static ExportThrottledRequestsLogAnalyticOperation ExportThrottledRequestsLogAnalytic(this Subscription subscription, bool waitForCompletion, string location, ThrottledRequestsInput parameters, CancellationToken cancellationToken = default)
         {
             return GetExtensionClient(subscription).ExportThrottledRequestsLogAnalytic(waitForCompletion, location, parameters, cancellationToken);

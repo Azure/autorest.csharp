@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Management.Storage.Models;
+using Azure.ResourceManager.Models;
 
 namespace Azure.Management.Storage
 {
@@ -21,7 +22,7 @@ namespace Azure.Management.Storage
             if (Optional.IsDefined(Identity))
             {
                 writer.WritePropertyName("identity");
-                writer.WriteObjectValue(Identity);
+                JsonSerializer.Serialize(writer, Identity);
             }
             if (Optional.IsDefined(ExtendedLocation))
             {
@@ -111,15 +112,16 @@ namespace Azure.Management.Storage
 
         internal static StorageAccountData DeserializeStorageAccountData(JsonElement element)
         {
-            Optional<Sku> sku = default;
+            Optional<Models.Sku> sku = default;
             Optional<Kind> kind = default;
-            Optional<Identity> identity = default;
+            Optional<ManagedServiceIdentity> identity = default;
             Optional<ExtendedLocation> extendedLocation = default;
             IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
+            SystemData systemData = default;
             Optional<ProvisioningState> provisioningState = default;
             Optional<Endpoints> primaryEndpoints = default;
             Optional<string> primaryLocation = default;
@@ -162,7 +164,7 @@ namespace Azure.Management.Storage
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    sku = Sku.DeserializeSku(property.Value);
+                    sku = Models.Sku.DeserializeSku(property.Value);
                     continue;
                 }
                 if (property.NameEquals("kind"))
@@ -182,7 +184,7 @@ namespace Azure.Management.Storage
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    identity = Identity.DeserializeIdentity(property.Value);
+                    identity = JsonSerializer.Deserialize<ManagedServiceIdentity>(property.Value.ToString());
                     continue;
                 }
                 if (property.NameEquals("extendedLocation"))
@@ -223,6 +225,11 @@ namespace Azure.Management.Storage
                 if (property.NameEquals("type"))
                 {
                     type = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("systemData"))
+                {
+                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.ToString());
                     continue;
                 }
                 if (property.NameEquals("properties"))
@@ -563,7 +570,7 @@ namespace Azure.Management.Storage
                     continue;
                 }
             }
-            return new StorageAccountData(id, name, type, tags, location, sku.Value, Optional.ToNullable(kind), identity.Value, extendedLocation.Value, Optional.ToNullable(provisioningState), primaryEndpoints.Value, primaryLocation.Value, Optional.ToNullable(statusOfPrimary), Optional.ToNullable(lastGeoFailoverTime), secondaryLocation.Value, Optional.ToNullable(statusOfSecondary), Optional.ToNullable(creationTime), customDomain.Value, sasPolicy.Value, keyPolicy.Value, keyCreationTime.Value, secondaryEndpoints.Value, encryption.Value, Optional.ToNullable(accessTier), azureFilesIdentityBasedAuthentication.Value, Optional.ToNullable(supportsHttpsTrafficOnly), networkAcls.Value, Optional.ToNullable(isHnsEnabled), geoReplicationStats.Value, Optional.ToNullable(failoverInProgress), Optional.ToNullable(largeFileSharesState), Optional.ToList(privateEndpointConnections), routingPreference.Value, blobRestoreStatus.Value, Optional.ToNullable(allowBlobPublicAccess), Optional.ToNullable(minimumTlsVersion), Optional.ToNullable(allowSharedKeyAccess), Optional.ToNullable(isNfsV3Enabled), Optional.ToNullable(allowCrossTenantReplication), Optional.ToNullable(defaultToOAuthAuthentication), Optional.ToNullable(publicNetworkAccess), immutableStorageWithVersioning.Value);
+            return new StorageAccountData(id, name, type, systemData, tags, location, sku.Value, Optional.ToNullable(kind), identity, extendedLocation.Value, Optional.ToNullable(provisioningState), primaryEndpoints.Value, primaryLocation.Value, Optional.ToNullable(statusOfPrimary), Optional.ToNullable(lastGeoFailoverTime), secondaryLocation.Value, Optional.ToNullable(statusOfSecondary), Optional.ToNullable(creationTime), customDomain.Value, sasPolicy.Value, keyPolicy.Value, keyCreationTime.Value, secondaryEndpoints.Value, encryption.Value, Optional.ToNullable(accessTier), azureFilesIdentityBasedAuthentication.Value, Optional.ToNullable(supportsHttpsTrafficOnly), networkAcls.Value, Optional.ToNullable(isHnsEnabled), geoReplicationStats.Value, Optional.ToNullable(failoverInProgress), Optional.ToNullable(largeFileSharesState), Optional.ToList(privateEndpointConnections), routingPreference.Value, blobRestoreStatus.Value, Optional.ToNullable(allowBlobPublicAccess), Optional.ToNullable(minimumTlsVersion), Optional.ToNullable(allowSharedKeyAccess), Optional.ToNullable(isNfsV3Enabled), Optional.ToNullable(allowCrossTenantReplication), Optional.ToNullable(defaultToOAuthAuthentication), Optional.ToNullable(publicNetworkAccess), immutableStorageWithVersioning.Value);
         }
     }
 }

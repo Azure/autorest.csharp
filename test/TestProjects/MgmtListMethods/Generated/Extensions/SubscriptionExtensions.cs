@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Threading;
 using Azure;
 using Azure.ResourceManager.Resources;
@@ -97,38 +96,14 @@ namespace MgmtListMethods
             return GetExtensionClient(subscription).GetFakeParentWithAncestorWithNonResourceChWithLoc(cancellationToken);
         }
 
-        /// <summary> Filters the list of FakeParentWithAncestorWithNonResChWithLocs for a <see cref="Subscription" /> represented as generic resources. </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <param name="filter"> The string to filter the list. </param>
-        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<GenericResource> GetFakeParentWithAncestorWithNonResChWithLocsAsGenericResourcesAsync(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
-        {
-            return GetExtensionClient(subscription).GetFakeParentWithAncestorWithNonResChWithLocsAsGenericResourcesAsync(filter, expand, top, cancellationToken);
-        }
-
-        /// <summary> Filters the list of FakeParentWithAncestorWithNonResChWithLocs for a <see cref="Subscription" /> represented as generic resources. </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <param name="filter"> The string to filter the list. </param>
-        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static Pageable<GenericResource> GetFakeParentWithAncestorWithNonResChWithLocsAsGenericResources(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
-        {
-            return GetExtensionClient(subscription).GetFakeParentWithAncestorWithNonResChWithLocsAsGenericResources(filter, expand, top, cancellationToken);
-        }
-
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/locations/{location}/nonResourceChild
         /// ContextualPath: /subscriptions/{subscriptionId}
         /// OperationId: FakeParentWithAncestorWithNonResChWithLocs_ListTestByLocations
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
+        /// <exception cref="System.ArgumentException"> <paramref name="location"/> is empty. </exception>
+        /// <exception cref="System.ArgumentNullException"> <paramref name="location"/> is null. </exception>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<NonResourceChild> GetTestByLocationsFakeParentWithAncestorWithNonResChWithLocsAsync(this Subscription subscription, string location, CancellationToken cancellationToken = default)
         {
@@ -141,8 +116,8 @@ namespace MgmtListMethods
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
+        /// <exception cref="System.ArgumentException"> <paramref name="location"/> is empty. </exception>
+        /// <exception cref="System.ArgumentNullException"> <paramref name="location"/> is null. </exception>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static Pageable<NonResourceChild> GetTestByLocationsFakeParentWithAncestorWithNonResChWithLocs(this Subscription subscription, string location, CancellationToken cancellationToken = default)
         {
@@ -171,30 +146,6 @@ namespace MgmtListMethods
             return GetExtensionClient(subscription).GetFakeParentWithAncestorWithNonResChes(cancellationToken);
         }
 
-        /// <summary> Filters the list of FakeParentWithAncestorWithNonResChes for a <see cref="Subscription" /> represented as generic resources. </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <param name="filter"> The string to filter the list. </param>
-        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<GenericResource> GetFakeParentWithAncestorWithNonResChesAsGenericResourcesAsync(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
-        {
-            return GetExtensionClient(subscription).GetFakeParentWithAncestorWithNonResChesAsGenericResourcesAsync(filter, expand, top, cancellationToken);
-        }
-
-        /// <summary> Filters the list of FakeParentWithAncestorWithNonResChes for a <see cref="Subscription" /> represented as generic resources. </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <param name="filter"> The string to filter the list. </param>
-        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static Pageable<GenericResource> GetFakeParentWithAncestorWithNonResChesAsGenericResources(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
-        {
-            return GetExtensionClient(subscription).GetFakeParentWithAncestorWithNonResChesAsGenericResources(filter, expand, top, cancellationToken);
-        }
-
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakeParentWithAncestorWithLocs
         /// ContextualPath: /subscriptions/{subscriptionId}
         /// OperationId: FakeParentWithAncestorWithLocs_ListBySubscription
@@ -217,38 +168,14 @@ namespace MgmtListMethods
             return GetExtensionClient(subscription).GetFakeParentWithAncestorWithLocs(cancellationToken);
         }
 
-        /// <summary> Filters the list of FakeParentWithAncestorWithLocs for a <see cref="Subscription" /> represented as generic resources. </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <param name="filter"> The string to filter the list. </param>
-        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<GenericResource> GetFakeParentWithAncestorWithLocsAsGenericResourcesAsync(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
-        {
-            return GetExtensionClient(subscription).GetFakeParentWithAncestorWithLocsAsGenericResourcesAsync(filter, expand, top, cancellationToken);
-        }
-
-        /// <summary> Filters the list of FakeParentWithAncestorWithLocs for a <see cref="Subscription" /> represented as generic resources. </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <param name="filter"> The string to filter the list. </param>
-        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static Pageable<GenericResource> GetFakeParentWithAncestorWithLocsAsGenericResources(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
-        {
-            return GetExtensionClient(subscription).GetFakeParentWithAncestorWithLocsAsGenericResources(filter, expand, top, cancellationToken);
-        }
-
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/locations/{location}/fakeParentWithAncestorWithLocs
         /// ContextualPath: /subscriptions/{subscriptionId}
         /// OperationId: FakeParentWithAncestorWithLocs_ListTestByLocations
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
+        /// <exception cref="System.ArgumentException"> <paramref name="location"/> is empty. </exception>
+        /// <exception cref="System.ArgumentNullException"> <paramref name="location"/> is null. </exception>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<FakeParentWithAncestorWithLoc> GetFakeParentWithAncestorWithLocsByLocationAsync(this Subscription subscription, string location, CancellationToken cancellationToken = default)
         {
@@ -261,8 +188,8 @@ namespace MgmtListMethods
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
+        /// <exception cref="System.ArgumentException"> <paramref name="location"/> is empty. </exception>
+        /// <exception cref="System.ArgumentNullException"> <paramref name="location"/> is null. </exception>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static Pageable<FakeParentWithAncestorWithLoc> GetFakeParentWithAncestorWithLocsByLocation(this Subscription subscription, string location, CancellationToken cancellationToken = default)
         {
@@ -291,30 +218,6 @@ namespace MgmtListMethods
             return GetExtensionClient(subscription).GetFakeParentWithAncestors(cancellationToken);
         }
 
-        /// <summary> Filters the list of FakeParentWithAncestors for a <see cref="Subscription" /> represented as generic resources. </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <param name="filter"> The string to filter the list. </param>
-        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<GenericResource> GetFakeParentWithAncestorsAsGenericResourcesAsync(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
-        {
-            return GetExtensionClient(subscription).GetFakeParentWithAncestorsAsGenericResourcesAsync(filter, expand, top, cancellationToken);
-        }
-
-        /// <summary> Filters the list of FakeParentWithAncestors for a <see cref="Subscription" /> represented as generic resources. </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <param name="filter"> The string to filter the list. </param>
-        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static Pageable<GenericResource> GetFakeParentWithAncestorsAsGenericResources(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
-        {
-            return GetExtensionClient(subscription).GetFakeParentWithAncestorsAsGenericResources(filter, expand, top, cancellationToken);
-        }
-
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/resGrpParentWithAncestorWithNonResChWithLocs
         /// ContextualPath: /subscriptions/{subscriptionId}
         /// OperationId: ResGrpParentWithAncestorWithNonResChWithLocs_ListBySubscription
@@ -337,30 +240,6 @@ namespace MgmtListMethods
         public static Pageable<ResGrpParentWithAncestorWithNonResChWithLoc> GetResGrpParentWithAncestorWithNonResChWithLocs(this Subscription subscription, string expand = null, CancellationToken cancellationToken = default)
         {
             return GetExtensionClient(subscription).GetResGrpParentWithAncestorWithNonResChWithLocs(expand, cancellationToken);
-        }
-
-        /// <summary> Filters the list of ResGrpParentWithAncestorWithNonResChWithLocs for a <see cref="Subscription" /> represented as generic resources. </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <param name="filter"> The string to filter the list. </param>
-        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<GenericResource> GetResGrpParentWithAncestorWithNonResChWithLocsAsGenericResourcesAsync(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
-        {
-            return GetExtensionClient(subscription).GetResGrpParentWithAncestorWithNonResChWithLocsAsGenericResourcesAsync(filter, expand, top, cancellationToken);
-        }
-
-        /// <summary> Filters the list of ResGrpParentWithAncestorWithNonResChWithLocs for a <see cref="Subscription" /> represented as generic resources. </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <param name="filter"> The string to filter the list. </param>
-        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static Pageable<GenericResource> GetResGrpParentWithAncestorWithNonResChWithLocsAsGenericResources(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
-        {
-            return GetExtensionClient(subscription).GetResGrpParentWithAncestorWithNonResChWithLocsAsGenericResources(filter, expand, top, cancellationToken);
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/resGrpParentWithAncestorWithNonResChes
@@ -387,30 +266,6 @@ namespace MgmtListMethods
             return GetExtensionClient(subscription).GetResGrpParentWithAncestorWithNonResChes(expand, cancellationToken);
         }
 
-        /// <summary> Filters the list of ResGrpParentWithAncestorWithNonResChes for a <see cref="Subscription" /> represented as generic resources. </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <param name="filter"> The string to filter the list. </param>
-        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<GenericResource> GetResGrpParentWithAncestorWithNonResChesAsGenericResourcesAsync(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
-        {
-            return GetExtensionClient(subscription).GetResGrpParentWithAncestorWithNonResChesAsGenericResourcesAsync(filter, expand, top, cancellationToken);
-        }
-
-        /// <summary> Filters the list of ResGrpParentWithAncestorWithNonResChes for a <see cref="Subscription" /> represented as generic resources. </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <param name="filter"> The string to filter the list. </param>
-        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static Pageable<GenericResource> GetResGrpParentWithAncestorWithNonResChesAsGenericResources(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
-        {
-            return GetExtensionClient(subscription).GetResGrpParentWithAncestorWithNonResChesAsGenericResources(filter, expand, top, cancellationToken);
-        }
-
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/resGrpParentWithAncestorWithLocs
         /// ContextualPath: /subscriptions/{subscriptionId}
         /// OperationId: ResGrpParentWithAncestorWithLocs_ListTest
@@ -433,38 +288,14 @@ namespace MgmtListMethods
             return GetExtensionClient(subscription).GetResGrpParentWithAncestorWithLocs(cancellationToken);
         }
 
-        /// <summary> Filters the list of ResGrpParentWithAncestorWithLocs for a <see cref="Subscription" /> represented as generic resources. </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <param name="filter"> The string to filter the list. </param>
-        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<GenericResource> GetResGrpParentWithAncestorWithLocsAsGenericResourcesAsync(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
-        {
-            return GetExtensionClient(subscription).GetResGrpParentWithAncestorWithLocsAsGenericResourcesAsync(filter, expand, top, cancellationToken);
-        }
-
-        /// <summary> Filters the list of ResGrpParentWithAncestorWithLocs for a <see cref="Subscription" /> represented as generic resources. </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <param name="filter"> The string to filter the list. </param>
-        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static Pageable<GenericResource> GetResGrpParentWithAncestorWithLocsAsGenericResources(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
-        {
-            return GetExtensionClient(subscription).GetResGrpParentWithAncestorWithLocsAsGenericResources(filter, expand, top, cancellationToken);
-        }
-
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/locations/{location}/resGrpParentWithAncestorWithLocs
         /// ContextualPath: /subscriptions/{subscriptionId}
         /// OperationId: ResGrpParentWithAncestorWithLocs_ListAll
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
+        /// <exception cref="System.ArgumentException"> <paramref name="location"/> is empty. </exception>
+        /// <exception cref="System.ArgumentNullException"> <paramref name="location"/> is null. </exception>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<ResGrpParentWithAncestorWithNonResChWithLoc> GetResGrpParentWithAncestorWithNonResChWithLocsByLocationResGrpParentWithAncestorWithLocAsync(this Subscription subscription, string location, CancellationToken cancellationToken = default)
         {
@@ -477,8 +308,8 @@ namespace MgmtListMethods
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
+        /// <exception cref="System.ArgumentException"> <paramref name="location"/> is empty. </exception>
+        /// <exception cref="System.ArgumentNullException"> <paramref name="location"/> is null. </exception>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static Pageable<ResGrpParentWithAncestorWithNonResChWithLoc> GetResGrpParentWithAncestorWithNonResChWithLocsByLocationResGrpParentWithAncestorWithLoc(this Subscription subscription, string location, CancellationToken cancellationToken = default)
         {
@@ -507,30 +338,6 @@ namespace MgmtListMethods
             return GetExtensionClient(subscription).GetResGrpParentWithAncestors(cancellationToken);
         }
 
-        /// <summary> Filters the list of ResGrpParentWithAncestors for a <see cref="Subscription" /> represented as generic resources. </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <param name="filter"> The string to filter the list. </param>
-        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<GenericResource> GetResGrpParentWithAncestorsAsGenericResourcesAsync(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
-        {
-            return GetExtensionClient(subscription).GetResGrpParentWithAncestorsAsGenericResourcesAsync(filter, expand, top, cancellationToken);
-        }
-
-        /// <summary> Filters the list of ResGrpParentWithAncestors for a <see cref="Subscription" /> represented as generic resources. </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <param name="filter"> The string to filter the list. </param>
-        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static Pageable<GenericResource> GetResGrpParentWithAncestorsAsGenericResources(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
-        {
-            return GetExtensionClient(subscription).GetResGrpParentWithAncestorsAsGenericResources(filter, expand, top, cancellationToken);
-        }
-
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/locations/{location}/updateQuotas
         /// ContextualPath: /subscriptions/{subscriptionId}
         /// OperationId: Quotas_Update
@@ -538,8 +345,8 @@ namespace MgmtListMethods
         /// <param name="location"> The location for update quota is queried. </param>
         /// <param name="parameters"> Quota update parameters. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="System.ArgumentException"> <paramref name="location"/> is empty. </exception>
+        /// <exception cref="System.ArgumentNullException"> <paramref name="location"/> or <paramref name="parameters"/> is null. </exception>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<UpdateWorkspaceQuotas> UpdateQuotasAsync(this Subscription subscription, string location, QuotaUpdateParameters parameters, CancellationToken cancellationToken = default)
         {
@@ -553,8 +360,8 @@ namespace MgmtListMethods
         /// <param name="location"> The location for update quota is queried. </param>
         /// <param name="parameters"> Quota update parameters. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="System.ArgumentException"> <paramref name="location"/> is empty. </exception>
+        /// <exception cref="System.ArgumentNullException"> <paramref name="location"/> or <paramref name="parameters"/> is null. </exception>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static Pageable<UpdateWorkspaceQuotas> UpdateQuotas(this Subscription subscription, string location, QuotaUpdateParameters parameters, CancellationToken cancellationToken = default)
         {

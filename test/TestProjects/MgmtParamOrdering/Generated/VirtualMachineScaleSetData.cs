@@ -25,10 +25,11 @@ namespace MgmtParamOrdering
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="type"> The type. </param>
+        /// <param name="systemData"> The systemData. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
         /// <param name="zones"> The virtual machine scale set zones. NOTE: Availability zones can only be set when you create the scale set. </param>
-        internal VirtualMachineScaleSetData(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, AzureLocation location, IList<string> zones) : base(id, name, type, tags, location)
+        internal VirtualMachineScaleSetData(ResourceIdentifier id, string name, ResourceType type, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, IList<string> zones) : base(id, name, type, systemData, tags, location)
         {
             Zones = zones;
         }

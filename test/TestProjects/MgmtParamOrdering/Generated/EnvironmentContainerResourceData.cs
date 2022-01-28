@@ -34,19 +34,16 @@ namespace MgmtParamOrdering
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="type"> The type. </param>
+        /// <param name="systemData"> The systemData. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
         /// <param name="properties"> Additional attributes of the entity. </param>
-        /// <param name="systemData"> System data associated with resource provider. </param>
-        internal EnvironmentContainerResourceData(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, AzureLocation location, EnvironmentContainer properties, SystemData systemData) : base(id, name, type, tags, location)
+        internal EnvironmentContainerResourceData(ResourceIdentifier id, string name, ResourceType type, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, EnvironmentContainer properties) : base(id, name, type, systemData, tags, location)
         {
             Properties = properties;
-            SystemData = systemData;
         }
 
         /// <summary> Additional attributes of the entity. </summary>
         public EnvironmentContainer Properties { get; set; }
-        /// <summary> System data associated with resource provider. </summary>
-        public SystemData SystemData { get; }
     }
 }

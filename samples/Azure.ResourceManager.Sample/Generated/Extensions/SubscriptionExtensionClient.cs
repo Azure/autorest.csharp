@@ -14,7 +14,6 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
-using Azure.ResourceManager.Resources;
 using Azure.ResourceManager.Sample.Models;
 
 namespace Azure.ResourceManager.Sample
@@ -170,32 +169,6 @@ namespace Azure.ResourceManager.Sample
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
-        /// <summary> Filters the list of AvailabilitySets for a <see cref="Subscription" /> represented as generic resources. </summary>
-        /// <param name="filter"> The string to filter the list. </param>
-        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<GenericResource> GetAvailabilitySetsAsGenericResourcesAsync(string filter, string expand, int? top, CancellationToken cancellationToken = default)
-        {
-            ResourceFilterCollection filters = new(AvailabilitySet.ResourceType);
-            filters.SubstringFilter = filter;
-            return ResourceListOperations.GetAtContextAsync(ArmClient.GetSubscription(Id), filters, expand, top, cancellationToken);
-        }
-
-        /// <summary> Filters the list of AvailabilitySets for a <see cref="Subscription" /> represented as generic resources. </summary>
-        /// <param name="filter"> The string to filter the list. </param>
-        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public Pageable<GenericResource> GetAvailabilitySetsAsGenericResources(string filter, string expand, int? top, CancellationToken cancellationToken = default)
-        {
-            ResourceFilterCollection filters = new(AvailabilitySet.ResourceType);
-            filters.SubstringFilter = filter;
-            return ResourceListOperations.GetAtContext(ArmClient.GetSubscription(Id), filters, expand, top, cancellationToken);
-        }
-
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/proximityPlacementGroups
         /// ContextualPath: /subscriptions/{subscriptionId}
         /// OperationId: ProximityPlacementGroups_ListBySubscription
@@ -276,32 +249,6 @@ namespace Azure.ResourceManager.Sample
                 }
             }
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
-        }
-
-        /// <summary> Filters the list of ProximityPlacementGroups for a <see cref="Subscription" /> represented as generic resources. </summary>
-        /// <param name="filter"> The string to filter the list. </param>
-        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<GenericResource> GetProximityPlacementGroupsAsGenericResourcesAsync(string filter, string expand, int? top, CancellationToken cancellationToken = default)
-        {
-            ResourceFilterCollection filters = new(ProximityPlacementGroup.ResourceType);
-            filters.SubstringFilter = filter;
-            return ResourceListOperations.GetAtContextAsync(ArmClient.GetSubscription(Id), filters, expand, top, cancellationToken);
-        }
-
-        /// <summary> Filters the list of ProximityPlacementGroups for a <see cref="Subscription" /> represented as generic resources. </summary>
-        /// <param name="filter"> The string to filter the list. </param>
-        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public Pageable<GenericResource> GetProximityPlacementGroupsAsGenericResources(string filter, string expand, int? top, CancellationToken cancellationToken = default)
-        {
-            ResourceFilterCollection filters = new(ProximityPlacementGroup.ResourceType);
-            filters.SubstringFilter = filter;
-            return ResourceListOperations.GetAtContext(ArmClient.GetSubscription(Id), filters, expand, top, cancellationToken);
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/hostGroups
@@ -386,32 +333,6 @@ namespace Azure.ResourceManager.Sample
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
-        /// <summary> Filters the list of DedicatedHostGroups for a <see cref="Subscription" /> represented as generic resources. </summary>
-        /// <param name="filter"> The string to filter the list. </param>
-        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<GenericResource> GetDedicatedHostGroupsAsGenericResourcesAsync(string filter, string expand, int? top, CancellationToken cancellationToken = default)
-        {
-            ResourceFilterCollection filters = new(DedicatedHostGroup.ResourceType);
-            filters.SubstringFilter = filter;
-            return ResourceListOperations.GetAtContextAsync(ArmClient.GetSubscription(Id), filters, expand, top, cancellationToken);
-        }
-
-        /// <summary> Filters the list of DedicatedHostGroups for a <see cref="Subscription" /> represented as generic resources. </summary>
-        /// <param name="filter"> The string to filter the list. </param>
-        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public Pageable<GenericResource> GetDedicatedHostGroupsAsGenericResources(string filter, string expand, int? top, CancellationToken cancellationToken = default)
-        {
-            ResourceFilterCollection filters = new(DedicatedHostGroup.ResourceType);
-            filters.SubstringFilter = filter;
-            return ResourceListOperations.GetAtContext(ArmClient.GetSubscription(Id), filters, expand, top, cancellationToken);
-        }
-
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/sshPublicKeys
         /// ContextualPath: /subscriptions/{subscriptionId}
         /// OperationId: SshPublicKeys_ListBySubscription
@@ -492,32 +413,6 @@ namespace Azure.ResourceManager.Sample
                 }
             }
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
-        }
-
-        /// <summary> Filters the list of SshPublicKeys for a <see cref="Subscription" /> represented as generic resources. </summary>
-        /// <param name="filter"> The string to filter the list. </param>
-        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<GenericResource> GetSshPublicKeysAsGenericResourcesAsync(string filter, string expand, int? top, CancellationToken cancellationToken = default)
-        {
-            ResourceFilterCollection filters = new(SshPublicKey.ResourceType);
-            filters.SubstringFilter = filter;
-            return ResourceListOperations.GetAtContextAsync(ArmClient.GetSubscription(Id), filters, expand, top, cancellationToken);
-        }
-
-        /// <summary> Filters the list of SshPublicKeys for a <see cref="Subscription" /> represented as generic resources. </summary>
-        /// <param name="filter"> The string to filter the list. </param>
-        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public Pageable<GenericResource> GetSshPublicKeysAsGenericResources(string filter, string expand, int? top, CancellationToken cancellationToken = default)
-        {
-            ResourceFilterCollection filters = new(SshPublicKey.ResourceType);
-            filters.SubstringFilter = filter;
-            return ResourceListOperations.GetAtContext(ArmClient.GetSubscription(Id), filters, expand, top, cancellationToken);
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus/{skus}/versions/{version}
@@ -1050,32 +945,6 @@ namespace Azure.ResourceManager.Sample
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
-        /// <summary> Filters the list of VirtualMachines for a <see cref="Subscription" /> represented as generic resources. </summary>
-        /// <param name="filter"> The string to filter the list. </param>
-        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<GenericResource> GetVirtualMachinesAsGenericResourcesAsync(string filter, string expand, int? top, CancellationToken cancellationToken = default)
-        {
-            ResourceFilterCollection filters = new(VirtualMachine.ResourceType);
-            filters.SubstringFilter = filter;
-            return ResourceListOperations.GetAtContextAsync(ArmClient.GetSubscription(Id), filters, expand, top, cancellationToken);
-        }
-
-        /// <summary> Filters the list of VirtualMachines for a <see cref="Subscription" /> represented as generic resources. </summary>
-        /// <param name="filter"> The string to filter the list. </param>
-        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public Pageable<GenericResource> GetVirtualMachinesAsGenericResources(string filter, string expand, int? top, CancellationToken cancellationToken = default)
-        {
-            ResourceFilterCollection filters = new(VirtualMachine.ResourceType);
-            filters.SubstringFilter = filter;
-            return ResourceListOperations.GetAtContext(ArmClient.GetSubscription(Id), filters, expand, top, cancellationToken);
-        }
-
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/virtualMachines
         /// ContextualPath: /subscriptions/{subscriptionId}
         /// OperationId: VirtualMachines_ListAll
@@ -1304,32 +1173,6 @@ namespace Azure.ResourceManager.Sample
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
-        /// <summary> Filters the list of Images for a <see cref="Subscription" /> represented as generic resources. </summary>
-        /// <param name="filter"> The string to filter the list. </param>
-        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<GenericResource> GetImagesAsGenericResourcesAsync(string filter, string expand, int? top, CancellationToken cancellationToken = default)
-        {
-            ResourceFilterCollection filters = new(Image.ResourceType);
-            filters.SubstringFilter = filter;
-            return ResourceListOperations.GetAtContextAsync(ArmClient.GetSubscription(Id), filters, expand, top, cancellationToken);
-        }
-
-        /// <summary> Filters the list of Images for a <see cref="Subscription" /> represented as generic resources. </summary>
-        /// <param name="filter"> The string to filter the list. </param>
-        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public Pageable<GenericResource> GetImagesAsGenericResources(string filter, string expand, int? top, CancellationToken cancellationToken = default)
-        {
-            ResourceFilterCollection filters = new(Image.ResourceType);
-            filters.SubstringFilter = filter;
-            return ResourceListOperations.GetAtContext(ArmClient.GetSubscription(Id), filters, expand, top, cancellationToken);
-        }
-
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/virtualMachineScaleSets
         /// ContextualPath: /subscriptions/{subscriptionId}
         /// OperationId: VirtualMachineScaleSets_ListAll
@@ -1410,32 +1253,6 @@ namespace Azure.ResourceManager.Sample
                 }
             }
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
-        }
-
-        /// <summary> Filters the list of VirtualMachineScaleSets for a <see cref="Subscription" /> represented as generic resources. </summary>
-        /// <param name="filter"> The string to filter the list. </param>
-        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<GenericResource> GetVirtualMachineScaleSetsAsGenericResourcesAsync(string filter, string expand, int? top, CancellationToken cancellationToken = default)
-        {
-            ResourceFilterCollection filters = new(VirtualMachineScaleSet.ResourceType);
-            filters.SubstringFilter = filter;
-            return ResourceListOperations.GetAtContextAsync(ArmClient.GetSubscription(Id), filters, expand, top, cancellationToken);
-        }
-
-        /// <summary> Filters the list of VirtualMachineScaleSets for a <see cref="Subscription" /> represented as generic resources. </summary>
-        /// <param name="filter"> The string to filter the list. </param>
-        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public Pageable<GenericResource> GetVirtualMachineScaleSetsAsGenericResources(string filter, string expand, int? top, CancellationToken cancellationToken = default)
-        {
-            ResourceFilterCollection filters = new(VirtualMachineScaleSet.ResourceType);
-            filters.SubstringFilter = filter;
-            return ResourceListOperations.GetAtContext(ArmClient.GetSubscription(Id), filters, expand, top, cancellationToken);
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/logAnalytics/apiAccess/getRequestRateByInterval

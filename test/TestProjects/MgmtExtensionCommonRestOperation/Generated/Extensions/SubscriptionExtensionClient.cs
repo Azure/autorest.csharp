@@ -14,7 +14,6 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
-using Azure.ResourceManager.Resources;
 
 namespace MgmtExtensionCommonRestOperation
 {
@@ -101,32 +100,6 @@ namespace MgmtExtensionCommonRestOperation
             return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
 
-        /// <summary> Filters the list of TypeOnes for a <see cref="Subscription" /> represented as generic resources. </summary>
-        /// <param name="filter"> The string to filter the list. </param>
-        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<GenericResource> GetTypeOnesAsGenericResourcesAsync(string filter, string expand, int? top, CancellationToken cancellationToken = default)
-        {
-            ResourceFilterCollection filters = new(TypeOne.ResourceType);
-            filters.SubstringFilter = filter;
-            return ResourceListOperations.GetAtContextAsync(ArmClient.GetSubscription(Id), filters, expand, top, cancellationToken);
-        }
-
-        /// <summary> Filters the list of TypeOnes for a <see cref="Subscription" /> represented as generic resources. </summary>
-        /// <param name="filter"> The string to filter the list. </param>
-        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public Pageable<GenericResource> GetTypeOnesAsGenericResources(string filter, string expand, int? top, CancellationToken cancellationToken = default)
-        {
-            ResourceFilterCollection filters = new(TypeOne.ResourceType);
-            filters.SubstringFilter = filter;
-            return ResourceListOperations.GetAtContext(ArmClient.GetSubscription(Id), filters, expand, top, cancellationToken);
-        }
-
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.TypeTwo/typeTwos
         /// ContextualPath: /subscriptions/{subscriptionId}
         /// OperationId: Common_ListTypeTwosBySubscription
@@ -177,32 +150,6 @@ namespace MgmtExtensionCommonRestOperation
                 }
             }
             return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
-        }
-
-        /// <summary> Filters the list of TypeTwos for a <see cref="Subscription" /> represented as generic resources. </summary>
-        /// <param name="filter"> The string to filter the list. </param>
-        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<GenericResource> GetTypeTwosAsGenericResourcesAsync(string filter, string expand, int? top, CancellationToken cancellationToken = default)
-        {
-            ResourceFilterCollection filters = new(TypeTwo.ResourceType);
-            filters.SubstringFilter = filter;
-            return ResourceListOperations.GetAtContextAsync(ArmClient.GetSubscription(Id), filters, expand, top, cancellationToken);
-        }
-
-        /// <summary> Filters the list of TypeTwos for a <see cref="Subscription" /> represented as generic resources. </summary>
-        /// <param name="filter"> The string to filter the list. </param>
-        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public Pageable<GenericResource> GetTypeTwosAsGenericResources(string filter, string expand, int? top, CancellationToken cancellationToken = default)
-        {
-            ResourceFilterCollection filters = new(TypeTwo.ResourceType);
-            filters.SubstringFilter = filter;
-            return ResourceListOperations.GetAtContext(ArmClient.GetSubscription(Id), filters, expand, top, cancellationToken);
         }
     }
 }
