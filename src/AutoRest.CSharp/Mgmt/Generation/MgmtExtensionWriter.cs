@@ -3,42 +3,36 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Threading;
-using AutoRest.CSharp.Common.Generation.Writers;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
-using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
-using Azure;
-using Azure.Core;
 using Azure.Core.Pipeline;
-using Azure.ResourceManager;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
-    internal abstract class MgmtExtensionWriter : MgmtClientBaseWriter<MgmtExtensions>
+    internal class MgmtExtensionWriter : MgmtClientBaseWriter<MgmtExtensions>
     {
-        protected MgmtExtensions _extensions;
-
         protected virtual string DiagnosticOptionsVariable { get; } = "diagnosticOptions";
 
         protected bool IsArmCore;
-        public MgmtExtensionWriter(CodeWriter writer, MgmtExtensions extensions, BuildContext<MgmtOutputLibrary> context, Type extensionType, bool isArmCore = false) : base(writer, extensions, context)
+
+        public MgmtExtensionWriter(MgmtExtensions extensions, BuildContext<MgmtOutputLibrary> context)
+            : base(new CodeWriter(), extensions, context)
         {
-            _extensions = extensions;
-            IsArmCore = isArmCore;
-            ExtensionOperationVariableType = extensionType;
+            Extension = extensions;
+            IsArmCore = context.Configuration.MgmtConfiguration.IsArmCore;
+            ExtensionOperationVariableType = extensions.ArmCoreType;
+            ExtensionOperationVariableName = IsArmCore ? "this" : ExtensionOperationVariableType.Name.ToVariableName();
             ExtensionParameter = new Parameter(
                 ExtensionOperationVariableName,
                 $"The <see cref=\"{ExtensionOperationVariableType}\" /> instance the method will execute against.",
@@ -47,8 +41,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 false);
         }
 
-        protected abstract string Description { get; }
-        protected abstract string ExtensionOperationVariableName { get; }
+        public MgmtExtensions Extension { get; }
+
+        protected virtual string ExtensionOperationVariableName { get; }
+
         protected Type ExtensionOperationVariableType { get; }
 
         protected override string IdVariableName => $"{ExtensionOperationVariableName}.Id";
@@ -58,6 +54,31 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected override string ContextProperty => ExtensionOperationVariableName;
 
         protected Parameter ExtensionParameter { get; }
+
+        public override void Write()
+        {
+            var theNamespace = IsArmCore ? Extension.ArmCoreNamespace : Context.DefaultNamespace;
+            var staticKeyWord = IsArmCore ? string.Empty : "static ";
+            var className = IsArmCore ? Extension.ResourceName : TypeNameOfThis;
+            using (_writer.Namespace(theNamespace))
+            {
+                _writer.WriteXmlDocumentationSummary($"{Extension.Description}");
+                using (_writer.Scope($"{Accessibility} {staticKeyWord}partial class {className}"))
+                {
+                    // Write resource collection entries
+                    WriteChildResourceEntries();
+
+                    WriteExtensionClientGet();
+
+                    // Write other orphan operations with the parent of ResourceGroup
+                    foreach (var clientOperation in Extension.ClientOperations)
+                    {
+                        WriteMethodWrapper(clientOperation, true);
+                        WriteMethodWrapper(clientOperation, false);
+                    }
+                }
+            }
+        }
 
         protected void WriteMethodWrapper(MgmtClientOperation clientOperation, bool isAsync)
         {
@@ -427,6 +448,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
                 _writer.Line($"){GetConfigureAwait(_async)};");
             }
+        }
+
+        public override string ToString()
+        {
+            return _writer.ToString();
         }
     }
 }

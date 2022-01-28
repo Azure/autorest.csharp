@@ -24,6 +24,7 @@ using Azure.Core.Serialization;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text.RegularExpressions;
 using Azure.Core;
+using Azure.ResourceManager.Resources;
 
 namespace AutoRest.CSharp.MgmtTest.Generation
 {
@@ -704,13 +705,16 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                         return String.Join("/", result.ToArray());
                     }
             int maxSegment = 0;
-            if (tp is ResourceGroupExtensions)
+            if (tp is MgmtExtensions extension)
             {
-                maxSegment = 5;
-            }
-            else if (tp is SubscriptionExtensions)
-            {
-                maxSegment = 3;
+                if (extension.ArmCoreType == typeof(ResourceGroup))
+                {
+                    maxSegment = 5;
+                }
+                else if (extension.ArmCoreType == typeof(Subscription))
+                {
+                    maxSegment = 3;
+                }
             }
             int i = 0;
             foreach (string segment in segements)

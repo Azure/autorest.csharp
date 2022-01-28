@@ -2,23 +2,25 @@
 // Licensed under the MIT License
 
 using System.Collections.Generic;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
-using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class MgmtExtensionClient : MgmtExtensions
     {
-        private readonly MgmtExtensions _publicExtension;
-
-        public MgmtExtensionClient(IEnumerable<Operation> allOperations, string resourceName, BuildContext<MgmtOutputLibrary> context, string defaultName, RequestPath contextualPath, MgmtExtensions publicExtension)
-            : base(allOperations, resourceName, context, defaultName, contextualPath)
+        private string _defaultName;
+        public MgmtExtensionClient(BuildContext<MgmtOutputLibrary> context, MgmtExtensions publicExtension)
+            : base(context, publicExtension)
         {
-            _publicExtension = publicExtension;
+            PublicExtension = publicExtension;
+            _defaultName = $"{ResourceName}ExtensionClient";
         }
 
-        public override IEnumerable<Resource> ChildResources => _publicExtension.ChildResources;
+        protected override string DefaultName => _defaultName;
+
+        public MgmtExtensions PublicExtension { get; }
+
+        public override IEnumerable<Resource> ChildResources => PublicExtension.ChildResources;
     }
 }

@@ -6,21 +6,20 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Reflection;
 using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Common.Output.Builders;
-using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Builders;
-using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
-using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
+using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Management;
+using Azure.ResourceManager.Resources;
 
 namespace AutoRest.CSharp.Mgmt.AutoRest
 {
@@ -259,80 +258,31 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public ArmClientExtensions ArmClientExtensions => EnsureArmClientExtensions();
 
-        public TenantExtensions TenantExtensions => EnsureTenantExtensions();
+        private MgmtExtensions? _tenantExtensions;
+        private MgmtExtensions? _managementGroupExtensions;
+        private MgmtExtensions? _subscriptionExtensions;
+        private MgmtExtensions? _resourceGroupsExtensions;
+        private MgmtExtensions? _armResourceExtensions;
+        public MgmtExtensions TenantExtensions => _tenantExtensions ??= EnsureExtensions(typeof(Tenant), RequestPath.Tenant);
+        public MgmtExtensions SubscriptionExtensions => _subscriptionExtensions ??= EnsureExtensions(typeof(Subscription), RequestPath.Subscription);
+        public MgmtExtensions ResourceGroupExtensions => _resourceGroupsExtensions ??= EnsureExtensions(typeof(ResourceGroup), RequestPath.ResourceGroup);
+        public MgmtExtensions ManagementGroupExtensions => _managementGroupExtensions ??= EnsureExtensions(typeof(ManagementGroup), RequestPath.ManagementGroup);
+        public MgmtExtensions ArmResourceExtensions => _armResourceExtensions ??= EnsureExtensions(typeof(ArmResource), RequestPath.Any);
 
-        public SubscriptionExtensions SubscriptionExtensions => EnsureSubscriptionExtensions();
+        private MgmtExtensionClient? _tenantExtensionClient;
+        private MgmtExtensionClient? _managementGroupExtensionClient;
+        private MgmtExtensionClient? _subscriptionExtensionClient;
+        private MgmtExtensionClient? _resourceGroupExtensionClient;
+        public MgmtExtensionClient SubscriptionExtensionsClient => _subscriptionExtensionClient ??= EnsureExtensionsClient(SubscriptionExtensions);
+        public MgmtExtensionClient ResourceGroupExtensionsClient => _resourceGroupExtensionClient ??= EnsureExtensionsClient(ResourceGroupExtensions);
+        public MgmtExtensionClient TenantExtensionsClient => _tenantExtensionClient ??= EnsureExtensionsClient(TenantExtensions);
+        public MgmtExtensionClient ManagementGroupExtensionsClient => _managementGroupExtensionClient ??= EnsureExtensionsClient(ManagementGroupExtensions);
 
-        private MgmtExtensions? _subscriptionExtensionClient;
-        public MgmtExtensions SubscriptionExtensionsClient => EnsureExtensionsClient(ref _subscriptionExtensionClient, "Subscription", RequestPath.Subscription, SubscriptionExtensions);
+        private MgmtExtensionClient EnsureExtensionsClient(MgmtExtensions publicExtension) =>
+            new MgmtExtensionClient(_context, publicExtension);
 
-        private MgmtExtensions? _resourceGroupExtensionClient;
-        public MgmtExtensions ResourceGroupExtensionsClient => EnsureExtensionsClient(ref _resourceGroupExtensionClient, "ResourceGroup", RequestPath.ResourceGroup, ResourceGroupExtensions);
-
-        private MgmtExtensions? _tenantExtensionClient;
-        public MgmtExtensions TenantExtensionsClient => EnsureExtensionsClient(ref _tenantExtensionClient, "Tenant", RequestPath.Tenant, TenantExtensions);
-
-        private MgmtExtensions? _managementGroupExtensionClient;
-        public MgmtExtensions ManagementGroupExtensionsClient => EnsureExtensionsClient(ref _managementGroupExtensionClient, "ManagementGroup", RequestPath.ManagementGroup, ManagementGroupExtensions);
-
-        public ResourceGroupExtensions ResourceGroupExtensions => EnsureResourceGroupExtensions();
-
-        public ManagementGroupExtensions ManagementGroupExtensions => EnsureManagementExtensions();
-
-        public ArmResourceExtensions ArmResourceExtensions => EnsureArmResourceExtensions();
-
-        private ResourceGroupExtensions? _resourceGroupsExtensions;
-        private ResourceGroupExtensions EnsureResourceGroupExtensions()
-        {
-            if (_resourceGroupsExtensions != null)
-                return _resourceGroupsExtensions;
-
-            // accumulate all the operations of resource group extensions
-            _resourceGroupsExtensions = new ResourceGroupExtensions(GetChildOperations(RequestPath.ResourceGroup), _context);
-            return _resourceGroupsExtensions;
-        }
-
-        private SubscriptionExtensions? _subscriptionExtensions;
-        private SubscriptionExtensions EnsureSubscriptionExtensions()
-        {
-            if (_subscriptionExtensions != null)
-                return _subscriptionExtensions;
-
-            // accumulate all the operations of subscription extensions
-            _subscriptionExtensions = new SubscriptionExtensions(GetChildOperations(RequestPath.Subscription), _context);
-            return _subscriptionExtensions;
-        }
-
-        private MgmtExtensions EnsureExtensionsClient(ref MgmtExtensions? extensionField, string typePrefix, RequestPath path, MgmtExtensions publicExtension)
-        {
-            if (extensionField != null)
-                return extensionField;
-
-            extensionField = new MgmtExtensionClient(GetChildOperations(path), typePrefix, _context, $"{typePrefix}ExtensionClient", path, publicExtension);
-            return extensionField;
-        }
-
-
-        private ManagementGroupExtensions? _managementGroupExtensions;
-        private ManagementGroupExtensions EnsureManagementExtensions()
-        {
-            if (_managementGroupExtensions != null)
-                return _managementGroupExtensions;
-
-            // accumulate all the operations of subscription extensions
-            _managementGroupExtensions = new ManagementGroupExtensions(GetChildOperations(RequestPath.ManagementGroup), _context);
-            return _managementGroupExtensions;
-        }
-
-        private TenantExtensions? _tenantExtensions;
-        private TenantExtensions EnsureTenantExtensions()
-        {
-            if (_tenantExtensions != null)
-                return _tenantExtensions;
-
-            _tenantExtensions = new TenantExtensions(GetChildOperations(RequestPath.Tenant), _context);
-            return _tenantExtensions;
-        }
+        private MgmtExtensions EnsureExtensions(Type armCoreType, RequestPath contextualPath) =>
+            new MgmtExtensions(GetChildOperations(contextualPath), armCoreType, _context, contextualPath);
 
         private ArmClientExtensions? _armClientExtensions;
         private ArmClientExtensions EnsureArmClientExtensions()
@@ -342,16 +292,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
             _armClientExtensions = new ArmClientExtensions(GetChildOperations(RequestPath.Tenant), _context);
             return _armClientExtensions;
-        }
-
-        private ArmResourceExtensions? _armResourceExtensions;
-        private ArmResourceExtensions EnsureArmResourceExtensions()
-        {
-            if (_armResourceExtensions != null)
-                return _armResourceExtensions;
-
-            _armResourceExtensions = new ArmResourceExtensions(Enumerable.Empty<Operation>(), _context);
-            return _armResourceExtensions;
         }
 
         private IEnumerable<ResourceData>? _resourceDatas;
@@ -636,6 +576,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public IEnumerable<Operation> GetChildOperations(string requestPath)
         {
+            if (requestPath == RequestPath.Any)
+                return Enumerable.Empty<Operation>();
+
             if (EnsureResourceChildOperations().TryGetValue(requestPath, out var operations))
                 return operations;
 

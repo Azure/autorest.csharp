@@ -3,30 +3,19 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Text;
-using System.Threading;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.AutoRest;
-using AutoRest.CSharp.Mgmt.Decorator;
-using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Types;
-using AutoRest.CSharp.Utilities;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
-using Azure.ResourceManager.Resources;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal class ResourceExtensionWriter : MgmtExtensionWriter
     {
-        protected override string Description => "An internal class to add extension methods to.";
-
         protected override string ExtensionOperationVariableName => "this";
 
         protected override string Accessibility => "internal";
@@ -35,8 +24,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected override bool UseRestClientField => false;
 
-        public ResourceExtensionWriter(CodeWriter writer, MgmtExtensions extensions, BuildContext<MgmtOutputLibrary> context, Type extensionType)
-            : base(writer, extensions, context, extensionType)
+        public ResourceExtensionWriter(MgmtExtensions extensions, BuildContext<MgmtOutputLibrary> context)
+            : base(extensions, context)
         {
         }
 
@@ -44,10 +33,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             using (_writer.Namespace(Context.DefaultNamespace))
             {
-                _writer.WriteXmlDocumentationSummary($"{Description}");
+                _writer.WriteXmlDocumentationSummary($"{Extension.Description}");
                 using (_writer.Scope($"{Accessibility} partial class {TypeNameOfThis} : {typeof(ArmResource)}"))
                 {
-                    var uniqueSets = WriteFields(_writer, _extensions.ClientOperations, false);
+                    var uniqueSets = WriteFields(_writer, Extension.ClientOperations, false);
                     _writer.Line();
 
                     WriteCtors();
@@ -63,7 +52,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
                     var resourcesWithGetAllAsGenericMethod = new HashSet<Resource>();
                     // Write other orphan operations with the parent of ResourceGroup
-                    foreach (var clientOperation in _extensions.ClientOperations)
+                    foreach (var clientOperation in Extension.ClientOperations)
                     {
                         WriteMethod(clientOperation, true);
                         WriteMethod(clientOperation, false);

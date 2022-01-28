@@ -3,7 +3,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
@@ -11,7 +10,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Common.Generation.Writers;
-using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.AutoRest;
@@ -26,7 +24,6 @@ using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Azure.ResourceManager;
 using Azure.ResourceManager.Management;
 using Azure.ResourceManager.Resources;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
@@ -80,11 +77,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected virtual bool UseRestClientField => true;
 
+        public string FileName { get; }
+
         protected MgmtClientBaseWriter(CodeWriter writer, T provider, BuildContext<MgmtOutputLibrary> context)
         {
             _writer = writer;
             Context = context;
             _provider = provider;
+            FileName = TypeNameOfThis;
         }
 
         public abstract void Write();

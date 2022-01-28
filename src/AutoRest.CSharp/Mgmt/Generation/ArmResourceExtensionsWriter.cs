@@ -10,13 +10,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal class ArmResourceExtensionsWriter : MgmtExtensionWriter
     {
-        public ArmResourceExtensionsWriter(CodeWriter writer, Output.MgmtExtensions extensions, BuildContext<MgmtOutputLibrary> context, bool isArmCore = false)
-            : base(writer, extensions, context, typeof(ArmResource), isArmCore)
+        public ArmResourceExtensionsWriter(Output.MgmtExtensions extensions, BuildContext<MgmtOutputLibrary> context)
+            : base(extensions, context)
         {
         }
-
-        protected override string Description => IsArmCore ? "A class representing the operations that can be performed over a specific resource." : "A class to add extension methods to ArmResource.";
-        protected override string ExtensionOperationVariableName => IsArmCore ? "this" : "armResource";
 
         public override void Write()
         {
@@ -25,7 +22,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var className = IsArmCore ? nameof(ArmResource) : TypeNameOfThis;
             using (_writer.Namespace(theNamespace))
             {
-                _writer.WriteXmlDocumentationSummary($"{Description}");
+                _writer.WriteXmlDocumentationSummary($"{Extension.Description}");
                 using (_writer.Scope($"{Accessibility} {modifier} partial class {className}"))
                 {
                     // Write resource collection entries

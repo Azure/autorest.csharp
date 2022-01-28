@@ -1,31 +1,20 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
-using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
-using AutoRest.CSharp.Output.Models.Requests;
-using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
-using AutoRest.CSharp.Utilities;
 using Azure.ResourceManager;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal class ArmClientExtensionsWriter : MgmtExtensionWriter
     {
-        public ArmClientExtensionsWriter(CodeWriter writer, MgmtExtensions extensions, BuildContext<MgmtOutputLibrary> context, bool isArmCore = false)
-            : base(writer, extensions, context, typeof(ArmClient), isArmCore)
+        public ArmClientExtensionsWriter(MgmtExtensions extensions, BuildContext<MgmtOutputLibrary> context)
+            : base(extensions, context)
         {
         }
-        protected override string Description => IsArmCore ? "The entry point for all ARM clients." : "A class to add extension methods to ArmClient.";
-        protected override string ExtensionOperationVariableName => IsArmCore ? "this" : "armClient";
 
         public override void Write()
         {
@@ -34,7 +23,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var className = IsArmCore ? nameof(ArmClient) : TypeNameOfThis;
             using (_writer.Namespace(theNamespace))
             {
-                _writer.WriteXmlDocumentationSummary($"{Description}");
+                _writer.WriteXmlDocumentationSummary($"{Extension.Description}");
                 using (_writer.Scope($"{Accessibility} {staticKeyWord}partial class {className}"))
                 {
                     foreach (var resource in Context.Library.ArmResources)

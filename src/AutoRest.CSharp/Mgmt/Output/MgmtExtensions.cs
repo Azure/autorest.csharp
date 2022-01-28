@@ -17,14 +17,28 @@ namespace AutoRest.CSharp.Mgmt.Output
     {
         protected IEnumerable<Operation> _allOperations;
 
-        public MgmtExtensions(IEnumerable<Operation> allOperations, string resourceName, BuildContext<MgmtOutputLibrary> context, string defaultName, RequestPath contextualPath)
-            : base(context, resourceName)
+        protected MgmtExtensions(BuildContext<MgmtOutputLibrary> context, MgmtExtensions mgmtExtension)
+            : this(mgmtExtension._allOperations, mgmtExtension.ArmCoreType, context, mgmtExtension.ContextualPath)
+        {
+        }
+
+        public MgmtExtensions(IEnumerable<Operation> allOperations, Type armCoreType, BuildContext<MgmtOutputLibrary> context, RequestPath contextualPath)
+            : base(context, armCoreType.Name)
         {
             _context = context;
             _allOperations = allOperations;
-            DefaultName = defaultName;
+            ArmCoreType = armCoreType;
+            DefaultName = $"{ResourceName}Extensions";
             ContextualPath = contextualPath;
+            ArmCoreNamespace = ArmCoreType.Namespace!;
+            Description = $"A class to add extension methods to {ResourceName}.";
         }
+
+        public Type ArmCoreType { get; }
+
+        public string Description { get; }
+
+        public string ArmCoreNamespace { get; }
 
         protected override string DefaultName { get; }
 
