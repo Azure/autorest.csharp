@@ -2,7 +2,9 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using AutoRest.CSharp.AutoRest.Plugins;
@@ -13,6 +15,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class CodeModelExtension
     {
+        private static readonly IDictionary<string, string> _cache = new ConcurrentDictionary<string, string>();
+
         public static void UpdateSubscriptionIdForAllResource(this CodeModel codeModel)
         {
             bool setSubParam = false;
@@ -38,17 +42,17 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
         }
 
-        private static void ApplyAcronymsDictionary(MgmtConfiguration config)
+        internal static void ApplyRenameRules(IReadOnlyDictionary<string, string> renameRules)
         {
-            foreach ((var key, var value) in config.AcroynmsDictionary)
+            foreach ((var key, var value) in renameRules)
             {
-                CommonAcronyms.Add(key, value);
+                RenameRules.Add(key, value);
             }
         }
 
-        public static void UpdateAcronyms(this CodeModel codeModel, MgmtConfiguration config)
+        public static void UpdateAcronyms(this CodeModel codeModel, IReadOnlyDictionary<string, string> renameRules)
         {
-            ApplyAcronymsDictionary(config);
+            ApplyRenameRules(renameRules);
             foreach (var schema in codeModel.GetAllSchemas())
             {
                 TransformSchema(schema);
@@ -92,8 +96,14 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         private static void TransformLanguage(Languages languages)
         {
             var originalName = languages.Default.Name;
-            var newName = originalName.EnsureNameCase();
-            languages.Default.Name = newName;
+            if (_cache.TryGetValue(originalName, out var result))
+            {
+                languages.Default.Name = result;
+                return;
+            }
+            result = originalName.EnsureNameCase();
+            languages.Default.Name = result;
+            _cache.TryAdd(originalName, result);
         }
 
         private static void TransformObjectSchema(ObjectSchema objSchema)
@@ -106,16 +116,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
         }
 
-        private static IDictionary<string, string> CommonAcronyms = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-        {
-            { "os", "OS" },
-            { "ip", "IP" },
-            { "vm", "Vm" },
-            { "cpu", "Cpu" },
-            { "dns", "Dns" },
-            { "http", "Http" },
-            { "https", "Https" },
-        };
+        private static IDictionary<string, string> RenameRules = new Dictionary<string, string>();
 
         internal static string EnsureNameCase(this string name, bool lowerFirst = false)
         {
@@ -131,7 +132,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 }
                 else
                 {
-                    if (CommonAcronyms.TryGetValue(word, out var result))
+                    if (RenameRules.TryGetValue(word, out var result))
                     {
                         word = result;
                     }

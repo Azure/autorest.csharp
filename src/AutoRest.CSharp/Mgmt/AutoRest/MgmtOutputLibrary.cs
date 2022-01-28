@@ -77,7 +77,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             _context = context;
             _mgmtConfiguration = context.Configuration.MgmtConfiguration;
             _codeModel = codeModel;
-            codeModel.UpdateAcronyms(_mgmtConfiguration);
+            codeModel.UpdateAcronyms(_mgmtConfiguration.RenameRules);
             codeModel.UpdateSubscriptionIdForAllResource();
             _operationGroupToRequestPaths = new Dictionary<OperationGroup, IEnumerable<string>>();
             _rawRequestPathToOperationSets = new Dictionary<string, OperationSet>();
