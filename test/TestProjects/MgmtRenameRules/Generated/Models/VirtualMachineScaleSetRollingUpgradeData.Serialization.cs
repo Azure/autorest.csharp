@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Models;
 using MgmtRenameRules.Models;
 
 namespace MgmtRenameRules
@@ -40,6 +41,7 @@ namespace MgmtRenameRules
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
+            SystemData systemData = default;
             Optional<RollingUpgradePolicy> policy = default;
             Optional<RollingUpgradeRunningStatus> runningStatus = default;
             Optional<RollingUpgradeProgressInfo> progress = default;
@@ -74,6 +76,11 @@ namespace MgmtRenameRules
                 if (property.NameEquals("type"))
                 {
                     type = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("systemData"))
+                {
+                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.ToString());
                     continue;
                 }
                 if (property.NameEquals("properties"))
@@ -129,7 +136,7 @@ namespace MgmtRenameRules
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetRollingUpgradeData(id, name, type, tags, location, policy.Value, runningStatus.Value, progress.Value, error.Value);
+            return new VirtualMachineScaleSetRollingUpgradeData(id, name, type, systemData, tags, location, policy.Value, runningStatus.Value, progress.Value, error.Value);
         }
     }
 }

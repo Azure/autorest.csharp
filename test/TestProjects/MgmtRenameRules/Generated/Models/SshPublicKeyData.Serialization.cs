@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Models;
 
 namespace MgmtRenameRules
 {
@@ -44,6 +45,7 @@ namespace MgmtRenameRules
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
+            SystemData systemData = default;
             Optional<string> publicKey = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -77,6 +79,11 @@ namespace MgmtRenameRules
                     type = property.Value.GetString();
                     continue;
                 }
+                if (property.NameEquals("systemData"))
+                {
+                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.ToString());
+                    continue;
+                }
                 if (property.NameEquals("properties"))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
@@ -95,7 +102,7 @@ namespace MgmtRenameRules
                     continue;
                 }
             }
-            return new SshPublicKeyData(id, name, type, tags, location, publicKey.Value);
+            return new SshPublicKeyData(id, name, type, systemData, tags, location, publicKey.Value);
         }
     }
 }
