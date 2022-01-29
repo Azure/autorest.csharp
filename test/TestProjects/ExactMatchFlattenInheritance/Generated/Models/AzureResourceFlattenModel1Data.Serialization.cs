@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Models;
 
 namespace ExactMatchFlattenInheritance
 {
@@ -55,6 +56,7 @@ namespace ExactMatchFlattenInheritance
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
+            SystemData systemData = default;
             Optional<string> foo0 = default;
             Optional<string> id0 = default;
             foreach (var property in element.EnumerateObject())
@@ -99,6 +101,11 @@ namespace ExactMatchFlattenInheritance
                     type = property.Value.GetString();
                     continue;
                 }
+                if (property.NameEquals("systemData"))
+                {
+                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.ToString());
+                    continue;
+                }
                 if (property.NameEquals("properties"))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
@@ -122,7 +129,7 @@ namespace ExactMatchFlattenInheritance
                     continue;
                 }
             }
-            return new AzureResourceFlattenModel1Data(id, name, type, tags, location, Optional.ToNullable(foo), foo0.Value, id0.Value);
+            return new AzureResourceFlattenModel1Data(id, name, type, systemData, tags, location, Optional.ToNullable(foo), foo0.Value, id0.Value);
         }
     }
 }

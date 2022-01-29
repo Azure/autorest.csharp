@@ -22,12 +22,12 @@ namespace Azure.Analytics.Purview.Account
         private static readonly string[] AuthorizationScopes = new string[] { "https://purview.azure.net/.default" };
         private readonly TokenCredential _tokenCredential;
         private readonly HttpPipeline _pipeline;
-        private readonly ClientDiagnostics _clientDiagnostics;
         private readonly Uri _endpoint;
         private readonly string _apiVersion;
 
         /// <summary> The String to use. </summary>
-        public virtual string CollectionName { get; }
+        public string CollectionName { get; }
+        internal ClientDiagnostics ClientDiagnostics { get; }
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
@@ -52,7 +52,7 @@ namespace Azure.Analytics.Purview.Account
             Argument.AssertNotNull(collectionName, nameof(collectionName));
             Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 
-            _clientDiagnostics = clientDiagnostics;
+            ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
             _tokenCredential = tokenCredential;
             _endpoint = endpoint;
@@ -106,7 +106,7 @@ namespace Azure.Analytics.Purview.Account
         public virtual async Task<Response> GetCollectionAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("PurviewAccountCollections.GetCollection");
+            using var scope = ClientDiagnostics.CreateScope("PurviewAccountCollections.GetCollection");
             scope.Start();
             try
             {
@@ -166,7 +166,7 @@ namespace Azure.Analytics.Purview.Account
         public virtual Response GetCollection(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("PurviewAccountCollections.GetCollection");
+            using var scope = ClientDiagnostics.CreateScope("PurviewAccountCollections.GetCollection");
             scope.Start();
             try
             {
@@ -250,7 +250,7 @@ namespace Azure.Analytics.Purview.Account
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = _clientDiagnostics.CreateScope("PurviewAccountCollections.CreateOrUpdateCollection");
+            using var scope = ClientDiagnostics.CreateScope("PurviewAccountCollections.CreateOrUpdateCollection");
             scope.Start();
             try
             {
@@ -334,7 +334,7 @@ namespace Azure.Analytics.Purview.Account
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = _clientDiagnostics.CreateScope("PurviewAccountCollections.CreateOrUpdateCollection");
+            using var scope = ClientDiagnostics.CreateScope("PurviewAccountCollections.CreateOrUpdateCollection");
             scope.Start();
             try
             {
@@ -374,7 +374,7 @@ namespace Azure.Analytics.Purview.Account
         public virtual async Task<Response> DeleteCollectionAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("PurviewAccountCollections.DeleteCollection");
+            using var scope = ClientDiagnostics.CreateScope("PurviewAccountCollections.DeleteCollection");
             scope.Start();
             try
             {
@@ -414,7 +414,7 @@ namespace Azure.Analytics.Purview.Account
         public virtual Response DeleteCollection(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("PurviewAccountCollections.DeleteCollection");
+            using var scope = ClientDiagnostics.CreateScope("PurviewAccountCollections.DeleteCollection");
             scope.Start();
             try
             {
@@ -460,7 +460,7 @@ namespace Azure.Analytics.Purview.Account
         public virtual async Task<Response> GetCollectionPathAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("PurviewAccountCollections.GetCollectionPath");
+            using var scope = ClientDiagnostics.CreateScope("PurviewAccountCollections.GetCollectionPath");
             scope.Start();
             try
             {
@@ -506,7 +506,7 @@ namespace Azure.Analytics.Purview.Account
         public virtual Response GetCollectionPath(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("PurviewAccountCollections.GetCollectionPath");
+            using var scope = ClientDiagnostics.CreateScope("PurviewAccountCollections.GetCollectionPath");
             scope.Start();
             try
             {
@@ -559,7 +559,7 @@ namespace Azure.Analytics.Purview.Account
         public virtual AsyncPageable<BinaryData> GetChildCollectionNamesAsync(string skipToken = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PurviewAccountCollections.GetChildCollectionNames");
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "PurviewAccountCollections.GetChildCollectionNames");
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
@@ -613,7 +613,7 @@ namespace Azure.Analytics.Purview.Account
         public virtual Pageable<BinaryData> GetChildCollectionNames(string skipToken = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PurviewAccountCollections.GetChildCollectionNames");
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "PurviewAccountCollections.GetChildCollectionNames");
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do

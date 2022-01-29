@@ -76,7 +76,7 @@ namespace AutoRest.CSharp.Generation.Writers
         {
         }
 
-        protected virtual bool UseUserAgentOverride()
+        protected virtual bool UseSDKUserAgent()
         {
             return false;
         }
@@ -121,7 +121,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void WriteRequestCreation(CodeWriter writer, RestClientMethod clientMethod, Parameter[] parameters)
         {
-            RequestWriterHelpers.WriteRequestCreation(writer, clientMethod, "internal", null, null, UseUserAgentOverride(), parameters);
+            RequestWriterHelpers.WriteRequestCreation(writer, clientMethod, "internal", null, null, UseSDKUserAgent(), parameters);
         }
 
         private void WriteOperation(CodeWriter writer, RestClientMethod operation, bool async)

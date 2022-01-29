@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Models;
 
 namespace MgmtMultipleParentResource
 {
@@ -69,6 +70,7 @@ namespace MgmtMultipleParentResource
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
+            SystemData systemData = default;
             Optional<bool> asyncExecution = default;
             Optional<string> runAsUser = default;
             Optional<string> runAsPassword = default;
@@ -106,6 +108,11 @@ namespace MgmtMultipleParentResource
                 if (property.NameEquals("type"))
                 {
                     type = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("systemData"))
+                {
+                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.ToString());
                     continue;
                 }
                 if (property.NameEquals("properties"))
@@ -166,7 +173,7 @@ namespace MgmtMultipleParentResource
                     continue;
                 }
             }
-            return new ChildBodyData(id, name, type, tags, location, Optional.ToNullable(asyncExecution), runAsUser.Value, runAsPassword.Value, Optional.ToNullable(timeoutInSeconds), outputBlobUri.Value, errorBlobUri.Value, provisioningState.Value);
+            return new ChildBodyData(id, name, type, systemData, tags, location, Optional.ToNullable(asyncExecution), runAsUser.Value, runAsPassword.Value, Optional.ToNullable(timeoutInSeconds), outputBlobUri.Value, errorBlobUri.Value, provisioningState.Value);
         }
     }
 }

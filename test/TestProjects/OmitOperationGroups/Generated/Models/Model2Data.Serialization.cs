@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Models;
 using OmitOperationGroups.Models;
 
 namespace OmitOperationGroups
@@ -38,6 +39,7 @@ namespace OmitOperationGroups
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
+            SystemData systemData = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("b"))
@@ -80,8 +82,13 @@ namespace OmitOperationGroups
                     type = property.Value.GetString();
                     continue;
                 }
+                if (property.NameEquals("systemData"))
+                {
+                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.ToString());
+                    continue;
+                }
             }
-            return new Model2Data(id, name, type, f.Value, g.Value, b.Value, modelx.Value);
+            return new Model2Data(id, name, type, systemData, f.Value, g.Value, b.Value, modelx.Value);
         }
     }
 }

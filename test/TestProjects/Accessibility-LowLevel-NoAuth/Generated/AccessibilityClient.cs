@@ -17,9 +17,8 @@ namespace Accessibility_LowLevel_NoAuth
     public partial class AccessibilityClient
     {
         private readonly HttpPipeline _pipeline;
-        private readonly ClientDiagnostics _clientDiagnostics;
         private readonly Uri _endpoint;
-
+        internal ClientDiagnostics ClientDiagnostics { get; }
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
@@ -36,7 +35,7 @@ namespace Accessibility_LowLevel_NoAuth
             endpoint ??= new Uri("http://localhost:3000");
             options ??= new AccessibilityClientOptions();
 
-            _clientDiagnostics = new ClientDiagnostics(options);
+            ClientDiagnostics = new ClientDiagnostics(options);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
             _endpoint = endpoint;
         }
@@ -47,7 +46,7 @@ namespace Accessibility_LowLevel_NoAuth
         public virtual async Task<Response> OperationAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("AccessibilityClient.Operation");
+            using var scope = ClientDiagnostics.CreateScope("AccessibilityClient.Operation");
             scope.Start();
             try
             {
@@ -67,7 +66,7 @@ namespace Accessibility_LowLevel_NoAuth
         public virtual Response Operation(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("AccessibilityClient.Operation");
+            using var scope = ClientDiagnostics.CreateScope("AccessibilityClient.Operation");
             scope.Start();
             try
             {
@@ -87,7 +86,7 @@ namespace Accessibility_LowLevel_NoAuth
         internal virtual async Task<Response> OperationInternalAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("AccessibilityClient.OperationInternal");
+            using var scope = ClientDiagnostics.CreateScope("AccessibilityClient.OperationInternal");
             scope.Start();
             try
             {
@@ -107,7 +106,7 @@ namespace Accessibility_LowLevel_NoAuth
         internal virtual Response OperationInternal(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("AccessibilityClient.OperationInternal");
+            using var scope = ClientDiagnostics.CreateScope("AccessibilityClient.OperationInternal");
             scope.Start();
             try
             {

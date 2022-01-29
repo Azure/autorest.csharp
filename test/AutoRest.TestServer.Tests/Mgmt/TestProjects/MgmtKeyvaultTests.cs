@@ -17,66 +17,66 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             this.ValidateMethodExist("MgmtKeyvault.Tests.TestHelper", methodName, argTypes);
         }
 
-        [TestCase("CreateOrUpdateAsync")]
-        [TestCase("GetAsync")]
-        [TestCase("GetAllAsync")]
+        [TestCase("CreateOrUpdate")]
+        [TestCase("Get")]
+        [TestCase("GetAll")]
         public void ValidateMhsmPrivateEndpointConnectionCollectionMockTests(string methodName, params string[] argTypes)
         {
             this.ValidateMethodExist("MgmtKeyvault.Tests.Mock.MhsmPrivateEndpointConnectionCollectionMockTests", methodName, argTypes);
         }
 
-        [TestCase("CreateOrUpdateAsync")]
-        [TestCase("GetAsync")]
-        [TestCase("GetAllAsync")]
+        [TestCase("CreateOrUpdate")]
+        [TestCase("Get")]
+        [TestCase("GetAll")]
         public void ValidateManagedHsmCollectionMockTests(string methodName, params string[] argTypes)
         {
             this.ValidateMethodExist("MgmtKeyvault.Tests.Mock.ManagedHsmCollectionMockTests", methodName, argTypes);
         }
 
-        [TestCase("CreateOrUpdateAsync")]
-        [TestCase("GetAsync")]
-        [TestCase("GetAllAsync")]
+        [TestCase("CreateOrUpdate")]
+        [TestCase("Get")]
+        [TestCase("GetAll")]
         public void ValidatePrivateEndpointConnectionCollectionMockTests(string methodName, params string[] argTypes)
         {
             this.ValidateMethodExist("MgmtKeyvault.Tests.Mock.PrivateEndpointConnectionCollectionMockTests", methodName, argTypes);
         }
 
-        [TestCase("CreateOrUpdateAsync")]
-        [TestCase("CreateOrUpdateAsync2")]
-        [TestCase("GetAsync")]
-        [TestCase("GetAllAsync")]
+        [TestCase("CreateOrUpdate")]
+        [TestCase("CreateOrUpdate2")]
+        [TestCase("Get")]
+        [TestCase("GetAll")]
         public void ValidateVaultCollectionMockTests(string methodName, params string[] argTypes)
         {
             this.ValidateMethodExist("MgmtKeyvault.Tests.Mock.VaultCollectionMockTests", methodName, argTypes);
         }
 
-        [TestCase("GetAsync")]
-        [TestCase("DeleteAsync")]
-        [TestCase("UpdateAsync")]
-        [TestCase("GetMHSMPrivateLinkResourcesByMhsmResourceAsync")]
+        [TestCase("Get")]
+        [TestCase("Delete")]
+        [TestCase("Update")]
+        [TestCase("GetMHSMPrivateLinkResourcesByMhsmResource")]
         public void ValidateManagedHsmMockTests(string methodName, params string[] argTypes)
         {
             this.ValidateMethodExist("MgmtKeyvault.Tests.Mock.ManagedHsmMockTests", methodName, argTypes);
         }
 
-        [TestCase("GetAsync")]
-        [TestCase("DeleteAsync")]
+        [TestCase("Get")]
+        [TestCase("Delete")]
         public void ValidateMhsmPrivateEndpointConnectionMockTests(string methodName, params string[] argTypes)
         {
             this.ValidateMethodExist("MgmtKeyvault.Tests.Mock.MhsmPrivateEndpointConnectionMockTests", methodName, argTypes);
         }
 
-        [TestCase("GetAsync")]
-        [TestCase("DeleteAsync")]
+        [TestCase("Get")]
+        [TestCase("Delete")]
         public void ValidatePrivateEndpointConnectionMockTests(string methodName, params string[] argTypes)
         {
             this.ValidateMethodExist("MgmtKeyvault.Tests.Mock.PrivateEndpointConnectionMockTests", methodName, argTypes);
         }
 
-        [TestCase("GetAsync")]
-        [TestCase("DeleteAsync")]
-        [TestCase("UpdateAsync")]
-        [TestCase("GetPrivateLinkResourcesAsync")]
+        [TestCase("Get")]
+        [TestCase("Delete")]
+        [TestCase("Update")]
+        [TestCase("GetPrivateLinkResources")]
         public void ValidateVaultMockTests(string methodName, params string[] argTypes)
         {
             this.ValidateMethodExist("MgmtKeyvault.Tests.Mock.VaultMockTests", methodName, argTypes);

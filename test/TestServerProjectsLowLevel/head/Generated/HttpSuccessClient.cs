@@ -19,9 +19,8 @@ namespace head_LowLevel
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
-        private readonly ClientDiagnostics _clientDiagnostics;
         private readonly Uri _endpoint;
-
+        internal ClientDiagnostics ClientDiagnostics { get; }
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
@@ -41,7 +40,7 @@ namespace head_LowLevel
             endpoint ??= new Uri("http://localhost:3000");
             options ??= new HttpSuccessClientOptions();
 
-            _clientDiagnostics = new ClientDiagnostics(options);
+            ClientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
@@ -53,7 +52,7 @@ namespace head_LowLevel
         public virtual async Task<Response> Head200Async(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Head200");
+            using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Head200");
             scope.Start();
             try
             {
@@ -73,7 +72,7 @@ namespace head_LowLevel
         public virtual Response Head200(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Head200");
+            using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Head200");
             scope.Start();
             try
             {
@@ -93,7 +92,7 @@ namespace head_LowLevel
         public virtual async Task<Response> Head204Async(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Head204");
+            using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Head204");
             scope.Start();
             try
             {
@@ -113,7 +112,7 @@ namespace head_LowLevel
         public virtual Response Head204(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Head204");
+            using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Head204");
             scope.Start();
             try
             {
@@ -133,7 +132,7 @@ namespace head_LowLevel
         public virtual async Task<Response> Head404Async(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Head404");
+            using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Head404");
             scope.Start();
             try
             {
@@ -153,7 +152,7 @@ namespace head_LowLevel
         public virtual Response Head404(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Head404");
+            using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Head404");
             scope.Start();
             try
             {

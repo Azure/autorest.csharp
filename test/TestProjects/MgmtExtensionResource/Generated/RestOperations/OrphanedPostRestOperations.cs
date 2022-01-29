@@ -57,7 +57,7 @@ namespace MgmtExtensionResource
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(validateSomethingOptions);
             request.Content = content;
-            message.SetProperty("UserAgentOverride", _userAgent);
+            message.SetProperty("SDKUserAgent", _userAgent);
             return message;
         }
 

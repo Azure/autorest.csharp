@@ -20,9 +20,8 @@ namespace url_multi_collectionFormat_LowLevel
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
-        private readonly ClientDiagnostics _clientDiagnostics;
         private readonly Uri _endpoint;
-
+        internal ClientDiagnostics ClientDiagnostics { get; }
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
@@ -42,7 +41,7 @@ namespace url_multi_collectionFormat_LowLevel
             endpoint ??= new Uri("http://localhost:3000");
             options ??= new QueriesClientOptions();
 
-            _clientDiagnostics = new ClientDiagnostics(options);
+            ClientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
@@ -64,7 +63,7 @@ namespace url_multi_collectionFormat_LowLevel
         public virtual async Task<Response> ArrayStringMultiNullAsync(IEnumerable<string> arrayQuery = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringMultiNull");
+            using var scope = ClientDiagnostics.CreateScope("QueriesClient.ArrayStringMultiNull");
             scope.Start();
             try
             {
@@ -94,7 +93,7 @@ namespace url_multi_collectionFormat_LowLevel
         public virtual Response ArrayStringMultiNull(IEnumerable<string> arrayQuery = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringMultiNull");
+            using var scope = ClientDiagnostics.CreateScope("QueriesClient.ArrayStringMultiNull");
             scope.Start();
             try
             {
@@ -124,7 +123,7 @@ namespace url_multi_collectionFormat_LowLevel
         public virtual async Task<Response> ArrayStringMultiEmptyAsync(IEnumerable<string> arrayQuery = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringMultiEmpty");
+            using var scope = ClientDiagnostics.CreateScope("QueriesClient.ArrayStringMultiEmpty");
             scope.Start();
             try
             {
@@ -154,7 +153,7 @@ namespace url_multi_collectionFormat_LowLevel
         public virtual Response ArrayStringMultiEmpty(IEnumerable<string> arrayQuery = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringMultiEmpty");
+            using var scope = ClientDiagnostics.CreateScope("QueriesClient.ArrayStringMultiEmpty");
             scope.Start();
             try
             {
@@ -184,7 +183,7 @@ namespace url_multi_collectionFormat_LowLevel
         public virtual async Task<Response> ArrayStringMultiValidAsync(IEnumerable<string> arrayQuery = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringMultiValid");
+            using var scope = ClientDiagnostics.CreateScope("QueriesClient.ArrayStringMultiValid");
             scope.Start();
             try
             {
@@ -214,7 +213,7 @@ namespace url_multi_collectionFormat_LowLevel
         public virtual Response ArrayStringMultiValid(IEnumerable<string> arrayQuery = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringMultiValid");
+            using var scope = ClientDiagnostics.CreateScope("QueriesClient.ArrayStringMultiValid");
             scope.Start();
             try
             {

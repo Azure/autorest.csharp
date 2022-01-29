@@ -19,13 +19,13 @@ namespace ResourceClients_LowLevel
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
-        private readonly ClientDiagnostics _clientDiagnostics;
         private readonly Uri _endpoint;
 
         /// <summary> Group identifier. </summary>
-        public virtual string GroupId { get; }
+        public string GroupId { get; }
         /// <summary> Item identifier. </summary>
-        public virtual string ItemId { get; }
+        public string ItemId { get; }
+        internal ClientDiagnostics ClientDiagnostics { get; }
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
@@ -50,7 +50,7 @@ namespace ResourceClients_LowLevel
             Argument.AssertNotNull(itemId, nameof(itemId));
             endpoint ??= new Uri("http://localhost:3000");
 
-            _clientDiagnostics = clientDiagnostics;
+            ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
             _keyCredential = keyCredential;
             GroupId = groupId;
@@ -64,7 +64,7 @@ namespace ResourceClients_LowLevel
         public virtual async Task<Response> GetItemAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("Resource.GetItem");
+            using var scope = ClientDiagnostics.CreateScope("Resource.GetItem");
             scope.Start();
             try
             {
@@ -84,7 +84,7 @@ namespace ResourceClients_LowLevel
         public virtual Response GetItem(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("Resource.GetItem");
+            using var scope = ClientDiagnostics.CreateScope("Resource.GetItem");
             scope.Start();
             try
             {

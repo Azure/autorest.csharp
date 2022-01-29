@@ -19,9 +19,8 @@ namespace SingleTopLevelClientWithoutOperations_LowLevel
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
-        private readonly ClientDiagnostics _clientDiagnostics;
         private readonly Uri _endpoint;
-
+        internal ClientDiagnostics ClientDiagnostics { get; }
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
@@ -42,7 +41,7 @@ namespace SingleTopLevelClientWithoutOperations_LowLevel
             Argument.AssertNotNull(pipeline, nameof(pipeline));
             endpoint ??= new Uri("http://localhost:3000");
 
-            _clientDiagnostics = clientDiagnostics;
+            ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
             _keyCredential = keyCredential;
             _endpoint = endpoint;
@@ -53,7 +52,7 @@ namespace SingleTopLevelClientWithoutOperations_LowLevel
         public virtual async Task<Response> OperationAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("Client7.Operation");
+            using var scope = ClientDiagnostics.CreateScope("Client7.Operation");
             scope.Start();
             try
             {
@@ -72,7 +71,7 @@ namespace SingleTopLevelClientWithoutOperations_LowLevel
         public virtual Response Operation(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("Client7.Operation");
+            using var scope = ClientDiagnostics.CreateScope("Client7.Operation");
             scope.Start();
             try
             {
