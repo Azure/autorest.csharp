@@ -19,37 +19,35 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
                 { "Ips", "IPs" },
                 { "ID", "Id" },
                 { "IDs", "Ids" },
+                { "VPN", "Vpn" },
+                { "WAN", "Wan" },
+                { "WANs", "Wans" },
             };
             CodeModelExtension.ApplyRenameRules(renameRules);
         }
 
-        [TestCase("OsType", "OSType", false)]
-        [TestCase("OsType", "osType", true)]
-        [TestCase("DnsIp", "DnsIP", false)]
-        [TestCase("DnsIp", "dnsIP", true)]
-        [TestCase("OsProfile", "OSProfile", false)]
-        [TestCase("OsProfile", "osProfile", true)]
-        [TestCase("ipAddress", "IPAddress", false)]
-        [TestCase("ipAddress", "ipAddress", true)]
-        [TestCase("vipAddress", "VipAddress", false)]
-        [TestCase("vipAddress", "vipAddress", true)]
-        [TestCase("publicIp", "PublicIP", false)]
-        [TestCase("publicIp", "publicIP", true)]
-        [TestCase("publicIps", "PublicIPs", false)]
-        [TestCase("publicIps", "publicIPs", true)]
-        [TestCase("resourceId", "ResourceId", false)]
-        [TestCase("resourceId", "resourceId", true)]
-        [TestCase("resourceIds", "ResourceIds", false)]
-        [TestCase("resourceIds", "resourceIds", true)]
-        [TestCase("resourceIDs", "ResourceIds", false)]
-        [TestCase("resourceIDs", "resourceIds", true)]
-        [TestCase("resourceIdSuffix", "ResourceIdSuffix", false)]
-        [TestCase("resourceIdSuffix", "resourceIdSuffix", true)]
-        [TestCase("resourceIDSuffix", "ResourceIdSuffix", false)]
-        [TestCase("resourceIDSuffix", "resourceIdSuffix", true)]
-        public void EnsureNameCaseTest(string name, string expected, bool lowerFirst)
+        [TestCase("OsType", "OSType")]
+        [TestCase("DnsIp", "DnsIP")]
+        [TestCase("OsProfile", "OSProfile")]
+        [TestCase("ipAddress", "IPAddress")]
+        [TestCase("vipAddress", "VipAddress")]
+        [TestCase("publicIp", "PublicIP")]
+        [TestCase("publicIps", "PublicIPs")]
+        [TestCase("resourceId", "ResourceId")]
+        [TestCase("resourceIds", "ResourceIds")]
+        [TestCase("resourceIDs", "ResourceIds")]
+        [TestCase("resourceIdSuffix", "ResourceIdSuffix")]
+        [TestCase("IpsilateralDisablity", "IpsilateralDisablity")]
+        [TestCase("HumanIpsilateralDisablity", "HumanIpsilateralDisablity")]
+        [TestCase("DnsIpAddressIDsForWindowsOs", "DnsIPAddressIdsForWindowsOS")]
+        [TestCase("DnsIpAddressIDsForWindowsOsPlatform", "DnsIPAddressIdsForWindowsOSPlatform")]
+        [TestCase("something_IDs_Ip_Os", "Something_Ids_Ip_OS")]
+        [TestCase("Dynamic365IDs", "Dynamic365Ids")]
+        [TestCase("VirtualWAN", "VirtualWan")]
+        [TestCase("VirtualWANs", "VirtualWans")]
+        public void EnsureNameCaseTest(string name, string expected)
         {
-            var result = name.EnsureNameCase(lowerFirst);
+            var result = name.EnsureNameCase();
             Assert.AreEqual(expected, result);
         }
     }

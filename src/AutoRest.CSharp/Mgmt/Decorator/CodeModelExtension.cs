@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Utilities;
@@ -42,12 +43,31 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
         }
 
+        private static Regex? _regex;
+
         internal static void ApplyRenameRules(IReadOnlyDictionary<string, string> renameRules)
         {
             foreach ((var key, var value) in renameRules)
             {
                 RenameRules.Add(key, value);
             }
+            BuildRegex();
+        }
+
+        private static void BuildRegex()
+        {
+            if (RenameRules.Count == 0)
+                return;
+            var regexRawString = string.Join("|", RenameRules.Keys);
+            // we are building the regex that matches
+            // 1. it starts with a lower case letter or a digit which is considered as the end of its previous word
+            //    or it is at the beginning of this string
+            //    or we hit a word separator including \W, _, ., @, -, spaces
+            // 2. it either should match one of the candidates in the rename rules dictionary
+            // 3. it should followed by a upper case letter which is considered as the beginning of next word
+            //    or it is the end of this string
+            //    or we hit a word separator including \W, _, ., @, -, spaces
+            _regex = new Regex(@$"([\W|_|\.|@|-|\s|\$\da-z]|^)({regexRawString})([\W|_|\.|@|-|\s|\$A-Z]|$)");
         }
 
         public static void UpdateAcronyms(this CodeModel codeModel, IReadOnlyDictionary<string, string> renameRules)
@@ -118,28 +138,30 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         private static IDictionary<string, string> RenameRules = new Dictionary<string, string>();
 
-        internal static string EnsureNameCase(this string name, bool lowerFirst = false)
+        internal static string EnsureNameCase(this string name)
         {
-            var words = name.SplitByCamelCase().ToArray();
+            if (_regex == null)
+                return name; // this means we do not have any replacement rules
+            name = name.FirstCharToUpperCase();
+            var spans = name.AsSpan();
             var builder = new StringBuilder();
-            for (int i = 0; i < words.Length; i++)
+            var match = _regex.Match(name);
+            int index = 0;
+            while (match.Success)
             {
-                var word = words[i];
-                if (lowerFirst && i == 0)
-                {
-                    // we are the first word, all letters should be in lower case, including acronyms
-                    word = word.ToLowerInvariant();
-                }
-                else
-                {
-                    if (RenameRules.TryGetValue(word, out var result))
-                    {
-                        word = result;
-                    }
-                }
-
-                builder.Append(word);
+                var groups = match.Groups;
+                // in our regular expression, the content we want to find is in the second group
+                var matchGroup = groups[2];
+                var replaceValue = RenameRules[matchGroup.Value];
+                // append everything between the index from previous match (or 0 if none) and the index of this match
+                builder.Append(name.Substring(index, matchGroup.Index - index));
+                // append the replaced value
+                builder.Append(replaceValue);
+                match = match.NextMatch();
+                index = matchGroup.Index + matchGroup.Length;
             }
+            if (index < name.Length) // replace whatever is at the end of the string to the result
+                builder.Append(name.Substring(index, name.Length - index));
 
             return builder.ToString();
         }
