@@ -9,13 +9,11 @@ using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Utilities;
-using Azure.ResourceManager;
 using System.Diagnostics.CodeAnalysis;
 
 namespace AutoRest.CSharp.MgmtTest.Generation
@@ -25,6 +23,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
     /// </summary>
     internal class ResourceTestWriter : MgmtBaseTestWriter
     {
+        private IEnumerable<MgmtClientOperation> _allOperation; 
         protected string TestNamespace => This.Type.Namespace + ".Tests.Mock";
         private string TypeNameOfThis => This.Type.Name + "MockTests";
 
@@ -34,6 +33,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
         public ResourceTestWriter(CodeWriter writer, Resource resource, BuildContext<MgmtOutputLibrary> context): base(writer, resource, context)
         {
             This = resource;
+            _allOperation = resource.AllOperations;
         }
 
         public void WriteCollectionTest()
@@ -70,9 +70,6 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             writer.UseNamespace("System.Collections.Generic");
             writer.UseNamespace("Azure.Core.TestFramework");
             writer.UseNamespace("Azure.ResourceManager.TestFramework");
-            writer.UseNamespace("Azure.ResourceManager.Resources");
-            writer.UseNamespace("Azure.ResourceManager.Resources.Models");
-            writer.UseNamespace($"{Context.DefaultNamespace}.Models");
         }
 
         protected void WriteMethodTestIfExist(Resource resource) {
@@ -109,11 +106,13 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             }
         }
 
-        public string WriteGetResource(Resource resource, string requestPath, ExampleModel exampleModel)
+        public FormattableString WriteGetResource(Resource resource, FormattableString resourceIdentifierParams, ExampleModel exampleModel)
         {
-            var resourceVariableName = useVariableName(resource.Type.Name.FirstCharToLowerCase());
-            _writer.Line($"var {resourceVariableName} = GetArmClient().Get{resource.Type.Name}(new {typeof(Azure.Core.ResourceIdentifier)}({MgmtBaseTestWriter.FormatResourceId(requestPath):L}));");
-            return resourceVariableName;
+            var resourceVariableName = new CodeWriterDeclaration(resource.Type.Name.FirstCharToLowerCase());
+            var idVar = new CodeWriterDeclaration($"{resource.Type.Name.FirstCharToLowerCase()}Id");
+            _writer.Line($"var {idVar:D} = {resource.Type}.CreateResourceIdentifier({resourceIdentifierParams});");
+            _writer.Line($"var {resourceVariableName:D} = GetArmClient().Get{resource.Type.Name}({idVar});");
+            return $"{resourceVariableName}";
         }
 
         protected void WriteMethodTest(Resource resource, MgmtClientOperation clientOperation, bool async, bool isLroOperation)
@@ -131,25 +130,23 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
                 foreach (var exampleModel in exampleGroup?.Examples ?? Enumerable.Empty<ExampleModel>())
                 {
-                    var realRequestPath = ParseRequestPath(resource, operation.RequestPath.SerializedPath, exampleModel);
-                    if (realRequestPath is null)
+                    if (resource.RequestPaths is null || resource.RequestPaths.Count()==0)
                     {
                         continue;
                     }
+
                     WriteTestDecorator();
                     var testCaseSuffix = exampleIdx > 0 ? (exampleIdx + 1).ToString() : String.Empty;
-                    _writer.Append($"public {GetAsyncKeyword(async)} {MgmtBaseTestWriter.GetTaskOrVoid(async)} {(resource == This ? "" : resource.Type.Name)}{testMethodName}{testCaseSuffix}()");
+                    _writer.Append($"public {GetAsyncKeyword(async)} {MgmtBaseTestWriter.GetTaskOrVoid(async)} {(resource == This ? "" : resource.Type.Name)}{methodName}{testCaseSuffix}()");
 
                     using (_writer.Scope())
                     {
                         _writer.LineRaw($"// Example: {exampleModel.Name}");
-                        clearVariableNames();
-                        var resourceVariableName = WriteGetResource(resource, realRequestPath, exampleModel);
-
-                        List<string> paramNames = WriteOperationParameters(clientOperation.MethodParameters, Enumerable.Empty<Parameter> (), exampleModel);
-
+                        var resourceIdentifierParams = ComposeResourceIdentifierParams(resource.RequestPaths.First(), exampleModel);
+                        var resourceVariableName = WriteGetResource(resource, resourceIdentifierParams, exampleModel);
+                        List<KeyValuePair<string, FormattableString>> parameterValues = WriteOperationParameters(clientOperation.MethodParameters, exampleModel);
                         _writer.Line();
-                        WriteMethodTestInvocation(async, clientOperation, isLroOperation, $"{resourceVariableName}.{testMethodName}", paramNames);
+                        WriteMethodTestInvocation(async, clientOperation, isLroOperation, $"{resourceVariableName}.{testMethodName}", parameterValues.Select(pv => pv.Value));
                     }
                     _writer.Line();
                     exampleIdx++;

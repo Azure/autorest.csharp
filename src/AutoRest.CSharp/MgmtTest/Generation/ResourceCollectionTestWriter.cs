@@ -14,9 +14,7 @@ using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
-using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Mgmt.Models;
-using Azure.ResourceManager.Resources;
 using System.Diagnostics.CodeAnalysis;
 
 namespace AutoRest.CSharp.MgmtTest.Generation
@@ -26,6 +24,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
     /// </summary>
     internal class ResourceCollectionTestWriter : MgmtBaseTestWriter
     {
+        private MgmtClientOperation? _getAllOperation; 
         protected CSharpType TypeOfCollection => This.Type;
         protected string TypeNameOfCollection => TypeOfCollection.Name;
 
@@ -42,6 +41,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
         public ResourceCollectionTestWriter(CodeWriter writer, ResourceCollection resourceCollection, BuildContext<MgmtOutputLibrary> context): base(writer, resourceCollection, context)
         {
             This = resourceCollection;
+            _getAllOperation = resourceCollection.GetAllOperation;
         }
 
         public void WriteCollectionTest()
@@ -73,9 +73,6 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             writer.UseNamespace("System.Net");
             writer.UseNamespace("Azure.Core.TestFramework");
             writer.UseNamespace("Azure.ResourceManager.TestFramework");
-            writer.UseNamespace("Azure.ResourceManager.Resources");
-            writer.UseNamespace("Azure.ResourceManager.Resources.Models");
-            writer.UseNamespace($"{Context.DefaultNamespace}.Models");
         }
 
         protected void WriteTesterCtors()
@@ -117,56 +114,16 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             return isAsync ? "Async" : string.Empty;
         }
 
-        public void WriteGetCollection(MgmtClientOperation clientOperation, ExampleModel exampleModel, bool isAsync)
-        {
-            _writer.Append($"var collection = {GetAwait(isAsync)} Get{TypeNameOfCollection}{GetAsyncSuffix(isAsync)}(");
-            var methodParameters = GenExampleInstanceMethodParameters(clientOperation);
-            var usedParameters = new HashSet<ExampleParameter>();
-            var allMethodParameters = new HashSet<string>();
-            foreach (var methodParameter in methodParameters)
-            {
-                allMethodParameters.Add(methodParameter.Name);
-            }
-            foreach (var (parameter, op) in collectionInitiateParameters)
-            {
-                var found = false;
-                foreach (var exampleMethodParameter in exampleModel.MethodParameters)
-                {
-                    if (exampleMethodParameter.Parameter.CSharpName()==parameter.Name)
-                    {
-                        WriteExampleValue(_writer, parameter.Type, exampleMethodParameter.ExampleValue, parameter.Name);
-                        _writer.Append($", ");
-                        usedParameters.Add(exampleMethodParameter);
-                        found = true;
-                        break;
-                    }
-                }
-                if (!found)
-                {
-                    foreach (var exampleMethodParameter in exampleModel.MethodParameters)
-                    {
-                        if (!usedParameters.Contains(exampleMethodParameter) && !allMethodParameters.Contains(exampleMethodParameter.Parameter.CSharpName()))
-                        {
-                            WriteExampleValue(_writer, parameter.Type, exampleMethodParameter.ExampleValue, parameter.Name);
-                            _writer.Append($", ");
-                            usedParameters.Add(exampleMethodParameter);
-                            break;
-                        }
-                    }
-                }
-            }
-            _writer.RemoveTrailingComma();
-            _writer.Line($");");
-        }
-
-        public void WriteGetCollection(MgmtTypeProvider parentTp, string requestPath, ExampleModel exampleModel)
+        public void WriteGetCollection(MgmtTypeProvider parentTp, string requestPath, ExampleModel exampleModel, List<KeyValuePair<string, FormattableString>> parameterValues)
         {
             var realRequestPath = ParseRequestPath(parentTp, requestPath, exampleModel)!;
             switch (parentTp)
             {
                 case Resource parentResource:
                     {
-                        _writer.Append($"var collection = GetArmClient().Get{parentResource.Type.Name}(new {typeof(Azure.Core.ResourceIdentifier)}({MgmtBaseTestWriter.FormatResourceId(realRequestPath):L}))");
+                        var idVar = new CodeWriterDeclaration($"{parentResource.Type.Name.FirstCharToLowerCase()}Id");
+                        _writer.Line($"var {idVar:D} = {parentResource.Type}.CreateResourceIdentifier({ComposeResourceIdentifierParams(parentResource.RequestPaths.First(), exampleModel)});");
+                        _writer.Append($"var collection = GetArmClient().Get{parentResource.Type.Name}({idVar})");
                         break;
                     }
                 case MgmtExtensions extension:
@@ -177,7 +134,21 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 default:
                     throw new Exception($"Unknown parent {parentTp}");
             }
-            _writer.Line($".Get{This.Resource.Type.Name.ToPlural()}();");
+            List<FormattableString> extraParamNames = new List<FormattableString>();
+            var paramsMap = parameterValues.ToDictionary(pv => pv.Key, pv => pv);
+            foreach (var extraParam in This.ExtraConstructorParameters)
+            {
+                if (paramsMap.ContainsKey(extraParam.Name))
+                {
+                    extraParamNames.Add(paramsMap[extraParam.Name].Value);
+                    parameterValues.Remove(paramsMap[extraParam.Name]);
+                }
+                else
+                {
+                    extraParamNames.Add($"default");
+                }
+            }
+            _writer.Line($".{WriteMethodInvocation($"Get{This.Resource.Type.Name.ResourceNameToPlural()}", extraParamNames)};");
         }
 
         public MgmtTypeProvider? FindParentByRequestPath(string requestPath, ExampleModel exampleModel)
@@ -212,7 +183,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
             foreach (var tp in mgmtParentResources)
             {
-                if (tp is Resource rt && ParseRequestPath(rt, requestPath, exampleModel) is not null)
+                if (tp is Resource rt && rt.RequestPaths is not null && rt.RequestPaths.Count() !=0)
                 {
                     return tp;
                 }
@@ -253,7 +224,6 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 var exampleGroup = MgmtBaseTestWriter.FindExampleGroup(Context, operation);
                 if (exampleGroup is null || exampleGroup.Examples.Count() == 0)
                     return;
-                // var testMethodParameters = GenExampleInstanceMethodParameters(clientOperation);
                 var testMethodName = CreateMethodName(methodName, async);
 
                 foreach (var exampleModel in (exampleGroup?.Examples ?? Enumerable.Empty<ExampleModel>()))
@@ -266,17 +236,14 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
                     WriteTestDecorator();
                     var testCaseSuffix = exampleIdx > 0 ? (exampleIdx + 1).ToString() : String.Empty;
-                    _writer.Append($"public {GetAsyncKeyword(async)} {MgmtBaseTestWriter.GetTaskOrVoid(async)} {testMethodName}{testCaseSuffix}()");
+                    _writer.Append($"public {GetAsyncKeyword(async)} {MgmtBaseTestWriter.GetTaskOrVoid(async)} {methodName}{testCaseSuffix}()");
                     using (_writer.Scope())
                     {
                         _writer.Line($"// Example: {exampleModel.Name}");
-                        clearVariableNames();
-                        // WriteGetCollection(clientOperation, exampleModel, async);
-                        WriteGetCollection(parentTp, operation.RequestPath.SerializedPath, exampleModel);
-
-                        List<string> paramNames = WriteOperationParameters(clientOperation.MethodParameters, new List<Parameter>(), exampleModel);
+                        List<KeyValuePair<string, FormattableString>> parameterValues = WriteOperationParameters(clientOperation.MethodParameters, exampleModel);
                         _writer.Line();
-                        WriteMethodTestInvocation(async, clientOperation, isLroOperation, $"collection.{testMethodName}", paramNames);
+                        WriteGetCollection(parentTp, operation.RequestPath.SerializedPath, exampleModel, parameterValues);
+                        WriteMethodTestInvocation(async, clientOperation, isLroOperation, $"collection.{testMethodName}", parameterValues.Select(pv => pv.Value));
                     }
                     _writer.Line();
                     exampleIdx++;
