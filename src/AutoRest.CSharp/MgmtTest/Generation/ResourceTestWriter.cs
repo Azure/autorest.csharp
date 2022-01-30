@@ -23,14 +23,14 @@ namespace AutoRest.CSharp.MgmtTest.Generation
     /// </summary>
     internal class ResourceTestWriter : MgmtBaseTestWriter
     {
-        private IEnumerable<MgmtClientOperation> _allOperation; 
+        private IEnumerable<MgmtClientOperation> _allOperation;
         protected string TestNamespace => This.Type.Namespace + ".Tests.Mock";
         private string TypeNameOfThis => This.Type.Name + "MockTests";
 
         protected string TestBaseName => $"MockTestBase";
         private Resource This { get; }
 
-        public ResourceTestWriter(CodeWriter writer, Resource resource, BuildContext<MgmtOutputLibrary> context): base(writer, resource, context)
+        public ResourceTestWriter(CodeWriter writer, Resource resource, BuildContext<MgmtOutputLibrary> context) : base(writer, resource, context)
         {
             This = resource;
             _allOperation = resource.AllOperations;
@@ -72,7 +72,8 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             writer.UseNamespace("Azure.ResourceManager.TestFramework");
         }
 
-        protected void WriteMethodTestIfExist(Resource resource) {
+        protected void WriteMethodTestIfExist(Resource resource)
+        {
             if (resource.GetOperation != null)
             {
                 _writer.Line();
@@ -130,7 +131,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
                 foreach (var exampleModel in exampleGroup?.Examples ?? Enumerable.Empty<ExampleModel>())
                 {
-                    if (resource.RequestPaths is null || resource.RequestPaths.Count()==0)
+                    if (resource.RequestPaths is null || resource.RequestPaths.Count() == 0)
                     {
                         continue;
                     }

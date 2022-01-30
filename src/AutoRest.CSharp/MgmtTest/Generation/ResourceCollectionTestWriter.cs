@@ -16,6 +16,7 @@ using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using AutoRest.CSharp.Mgmt.Models;
 using System.Diagnostics.CodeAnalysis;
+using Azure.ResourceManager.Resources;
 
 namespace AutoRest.CSharp.MgmtTest.Generation
 {
@@ -24,7 +25,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
     /// </summary>
     internal class ResourceCollectionTestWriter : MgmtBaseTestWriter
     {
-        private MgmtClientOperation? _getAllOperation; 
+        private MgmtClientOperation? _getAllOperation;
         protected CSharpType TypeOfCollection => This.Type;
         protected string TypeNameOfCollection => TypeOfCollection.Name;
 
@@ -38,7 +39,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
         public List<Tuple<Parameter, MgmtClientOperation?>> collectionInitiateParameters = new List<Tuple<Parameter, MgmtClientOperation?>>();
         public Dictionary<Tuple<Parameter, MgmtClientOperation?>, string> collectionInitiateParametersMap = new Dictionary<Tuple<Parameter, MgmtClientOperation?>, string>();
 
-        public ResourceCollectionTestWriter(CodeWriter writer, ResourceCollection resourceCollection, BuildContext<MgmtOutputLibrary> context): base(writer, resourceCollection, context)
+        public ResourceCollectionTestWriter(CodeWriter writer, ResourceCollection resourceCollection, BuildContext<MgmtOutputLibrary> context) : base(writer, resourceCollection, context)
         {
             This = resourceCollection;
             _getAllOperation = resourceCollection.GetAllOperation;
@@ -183,7 +184,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
             foreach (var tp in mgmtParentResources)
             {
-                if (tp is Resource rt && rt.RequestPaths is not null && rt.RequestPaths.Count() !=0)
+                if (tp is Resource rt && rt.RequestPaths is not null && rt.RequestPaths.Count() != 0)
                 {
                     return tp;
                 }
