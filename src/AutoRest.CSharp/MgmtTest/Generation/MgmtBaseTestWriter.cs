@@ -615,12 +615,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             throw new NotImplementedException();
         }
 
-        protected override void WriteResourceCollectionEntry(Resource resource)
-        {
-            throw new NotImplementedException();
-        }
-
-        protected override ResourceTypeSegment GetBranchResourceType(RequestPath branch)
+        protected override void WriteResourceCollectionEntry(ResourceCollection resource)
         {
             throw new NotImplementedException();
         }
@@ -770,8 +765,8 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             if (isLroOperation || clientOperation.IsLongRunningOperation && !clientOperation.IsPagingOperation) {
                 paramNames = new List<string>().Append("true").Concat(paramNames);   // assign  waitForCompletion = true
             }
-            var isPagingOperation = clientOperation.IsPagingOperation|| clientOperation.IsListOperation;
-            if (isPagingOperation)
+
+            if (clientOperation.IsPagingOperation)
             {
                 using (_writer.Scope($"foreach (var _ in {WriteMethodInvocation($"{methodName}", paramNames)})"))
                 { }

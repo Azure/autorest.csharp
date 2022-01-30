@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
@@ -27,18 +28,45 @@ namespace AutoRest.CSharp.Mgmt.Output
             Resource = resource;
         }
 
-        public override ConstructorSignature? ResourceDataCtor => default(ConstructorSignature?);
-        public override Type? BaseType => typeof(ArmCollection);
+        public override CSharpType? BaseType => typeof(ArmCollection);
+        protected override IReadOnlyList<CSharpType> EnsureGetInterfaces()
+        {
+            if (GetAllOperation is null || GetAllOperation.MethodParameters.Any(p => p.IsRequired))
+                return base.EnsureGetInterfaces();
+
+            return new CSharpType[]
+            {
+                new CSharpType(typeof(IEnumerable<>), Resource.Type),
+                new CSharpType(typeof(IAsyncEnumerable<>), Resource.Type)
+            };
+        }
         public Resource Resource { get; }
 
         private MgmtClientOperation? _getAllOperation;
         public MgmtClientOperation? GetAllOperation => _getAllOperation ??= EnsureGetAllOperation();
 
         private Dictionary<Parameter, FormattableString> _extraConstructorParameters = new();
-        public IEnumerable<Parameter> ExtraConstructorParameters => _extraConstructorParameters.Keys;
-
         private List<ContextualParameterMapping> _extraContextualParameterMapping = new();
         public IEnumerable<ContextualParameterMapping> ExtraContextualParameterMapping => _extraContextualParameterMapping;
+
+        protected override IEnumerable<Parameter> EnsureExtraCtorParameters()
+        {
+            _ = GetAllOperation;
+            return _extraConstructorParameters.Keys;
+        }
+
+        protected override ConstructorSignature? EnsureArmClientCtor()
+        {
+            return new ConstructorSignature(
+              Name: Type.Name,
+              Description: $"Initializes a new instance of the <see cref=\"{Type.Name}\"/> class.",
+              Modifiers: "internal",
+              Parameters: _armClientCtorParameters.Concat(ExtraConstructorParameters).ToArray(),
+              Initializer: new(
+                  isBase: true,
+                  arguments: _armClientCtorParameters));
+        }
+        protected override ConstructorSignature? EnsureResourceDataCtor() => null;
 
         private MgmtClientOperation? EnsureGetAllOperation()
         {
@@ -149,11 +177,34 @@ namespace AutoRest.CSharp.Mgmt.Output
                 result.Add(CreateOperation);
             if (GetOperation != null)
                 result.Add(GetOperation);
-            //if (DeleteOperation != null)
-            //    result.Add(DeleteOperation); // comment this back if we decide to include delete method in collections
             result.AddRange(ClientOperations);
+            if (GetOperation != null)
+            {
+                var getMgmtRestOperation = GetOperation.OperationMappings.Values.First();
+                result.Add(MgmtClientOperation.FromOperation(
+                    new MgmtRestOperation(
+                        getMgmtRestOperation,
+                        "Exists",
+                        typeof(bool),
+                        $"Checks to see if the resource exists in azure.",
+                        _context),
+                    _context));
+                result.Add(MgmtClientOperation.FromOperation(
+                    new MgmtRestOperation(
+                        getMgmtRestOperation,
+                        "GetIfExists",
+                        getMgmtRestOperation.MgmtReturnType,
+                        $"Tries to get details for this resource from the service.",
+                        _context),
+                    _context));
+            }
 
             return result;
+        }
+
+        public override ResourceTypeSegment GetBranchResourceType(RequestPath branch)
+        {
+            return branch.GetResourceType(_context.Configuration.MgmtConfiguration);
         }
 
         protected override IEnumerable<FieldDeclaration> GetAdditionalFields()
@@ -202,7 +253,6 @@ namespace AutoRest.CSharp.Mgmt.Output
             Description = $"The resource representing the parent resource."
         };
 
-        public override Parameter ResourceIdentifierParameter => new Parameter(Name: "id", Description: $"The identifier of the parent resource that is the target of operations.",
-                Type: typeof(Azure.Core.ResourceIdentifier), DefaultValue: null, ValidateNotNull: false);
+        protected override string IdParamDescription => $"The identifier of the parent resource that is the target of operations.";
     }
 }

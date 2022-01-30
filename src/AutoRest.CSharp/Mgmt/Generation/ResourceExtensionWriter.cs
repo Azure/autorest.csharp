@@ -18,7 +18,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected override string ArmClientReference => "ArmClient";
 
-        protected override bool UseRestClientField => false;
+        protected override bool UseField => false;
 
         private MgmtExtensionClient This { get; }
 
@@ -30,6 +30,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected override void WritePrivateHelpers()
         {
+            _writer.Line();
             using (_writer.Scope($"private string GetApiVersionOrNull({typeof(ResourceType)} resourceType)"))
             {
                 _writer.Line($"{ArmClientReference}.TryGetApiVersion(resourceType, out string apiVersion);");
@@ -45,18 +46,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        protected override ResourceTypeSegment GetBranchResourceType(RequestPath branch)
-        {
-            // we should never have a branch in the operations in an extension class, therefore throwing an exception here
-            throw new InvalidOperationException();
-        }
-
         private void WriterPropertySet(MgmtRestClient client, Resource? resource)
         {
             string? resourceName = resource?.Type.Name;
-            string diagPropertyName = GetClientDiagnosticsPropertyName(client, resource);
+            string diagPropertyName = GetDiagnosticsPropertyName(client, resource);
             FormattableString diagOptionsCtor = ConstructClientDiagnostic(_writer, GetProviderNamespaceFromReturnType(resourceName), DiagnosticOptionsProperty);
-            _writer.Line($"private {typeof(ClientDiagnostics)} {diagPropertyName} => {GetClientDiagnosticFieldName(client, resource)} ??= {diagOptionsCtor};");
+            _writer.Line($"private {typeof(ClientDiagnostics)} {diagPropertyName} => {GetDiagnosticFieldName(client, resource)} ??= {diagOptionsCtor};");
             string apiVersionString = resourceName == null ? string.Empty : $", GetApiVersionOrNull({resourceName}.ResourceType)";
             string restCtor = GetRestConstructorString(client, diagPropertyName, apiVersionString);
             _writer.Line($"private {client.Type} {GetRestPropertyName(client, resource)} => {GetRestFieldName(client, resource)} ??= {restCtor};");

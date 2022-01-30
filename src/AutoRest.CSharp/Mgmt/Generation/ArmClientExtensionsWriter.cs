@@ -25,6 +25,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 WriteClassDeclaration();
                 using (_writer.Scope())
                 {
+                    WritePrivateHelpers();
+
                     foreach (var resource in Context.Library.ArmResources)
                     {
                         _writer.Line($"#region {resource.Type.Name}");

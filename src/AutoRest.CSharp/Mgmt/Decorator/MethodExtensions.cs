@@ -52,6 +52,5 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return schemaObject.Properties.FirstOrDefault(p => p.Declaration.Name == "Value" &&
                 p.Declaration.Type.IsFrameworkType && p.Declaration.Type.FrameworkType == typeof(IReadOnlyList<>));
         }
-
     }
 }

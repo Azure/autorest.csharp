@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
@@ -25,6 +26,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         protected static readonly string ResourcePosition = "resource";
         protected static readonly string CollectionPosition = "collection";
         private const string DataFieldName = "_data";
+        protected readonly Parameter[] _armClientCtorParameters;
 
         private static readonly HttpMethod[] MethodToExclude = new[] { HttpMethod.Put, HttpMethod.Get, HttpMethod.Delete, HttpMethod.Patch };
 
@@ -53,6 +55,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             : base(context, resourceName)
         {
             _context = context;
+            _armClientCtorParameters = new[] { ArmClientParameter, ResourceIdentifierParameter };
             OperationSets = allOperations.Keys;
             ResourceType = resourceType;
             ResourceData = resourceData;
@@ -67,17 +70,21 @@ namespace AutoRest.CSharp.Mgmt.Output
             Position = position;
         }
 
-        private ConstructorSignature? _armClientCtor;
-        public override ConstructorSignature? ArmClientCtor => _armClientCtor ??= new ConstructorSignature(
+        protected override ConstructorSignature? EnsureArmClientCtor()
+        {
+            return new ConstructorSignature(
               Name: Type.Name,
               Description: $"Initializes a new instance of the <see cref=\"{Type.Name}\"/> class.",
               Modifiers: "internal",
-              Parameters: new[] { ArmClientParameter, ResourceIdentifierParameter },
+              Parameters: _armClientCtorParameters,
               Initializer: new(
                   isBase: true,
-                  arguments: new[] { ArmClientParameter, ResourceIdentifierParameter }));
-        private ConstructorSignature? _resourceDataCtor;
-        public override ConstructorSignature? ResourceDataCtor => _resourceDataCtor ??= new ConstructorSignature(
+                  arguments: _armClientCtorParameters));
+        }
+
+        protected override ConstructorSignature? EnsureResourceDataCtor()
+        {
+            return new ConstructorSignature(
                 Name: Type.Name,
                 Description: $"Initializes a new instance of the <see cref = \"{Type.Name}\"/> class.",
                 Modifiers: "internal",
@@ -85,8 +92,9 @@ namespace AutoRest.CSharp.Mgmt.Output
                 Initializer: new(
                     IsBase: false,
                     Arguments: new FormattableString[] { $"{ArmClientParameter.Name:I}", ResourceDataIdExpression($"{ResourceDataParameter.Name:I}") }));
+        }
 
-        public override Type? BaseType => typeof(ArmResource);
+        public override CSharpType? BaseType => typeof(ArmResource);
 
         public override Resource? DefaultResource => this;
 
@@ -157,7 +165,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 }
             }
 
-            return MgmtClientOperation.FromOperations(result);
+            return MgmtClientOperation.FromOperations(result, _context);
         }
 
         private string? _defaultName;
@@ -281,13 +289,19 @@ namespace AutoRest.CSharp.Mgmt.Output
             var result = new List<MgmtClientOperation>();
             if (GetOperation != null)
                 result.Add(GetOperation);
-//            result.Add(new MgmtClientOperation())
             if (DeleteOperation != null)
                 result.Add(DeleteOperation);
             if (UpdateOperation != null)
                 result.Add(UpdateOperation);
+            if (IsSingleton && CreateOperation != null)
+                result.Add(CreateOperation);
             result.AddRange(ClientOperations);
             return result;
+        }
+
+        public override ResourceTypeSegment GetBranchResourceType(RequestPath branch)
+        {
+            return branch.ParentRequestPath(_context).GetResourceType(_context.Configuration.MgmtConfiguration);
         }
 
         /// <summary>
@@ -353,7 +367,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             // TODO -- what if the response type is not the same? Also we need to verify they have the same parameters before we could union those together
             _clientOperationMap = result.Where(pair => pair.Value.Count > 0).ToDictionary(
                 pair => pair.Key,
-                pair => MgmtClientOperation.FromOperations(pair.Value)!); // We first filtered the ones with at least one operation, therefore this will never be null
+                pair => MgmtClientOperation.FromOperations(pair.Value, _context)!); // We first filtered the ones with at least one operation, therefore this will never be null
             return _clientOperationMap;
         }
 

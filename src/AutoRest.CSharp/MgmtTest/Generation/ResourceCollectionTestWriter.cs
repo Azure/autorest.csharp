@@ -66,9 +66,8 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             }
         }
 
-        protected override void WriteUsings(CodeWriter writer)
+        private void WriteUsings(CodeWriter writer)
         {
-            base.WriteUsings(writer);
             writer.UseNamespace("System");
             writer.UseNamespace("System.Threading.Tasks");
             writer.UseNamespace("System.Net");
@@ -111,6 +110,11 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 _writer.Line();
                 WriteMethodTest(This.GetOperation, true, false);
             }
+        }
+
+        internal static string GetAsyncSuffix(bool isAsync)
+        {
+            return isAsync ? "Async" : string.Empty;
         }
 
         public void WriteGetCollection(MgmtClientOperation clientOperation, ExampleModel exampleModel, bool isAsync)
@@ -243,7 +247,6 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             Debug.Assert(clientOperation != null);
             var methodName = clientOperation.Name;
 
-            BuildParameters(clientOperation, out var operationMappings, out var parameterMappings, out var methodParameters);
             int exampleIdx = 0;
             foreach ((var branch, var operation) in GetSortedOperationMappings(clientOperation))
             {
@@ -271,7 +274,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                         // WriteGetCollection(clientOperation, exampleModel, async);
                         WriteGetCollection(parentTp, operation.RequestPath.SerializedPath, exampleModel);
 
-                        List<string> paramNames = WriteOperationParameters(methodParameters, new List<Parameter>(), exampleModel);
+                        List<string> paramNames = WriteOperationParameters(clientOperation.MethodParameters, new List<Parameter>(), exampleModel);
                         _writer.Line();
                         WriteMethodTestInvocation(async, clientOperation, isLroOperation, $"collection.{testMethodName}", paramNames);
                     }
@@ -288,9 +291,8 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
         public IEnumerable<Parameter> GenExampleInstanceMethodParameters(MgmtClientOperation clientOperation)
         {
-            BuildParameters(clientOperation, out var operationMappings, out var parameterMappings, out var methodParameters);
             // var passThruParameters = parameterMappings.Where(p => p.IsPassThru).Select(p => p.Parameter);
-            return methodParameters.Where(p => p.ValidateNotNull && p.Type.IsFrameworkType && (p.Type.FrameworkType.IsPrimitive || p.Type.FrameworkType == typeof(String))); // define all primitive parameters as method parameter
+            return clientOperation.MethodParameters.Where(p => p.ValidateNotNull && p.Type.IsFrameworkType && (p.Type.FrameworkType.IsPrimitive || p.Type.FrameworkType == typeof(String))); // define all primitive parameters as method parameter
         }
     }
 }

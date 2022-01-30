@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
@@ -12,6 +13,7 @@ using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
+using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
@@ -36,16 +38,35 @@ namespace AutoRest.CSharp.Mgmt.Output
             IsStatic = !_isArmCore && BaseType is null && this is MgmtExtensions extension && extension.ArmCoreType != typeof(ArmResource) && extension.ArmCoreType != typeof(ArmClient);
         }
 
-        public virtual Parameter ResourceIdentifierParameter => new Parameter(Name: "id", Description: $"The identifier of the resource that is the target of operations.",
-                Type: typeof(Azure.Core.ResourceIdentifier), DefaultValue: null, ValidateNotNull: false);
+        protected virtual string IdParamDescription => $"The identifier of the resource that is the target of operations.";
+        public Parameter ResourceIdentifierParameter => new Parameter(Name: "id", Description: IdParamDescription,
+                Type: typeof(ResourceIdentifier), DefaultValue: null, ValidateNotNull: false);
         public Parameter ArmClientParameter => new Parameter(Name: "armClient", Description: $"The client parameters to use in these operations.",
-            Type: typeof(Azure.ResourceManager.ArmClient), DefaultValue: null, ValidateNotNull: false);
+            Type: typeof(ArmClient), DefaultValue: null, ValidateNotNull: false);
 
         public string Accessibility => DefaultAccessibility;
         protected override string DefaultAccessibility => "public";
 
         public string Namespace => DefaultNamespace;
-        public abstract Type? BaseType { get; }
+        public abstract CSharpType? BaseType { get; }
+
+        private IReadOnlyList<CSharpType>? _enumerableInterfaces;
+        public IEnumerable<CSharpType> EnumerableInterfaces => _enumerableInterfaces ??= EnsureGetInterfaces();
+        protected virtual IReadOnlyList<CSharpType> EnsureGetInterfaces()
+        {
+            return new CSharpType[] { };
+        }
+
+        public IEnumerable<CSharpType> GetImplementsList()
+        {
+            if (BaseType is not null)
+                yield return BaseType;
+
+            foreach (var type in EnumerableInterfaces)
+            {
+                yield return type;
+            }
+        }
         public bool IsStatic { get; }
 
         public abstract string Description { get; }
@@ -54,6 +75,10 @@ namespace AutoRest.CSharp.Mgmt.Output
         public HashSet<NameSetKey> UniqueSets => _uniqueSets ??= EnsureUniqueSets();
 
         public virtual Resource? DefaultResource { get; } = null;
+
+        private IEnumerable<Parameter>? _extraConstructorParameters;
+        public IEnumerable<Parameter> ExtraConstructorParameters => _extraConstructorParameters ??= EnsureExtraCtorParameters();
+        protected virtual IEnumerable<Parameter> EnsureExtraCtorParameters() => new List<Parameter>();
 
         protected virtual FieldModifiers FieldModifiers { get; } = FieldModifiers.Private;
 
@@ -92,8 +117,12 @@ namespace AutoRest.CSharp.Mgmt.Output
                 Modifiers: "protected",
                 Parameters: new Parameter[0]);
 
-        public virtual ConstructorSignature? ArmClientCtor { get; }
-        public virtual ConstructorSignature? ResourceDataCtor { get; }
+        private ConstructorSignature? _armClientCtor;
+        public ConstructorSignature? ArmClientCtor => _armClientCtor ??= EnsureArmClientCtor();
+        protected virtual ConstructorSignature? EnsureArmClientCtor() => null;
+        private ConstructorSignature? _resourceDataCtor;
+        public ConstructorSignature? ResourceDataCtor => _resourceDataCtor ??= EnsureResourceDataCtor();
+        protected virtual ConstructorSignature? EnsureResourceDataCtor() => null;
 
         private Dictionary<NameSetKey, NameSet> _nameCache = new Dictionary<NameSetKey, NameSet>();
         public NameSet GetRestDiagNames(NameSetKey set)
@@ -158,6 +187,10 @@ namespace AutoRest.CSharp.Mgmt.Output
         public IEnumerable<MgmtClientOperation> AllOperations => _allOperations ??= EnsureAllOperations();
         protected virtual IEnumerable<MgmtClientOperation> EnsureAllOperations() => ClientOperations;
 
+        public virtual ResourceTypeSegment GetBranchResourceType(RequestPath branch)
+        {
+            throw new InvalidOperationException($"Tried to get a branch resource type from a type provider that doesn't support it {GetType().Name}.");
+        }
 
         private IEnumerable<Resource>? _childResources;
         /// <summary>

@@ -62,9 +62,8 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             }
         }
 
-        protected override void WriteUsings(CodeWriter writer)
+        private void WriteUsings(CodeWriter writer)
         {
-            base.WriteUsings(writer);
             writer.UseNamespace("System");
             writer.UseNamespace("System.Threading.Tasks");
             writer.UseNamespace("System.Net");
@@ -122,7 +121,6 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             Debug.Assert(clientOperation != null);
             var methodName = clientOperation.Name;
 
-            BuildParameters(clientOperation, out var operationMappings, out var parameterMappings, out var methodParameters);
             int exampleIdx = 0;
             foreach ((var branch, var operation) in GetSortedOperationMappings(clientOperation))
             {
@@ -148,7 +146,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                         clearVariableNames();
                         var resourceVariableName = WriteGetResource(resource, realRequestPath, exampleModel);
 
-                        List<string> paramNames = WriteOperationParameters(methodParameters, Enumerable.Empty<Parameter> (), exampleModel);
+                        List<string> paramNames = WriteOperationParameters(clientOperation.MethodParameters, Enumerable.Empty<Parameter> (), exampleModel);
 
                         _writer.Line();
                         WriteMethodTestInvocation(async, clientOperation, isLroOperation, $"{resourceVariableName}.{testMethodName}", paramNames);

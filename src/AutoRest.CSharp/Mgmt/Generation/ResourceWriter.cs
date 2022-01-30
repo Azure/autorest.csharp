@@ -22,13 +22,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal class ResourceWriter : MgmtClientBaseWriter
     {
-        protected virtual Type BaseClass => typeof(ArmResource);
-
         protected override string ContextProperty => "this";
 
         protected override string BranchIdVariableName => "Id.Parent";
-
-        protected override string ArmClientReference => "ArmClient";
 
         private Resource This { get; }
 
@@ -67,6 +63,24 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
+        protected override void WriteCustomMethods()
+        {
+            WriteListAvailableLocationsMethod(true);
+            WriteListAvailableLocationsMethod(false);
+
+            if (This.IsTaggable)
+            {
+                WriteAddTagMethod(true);
+                WriteAddTagMethod(false);
+
+                WriteSetTagsMethod(true);
+                WriteSetTagsMethod(false);
+
+                WriteRemoveTagMethod(true);
+                WriteRemoveTagMethod(false);
+            }
+        }
+
         protected override void WriteProperties()
         {
             _writer.Line();
@@ -93,24 +107,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
             WriteStaticValidate($"ResourceType", _writer);
         }
 
-        protected override ResourceTypeSegment GetBranchResourceType(RequestPath branch)
-        {
-            return branch.ParentRequestPath(Context).GetResourceType(Config);
-        }
-
-        protected void WriteCreateOrUpdateMethod(MgmtClientOperation? operation, bool async)
-        {
-            if (operation == null)
-                return;
-            WriteLROMethod(operation, async);
-        }
-
-        protected override void WriteListAvailableLocations()
-        {
-            WriteListAvailableLocationsMethod(true);
-            WriteListAvailableLocationsMethod(false);
-        }
-
         private void WriteListAvailableLocationsMethod(bool async)
         {
             _writer.Line();
@@ -119,28 +115,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.WriteXmlDocumentationReturns($"A collection of locations that may take multiple service requests to iterate over.");
 
             var responseType = new CSharpType(typeof(IEnumerable<AzureLocation>)).WrapAsync(async);
-            BuildParameters(This.GetOperation, out var operationMappings, out var parameterMappings, out var methodParameters);
 
-            using (_writer.Scope($"public {GetAsyncKeyword(async)} {GetVirtual(true)} {responseType} {CreateMethodName("GetAvailableLocations", async)}({typeof(CancellationToken)} cancellationToken = default)"))
+            using (_writer.Scope($"public {GetAsyncKeyword(async)} virtual {responseType} {CreateMethodName("GetAvailableLocations", async)}({typeof(CancellationToken)} cancellationToken = default)"))
             {
                 Diagnostic diagnostic = new Diagnostic($"{This.Type.Name}.GetAvailableLocations", Array.Empty<DiagnosticAttribute>());
-                using (WriteDiagnosticScope(_writer, diagnostic, GetClientDiagnosticFieldName(operationMappings.Values.First())))
+                using (WriteDiagnosticScope(_writer, diagnostic, GetDiagnosticName(This.GetOperation.OperationMappings.Values.First())))
                 {
                     _writer.Line($"return {GetAwait(async)} {CreateMethodName("ListAvailableLocations", async)}(ResourceType, cancellationToken){GetConfigureAwait(async)};");
                 }
-            }
-        }
-
-        protected override void WriteTaggingMethods()
-        {
-            if (This.IsTaggable)
-            {
-                WriteAddTagMethod(true);
-                WriteAddTagMethod(false);
-                WriteSetTagsMethod(true);
-                WriteSetTagsMethod(false);
-                WriteRemoveTagMethod(true);
-                WriteRemoveTagMethod(false);
             }
         }
 
@@ -155,14 +137,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             var responseType = This.Type.WrapResponse(async);
 
-            _writer.Append($"public {GetAsyncKeyword(async)} {GetVirtual(true)} {responseType} {CreateMethodName("AddTag", async)}(string key, string value, {typeof(CancellationToken)} cancellationToken = default)");
+            _writer.Append($"public {GetAsyncKeyword(async)} virtual {responseType} {CreateMethodName("AddTag", async)}(string key, string value, {typeof(CancellationToken)} cancellationToken = default)");
             using (_writer.Scope())
             {
                 _writer.WriteVariableNullOrWhiteSpaceCheck("key");
                 _writer.Line();
 
                 Diagnostic diagnostic = new Diagnostic($"{This.Type.Name}.AddTag", Array.Empty<DiagnosticAttribute>());
-                using (WriteDiagnosticScope(_writer, diagnostic, GetClientDiagnosticFieldName(This.GetOperation.RestClient, This)))
+                using (WriteDiagnosticScope(_writer, diagnostic, GetDiagnosticName(This.GetOperation.OperationMappings.Values.First())))
                 {
                     _writer.Append($"var originalTags = ");
                     if (async)
@@ -187,7 +169,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             var responseType = This.Type.WrapResponse(async);
 
-            _writer.Append($"public {GetAsyncKeyword(async)} {GetVirtual(true)} {responseType} {CreateMethodName("SetTags", async)}({typeof(IDictionary<string, string>)} tags, {typeof(CancellationToken)} cancellationToken = default)");
+            _writer.Append($"public {GetAsyncKeyword(async)} virtual {responseType} {CreateMethodName("SetTags", async)}({typeof(IDictionary<string, string>)} tags, {typeof(CancellationToken)} cancellationToken = default)");
             using (_writer.Scope())
             {
                 using (_writer.Scope($"if (tags == null)"))
@@ -197,7 +179,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.Line();
 
                 Diagnostic diagnostic = new Diagnostic($"{This.Type.Name}.SetTags", Array.Empty<DiagnosticAttribute>());
-                using (WriteDiagnosticScope(_writer, diagnostic, GetClientDiagnosticFieldName(This.GetOperation.RestClient, This)))
+                using (WriteDiagnosticScope(_writer, diagnostic, GetDiagnosticName(This.GetOperation.OperationMappings.Values.First())))
                 {
                     if (async)
                     {
@@ -227,14 +209,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             var responseType = This.Type.WrapResponse(async);
 
-            _writer.Append($"public {GetAsyncKeyword(async)} {GetVirtual(true)} {responseType} {CreateMethodName("RemoveTag", async)}(string key, {typeof(CancellationToken)} cancellationToken = default)");
+            _writer.Append($"public {GetAsyncKeyword(async)} virtual {responseType} {CreateMethodName("RemoveTag", async)}(string key, {typeof(CancellationToken)} cancellationToken = default)");
             using (_writer.Scope())
             {
                 _writer.WriteVariableNullOrWhiteSpaceCheck("key");
                 _writer.Line();
 
                 Diagnostic diagnostic = new Diagnostic($"{This.Type.Name}.RemoveTag");
-                using (WriteDiagnosticScope(_writer, diagnostic, GetClientDiagnosticFieldName(This.GetOperation.RestClient, This)))
+                using (WriteDiagnosticScope(_writer, diagnostic, GetDiagnosticName(This.GetOperation.OperationMappings.Values.First())))
                 {
                     _writer.Append($"var originalTags = ");
                     if (async)
@@ -253,14 +235,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             _writer.Line($"{GetAwait(async)} TagResource.{CreateMethodName("CreateOrUpdate", async)}(true, originalTags.Value.Data, cancellationToken: cancellationToken){GetConfigureAwait(async)};");
 
-            BuildParameters(This.GetOperation!, out var operationMappings, out var parameterMappings, out _);
-
+            MgmtClientOperation clientOperation = This.GetOperation!;
             // we need to write multiple branches for a normal method
-            if (operationMappings.Count == 1)
+            if (clientOperation.OperationMappings.Count == 1)
             {
                 // if we only have one branch, we would not need those if-else statements
-                var branch = operationMappings.Keys.First();
-                WriteTaggableCommonMethodBranch(operationMappings[branch], parameterMappings[branch], async);
+                var branch = clientOperation.OperationMappings.Keys.First();
+                WriteTaggableCommonMethodBranch(clientOperation.OperationMappings[branch], clientOperation.ParameterMappings[branch], async);
             }
             else
             {
@@ -274,7 +255,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var originalResponse = new CodeWriterDeclaration("originalResponse");
             _writer
                 .Append($"var {originalResponse:D} = {GetAwait(async)} ")
-                .Append($"{GetRestFieldName(operation)}.{CreateMethodName(operation.Method.Name, async)}(");
+                .Append($"{GetRestClientName(operation)}.{CreateMethodName(operation.Method.Name, async)}(");
 
             WriteArguments(_writer, parameterMappings, true);
             _writer.Line($"cancellationToken){GetConfigureAwait(async)};");

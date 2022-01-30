@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Output.Models;
@@ -21,8 +22,9 @@ namespace AutoRest.CSharp.Mgmt.Output
             _defaultName = $"{ResourceName}ExtensionClient";
         }
 
-        private ConstructorSignature? _armClientCtor;
-        public override ConstructorSignature? ArmClientCtor => _armClientCtor ??= new ConstructorSignature(
+        protected override ConstructorSignature? EnsureArmClientCtor()
+        {
+            return new ConstructorSignature(
                 Name: Type.Name,
                 Description: $"Initializes a new instance of the <see cref=\"{Type.Name}\"/> class.",
                 Modifiers: "internal",
@@ -30,8 +32,9 @@ namespace AutoRest.CSharp.Mgmt.Output
                 Initializer: new(
                     isBase: true,
                     arguments: new[] { ArmClientParameter, ResourceIdentifierParameter }));
+        }
 
-        public override Type? BaseType => typeof(ArmResource);
+        public override CSharpType? BaseType => typeof(ArmResource);
 
         protected override string DefaultName => _defaultName;
 

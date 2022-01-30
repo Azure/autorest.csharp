@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Serialization;
@@ -90,6 +91,9 @@ namespace AutoRest.CSharp.Generation.Writers
         }
 
         public static CodeWriter.CodeWriterScope WriteMethodDeclaration(this CodeWriter writer, MethodSignatureBase methodBase, params string[] disabledWarnings)
+            => writer.WriteMethodDeclaration(methodBase, false, disabledWarnings);
+
+        public static CodeWriter.CodeWriterScope WriteMethodDeclaration(this CodeWriter writer, MethodSignatureBase methodBase, bool isAsync, params string[] disabledWarnings)
         {
             foreach (var disabledWarning in disabledWarnings)
             {
@@ -99,16 +103,25 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Append($"{methodBase.Modifiers} ");
             if (methodBase is MethodSignature method)
             {
+                if (isAsync && !method.IsPageable)
+                    writer.Append($"async ");
+
+                if (method.Modifiers.Contains("public") && !method.Modifiers.Contains("virtual")) //back compat in case people were sending in virtual already
+                    writer.Append($"virtual ");
+
                 if (method.ReturnType != null)
                 {
-                    writer.Append($"{method.ReturnType} ");
+                    var finalType = method.IsPageable ? method.ReturnType.WrapPageable(isAsync) : method.ReturnType.WrapAsync(isAsync);
+                    writer.Append($"{finalType} ");
                 }
                 else
                 {
                     writer.AppendRaw("void ");
                 }
             }
-            writer.Append($"{methodBase.Name}(");
+
+            string methodName = isAsync ? $"{methodBase.Name}Async" : methodBase.Name;
+            writer.Append($"{methodName}(");
 
             foreach (var parameter in methodBase.Parameters)
             {
@@ -117,7 +130,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.RemoveTrailingComma();
             writer.Append($")");
 
-            if (methodBase is ConstructorSignature {Initializer: { }} constructor)
+            if (methodBase is ConstructorSignature { Initializer: { } } constructor)
             {
                 var (isBase, arguments) = constructor.Initializer;
 

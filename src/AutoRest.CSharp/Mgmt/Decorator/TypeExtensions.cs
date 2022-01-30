@@ -87,6 +87,12 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return isAsync ? new CSharpType(typeof(Task<>), response) : response;
         }
 
+        public static CSharpType UnWrapResponse(this CSharpType type)
+        {
+            return type.Name == "Response" && type.Arguments.Length == 1 ? type.Arguments[0] : type;
+        }
+
+
         public static bool IsResourceDataType(this CSharpType type, BuildContext<MgmtOutputLibrary> context, [MaybeNullWhen(false)] out ResourceData data)
         {
             data = null;
