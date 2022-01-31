@@ -351,8 +351,8 @@ namespace AutoRest.CSharp.Mgmt.Models
             }
             else
             {
-                data = Resource?.ResourceData;
-                return data != null && data.Type.Equals(type);
+                data = _context.Library.ResourceData.FirstOrDefault(d => d.Type.Equals(type));
+                return data != null;
             }
         }
 

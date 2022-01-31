@@ -36,6 +36,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected override void WriteProperties()
         {
+            _writer.Line();
             foreach (var set in This.UniqueSets)
             {
                 WriterPropertySet(set.RestClient, set.Resource);
