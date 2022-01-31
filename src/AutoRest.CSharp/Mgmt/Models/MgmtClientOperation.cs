@@ -28,12 +28,20 @@ namespace AutoRest.CSharp.Mgmt.Models
     internal class MgmtClientOperation : IReadOnlyList<MgmtRestOperation>
     {
         private const string IdVariableName = "Id";
+        private readonly Parameter? _extensionParameter;
+        private static readonly Parameter WaitForCompletionParameter = new Parameter(
+            "waitForCompletion",
+            "Waits for the completion of the long running operations.",
+            typeof(bool),
+            null,
+            false);
+
 
         public static MgmtClientOperation? FromOperations(IReadOnlyList<MgmtRestOperation> operations, BuildContext<MgmtOutputLibrary> context)
         {
             if (operations.Count > 0)
             {
-                return new MgmtClientOperation(operations.OrderBy(operation => operation.Name).ToArray(), context);
+                return new MgmtClientOperation(operations.OrderBy(operation => operation.Name).ToArray(), context, null);
             }
 
             return null;
@@ -50,18 +58,19 @@ namespace AutoRest.CSharp.Mgmt.Models
         private IReadOnlyList<Parameter>? _methodParameters;
         public IReadOnlyList<Parameter> MethodParameters => _methodParameters ??= EnsureMethodParameters();
 
-        public static MgmtClientOperation FromOperation(MgmtRestOperation operation, BuildContext<MgmtOutputLibrary> context)
+        public static MgmtClientOperation FromOperation(MgmtRestOperation operation, BuildContext<MgmtOutputLibrary> context, Parameter? extensionParameter = null)
         {
-            return new MgmtClientOperation(new List<MgmtRestOperation> { operation }, context);
+            return new MgmtClientOperation(new List<MgmtRestOperation> { operation }, context, extensionParameter);
         }
 
         private IReadOnlyList<MgmtRestOperation> _operations;
 
         private BuildContext<MgmtOutputLibrary> _context;
-        private MgmtClientOperation(IReadOnlyList<MgmtRestOperation> operations, BuildContext<MgmtOutputLibrary> context)
+        private MgmtClientOperation(IReadOnlyList<MgmtRestOperation> operations, BuildContext<MgmtOutputLibrary> context, Parameter? extensionParameter)
         {
             _operations = operations;
             _context = context;
+            _extensionParameter = extensionParameter;
         }
 
         public MgmtRestOperation this[int index] => _operations[index];
@@ -119,8 +128,10 @@ namespace AutoRest.CSharp.Mgmt.Models
         private IReadOnlyList<Parameter> EnsureMethodParameters()
         {
             List<Parameter> parameters = new List<Parameter>();
+            if (_extensionParameter is not null)
+                parameters.Add(_extensionParameter);
             if (IsLongRunningOperation)
-                parameters.Add(MgmtClientBaseWriter.WaitForCompletionParameter);
+                parameters.Add(WaitForCompletionParameter);
             parameters.AddRange(ParameterMappings.Values.First().GetPassThroughParameters());
             parameters.Add(MgmtClientBaseWriter.CancellationTokenParameter);
             return parameters;

@@ -42,6 +42,10 @@ namespace AutoRest.CSharp.Mgmt.Output
         }
         public Resource Resource { get; }
 
+        public override bool CanValidateResourceType => ResourceTypes.SelectMany(p => p.Value).Distinct().Count() == 1;
+
+        public override string BranchIdVariableName => "Id";
+
         private MgmtClientOperation? _getAllOperation;
         public MgmtClientOperation? GetAllOperation => _getAllOperation ??= EnsureGetAllOperation();
 

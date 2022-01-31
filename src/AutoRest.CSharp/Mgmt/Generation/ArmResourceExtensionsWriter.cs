@@ -1,9 +1,16 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System.Collections.Generic;
+using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Output;
+using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Mgmt.Decorator;
+using AutoRest.CSharp.Output.Models;
+using AutoRest.CSharp.Generation.Types;
+using System;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
@@ -17,17 +24,32 @@ namespace AutoRest.CSharp.Mgmt.Generation
             This = extensions;
         }
 
-        public override void Write()
+        protected override void WritePrivateHelpers()
         {
-            using (_writer.Namespace(This.Namespace))
+        }
+
+        protected override void WriteResourceCollectionEntry(ResourceCollection resourceCollection, MethodSignature signature)
+            => WriteCollectionBody(signature, false, false);
+
+        private void WriteCollectionBody(MethodSignature signature, bool isAsync, bool isPaging)
+        {
+            if (!IsArmCore)
             {
-                WriteClassDeclaration();
-                using (_writer.Scope())
+                using (_writer.Scope($"return {This.ExtensionParameter.Name}.GetCachedClient<{signature.ReturnType}>((armClient) =>"))
                 {
-                    // Write resource collection entries
-                    WriteChildResourceEntries();
+                    WriteGetter(signature.ReturnType);
                 }
+                _writer.Line($");");
             }
+            else
+            {
+                WriteGetter(signature.ReturnType);
+            }
+        }
+
+        private void WriteGetter(CSharpType? type)
+        {
+            _writer.Line($"return new {type}(armClient, {This.ExtensionParameter.Name}.Id);");
         }
     }
 }

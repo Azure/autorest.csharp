@@ -19,6 +19,7 @@ using AutoRest.CSharp.Mgmt.Models;
 using System.Text.RegularExpressions;
 using Azure.Core;
 using Azure.ResourceManager.Resources;
+using AutoRest.CSharp.Output.Models;
 
 namespace AutoRest.CSharp.MgmtTest.Generation
 {
@@ -563,12 +564,12 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             throw new NotImplementedException();
         }
 
-        protected override void WriteSingletonResourceEntry(Resource resource, string singletonResourceIdSuffix)
+        protected override void WriteSingletonResourceEntry(Resource resource, string singletonResourceIdSuffix, MethodSignature signature)
         {
             throw new NotImplementedException();
         }
 
-        protected override void WriteResourceCollectionEntry(ResourceCollection resource)
+        protected override void WriteResourceCollectionEntry(ResourceCollection resource, MethodSignature signature)
         {
             throw new NotImplementedException();
         }

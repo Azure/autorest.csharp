@@ -299,6 +299,8 @@ namespace AutoRest.CSharp.Mgmt.Output
             return result;
         }
 
+        public override string BranchIdVariableName => "Id.Parent";
+
         public override ResourceTypeSegment GetBranchResourceType(RequestPath branch)
         {
             return branch.ParentRequestPath(_context).GetResourceType(_context.Configuration.MgmtConfiguration);

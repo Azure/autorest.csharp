@@ -22,10 +22,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal class ResourceWriter : MgmtClientBaseWriter
     {
-        protected override string ContextProperty => "this";
-
-        protected override string BranchIdVariableName => "Id.Parent";
-
         private Resource This { get; }
 
         public ResourceWriter(CodeWriter writer, Resource resource, BuildContext<MgmtOutputLibrary> context) : base(writer, resource, context)
@@ -83,7 +79,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected override void WriteProperties()
         {
-            _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Gets the resource type for the operations");
 
             _writer.Line($"public static readonly {typeof(ResourceType)} ResourceType = \"{This.ResourceType}\";");

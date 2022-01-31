@@ -47,6 +47,10 @@ namespace AutoRest.CSharp.Mgmt.Output
         public string Accessibility => DefaultAccessibility;
         protected override string DefaultAccessibility => "public";
 
+        public virtual bool CanValidateResourceType => true;
+
+        public virtual string BranchIdVariableName => "Id";
+
         public string Namespace => DefaultNamespace;
         public abstract CSharpType? BaseType { get; }
 

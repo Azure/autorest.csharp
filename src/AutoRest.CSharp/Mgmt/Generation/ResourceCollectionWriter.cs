@@ -31,10 +31,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
     /// </summary>
     internal class ResourceCollectionWriter : MgmtClientBaseWriter
     {
-        protected override string ContextProperty => "this";
-
-        protected override string BranchIdVariableName => "Id";
-
         private ResourceCollection This { get; }
 
         public ResourceCollectionWriter(CodeWriter writer, ResourceCollection resourceCollection, BuildContext<MgmtOutputLibrary> context)

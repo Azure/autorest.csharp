@@ -2,6 +2,7 @@
 // Licensed under the MIT License
 
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Mgmt.AutoRest;
@@ -9,6 +10,8 @@ using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure.ResourceManager.Core;
+using AutoRest.CSharp.Mgmt.Decorator;
+using AutoRest.CSharp.Input;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
@@ -32,6 +35,31 @@ namespace AutoRest.CSharp.Mgmt.Output
                 Initializer: new(
                     isBase: true,
                     arguments: new[] { ArmClientParameter, ResourceIdentifierParameter }));
+        }
+
+        protected override IEnumerable<MgmtClientOperation> EnsureAllOperations()
+        {
+            return Extension.AllRawOperations.Select(operation =>
+            {
+                var operationName = Extension.GetOperationName(operation);
+                // TODO -- these logic needs a thorough refactor -- the values MgmtRestOperation consumes here are actually coupled together, some of the values are calculated multiple times (here and in writers).
+                // we just leave this implementation here since it could work for now
+                return MgmtClientOperation.FromOperation(
+                    new MgmtRestOperation(
+                        _context.Library.GetRestClientMethod(operation),
+                        _context.Library.GetRestClient(operation),
+                        operation.GetRequestPath(_context),
+                        Extension.ContextualPath,
+                        operationName,
+                        operation.GetReturnTypeAsLongRunningOperation(null, operationName, _context),
+                        _context),
+                    _context);
+            });
+        }
+
+        protected override string CalculateOperationName(Operation operation, string clientResourceName)
+        {
+            return base.CalculateOperationName(operation, clientResourceName);
         }
 
         public override CSharpType? BaseType => typeof(ArmResource);

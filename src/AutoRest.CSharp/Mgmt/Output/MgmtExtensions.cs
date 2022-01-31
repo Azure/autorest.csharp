@@ -10,30 +10,44 @@ using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Output.Models;
+using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
+using Azure.ResourceManager.Core;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class MgmtExtensions : MgmtTypeProvider
     {
-        protected IEnumerable<Operation> _allOperations;
+        public IEnumerable<Operation> AllRawOperations { get; }
 
         protected MgmtExtensions(BuildContext<MgmtOutputLibrary> context, MgmtExtensions mgmtExtension)
-            : this(mgmtExtension._allOperations, mgmtExtension.ArmCoreType, context, mgmtExtension.ContextualPath)
+            : this(mgmtExtension.AllRawOperations, mgmtExtension.ArmCoreType, context, mgmtExtension.ContextualPath)
         {
         }
 
-        public MgmtExtensions(IEnumerable<Operation> allOperations, Type armCoreType, BuildContext<MgmtOutputLibrary> context, RequestPath contextualPath)
+        public MgmtExtensions(IEnumerable<Operation> allRawOperations, Type armCoreType, BuildContext<MgmtOutputLibrary> context, RequestPath contextualPath)
             : base(context, armCoreType.Name)
         {
             _context = context;
-            _allOperations = allOperations;
+            AllRawOperations = allRawOperations;
             ArmCoreType = armCoreType;
             DefaultName = $"{ResourceName}Extensions";
             ContextualPath = contextualPath;
             ArmCoreNamespace = ArmCoreType.Namespace!;
+            string variableName = context.Configuration.MgmtConfiguration.IsArmCore ? "this" : armCoreType.Name.ToVariableName();
+            ExtensionParameter = new Parameter(
+                variableName,
+                $"The <see cref=\"{armCoreType}\" /> instance the method will execute against.",
+                armCoreType,
+                null,
+                false,
+                IsExtensionParameter: true);
         }
+
+        public override string BranchIdVariableName => $"{ExtensionParameter.Name}.Id";
+
+        public Parameter ExtensionParameter { get; }
 
         public override CSharpType? BaseType => null;
 
@@ -46,7 +60,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected override string DefaultName { get; }
 
-        protected virtual RequestPath ContextualPath { get; }
+        public virtual RequestPath ContextualPath { get; }
 
         public virtual bool IsEmpty => !ClientOperations.Any() && !ChildResources.Any();
 
@@ -57,7 +71,8 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected override IEnumerable<MgmtClientOperation> EnsureClientOperations()
         {
-            return _allOperations.Select(operation =>
+            var extensionParamToUse = _context.Configuration.MgmtConfiguration.IsArmCore ? null : ExtensionParameter;
+            return AllRawOperations.Select(operation =>
             {
                 var operationName = GetOperationName(operation, ResourceName);
                 // TODO -- these logic needs a thorough refactor -- the values MgmtRestOperation consumes here are actually coupled together, some of the values are calculated multiple times (here and in writers).
@@ -71,9 +86,12 @@ namespace AutoRest.CSharp.Mgmt.Output
                         operationName,
                         operation.GetReturnTypeAsLongRunningOperation(null, operationName, _context),
                         _context),
-                    _context);
+                    _context,
+                    ExtensionParameter);
             });
         }
+
+        public string GetOperationName(Operation operation) => GetOperationName(operation, ResourceName);
 
         protected override string CalculateOperationName(Operation operation, string clientResourceName)
         {

@@ -142,7 +142,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 var armClientExtensionsCodeWriter = new ArmClientExtensionsWriter(armClientExtension, context);
                 armClientExtensionsCodeWriter.Write();
                 AddGeneratedFile(project, isArmCore ? $"{armClientExtension.ResourceName}.cs" : $"Extensions/{armClientExtension.Type.Name}.cs", armClientExtensionsCodeWriter.ToString());
-                //WriteExtensionPiece(project, context, new ResourceExtensionWriter(context.Library.ArmClientExtensions, context));
             }
 
             if (!context.Library.ArmResourceExtensions.IsEmpty)

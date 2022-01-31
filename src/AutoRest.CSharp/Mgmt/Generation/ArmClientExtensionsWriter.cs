@@ -25,12 +25,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 WriteClassDeclaration();
                 using (_writer.Scope())
                 {
-                    WritePrivateHelpers();
-
                     foreach (var resource in Context.Library.ArmResources)
                     {
                         _writer.Line($"#region {resource.Type.Name}");
-                        WriteGetResourceFromIdMethod(_writer, resource);
+                        WriteGetResourceFromIdMethod(resource);
                         _writer.LineRaw("#endregion");
                         _writer.Line();
                     }
@@ -38,22 +36,38 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        protected void WriteGetResourceFromIdMethod(CodeWriter writer, Resource resource)
+        protected void WriteGetResourceFromIdMethod(Resource resource)
         {
-            writer.WriteXmlDocumentationSummary($"Gets an object representing a {resource.Type.Name} along with the instance operations that can be performed on it but with no data.");
+            _writer.WriteXmlDocumentationSummary($"Gets an object representing a {resource.Type.Name} along with the instance operations that can be performed on it but with no data.");
             if (!IsArmCore)
             {
-                writer.WriteXmlDocumentationParameter($"{ExtensionOperationVariableName}", $"The <see cref=\"{ExtensionOperationVariableType}\" /> instance the method will execute against.");
+                _writer.WriteXmlDocumentationParameter($"{This.ExtensionParameter.Name}", $"The <see cref=\"{This.ExtensionParameter.Type}\" /> instance the method will execute against.");
             }
-            writer.WriteXmlDocumentationParameter("id", $"The resource ID of the resource to get.");
-            writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{resource.Type.Name}\" /> object.");
+            _writer.WriteXmlDocumentationParameter("id", $"The resource ID of the resource to get.");
+            _writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{resource.Type.Name}\" /> object.");
             var modifier = IsArmCore ? "virtual" : "static";
-            var instanceParameter = IsArmCore ? string.Empty : $"this {ExtensionOperationVariableType} {ExtensionOperationVariableName}, ";
-            using (writer.Scope($"public {modifier} {resource.Type} Get{resource.Type.Name}({instanceParameter}{typeof(Azure.Core.ResourceIdentifier)} id)"))
+            var instanceParameter = IsArmCore ? string.Empty : $"this {This.ExtensionParameter.Type.Name} {This.ExtensionParameter.Name}, ";
+            using (_writer.Scope($"public {modifier} {resource.Type} Get{resource.Type.Name}({instanceParameter}{typeof(Azure.Core.ResourceIdentifier)} id)"))
             {
-                writer.Line($"{resource.Type.Name}.ValidateResourceId(id);");
-                writer.Line($"return new {resource.Type.Name}({ContextProperty}, id);");
+                if (!IsArmCore)
+                {
+                    using (_writer.Scope($"return {This.ExtensionParameter.Name}.GetClient<{resource.Type}>(() =>"))
+                    {
+                        WriteGetter(resource);
+                    }
+                    _writer.Line($");");
+                }
+                else
+                {
+                    WriteGetter(resource);
+                }
             }
+        }
+
+        private void WriteGetter(Resource resource)
+        {
+            _writer.Line($"{resource.Type.Name}.ValidateResourceId(id);");
+            _writer.Line($"return new {resource.Type.Name}(armClient, id);");
         }
     }
 }

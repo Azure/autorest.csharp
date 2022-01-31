@@ -34,14 +34,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
     internal abstract class MgmtClientBaseWriter : ClientWriter
     {
         protected const string BaseUriProperty = "BaseUri";
+        protected delegate void WriteMethodDelegate(MgmtClientOperation clientOperation, Diagnostic diagnostic, bool isAsync);
 
-        protected bool IsArmCore;
+        protected bool IsArmCore { get; }
         protected CodeWriter _writer;
         protected override string RestClientAccessibility => "private";
-        protected virtual string ContextProperty => "";
         protected BuildContext<MgmtOutputLibrary> Context { get; }
-        protected MgmtConfiguration Config => Context.Configuration.MgmtConfiguration;
-        protected bool ShowRequestPathAndOperationId => Config.MgmtDebug.ShowRequestPath;
+        protected bool ShowRequestPathAndOperationId { get; }
 
         internal static readonly Parameter CancellationTokenParameter = new Parameter(
             "cancellationToken",
@@ -50,16 +49,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             Constant.NewInstanceOf(typeof(CancellationToken)),
             false);
 
-        internal static readonly Parameter WaitForCompletionParameter = new Parameter(
-            "waitForCompletion",
-            "Waits for the completion of the long running operations.",
-            typeof(bool),
-            null,
-            false);
-
         private MgmtTypeProvider This { get; }
-
-        protected virtual string BranchIdVariableName => "Id";
 
         protected virtual string ArmClientReference { get; } = "ArmClient";
 
@@ -74,6 +64,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             This = provider;
             FileName = This.Type.Name;
             IsArmCore = context.Configuration.MgmtConfiguration.IsArmCore;
+            ShowRequestPathAndOperationId = Context.Configuration.MgmtConfiguration.MgmtDebug.ShowRequestPath;
         }
 
         public virtual void Write()
@@ -154,6 +145,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 }
             }
 
+            _writer.Line();
             if (This.ArmClientCtor is not null)
             {
                 _writer.Line();
@@ -172,8 +164,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     {
                         WriteRestClientConstructorPair(set.RestClient, set.Resource);
                     }
-                    //if (_resourceCollection.ResourceTypes.SelectMany(p => p.Value).Distinct() == 1)
-                    WriteDebugValidate(_writer);
+                    if (This.CanValidateResourceType)
+                        WriteDebugValidate(_writer);
                 }
             }
             _writer.Line();
@@ -241,54 +233,63 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.Line();
                 if (resource.IsSingleton)
                 {
-                    WriteSingletonResourceEntry(resource, resource.SingletonResourceIdSuffix!);
+                    var signature = new MethodSignature(
+                        $"Get{resource.Type.Name}",
+                        $"Gets an object representing a {resource.Type.Name} along with the instance operations that can be performed on it in the {This.Type.Name}.",
+                        "public",
+                        resource.Type,
+                        $"Returns a <see cref=\"{resource.Type}\" /> object.",
+                        GetParametersForSingletonEntry());
+                    using (WriteCommonMethod(signature, null, false))
+                    {
+                        WriteSingletonResourceEntry(resource, resource.SingletonResourceIdSuffix!, signature);
+                    }
                 }
                 else if (resource.ResourceCollection is not null)
                 {
-                    WriteResourceCollectionEntry(resource.ResourceCollection);
+                    var collection = resource.ResourceCollection;
+                    var signature = new MethodSignature(
+                        $"Get{resource.Type.Name.ResourceNameToPlural()}",
+                        $"Gets a collection of {resource.Type.Name.LastWordToPlural()} in the {resource.Type.Name}.",
+                        "public",
+                        collection.Type,
+                        $"An object representing collection of {resource.Type.Name.LastWordToPlural()} and their operations over a {resource.Type.Name}.",
+                        GetParametersForCollectionEntry(collection));
+                    using (WriteCommonMethod(signature, null, false))
+                    {
+                        WriteResourceCollectionEntry(resource.ResourceCollection, signature);
+                    }
                 }
             }
             _writer.Line();
         }
 
-        protected virtual void WriteSingletonResourceEntry(Resource resource, string singletonResourceIdSuffix)
+        protected virtual void WriteSingletonResourceEntry(Resource resource, string singletonResourceIdSuffix, MethodSignature signature)
         {
-            _writer.Line();
-            _writer.WriteXmlDocumentationSummary($"Gets an object representing a {resource.Type.Name} along with the instance operations that can be performed on it in the {This.Type.Name}.");
-            _writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{resource.Type}\" /> object.");
-            using (_writer.Scope($"public virtual {resource.Type.Name} Get{resource.Type.Name}()"))
-            {
-                // we cannot guarantee that the singleResourceSuffix can only have two segments (it has many different cases),
-                // therefore instead of using the extension method of ResourceIdentifier, we are just concatting this as a string
-                _writer.Line($"return new {resource.Type.Name}({ArmClientReference}, new {typeof(Azure.Core.ResourceIdentifier)}(Id.ToString() + \"/{singletonResourceIdSuffix}\"));");
-            }
+            // we cannot guarantee that the singleResourceSuffix can only have two segments (it has many different cases),
+            // therefore instead of using the extension method of ResourceIdentifier, we are just concatting this as a string
+            _writer.Line($"return new {resource.Type.Name}({ArmClientReference}, new {typeof(Azure.Core.ResourceIdentifier)}(Id.ToString() + \"/{singletonResourceIdSuffix}\"));");
         }
 
-        protected virtual void WriteResourceCollectionEntry(ResourceCollection resourceCollection)
+        protected virtual Parameter[] GetParametersForSingletonEntry()
         {
-            var resource = resourceCollection.Resource;
-            _writer.Line();
-            _writer.WriteXmlDocumentationSummary($"Gets a collection of {resource.Type.Name.LastWordToPlural()} in the {resource.Type.Name}.");
-            _writer.WriteXmlDocumentationReturns($"An object representing collection of {resource.Type.Name.LastWordToPlural()} and their operations over a {resource.Type.Name}.");
-            _writer.WriteXmlDocumentationParameters(resourceCollection.ExtraConstructorParameters);
-            var extraConstructorParameters = resourceCollection.ExtraConstructorParameters;
-            _writer.Append($"public virtual {resourceCollection.Type} Get{resource.Type.Name.ResourceNameToPlural()}(");
+            return new Parameter[] { };
+        }
+
+        protected virtual Parameter[] GetParametersForCollectionEntry(ResourceCollection resourceCollection)
+        {
+            return resourceCollection.ExtraConstructorParameters.ToArray();
+        }
+
+        protected virtual void WriteResourceCollectionEntry(ResourceCollection resourceCollection, MethodSignature signature)
+        {
+            _writer.Append($"return new {resourceCollection.Type.Name}({ArmClientReference}, Id, ");
             foreach (var parameter in resourceCollection.ExtraConstructorParameters)
             {
-                _writer.WriteParameter(parameter);
+                _writer.Append($"{parameter.Name}, ");
             }
             _writer.RemoveTrailingComma();
-            _writer.Line($")");
-            using (_writer.Scope())
-            {
-                _writer.Append($"return new {resourceCollection.Type.Name}({ArmClientReference}, Id, ");
-                foreach (var parameter in resourceCollection.ExtraConstructorParameters)
-                {
-                    _writer.Append($"{parameter.Name}, ");
-                }
-                _writer.RemoveTrailingComma();
-                _writer.Line($");");
-            }
+            _writer.Line($");");
         }
 
         protected void WriteStaticValidate(FormattableString validResourceType, CodeWriter writer)
@@ -421,51 +422,64 @@ namespace AutoRest.CSharp.Mgmt.Generation
         }
 
         protected virtual void WriteMethod(MgmtClientOperation clientOperation, bool isAsync)
-            => WriteCommomMethod(clientOperation, isAsync, GetMethodDelegate(clientOperation));
-
-        protected Dictionary<string, Action<MgmtClientOperation, Diagnostic, bool>> _customMethods = new Dictionary<string, Action<MgmtClientOperation, Diagnostic, bool>>();
-        private Action<MgmtClientOperation, Diagnostic, bool> GetMethodDelegate(MgmtClientOperation clientOperation)
         {
+            var writeBody = GetMethodDelegate(clientOperation);
+            using (WriteCommonMethod(clientOperation, isAsync))
+            {
+                var diagnostic = new Diagnostic($"{This.Type.Name}.{clientOperation.Name}", Array.Empty<DiagnosticAttribute>());
+                writeBody(clientOperation, diagnostic, isAsync);
+            }
+        }
+
+        protected Dictionary<string, WriteMethodDelegate> _customMethods = new Dictionary<string, WriteMethodDelegate>();
+        private WriteMethodDelegate GetMethodDelegate(MgmtClientOperation clientOperation)
+        {
+            if (clientOperation.IsLongRunningOperation && clientOperation.IsPagingOperation)
+                throw new NotImplementedException($"Pageable LRO is not implemented yet, please use `remove-operation` directive to remove the following operationIds: {string.Join(", ", clientOperation.Select(o => o.OperationId))}");
+
             if (!_customMethods.TryGetValue($"Write{clientOperation.Name}Body", out var function))
             {
                 function = GetMethodDelegate(clientOperation.IsLongRunningOperation, clientOperation.IsPagingOperation);
-                if (function is null)
-                    throw new NotImplementedException($"Pageable LRO is not implemented yet, please use `remove-operation` directive to remove the following operationIds: {string.Join(", ", clientOperation.Select(o => o.OperationId))}");
             }
 
             return function;
         }
 
-        private Action<MgmtClientOperation, Diagnostic, bool>? GetMethodDelegate(bool isLongRunning, bool isPaging)
+        protected virtual WriteMethodDelegate GetMethodDelegate(bool isLongRunning, bool isPaging)
             => (isLongRunning, isPaging) switch
-        {
-            (true, true) => null,
-            (true, false) => WriteLROMethodBody,
-            (false, true) => WritePagingMethodBody,
-            (false, false) => WriteNormalMethodBody
-        };
+            {
+                (true, false) => WriteLROMethodBody,
+                (false, true) => WritePagingMethodBody,
+                (false, false) => WriteNormalMethodBody,
+                _ => throw new InvalidOperationException("Unknown method combination"),
+            };
 
-        protected void WriteCommomMethod(MgmtClientOperation clientOperation, bool isAsync, Action<MgmtClientOperation, Diagnostic, bool> methodDelegate)
+        protected CodeWriter.CodeWriterScope WriteCommonMethod(MgmtClientOperation clientOperation, bool isAsync)
         {
             _writer.Line();
             // write the extra information about the request path, operation id, etc
             if (ShowRequestPathAndOperationId)
                 WriteRequestPathAndOperationId(clientOperation);
+            var returnDescription = clientOperation.ReturnsDescription is not null ? clientOperation.ReturnsDescription(isAsync) : null;
+            return WriteCommonMethod(clientOperation.MethodSignature, returnDescription, isAsync);
+        }
 
-            _writer.WriteXmlDocumentationSummary($"{clientOperation.Description}");
-            _writer.WriteXmlDocumentationParameters(clientOperation.MethodParameters);
-            _writer.WriteXmlDocumentationMgmtRequiredParametersException(clientOperation.MethodParameters);
+        protected CodeWriter.CodeWriterScope WriteCommonMethod(MethodSignature signature, FormattableString? returnDescription, bool isAsync)
+        {
+            _writer.WriteXmlDocumentationSummary($"{signature.Description}");
+            _writer.WriteXmlDocumentationParameters(signature.Parameters);
+            if (This.Accessibility == "public")
+                _writer.WriteXmlDocumentationMgmtRequiredParametersException(signature.Parameters);
 
-            if (clientOperation.ReturnsDescription is not null)
-                _writer.WriteXmlDocumentationReturns(clientOperation.ReturnsDescription(isAsync));
+            FormattableString? returnDesc = returnDescription ?? signature.ReturnDescription;
+            if (returnDesc is not null)
+                _writer.WriteXmlDocumentationReturns(returnDesc);
 
-            using (_writer.WriteMethodDeclaration(clientOperation.MethodSignature, isAsync))
-            {
-                _writer.WriteParameterNullOrEmptyChecks(clientOperation.MethodParameters);
+            var scope = _writer.WriteMethodDeclaration(signature, isAsync);
+            if (This.Accessibility == "public")
+                _writer.WriteParameterNullOrEmptyChecks(signature.Parameters);
 
-                var diagnostic = new Diagnostic($"{This.Type.Name}.{clientOperation.Name}", Array.Empty<DiagnosticAttribute>());
-                methodDelegate(clientOperation, diagnostic, isAsync);
-            }
+            return scope;
         }
 
         #region PagingMethod
@@ -494,7 +508,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         escapeBranches.Add(branch);
                         continue;
                     }
-                    using (_writer.Scope($"{keyword} ({BranchIdVariableName}.ResourceType == {GetResourceTypeExpression(resourceType)})"))
+                    using (_writer.Scope($"{keyword} ({This.BranchIdVariableName}.ResourceType == {GetResourceTypeExpression(resourceType)})"))
                     {
                         WritePagingMethodBranch(clientOperation.ReturnType, diagnostic, clientDiagFieldName, operation, clientOperation.ParameterMappings[branch], isAsync);
                     }
@@ -504,7 +518,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     using (_writer.Scope($"else"))
                     {
-                        _writer.Line($"throw new InvalidOperationException($\"{{{BranchIdVariableName}.ResourceType}} is not supported here\");");
+                        _writer.Line($"throw new InvalidOperationException($\"{{{This.BranchIdVariableName}.ResourceType}} is not supported here\");");
                     }
                 }
                 else if (escapeBranches.Count == 1)
@@ -701,7 +715,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                             escapeBranches.Add(branch);
                             continue;
                         }
-                        using (_writer.Scope($"{keyword} ({BranchIdVariableName}.ResourceType == {GetResourceTypeExpression(resourceType)})"))
+                        using (_writer.Scope($"{keyword} ({This.BranchIdVariableName}.ResourceType == {GetResourceTypeExpression(resourceType)})"))
                         {
                             WriteLROMethodBranch(clientOperation.ReturnType, operation, clientOperation.ParameterMappings[branch], async);
                         }
@@ -711,7 +725,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     {
                         using (_writer.Scope($"else"))
                         {
-                            _writer.Line($"throw new InvalidOperationException($\"{{{BranchIdVariableName}.ResourceType}} is not supported here\");");
+                            _writer.Line($"throw new InvalidOperationException($\"{{{This.BranchIdVariableName}.ResourceType}} is not supported here\");");
                         }
                     }
                     else if (escapeBranches.Count == 1)

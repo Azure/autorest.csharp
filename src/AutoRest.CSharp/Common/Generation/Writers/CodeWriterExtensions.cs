@@ -106,8 +106,14 @@ namespace AutoRest.CSharp.Generation.Writers
                 if (isAsync && !method.IsPageable)
                     writer.Append($"async ");
 
-                if (method.Modifiers.Contains("public") && !method.Modifiers.Contains("virtual")) //back compat in case people were sending in virtual already
+                var firstParam = method.Parameters.FirstOrDefault();
+                bool isExtensionMethod = firstParam is not null && firstParam.IsExtensionParameter;
+
+                if (method.Modifiers.Contains("public") && !isExtensionMethod && !method.Modifiers.Contains("virtual")) //back compat in case people were sending in virtual already
                     writer.Append($"virtual ");
+
+                if (isExtensionMethod && !method.Modifiers.Contains("static")) //back compat in case people were sending in static already
+                    writer.Append($"static ");
 
                 if (method.ReturnType != null)
                 {
@@ -181,6 +187,8 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.AppendRaw("]");
             }
 
+            if (clientParameter.IsExtensionParameter)
+                writer.Append($"this ");
             writer.Append($"{clientParameter.Type} {clientParameter.Name:D}");
             if (clientParameter.DefaultValue != null && clientParameter.UseDefaultValueInCtorParam)
             {
