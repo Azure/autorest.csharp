@@ -46,6 +46,36 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         protected Type? GetType(string name) => MyTypes().FirstOrDefault(t => t.Name == name);
 
         [Test]
+        public void ValidatePublicMethodsAreVirtual()
+        {
+            foreach (var type in FindAllResources())
+            {
+                ValidatePublicMethods(type);
+            }
+            foreach (var type in FindAllCollections())
+            {
+                ValidatePublicMethods(type);
+            }
+            foreach (var type in FindAllExtensionClients())
+            {
+                ValidatePublicMethods(type);
+            }
+        }
+
+        private void ValidatePublicMethods(Type type)
+        {
+            if (!type.IsPublic)
+                return;
+            foreach (var method in type.GetMethods(BindingFlags.Instance | BindingFlags.Public))
+            {
+                if (method.DeclaringType != type)
+                    continue;
+
+                Assert.IsTrue(method.IsVirtual, $"{method.Name} was not virtual but was public on {type.Name}");
+            }
+        }
+
+        [Test]
         public void AllClientsShouldHaveMockingCtor()
         {
             foreach (var type in FindAllResources())

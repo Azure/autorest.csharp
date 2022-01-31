@@ -91,14 +91,28 @@ namespace AutoRest.CSharp.Generation.Writers
         }
 
         public static CodeWriter.CodeWriterScope WriteMethodDeclaration(this CodeWriter writer, MethodSignatureBase methodBase, params string[] disabledWarnings)
-            => writer.WriteMethodDeclaration(methodBase, false, disabledWarnings);
+        {
+            WriteDisableWarnings(writer, disabledWarnings);
+
+            writer.Append($"{methodBase.Modifiers} ");
+            if (methodBase is MethodSignature method)
+            {
+                if (method.ReturnType != null)
+                {
+                    writer.Append($"{method.ReturnType} ");
+                }
+                else
+                {
+                    writer.AppendRaw("void ");
+                }
+            }
+
+            return WriteMethodDeclarationParameters(writer, methodBase, disabledWarnings, methodBase.Name);
+        }
 
         public static CodeWriter.CodeWriterScope WriteMethodDeclaration(this CodeWriter writer, MethodSignatureBase methodBase, bool isAsync, params string[] disabledWarnings)
         {
-            foreach (var disabledWarning in disabledWarnings)
-            {
-                writer.Line($"#pragma warning disable {disabledWarning}");
-            }
+            WriteDisableWarnings(writer, disabledWarnings);
 
             writer.Append($"{methodBase.Modifiers} ");
             if (methodBase is MethodSignature method)
@@ -109,10 +123,10 @@ namespace AutoRest.CSharp.Generation.Writers
                 var firstParam = method.Parameters.FirstOrDefault();
                 bool isExtensionMethod = firstParam is not null && firstParam.IsExtensionParameter;
 
-                if (method.Modifiers.Contains("public") && !isExtensionMethod && !method.Modifiers.Contains("virtual")) //back compat in case people were sending in virtual already
+                if (method.Modifiers.Contains("public") && !isExtensionMethod)
                     writer.Append($"virtual ");
 
-                if (isExtensionMethod && !method.Modifiers.Contains("static")) //back compat in case people were sending in static already
+                if (isExtensionMethod)
                     writer.Append($"static ");
 
                 if (method.ReturnType != null)
@@ -127,6 +141,19 @@ namespace AutoRest.CSharp.Generation.Writers
             }
 
             string methodName = isAsync ? $"{methodBase.Name}Async" : methodBase.Name;
+            return WriteMethodDeclarationParameters(writer, methodBase, disabledWarnings, methodName);
+        }
+
+        private static void WriteDisableWarnings(CodeWriter writer, string[] disabledWarnings)
+        {
+            foreach (var disabledWarning in disabledWarnings)
+            {
+                writer.Line($"#pragma warning disable {disabledWarning}");
+            }
+        }
+
+        private static CodeWriter.CodeWriterScope WriteMethodDeclarationParameters(CodeWriter writer, MethodSignatureBase methodBase, string[] disabledWarnings, string methodName)
+        {
             writer.Append($"{methodName}(");
 
             foreach (var parameter in methodBase.Parameters)
