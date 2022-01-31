@@ -1953,7 +1953,7 @@ namespace url_LowLevel
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/paths/byte/empty/", false);
-            uri.AppendPath(new byte[] { }, "D", true);
+            uri.AppendPath(Array.Empty<byte>(), "D", true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             message.ResponseClassifier = ResponseClassifier200.Instance;

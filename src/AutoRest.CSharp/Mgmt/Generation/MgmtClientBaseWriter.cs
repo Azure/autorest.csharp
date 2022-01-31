@@ -120,7 +120,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 Name: TypeOfThis.Name,
                 Description: $"Initializes a new instance of the <see cref=\"{TypeOfThis.Name}\"/> class for mocking.",
                 Modifiers: "protected",
-                Parameters: new Parameter[0]);
+                Parameters: Array.Empty<Parameter>());
             _writer.WriteMethodDocumentation(mockingConstructor);
             using (_writer.WriteMethodDeclaration(mockingConstructor))
             { }
