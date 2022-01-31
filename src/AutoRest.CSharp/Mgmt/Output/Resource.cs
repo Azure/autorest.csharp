@@ -30,6 +30,27 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         private static readonly HttpMethod[] MethodToExclude = new[] { HttpMethod.Put, HttpMethod.Get, HttpMethod.Delete, HttpMethod.Patch };
 
+        private static readonly Parameter TagKeyParameter = new Parameter(
+            "key",
+            "The key for the tag.",
+            typeof(string),
+            null,
+            true);
+
+        private static readonly Parameter TagValueParameter = new Parameter(
+            "value",
+            "The value for the tag.",
+            typeof(string),
+            null,
+            true);
+
+        private static readonly Parameter TagSetParameter = new Parameter(
+            "tags",
+            "The set of tags to use as replacement.",
+            typeof(IDictionary<string, string>),
+            null,
+            true);
+
         /// <summary>
         /// The position means which class an operation should go. Possible value of this property is `resource` or `collection`.
         /// There is a configuration in <see cref="MgmtConfiguration"/> which assign values to operations.
@@ -296,6 +317,40 @@ namespace AutoRest.CSharp.Mgmt.Output
             if (IsSingleton && CreateOperation != null)
                 result.Add(CreateOperation);
             result.AddRange(ClientOperations);
+            if (GetOperation != null && IsTaggable)
+            {
+                var getOperation = GetOperation.OperationMappings.Values.First();
+                result.Add(MgmtClientOperation.FromOperation(
+                    new MgmtRestOperation(
+                        getOperation,
+                        "AddTag",
+                        getOperation.MgmtReturnType,
+                        "Add a tag to the current resource.",
+                        _context,
+                        TagKeyParameter,
+                        TagValueParameter),
+                    _context));
+
+                result.Add(MgmtClientOperation.FromOperation(
+                    new MgmtRestOperation(
+                        getOperation,
+                        "SetTags",
+                        getOperation.MgmtReturnType,
+                        "Replace the tags on the resource with the given set.",
+                        _context,
+                        TagSetParameter),
+                    _context));
+
+                result.Add(MgmtClientOperation.FromOperation(
+                    new MgmtRestOperation(
+                        getOperation,
+                        "RemoveTag",
+                        getOperation.MgmtReturnType,
+                        "Removes a tag by key from the resource.",
+                        _context,
+                        TagKeyParameter),
+                    _context));
+            }
             return result;
         }
 

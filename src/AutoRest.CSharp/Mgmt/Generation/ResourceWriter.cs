@@ -27,6 +27,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
         public ResourceWriter(CodeWriter writer, Resource resource, BuildContext<MgmtOutputLibrary> context) : base(writer, resource, context)
         {
             This = resource;
+            _customMethods.Add(nameof(WriteAddTagBody), WriteAddTagBody);
+            _customMethods.Add(nameof(WriteSetTagsBody), WriteSetTagsBody);
+            _customMethods.Add(nameof(WriteRemoveTagBody), WriteRemoveTagBody);
         }
 
         protected override void WriteStaticMethods()
@@ -63,18 +66,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             WriteListAvailableLocationsMethod(true);
             WriteListAvailableLocationsMethod(false);
-
-            if (This.IsTaggable)
-            {
-                WriteAddTagMethod(true);
-                WriteAddTagMethod(false);
-
-                WriteSetTagsMethod(true);
-                WriteSetTagsMethod(false);
-
-                WriteRemoveTagMethod(true);
-                WriteRemoveTagMethod(false);
-            }
         }
 
         protected override void WriteProperties()
@@ -121,109 +112,57 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        private void WriteAddTagMethod(bool async)
+        private void WriteAddTagBody(MgmtClientOperation clientOperation, Diagnostic diagnostic, bool async)
         {
-            _writer.Line();
-            _writer.WriteXmlDocumentationSummary($"Add a tag to the current resource.");
-            _writer.WriteXmlDocumentationParameter("key", $"The key for the tag.");
-            _writer.WriteXmlDocumentationParameter("value", $"The value for the tag.");
-            _writer.WriteXmlDocumentationParameter("cancellationToken", $"A token to allow the caller to cancel the call to the service. The default value is <see cref=\"CancellationToken.None\" />.");
-            _writer.WriteXmlDocumentationReturns($"The updated resource with the tag added.");
-
-            var responseType = This.Type.WrapResponse(async);
-
-            _writer.Append($"public {GetAsyncKeyword(async)} virtual {responseType} {CreateMethodName("AddTag", async)}(string key, string value, {typeof(CancellationToken)} cancellationToken = default)");
-            using (_writer.Scope())
+            using (WriteDiagnosticScope(_writer, diagnostic, GetDiagnosticName(This.GetOperation.OperationMappings.Values.First())))
             {
-                _writer.WriteVariableNullOrWhiteSpaceCheck("key");
-                _writer.Line();
-
-                Diagnostic diagnostic = new Diagnostic($"{This.Type.Name}.AddTag", Array.Empty<DiagnosticAttribute>());
-                using (WriteDiagnosticScope(_writer, diagnostic, GetDiagnosticName(This.GetOperation.OperationMappings.Values.First())))
+                _writer.Append($"var originalTags = ");
+                if (async)
                 {
-                    _writer.Append($"var originalTags = ");
-                    if (async)
-                    {
-                        _writer.Append($"await ");
-                    }
-                    _writer.Line($"TagResource.{CreateMethodName("Get", async)}(cancellationToken){GetConfigureAwait(async)};");
-                    _writer.Line($"originalTags.Value.Data.Properties.TagsValue[key] = value;");
-                    WriteTaggableCommonMethod(async);
+                    _writer.Append($"await ");
                 }
-                _writer.Line();
+                _writer.Line($"TagResource.{CreateMethodName("Get", async)}(cancellationToken){GetConfigureAwait(async)};");
+                _writer.Line($"originalTags.Value.Data.Properties.TagsValue[key] = value;");
+                WriteTaggableCommonMethod(async);
             }
+            _writer.Line();
         }
 
-        private void WriteSetTagsMethod(bool async)
+        private void WriteSetTagsBody(MgmtClientOperation clientOperation, Diagnostic diagnostic, bool async)
         {
-            _writer.Line();
-            _writer.WriteXmlDocumentationSummary($"Replace the tags on the resource with the given set.");
-            _writer.WriteXmlDocumentationParameter("tags", $"The set of tags to use as replacement.");
-            _writer.WriteXmlDocumentationParameter("cancellationToken", $"A token to allow the caller to cancel the call to the service. The default value is <see cref=\"CancellationToken.None\" />.");
-            _writer.WriteXmlDocumentationReturns($"The updated resource with the tags replaced.");
-
-            var responseType = This.Type.WrapResponse(async);
-
-            _writer.Append($"public {GetAsyncKeyword(async)} virtual {responseType} {CreateMethodName("SetTags", async)}({typeof(IDictionary<string, string>)} tags, {typeof(CancellationToken)} cancellationToken = default)");
-            using (_writer.Scope())
+            using (WriteDiagnosticScope(_writer, diagnostic, GetDiagnosticName(This.GetOperation.OperationMappings.Values.First())))
             {
-                using (_writer.Scope($"if (tags == null)"))
+                if (async)
                 {
-                    _writer.Line($"throw new {typeof(ArgumentNullException)}(nameof(tags), $\"{{nameof(tags)}} provided cannot be null.\");");
+                    _writer.Append($"await ");
                 }
-                _writer.Line();
-
-                Diagnostic diagnostic = new Diagnostic($"{This.Type.Name}.SetTags", Array.Empty<DiagnosticAttribute>());
-                using (WriteDiagnosticScope(_writer, diagnostic, GetDiagnosticName(This.GetOperation.OperationMappings.Values.First())))
+                _writer.Line($"TagResource.{CreateMethodName("Delete", async)}(true, cancellationToken: cancellationToken){GetConfigureAwait(async)};");
+                _writer.Append($"var originalTags  = ");
+                if (async)
                 {
-                    if (async)
-                    {
-                        _writer.Append($"await ");
-                    }
-                    _writer.Line($"TagResource.{CreateMethodName("Delete", async)}(true, cancellationToken: cancellationToken){GetConfigureAwait(async)};");
-                    _writer.Append($"var originalTags  = ");
-                    if (async)
-                    {
-                        _writer.Append($"await ");
-                    }
-                    _writer.Line($"TagResource.{CreateMethodName("Get", async)}(cancellationToken){GetConfigureAwait(async)};");
-                    _writer.Line($"originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);");
-                    WriteTaggableCommonMethod(async);
+                    _writer.Append($"await ");
                 }
-                _writer.Line();
+                _writer.Line($"TagResource.{CreateMethodName("Get", async)}(cancellationToken){GetConfigureAwait(async)};");
+                _writer.Line($"originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);");
+                WriteTaggableCommonMethod(async);
             }
+            _writer.Line();
         }
 
-        private void WriteRemoveTagMethod(bool async)
+        private void WriteRemoveTagBody(MgmtClientOperation clientOperation, Diagnostic diagnostic, bool async)
         {
-            _writer.Line();
-            _writer.WriteXmlDocumentationSummary($"Removes a tag by key from the resource.");
-            _writer.WriteXmlDocumentationParameter("key", $"The key of the tag to remove.");
-            _writer.WriteXmlDocumentationParameter("cancellationToken", $"A token to allow the caller to cancel the call to the service. The default value is <see cref=\"CancellationToken.None\" />.");
-            _writer.WriteXmlDocumentationReturns($"The updated resource with the tag removed.");
-
-            var responseType = This.Type.WrapResponse(async);
-
-            _writer.Append($"public {GetAsyncKeyword(async)} virtual {responseType} {CreateMethodName("RemoveTag", async)}(string key, {typeof(CancellationToken)} cancellationToken = default)");
-            using (_writer.Scope())
+            using (WriteDiagnosticScope(_writer, diagnostic, GetDiagnosticName(This.GetOperation.OperationMappings.Values.First())))
             {
-                _writer.WriteVariableNullOrWhiteSpaceCheck("key");
-                _writer.Line();
-
-                Diagnostic diagnostic = new Diagnostic($"{This.Type.Name}.RemoveTag");
-                using (WriteDiagnosticScope(_writer, diagnostic, GetDiagnosticName(This.GetOperation.OperationMappings.Values.First())))
+                _writer.Append($"var originalTags = ");
+                if (async)
                 {
-                    _writer.Append($"var originalTags = ");
-                    if (async)
-                    {
-                        _writer.Append($"await ");
-                    }
-                    _writer.Line($"TagResource.{CreateMethodName("Get", async)}(cancellationToken){GetConfigureAwait(async)};");
-                    _writer.Line($"originalTags.Value.Data.Properties.TagsValue.Remove(key);");
-                    WriteTaggableCommonMethod(async);
+                    _writer.Append($"await ");
                 }
-                _writer.Line();
+                _writer.Line($"TagResource.{CreateMethodName("Get", async)}(cancellationToken){GetConfigureAwait(async)};");
+                _writer.Line($"originalTags.Value.Data.Properties.TagsValue.Remove(key);");
+                WriteTaggableCommonMethod(async);
             }
+            _writer.Line();
         }
 
         private void WriteTaggableCommonMethod(bool async)

@@ -132,6 +132,7 @@ namespace AutoRest.CSharp.Mgmt.Models
                 parameters.Add(_extensionParameter);
             if (IsLongRunningOperation)
                 parameters.Add(WaitForCompletionParameter);
+            parameters.AddRange(OperationMappings.Values.First().PrependParameters);
             parameters.AddRange(ParameterMappings.Values.First().GetPassThroughParameters());
             parameters.Add(MgmtClientBaseWriter.CancellationTokenParameter);
             return parameters;
