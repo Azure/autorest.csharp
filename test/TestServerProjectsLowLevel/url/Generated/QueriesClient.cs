@@ -2480,7 +2480,7 @@ namespace url_LowLevel
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/queries/byte/empty", false);
-            uri.AppendQuery("byteQuery", Array.Empty<byte>(), "D", true);
+            uri.AppendQuery("byteQuery", new byte[] { }, "D", true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             message.ResponseClassifier = ResponseClassifier200.Instance;
