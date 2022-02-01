@@ -14,6 +14,7 @@ using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Output.Models.Shared;
+using AutoRest.CSharp.Generation.Types;
 
 namespace AutoRest.CSharp.Mgmt.Models
 {
@@ -297,8 +298,9 @@ namespace AutoRest.CSharp.Mgmt.Models
         private static IEnumerable<Segment> ParsePathSegment(PathSegment pathSegment)
         {
             // we explicitly skip the `uri` variable in the path (which should be `endpoint`)
-            if (pathSegment.Value.Type.IsFrameworkType &&
-                pathSegment.Value.Type.FrameworkType == typeof(Uri))
+            CSharpType valueType = pathSegment.Value.Type;
+            if (valueType.IsFrameworkType &&
+                valueType.FrameworkType == typeof(Uri))
                 return Enumerable.Empty<Segment>();
             if (pathSegment.Value.IsConstant)
             {
@@ -314,8 +316,10 @@ namespace AutoRest.CSharp.Mgmt.Models
                     return ((string)value).Split('/', StringSplitOptions.RemoveEmptyEntries).Select(s => new Segment(s));
                 }
             }
+            CSharpType? expandableType = !valueType.IsFrameworkType && valueType.Implementation is EnumType ? valueType : null;
+
             // this is either a constant but not string type, or it is not a constant, we just keep the information in this path segment
-            return new Segment(pathSegment.Value, pathSegment.Escape).AsIEnumerable();
+            return new Segment(pathSegment.Value, pathSegment.Escape, expandableType: expandableType).AsIEnumerable();
         }
 
         public int Count => _segments.Count;
