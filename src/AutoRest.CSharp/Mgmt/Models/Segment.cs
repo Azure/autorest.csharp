@@ -69,7 +69,7 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         public bool IsReference => !IsConstant;
 
-        public bool IsExpandable => _expandableType is not null || (IsReference && !Reference.Type.IsFrameworkType && Reference.Type.Implementation is EnumType);
+        public bool IsExpandable => _expandableType is not null;
 
         public CSharpType Type => _expandableType ?? _value.Type;
 
