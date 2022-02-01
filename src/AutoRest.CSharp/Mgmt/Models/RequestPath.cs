@@ -13,6 +13,7 @@ using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Output.Models.Shared;
 
 namespace AutoRest.CSharp.Mgmt.Models
 {
@@ -198,6 +199,42 @@ namespace AutoRest.CSharp.Mgmt.Models
             return new RequestPath(this._segments.Concat(other._segments));
         }
 
+        public RequestPath ApplyHint(ResourceTypeSegment hint)
+        {
+            int hintIndex = 0;
+            List<Segment> newPath = new List<Segment>();
+            int thisIndex = 0;
+            for (; thisIndex < _segments.Count; thisIndex++)
+            {
+                var segment = this[thisIndex];
+                if (segment.IsExpandable)
+                {
+                    newPath.Add(hint[hintIndex]);
+                    hintIndex++;
+                }
+                else
+                {
+                    if (segment.Equals(hint[hintIndex]))
+                    {
+                        hintIndex++;
+                    }
+                    newPath.Add(segment);
+                }
+                if (hintIndex >= hint.Count)
+                {
+                    thisIndex++;
+                    break;
+                }
+            }
+
+            //copy remaining items in this
+            for (; thisIndex < _segments.Count; thisIndex++)
+            {
+                newPath.Add(_segments[thisIndex]);
+            }
+            return new RequestPath(newPath);
+        }
+
         public IEnumerable<RequestPath> Expand(MgmtConfiguration config)
         {
             // we first get the resource type
@@ -216,7 +253,7 @@ namespace AutoRest.CSharp.Mgmt.Models
                 switch (type)
                 {
                     case EnumType enumType:
-                        possibleValueMap.Add(segment, enumType.Values.Select(v => new Segment(v.Value, segment.Escape, segment.IsStrict)));
+                        possibleValueMap.Add(segment, enumType.Values.Select(v => new Segment(v.Value, segment.Escape, segment.IsStrict, enumType.Type)));
                         break;
                     default:
                         throw new InvalidOperationException($"The resource type {this} contains variables in it, but it is not an enum type, therefore we cannot expand it. Please double check and/or override it in `request-path-to-resource-type` section.");

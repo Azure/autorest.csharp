@@ -9,6 +9,7 @@ using System.Text;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
+using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Mgmt.Models
 {
@@ -21,14 +22,16 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         private ReferenceOrConstant _value;
         private string _stringValue;
+        private CSharpType? _expandableType;
 
-        public Segment(ReferenceOrConstant value, bool escape, bool strict = false)
+        public Segment(ReferenceOrConstant value, bool escape, bool strict = false, CSharpType? expandableType = null)
         {
             _value = value;
             _stringValue = value.IsConstant ? value.Constant.Value?.ToString() ?? "null"
                 : $"({value.Reference.Type.Name}){value.Reference.Name}";
             IsStrict = strict;
             Escape = escape;
+            _expandableType = expandableType;
         }
 
         /// <summary>
@@ -66,7 +69,9 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         public bool IsReference => !IsConstant;
 
-        public CSharpType Type => _value.Type;
+        public bool IsExpandable => _expandableType is not null || (IsReference && !Reference.Type.IsFrameworkType && Reference.Type.Implementation is EnumType);
+
+        public CSharpType Type => _expandableType ?? _value.Type;
 
         /// <summary>
         /// Returns the <see cref="Constant"/> of this segment

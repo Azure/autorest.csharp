@@ -579,10 +579,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 .Append($"return {typeof(Page)}.FromValues(response.Value")
                 .AppendIf($".{pagingMethod.ItemName}", !pagingMethod.ItemName.IsNullOrEmpty());
 
+
+            Resource? resource = Context.Library.ArmResources.FirstOrDefault(resource => resource.Type.Equals(itemType));
             // only when we are listing ourselves, we use Select to convert XXXResourceData to XXXResource
-            Resource? resource = operation.Resource is not null && operation.Resource.Type.Equals(itemType)
-                ? operation.Resource
-                : This.DefaultResource;
+            if (resource is null)
+                resource = operation.Resource is not null && operation.Resource.Type.Equals(itemType)
+                    ? operation.Resource
+                    : This.DefaultResource;
             if (resource is not null && resource.Type.Equals(itemType))
             {
                 _writer.UseNamespace(typeof(Enumerable).Namespace!);

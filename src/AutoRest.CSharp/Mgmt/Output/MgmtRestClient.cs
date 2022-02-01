@@ -48,8 +48,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             HashSet<Resource> candidates = new HashSet<Resource>();
             foreach (var operation in OperationGroup.Operations)
             {
-                var resource = operation.GetResourceFromResourceType(_context);
-                if (resource is not null)
+                foreach (var resource in operation.GetResourceFromResourceType(_context))
                 {
                     candidates.Add(resource);
                 }

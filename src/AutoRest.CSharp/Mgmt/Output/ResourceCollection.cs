@@ -42,6 +42,8 @@ namespace AutoRest.CSharp.Mgmt.Output
         }
         public Resource Resource { get; }
 
+        public override Resource GetResource() => Resource;
+
         public override bool CanValidateResourceType => ResourceTypes.SelectMany(p => p.Value).Distinct().Count() == 1;
 
         public override string BranchIdVariableName => "Id";

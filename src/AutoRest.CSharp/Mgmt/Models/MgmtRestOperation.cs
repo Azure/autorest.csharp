@@ -329,9 +329,8 @@ namespace AutoRest.CSharp.Mgmt.Models
                     return filteredResources.Single().Type;
             }
 
-            if (Resource is null)
-                throw new InvalidOperationException($"Found a resource data return type but resource was null. {originalType?.Name}");
-            return Resource.Type;
+            var foundResource = _context.Library.ArmResources.FirstOrDefault(resource => resource.ResourceData.Type.Equals(originalType));
+            return foundResource?.Type ?? Resource?.Type ?? throw new InvalidOperationException($"Found a resource data return type but resource was null. {originalType?.Name}");
         }
 
         private bool IsResourceDataType(CSharpType? type, [MaybeNullWhen(false)] out ResourceData data)

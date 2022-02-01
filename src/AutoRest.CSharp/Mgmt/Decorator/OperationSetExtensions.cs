@@ -17,17 +17,17 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class OperationSetExtensions
     {
-        private static readonly ConcurrentDictionary<OperationSet, RequestPath> _cache = new ConcurrentDictionary<OperationSet, RequestPath>();
+        private static readonly ConcurrentDictionary<(OperationSet, ResourceTypeSegment?), RequestPath> _cache = new ConcurrentDictionary<(OperationSet, ResourceTypeSegment?), RequestPath>();
 
         private static readonly ConcurrentDictionary<OperationSet, bool> _byIdCache = new ConcurrentDictionary<OperationSet, bool>();
 
-        public static RequestPath GetRequestPath(this OperationSet operationSet, BuildContext<MgmtOutputLibrary> context)
+        public static RequestPath GetRequestPath(this OperationSet operationSet, BuildContext<MgmtOutputLibrary> context, ResourceTypeSegment? hint = null)
         {
-            if (_cache.TryGetValue(operationSet, out var requestPath))
+            if (_cache.TryGetValue((operationSet, hint), out var requestPath))
                 return requestPath;
 
-            requestPath = GetOperation(operationSet).GetRequestPath(context);
-            _cache.TryAdd(operationSet, requestPath);
+            requestPath = GetOperation(operationSet).GetRequestPath(context, hint);
+            _cache.TryAdd((operationSet, hint), requestPath);
             return requestPath;
         }
 

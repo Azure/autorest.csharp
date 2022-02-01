@@ -62,7 +62,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         private IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> _allOperationMap;
 
         private IEnumerable<RequestPath>? _requestPaths;
-        public IEnumerable<RequestPath> RequestPaths => _requestPaths ??= OperationSets.Select(operationSet => operationSet.GetRequestPath(_context));
+        public IEnumerable<RequestPath> RequestPaths => _requestPaths ??= OperationSets.Select(operationSet => operationSet.GetRequestPath(_context, ResourceType));
 
         /// <summary>
         /// </summary>
@@ -170,7 +170,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 if (operation is not null)
                 {
                     var restClient = _context.Library.GetRestClient(operation);
-                    var requestPath = operation.GetRequestPath(_context);
+                    var requestPath = operation.GetRequestPath(_context, ResourceType);
                     var contextualPath = GetContextualPath(operationSet, requestPath);
                     var restOperation = new MgmtRestOperation(
                         _context.Library.GetRestClientMethod(operation),
@@ -178,7 +178,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                         requestPath,
                         contextualPath,
                         operationName,
-                        operation.GetReturnTypeAsLongRunningOperation(this, operationName, _context),
+                        operation.GetReturnTypeAsLongRunningOperation(GetResource(), operationName, _context),
                         _context,
                         isLongRunning,
                         throwIfNull);
@@ -188,6 +188,8 @@ namespace AutoRest.CSharp.Mgmt.Output
 
             return MgmtClientOperation.FromOperations(result, _context);
         }
+
+        public virtual Resource GetResource() => this;
 
         private string? _defaultName;
         protected override string DefaultName => _defaultName ??= EnsureResourceDefaultName();
@@ -389,7 +391,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                     var method = operation.GetHttpMethod();
                     // considering the case of parameterized scope, we might do not have direct parenting relationship between the two paths
                     // therefore we trim the scope off and then calculate the diff
-                    var requestPath = operation.GetRequestPath(_context);
+                    var requestPath = operation.GetRequestPath(_context, ResourceType);
                     var requestTrimmedPath = requestPath.TrimScope();
                     var resourceTrimmedPath = resourceRequestPath.TrimScope();
                     // the operations are grouped by the following key
@@ -406,7 +408,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                         requestPath,
                         contextualPath,
                         methodName,
-                        operation.GetReturnTypeAsLongRunningOperation(this, methodName, _context),
+                        operation.GetReturnTypeAsLongRunningOperation(GetResource(), methodName, _context),
                         _context);
 
                     if (result.TryGetValue(key, out var list))
