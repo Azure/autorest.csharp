@@ -9,7 +9,9 @@ using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
+using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models;
+using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
@@ -53,12 +55,10 @@ namespace AutoRest.CSharp.Mgmt.Output
         public MgmtClientOperation? GetAllOperation => _getAllOperation ??= EnsureGetAllOperation();
 
         private Dictionary<Parameter, FormattableString> _extraConstructorParameters = new();
-        private List<ContextualParameterMapping> _extraContextualParameterMapping = new();
-        public IEnumerable<ContextualParameterMapping> ExtraContextualParameterMapping => _extraContextualParameterMapping;
 
         protected override IEnumerable<Parameter> EnsureExtraCtorParameters()
         {
-            _ = GetAllOperation;
+            _ = ExtraContextualParameterMapping;
             return _extraConstructorParameters.Keys;
         }
 
@@ -74,6 +74,57 @@ namespace AutoRest.CSharp.Mgmt.Output
                   arguments: _armClientCtorParameters));
         }
         protected override ConstructorSignature? EnsureResourceDataCtor() => null;
+
+        protected override IEnumerable<ContextualParameterMapping> EnsureExtraContextualParameterMapping()
+        {
+            var result = new List<ContextualParameterMapping>();
+            Operation? op = null;
+            OperationSet? opSet = null;
+            foreach ((var operationSet, var operations) in _allOperationMap)
+            {
+                foreach (var operation in operations)
+                {
+                    if (IsListOperation(operation, operationSet))
+                    {
+                        op = operation;
+                        opSet = operationSet;
+                        break;
+                    }
+                }
+            }
+
+            if (op is null || opSet is null)
+                return result;
+
+            RestClientMethod method = _context.Library.GetRestClientMethod(op);
+            // calculate the ResourceType from the RequestPath of this resource
+            var resourceTypeSegments = ResourceType.Select((segment, index) => (segment, index)).Where(tuple => tuple.segment.IsReference).ToList();
+            // iterate over all the reference segments in the diff of this GetAll operation
+            var candidatesOfParameters = new List<Parameter>(method.Parameters);
+
+            var opRequestPath = op.GetRequestPath(_context, ResourceType);
+            foreach (var segment in GetDiffFromRequestPath(opRequestPath, GetContextualPath(opSet, opRequestPath)))
+            {
+                var index = resourceTypeSegments.FindIndex(tuple => tuple.segment == segment);
+                if (index < 0)
+                {
+                    var parameter = candidatesOfParameters.First(p => p.Name == segment.ReferenceName && p.Type.Equals(segment.Type));
+                    candidatesOfParameters.Remove(parameter);
+                    // this reference is not in the resource type, therefore this parameter goes to the constructor
+                    _extraConstructorParameters.Add(parameter, $"_{segment.ReferenceName}");
+                    // there is a key for this parameter, get the key and add this one to contextual parameter mapping
+                    var key = ParameterMappingBuilder.FindKeyOfParameter(parameter, opRequestPath);
+                    result.Add(new ContextualParameterMapping(key, segment, GetFieldName(parameter)));
+                }
+                else
+                {
+                    var candidate = resourceTypeSegments[index];
+                    var value = ResourceType[candidate.index];
+                    result.Add(new ContextualParameterMapping("", segment, $"\"{value.ConstantValue}\""));
+                }
+            }
+            return result;
+        }
 
         private MgmtClientOperation? EnsureGetAllOperation()
         {
@@ -96,32 +147,6 @@ namespace AutoRest.CSharp.Mgmt.Output
                 return ReferenceSegments(getAllOperation).Any() ? null : getAllOperation;
             }
 
-            // calculate the ResourceType from the RequestPath of this resource
-            var resourceType = RequestPaths.GetResourceType(_context);
-            var resourceTypeSegments = resourceType.Select((segment, index) => (segment, index)).Where(tuple => tuple.segment.IsReference).ToList();
-            // iterate over all the reference segments in the diff of this GetAll operation
-            var candidatesOfParameters = new List<Parameter>(getAllOperation.Parameters);
-            foreach (var segment in ReferenceSegments(getAllOperation))
-            {
-                var index = resourceTypeSegments.FindIndex(tuple => tuple.segment == segment);
-                if (index < 0)
-                {
-                    var parameter = candidatesOfParameters.First(p => p.Name == segment.ReferenceName && p.Type.Equals(segment.Type));
-                    candidatesOfParameters.Remove(parameter);
-                    // this reference is not in the resource type, therefore this parameter goes to the constructor
-                    _extraConstructorParameters.Add(parameter, $"_{segment.ReferenceName}");
-                    // there is a key for this parameter, get the key and add this one to contextual parameter mapping
-                    var key = ParameterMappingBuilder.FindKeyOfParameter(parameter, getAllOperation.First().RequestPath);
-                    _extraContextualParameterMapping.Add(new ContextualParameterMapping(key, segment, GetFieldName(parameter)));
-                }
-                else
-                {
-                    var candidate = resourceTypeSegments[index];
-                    var value = ResourceType[candidate.index];
-                    _extraContextualParameterMapping.Add(new ContextualParameterMapping("", segment, $"\"{value.ConstantValue}\""));
-                }
-            }
-
             return getAllOperation;
         }
 
@@ -133,11 +158,20 @@ namespace AutoRest.CSharp.Mgmt.Output
         private static IEnumerable<Segment> ReferenceSegments(MgmtClientOperation clientOperation)
         {
             var operation = clientOperation.First();
+            return GetDiffFromRequestPath(operation.RequestPath, operation.ContextualPath);
+        }
+
+        private static IEnumerable<Segment> GetDiffFromRequestPath(RequestPath requestPath, RequestPath contextPath)
+        {
             RequestPath diff;
-            if (operation.RequestPath.IsAncestorOf(operation.ContextualPath))
-                diff = operation.RequestPath.TrimAncestorFrom(operation.ContextualPath);
+            if (requestPath.IsAncestorOf(contextPath))
+            {
+                diff = requestPath.TrimAncestorFrom(contextPath);
+            }
             else
-                diff = operation.ContextualPath.TrimAncestorFrom(operation.RequestPath);
+            {
+                diff = contextPath.TrimAncestorFrom(requestPath);
+            }
             return diff.Where(segment => segment.IsReference);
         }
 

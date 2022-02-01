@@ -117,9 +117,11 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         private IReadOnlyDictionary<RequestPath, IEnumerable<ParameterMapping>> EnsureParameterMappings()
         {
+            var contextParams = Resource?.ResourceCollection?.ExtraContextualParameterMapping ?? Enumerable.Empty<ContextualParameterMapping>();
+
             var contextualParameterMappings = OperationMappings.Keys.ToDictionary(
                 contextualPath => contextualPath,
-                contextualPath => contextualPath.BuildContextualParameters(_context, IdVariableName));
+                contextualPath => contextualPath.BuildContextualParameters(_context, IdVariableName).Concat(contextParams));
             return OperationMappings.ToDictionary(
                 pair => pair.Key,
                 pair => pair.Value.BuildParameterMapping(contextualParameterMappings[pair.Key]));

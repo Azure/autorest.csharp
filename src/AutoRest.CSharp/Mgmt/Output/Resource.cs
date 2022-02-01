@@ -18,6 +18,7 @@ using Azure.Core;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Models;
 using Azure.ResourceManager.Resources.Models;
+using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
@@ -59,7 +60,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public IEnumerable<OperationSet> OperationSets { get; }
 
-        private IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> _allOperationMap;
+        protected IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> _allOperationMap;
 
         private IEnumerable<RequestPath>? _requestPaths;
         public IEnumerable<RequestPath> RequestPaths => _requestPaths ??= OperationSets.Select(operationSet => operationSet.GetRequestPath(_context, ResourceType));
@@ -363,6 +364,10 @@ namespace AutoRest.CSharp.Mgmt.Output
             return branch.ParentRequestPath(_context).GetResourceType(_context.Configuration.MgmtConfiguration);
         }
 
+        private IEnumerable<ContextualParameterMapping>? _extraContextualParameterMapping;
+        public IEnumerable<ContextualParameterMapping> ExtraContextualParameterMapping => _extraContextualParameterMapping ??= EnsureExtraContextualParameterMapping();
+        protected virtual IEnumerable<ContextualParameterMapping> EnsureExtraContextualParameterMapping() =>Enumerable.Empty<ContextualParameterMapping>();
+
         /// <summary>
         /// A collection of ClientOperations.
         /// The List of <see cref="MgmtRestOperation"/> represents a set of the same operations under different parent (OperationSet)
@@ -449,7 +454,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             return operationRequestPath.GetScopePath().Append(contextualPath.TrimScope());
         }
 
-        private bool IsListOperation(Operation operation, OperationSet operationSet)
+        protected bool IsListOperation(Operation operation, OperationSet operationSet)
         {
             return operation.IsResourceCollectionOperation(_context, out var resourceOperationSet) && resourceOperationSet == operationSet;
         }
