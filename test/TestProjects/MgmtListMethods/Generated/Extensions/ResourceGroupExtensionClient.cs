@@ -11,7 +11,7 @@ using Azure.ResourceManager.Core;
 
 namespace MgmtListMethods
 {
-    /// <summary> An internal class to add extension methods to. </summary>
+    /// <summary> A class to add extension methods to ResourceGroup. </summary>
     internal partial class ResourceGroupExtensionClient : ArmResource
     {
         /// <summary> Initializes a new instance of the <see cref="ResourceGroupExtensionClient"/> class for mocking. </summary>
@@ -30,6 +30,48 @@ namespace MgmtListMethods
         {
             ArmClient.TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
+        }
+
+        /// <summary> Gets a collection of ResGrpParentWithAncestorWithNonResChWithLocs in the ResGrpParentWithAncestorWithNonResChWithLoc. </summary>
+        /// <returns> An object representing collection of ResGrpParentWithAncestorWithNonResChWithLocs and their operations over a ResGrpParentWithAncestorWithNonResChWithLoc. </returns>
+        public virtual ResGrpParentWithAncestorWithNonResChWithLocCollection GetResGrpParentWithAncestorWithNonResChWithLocs()
+        {
+            return new ResGrpParentWithAncestorWithNonResChWithLocCollection(ArmClient, Id);
+        }
+
+        /// <summary> Gets a collection of ResGrpParentWithAncestorWithNonResChes in the ResGrpParentWithAncestorWithNonResCh. </summary>
+        /// <returns> An object representing collection of ResGrpParentWithAncestorWithNonResChes and their operations over a ResGrpParentWithAncestorWithNonResCh. </returns>
+        public virtual ResGrpParentWithAncestorWithNonResChCollection GetResGrpParentWithAncestorWithNonResChes()
+        {
+            return new ResGrpParentWithAncestorWithNonResChCollection(ArmClient, Id);
+        }
+
+        /// <summary> Gets a collection of ResGrpParentWithAncestorWithLocs in the ResGrpParentWithAncestorWithLoc. </summary>
+        /// <returns> An object representing collection of ResGrpParentWithAncestorWithLocs and their operations over a ResGrpParentWithAncestorWithLoc. </returns>
+        public virtual ResGrpParentWithAncestorWithLocCollection GetResGrpParentWithAncestorWithLocs()
+        {
+            return new ResGrpParentWithAncestorWithLocCollection(ArmClient, Id);
+        }
+
+        /// <summary> Gets a collection of ResGrpParentWithAncestors in the ResGrpParentWithAncestor. </summary>
+        /// <returns> An object representing collection of ResGrpParentWithAncestors and their operations over a ResGrpParentWithAncestor. </returns>
+        public virtual ResGrpParentWithAncestorCollection GetResGrpParentWithAncestors()
+        {
+            return new ResGrpParentWithAncestorCollection(ArmClient, Id);
+        }
+
+        /// <summary> Gets a collection of ResGrpParentWithNonResChes in the ResGrpParentWithNonResCh. </summary>
+        /// <returns> An object representing collection of ResGrpParentWithNonResChes and their operations over a ResGrpParentWithNonResCh. </returns>
+        public virtual ResGrpParentWithNonResChCollection GetResGrpParentWithNonResChes()
+        {
+            return new ResGrpParentWithNonResChCollection(ArmClient, Id);
+        }
+
+        /// <summary> Gets a collection of ResGrpParents in the ResGrpParent. </summary>
+        /// <returns> An object representing collection of ResGrpParents and their operations over a ResGrpParent. </returns>
+        public virtual ResGrpParentCollection GetResGrpParents()
+        {
+            return new ResGrpParentCollection(ArmClient, Id);
         }
     }
 }

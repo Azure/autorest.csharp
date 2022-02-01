@@ -12,26 +12,6 @@ namespace SingletonResource
     /// <summary> A class to add extension methods to ResourceGroup. </summary>
     public static partial class ResourceGroupExtensions
     {
-        #region Car
-        /// <summary> Gets an object representing a CarCollection along with the instance operations that can be performed on it. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="CarCollection" /> object. </returns>
-        public static CarCollection GetCars(this ResourceGroup resourceGroup)
-        {
-            return new CarCollection(resourceGroup);
-        }
-        #endregion
-
-        #region ParentResource
-        /// <summary> Gets an object representing a ParentResourceCollection along with the instance operations that can be performed on it. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="ParentResourceCollection" /> object. </returns>
-        public static ParentResourceCollection GetParentResources(this ResourceGroup resourceGroup)
-        {
-            return new ParentResourceCollection(resourceGroup);
-        }
-        #endregion
-
         private static ResourceGroupExtensionClient GetExtensionClient(ResourceGroup resourceGroup)
         {
             return resourceGroup.GetCachedClient((armClient) =>
@@ -39,6 +19,22 @@ namespace SingletonResource
                 return new ResourceGroupExtensionClient(armClient, resourceGroup.Id);
             }
             );
+        }
+
+        /// <summary> Gets a collection of Cars in the Car. </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <returns> An object representing collection of Cars and their operations over a Car. </returns>
+        public static CarCollection GetCars(this ResourceGroup resourceGroup)
+        {
+            return GetExtensionClient(resourceGroup).GetCars();
+        }
+
+        /// <summary> Gets a collection of ParentResources in the ParentResource. </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <returns> An object representing collection of ParentResources and their operations over a ParentResource. </returns>
+        public static ParentResourceCollection GetParentResources(this ResourceGroup resourceGroup)
+        {
+            return GetExtensionClient(resourceGroup).GetParentResources();
         }
     }
 }

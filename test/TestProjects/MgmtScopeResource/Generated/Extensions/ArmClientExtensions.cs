@@ -20,8 +20,12 @@ namespace MgmtScopeResource
         /// <returns> Returns a <see cref="PolicyAssignment" /> object. </returns>
         public static PolicyAssignment GetPolicyAssignment(this ArmClient armClient, ResourceIdentifier id)
         {
-            PolicyAssignment.ValidateResourceId(id);
-            return new PolicyAssignment(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                PolicyAssignment.ValidateResourceId(id);
+                return new PolicyAssignment(armClient, id);
+            }
+            );
         }
         #endregion
 
@@ -32,8 +36,12 @@ namespace MgmtScopeResource
         /// <returns> Returns a <see cref="DeploymentExtended" /> object. </returns>
         public static DeploymentExtended GetDeploymentExtended(this ArmClient armClient, ResourceIdentifier id)
         {
-            DeploymentExtended.ValidateResourceId(id);
-            return new DeploymentExtended(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                DeploymentExtended.ValidateResourceId(id);
+                return new DeploymentExtended(armClient, id);
+            }
+            );
         }
         #endregion
 
@@ -44,8 +52,12 @@ namespace MgmtScopeResource
         /// <returns> Returns a <see cref="ResourceLink" /> object. </returns>
         public static ResourceLink GetResourceLink(this ArmClient armClient, ResourceIdentifier id)
         {
-            ResourceLink.ValidateResourceId(id);
-            return new ResourceLink(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                ResourceLink.ValidateResourceId(id);
+                return new ResourceLink(armClient, id);
+            }
+            );
         }
         #endregion
     }

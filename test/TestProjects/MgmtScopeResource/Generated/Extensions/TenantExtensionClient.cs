@@ -17,7 +17,7 @@ using MgmtScopeResource.Models;
 
 namespace MgmtScopeResource
 {
-    /// <summary> An internal class to add extension methods to. </summary>
+    /// <summary> A class to add extension methods to Tenant. </summary>
     internal partial class TenantExtensionClient : ArmResource
     {
         private ClientDiagnostics _deploymentExtendedDeploymentsClientDiagnostics;
@@ -44,22 +44,31 @@ namespace MgmtScopeResource
             return apiVersion;
         }
 
+        /// <summary> Gets a collection of DeploymentExtendeds in the DeploymentExtended. </summary>
+        /// <returns> An object representing collection of DeploymentExtendeds and their operations over a DeploymentExtended. </returns>
+        public virtual DeploymentExtendedCollection GetDeploymentExtendeds()
+        {
+            return new DeploymentExtendedCollection(ArmClient, Id);
+        }
+
+        /// <summary> Gets a collection of ResourceLinks in the ResourceLink. </summary>
+        /// <param name="scope"> The fully qualified ID of the scope for getting the resource links. For example, to list resource links at and under a resource group, set the scope to /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup. </param>
+        /// <returns> An object representing collection of ResourceLinks and their operations over a ResourceLink. </returns>
+        public virtual ResourceLinkCollection GetResourceLinks(string scope)
+        {
+            return new ResourceLinkCollection(ArmClient, Id, scope);
+        }
+
         /// RequestPath: /providers/Microsoft.Resources/calculateTemplateHash
         /// ContextualPath: /
         /// OperationId: Deployments_CalculateTemplateHash
         /// <summary> Calculate the hash of the given template. </summary>
         /// <param name="template"> The template provided to calculate hash. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="template"/> is null. </exception>
         public async virtual Task<Response<TemplateHashResult>> CalculateTemplateHashDeploymentAsync(object template, CancellationToken cancellationToken = default)
         {
-            if (template == null)
-            {
-                throw new ArgumentNullException(nameof(template));
-            }
-
-            using var scope = DeploymentExtendedDeploymentsClientDiagnostics.CreateScope("TenantExtensionClient.CalculateTemplateHashDeployment");
-            scope.Start();
+            using var scope0 = DeploymentExtendedDeploymentsClientDiagnostics.CreateScope("TenantExtensionClient.CalculateTemplateHashDeployment");
+            scope0.Start();
             try
             {
                 var response = await DeploymentExtendedDeploymentsRestClient.CalculateTemplateHashAsync(template, cancellationToken).ConfigureAwait(false);
@@ -67,7 +76,7 @@ namespace MgmtScopeResource
             }
             catch (Exception e)
             {
-                scope.Failed(e);
+                scope0.Failed(e);
                 throw;
             }
         }
@@ -78,16 +87,10 @@ namespace MgmtScopeResource
         /// <summary> Calculate the hash of the given template. </summary>
         /// <param name="template"> The template provided to calculate hash. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="template"/> is null. </exception>
         public virtual Response<TemplateHashResult> CalculateTemplateHashDeployment(object template, CancellationToken cancellationToken = default)
         {
-            if (template == null)
-            {
-                throw new ArgumentNullException(nameof(template));
-            }
-
-            using var scope = DeploymentExtendedDeploymentsClientDiagnostics.CreateScope("TenantExtensionClient.CalculateTemplateHashDeployment");
-            scope.Start();
+            using var scope0 = DeploymentExtendedDeploymentsClientDiagnostics.CreateScope("TenantExtensionClient.CalculateTemplateHashDeployment");
+            scope0.Start();
             try
             {
                 var response = DeploymentExtendedDeploymentsRestClient.CalculateTemplateHash(template, cancellationToken);
@@ -95,7 +98,7 @@ namespace MgmtScopeResource
             }
             catch (Exception e)
             {
-                scope.Failed(e);
+                scope0.Failed(e);
                 throw;
             }
         }

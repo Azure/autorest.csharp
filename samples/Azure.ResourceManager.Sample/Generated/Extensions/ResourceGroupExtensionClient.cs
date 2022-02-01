@@ -25,80 +25,60 @@ namespace Azure.ResourceManager.Sample
         internal ResourceGroupExtensionClient(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
         {
         }
+
         private string GetApiVersionOrNull(ResourceType resourceType)
         {
             ArmClient.TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
         }
 
-        #region AvailabilitySet
-
         /// <summary> Gets a collection of AvailabilitySets in the AvailabilitySet. </summary>
         /// <returns> An object representing collection of AvailabilitySets and their operations over a AvailabilitySet. </returns>
         public virtual AvailabilitySetCollection GetAvailabilitySets()
         {
-            return new AvailabilitySetCollection(this);
+            return new AvailabilitySetCollection(ArmClient, Id);
         }
-        #endregion
-
-        #region ProximityPlacementGroup
 
         /// <summary> Gets a collection of ProximityPlacementGroups in the ProximityPlacementGroup. </summary>
         /// <returns> An object representing collection of ProximityPlacementGroups and their operations over a ProximityPlacementGroup. </returns>
         public virtual ProximityPlacementGroupCollection GetProximityPlacementGroups()
         {
-            return new ProximityPlacementGroupCollection(this);
+            return new ProximityPlacementGroupCollection(ArmClient, Id);
         }
-        #endregion
-
-        #region DedicatedHostGroup
 
         /// <summary> Gets a collection of DedicatedHostGroups in the DedicatedHostGroup. </summary>
         /// <returns> An object representing collection of DedicatedHostGroups and their operations over a DedicatedHostGroup. </returns>
         public virtual DedicatedHostGroupCollection GetDedicatedHostGroups()
         {
-            return new DedicatedHostGroupCollection(this);
+            return new DedicatedHostGroupCollection(ArmClient, Id);
         }
-        #endregion
-
-        #region SshPublicKey
 
         /// <summary> Gets a collection of SshPublicKeys in the SshPublicKey. </summary>
         /// <returns> An object representing collection of SshPublicKeys and their operations over a SshPublicKey. </returns>
         public virtual SshPublicKeyCollection GetSshPublicKeys()
         {
-            return new SshPublicKeyCollection(this);
+            return new SshPublicKeyCollection(ArmClient, Id);
         }
-        #endregion
-
-        #region VirtualMachine
 
         /// <summary> Gets a collection of VirtualMachines in the VirtualMachine. </summary>
         /// <returns> An object representing collection of VirtualMachines and their operations over a VirtualMachine. </returns>
         public virtual VirtualMachineCollection GetVirtualMachines()
         {
-            return new VirtualMachineCollection(this);
+            return new VirtualMachineCollection(ArmClient, Id);
         }
-        #endregion
-
-        #region Image
 
         /// <summary> Gets a collection of Images in the Image. </summary>
         /// <returns> An object representing collection of Images and their operations over a Image. </returns>
         public virtual ImageCollection GetImages()
         {
-            return new ImageCollection(this);
+            return new ImageCollection(ArmClient, Id);
         }
-        #endregion
-
-        #region VirtualMachineScaleSet
 
         /// <summary> Gets a collection of VirtualMachineScaleSets in the VirtualMachineScaleSet. </summary>
         /// <returns> An object representing collection of VirtualMachineScaleSets and their operations over a VirtualMachineScaleSet. </returns>
         public virtual VirtualMachineScaleSetCollection GetVirtualMachineScaleSets()
         {
-            return new VirtualMachineScaleSetCollection(this);
+            return new VirtualMachineScaleSetCollection(ArmClient, Id);
         }
-        #endregion
     }
 }

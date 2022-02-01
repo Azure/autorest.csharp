@@ -11,7 +11,7 @@ using Azure.ResourceManager.Core;
 
 namespace MgmtScopeResource
 {
-    /// <summary> An internal class to add extension methods to. </summary>
+    /// <summary> A class to add extension methods to ManagementGroup. </summary>
     internal partial class ManagementGroupExtensionClient : ArmResource
     {
         /// <summary> Initializes a new instance of the <see cref="ManagementGroupExtensionClient"/> class for mocking. </summary>
@@ -30,6 +30,13 @@ namespace MgmtScopeResource
         {
             ArmClient.TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
+        }
+
+        /// <summary> Gets a collection of DeploymentExtendeds in the DeploymentExtended. </summary>
+        /// <returns> An object representing collection of DeploymentExtendeds and their operations over a DeploymentExtended. </returns>
+        public virtual DeploymentExtendedCollection GetDeploymentExtendeds()
+        {
+            return new DeploymentExtendedCollection(ArmClient, Id);
         }
     }
 }

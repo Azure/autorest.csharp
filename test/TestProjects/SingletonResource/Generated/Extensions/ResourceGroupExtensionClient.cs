@@ -11,7 +11,7 @@ using Azure.ResourceManager.Core;
 
 namespace SingletonResource
 {
-    /// <summary> An internal class to add extension methods to. </summary>
+    /// <summary> A class to add extension methods to ResourceGroup. </summary>
     internal partial class ResourceGroupExtensionClient : ArmResource
     {
         /// <summary> Initializes a new instance of the <see cref="ResourceGroupExtensionClient"/> class for mocking. </summary>
@@ -30,6 +30,20 @@ namespace SingletonResource
         {
             ArmClient.TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
+        }
+
+        /// <summary> Gets a collection of Cars in the Car. </summary>
+        /// <returns> An object representing collection of Cars and their operations over a Car. </returns>
+        public virtual CarCollection GetCars()
+        {
+            return new CarCollection(ArmClient, Id);
+        }
+
+        /// <summary> Gets a collection of ParentResources in the ParentResource. </summary>
+        /// <returns> An object representing collection of ParentResources and their operations over a ParentResource. </returns>
+        public virtual ParentResourceCollection GetParentResources()
+        {
+            return new ParentResourceCollection(ArmClient, Id);
         }
     }
 }

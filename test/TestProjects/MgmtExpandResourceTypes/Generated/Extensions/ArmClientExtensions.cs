@@ -20,8 +20,12 @@ namespace MgmtExpandResourceTypes
         /// <returns> Returns a <see cref="RecordSetA" /> object. </returns>
         public static RecordSetA GetRecordSetA(this ArmClient armClient, ResourceIdentifier id)
         {
-            RecordSetA.ValidateResourceId(id);
-            return new RecordSetA(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                RecordSetA.ValidateResourceId(id);
+                return new RecordSetA(armClient, id);
+            }
+            );
         }
         #endregion
 
@@ -32,8 +36,12 @@ namespace MgmtExpandResourceTypes
         /// <returns> Returns a <see cref="RecordSetAaaa" /> object. </returns>
         public static RecordSetAaaa GetRecordSetAaaa(this ArmClient armClient, ResourceIdentifier id)
         {
-            RecordSetAaaa.ValidateResourceId(id);
-            return new RecordSetAaaa(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                RecordSetAaaa.ValidateResourceId(id);
+                return new RecordSetAaaa(armClient, id);
+            }
+            );
         }
         #endregion
 
@@ -44,8 +52,12 @@ namespace MgmtExpandResourceTypes
         /// <returns> Returns a <see cref="RecordSetCaa" /> object. </returns>
         public static RecordSetCaa GetRecordSetCaa(this ArmClient armClient, ResourceIdentifier id)
         {
-            RecordSetCaa.ValidateResourceId(id);
-            return new RecordSetCaa(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                RecordSetCaa.ValidateResourceId(id);
+                return new RecordSetCaa(armClient, id);
+            }
+            );
         }
         #endregion
 
@@ -56,8 +68,12 @@ namespace MgmtExpandResourceTypes
         /// <returns> Returns a <see cref="RecordSetCName" /> object. </returns>
         public static RecordSetCName GetRecordSetCName(this ArmClient armClient, ResourceIdentifier id)
         {
-            RecordSetCName.ValidateResourceId(id);
-            return new RecordSetCName(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                RecordSetCName.ValidateResourceId(id);
+                return new RecordSetCName(armClient, id);
+            }
+            );
         }
         #endregion
 
@@ -68,8 +84,12 @@ namespace MgmtExpandResourceTypes
         /// <returns> Returns a <see cref="RecordSetMx" /> object. </returns>
         public static RecordSetMx GetRecordSetMx(this ArmClient armClient, ResourceIdentifier id)
         {
-            RecordSetMx.ValidateResourceId(id);
-            return new RecordSetMx(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                RecordSetMx.ValidateResourceId(id);
+                return new RecordSetMx(armClient, id);
+            }
+            );
         }
         #endregion
 
@@ -80,8 +100,12 @@ namespace MgmtExpandResourceTypes
         /// <returns> Returns a <see cref="RecordSetNs" /> object. </returns>
         public static RecordSetNs GetRecordSetNs(this ArmClient armClient, ResourceIdentifier id)
         {
-            RecordSetNs.ValidateResourceId(id);
-            return new RecordSetNs(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                RecordSetNs.ValidateResourceId(id);
+                return new RecordSetNs(armClient, id);
+            }
+            );
         }
         #endregion
 
@@ -92,8 +116,12 @@ namespace MgmtExpandResourceTypes
         /// <returns> Returns a <see cref="RecordSetPtr" /> object. </returns>
         public static RecordSetPtr GetRecordSetPtr(this ArmClient armClient, ResourceIdentifier id)
         {
-            RecordSetPtr.ValidateResourceId(id);
-            return new RecordSetPtr(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                RecordSetPtr.ValidateResourceId(id);
+                return new RecordSetPtr(armClient, id);
+            }
+            );
         }
         #endregion
 
@@ -104,8 +132,12 @@ namespace MgmtExpandResourceTypes
         /// <returns> Returns a <see cref="RecordSetSoa" /> object. </returns>
         public static RecordSetSoa GetRecordSetSoa(this ArmClient armClient, ResourceIdentifier id)
         {
-            RecordSetSoa.ValidateResourceId(id);
-            return new RecordSetSoa(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                RecordSetSoa.ValidateResourceId(id);
+                return new RecordSetSoa(armClient, id);
+            }
+            );
         }
         #endregion
 
@@ -116,8 +148,12 @@ namespace MgmtExpandResourceTypes
         /// <returns> Returns a <see cref="RecordSetSrv" /> object. </returns>
         public static RecordSetSrv GetRecordSetSrv(this ArmClient armClient, ResourceIdentifier id)
         {
-            RecordSetSrv.ValidateResourceId(id);
-            return new RecordSetSrv(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                RecordSetSrv.ValidateResourceId(id);
+                return new RecordSetSrv(armClient, id);
+            }
+            );
         }
         #endregion
 
@@ -128,8 +164,12 @@ namespace MgmtExpandResourceTypes
         /// <returns> Returns a <see cref="RecordSetTxt" /> object. </returns>
         public static RecordSetTxt GetRecordSetTxt(this ArmClient armClient, ResourceIdentifier id)
         {
-            RecordSetTxt.ValidateResourceId(id);
-            return new RecordSetTxt(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                RecordSetTxt.ValidateResourceId(id);
+                return new RecordSetTxt(armClient, id);
+            }
+            );
         }
         #endregion
 
@@ -140,8 +180,12 @@ namespace MgmtExpandResourceTypes
         /// <returns> Returns a <see cref="Zone" /> object. </returns>
         public static Zone GetZone(this ArmClient armClient, ResourceIdentifier id)
         {
-            Zone.ValidateResourceId(id);
-            return new Zone(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                Zone.ValidateResourceId(id);
+                return new Zone(armClient, id);
+            }
+            );
         }
         #endregion
     }

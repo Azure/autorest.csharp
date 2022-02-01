@@ -20,8 +20,12 @@ namespace Azure.Management.Storage
         /// <returns> Returns a <see cref="BlobService" /> object. </returns>
         public static BlobService GetBlobService(this ArmClient armClient, ResourceIdentifier id)
         {
-            BlobService.ValidateResourceId(id);
-            return new BlobService(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                BlobService.ValidateResourceId(id);
+                return new BlobService(armClient, id);
+            }
+            );
         }
         #endregion
 
@@ -32,8 +36,12 @@ namespace Azure.Management.Storage
         /// <returns> Returns a <see cref="BlobContainer" /> object. </returns>
         public static BlobContainer GetBlobContainer(this ArmClient armClient, ResourceIdentifier id)
         {
-            BlobContainer.ValidateResourceId(id);
-            return new BlobContainer(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                BlobContainer.ValidateResourceId(id);
+                return new BlobContainer(armClient, id);
+            }
+            );
         }
         #endregion
 
@@ -44,8 +52,12 @@ namespace Azure.Management.Storage
         /// <returns> Returns a <see cref="ImmutabilityPolicy" /> object. </returns>
         public static ImmutabilityPolicy GetImmutabilityPolicy(this ArmClient armClient, ResourceIdentifier id)
         {
-            ImmutabilityPolicy.ValidateResourceId(id);
-            return new ImmutabilityPolicy(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                ImmutabilityPolicy.ValidateResourceId(id);
+                return new ImmutabilityPolicy(armClient, id);
+            }
+            );
         }
         #endregion
 
@@ -56,8 +68,12 @@ namespace Azure.Management.Storage
         /// <returns> Returns a <see cref="FileService" /> object. </returns>
         public static FileService GetFileService(this ArmClient armClient, ResourceIdentifier id)
         {
-            FileService.ValidateResourceId(id);
-            return new FileService(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                FileService.ValidateResourceId(id);
+                return new FileService(armClient, id);
+            }
+            );
         }
         #endregion
 
@@ -68,8 +84,12 @@ namespace Azure.Management.Storage
         /// <returns> Returns a <see cref="FileShare" /> object. </returns>
         public static FileShare GetFileShare(this ArmClient armClient, ResourceIdentifier id)
         {
-            FileShare.ValidateResourceId(id);
-            return new FileShare(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                FileShare.ValidateResourceId(id);
+                return new FileShare(armClient, id);
+            }
+            );
         }
         #endregion
 
@@ -80,8 +100,12 @@ namespace Azure.Management.Storage
         /// <returns> Returns a <see cref="StorageAccount" /> object. </returns>
         public static StorageAccount GetStorageAccount(this ArmClient armClient, ResourceIdentifier id)
         {
-            StorageAccount.ValidateResourceId(id);
-            return new StorageAccount(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                StorageAccount.ValidateResourceId(id);
+                return new StorageAccount(armClient, id);
+            }
+            );
         }
         #endregion
 
@@ -92,8 +116,12 @@ namespace Azure.Management.Storage
         /// <returns> Returns a <see cref="DeletedAccount" /> object. </returns>
         public static DeletedAccount GetDeletedAccount(this ArmClient armClient, ResourceIdentifier id)
         {
-            DeletedAccount.ValidateResourceId(id);
-            return new DeletedAccount(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                DeletedAccount.ValidateResourceId(id);
+                return new DeletedAccount(armClient, id);
+            }
+            );
         }
         #endregion
 
@@ -104,8 +132,12 @@ namespace Azure.Management.Storage
         /// <returns> Returns a <see cref="ManagementPolicy" /> object. </returns>
         public static ManagementPolicy GetManagementPolicy(this ArmClient armClient, ResourceIdentifier id)
         {
-            ManagementPolicy.ValidateResourceId(id);
-            return new ManagementPolicy(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                ManagementPolicy.ValidateResourceId(id);
+                return new ManagementPolicy(armClient, id);
+            }
+            );
         }
         #endregion
 
@@ -116,8 +148,12 @@ namespace Azure.Management.Storage
         /// <returns> Returns a <see cref="BlobInventoryPolicy" /> object. </returns>
         public static BlobInventoryPolicy GetBlobInventoryPolicy(this ArmClient armClient, ResourceIdentifier id)
         {
-            BlobInventoryPolicy.ValidateResourceId(id);
-            return new BlobInventoryPolicy(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                BlobInventoryPolicy.ValidateResourceId(id);
+                return new BlobInventoryPolicy(armClient, id);
+            }
+            );
         }
         #endregion
 
@@ -128,8 +164,12 @@ namespace Azure.Management.Storage
         /// <returns> Returns a <see cref="PrivateEndpointConnection" /> object. </returns>
         public static PrivateEndpointConnection GetPrivateEndpointConnection(this ArmClient armClient, ResourceIdentifier id)
         {
-            PrivateEndpointConnection.ValidateResourceId(id);
-            return new PrivateEndpointConnection(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                PrivateEndpointConnection.ValidateResourceId(id);
+                return new PrivateEndpointConnection(armClient, id);
+            }
+            );
         }
         #endregion
 
@@ -140,8 +180,12 @@ namespace Azure.Management.Storage
         /// <returns> Returns a <see cref="ObjectReplicationPolicy" /> object. </returns>
         public static ObjectReplicationPolicy GetObjectReplicationPolicy(this ArmClient armClient, ResourceIdentifier id)
         {
-            ObjectReplicationPolicy.ValidateResourceId(id);
-            return new ObjectReplicationPolicy(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                ObjectReplicationPolicy.ValidateResourceId(id);
+                return new ObjectReplicationPolicy(armClient, id);
+            }
+            );
         }
         #endregion
 
@@ -152,8 +196,12 @@ namespace Azure.Management.Storage
         /// <returns> Returns a <see cref="EncryptionScope" /> object. </returns>
         public static EncryptionScope GetEncryptionScope(this ArmClient armClient, ResourceIdentifier id)
         {
-            EncryptionScope.ValidateResourceId(id);
-            return new EncryptionScope(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                EncryptionScope.ValidateResourceId(id);
+                return new EncryptionScope(armClient, id);
+            }
+            );
         }
         #endregion
     }

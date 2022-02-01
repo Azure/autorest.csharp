@@ -88,7 +88,7 @@ namespace OmitOperationGroups
                 throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ResourceType), nameof(id));
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s/{model2sName}
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s/{model2SName}
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s/{model2sName}
         /// OperationId: Model2s_Get
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -110,7 +110,7 @@ namespace OmitOperationGroups
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s/{model2sName}
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s/{model2SName}
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s/{model2sName}
         /// OperationId: Model2s_Get
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -124,6 +124,46 @@ namespace OmitOperationGroups
                 if (response.Value == null)
                     throw _model2ClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new Model2(ArmClient, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s/{model2SName}/model4s/default
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s/{model2sName}
+        /// OperationId: Model4s_GetDefault
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async virtual Task<Response<Model4>> GetDefaultModel4Async(CancellationToken cancellationToken = default)
+        {
+            using var scope = _model4sClientDiagnostics.CreateScope("Model2.GetDefaultModel4");
+            scope.Start();
+            try
+            {
+                var response = await _model4sRestClient.GetDefaultAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                return response;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s/{model2SName}/model4s/default
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s/{model2sName}
+        /// OperationId: Model4s_GetDefault
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<Model4> GetDefaultModel4(CancellationToken cancellationToken = default)
+        {
+            using var scope = _model4sClientDiagnostics.CreateScope("Model2.GetDefaultModel4");
+            scope.Start();
+            try
+            {
+                var response = _model4sRestClient.GetDefault(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                return response;
             }
             catch (Exception e)
             {
@@ -160,46 +200,6 @@ namespace OmitOperationGroups
             try
             {
                 return ListAvailableLocations(ResourceType, cancellationToken);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s/{model2sName}/model4s/default
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s/{model2sName}
-        /// OperationId: Model4s_GetDefault
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<Model4>> GetDefaultModel4Async(CancellationToken cancellationToken = default)
-        {
-            using var scope = _model4sClientDiagnostics.CreateScope("Model2.GetDefaultModel4");
-            scope.Start();
-            try
-            {
-                var response = await _model4sRestClient.GetDefaultAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                return response;
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s/{model2sName}/model4s/default
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s/{model2sName}
-        /// OperationId: Model4s_GetDefault
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<Model4> GetDefaultModel4(CancellationToken cancellationToken = default)
-        {
-            using var scope = _model4sClientDiagnostics.CreateScope("Model2.GetDefaultModel4");
-            scope.Start();
-            try
-            {
-                var response = _model4sRestClient.GetDefault(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
-                return response;
             }
             catch (Exception e)
             {

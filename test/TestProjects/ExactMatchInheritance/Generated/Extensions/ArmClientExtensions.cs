@@ -20,8 +20,12 @@ namespace ExactMatchInheritance
         /// <returns> Returns a <see cref="ExactMatchModel1" /> object. </returns>
         public static ExactMatchModel1 GetExactMatchModel1(this ArmClient armClient, ResourceIdentifier id)
         {
-            ExactMatchModel1.ValidateResourceId(id);
-            return new ExactMatchModel1(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                ExactMatchModel1.ValidateResourceId(id);
+                return new ExactMatchModel1(armClient, id);
+            }
+            );
         }
         #endregion
 
@@ -32,8 +36,12 @@ namespace ExactMatchInheritance
         /// <returns> Returns a <see cref="ExactMatchModel5" /> object. </returns>
         public static ExactMatchModel5 GetExactMatchModel5(this ArmClient armClient, ResourceIdentifier id)
         {
-            ExactMatchModel5.ValidateResourceId(id);
-            return new ExactMatchModel5(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                ExactMatchModel5.ValidateResourceId(id);
+                return new ExactMatchModel5(armClient, id);
+            }
+            );
         }
         #endregion
     }

@@ -20,8 +20,12 @@ namespace MgmtOperations
         /// <returns> Returns a <see cref="AvailabilitySet" /> object. </returns>
         public static AvailabilitySet GetAvailabilitySet(this ArmClient armClient, ResourceIdentifier id)
         {
-            AvailabilitySet.ValidateResourceId(id);
-            return new AvailabilitySet(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                AvailabilitySet.ValidateResourceId(id);
+                return new AvailabilitySet(armClient, id);
+            }
+            );
         }
         #endregion
 
@@ -32,8 +36,12 @@ namespace MgmtOperations
         /// <returns> Returns a <see cref="AvailabilitySetChild" /> object. </returns>
         public static AvailabilitySetChild GetAvailabilitySetChild(this ArmClient armClient, ResourceIdentifier id)
         {
-            AvailabilitySetChild.ValidateResourceId(id);
-            return new AvailabilitySetChild(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                AvailabilitySetChild.ValidateResourceId(id);
+                return new AvailabilitySetChild(armClient, id);
+            }
+            );
         }
         #endregion
 
@@ -44,8 +52,12 @@ namespace MgmtOperations
         /// <returns> Returns a <see cref="AvailabilitySetGrandChild" /> object. </returns>
         public static AvailabilitySetGrandChild GetAvailabilitySetGrandChild(this ArmClient armClient, ResourceIdentifier id)
         {
-            AvailabilitySetGrandChild.ValidateResourceId(id);
-            return new AvailabilitySetGrandChild(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                AvailabilitySetGrandChild.ValidateResourceId(id);
+                return new AvailabilitySetGrandChild(armClient, id);
+            }
+            );
         }
         #endregion
     }

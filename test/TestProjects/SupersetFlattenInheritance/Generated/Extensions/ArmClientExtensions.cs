@@ -20,8 +20,12 @@ namespace SupersetFlattenInheritance
         /// <returns> Returns a <see cref="ResourceModel1" /> object. </returns>
         public static ResourceModel1 GetResourceModel1(this ArmClient armClient, ResourceIdentifier id)
         {
-            ResourceModel1.ValidateResourceId(id);
-            return new ResourceModel1(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                ResourceModel1.ValidateResourceId(id);
+                return new ResourceModel1(armClient, id);
+            }
+            );
         }
         #endregion
 
@@ -32,8 +36,12 @@ namespace SupersetFlattenInheritance
         /// <returns> Returns a <see cref="TrackedResourceModel1" /> object. </returns>
         public static TrackedResourceModel1 GetTrackedResourceModel1(this ArmClient armClient, ResourceIdentifier id)
         {
-            TrackedResourceModel1.ValidateResourceId(id);
-            return new TrackedResourceModel1(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                TrackedResourceModel1.ValidateResourceId(id);
+                return new TrackedResourceModel1(armClient, id);
+            }
+            );
         }
         #endregion
     }

@@ -11,7 +11,7 @@ using Azure.ResourceManager.Core;
 
 namespace MgmtPropertyChooser
 {
-    /// <summary> An internal class to add extension methods to. </summary>
+    /// <summary> A class to add extension methods to ResourceGroup. </summary>
     internal partial class ResourceGroupExtensionClient : ArmResource
     {
         /// <summary> Initializes a new instance of the <see cref="ResourceGroupExtensionClient"/> class for mocking. </summary>
@@ -30,6 +30,13 @@ namespace MgmtPropertyChooser
         {
             ArmClient.TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
+        }
+
+        /// <summary> Gets a collection of VirtualMachines in the VirtualMachine. </summary>
+        /// <returns> An object representing collection of VirtualMachines and their operations over a VirtualMachine. </returns>
+        public virtual VirtualMachineCollection GetVirtualMachines()
+        {
+            return new VirtualMachineCollection(ArmClient, Id);
         }
     }
 }

@@ -21,74 +21,60 @@ namespace Azure.ResourceManager.Sample
             );
         }
 
-        #region AvailabilitySet
-        /// <summary> Gets an object representing a AvailabilitySetCollection along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets a collection of AvailabilitySets in the AvailabilitySet. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="AvailabilitySetCollection" /> object. </returns>
+        /// <returns> An object representing collection of AvailabilitySets and their operations over a AvailabilitySet. </returns>
         public static AvailabilitySetCollection GetAvailabilitySets(this ResourceGroup resourceGroup)
         {
-            return new AvailabilitySetCollection(resourceGroup);
+            return GetExtensionClient(resourceGroup).GetAvailabilitySets();
         }
-        #endregion
 
-        #region ProximityPlacementGroup
-        /// <summary> Gets an object representing a ProximityPlacementGroupCollection along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets a collection of ProximityPlacementGroups in the ProximityPlacementGroup. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="ProximityPlacementGroupCollection" /> object. </returns>
+        /// <returns> An object representing collection of ProximityPlacementGroups and their operations over a ProximityPlacementGroup. </returns>
         public static ProximityPlacementGroupCollection GetProximityPlacementGroups(this ResourceGroup resourceGroup)
         {
-            return new ProximityPlacementGroupCollection(resourceGroup);
+            return GetExtensionClient(resourceGroup).GetProximityPlacementGroups();
         }
-        #endregion
 
-        #region DedicatedHostGroup
-        /// <summary> Gets an object representing a DedicatedHostGroupCollection along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets a collection of DedicatedHostGroups in the DedicatedHostGroup. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="DedicatedHostGroupCollection" /> object. </returns>
+        /// <returns> An object representing collection of DedicatedHostGroups and their operations over a DedicatedHostGroup. </returns>
         public static DedicatedHostGroupCollection GetDedicatedHostGroups(this ResourceGroup resourceGroup)
         {
-            return new DedicatedHostGroupCollection(resourceGroup);
+            return GetExtensionClient(resourceGroup).GetDedicatedHostGroups();
         }
-        #endregion
 
-        #region SshPublicKey
-        /// <summary> Gets an object representing a SshPublicKeyCollection along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets a collection of SshPublicKeys in the SshPublicKey. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="SshPublicKeyCollection" /> object. </returns>
+        /// <returns> An object representing collection of SshPublicKeys and their operations over a SshPublicKey. </returns>
         public static SshPublicKeyCollection GetSshPublicKeys(this ResourceGroup resourceGroup)
         {
-            return new SshPublicKeyCollection(resourceGroup);
+            return GetExtensionClient(resourceGroup).GetSshPublicKeys();
         }
-        #endregion
 
-        #region VirtualMachine
-        /// <summary> Gets an object representing a VirtualMachineCollection along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets a collection of VirtualMachines in the VirtualMachine. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="VirtualMachineCollection" /> object. </returns>
+        /// <returns> An object representing collection of VirtualMachines and their operations over a VirtualMachine. </returns>
         public static VirtualMachineCollection GetVirtualMachines(this ResourceGroup resourceGroup)
         {
-            return new VirtualMachineCollection(resourceGroup);
+            return GetExtensionClient(resourceGroup).GetVirtualMachines();
         }
-        #endregion
 
-        #region Image
-        /// <summary> Gets an object representing a ImageCollection along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets a collection of Images in the Image. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="ImageCollection" /> object. </returns>
+        /// <returns> An object representing collection of Images and their operations over a Image. </returns>
         public static ImageCollection GetImages(this ResourceGroup resourceGroup)
         {
-            return new ImageCollection(resourceGroup);
+            return GetExtensionClient(resourceGroup).GetImages();
         }
-        #endregion
 
-        #region VirtualMachineScaleSet
-        /// <summary> Gets an object representing a VirtualMachineScaleSetCollection along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets a collection of VirtualMachineScaleSets in the VirtualMachineScaleSet. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="VirtualMachineScaleSetCollection" /> object. </returns>
+        /// <returns> An object representing collection of VirtualMachineScaleSets and their operations over a VirtualMachineScaleSet. </returns>
         public static VirtualMachineScaleSetCollection GetVirtualMachineScaleSets(this ResourceGroup resourceGroup)
         {
-            return new VirtualMachineScaleSetCollection(resourceGroup);
+            return GetExtensionClient(resourceGroup).GetVirtualMachineScaleSets();
         }
-        #endregion
     }
 }

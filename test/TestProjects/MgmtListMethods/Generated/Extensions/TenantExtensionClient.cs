@@ -11,7 +11,7 @@ using Azure.ResourceManager.Core;
 
 namespace MgmtListMethods
 {
-    /// <summary> An internal class to add extension methods to. </summary>
+    /// <summary> A class to add extension methods to Tenant. </summary>
     internal partial class TenantExtensionClient : ArmResource
     {
         /// <summary> Initializes a new instance of the <see cref="TenantExtensionClient"/> class for mocking. </summary>
@@ -30,6 +30,13 @@ namespace MgmtListMethods
         {
             ArmClient.TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
+        }
+
+        /// <summary> Gets a collection of TenantTests in the TenantTest. </summary>
+        /// <returns> An object representing collection of TenantTests and their operations over a TenantTest. </returns>
+        public virtual TenantTestCollection GetTenantTests()
+        {
+            return new TenantTestCollection(ArmClient, Id);
         }
     }
 }

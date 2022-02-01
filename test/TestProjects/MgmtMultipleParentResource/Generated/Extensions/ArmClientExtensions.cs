@@ -20,8 +20,12 @@ namespace MgmtMultipleParentResource
         /// <returns> Returns a <see cref="AnotherParent" /> object. </returns>
         public static AnotherParent GetAnotherParent(this ArmClient armClient, ResourceIdentifier id)
         {
-            AnotherParent.ValidateResourceId(id);
-            return new AnotherParent(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                AnotherParent.ValidateResourceId(id);
+                return new AnotherParent(armClient, id);
+            }
+            );
         }
         #endregion
 
@@ -32,8 +36,12 @@ namespace MgmtMultipleParentResource
         /// <returns> Returns a <see cref="AnotherParentChild" /> object. </returns>
         public static AnotherParentChild GetAnotherParentChild(this ArmClient armClient, ResourceIdentifier id)
         {
-            AnotherParentChild.ValidateResourceId(id);
-            return new AnotherParentChild(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                AnotherParentChild.ValidateResourceId(id);
+                return new AnotherParentChild(armClient, id);
+            }
+            );
         }
         #endregion
 
@@ -44,8 +52,12 @@ namespace MgmtMultipleParentResource
         /// <returns> Returns a <see cref="TheParentSubParentChild" /> object. </returns>
         public static TheParentSubParentChild GetTheParentSubParentChild(this ArmClient armClient, ResourceIdentifier id)
         {
-            TheParentSubParentChild.ValidateResourceId(id);
-            return new TheParentSubParentChild(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                TheParentSubParentChild.ValidateResourceId(id);
+                return new TheParentSubParentChild(armClient, id);
+            }
+            );
         }
         #endregion
 
@@ -56,8 +68,12 @@ namespace MgmtMultipleParentResource
         /// <returns> Returns a <see cref="TheParent" /> object. </returns>
         public static TheParent GetTheParent(this ArmClient armClient, ResourceIdentifier id)
         {
-            TheParent.ValidateResourceId(id);
-            return new TheParent(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                TheParent.ValidateResourceId(id);
+                return new TheParent(armClient, id);
+            }
+            );
         }
         #endregion
 
@@ -68,8 +84,12 @@ namespace MgmtMultipleParentResource
         /// <returns> Returns a <see cref="SubParent" /> object. </returns>
         public static SubParent GetSubParent(this ArmClient armClient, ResourceIdentifier id)
         {
-            SubParent.ValidateResourceId(id);
-            return new SubParent(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                SubParent.ValidateResourceId(id);
+                return new SubParent(armClient, id);
+            }
+            );
         }
         #endregion
     }

@@ -12,26 +12,6 @@ namespace MgmtMultipleParentResource
     /// <summary> A class to add extension methods to ResourceGroup. </summary>
     public static partial class ResourceGroupExtensions
     {
-        #region AnotherParent
-        /// <summary> Gets an object representing a AnotherParentCollection along with the instance operations that can be performed on it. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="AnotherParentCollection" /> object. </returns>
-        public static AnotherParentCollection GetAnotherParents(this ResourceGroup resourceGroup)
-        {
-            return new AnotherParentCollection(resourceGroup);
-        }
-        #endregion
-
-        #region TheParent
-        /// <summary> Gets an object representing a TheParentCollection along with the instance operations that can be performed on it. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="TheParentCollection" /> object. </returns>
-        public static TheParentCollection GetTheParents(this ResourceGroup resourceGroup)
-        {
-            return new TheParentCollection(resourceGroup);
-        }
-        #endregion
-
         private static ResourceGroupExtensionClient GetExtensionClient(ResourceGroup resourceGroup)
         {
             return resourceGroup.GetCachedClient((armClient) =>
@@ -39,6 +19,22 @@ namespace MgmtMultipleParentResource
                 return new ResourceGroupExtensionClient(armClient, resourceGroup.Id);
             }
             );
+        }
+
+        /// <summary> Gets a collection of AnotherParents in the AnotherParent. </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <returns> An object representing collection of AnotherParents and their operations over a AnotherParent. </returns>
+        public static AnotherParentCollection GetAnotherParents(this ResourceGroup resourceGroup)
+        {
+            return GetExtensionClient(resourceGroup).GetAnotherParents();
+        }
+
+        /// <summary> Gets a collection of TheParents in the TheParent. </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <returns> An object representing collection of TheParents and their operations over a TheParent. </returns>
+        public static TheParentCollection GetTheParents(this ResourceGroup resourceGroup)
+        {
+            return GetExtensionClient(resourceGroup).GetTheParents();
         }
     }
 }

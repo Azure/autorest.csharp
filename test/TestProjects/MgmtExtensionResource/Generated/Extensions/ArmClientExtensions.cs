@@ -20,8 +20,12 @@ namespace MgmtExtensionResource
         /// <returns> Returns a <see cref="SubSingleton" /> object. </returns>
         public static SubSingleton GetSubSingleton(this ArmClient armClient, ResourceIdentifier id)
         {
-            SubSingleton.ValidateResourceId(id);
-            return new SubSingleton(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                SubSingleton.ValidateResourceId(id);
+                return new SubSingleton(armClient, id);
+            }
+            );
         }
         #endregion
 
@@ -32,8 +36,12 @@ namespace MgmtExtensionResource
         /// <returns> Returns a <see cref="SubscriptionPolicyDefinition" /> object. </returns>
         public static SubscriptionPolicyDefinition GetSubscriptionPolicyDefinition(this ArmClient armClient, ResourceIdentifier id)
         {
-            SubscriptionPolicyDefinition.ValidateResourceId(id);
-            return new SubscriptionPolicyDefinition(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                SubscriptionPolicyDefinition.ValidateResourceId(id);
+                return new SubscriptionPolicyDefinition(armClient, id);
+            }
+            );
         }
         #endregion
 
@@ -44,8 +52,12 @@ namespace MgmtExtensionResource
         /// <returns> Returns a <see cref="BuiltInPolicyDefinition" /> object. </returns>
         public static BuiltInPolicyDefinition GetBuiltInPolicyDefinition(this ArmClient armClient, ResourceIdentifier id)
         {
-            BuiltInPolicyDefinition.ValidateResourceId(id);
-            return new BuiltInPolicyDefinition(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                BuiltInPolicyDefinition.ValidateResourceId(id);
+                return new BuiltInPolicyDefinition(armClient, id);
+            }
+            );
         }
         #endregion
 
@@ -56,8 +68,12 @@ namespace MgmtExtensionResource
         /// <returns> Returns a <see cref="ManagementGroupPolicyDefinition" /> object. </returns>
         public static ManagementGroupPolicyDefinition GetManagementGroupPolicyDefinition(this ArmClient armClient, ResourceIdentifier id)
         {
-            ManagementGroupPolicyDefinition.ValidateResourceId(id);
-            return new ManagementGroupPolicyDefinition(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                ManagementGroupPolicyDefinition.ValidateResourceId(id);
+                return new ManagementGroupPolicyDefinition(armClient, id);
+            }
+            );
         }
         #endregion
     }

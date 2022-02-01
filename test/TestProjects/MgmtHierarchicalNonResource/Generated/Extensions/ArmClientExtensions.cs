@@ -20,8 +20,12 @@ namespace MgmtHierarchicalNonResource
         /// <returns> Returns a <see cref="SharedGallery" /> object. </returns>
         public static SharedGallery GetSharedGallery(this ArmClient armClient, ResourceIdentifier id)
         {
-            SharedGallery.ValidateResourceId(id);
-            return new SharedGallery(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                SharedGallery.ValidateResourceId(id);
+                return new SharedGallery(armClient, id);
+            }
+            );
         }
         #endregion
     }

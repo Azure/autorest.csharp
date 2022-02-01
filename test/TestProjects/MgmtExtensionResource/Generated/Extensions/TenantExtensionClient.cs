@@ -11,7 +11,7 @@ using Azure.ResourceManager.Core;
 
 namespace MgmtExtensionResource
 {
-    /// <summary> An internal class to add extension methods to. </summary>
+    /// <summary> A class to add extension methods to Tenant. </summary>
     internal partial class TenantExtensionClient : ArmResource
     {
         /// <summary> Initializes a new instance of the <see cref="TenantExtensionClient"/> class for mocking. </summary>
@@ -30,6 +30,13 @@ namespace MgmtExtensionResource
         {
             ArmClient.TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
+        }
+
+        /// <summary> Gets a collection of BuiltInPolicyDefinitions in the BuiltInPolicyDefinition. </summary>
+        /// <returns> An object representing collection of BuiltInPolicyDefinitions and their operations over a BuiltInPolicyDefinition. </returns>
+        public virtual BuiltInPolicyDefinitionCollection GetBuiltInPolicyDefinitions()
+        {
+            return new BuiltInPolicyDefinitionCollection(ArmClient, Id);
         }
     }
 }

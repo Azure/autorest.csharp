@@ -12,14 +12,16 @@ namespace MgmtScopeResource
     /// <summary> A class to add extension methods to ArmResource. </summary>
     public static partial class ArmResourceExtensions
     {
-        #region PolicyAssignment
-        /// <summary> Gets an object representing a PolicyAssignmentCollection along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets a collection of PolicyAssignments in the PolicyAssignment. </summary>
         /// <param name="armResource"> The <see cref="ArmResource" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="PolicyAssignmentCollection" /> object. </returns>
+        /// <returns> An object representing collection of PolicyAssignments and their operations over a PolicyAssignment. </returns>
         public static PolicyAssignmentCollection GetPolicyAssignments(this ArmResource armResource)
         {
-            return new PolicyAssignmentCollection(armResource);
+            return armResource.GetCachedClient((armClient) =>
+            {
+                return new PolicyAssignmentCollection(armClient, armResource.Id);
+            }
+            );
         }
-        #endregion
     }
 }

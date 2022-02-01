@@ -11,7 +11,7 @@ using Azure.ResourceManager.Core;
 
 namespace Azure.Management.Storage
 {
-    /// <summary> An internal class to add extension methods to. </summary>
+    /// <summary> A class to add extension methods to ResourceGroup. </summary>
     internal partial class ResourceGroupExtensionClient : ArmResource
     {
         /// <summary> Initializes a new instance of the <see cref="ResourceGroupExtensionClient"/> class for mocking. </summary>
@@ -30,6 +30,13 @@ namespace Azure.Management.Storage
         {
             ArmClient.TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
+        }
+
+        /// <summary> Gets a collection of StorageAccounts in the StorageAccount. </summary>
+        /// <returns> An object representing collection of StorageAccounts and their operations over a StorageAccount. </returns>
+        public virtual StorageAccountCollection GetStorageAccounts()
+        {
+            return new StorageAccountCollection(ArmClient, Id);
         }
     }
 }

@@ -20,8 +20,12 @@ namespace MgmtPropertyChooser
         /// <returns> Returns a <see cref="VirtualMachine" /> object. </returns>
         public static VirtualMachine GetVirtualMachine(this ArmClient armClient, ResourceIdentifier id)
         {
-            VirtualMachine.ValidateResourceId(id);
-            return new VirtualMachine(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                VirtualMachine.ValidateResourceId(id);
+                return new VirtualMachine(armClient, id);
+            }
+            );
         }
         #endregion
     }

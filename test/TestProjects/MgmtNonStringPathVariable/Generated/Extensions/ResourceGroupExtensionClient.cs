@@ -11,7 +11,7 @@ using Azure.ResourceManager.Core;
 
 namespace MgmtNonStringPathVariable
 {
-    /// <summary> An internal class to add extension methods to. </summary>
+    /// <summary> A class to add extension methods to ResourceGroup. </summary>
     internal partial class ResourceGroupExtensionClient : ArmResource
     {
         /// <summary> Initializes a new instance of the <see cref="ResourceGroupExtensionClient"/> class for mocking. </summary>
@@ -30,6 +30,20 @@ namespace MgmtNonStringPathVariable
         {
             ArmClient.TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
+        }
+
+        /// <summary> Gets a collection of Fakes in the Fake. </summary>
+        /// <returns> An object representing collection of Fakes and their operations over a Fake. </returns>
+        public virtual FakeCollection GetFakes()
+        {
+            return new FakeCollection(ArmClient, Id);
+        }
+
+        /// <summary> Gets a collection of Bars in the Bar. </summary>
+        /// <returns> An object representing collection of Bars and their operations over a Bar. </returns>
+        public virtual BarCollection GetBars()
+        {
+            return new BarCollection(ArmClient, Id);
         }
     }
 }

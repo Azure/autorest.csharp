@@ -18,7 +18,7 @@ using MgmtKeyvault.Models;
 
 namespace MgmtKeyvault
 {
-    /// <summary> An internal class to add extension methods to. </summary>
+    /// <summary> A class to add extension methods to Subscription. </summary>
     internal partial class SubscriptionExtensionClient : ArmResource
     {
         private ClientDiagnostics _vaultClientDiagnostics;
@@ -55,6 +55,20 @@ namespace MgmtKeyvault
         {
             ArmClient.TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
+        }
+
+        /// <summary> Gets a collection of DeletedVaults in the DeletedVault. </summary>
+        /// <returns> An object representing collection of DeletedVaults and their operations over a DeletedVault. </returns>
+        public virtual DeletedVaultCollection GetDeletedVaults()
+        {
+            return new DeletedVaultCollection(ArmClient, Id);
+        }
+
+        /// <summary> Gets a collection of DeletedManagedHsms in the DeletedManagedHsm. </summary>
+        /// <returns> An object representing collection of DeletedManagedHsms and their operations over a DeletedManagedHsm. </returns>
+        public virtual DeletedManagedHsmCollection GetDeletedManagedHsms()
+        {
+            return new DeletedManagedHsmCollection(ArmClient, Id);
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.KeyVault/vaults
@@ -229,14 +243,8 @@ namespace MgmtKeyvault
         /// <summary> Checks that the vault name is valid and is not already in use. </summary>
         /// <param name="vaultName"> The name of the vault. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="vaultName"/> is null. </exception>
         public async virtual Task<Response<CheckNameAvailabilityResult>> CheckNameAvailabilityVaultAsync(VaultCheckNameAvailabilityParameters vaultName, CancellationToken cancellationToken = default)
         {
-            if (vaultName == null)
-            {
-                throw new ArgumentNullException(nameof(vaultName));
-            }
-
             using var scope = VaultsClientDiagnostics.CreateScope("SubscriptionExtensionClient.CheckNameAvailabilityVault");
             scope.Start();
             try
@@ -257,14 +265,8 @@ namespace MgmtKeyvault
         /// <summary> Checks that the vault name is valid and is not already in use. </summary>
         /// <param name="vaultName"> The name of the vault. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="vaultName"/> is null. </exception>
         public virtual Response<CheckNameAvailabilityResult> CheckNameAvailabilityVault(VaultCheckNameAvailabilityParameters vaultName, CancellationToken cancellationToken = default)
         {
-            if (vaultName == null)
-            {
-                throw new ArgumentNullException(nameof(vaultName));
-            }
-
             using var scope = VaultsClientDiagnostics.CreateScope("SubscriptionExtensionClient.CheckNameAvailabilityVault");
             scope.Start();
             try

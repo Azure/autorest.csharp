@@ -11,7 +11,7 @@ using Azure.ResourceManager.Core;
 
 namespace MgmtKeyvault
 {
-    /// <summary> An internal class to add extension methods to. </summary>
+    /// <summary> A class to add extension methods to ResourceGroup. </summary>
     internal partial class ResourceGroupExtensionClient : ArmResource
     {
         /// <summary> Initializes a new instance of the <see cref="ResourceGroupExtensionClient"/> class for mocking. </summary>
@@ -30,6 +30,20 @@ namespace MgmtKeyvault
         {
             ArmClient.TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
+        }
+
+        /// <summary> Gets a collection of Vaults in the Vault. </summary>
+        /// <returns> An object representing collection of Vaults and their operations over a Vault. </returns>
+        public virtual VaultCollection GetVaults()
+        {
+            return new VaultCollection(ArmClient, Id);
+        }
+
+        /// <summary> Gets a collection of ManagedHsms in the ManagedHsm. </summary>
+        /// <returns> An object representing collection of ManagedHsms and their operations over a ManagedHsm. </returns>
+        public virtual ManagedHsmCollection GetManagedHsms()
+        {
+            return new ManagedHsmCollection(ArmClient, Id);
         }
     }
 }

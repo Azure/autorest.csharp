@@ -20,8 +20,12 @@ namespace SingletonResource
         /// <returns> Returns a <see cref="Car" /> object. </returns>
         public static Car GetCar(this ArmClient armClient, ResourceIdentifier id)
         {
-            Car.ValidateResourceId(id);
-            return new Car(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                Car.ValidateResourceId(id);
+                return new Car(armClient, id);
+            }
+            );
         }
         #endregion
 
@@ -32,8 +36,12 @@ namespace SingletonResource
         /// <returns> Returns a <see cref="Ignition" /> object. </returns>
         public static Ignition GetIgnition(this ArmClient armClient, ResourceIdentifier id)
         {
-            Ignition.ValidateResourceId(id);
-            return new Ignition(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                Ignition.ValidateResourceId(id);
+                return new Ignition(armClient, id);
+            }
+            );
         }
         #endregion
 
@@ -44,8 +52,12 @@ namespace SingletonResource
         /// <returns> Returns a <see cref="SingletonResource" /> object. </returns>
         public static SingletonResource GetSingletonResource(this ArmClient armClient, ResourceIdentifier id)
         {
-            SingletonResource.ValidateResourceId(id);
-            return new SingletonResource(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                SingletonResource.ValidateResourceId(id);
+                return new SingletonResource(armClient, id);
+            }
+            );
         }
         #endregion
 
@@ -56,8 +68,12 @@ namespace SingletonResource
         /// <returns> Returns a <see cref="ParentResource" /> object. </returns>
         public static ParentResource GetParentResource(this ArmClient armClient, ResourceIdentifier id)
         {
-            ParentResource.ValidateResourceId(id);
-            return new ParentResource(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                ParentResource.ValidateResourceId(id);
+                return new ParentResource(armClient, id);
+            }
+            );
         }
         #endregion
     }

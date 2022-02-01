@@ -11,7 +11,7 @@ using Azure.ResourceManager.Core;
 
 namespace MgmtCollectionParent
 {
-    /// <summary> An internal class to add extension methods to. </summary>
+    /// <summary> A class to add extension methods to ResourceGroup. </summary>
     internal partial class ResourceGroupExtensionClient : ArmResource
     {
         /// <summary> Initializes a new instance of the <see cref="ResourceGroupExtensionClient"/> class for mocking. </summary>
@@ -30,6 +30,13 @@ namespace MgmtCollectionParent
         {
             ArmClient.TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
+        }
+
+        /// <summary> Gets a collection of OrderResources in the OrderResource. </summary>
+        /// <returns> An object representing collection of OrderResources and their operations over a OrderResource. </returns>
+        public virtual OrderResourceCollection GetOrderResources()
+        {
+            return new OrderResourceCollection(ArmClient, Id);
         }
     }
 }

@@ -17,7 +17,7 @@ using Azure.ResourceManager.Core;
 
 namespace MgmtCollectionParent
 {
-    /// <summary> An internal class to add extension methods to. </summary>
+    /// <summary> A class to add extension methods to Subscription. </summary>
     internal partial class SubscriptionExtensionClient : ArmResource
     {
         private ClientDiagnostics _orderResourceClientDiagnostics;

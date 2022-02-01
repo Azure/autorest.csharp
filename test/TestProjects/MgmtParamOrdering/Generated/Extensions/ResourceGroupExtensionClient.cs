@@ -11,7 +11,7 @@ using Azure.ResourceManager.Core;
 
 namespace MgmtParamOrdering
 {
-    /// <summary> An internal class to add extension methods to. </summary>
+    /// <summary> A class to add extension methods to ResourceGroup. </summary>
     internal partial class ResourceGroupExtensionClient : ArmResource
     {
         /// <summary> Initializes a new instance of the <see cref="ResourceGroupExtensionClient"/> class for mocking. </summary>
@@ -30,6 +30,34 @@ namespace MgmtParamOrdering
         {
             ArmClient.TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
+        }
+
+        /// <summary> Gets a collection of AvailabilitySets in the AvailabilitySet. </summary>
+        /// <returns> An object representing collection of AvailabilitySets and their operations over a AvailabilitySet. </returns>
+        public virtual AvailabilitySetCollection GetAvailabilitySets()
+        {
+            return new AvailabilitySetCollection(ArmClient, Id);
+        }
+
+        /// <summary> Gets a collection of DedicatedHostGroups in the DedicatedHostGroup. </summary>
+        /// <returns> An object representing collection of DedicatedHostGroups and their operations over a DedicatedHostGroup. </returns>
+        public virtual DedicatedHostGroupCollection GetDedicatedHostGroups()
+        {
+            return new DedicatedHostGroupCollection(ArmClient, Id);
+        }
+
+        /// <summary> Gets a collection of Workspaces in the Workspace. </summary>
+        /// <returns> An object representing collection of Workspaces and their operations over a Workspace. </returns>
+        public virtual WorkspaceCollection GetWorkspaces()
+        {
+            return new WorkspaceCollection(ArmClient, Id);
+        }
+
+        /// <summary> Gets a collection of VirtualMachineScaleSets in the VirtualMachineScaleSet. </summary>
+        /// <returns> An object representing collection of VirtualMachineScaleSets and their operations over a VirtualMachineScaleSet. </returns>
+        public virtual VirtualMachineScaleSetCollection GetVirtualMachineScaleSets()
+        {
+            return new VirtualMachineScaleSetCollection(ArmClient, Id);
         }
     }
 }

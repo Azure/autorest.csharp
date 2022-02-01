@@ -11,7 +11,7 @@ using Azure.ResourceManager.Core;
 
 namespace MgmtExpandResourceTypes
 {
-    /// <summary> An internal class to add extension methods to. </summary>
+    /// <summary> A class to add extension methods to ResourceGroup. </summary>
     internal partial class ResourceGroupExtensionClient : ArmResource
     {
         /// <summary> Initializes a new instance of the <see cref="ResourceGroupExtensionClient"/> class for mocking. </summary>
@@ -30,6 +30,13 @@ namespace MgmtExpandResourceTypes
         {
             ArmClient.TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
+        }
+
+        /// <summary> Gets a collection of Zones in the Zone. </summary>
+        /// <returns> An object representing collection of Zones and their operations over a Zone. </returns>
+        public virtual ZoneCollection GetZones()
+        {
+            return new ZoneCollection(ArmClient, Id);
         }
     }
 }

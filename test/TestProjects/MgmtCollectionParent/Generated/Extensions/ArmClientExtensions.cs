@@ -20,8 +20,12 @@ namespace MgmtCollectionParent
         /// <returns> Returns a <see cref="OrderResource" /> object. </returns>
         public static OrderResource GetOrderResource(this ArmClient armClient, ResourceIdentifier id)
         {
-            OrderResource.ValidateResourceId(id);
-            return new OrderResource(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                OrderResource.ValidateResourceId(id);
+                return new OrderResource(armClient, id);
+            }
+            );
         }
         #endregion
     }

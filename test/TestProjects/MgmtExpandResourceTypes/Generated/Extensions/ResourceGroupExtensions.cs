@@ -12,16 +12,6 @@ namespace MgmtExpandResourceTypes
     /// <summary> A class to add extension methods to ResourceGroup. </summary>
     public static partial class ResourceGroupExtensions
     {
-        #region Zone
-        /// <summary> Gets an object representing a ZoneCollection along with the instance operations that can be performed on it. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="ZoneCollection" /> object. </returns>
-        public static ZoneCollection GetZones(this ResourceGroup resourceGroup)
-        {
-            return new ZoneCollection(resourceGroup);
-        }
-        #endregion
-
         private static ResourceGroupExtensionClient GetExtensionClient(ResourceGroup resourceGroup)
         {
             return resourceGroup.GetCachedClient((armClient) =>
@@ -29,6 +19,14 @@ namespace MgmtExpandResourceTypes
                 return new ResourceGroupExtensionClient(armClient, resourceGroup.Id);
             }
             );
+        }
+
+        /// <summary> Gets a collection of Zones in the Zone. </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <returns> An object representing collection of Zones and their operations over a Zone. </returns>
+        public static ZoneCollection GetZones(this ResourceGroup resourceGroup)
+        {
+            return GetExtensionClient(resourceGroup).GetZones();
         }
     }
 }

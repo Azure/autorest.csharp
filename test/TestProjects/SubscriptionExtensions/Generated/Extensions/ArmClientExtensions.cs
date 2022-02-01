@@ -20,8 +20,12 @@ namespace SubscriptionExtensions
         /// <returns> Returns a <see cref="Toaster" /> object. </returns>
         public static Toaster GetToaster(this ArmClient armClient, ResourceIdentifier id)
         {
-            Toaster.ValidateResourceId(id);
-            return new Toaster(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                Toaster.ValidateResourceId(id);
+                return new Toaster(armClient, id);
+            }
+            );
         }
         #endregion
 
@@ -32,8 +36,12 @@ namespace SubscriptionExtensions
         /// <returns> Returns a <see cref="Oven" /> object. </returns>
         public static Oven GetOven(this ArmClient armClient, ResourceIdentifier id)
         {
-            Oven.ValidateResourceId(id);
-            return new Oven(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                Oven.ValidateResourceId(id);
+                return new Oven(armClient, id);
+            }
+            );
         }
         #endregion
     }

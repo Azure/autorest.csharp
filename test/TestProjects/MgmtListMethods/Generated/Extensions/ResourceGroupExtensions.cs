@@ -12,66 +12,6 @@ namespace MgmtListMethods
     /// <summary> A class to add extension methods to ResourceGroup. </summary>
     public static partial class ResourceGroupExtensions
     {
-        #region ResGrpParentWithAncestorWithNonResChWithLoc
-        /// <summary> Gets an object representing a ResGrpParentWithAncestorWithNonResChWithLocCollection along with the instance operations that can be performed on it. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="ResGrpParentWithAncestorWithNonResChWithLocCollection" /> object. </returns>
-        public static ResGrpParentWithAncestorWithNonResChWithLocCollection GetResGrpParentWithAncestorWithNonResChWithLocs(this ResourceGroup resourceGroup)
-        {
-            return new ResGrpParentWithAncestorWithNonResChWithLocCollection(resourceGroup);
-        }
-        #endregion
-
-        #region ResGrpParentWithAncestorWithNonResCh
-        /// <summary> Gets an object representing a ResGrpParentWithAncestorWithNonResChCollection along with the instance operations that can be performed on it. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="ResGrpParentWithAncestorWithNonResChCollection" /> object. </returns>
-        public static ResGrpParentWithAncestorWithNonResChCollection GetResGrpParentWithAncestorWithNonResChes(this ResourceGroup resourceGroup)
-        {
-            return new ResGrpParentWithAncestorWithNonResChCollection(resourceGroup);
-        }
-        #endregion
-
-        #region ResGrpParentWithAncestorWithLoc
-        /// <summary> Gets an object representing a ResGrpParentWithAncestorWithLocCollection along with the instance operations that can be performed on it. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="ResGrpParentWithAncestorWithLocCollection" /> object. </returns>
-        public static ResGrpParentWithAncestorWithLocCollection GetResGrpParentWithAncestorWithLocs(this ResourceGroup resourceGroup)
-        {
-            return new ResGrpParentWithAncestorWithLocCollection(resourceGroup);
-        }
-        #endregion
-
-        #region ResGrpParentWithAncestor
-        /// <summary> Gets an object representing a ResGrpParentWithAncestorCollection along with the instance operations that can be performed on it. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="ResGrpParentWithAncestorCollection" /> object. </returns>
-        public static ResGrpParentWithAncestorCollection GetResGrpParentWithAncestors(this ResourceGroup resourceGroup)
-        {
-            return new ResGrpParentWithAncestorCollection(resourceGroup);
-        }
-        #endregion
-
-        #region ResGrpParentWithNonResCh
-        /// <summary> Gets an object representing a ResGrpParentWithNonResChCollection along with the instance operations that can be performed on it. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="ResGrpParentWithNonResChCollection" /> object. </returns>
-        public static ResGrpParentWithNonResChCollection GetResGrpParentWithNonResChes(this ResourceGroup resourceGroup)
-        {
-            return new ResGrpParentWithNonResChCollection(resourceGroup);
-        }
-        #endregion
-
-        #region ResGrpParent
-        /// <summary> Gets an object representing a ResGrpParentCollection along with the instance operations that can be performed on it. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="ResGrpParentCollection" /> object. </returns>
-        public static ResGrpParentCollection GetResGrpParents(this ResourceGroup resourceGroup)
-        {
-            return new ResGrpParentCollection(resourceGroup);
-        }
-        #endregion
-
         private static ResourceGroupExtensionClient GetExtensionClient(ResourceGroup resourceGroup)
         {
             return resourceGroup.GetCachedClient((armClient) =>
@@ -79,6 +19,54 @@ namespace MgmtListMethods
                 return new ResourceGroupExtensionClient(armClient, resourceGroup.Id);
             }
             );
+        }
+
+        /// <summary> Gets a collection of ResGrpParentWithAncestorWithNonResChWithLocs in the ResGrpParentWithAncestorWithNonResChWithLoc. </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <returns> An object representing collection of ResGrpParentWithAncestorWithNonResChWithLocs and their operations over a ResGrpParentWithAncestorWithNonResChWithLoc. </returns>
+        public static ResGrpParentWithAncestorWithNonResChWithLocCollection GetResGrpParentWithAncestorWithNonResChWithLocs(this ResourceGroup resourceGroup)
+        {
+            return GetExtensionClient(resourceGroup).GetResGrpParentWithAncestorWithNonResChWithLocs();
+        }
+
+        /// <summary> Gets a collection of ResGrpParentWithAncestorWithNonResChes in the ResGrpParentWithAncestorWithNonResCh. </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <returns> An object representing collection of ResGrpParentWithAncestorWithNonResChes and their operations over a ResGrpParentWithAncestorWithNonResCh. </returns>
+        public static ResGrpParentWithAncestorWithNonResChCollection GetResGrpParentWithAncestorWithNonResChes(this ResourceGroup resourceGroup)
+        {
+            return GetExtensionClient(resourceGroup).GetResGrpParentWithAncestorWithNonResChes();
+        }
+
+        /// <summary> Gets a collection of ResGrpParentWithAncestorWithLocs in the ResGrpParentWithAncestorWithLoc. </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <returns> An object representing collection of ResGrpParentWithAncestorWithLocs and their operations over a ResGrpParentWithAncestorWithLoc. </returns>
+        public static ResGrpParentWithAncestorWithLocCollection GetResGrpParentWithAncestorWithLocs(this ResourceGroup resourceGroup)
+        {
+            return GetExtensionClient(resourceGroup).GetResGrpParentWithAncestorWithLocs();
+        }
+
+        /// <summary> Gets a collection of ResGrpParentWithAncestors in the ResGrpParentWithAncestor. </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <returns> An object representing collection of ResGrpParentWithAncestors and their operations over a ResGrpParentWithAncestor. </returns>
+        public static ResGrpParentWithAncestorCollection GetResGrpParentWithAncestors(this ResourceGroup resourceGroup)
+        {
+            return GetExtensionClient(resourceGroup).GetResGrpParentWithAncestors();
+        }
+
+        /// <summary> Gets a collection of ResGrpParentWithNonResChes in the ResGrpParentWithNonResCh. </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <returns> An object representing collection of ResGrpParentWithNonResChes and their operations over a ResGrpParentWithNonResCh. </returns>
+        public static ResGrpParentWithNonResChCollection GetResGrpParentWithNonResChes(this ResourceGroup resourceGroup)
+        {
+            return GetExtensionClient(resourceGroup).GetResGrpParentWithNonResChes();
+        }
+
+        /// <summary> Gets a collection of ResGrpParents in the ResGrpParent. </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <returns> An object representing collection of ResGrpParents and their operations over a ResGrpParent. </returns>
+        public static ResGrpParentCollection GetResGrpParents(this ResourceGroup resourceGroup)
+        {
+            return GetExtensionClient(resourceGroup).GetResGrpParents();
         }
     }
 }

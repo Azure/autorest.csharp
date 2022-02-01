@@ -20,8 +20,12 @@ namespace MgmtKeyvault
         /// <returns> Returns a <see cref="Vault" /> object. </returns>
         public static Vault GetVault(this ArmClient armClient, ResourceIdentifier id)
         {
-            Vault.ValidateResourceId(id);
-            return new Vault(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                Vault.ValidateResourceId(id);
+                return new Vault(armClient, id);
+            }
+            );
         }
         #endregion
 
@@ -32,8 +36,12 @@ namespace MgmtKeyvault
         /// <returns> Returns a <see cref="DeletedVault" /> object. </returns>
         public static DeletedVault GetDeletedVault(this ArmClient armClient, ResourceIdentifier id)
         {
-            DeletedVault.ValidateResourceId(id);
-            return new DeletedVault(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                DeletedVault.ValidateResourceId(id);
+                return new DeletedVault(armClient, id);
+            }
+            );
         }
         #endregion
 
@@ -44,8 +52,12 @@ namespace MgmtKeyvault
         /// <returns> Returns a <see cref="PrivateEndpointConnection" /> object. </returns>
         public static PrivateEndpointConnection GetPrivateEndpointConnection(this ArmClient armClient, ResourceIdentifier id)
         {
-            PrivateEndpointConnection.ValidateResourceId(id);
-            return new PrivateEndpointConnection(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                PrivateEndpointConnection.ValidateResourceId(id);
+                return new PrivateEndpointConnection(armClient, id);
+            }
+            );
         }
         #endregion
 
@@ -56,8 +68,12 @@ namespace MgmtKeyvault
         /// <returns> Returns a <see cref="ManagedHsm" /> object. </returns>
         public static ManagedHsm GetManagedHsm(this ArmClient armClient, ResourceIdentifier id)
         {
-            ManagedHsm.ValidateResourceId(id);
-            return new ManagedHsm(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                ManagedHsm.ValidateResourceId(id);
+                return new ManagedHsm(armClient, id);
+            }
+            );
         }
         #endregion
 
@@ -68,8 +84,12 @@ namespace MgmtKeyvault
         /// <returns> Returns a <see cref="DeletedManagedHsm" /> object. </returns>
         public static DeletedManagedHsm GetDeletedManagedHsm(this ArmClient armClient, ResourceIdentifier id)
         {
-            DeletedManagedHsm.ValidateResourceId(id);
-            return new DeletedManagedHsm(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                DeletedManagedHsm.ValidateResourceId(id);
+                return new DeletedManagedHsm(armClient, id);
+            }
+            );
         }
         #endregion
 
@@ -80,8 +100,12 @@ namespace MgmtKeyvault
         /// <returns> Returns a <see cref="MhsmPrivateEndpointConnection" /> object. </returns>
         public static MhsmPrivateEndpointConnection GetMhsmPrivateEndpointConnection(this ArmClient armClient, ResourceIdentifier id)
         {
-            MhsmPrivateEndpointConnection.ValidateResourceId(id);
-            return new MhsmPrivateEndpointConnection(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                MhsmPrivateEndpointConnection.ValidateResourceId(id);
+                return new MhsmPrivateEndpointConnection(armClient, id);
+            }
+            );
         }
         #endregion
     }

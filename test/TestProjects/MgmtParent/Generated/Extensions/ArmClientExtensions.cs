@@ -20,8 +20,12 @@ namespace MgmtParent
         /// <returns> Returns a <see cref="AvailabilitySet" /> object. </returns>
         public static AvailabilitySet GetAvailabilitySet(this ArmClient armClient, ResourceIdentifier id)
         {
-            AvailabilitySet.ValidateResourceId(id);
-            return new AvailabilitySet(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                AvailabilitySet.ValidateResourceId(id);
+                return new AvailabilitySet(armClient, id);
+            }
+            );
         }
         #endregion
 
@@ -32,8 +36,12 @@ namespace MgmtParent
         /// <returns> Returns a <see cref="DedicatedHostGroup" /> object. </returns>
         public static DedicatedHostGroup GetDedicatedHostGroup(this ArmClient armClient, ResourceIdentifier id)
         {
-            DedicatedHostGroup.ValidateResourceId(id);
-            return new DedicatedHostGroup(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                DedicatedHostGroup.ValidateResourceId(id);
+                return new DedicatedHostGroup(armClient, id);
+            }
+            );
         }
         #endregion
 
@@ -44,8 +52,12 @@ namespace MgmtParent
         /// <returns> Returns a <see cref="DedicatedHost" /> object. </returns>
         public static DedicatedHost GetDedicatedHost(this ArmClient armClient, ResourceIdentifier id)
         {
-            DedicatedHost.ValidateResourceId(id);
-            return new DedicatedHost(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                DedicatedHost.ValidateResourceId(id);
+                return new DedicatedHost(armClient, id);
+            }
+            );
         }
         #endregion
 
@@ -56,8 +68,12 @@ namespace MgmtParent
         /// <returns> Returns a <see cref="VirtualMachineExtensionImage" /> object. </returns>
         public static VirtualMachineExtensionImage GetVirtualMachineExtensionImage(this ArmClient armClient, ResourceIdentifier id)
         {
-            VirtualMachineExtensionImage.ValidateResourceId(id);
-            return new VirtualMachineExtensionImage(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                VirtualMachineExtensionImage.ValidateResourceId(id);
+                return new VirtualMachineExtensionImage(armClient, id);
+            }
+            );
         }
         #endregion
     }

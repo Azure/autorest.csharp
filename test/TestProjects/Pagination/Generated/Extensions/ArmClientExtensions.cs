@@ -20,8 +20,12 @@ namespace Pagination
         /// <returns> Returns a <see cref="PageSizeIntegerModel" /> object. </returns>
         public static PageSizeIntegerModel GetPageSizeIntegerModel(this ArmClient armClient, ResourceIdentifier id)
         {
-            PageSizeIntegerModel.ValidateResourceId(id);
-            return new PageSizeIntegerModel(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                PageSizeIntegerModel.ValidateResourceId(id);
+                return new PageSizeIntegerModel(armClient, id);
+            }
+            );
         }
         #endregion
 
@@ -32,8 +36,12 @@ namespace Pagination
         /// <returns> Returns a <see cref="PageSizeInt64Model" /> object. </returns>
         public static PageSizeInt64Model GetPageSizeInt64Model(this ArmClient armClient, ResourceIdentifier id)
         {
-            PageSizeInt64Model.ValidateResourceId(id);
-            return new PageSizeInt64Model(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                PageSizeInt64Model.ValidateResourceId(id);
+                return new PageSizeInt64Model(armClient, id);
+            }
+            );
         }
         #endregion
 
@@ -44,8 +52,12 @@ namespace Pagination
         /// <returns> Returns a <see cref="PageSizeInt32Model" /> object. </returns>
         public static PageSizeInt32Model GetPageSizeInt32Model(this ArmClient armClient, ResourceIdentifier id)
         {
-            PageSizeInt32Model.ValidateResourceId(id);
-            return new PageSizeInt32Model(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                PageSizeInt32Model.ValidateResourceId(id);
+                return new PageSizeInt32Model(armClient, id);
+            }
+            );
         }
         #endregion
 
@@ -56,8 +68,12 @@ namespace Pagination
         /// <returns> Returns a <see cref="PageSizeNumericModel" /> object. </returns>
         public static PageSizeNumericModel GetPageSizeNumericModel(this ArmClient armClient, ResourceIdentifier id)
         {
-            PageSizeNumericModel.ValidateResourceId(id);
-            return new PageSizeNumericModel(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                PageSizeNumericModel.ValidateResourceId(id);
+                return new PageSizeNumericModel(armClient, id);
+            }
+            );
         }
         #endregion
 
@@ -68,8 +84,12 @@ namespace Pagination
         /// <returns> Returns a <see cref="PageSizeFloatModel" /> object. </returns>
         public static PageSizeFloatModel GetPageSizeFloatModel(this ArmClient armClient, ResourceIdentifier id)
         {
-            PageSizeFloatModel.ValidateResourceId(id);
-            return new PageSizeFloatModel(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                PageSizeFloatModel.ValidateResourceId(id);
+                return new PageSizeFloatModel(armClient, id);
+            }
+            );
         }
         #endregion
 
@@ -80,8 +100,12 @@ namespace Pagination
         /// <returns> Returns a <see cref="PageSizeDoubleModel" /> object. </returns>
         public static PageSizeDoubleModel GetPageSizeDoubleModel(this ArmClient armClient, ResourceIdentifier id)
         {
-            PageSizeDoubleModel.ValidateResourceId(id);
-            return new PageSizeDoubleModel(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                PageSizeDoubleModel.ValidateResourceId(id);
+                return new PageSizeDoubleModel(armClient, id);
+            }
+            );
         }
         #endregion
 
@@ -92,8 +116,12 @@ namespace Pagination
         /// <returns> Returns a <see cref="PageSizeDecimalModel" /> object. </returns>
         public static PageSizeDecimalModel GetPageSizeDecimalModel(this ArmClient armClient, ResourceIdentifier id)
         {
-            PageSizeDecimalModel.ValidateResourceId(id);
-            return new PageSizeDecimalModel(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                PageSizeDecimalModel.ValidateResourceId(id);
+                return new PageSizeDecimalModel(armClient, id);
+            }
+            );
         }
         #endregion
 
@@ -104,8 +132,12 @@ namespace Pagination
         /// <returns> Returns a <see cref="PageSizeStringModel" /> object. </returns>
         public static PageSizeStringModel GetPageSizeStringModel(this ArmClient armClient, ResourceIdentifier id)
         {
-            PageSizeStringModel.ValidateResourceId(id);
-            return new PageSizeStringModel(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                PageSizeStringModel.ValidateResourceId(id);
+                return new PageSizeStringModel(armClient, id);
+            }
+            );
         }
         #endregion
     }

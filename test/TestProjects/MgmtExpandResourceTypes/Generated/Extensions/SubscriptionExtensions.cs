@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -28,10 +29,11 @@ namespace MgmtExpandResourceTypes
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Network/dnszones
         /// ContextualPath: /subscriptions/{subscriptionId}
         /// OperationId: Zones_List
+        /// <summary> Lists the DNS zones in all resource groups in a subscription. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="top"> The maximum number of DNS zones to return. If not specified, returns up to 100 zones. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="Zone" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<Zone> GetZonesByDnszoneAsync(this Subscription subscription, int? top = null, CancellationToken cancellationToken = default)
         {
             return GetExtensionClient(subscription).GetZonesByDnszoneAsync(top, cancellationToken);
@@ -40,10 +42,11 @@ namespace MgmtExpandResourceTypes
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Network/dnszones
         /// ContextualPath: /subscriptions/{subscriptionId}
         /// OperationId: Zones_List
+        /// <summary> Lists the DNS zones in all resource groups in a subscription. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="top"> The maximum number of DNS zones to return. If not specified, returns up to 100 zones. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="Zone" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<Zone> GetZonesByDnszone(this Subscription subscription, int? top = null, CancellationToken cancellationToken = default)
         {
             return GetExtensionClient(subscription).GetZonesByDnszone(top, cancellationToken);
@@ -52,24 +55,36 @@ namespace MgmtExpandResourceTypes
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Network/getDnsResourceReference
         /// ContextualPath: /subscriptions/{subscriptionId}
         /// OperationId: DnsResourceReference_GetByTargetResources
+        /// <summary> Returns the DNS records specified by the referencing targetResourceIds. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="parameters"> Properties for dns resource reference request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="System.ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public static async Task<Response<DnsResourceReferenceResult>> GetByTargetResourcesDnsResourceReferenceAsync(this Subscription subscription, DnsResourceReferenceRequest parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        public async static Task<Response<DnsResourceReferenceResult>> GetByTargetResourcesDnsResourceReferenceAsync(this Subscription subscription, DnsResourceReferenceRequest parameters, CancellationToken cancellationToken = default)
         {
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
             return await GetExtensionClient(subscription).GetByTargetResourcesDnsResourceReferenceAsync(parameters, cancellationToken).ConfigureAwait(false);
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Network/getDnsResourceReference
         /// ContextualPath: /subscriptions/{subscriptionId}
         /// OperationId: DnsResourceReference_GetByTargetResources
+        /// <summary> Returns the DNS records specified by the referencing targetResourceIds. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="parameters"> Properties for dns resource reference request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="System.ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public static Response<DnsResourceReferenceResult> GetByTargetResourcesDnsResourceReference(this Subscription subscription, DnsResourceReferenceRequest parameters, CancellationToken cancellationToken = default)
         {
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
             return GetExtensionClient(subscription).GetByTargetResourcesDnsResourceReference(parameters, cancellationToken);
         }
     }

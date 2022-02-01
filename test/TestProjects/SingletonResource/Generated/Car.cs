@@ -83,6 +83,13 @@ namespace SingletonResource
                 throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ResourceType), nameof(id));
         }
 
+        /// <summary> Gets an object representing a Ignition along with the instance operations that can be performed on it in the Car. </summary>
+        /// <returns> Returns a <see cref="Ignition" /> object. </returns>
+        public virtual Ignition GetIgnition()
+        {
+            return new Ignition(ArmClient, new ResourceIdentifier(Id.ToString() + "/ignitions/default"));
+        }
+
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cars/{carName}
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cars/{carName}
         /// OperationId: Cars_Get
@@ -162,15 +169,5 @@ namespace SingletonResource
                 throw;
             }
         }
-
-        #region Ignition
-
-        /// <summary> Gets an object representing a Ignition along with the instance operations that can be performed on it in the Car. </summary>
-        /// <returns> Returns a <see cref="Ignition" /> object. </returns>
-        public virtual Ignition GetIgnition()
-        {
-            return new Ignition(ArmClient, new ResourceIdentifier(Id.ToString() + "/ignitions/default"));
-        }
-        #endregion
     }
 }

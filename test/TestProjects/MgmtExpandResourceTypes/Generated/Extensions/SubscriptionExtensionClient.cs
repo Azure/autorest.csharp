@@ -18,7 +18,7 @@ using MgmtExpandResourceTypes.Models;
 
 namespace MgmtExpandResourceTypes
 {
-    /// <summary> An internal class to add extension methods to. </summary>
+    /// <summary> A class to add extension methods to Subscription. </summary>
     internal partial class SubscriptionExtensionClient : ArmResource
     {
         private ClientDiagnostics _zoneClientDiagnostics;
@@ -139,14 +139,8 @@ namespace MgmtExpandResourceTypes
         /// <summary> Returns the DNS records specified by the referencing targetResourceIds. </summary>
         /// <param name="parameters"> Properties for dns resource reference request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public async virtual Task<Response<DnsResourceReferenceResult>> GetByTargetResourcesDnsResourceReferenceAsync(DnsResourceReferenceRequest parameters, CancellationToken cancellationToken = default)
         {
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
             using var scope = DnsResourceReferenceClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetByTargetResourcesDnsResourceReference");
             scope.Start();
             try
@@ -167,14 +161,8 @@ namespace MgmtExpandResourceTypes
         /// <summary> Returns the DNS records specified by the referencing targetResourceIds. </summary>
         /// <param name="parameters"> Properties for dns resource reference request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public virtual Response<DnsResourceReferenceResult> GetByTargetResourcesDnsResourceReference(DnsResourceReferenceRequest parameters, CancellationToken cancellationToken = default)
         {
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
             using var scope = DnsResourceReferenceClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetByTargetResourcesDnsResourceReference");
             scope.Start();
             try

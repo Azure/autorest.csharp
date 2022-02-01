@@ -20,8 +20,12 @@ namespace Azure.ResourceManager.Sample
         /// <returns> Returns a <see cref="AvailabilitySet" /> object. </returns>
         public static AvailabilitySet GetAvailabilitySet(this ArmClient armClient, ResourceIdentifier id)
         {
-            AvailabilitySet.ValidateResourceId(id);
-            return new AvailabilitySet(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                AvailabilitySet.ValidateResourceId(id);
+                return new AvailabilitySet(armClient, id);
+            }
+            );
         }
         #endregion
 
@@ -32,8 +36,12 @@ namespace Azure.ResourceManager.Sample
         /// <returns> Returns a <see cref="ProximityPlacementGroup" /> object. </returns>
         public static ProximityPlacementGroup GetProximityPlacementGroup(this ArmClient armClient, ResourceIdentifier id)
         {
-            ProximityPlacementGroup.ValidateResourceId(id);
-            return new ProximityPlacementGroup(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                ProximityPlacementGroup.ValidateResourceId(id);
+                return new ProximityPlacementGroup(armClient, id);
+            }
+            );
         }
         #endregion
 
@@ -44,8 +52,12 @@ namespace Azure.ResourceManager.Sample
         /// <returns> Returns a <see cref="DedicatedHostGroup" /> object. </returns>
         public static DedicatedHostGroup GetDedicatedHostGroup(this ArmClient armClient, ResourceIdentifier id)
         {
-            DedicatedHostGroup.ValidateResourceId(id);
-            return new DedicatedHostGroup(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                DedicatedHostGroup.ValidateResourceId(id);
+                return new DedicatedHostGroup(armClient, id);
+            }
+            );
         }
         #endregion
 
@@ -56,8 +68,12 @@ namespace Azure.ResourceManager.Sample
         /// <returns> Returns a <see cref="DedicatedHost" /> object. </returns>
         public static DedicatedHost GetDedicatedHost(this ArmClient armClient, ResourceIdentifier id)
         {
-            DedicatedHost.ValidateResourceId(id);
-            return new DedicatedHost(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                DedicatedHost.ValidateResourceId(id);
+                return new DedicatedHost(armClient, id);
+            }
+            );
         }
         #endregion
 
@@ -68,8 +84,12 @@ namespace Azure.ResourceManager.Sample
         /// <returns> Returns a <see cref="SshPublicKey" /> object. </returns>
         public static SshPublicKey GetSshPublicKey(this ArmClient armClient, ResourceIdentifier id)
         {
-            SshPublicKey.ValidateResourceId(id);
-            return new SshPublicKey(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                SshPublicKey.ValidateResourceId(id);
+                return new SshPublicKey(armClient, id);
+            }
+            );
         }
         #endregion
 
@@ -80,8 +100,12 @@ namespace Azure.ResourceManager.Sample
         /// <returns> Returns a <see cref="VirtualMachineExtensionImage" /> object. </returns>
         public static VirtualMachineExtensionImage GetVirtualMachineExtensionImage(this ArmClient armClient, ResourceIdentifier id)
         {
-            VirtualMachineExtensionImage.ValidateResourceId(id);
-            return new VirtualMachineExtensionImage(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                VirtualMachineExtensionImage.ValidateResourceId(id);
+                return new VirtualMachineExtensionImage(armClient, id);
+            }
+            );
         }
         #endregion
 
@@ -92,8 +116,12 @@ namespace Azure.ResourceManager.Sample
         /// <returns> Returns a <see cref="VirtualMachineExtension" /> object. </returns>
         public static VirtualMachineExtension GetVirtualMachineExtension(this ArmClient armClient, ResourceIdentifier id)
         {
-            VirtualMachineExtension.ValidateResourceId(id);
-            return new VirtualMachineExtension(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                VirtualMachineExtension.ValidateResourceId(id);
+                return new VirtualMachineExtension(armClient, id);
+            }
+            );
         }
         #endregion
 
@@ -104,8 +132,12 @@ namespace Azure.ResourceManager.Sample
         /// <returns> Returns a <see cref="VirtualMachineScaleSetVirtualMachineExtension" /> object. </returns>
         public static VirtualMachineScaleSetVirtualMachineExtension GetVirtualMachineScaleSetVirtualMachineExtension(this ArmClient armClient, ResourceIdentifier id)
         {
-            VirtualMachineScaleSetVirtualMachineExtension.ValidateResourceId(id);
-            return new VirtualMachineScaleSetVirtualMachineExtension(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                VirtualMachineScaleSetVirtualMachineExtension.ValidateResourceId(id);
+                return new VirtualMachineScaleSetVirtualMachineExtension(armClient, id);
+            }
+            );
         }
         #endregion
 
@@ -116,8 +148,12 @@ namespace Azure.ResourceManager.Sample
         /// <returns> Returns a <see cref="VirtualMachine" /> object. </returns>
         public static VirtualMachine GetVirtualMachine(this ArmClient armClient, ResourceIdentifier id)
         {
-            VirtualMachine.ValidateResourceId(id);
-            return new VirtualMachine(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                VirtualMachine.ValidateResourceId(id);
+                return new VirtualMachine(armClient, id);
+            }
+            );
         }
         #endregion
 
@@ -128,8 +164,12 @@ namespace Azure.ResourceManager.Sample
         /// <returns> Returns a <see cref="Image" /> object. </returns>
         public static Image GetImage(this ArmClient armClient, ResourceIdentifier id)
         {
-            Image.ValidateResourceId(id);
-            return new Image(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                Image.ValidateResourceId(id);
+                return new Image(armClient, id);
+            }
+            );
         }
         #endregion
 
@@ -140,8 +180,12 @@ namespace Azure.ResourceManager.Sample
         /// <returns> Returns a <see cref="VirtualMachineScaleSet" /> object. </returns>
         public static VirtualMachineScaleSet GetVirtualMachineScaleSet(this ArmClient armClient, ResourceIdentifier id)
         {
-            VirtualMachineScaleSet.ValidateResourceId(id);
-            return new VirtualMachineScaleSet(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                VirtualMachineScaleSet.ValidateResourceId(id);
+                return new VirtualMachineScaleSet(armClient, id);
+            }
+            );
         }
         #endregion
 
@@ -152,8 +196,12 @@ namespace Azure.ResourceManager.Sample
         /// <returns> Returns a <see cref="VirtualMachineScaleSetExtension" /> object. </returns>
         public static VirtualMachineScaleSetExtension GetVirtualMachineScaleSetExtension(this ArmClient armClient, ResourceIdentifier id)
         {
-            VirtualMachineScaleSetExtension.ValidateResourceId(id);
-            return new VirtualMachineScaleSetExtension(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                VirtualMachineScaleSetExtension.ValidateResourceId(id);
+                return new VirtualMachineScaleSetExtension(armClient, id);
+            }
+            );
         }
         #endregion
 
@@ -164,8 +212,12 @@ namespace Azure.ResourceManager.Sample
         /// <returns> Returns a <see cref="VirtualMachineScaleSetRollingUpgrade" /> object. </returns>
         public static VirtualMachineScaleSetRollingUpgrade GetVirtualMachineScaleSetRollingUpgrade(this ArmClient armClient, ResourceIdentifier id)
         {
-            VirtualMachineScaleSetRollingUpgrade.ValidateResourceId(id);
-            return new VirtualMachineScaleSetRollingUpgrade(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                VirtualMachineScaleSetRollingUpgrade.ValidateResourceId(id);
+                return new VirtualMachineScaleSetRollingUpgrade(armClient, id);
+            }
+            );
         }
         #endregion
 
@@ -176,8 +228,12 @@ namespace Azure.ResourceManager.Sample
         /// <returns> Returns a <see cref="VirtualMachineScaleSetVM" /> object. </returns>
         public static VirtualMachineScaleSetVM GetVirtualMachineScaleSetVM(this ArmClient armClient, ResourceIdentifier id)
         {
-            VirtualMachineScaleSetVM.ValidateResourceId(id);
-            return new VirtualMachineScaleSetVM(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                VirtualMachineScaleSetVM.ValidateResourceId(id);
+                return new VirtualMachineScaleSetVM(armClient, id);
+            }
+            );
         }
         #endregion
     }

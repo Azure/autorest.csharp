@@ -12,16 +12,6 @@ namespace MgmtScopeResource
     /// <summary> A class to add extension methods to ResourceGroup. </summary>
     public static partial class ResourceGroupExtensions
     {
-        #region DeploymentExtended
-        /// <summary> Gets an object representing a DeploymentExtendedCollection along with the instance operations that can be performed on it. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="DeploymentExtendedCollection" /> object. </returns>
-        public static DeploymentExtendedCollection GetDeploymentExtendeds(this ResourceGroup resourceGroup)
-        {
-            return new DeploymentExtendedCollection(resourceGroup);
-        }
-        #endregion
-
         private static ResourceGroupExtensionClient GetExtensionClient(ResourceGroup resourceGroup)
         {
             return resourceGroup.GetCachedClient((armClient) =>
@@ -29,6 +19,14 @@ namespace MgmtScopeResource
                 return new ResourceGroupExtensionClient(armClient, resourceGroup.Id);
             }
             );
+        }
+
+        /// <summary> Gets a collection of DeploymentExtendeds in the DeploymentExtended. </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <returns> An object representing collection of DeploymentExtendeds and their operations over a DeploymentExtended. </returns>
+        public static DeploymentExtendedCollection GetDeploymentExtendeds(this ResourceGroup resourceGroup)
+        {
+            return GetExtensionClient(resourceGroup).GetDeploymentExtendeds();
         }
     }
 }

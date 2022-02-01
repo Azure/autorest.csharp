@@ -11,7 +11,7 @@ using Azure.ResourceManager.Core;
 
 namespace MgmtMultipleParentResource
 {
-    /// <summary> An internal class to add extension methods to. </summary>
+    /// <summary> A class to add extension methods to ResourceGroup. </summary>
     internal partial class ResourceGroupExtensionClient : ArmResource
     {
         /// <summary> Initializes a new instance of the <see cref="ResourceGroupExtensionClient"/> class for mocking. </summary>
@@ -30,6 +30,20 @@ namespace MgmtMultipleParentResource
         {
             ArmClient.TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
+        }
+
+        /// <summary> Gets a collection of AnotherParents in the AnotherParent. </summary>
+        /// <returns> An object representing collection of AnotherParents and their operations over a AnotherParent. </returns>
+        public virtual AnotherParentCollection GetAnotherParents()
+        {
+            return new AnotherParentCollection(ArmClient, Id);
+        }
+
+        /// <summary> Gets a collection of TheParents in the TheParent. </summary>
+        /// <returns> An object representing collection of TheParents and their operations over a TheParent. </returns>
+        public virtual TheParentCollection GetTheParents()
+        {
+            return new TheParentCollection(ArmClient, Id);
         }
     }
 }

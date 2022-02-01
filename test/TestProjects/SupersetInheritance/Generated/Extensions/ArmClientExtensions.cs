@@ -20,8 +20,12 @@ namespace SupersetInheritance
         /// <returns> Returns a <see cref="SupersetModel1" /> object. </returns>
         public static SupersetModel1 GetSupersetModel1(this ArmClient armClient, ResourceIdentifier id)
         {
-            SupersetModel1.ValidateResourceId(id);
-            return new SupersetModel1(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                SupersetModel1.ValidateResourceId(id);
+                return new SupersetModel1(armClient, id);
+            }
+            );
         }
         #endregion
 
@@ -32,8 +36,12 @@ namespace SupersetInheritance
         /// <returns> Returns a <see cref="SupersetModel4" /> object. </returns>
         public static SupersetModel4 GetSupersetModel4(this ArmClient armClient, ResourceIdentifier id)
         {
-            SupersetModel4.ValidateResourceId(id);
-            return new SupersetModel4(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                SupersetModel4.ValidateResourceId(id);
+                return new SupersetModel4(armClient, id);
+            }
+            );
         }
         #endregion
 
@@ -44,8 +52,12 @@ namespace SupersetInheritance
         /// <returns> Returns a <see cref="SupersetModel6" /> object. </returns>
         public static SupersetModel6 GetSupersetModel6(this ArmClient armClient, ResourceIdentifier id)
         {
-            SupersetModel6.ValidateResourceId(id);
-            return new SupersetModel6(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                SupersetModel6.ValidateResourceId(id);
+                return new SupersetModel6(armClient, id);
+            }
+            );
         }
         #endregion
 
@@ -56,8 +68,12 @@ namespace SupersetInheritance
         /// <returns> Returns a <see cref="SupersetModel7" /> object. </returns>
         public static SupersetModel7 GetSupersetModel7(this ArmClient armClient, ResourceIdentifier id)
         {
-            SupersetModel7.ValidateResourceId(id);
-            return new SupersetModel7(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                SupersetModel7.ValidateResourceId(id);
+                return new SupersetModel7(armClient, id);
+            }
+            );
         }
         #endregion
     }

@@ -20,8 +20,12 @@ namespace MgmtExtensionCommonRestOperation
         /// <returns> Returns a <see cref="TypeOne" /> object. </returns>
         public static TypeOne GetTypeOne(this ArmClient armClient, ResourceIdentifier id)
         {
-            TypeOne.ValidateResourceId(id);
-            return new TypeOne(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                TypeOne.ValidateResourceId(id);
+                return new TypeOne(armClient, id);
+            }
+            );
         }
         #endregion
 
@@ -32,8 +36,12 @@ namespace MgmtExtensionCommonRestOperation
         /// <returns> Returns a <see cref="TypeTwo" /> object. </returns>
         public static TypeTwo GetTypeTwo(this ArmClient armClient, ResourceIdentifier id)
         {
-            TypeTwo.ValidateResourceId(id);
-            return new TypeTwo(armClient, id);
+            return armClient.GetClient(() =>
+            {
+                TypeTwo.ValidateResourceId(id);
+                return new TypeTwo(armClient, id);
+            }
+            );
         }
         #endregion
     }

@@ -12,16 +12,6 @@ namespace TenantOnly
     /// <summary> A class to add extension methods to Tenant. </summary>
     public static partial class TenantExtensions
     {
-        #region BillingAccount
-        /// <summary> Gets an object representing a BillingAccountCollection along with the instance operations that can be performed on it. </summary>
-        /// <param name="tenant"> The <see cref="Tenant" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="BillingAccountCollection" /> object. </returns>
-        public static BillingAccountCollection GetBillingAccounts(this Tenant tenant)
-        {
-            return new BillingAccountCollection(tenant);
-        }
-        #endregion
-
         private static TenantExtensionClient GetExtensionClient(Tenant tenant)
         {
             return tenant.GetCachedClient((armClient) =>
@@ -29,6 +19,14 @@ namespace TenantOnly
                 return new TenantExtensionClient(armClient, tenant.Id);
             }
             );
+        }
+
+        /// <summary> Gets a collection of BillingAccounts in the BillingAccount. </summary>
+        /// <param name="tenant"> The <see cref="Tenant" /> instance the method will execute against. </param>
+        /// <returns> An object representing collection of BillingAccounts and their operations over a BillingAccount. </returns>
+        public static BillingAccountCollection GetBillingAccounts(this Tenant tenant)
+        {
+            return GetExtensionClient(tenant).GetBillingAccounts();
         }
     }
 }

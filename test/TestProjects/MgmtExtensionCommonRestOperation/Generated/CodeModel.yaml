@@ -657,7 +657,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpRequest 
                 path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeOne/typeOnes
-                method: post
+                method: get
                 uri: '{$host}'
         signatureParameters:
           - *ref_26
@@ -739,7 +739,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpRequest 
                 path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeTwo/typeTwos
-                method: post
+                method: get
                 uri: '{$host}'
         signatureParameters:
           - *ref_27

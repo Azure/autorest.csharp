@@ -11,7 +11,7 @@ using Azure.ResourceManager.Core;
 
 namespace XmlDeserialization
 {
-    /// <summary> An internal class to add extension methods to. </summary>
+    /// <summary> A class to add extension methods to ResourceGroup. </summary>
     internal partial class ResourceGroupExtensionClient : ArmResource
     {
         /// <summary> Initializes a new instance of the <see cref="ResourceGroupExtensionClient"/> class for mocking. </summary>
@@ -30,6 +30,13 @@ namespace XmlDeserialization
         {
             ArmClient.TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
+        }
+
+        /// <summary> Gets a collection of XmlInstances in the XmlInstance. </summary>
+        /// <returns> An object representing collection of XmlInstances and their operations over a XmlInstance. </returns>
+        public virtual XmlInstanceCollection GetXmlInstances()
+        {
+            return new XmlInstanceCollection(ArmClient, Id);
         }
     }
 }

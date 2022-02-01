@@ -11,7 +11,7 @@ using Azure.ResourceManager.Core;
 
 namespace MgmtSubscriptionNameParameter
 {
-    /// <summary> An internal class to add extension methods to. </summary>
+    /// <summary> A class to add extension methods to ResourceGroup. </summary>
     internal partial class ResourceGroupExtensionClient : ArmResource
     {
         /// <summary> Initializes a new instance of the <see cref="ResourceGroupExtensionClient"/> class for mocking. </summary>
@@ -30,6 +30,13 @@ namespace MgmtSubscriptionNameParameter
         {
             ArmClient.TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
+        }
+
+        /// <summary> Gets a collection of SBSubscriptions in the SBSubscription. </summary>
+        /// <returns> An object representing collection of SBSubscriptions and their operations over a SBSubscription. </returns>
+        public virtual SBSubscriptionCollection GetSBSubscriptions()
+        {
+            return new SBSubscriptionCollection(ArmClient, Id);
         }
     }
 }

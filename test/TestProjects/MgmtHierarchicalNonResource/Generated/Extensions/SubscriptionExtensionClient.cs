@@ -11,7 +11,7 @@ using Azure.ResourceManager.Core;
 
 namespace MgmtHierarchicalNonResource
 {
-    /// <summary> An internal class to add extension methods to. </summary>
+    /// <summary> A class to add extension methods to Subscription. </summary>
     internal partial class SubscriptionExtensionClient : ArmResource
     {
         /// <summary> Initializes a new instance of the <see cref="SubscriptionExtensionClient"/> class for mocking. </summary>
@@ -30,6 +30,14 @@ namespace MgmtHierarchicalNonResource
         {
             ArmClient.TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
+        }
+
+        /// <summary> Gets a collection of SharedGalleries in the SharedGallery. </summary>
+        /// <param name="location"> Resource location. </param>
+        /// <returns> An object representing collection of SharedGalleries and their operations over a SharedGallery. </returns>
+        public virtual SharedGalleryCollection GetSharedGalleries(string location)
+        {
+            return new SharedGalleryCollection(ArmClient, Id, location);
         }
     }
 }

@@ -11,7 +11,7 @@ using Azure.ResourceManager.Core;
 
 namespace MgmtListMethods
 {
-    /// <summary> An internal class to add extension methods to. </summary>
+    /// <summary> A class to add extension methods to ManagementGroup. </summary>
     internal partial class ManagementGroupExtensionClient : ArmResource
     {
         /// <summary> Initializes a new instance of the <see cref="ManagementGroupExtensionClient"/> class for mocking. </summary>
@@ -30,6 +30,34 @@ namespace MgmtListMethods
         {
             ArmClient.TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
+        }
+
+        /// <summary> Gets a collection of MgmtGrpParentWithNonResChWithLocs in the MgmtGrpParentWithNonResChWithLoc. </summary>
+        /// <returns> An object representing collection of MgmtGrpParentWithNonResChWithLocs and their operations over a MgmtGrpParentWithNonResChWithLoc. </returns>
+        public virtual MgmtGrpParentWithNonResChWithLocCollection GetMgmtGrpParentWithNonResChWithLocs()
+        {
+            return new MgmtGrpParentWithNonResChWithLocCollection(ArmClient, Id);
+        }
+
+        /// <summary> Gets a collection of MgmtGrpParentWithNonResChes in the MgmtGrpParentWithNonResCh. </summary>
+        /// <returns> An object representing collection of MgmtGrpParentWithNonResChes and their operations over a MgmtGrpParentWithNonResCh. </returns>
+        public virtual MgmtGrpParentWithNonResChCollection GetMgmtGrpParentWithNonResChes()
+        {
+            return new MgmtGrpParentWithNonResChCollection(ArmClient, Id);
+        }
+
+        /// <summary> Gets a collection of MgmtGrpParentWithLocs in the MgmtGrpParentWithLoc. </summary>
+        /// <returns> An object representing collection of MgmtGrpParentWithLocs and their operations over a MgmtGrpParentWithLoc. </returns>
+        public virtual MgmtGrpParentWithLocCollection GetMgmtGrpParentWithLocs()
+        {
+            return new MgmtGrpParentWithLocCollection(ArmClient, Id);
+        }
+
+        /// <summary> Gets a collection of MgmtGroupParents in the MgmtGroupParent. </summary>
+        /// <returns> An object representing collection of MgmtGroupParents and their operations over a MgmtGroupParent. </returns>
+        public virtual MgmtGroupParentCollection GetMgmtGroupParents()
+        {
+            return new MgmtGroupParentCollection(ArmClient, Id);
         }
     }
 }

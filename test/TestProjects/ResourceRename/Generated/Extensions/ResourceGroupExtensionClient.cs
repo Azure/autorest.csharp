@@ -11,7 +11,7 @@ using Azure.ResourceManager.Core;
 
 namespace ResourceRename
 {
-    /// <summary> An internal class to add extension methods to. </summary>
+    /// <summary> A class to add extension methods to ResourceGroup. </summary>
     internal partial class ResourceGroupExtensionClient : ArmResource
     {
         /// <summary> Initializes a new instance of the <see cref="ResourceGroupExtensionClient"/> class for mocking. </summary>
@@ -30,6 +30,13 @@ namespace ResourceRename
         {
             ArmClient.TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
+        }
+
+        /// <summary> Gets a collection of SshPublicKeyInfos in the SshPublicKeyInfo. </summary>
+        /// <returns> An object representing collection of SshPublicKeyInfos and their operations over a SshPublicKeyInfo. </returns>
+        public virtual SshPublicKeyInfoCollection GetSshPublicKeyInfos()
+        {
+            return new SshPublicKeyInfoCollection(ArmClient, Id);
         }
     }
 }
