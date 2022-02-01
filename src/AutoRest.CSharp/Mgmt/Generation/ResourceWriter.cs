@@ -199,7 +199,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.Line($"{originalResponse}.Value.Id = {CreateResourceIdentifierExpression(This, operation.RequestPath, parameterMappings, $"{originalResponse}.Value")};");
             }
 
-            _writer.Line($"return {typeof(Response)}.FromValue(new {This.Type}({ArmClientReference}, {originalResponse}.Value), {originalResponse}.GetRawResponse());");
+            _writer.Line($"return {typeof(Response)}.FromValue(new {operation.ReturnType.UnWrapResponse()}({ArmClientReference}, {originalResponse}.Value), {originalResponse}.GetRawResponse());");
         }
     }
 }

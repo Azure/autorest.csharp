@@ -34,10 +34,11 @@ namespace AutoRest.CSharp.Mgmt.Output
             if (GetAllOperation is null || GetAllOperation.MethodParameters.Any(p => p.IsRequired))
                 return base.EnsureGetInterfaces();
 
+            var getRestOperation = GetAllOperation.OperationMappings.Values.First();
             return new CSharpType[]
             {
-                new CSharpType(typeof(IEnumerable<>), Resource.Type),
-                new CSharpType(typeof(IAsyncEnumerable<>), Resource.Type)
+                new CSharpType(typeof(IEnumerable<>), getRestOperation.MgmtReturnType!),
+                new CSharpType(typeof(IAsyncEnumerable<>), getRestOperation.MgmtReturnType!)
             };
         }
         public Resource Resource { get; }

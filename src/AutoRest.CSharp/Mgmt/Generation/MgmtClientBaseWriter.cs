@@ -668,7 +668,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 WriteArguments(_writer, parameterMappings);
                 _writer.Line($"cancellationToken){GetConfigureAwait(async)};");
 
-                if (operation.Resource != null && operation.Resource.Type.Equals(operation.ReturnType.UnWrapResponse()))
+                Resource? resource = Context.Library.ArmResources.FirstOrDefault(resource => resource.Type.Equals(operation.ReturnType.UnWrapResponse()));
+                resource ??= operation.Resource != null && operation.Resource.Type.Equals(operation.ReturnType.UnWrapResponse()) ? operation.Resource : null;
+                if (resource is not null)
                 {
                     if (operation.ThrowIfNull)
                     {
@@ -676,12 +678,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         _writer.Line($"throw {GetAwait(async)} {GetDiagnosticName(operation)}.{CreateMethodName("CreateRequestFailedException", async)}({response}.GetRawResponse()){GetConfigureAwait(async)};");
                     }
 
-                    if (operation.Resource.ResourceData.ShouldSetResourceIdentifier)
+                    if (resource.ResourceData.ShouldSetResourceIdentifier)
                     {
-                        _writer.Line($"{response}.Value.Id = {CreateResourceIdentifierExpression(operation.Resource, operation.RequestPath, parameterMappings, $"{response}.Value")};");
+                        _writer.Line($"{response}.Value.Id = {CreateResourceIdentifierExpression(resource, operation.RequestPath, parameterMappings, $"{response}.Value")};");
                     }
 
-                    _writer.Line($"return {typeof(Response)}.FromValue(new {operation.Resource.Type}({ArmClientReference}, {response}.Value), {response}.GetRawResponse());");
+                    _writer.Line($"return {typeof(Response)}.FromValue(new {resource.Type}({ArmClientReference}, {response}.Value), {response}.GetRawResponse());");
                 }
                 else
                 {
