@@ -186,7 +186,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 var method = type.GetMethod(methodName);
                 Assert.NotNull(method, $"{type.Name} does not implement the {methodName} method.");
 
-                Assert.AreEqual(3, method.GetParameters().Length);
+                Assert.AreEqual(3, method.GetParameters().Length, $"{type.Name}.{method.Name} had more parameters than expected. Only expected 3 but got {{{string.Join(',', method.GetParameters().Select(p => p.Name))}}}");
                 var param1 = TypeAsserts.HasParameter(method, "key");
                 Assert.AreEqual(typeof(string), param1.ParameterType);
                 var param2 = TypeAsserts.HasParameter(method, "value");

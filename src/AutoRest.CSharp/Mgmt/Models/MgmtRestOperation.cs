@@ -93,7 +93,7 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         public bool IsLongRunningOperation => _isLongRunning.HasValue ? _isLongRunning.Value : Operation.IsLongRunning;
 
-        public Parameter[] PrependParameters { get; } = new Parameter[] { };
+        public Parameter[] OverrideParameters { get; } = new Parameter[] { };
 
         public MgmtRestOperation(RestClientMethod method, MgmtRestClient restClient, RequestPath requestPath, RequestPath contextualPath, string methodName, CSharpType? returnType, BuildContext<MgmtOutputLibrary> context, bool? isLongRunning = null, bool throwIfNull = false)
         {
@@ -109,7 +109,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             _mgmtReturnType = returnType;
         }
 
-        public MgmtRestOperation(MgmtRestOperation other, string nameOverride, CSharpType? overrideReturnType, string overrideDescription, BuildContext<MgmtOutputLibrary> context, params Parameter[] prependParameters)
+        public MgmtRestOperation(MgmtRestOperation other, string nameOverride, CSharpType? overrideReturnType, string overrideDescription, BuildContext<MgmtOutputLibrary> context, params Parameter[] overrideParameters)
         {
             //copy values from other method
             _context = context;
@@ -125,7 +125,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             Name = nameOverride;
             _mgmtReturnType = overrideReturnType;
             _description = overrideDescription;
-            PrependParameters = prependParameters;
+            OverrideParameters = overrideParameters;
         }
 
 
