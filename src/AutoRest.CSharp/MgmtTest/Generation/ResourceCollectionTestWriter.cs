@@ -129,7 +129,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     }
                 case MgmtExtensions extension:
                     {
-                        _writer.Append($"var collection = GetArmClient().Get{extension.ArmCoreType}(new {typeof(Azure.Core.ResourceIdentifier)}({MgmtBaseTestWriter.FormatResourceId(realRequestPath):L}))");
+                        _writer.Append($"var collection = GetArmClient().Get{extension.ArmCoreType.Name}(new {typeof(Azure.Core.ResourceIdentifier)}({MgmtBaseTestWriter.FormatResourceId(realRequestPath):L}))");
                         break;
                     }
                 default:

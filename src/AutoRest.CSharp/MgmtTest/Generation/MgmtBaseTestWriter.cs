@@ -579,6 +579,9 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             var parameterValues = new List<KeyValuePair<string, FormattableString>>();
             foreach (var passThruParameter in methodParameters)
             {
+                if (passThruParameter.Name == MgmtClientOperation.WaitForCompletionParameter.Name ||
+                    passThruParameter.Name == MgmtClientBaseWriter.CancellationTokenParameter.Name)
+                    continue;
                 FormattableString? paramName = null;
                 foreach (ExampleParameter exampleParameter in exampleModel.AllParameter)
                 {

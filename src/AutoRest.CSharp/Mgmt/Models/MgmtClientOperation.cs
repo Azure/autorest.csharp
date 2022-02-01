@@ -29,7 +29,7 @@ namespace AutoRest.CSharp.Mgmt.Models
     {
         private const string IdVariableName = "Id";
         private readonly Parameter? _extensionParameter;
-        private static readonly Parameter WaitForCompletionParameter = new Parameter(
+        internal static readonly Parameter WaitForCompletionParameter = new Parameter(
             "waitForCompletion",
             "Waits for the completion of the long running operations.",
             typeof(bool),
