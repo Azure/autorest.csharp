@@ -12,6 +12,7 @@ using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
@@ -114,6 +115,13 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                         if (keySegment.IsReference)
                         {
                             parameterMappingStack.Push(new ContextualParameterMapping(string.Empty, keySegment, $"{idVariableName}{invocationSuffix}.ResourceType.GetLastType()", new[] { "System.Linq" }));
+                            appendParent = true;
+                        }
+                        else if (keySegment.IsExpandable)
+                        {
+                            //this is the case where we have expanded the reference into its enumerations
+                            var keyParam = keySegment.Type.Name.ToVariableName();
+                            parameterMappingStack.Push(new ContextualParameterMapping(keyParam, keyParam, keySegment.Type, $"\"{keySegment.ConstantValue}\"", Enumerable.Empty<string>()));
                             appendParent = true;
                         }
                         // add .Parent suffix
@@ -346,6 +354,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
             if (index == 0)
                 return string.Empty;
+
+            if (segments[index].IsExpandable)
+                return segments[index].Type.Name.ToVariableName();
 
             var keySegment = segments[index - 1];
             return keySegment.IsConstant ? keySegment.ConstantValue : string.Empty;

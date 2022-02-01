@@ -119,9 +119,12 @@ namespace AutoRest.CSharp.Mgmt.Models
         {
             var contextParams = Resource?.ResourceCollection?.ExtraContextualParameterMapping ?? Enumerable.Empty<ContextualParameterMapping>();
 
-            var contextualParameterMappings = OperationMappings.Keys.ToDictionary(
-                contextualPath => contextualPath,
-                contextualPath => contextualPath.BuildContextualParameters(_context, IdVariableName).Concat(contextParams));
+            var contextualParameterMappings = new Dictionary<RequestPath, IEnumerable<ContextualParameterMapping>>();
+            foreach (var contextualPath in OperationMappings.Keys)
+            {
+                var adjustedPath = Resource is not null ? contextualPath.ApplyHint(Resource.ResourceType) : contextualPath;
+                contextualParameterMappings.Add(contextualPath, adjustedPath.BuildContextualParameters(_context, IdVariableName).Concat(contextParams));
+            }
             return OperationMappings.ToDictionary(
                 pair => pair.Key,
                 pair => pair.Value.BuildParameterMapping(contextualParameterMappings[pair.Key]));
