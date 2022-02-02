@@ -308,29 +308,14 @@ namespace AutoRest.CSharp.Mgmt.Models
             if (!IsResourceDataType(originalType, out var data))
                 return originalType;
 
-            if (_context.Configuration.MgmtConfiguration.IsArmCore)
-            {
-                // we need to find the correct resource type that links with this resource data
-                var candidates = _context.Library.FindResources(data);
-
-                // return null when there is no match
-                if (!candidates.Any())
-                    return originalType;
-
-                // when we only find one result, just return it.
-                if (candidates.Count() == 1)
-                    return candidates.Single().Type;
-
-                // if there is more candidates than one, we are going to some more matching to see if we could determine one
-                var resourceType = RequestPath.GetResourceType(_context.Configuration.MgmtConfiguration);
-                var filteredResources = candidates.Where(r => r.ResourceType == resourceType);
-
-                if (filteredResources.Count() == 1)
-                    return filteredResources.Single().Type;
-            }
+            if (Resource is not null && Resource.ResourceData.Type.Equals(originalType))
+                return Resource.Type;
 
             var foundResource = _context.Library.ArmResources.FirstOrDefault(resource => resource.ResourceData.Type.Equals(originalType));
-            return foundResource?.Type ?? Resource?.Type ?? throw new InvalidOperationException($"Found a resource data return type but resource was null. {originalType?.Name}");
+            if (foundResource is not null)
+                return foundResource.Type;
+
+            throw new InvalidOperationException($"Found a resource data return type but resource was null for method {RestClient.Type.Name}.{Method.Name}: {originalType?.Name}");
         }
 
         private bool IsResourceDataType(CSharpType? type, [MaybeNullWhen(false)] out ResourceData data)
