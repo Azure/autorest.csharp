@@ -32,8 +32,6 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             _subFolder = subFolder;
         }
 
-        protected HashSet<string> ListExceptions = new HashSet<string>();
-
         protected virtual IEnumerable<Type> MyTypes()
         {
             foreach (var type in GetType().Assembly.GetTypes())
@@ -44,6 +42,60 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         }
 
         protected Type? GetType(string name) => MyTypes().FirstOrDefault(t => t.Name == name);
+
+        public void GetShouldMatchResource()
+        {
+            foreach (var resource in FindAllResources())
+            {
+                VerifyMethodReturnType(resource, resource, typeof(Response<>), "Get");
+                VerifyMethodReturnType(resource, resource, typeof(Response<>), "AddTag");
+                VerifyMethodReturnType(resource, resource, typeof(Response<>), "SetTag");
+                VerifyMethodReturnType(resource, resource, typeof(Response<>), "RemoveTag");
+                VerifyMethodReturnType(resource, resource, typeof(Response<>), "Update");
+            }
+
+            foreach (var collection in FindAllCollections())
+            {
+                var resource = GetResourceFromCollection(collection);
+                Assert.NotNull(resource);
+                VerifyMethodReturnType(collection, resource, typeof(Response<>), "Get");
+                VerifyMethodReturnType(collection, resource, typeof(Response<>), "GetIfExists");
+                VerifyMethodReturnType(collection, resource, typeof(Pageable<>), "GetAll");
+                VerifyMethodReturnType(collection, resource, typeof(Pageable<>), "CreateOrUpdate");
+            }
+        }
+
+        private void VerifyMethodReturnType(Type collection, Type resource, Type wrapper, string methodName)
+        {
+            var method = collection.GetMethod(methodName);
+            Assert.NotNull(method, $"Method {methodName} was not found on {collection.Name}");
+            Assert.AreEqual(wrapper.MakeGenericType(resource), method.ReturnType, $"Return type did not match for {collection.Name}.{methodName}");
+        }
+
+        private Type? GetResourceFromCollection(Type collection) => MyTypes().FirstOrDefault(t => t.Name == GetResourceNameFromCollectionName(collection.Name));
+        private string GetResourceNameFromCollectionName(string collectionName) => collectionName.Substring(0, collectionName.IndexOf("Collection"));
+
+        protected virtual HashSet<Type> ListExceptionCollections { get; } = new HashSet<Type>();
+        [Test]
+        public void IEnumerableShouldMatchResource()
+        {
+            foreach (var collection in FindAllCollections())
+            {
+                if (ListExceptionCollections.Contains(collection))
+                    continue;
+
+                var interfaces = collection.GetInterfaces();
+                Assert.AreEqual(3, interfaces.Length, $"For {collection.Name} expected IEnumerable<T>, IEnumerable, and IAsyncEnumerable<T>, found {string.Join(',', interfaces.Select(i => i.Name).ToArray())}");
+                foreach (var interFace in interfaces)
+                {
+                    if (!interFace.IsGenericType)
+                        continue;
+                    var genericArg = interFace.GetGenericArguments().FirstOrDefault();
+                    Assert.NotNull(genericArg, $"{interFace.Name} did not have a type argument for {collection.Name}");
+                    Assert.AreEqual(GetResourceNameFromCollectionName(collection.Name), genericArg.Name);
+                }
+            }
+        }
 
         [Test]
         public void ValidatePublicMethodsAreVirtual()

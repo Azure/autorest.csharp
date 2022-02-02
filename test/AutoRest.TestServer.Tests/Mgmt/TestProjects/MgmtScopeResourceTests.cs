@@ -1,12 +1,17 @@
 ﻿using System.Linq;
 using System.Reflection;
 using NUnit.Framework;
+using System.Collections.Generic;
+using MgmtScopeResource;
+using System;
 
 namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 {
     public class MgmtScopeResourceTests : TestProjectTests
     {
         public MgmtScopeResourceTests() : base("MgmtScopeResource") { }
+
+        protected override HashSet<Type> ListExceptionCollections { get; } = new HashSet<Type>() { typeof(ResourceLinkCollection) };
 
         [TestCase("ManagementGroupExtensions", "GetPolicyAssignments", false)]
         [TestCase("SubscriptionExtensions", "GetPolicyAssignments", false)]
