@@ -37,14 +37,6 @@ namespace AutoRest.CSharp.Mgmt.Output
             Description = context.Configuration.MgmtConfiguration.IsArmCore ? string.Empty : $"A class to add extension methods to {ResourceName}.";
             ContextualPath = contextualPath;
             ArmCoreNamespace = ArmCoreType.Namespace!;
-            string variableName = context.Configuration.MgmtConfiguration.IsArmCore ? "this" : armCoreType.Name.ToVariableName();
-            ExtensionParameter = new Parameter(
-                variableName,
-                $"The <see cref=\"{armCoreType}\" /> instance the method will execute against.",
-                armCoreType,
-                null,
-                false,
-                IsExtensionParameter: true);
         }
 
         protected override ConstructorSignature? EnsureMockingCtor()
@@ -54,7 +46,20 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public override string BranchIdVariableName => $"{ExtensionParameter.Name}.Id";
 
-        public Parameter ExtensionParameter { get; }
+        private Parameter? _extensionParameter;
+        public Parameter ExtensionParameter => _extensionParameter ??= EnsureExtensionParameter();
+        private Parameter EnsureExtensionParameter()
+        {
+            return new Parameter(
+                VariableName,
+                $"The <see cref=\"{ArmCoreType}\" /> instance the method will execute against.",
+                ArmCoreType,
+                null,
+                false,
+                IsExtensionParameter: true);
+        }
+
+        protected virtual string VariableName => Context.Configuration.MgmtConfiguration.IsArmCore ? "this" : ArmCoreType.Name.ToVariableName();
 
         public override CSharpType? BaseType => null;
 

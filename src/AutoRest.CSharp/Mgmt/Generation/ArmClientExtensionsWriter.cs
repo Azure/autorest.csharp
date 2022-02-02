@@ -53,7 +53,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     using (_writer.Scope($"return {This.ExtensionParameter.Name}.GetClient<{resource.Type}>(() =>"))
                     {
-                        WriteGetter(resource, "armClient");
+                        WriteGetter(resource, "client");
                     }
                     _writer.Line($");");
                 }

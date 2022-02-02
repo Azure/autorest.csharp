@@ -19,5 +19,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         }
 
         public override bool IsEmpty => !_context.Library.ArmResources.Any();
+
+        protected override string VariableName => Context.Configuration.MgmtConfiguration.IsArmCore ? "this" : "client";
     }
 }
