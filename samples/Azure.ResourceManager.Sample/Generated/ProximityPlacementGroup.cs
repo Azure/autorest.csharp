@@ -244,10 +244,9 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Add a tag to the current resource. </summary>
         /// <param name="key"> The key for the tag. </param>
         /// <param name="value"> The value for the tag. </param>
-        /// <param name="includeColocationStatus"> includeColocationStatus=true enables fetching the colocation status of all the resources in the proximity placement group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> or <paramref name="value"/> is null. </exception>
-        public async virtual Task<Response<ProximityPlacementGroup>> AddTagAsync(string key, string value, string includeColocationStatus = null, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<ProximityPlacementGroup>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
@@ -281,10 +280,9 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Add a tag to the current resource. </summary>
         /// <param name="key"> The key for the tag. </param>
         /// <param name="value"> The value for the tag. </param>
-        /// <param name="includeColocationStatus"> includeColocationStatus=true enables fetching the colocation status of all the resources in the proximity placement group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> or <paramref name="value"/> is null. </exception>
-        public virtual Response<ProximityPlacementGroup> AddTag(string key, string value, string includeColocationStatus = null, CancellationToken cancellationToken = default)
+        public virtual Response<ProximityPlacementGroup> AddTag(string key, string value, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
@@ -317,10 +315,9 @@ namespace Azure.ResourceManager.Sample
         /// OperationId: ProximityPlacementGroups_Get
         /// <summary> Replace the tags on the resource with the given set. </summary>
         /// <param name="tags"> The set of tags to use as replacement. </param>
-        /// <param name="includeColocationStatus"> includeColocationStatus=true enables fetching the colocation status of all the resources in the proximity placement group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
-        public async virtual Task<Response<ProximityPlacementGroup>> SetTagsAsync(IDictionary<string, string> tags, string includeColocationStatus = null, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<ProximityPlacementGroup>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
             if (tags == null)
             {
@@ -350,10 +347,9 @@ namespace Azure.ResourceManager.Sample
         /// OperationId: ProximityPlacementGroups_Get
         /// <summary> Replace the tags on the resource with the given set. </summary>
         /// <param name="tags"> The set of tags to use as replacement. </param>
-        /// <param name="includeColocationStatus"> includeColocationStatus=true enables fetching the colocation status of all the resources in the proximity placement group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
-        public virtual Response<ProximityPlacementGroup> SetTags(IDictionary<string, string> tags, string includeColocationStatus = null, CancellationToken cancellationToken = default)
+        public virtual Response<ProximityPlacementGroup> SetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
             if (tags == null)
             {
@@ -383,10 +379,9 @@ namespace Azure.ResourceManager.Sample
         /// OperationId: ProximityPlacementGroups_Get
         /// <summary> Removes a tag by key from the resource. </summary>
         /// <param name="key"> The key for the tag. </param>
-        /// <param name="includeColocationStatus"> includeColocationStatus=true enables fetching the colocation status of all the resources in the proximity placement group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
-        public async virtual Task<Response<ProximityPlacementGroup>> RemoveTagAsync(string key, string includeColocationStatus = null, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<ProximityPlacementGroup>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
@@ -415,10 +410,9 @@ namespace Azure.ResourceManager.Sample
         /// OperationId: ProximityPlacementGroups_Get
         /// <summary> Removes a tag by key from the resource. </summary>
         /// <param name="key"> The key for the tag. </param>
-        /// <param name="includeColocationStatus"> includeColocationStatus=true enables fetching the colocation status of all the resources in the proximity placement group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
-        public virtual Response<ProximityPlacementGroup> RemoveTag(string key, string includeColocationStatus = null, CancellationToken cancellationToken = default)
+        public virtual Response<ProximityPlacementGroup> RemoveTag(string key, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {

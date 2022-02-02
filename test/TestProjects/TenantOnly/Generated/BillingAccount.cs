@@ -144,10 +144,9 @@ namespace TenantOnly
         /// <summary> Add a tag to the current resource. </summary>
         /// <param name="key"> The key for the tag. </param>
         /// <param name="value"> The value for the tag. </param>
-        /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> or <paramref name="value"/> is null. </exception>
-        public async virtual Task<Response<BillingAccount>> AddTagAsync(string key, string value, string expand = null, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<BillingAccount>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
@@ -181,10 +180,9 @@ namespace TenantOnly
         /// <summary> Add a tag to the current resource. </summary>
         /// <param name="key"> The key for the tag. </param>
         /// <param name="value"> The value for the tag. </param>
-        /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> or <paramref name="value"/> is null. </exception>
-        public virtual Response<BillingAccount> AddTag(string key, string value, string expand = null, CancellationToken cancellationToken = default)
+        public virtual Response<BillingAccount> AddTag(string key, string value, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
@@ -217,10 +215,9 @@ namespace TenantOnly
         /// OperationId: BillingAccounts_Get
         /// <summary> Replace the tags on the resource with the given set. </summary>
         /// <param name="tags"> The set of tags to use as replacement. </param>
-        /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
-        public async virtual Task<Response<BillingAccount>> SetTagsAsync(IDictionary<string, string> tags, string expand = null, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<BillingAccount>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
             if (tags == null)
             {
@@ -250,10 +247,9 @@ namespace TenantOnly
         /// OperationId: BillingAccounts_Get
         /// <summary> Replace the tags on the resource with the given set. </summary>
         /// <param name="tags"> The set of tags to use as replacement. </param>
-        /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
-        public virtual Response<BillingAccount> SetTags(IDictionary<string, string> tags, string expand = null, CancellationToken cancellationToken = default)
+        public virtual Response<BillingAccount> SetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
             if (tags == null)
             {
@@ -283,10 +279,9 @@ namespace TenantOnly
         /// OperationId: BillingAccounts_Get
         /// <summary> Removes a tag by key from the resource. </summary>
         /// <param name="key"> The key for the tag. </param>
-        /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
-        public async virtual Task<Response<BillingAccount>> RemoveTagAsync(string key, string expand = null, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<BillingAccount>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
@@ -315,10 +310,9 @@ namespace TenantOnly
         /// OperationId: BillingAccounts_Get
         /// <summary> Removes a tag by key from the resource. </summary>
         /// <param name="key"> The key for the tag. </param>
-        /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
-        public virtual Response<BillingAccount> RemoveTag(string key, string expand = null, CancellationToken cancellationToken = default)
+        public virtual Response<BillingAccount> RemoveTag(string key, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {

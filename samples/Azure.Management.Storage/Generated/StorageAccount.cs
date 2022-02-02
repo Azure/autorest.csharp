@@ -829,10 +829,9 @@ namespace Azure.Management.Storage
         /// <summary> Add a tag to the current resource. </summary>
         /// <param name="key"> The key for the tag. </param>
         /// <param name="value"> The value for the tag. </param>
-        /// <param name="expand"> May be used to expand the properties within account&apos;s properties. By default, data is not included when fetching properties. Currently we only support geoReplicationStats and blobRestoreStatus. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> or <paramref name="value"/> is null. </exception>
-        public async virtual Task<Response<StorageAccount>> AddTagAsync(string key, string value, StorageAccountExpand? expand = null, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<StorageAccount>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
@@ -866,10 +865,9 @@ namespace Azure.Management.Storage
         /// <summary> Add a tag to the current resource. </summary>
         /// <param name="key"> The key for the tag. </param>
         /// <param name="value"> The value for the tag. </param>
-        /// <param name="expand"> May be used to expand the properties within account&apos;s properties. By default, data is not included when fetching properties. Currently we only support geoReplicationStats and blobRestoreStatus. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> or <paramref name="value"/> is null. </exception>
-        public virtual Response<StorageAccount> AddTag(string key, string value, StorageAccountExpand? expand = null, CancellationToken cancellationToken = default)
+        public virtual Response<StorageAccount> AddTag(string key, string value, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
@@ -902,10 +900,9 @@ namespace Azure.Management.Storage
         /// OperationId: StorageAccounts_GetProperties
         /// <summary> Replace the tags on the resource with the given set. </summary>
         /// <param name="tags"> The set of tags to use as replacement. </param>
-        /// <param name="expand"> May be used to expand the properties within account&apos;s properties. By default, data is not included when fetching properties. Currently we only support geoReplicationStats and blobRestoreStatus. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
-        public async virtual Task<Response<StorageAccount>> SetTagsAsync(IDictionary<string, string> tags, StorageAccountExpand? expand = null, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<StorageAccount>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
             if (tags == null)
             {
@@ -935,10 +932,9 @@ namespace Azure.Management.Storage
         /// OperationId: StorageAccounts_GetProperties
         /// <summary> Replace the tags on the resource with the given set. </summary>
         /// <param name="tags"> The set of tags to use as replacement. </param>
-        /// <param name="expand"> May be used to expand the properties within account&apos;s properties. By default, data is not included when fetching properties. Currently we only support geoReplicationStats and blobRestoreStatus. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
-        public virtual Response<StorageAccount> SetTags(IDictionary<string, string> tags, StorageAccountExpand? expand = null, CancellationToken cancellationToken = default)
+        public virtual Response<StorageAccount> SetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
             if (tags == null)
             {
@@ -968,10 +964,9 @@ namespace Azure.Management.Storage
         /// OperationId: StorageAccounts_GetProperties
         /// <summary> Removes a tag by key from the resource. </summary>
         /// <param name="key"> The key for the tag. </param>
-        /// <param name="expand"> May be used to expand the properties within account&apos;s properties. By default, data is not included when fetching properties. Currently we only support geoReplicationStats and blobRestoreStatus. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
-        public async virtual Task<Response<StorageAccount>> RemoveTagAsync(string key, StorageAccountExpand? expand = null, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<StorageAccount>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
@@ -1000,10 +995,9 @@ namespace Azure.Management.Storage
         /// OperationId: StorageAccounts_GetProperties
         /// <summary> Removes a tag by key from the resource. </summary>
         /// <param name="key"> The key for the tag. </param>
-        /// <param name="expand"> May be used to expand the properties within account&apos;s properties. By default, data is not included when fetching properties. Currently we only support geoReplicationStats and blobRestoreStatus. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
-        public virtual Response<StorageAccount> RemoveTag(string key, StorageAccountExpand? expand = null, CancellationToken cancellationToken = default)
+        public virtual Response<StorageAccount> RemoveTag(string key, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {

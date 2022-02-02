@@ -259,10 +259,9 @@ namespace MgmtMultipleParentResource
         /// <summary> Add a tag to the current resource. </summary>
         /// <param name="key"> The key for the tag. </param>
         /// <param name="value"> The value for the tag. </param>
-        /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> or <paramref name="value"/> is null. </exception>
-        public async virtual Task<Response<SubParent>> AddTagAsync(string key, string value, string expand = null, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<SubParent>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
@@ -296,10 +295,9 @@ namespace MgmtMultipleParentResource
         /// <summary> Add a tag to the current resource. </summary>
         /// <param name="key"> The key for the tag. </param>
         /// <param name="value"> The value for the tag. </param>
-        /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> or <paramref name="value"/> is null. </exception>
-        public virtual Response<SubParent> AddTag(string key, string value, string expand = null, CancellationToken cancellationToken = default)
+        public virtual Response<SubParent> AddTag(string key, string value, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
@@ -332,10 +330,9 @@ namespace MgmtMultipleParentResource
         /// OperationId: SubParents_Get
         /// <summary> Replace the tags on the resource with the given set. </summary>
         /// <param name="tags"> The set of tags to use as replacement. </param>
-        /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
-        public async virtual Task<Response<SubParent>> SetTagsAsync(IDictionary<string, string> tags, string expand = null, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<SubParent>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
             if (tags == null)
             {
@@ -365,10 +362,9 @@ namespace MgmtMultipleParentResource
         /// OperationId: SubParents_Get
         /// <summary> Replace the tags on the resource with the given set. </summary>
         /// <param name="tags"> The set of tags to use as replacement. </param>
-        /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
-        public virtual Response<SubParent> SetTags(IDictionary<string, string> tags, string expand = null, CancellationToken cancellationToken = default)
+        public virtual Response<SubParent> SetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
             if (tags == null)
             {
@@ -398,10 +394,9 @@ namespace MgmtMultipleParentResource
         /// OperationId: SubParents_Get
         /// <summary> Removes a tag by key from the resource. </summary>
         /// <param name="key"> The key for the tag. </param>
-        /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
-        public async virtual Task<Response<SubParent>> RemoveTagAsync(string key, string expand = null, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<SubParent>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
@@ -430,10 +425,9 @@ namespace MgmtMultipleParentResource
         /// OperationId: SubParents_Get
         /// <summary> Removes a tag by key from the resource. </summary>
         /// <param name="key"> The key for the tag. </param>
-        /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
-        public virtual Response<SubParent> RemoveTag(string key, string expand = null, CancellationToken cancellationToken = default)
+        public virtual Response<SubParent> RemoveTag(string key, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
