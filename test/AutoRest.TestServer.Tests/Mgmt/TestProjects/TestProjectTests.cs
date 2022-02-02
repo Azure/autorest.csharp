@@ -92,13 +92,24 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             {
                 var responseType = typeof(Response<>).MakeGenericType(resource);
                 VerifyMethodReturnType(resource, responseType, "Get");
+                var resourceData = GetResourceDataByResource(resource);
+                if (typeof(TrackedResource).IsAssignableFrom(resourceData))
+                {
+                    VerifyMethodReturnType(resource, responseType, "AddTag");
+                    VerifyMethodReturnType(resource, responseType, "SetTags");
+                    VerifyMethodReturnType(resource, responseType, "RemoveTag");
+                }
                 var updateMethod = resource.GetMethod("Update");
                 if (updateMethod is not null)
                 {
-                    VerifyMethodReturnType(resource, responseType, "AddTag");
-                    VerifyMethodReturnType(resource, responseType, "SetTag");
-                    VerifyMethodReturnType(resource, responseType, "RemoveTag");
-                    VerifyMethodReturnType(resource, responseType, "Update");
+                    if (updateMethod.ReturnType.IsGenericType)
+                    {
+                        VerifyMethodReturnType(resource, responseType, "Update");
+                    }
+                    else
+                    {
+                        VerifyMethodReturnType(resource, typeof(Operation<>).MakeGenericType(resource), "Update", true);
+                    }
                 }
             }
 
@@ -111,8 +122,12 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 var lroType = typeof(Operation<>).MakeGenericType(resource);
                 VerifyMethodReturnType(collection, responseType, "Get");
                 VerifyMethodReturnType(collection, responseType, "GetIfExists");
-                VerifyMethodReturnType(collection, pagingType, "GetAll");
-                VerifyMethodReturnType(collection, lroType, "CreateOrUpdate", true);
+
+                if (!ListExceptionCollections.Contains(collection))
+                    VerifyMethodReturnType(collection, pagingType, collection.GetMethods().First(m => m.Name == "GetAll" && !m.GetParameters().Any(p => !p.IsOptional)));
+
+                if (collection.GetMethod("CreateOrUpdate") is not null)
+                    VerifyMethodReturnType(collection, lroType, "CreateOrUpdate", true);
             }
         }
 
@@ -120,13 +135,18 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         {
             var method = collection.GetMethod(methodName);
             Assert.NotNull(method, $"Method {methodName} was not found on {collection.Name}");
+            VerifyMethodReturnType(collection, expectedType, method, useIsAssignableFrom);
+        }
+
+        private static void VerifyMethodReturnType(Type collection, Type expectedType, MethodInfo method, bool useIsAssignableFrom = false)
+        {
             if (useIsAssignableFrom)
             {
-                Assert.IsTrue(expectedType.IsAssignableFrom(method.ReturnType), $"Return type did not match for {collection.Name}.{methodName}");
+                Assert.IsTrue(expectedType.IsAssignableFrom(method.ReturnType), $"Return type did not match for {collection.Name}.{method.Name}");
             }
             else
             {
-                Assert.AreEqual(expectedType, method.ReturnType, $"Return type did not match for {collection.Name}.{methodName}");
+                Assert.AreEqual(expectedType, method.ReturnType, $"Return type did not match for {collection.Name}.{method.Name}");
             }
         }
 

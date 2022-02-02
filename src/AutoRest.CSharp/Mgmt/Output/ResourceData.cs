@@ -1,12 +1,14 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Types;
+using Azure.ResourceManager.Models;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
@@ -28,6 +30,18 @@ namespace AutoRest.CSharp.Mgmt.Output
         protected string CreateDescription(string clientPrefix)
         {
             return $"A class representing the {clientPrefix} data model.";
+        }
+
+        private bool? _isTaggable;
+        public bool IsTaggable => _isTaggable ??= EnsureIsTaggable();
+        private bool EnsureIsTaggable()
+        {
+            foreach (var obj in EnumerateHierarchy())
+            {
+                if (obj.Type.Name == nameof(TrackedResource) && obj.Type.Namespace == typeof(TrackedResource).Namespace)
+                    return true;
+            }
+            return false;
         }
 
         private CSharpType? typeOfId;

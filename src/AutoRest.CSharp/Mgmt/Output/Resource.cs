@@ -269,14 +269,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public string? SingletonResourceIdSuffix { get; }
 
-        private bool? _isTaggable;
-        public bool IsTaggable => _isTaggable ??= EnsureIsTaggable();
-
-        private bool EnsureIsTaggable()
-        {
-            // TODO: use type.Name after upgrading resourcemanager version
-            return ResourceData.Inherits != null && (ResourceData.Inherits.Name == nameof(TrackedResource) || ResourceData.Inherits.Name == nameof(TrackedResourceExtended));
-        }
+        public bool IsTaggable => ResourceData.IsTaggable;
 
         /// <summary>
         /// Finds the corresponding <see cref="ResourceCollection"/> of this <see cref="Resource"/>

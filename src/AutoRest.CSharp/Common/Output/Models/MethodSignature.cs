@@ -7,11 +7,7 @@ using AutoRest.CSharp.Output.Models.Shared;
 
 namespace AutoRest.CSharp.Output.Models
 {
-    internal record MethodSignature(string Name, string? Description, string Modifiers, CSharpType? ReturnType, FormattableString? ReturnDescription, Parameter[] Parameters, bool IsPageable) : MethodSignatureBase(Name, Description, Modifiers, Parameters)
+    internal record MethodSignature(string Name, string? Description, string Modifiers, CSharpType? ReturnType, FormattableString? ReturnDescription, Parameter[] Parameters, bool IsPageable = false) : MethodSignatureBase(Name, Description, Modifiers, Parameters)
     {
-        public MethodSignature(string Name, string? Description, string Modifiers, CSharpType? ReturnType, FormattableString? ReturnDescription, Parameter[] Parameters)
-            :this(Name, Description, Modifiers, ReturnType, ReturnDescription, Parameters, false)
-        {
-        }
     }
 }
