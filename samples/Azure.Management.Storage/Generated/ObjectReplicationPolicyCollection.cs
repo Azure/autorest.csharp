@@ -33,9 +33,9 @@ namespace Azure.Management.Storage
         }
 
         /// <summary> Initializes a new instance of the <see cref="ObjectReplicationPolicyCollection"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
-        internal ObjectReplicationPolicyCollection(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        internal ObjectReplicationPolicyCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _objectReplicationPolicyClientDiagnostics = new ClientDiagnostics("Azure.Management.Storage", ObjectReplicationPolicy.ResourceType.Namespace, DiagnosticOptions);
             ArmClient.TryGetApiVersion(ObjectReplicationPolicy.ResourceType, out string objectReplicationPolicyApiVersion);

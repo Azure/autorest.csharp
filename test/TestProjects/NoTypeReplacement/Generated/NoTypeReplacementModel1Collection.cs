@@ -34,9 +34,9 @@ namespace NoTypeReplacement
         }
 
         /// <summary> Initializes a new instance of the <see cref="NoTypeReplacementModel1Collection"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
-        internal NoTypeReplacementModel1Collection(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        internal NoTypeReplacementModel1Collection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _noTypeReplacementModel1ClientDiagnostics = new ClientDiagnostics("NoTypeReplacement", NoTypeReplacementModel1.ResourceType.Namespace, DiagnosticOptions);
             ArmClient.TryGetApiVersion(NoTypeReplacementModel1.ResourceType, out string noTypeReplacementModel1ApiVersion);

@@ -34,9 +34,9 @@ namespace SubscriptionExtensions
         }
 
         /// <summary> Initializes a new instance of the <see cref="OvenCollection"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
-        internal OvenCollection(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        internal OvenCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _ovenClientDiagnostics = new ClientDiagnostics("SubscriptionExtensions", Oven.ResourceType.Namespace, DiagnosticOptions);
             ArmClient.TryGetApiVersion(Oven.ResourceType, out string ovenApiVersion);

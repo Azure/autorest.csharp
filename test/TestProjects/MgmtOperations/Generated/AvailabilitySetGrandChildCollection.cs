@@ -33,9 +33,9 @@ namespace MgmtOperations
         }
 
         /// <summary> Initializes a new instance of the <see cref="AvailabilitySetGrandChildCollection"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
-        internal AvailabilitySetGrandChildCollection(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        internal AvailabilitySetGrandChildCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _availabilitySetGrandChildavailabilitySetGrandChildClientDiagnostics = new ClientDiagnostics("MgmtOperations", AvailabilitySetGrandChild.ResourceType.Namespace, DiagnosticOptions);
             ArmClient.TryGetApiVersion(AvailabilitySetGrandChild.ResourceType, out string availabilitySetGrandChildavailabilitySetGrandChildApiVersion);

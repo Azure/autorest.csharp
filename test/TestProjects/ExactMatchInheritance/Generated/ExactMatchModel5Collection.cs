@@ -34,9 +34,9 @@ namespace ExactMatchInheritance
         }
 
         /// <summary> Initializes a new instance of the <see cref="ExactMatchModel5Collection"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
-        internal ExactMatchModel5Collection(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        internal ExactMatchModel5Collection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _exactMatchModel5ClientDiagnostics = new ClientDiagnostics("ExactMatchInheritance", ExactMatchModel5.ResourceType.Namespace, DiagnosticOptions);
             ArmClient.TryGetApiVersion(ExactMatchModel5.ResourceType, out string exactMatchModel5ApiVersion);

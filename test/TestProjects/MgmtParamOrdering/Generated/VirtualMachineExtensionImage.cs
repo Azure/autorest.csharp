@@ -38,18 +38,18 @@ namespace MgmtParamOrdering
         }
 
         /// <summary> Initializes a new instance of the <see cref = "VirtualMachineExtensionImage"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal VirtualMachineExtensionImage(ArmClient armClient, VirtualMachineExtensionImageData data) : this(armClient, data.Id)
+        internal VirtualMachineExtensionImage(ArmClient client, VirtualMachineExtensionImageData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
         }
 
         /// <summary> Initializes a new instance of the <see cref="VirtualMachineExtensionImage"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal VirtualMachineExtensionImage(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        internal VirtualMachineExtensionImage(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _virtualMachineExtensionImageClientDiagnostics = new ClientDiagnostics("MgmtParamOrdering", ResourceType.Namespace, DiagnosticOptions);
             ArmClient.TryGetApiVersion(ResourceType, out string virtualMachineExtensionImageApiVersion);

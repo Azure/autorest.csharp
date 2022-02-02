@@ -34,9 +34,9 @@ namespace MgmtExtensionCommonRestOperation
         }
 
         /// <summary> Initializes a new instance of the <see cref="TypeTwoCollection"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
-        internal TypeTwoCollection(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        internal TypeTwoCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _typeTwoCommonClientDiagnostics = new ClientDiagnostics("MgmtExtensionCommonRestOperation", TypeTwo.ResourceType.Namespace, DiagnosticOptions);
             ArmClient.TryGetApiVersion(TypeTwo.ResourceType, out string typeTwoCommonApiVersion);

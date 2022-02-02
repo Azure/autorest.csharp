@@ -39,18 +39,18 @@ namespace MgmtParamOrdering
         }
 
         /// <summary> Initializes a new instance of the <see cref = "Workspace"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal Workspace(ArmClient armClient, WorkspaceData data) : this(armClient, data.Id)
+        internal Workspace(ArmClient client, WorkspaceData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
         }
 
         /// <summary> Initializes a new instance of the <see cref="Workspace"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal Workspace(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        internal Workspace(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _workspaceClientDiagnostics = new ClientDiagnostics("MgmtParamOrdering", ResourceType.Namespace, DiagnosticOptions);
             ArmClient.TryGetApiVersion(ResourceType, out string workspaceApiVersion);

@@ -34,9 +34,9 @@ namespace Azure.ResourceManager.Sample
         }
 
         /// <summary> Initializes a new instance of the <see cref="VirtualMachineScaleSetCollection"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
-        internal VirtualMachineScaleSetCollection(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        internal VirtualMachineScaleSetCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _virtualMachineScaleSetClientDiagnostics = new ClientDiagnostics("Azure.ResourceManager.Sample", VirtualMachineScaleSet.ResourceType.Namespace, DiagnosticOptions);
             ArmClient.TryGetApiVersion(VirtualMachineScaleSet.ResourceType, out string virtualMachineScaleSetApiVersion);

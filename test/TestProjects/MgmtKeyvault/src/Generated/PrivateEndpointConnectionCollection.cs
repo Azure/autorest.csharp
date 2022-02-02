@@ -33,9 +33,9 @@ namespace MgmtKeyvault
         }
 
         /// <summary> Initializes a new instance of the <see cref="PrivateEndpointConnectionCollection"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
-        internal PrivateEndpointConnectionCollection(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        internal PrivateEndpointConnectionCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _privateEndpointConnectionClientDiagnostics = new ClientDiagnostics("MgmtKeyvault", PrivateEndpointConnection.ResourceType.Namespace, DiagnosticOptions);
             ArmClient.TryGetApiVersion(PrivateEndpointConnection.ResourceType, out string privateEndpointConnectionApiVersion);

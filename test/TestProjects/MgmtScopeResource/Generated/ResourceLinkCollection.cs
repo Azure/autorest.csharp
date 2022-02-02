@@ -33,11 +33,11 @@ namespace MgmtScopeResource
         }
 
         /// <summary> Initializes a new instance of the <see cref="ResourceLinkCollection"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         /// <param name="scope"> The fully qualified ID of the scope for getting the resource links. For example, to list resource links at and under a resource group, set the scope to /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scope"/> is null. </exception>
-        internal ResourceLinkCollection(ArmClient armClient, ResourceIdentifier id, string scope) : base(armClient, id)
+        internal ResourceLinkCollection(ArmClient client, ResourceIdentifier id, string scope) : base(client, id)
         {
             _scope = scope;
             _resourceLinkClientDiagnostics = new ClientDiagnostics("MgmtScopeResource", ResourceLink.ResourceType.Namespace, DiagnosticOptions);

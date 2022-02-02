@@ -39,18 +39,18 @@ namespace Azure.ResourceManager.Sample
         }
 
         /// <summary> Initializes a new instance of the <see cref = "VirtualMachineScaleSetVM"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal VirtualMachineScaleSetVM(ArmClient armClient, VirtualMachineScaleSetVMData data) : this(armClient, data.Id)
+        internal VirtualMachineScaleSetVM(ArmClient client, VirtualMachineScaleSetVMData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
         }
 
         /// <summary> Initializes a new instance of the <see cref="VirtualMachineScaleSetVM"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal VirtualMachineScaleSetVM(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        internal VirtualMachineScaleSetVM(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _virtualMachineScaleSetVMClientDiagnostics = new ClientDiagnostics("Azure.ResourceManager.Sample", ResourceType.Namespace, DiagnosticOptions);
             ArmClient.TryGetApiVersion(ResourceType, out string virtualMachineScaleSetVMApiVersion);

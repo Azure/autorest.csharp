@@ -34,9 +34,9 @@ namespace MgmtListMethods
         }
 
         /// <summary> Initializes a new instance of the <see cref="MgmtGroupParentCollection"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
-        internal MgmtGroupParentCollection(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        internal MgmtGroupParentCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _mgmtGroupParentClientDiagnostics = new ClientDiagnostics("MgmtListMethods", MgmtGroupParent.ResourceType.Namespace, DiagnosticOptions);
             ArmClient.TryGetApiVersion(MgmtGroupParent.ResourceType, out string mgmtGroupParentApiVersion);

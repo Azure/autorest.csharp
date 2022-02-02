@@ -39,18 +39,18 @@ namespace Azure.ResourceManager.Sample
         }
 
         /// <summary> Initializes a new instance of the <see cref = "AvailabilitySet"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal AvailabilitySet(ArmClient armClient, AvailabilitySetData data) : this(armClient, data.Id)
+        internal AvailabilitySet(ArmClient client, AvailabilitySetData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
         }
 
         /// <summary> Initializes a new instance of the <see cref="AvailabilitySet"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal AvailabilitySet(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        internal AvailabilitySet(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _availabilitySetClientDiagnostics = new ClientDiagnostics("Azure.ResourceManager.Sample", ResourceType.Namespace, DiagnosticOptions);
             ArmClient.TryGetApiVersion(ResourceType, out string availabilitySetApiVersion);

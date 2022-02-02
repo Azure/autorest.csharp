@@ -15,15 +15,15 @@ namespace MgmtPropertyChooser
     {
         #region VirtualMachine
         /// <summary> Gets an object representing a VirtualMachine along with the instance operations that can be performed on it but with no data. </summary>
-        /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="VirtualMachine" /> object. </returns>
-        public static VirtualMachine GetVirtualMachine(this ArmClient armClient, ResourceIdentifier id)
+        public static VirtualMachine GetVirtualMachine(this ArmClient client, ResourceIdentifier id)
         {
-            return armClient.GetClient(() =>
+            return client.GetClient(() =>
             {
                 VirtualMachine.ValidateResourceId(id);
-                return new VirtualMachine(armClient, id);
+                return new VirtualMachine(client, id);
             }
             );
         }

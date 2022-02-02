@@ -38,18 +38,18 @@ namespace SupersetFlattenInheritance
         }
 
         /// <summary> Initializes a new instance of the <see cref = "ResourceModel1"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal ResourceModel1(ArmClient armClient, ResourceModel1Data data) : this(armClient, data.Id)
+        internal ResourceModel1(ArmClient client, ResourceModel1Data data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
         }
 
         /// <summary> Initializes a new instance of the <see cref="ResourceModel1"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal ResourceModel1(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        internal ResourceModel1(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _resourceModel1ClientDiagnostics = new ClientDiagnostics("SupersetFlattenInheritance", ResourceType.Namespace, DiagnosticOptions);
             ArmClient.TryGetApiVersion(ResourceType, out string resourceModel1ApiVersion);

@@ -38,18 +38,18 @@ namespace Pagination
         }
 
         /// <summary> Initializes a new instance of the <see cref = "PageSizeDoubleModel"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal PageSizeDoubleModel(ArmClient armClient, PageSizeDoubleModelData data) : this(armClient, new ResourceIdentifier(data.Id))
+        internal PageSizeDoubleModel(ArmClient client, PageSizeDoubleModelData data) : this(client, new ResourceIdentifier(data.Id))
         {
             HasData = true;
             _data = data;
         }
 
         /// <summary> Initializes a new instance of the <see cref="PageSizeDoubleModel"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal PageSizeDoubleModel(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        internal PageSizeDoubleModel(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _pageSizeDoubleModelClientDiagnostics = new ClientDiagnostics("Pagination", ResourceType.Namespace, DiagnosticOptions);
             ArmClient.TryGetApiVersion(ResourceType, out string pageSizeDoubleModelApiVersion);

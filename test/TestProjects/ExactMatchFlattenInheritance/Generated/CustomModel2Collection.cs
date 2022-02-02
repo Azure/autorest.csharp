@@ -34,9 +34,9 @@ namespace ExactMatchFlattenInheritance
         }
 
         /// <summary> Initializes a new instance of the <see cref="CustomModel2Collection"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
-        internal CustomModel2Collection(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        internal CustomModel2Collection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _customModel2ClientDiagnostics = new ClientDiagnostics("ExactMatchFlattenInheritance", CustomModel2.ResourceType.Namespace, DiagnosticOptions);
             ArmClient.TryGetApiVersion(CustomModel2.ResourceType, out string customModel2ApiVersion);

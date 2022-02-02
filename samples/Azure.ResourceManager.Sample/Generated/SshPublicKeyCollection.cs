@@ -34,9 +34,9 @@ namespace Azure.ResourceManager.Sample
         }
 
         /// <summary> Initializes a new instance of the <see cref="SshPublicKeyCollection"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
-        internal SshPublicKeyCollection(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        internal SshPublicKeyCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _sshPublicKeyClientDiagnostics = new ClientDiagnostics("Azure.ResourceManager.Sample", SshPublicKey.ResourceType.Namespace, DiagnosticOptions);
             ArmClient.TryGetApiVersion(SshPublicKey.ResourceType, out string sshPublicKeyApiVersion);

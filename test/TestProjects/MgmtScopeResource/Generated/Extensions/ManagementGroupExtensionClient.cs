@@ -20,9 +20,9 @@ namespace MgmtScopeResource
         }
 
         /// <summary> Initializes a new instance of the <see cref="ManagementGroupExtensionClient"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal ManagementGroupExtensionClient(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        internal ManagementGroupExtensionClient(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
         }
 

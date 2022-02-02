@@ -39,18 +39,18 @@ namespace MgmtMultipleParentResource
         }
 
         /// <summary> Initializes a new instance of the <see cref = "SubParent"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal SubParent(ArmClient armClient, SubParentData data) : this(armClient, data.Id)
+        internal SubParent(ArmClient client, SubParentData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
         }
 
         /// <summary> Initializes a new instance of the <see cref="SubParent"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal SubParent(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        internal SubParent(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _subParentClientDiagnostics = new ClientDiagnostics("MgmtMultipleParentResource", ResourceType.Namespace, DiagnosticOptions);
             ArmClient.TryGetApiVersion(ResourceType, out string subParentApiVersion);

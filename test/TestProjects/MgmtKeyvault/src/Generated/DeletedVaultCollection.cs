@@ -30,9 +30,9 @@ namespace MgmtKeyvault
         }
 
         /// <summary> Initializes a new instance of the <see cref="DeletedVaultCollection"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
-        internal DeletedVaultCollection(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        internal DeletedVaultCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _deletedVaultVaultsClientDiagnostics = new ClientDiagnostics("MgmtKeyvault", DeletedVault.ResourceType.Namespace, DiagnosticOptions);
             ArmClient.TryGetApiVersion(DeletedVault.ResourceType, out string deletedVaultVaultsApiVersion);

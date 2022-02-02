@@ -34,9 +34,9 @@ namespace Pagination
         }
 
         /// <summary> Initializes a new instance of the <see cref="PageSizeFloatModelCollection"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
-        internal PageSizeFloatModelCollection(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        internal PageSizeFloatModelCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _pageSizeFloatModelClientDiagnostics = new ClientDiagnostics("Pagination", PageSizeFloatModel.ResourceType.Namespace, DiagnosticOptions);
             ArmClient.TryGetApiVersion(PageSizeFloatModel.ResourceType, out string pageSizeFloatModelApiVersion);

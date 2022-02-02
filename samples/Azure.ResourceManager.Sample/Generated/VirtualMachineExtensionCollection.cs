@@ -33,9 +33,9 @@ namespace Azure.ResourceManager.Sample
         }
 
         /// <summary> Initializes a new instance of the <see cref="VirtualMachineExtensionCollection"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
-        internal VirtualMachineExtensionCollection(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        internal VirtualMachineExtensionCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _virtualMachineExtensionClientDiagnostics = new ClientDiagnostics("Azure.ResourceManager.Sample", VirtualMachineExtension.ResourceType.Namespace, DiagnosticOptions);
             ArmClient.TryGetApiVersion(VirtualMachineExtension.ResourceType, out string virtualMachineExtensionApiVersion);

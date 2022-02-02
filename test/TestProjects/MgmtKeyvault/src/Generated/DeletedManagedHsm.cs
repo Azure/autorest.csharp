@@ -39,18 +39,18 @@ namespace MgmtKeyvault
         }
 
         /// <summary> Initializes a new instance of the <see cref = "DeletedManagedHsm"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal DeletedManagedHsm(ArmClient armClient, DeletedManagedHsmData data) : this(armClient, data.Id)
+        internal DeletedManagedHsm(ArmClient client, DeletedManagedHsmData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
         }
 
         /// <summary> Initializes a new instance of the <see cref="DeletedManagedHsm"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal DeletedManagedHsm(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        internal DeletedManagedHsm(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _deletedManagedHsmManagedHsmsClientDiagnostics = new ClientDiagnostics("MgmtKeyvault", ResourceType.Namespace, DiagnosticOptions);
             ArmClient.TryGetApiVersion(ResourceType, out string deletedManagedHsmManagedHsmsApiVersion);

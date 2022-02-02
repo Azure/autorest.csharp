@@ -34,9 +34,9 @@ namespace XmlDeserialization
         }
 
         /// <summary> Initializes a new instance of the <see cref="XmlInstanceCollection"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
-        internal XmlInstanceCollection(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        internal XmlInstanceCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _xmlInstanceXmlDeserializationClientDiagnostics = new ClientDiagnostics("XmlDeserialization", XmlInstance.ResourceType.Namespace, DiagnosticOptions);
             ArmClient.TryGetApiVersion(XmlInstance.ResourceType, out string xmlInstanceXmlDeserializationApiVersion);

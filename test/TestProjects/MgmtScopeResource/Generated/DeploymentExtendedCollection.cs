@@ -32,9 +32,9 @@ namespace MgmtScopeResource
         }
 
         /// <summary> Initializes a new instance of the <see cref="DeploymentExtendedCollection"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
-        internal DeploymentExtendedCollection(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        internal DeploymentExtendedCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _deploymentExtendedDeploymentsClientDiagnostics = new ClientDiagnostics("MgmtScopeResource", DeploymentExtended.ResourceType.Namespace, DiagnosticOptions);
             ArmClient.TryGetApiVersion(DeploymentExtended.ResourceType, out string deploymentExtendedDeploymentsApiVersion);

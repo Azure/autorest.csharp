@@ -39,18 +39,18 @@ namespace Azure.Management.Storage
         }
 
         /// <summary> Initializes a new instance of the <see cref = "FileService"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal FileService(ArmClient armClient, FileServiceData data) : this(armClient, data.Id)
+        internal FileService(ArmClient client, FileServiceData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
         }
 
         /// <summary> Initializes a new instance of the <see cref="FileService"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal FileService(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        internal FileService(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _fileServiceClientDiagnostics = new ClientDiagnostics("Azure.Management.Storage", ResourceType.Namespace, DiagnosticOptions);
             ArmClient.TryGetApiVersion(ResourceType, out string fileServiceApiVersion);

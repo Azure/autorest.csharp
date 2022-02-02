@@ -30,9 +30,9 @@ namespace MgmtKeyvault
         }
 
         /// <summary> Initializes a new instance of the <see cref="DeletedManagedHsmCollection"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
-        internal DeletedManagedHsmCollection(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        internal DeletedManagedHsmCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _deletedManagedHsmManagedHsmsClientDiagnostics = new ClientDiagnostics("MgmtKeyvault", DeletedManagedHsm.ResourceType.Namespace, DiagnosticOptions);
             ArmClient.TryGetApiVersion(DeletedManagedHsm.ResourceType, out string deletedManagedHsmManagedHsmsApiVersion);

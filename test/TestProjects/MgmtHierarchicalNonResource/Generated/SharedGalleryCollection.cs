@@ -35,11 +35,11 @@ namespace MgmtHierarchicalNonResource
         }
 
         /// <summary> Initializes a new instance of the <see cref="SharedGalleryCollection"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         /// <param name="location"> Resource location. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        internal SharedGalleryCollection(ArmClient armClient, ResourceIdentifier id, string location) : base(armClient, id)
+        internal SharedGalleryCollection(ArmClient client, ResourceIdentifier id, string location) : base(client, id)
         {
             _location = location;
             _sharedGalleryClientDiagnostics = new ClientDiagnostics("MgmtHierarchicalNonResource", SharedGallery.ResourceType.Namespace, DiagnosticOptions);

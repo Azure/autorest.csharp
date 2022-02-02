@@ -15,15 +15,15 @@ namespace MgmtScopeResource
     {
         #region PolicyAssignment
         /// <summary> Gets an object representing a PolicyAssignment along with the instance operations that can be performed on it but with no data. </summary>
-        /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="PolicyAssignment" /> object. </returns>
-        public static PolicyAssignment GetPolicyAssignment(this ArmClient armClient, ResourceIdentifier id)
+        public static PolicyAssignment GetPolicyAssignment(this ArmClient client, ResourceIdentifier id)
         {
-            return armClient.GetClient(() =>
+            return client.GetClient(() =>
             {
                 PolicyAssignment.ValidateResourceId(id);
-                return new PolicyAssignment(armClient, id);
+                return new PolicyAssignment(client, id);
             }
             );
         }
@@ -31,15 +31,15 @@ namespace MgmtScopeResource
 
         #region DeploymentExtended
         /// <summary> Gets an object representing a DeploymentExtended along with the instance operations that can be performed on it but with no data. </summary>
-        /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="DeploymentExtended" /> object. </returns>
-        public static DeploymentExtended GetDeploymentExtended(this ArmClient armClient, ResourceIdentifier id)
+        public static DeploymentExtended GetDeploymentExtended(this ArmClient client, ResourceIdentifier id)
         {
-            return armClient.GetClient(() =>
+            return client.GetClient(() =>
             {
                 DeploymentExtended.ValidateResourceId(id);
-                return new DeploymentExtended(armClient, id);
+                return new DeploymentExtended(client, id);
             }
             );
         }
@@ -47,15 +47,15 @@ namespace MgmtScopeResource
 
         #region ResourceLink
         /// <summary> Gets an object representing a ResourceLink along with the instance operations that can be performed on it but with no data. </summary>
-        /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="ResourceLink" /> object. </returns>
-        public static ResourceLink GetResourceLink(this ArmClient armClient, ResourceIdentifier id)
+        public static ResourceLink GetResourceLink(this ArmClient client, ResourceIdentifier id)
         {
-            return armClient.GetClient(() =>
+            return client.GetClient(() =>
             {
                 ResourceLink.ValidateResourceId(id);
-                return new ResourceLink(armClient, id);
+                return new ResourceLink(client, id);
             }
             );
         }

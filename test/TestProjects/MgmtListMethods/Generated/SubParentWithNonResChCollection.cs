@@ -34,9 +34,9 @@ namespace MgmtListMethods
         }
 
         /// <summary> Initializes a new instance of the <see cref="SubParentWithNonResChCollection"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
-        internal SubParentWithNonResChCollection(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        internal SubParentWithNonResChCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _subParentWithNonResChClientDiagnostics = new ClientDiagnostics("MgmtListMethods", SubParentWithNonResCh.ResourceType.Namespace, DiagnosticOptions);
             ArmClient.TryGetApiVersion(SubParentWithNonResCh.ResourceType, out string subParentWithNonResChApiVersion);

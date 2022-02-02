@@ -39,18 +39,18 @@ namespace MgmtParamOrdering
         }
 
         /// <summary> Initializes a new instance of the <see cref = "DedicatedHost"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal DedicatedHost(ArmClient armClient, DedicatedHostData data) : this(armClient, data.Id)
+        internal DedicatedHost(ArmClient client, DedicatedHostData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
         }
 
         /// <summary> Initializes a new instance of the <see cref="DedicatedHost"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal DedicatedHost(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        internal DedicatedHost(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _dedicatedHostClientDiagnostics = new ClientDiagnostics("MgmtParamOrdering", ResourceType.Namespace, DiagnosticOptions);
             ArmClient.TryGetApiVersion(ResourceType, out string dedicatedHostApiVersion);

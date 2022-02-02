@@ -34,9 +34,9 @@ namespace Pagination
         }
 
         /// <summary> Initializes a new instance of the <see cref="PageSizeInt32ModelCollection"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
-        internal PageSizeInt32ModelCollection(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        internal PageSizeInt32ModelCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _pageSizeInt32ModelClientDiagnostics = new ClientDiagnostics("Pagination", PageSizeInt32Model.ResourceType.Namespace, DiagnosticOptions);
             ArmClient.TryGetApiVersion(PageSizeInt32Model.ResourceType, out string pageSizeInt32ModelApiVersion);

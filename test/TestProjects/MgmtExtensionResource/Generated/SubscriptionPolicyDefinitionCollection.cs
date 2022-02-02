@@ -34,9 +34,9 @@ namespace MgmtExtensionResource
         }
 
         /// <summary> Initializes a new instance of the <see cref="SubscriptionPolicyDefinitionCollection"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
-        internal SubscriptionPolicyDefinitionCollection(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        internal SubscriptionPolicyDefinitionCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _subscriptionPolicyDefinitionPolicyDefinitionsClientDiagnostics = new ClientDiagnostics("MgmtExtensionResource", SubscriptionPolicyDefinition.ResourceType.Namespace, DiagnosticOptions);
             ArmClient.TryGetApiVersion(SubscriptionPolicyDefinition.ResourceType, out string subscriptionPolicyDefinitionPolicyDefinitionsApiVersion);

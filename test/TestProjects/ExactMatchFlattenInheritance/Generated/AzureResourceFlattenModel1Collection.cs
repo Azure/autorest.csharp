@@ -34,9 +34,9 @@ namespace ExactMatchFlattenInheritance
         }
 
         /// <summary> Initializes a new instance of the <see cref="AzureResourceFlattenModel1Collection"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
-        internal AzureResourceFlattenModel1Collection(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        internal AzureResourceFlattenModel1Collection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _azureResourceFlattenModel1ClientDiagnostics = new ClientDiagnostics("ExactMatchFlattenInheritance", AzureResourceFlattenModel1.ResourceType.Namespace, DiagnosticOptions);
             ArmClient.TryGetApiVersion(AzureResourceFlattenModel1.ResourceType, out string azureResourceFlattenModel1ApiVersion);

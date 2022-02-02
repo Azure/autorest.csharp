@@ -33,9 +33,9 @@ namespace Azure.Management.Storage
         }
 
         /// <summary> Initializes a new instance of the <see cref="EncryptionScopeCollection"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
-        internal EncryptionScopeCollection(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        internal EncryptionScopeCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _encryptionScopeClientDiagnostics = new ClientDiagnostics("Azure.Management.Storage", EncryptionScope.ResourceType.Namespace, DiagnosticOptions);
             ArmClient.TryGetApiVersion(EncryptionScope.ResourceType, out string encryptionScopeApiVersion);

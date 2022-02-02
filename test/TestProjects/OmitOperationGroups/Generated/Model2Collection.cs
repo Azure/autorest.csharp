@@ -34,9 +34,9 @@ namespace OmitOperationGroups
         }
 
         /// <summary> Initializes a new instance of the <see cref="Model2Collection"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
-        internal Model2Collection(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        internal Model2Collection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _model2ClientDiagnostics = new ClientDiagnostics("OmitOperationGroups", Model2.ResourceType.Namespace, DiagnosticOptions);
             ArmClient.TryGetApiVersion(Model2.ResourceType, out string model2ApiVersion);

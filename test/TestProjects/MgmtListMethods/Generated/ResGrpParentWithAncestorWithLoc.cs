@@ -38,18 +38,18 @@ namespace MgmtListMethods
         }
 
         /// <summary> Initializes a new instance of the <see cref = "ResGrpParentWithAncestorWithLoc"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal ResGrpParentWithAncestorWithLoc(ArmClient armClient, ResGrpParentWithAncestorWithLocData data) : this(armClient, data.Id)
+        internal ResGrpParentWithAncestorWithLoc(ArmClient client, ResGrpParentWithAncestorWithLocData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
         }
 
         /// <summary> Initializes a new instance of the <see cref="ResGrpParentWithAncestorWithLoc"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal ResGrpParentWithAncestorWithLoc(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        internal ResGrpParentWithAncestorWithLoc(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _resGrpParentWithAncestorWithLocClientDiagnostics = new ClientDiagnostics("MgmtListMethods", ResourceType.Namespace, DiagnosticOptions);
             ArmClient.TryGetApiVersion(ResourceType, out string resGrpParentWithAncestorWithLocApiVersion);

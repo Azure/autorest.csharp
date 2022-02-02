@@ -34,9 +34,9 @@ namespace Pagination
         }
 
         /// <summary> Initializes a new instance of the <see cref="PageSizeDecimalModelCollection"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
-        internal PageSizeDecimalModelCollection(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        internal PageSizeDecimalModelCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _pageSizeDecimalModelClientDiagnostics = new ClientDiagnostics("Pagination", PageSizeDecimalModel.ResourceType.Namespace, DiagnosticOptions);
             ArmClient.TryGetApiVersion(PageSizeDecimalModel.ResourceType, out string pageSizeDecimalModelApiVersion);

@@ -33,9 +33,9 @@ namespace MgmtCollectionParent
         }
 
         /// <summary> Initializes a new instance of the <see cref="OrderResourceCollection"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
-        internal OrderResourceCollection(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        internal OrderResourceCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _orderResourceClientDiagnostics = new ClientDiagnostics("MgmtCollectionParent", OrderResource.ResourceType.Namespace, DiagnosticOptions);
             ArmClient.TryGetApiVersion(OrderResource.ResourceType, out string orderResourceApiVersion);

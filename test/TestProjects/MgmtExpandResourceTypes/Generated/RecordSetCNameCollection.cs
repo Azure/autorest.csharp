@@ -33,9 +33,9 @@ namespace MgmtExpandResourceTypes
         }
 
         /// <summary> Initializes a new instance of the <see cref="RecordSetCNameCollection"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
-        internal RecordSetCNameCollection(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        internal RecordSetCNameCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _recordSetCNameRecordSetsClientDiagnostics = new ClientDiagnostics("MgmtExpandResourceTypes", RecordSetCName.ResourceType.Namespace, DiagnosticOptions);
             ArmClient.TryGetApiVersion(RecordSetCName.ResourceType, out string recordSetCNameRecordSetsApiVersion);

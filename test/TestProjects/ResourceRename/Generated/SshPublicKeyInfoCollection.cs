@@ -34,9 +34,9 @@ namespace ResourceRename
         }
 
         /// <summary> Initializes a new instance of the <see cref="SshPublicKeyInfoCollection"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
-        internal SshPublicKeyInfoCollection(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        internal SshPublicKeyInfoCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _sshPublicKeyInfoSshPublicKeysClientDiagnostics = new ClientDiagnostics("ResourceRename", SshPublicKeyInfo.ResourceType.Namespace, DiagnosticOptions);
             ArmClient.TryGetApiVersion(SshPublicKeyInfo.ResourceType, out string sshPublicKeyInfoSshPublicKeysApiVersion);

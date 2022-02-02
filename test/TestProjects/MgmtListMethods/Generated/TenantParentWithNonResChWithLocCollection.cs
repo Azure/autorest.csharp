@@ -33,9 +33,9 @@ namespace MgmtListMethods
         }
 
         /// <summary> Initializes a new instance of the <see cref="TenantParentWithNonResChWithLocCollection"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
-        internal TenantParentWithNonResChWithLocCollection(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        internal TenantParentWithNonResChWithLocCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _tenantParentWithNonResChWithLocClientDiagnostics = new ClientDiagnostics("MgmtListMethods", TenantParentWithNonResChWithLoc.ResourceType.Namespace, DiagnosticOptions);
             ArmClient.TryGetApiVersion(TenantParentWithNonResChWithLoc.ResourceType, out string tenantParentWithNonResChWithLocApiVersion);

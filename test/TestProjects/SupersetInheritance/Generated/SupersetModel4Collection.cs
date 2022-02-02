@@ -34,9 +34,9 @@ namespace SupersetInheritance
         }
 
         /// <summary> Initializes a new instance of the <see cref="SupersetModel4Collection"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
-        internal SupersetModel4Collection(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        internal SupersetModel4Collection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _supersetModel4ClientDiagnostics = new ClientDiagnostics("SupersetInheritance", SupersetModel4.ResourceType.Namespace, DiagnosticOptions);
             ArmClient.TryGetApiVersion(SupersetModel4.ResourceType, out string supersetModel4ApiVersion);

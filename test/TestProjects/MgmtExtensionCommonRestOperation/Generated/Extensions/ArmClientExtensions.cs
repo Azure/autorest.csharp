@@ -15,15 +15,15 @@ namespace MgmtExtensionCommonRestOperation
     {
         #region TypeOne
         /// <summary> Gets an object representing a TypeOne along with the instance operations that can be performed on it but with no data. </summary>
-        /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="TypeOne" /> object. </returns>
-        public static TypeOne GetTypeOne(this ArmClient armClient, ResourceIdentifier id)
+        public static TypeOne GetTypeOne(this ArmClient client, ResourceIdentifier id)
         {
-            return armClient.GetClient(() =>
+            return client.GetClient(() =>
             {
                 TypeOne.ValidateResourceId(id);
-                return new TypeOne(armClient, id);
+                return new TypeOne(client, id);
             }
             );
         }
@@ -31,15 +31,15 @@ namespace MgmtExtensionCommonRestOperation
 
         #region TypeTwo
         /// <summary> Gets an object representing a TypeTwo along with the instance operations that can be performed on it but with no data. </summary>
-        /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="TypeTwo" /> object. </returns>
-        public static TypeTwo GetTypeTwo(this ArmClient armClient, ResourceIdentifier id)
+        public static TypeTwo GetTypeTwo(this ArmClient client, ResourceIdentifier id)
         {
-            return armClient.GetClient(() =>
+            return client.GetClient(() =>
             {
                 TypeTwo.ValidateResourceId(id);
-                return new TypeTwo(armClient, id);
+                return new TypeTwo(client, id);
             }
             );
         }

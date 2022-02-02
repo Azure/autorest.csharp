@@ -33,9 +33,9 @@ namespace MgmtListMethods
         }
 
         /// <summary> Initializes a new instance of the <see cref="FakeParentWithNonResChCollection"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
-        internal FakeParentWithNonResChCollection(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        internal FakeParentWithNonResChCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _fakeParentWithNonResChClientDiagnostics = new ClientDiagnostics("MgmtListMethods", FakeParentWithNonResCh.ResourceType.Namespace, DiagnosticOptions);
             ArmClient.TryGetApiVersion(FakeParentWithNonResCh.ResourceType, out string fakeParentWithNonResChApiVersion);

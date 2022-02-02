@@ -38,18 +38,18 @@ namespace ExactMatchFlattenInheritance
         }
 
         /// <summary> Initializes a new instance of the <see cref = "CustomModel3"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal CustomModel3(ArmClient armClient, CustomModel3Data data) : this(armClient, new ResourceIdentifier(data.Id))
+        internal CustomModel3(ArmClient client, CustomModel3Data data) : this(client, new ResourceIdentifier(data.Id))
         {
             HasData = true;
             _data = data;
         }
 
         /// <summary> Initializes a new instance of the <see cref="CustomModel3"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal CustomModel3(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        internal CustomModel3(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _customModel3ClientDiagnostics = new ClientDiagnostics("ExactMatchFlattenInheritance", ResourceType.Namespace, DiagnosticOptions);
             ArmClient.TryGetApiVersion(ResourceType, out string customModel3ApiVersion);

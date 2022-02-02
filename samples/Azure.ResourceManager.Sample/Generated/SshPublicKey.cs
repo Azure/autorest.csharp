@@ -39,18 +39,18 @@ namespace Azure.ResourceManager.Sample
         }
 
         /// <summary> Initializes a new instance of the <see cref = "SshPublicKey"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal SshPublicKey(ArmClient armClient, SshPublicKeyData data) : this(armClient, data.Id)
+        internal SshPublicKey(ArmClient client, SshPublicKeyData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
         }
 
         /// <summary> Initializes a new instance of the <see cref="SshPublicKey"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal SshPublicKey(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        internal SshPublicKey(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _sshPublicKeyClientDiagnostics = new ClientDiagnostics("Azure.ResourceManager.Sample", ResourceType.Namespace, DiagnosticOptions);
             ArmClient.TryGetApiVersion(ResourceType, out string sshPublicKeyApiVersion);

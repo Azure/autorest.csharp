@@ -34,9 +34,9 @@ namespace Azure.ResourceManager.Sample
         }
 
         /// <summary> Initializes a new instance of the <see cref="ImageCollection"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
-        internal ImageCollection(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        internal ImageCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _imageClientDiagnostics = new ClientDiagnostics("Azure.ResourceManager.Sample", Image.ResourceType.Namespace, DiagnosticOptions);
             ArmClient.TryGetApiVersion(Image.ResourceType, out string imageApiVersion);

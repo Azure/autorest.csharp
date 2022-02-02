@@ -38,18 +38,18 @@ namespace ExactMatchInheritance
         }
 
         /// <summary> Initializes a new instance of the <see cref = "ExactMatchModel1"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal ExactMatchModel1(ArmClient armClient, ExactMatchModel1Data data) : this(armClient, data.Id)
+        internal ExactMatchModel1(ArmClient client, ExactMatchModel1Data data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
         }
 
         /// <summary> Initializes a new instance of the <see cref="ExactMatchModel1"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal ExactMatchModel1(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        internal ExactMatchModel1(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _exactMatchModel1ClientDiagnostics = new ClientDiagnostics("ExactMatchInheritance", ResourceType.Namespace, DiagnosticOptions);
             ArmClient.TryGetApiVersion(ResourceType, out string exactMatchModel1ApiVersion);

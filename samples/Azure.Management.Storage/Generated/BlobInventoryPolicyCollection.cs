@@ -33,9 +33,9 @@ namespace Azure.Management.Storage
         }
 
         /// <summary> Initializes a new instance of the <see cref="BlobInventoryPolicyCollection"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
-        internal BlobInventoryPolicyCollection(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        internal BlobInventoryPolicyCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _blobInventoryPolicyClientDiagnostics = new ClientDiagnostics("Azure.Management.Storage", BlobInventoryPolicy.ResourceType.Namespace, DiagnosticOptions);
             ArmClient.TryGetApiVersion(BlobInventoryPolicy.ResourceType, out string blobInventoryPolicyApiVersion);

@@ -38,18 +38,18 @@ namespace SingletonResource
         }
 
         /// <summary> Initializes a new instance of the <see cref = "ParentResource"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal ParentResource(ArmClient armClient, ParentResourceData data) : this(armClient, data.Id)
+        internal ParentResource(ArmClient client, ParentResourceData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
         }
 
         /// <summary> Initializes a new instance of the <see cref="ParentResource"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal ParentResource(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        internal ParentResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _parentResourceClientDiagnostics = new ClientDiagnostics("SingletonResource", ResourceType.Namespace, DiagnosticOptions);
             ArmClient.TryGetApiVersion(ResourceType, out string parentResourceApiVersion);

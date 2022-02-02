@@ -34,9 +34,9 @@ namespace MgmtListMethods
         }
 
         /// <summary> Initializes a new instance of the <see cref="MgmtGrpParentWithLocCollection"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
-        internal MgmtGrpParentWithLocCollection(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        internal MgmtGrpParentWithLocCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _mgmtGrpParentWithLocClientDiagnostics = new ClientDiagnostics("MgmtListMethods", MgmtGrpParentWithLoc.ResourceType.Namespace, DiagnosticOptions);
             ArmClient.TryGetApiVersion(MgmtGrpParentWithLoc.ResourceType, out string mgmtGrpParentWithLocApiVersion);

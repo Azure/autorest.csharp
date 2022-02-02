@@ -35,12 +35,12 @@ namespace MgmtParamOrdering
         }
 
         /// <summary> Initializes a new instance of the <see cref="VirtualMachineExtensionImageCollection"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         /// <param name="location"> The name of a supported Azure region. </param>
         /// <param name="publisherName"> The String to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="publisherName"/> is null. </exception>
-        internal VirtualMachineExtensionImageCollection(ArmClient armClient, ResourceIdentifier id, string location, string publisherName) : base(armClient, id)
+        internal VirtualMachineExtensionImageCollection(ArmClient client, ResourceIdentifier id, string location, string publisherName) : base(client, id)
         {
             _location = location;
             _publisherName = publisherName;

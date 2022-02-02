@@ -34,9 +34,9 @@ namespace SubscriptionExtensions
         }
 
         /// <summary> Initializes a new instance of the <see cref="ToasterCollection"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
-        internal ToasterCollection(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        internal ToasterCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _toasterClientDiagnostics = new ClientDiagnostics("SubscriptionExtensions", Toaster.ResourceType.Namespace, DiagnosticOptions);
             ArmClient.TryGetApiVersion(Toaster.ResourceType, out string toasterApiVersion);

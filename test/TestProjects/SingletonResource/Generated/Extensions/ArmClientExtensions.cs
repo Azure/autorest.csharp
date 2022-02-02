@@ -15,15 +15,15 @@ namespace SingletonResource
     {
         #region Car
         /// <summary> Gets an object representing a Car along with the instance operations that can be performed on it but with no data. </summary>
-        /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="Car" /> object. </returns>
-        public static Car GetCar(this ArmClient armClient, ResourceIdentifier id)
+        public static Car GetCar(this ArmClient client, ResourceIdentifier id)
         {
-            return armClient.GetClient(() =>
+            return client.GetClient(() =>
             {
                 Car.ValidateResourceId(id);
-                return new Car(armClient, id);
+                return new Car(client, id);
             }
             );
         }
@@ -31,15 +31,15 @@ namespace SingletonResource
 
         #region Ignition
         /// <summary> Gets an object representing a Ignition along with the instance operations that can be performed on it but with no data. </summary>
-        /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="Ignition" /> object. </returns>
-        public static Ignition GetIgnition(this ArmClient armClient, ResourceIdentifier id)
+        public static Ignition GetIgnition(this ArmClient client, ResourceIdentifier id)
         {
-            return armClient.GetClient(() =>
+            return client.GetClient(() =>
             {
                 Ignition.ValidateResourceId(id);
-                return new Ignition(armClient, id);
+                return new Ignition(client, id);
             }
             );
         }
@@ -47,15 +47,15 @@ namespace SingletonResource
 
         #region SingletonResource
         /// <summary> Gets an object representing a SingletonResource along with the instance operations that can be performed on it but with no data. </summary>
-        /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="SingletonResource" /> object. </returns>
-        public static SingletonResource GetSingletonResource(this ArmClient armClient, ResourceIdentifier id)
+        public static SingletonResource GetSingletonResource(this ArmClient client, ResourceIdentifier id)
         {
-            return armClient.GetClient(() =>
+            return client.GetClient(() =>
             {
                 SingletonResource.ValidateResourceId(id);
-                return new SingletonResource(armClient, id);
+                return new SingletonResource(client, id);
             }
             );
         }
@@ -63,15 +63,15 @@ namespace SingletonResource
 
         #region ParentResource
         /// <summary> Gets an object representing a ParentResource along with the instance operations that can be performed on it but with no data. </summary>
-        /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="ParentResource" /> object. </returns>
-        public static ParentResource GetParentResource(this ArmClient armClient, ResourceIdentifier id)
+        public static ParentResource GetParentResource(this ArmClient client, ResourceIdentifier id)
         {
-            return armClient.GetClient(() =>
+            return client.GetClient(() =>
             {
                 ParentResource.ValidateResourceId(id);
-                return new ParentResource(armClient, id);
+                return new ParentResource(client, id);
             }
             );
         }

@@ -39,18 +39,18 @@ namespace Azure.Management.Storage
         }
 
         /// <summary> Initializes a new instance of the <see cref = "ManagementPolicy"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal ManagementPolicy(ArmClient armClient, ManagementPolicyData data) : this(armClient, data.Id)
+        internal ManagementPolicy(ArmClient client, ManagementPolicyData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
         }
 
         /// <summary> Initializes a new instance of the <see cref="ManagementPolicy"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal ManagementPolicy(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        internal ManagementPolicy(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _managementPolicyClientDiagnostics = new ClientDiagnostics("Azure.Management.Storage", ResourceType.Namespace, DiagnosticOptions);
             ArmClient.TryGetApiVersion(ResourceType, out string managementPolicyApiVersion);

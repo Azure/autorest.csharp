@@ -34,9 +34,9 @@ namespace SingletonResource
         }
 
         /// <summary> Initializes a new instance of the <see cref="CarCollection"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
-        internal CarCollection(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        internal CarCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _carClientDiagnostics = new ClientDiagnostics("SingletonResource", Car.ResourceType.Namespace, DiagnosticOptions);
             ArmClient.TryGetApiVersion(Car.ResourceType, out string carApiVersion);

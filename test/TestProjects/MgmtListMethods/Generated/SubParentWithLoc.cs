@@ -38,18 +38,18 @@ namespace MgmtListMethods
         }
 
         /// <summary> Initializes a new instance of the <see cref = "SubParentWithLoc"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal SubParentWithLoc(ArmClient armClient, SubParentWithLocData data) : this(armClient, data.Id)
+        internal SubParentWithLoc(ArmClient client, SubParentWithLocData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
         }
 
         /// <summary> Initializes a new instance of the <see cref="SubParentWithLoc"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal SubParentWithLoc(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        internal SubParentWithLoc(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _subParentWithLocClientDiagnostics = new ClientDiagnostics("MgmtListMethods", ResourceType.Namespace, DiagnosticOptions);
             ArmClient.TryGetApiVersion(ResourceType, out string subParentWithLocApiVersion);

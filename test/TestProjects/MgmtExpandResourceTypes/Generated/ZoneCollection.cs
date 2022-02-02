@@ -34,9 +34,9 @@ namespace MgmtExpandResourceTypes
         }
 
         /// <summary> Initializes a new instance of the <see cref="ZoneCollection"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
-        internal ZoneCollection(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        internal ZoneCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _zoneClientDiagnostics = new ClientDiagnostics("MgmtExpandResourceTypes", Zone.ResourceType.Namespace, DiagnosticOptions);
             ArmClient.TryGetApiVersion(Zone.ResourceType, out string zoneApiVersion);

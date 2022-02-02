@@ -15,15 +15,15 @@ namespace NoTypeReplacement
     {
         #region NoTypeReplacementModel1
         /// <summary> Gets an object representing a NoTypeReplacementModel1 along with the instance operations that can be performed on it but with no data. </summary>
-        /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="NoTypeReplacementModel1" /> object. </returns>
-        public static NoTypeReplacementModel1 GetNoTypeReplacementModel1(this ArmClient armClient, ResourceIdentifier id)
+        public static NoTypeReplacementModel1 GetNoTypeReplacementModel1(this ArmClient client, ResourceIdentifier id)
         {
-            return armClient.GetClient(() =>
+            return client.GetClient(() =>
             {
                 NoTypeReplacementModel1.ValidateResourceId(id);
-                return new NoTypeReplacementModel1(armClient, id);
+                return new NoTypeReplacementModel1(client, id);
             }
             );
         }
@@ -31,15 +31,15 @@ namespace NoTypeReplacement
 
         #region NoTypeReplacementModel2
         /// <summary> Gets an object representing a NoTypeReplacementModel2 along with the instance operations that can be performed on it but with no data. </summary>
-        /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="NoTypeReplacementModel2" /> object. </returns>
-        public static NoTypeReplacementModel2 GetNoTypeReplacementModel2(this ArmClient armClient, ResourceIdentifier id)
+        public static NoTypeReplacementModel2 GetNoTypeReplacementModel2(this ArmClient client, ResourceIdentifier id)
         {
-            return armClient.GetClient(() =>
+            return client.GetClient(() =>
             {
                 NoTypeReplacementModel2.ValidateResourceId(id);
-                return new NoTypeReplacementModel2(armClient, id);
+                return new NoTypeReplacementModel2(client, id);
             }
             );
         }
@@ -47,15 +47,15 @@ namespace NoTypeReplacement
 
         #region NoTypeReplacementModel3
         /// <summary> Gets an object representing a NoTypeReplacementModel3 along with the instance operations that can be performed on it but with no data. </summary>
-        /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="NoTypeReplacementModel3" /> object. </returns>
-        public static NoTypeReplacementModel3 GetNoTypeReplacementModel3(this ArmClient armClient, ResourceIdentifier id)
+        public static NoTypeReplacementModel3 GetNoTypeReplacementModel3(this ArmClient client, ResourceIdentifier id)
         {
-            return armClient.GetClient(() =>
+            return client.GetClient(() =>
             {
                 NoTypeReplacementModel3.ValidateResourceId(id);
-                return new NoTypeReplacementModel3(armClient, id);
+                return new NoTypeReplacementModel3(client, id);
             }
             );
         }

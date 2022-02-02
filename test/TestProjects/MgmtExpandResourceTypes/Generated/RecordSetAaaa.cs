@@ -39,18 +39,18 @@ namespace MgmtExpandResourceTypes
         }
 
         /// <summary> Initializes a new instance of the <see cref = "RecordSetAaaa"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal RecordSetAaaa(ArmClient armClient, RecordSetData data) : this(armClient, data.Id)
+        internal RecordSetAaaa(ArmClient client, RecordSetData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
         }
 
         /// <summary> Initializes a new instance of the <see cref="RecordSetAaaa"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal RecordSetAaaa(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        internal RecordSetAaaa(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _recordSetAaaaRecordSetsClientDiagnostics = new ClientDiagnostics("MgmtExpandResourceTypes", ResourceType.Namespace, DiagnosticOptions);
             ArmClient.TryGetApiVersion(ResourceType, out string recordSetAaaaRecordSetsApiVersion);

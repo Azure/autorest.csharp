@@ -34,9 +34,9 @@ namespace MgmtScopeResource
         }
 
         /// <summary> Initializes a new instance of the <see cref="PolicyAssignmentCollection"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
-        internal PolicyAssignmentCollection(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        internal PolicyAssignmentCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _policyAssignmentClientDiagnostics = new ClientDiagnostics("MgmtScopeResource", PolicyAssignment.ResourceType.Namespace, DiagnosticOptions);
             ArmClient.TryGetApiVersion(PolicyAssignment.ResourceType, out string policyAssignmentApiVersion);

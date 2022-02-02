@@ -15,15 +15,15 @@ namespace MgmtHierarchicalNonResource
     {
         #region SharedGallery
         /// <summary> Gets an object representing a SharedGallery along with the instance operations that can be performed on it but with no data. </summary>
-        /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="SharedGallery" /> object. </returns>
-        public static SharedGallery GetSharedGallery(this ArmClient armClient, ResourceIdentifier id)
+        public static SharedGallery GetSharedGallery(this ArmClient client, ResourceIdentifier id)
         {
-            return armClient.GetClient(() =>
+            return client.GetClient(() =>
             {
                 SharedGallery.ValidateResourceId(id);
-                return new SharedGallery(armClient, id);
+                return new SharedGallery(client, id);
             }
             );
         }

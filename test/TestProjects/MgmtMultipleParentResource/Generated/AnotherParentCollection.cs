@@ -34,9 +34,9 @@ namespace MgmtMultipleParentResource
         }
 
         /// <summary> Initializes a new instance of the <see cref="AnotherParentCollection"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
-        internal AnotherParentCollection(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        internal AnotherParentCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _anotherParentClientDiagnostics = new ClientDiagnostics("MgmtMultipleParentResource", AnotherParent.ResourceType.Namespace, DiagnosticOptions);
             ArmClient.TryGetApiVersion(AnotherParent.ResourceType, out string anotherParentApiVersion);

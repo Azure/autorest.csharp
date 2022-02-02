@@ -33,9 +33,9 @@ namespace MgmtParent
         }
 
         /// <summary> Initializes a new instance of the <see cref="DedicatedHostCollection"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
-        internal DedicatedHostCollection(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        internal DedicatedHostCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _dedicatedHostClientDiagnostics = new ClientDiagnostics("MgmtParent", DedicatedHost.ResourceType.Namespace, DiagnosticOptions);
             ArmClient.TryGetApiVersion(DedicatedHost.ResourceType, out string dedicatedHostApiVersion);

@@ -38,18 +38,18 @@ namespace MgmtListMethods
         }
 
         /// <summary> Initializes a new instance of the <see cref = "MgmtGroupParent"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal MgmtGroupParent(ArmClient armClient, MgmtGroupParentData data) : this(armClient, data.Id)
+        internal MgmtGroupParent(ArmClient client, MgmtGroupParentData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
         }
 
         /// <summary> Initializes a new instance of the <see cref="MgmtGroupParent"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal MgmtGroupParent(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        internal MgmtGroupParent(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _mgmtGroupParentClientDiagnostics = new ClientDiagnostics("MgmtListMethods", ResourceType.Namespace, DiagnosticOptions);
             ArmClient.TryGetApiVersion(ResourceType, out string mgmtGroupParentApiVersion);

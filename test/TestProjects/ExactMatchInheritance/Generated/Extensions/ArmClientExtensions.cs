@@ -15,15 +15,15 @@ namespace ExactMatchInheritance
     {
         #region ExactMatchModel1
         /// <summary> Gets an object representing a ExactMatchModel1 along with the instance operations that can be performed on it but with no data. </summary>
-        /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="ExactMatchModel1" /> object. </returns>
-        public static ExactMatchModel1 GetExactMatchModel1(this ArmClient armClient, ResourceIdentifier id)
+        public static ExactMatchModel1 GetExactMatchModel1(this ArmClient client, ResourceIdentifier id)
         {
-            return armClient.GetClient(() =>
+            return client.GetClient(() =>
             {
                 ExactMatchModel1.ValidateResourceId(id);
-                return new ExactMatchModel1(armClient, id);
+                return new ExactMatchModel1(client, id);
             }
             );
         }
@@ -31,15 +31,15 @@ namespace ExactMatchInheritance
 
         #region ExactMatchModel5
         /// <summary> Gets an object representing a ExactMatchModel5 along with the instance operations that can be performed on it but with no data. </summary>
-        /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="ExactMatchModel5" /> object. </returns>
-        public static ExactMatchModel5 GetExactMatchModel5(this ArmClient armClient, ResourceIdentifier id)
+        public static ExactMatchModel5 GetExactMatchModel5(this ArmClient client, ResourceIdentifier id)
         {
-            return armClient.GetClient(() =>
+            return client.GetClient(() =>
             {
                 ExactMatchModel5.ValidateResourceId(id);
-                return new ExactMatchModel5(armClient, id);
+                return new ExactMatchModel5(client, id);
             }
             );
         }

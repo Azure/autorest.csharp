@@ -33,9 +33,9 @@ namespace MgmtExtensionResource
         }
 
         /// <summary> Initializes a new instance of the <see cref="BuiltInPolicyDefinitionCollection"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
-        internal BuiltInPolicyDefinitionCollection(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        internal BuiltInPolicyDefinitionCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _builtInPolicyDefinitionPolicyDefinitionsClientDiagnostics = new ClientDiagnostics("MgmtExtensionResource", BuiltInPolicyDefinition.ResourceType.Namespace, DiagnosticOptions);
             ArmClient.TryGetApiVersion(BuiltInPolicyDefinition.ResourceType, out string builtInPolicyDefinitionPolicyDefinitionsApiVersion);

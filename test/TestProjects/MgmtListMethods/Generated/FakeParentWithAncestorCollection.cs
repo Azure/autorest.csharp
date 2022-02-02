@@ -33,9 +33,9 @@ namespace MgmtListMethods
         }
 
         /// <summary> Initializes a new instance of the <see cref="FakeParentWithAncestorCollection"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
-        internal FakeParentWithAncestorCollection(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        internal FakeParentWithAncestorCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _fakeParentWithAncestorClientDiagnostics = new ClientDiagnostics("MgmtListMethods", FakeParentWithAncestor.ResourceType.Namespace, DiagnosticOptions);
             ArmClient.TryGetApiVersion(FakeParentWithAncestor.ResourceType, out string fakeParentWithAncestorApiVersion);

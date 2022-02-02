@@ -15,15 +15,15 @@ namespace MgmtOperations
     {
         #region AvailabilitySet
         /// <summary> Gets an object representing a AvailabilitySet along with the instance operations that can be performed on it but with no data. </summary>
-        /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="AvailabilitySet" /> object. </returns>
-        public static AvailabilitySet GetAvailabilitySet(this ArmClient armClient, ResourceIdentifier id)
+        public static AvailabilitySet GetAvailabilitySet(this ArmClient client, ResourceIdentifier id)
         {
-            return armClient.GetClient(() =>
+            return client.GetClient(() =>
             {
                 AvailabilitySet.ValidateResourceId(id);
-                return new AvailabilitySet(armClient, id);
+                return new AvailabilitySet(client, id);
             }
             );
         }
@@ -31,15 +31,15 @@ namespace MgmtOperations
 
         #region AvailabilitySetChild
         /// <summary> Gets an object representing a AvailabilitySetChild along with the instance operations that can be performed on it but with no data. </summary>
-        /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="AvailabilitySetChild" /> object. </returns>
-        public static AvailabilitySetChild GetAvailabilitySetChild(this ArmClient armClient, ResourceIdentifier id)
+        public static AvailabilitySetChild GetAvailabilitySetChild(this ArmClient client, ResourceIdentifier id)
         {
-            return armClient.GetClient(() =>
+            return client.GetClient(() =>
             {
                 AvailabilitySetChild.ValidateResourceId(id);
-                return new AvailabilitySetChild(armClient, id);
+                return new AvailabilitySetChild(client, id);
             }
             );
         }
@@ -47,15 +47,15 @@ namespace MgmtOperations
 
         #region AvailabilitySetGrandChild
         /// <summary> Gets an object representing a AvailabilitySetGrandChild along with the instance operations that can be performed on it but with no data. </summary>
-        /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="AvailabilitySetGrandChild" /> object. </returns>
-        public static AvailabilitySetGrandChild GetAvailabilitySetGrandChild(this ArmClient armClient, ResourceIdentifier id)
+        public static AvailabilitySetGrandChild GetAvailabilitySetGrandChild(this ArmClient client, ResourceIdentifier id)
         {
-            return armClient.GetClient(() =>
+            return client.GetClient(() =>
             {
                 AvailabilitySetGrandChild.ValidateResourceId(id);
-                return new AvailabilitySetGrandChild(armClient, id);
+                return new AvailabilitySetGrandChild(client, id);
             }
             );
         }

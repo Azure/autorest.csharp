@@ -33,9 +33,9 @@ namespace Azure.Management.Storage
         }
 
         /// <summary> Initializes a new instance of the <see cref="BlobContainerCollection"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
-        internal BlobContainerCollection(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        internal BlobContainerCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _blobContainerClientDiagnostics = new ClientDiagnostics("Azure.Management.Storage", BlobContainer.ResourceType.Namespace, DiagnosticOptions);
             ArmClient.TryGetApiVersion(BlobContainer.ResourceType, out string blobContainerApiVersion);

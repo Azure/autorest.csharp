@@ -15,15 +15,15 @@ namespace MgmtParamOrdering
     {
         #region AvailabilitySet
         /// <summary> Gets an object representing a AvailabilitySet along with the instance operations that can be performed on it but with no data. </summary>
-        /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="AvailabilitySet" /> object. </returns>
-        public static AvailabilitySet GetAvailabilitySet(this ArmClient armClient, ResourceIdentifier id)
+        public static AvailabilitySet GetAvailabilitySet(this ArmClient client, ResourceIdentifier id)
         {
-            return armClient.GetClient(() =>
+            return client.GetClient(() =>
             {
                 AvailabilitySet.ValidateResourceId(id);
-                return new AvailabilitySet(armClient, id);
+                return new AvailabilitySet(client, id);
             }
             );
         }
@@ -31,15 +31,15 @@ namespace MgmtParamOrdering
 
         #region DedicatedHostGroup
         /// <summary> Gets an object representing a DedicatedHostGroup along with the instance operations that can be performed on it but with no data. </summary>
-        /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="DedicatedHostGroup" /> object. </returns>
-        public static DedicatedHostGroup GetDedicatedHostGroup(this ArmClient armClient, ResourceIdentifier id)
+        public static DedicatedHostGroup GetDedicatedHostGroup(this ArmClient client, ResourceIdentifier id)
         {
-            return armClient.GetClient(() =>
+            return client.GetClient(() =>
             {
                 DedicatedHostGroup.ValidateResourceId(id);
-                return new DedicatedHostGroup(armClient, id);
+                return new DedicatedHostGroup(client, id);
             }
             );
         }
@@ -47,15 +47,15 @@ namespace MgmtParamOrdering
 
         #region DedicatedHost
         /// <summary> Gets an object representing a DedicatedHost along with the instance operations that can be performed on it but with no data. </summary>
-        /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="DedicatedHost" /> object. </returns>
-        public static DedicatedHost GetDedicatedHost(this ArmClient armClient, ResourceIdentifier id)
+        public static DedicatedHost GetDedicatedHost(this ArmClient client, ResourceIdentifier id)
         {
-            return armClient.GetClient(() =>
+            return client.GetClient(() =>
             {
                 DedicatedHost.ValidateResourceId(id);
-                return new DedicatedHost(armClient, id);
+                return new DedicatedHost(client, id);
             }
             );
         }
@@ -63,15 +63,15 @@ namespace MgmtParamOrdering
 
         #region VirtualMachineExtensionImage
         /// <summary> Gets an object representing a VirtualMachineExtensionImage along with the instance operations that can be performed on it but with no data. </summary>
-        /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="VirtualMachineExtensionImage" /> object. </returns>
-        public static VirtualMachineExtensionImage GetVirtualMachineExtensionImage(this ArmClient armClient, ResourceIdentifier id)
+        public static VirtualMachineExtensionImage GetVirtualMachineExtensionImage(this ArmClient client, ResourceIdentifier id)
         {
-            return armClient.GetClient(() =>
+            return client.GetClient(() =>
             {
                 VirtualMachineExtensionImage.ValidateResourceId(id);
-                return new VirtualMachineExtensionImage(armClient, id);
+                return new VirtualMachineExtensionImage(client, id);
             }
             );
         }
@@ -79,15 +79,15 @@ namespace MgmtParamOrdering
 
         #region EnvironmentContainerResource
         /// <summary> Gets an object representing a EnvironmentContainerResource along with the instance operations that can be performed on it but with no data. </summary>
-        /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="EnvironmentContainerResource" /> object. </returns>
-        public static EnvironmentContainerResource GetEnvironmentContainerResource(this ArmClient armClient, ResourceIdentifier id)
+        public static EnvironmentContainerResource GetEnvironmentContainerResource(this ArmClient client, ResourceIdentifier id)
         {
-            return armClient.GetClient(() =>
+            return client.GetClient(() =>
             {
                 EnvironmentContainerResource.ValidateResourceId(id);
-                return new EnvironmentContainerResource(armClient, id);
+                return new EnvironmentContainerResource(client, id);
             }
             );
         }
@@ -95,15 +95,15 @@ namespace MgmtParamOrdering
 
         #region Workspace
         /// <summary> Gets an object representing a Workspace along with the instance operations that can be performed on it but with no data. </summary>
-        /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="Workspace" /> object. </returns>
-        public static Workspace GetWorkspace(this ArmClient armClient, ResourceIdentifier id)
+        public static Workspace GetWorkspace(this ArmClient client, ResourceIdentifier id)
         {
-            return armClient.GetClient(() =>
+            return client.GetClient(() =>
             {
                 Workspace.ValidateResourceId(id);
-                return new Workspace(armClient, id);
+                return new Workspace(client, id);
             }
             );
         }
@@ -111,15 +111,15 @@ namespace MgmtParamOrdering
 
         #region VirtualMachineScaleSet
         /// <summary> Gets an object representing a VirtualMachineScaleSet along with the instance operations that can be performed on it but with no data. </summary>
-        /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="VirtualMachineScaleSet" /> object. </returns>
-        public static VirtualMachineScaleSet GetVirtualMachineScaleSet(this ArmClient armClient, ResourceIdentifier id)
+        public static VirtualMachineScaleSet GetVirtualMachineScaleSet(this ArmClient client, ResourceIdentifier id)
         {
-            return armClient.GetClient(() =>
+            return client.GetClient(() =>
             {
                 VirtualMachineScaleSet.ValidateResourceId(id);
-                return new VirtualMachineScaleSet(armClient, id);
+                return new VirtualMachineScaleSet(client, id);
             }
             );
         }
