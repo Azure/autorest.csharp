@@ -22,7 +22,7 @@ using MgmtExpandResourceTypes.Models;
 namespace MgmtExpandResourceTypes
 {
     /// <summary> A class representing collection of RecordSet and their operations over its parent. </summary>
-    public partial class RecordSetAaaaCollection : ArmCollection, IEnumerable<RecordSetA>, IAsyncEnumerable<RecordSetA>
+    public partial class RecordSetAaaaCollection : ArmCollection, IEnumerable<RecordSetAaaa>, IAsyncEnumerable<RecordSetAaaa>
     {
         private readonly ClientDiagnostics _recordSetAaaaRecordSetsClientDiagnostics;
         private readonly RecordSetsRestOperations _recordSetAaaaRecordSetsRestClient;
@@ -136,7 +136,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
-        public async virtual Task<Response<RecordSetA>> GetAsync(string relativeRecordSetName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<RecordSetAaaa>> GetAsync(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
             if (relativeRecordSetName == null)
             {
@@ -150,7 +150,7 @@ namespace MgmtExpandResourceTypes
                 var response = await _recordSetAaaaRecordSetsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "AAAA".ToRecordType(), relativeRecordSetName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _recordSetAaaaRecordSetsClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new RecordSetA(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new RecordSetAaaa(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -166,7 +166,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
-        public virtual Response<RecordSetA> Get(string relativeRecordSetName, CancellationToken cancellationToken = default)
+        public virtual Response<RecordSetAaaa> Get(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
             if (relativeRecordSetName == null)
             {
@@ -180,7 +180,7 @@ namespace MgmtExpandResourceTypes
                 var response = _recordSetAaaaRecordSetsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "AAAA".ToRecordType(), relativeRecordSetName, cancellationToken);
                 if (response.Value == null)
                     throw _recordSetAaaaRecordSetsClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new RecordSetA(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new RecordSetAaaa(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -196,17 +196,17 @@ namespace MgmtExpandResourceTypes
         /// <param name="top"> The maximum number of record sets to return. If not specified, returns up to 100 record sets. </param>
         /// <param name="recordsetnamesuffix"> The suffix label of the record set name that has to be used to filter the record set enumerations. If this parameter is specified, Enumeration will return only records that end with .&lt;recordSetNameSuffix&gt;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="RecordSetA" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<RecordSetA> GetAllAsync(int? top = null, string recordsetnamesuffix = null, CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="RecordSetAaaa" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<RecordSetAaaa> GetAllAsync(int? top = null, string recordsetnamesuffix = null, CancellationToken cancellationToken = default)
         {
-            async Task<Page<RecordSetA>> FirstPageFunc(int? pageSizeHint)
+            async Task<Page<RecordSetAaaa>> FirstPageFunc(int? pageSizeHint)
             {
                 using var scope = _recordSetAaaaRecordSetsClientDiagnostics.CreateScope("RecordSetAaaaCollection.GetAll");
                 scope.Start();
                 try
                 {
                     var response = await _recordSetAaaaRecordSetsRestClient.ListByTypeAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "AAAA".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetA(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetAaaa(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -214,14 +214,14 @@ namespace MgmtExpandResourceTypes
                     throw;
                 }
             }
-            async Task<Page<RecordSetA>> NextPageFunc(string nextLink, int? pageSizeHint)
+            async Task<Page<RecordSetAaaa>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
                 using var scope = _recordSetAaaaRecordSetsClientDiagnostics.CreateScope("RecordSetAaaaCollection.GetAll");
                 scope.Start();
                 try
                 {
                     var response = await _recordSetAaaaRecordSetsRestClient.ListByTypeNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "AAAA".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetA(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetAaaa(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -239,17 +239,17 @@ namespace MgmtExpandResourceTypes
         /// <param name="top"> The maximum number of record sets to return. If not specified, returns up to 100 record sets. </param>
         /// <param name="recordsetnamesuffix"> The suffix label of the record set name that has to be used to filter the record set enumerations. If this parameter is specified, Enumeration will return only records that end with .&lt;recordSetNameSuffix&gt;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="RecordSetA" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<RecordSetA> GetAll(int? top = null, string recordsetnamesuffix = null, CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="RecordSetAaaa" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<RecordSetAaaa> GetAll(int? top = null, string recordsetnamesuffix = null, CancellationToken cancellationToken = default)
         {
-            Page<RecordSetA> FirstPageFunc(int? pageSizeHint)
+            Page<RecordSetAaaa> FirstPageFunc(int? pageSizeHint)
             {
                 using var scope = _recordSetAaaaRecordSetsClientDiagnostics.CreateScope("RecordSetAaaaCollection.GetAll");
                 scope.Start();
                 try
                 {
                     var response = _recordSetAaaaRecordSetsRestClient.ListByType(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "AAAA".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetA(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetAaaa(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -257,14 +257,14 @@ namespace MgmtExpandResourceTypes
                     throw;
                 }
             }
-            Page<RecordSetA> NextPageFunc(string nextLink, int? pageSizeHint)
+            Page<RecordSetAaaa> NextPageFunc(string nextLink, int? pageSizeHint)
             {
                 using var scope = _recordSetAaaaRecordSetsClientDiagnostics.CreateScope("RecordSetAaaaCollection.GetAll");
                 scope.Start();
                 try
                 {
                     var response = _recordSetAaaaRecordSetsRestClient.ListByTypeNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "AAAA".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetA(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetAaaa(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -338,7 +338,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
-        public async virtual Task<Response<RecordSetA>> GetIfExistsAsync(string relativeRecordSetName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<RecordSetAaaa>> GetIfExistsAsync(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
             if (relativeRecordSetName == null)
             {
@@ -351,8 +351,8 @@ namespace MgmtExpandResourceTypes
             {
                 var response = await _recordSetAaaaRecordSetsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "AAAA".ToRecordType(), relativeRecordSetName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    return Response.FromValue<RecordSetA>(null, response.GetRawResponse());
-                return Response.FromValue(new RecordSetA(ArmClient, response.Value), response.GetRawResponse());
+                    return Response.FromValue<RecordSetAaaa>(null, response.GetRawResponse());
+                return Response.FromValue(new RecordSetAaaa(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -368,7 +368,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
-        public virtual Response<RecordSetA> GetIfExists(string relativeRecordSetName, CancellationToken cancellationToken = default)
+        public virtual Response<RecordSetAaaa> GetIfExists(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
             if (relativeRecordSetName == null)
             {
@@ -381,8 +381,8 @@ namespace MgmtExpandResourceTypes
             {
                 var response = _recordSetAaaaRecordSetsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "AAAA".ToRecordType(), relativeRecordSetName, cancellationToken: cancellationToken);
                 if (response.Value == null)
-                    return Response.FromValue<RecordSetA>(null, response.GetRawResponse());
-                return Response.FromValue(new RecordSetA(ArmClient, response.Value), response.GetRawResponse());
+                    return Response.FromValue<RecordSetAaaa>(null, response.GetRawResponse());
+                return Response.FromValue(new RecordSetAaaa(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -391,7 +391,7 @@ namespace MgmtExpandResourceTypes
             }
         }
 
-        IEnumerator<RecordSetA> IEnumerable<RecordSetA>.GetEnumerator()
+        IEnumerator<RecordSetAaaa> IEnumerable<RecordSetAaaa>.GetEnumerator()
         {
             return GetAll().GetEnumerator();
         }
@@ -401,7 +401,7 @@ namespace MgmtExpandResourceTypes
             return GetAll().GetEnumerator();
         }
 
-        IAsyncEnumerator<RecordSetA> IAsyncEnumerable<RecordSetA>.GetAsyncEnumerator(CancellationToken cancellationToken)
+        IAsyncEnumerator<RecordSetAaaa> IAsyncEnumerable<RecordSetAaaa>.GetAsyncEnumerator(CancellationToken cancellationToken)
         {
             return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }

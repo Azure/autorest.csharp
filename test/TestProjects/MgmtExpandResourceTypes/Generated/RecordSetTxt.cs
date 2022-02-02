@@ -89,7 +89,7 @@ namespace MgmtExpandResourceTypes
         /// OperationId: RecordSets_Get
         /// <summary> Gets a record set. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<RecordSetA>> GetAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<Response<RecordSetTxt>> GetAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _recordSetTxtRecordSetsClientDiagnostics.CreateScope("RecordSetTxt.Get");
             scope.Start();
@@ -98,7 +98,7 @@ namespace MgmtExpandResourceTypes
                 var response = await _recordSetTxtRecordSetsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, "TXT".ToRecordType(), Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _recordSetTxtRecordSetsClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new RecordSetA(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new RecordSetTxt(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -112,7 +112,7 @@ namespace MgmtExpandResourceTypes
         /// OperationId: RecordSets_Get
         /// <summary> Gets a record set. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<RecordSetA> Get(CancellationToken cancellationToken = default)
+        public virtual Response<RecordSetTxt> Get(CancellationToken cancellationToken = default)
         {
             using var scope = _recordSetTxtRecordSetsClientDiagnostics.CreateScope("RecordSetTxt.Get");
             scope.Start();
@@ -121,7 +121,7 @@ namespace MgmtExpandResourceTypes
                 var response = _recordSetTxtRecordSetsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, "TXT".ToRecordType(), Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _recordSetTxtRecordSetsClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new RecordSetA(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new RecordSetTxt(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -190,7 +190,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="ifMatch"> The etag of the record set. Omit this value to always overwrite the current record set. Specify the last-seen etag value to prevent accidentally overwriting concurrent changes. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<Response<RecordSetA>> UpdateAsync(RecordSetData parameters, string ifMatch = null, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<RecordSetTxt>> UpdateAsync(RecordSetData parameters, string ifMatch = null, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -202,7 +202,7 @@ namespace MgmtExpandResourceTypes
             try
             {
                 var response = await _recordSetTxtRecordSetsRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, "TXT".ToRecordType(), Id.Name, parameters, ifMatch, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new RecordSetA(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new RecordSetTxt(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -219,7 +219,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="ifMatch"> The etag of the record set. Omit this value to always overwrite the current record set. Specify the last-seen etag value to prevent accidentally overwriting concurrent changes. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual Response<RecordSetA> Update(RecordSetData parameters, string ifMatch = null, CancellationToken cancellationToken = default)
+        public virtual Response<RecordSetTxt> Update(RecordSetData parameters, string ifMatch = null, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -231,7 +231,7 @@ namespace MgmtExpandResourceTypes
             try
             {
                 var response = _recordSetTxtRecordSetsRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, "TXT".ToRecordType(), Id.Name, parameters, ifMatch, cancellationToken);
-                return Response.FromValue(new RecordSetA(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new RecordSetTxt(ArmClient, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
