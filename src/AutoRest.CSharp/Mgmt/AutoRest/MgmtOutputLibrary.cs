@@ -283,8 +283,13 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private MgmtExtensionClient EnsureExtensionsClient(MgmtExtensions publicExtension) =>
             new MgmtExtensionClient(_context, publicExtension);
 
-        private MgmtExtensions EnsureExtensions(Type armCoreType, RequestPath contextualPath) =>
-            new MgmtExtensions(GetChildOperations(contextualPath), armCoreType, _context, contextualPath);
+        private MgmtExtensions EnsureExtensions(Type armCoreType, RequestPath contextualPath)
+        {
+            var operations = armCoreType.Namespace != _context.DefaultNamespace
+                ? GetChildOperations(contextualPath)
+                : Enumerable.Empty<Operation>();
+            return new MgmtExtensions(operations, armCoreType, _context, contextualPath);
+        }
 
         private ArmClientExtensions? _armClientExtensions;
         private ArmClientExtensions EnsureArmClientExtensions()

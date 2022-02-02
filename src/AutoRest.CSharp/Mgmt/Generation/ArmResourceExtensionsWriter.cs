@@ -37,19 +37,19 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 using (_writer.Scope($"return {This.ExtensionParameter.Name}.GetCachedClient<{signature.ReturnType}>((armClient) =>"))
                 {
-                    WriteGetter(signature.ReturnType);
+                    WriteGetter(signature.ReturnType, "armClient");
                 }
                 _writer.Line($");");
             }
             else
             {
-                WriteGetter(signature.ReturnType);
+                WriteGetter(signature.ReturnType, ArmClientReference);
             }
         }
 
-        private void WriteGetter(CSharpType? type)
+        private void WriteGetter(CSharpType? type, string armClientVariable)
         {
-            _writer.Line($"return new {type}(armClient, {This.ExtensionParameter.Name}.Id);");
+            _writer.Line($"return new {type}({armClientVariable}, {This.ExtensionParameter.Name}.Id);");
         }
     }
 }

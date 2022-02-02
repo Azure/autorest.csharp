@@ -32,7 +32,9 @@ namespace AutoRest.CSharp.Mgmt.Output
             _context = context;
             AllRawOperations = allRawOperations;
             ArmCoreType = armCoreType;
-            DefaultName = $"{ResourceName}Extensions";
+            DefaultName = context.Configuration.MgmtConfiguration.IsArmCore ? ResourceName : $"{ResourceName}Extensions";
+            DefaultNamespace = context.Configuration.MgmtConfiguration.IsArmCore ? ArmCoreType.Namespace! : base.DefaultNamespace;
+            Description = context.Configuration.MgmtConfiguration.IsArmCore ? string.Empty : $"A class to add extension methods to {ResourceName}.";
             ContextualPath = contextualPath;
             ArmCoreNamespace = ArmCoreType.Namespace!;
             string variableName = context.Configuration.MgmtConfiguration.IsArmCore ? "this" : armCoreType.Name.ToVariableName();
@@ -45,20 +47,26 @@ namespace AutoRest.CSharp.Mgmt.Output
                 IsExtensionParameter: true);
         }
 
+        protected override ConstructorSignature? EnsureMockingCtor()
+        {
+            return IsArmCore ? null : base.EnsureMockingCtor();
+        }
+
         public override string BranchIdVariableName => $"{ExtensionParameter.Name}.Id";
 
         public Parameter ExtensionParameter { get; }
 
         public override CSharpType? BaseType => null;
 
-        private string? _description;
-        public override string Description => _description ??= $"A class to add extension methods to {ResourceName}.";
+        public override string Description { get; }
 
         public Type ArmCoreType { get; }
 
         public string ArmCoreNamespace { get; }
 
         protected override string DefaultName { get; }
+
+        protected override string DefaultNamespace { get; }
 
         public virtual RequestPath ContextualPath { get; }
 
@@ -75,7 +83,8 @@ namespace AutoRest.CSharp.Mgmt.Output
             return AllRawOperations.Select(operation =>
             {
                 var operationName = GetOperationName(operation, ResourceName);
-                // TODO -- these logic needs a thorough refactor -- the values MgmtRestOperation consumes here are actually coupled together, some of the values are calculated multiple times (here and in writers).
+                // TODO -- these logic needs a thorough refactor -- the values MgmtRestOperation consumes here are actually coupled together
+                // some of the values are calculated multiple times (here and in writers).
                 // we just leave this implementation here since it could work for now
                 return MgmtClientOperation.FromOperation(
                     new MgmtRestOperation(
@@ -87,7 +96,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                         operation.GetReturnTypeAsLongRunningOperation(null, operationName, _context),
                         _context),
                     _context,
-                    ExtensionParameter);
+                    extensionParamToUse);
             });
         }
 

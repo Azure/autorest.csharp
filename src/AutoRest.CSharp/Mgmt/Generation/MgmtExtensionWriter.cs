@@ -30,13 +30,17 @@ namespace AutoRest.CSharp.Mgmt.Generation
             This = extensions;
         }
 
-        protected override WriteMethodDelegate GetMethodDelegate(bool isLongRunning, bool isPaging) => GetMethodWrapperImpl;
+        protected override WriteMethodDelegate GetMethodDelegate(bool isLongRunning, bool isPaging)
+            => IsArmCore ? base.GetMethodDelegate(isLongRunning, isPaging) : GetMethodWrapperImpl;
 
         private void GetMethodWrapperImpl(MgmtClientOperation clientOperation, Diagnostic diagnostic, bool isAsync)
             => WriteMethodBodyWrapper(clientOperation.MethodSignature, isAsync, clientOperation.IsPagingOperation);
 
         protected override void WritePrivateHelpers()
         {
+            if (IsArmCore)
+                return;
+
             _writer.Line();
             string staticText = IsArmCore ? string.Empty : "static ";
             FormattableString signatureParamText = IsArmCore ? (FormattableString)$"" : (FormattableString)$"{This.ExtensionParameter.Type} {This.ExtensionParameter.Name}";
@@ -67,22 +71,46 @@ namespace AutoRest.CSharp.Mgmt.Generation
         }
 
         protected override void WriteResourceCollectionEntry(ResourceCollection resourceCollection, MethodSignature signature)
-            => WriteMethodBodyWrapper(signature, false, false);
+        {
+            if (IsArmCore)
+            {
+                base.WriteResourceCollectionEntry(resourceCollection, signature);
+            }
+            else
+            {
+                WriteMethodBodyWrapper(signature, false, false);
+            }
+        }
 
         protected override void WriteSingletonResourceEntry(Resource resource, string singletonResourceSuffix, MethodSignature signature)
-            => WriteMethodBodyWrapper(signature, false, false);
-
-        protected override Parameter[] GetParametersForCollectionEntry(ResourceCollection resource)
         {
+            if (IsArmCore)
+            {
+                base.WriteSingletonResourceEntry(resource, singletonResourceSuffix, signature);
+            }
+            else
+            {
+                WriteMethodBodyWrapper(signature, false, false);
+            }
+        }
+
+        protected override Parameter[] GetParametersForCollectionEntry(ResourceCollection resourceCollection)
+        {
+            if (IsArmCore)
+                return base.GetParametersForCollectionEntry(resourceCollection);
+
             List<Parameter> parameters = new List<Parameter>();
             if (!IsArmCore)
                 parameters.Add(This.ExtensionParameter);
-            parameters.AddRange(resource.ExtraConstructorParameters);
+            parameters.AddRange(resourceCollection.ExtraConstructorParameters);
             return parameters.ToArray();
         }
 
         protected override Parameter[] GetParametersForSingletonEntry()
         {
+            if (IsArmCore)
+                return base.GetParametersForSingletonEntry();
+
             List<Parameter> parameters = new List<Parameter>();
             if (!IsArmCore)
                 parameters.Add(This.ExtensionParameter);

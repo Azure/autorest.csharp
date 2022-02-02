@@ -203,6 +203,8 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         public RequestPath ApplyHint(ResourceTypeSegment hint)
         {
+            if (hint.Count == 0)
+                return this;
             int hintIndex = 0;
             List<Segment> newPath = new List<Segment>();
             int thisIndex = 0;

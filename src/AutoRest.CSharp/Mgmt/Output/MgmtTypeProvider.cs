@@ -28,14 +28,14 @@ namespace AutoRest.CSharp.Mgmt.Output
     internal abstract class MgmtTypeProvider : TypeProvider
     {
         protected BuildContext<MgmtOutputLibrary> _context;
-        private bool _isArmCore;
+        protected bool IsArmCore { get; }
 
         protected MgmtTypeProvider(BuildContext<MgmtOutputLibrary> context, string resourceName) : base(context)
         {
             _context = context;
             ResourceName = resourceName;
-            _isArmCore = context.Configuration.MgmtConfiguration.IsArmCore;
-            IsStatic = !_isArmCore && BaseType is null && this is MgmtExtensions extension && extension.ArmCoreType != typeof(ArmResource) && extension.ArmCoreType != typeof(ArmClient);
+            IsArmCore = context.Configuration.MgmtConfiguration.IsArmCore;
+            IsStatic = !IsArmCore && BaseType is null && this is MgmtExtensions extension && extension.ArmCoreType != typeof(ArmResource) && extension.ArmCoreType != typeof(ArmClient);
         }
 
         protected virtual string IdParamDescription => $"The identifier of the resource that is the target of operations.";
@@ -115,11 +115,15 @@ namespace AutoRest.CSharp.Mgmt.Output
         protected virtual IEnumerable<FieldDeclaration>? GetAdditionalFields() => null;
 
         private ConstructorSignature? _mockingCtor;
-        public ConstructorSignature MockingCtor => _mockingCtor ??= new ConstructorSignature(
+        public ConstructorSignature? MockingCtor => _mockingCtor ??= EnsureMockingCtor();
+        protected virtual ConstructorSignature? EnsureMockingCtor()
+        {
+            return new ConstructorSignature(
                 Name: Type.Name,
                 Description: $"Initializes a new instance of the <see cref=\"{Type.Name}\"/> class for mocking.",
                 Modifiers: "protected",
                 Parameters: new Parameter[0]);
+        }
 
         private ConstructorSignature? _armClientCtor;
         public ConstructorSignature? ArmClientCtor => _armClientCtor ??= EnsureArmClientCtor();

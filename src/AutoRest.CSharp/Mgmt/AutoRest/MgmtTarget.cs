@@ -141,7 +141,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 var armClientExtension = context.Library.ArmClientExtensions;
                 var armClientExtensionsCodeWriter = new ArmClientExtensionsWriter(armClientExtension, context);
                 armClientExtensionsCodeWriter.Write();
-                AddGeneratedFile(project, isArmCore ? $"{armClientExtension.ResourceName}.cs" : $"Extensions/{armClientExtension.Type.Name}.cs", armClientExtensionsCodeWriter.ToString());
+                AddGeneratedFile(project, $"Extensions/{armClientExtensionsCodeWriter.FileName}.cs", armClientExtensionsCodeWriter.ToString());
             }
 
             if (!context.Library.ArmResourceExtensions.IsEmpty)
@@ -149,7 +149,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 var armResourceExt = context.Library.ArmResourceExtensions;
                 var armResourceExtensionsCodeWriter = new ArmResourceExtensionsWriter(armResourceExt, context);
                 armResourceExtensionsCodeWriter.Write();
-                AddGeneratedFile(project, isArmCore ? $"{armResourceExt.ResourceName}.cs" : $"Extensions/{armResourceExt.Type.Name}.cs", armResourceExtensionsCodeWriter.ToString());
+                AddGeneratedFile(project, $"Extensions/{armResourceExtensionsCodeWriter.FileName}.cs", armResourceExtensionsCodeWriter.ToString());
             }
 
             // we must output the LROs and fake LROs as the last step to sure all the LRO and fake LRO object could be initialized.
@@ -176,7 +176,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         private static void WriteExtensionPair(GeneratedCodeWorkspace project, BuildContext<MgmtOutputLibrary> context, MgmtExtensionClient extensionClient)
         {
             WriteExtensionPiece(project, context, new MgmtExtensionWriter(extensionClient.Extension, context));
-            WriteExtensionPiece(project, context, new ResourceExtensionWriter(extensionClient, context));
+            if (!context.Configuration.MgmtConfiguration.IsArmCore)
+                WriteExtensionPiece(project, context, new ResourceExtensionWriter(extensionClient, context));
         }
 
         private static void WriteExtensionPiece(GeneratedCodeWorkspace project, BuildContext<MgmtOutputLibrary> context, MgmtClientBaseWriter extensionWriter)

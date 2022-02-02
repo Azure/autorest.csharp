@@ -111,7 +111,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Append($"{This.Accessibility}");
             if (This.IsStatic)
                 _writer.Append($" static");
-            _writer.Append($" partial class {This.Type.Name:D}");
+            _writer.Append($" partial class {This.Type.Name}");
             if (This.GetImplementsList().Any())
             {
                 _writer.Append($" : ");
@@ -129,9 +129,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
             if (This.IsStatic)
                 return;
 
-            _writer.WriteMethodDocumentation(This.MockingCtor);
-            using (_writer.WriteMethodDeclaration(This.MockingCtor))
+            if (This.MockingCtor is not null)
             {
+                _writer.WriteMethodDocumentation(This.MockingCtor);
+                using (_writer.WriteMethodDeclaration(This.MockingCtor))
+                {
+                }
             }
 
             _writer.Line();

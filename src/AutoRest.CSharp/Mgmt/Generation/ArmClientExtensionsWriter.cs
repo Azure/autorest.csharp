@@ -53,21 +53,21 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     using (_writer.Scope($"return {This.ExtensionParameter.Name}.GetClient<{resource.Type}>(() =>"))
                     {
-                        WriteGetter(resource);
+                        WriteGetter(resource, "armClient");
                     }
                     _writer.Line($");");
                 }
                 else
                 {
-                    WriteGetter(resource);
+                    WriteGetter(resource, "this");
                 }
             }
         }
 
-        private void WriteGetter(Resource resource)
+        private void WriteGetter(Resource resource, string armVariable)
         {
             _writer.Line($"{resource.Type.Name}.ValidateResourceId(id);");
-            _writer.Line($"return new {resource.Type.Name}(armClient, id);");
+            _writer.Line($"return new {resource.Type.Name}({armVariable}, id);");
         }
     }
 }
