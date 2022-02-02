@@ -80,8 +80,9 @@ namespace AutoRest.CSharp.Mgmt.Models
         /// <param name="method"></param>
         public RequestPath(RestClientMethod method)
         {
+            int index = 0;
             var segments = method.Request.PathSegments
-                .SelectMany(pathSegment => ParsePathSegment(pathSegment))
+                .SelectMany(pathSegment => ParsePathSegment(pathSegment, ref index))
                 .ToList();
             _segments = CheckByIdPath(segments);
             SerializedPath = method.Operation.GetHttpPath();
@@ -295,13 +296,16 @@ namespace AutoRest.CSharp.Mgmt.Models
             return queue.Select(list => new RequestPath(list));
         }
 
-        private static IEnumerable<Segment> ParsePathSegment(PathSegment pathSegment)
+        private static IEnumerable<Segment> ParsePathSegment(PathSegment pathSegment, ref int segmentIndex)
         {
             // we explicitly skip the `uri` variable in the path (which should be `endpoint`)
             CSharpType valueType = pathSegment.Value.Type;
             if (valueType.IsFrameworkType &&
                 valueType.FrameworkType == typeof(Uri))
+            {
+                segmentIndex++;
                 return Enumerable.Empty<Segment>();
+            }
             if (pathSegment.Value.IsConstant)
             {
                 // in this case, we have a constant in this path segment, which might contains slashes
@@ -313,10 +317,15 @@ namespace AutoRest.CSharp.Mgmt.Models
                 // if this is a string type
                 if (type.IsFrameworkType && type.FrameworkType == typeof(string))
                 {
-                    return ((string)value).Split('/', StringSplitOptions.RemoveEmptyEntries).Select(s => new Segment(s));
+                    var pieces = ((string)value).Split('/', StringSplitOptions.RemoveEmptyEntries);
+                    segmentIndex += pieces.Length;
+                    return pieces.Select(s => new Segment(s));
                 }
             }
-            CSharpType? expandableType = !valueType.IsFrameworkType && valueType.Implementation is EnumType ? valueType : null;
+
+            segmentIndex++;
+            //for now we only assume expand variables are in the key slot which will be an odd slot
+            CSharpType? expandableType = (segmentIndex % 2 == 0) && !valueType.IsFrameworkType && valueType.Implementation is EnumType ? valueType : null;
 
             // this is either a constant but not string type, or it is not a constant, we just keep the information in this path segment
             return new Segment(pathSegment.Value, pathSegment.Escape, expandableType: expandableType).AsIEnumerable();
