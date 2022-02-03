@@ -39,7 +39,7 @@ namespace SingletonResource
         internal CarCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _carClientDiagnostics = new ClientDiagnostics("SingletonResource", Car.ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(Car.ResourceType, out string carApiVersion);
+            Client.TryGetApiVersion(Car.ResourceType, out string carApiVersion);
             _carRestClient = new CarsRestOperations(_carClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, carApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -74,7 +74,7 @@ namespace SingletonResource
             try
             {
                 var response = await _carRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, carName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new CarCreateOrUpdateOperation(ArmClient, response);
+                var operation = new CarCreateOrUpdateOperation(Client, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -108,7 +108,7 @@ namespace SingletonResource
             try
             {
                 var response = _carRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, carName, parameters, cancellationToken);
-                var operation = new CarCreateOrUpdateOperation(ArmClient, response);
+                var operation = new CarCreateOrUpdateOperation(Client, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -138,7 +138,7 @@ namespace SingletonResource
                 var response = await _carRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, carName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _carClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new Car(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Car(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -165,7 +165,7 @@ namespace SingletonResource
                 var response = _carRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, carName, cancellationToken);
                 if (response.Value == null)
                     throw _carClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new Car(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Car(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -188,7 +188,7 @@ namespace SingletonResource
                 try
                 {
                     var response = await _carRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new Car(ArmClient, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new Car(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -213,7 +213,7 @@ namespace SingletonResource
                 try
                 {
                     var response = _carRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new Car(ArmClient, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new Car(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -295,7 +295,7 @@ namespace SingletonResource
                 var response = await _carRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, carName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<Car>(null, response.GetRawResponse());
-                return Response.FromValue(new Car(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Car(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -323,7 +323,7 @@ namespace SingletonResource
                 var response = _carRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, carName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<Car>(null, response.GetRawResponse());
-                return Response.FromValue(new Car(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Car(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

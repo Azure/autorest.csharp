@@ -38,7 +38,7 @@ namespace MgmtListMethods
         internal TenantParentWithNonResChWithLocCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _tenantParentWithNonResChWithLocClientDiagnostics = new ClientDiagnostics("MgmtListMethods", TenantParentWithNonResChWithLoc.ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(TenantParentWithNonResChWithLoc.ResourceType, out string tenantParentWithNonResChWithLocApiVersion);
+            Client.TryGetApiVersion(TenantParentWithNonResChWithLoc.ResourceType, out string tenantParentWithNonResChWithLocApiVersion);
             _tenantParentWithNonResChWithLocRestClient = new TenantParentWithNonResChWithLocsRestOperations(_tenantParentWithNonResChWithLocClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, tenantParentWithNonResChWithLocApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -74,7 +74,7 @@ namespace MgmtListMethods
             try
             {
                 var response = await _tenantParentWithNonResChWithLocRestClient.CreateOrUpdateAsync(Id.Name, tenantParentWithNonResChWithLocName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new TenantParentWithNonResChWithLocCreateOrUpdateOperation(ArmClient, response);
+                var operation = new TenantParentWithNonResChWithLocCreateOrUpdateOperation(Client, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -109,7 +109,7 @@ namespace MgmtListMethods
             try
             {
                 var response = _tenantParentWithNonResChWithLocRestClient.CreateOrUpdate(Id.Name, tenantParentWithNonResChWithLocName, parameters, cancellationToken);
-                var operation = new TenantParentWithNonResChWithLocCreateOrUpdateOperation(ArmClient, response);
+                var operation = new TenantParentWithNonResChWithLocCreateOrUpdateOperation(Client, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -140,7 +140,7 @@ namespace MgmtListMethods
                 var response = await _tenantParentWithNonResChWithLocRestClient.GetAsync(Id.Name, tenantParentWithNonResChWithLocName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _tenantParentWithNonResChWithLocClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new TenantParentWithNonResChWithLoc(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new TenantParentWithNonResChWithLoc(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -168,7 +168,7 @@ namespace MgmtListMethods
                 var response = _tenantParentWithNonResChWithLocRestClient.Get(Id.Name, tenantParentWithNonResChWithLocName, cancellationToken);
                 if (response.Value == null)
                     throw _tenantParentWithNonResChWithLocClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new TenantParentWithNonResChWithLoc(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new TenantParentWithNonResChWithLoc(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -192,7 +192,7 @@ namespace MgmtListMethods
                 try
                 {
                     var response = await _tenantParentWithNonResChWithLocRestClient.ListAsync(Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new TenantParentWithNonResChWithLoc(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new TenantParentWithNonResChWithLoc(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -207,7 +207,7 @@ namespace MgmtListMethods
                 try
                 {
                     var response = await _tenantParentWithNonResChWithLocRestClient.ListNextPageAsync(nextLink, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new TenantParentWithNonResChWithLoc(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new TenantParentWithNonResChWithLoc(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -233,7 +233,7 @@ namespace MgmtListMethods
                 try
                 {
                     var response = _tenantParentWithNonResChWithLocRestClient.List(Id.Name, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new TenantParentWithNonResChWithLoc(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new TenantParentWithNonResChWithLoc(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -248,7 +248,7 @@ namespace MgmtListMethods
                 try
                 {
                     var response = _tenantParentWithNonResChWithLocRestClient.ListNextPage(nextLink, Id.Name, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new TenantParentWithNonResChWithLoc(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new TenantParentWithNonResChWithLoc(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -330,7 +330,7 @@ namespace MgmtListMethods
                 var response = await _tenantParentWithNonResChWithLocRestClient.GetAsync(Id.Name, tenantParentWithNonResChWithLocName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<TenantParentWithNonResChWithLoc>(null, response.GetRawResponse());
-                return Response.FromValue(new TenantParentWithNonResChWithLoc(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new TenantParentWithNonResChWithLoc(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -358,7 +358,7 @@ namespace MgmtListMethods
                 var response = _tenantParentWithNonResChWithLocRestClient.Get(Id.Name, tenantParentWithNonResChWithLocName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<TenantParentWithNonResChWithLoc>(null, response.GetRawResponse());
-                return Response.FromValue(new TenantParentWithNonResChWithLoc(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new TenantParentWithNonResChWithLoc(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

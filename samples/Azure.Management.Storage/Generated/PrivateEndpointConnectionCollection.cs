@@ -38,7 +38,7 @@ namespace Azure.Management.Storage
         internal PrivateEndpointConnectionCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _privateEndpointConnectionClientDiagnostics = new ClientDiagnostics("Azure.Management.Storage", PrivateEndpointConnection.ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(PrivateEndpointConnection.ResourceType, out string privateEndpointConnectionApiVersion);
+            Client.TryGetApiVersion(PrivateEndpointConnection.ResourceType, out string privateEndpointConnectionApiVersion);
             _privateEndpointConnectionRestClient = new PrivateEndpointConnectionsRestOperations(_privateEndpointConnectionClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, privateEndpointConnectionApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -74,7 +74,7 @@ namespace Azure.Management.Storage
             try
             {
                 var response = await _privateEndpointConnectionRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, privateEndpointConnectionName, properties, cancellationToken).ConfigureAwait(false);
-                var operation = new PrivateEndpointConnectionCreateOrUpdateOperation(ArmClient, response);
+                var operation = new PrivateEndpointConnectionCreateOrUpdateOperation(Client, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -109,7 +109,7 @@ namespace Azure.Management.Storage
             try
             {
                 var response = _privateEndpointConnectionRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, privateEndpointConnectionName, properties, cancellationToken);
-                var operation = new PrivateEndpointConnectionCreateOrUpdateOperation(ArmClient, response);
+                var operation = new PrivateEndpointConnectionCreateOrUpdateOperation(Client, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -140,7 +140,7 @@ namespace Azure.Management.Storage
                 var response = await _privateEndpointConnectionRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, privateEndpointConnectionName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _privateEndpointConnectionClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new PrivateEndpointConnection(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new PrivateEndpointConnection(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -168,7 +168,7 @@ namespace Azure.Management.Storage
                 var response = _privateEndpointConnectionRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, privateEndpointConnectionName, cancellationToken);
                 if (response.Value == null)
                     throw _privateEndpointConnectionClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new PrivateEndpointConnection(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new PrivateEndpointConnection(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -192,7 +192,7 @@ namespace Azure.Management.Storage
                 try
                 {
                     var response = await _privateEndpointConnectionRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new PrivateEndpointConnection(ArmClient, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new PrivateEndpointConnection(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -218,7 +218,7 @@ namespace Azure.Management.Storage
                 try
                 {
                     var response = _privateEndpointConnectionRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new PrivateEndpointConnection(ArmClient, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new PrivateEndpointConnection(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -300,7 +300,7 @@ namespace Azure.Management.Storage
                 var response = await _privateEndpointConnectionRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, privateEndpointConnectionName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<PrivateEndpointConnection>(null, response.GetRawResponse());
-                return Response.FromValue(new PrivateEndpointConnection(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new PrivateEndpointConnection(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -328,7 +328,7 @@ namespace Azure.Management.Storage
                 var response = _privateEndpointConnectionRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, privateEndpointConnectionName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<PrivateEndpointConnection>(null, response.GetRawResponse());
-                return Response.FromValue(new PrivateEndpointConnection(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new PrivateEndpointConnection(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

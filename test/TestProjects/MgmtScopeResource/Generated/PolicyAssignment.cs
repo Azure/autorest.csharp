@@ -53,7 +53,7 @@ namespace MgmtScopeResource
         internal PolicyAssignment(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _policyAssignmentClientDiagnostics = new ClientDiagnostics("MgmtScopeResource", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string policyAssignmentApiVersion);
+            Client.TryGetApiVersion(ResourceType, out string policyAssignmentApiVersion);
             _policyAssignmentRestClient = new PolicyAssignmentsRestOperations(_policyAssignmentClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, policyAssignmentApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -98,7 +98,7 @@ namespace MgmtScopeResource
                 var response = await _policyAssignmentRestClient.GetAsync(Id.Parent, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _policyAssignmentClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new PolicyAssignment(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new PolicyAssignment(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -121,7 +121,7 @@ namespace MgmtScopeResource
                 var response = _policyAssignmentRestClient.Get(Id.Parent, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _policyAssignmentClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new PolicyAssignment(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new PolicyAssignment(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

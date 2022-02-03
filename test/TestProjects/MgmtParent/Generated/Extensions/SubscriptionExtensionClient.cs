@@ -40,7 +40,7 @@ namespace MgmtParent
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {
-            ArmClient.TryGetApiVersion(resourceType, out string apiVersion);
+            Client.TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
         }
 
@@ -50,7 +50,7 @@ namespace MgmtParent
         /// <returns> An object representing collection of VirtualMachineExtensionImages and their operations over a VirtualMachineExtensionImage. </returns>
         public virtual VirtualMachineExtensionImageCollection GetVirtualMachineExtensionImages(string location, string publisherName)
         {
-            return new VirtualMachineExtensionImageCollection(ArmClient, Id, location, publisherName);
+            return new VirtualMachineExtensionImageCollection(Client, Id, location, publisherName);
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/availabilitySets
@@ -69,7 +69,7 @@ namespace MgmtParent
                 try
                 {
                     var response = await AvailabilitySetRestClient.ListBySubscriptionAsync(Id.SubscriptionId, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new AvailabilitySet(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new AvailabilitySet(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -84,7 +84,7 @@ namespace MgmtParent
                 try
                 {
                     var response = await AvailabilitySetRestClient.ListBySubscriptionNextPageAsync(nextLink, Id.SubscriptionId, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new AvailabilitySet(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new AvailabilitySet(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -111,7 +111,7 @@ namespace MgmtParent
                 try
                 {
                     var response = AvailabilitySetRestClient.ListBySubscription(Id.SubscriptionId, expand, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new AvailabilitySet(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new AvailabilitySet(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -126,7 +126,7 @@ namespace MgmtParent
                 try
                 {
                     var response = AvailabilitySetRestClient.ListBySubscriptionNextPage(nextLink, Id.SubscriptionId, expand, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new AvailabilitySet(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new AvailabilitySet(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {

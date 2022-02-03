@@ -28,7 +28,7 @@ namespace MgmtExtensionResource
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {
-            ArmClient.TryGetApiVersion(resourceType, out string apiVersion);
+            Client.TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
         }
 
@@ -36,7 +36,7 @@ namespace MgmtExtensionResource
         /// <returns> An object representing collection of ManagementGroupPolicyDefinitions and their operations over a ManagementGroupPolicyDefinition. </returns>
         public virtual ManagementGroupPolicyDefinitionCollection GetManagementGroupPolicyDefinitions()
         {
-            return new ManagementGroupPolicyDefinitionCollection(ArmClient, Id);
+            return new ManagementGroupPolicyDefinitionCollection(Client, Id);
         }
     }
 }

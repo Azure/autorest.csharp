@@ -39,7 +39,7 @@ namespace MgmtListMethods
         internal TenantTestCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _tenantTestClientDiagnostics = new ClientDiagnostics("MgmtListMethods", TenantTest.ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(TenantTest.ResourceType, out string tenantTestApiVersion);
+            Client.TryGetApiVersion(TenantTest.ResourceType, out string tenantTestApiVersion);
             _tenantTestRestClient = new TenantTestsRestOperations(_tenantTestClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, tenantTestApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -75,7 +75,7 @@ namespace MgmtListMethods
             try
             {
                 var response = await _tenantTestRestClient.CreateAsync(tenantTestName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new TenantTestCreateOrUpdateOperation(ArmClient, _tenantTestClientDiagnostics, Pipeline, _tenantTestRestClient.CreateCreateRequest(tenantTestName, parameters).Request, response);
+                var operation = new TenantTestCreateOrUpdateOperation(Client, _tenantTestClientDiagnostics, Pipeline, _tenantTestRestClient.CreateCreateRequest(tenantTestName, parameters).Request, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -110,7 +110,7 @@ namespace MgmtListMethods
             try
             {
                 var response = _tenantTestRestClient.Create(tenantTestName, parameters, cancellationToken);
-                var operation = new TenantTestCreateOrUpdateOperation(ArmClient, _tenantTestClientDiagnostics, Pipeline, _tenantTestRestClient.CreateCreateRequest(tenantTestName, parameters).Request, response);
+                var operation = new TenantTestCreateOrUpdateOperation(Client, _tenantTestClientDiagnostics, Pipeline, _tenantTestRestClient.CreateCreateRequest(tenantTestName, parameters).Request, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -142,7 +142,7 @@ namespace MgmtListMethods
                 var response = await _tenantTestRestClient.GetAsync(tenantTestName, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _tenantTestClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new TenantTest(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new TenantTest(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -171,7 +171,7 @@ namespace MgmtListMethods
                 var response = _tenantTestRestClient.Get(tenantTestName, expand, cancellationToken);
                 if (response.Value == null)
                     throw _tenantTestClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new TenantTest(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new TenantTest(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -196,7 +196,7 @@ namespace MgmtListMethods
                 try
                 {
                     var response = await _tenantTestRestClient.ListAsync(optionalParam, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new TenantTest(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new TenantTest(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -211,7 +211,7 @@ namespace MgmtListMethods
                 try
                 {
                     var response = await _tenantTestRestClient.ListNextPageAsync(nextLink, optionalParam, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new TenantTest(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new TenantTest(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -238,7 +238,7 @@ namespace MgmtListMethods
                 try
                 {
                     var response = _tenantTestRestClient.List(optionalParam, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new TenantTest(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new TenantTest(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -253,7 +253,7 @@ namespace MgmtListMethods
                 try
                 {
                     var response = _tenantTestRestClient.ListNextPage(nextLink, optionalParam, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new TenantTest(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new TenantTest(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -338,7 +338,7 @@ namespace MgmtListMethods
                 var response = await _tenantTestRestClient.GetAsync(tenantTestName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<TenantTest>(null, response.GetRawResponse());
-                return Response.FromValue(new TenantTest(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new TenantTest(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -367,7 +367,7 @@ namespace MgmtListMethods
                 var response = _tenantTestRestClient.Get(tenantTestName, expand, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<TenantTest>(null, response.GetRawResponse());
-                return Response.FromValue(new TenantTest(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new TenantTest(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

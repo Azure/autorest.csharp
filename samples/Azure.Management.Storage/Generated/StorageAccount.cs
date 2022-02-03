@@ -55,7 +55,7 @@ namespace Azure.Management.Storage
         internal StorageAccount(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _storageAccountClientDiagnostics = new ClientDiagnostics("Azure.Management.Storage", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string storageAccountApiVersion);
+            Client.TryGetApiVersion(ResourceType, out string storageAccountApiVersion);
             _storageAccountRestClient = new StorageAccountsRestOperations(_storageAccountClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, storageAccountApiVersion);
             _privateLinkResourcesClientDiagnostics = new ClientDiagnostics("Azure.Management.Storage", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
             _privateLinkResourcesRestClient = new PrivateLinkResourcesRestOperations(_privateLinkResourcesClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
@@ -92,49 +92,49 @@ namespace Azure.Management.Storage
         /// <returns> Returns a <see cref="BlobService" /> object. </returns>
         public virtual BlobService GetBlobService()
         {
-            return new BlobService(ArmClient, new ResourceIdentifier(Id.ToString() + "/blobServices/default"));
+            return new BlobService(Client, new ResourceIdentifier(Id.ToString() + "/blobServices/default"));
         }
 
         /// <summary> Gets an object representing a FileService along with the instance operations that can be performed on it in the StorageAccount. </summary>
         /// <returns> Returns a <see cref="FileService" /> object. </returns>
         public virtual FileService GetFileService()
         {
-            return new FileService(ArmClient, new ResourceIdentifier(Id.ToString() + "/fileServices/default"));
+            return new FileService(Client, new ResourceIdentifier(Id.ToString() + "/fileServices/default"));
         }
 
         /// <summary> Gets an object representing a ManagementPolicy along with the instance operations that can be performed on it in the StorageAccount. </summary>
         /// <returns> Returns a <see cref="ManagementPolicy" /> object. </returns>
         public virtual ManagementPolicy GetManagementPolicy()
         {
-            return new ManagementPolicy(ArmClient, new ResourceIdentifier(Id.ToString() + "/managementPolicies/default"));
+            return new ManagementPolicy(Client, new ResourceIdentifier(Id.ToString() + "/managementPolicies/default"));
         }
 
         /// <summary> Gets a collection of BlobInventoryPolicies in the BlobInventoryPolicy. </summary>
         /// <returns> An object representing collection of BlobInventoryPolicies and their operations over a BlobInventoryPolicy. </returns>
         public virtual BlobInventoryPolicyCollection GetBlobInventoryPolicies()
         {
-            return new BlobInventoryPolicyCollection(ArmClient, Id);
+            return new BlobInventoryPolicyCollection(Client, Id);
         }
 
         /// <summary> Gets a collection of PrivateEndpointConnections in the PrivateEndpointConnection. </summary>
         /// <returns> An object representing collection of PrivateEndpointConnections and their operations over a PrivateEndpointConnection. </returns>
         public virtual PrivateEndpointConnectionCollection GetPrivateEndpointConnections()
         {
-            return new PrivateEndpointConnectionCollection(ArmClient, Id);
+            return new PrivateEndpointConnectionCollection(Client, Id);
         }
 
         /// <summary> Gets a collection of ObjectReplicationPolicies in the ObjectReplicationPolicy. </summary>
         /// <returns> An object representing collection of ObjectReplicationPolicies and their operations over a ObjectReplicationPolicy. </returns>
         public virtual ObjectReplicationPolicyCollection GetObjectReplicationPolicies()
         {
-            return new ObjectReplicationPolicyCollection(ArmClient, Id);
+            return new ObjectReplicationPolicyCollection(Client, Id);
         }
 
         /// <summary> Gets a collection of EncryptionScopes in the EncryptionScope. </summary>
         /// <returns> An object representing collection of EncryptionScopes and their operations over a EncryptionScope. </returns>
         public virtual EncryptionScopeCollection GetEncryptionScopes()
         {
-            return new EncryptionScopeCollection(ArmClient, Id);
+            return new EncryptionScopeCollection(Client, Id);
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
@@ -152,7 +152,7 @@ namespace Azure.Management.Storage
                 var response = await _storageAccountRestClient.GetPropertiesAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _storageAccountClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new StorageAccount(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new StorageAccount(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -176,7 +176,7 @@ namespace Azure.Management.Storage
                 var response = _storageAccountRestClient.GetProperties(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, expand, cancellationToken);
                 if (response.Value == null)
                     throw _storageAccountClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new StorageAccount(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new StorageAccount(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -254,7 +254,7 @@ namespace Azure.Management.Storage
             try
             {
                 var response = await _storageAccountRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new StorageAccount(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new StorageAccount(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -282,7 +282,7 @@ namespace Azure.Management.Storage
             try
             {
                 var response = _storageAccountRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
-                return Response.FromValue(new StorageAccount(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new StorageAccount(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -850,7 +850,7 @@ namespace Azure.Management.Storage
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _storageAccountRestClient.GetPropertiesAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new StorageAccount(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new StorageAccount(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -886,7 +886,7 @@ namespace Azure.Management.Storage
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _storageAccountRestClient.GetProperties(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken);
-                return Response.FromValue(new StorageAccount(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new StorageAccount(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -918,7 +918,7 @@ namespace Azure.Management.Storage
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _storageAccountRestClient.GetPropertiesAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new StorageAccount(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new StorageAccount(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -950,7 +950,7 @@ namespace Azure.Management.Storage
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _storageAccountRestClient.GetProperties(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken);
-                return Response.FromValue(new StorageAccount(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new StorageAccount(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -981,7 +981,7 @@ namespace Azure.Management.Storage
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _storageAccountRestClient.GetPropertiesAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new StorageAccount(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new StorageAccount(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -1012,7 +1012,7 @@ namespace Azure.Management.Storage
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _storageAccountRestClient.GetProperties(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken);
-                return Response.FromValue(new StorageAccount(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new StorageAccount(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {

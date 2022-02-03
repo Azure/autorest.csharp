@@ -39,7 +39,7 @@ namespace MgmtExtensionResource
         internal ManagementGroupPolicyDefinitionCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _managementGroupPolicyDefinitionPolicyDefinitionsClientDiagnostics = new ClientDiagnostics("MgmtExtensionResource", ManagementGroupPolicyDefinition.ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ManagementGroupPolicyDefinition.ResourceType, out string managementGroupPolicyDefinitionPolicyDefinitionsApiVersion);
+            Client.TryGetApiVersion(ManagementGroupPolicyDefinition.ResourceType, out string managementGroupPolicyDefinitionPolicyDefinitionsApiVersion);
             _managementGroupPolicyDefinitionPolicyDefinitionsRestClient = new PolicyDefinitionsRestOperations(_managementGroupPolicyDefinitionPolicyDefinitionsClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, managementGroupPolicyDefinitionPolicyDefinitionsApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -75,7 +75,7 @@ namespace MgmtExtensionResource
             try
             {
                 var response = await _managementGroupPolicyDefinitionPolicyDefinitionsRestClient.CreateOrUpdateAtManagementGroupAsync(Id.Name, policyDefinitionName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new ManagementGroupPolicyDefinitionCreateOrUpdateOperation(ArmClient, response);
+                var operation = new ManagementGroupPolicyDefinitionCreateOrUpdateOperation(Client, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -110,7 +110,7 @@ namespace MgmtExtensionResource
             try
             {
                 var response = _managementGroupPolicyDefinitionPolicyDefinitionsRestClient.CreateOrUpdateAtManagementGroup(Id.Name, policyDefinitionName, parameters, cancellationToken);
-                var operation = new ManagementGroupPolicyDefinitionCreateOrUpdateOperation(ArmClient, response);
+                var operation = new ManagementGroupPolicyDefinitionCreateOrUpdateOperation(Client, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -141,7 +141,7 @@ namespace MgmtExtensionResource
                 var response = await _managementGroupPolicyDefinitionPolicyDefinitionsRestClient.GetAtManagementGroupAsync(Id.Name, policyDefinitionName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _managementGroupPolicyDefinitionPolicyDefinitionsClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new ManagementGroupPolicyDefinition(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ManagementGroupPolicyDefinition(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -169,7 +169,7 @@ namespace MgmtExtensionResource
                 var response = _managementGroupPolicyDefinitionPolicyDefinitionsRestClient.GetAtManagementGroup(Id.Name, policyDefinitionName, cancellationToken);
                 if (response.Value == null)
                     throw _managementGroupPolicyDefinitionPolicyDefinitionsClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new ManagementGroupPolicyDefinition(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ManagementGroupPolicyDefinition(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -195,7 +195,7 @@ namespace MgmtExtensionResource
                 try
                 {
                     var response = await _managementGroupPolicyDefinitionPolicyDefinitionsRestClient.ListByManagementGroupAsync(Id.Name, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new ManagementGroupPolicyDefinition(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new ManagementGroupPolicyDefinition(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -210,7 +210,7 @@ namespace MgmtExtensionResource
                 try
                 {
                     var response = await _managementGroupPolicyDefinitionPolicyDefinitionsRestClient.ListByManagementGroupNextPageAsync(nextLink, Id.Name, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new ManagementGroupPolicyDefinition(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new ManagementGroupPolicyDefinition(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -238,7 +238,7 @@ namespace MgmtExtensionResource
                 try
                 {
                     var response = _managementGroupPolicyDefinitionPolicyDefinitionsRestClient.ListByManagementGroup(Id.Name, filter, top, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new ManagementGroupPolicyDefinition(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new ManagementGroupPolicyDefinition(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -253,7 +253,7 @@ namespace MgmtExtensionResource
                 try
                 {
                     var response = _managementGroupPolicyDefinitionPolicyDefinitionsRestClient.ListByManagementGroupNextPage(nextLink, Id.Name, filter, top, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new ManagementGroupPolicyDefinition(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new ManagementGroupPolicyDefinition(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -335,7 +335,7 @@ namespace MgmtExtensionResource
                 var response = await _managementGroupPolicyDefinitionPolicyDefinitionsRestClient.GetAtManagementGroupAsync(Id.Name, policyDefinitionName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<ManagementGroupPolicyDefinition>(null, response.GetRawResponse());
-                return Response.FromValue(new ManagementGroupPolicyDefinition(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ManagementGroupPolicyDefinition(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -363,7 +363,7 @@ namespace MgmtExtensionResource
                 var response = _managementGroupPolicyDefinitionPolicyDefinitionsRestClient.GetAtManagementGroup(Id.Name, policyDefinitionName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<ManagementGroupPolicyDefinition>(null, response.GetRawResponse());
-                return Response.FromValue(new ManagementGroupPolicyDefinition(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ManagementGroupPolicyDefinition(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

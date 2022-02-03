@@ -38,7 +38,7 @@ namespace Azure.Management.Storage
         internal DeletedAccountCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _deletedAccountClientDiagnostics = new ClientDiagnostics("Azure.Management.Storage", DeletedAccount.ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(DeletedAccount.ResourceType, out string deletedAccountApiVersion);
+            Client.TryGetApiVersion(DeletedAccount.ResourceType, out string deletedAccountApiVersion);
             _deletedAccountRestClient = new DeletedAccountsRestOperations(_deletedAccountClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, deletedAccountApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -72,7 +72,7 @@ namespace Azure.Management.Storage
                 var response = await _deletedAccountRestClient.GetAsync(Id.SubscriptionId, location, deletedAccountName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _deletedAccountClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new DeletedAccount(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new DeletedAccount(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -102,7 +102,7 @@ namespace Azure.Management.Storage
                 var response = _deletedAccountRestClient.Get(Id.SubscriptionId, location, deletedAccountName, cancellationToken);
                 if (response.Value == null)
                     throw _deletedAccountClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new DeletedAccount(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new DeletedAccount(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -126,7 +126,7 @@ namespace Azure.Management.Storage
                 try
                 {
                     var response = await _deletedAccountRestClient.ListAsync(Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new DeletedAccount(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new DeletedAccount(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -141,7 +141,7 @@ namespace Azure.Management.Storage
                 try
                 {
                     var response = await _deletedAccountRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new DeletedAccount(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new DeletedAccount(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -167,7 +167,7 @@ namespace Azure.Management.Storage
                 try
                 {
                     var response = _deletedAccountRestClient.List(Id.SubscriptionId, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new DeletedAccount(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new DeletedAccount(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -182,7 +182,7 @@ namespace Azure.Management.Storage
                 try
                 {
                     var response = _deletedAccountRestClient.ListNextPage(nextLink, Id.SubscriptionId, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new DeletedAccount(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new DeletedAccount(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -270,7 +270,7 @@ namespace Azure.Management.Storage
                 var response = await _deletedAccountRestClient.GetAsync(Id.SubscriptionId, location, deletedAccountName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<DeletedAccount>(null, response.GetRawResponse());
-                return Response.FromValue(new DeletedAccount(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new DeletedAccount(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -300,7 +300,7 @@ namespace Azure.Management.Storage
                 var response = _deletedAccountRestClient.Get(Id.SubscriptionId, location, deletedAccountName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<DeletedAccount>(null, response.GetRawResponse());
-                return Response.FromValue(new DeletedAccount(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new DeletedAccount(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

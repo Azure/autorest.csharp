@@ -39,7 +39,7 @@ namespace Pagination
         internal PageSizeFloatModelCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _pageSizeFloatModelClientDiagnostics = new ClientDiagnostics("Pagination", PageSizeFloatModel.ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(PageSizeFloatModel.ResourceType, out string pageSizeFloatModelApiVersion);
+            Client.TryGetApiVersion(PageSizeFloatModel.ResourceType, out string pageSizeFloatModelApiVersion);
             _pageSizeFloatModelRestClient = new PageSizeFloatModelsRestOperations(_pageSizeFloatModelClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, pageSizeFloatModelApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -71,7 +71,7 @@ namespace Pagination
             try
             {
                 var response = await _pageSizeFloatModelRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, name, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new PageSizeFloatModelCreateOrUpdateOperation(ArmClient, response);
+                var operation = new PageSizeFloatModelCreateOrUpdateOperation(Client, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -102,7 +102,7 @@ namespace Pagination
             try
             {
                 var response = _pageSizeFloatModelRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, name, parameters, cancellationToken);
-                var operation = new PageSizeFloatModelCreateOrUpdateOperation(ArmClient, response);
+                var operation = new PageSizeFloatModelCreateOrUpdateOperation(Client, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -129,7 +129,7 @@ namespace Pagination
                 var response = await _pageSizeFloatModelRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _pageSizeFloatModelClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new PageSizeFloatModel(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new PageSizeFloatModel(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -153,7 +153,7 @@ namespace Pagination
                 var response = _pageSizeFloatModelRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken);
                 if (response.Value == null)
                     throw _pageSizeFloatModelClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new PageSizeFloatModel(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new PageSizeFloatModel(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -174,7 +174,7 @@ namespace Pagination
                 try
                 {
                     var response = await _pageSizeFloatModelRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new PageSizeFloatModel(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new PageSizeFloatModel(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -189,7 +189,7 @@ namespace Pagination
                 try
                 {
                     var response = await _pageSizeFloatModelRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new PageSizeFloatModel(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new PageSizeFloatModel(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -212,7 +212,7 @@ namespace Pagination
                 try
                 {
                     var response = _pageSizeFloatModelRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new PageSizeFloatModel(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new PageSizeFloatModel(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -227,7 +227,7 @@ namespace Pagination
                 try
                 {
                     var response = _pageSizeFloatModelRestClient.ListNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new PageSizeFloatModel(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new PageSizeFloatModel(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -300,7 +300,7 @@ namespace Pagination
                 var response = await _pageSizeFloatModelRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<PageSizeFloatModel>(null, response.GetRawResponse());
-                return Response.FromValue(new PageSizeFloatModel(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new PageSizeFloatModel(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -325,7 +325,7 @@ namespace Pagination
                 var response = _pageSizeFloatModelRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<PageSizeFloatModel>(null, response.GetRawResponse());
-                return Response.FromValue(new PageSizeFloatModel(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new PageSizeFloatModel(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

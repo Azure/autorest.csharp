@@ -38,7 +38,7 @@ namespace MgmtExpandResourceTypes
         internal RecordSetTxtCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _recordSetTxtRecordSetsClientDiagnostics = new ClientDiagnostics("MgmtExpandResourceTypes", RecordSetTxt.ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(RecordSetTxt.ResourceType, out string recordSetTxtRecordSetsApiVersion);
+            Client.TryGetApiVersion(RecordSetTxt.ResourceType, out string recordSetTxtRecordSetsApiVersion);
             _recordSetTxtRecordSetsRestClient = new RecordSetsRestOperations(_recordSetTxtRecordSetsClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, recordSetTxtRecordSetsApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -78,7 +78,7 @@ namespace MgmtExpandResourceTypes
             try
             {
                 var response = await _recordSetTxtRecordSetsRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "TXT".ToRecordType(), relativeRecordSetName, parameters, ifMatch, ifNoneMatch, cancellationToken).ConfigureAwait(false);
-                var operation = new RecordSetTxtCreateOrUpdateOperation(ArmClient, response);
+                var operation = new RecordSetTxtCreateOrUpdateOperation(Client, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -117,7 +117,7 @@ namespace MgmtExpandResourceTypes
             try
             {
                 var response = _recordSetTxtRecordSetsRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "TXT".ToRecordType(), relativeRecordSetName, parameters, ifMatch, ifNoneMatch, cancellationToken);
-                var operation = new RecordSetTxtCreateOrUpdateOperation(ArmClient, response);
+                var operation = new RecordSetTxtCreateOrUpdateOperation(Client, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -150,7 +150,7 @@ namespace MgmtExpandResourceTypes
                 var response = await _recordSetTxtRecordSetsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "TXT".ToRecordType(), relativeRecordSetName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _recordSetTxtRecordSetsClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new RecordSetTxt(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new RecordSetTxt(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -180,7 +180,7 @@ namespace MgmtExpandResourceTypes
                 var response = _recordSetTxtRecordSetsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "TXT".ToRecordType(), relativeRecordSetName, cancellationToken);
                 if (response.Value == null)
                     throw _recordSetTxtRecordSetsClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new RecordSetTxt(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new RecordSetTxt(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -206,7 +206,7 @@ namespace MgmtExpandResourceTypes
                 try
                 {
                     var response = await _recordSetTxtRecordSetsRestClient.ListByTypeAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "TXT".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetTxt(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetTxt(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -221,7 +221,7 @@ namespace MgmtExpandResourceTypes
                 try
                 {
                     var response = await _recordSetTxtRecordSetsRestClient.ListByTypeNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "TXT".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetTxt(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetTxt(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -249,7 +249,7 @@ namespace MgmtExpandResourceTypes
                 try
                 {
                     var response = _recordSetTxtRecordSetsRestClient.ListByType(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "TXT".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetTxt(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetTxt(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -264,7 +264,7 @@ namespace MgmtExpandResourceTypes
                 try
                 {
                     var response = _recordSetTxtRecordSetsRestClient.ListByTypeNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "TXT".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetTxt(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetTxt(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -352,7 +352,7 @@ namespace MgmtExpandResourceTypes
                 var response = await _recordSetTxtRecordSetsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "TXT".ToRecordType(), relativeRecordSetName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<RecordSetTxt>(null, response.GetRawResponse());
-                return Response.FromValue(new RecordSetTxt(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new RecordSetTxt(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -382,7 +382,7 @@ namespace MgmtExpandResourceTypes
                 var response = _recordSetTxtRecordSetsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "TXT".ToRecordType(), relativeRecordSetName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<RecordSetTxt>(null, response.GetRawResponse());
-                return Response.FromValue(new RecordSetTxt(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new RecordSetTxt(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

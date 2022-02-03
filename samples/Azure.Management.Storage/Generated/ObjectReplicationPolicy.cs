@@ -53,7 +53,7 @@ namespace Azure.Management.Storage
         internal ObjectReplicationPolicy(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _objectReplicationPolicyClientDiagnostics = new ClientDiagnostics("Azure.Management.Storage", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string objectReplicationPolicyApiVersion);
+            Client.TryGetApiVersion(ResourceType, out string objectReplicationPolicyApiVersion);
             _objectReplicationPolicyRestClient = new ObjectReplicationPoliciesRestOperations(_objectReplicationPolicyClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, objectReplicationPolicyApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -98,7 +98,7 @@ namespace Azure.Management.Storage
                 var response = await _objectReplicationPolicyRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _objectReplicationPolicyClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new ObjectReplicationPolicy(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ObjectReplicationPolicy(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -121,7 +121,7 @@ namespace Azure.Management.Storage
                 var response = _objectReplicationPolicyRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _objectReplicationPolicyClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new ObjectReplicationPolicy(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ObjectReplicationPolicy(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

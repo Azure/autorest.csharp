@@ -28,7 +28,7 @@ namespace MgmtExpandResourceTypes
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {
-            ArmClient.TryGetApiVersion(resourceType, out string apiVersion);
+            Client.TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
         }
 
@@ -36,7 +36,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> An object representing collection of Zones and their operations over a Zone. </returns>
         public virtual ZoneCollection GetZones()
         {
-            return new ZoneCollection(ArmClient, Id);
+            return new ZoneCollection(Client, Id);
         }
     }
 }

@@ -39,7 +39,7 @@ namespace MgmtListMethods
         internal ResGrpParentWithAncestorWithLocCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _resGrpParentWithAncestorWithLocClientDiagnostics = new ClientDiagnostics("MgmtListMethods", ResGrpParentWithAncestorWithLoc.ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResGrpParentWithAncestorWithLoc.ResourceType, out string resGrpParentWithAncestorWithLocApiVersion);
+            Client.TryGetApiVersion(ResGrpParentWithAncestorWithLoc.ResourceType, out string resGrpParentWithAncestorWithLocApiVersion);
             _resGrpParentWithAncestorWithLocRestClient = new ResGrpParentWithAncestorWithLocsRestOperations(_resGrpParentWithAncestorWithLocClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, resGrpParentWithAncestorWithLocApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -75,7 +75,7 @@ namespace MgmtListMethods
             try
             {
                 var response = await _resGrpParentWithAncestorWithLocRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentWithAncestorWithLocName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new ResGrpParentWithAncestorWithLocCreateOrUpdateOperation(ArmClient, response);
+                var operation = new ResGrpParentWithAncestorWithLocCreateOrUpdateOperation(Client, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -110,7 +110,7 @@ namespace MgmtListMethods
             try
             {
                 var response = _resGrpParentWithAncestorWithLocRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentWithAncestorWithLocName, parameters, cancellationToken);
-                var operation = new ResGrpParentWithAncestorWithLocCreateOrUpdateOperation(ArmClient, response);
+                var operation = new ResGrpParentWithAncestorWithLocCreateOrUpdateOperation(Client, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -141,7 +141,7 @@ namespace MgmtListMethods
                 var response = await _resGrpParentWithAncestorWithLocRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentWithAncestorWithLocName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _resGrpParentWithAncestorWithLocClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new ResGrpParentWithAncestorWithLoc(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ResGrpParentWithAncestorWithLoc(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -169,7 +169,7 @@ namespace MgmtListMethods
                 var response = _resGrpParentWithAncestorWithLocRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentWithAncestorWithLocName, cancellationToken);
                 if (response.Value == null)
                     throw _resGrpParentWithAncestorWithLocClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new ResGrpParentWithAncestorWithLoc(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ResGrpParentWithAncestorWithLoc(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -193,7 +193,7 @@ namespace MgmtListMethods
                 try
                 {
                     var response = await _resGrpParentWithAncestorWithLocRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentWithAncestorWithLoc(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentWithAncestorWithLoc(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -208,7 +208,7 @@ namespace MgmtListMethods
                 try
                 {
                     var response = await _resGrpParentWithAncestorWithLocRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentWithAncestorWithLoc(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentWithAncestorWithLoc(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -234,7 +234,7 @@ namespace MgmtListMethods
                 try
                 {
                     var response = _resGrpParentWithAncestorWithLocRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentWithAncestorWithLoc(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentWithAncestorWithLoc(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -249,7 +249,7 @@ namespace MgmtListMethods
                 try
                 {
                     var response = _resGrpParentWithAncestorWithLocRestClient.ListNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentWithAncestorWithLoc(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentWithAncestorWithLoc(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -331,7 +331,7 @@ namespace MgmtListMethods
                 var response = await _resGrpParentWithAncestorWithLocRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentWithAncestorWithLocName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<ResGrpParentWithAncestorWithLoc>(null, response.GetRawResponse());
-                return Response.FromValue(new ResGrpParentWithAncestorWithLoc(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ResGrpParentWithAncestorWithLoc(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -359,7 +359,7 @@ namespace MgmtListMethods
                 var response = _resGrpParentWithAncestorWithLocRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentWithAncestorWithLocName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<ResGrpParentWithAncestorWithLoc>(null, response.GetRawResponse());
-                return Response.FromValue(new ResGrpParentWithAncestorWithLoc(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ResGrpParentWithAncestorWithLoc(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

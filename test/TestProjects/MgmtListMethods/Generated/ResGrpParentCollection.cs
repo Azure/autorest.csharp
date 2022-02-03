@@ -39,7 +39,7 @@ namespace MgmtListMethods
         internal ResGrpParentCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _resGrpParentClientDiagnostics = new ClientDiagnostics("MgmtListMethods", ResGrpParent.ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResGrpParent.ResourceType, out string resGrpParentApiVersion);
+            Client.TryGetApiVersion(ResGrpParent.ResourceType, out string resGrpParentApiVersion);
             _resGrpParentRestClient = new ResGrpParentsRestOperations(_resGrpParentClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, resGrpParentApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -75,7 +75,7 @@ namespace MgmtListMethods
             try
             {
                 var response = await _resGrpParentRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new ResGrpParentCreateOrUpdateOperation(ArmClient, response);
+                var operation = new ResGrpParentCreateOrUpdateOperation(Client, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -110,7 +110,7 @@ namespace MgmtListMethods
             try
             {
                 var response = _resGrpParentRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentName, parameters, cancellationToken);
-                var operation = new ResGrpParentCreateOrUpdateOperation(ArmClient, response);
+                var operation = new ResGrpParentCreateOrUpdateOperation(Client, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -141,7 +141,7 @@ namespace MgmtListMethods
                 var response = await _resGrpParentRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _resGrpParentClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new ResGrpParent(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ResGrpParent(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -169,7 +169,7 @@ namespace MgmtListMethods
                 var response = _resGrpParentRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentName, cancellationToken);
                 if (response.Value == null)
                     throw _resGrpParentClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new ResGrpParent(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ResGrpParent(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -193,7 +193,7 @@ namespace MgmtListMethods
                 try
                 {
                     var response = await _resGrpParentRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new ResGrpParent(ArmClient, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new ResGrpParent(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -219,7 +219,7 @@ namespace MgmtListMethods
                 try
                 {
                     var response = _resGrpParentRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new ResGrpParent(ArmClient, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new ResGrpParent(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -301,7 +301,7 @@ namespace MgmtListMethods
                 var response = await _resGrpParentRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<ResGrpParent>(null, response.GetRawResponse());
-                return Response.FromValue(new ResGrpParent(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ResGrpParent(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -329,7 +329,7 @@ namespace MgmtListMethods
                 var response = _resGrpParentRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<ResGrpParent>(null, response.GetRawResponse());
-                return Response.FromValue(new ResGrpParent(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ResGrpParent(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

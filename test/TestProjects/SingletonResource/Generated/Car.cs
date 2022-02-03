@@ -52,7 +52,7 @@ namespace SingletonResource
         internal Car(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _carClientDiagnostics = new ClientDiagnostics("SingletonResource", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string carApiVersion);
+            Client.TryGetApiVersion(ResourceType, out string carApiVersion);
             _carRestClient = new CarsRestOperations(_carClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, carApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -87,7 +87,7 @@ namespace SingletonResource
         /// <returns> Returns a <see cref="Ignition" /> object. </returns>
         public virtual Ignition GetIgnition()
         {
-            return new Ignition(ArmClient, new ResourceIdentifier(Id.ToString() + "/ignitions/default"));
+            return new Ignition(Client, new ResourceIdentifier(Id.ToString() + "/ignitions/default"));
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cars/{carName}
@@ -103,7 +103,7 @@ namespace SingletonResource
                 var response = await _carRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _carClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new Car(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Car(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -125,7 +125,7 @@ namespace SingletonResource
                 var response = _carRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _carClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new Car(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Car(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

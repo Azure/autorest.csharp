@@ -39,7 +39,7 @@ namespace ExactMatchFlattenInheritance
         internal CustomModel2Collection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _customModel2ClientDiagnostics = new ClientDiagnostics("ExactMatchFlattenInheritance", CustomModel2.ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(CustomModel2.ResourceType, out string customModel2ApiVersion);
+            Client.TryGetApiVersion(CustomModel2.ResourceType, out string customModel2ApiVersion);
             _customModel2RestClient = new CustomModel2SRestOperations(_customModel2ClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, customModel2ApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -71,7 +71,7 @@ namespace ExactMatchFlattenInheritance
             try
             {
                 var response = await _customModel2RestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, name, foo, cancellationToken).ConfigureAwait(false);
-                var operation = new CustomModel2CreateOrUpdateOperation(ArmClient, response);
+                var operation = new CustomModel2CreateOrUpdateOperation(Client, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -102,7 +102,7 @@ namespace ExactMatchFlattenInheritance
             try
             {
                 var response = _customModel2RestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, name, foo, cancellationToken);
-                var operation = new CustomModel2CreateOrUpdateOperation(ArmClient, response);
+                var operation = new CustomModel2CreateOrUpdateOperation(Client, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -133,7 +133,7 @@ namespace ExactMatchFlattenInheritance
                 var response = await _customModel2RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _customModel2ClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new CustomModel2(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new CustomModel2(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -161,7 +161,7 @@ namespace ExactMatchFlattenInheritance
                 var response = _customModel2RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken);
                 if (response.Value == null)
                     throw _customModel2ClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new CustomModel2(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new CustomModel2(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -185,7 +185,7 @@ namespace ExactMatchFlattenInheritance
                 try
                 {
                     var response = await _customModel2RestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new CustomModel2(ArmClient, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new CustomModel2(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -211,7 +211,7 @@ namespace ExactMatchFlattenInheritance
                 try
                 {
                     var response = _customModel2RestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new CustomModel2(ArmClient, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new CustomModel2(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -293,7 +293,7 @@ namespace ExactMatchFlattenInheritance
                 var response = await _customModel2RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<CustomModel2>(null, response.GetRawResponse());
-                return Response.FromValue(new CustomModel2(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new CustomModel2(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -321,7 +321,7 @@ namespace ExactMatchFlattenInheritance
                 var response = _customModel2RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<CustomModel2>(null, response.GetRawResponse());
-                return Response.FromValue(new CustomModel2(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new CustomModel2(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

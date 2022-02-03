@@ -53,7 +53,7 @@ namespace Azure.Management.Storage
         internal BlobService(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _blobServiceClientDiagnostics = new ClientDiagnostics("Azure.Management.Storage", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string blobServiceApiVersion);
+            Client.TryGetApiVersion(ResourceType, out string blobServiceApiVersion);
             _blobServiceRestClient = new BlobServicesRestOperations(_blobServiceClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, blobServiceApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -88,7 +88,7 @@ namespace Azure.Management.Storage
         /// <returns> An object representing collection of BlobContainers and their operations over a BlobContainer. </returns>
         public virtual BlobContainerCollection GetBlobContainers()
         {
-            return new BlobContainerCollection(ArmClient, Id);
+            return new BlobContainerCollection(Client, Id);
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default
@@ -105,7 +105,7 @@ namespace Azure.Management.Storage
                 var response = await _blobServiceRestClient.GetServicePropertiesAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _blobServiceClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new BlobService(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new BlobService(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -128,7 +128,7 @@ namespace Azure.Management.Storage
                 var response = _blobServiceRestClient.GetServiceProperties(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, cancellationToken);
                 if (response.Value == null)
                     throw _blobServiceClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new BlobService(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new BlobService(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -157,7 +157,7 @@ namespace Azure.Management.Storage
             try
             {
                 var response = await _blobServiceRestClient.SetServicePropertiesAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new BlobServiceCreateOrUpdateOperation(ArmClient, response);
+                var operation = new BlobServiceCreateOrUpdateOperation(Client, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -189,7 +189,7 @@ namespace Azure.Management.Storage
             try
             {
                 var response = _blobServiceRestClient.SetServiceProperties(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, parameters, cancellationToken);
-                var operation = new BlobServiceCreateOrUpdateOperation(ArmClient, response);
+                var operation = new BlobServiceCreateOrUpdateOperation(Client, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

@@ -38,7 +38,7 @@ namespace MgmtListMethods
         internal TenantParentWithLocCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _tenantParentWithLocClientDiagnostics = new ClientDiagnostics("MgmtListMethods", TenantParentWithLoc.ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(TenantParentWithLoc.ResourceType, out string tenantParentWithLocApiVersion);
+            Client.TryGetApiVersion(TenantParentWithLoc.ResourceType, out string tenantParentWithLocApiVersion);
             _tenantParentWithLocRestClient = new TenantParentWithLocsRestOperations(_tenantParentWithLocClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, tenantParentWithLocApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -74,7 +74,7 @@ namespace MgmtListMethods
             try
             {
                 var response = await _tenantParentWithLocRestClient.CreateOrUpdateAsync(Id.Name, tenantParentWithLocName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new TenantParentWithLocCreateOrUpdateOperation(ArmClient, response);
+                var operation = new TenantParentWithLocCreateOrUpdateOperation(Client, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -109,7 +109,7 @@ namespace MgmtListMethods
             try
             {
                 var response = _tenantParentWithLocRestClient.CreateOrUpdate(Id.Name, tenantParentWithLocName, parameters, cancellationToken);
-                var operation = new TenantParentWithLocCreateOrUpdateOperation(ArmClient, response);
+                var operation = new TenantParentWithLocCreateOrUpdateOperation(Client, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -140,7 +140,7 @@ namespace MgmtListMethods
                 var response = await _tenantParentWithLocRestClient.GetAsync(Id.Name, tenantParentWithLocName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _tenantParentWithLocClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new TenantParentWithLoc(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new TenantParentWithLoc(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -168,7 +168,7 @@ namespace MgmtListMethods
                 var response = _tenantParentWithLocRestClient.Get(Id.Name, tenantParentWithLocName, cancellationToken);
                 if (response.Value == null)
                     throw _tenantParentWithLocClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new TenantParentWithLoc(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new TenantParentWithLoc(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -192,7 +192,7 @@ namespace MgmtListMethods
                 try
                 {
                     var response = await _tenantParentWithLocRestClient.ListAsync(Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new TenantParentWithLoc(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new TenantParentWithLoc(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -207,7 +207,7 @@ namespace MgmtListMethods
                 try
                 {
                     var response = await _tenantParentWithLocRestClient.ListNextPageAsync(nextLink, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new TenantParentWithLoc(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new TenantParentWithLoc(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -233,7 +233,7 @@ namespace MgmtListMethods
                 try
                 {
                     var response = _tenantParentWithLocRestClient.List(Id.Name, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new TenantParentWithLoc(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new TenantParentWithLoc(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -248,7 +248,7 @@ namespace MgmtListMethods
                 try
                 {
                     var response = _tenantParentWithLocRestClient.ListNextPage(nextLink, Id.Name, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new TenantParentWithLoc(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new TenantParentWithLoc(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -330,7 +330,7 @@ namespace MgmtListMethods
                 var response = await _tenantParentWithLocRestClient.GetAsync(Id.Name, tenantParentWithLocName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<TenantParentWithLoc>(null, response.GetRawResponse());
-                return Response.FromValue(new TenantParentWithLoc(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new TenantParentWithLoc(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -358,7 +358,7 @@ namespace MgmtListMethods
                 var response = _tenantParentWithLocRestClient.Get(Id.Name, tenantParentWithLocName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<TenantParentWithLoc>(null, response.GetRawResponse());
-                return Response.FromValue(new TenantParentWithLoc(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new TenantParentWithLoc(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

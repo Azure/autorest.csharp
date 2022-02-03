@@ -48,7 +48,7 @@ namespace ExactMatchInheritance
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {
-            ArmClient.TryGetApiVersion(resourceType, out string apiVersion);
+            Client.TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
         }
 
@@ -56,14 +56,14 @@ namespace ExactMatchInheritance
         /// <returns> An object representing collection of ExactMatchModel1s and their operations over a ExactMatchModel1. </returns>
         public virtual ExactMatchModel1Collection GetExactMatchModel1s()
         {
-            return new ExactMatchModel1Collection(ArmClient, Id);
+            return new ExactMatchModel1Collection(Client, Id);
         }
 
         /// <summary> Gets a collection of ExactMatchModel5s in the ExactMatchModel5. </summary>
         /// <returns> An object representing collection of ExactMatchModel5s and their operations over a ExactMatchModel5. </returns>
         public virtual ExactMatchModel5Collection GetExactMatchModel5s()
         {
-            return new ExactMatchModel5Collection(ArmClient, Id);
+            return new ExactMatchModel5Collection(Client, Id);
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel2s/{exactMatchModel2sName}

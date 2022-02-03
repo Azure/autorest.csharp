@@ -14,9 +14,9 @@ namespace MgmtListMethods
     {
         private static TenantExtensionClient GetExtensionClient(Tenant tenant)
         {
-            return tenant.GetCachedClient((armClient) =>
+            return tenant.GetCachedClient((client) =>
             {
-                return new TenantExtensionClient(armClient, tenant.Id);
+                return new TenantExtensionClient(client, tenant.Id);
             }
             );
         }

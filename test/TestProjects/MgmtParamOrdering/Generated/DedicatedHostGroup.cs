@@ -53,7 +53,7 @@ namespace MgmtParamOrdering
         internal DedicatedHostGroup(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _dedicatedHostGroupClientDiagnostics = new ClientDiagnostics("MgmtParamOrdering", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string dedicatedHostGroupApiVersion);
+            Client.TryGetApiVersion(ResourceType, out string dedicatedHostGroupApiVersion);
             _dedicatedHostGroupRestClient = new DedicatedHostGroupsRestOperations(_dedicatedHostGroupClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, dedicatedHostGroupApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -88,7 +88,7 @@ namespace MgmtParamOrdering
         /// <returns> An object representing collection of DedicatedHosts and their operations over a DedicatedHost. </returns>
         public virtual DedicatedHostCollection GetDedicatedHosts()
         {
-            return new DedicatedHostCollection(ArmClient, Id);
+            return new DedicatedHostCollection(Client, Id);
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}
@@ -105,7 +105,7 @@ namespace MgmtParamOrdering
                 var response = await _dedicatedHostGroupRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _dedicatedHostGroupClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new DedicatedHostGroup(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new DedicatedHostGroup(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -128,7 +128,7 @@ namespace MgmtParamOrdering
                 var response = _dedicatedHostGroupRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _dedicatedHostGroupClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new DedicatedHostGroup(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new DedicatedHostGroup(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -206,7 +206,7 @@ namespace MgmtParamOrdering
             try
             {
                 var response = await _dedicatedHostGroupRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new DedicatedHostGroup(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new DedicatedHostGroup(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -234,7 +234,7 @@ namespace MgmtParamOrdering
             try
             {
                 var response = _dedicatedHostGroupRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
-                return Response.FromValue(new DedicatedHostGroup(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new DedicatedHostGroup(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -270,7 +270,7 @@ namespace MgmtParamOrdering
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _dedicatedHostGroupRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new DedicatedHostGroup(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new DedicatedHostGroup(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -306,7 +306,7 @@ namespace MgmtParamOrdering
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _dedicatedHostGroupRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
-                return Response.FromValue(new DedicatedHostGroup(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new DedicatedHostGroup(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -338,7 +338,7 @@ namespace MgmtParamOrdering
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _dedicatedHostGroupRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new DedicatedHostGroup(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new DedicatedHostGroup(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -370,7 +370,7 @@ namespace MgmtParamOrdering
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _dedicatedHostGroupRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
-                return Response.FromValue(new DedicatedHostGroup(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new DedicatedHostGroup(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -401,7 +401,7 @@ namespace MgmtParamOrdering
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _dedicatedHostGroupRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new DedicatedHostGroup(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new DedicatedHostGroup(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -432,7 +432,7 @@ namespace MgmtParamOrdering
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _dedicatedHostGroupRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
-                return Response.FromValue(new DedicatedHostGroup(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new DedicatedHostGroup(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {

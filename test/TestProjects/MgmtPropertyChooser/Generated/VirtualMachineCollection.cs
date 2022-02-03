@@ -39,7 +39,7 @@ namespace MgmtPropertyChooser
         internal VirtualMachineCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _virtualMachineClientDiagnostics = new ClientDiagnostics("MgmtPropertyChooser", VirtualMachine.ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(VirtualMachine.ResourceType, out string virtualMachineApiVersion);
+            Client.TryGetApiVersion(VirtualMachine.ResourceType, out string virtualMachineApiVersion);
             _virtualMachineRestClient = new VirtualMachinesRestOperations(_virtualMachineClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, virtualMachineApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -75,7 +75,7 @@ namespace MgmtPropertyChooser
             try
             {
                 var response = await _virtualMachineRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, vmName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new VirtualMachineCreateOrUpdateOperation(ArmClient, _virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, vmName, parameters).Request, response);
+                var operation = new VirtualMachineCreateOrUpdateOperation(Client, _virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, vmName, parameters).Request, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -110,7 +110,7 @@ namespace MgmtPropertyChooser
             try
             {
                 var response = _virtualMachineRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, vmName, parameters, cancellationToken);
-                var operation = new VirtualMachineCreateOrUpdateOperation(ArmClient, _virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, vmName, parameters).Request, response);
+                var operation = new VirtualMachineCreateOrUpdateOperation(Client, _virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, vmName, parameters).Request, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -141,7 +141,7 @@ namespace MgmtPropertyChooser
                 var response = await _virtualMachineRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, vmName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _virtualMachineClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new VirtualMachine(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new VirtualMachine(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -169,7 +169,7 @@ namespace MgmtPropertyChooser
                 var response = _virtualMachineRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, vmName, cancellationToken);
                 if (response.Value == null)
                     throw _virtualMachineClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new VirtualMachine(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new VirtualMachine(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -193,7 +193,7 @@ namespace MgmtPropertyChooser
                 try
                 {
                     var response = await _virtualMachineRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new VirtualMachine(ArmClient, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new VirtualMachine(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -219,7 +219,7 @@ namespace MgmtPropertyChooser
                 try
                 {
                     var response = _virtualMachineRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new VirtualMachine(ArmClient, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new VirtualMachine(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -301,7 +301,7 @@ namespace MgmtPropertyChooser
                 var response = await _virtualMachineRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, vmName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<VirtualMachine>(null, response.GetRawResponse());
-                return Response.FromValue(new VirtualMachine(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new VirtualMachine(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -329,7 +329,7 @@ namespace MgmtPropertyChooser
                 var response = _virtualMachineRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, vmName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<VirtualMachine>(null, response.GetRawResponse());
-                return Response.FromValue(new VirtualMachine(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new VirtualMachine(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

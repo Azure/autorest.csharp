@@ -39,7 +39,7 @@ namespace SubscriptionExtensions
         internal OvenCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _ovenClientDiagnostics = new ClientDiagnostics("SubscriptionExtensions", Oven.ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(Oven.ResourceType, out string ovenApiVersion);
+            Client.TryGetApiVersion(Oven.ResourceType, out string ovenApiVersion);
             _ovenRestClient = new OvensRestOperations(_ovenClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, ovenApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -75,7 +75,7 @@ namespace SubscriptionExtensions
             try
             {
                 var response = await _ovenRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, ovenName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new OvenCreateOrUpdateOperation(ArmClient, _ovenClientDiagnostics, Pipeline, _ovenRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, ovenName, parameters).Request, response);
+                var operation = new OvenCreateOrUpdateOperation(Client, _ovenClientDiagnostics, Pipeline, _ovenRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, ovenName, parameters).Request, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -110,7 +110,7 @@ namespace SubscriptionExtensions
             try
             {
                 var response = _ovenRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, ovenName, parameters, cancellationToken);
-                var operation = new OvenCreateOrUpdateOperation(ArmClient, _ovenClientDiagnostics, Pipeline, _ovenRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, ovenName, parameters).Request, response);
+                var operation = new OvenCreateOrUpdateOperation(Client, _ovenClientDiagnostics, Pipeline, _ovenRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, ovenName, parameters).Request, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -140,7 +140,7 @@ namespace SubscriptionExtensions
                 var response = await _ovenRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, ovenName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _ovenClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new Oven(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Oven(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -167,7 +167,7 @@ namespace SubscriptionExtensions
                 var response = _ovenRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, ovenName, cancellationToken);
                 if (response.Value == null)
                     throw _ovenClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new Oven(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Oven(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -192,7 +192,7 @@ namespace SubscriptionExtensions
                 try
                 {
                     var response = await _ovenRestClient.ListAllAsync(Id.SubscriptionId, Id.ResourceGroupName, statusOnly, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new Oven(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new Oven(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -207,7 +207,7 @@ namespace SubscriptionExtensions
                 try
                 {
                     var response = await _ovenRestClient.ListAllNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, statusOnly, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new Oven(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new Oven(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -234,7 +234,7 @@ namespace SubscriptionExtensions
                 try
                 {
                     var response = _ovenRestClient.ListAll(Id.SubscriptionId, Id.ResourceGroupName, statusOnly, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new Oven(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new Oven(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -249,7 +249,7 @@ namespace SubscriptionExtensions
                 try
                 {
                     var response = _ovenRestClient.ListAllNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, statusOnly, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new Oven(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new Oven(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -331,7 +331,7 @@ namespace SubscriptionExtensions
                 var response = await _ovenRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, ovenName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<Oven>(null, response.GetRawResponse());
-                return Response.FromValue(new Oven(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Oven(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -359,7 +359,7 @@ namespace SubscriptionExtensions
                 var response = _ovenRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, ovenName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<Oven>(null, response.GetRawResponse());
-                return Response.FromValue(new Oven(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Oven(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

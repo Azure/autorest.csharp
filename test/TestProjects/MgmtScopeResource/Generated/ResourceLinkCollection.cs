@@ -41,7 +41,7 @@ namespace MgmtScopeResource
         {
             _scope = scope;
             _resourceLinkClientDiagnostics = new ClientDiagnostics("MgmtScopeResource", ResourceLink.ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceLink.ResourceType, out string resourceLinkApiVersion);
+            Client.TryGetApiVersion(ResourceLink.ResourceType, out string resourceLinkApiVersion);
             _resourceLinkRestClient = new ResourceLinksRestOperations(_resourceLinkClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, resourceLinkApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -74,7 +74,7 @@ namespace MgmtScopeResource
             try
             {
                 var response = await _resourceLinkRestClient.CreateOrUpdateAsync(_scope, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new ResourceLinkCreateOrUpdateOperation(ArmClient, response);
+                var operation = new ResourceLinkCreateOrUpdateOperation(Client, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -106,7 +106,7 @@ namespace MgmtScopeResource
             try
             {
                 var response = _resourceLinkRestClient.CreateOrUpdate(_scope, parameters, cancellationToken);
-                var operation = new ResourceLinkCreateOrUpdateOperation(ArmClient, response);
+                var operation = new ResourceLinkCreateOrUpdateOperation(Client, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -132,7 +132,7 @@ namespace MgmtScopeResource
                 var response = await _resourceLinkRestClient.GetAsync(_scope, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _resourceLinkClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new ResourceLink(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ResourceLink(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -155,7 +155,7 @@ namespace MgmtScopeResource
                 var response = _resourceLinkRestClient.Get(_scope, cancellationToken);
                 if (response.Value == null)
                     throw _resourceLinkClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new ResourceLink(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ResourceLink(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -179,7 +179,7 @@ namespace MgmtScopeResource
                 try
                 {
                     var response = await _resourceLinkRestClient.ListAtSourceScopeAsync(_scope, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new ResourceLink(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new ResourceLink(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -194,7 +194,7 @@ namespace MgmtScopeResource
                 try
                 {
                     var response = await _resourceLinkRestClient.ListAtSourceScopeNextPageAsync(nextLink, _scope, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new ResourceLink(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new ResourceLink(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -220,7 +220,7 @@ namespace MgmtScopeResource
                 try
                 {
                     var response = _resourceLinkRestClient.ListAtSourceScope(_scope, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new ResourceLink(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new ResourceLink(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -235,7 +235,7 @@ namespace MgmtScopeResource
                 try
                 {
                     var response = _resourceLinkRestClient.ListAtSourceScopeNextPage(nextLink, _scope, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new ResourceLink(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new ResourceLink(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -302,7 +302,7 @@ namespace MgmtScopeResource
                 var response = await _resourceLinkRestClient.GetAsync(_scope, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<ResourceLink>(null, response.GetRawResponse());
-                return Response.FromValue(new ResourceLink(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ResourceLink(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -325,7 +325,7 @@ namespace MgmtScopeResource
                 var response = _resourceLinkRestClient.Get(_scope, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<ResourceLink>(null, response.GetRawResponse());
-                return Response.FromValue(new ResourceLink(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ResourceLink(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

@@ -39,7 +39,7 @@ namespace MgmtListMethods
         internal SubParentWithLocCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _subParentWithLocClientDiagnostics = new ClientDiagnostics("MgmtListMethods", SubParentWithLoc.ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(SubParentWithLoc.ResourceType, out string subParentWithLocApiVersion);
+            Client.TryGetApiVersion(SubParentWithLoc.ResourceType, out string subParentWithLocApiVersion);
             _subParentWithLocRestClient = new SubParentWithLocsRestOperations(_subParentWithLocClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, subParentWithLocApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -75,7 +75,7 @@ namespace MgmtListMethods
             try
             {
                 var response = await _subParentWithLocRestClient.CreateOrUpdateAsync(Id.SubscriptionId, subParentWithLocName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new SubParentWithLocCreateOrUpdateOperation(ArmClient, response);
+                var operation = new SubParentWithLocCreateOrUpdateOperation(Client, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -110,7 +110,7 @@ namespace MgmtListMethods
             try
             {
                 var response = _subParentWithLocRestClient.CreateOrUpdate(Id.SubscriptionId, subParentWithLocName, parameters, cancellationToken);
-                var operation = new SubParentWithLocCreateOrUpdateOperation(ArmClient, response);
+                var operation = new SubParentWithLocCreateOrUpdateOperation(Client, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -141,7 +141,7 @@ namespace MgmtListMethods
                 var response = await _subParentWithLocRestClient.GetAsync(Id.SubscriptionId, subParentWithLocName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _subParentWithLocClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new SubParentWithLoc(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SubParentWithLoc(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -169,7 +169,7 @@ namespace MgmtListMethods
                 var response = _subParentWithLocRestClient.Get(Id.SubscriptionId, subParentWithLocName, cancellationToken);
                 if (response.Value == null)
                     throw _subParentWithLocClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new SubParentWithLoc(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SubParentWithLoc(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -193,7 +193,7 @@ namespace MgmtListMethods
                 try
                 {
                     var response = await _subParentWithLocRestClient.ListAsync(Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new SubParentWithLoc(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new SubParentWithLoc(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -208,7 +208,7 @@ namespace MgmtListMethods
                 try
                 {
                     var response = await _subParentWithLocRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new SubParentWithLoc(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new SubParentWithLoc(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -234,7 +234,7 @@ namespace MgmtListMethods
                 try
                 {
                     var response = _subParentWithLocRestClient.List(Id.SubscriptionId, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new SubParentWithLoc(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new SubParentWithLoc(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -249,7 +249,7 @@ namespace MgmtListMethods
                 try
                 {
                     var response = _subParentWithLocRestClient.ListNextPage(nextLink, Id.SubscriptionId, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new SubParentWithLoc(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new SubParentWithLoc(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -331,7 +331,7 @@ namespace MgmtListMethods
                 var response = await _subParentWithLocRestClient.GetAsync(Id.SubscriptionId, subParentWithLocName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<SubParentWithLoc>(null, response.GetRawResponse());
-                return Response.FromValue(new SubParentWithLoc(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SubParentWithLoc(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -359,7 +359,7 @@ namespace MgmtListMethods
                 var response = _subParentWithLocRestClient.Get(Id.SubscriptionId, subParentWithLocName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<SubParentWithLoc>(null, response.GetRawResponse());
-                return Response.FromValue(new SubParentWithLoc(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SubParentWithLoc(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

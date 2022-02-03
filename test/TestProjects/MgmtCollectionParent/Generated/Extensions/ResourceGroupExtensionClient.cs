@@ -28,7 +28,7 @@ namespace MgmtCollectionParent
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {
-            ArmClient.TryGetApiVersion(resourceType, out string apiVersion);
+            Client.TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
         }
 
@@ -36,7 +36,7 @@ namespace MgmtCollectionParent
         /// <returns> An object representing collection of OrderResources and their operations over a OrderResource. </returns>
         public virtual OrderResourceCollection GetOrderResources()
         {
-            return new OrderResourceCollection(ArmClient, Id);
+            return new OrderResourceCollection(Client, Id);
         }
     }
 }

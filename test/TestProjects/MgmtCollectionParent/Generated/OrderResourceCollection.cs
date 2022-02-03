@@ -38,7 +38,7 @@ namespace MgmtCollectionParent
         internal OrderResourceCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _orderResourceClientDiagnostics = new ClientDiagnostics("MgmtCollectionParent", OrderResource.ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(OrderResource.ResourceType, out string orderResourceApiVersion);
+            Client.TryGetApiVersion(OrderResource.ResourceType, out string orderResourceApiVersion);
             _orderResourceRestClient = new ComputeManagementRestOperations(_orderResourceClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, orderResourceApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -72,7 +72,7 @@ namespace MgmtCollectionParent
                 var response = await _orderResourceRestClient.GetOrderByNameAsync(Id.SubscriptionId, Id.ResourceGroupName, location, orderName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _orderResourceClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new OrderResource(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new OrderResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -102,7 +102,7 @@ namespace MgmtCollectionParent
                 var response = _orderResourceRestClient.GetOrderByName(Id.SubscriptionId, Id.ResourceGroupName, location, orderName, cancellationToken);
                 if (response.Value == null)
                     throw _orderResourceClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new OrderResource(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new OrderResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -127,7 +127,7 @@ namespace MgmtCollectionParent
                 try
                 {
                     var response = await _orderResourceRestClient.ListOrderAtResourceGroupLevelAsync(Id.SubscriptionId, Id.ResourceGroupName, skipToken, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new OrderResource(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new OrderResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -142,7 +142,7 @@ namespace MgmtCollectionParent
                 try
                 {
                     var response = await _orderResourceRestClient.ListOrderAtResourceGroupLevelNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, skipToken, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new OrderResource(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new OrderResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -169,7 +169,7 @@ namespace MgmtCollectionParent
                 try
                 {
                     var response = _orderResourceRestClient.ListOrderAtResourceGroupLevel(Id.SubscriptionId, Id.ResourceGroupName, skipToken, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new OrderResource(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new OrderResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -184,7 +184,7 @@ namespace MgmtCollectionParent
                 try
                 {
                     var response = _orderResourceRestClient.ListOrderAtResourceGroupLevelNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, skipToken, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new OrderResource(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new OrderResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -272,7 +272,7 @@ namespace MgmtCollectionParent
                 var response = await _orderResourceRestClient.GetOrderByNameAsync(Id.SubscriptionId, Id.ResourceGroupName, location, orderName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<OrderResource>(null, response.GetRawResponse());
-                return Response.FromValue(new OrderResource(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new OrderResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -302,7 +302,7 @@ namespace MgmtCollectionParent
                 var response = _orderResourceRestClient.GetOrderByName(Id.SubscriptionId, Id.ResourceGroupName, location, orderName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<OrderResource>(null, response.GetRawResponse());
-                return Response.FromValue(new OrderResource(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new OrderResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

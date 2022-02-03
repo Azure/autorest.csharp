@@ -38,7 +38,7 @@ namespace MgmtOperations
         internal AvailabilitySetChildCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _availabilitySetChildavailabilitySetChildClientDiagnostics = new ClientDiagnostics("MgmtOperations", AvailabilitySetChild.ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(AvailabilitySetChild.ResourceType, out string availabilitySetChildavailabilitySetChildApiVersion);
+            Client.TryGetApiVersion(AvailabilitySetChild.ResourceType, out string availabilitySetChildavailabilitySetChildApiVersion);
             _availabilitySetChildavailabilitySetChildRestClient = new AvailabilitySetChildRestOperations(_availabilitySetChildavailabilitySetChildClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, availabilitySetChildavailabilitySetChildApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -74,7 +74,7 @@ namespace MgmtOperations
             try
             {
                 var response = await _availabilitySetChildavailabilitySetChildRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, availabilitySetChildName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new AvailabilitySetChildCreateOrUpdateOperation(ArmClient, response);
+                var operation = new AvailabilitySetChildCreateOrUpdateOperation(Client, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -109,7 +109,7 @@ namespace MgmtOperations
             try
             {
                 var response = _availabilitySetChildavailabilitySetChildRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, availabilitySetChildName, parameters, cancellationToken);
-                var operation = new AvailabilitySetChildCreateOrUpdateOperation(ArmClient, response);
+                var operation = new AvailabilitySetChildCreateOrUpdateOperation(Client, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -140,7 +140,7 @@ namespace MgmtOperations
                 var response = await _availabilitySetChildavailabilitySetChildRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, availabilitySetChildName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _availabilitySetChildavailabilitySetChildClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new AvailabilitySetChild(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new AvailabilitySetChild(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -168,7 +168,7 @@ namespace MgmtOperations
                 var response = _availabilitySetChildavailabilitySetChildRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, availabilitySetChildName, cancellationToken);
                 if (response.Value == null)
                     throw _availabilitySetChildavailabilitySetChildClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new AvailabilitySetChild(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new AvailabilitySetChild(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -192,7 +192,7 @@ namespace MgmtOperations
                 try
                 {
                     var response = await _availabilitySetChildavailabilitySetChildRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new AvailabilitySetChild(ArmClient, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new AvailabilitySetChild(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -218,7 +218,7 @@ namespace MgmtOperations
                 try
                 {
                     var response = _availabilitySetChildavailabilitySetChildRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new AvailabilitySetChild(ArmClient, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new AvailabilitySetChild(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -300,7 +300,7 @@ namespace MgmtOperations
                 var response = await _availabilitySetChildavailabilitySetChildRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, availabilitySetChildName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<AvailabilitySetChild>(null, response.GetRawResponse());
-                return Response.FromValue(new AvailabilitySetChild(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new AvailabilitySetChild(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -328,7 +328,7 @@ namespace MgmtOperations
                 var response = _availabilitySetChildavailabilitySetChildRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, availabilitySetChildName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<AvailabilitySetChild>(null, response.GetRawResponse());
-                return Response.FromValue(new AvailabilitySetChild(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new AvailabilitySetChild(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

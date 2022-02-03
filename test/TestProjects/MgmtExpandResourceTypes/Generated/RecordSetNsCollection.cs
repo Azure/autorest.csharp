@@ -38,7 +38,7 @@ namespace MgmtExpandResourceTypes
         internal RecordSetNsCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _recordSetNsRecordSetsClientDiagnostics = new ClientDiagnostics("MgmtExpandResourceTypes", RecordSetNs.ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(RecordSetNs.ResourceType, out string recordSetNsRecordSetsApiVersion);
+            Client.TryGetApiVersion(RecordSetNs.ResourceType, out string recordSetNsRecordSetsApiVersion);
             _recordSetNsRecordSetsRestClient = new RecordSetsRestOperations(_recordSetNsRecordSetsClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, recordSetNsRecordSetsApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -78,7 +78,7 @@ namespace MgmtExpandResourceTypes
             try
             {
                 var response = await _recordSetNsRecordSetsRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "NS".ToRecordType(), relativeRecordSetName, parameters, ifMatch, ifNoneMatch, cancellationToken).ConfigureAwait(false);
-                var operation = new RecordSetNsCreateOrUpdateOperation(ArmClient, response);
+                var operation = new RecordSetNsCreateOrUpdateOperation(Client, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -117,7 +117,7 @@ namespace MgmtExpandResourceTypes
             try
             {
                 var response = _recordSetNsRecordSetsRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "NS".ToRecordType(), relativeRecordSetName, parameters, ifMatch, ifNoneMatch, cancellationToken);
-                var operation = new RecordSetNsCreateOrUpdateOperation(ArmClient, response);
+                var operation = new RecordSetNsCreateOrUpdateOperation(Client, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -150,7 +150,7 @@ namespace MgmtExpandResourceTypes
                 var response = await _recordSetNsRecordSetsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "NS".ToRecordType(), relativeRecordSetName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _recordSetNsRecordSetsClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new RecordSetNs(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new RecordSetNs(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -180,7 +180,7 @@ namespace MgmtExpandResourceTypes
                 var response = _recordSetNsRecordSetsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "NS".ToRecordType(), relativeRecordSetName, cancellationToken);
                 if (response.Value == null)
                     throw _recordSetNsRecordSetsClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new RecordSetNs(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new RecordSetNs(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -206,7 +206,7 @@ namespace MgmtExpandResourceTypes
                 try
                 {
                     var response = await _recordSetNsRecordSetsRestClient.ListByTypeAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "NS".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetNs(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetNs(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -221,7 +221,7 @@ namespace MgmtExpandResourceTypes
                 try
                 {
                     var response = await _recordSetNsRecordSetsRestClient.ListByTypeNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "NS".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetNs(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetNs(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -249,7 +249,7 @@ namespace MgmtExpandResourceTypes
                 try
                 {
                     var response = _recordSetNsRecordSetsRestClient.ListByType(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "NS".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetNs(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetNs(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -264,7 +264,7 @@ namespace MgmtExpandResourceTypes
                 try
                 {
                     var response = _recordSetNsRecordSetsRestClient.ListByTypeNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "NS".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetNs(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetNs(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -352,7 +352,7 @@ namespace MgmtExpandResourceTypes
                 var response = await _recordSetNsRecordSetsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "NS".ToRecordType(), relativeRecordSetName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<RecordSetNs>(null, response.GetRawResponse());
-                return Response.FromValue(new RecordSetNs(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new RecordSetNs(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -382,7 +382,7 @@ namespace MgmtExpandResourceTypes
                 var response = _recordSetNsRecordSetsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "NS".ToRecordType(), relativeRecordSetName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<RecordSetNs>(null, response.GetRawResponse());
-                return Response.FromValue(new RecordSetNs(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new RecordSetNs(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

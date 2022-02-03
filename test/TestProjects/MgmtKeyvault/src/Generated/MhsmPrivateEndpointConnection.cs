@@ -53,7 +53,7 @@ namespace MgmtKeyvault
         internal MhsmPrivateEndpointConnection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _mhsmPrivateEndpointConnectionMHSMPrivateEndpointConnectionsClientDiagnostics = new ClientDiagnostics("MgmtKeyvault", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string mhsmPrivateEndpointConnectionMHSMPrivateEndpointConnectionsApiVersion);
+            Client.TryGetApiVersion(ResourceType, out string mhsmPrivateEndpointConnectionMHSMPrivateEndpointConnectionsApiVersion);
             _mhsmPrivateEndpointConnectionMHSMPrivateEndpointConnectionsRestClient = new MhsmPrivateEndpointConnectionsRestOperations(_mhsmPrivateEndpointConnectionMHSMPrivateEndpointConnectionsClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, mhsmPrivateEndpointConnectionMHSMPrivateEndpointConnectionsApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -98,7 +98,7 @@ namespace MgmtKeyvault
                 var response = await _mhsmPrivateEndpointConnectionMHSMPrivateEndpointConnectionsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _mhsmPrivateEndpointConnectionMHSMPrivateEndpointConnectionsClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new MhsmPrivateEndpointConnection(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new MhsmPrivateEndpointConnection(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -121,7 +121,7 @@ namespace MgmtKeyvault
                 var response = _mhsmPrivateEndpointConnectionMHSMPrivateEndpointConnectionsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _mhsmPrivateEndpointConnectionMHSMPrivateEndpointConnectionsClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new MhsmPrivateEndpointConnection(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new MhsmPrivateEndpointConnection(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -207,7 +207,7 @@ namespace MgmtKeyvault
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _mhsmPrivateEndpointConnectionMHSMPrivateEndpointConnectionsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new MhsmPrivateEndpointConnection(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new MhsmPrivateEndpointConnection(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -243,7 +243,7 @@ namespace MgmtKeyvault
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _mhsmPrivateEndpointConnectionMHSMPrivateEndpointConnectionsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
-                return Response.FromValue(new MhsmPrivateEndpointConnection(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new MhsmPrivateEndpointConnection(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -275,7 +275,7 @@ namespace MgmtKeyvault
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _mhsmPrivateEndpointConnectionMHSMPrivateEndpointConnectionsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new MhsmPrivateEndpointConnection(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new MhsmPrivateEndpointConnection(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -307,7 +307,7 @@ namespace MgmtKeyvault
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _mhsmPrivateEndpointConnectionMHSMPrivateEndpointConnectionsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
-                return Response.FromValue(new MhsmPrivateEndpointConnection(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new MhsmPrivateEndpointConnection(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -338,7 +338,7 @@ namespace MgmtKeyvault
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _mhsmPrivateEndpointConnectionMHSMPrivateEndpointConnectionsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new MhsmPrivateEndpointConnection(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new MhsmPrivateEndpointConnection(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -369,7 +369,7 @@ namespace MgmtKeyvault
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _mhsmPrivateEndpointConnectionMHSMPrivateEndpointConnectionsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
-                return Response.FromValue(new MhsmPrivateEndpointConnection(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new MhsmPrivateEndpointConnection(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {

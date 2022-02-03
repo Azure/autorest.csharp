@@ -52,7 +52,7 @@ namespace MgmtListMethods
         internal TenantTest(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _tenantTestClientDiagnostics = new ClientDiagnostics("MgmtListMethods", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string tenantTestApiVersion);
+            Client.TryGetApiVersion(ResourceType, out string tenantTestApiVersion);
             _tenantTestRestClient = new TenantTestsRestOperations(_tenantTestClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, tenantTestApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -87,28 +87,28 @@ namespace MgmtListMethods
         /// <returns> An object representing collection of TenantParentWithNonResChWithLocs and their operations over a TenantParentWithNonResChWithLoc. </returns>
         public virtual TenantParentWithNonResChWithLocCollection GetTenantParentWithNonResChWithLocs()
         {
-            return new TenantParentWithNonResChWithLocCollection(ArmClient, Id);
+            return new TenantParentWithNonResChWithLocCollection(Client, Id);
         }
 
         /// <summary> Gets a collection of TenantParentWithNonResChes in the TenantParentWithNonResCh. </summary>
         /// <returns> An object representing collection of TenantParentWithNonResChes and their operations over a TenantParentWithNonResCh. </returns>
         public virtual TenantParentWithNonResChCollection GetTenantParentWithNonResChes()
         {
-            return new TenantParentWithNonResChCollection(ArmClient, Id);
+            return new TenantParentWithNonResChCollection(Client, Id);
         }
 
         /// <summary> Gets a collection of TenantParentWithLocs in the TenantParentWithLoc. </summary>
         /// <returns> An object representing collection of TenantParentWithLocs and their operations over a TenantParentWithLoc. </returns>
         public virtual TenantParentWithLocCollection GetTenantParentWithLocs()
         {
-            return new TenantParentWithLocCollection(ArmClient, Id);
+            return new TenantParentWithLocCollection(Client, Id);
         }
 
         /// <summary> Gets a collection of TenantParents in the TenantParent. </summary>
         /// <returns> An object representing collection of TenantParents and their operations over a TenantParent. </returns>
         public virtual TenantParentCollection GetTenantParents()
         {
-            return new TenantParentCollection(ArmClient, Id);
+            return new TenantParentCollection(Client, Id);
         }
 
         /// RequestPath: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}
@@ -126,7 +126,7 @@ namespace MgmtListMethods
                 var response = await _tenantTestRestClient.GetAsync(Id.Name, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _tenantTestClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new TenantTest(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new TenantTest(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -150,7 +150,7 @@ namespace MgmtListMethods
                 var response = _tenantTestRestClient.Get(Id.Name, expand, cancellationToken);
                 if (response.Value == null)
                     throw _tenantTestClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new TenantTest(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new TenantTest(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -186,7 +186,7 @@ namespace MgmtListMethods
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _tenantTestRestClient.GetAsync(Id.Name, null, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new TenantTest(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new TenantTest(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -222,7 +222,7 @@ namespace MgmtListMethods
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _tenantTestRestClient.Get(Id.Name, null, cancellationToken);
-                return Response.FromValue(new TenantTest(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new TenantTest(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -254,7 +254,7 @@ namespace MgmtListMethods
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _tenantTestRestClient.GetAsync(Id.Name, null, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new TenantTest(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new TenantTest(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -286,7 +286,7 @@ namespace MgmtListMethods
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _tenantTestRestClient.Get(Id.Name, null, cancellationToken);
-                return Response.FromValue(new TenantTest(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new TenantTest(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -317,7 +317,7 @@ namespace MgmtListMethods
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _tenantTestRestClient.GetAsync(Id.Name, null, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new TenantTest(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new TenantTest(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -348,7 +348,7 @@ namespace MgmtListMethods
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _tenantTestRestClient.Get(Id.Name, null, cancellationToken);
-                return Response.FromValue(new TenantTest(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new TenantTest(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {

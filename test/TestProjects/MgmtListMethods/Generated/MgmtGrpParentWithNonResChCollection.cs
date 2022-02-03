@@ -39,7 +39,7 @@ namespace MgmtListMethods
         internal MgmtGrpParentWithNonResChCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _mgmtGrpParentWithNonResChClientDiagnostics = new ClientDiagnostics("MgmtListMethods", MgmtGrpParentWithNonResCh.ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(MgmtGrpParentWithNonResCh.ResourceType, out string mgmtGrpParentWithNonResChApiVersion);
+            Client.TryGetApiVersion(MgmtGrpParentWithNonResCh.ResourceType, out string mgmtGrpParentWithNonResChApiVersion);
             _mgmtGrpParentWithNonResChRestClient = new MgmtGrpParentWithNonResChesRestOperations(_mgmtGrpParentWithNonResChClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, mgmtGrpParentWithNonResChApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -75,7 +75,7 @@ namespace MgmtListMethods
             try
             {
                 var response = await _mgmtGrpParentWithNonResChRestClient.CreateOrUpdateAsync(Id.Name, mgmtGrpParentWithNonResChName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtGrpParentWithNonResChCreateOrUpdateOperation(ArmClient, response);
+                var operation = new MgmtGrpParentWithNonResChCreateOrUpdateOperation(Client, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -110,7 +110,7 @@ namespace MgmtListMethods
             try
             {
                 var response = _mgmtGrpParentWithNonResChRestClient.CreateOrUpdate(Id.Name, mgmtGrpParentWithNonResChName, parameters, cancellationToken);
-                var operation = new MgmtGrpParentWithNonResChCreateOrUpdateOperation(ArmClient, response);
+                var operation = new MgmtGrpParentWithNonResChCreateOrUpdateOperation(Client, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -141,7 +141,7 @@ namespace MgmtListMethods
                 var response = await _mgmtGrpParentWithNonResChRestClient.GetAsync(Id.Name, mgmtGrpParentWithNonResChName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _mgmtGrpParentWithNonResChClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new MgmtGrpParentWithNonResCh(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new MgmtGrpParentWithNonResCh(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -169,7 +169,7 @@ namespace MgmtListMethods
                 var response = _mgmtGrpParentWithNonResChRestClient.Get(Id.Name, mgmtGrpParentWithNonResChName, cancellationToken);
                 if (response.Value == null)
                     throw _mgmtGrpParentWithNonResChClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new MgmtGrpParentWithNonResCh(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new MgmtGrpParentWithNonResCh(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -193,7 +193,7 @@ namespace MgmtListMethods
                 try
                 {
                     var response = await _mgmtGrpParentWithNonResChRestClient.ListAsync(Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new MgmtGrpParentWithNonResCh(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new MgmtGrpParentWithNonResCh(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -208,7 +208,7 @@ namespace MgmtListMethods
                 try
                 {
                     var response = await _mgmtGrpParentWithNonResChRestClient.ListNextPageAsync(nextLink, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new MgmtGrpParentWithNonResCh(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new MgmtGrpParentWithNonResCh(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -234,7 +234,7 @@ namespace MgmtListMethods
                 try
                 {
                     var response = _mgmtGrpParentWithNonResChRestClient.List(Id.Name, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new MgmtGrpParentWithNonResCh(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new MgmtGrpParentWithNonResCh(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -249,7 +249,7 @@ namespace MgmtListMethods
                 try
                 {
                     var response = _mgmtGrpParentWithNonResChRestClient.ListNextPage(nextLink, Id.Name, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new MgmtGrpParentWithNonResCh(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new MgmtGrpParentWithNonResCh(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -331,7 +331,7 @@ namespace MgmtListMethods
                 var response = await _mgmtGrpParentWithNonResChRestClient.GetAsync(Id.Name, mgmtGrpParentWithNonResChName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<MgmtGrpParentWithNonResCh>(null, response.GetRawResponse());
-                return Response.FromValue(new MgmtGrpParentWithNonResCh(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new MgmtGrpParentWithNonResCh(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -359,7 +359,7 @@ namespace MgmtListMethods
                 var response = _mgmtGrpParentWithNonResChRestClient.Get(Id.Name, mgmtGrpParentWithNonResChName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<MgmtGrpParentWithNonResCh>(null, response.GetRawResponse());
-                return Response.FromValue(new MgmtGrpParentWithNonResCh(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new MgmtGrpParentWithNonResCh(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

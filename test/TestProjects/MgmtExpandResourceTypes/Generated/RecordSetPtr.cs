@@ -53,7 +53,7 @@ namespace MgmtExpandResourceTypes
         internal RecordSetPtr(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _recordSetPtrRecordSetsClientDiagnostics = new ClientDiagnostics("MgmtExpandResourceTypes", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string recordSetPtrRecordSetsApiVersion);
+            Client.TryGetApiVersion(ResourceType, out string recordSetPtrRecordSetsApiVersion);
             _recordSetPtrRecordSetsRestClient = new RecordSetsRestOperations(_recordSetPtrRecordSetsClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, recordSetPtrRecordSetsApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -98,7 +98,7 @@ namespace MgmtExpandResourceTypes
                 var response = await _recordSetPtrRecordSetsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, "PTR".ToRecordType(), Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _recordSetPtrRecordSetsClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new RecordSetPtr(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new RecordSetPtr(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -121,7 +121,7 @@ namespace MgmtExpandResourceTypes
                 var response = _recordSetPtrRecordSetsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, "PTR".ToRecordType(), Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _recordSetPtrRecordSetsClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new RecordSetPtr(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new RecordSetPtr(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -202,7 +202,7 @@ namespace MgmtExpandResourceTypes
             try
             {
                 var response = await _recordSetPtrRecordSetsRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, "PTR".ToRecordType(), Id.Name, parameters, ifMatch, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new RecordSetPtr(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new RecordSetPtr(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -231,7 +231,7 @@ namespace MgmtExpandResourceTypes
             try
             {
                 var response = _recordSetPtrRecordSetsRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, "PTR".ToRecordType(), Id.Name, parameters, ifMatch, cancellationToken);
-                return Response.FromValue(new RecordSetPtr(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new RecordSetPtr(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

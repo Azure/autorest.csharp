@@ -53,7 +53,7 @@ namespace MgmtExtensionResource
         internal SubscriptionPolicyDefinition(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _subscriptionPolicyDefinitionPolicyDefinitionsClientDiagnostics = new ClientDiagnostics("MgmtExtensionResource", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string subscriptionPolicyDefinitionPolicyDefinitionsApiVersion);
+            Client.TryGetApiVersion(ResourceType, out string subscriptionPolicyDefinitionPolicyDefinitionsApiVersion);
             _subscriptionPolicyDefinitionPolicyDefinitionsRestClient = new PolicyDefinitionsRestOperations(_subscriptionPolicyDefinitionPolicyDefinitionsClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, subscriptionPolicyDefinitionPolicyDefinitionsApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -98,7 +98,7 @@ namespace MgmtExtensionResource
                 var response = await _subscriptionPolicyDefinitionPolicyDefinitionsRestClient.GetAsync(Id.SubscriptionId, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _subscriptionPolicyDefinitionPolicyDefinitionsClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new SubscriptionPolicyDefinition(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SubscriptionPolicyDefinition(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -121,7 +121,7 @@ namespace MgmtExtensionResource
                 var response = _subscriptionPolicyDefinitionPolicyDefinitionsRestClient.Get(Id.SubscriptionId, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _subscriptionPolicyDefinitionPolicyDefinitionsClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new SubscriptionPolicyDefinition(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SubscriptionPolicyDefinition(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

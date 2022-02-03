@@ -28,7 +28,7 @@ namespace MgmtMultipleParentResource
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {
-            ArmClient.TryGetApiVersion(resourceType, out string apiVersion);
+            Client.TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
         }
 
@@ -36,14 +36,14 @@ namespace MgmtMultipleParentResource
         /// <returns> An object representing collection of AnotherParents and their operations over a AnotherParent. </returns>
         public virtual AnotherParentCollection GetAnotherParents()
         {
-            return new AnotherParentCollection(ArmClient, Id);
+            return new AnotherParentCollection(Client, Id);
         }
 
         /// <summary> Gets a collection of TheParents in the TheParent. </summary>
         /// <returns> An object representing collection of TheParents and their operations over a TheParent. </returns>
         public virtual TheParentCollection GetTheParents()
         {
-            return new TheParentCollection(ArmClient, Id);
+            return new TheParentCollection(Client, Id);
         }
     }
 }

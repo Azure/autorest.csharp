@@ -28,7 +28,7 @@ namespace MgmtExtensionResource
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {
-            ArmClient.TryGetApiVersion(resourceType, out string apiVersion);
+            Client.TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
         }
 
@@ -36,7 +36,7 @@ namespace MgmtExtensionResource
         /// <returns> An object representing collection of BuiltInPolicyDefinitions and their operations over a BuiltInPolicyDefinition. </returns>
         public virtual BuiltInPolicyDefinitionCollection GetBuiltInPolicyDefinitions()
         {
-            return new BuiltInPolicyDefinitionCollection(ArmClient, Id);
+            return new BuiltInPolicyDefinitionCollection(Client, Id);
         }
     }
 }

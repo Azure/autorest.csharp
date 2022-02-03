@@ -52,7 +52,7 @@ namespace Azure.Management.Storage
         internal EncryptionScope(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _encryptionScopeClientDiagnostics = new ClientDiagnostics("Azure.Management.Storage", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string encryptionScopeApiVersion);
+            Client.TryGetApiVersion(ResourceType, out string encryptionScopeApiVersion);
             _encryptionScopeRestClient = new EncryptionScopesRestOperations(_encryptionScopeClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, encryptionScopeApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -97,7 +97,7 @@ namespace Azure.Management.Storage
                 var response = await _encryptionScopeRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _encryptionScopeClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new EncryptionScope(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new EncryptionScope(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -120,7 +120,7 @@ namespace Azure.Management.Storage
                 var response = _encryptionScopeRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _encryptionScopeClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new EncryptionScope(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new EncryptionScope(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -148,7 +148,7 @@ namespace Azure.Management.Storage
             try
             {
                 var response = await _encryptionScopeRestClient.PatchAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, encryptionScope, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new EncryptionScope(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new EncryptionScope(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -176,7 +176,7 @@ namespace Azure.Management.Storage
             try
             {
                 var response = _encryptionScopeRestClient.Patch(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, encryptionScope, cancellationToken);
-                return Response.FromValue(new EncryptionScope(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new EncryptionScope(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

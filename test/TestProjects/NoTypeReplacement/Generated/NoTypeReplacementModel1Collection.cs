@@ -39,7 +39,7 @@ namespace NoTypeReplacement
         internal NoTypeReplacementModel1Collection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _noTypeReplacementModel1ClientDiagnostics = new ClientDiagnostics("NoTypeReplacement", NoTypeReplacementModel1.ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(NoTypeReplacementModel1.ResourceType, out string noTypeReplacementModel1ApiVersion);
+            Client.TryGetApiVersion(NoTypeReplacementModel1.ResourceType, out string noTypeReplacementModel1ApiVersion);
             _noTypeReplacementModel1RestClient = new NoTypeReplacementModel1SRestOperations(_noTypeReplacementModel1ClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, noTypeReplacementModel1ApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -71,7 +71,7 @@ namespace NoTypeReplacement
             try
             {
                 var response = await _noTypeReplacementModel1RestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, noTypeReplacementModel1SName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new NoTypeReplacementModel1CreateOrUpdateOperation(ArmClient, response);
+                var operation = new NoTypeReplacementModel1CreateOrUpdateOperation(Client, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -102,7 +102,7 @@ namespace NoTypeReplacement
             try
             {
                 var response = _noTypeReplacementModel1RestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, noTypeReplacementModel1SName, parameters, cancellationToken);
-                var operation = new NoTypeReplacementModel1CreateOrUpdateOperation(ArmClient, response);
+                var operation = new NoTypeReplacementModel1CreateOrUpdateOperation(Client, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -129,7 +129,7 @@ namespace NoTypeReplacement
                 var response = await _noTypeReplacementModel1RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, noTypeReplacementModel1SName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _noTypeReplacementModel1ClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new NoTypeReplacementModel1(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new NoTypeReplacementModel1(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -153,7 +153,7 @@ namespace NoTypeReplacement
                 var response = _noTypeReplacementModel1RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, noTypeReplacementModel1SName, cancellationToken);
                 if (response.Value == null)
                     throw _noTypeReplacementModel1ClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new NoTypeReplacementModel1(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new NoTypeReplacementModel1(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -173,7 +173,7 @@ namespace NoTypeReplacement
                 try
                 {
                     var response = await _noTypeReplacementModel1RestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new NoTypeReplacementModel1(ArmClient, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new NoTypeReplacementModel1(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -195,7 +195,7 @@ namespace NoTypeReplacement
                 try
                 {
                     var response = _noTypeReplacementModel1RestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new NoTypeReplacementModel1(ArmClient, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new NoTypeReplacementModel1(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -268,7 +268,7 @@ namespace NoTypeReplacement
                 var response = await _noTypeReplacementModel1RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, noTypeReplacementModel1SName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<NoTypeReplacementModel1>(null, response.GetRawResponse());
-                return Response.FromValue(new NoTypeReplacementModel1(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new NoTypeReplacementModel1(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -293,7 +293,7 @@ namespace NoTypeReplacement
                 var response = _noTypeReplacementModel1RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, noTypeReplacementModel1SName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<NoTypeReplacementModel1>(null, response.GetRawResponse());
-                return Response.FromValue(new NoTypeReplacementModel1(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new NoTypeReplacementModel1(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

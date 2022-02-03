@@ -39,7 +39,7 @@ namespace MgmtNonStringPathVariable
         internal FakeCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _fakeClientDiagnostics = new ClientDiagnostics("MgmtNonStringPathVariable", Fake.ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(Fake.ResourceType, out string fakeApiVersion);
+            Client.TryGetApiVersion(Fake.ResourceType, out string fakeApiVersion);
             _fakeRestClient = new FakesRestOperations(_fakeClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, fakeApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -73,7 +73,7 @@ namespace MgmtNonStringPathVariable
             try
             {
                 var response = await _fakeRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, fakeName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new FakeCreateOrUpdateOperation(ArmClient, _fakeClientDiagnostics, Pipeline, _fakeRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, fakeName, parameters).Request, response);
+                var operation = new FakeCreateOrUpdateOperation(Client, _fakeClientDiagnostics, Pipeline, _fakeRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, fakeName, parameters).Request, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -106,7 +106,7 @@ namespace MgmtNonStringPathVariable
             try
             {
                 var response = _fakeRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, fakeName, parameters, cancellationToken);
-                var operation = new FakeCreateOrUpdateOperation(ArmClient, _fakeClientDiagnostics, Pipeline, _fakeRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, fakeName, parameters).Request, response);
+                var operation = new FakeCreateOrUpdateOperation(Client, _fakeClientDiagnostics, Pipeline, _fakeRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, fakeName, parameters).Request, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -134,7 +134,7 @@ namespace MgmtNonStringPathVariable
                 var response = await _fakeRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, fakeName, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _fakeClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new Fake(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Fake(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -159,7 +159,7 @@ namespace MgmtNonStringPathVariable
                 var response = _fakeRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, fakeName, expand, cancellationToken);
                 if (response.Value == null)
                     throw _fakeClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new Fake(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Fake(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -184,7 +184,7 @@ namespace MgmtNonStringPathVariable
                 try
                 {
                     var response = await _fakeRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, optionalParam, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new Fake(ArmClient, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new Fake(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -211,7 +211,7 @@ namespace MgmtNonStringPathVariable
                 try
                 {
                     var response = _fakeRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, optionalParam, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new Fake(ArmClient, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new Fake(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -284,7 +284,7 @@ namespace MgmtNonStringPathVariable
                 var response = await _fakeRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, fakeName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<Fake>(null, response.GetRawResponse());
-                return Response.FromValue(new Fake(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Fake(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -309,7 +309,7 @@ namespace MgmtNonStringPathVariable
                 var response = _fakeRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, fakeName, expand, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<Fake>(null, response.GetRawResponse());
-                return Response.FromValue(new Fake(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Fake(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

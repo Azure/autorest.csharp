@@ -28,7 +28,7 @@ namespace TenantOnly
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {
-            ArmClient.TryGetApiVersion(resourceType, out string apiVersion);
+            Client.TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
         }
 
@@ -36,7 +36,7 @@ namespace TenantOnly
         /// <returns> An object representing collection of BillingAccounts and their operations over a BillingAccount. </returns>
         public virtual BillingAccountCollection GetBillingAccounts()
         {
-            return new BillingAccountCollection(ArmClient, Id);
+            return new BillingAccountCollection(Client, Id);
         }
     }
 }

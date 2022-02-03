@@ -14,9 +14,9 @@ namespace MgmtScopeResource
     {
         private static ManagementGroupExtensionClient GetExtensionClient(ManagementGroup managementGroup)
         {
-            return managementGroup.GetCachedClient((armClient) =>
+            return managementGroup.GetCachedClient((client) =>
             {
-                return new ManagementGroupExtensionClient(armClient, managementGroup.Id);
+                return new ManagementGroupExtensionClient(client, managementGroup.Id);
             }
             );
         }

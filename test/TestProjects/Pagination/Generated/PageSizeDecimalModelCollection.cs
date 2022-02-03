@@ -39,7 +39,7 @@ namespace Pagination
         internal PageSizeDecimalModelCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _pageSizeDecimalModelClientDiagnostics = new ClientDiagnostics("Pagination", PageSizeDecimalModel.ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(PageSizeDecimalModel.ResourceType, out string pageSizeDecimalModelApiVersion);
+            Client.TryGetApiVersion(PageSizeDecimalModel.ResourceType, out string pageSizeDecimalModelApiVersion);
             _pageSizeDecimalModelRestClient = new PageSizeDecimalModelsRestOperations(_pageSizeDecimalModelClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, pageSizeDecimalModelApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -71,7 +71,7 @@ namespace Pagination
             try
             {
                 var response = await _pageSizeDecimalModelRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, name, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new PageSizeDecimalModelCreateOrUpdateOperation(ArmClient, response);
+                var operation = new PageSizeDecimalModelCreateOrUpdateOperation(Client, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -102,7 +102,7 @@ namespace Pagination
             try
             {
                 var response = _pageSizeDecimalModelRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, name, parameters, cancellationToken);
-                var operation = new PageSizeDecimalModelCreateOrUpdateOperation(ArmClient, response);
+                var operation = new PageSizeDecimalModelCreateOrUpdateOperation(Client, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -129,7 +129,7 @@ namespace Pagination
                 var response = await _pageSizeDecimalModelRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _pageSizeDecimalModelClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new PageSizeDecimalModel(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new PageSizeDecimalModel(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -153,7 +153,7 @@ namespace Pagination
                 var response = _pageSizeDecimalModelRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken);
                 if (response.Value == null)
                     throw _pageSizeDecimalModelClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new PageSizeDecimalModel(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new PageSizeDecimalModel(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -174,7 +174,7 @@ namespace Pagination
                 try
                 {
                     var response = await _pageSizeDecimalModelRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new PageSizeDecimalModel(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new PageSizeDecimalModel(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -189,7 +189,7 @@ namespace Pagination
                 try
                 {
                     var response = await _pageSizeDecimalModelRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new PageSizeDecimalModel(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new PageSizeDecimalModel(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -212,7 +212,7 @@ namespace Pagination
                 try
                 {
                     var response = _pageSizeDecimalModelRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new PageSizeDecimalModel(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new PageSizeDecimalModel(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -227,7 +227,7 @@ namespace Pagination
                 try
                 {
                     var response = _pageSizeDecimalModelRestClient.ListNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new PageSizeDecimalModel(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new PageSizeDecimalModel(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -300,7 +300,7 @@ namespace Pagination
                 var response = await _pageSizeDecimalModelRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<PageSizeDecimalModel>(null, response.GetRawResponse());
-                return Response.FromValue(new PageSizeDecimalModel(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new PageSizeDecimalModel(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -325,7 +325,7 @@ namespace Pagination
                 var response = _pageSizeDecimalModelRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<PageSizeDecimalModel>(null, response.GetRawResponse());
-                return Response.FromValue(new PageSizeDecimalModel(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new PageSizeDecimalModel(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

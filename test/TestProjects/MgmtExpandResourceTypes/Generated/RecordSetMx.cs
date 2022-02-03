@@ -53,7 +53,7 @@ namespace MgmtExpandResourceTypes
         internal RecordSetMx(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _recordSetMxRecordSetsClientDiagnostics = new ClientDiagnostics("MgmtExpandResourceTypes", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string recordSetMxRecordSetsApiVersion);
+            Client.TryGetApiVersion(ResourceType, out string recordSetMxRecordSetsApiVersion);
             _recordSetMxRecordSetsRestClient = new RecordSetsRestOperations(_recordSetMxRecordSetsClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, recordSetMxRecordSetsApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -98,7 +98,7 @@ namespace MgmtExpandResourceTypes
                 var response = await _recordSetMxRecordSetsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, "MX".ToRecordType(), Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _recordSetMxRecordSetsClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new RecordSetMx(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new RecordSetMx(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -121,7 +121,7 @@ namespace MgmtExpandResourceTypes
                 var response = _recordSetMxRecordSetsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, "MX".ToRecordType(), Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _recordSetMxRecordSetsClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new RecordSetMx(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new RecordSetMx(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -202,7 +202,7 @@ namespace MgmtExpandResourceTypes
             try
             {
                 var response = await _recordSetMxRecordSetsRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, "MX".ToRecordType(), Id.Name, parameters, ifMatch, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new RecordSetMx(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new RecordSetMx(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -231,7 +231,7 @@ namespace MgmtExpandResourceTypes
             try
             {
                 var response = _recordSetMxRecordSetsRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, "MX".ToRecordType(), Id.Name, parameters, ifMatch, cancellationToken);
-                return Response.FromValue(new RecordSetMx(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new RecordSetMx(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

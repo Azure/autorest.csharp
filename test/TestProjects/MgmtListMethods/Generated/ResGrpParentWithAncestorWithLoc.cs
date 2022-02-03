@@ -52,7 +52,7 @@ namespace MgmtListMethods
         internal ResGrpParentWithAncestorWithLoc(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _resGrpParentWithAncestorWithLocClientDiagnostics = new ClientDiagnostics("MgmtListMethods", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string resGrpParentWithAncestorWithLocApiVersion);
+            Client.TryGetApiVersion(ResourceType, out string resGrpParentWithAncestorWithLocApiVersion);
             _resGrpParentWithAncestorWithLocRestClient = new ResGrpParentWithAncestorWithLocsRestOperations(_resGrpParentWithAncestorWithLocClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, resGrpParentWithAncestorWithLocApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -97,7 +97,7 @@ namespace MgmtListMethods
                 var response = await _resGrpParentWithAncestorWithLocRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _resGrpParentWithAncestorWithLocClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new ResGrpParentWithAncestorWithLoc(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ResGrpParentWithAncestorWithLoc(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -120,7 +120,7 @@ namespace MgmtListMethods
                 var response = _resGrpParentWithAncestorWithLocRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _resGrpParentWithAncestorWithLocClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new ResGrpParentWithAncestorWithLoc(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ResGrpParentWithAncestorWithLoc(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -156,7 +156,7 @@ namespace MgmtListMethods
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _resGrpParentWithAncestorWithLocRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new ResGrpParentWithAncestorWithLoc(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new ResGrpParentWithAncestorWithLoc(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -192,7 +192,7 @@ namespace MgmtListMethods
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _resGrpParentWithAncestorWithLocRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
-                return Response.FromValue(new ResGrpParentWithAncestorWithLoc(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new ResGrpParentWithAncestorWithLoc(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -224,7 +224,7 @@ namespace MgmtListMethods
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _resGrpParentWithAncestorWithLocRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new ResGrpParentWithAncestorWithLoc(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new ResGrpParentWithAncestorWithLoc(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -256,7 +256,7 @@ namespace MgmtListMethods
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _resGrpParentWithAncestorWithLocRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
-                return Response.FromValue(new ResGrpParentWithAncestorWithLoc(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new ResGrpParentWithAncestorWithLoc(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -287,7 +287,7 @@ namespace MgmtListMethods
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _resGrpParentWithAncestorWithLocRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new ResGrpParentWithAncestorWithLoc(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new ResGrpParentWithAncestorWithLoc(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -318,7 +318,7 @@ namespace MgmtListMethods
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _resGrpParentWithAncestorWithLocRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
-                return Response.FromValue(new ResGrpParentWithAncestorWithLoc(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new ResGrpParentWithAncestorWithLoc(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {

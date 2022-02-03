@@ -52,7 +52,7 @@ namespace ExactMatchInheritance
         internal ExactMatchModel1(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _exactMatchModel1ClientDiagnostics = new ClientDiagnostics("ExactMatchInheritance", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string exactMatchModel1ApiVersion);
+            Client.TryGetApiVersion(ResourceType, out string exactMatchModel1ApiVersion);
             _exactMatchModel1RestClient = new ExactMatchModel1SRestOperations(_exactMatchModel1ClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, exactMatchModel1ApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -96,7 +96,7 @@ namespace ExactMatchInheritance
                 var response = await _exactMatchModel1RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _exactMatchModel1ClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new ExactMatchModel1(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ExactMatchModel1(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -118,7 +118,7 @@ namespace ExactMatchInheritance
                 var response = _exactMatchModel1RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _exactMatchModel1ClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new ExactMatchModel1(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ExactMatchModel1(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

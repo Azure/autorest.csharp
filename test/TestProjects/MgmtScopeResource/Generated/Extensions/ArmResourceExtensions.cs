@@ -17,9 +17,9 @@ namespace MgmtScopeResource
         /// <returns> An object representing collection of PolicyAssignments and their operations over a PolicyAssignment. </returns>
         public static PolicyAssignmentCollection GetPolicyAssignments(this ArmResource armResource)
         {
-            return armResource.GetCachedClient((armClient) =>
+            return armResource.GetCachedClient((client) =>
             {
-                return new PolicyAssignmentCollection(armClient, armResource.Id);
+                return new PolicyAssignmentCollection(client, armResource.Id);
             }
             );
         }

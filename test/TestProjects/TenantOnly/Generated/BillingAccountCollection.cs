@@ -39,7 +39,7 @@ namespace TenantOnly
         internal BillingAccountCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _billingAccountClientDiagnostics = new ClientDiagnostics("TenantOnly", BillingAccount.ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(BillingAccount.ResourceType, out string billingAccountApiVersion);
+            Client.TryGetApiVersion(BillingAccount.ResourceType, out string billingAccountApiVersion);
             _billingAccountRestClient = new BillingAccountsRestOperations(_billingAccountClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, billingAccountApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -75,7 +75,7 @@ namespace TenantOnly
             try
             {
                 var response = await _billingAccountRestClient.CreateAsync(billingAccountName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new BillingAccountCreateOrUpdateOperation(ArmClient, _billingAccountClientDiagnostics, Pipeline, _billingAccountRestClient.CreateCreateRequest(billingAccountName, parameters).Request, response);
+                var operation = new BillingAccountCreateOrUpdateOperation(Client, _billingAccountClientDiagnostics, Pipeline, _billingAccountRestClient.CreateCreateRequest(billingAccountName, parameters).Request, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -110,7 +110,7 @@ namespace TenantOnly
             try
             {
                 var response = _billingAccountRestClient.Create(billingAccountName, parameters, cancellationToken);
-                var operation = new BillingAccountCreateOrUpdateOperation(ArmClient, _billingAccountClientDiagnostics, Pipeline, _billingAccountRestClient.CreateCreateRequest(billingAccountName, parameters).Request, response);
+                var operation = new BillingAccountCreateOrUpdateOperation(Client, _billingAccountClientDiagnostics, Pipeline, _billingAccountRestClient.CreateCreateRequest(billingAccountName, parameters).Request, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -142,7 +142,7 @@ namespace TenantOnly
                 var response = await _billingAccountRestClient.GetAsync(billingAccountName, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _billingAccountClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new BillingAccount(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new BillingAccount(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -171,7 +171,7 @@ namespace TenantOnly
                 var response = _billingAccountRestClient.Get(billingAccountName, expand, cancellationToken);
                 if (response.Value == null)
                     throw _billingAccountClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new BillingAccount(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new BillingAccount(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -196,7 +196,7 @@ namespace TenantOnly
                 try
                 {
                     var response = await _billingAccountRestClient.ListAsync(expand, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new BillingAccount(ArmClient, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new BillingAccount(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -223,7 +223,7 @@ namespace TenantOnly
                 try
                 {
                     var response = _billingAccountRestClient.List(expand, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new BillingAccount(ArmClient, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new BillingAccount(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -308,7 +308,7 @@ namespace TenantOnly
                 var response = await _billingAccountRestClient.GetAsync(billingAccountName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<BillingAccount>(null, response.GetRawResponse());
-                return Response.FromValue(new BillingAccount(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new BillingAccount(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -337,7 +337,7 @@ namespace TenantOnly
                 var response = _billingAccountRestClient.Get(billingAccountName, expand, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<BillingAccount>(null, response.GetRawResponse());
-                return Response.FromValue(new BillingAccount(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new BillingAccount(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

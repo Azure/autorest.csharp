@@ -39,7 +39,7 @@ namespace Azure.ResourceManager.Sample
         internal VirtualMachineScaleSetCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _virtualMachineScaleSetClientDiagnostics = new ClientDiagnostics("Azure.ResourceManager.Sample", VirtualMachineScaleSet.ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(VirtualMachineScaleSet.ResourceType, out string virtualMachineScaleSetApiVersion);
+            Client.TryGetApiVersion(VirtualMachineScaleSet.ResourceType, out string virtualMachineScaleSetApiVersion);
             _virtualMachineScaleSetRestClient = new VirtualMachineScaleSetsRestOperations(_virtualMachineScaleSetClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, virtualMachineScaleSetApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -75,7 +75,7 @@ namespace Azure.ResourceManager.Sample
             try
             {
                 var response = await _virtualMachineScaleSetRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, vmScaleSetName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new VirtualMachineScaleSetCreateOrUpdateOperation(ArmClient, _virtualMachineScaleSetClientDiagnostics, Pipeline, _virtualMachineScaleSetRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, vmScaleSetName, parameters).Request, response);
+                var operation = new VirtualMachineScaleSetCreateOrUpdateOperation(Client, _virtualMachineScaleSetClientDiagnostics, Pipeline, _virtualMachineScaleSetRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, vmScaleSetName, parameters).Request, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -110,7 +110,7 @@ namespace Azure.ResourceManager.Sample
             try
             {
                 var response = _virtualMachineScaleSetRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, vmScaleSetName, parameters, cancellationToken);
-                var operation = new VirtualMachineScaleSetCreateOrUpdateOperation(ArmClient, _virtualMachineScaleSetClientDiagnostics, Pipeline, _virtualMachineScaleSetRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, vmScaleSetName, parameters).Request, response);
+                var operation = new VirtualMachineScaleSetCreateOrUpdateOperation(Client, _virtualMachineScaleSetClientDiagnostics, Pipeline, _virtualMachineScaleSetRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, vmScaleSetName, parameters).Request, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -141,7 +141,7 @@ namespace Azure.ResourceManager.Sample
                 var response = await _virtualMachineScaleSetRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, vmScaleSetName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _virtualMachineScaleSetClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new VirtualMachineScaleSet(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new VirtualMachineScaleSet(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -169,7 +169,7 @@ namespace Azure.ResourceManager.Sample
                 var response = _virtualMachineScaleSetRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, vmScaleSetName, cancellationToken);
                 if (response.Value == null)
                     throw _virtualMachineScaleSetClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new VirtualMachineScaleSet(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new VirtualMachineScaleSet(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -193,7 +193,7 @@ namespace Azure.ResourceManager.Sample
                 try
                 {
                     var response = await _virtualMachineScaleSetRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new VirtualMachineScaleSet(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new VirtualMachineScaleSet(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -208,7 +208,7 @@ namespace Azure.ResourceManager.Sample
                 try
                 {
                     var response = await _virtualMachineScaleSetRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new VirtualMachineScaleSet(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new VirtualMachineScaleSet(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -234,7 +234,7 @@ namespace Azure.ResourceManager.Sample
                 try
                 {
                     var response = _virtualMachineScaleSetRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new VirtualMachineScaleSet(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new VirtualMachineScaleSet(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -249,7 +249,7 @@ namespace Azure.ResourceManager.Sample
                 try
                 {
                     var response = _virtualMachineScaleSetRestClient.ListNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new VirtualMachineScaleSet(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new VirtualMachineScaleSet(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -331,7 +331,7 @@ namespace Azure.ResourceManager.Sample
                 var response = await _virtualMachineScaleSetRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, vmScaleSetName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<VirtualMachineScaleSet>(null, response.GetRawResponse());
-                return Response.FromValue(new VirtualMachineScaleSet(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new VirtualMachineScaleSet(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -359,7 +359,7 @@ namespace Azure.ResourceManager.Sample
                 var response = _virtualMachineScaleSetRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, vmScaleSetName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<VirtualMachineScaleSet>(null, response.GetRawResponse());
-                return Response.FromValue(new VirtualMachineScaleSet(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new VirtualMachineScaleSet(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

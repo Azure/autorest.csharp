@@ -39,7 +39,7 @@ namespace Pagination
         internal PageSizeStringModelCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _pageSizeStringModelClientDiagnostics = new ClientDiagnostics("Pagination", PageSizeStringModel.ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(PageSizeStringModel.ResourceType, out string pageSizeStringModelApiVersion);
+            Client.TryGetApiVersion(PageSizeStringModel.ResourceType, out string pageSizeStringModelApiVersion);
             _pageSizeStringModelRestClient = new PageSizeStringModelsRestOperations(_pageSizeStringModelClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, pageSizeStringModelApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -71,7 +71,7 @@ namespace Pagination
             try
             {
                 var response = await _pageSizeStringModelRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, name, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new PageSizeStringModelCreateOrUpdateOperation(ArmClient, response);
+                var operation = new PageSizeStringModelCreateOrUpdateOperation(Client, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -102,7 +102,7 @@ namespace Pagination
             try
             {
                 var response = _pageSizeStringModelRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, name, parameters, cancellationToken);
-                var operation = new PageSizeStringModelCreateOrUpdateOperation(ArmClient, response);
+                var operation = new PageSizeStringModelCreateOrUpdateOperation(Client, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -129,7 +129,7 @@ namespace Pagination
                 var response = await _pageSizeStringModelRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _pageSizeStringModelClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new PageSizeStringModel(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new PageSizeStringModel(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -153,7 +153,7 @@ namespace Pagination
                 var response = _pageSizeStringModelRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken);
                 if (response.Value == null)
                     throw _pageSizeStringModelClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new PageSizeStringModel(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new PageSizeStringModel(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -174,7 +174,7 @@ namespace Pagination
                 try
                 {
                     var response = await _pageSizeStringModelRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, maxpagesize, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new PageSizeStringModel(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new PageSizeStringModel(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -189,7 +189,7 @@ namespace Pagination
                 try
                 {
                     var response = await _pageSizeStringModelRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, maxpagesize, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new PageSizeStringModel(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new PageSizeStringModel(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -212,7 +212,7 @@ namespace Pagination
                 try
                 {
                     var response = _pageSizeStringModelRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, maxpagesize, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new PageSizeStringModel(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new PageSizeStringModel(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -227,7 +227,7 @@ namespace Pagination
                 try
                 {
                     var response = _pageSizeStringModelRestClient.ListNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, maxpagesize, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new PageSizeStringModel(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new PageSizeStringModel(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -300,7 +300,7 @@ namespace Pagination
                 var response = await _pageSizeStringModelRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<PageSizeStringModel>(null, response.GetRawResponse());
-                return Response.FromValue(new PageSizeStringModel(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new PageSizeStringModel(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -325,7 +325,7 @@ namespace Pagination
                 var response = _pageSizeStringModelRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<PageSizeStringModel>(null, response.GetRawResponse());
-                return Response.FromValue(new PageSizeStringModel(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new PageSizeStringModel(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

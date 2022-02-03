@@ -52,7 +52,7 @@ namespace MgmtExtensionResource
         internal SubSingleton(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _subSingletonClientDiagnostics = new ClientDiagnostics("MgmtExtensionResource", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string subSingletonApiVersion);
+            Client.TryGetApiVersion(ResourceType, out string subSingletonApiVersion);
             _subSingletonRestClient = new SubSingletonsRestOperations(_subSingletonClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, subSingletonApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -97,7 +97,7 @@ namespace MgmtExtensionResource
                 var response = await _subSingletonRestClient.GetAsync(Id.SubscriptionId, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _subSingletonClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new SubSingleton(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SubSingleton(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -120,7 +120,7 @@ namespace MgmtExtensionResource
                 var response = _subSingletonRestClient.Get(Id.SubscriptionId, cancellationToken);
                 if (response.Value == null)
                     throw _subSingletonClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new SubSingleton(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SubSingleton(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

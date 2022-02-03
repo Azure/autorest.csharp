@@ -43,7 +43,7 @@ namespace MgmtHierarchicalNonResource
         {
             _location = location;
             _sharedGalleryClientDiagnostics = new ClientDiagnostics("MgmtHierarchicalNonResource", SharedGallery.ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(SharedGallery.ResourceType, out string sharedGalleryApiVersion);
+            Client.TryGetApiVersion(SharedGallery.ResourceType, out string sharedGalleryApiVersion);
             _sharedGalleryRestClient = new SharedGalleriesRestOperations(_sharedGalleryClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, sharedGalleryApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -76,7 +76,7 @@ namespace MgmtHierarchicalNonResource
                 if (response.Value == null)
                     throw await _sharedGalleryClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 response.Value.Id = SharedGallery.CreateResourceIdentifier(Id.SubscriptionId, _location, galleryUniqueName);
-                return Response.FromValue(new SharedGallery(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SharedGallery(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -105,7 +105,7 @@ namespace MgmtHierarchicalNonResource
                 if (response.Value == null)
                     throw _sharedGalleryClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 response.Value.Id = SharedGallery.CreateResourceIdentifier(Id.SubscriptionId, _location, galleryUniqueName);
-                return Response.FromValue(new SharedGallery(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SharedGallery(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -133,7 +133,7 @@ namespace MgmtHierarchicalNonResource
                     return Page.FromValues(response.Value.Value.Select(value =>
                     {
                         value.Id = SharedGallery.CreateResourceIdentifier(Id.SubscriptionId, _location, value.Name);
-                        return new SharedGallery(ArmClient, value);
+                        return new SharedGallery(Client, value);
                     }
                     ), response.Value.NextLink, response.GetRawResponse());
                 }
@@ -153,7 +153,7 @@ namespace MgmtHierarchicalNonResource
                     return Page.FromValues(response.Value.Value.Select(value =>
                     {
                         value.Id = SharedGallery.CreateResourceIdentifier(Id.SubscriptionId, _location, value.Name);
-                        return new SharedGallery(ArmClient, value);
+                        return new SharedGallery(Client, value);
                     }
                     ), response.Value.NextLink, response.GetRawResponse());
                 }
@@ -185,7 +185,7 @@ namespace MgmtHierarchicalNonResource
                     return Page.FromValues(response.Value.Value.Select(value =>
                     {
                         value.Id = SharedGallery.CreateResourceIdentifier(Id.SubscriptionId, _location, value.Name);
-                        return new SharedGallery(ArmClient, value);
+                        return new SharedGallery(Client, value);
                     }
                     ), response.Value.NextLink, response.GetRawResponse());
                 }
@@ -205,7 +205,7 @@ namespace MgmtHierarchicalNonResource
                     return Page.FromValues(response.Value.Value.Select(value =>
                     {
                         value.Id = SharedGallery.CreateResourceIdentifier(Id.SubscriptionId, _location, value.Name);
-                        return new SharedGallery(ArmClient, value);
+                        return new SharedGallery(Client, value);
                     }
                     ), response.Value.NextLink, response.GetRawResponse());
                 }
@@ -290,7 +290,7 @@ namespace MgmtHierarchicalNonResource
                 if (response.Value == null)
                     return Response.FromValue<SharedGallery>(null, response.GetRawResponse());
                 response.Value.Id = SharedGallery.CreateResourceIdentifier(Id.SubscriptionId, _location, galleryUniqueName);
-                return Response.FromValue(new SharedGallery(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SharedGallery(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -319,7 +319,7 @@ namespace MgmtHierarchicalNonResource
                 if (response.Value == null)
                     return Response.FromValue<SharedGallery>(null, response.GetRawResponse());
                 response.Value.Id = SharedGallery.CreateResourceIdentifier(Id.SubscriptionId, _location, galleryUniqueName);
-                return Response.FromValue(new SharedGallery(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SharedGallery(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

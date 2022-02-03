@@ -39,7 +39,7 @@ namespace MgmtExtensionCommonRestOperation
         internal TypeOneCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _typeOneCommonClientDiagnostics = new ClientDiagnostics("MgmtExtensionCommonRestOperation", TypeOne.ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(TypeOne.ResourceType, out string typeOneCommonApiVersion);
+            Client.TryGetApiVersion(TypeOne.ResourceType, out string typeOneCommonApiVersion);
             _typeOneCommonRestClient = new CommonRestOperations(_typeOneCommonClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, typeOneCommonApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -75,7 +75,7 @@ namespace MgmtExtensionCommonRestOperation
             try
             {
                 var response = await _typeOneCommonRestClient.CreateOrUpdateTypeOneAsync(Id.SubscriptionId, Id.ResourceGroupName, typeOneName, typeOne, cancellationToken).ConfigureAwait(false);
-                var operation = new TypeOneCreateOrUpdateOperation(ArmClient, response);
+                var operation = new TypeOneCreateOrUpdateOperation(Client, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -110,7 +110,7 @@ namespace MgmtExtensionCommonRestOperation
             try
             {
                 var response = _typeOneCommonRestClient.CreateOrUpdateTypeOne(Id.SubscriptionId, Id.ResourceGroupName, typeOneName, typeOne, cancellationToken);
-                var operation = new TypeOneCreateOrUpdateOperation(ArmClient, response);
+                var operation = new TypeOneCreateOrUpdateOperation(Client, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -141,7 +141,7 @@ namespace MgmtExtensionCommonRestOperation
                 var response = await _typeOneCommonRestClient.GetTypeOneAsync(Id.SubscriptionId, Id.ResourceGroupName, typeOneName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _typeOneCommonClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new TypeOne(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new TypeOne(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -169,7 +169,7 @@ namespace MgmtExtensionCommonRestOperation
                 var response = _typeOneCommonRestClient.GetTypeOne(Id.SubscriptionId, Id.ResourceGroupName, typeOneName, cancellationToken);
                 if (response.Value == null)
                     throw _typeOneCommonClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new TypeOne(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new TypeOne(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -193,7 +193,7 @@ namespace MgmtExtensionCommonRestOperation
                 try
                 {
                     var response = await _typeOneCommonRestClient.ListTypeOnesAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new TypeOne(ArmClient, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new TypeOne(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -219,7 +219,7 @@ namespace MgmtExtensionCommonRestOperation
                 try
                 {
                     var response = _typeOneCommonRestClient.ListTypeOnes(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new TypeOne(ArmClient, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new TypeOne(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -301,7 +301,7 @@ namespace MgmtExtensionCommonRestOperation
                 var response = await _typeOneCommonRestClient.GetTypeOneAsync(Id.SubscriptionId, Id.ResourceGroupName, typeOneName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<TypeOne>(null, response.GetRawResponse());
-                return Response.FromValue(new TypeOne(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new TypeOne(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -329,7 +329,7 @@ namespace MgmtExtensionCommonRestOperation
                 var response = _typeOneCommonRestClient.GetTypeOne(Id.SubscriptionId, Id.ResourceGroupName, typeOneName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<TypeOne>(null, response.GetRawResponse());
-                return Response.FromValue(new TypeOne(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new TypeOne(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

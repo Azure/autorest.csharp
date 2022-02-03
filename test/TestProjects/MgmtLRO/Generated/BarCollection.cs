@@ -39,7 +39,7 @@ namespace MgmtLRO
         internal BarCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _barClientDiagnostics = new ClientDiagnostics("MgmtLRO", Bar.ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(Bar.ResourceType, out string barApiVersion);
+            Client.TryGetApiVersion(Bar.ResourceType, out string barApiVersion);
             _barRestClient = new BarsRestOperations(_barClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, barApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -75,7 +75,7 @@ namespace MgmtLRO
             try
             {
                 var response = await _barRestClient.CreateAsync(Id.SubscriptionId, Id.ResourceGroupName, barName, body, cancellationToken).ConfigureAwait(false);
-                var operation = new BarCreateOrUpdateOperation(ArmClient, _barClientDiagnostics, Pipeline, _barRestClient.CreateCreateRequest(Id.SubscriptionId, Id.ResourceGroupName, barName, body).Request, response);
+                var operation = new BarCreateOrUpdateOperation(Client, _barClientDiagnostics, Pipeline, _barRestClient.CreateCreateRequest(Id.SubscriptionId, Id.ResourceGroupName, barName, body).Request, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -110,7 +110,7 @@ namespace MgmtLRO
             try
             {
                 var response = _barRestClient.Create(Id.SubscriptionId, Id.ResourceGroupName, barName, body, cancellationToken);
-                var operation = new BarCreateOrUpdateOperation(ArmClient, _barClientDiagnostics, Pipeline, _barRestClient.CreateCreateRequest(Id.SubscriptionId, Id.ResourceGroupName, barName, body).Request, response);
+                var operation = new BarCreateOrUpdateOperation(Client, _barClientDiagnostics, Pipeline, _barRestClient.CreateCreateRequest(Id.SubscriptionId, Id.ResourceGroupName, barName, body).Request, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -141,7 +141,7 @@ namespace MgmtLRO
                 var response = await _barRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, barName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _barClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new Bar(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Bar(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -169,7 +169,7 @@ namespace MgmtLRO
                 var response = _barRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, barName, cancellationToken);
                 if (response.Value == null)
                     throw _barClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new Bar(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Bar(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -193,7 +193,7 @@ namespace MgmtLRO
                 try
                 {
                     var response = await _barRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new Bar(ArmClient, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new Bar(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -219,7 +219,7 @@ namespace MgmtLRO
                 try
                 {
                     var response = _barRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new Bar(ArmClient, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new Bar(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -301,7 +301,7 @@ namespace MgmtLRO
                 var response = await _barRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, barName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<Bar>(null, response.GetRawResponse());
-                return Response.FromValue(new Bar(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Bar(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -329,7 +329,7 @@ namespace MgmtLRO
                 var response = _barRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, barName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<Bar>(null, response.GetRawResponse());
-                return Response.FromValue(new Bar(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Bar(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

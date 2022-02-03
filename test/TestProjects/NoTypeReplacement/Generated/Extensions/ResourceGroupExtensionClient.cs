@@ -28,7 +28,7 @@ namespace NoTypeReplacement
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {
-            ArmClient.TryGetApiVersion(resourceType, out string apiVersion);
+            Client.TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
         }
 
@@ -36,21 +36,21 @@ namespace NoTypeReplacement
         /// <returns> An object representing collection of NoTypeReplacementModel1s and their operations over a NoTypeReplacementModel1. </returns>
         public virtual NoTypeReplacementModel1Collection GetNoTypeReplacementModel1s()
         {
-            return new NoTypeReplacementModel1Collection(ArmClient, Id);
+            return new NoTypeReplacementModel1Collection(Client, Id);
         }
 
         /// <summary> Gets a collection of NoTypeReplacementModel2s in the NoTypeReplacementModel2. </summary>
         /// <returns> An object representing collection of NoTypeReplacementModel2s and their operations over a NoTypeReplacementModel2. </returns>
         public virtual NoTypeReplacementModel2Collection GetNoTypeReplacementModel2s()
         {
-            return new NoTypeReplacementModel2Collection(ArmClient, Id);
+            return new NoTypeReplacementModel2Collection(Client, Id);
         }
 
         /// <summary> Gets a collection of NoTypeReplacementModel3s in the NoTypeReplacementModel3. </summary>
         /// <returns> An object representing collection of NoTypeReplacementModel3s and their operations over a NoTypeReplacementModel3. </returns>
         public virtual NoTypeReplacementModel3Collection GetNoTypeReplacementModel3s()
         {
-            return new NoTypeReplacementModel3Collection(ArmClient, Id);
+            return new NoTypeReplacementModel3Collection(Client, Id);
         }
     }
 }

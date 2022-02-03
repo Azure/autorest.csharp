@@ -57,7 +57,7 @@ namespace MgmtScopeResource
         internal DeploymentExtended(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _deploymentExtendedDeploymentsClientDiagnostics = new ClientDiagnostics("MgmtScopeResource", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string deploymentExtendedDeploymentsApiVersion);
+            Client.TryGetApiVersion(ResourceType, out string deploymentExtendedDeploymentsApiVersion);
             _deploymentExtendedDeploymentsRestClient = new DeploymentsRestOperations(_deploymentExtendedDeploymentsClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, deploymentExtendedDeploymentsApiVersion);
             _deploymentOperationsClientDiagnostics = new ClientDiagnostics("MgmtScopeResource", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
             _deploymentOperationsRestClient = new DeploymentRestOperations(_deploymentOperationsClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
@@ -104,7 +104,7 @@ namespace MgmtScopeResource
                 var response = await _deploymentExtendedDeploymentsRestClient.GetAtScopeAsync(Id.Parent, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _deploymentExtendedDeploymentsClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new DeploymentExtended(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new DeploymentExtended(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -127,7 +127,7 @@ namespace MgmtScopeResource
                 var response = _deploymentExtendedDeploymentsRestClient.GetAtScope(Id.Parent, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _deploymentExtendedDeploymentsClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new DeploymentExtended(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new DeploymentExtended(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

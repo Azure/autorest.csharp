@@ -28,7 +28,7 @@ namespace MgmtExtensionCommonRestOperation
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {
-            ArmClient.TryGetApiVersion(resourceType, out string apiVersion);
+            Client.TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
         }
 
@@ -36,14 +36,14 @@ namespace MgmtExtensionCommonRestOperation
         /// <returns> An object representing collection of TypeOnes and their operations over a TypeOne. </returns>
         public virtual TypeOneCollection GetTypeOnes()
         {
-            return new TypeOneCollection(ArmClient, Id);
+            return new TypeOneCollection(Client, Id);
         }
 
         /// <summary> Gets a collection of TypeTwos in the TypeTwo. </summary>
         /// <returns> An object representing collection of TypeTwos and their operations over a TypeTwo. </returns>
         public virtual TypeTwoCollection GetTypeTwos()
         {
-            return new TypeTwoCollection(ArmClient, Id);
+            return new TypeTwoCollection(Client, Id);
         }
     }
 }

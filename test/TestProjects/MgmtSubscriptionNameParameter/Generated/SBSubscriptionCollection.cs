@@ -39,7 +39,7 @@ namespace MgmtSubscriptionNameParameter
         internal SBSubscriptionCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _sBSubscriptionSubscriptionsClientDiagnostics = new ClientDiagnostics("MgmtSubscriptionNameParameter", SBSubscription.ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(SBSubscription.ResourceType, out string sBSubscriptionSubscriptionsApiVersion);
+            Client.TryGetApiVersion(SBSubscription.ResourceType, out string sBSubscriptionSubscriptionsApiVersion);
             _sBSubscriptionSubscriptionsRestClient = new SubscriptionsRestOperations(_sBSubscriptionSubscriptionsClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, sBSubscriptionSubscriptionsApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -75,7 +75,7 @@ namespace MgmtSubscriptionNameParameter
             try
             {
                 var response = await _sBSubscriptionSubscriptionsRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, subscriptionName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new SBSubscriptionCreateOrUpdateOperation(ArmClient, response);
+                var operation = new SBSubscriptionCreateOrUpdateOperation(Client, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -110,7 +110,7 @@ namespace MgmtSubscriptionNameParameter
             try
             {
                 var response = _sBSubscriptionSubscriptionsRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, subscriptionName, parameters, cancellationToken);
-                var operation = new SBSubscriptionCreateOrUpdateOperation(ArmClient, response);
+                var operation = new SBSubscriptionCreateOrUpdateOperation(Client, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -141,7 +141,7 @@ namespace MgmtSubscriptionNameParameter
                 var response = await _sBSubscriptionSubscriptionsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, subscriptionName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _sBSubscriptionSubscriptionsClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new SBSubscription(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SBSubscription(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -169,7 +169,7 @@ namespace MgmtSubscriptionNameParameter
                 var response = _sBSubscriptionSubscriptionsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, subscriptionName, cancellationToken);
                 if (response.Value == null)
                     throw _sBSubscriptionSubscriptionsClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new SBSubscription(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SBSubscription(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -195,7 +195,7 @@ namespace MgmtSubscriptionNameParameter
                 try
                 {
                     var response = await _sBSubscriptionSubscriptionsRestClient.ListByTopicAsync(Id.SubscriptionId, Id.ResourceGroupName, skip, top, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new SBSubscription(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new SBSubscription(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -210,7 +210,7 @@ namespace MgmtSubscriptionNameParameter
                 try
                 {
                     var response = await _sBSubscriptionSubscriptionsRestClient.ListByTopicNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, skip, top, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new SBSubscription(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new SBSubscription(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -238,7 +238,7 @@ namespace MgmtSubscriptionNameParameter
                 try
                 {
                     var response = _sBSubscriptionSubscriptionsRestClient.ListByTopic(Id.SubscriptionId, Id.ResourceGroupName, skip, top, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new SBSubscription(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new SBSubscription(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -253,7 +253,7 @@ namespace MgmtSubscriptionNameParameter
                 try
                 {
                     var response = _sBSubscriptionSubscriptionsRestClient.ListByTopicNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, skip, top, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new SBSubscription(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new SBSubscription(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -335,7 +335,7 @@ namespace MgmtSubscriptionNameParameter
                 var response = await _sBSubscriptionSubscriptionsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, subscriptionName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<SBSubscription>(null, response.GetRawResponse());
-                return Response.FromValue(new SBSubscription(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SBSubscription(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -363,7 +363,7 @@ namespace MgmtSubscriptionNameParameter
                 var response = _sBSubscriptionSubscriptionsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, subscriptionName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<SBSubscription>(null, response.GetRawResponse());
-                return Response.FromValue(new SBSubscription(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SBSubscription(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

@@ -56,7 +56,7 @@ namespace MgmtExpandResourceTypes
         internal Zone(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _zoneClientDiagnostics = new ClientDiagnostics("MgmtExpandResourceTypes", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string zoneApiVersion);
+            Client.TryGetApiVersion(ResourceType, out string zoneApiVersion);
             _zoneRestClient = new ZonesRestOperations(_zoneClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, zoneApiVersion);
             _recordSetsClientDiagnostics = new ClientDiagnostics("MgmtExpandResourceTypes", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
             _recordSetsRestClient = new RecordSetsRestOperations(_recordSetsClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
@@ -93,70 +93,70 @@ namespace MgmtExpandResourceTypes
         /// <returns> An object representing collection of RecordSetAs and their operations over a RecordSetA. </returns>
         public virtual RecordSetACollection GetRecordSetAs()
         {
-            return new RecordSetACollection(ArmClient, Id);
+            return new RecordSetACollection(Client, Id);
         }
 
         /// <summary> Gets a collection of RecordSetAaaas in the RecordSetAaaa. </summary>
         /// <returns> An object representing collection of RecordSetAaaas and their operations over a RecordSetAaaa. </returns>
         public virtual RecordSetAaaaCollection GetRecordSetAaaas()
         {
-            return new RecordSetAaaaCollection(ArmClient, Id);
+            return new RecordSetAaaaCollection(Client, Id);
         }
 
         /// <summary> Gets a collection of RecordSetCaas in the RecordSetCaa. </summary>
         /// <returns> An object representing collection of RecordSetCaas and their operations over a RecordSetCaa. </returns>
         public virtual RecordSetCaaCollection GetRecordSetCaas()
         {
-            return new RecordSetCaaCollection(ArmClient, Id);
+            return new RecordSetCaaCollection(Client, Id);
         }
 
         /// <summary> Gets a collection of RecordSetCNames in the RecordSetCName. </summary>
         /// <returns> An object representing collection of RecordSetCNames and their operations over a RecordSetCName. </returns>
         public virtual RecordSetCNameCollection GetRecordSetCNames()
         {
-            return new RecordSetCNameCollection(ArmClient, Id);
+            return new RecordSetCNameCollection(Client, Id);
         }
 
         /// <summary> Gets a collection of RecordSetMxes in the RecordSetMx. </summary>
         /// <returns> An object representing collection of RecordSetMxes and their operations over a RecordSetMx. </returns>
         public virtual RecordSetMxCollection GetRecordSetMxes()
         {
-            return new RecordSetMxCollection(ArmClient, Id);
+            return new RecordSetMxCollection(Client, Id);
         }
 
         /// <summary> Gets a collection of RecordSetNs in the RecordSetNs. </summary>
         /// <returns> An object representing collection of RecordSetNs and their operations over a RecordSetNs. </returns>
         public virtual RecordSetNsCollection GetRecordSetNs()
         {
-            return new RecordSetNsCollection(ArmClient, Id);
+            return new RecordSetNsCollection(Client, Id);
         }
 
         /// <summary> Gets a collection of RecordSetPtrs in the RecordSetPtr. </summary>
         /// <returns> An object representing collection of RecordSetPtrs and their operations over a RecordSetPtr. </returns>
         public virtual RecordSetPtrCollection GetRecordSetPtrs()
         {
-            return new RecordSetPtrCollection(ArmClient, Id);
+            return new RecordSetPtrCollection(Client, Id);
         }
 
         /// <summary> Gets a collection of RecordSetSoas in the RecordSetSoa. </summary>
         /// <returns> An object representing collection of RecordSetSoas and their operations over a RecordSetSoa. </returns>
         public virtual RecordSetSoaCollection GetRecordSetSoas()
         {
-            return new RecordSetSoaCollection(ArmClient, Id);
+            return new RecordSetSoaCollection(Client, Id);
         }
 
         /// <summary> Gets a collection of RecordSetSrvs in the RecordSetSrv. </summary>
         /// <returns> An object representing collection of RecordSetSrvs and their operations over a RecordSetSrv. </returns>
         public virtual RecordSetSrvCollection GetRecordSetSrvs()
         {
-            return new RecordSetSrvCollection(ArmClient, Id);
+            return new RecordSetSrvCollection(Client, Id);
         }
 
         /// <summary> Gets a collection of RecordSetTxts in the RecordSetTxt. </summary>
         /// <returns> An object representing collection of RecordSetTxts and their operations over a RecordSetTxt. </returns>
         public virtual RecordSetTxtCollection GetRecordSetTxts()
         {
-            return new RecordSetTxtCollection(ArmClient, Id);
+            return new RecordSetTxtCollection(Client, Id);
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}
@@ -173,7 +173,7 @@ namespace MgmtExpandResourceTypes
                 var response = await _zoneRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _zoneClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new Zone(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Zone(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -196,7 +196,7 @@ namespace MgmtExpandResourceTypes
                 var response = _zoneRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _zoneClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new Zone(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Zone(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -277,7 +277,7 @@ namespace MgmtExpandResourceTypes
             try
             {
                 var response = await _zoneRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, ifMatch, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new Zone(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Zone(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -306,7 +306,7 @@ namespace MgmtExpandResourceTypes
             try
             {
                 var response = _zoneRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, ifMatch, cancellationToken);
-                return Response.FromValue(new Zone(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Zone(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -332,7 +332,7 @@ namespace MgmtExpandResourceTypes
                 try
                 {
                     var response = await _recordSetsRestClient.ListByDnsZoneAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, top, recordsetnamesuffix, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetA(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetA(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -347,7 +347,7 @@ namespace MgmtExpandResourceTypes
                 try
                 {
                     var response = await _recordSetsRestClient.ListByDnsZoneNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, top, recordsetnamesuffix, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetA(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetA(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -375,7 +375,7 @@ namespace MgmtExpandResourceTypes
                 try
                 {
                     var response = _recordSetsRestClient.ListByDnsZone(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, top, recordsetnamesuffix, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetA(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetA(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -390,7 +390,7 @@ namespace MgmtExpandResourceTypes
                 try
                 {
                     var response = _recordSetsRestClient.ListByDnsZoneNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, top, recordsetnamesuffix, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetA(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetA(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -418,7 +418,7 @@ namespace MgmtExpandResourceTypes
                 try
                 {
                     var response = await _recordSetsRestClient.ListAllByDnsZoneAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, top, recordSetNameSuffix, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetA(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetA(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -433,7 +433,7 @@ namespace MgmtExpandResourceTypes
                 try
                 {
                     var response = await _recordSetsRestClient.ListAllByDnsZoneNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, top, recordSetNameSuffix, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetA(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetA(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -461,7 +461,7 @@ namespace MgmtExpandResourceTypes
                 try
                 {
                     var response = _recordSetsRestClient.ListAllByDnsZone(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, top, recordSetNameSuffix, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetA(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetA(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -476,7 +476,7 @@ namespace MgmtExpandResourceTypes
                 try
                 {
                     var response = _recordSetsRestClient.ListAllByDnsZoneNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, top, recordSetNameSuffix, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetA(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetA(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -514,7 +514,7 @@ namespace MgmtExpandResourceTypes
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _zoneRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new Zone(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new Zone(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -550,7 +550,7 @@ namespace MgmtExpandResourceTypes
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _zoneRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
-                return Response.FromValue(new Zone(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new Zone(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -582,7 +582,7 @@ namespace MgmtExpandResourceTypes
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _zoneRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new Zone(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new Zone(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -614,7 +614,7 @@ namespace MgmtExpandResourceTypes
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _zoneRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
-                return Response.FromValue(new Zone(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new Zone(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -645,7 +645,7 @@ namespace MgmtExpandResourceTypes
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _zoneRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new Zone(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new Zone(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -676,7 +676,7 @@ namespace MgmtExpandResourceTypes
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _zoneRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
-                return Response.FromValue(new Zone(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new Zone(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {

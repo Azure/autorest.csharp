@@ -28,7 +28,7 @@ namespace MgmtPropertyChooser
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {
-            ArmClient.TryGetApiVersion(resourceType, out string apiVersion);
+            Client.TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
         }
 
@@ -36,7 +36,7 @@ namespace MgmtPropertyChooser
         /// <returns> An object representing collection of VirtualMachines and their operations over a VirtualMachine. </returns>
         public virtual VirtualMachineCollection GetVirtualMachines()
         {
-            return new VirtualMachineCollection(ArmClient, Id);
+            return new VirtualMachineCollection(Client, Id);
         }
     }
 }

@@ -45,7 +45,7 @@ namespace MgmtExpandResourceTypes
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {
-            ArmClient.TryGetApiVersion(resourceType, out string apiVersion);
+            Client.TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
         }
 
@@ -65,7 +65,7 @@ namespace MgmtExpandResourceTypes
                 try
                 {
                     var response = await ZoneRestClient.ListAsync(Id.SubscriptionId, top, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new Zone(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new Zone(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -80,7 +80,7 @@ namespace MgmtExpandResourceTypes
                 try
                 {
                     var response = await ZoneRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, top, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new Zone(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new Zone(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -107,7 +107,7 @@ namespace MgmtExpandResourceTypes
                 try
                 {
                     var response = ZoneRestClient.List(Id.SubscriptionId, top, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new Zone(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new Zone(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -122,7 +122,7 @@ namespace MgmtExpandResourceTypes
                 try
                 {
                     var response = ZoneRestClient.ListNextPage(nextLink, Id.SubscriptionId, top, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new Zone(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new Zone(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {

@@ -38,7 +38,7 @@ namespace MgmtExpandResourceTypes
         internal RecordSetCNameCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _recordSetCNameRecordSetsClientDiagnostics = new ClientDiagnostics("MgmtExpandResourceTypes", RecordSetCName.ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(RecordSetCName.ResourceType, out string recordSetCNameRecordSetsApiVersion);
+            Client.TryGetApiVersion(RecordSetCName.ResourceType, out string recordSetCNameRecordSetsApiVersion);
             _recordSetCNameRecordSetsRestClient = new RecordSetsRestOperations(_recordSetCNameRecordSetsClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, recordSetCNameRecordSetsApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -78,7 +78,7 @@ namespace MgmtExpandResourceTypes
             try
             {
                 var response = await _recordSetCNameRecordSetsRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "CNAME".ToRecordType(), relativeRecordSetName, parameters, ifMatch, ifNoneMatch, cancellationToken).ConfigureAwait(false);
-                var operation = new RecordSetCNameCreateOrUpdateOperation(ArmClient, response);
+                var operation = new RecordSetCNameCreateOrUpdateOperation(Client, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -117,7 +117,7 @@ namespace MgmtExpandResourceTypes
             try
             {
                 var response = _recordSetCNameRecordSetsRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "CNAME".ToRecordType(), relativeRecordSetName, parameters, ifMatch, ifNoneMatch, cancellationToken);
-                var operation = new RecordSetCNameCreateOrUpdateOperation(ArmClient, response);
+                var operation = new RecordSetCNameCreateOrUpdateOperation(Client, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -150,7 +150,7 @@ namespace MgmtExpandResourceTypes
                 var response = await _recordSetCNameRecordSetsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "CNAME".ToRecordType(), relativeRecordSetName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _recordSetCNameRecordSetsClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new RecordSetCName(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new RecordSetCName(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -180,7 +180,7 @@ namespace MgmtExpandResourceTypes
                 var response = _recordSetCNameRecordSetsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "CNAME".ToRecordType(), relativeRecordSetName, cancellationToken);
                 if (response.Value == null)
                     throw _recordSetCNameRecordSetsClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new RecordSetCName(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new RecordSetCName(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -206,7 +206,7 @@ namespace MgmtExpandResourceTypes
                 try
                 {
                     var response = await _recordSetCNameRecordSetsRestClient.ListByTypeAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "CNAME".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetCName(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetCName(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -221,7 +221,7 @@ namespace MgmtExpandResourceTypes
                 try
                 {
                     var response = await _recordSetCNameRecordSetsRestClient.ListByTypeNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "CNAME".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetCName(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetCName(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -249,7 +249,7 @@ namespace MgmtExpandResourceTypes
                 try
                 {
                     var response = _recordSetCNameRecordSetsRestClient.ListByType(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "CNAME".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetCName(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetCName(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -264,7 +264,7 @@ namespace MgmtExpandResourceTypes
                 try
                 {
                     var response = _recordSetCNameRecordSetsRestClient.ListByTypeNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "CNAME".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetCName(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetCName(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -352,7 +352,7 @@ namespace MgmtExpandResourceTypes
                 var response = await _recordSetCNameRecordSetsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "CNAME".ToRecordType(), relativeRecordSetName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<RecordSetCName>(null, response.GetRawResponse());
-                return Response.FromValue(new RecordSetCName(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new RecordSetCName(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -382,7 +382,7 @@ namespace MgmtExpandResourceTypes
                 var response = _recordSetCNameRecordSetsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "CNAME".ToRecordType(), relativeRecordSetName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<RecordSetCName>(null, response.GetRawResponse());
-                return Response.FromValue(new RecordSetCName(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new RecordSetCName(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

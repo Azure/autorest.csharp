@@ -28,7 +28,7 @@ namespace SingletonResource
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {
-            ArmClient.TryGetApiVersion(resourceType, out string apiVersion);
+            Client.TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
         }
 
@@ -36,14 +36,14 @@ namespace SingletonResource
         /// <returns> An object representing collection of Cars and their operations over a Car. </returns>
         public virtual CarCollection GetCars()
         {
-            return new CarCollection(ArmClient, Id);
+            return new CarCollection(Client, Id);
         }
 
         /// <summary> Gets a collection of ParentResources in the ParentResource. </summary>
         /// <returns> An object representing collection of ParentResources and their operations over a ParentResource. </returns>
         public virtual ParentResourceCollection GetParentResources()
         {
-            return new ParentResourceCollection(ArmClient, Id);
+            return new ParentResourceCollection(Client, Id);
         }
     }
 }

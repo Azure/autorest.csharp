@@ -53,7 +53,7 @@ namespace Azure.Management.Storage
         internal FileShare(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _fileShareClientDiagnostics = new ClientDiagnostics("Azure.Management.Storage", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string fileShareApiVersion);
+            Client.TryGetApiVersion(ResourceType, out string fileShareApiVersion);
             _fileShareRestClient = new FileSharesRestOperations(_fileShareClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, fileShareApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -100,7 +100,7 @@ namespace Azure.Management.Storage
                 var response = await _fileShareRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, expand, xMsSnapshot, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _fileShareClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new FileShare(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new FileShare(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -125,7 +125,7 @@ namespace Azure.Management.Storage
                 var response = _fileShareRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, expand, xMsSnapshot, cancellationToken);
                 if (response.Value == null)
                     throw _fileShareClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new FileShare(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new FileShare(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -207,7 +207,7 @@ namespace Azure.Management.Storage
             try
             {
                 var response = await _fileShareRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, fileShare, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new FileShare(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new FileShare(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -235,7 +235,7 @@ namespace Azure.Management.Storage
             try
             {
                 var response = _fileShareRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, fileShare, cancellationToken);
-                return Response.FromValue(new FileShare(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new FileShare(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

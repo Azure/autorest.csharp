@@ -40,7 +40,7 @@ namespace OmitOperationGroups
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {
-            ArmClient.TryGetApiVersion(resourceType, out string apiVersion);
+            Client.TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
         }
 
@@ -48,7 +48,7 @@ namespace OmitOperationGroups
         /// <returns> An object representing collection of Model2s and their operations over a Model2. </returns>
         public virtual Model2Collection GetModel2s()
         {
-            return new Model2Collection(ArmClient, Id);
+            return new Model2Collection(Client, Id);
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model5s

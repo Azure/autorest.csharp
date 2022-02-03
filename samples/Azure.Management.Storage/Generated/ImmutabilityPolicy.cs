@@ -53,7 +53,7 @@ namespace Azure.Management.Storage
         internal ImmutabilityPolicy(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _immutabilityPolicyBlobContainersClientDiagnostics = new ClientDiagnostics("Azure.Management.Storage", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string immutabilityPolicyBlobContainersApiVersion);
+            Client.TryGetApiVersion(ResourceType, out string immutabilityPolicyBlobContainersApiVersion);
             _immutabilityPolicyBlobContainersRestClient = new BlobContainersRestOperations(_immutabilityPolicyBlobContainersClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, immutabilityPolicyBlobContainersApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -99,7 +99,7 @@ namespace Azure.Management.Storage
                 var response = await _immutabilityPolicyBlobContainersRestClient.GetImmutabilityPolicyAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Parent.Name, Id.Parent.Name, ifMatch, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _immutabilityPolicyBlobContainersClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new ImmutabilityPolicy(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ImmutabilityPolicy(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -123,7 +123,7 @@ namespace Azure.Management.Storage
                 var response = _immutabilityPolicyBlobContainersRestClient.GetImmutabilityPolicy(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Parent.Name, Id.Parent.Name, ifMatch, cancellationToken);
                 if (response.Value == null)
                     throw _immutabilityPolicyBlobContainersClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new ImmutabilityPolicy(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ImmutabilityPolicy(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -211,7 +211,7 @@ namespace Azure.Management.Storage
             try
             {
                 var response = await _immutabilityPolicyBlobContainersRestClient.CreateOrUpdateImmutabilityPolicyAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Parent.Name, Id.Parent.Name, parameters, ifMatch, cancellationToken).ConfigureAwait(false);
-                var operation = new ImmutabilityPolicyCreateOrUpdateOperation(ArmClient, response);
+                var operation = new ImmutabilityPolicyCreateOrUpdateOperation(Client, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -238,7 +238,7 @@ namespace Azure.Management.Storage
             try
             {
                 var response = _immutabilityPolicyBlobContainersRestClient.CreateOrUpdateImmutabilityPolicy(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Parent.Name, Id.Parent.Name, parameters, ifMatch, cancellationToken);
-                var operation = new ImmutabilityPolicyCreateOrUpdateOperation(ArmClient, response);
+                var operation = new ImmutabilityPolicyCreateOrUpdateOperation(Client, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -269,7 +269,7 @@ namespace Azure.Management.Storage
             try
             {
                 var response = await _immutabilityPolicyBlobContainersRestClient.LockImmutabilityPolicyAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Parent.Name, Id.Parent.Name, ifMatch, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new ImmutabilityPolicy(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ImmutabilityPolicy(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -297,7 +297,7 @@ namespace Azure.Management.Storage
             try
             {
                 var response = _immutabilityPolicyBlobContainersRestClient.LockImmutabilityPolicy(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Parent.Name, Id.Parent.Name, ifMatch, cancellationToken);
-                return Response.FromValue(new ImmutabilityPolicy(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ImmutabilityPolicy(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -326,7 +326,7 @@ namespace Azure.Management.Storage
             try
             {
                 var response = await _immutabilityPolicyBlobContainersRestClient.ExtendImmutabilityPolicyAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Parent.Name, Id.Parent.Name, ifMatch, parameters, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new ImmutabilityPolicy(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ImmutabilityPolicy(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -355,7 +355,7 @@ namespace Azure.Management.Storage
             try
             {
                 var response = _immutabilityPolicyBlobContainersRestClient.ExtendImmutabilityPolicy(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Parent.Name, Id.Parent.Name, ifMatch, parameters, cancellationToken);
-                return Response.FromValue(new ImmutabilityPolicy(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ImmutabilityPolicy(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

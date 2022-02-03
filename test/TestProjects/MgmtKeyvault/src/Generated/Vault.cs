@@ -55,7 +55,7 @@ namespace MgmtKeyvault
         internal Vault(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _vaultClientDiagnostics = new ClientDiagnostics("MgmtKeyvault", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string vaultApiVersion);
+            Client.TryGetApiVersion(ResourceType, out string vaultApiVersion);
             _vaultRestClient = new VaultsRestOperations(_vaultClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, vaultApiVersion);
             _privateLinkResourcesClientDiagnostics = new ClientDiagnostics("MgmtKeyvault", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
             _privateLinkResourcesRestClient = new PrivateLinkResourcesRestOperations(_privateLinkResourcesClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
@@ -92,7 +92,7 @@ namespace MgmtKeyvault
         /// <returns> An object representing collection of PrivateEndpointConnections and their operations over a PrivateEndpointConnection. </returns>
         public virtual PrivateEndpointConnectionCollection GetPrivateEndpointConnections()
         {
-            return new PrivateEndpointConnectionCollection(ArmClient, Id);
+            return new PrivateEndpointConnectionCollection(Client, Id);
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}
@@ -109,7 +109,7 @@ namespace MgmtKeyvault
                 var response = await _vaultRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _vaultClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new Vault(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Vault(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -132,7 +132,7 @@ namespace MgmtKeyvault
                 var response = _vaultRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _vaultClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new Vault(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Vault(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -210,7 +210,7 @@ namespace MgmtKeyvault
             try
             {
                 var response = await _vaultRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new Vault(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Vault(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -238,7 +238,7 @@ namespace MgmtKeyvault
             try
             {
                 var response = _vaultRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
-                return Response.FromValue(new Vault(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Vault(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

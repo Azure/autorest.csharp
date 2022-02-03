@@ -53,7 +53,7 @@ namespace MgmtNonStringPathVariable
         internal Bar(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _barClientDiagnostics = new ClientDiagnostics("MgmtNonStringPathVariable", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string barApiVersion);
+            Client.TryGetApiVersion(ResourceType, out string barApiVersion);
             _barRestClient = new BarsRestOperations(_barClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, barApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -98,7 +98,7 @@ namespace MgmtNonStringPathVariable
                 var response = await _barRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, int.Parse(Id.Name), cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _barClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new Bar(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Bar(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -121,7 +121,7 @@ namespace MgmtNonStringPathVariable
                 var response = _barRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, int.Parse(Id.Name), cancellationToken);
                 if (response.Value == null)
                     throw _barClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new Bar(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Bar(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -200,7 +200,7 @@ namespace MgmtNonStringPathVariable
             try
             {
                 var response = await _barRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, int.Parse(Id.Name), parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new BarUpdateOperation(ArmClient, _barClientDiagnostics, Pipeline, _barRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, int.Parse(Id.Name), parameters).Request, response);
+                var operation = new BarUpdateOperation(Client, _barClientDiagnostics, Pipeline, _barRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, int.Parse(Id.Name), parameters).Request, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -232,7 +232,7 @@ namespace MgmtNonStringPathVariable
             try
             {
                 var response = _barRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, int.Parse(Id.Name), parameters, cancellationToken);
-                var operation = new BarUpdateOperation(ArmClient, _barClientDiagnostics, Pipeline, _barRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, int.Parse(Id.Name), parameters).Request, response);
+                var operation = new BarUpdateOperation(Client, _barClientDiagnostics, Pipeline, _barRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, int.Parse(Id.Name), parameters).Request, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -271,7 +271,7 @@ namespace MgmtNonStringPathVariable
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _barRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, int.Parse(Id.Name), cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new Bar(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new Bar(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -307,7 +307,7 @@ namespace MgmtNonStringPathVariable
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _barRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, int.Parse(Id.Name), cancellationToken);
-                return Response.FromValue(new Bar(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new Bar(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -339,7 +339,7 @@ namespace MgmtNonStringPathVariable
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _barRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, int.Parse(Id.Name), cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new Bar(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new Bar(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -371,7 +371,7 @@ namespace MgmtNonStringPathVariable
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _barRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, int.Parse(Id.Name), cancellationToken);
-                return Response.FromValue(new Bar(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new Bar(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -402,7 +402,7 @@ namespace MgmtNonStringPathVariable
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _barRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, int.Parse(Id.Name), cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new Bar(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new Bar(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -433,7 +433,7 @@ namespace MgmtNonStringPathVariable
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _barRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, int.Parse(Id.Name), cancellationToken);
-                return Response.FromValue(new Bar(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new Bar(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {

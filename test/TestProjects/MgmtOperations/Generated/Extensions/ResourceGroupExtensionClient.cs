@@ -39,7 +39,7 @@ namespace MgmtOperations
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {
-            ArmClient.TryGetApiVersion(resourceType, out string apiVersion);
+            Client.TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
         }
 
@@ -47,7 +47,7 @@ namespace MgmtOperations
         /// <returns> An object representing collection of AvailabilitySets and their operations over a AvailabilitySet. </returns>
         public virtual AvailabilitySetCollection GetAvailabilitySets()
         {
-            return new AvailabilitySetCollection(ArmClient, Id);
+            return new AvailabilitySetCollection(Client, Id);
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/patchAvailabilitySets

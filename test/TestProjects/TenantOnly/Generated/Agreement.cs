@@ -52,7 +52,7 @@ namespace TenantOnly
         internal Agreement(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _agreementClientDiagnostics = new ClientDiagnostics("TenantOnly", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string agreementApiVersion);
+            Client.TryGetApiVersion(ResourceType, out string agreementApiVersion);
             _agreementRestClient = new AgreementsRestOperations(_agreementClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, agreementApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -98,7 +98,7 @@ namespace TenantOnly
                 var response = await _agreementRestClient.GetAsync(Id.Parent.Name, Id.Name, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _agreementClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new Agreement(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Agreement(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -122,7 +122,7 @@ namespace TenantOnly
                 var response = _agreementRestClient.Get(Id.Parent.Name, Id.Name, expand, cancellationToken);
                 if (response.Value == null)
                     throw _agreementClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new Agreement(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Agreement(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

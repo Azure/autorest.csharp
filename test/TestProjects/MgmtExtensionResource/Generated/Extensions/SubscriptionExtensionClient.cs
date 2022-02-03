@@ -44,7 +44,7 @@ namespace MgmtExtensionResource
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {
-            ArmClient.TryGetApiVersion(resourceType, out string apiVersion);
+            Client.TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
         }
 
@@ -52,14 +52,14 @@ namespace MgmtExtensionResource
         /// <returns> Returns a <see cref="SubSingleton" /> object. </returns>
         public virtual SubSingleton GetSubSingleton()
         {
-            return new SubSingleton(ArmClient, new ResourceIdentifier(Id.ToString() + "/providers/Microsoft.Singleton/subSingletons/default"));
+            return new SubSingleton(Client, new ResourceIdentifier(Id.ToString() + "/providers/Microsoft.Singleton/subSingletons/default"));
         }
 
         /// <summary> Gets a collection of SubscriptionPolicyDefinitions in the SubscriptionPolicyDefinition. </summary>
         /// <returns> An object representing collection of SubscriptionPolicyDefinitions and their operations over a SubscriptionPolicyDefinition. </returns>
         public virtual SubscriptionPolicyDefinitionCollection GetSubscriptionPolicyDefinitions()
         {
-            return new SubscriptionPolicyDefinitionCollection(ArmClient, Id);
+            return new SubscriptionPolicyDefinitionCollection(Client, Id);
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/CheckDnsNameAvailability

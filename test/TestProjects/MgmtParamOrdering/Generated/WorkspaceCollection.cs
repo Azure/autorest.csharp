@@ -39,7 +39,7 @@ namespace MgmtParamOrdering
         internal WorkspaceCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _workspaceClientDiagnostics = new ClientDiagnostics("MgmtParamOrdering", Workspace.ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(Workspace.ResourceType, out string workspaceApiVersion);
+            Client.TryGetApiVersion(Workspace.ResourceType, out string workspaceApiVersion);
             _workspaceRestClient = new WorkspacesRestOperations(_workspaceClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, workspaceApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -75,7 +75,7 @@ namespace MgmtParamOrdering
             try
             {
                 var response = await _workspaceRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, workspaceName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new WorkspaceCreateOrUpdateOperation(ArmClient, _workspaceClientDiagnostics, Pipeline, _workspaceRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, workspaceName, parameters).Request, response);
+                var operation = new WorkspaceCreateOrUpdateOperation(Client, _workspaceClientDiagnostics, Pipeline, _workspaceRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, workspaceName, parameters).Request, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -110,7 +110,7 @@ namespace MgmtParamOrdering
             try
             {
                 var response = _workspaceRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, workspaceName, parameters, cancellationToken);
-                var operation = new WorkspaceCreateOrUpdateOperation(ArmClient, _workspaceClientDiagnostics, Pipeline, _workspaceRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, workspaceName, parameters).Request, response);
+                var operation = new WorkspaceCreateOrUpdateOperation(Client, _workspaceClientDiagnostics, Pipeline, _workspaceRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, workspaceName, parameters).Request, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -141,7 +141,7 @@ namespace MgmtParamOrdering
                 var response = await _workspaceRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, workspaceName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _workspaceClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new Workspace(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Workspace(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -169,7 +169,7 @@ namespace MgmtParamOrdering
                 var response = _workspaceRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, workspaceName, cancellationToken);
                 if (response.Value == null)
                     throw _workspaceClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new Workspace(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Workspace(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -193,7 +193,7 @@ namespace MgmtParamOrdering
                 try
                 {
                     var response = await _workspaceRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new Workspace(ArmClient, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new Workspace(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -219,7 +219,7 @@ namespace MgmtParamOrdering
                 try
                 {
                     var response = _workspaceRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new Workspace(ArmClient, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new Workspace(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -301,7 +301,7 @@ namespace MgmtParamOrdering
                 var response = await _workspaceRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, workspaceName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<Workspace>(null, response.GetRawResponse());
-                return Response.FromValue(new Workspace(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Workspace(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -329,7 +329,7 @@ namespace MgmtParamOrdering
                 var response = _workspaceRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, workspaceName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<Workspace>(null, response.GetRawResponse());
-                return Response.FromValue(new Workspace(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Workspace(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

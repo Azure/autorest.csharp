@@ -38,7 +38,7 @@ namespace MgmtMultipleParentResource
         internal TheParentSubParentChildCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _theParentSubParentChildChildrenClientDiagnostics = new ClientDiagnostics("MgmtMultipleParentResource", TheParentSubParentChild.ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(TheParentSubParentChild.ResourceType, out string theParentSubParentChildChildrenApiVersion);
+            Client.TryGetApiVersion(TheParentSubParentChild.ResourceType, out string theParentSubParentChildChildrenApiVersion);
             _theParentSubParentChildChildrenRestClient = new ChildrenRestOperations(_theParentSubParentChildChildrenClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, theParentSubParentChildChildrenApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -74,7 +74,7 @@ namespace MgmtMultipleParentResource
             try
             {
                 var response = await _theParentSubParentChildChildrenRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, childName, childBody, cancellationToken).ConfigureAwait(false);
-                var operation = new TheParentSubParentChildCreateOrUpdateOperation(ArmClient, _theParentSubParentChildChildrenClientDiagnostics, Pipeline, _theParentSubParentChildChildrenRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, childName, childBody).Request, response);
+                var operation = new TheParentSubParentChildCreateOrUpdateOperation(Client, _theParentSubParentChildChildrenClientDiagnostics, Pipeline, _theParentSubParentChildChildrenRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, childName, childBody).Request, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -109,7 +109,7 @@ namespace MgmtMultipleParentResource
             try
             {
                 var response = _theParentSubParentChildChildrenRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, childName, childBody, cancellationToken);
-                var operation = new TheParentSubParentChildCreateOrUpdateOperation(ArmClient, _theParentSubParentChildChildrenClientDiagnostics, Pipeline, _theParentSubParentChildChildrenRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, childName, childBody).Request, response);
+                var operation = new TheParentSubParentChildCreateOrUpdateOperation(Client, _theParentSubParentChildChildrenClientDiagnostics, Pipeline, _theParentSubParentChildChildrenRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, childName, childBody).Request, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -141,7 +141,7 @@ namespace MgmtMultipleParentResource
                 var response = await _theParentSubParentChildChildrenRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, childName, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _theParentSubParentChildChildrenClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new TheParentSubParentChild(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new TheParentSubParentChild(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -170,7 +170,7 @@ namespace MgmtMultipleParentResource
                 var response = _theParentSubParentChildChildrenRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, childName, expand, cancellationToken);
                 if (response.Value == null)
                     throw _theParentSubParentChildChildrenClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new TheParentSubParentChild(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new TheParentSubParentChild(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -195,7 +195,7 @@ namespace MgmtMultipleParentResource
                 try
                 {
                     var response = await _theParentSubParentChildChildrenRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new TheParentSubParentChild(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new TheParentSubParentChild(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -210,7 +210,7 @@ namespace MgmtMultipleParentResource
                 try
                 {
                     var response = await _theParentSubParentChildChildrenRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new TheParentSubParentChild(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new TheParentSubParentChild(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -237,7 +237,7 @@ namespace MgmtMultipleParentResource
                 try
                 {
                     var response = _theParentSubParentChildChildrenRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, expand, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new TheParentSubParentChild(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new TheParentSubParentChild(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -252,7 +252,7 @@ namespace MgmtMultipleParentResource
                 try
                 {
                     var response = _theParentSubParentChildChildrenRestClient.ListNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, expand, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new TheParentSubParentChild(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new TheParentSubParentChild(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -337,7 +337,7 @@ namespace MgmtMultipleParentResource
                 var response = await _theParentSubParentChildChildrenRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, childName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<TheParentSubParentChild>(null, response.GetRawResponse());
-                return Response.FromValue(new TheParentSubParentChild(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new TheParentSubParentChild(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -366,7 +366,7 @@ namespace MgmtMultipleParentResource
                 var response = _theParentSubParentChildChildrenRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, childName, expand, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<TheParentSubParentChild>(null, response.GetRawResponse());
-                return Response.FromValue(new TheParentSubParentChild(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new TheParentSubParentChild(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

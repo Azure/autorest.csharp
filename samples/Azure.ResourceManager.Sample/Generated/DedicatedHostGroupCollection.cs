@@ -39,7 +39,7 @@ namespace Azure.ResourceManager.Sample
         internal DedicatedHostGroupCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _dedicatedHostGroupClientDiagnostics = new ClientDiagnostics("Azure.ResourceManager.Sample", DedicatedHostGroup.ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(DedicatedHostGroup.ResourceType, out string dedicatedHostGroupApiVersion);
+            Client.TryGetApiVersion(DedicatedHostGroup.ResourceType, out string dedicatedHostGroupApiVersion);
             _dedicatedHostGroupRestClient = new DedicatedHostGroupsRestOperations(_dedicatedHostGroupClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, dedicatedHostGroupApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -75,7 +75,7 @@ namespace Azure.ResourceManager.Sample
             try
             {
                 var response = await _dedicatedHostGroupRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, hostGroupName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new DedicatedHostGroupCreateOrUpdateOperation(ArmClient, response);
+                var operation = new DedicatedHostGroupCreateOrUpdateOperation(Client, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -110,7 +110,7 @@ namespace Azure.ResourceManager.Sample
             try
             {
                 var response = _dedicatedHostGroupRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, hostGroupName, parameters, cancellationToken);
-                var operation = new DedicatedHostGroupCreateOrUpdateOperation(ArmClient, response);
+                var operation = new DedicatedHostGroupCreateOrUpdateOperation(Client, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -141,7 +141,7 @@ namespace Azure.ResourceManager.Sample
                 var response = await _dedicatedHostGroupRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, hostGroupName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _dedicatedHostGroupClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new DedicatedHostGroup(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new DedicatedHostGroup(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -169,7 +169,7 @@ namespace Azure.ResourceManager.Sample
                 var response = _dedicatedHostGroupRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, hostGroupName, cancellationToken);
                 if (response.Value == null)
                     throw _dedicatedHostGroupClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new DedicatedHostGroup(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new DedicatedHostGroup(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -193,7 +193,7 @@ namespace Azure.ResourceManager.Sample
                 try
                 {
                     var response = await _dedicatedHostGroupRestClient.ListByResourceGroupAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new DedicatedHostGroup(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new DedicatedHostGroup(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -208,7 +208,7 @@ namespace Azure.ResourceManager.Sample
                 try
                 {
                     var response = await _dedicatedHostGroupRestClient.ListByResourceGroupNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new DedicatedHostGroup(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new DedicatedHostGroup(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -234,7 +234,7 @@ namespace Azure.ResourceManager.Sample
                 try
                 {
                     var response = _dedicatedHostGroupRestClient.ListByResourceGroup(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new DedicatedHostGroup(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new DedicatedHostGroup(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -249,7 +249,7 @@ namespace Azure.ResourceManager.Sample
                 try
                 {
                     var response = _dedicatedHostGroupRestClient.ListByResourceGroupNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new DedicatedHostGroup(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new DedicatedHostGroup(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -331,7 +331,7 @@ namespace Azure.ResourceManager.Sample
                 var response = await _dedicatedHostGroupRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, hostGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<DedicatedHostGroup>(null, response.GetRawResponse());
-                return Response.FromValue(new DedicatedHostGroup(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new DedicatedHostGroup(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -359,7 +359,7 @@ namespace Azure.ResourceManager.Sample
                 var response = _dedicatedHostGroupRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, hostGroupName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<DedicatedHostGroup>(null, response.GetRawResponse());
-                return Response.FromValue(new DedicatedHostGroup(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new DedicatedHostGroup(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

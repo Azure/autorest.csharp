@@ -53,7 +53,7 @@ namespace MgmtParent
         internal AvailabilitySet(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _availabilitySetClientDiagnostics = new ClientDiagnostics("MgmtParent", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string availabilitySetApiVersion);
+            Client.TryGetApiVersion(ResourceType, out string availabilitySetApiVersion);
             _availabilitySetRestClient = new AvailabilitySetsRestOperations(_availabilitySetClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, availabilitySetApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -98,7 +98,7 @@ namespace MgmtParent
                 var response = await _availabilitySetRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _availabilitySetClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new AvailabilitySet(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new AvailabilitySet(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -121,7 +121,7 @@ namespace MgmtParent
                 var response = _availabilitySetRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _availabilitySetClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new AvailabilitySet(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new AvailabilitySet(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -199,7 +199,7 @@ namespace MgmtParent
             try
             {
                 var response = await _availabilitySetRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new AvailabilitySet(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new AvailabilitySet(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -227,7 +227,7 @@ namespace MgmtParent
             try
             {
                 var response = _availabilitySetRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
-                return Response.FromValue(new AvailabilitySet(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new AvailabilitySet(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -263,7 +263,7 @@ namespace MgmtParent
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _availabilitySetRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new AvailabilitySet(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new AvailabilitySet(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -299,7 +299,7 @@ namespace MgmtParent
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _availabilitySetRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
-                return Response.FromValue(new AvailabilitySet(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new AvailabilitySet(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -331,7 +331,7 @@ namespace MgmtParent
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _availabilitySetRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new AvailabilitySet(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new AvailabilitySet(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -363,7 +363,7 @@ namespace MgmtParent
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _availabilitySetRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
-                return Response.FromValue(new AvailabilitySet(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new AvailabilitySet(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -394,7 +394,7 @@ namespace MgmtParent
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _availabilitySetRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new AvailabilitySet(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new AvailabilitySet(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -425,7 +425,7 @@ namespace MgmtParent
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _availabilitySetRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
-                return Response.FromValue(new AvailabilitySet(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new AvailabilitySet(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {

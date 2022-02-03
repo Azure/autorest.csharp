@@ -38,7 +38,7 @@ namespace Azure.ResourceManager.Sample
         internal VirtualMachineExtensionCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _virtualMachineExtensionClientDiagnostics = new ClientDiagnostics("Azure.ResourceManager.Sample", VirtualMachineExtension.ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(VirtualMachineExtension.ResourceType, out string virtualMachineExtensionApiVersion);
+            Client.TryGetApiVersion(VirtualMachineExtension.ResourceType, out string virtualMachineExtensionApiVersion);
             _virtualMachineExtensionRestClient = new VirtualMachineExtensionsRestOperations(_virtualMachineExtensionClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, virtualMachineExtensionApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -74,7 +74,7 @@ namespace Azure.ResourceManager.Sample
             try
             {
                 var response = await _virtualMachineExtensionRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmExtensionName, extensionParameters, cancellationToken).ConfigureAwait(false);
-                var operation = new VirtualMachineExtensionCreateOrUpdateOperation(ArmClient, _virtualMachineExtensionClientDiagnostics, Pipeline, _virtualMachineExtensionRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmExtensionName, extensionParameters).Request, response);
+                var operation = new VirtualMachineExtensionCreateOrUpdateOperation(Client, _virtualMachineExtensionClientDiagnostics, Pipeline, _virtualMachineExtensionRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmExtensionName, extensionParameters).Request, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -109,7 +109,7 @@ namespace Azure.ResourceManager.Sample
             try
             {
                 var response = _virtualMachineExtensionRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmExtensionName, extensionParameters, cancellationToken);
-                var operation = new VirtualMachineExtensionCreateOrUpdateOperation(ArmClient, _virtualMachineExtensionClientDiagnostics, Pipeline, _virtualMachineExtensionRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmExtensionName, extensionParameters).Request, response);
+                var operation = new VirtualMachineExtensionCreateOrUpdateOperation(Client, _virtualMachineExtensionClientDiagnostics, Pipeline, _virtualMachineExtensionRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmExtensionName, extensionParameters).Request, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -141,7 +141,7 @@ namespace Azure.ResourceManager.Sample
                 var response = await _virtualMachineExtensionRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmExtensionName, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _virtualMachineExtensionClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new VirtualMachineExtension(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new VirtualMachineExtension(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -170,7 +170,7 @@ namespace Azure.ResourceManager.Sample
                 var response = _virtualMachineExtensionRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmExtensionName, expand, cancellationToken);
                 if (response.Value == null)
                     throw _virtualMachineExtensionClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new VirtualMachineExtension(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new VirtualMachineExtension(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -195,7 +195,7 @@ namespace Azure.ResourceManager.Sample
                 try
                 {
                     var response = await _virtualMachineExtensionRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new VirtualMachineExtension(ArmClient, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new VirtualMachineExtension(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -222,7 +222,7 @@ namespace Azure.ResourceManager.Sample
                 try
                 {
                     var response = _virtualMachineExtensionRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, expand, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new VirtualMachineExtension(ArmClient, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new VirtualMachineExtension(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -307,7 +307,7 @@ namespace Azure.ResourceManager.Sample
                 var response = await _virtualMachineExtensionRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmExtensionName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<VirtualMachineExtension>(null, response.GetRawResponse());
-                return Response.FromValue(new VirtualMachineExtension(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new VirtualMachineExtension(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -336,7 +336,7 @@ namespace Azure.ResourceManager.Sample
                 var response = _virtualMachineExtensionRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmExtensionName, expand, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<VirtualMachineExtension>(null, response.GetRawResponse());
-                return Response.FromValue(new VirtualMachineExtension(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new VirtualMachineExtension(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

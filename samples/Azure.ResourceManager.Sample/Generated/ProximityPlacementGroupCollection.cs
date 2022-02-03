@@ -39,7 +39,7 @@ namespace Azure.ResourceManager.Sample
         internal ProximityPlacementGroupCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _proximityPlacementGroupClientDiagnostics = new ClientDiagnostics("Azure.ResourceManager.Sample", ProximityPlacementGroup.ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ProximityPlacementGroup.ResourceType, out string proximityPlacementGroupApiVersion);
+            Client.TryGetApiVersion(ProximityPlacementGroup.ResourceType, out string proximityPlacementGroupApiVersion);
             _proximityPlacementGroupRestClient = new ProximityPlacementGroupsRestOperations(_proximityPlacementGroupClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, proximityPlacementGroupApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -75,7 +75,7 @@ namespace Azure.ResourceManager.Sample
             try
             {
                 var response = await _proximityPlacementGroupRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, proximityPlacementGroupName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new ProximityPlacementGroupCreateOrUpdateOperation(ArmClient, response);
+                var operation = new ProximityPlacementGroupCreateOrUpdateOperation(Client, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -110,7 +110,7 @@ namespace Azure.ResourceManager.Sample
             try
             {
                 var response = _proximityPlacementGroupRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, proximityPlacementGroupName, parameters, cancellationToken);
-                var operation = new ProximityPlacementGroupCreateOrUpdateOperation(ArmClient, response);
+                var operation = new ProximityPlacementGroupCreateOrUpdateOperation(Client, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -142,7 +142,7 @@ namespace Azure.ResourceManager.Sample
                 var response = await _proximityPlacementGroupRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, proximityPlacementGroupName, includeColocationStatus, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _proximityPlacementGroupClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new ProximityPlacementGroup(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ProximityPlacementGroup(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -171,7 +171,7 @@ namespace Azure.ResourceManager.Sample
                 var response = _proximityPlacementGroupRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, proximityPlacementGroupName, includeColocationStatus, cancellationToken);
                 if (response.Value == null)
                     throw _proximityPlacementGroupClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new ProximityPlacementGroup(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ProximityPlacementGroup(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -195,7 +195,7 @@ namespace Azure.ResourceManager.Sample
                 try
                 {
                     var response = await _proximityPlacementGroupRestClient.ListByResourceGroupAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new ProximityPlacementGroup(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new ProximityPlacementGroup(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -210,7 +210,7 @@ namespace Azure.ResourceManager.Sample
                 try
                 {
                     var response = await _proximityPlacementGroupRestClient.ListByResourceGroupNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new ProximityPlacementGroup(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new ProximityPlacementGroup(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -236,7 +236,7 @@ namespace Azure.ResourceManager.Sample
                 try
                 {
                     var response = _proximityPlacementGroupRestClient.ListByResourceGroup(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new ProximityPlacementGroup(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new ProximityPlacementGroup(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -251,7 +251,7 @@ namespace Azure.ResourceManager.Sample
                 try
                 {
                     var response = _proximityPlacementGroupRestClient.ListByResourceGroupNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new ProximityPlacementGroup(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new ProximityPlacementGroup(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -336,7 +336,7 @@ namespace Azure.ResourceManager.Sample
                 var response = await _proximityPlacementGroupRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, proximityPlacementGroupName, includeColocationStatus, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<ProximityPlacementGroup>(null, response.GetRawResponse());
-                return Response.FromValue(new ProximityPlacementGroup(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ProximityPlacementGroup(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -365,7 +365,7 @@ namespace Azure.ResourceManager.Sample
                 var response = _proximityPlacementGroupRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, proximityPlacementGroupName, includeColocationStatus, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<ProximityPlacementGroup>(null, response.GetRawResponse());
-                return Response.FromValue(new ProximityPlacementGroup(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ProximityPlacementGroup(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

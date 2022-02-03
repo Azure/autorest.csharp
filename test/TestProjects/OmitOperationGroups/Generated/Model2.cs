@@ -55,7 +55,7 @@ namespace OmitOperationGroups
         internal Model2(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _model2ClientDiagnostics = new ClientDiagnostics("OmitOperationGroups", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string model2ApiVersion);
+            Client.TryGetApiVersion(ResourceType, out string model2ApiVersion);
             _model2RestClient = new Model2SRestOperations(_model2ClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, model2ApiVersion);
             _model4sClientDiagnostics = new ClientDiagnostics("OmitOperationGroups", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
             _model4sRestClient = new Model4SRestOperations(_model4sClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
@@ -101,7 +101,7 @@ namespace OmitOperationGroups
                 var response = await _model2RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _model2ClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new Model2(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Model2(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -123,7 +123,7 @@ namespace OmitOperationGroups
                 var response = _model2RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _model2ClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new Model2(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Model2(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

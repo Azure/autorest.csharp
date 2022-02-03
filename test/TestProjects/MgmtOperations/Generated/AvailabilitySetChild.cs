@@ -52,7 +52,7 @@ namespace MgmtOperations
         internal AvailabilitySetChild(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _availabilitySetChildavailabilitySetChildClientDiagnostics = new ClientDiagnostics("MgmtOperations", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string availabilitySetChildavailabilitySetChildApiVersion);
+            Client.TryGetApiVersion(ResourceType, out string availabilitySetChildavailabilitySetChildApiVersion);
             _availabilitySetChildavailabilitySetChildRestClient = new AvailabilitySetChildRestOperations(_availabilitySetChildavailabilitySetChildClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, availabilitySetChildavailabilitySetChildApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -87,7 +87,7 @@ namespace MgmtOperations
         /// <returns> An object representing collection of AvailabilitySetGrandChildren and their operations over a AvailabilitySetGrandChild. </returns>
         public virtual AvailabilitySetGrandChildCollection GetAvailabilitySetGrandChildren()
         {
-            return new AvailabilitySetGrandChildCollection(ArmClient, Id);
+            return new AvailabilitySetGrandChildCollection(Client, Id);
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}/availabilitySetChildren/{availabilitySetChildName}
@@ -104,7 +104,7 @@ namespace MgmtOperations
                 var response = await _availabilitySetChildavailabilitySetChildRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _availabilitySetChildavailabilitySetChildClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new AvailabilitySetChild(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new AvailabilitySetChild(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -127,7 +127,7 @@ namespace MgmtOperations
                 var response = _availabilitySetChildavailabilitySetChildRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _availabilitySetChildavailabilitySetChildClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new AvailabilitySetChild(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new AvailabilitySetChild(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -163,7 +163,7 @@ namespace MgmtOperations
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _availabilitySetChildavailabilitySetChildRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new AvailabilitySetChild(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new AvailabilitySetChild(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -199,7 +199,7 @@ namespace MgmtOperations
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _availabilitySetChildavailabilitySetChildRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
-                return Response.FromValue(new AvailabilitySetChild(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new AvailabilitySetChild(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -231,7 +231,7 @@ namespace MgmtOperations
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _availabilitySetChildavailabilitySetChildRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new AvailabilitySetChild(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new AvailabilitySetChild(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -263,7 +263,7 @@ namespace MgmtOperations
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _availabilitySetChildavailabilitySetChildRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
-                return Response.FromValue(new AvailabilitySetChild(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new AvailabilitySetChild(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -294,7 +294,7 @@ namespace MgmtOperations
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _availabilitySetChildavailabilitySetChildRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new AvailabilitySetChild(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new AvailabilitySetChild(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -325,7 +325,7 @@ namespace MgmtOperations
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _availabilitySetChildavailabilitySetChildRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
-                return Response.FromValue(new AvailabilitySetChild(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new AvailabilitySetChild(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {

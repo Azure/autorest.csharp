@@ -20,9 +20,9 @@ namespace SupersetFlattenInheritance
     {
         private static ResourceGroupExtensionClient GetExtensionClient(ResourceGroup resourceGroup)
         {
-            return resourceGroup.GetCachedClient((armClient) =>
+            return resourceGroup.GetCachedClient((client) =>
             {
-                return new ResourceGroupExtensionClient(armClient, resourceGroup.Id);
+                return new ResourceGroupExtensionClient(client, resourceGroup.Id);
             }
             );
         }

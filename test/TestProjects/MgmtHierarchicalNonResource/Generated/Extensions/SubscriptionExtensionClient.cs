@@ -28,7 +28,7 @@ namespace MgmtHierarchicalNonResource
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {
-            ArmClient.TryGetApiVersion(resourceType, out string apiVersion);
+            Client.TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
         }
 
@@ -37,7 +37,7 @@ namespace MgmtHierarchicalNonResource
         /// <returns> An object representing collection of SharedGalleries and their operations over a SharedGallery. </returns>
         public virtual SharedGalleryCollection GetSharedGalleries(string location)
         {
-            return new SharedGalleryCollection(ArmClient, Id, location);
+            return new SharedGalleryCollection(Client, Id, location);
         }
     }
 }

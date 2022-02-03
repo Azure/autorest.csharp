@@ -57,7 +57,7 @@ namespace MgmtHierarchicalNonResource
         internal SharedGallery(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _sharedGalleryClientDiagnostics = new ClientDiagnostics("MgmtHierarchicalNonResource", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string sharedGalleryApiVersion);
+            Client.TryGetApiVersion(ResourceType, out string sharedGalleryApiVersion);
             _sharedGalleryRestClient = new SharedGalleriesRestOperations(_sharedGalleryClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, sharedGalleryApiVersion);
             _sharedGalleryImagesClientDiagnostics = new ClientDiagnostics("MgmtHierarchicalNonResource", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
             _sharedGalleryImagesRestClient = new SharedGalleryImagesRestOperations(_sharedGalleryImagesClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
@@ -107,7 +107,7 @@ namespace MgmtHierarchicalNonResource
                 if (response.Value == null)
                     throw await _sharedGalleryClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 response.Value.Id = CreateResourceIdentifier(Id.SubscriptionId, Id.Parent.Name, Id.Name);
-                return Response.FromValue(new SharedGallery(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SharedGallery(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -131,7 +131,7 @@ namespace MgmtHierarchicalNonResource
                 if (response.Value == null)
                     throw _sharedGalleryClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 response.Value.Id = CreateResourceIdentifier(Id.SubscriptionId, Id.Parent.Name, Id.Name);
-                return Response.FromValue(new SharedGallery(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SharedGallery(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

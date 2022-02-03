@@ -38,7 +38,7 @@ namespace MgmtParamOrdering
         internal EnvironmentContainerResourceCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _environmentContainerResourceEnvironmentContainersClientDiagnostics = new ClientDiagnostics("MgmtParamOrdering", EnvironmentContainerResource.ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(EnvironmentContainerResource.ResourceType, out string environmentContainerResourceEnvironmentContainersApiVersion);
+            Client.TryGetApiVersion(EnvironmentContainerResource.ResourceType, out string environmentContainerResourceEnvironmentContainersApiVersion);
             _environmentContainerResourceEnvironmentContainersRestClient = new EnvironmentContainersRestOperations(_environmentContainerResourceEnvironmentContainersClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, environmentContainerResourceEnvironmentContainersApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -74,7 +74,7 @@ namespace MgmtParamOrdering
             try
             {
                 var response = await _environmentContainerResourceEnvironmentContainersRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, name, body, cancellationToken).ConfigureAwait(false);
-                var operation = new EnvironmentContainerResourceCreateOrUpdateOperation(ArmClient, response);
+                var operation = new EnvironmentContainerResourceCreateOrUpdateOperation(Client, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -109,7 +109,7 @@ namespace MgmtParamOrdering
             try
             {
                 var response = _environmentContainerResourceEnvironmentContainersRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, name, body, cancellationToken);
-                var operation = new EnvironmentContainerResourceCreateOrUpdateOperation(ArmClient, response);
+                var operation = new EnvironmentContainerResourceCreateOrUpdateOperation(Client, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -140,7 +140,7 @@ namespace MgmtParamOrdering
                 var response = await _environmentContainerResourceEnvironmentContainersRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _environmentContainerResourceEnvironmentContainersClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new EnvironmentContainerResource(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new EnvironmentContainerResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -168,7 +168,7 @@ namespace MgmtParamOrdering
                 var response = _environmentContainerResourceEnvironmentContainersRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, name, cancellationToken);
                 if (response.Value == null)
                     throw _environmentContainerResourceEnvironmentContainersClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new EnvironmentContainerResource(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new EnvironmentContainerResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -192,7 +192,7 @@ namespace MgmtParamOrdering
                 try
                 {
                     var response = await _environmentContainerResourceEnvironmentContainersRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new EnvironmentContainerResource(ArmClient, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new EnvironmentContainerResource(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -218,7 +218,7 @@ namespace MgmtParamOrdering
                 try
                 {
                     var response = _environmentContainerResourceEnvironmentContainersRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new EnvironmentContainerResource(ArmClient, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new EnvironmentContainerResource(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -300,7 +300,7 @@ namespace MgmtParamOrdering
                 var response = await _environmentContainerResourceEnvironmentContainersRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, name, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<EnvironmentContainerResource>(null, response.GetRawResponse());
-                return Response.FromValue(new EnvironmentContainerResource(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new EnvironmentContainerResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -328,7 +328,7 @@ namespace MgmtParamOrdering
                 var response = _environmentContainerResourceEnvironmentContainersRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, name, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<EnvironmentContainerResource>(null, response.GetRawResponse());
-                return Response.FromValue(new EnvironmentContainerResource(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new EnvironmentContainerResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

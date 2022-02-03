@@ -52,7 +52,7 @@ namespace SubscriptionExtensions
         internal Oven(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _ovenClientDiagnostics = new ClientDiagnostics("SubscriptionExtensions", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string ovenApiVersion);
+            Client.TryGetApiVersion(ResourceType, out string ovenApiVersion);
             _ovenRestClient = new OvensRestOperations(_ovenClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, ovenApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -96,7 +96,7 @@ namespace SubscriptionExtensions
                 var response = await _ovenRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _ovenClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new Oven(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Oven(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -118,7 +118,7 @@ namespace SubscriptionExtensions
                 var response = _ovenRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _ovenClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new Oven(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Oven(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -154,7 +154,7 @@ namespace SubscriptionExtensions
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _ovenRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new Oven(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new Oven(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -190,7 +190,7 @@ namespace SubscriptionExtensions
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _ovenRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
-                return Response.FromValue(new Oven(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new Oven(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -222,7 +222,7 @@ namespace SubscriptionExtensions
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _ovenRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new Oven(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new Oven(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -254,7 +254,7 @@ namespace SubscriptionExtensions
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _ovenRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
-                return Response.FromValue(new Oven(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new Oven(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -285,7 +285,7 @@ namespace SubscriptionExtensions
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _ovenRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new Oven(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new Oven(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -316,7 +316,7 @@ namespace SubscriptionExtensions
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _ovenRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
-                return Response.FromValue(new Oven(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new Oven(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {

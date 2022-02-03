@@ -28,7 +28,7 @@ namespace ResourceRename
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {
-            ArmClient.TryGetApiVersion(resourceType, out string apiVersion);
+            Client.TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
         }
 
@@ -36,7 +36,7 @@ namespace ResourceRename
         /// <returns> An object representing collection of SshPublicKeyInfos and their operations over a SshPublicKeyInfo. </returns>
         public virtual SshPublicKeyInfoCollection GetSshPublicKeyInfos()
         {
-            return new SshPublicKeyInfoCollection(ArmClient, Id);
+            return new SshPublicKeyInfoCollection(Client, Id);
         }
     }
 }

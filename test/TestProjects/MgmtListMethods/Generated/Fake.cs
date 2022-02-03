@@ -52,7 +52,7 @@ namespace MgmtListMethods
         internal Fake(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _fakeClientDiagnostics = new ClientDiagnostics("MgmtListMethods", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string fakeApiVersion);
+            Client.TryGetApiVersion(ResourceType, out string fakeApiVersion);
             _fakeRestClient = new FakesRestOperations(_fakeClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, fakeApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -87,42 +87,42 @@ namespace MgmtListMethods
         /// <returns> An object representing collection of FakeParentWithAncestorWithNonResChWithLocs and their operations over a FakeParentWithAncestorWithNonResChWithLoc. </returns>
         public virtual FakeParentWithAncestorWithNonResChWithLocCollection GetFakeParentWithAncestorWithNonResChWithLocs()
         {
-            return new FakeParentWithAncestorWithNonResChWithLocCollection(ArmClient, Id);
+            return new FakeParentWithAncestorWithNonResChWithLocCollection(Client, Id);
         }
 
         /// <summary> Gets a collection of FakeParentWithAncestorWithNonResChes in the FakeParentWithAncestorWithNonResCh. </summary>
         /// <returns> An object representing collection of FakeParentWithAncestorWithNonResChes and their operations over a FakeParentWithAncestorWithNonResCh. </returns>
         public virtual FakeParentWithAncestorWithNonResChCollection GetFakeParentWithAncestorWithNonResChes()
         {
-            return new FakeParentWithAncestorWithNonResChCollection(ArmClient, Id);
+            return new FakeParentWithAncestorWithNonResChCollection(Client, Id);
         }
 
         /// <summary> Gets a collection of FakeParentWithAncestorWithLocs in the FakeParentWithAncestorWithLoc. </summary>
         /// <returns> An object representing collection of FakeParentWithAncestorWithLocs and their operations over a FakeParentWithAncestorWithLoc. </returns>
         public virtual FakeParentWithAncestorWithLocCollection GetFakeParentWithAncestorWithLocs()
         {
-            return new FakeParentWithAncestorWithLocCollection(ArmClient, Id);
+            return new FakeParentWithAncestorWithLocCollection(Client, Id);
         }
 
         /// <summary> Gets a collection of FakeParentWithAncestors in the FakeParentWithAncestor. </summary>
         /// <returns> An object representing collection of FakeParentWithAncestors and their operations over a FakeParentWithAncestor. </returns>
         public virtual FakeParentWithAncestorCollection GetFakeParentWithAncestors()
         {
-            return new FakeParentWithAncestorCollection(ArmClient, Id);
+            return new FakeParentWithAncestorCollection(Client, Id);
         }
 
         /// <summary> Gets a collection of FakeParentWithNonResChes in the FakeParentWithNonResCh. </summary>
         /// <returns> An object representing collection of FakeParentWithNonResChes and their operations over a FakeParentWithNonResCh. </returns>
         public virtual FakeParentWithNonResChCollection GetFakeParentWithNonResChes()
         {
-            return new FakeParentWithNonResChCollection(ArmClient, Id);
+            return new FakeParentWithNonResChCollection(Client, Id);
         }
 
         /// <summary> Gets a collection of FakeParents in the FakeParent. </summary>
         /// <returns> An object representing collection of FakeParents and their operations over a FakeParent. </returns>
         public virtual FakeParentCollection GetFakeParents()
         {
-            return new FakeParentCollection(ArmClient, Id);
+            return new FakeParentCollection(Client, Id);
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes/{fakeName}
@@ -140,7 +140,7 @@ namespace MgmtListMethods
                 var response = await _fakeRestClient.GetAsync(Id.SubscriptionId, Id.Name, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _fakeClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new Fake(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Fake(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -164,7 +164,7 @@ namespace MgmtListMethods
                 var response = _fakeRestClient.Get(Id.SubscriptionId, Id.Name, expand, cancellationToken);
                 if (response.Value == null)
                     throw _fakeClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new Fake(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Fake(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -200,7 +200,7 @@ namespace MgmtListMethods
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _fakeRestClient.GetAsync(Id.SubscriptionId, Id.Name, null, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new Fake(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new Fake(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -236,7 +236,7 @@ namespace MgmtListMethods
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _fakeRestClient.Get(Id.SubscriptionId, Id.Name, null, cancellationToken);
-                return Response.FromValue(new Fake(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new Fake(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -268,7 +268,7 @@ namespace MgmtListMethods
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _fakeRestClient.GetAsync(Id.SubscriptionId, Id.Name, null, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new Fake(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new Fake(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -300,7 +300,7 @@ namespace MgmtListMethods
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _fakeRestClient.Get(Id.SubscriptionId, Id.Name, null, cancellationToken);
-                return Response.FromValue(new Fake(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new Fake(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -331,7 +331,7 @@ namespace MgmtListMethods
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _fakeRestClient.GetAsync(Id.SubscriptionId, Id.Name, null, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new Fake(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new Fake(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -362,7 +362,7 @@ namespace MgmtListMethods
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _fakeRestClient.Get(Id.SubscriptionId, Id.Name, null, cancellationToken);
-                return Response.FromValue(new Fake(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new Fake(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {

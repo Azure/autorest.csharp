@@ -52,7 +52,7 @@ namespace MgmtListMethods
         internal SubParent(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _subParentClientDiagnostics = new ClientDiagnostics("MgmtListMethods", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string subParentApiVersion);
+            Client.TryGetApiVersion(ResourceType, out string subParentApiVersion);
             _subParentRestClient = new SubParentsRestOperations(_subParentClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, subParentApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -97,7 +97,7 @@ namespace MgmtListMethods
                 var response = await _subParentRestClient.GetAsync(Id.SubscriptionId, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _subParentClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new SubParent(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SubParent(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -120,7 +120,7 @@ namespace MgmtListMethods
                 var response = _subParentRestClient.Get(Id.SubscriptionId, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _subParentClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new SubParent(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SubParent(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -156,7 +156,7 @@ namespace MgmtListMethods
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _subParentRestClient.GetAsync(Id.SubscriptionId, Id.Name, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new SubParent(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new SubParent(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -192,7 +192,7 @@ namespace MgmtListMethods
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _subParentRestClient.Get(Id.SubscriptionId, Id.Name, cancellationToken);
-                return Response.FromValue(new SubParent(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new SubParent(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -224,7 +224,7 @@ namespace MgmtListMethods
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _subParentRestClient.GetAsync(Id.SubscriptionId, Id.Name, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new SubParent(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new SubParent(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -256,7 +256,7 @@ namespace MgmtListMethods
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _subParentRestClient.Get(Id.SubscriptionId, Id.Name, cancellationToken);
-                return Response.FromValue(new SubParent(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new SubParent(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -287,7 +287,7 @@ namespace MgmtListMethods
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _subParentRestClient.GetAsync(Id.SubscriptionId, Id.Name, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new SubParent(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new SubParent(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -318,7 +318,7 @@ namespace MgmtListMethods
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _subParentRestClient.Get(Id.SubscriptionId, Id.Name, cancellationToken);
-                return Response.FromValue(new SubParent(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new SubParent(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {

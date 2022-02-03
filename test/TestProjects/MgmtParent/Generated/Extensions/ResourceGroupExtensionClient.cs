@@ -28,7 +28,7 @@ namespace MgmtParent
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {
-            ArmClient.TryGetApiVersion(resourceType, out string apiVersion);
+            Client.TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
         }
 
@@ -36,14 +36,14 @@ namespace MgmtParent
         /// <returns> An object representing collection of AvailabilitySets and their operations over a AvailabilitySet. </returns>
         public virtual AvailabilitySetCollection GetAvailabilitySets()
         {
-            return new AvailabilitySetCollection(ArmClient, Id);
+            return new AvailabilitySetCollection(Client, Id);
         }
 
         /// <summary> Gets a collection of DedicatedHostGroups in the DedicatedHostGroup. </summary>
         /// <returns> An object representing collection of DedicatedHostGroups and their operations over a DedicatedHostGroup. </returns>
         public virtual DedicatedHostGroupCollection GetDedicatedHostGroups()
         {
-            return new DedicatedHostGroupCollection(ArmClient, Id);
+            return new DedicatedHostGroupCollection(Client, Id);
         }
     }
 }

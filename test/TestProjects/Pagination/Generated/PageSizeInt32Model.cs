@@ -52,7 +52,7 @@ namespace Pagination
         internal PageSizeInt32Model(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _pageSizeInt32ModelClientDiagnostics = new ClientDiagnostics("Pagination", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string pageSizeInt32ModelApiVersion);
+            Client.TryGetApiVersion(ResourceType, out string pageSizeInt32ModelApiVersion);
             _pageSizeInt32ModelRestClient = new PageSizeInt32ModelsRestOperations(_pageSizeInt32ModelClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, pageSizeInt32ModelApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -93,7 +93,7 @@ namespace Pagination
                 var response = await _pageSizeInt32ModelRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _pageSizeInt32ModelClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new PageSizeInt32Model(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new PageSizeInt32Model(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -112,7 +112,7 @@ namespace Pagination
                 var response = _pageSizeInt32ModelRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _pageSizeInt32ModelClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new PageSizeInt32Model(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new PageSizeInt32Model(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

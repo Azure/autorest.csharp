@@ -28,7 +28,7 @@ namespace MgmtSubscriptionNameParameter
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {
-            ArmClient.TryGetApiVersion(resourceType, out string apiVersion);
+            Client.TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
         }
 
@@ -36,7 +36,7 @@ namespace MgmtSubscriptionNameParameter
         /// <returns> An object representing collection of SBSubscriptions and their operations over a SBSubscription. </returns>
         public virtual SBSubscriptionCollection GetSBSubscriptions()
         {
-            return new SBSubscriptionCollection(ArmClient, Id);
+            return new SBSubscriptionCollection(Client, Id);
         }
     }
 }

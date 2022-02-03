@@ -35,7 +35,7 @@ namespace MgmtKeyvault
         internal DeletedManagedHsmCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _deletedManagedHsmManagedHsmsClientDiagnostics = new ClientDiagnostics("MgmtKeyvault", DeletedManagedHsm.ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(DeletedManagedHsm.ResourceType, out string deletedManagedHsmManagedHsmsApiVersion);
+            Client.TryGetApiVersion(DeletedManagedHsm.ResourceType, out string deletedManagedHsmManagedHsmsApiVersion);
             _deletedManagedHsmManagedHsmsRestClient = new ManagedHsmsRestOperations(_deletedManagedHsmManagedHsmsClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, deletedManagedHsmManagedHsmsApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -69,7 +69,7 @@ namespace MgmtKeyvault
                 var response = await _deletedManagedHsmManagedHsmsRestClient.GetDeletedAsync(Id.SubscriptionId, location, name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _deletedManagedHsmManagedHsmsClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new DeletedManagedHsm(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new DeletedManagedHsm(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -99,7 +99,7 @@ namespace MgmtKeyvault
                 var response = _deletedManagedHsmManagedHsmsRestClient.GetDeleted(Id.SubscriptionId, location, name, cancellationToken);
                 if (response.Value == null)
                     throw _deletedManagedHsmManagedHsmsClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new DeletedManagedHsm(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new DeletedManagedHsm(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -185,7 +185,7 @@ namespace MgmtKeyvault
                 var response = await _deletedManagedHsmManagedHsmsRestClient.GetDeletedAsync(Id.SubscriptionId, location, name, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<DeletedManagedHsm>(null, response.GetRawResponse());
-                return Response.FromValue(new DeletedManagedHsm(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new DeletedManagedHsm(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -215,7 +215,7 @@ namespace MgmtKeyvault
                 var response = _deletedManagedHsmManagedHsmsRestClient.GetDeleted(Id.SubscriptionId, location, name, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<DeletedManagedHsm>(null, response.GetRawResponse());
-                return Response.FromValue(new DeletedManagedHsm(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new DeletedManagedHsm(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

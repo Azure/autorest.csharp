@@ -53,7 +53,7 @@ namespace MgmtScopeResource
         internal ResourceLink(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _resourceLinkClientDiagnostics = new ClientDiagnostics("MgmtScopeResource", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string resourceLinkApiVersion);
+            Client.TryGetApiVersion(ResourceType, out string resourceLinkApiVersion);
             _resourceLinkRestClient = new ResourceLinksRestOperations(_resourceLinkClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, resourceLinkApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -98,7 +98,7 @@ namespace MgmtScopeResource
                 var response = await _resourceLinkRestClient.GetAsync(Id, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _resourceLinkClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new ResourceLink(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ResourceLink(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -121,7 +121,7 @@ namespace MgmtScopeResource
                 var response = _resourceLinkRestClient.Get(Id, cancellationToken);
                 if (response.Value == null)
                     throw _resourceLinkClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new ResourceLink(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ResourceLink(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

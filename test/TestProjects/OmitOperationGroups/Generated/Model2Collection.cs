@@ -39,7 +39,7 @@ namespace OmitOperationGroups
         internal Model2Collection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _model2ClientDiagnostics = new ClientDiagnostics("OmitOperationGroups", Model2.ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(Model2.ResourceType, out string model2ApiVersion);
+            Client.TryGetApiVersion(Model2.ResourceType, out string model2ApiVersion);
             _model2RestClient = new Model2SRestOperations(_model2ClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, model2ApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -74,7 +74,7 @@ namespace OmitOperationGroups
             try
             {
                 var response = await _model2RestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, model2SName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new Model2CreateOrUpdateOperation(ArmClient, response);
+                var operation = new Model2CreateOrUpdateOperation(Client, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -108,7 +108,7 @@ namespace OmitOperationGroups
             try
             {
                 var response = _model2RestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, model2SName, parameters, cancellationToken);
-                var operation = new Model2CreateOrUpdateOperation(ArmClient, response);
+                var operation = new Model2CreateOrUpdateOperation(Client, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -138,7 +138,7 @@ namespace OmitOperationGroups
                 var response = await _model2RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, model2SName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _model2ClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new Model2(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Model2(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -165,7 +165,7 @@ namespace OmitOperationGroups
                 var response = _model2RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, model2SName, cancellationToken);
                 if (response.Value == null)
                     throw _model2ClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new Model2(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Model2(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -188,7 +188,7 @@ namespace OmitOperationGroups
                 try
                 {
                     var response = await _model2RestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new Model2(ArmClient, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new Model2(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -213,7 +213,7 @@ namespace OmitOperationGroups
                 try
                 {
                     var response = _model2RestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new Model2(ArmClient, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new Model2(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -295,7 +295,7 @@ namespace OmitOperationGroups
                 var response = await _model2RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, model2SName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<Model2>(null, response.GetRawResponse());
-                return Response.FromValue(new Model2(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Model2(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -323,7 +323,7 @@ namespace OmitOperationGroups
                 var response = _model2RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, model2SName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<Model2>(null, response.GetRawResponse());
-                return Response.FromValue(new Model2(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Model2(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

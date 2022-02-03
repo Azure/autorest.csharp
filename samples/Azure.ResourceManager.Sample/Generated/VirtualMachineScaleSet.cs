@@ -55,10 +55,10 @@ namespace Azure.ResourceManager.Sample
         internal VirtualMachineScaleSet(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _virtualMachineScaleSetClientDiagnostics = new ClientDiagnostics("Azure.ResourceManager.Sample", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string virtualMachineScaleSetApiVersion);
+            Client.TryGetApiVersion(ResourceType, out string virtualMachineScaleSetApiVersion);
             _virtualMachineScaleSetRestClient = new VirtualMachineScaleSetsRestOperations(_virtualMachineScaleSetClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, virtualMachineScaleSetApiVersion);
             _virtualMachineScaleSetRollingUpgradeClientDiagnostics = new ClientDiagnostics("Azure.ResourceManager.Sample", VirtualMachineScaleSetRollingUpgrade.ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(VirtualMachineScaleSetRollingUpgrade.ResourceType, out string virtualMachineScaleSetRollingUpgradeApiVersion);
+            Client.TryGetApiVersion(VirtualMachineScaleSetRollingUpgrade.ResourceType, out string virtualMachineScaleSetRollingUpgradeApiVersion);
             _virtualMachineScaleSetRollingUpgradeRestClient = new VirtualMachineScaleSetRollingUpgradesRestOperations(_virtualMachineScaleSetRollingUpgradeClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, virtualMachineScaleSetRollingUpgradeApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -93,21 +93,21 @@ namespace Azure.ResourceManager.Sample
         /// <returns> An object representing collection of VirtualMachineScaleSetExtensions and their operations over a VirtualMachineScaleSetExtension. </returns>
         public virtual VirtualMachineScaleSetExtensionCollection GetVirtualMachineScaleSetExtensions()
         {
-            return new VirtualMachineScaleSetExtensionCollection(ArmClient, Id);
+            return new VirtualMachineScaleSetExtensionCollection(Client, Id);
         }
 
         /// <summary> Gets an object representing a VirtualMachineScaleSetRollingUpgrade along with the instance operations that can be performed on it in the VirtualMachineScaleSet. </summary>
         /// <returns> Returns a <see cref="VirtualMachineScaleSetRollingUpgrade" /> object. </returns>
         public virtual VirtualMachineScaleSetRollingUpgrade GetVirtualMachineScaleSetRollingUpgrade()
         {
-            return new VirtualMachineScaleSetRollingUpgrade(ArmClient, new ResourceIdentifier(Id.ToString() + "/rollingUpgrades/latest"));
+            return new VirtualMachineScaleSetRollingUpgrade(Client, new ResourceIdentifier(Id.ToString() + "/rollingUpgrades/latest"));
         }
 
         /// <summary> Gets a collection of VirtualMachineScaleSetVMs in the VirtualMachineScaleSetVM. </summary>
         /// <returns> An object representing collection of VirtualMachineScaleSetVMs and their operations over a VirtualMachineScaleSetVM. </returns>
         public virtual VirtualMachineScaleSetVMCollection GetVirtualMachineScaleSetVMs()
         {
-            return new VirtualMachineScaleSetVMCollection(ArmClient, Id);
+            return new VirtualMachineScaleSetVMCollection(Client, Id);
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}
@@ -124,7 +124,7 @@ namespace Azure.ResourceManager.Sample
                 var response = await _virtualMachineScaleSetRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _virtualMachineScaleSetClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new VirtualMachineScaleSet(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new VirtualMachineScaleSet(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -147,7 +147,7 @@ namespace Azure.ResourceManager.Sample
                 var response = _virtualMachineScaleSetRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _virtualMachineScaleSetClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new VirtualMachineScaleSet(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new VirtualMachineScaleSet(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -226,7 +226,7 @@ namespace Azure.ResourceManager.Sample
             try
             {
                 var response = await _virtualMachineScaleSetRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new VirtualMachineScaleSetUpdateOperation(ArmClient, _virtualMachineScaleSetClientDiagnostics, Pipeline, _virtualMachineScaleSetRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters).Request, response);
+                var operation = new VirtualMachineScaleSetUpdateOperation(Client, _virtualMachineScaleSetClientDiagnostics, Pipeline, _virtualMachineScaleSetRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters).Request, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -258,7 +258,7 @@ namespace Azure.ResourceManager.Sample
             try
             {
                 var response = _virtualMachineScaleSetRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
-                var operation = new VirtualMachineScaleSetUpdateOperation(ArmClient, _virtualMachineScaleSetClientDiagnostics, Pipeline, _virtualMachineScaleSetRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters).Request, response);
+                var operation = new VirtualMachineScaleSetUpdateOperation(Client, _virtualMachineScaleSetClientDiagnostics, Pipeline, _virtualMachineScaleSetRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters).Request, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -1363,7 +1363,7 @@ namespace Azure.ResourceManager.Sample
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _virtualMachineScaleSetRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new VirtualMachineScaleSet(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new VirtualMachineScaleSet(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -1399,7 +1399,7 @@ namespace Azure.ResourceManager.Sample
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _virtualMachineScaleSetRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
-                return Response.FromValue(new VirtualMachineScaleSet(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new VirtualMachineScaleSet(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -1431,7 +1431,7 @@ namespace Azure.ResourceManager.Sample
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _virtualMachineScaleSetRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new VirtualMachineScaleSet(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new VirtualMachineScaleSet(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -1463,7 +1463,7 @@ namespace Azure.ResourceManager.Sample
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _virtualMachineScaleSetRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
-                return Response.FromValue(new VirtualMachineScaleSet(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new VirtualMachineScaleSet(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -1494,7 +1494,7 @@ namespace Azure.ResourceManager.Sample
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _virtualMachineScaleSetRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new VirtualMachineScaleSet(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new VirtualMachineScaleSet(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -1525,7 +1525,7 @@ namespace Azure.ResourceManager.Sample
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _virtualMachineScaleSetRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
-                return Response.FromValue(new VirtualMachineScaleSet(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new VirtualMachineScaleSet(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {

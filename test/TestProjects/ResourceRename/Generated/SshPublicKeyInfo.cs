@@ -53,7 +53,7 @@ namespace ResourceRename
         internal SshPublicKeyInfo(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _sshPublicKeyInfoSshPublicKeysClientDiagnostics = new ClientDiagnostics("ResourceRename", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string sshPublicKeyInfoSshPublicKeysApiVersion);
+            Client.TryGetApiVersion(ResourceType, out string sshPublicKeyInfoSshPublicKeysApiVersion);
             _sshPublicKeyInfoSshPublicKeysRestClient = new SshPublicKeysRestOperations(_sshPublicKeyInfoSshPublicKeysClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, sshPublicKeyInfoSshPublicKeysApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -98,7 +98,7 @@ namespace ResourceRename
                 var response = await _sshPublicKeyInfoSshPublicKeysRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _sshPublicKeyInfoSshPublicKeysClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new SshPublicKeyInfo(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SshPublicKeyInfo(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -121,7 +121,7 @@ namespace ResourceRename
                 var response = _sshPublicKeyInfoSshPublicKeysRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _sshPublicKeyInfoSshPublicKeysClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new SshPublicKeyInfo(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SshPublicKeyInfo(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

@@ -28,7 +28,7 @@ namespace MgmtListMethods
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {
-            ArmClient.TryGetApiVersion(resourceType, out string apiVersion);
+            Client.TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
         }
 
@@ -36,28 +36,28 @@ namespace MgmtListMethods
         /// <returns> An object representing collection of MgmtGrpParentWithNonResChWithLocs and their operations over a MgmtGrpParentWithNonResChWithLoc. </returns>
         public virtual MgmtGrpParentWithNonResChWithLocCollection GetMgmtGrpParentWithNonResChWithLocs()
         {
-            return new MgmtGrpParentWithNonResChWithLocCollection(ArmClient, Id);
+            return new MgmtGrpParentWithNonResChWithLocCollection(Client, Id);
         }
 
         /// <summary> Gets a collection of MgmtGrpParentWithNonResChes in the MgmtGrpParentWithNonResCh. </summary>
         /// <returns> An object representing collection of MgmtGrpParentWithNonResChes and their operations over a MgmtGrpParentWithNonResCh. </returns>
         public virtual MgmtGrpParentWithNonResChCollection GetMgmtGrpParentWithNonResChes()
         {
-            return new MgmtGrpParentWithNonResChCollection(ArmClient, Id);
+            return new MgmtGrpParentWithNonResChCollection(Client, Id);
         }
 
         /// <summary> Gets a collection of MgmtGrpParentWithLocs in the MgmtGrpParentWithLoc. </summary>
         /// <returns> An object representing collection of MgmtGrpParentWithLocs and their operations over a MgmtGrpParentWithLoc. </returns>
         public virtual MgmtGrpParentWithLocCollection GetMgmtGrpParentWithLocs()
         {
-            return new MgmtGrpParentWithLocCollection(ArmClient, Id);
+            return new MgmtGrpParentWithLocCollection(Client, Id);
         }
 
         /// <summary> Gets a collection of MgmtGroupParents in the MgmtGroupParent. </summary>
         /// <returns> An object representing collection of MgmtGroupParents and their operations over a MgmtGroupParent. </returns>
         public virtual MgmtGroupParentCollection GetMgmtGroupParents()
         {
-            return new MgmtGroupParentCollection(ArmClient, Id);
+            return new MgmtGroupParentCollection(Client, Id);
         }
     }
 }

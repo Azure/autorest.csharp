@@ -53,7 +53,7 @@ namespace MgmtListMethods
         internal TenantParentWithNonResCh(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _tenantParentWithNonResChClientDiagnostics = new ClientDiagnostics("MgmtListMethods", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string tenantParentWithNonResChApiVersion);
+            Client.TryGetApiVersion(ResourceType, out string tenantParentWithNonResChApiVersion);
             _tenantParentWithNonResChRestClient = new TenantParentWithNonResChesRestOperations(_tenantParentWithNonResChClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, tenantParentWithNonResChApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -98,7 +98,7 @@ namespace MgmtListMethods
                 var response = await _tenantParentWithNonResChRestClient.GetAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _tenantParentWithNonResChClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new TenantParentWithNonResCh(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new TenantParentWithNonResCh(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -121,7 +121,7 @@ namespace MgmtListMethods
                 var response = _tenantParentWithNonResChRestClient.Get(Id.Parent.Name, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _tenantParentWithNonResChClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new TenantParentWithNonResCh(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new TenantParentWithNonResCh(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -209,7 +209,7 @@ namespace MgmtListMethods
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _tenantParentWithNonResChRestClient.GetAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new TenantParentWithNonResCh(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new TenantParentWithNonResCh(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -245,7 +245,7 @@ namespace MgmtListMethods
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _tenantParentWithNonResChRestClient.Get(Id.Parent.Name, Id.Name, cancellationToken);
-                return Response.FromValue(new TenantParentWithNonResCh(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new TenantParentWithNonResCh(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -277,7 +277,7 @@ namespace MgmtListMethods
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _tenantParentWithNonResChRestClient.GetAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new TenantParentWithNonResCh(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new TenantParentWithNonResCh(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -309,7 +309,7 @@ namespace MgmtListMethods
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _tenantParentWithNonResChRestClient.Get(Id.Parent.Name, Id.Name, cancellationToken);
-                return Response.FromValue(new TenantParentWithNonResCh(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new TenantParentWithNonResCh(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -340,7 +340,7 @@ namespace MgmtListMethods
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _tenantParentWithNonResChRestClient.GetAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new TenantParentWithNonResCh(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new TenantParentWithNonResCh(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -371,7 +371,7 @@ namespace MgmtListMethods
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _tenantParentWithNonResChRestClient.Get(Id.Parent.Name, Id.Name, cancellationToken);
-                return Response.FromValue(new TenantParentWithNonResCh(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new TenantParentWithNonResCh(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {

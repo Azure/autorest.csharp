@@ -52,7 +52,7 @@ namespace MgmtExtensionResource
         internal BuiltInPolicyDefinition(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _builtInPolicyDefinitionPolicyDefinitionsClientDiagnostics = new ClientDiagnostics("MgmtExtensionResource", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string builtInPolicyDefinitionPolicyDefinitionsApiVersion);
+            Client.TryGetApiVersion(ResourceType, out string builtInPolicyDefinitionPolicyDefinitionsApiVersion);
             _builtInPolicyDefinitionPolicyDefinitionsRestClient = new PolicyDefinitionsRestOperations(_builtInPolicyDefinitionPolicyDefinitionsClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, builtInPolicyDefinitionPolicyDefinitionsApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -97,7 +97,7 @@ namespace MgmtExtensionResource
                 var response = await _builtInPolicyDefinitionPolicyDefinitionsRestClient.GetBuiltInAsync(Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _builtInPolicyDefinitionPolicyDefinitionsClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new BuiltInPolicyDefinition(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new BuiltInPolicyDefinition(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -120,7 +120,7 @@ namespace MgmtExtensionResource
                 var response = _builtInPolicyDefinitionPolicyDefinitionsRestClient.GetBuiltIn(Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _builtInPolicyDefinitionPolicyDefinitionsClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new BuiltInPolicyDefinition(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new BuiltInPolicyDefinition(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

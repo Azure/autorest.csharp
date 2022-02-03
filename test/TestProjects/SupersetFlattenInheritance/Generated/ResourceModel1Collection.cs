@@ -39,7 +39,7 @@ namespace SupersetFlattenInheritance
         internal ResourceModel1Collection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _resourceModel1ClientDiagnostics = new ClientDiagnostics("SupersetFlattenInheritance", ResourceModel1.ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceModel1.ResourceType, out string resourceModel1ApiVersion);
+            Client.TryGetApiVersion(ResourceModel1.ResourceType, out string resourceModel1ApiVersion);
             _resourceModel1RestClient = new ResourceModel1SRestOperations(_resourceModel1ClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, resourceModel1ApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -74,7 +74,7 @@ namespace SupersetFlattenInheritance
             try
             {
                 var response = await _resourceModel1RestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, resourceModel1SName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new ResourceModel1CreateOrUpdateOperation(ArmClient, response);
+                var operation = new ResourceModel1CreateOrUpdateOperation(Client, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -108,7 +108,7 @@ namespace SupersetFlattenInheritance
             try
             {
                 var response = _resourceModel1RestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, resourceModel1SName, parameters, cancellationToken);
-                var operation = new ResourceModel1CreateOrUpdateOperation(ArmClient, response);
+                var operation = new ResourceModel1CreateOrUpdateOperation(Client, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -138,7 +138,7 @@ namespace SupersetFlattenInheritance
                 var response = await _resourceModel1RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, resourceModel1SName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _resourceModel1ClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new ResourceModel1(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ResourceModel1(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -165,7 +165,7 @@ namespace SupersetFlattenInheritance
                 var response = _resourceModel1RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, resourceModel1SName, cancellationToken);
                 if (response.Value == null)
                     throw _resourceModel1ClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new ResourceModel1(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ResourceModel1(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -188,7 +188,7 @@ namespace SupersetFlattenInheritance
                 try
                 {
                     var response = await _resourceModel1RestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new ResourceModel1(ArmClient, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new ResourceModel1(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -213,7 +213,7 @@ namespace SupersetFlattenInheritance
                 try
                 {
                     var response = _resourceModel1RestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new ResourceModel1(ArmClient, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new ResourceModel1(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -295,7 +295,7 @@ namespace SupersetFlattenInheritance
                 var response = await _resourceModel1RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, resourceModel1SName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<ResourceModel1>(null, response.GetRawResponse());
-                return Response.FromValue(new ResourceModel1(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ResourceModel1(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -323,7 +323,7 @@ namespace SupersetFlattenInheritance
                 var response = _resourceModel1RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, resourceModel1SName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<ResourceModel1>(null, response.GetRawResponse());
-                return Response.FromValue(new ResourceModel1(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ResourceModel1(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

@@ -53,7 +53,7 @@ namespace SingletonResource
         internal SingletonResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _singletonResourceClientDiagnostics = new ClientDiagnostics("SingletonResource", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string singletonResourceApiVersion);
+            Client.TryGetApiVersion(ResourceType, out string singletonResourceApiVersion);
             _singletonResourceRestClient = new SingletonResourcesRestOperations(_singletonResourceClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, singletonResourceApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -98,7 +98,7 @@ namespace SingletonResource
                 var response = await _singletonResourceRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _singletonResourceClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new SingletonResource(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SingletonResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -121,7 +121,7 @@ namespace SingletonResource
                 var response = _singletonResourceRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, cancellationToken);
                 if (response.Value == null)
                     throw _singletonResourceClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new SingletonResource(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SingletonResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -150,7 +150,7 @@ namespace SingletonResource
             try
             {
                 var response = await _singletonResourceRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new SingletonResourceCreateOrUpdateOperation(ArmClient, response);
+                var operation = new SingletonResourceCreateOrUpdateOperation(Client, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -182,7 +182,7 @@ namespace SingletonResource
             try
             {
                 var response = _singletonResourceRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, parameters, cancellationToken);
-                var operation = new SingletonResourceCreateOrUpdateOperation(ArmClient, response);
+                var operation = new SingletonResourceCreateOrUpdateOperation(Client, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

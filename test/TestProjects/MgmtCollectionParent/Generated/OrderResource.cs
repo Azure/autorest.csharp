@@ -52,7 +52,7 @@ namespace MgmtCollectionParent
         internal OrderResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _orderResourceClientDiagnostics = new ClientDiagnostics("MgmtCollectionParent", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string orderResourceApiVersion);
+            Client.TryGetApiVersion(ResourceType, out string orderResourceApiVersion);
             _orderResourceRestClient = new ComputeManagementRestOperations(_orderResourceClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, orderResourceApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -97,7 +97,7 @@ namespace MgmtCollectionParent
                 var response = await _orderResourceRestClient.GetOrderByNameAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _orderResourceClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new OrderResource(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new OrderResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -120,7 +120,7 @@ namespace MgmtCollectionParent
                 var response = _orderResourceRestClient.GetOrderByName(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _orderResourceClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new OrderResource(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new OrderResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

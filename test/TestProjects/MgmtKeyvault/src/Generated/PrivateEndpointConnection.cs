@@ -53,7 +53,7 @@ namespace MgmtKeyvault
         internal PrivateEndpointConnection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _privateEndpointConnectionClientDiagnostics = new ClientDiagnostics("MgmtKeyvault", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string privateEndpointConnectionApiVersion);
+            Client.TryGetApiVersion(ResourceType, out string privateEndpointConnectionApiVersion);
             _privateEndpointConnectionRestClient = new PrivateEndpointConnectionsRestOperations(_privateEndpointConnectionClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, privateEndpointConnectionApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -98,7 +98,7 @@ namespace MgmtKeyvault
                 var response = await _privateEndpointConnectionRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _privateEndpointConnectionClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new PrivateEndpointConnection(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new PrivateEndpointConnection(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -121,7 +121,7 @@ namespace MgmtKeyvault
                 var response = _privateEndpointConnectionRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _privateEndpointConnectionClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new PrivateEndpointConnection(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new PrivateEndpointConnection(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

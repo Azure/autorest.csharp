@@ -52,7 +52,7 @@ namespace ExactMatchFlattenInheritance
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {
-            ArmClient.TryGetApiVersion(resourceType, out string apiVersion);
+            Client.TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
         }
 
@@ -60,21 +60,21 @@ namespace ExactMatchFlattenInheritance
         /// <returns> An object representing collection of AzureResourceFlattenModel1s and their operations over a AzureResourceFlattenModel1. </returns>
         public virtual AzureResourceFlattenModel1Collection GetAzureResourceFlattenModel1s()
         {
-            return new AzureResourceFlattenModel1Collection(ArmClient, Id);
+            return new AzureResourceFlattenModel1Collection(Client, Id);
         }
 
         /// <summary> Gets a collection of CustomModel2s in the CustomModel2. </summary>
         /// <returns> An object representing collection of CustomModel2s and their operations over a CustomModel2. </returns>
         public virtual CustomModel2Collection GetCustomModel2s()
         {
-            return new CustomModel2Collection(ArmClient, Id);
+            return new CustomModel2Collection(Client, Id);
         }
 
         /// <summary> Gets a collection of CustomModel3s in the CustomModel3. </summary>
         /// <returns> An object representing collection of CustomModel3s and their operations over a CustomModel3. </returns>
         public virtual CustomModel3Collection GetCustomModel3s()
         {
-            return new CustomModel3Collection(ArmClient, Id);
+            return new CustomModel3Collection(Client, Id);
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel2s

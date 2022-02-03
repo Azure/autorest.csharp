@@ -52,7 +52,7 @@ namespace SingletonResource
         internal Ignition(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _ignitionClientDiagnostics = new ClientDiagnostics("SingletonResource", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string ignitionApiVersion);
+            Client.TryGetApiVersion(ResourceType, out string ignitionApiVersion);
             _ignitionRestClient = new IgnitionsRestOperations(_ignitionClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, ignitionApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -96,7 +96,7 @@ namespace SingletonResource
                 var response = await _ignitionRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _ignitionClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new Ignition(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Ignition(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -118,7 +118,7 @@ namespace SingletonResource
                 var response = _ignitionRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, cancellationToken);
                 if (response.Value == null)
                     throw _ignitionClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new Ignition(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Ignition(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

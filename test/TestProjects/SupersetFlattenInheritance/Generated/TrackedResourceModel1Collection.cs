@@ -39,7 +39,7 @@ namespace SupersetFlattenInheritance
         internal TrackedResourceModel1Collection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _trackedResourceModel1ClientDiagnostics = new ClientDiagnostics("SupersetFlattenInheritance", TrackedResourceModel1.ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(TrackedResourceModel1.ResourceType, out string trackedResourceModel1ApiVersion);
+            Client.TryGetApiVersion(TrackedResourceModel1.ResourceType, out string trackedResourceModel1ApiVersion);
             _trackedResourceModel1RestClient = new TrackedResourceModel1SRestOperations(_trackedResourceModel1ClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, trackedResourceModel1ApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -74,7 +74,7 @@ namespace SupersetFlattenInheritance
             try
             {
                 var response = await _trackedResourceModel1RestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, trackedResourceModel1SName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new TrackedResourceModel1CreateOrUpdateOperation(ArmClient, response);
+                var operation = new TrackedResourceModel1CreateOrUpdateOperation(Client, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -108,7 +108,7 @@ namespace SupersetFlattenInheritance
             try
             {
                 var response = _trackedResourceModel1RestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, trackedResourceModel1SName, parameters, cancellationToken);
-                var operation = new TrackedResourceModel1CreateOrUpdateOperation(ArmClient, response);
+                var operation = new TrackedResourceModel1CreateOrUpdateOperation(Client, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -138,7 +138,7 @@ namespace SupersetFlattenInheritance
                 var response = await _trackedResourceModel1RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, trackedResourceModel1SName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _trackedResourceModel1ClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new TrackedResourceModel1(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new TrackedResourceModel1(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -165,7 +165,7 @@ namespace SupersetFlattenInheritance
                 var response = _trackedResourceModel1RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, trackedResourceModel1SName, cancellationToken);
                 if (response.Value == null)
                     throw _trackedResourceModel1ClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new TrackedResourceModel1(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new TrackedResourceModel1(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -188,7 +188,7 @@ namespace SupersetFlattenInheritance
                 try
                 {
                     var response = await _trackedResourceModel1RestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new TrackedResourceModel1(ArmClient, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new TrackedResourceModel1(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -213,7 +213,7 @@ namespace SupersetFlattenInheritance
                 try
                 {
                     var response = _trackedResourceModel1RestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new TrackedResourceModel1(ArmClient, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new TrackedResourceModel1(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -295,7 +295,7 @@ namespace SupersetFlattenInheritance
                 var response = await _trackedResourceModel1RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, trackedResourceModel1SName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<TrackedResourceModel1>(null, response.GetRawResponse());
-                return Response.FromValue(new TrackedResourceModel1(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new TrackedResourceModel1(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -323,7 +323,7 @@ namespace SupersetFlattenInheritance
                 var response = _trackedResourceModel1RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, trackedResourceModel1SName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<TrackedResourceModel1>(null, response.GetRawResponse());
-                return Response.FromValue(new TrackedResourceModel1(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new TrackedResourceModel1(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

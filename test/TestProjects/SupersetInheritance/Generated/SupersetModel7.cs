@@ -52,7 +52,7 @@ namespace SupersetInheritance
         internal SupersetModel7(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _supersetModel7ClientDiagnostics = new ClientDiagnostics("SupersetInheritance", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string supersetModel7ApiVersion);
+            Client.TryGetApiVersion(ResourceType, out string supersetModel7ApiVersion);
             _supersetModel7RestClient = new SupersetModel7SRestOperations(_supersetModel7ClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, supersetModel7ApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -96,7 +96,7 @@ namespace SupersetInheritance
                 var response = await _supersetModel7RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _supersetModel7ClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new SupersetModel7(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SupersetModel7(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -118,7 +118,7 @@ namespace SupersetInheritance
                 var response = _supersetModel7RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _supersetModel7ClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new SupersetModel7(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SupersetModel7(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

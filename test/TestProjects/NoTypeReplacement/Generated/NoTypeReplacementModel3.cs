@@ -52,7 +52,7 @@ namespace NoTypeReplacement
         internal NoTypeReplacementModel3(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _noTypeReplacementModel3ClientDiagnostics = new ClientDiagnostics("NoTypeReplacement", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string noTypeReplacementModel3ApiVersion);
+            Client.TryGetApiVersion(ResourceType, out string noTypeReplacementModel3ApiVersion);
             _noTypeReplacementModel3RestClient = new NoTypeReplacementModel3SRestOperations(_noTypeReplacementModel3ClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, noTypeReplacementModel3ApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -93,7 +93,7 @@ namespace NoTypeReplacement
                 var response = await _noTypeReplacementModel3RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _noTypeReplacementModel3ClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new NoTypeReplacementModel3(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new NoTypeReplacementModel3(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -112,7 +112,7 @@ namespace NoTypeReplacement
                 var response = _noTypeReplacementModel3RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _noTypeReplacementModel3ClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new NoTypeReplacementModel3(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new NoTypeReplacementModel3(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

@@ -52,7 +52,7 @@ namespace Azure.Management.Storage
         internal DeletedAccount(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _deletedAccountClientDiagnostics = new ClientDiagnostics("Azure.Management.Storage", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string deletedAccountApiVersion);
+            Client.TryGetApiVersion(ResourceType, out string deletedAccountApiVersion);
             _deletedAccountRestClient = new DeletedAccountsRestOperations(_deletedAccountClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, deletedAccountApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -97,7 +97,7 @@ namespace Azure.Management.Storage
                 var response = await _deletedAccountRestClient.GetAsync(Id.SubscriptionId, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _deletedAccountClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new DeletedAccount(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new DeletedAccount(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -120,7 +120,7 @@ namespace Azure.Management.Storage
                 var response = _deletedAccountRestClient.Get(Id.SubscriptionId, Id.Parent.Name, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _deletedAccountClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new DeletedAccount(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new DeletedAccount(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

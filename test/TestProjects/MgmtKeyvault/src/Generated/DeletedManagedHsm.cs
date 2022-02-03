@@ -53,7 +53,7 @@ namespace MgmtKeyvault
         internal DeletedManagedHsm(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _deletedManagedHsmManagedHsmsClientDiagnostics = new ClientDiagnostics("MgmtKeyvault", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string deletedManagedHsmManagedHsmsApiVersion);
+            Client.TryGetApiVersion(ResourceType, out string deletedManagedHsmManagedHsmsApiVersion);
             _deletedManagedHsmManagedHsmsRestClient = new ManagedHsmsRestOperations(_deletedManagedHsmManagedHsmsClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, deletedManagedHsmManagedHsmsApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -98,7 +98,7 @@ namespace MgmtKeyvault
                 var response = await _deletedManagedHsmManagedHsmsRestClient.GetDeletedAsync(Id.SubscriptionId, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _deletedManagedHsmManagedHsmsClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new DeletedManagedHsm(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new DeletedManagedHsm(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -121,7 +121,7 @@ namespace MgmtKeyvault
                 var response = _deletedManagedHsmManagedHsmsRestClient.GetDeleted(Id.SubscriptionId, Id.Parent.Name, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _deletedManagedHsmManagedHsmsClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new DeletedManagedHsm(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new DeletedManagedHsm(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

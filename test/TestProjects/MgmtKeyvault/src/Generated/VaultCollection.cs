@@ -39,7 +39,7 @@ namespace MgmtKeyvault
         internal VaultCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _vaultClientDiagnostics = new ClientDiagnostics("MgmtKeyvault", Vault.ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(Vault.ResourceType, out string vaultApiVersion);
+            Client.TryGetApiVersion(Vault.ResourceType, out string vaultApiVersion);
             _vaultRestClient = new VaultsRestOperations(_vaultClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, vaultApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -75,7 +75,7 @@ namespace MgmtKeyvault
             try
             {
                 var response = await _vaultRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, vaultName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new VaultCreateOrUpdateOperation(ArmClient, _vaultClientDiagnostics, Pipeline, _vaultRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, vaultName, parameters).Request, response);
+                var operation = new VaultCreateOrUpdateOperation(Client, _vaultClientDiagnostics, Pipeline, _vaultRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, vaultName, parameters).Request, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -110,7 +110,7 @@ namespace MgmtKeyvault
             try
             {
                 var response = _vaultRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, vaultName, parameters, cancellationToken);
-                var operation = new VaultCreateOrUpdateOperation(ArmClient, _vaultClientDiagnostics, Pipeline, _vaultRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, vaultName, parameters).Request, response);
+                var operation = new VaultCreateOrUpdateOperation(Client, _vaultClientDiagnostics, Pipeline, _vaultRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, vaultName, parameters).Request, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -141,7 +141,7 @@ namespace MgmtKeyvault
                 var response = await _vaultRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, vaultName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _vaultClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new Vault(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Vault(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -169,7 +169,7 @@ namespace MgmtKeyvault
                 var response = _vaultRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, vaultName, cancellationToken);
                 if (response.Value == null)
                     throw _vaultClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new Vault(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Vault(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -194,7 +194,7 @@ namespace MgmtKeyvault
                 try
                 {
                     var response = await _vaultRestClient.ListByResourceGroupAsync(Id.SubscriptionId, Id.ResourceGroupName, top, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new Vault(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new Vault(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -209,7 +209,7 @@ namespace MgmtKeyvault
                 try
                 {
                     var response = await _vaultRestClient.ListByResourceGroupNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, top, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new Vault(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new Vault(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -236,7 +236,7 @@ namespace MgmtKeyvault
                 try
                 {
                     var response = _vaultRestClient.ListByResourceGroup(Id.SubscriptionId, Id.ResourceGroupName, top, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new Vault(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new Vault(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -251,7 +251,7 @@ namespace MgmtKeyvault
                 try
                 {
                     var response = _vaultRestClient.ListByResourceGroupNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, top, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new Vault(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new Vault(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -333,7 +333,7 @@ namespace MgmtKeyvault
                 var response = await _vaultRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, vaultName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<Vault>(null, response.GetRawResponse());
-                return Response.FromValue(new Vault(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Vault(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -361,7 +361,7 @@ namespace MgmtKeyvault
                 var response = _vaultRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, vaultName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<Vault>(null, response.GetRawResponse());
-                return Response.FromValue(new Vault(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Vault(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

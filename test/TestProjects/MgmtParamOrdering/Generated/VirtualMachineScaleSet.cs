@@ -53,7 +53,7 @@ namespace MgmtParamOrdering
         internal VirtualMachineScaleSet(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _virtualMachineScaleSetClientDiagnostics = new ClientDiagnostics("MgmtParamOrdering", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string virtualMachineScaleSetApiVersion);
+            Client.TryGetApiVersion(ResourceType, out string virtualMachineScaleSetApiVersion);
             _virtualMachineScaleSetRestClient = new VirtualMachineScaleSetsRestOperations(_virtualMachineScaleSetClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, virtualMachineScaleSetApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -99,7 +99,7 @@ namespace MgmtParamOrdering
                 var response = await _virtualMachineScaleSetRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _virtualMachineScaleSetClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new VirtualMachineScaleSet(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new VirtualMachineScaleSet(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -123,7 +123,7 @@ namespace MgmtParamOrdering
                 var response = _virtualMachineScaleSetRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, expand, cancellationToken);
                 if (response.Value == null)
                     throw _virtualMachineScaleSetClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new VirtualMachineScaleSet(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new VirtualMachineScaleSet(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -198,7 +198,7 @@ namespace MgmtParamOrdering
             try
             {
                 var response = await _virtualMachineScaleSetRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new VirtualMachineScaleSetUpdateOperation(ArmClient, _virtualMachineScaleSetClientDiagnostics, Pipeline, _virtualMachineScaleSetRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters).Request, response);
+                var operation = new VirtualMachineScaleSetUpdateOperation(Client, _virtualMachineScaleSetClientDiagnostics, Pipeline, _virtualMachineScaleSetRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters).Request, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -224,7 +224,7 @@ namespace MgmtParamOrdering
             try
             {
                 var response = _virtualMachineScaleSetRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
-                var operation = new VirtualMachineScaleSetUpdateOperation(ArmClient, _virtualMachineScaleSetClientDiagnostics, Pipeline, _virtualMachineScaleSetRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters).Request, response);
+                var operation = new VirtualMachineScaleSetUpdateOperation(Client, _virtualMachineScaleSetClientDiagnostics, Pipeline, _virtualMachineScaleSetRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters).Request, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -441,7 +441,7 @@ namespace MgmtParamOrdering
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _virtualMachineScaleSetRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new VirtualMachineScaleSet(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new VirtualMachineScaleSet(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -477,7 +477,7 @@ namespace MgmtParamOrdering
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _virtualMachineScaleSetRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken);
-                return Response.FromValue(new VirtualMachineScaleSet(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new VirtualMachineScaleSet(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -509,7 +509,7 @@ namespace MgmtParamOrdering
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _virtualMachineScaleSetRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new VirtualMachineScaleSet(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new VirtualMachineScaleSet(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -541,7 +541,7 @@ namespace MgmtParamOrdering
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _virtualMachineScaleSetRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken);
-                return Response.FromValue(new VirtualMachineScaleSet(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new VirtualMachineScaleSet(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -572,7 +572,7 @@ namespace MgmtParamOrdering
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _virtualMachineScaleSetRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new VirtualMachineScaleSet(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new VirtualMachineScaleSet(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -603,7 +603,7 @@ namespace MgmtParamOrdering
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _virtualMachineScaleSetRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken);
-                return Response.FromValue(new VirtualMachineScaleSet(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new VirtualMachineScaleSet(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {

@@ -28,7 +28,7 @@ namespace SubscriptionExtensions
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {
-            ArmClient.TryGetApiVersion(resourceType, out string apiVersion);
+            Client.TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
         }
 
@@ -36,7 +36,7 @@ namespace SubscriptionExtensions
         /// <returns> An object representing collection of Ovens and their operations over a Oven. </returns>
         public virtual OvenCollection GetOvens()
         {
-            return new OvenCollection(ArmClient, Id);
+            return new OvenCollection(Client, Id);
         }
     }
 }

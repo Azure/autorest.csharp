@@ -39,7 +39,7 @@ namespace SubscriptionExtensions
         internal ToasterCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _toasterClientDiagnostics = new ClientDiagnostics("SubscriptionExtensions", Toaster.ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(Toaster.ResourceType, out string toasterApiVersion);
+            Client.TryGetApiVersion(Toaster.ResourceType, out string toasterApiVersion);
             _toasterRestClient = new ToastersRestOperations(_toasterClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, toasterApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -75,7 +75,7 @@ namespace SubscriptionExtensions
             try
             {
                 var response = await _toasterRestClient.CreateOrUpdateAsync(Id.SubscriptionId, toasterName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new ToasterCreateOrUpdateOperation(ArmClient, response);
+                var operation = new ToasterCreateOrUpdateOperation(Client, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -110,7 +110,7 @@ namespace SubscriptionExtensions
             try
             {
                 var response = _toasterRestClient.CreateOrUpdate(Id.SubscriptionId, toasterName, parameters, cancellationToken);
-                var operation = new ToasterCreateOrUpdateOperation(ArmClient, response);
+                var operation = new ToasterCreateOrUpdateOperation(Client, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -140,7 +140,7 @@ namespace SubscriptionExtensions
                 var response = await _toasterRestClient.GetAsync(Id.SubscriptionId, toasterName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _toasterClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new Toaster(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Toaster(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -167,7 +167,7 @@ namespace SubscriptionExtensions
                 var response = _toasterRestClient.Get(Id.SubscriptionId, toasterName, cancellationToken);
                 if (response.Value == null)
                     throw _toasterClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new Toaster(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Toaster(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -190,7 +190,7 @@ namespace SubscriptionExtensions
                 try
                 {
                     var response = await _toasterRestClient.ListAsync(Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new Toaster(ArmClient, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new Toaster(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -215,7 +215,7 @@ namespace SubscriptionExtensions
                 try
                 {
                     var response = _toasterRestClient.List(Id.SubscriptionId, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new Toaster(ArmClient, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new Toaster(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -297,7 +297,7 @@ namespace SubscriptionExtensions
                 var response = await _toasterRestClient.GetAsync(Id.SubscriptionId, toasterName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<Toaster>(null, response.GetRawResponse());
-                return Response.FromValue(new Toaster(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Toaster(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -325,7 +325,7 @@ namespace SubscriptionExtensions
                 var response = _toasterRestClient.Get(Id.SubscriptionId, toasterName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<Toaster>(null, response.GetRawResponse());
-                return Response.FromValue(new Toaster(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Toaster(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

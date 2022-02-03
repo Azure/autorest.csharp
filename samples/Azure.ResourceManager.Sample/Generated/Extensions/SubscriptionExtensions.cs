@@ -20,9 +20,9 @@ namespace Azure.ResourceManager.Sample
     {
         private static SubscriptionExtensionClient GetExtensionClient(Subscription subscription)
         {
-            return subscription.GetCachedClient((armClient) =>
+            return subscription.GetCachedClient((client) =>
             {
-                return new SubscriptionExtensionClient(armClient, subscription.Id);
+                return new SubscriptionExtensionClient(client, subscription.Id);
             }
             );
         }

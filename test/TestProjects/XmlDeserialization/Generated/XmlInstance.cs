@@ -53,7 +53,7 @@ namespace XmlDeserialization
         internal XmlInstance(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _xmlInstanceXmlDeserializationClientDiagnostics = new ClientDiagnostics("XmlDeserialization", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string xmlInstanceXmlDeserializationApiVersion);
+            Client.TryGetApiVersion(ResourceType, out string xmlInstanceXmlDeserializationApiVersion);
             _xmlInstanceXmlDeserializationRestClient = new XmlDeserializationRestOperations(_xmlInstanceXmlDeserializationClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, xmlInstanceXmlDeserializationApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -98,7 +98,7 @@ namespace XmlDeserialization
                 var response = await _xmlInstanceXmlDeserializationRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _xmlInstanceXmlDeserializationClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new XmlInstance(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new XmlInstance(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -121,7 +121,7 @@ namespace XmlDeserialization
                 var response = _xmlInstanceXmlDeserializationRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _xmlInstanceXmlDeserializationClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new XmlInstance(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new XmlInstance(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

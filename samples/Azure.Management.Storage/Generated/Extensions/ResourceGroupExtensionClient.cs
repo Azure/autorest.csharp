@@ -28,7 +28,7 @@ namespace Azure.Management.Storage
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {
-            ArmClient.TryGetApiVersion(resourceType, out string apiVersion);
+            Client.TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
         }
 
@@ -36,7 +36,7 @@ namespace Azure.Management.Storage
         /// <returns> An object representing collection of StorageAccounts and their operations over a StorageAccount. </returns>
         public virtual StorageAccountCollection GetStorageAccounts()
         {
-            return new StorageAccountCollection(ArmClient, Id);
+            return new StorageAccountCollection(Client, Id);
         }
     }
 }

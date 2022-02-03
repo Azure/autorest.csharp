@@ -49,7 +49,7 @@ namespace Azure.Management.Storage
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {
-            ArmClient.TryGetApiVersion(resourceType, out string apiVersion);
+            Client.TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
         }
 
@@ -57,7 +57,7 @@ namespace Azure.Management.Storage
         /// <returns> An object representing collection of DeletedAccounts and their operations over a DeletedAccount. </returns>
         public virtual DeletedAccountCollection GetDeletedAccounts()
         {
-            return new DeletedAccountCollection(ArmClient, Id);
+            return new DeletedAccountCollection(Client, Id);
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/skus
@@ -127,7 +127,7 @@ namespace Azure.Management.Storage
                 try
                 {
                     var response = await StorageAccountRestClient.ListAsync(Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new StorageAccount(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new StorageAccount(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -142,7 +142,7 @@ namespace Azure.Management.Storage
                 try
                 {
                     var response = await StorageAccountRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new StorageAccount(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new StorageAccount(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -168,7 +168,7 @@ namespace Azure.Management.Storage
                 try
                 {
                     var response = StorageAccountRestClient.List(Id.SubscriptionId, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new StorageAccount(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new StorageAccount(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -183,7 +183,7 @@ namespace Azure.Management.Storage
                 try
                 {
                     var response = StorageAccountRestClient.ListNextPage(nextLink, Id.SubscriptionId, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new StorageAccount(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new StorageAccount(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {

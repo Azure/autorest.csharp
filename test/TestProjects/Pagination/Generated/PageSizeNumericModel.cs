@@ -52,7 +52,7 @@ namespace Pagination
         internal PageSizeNumericModel(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _pageSizeNumericModelClientDiagnostics = new ClientDiagnostics("Pagination", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string pageSizeNumericModelApiVersion);
+            Client.TryGetApiVersion(ResourceType, out string pageSizeNumericModelApiVersion);
             _pageSizeNumericModelRestClient = new PageSizeNumericModelsRestOperations(_pageSizeNumericModelClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, pageSizeNumericModelApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -93,7 +93,7 @@ namespace Pagination
                 var response = await _pageSizeNumericModelRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _pageSizeNumericModelClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new PageSizeNumericModel(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new PageSizeNumericModel(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -112,7 +112,7 @@ namespace Pagination
                 var response = _pageSizeNumericModelRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _pageSizeNumericModelClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new PageSizeNumericModel(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new PageSizeNumericModel(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

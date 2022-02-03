@@ -38,7 +38,7 @@ namespace MgmtExtensionResource
         internal BuiltInPolicyDefinitionCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _builtInPolicyDefinitionPolicyDefinitionsClientDiagnostics = new ClientDiagnostics("MgmtExtensionResource", BuiltInPolicyDefinition.ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(BuiltInPolicyDefinition.ResourceType, out string builtInPolicyDefinitionPolicyDefinitionsApiVersion);
+            Client.TryGetApiVersion(BuiltInPolicyDefinition.ResourceType, out string builtInPolicyDefinitionPolicyDefinitionsApiVersion);
             _builtInPolicyDefinitionPolicyDefinitionsRestClient = new PolicyDefinitionsRestOperations(_builtInPolicyDefinitionPolicyDefinitionsClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, builtInPolicyDefinitionPolicyDefinitionsApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -70,7 +70,7 @@ namespace MgmtExtensionResource
                 var response = await _builtInPolicyDefinitionPolicyDefinitionsRestClient.GetBuiltInAsync(policyDefinitionName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _builtInPolicyDefinitionPolicyDefinitionsClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new BuiltInPolicyDefinition(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new BuiltInPolicyDefinition(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -98,7 +98,7 @@ namespace MgmtExtensionResource
                 var response = _builtInPolicyDefinitionPolicyDefinitionsRestClient.GetBuiltIn(policyDefinitionName, cancellationToken);
                 if (response.Value == null)
                     throw _builtInPolicyDefinitionPolicyDefinitionsClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new BuiltInPolicyDefinition(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new BuiltInPolicyDefinition(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -124,7 +124,7 @@ namespace MgmtExtensionResource
                 try
                 {
                     var response = await _builtInPolicyDefinitionPolicyDefinitionsRestClient.ListBuiltInAsync(filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new BuiltInPolicyDefinition(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new BuiltInPolicyDefinition(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -139,7 +139,7 @@ namespace MgmtExtensionResource
                 try
                 {
                     var response = await _builtInPolicyDefinitionPolicyDefinitionsRestClient.ListBuiltInNextPageAsync(nextLink, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new BuiltInPolicyDefinition(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new BuiltInPolicyDefinition(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -167,7 +167,7 @@ namespace MgmtExtensionResource
                 try
                 {
                     var response = _builtInPolicyDefinitionPolicyDefinitionsRestClient.ListBuiltIn(filter, top, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new BuiltInPolicyDefinition(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new BuiltInPolicyDefinition(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -182,7 +182,7 @@ namespace MgmtExtensionResource
                 try
                 {
                     var response = _builtInPolicyDefinitionPolicyDefinitionsRestClient.ListBuiltInNextPage(nextLink, filter, top, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new BuiltInPolicyDefinition(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new BuiltInPolicyDefinition(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -264,7 +264,7 @@ namespace MgmtExtensionResource
                 var response = await _builtInPolicyDefinitionPolicyDefinitionsRestClient.GetBuiltInAsync(policyDefinitionName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<BuiltInPolicyDefinition>(null, response.GetRawResponse());
-                return Response.FromValue(new BuiltInPolicyDefinition(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new BuiltInPolicyDefinition(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -292,7 +292,7 @@ namespace MgmtExtensionResource
                 var response = _builtInPolicyDefinitionPolicyDefinitionsRestClient.GetBuiltIn(policyDefinitionName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<BuiltInPolicyDefinition>(null, response.GetRawResponse());
-                return Response.FromValue(new BuiltInPolicyDefinition(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new BuiltInPolicyDefinition(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

@@ -53,7 +53,7 @@ namespace Azure.Management.Storage
         internal BlobInventoryPolicy(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _blobInventoryPolicyClientDiagnostics = new ClientDiagnostics("Azure.Management.Storage", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string blobInventoryPolicyApiVersion);
+            Client.TryGetApiVersion(ResourceType, out string blobInventoryPolicyApiVersion);
             _blobInventoryPolicyRestClient = new BlobInventoryPoliciesRestOperations(_blobInventoryPolicyClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, blobInventoryPolicyApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -98,7 +98,7 @@ namespace Azure.Management.Storage
                 var response = await _blobInventoryPolicyRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _blobInventoryPolicyClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new BlobInventoryPolicy(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new BlobInventoryPolicy(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -121,7 +121,7 @@ namespace Azure.Management.Storage
                 var response = _blobInventoryPolicyRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _blobInventoryPolicyClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new BlobInventoryPolicy(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new BlobInventoryPolicy(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

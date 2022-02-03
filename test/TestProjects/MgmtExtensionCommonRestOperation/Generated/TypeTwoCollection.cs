@@ -39,7 +39,7 @@ namespace MgmtExtensionCommonRestOperation
         internal TypeTwoCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _typeTwoCommonClientDiagnostics = new ClientDiagnostics("MgmtExtensionCommonRestOperation", TypeTwo.ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(TypeTwo.ResourceType, out string typeTwoCommonApiVersion);
+            Client.TryGetApiVersion(TypeTwo.ResourceType, out string typeTwoCommonApiVersion);
             _typeTwoCommonRestClient = new CommonRestOperations(_typeTwoCommonClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, typeTwoCommonApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -75,7 +75,7 @@ namespace MgmtExtensionCommonRestOperation
             try
             {
                 var response = await _typeTwoCommonRestClient.CreateOrUpdateTypeTwoAsync(Id.SubscriptionId, Id.ResourceGroupName, typeTwoName, typeTwo, cancellationToken).ConfigureAwait(false);
-                var operation = new TypeTwoCreateOrUpdateOperation(ArmClient, response);
+                var operation = new TypeTwoCreateOrUpdateOperation(Client, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -110,7 +110,7 @@ namespace MgmtExtensionCommonRestOperation
             try
             {
                 var response = _typeTwoCommonRestClient.CreateOrUpdateTypeTwo(Id.SubscriptionId, Id.ResourceGroupName, typeTwoName, typeTwo, cancellationToken);
-                var operation = new TypeTwoCreateOrUpdateOperation(ArmClient, response);
+                var operation = new TypeTwoCreateOrUpdateOperation(Client, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -141,7 +141,7 @@ namespace MgmtExtensionCommonRestOperation
                 var response = await _typeTwoCommonRestClient.GetTypeTwoAsync(Id.SubscriptionId, Id.ResourceGroupName, typeTwoName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _typeTwoCommonClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new TypeTwo(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new TypeTwo(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -169,7 +169,7 @@ namespace MgmtExtensionCommonRestOperation
                 var response = _typeTwoCommonRestClient.GetTypeTwo(Id.SubscriptionId, Id.ResourceGroupName, typeTwoName, cancellationToken);
                 if (response.Value == null)
                     throw _typeTwoCommonClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new TypeTwo(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new TypeTwo(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -193,7 +193,7 @@ namespace MgmtExtensionCommonRestOperation
                 try
                 {
                     var response = await _typeTwoCommonRestClient.ListTypeTwosAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new TypeTwo(ArmClient, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new TypeTwo(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -219,7 +219,7 @@ namespace MgmtExtensionCommonRestOperation
                 try
                 {
                     var response = _typeTwoCommonRestClient.ListTypeTwos(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new TypeTwo(ArmClient, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new TypeTwo(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -301,7 +301,7 @@ namespace MgmtExtensionCommonRestOperation
                 var response = await _typeTwoCommonRestClient.GetTypeTwoAsync(Id.SubscriptionId, Id.ResourceGroupName, typeTwoName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<TypeTwo>(null, response.GetRawResponse());
-                return Response.FromValue(new TypeTwo(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new TypeTwo(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -329,7 +329,7 @@ namespace MgmtExtensionCommonRestOperation
                 var response = _typeTwoCommonRestClient.GetTypeTwo(Id.SubscriptionId, Id.ResourceGroupName, typeTwoName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<TypeTwo>(null, response.GetRawResponse());
-                return Response.FromValue(new TypeTwo(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new TypeTwo(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

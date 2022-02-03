@@ -53,7 +53,7 @@ namespace MgmtExpandResourceTypes
         internal RecordSetCaa(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _recordSetCaaRecordSetsClientDiagnostics = new ClientDiagnostics("MgmtExpandResourceTypes", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string recordSetCaaRecordSetsApiVersion);
+            Client.TryGetApiVersion(ResourceType, out string recordSetCaaRecordSetsApiVersion);
             _recordSetCaaRecordSetsRestClient = new RecordSetsRestOperations(_recordSetCaaRecordSetsClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, recordSetCaaRecordSetsApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -98,7 +98,7 @@ namespace MgmtExpandResourceTypes
                 var response = await _recordSetCaaRecordSetsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, "CAA".ToRecordType(), Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _recordSetCaaRecordSetsClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new RecordSetCaa(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new RecordSetCaa(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -121,7 +121,7 @@ namespace MgmtExpandResourceTypes
                 var response = _recordSetCaaRecordSetsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, "CAA".ToRecordType(), Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _recordSetCaaRecordSetsClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new RecordSetCaa(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new RecordSetCaa(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -202,7 +202,7 @@ namespace MgmtExpandResourceTypes
             try
             {
                 var response = await _recordSetCaaRecordSetsRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, "CAA".ToRecordType(), Id.Name, parameters, ifMatch, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new RecordSetCaa(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new RecordSetCaa(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -231,7 +231,7 @@ namespace MgmtExpandResourceTypes
             try
             {
                 var response = _recordSetCaaRecordSetsRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, "CAA".ToRecordType(), Id.Name, parameters, ifMatch, cancellationToken);
-                return Response.FromValue(new RecordSetCaa(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new RecordSetCaa(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

@@ -52,7 +52,7 @@ namespace SupersetInheritance
         internal SupersetModel6(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _supersetModel6ClientDiagnostics = new ClientDiagnostics("SupersetInheritance", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string supersetModel6ApiVersion);
+            Client.TryGetApiVersion(ResourceType, out string supersetModel6ApiVersion);
             _supersetModel6RestClient = new SupersetModel6SRestOperations(_supersetModel6ClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, supersetModel6ApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -96,7 +96,7 @@ namespace SupersetInheritance
                 var response = await _supersetModel6RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _supersetModel6ClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new SupersetModel6(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SupersetModel6(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -118,7 +118,7 @@ namespace SupersetInheritance
                 var response = _supersetModel6RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _supersetModel6ClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new SupersetModel6(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SupersetModel6(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

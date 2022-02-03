@@ -40,7 +40,7 @@ namespace MgmtScopeResource
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {
-            ArmClient.TryGetApiVersion(resourceType, out string apiVersion);
+            Client.TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
         }
 
@@ -48,7 +48,7 @@ namespace MgmtScopeResource
         /// <returns> An object representing collection of DeploymentExtendeds and their operations over a DeploymentExtended. </returns>
         public virtual DeploymentExtendedCollection GetDeploymentExtendeds()
         {
-            return new DeploymentExtendedCollection(ArmClient, Id);
+            return new DeploymentExtendedCollection(Client, Id);
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Resources/links
@@ -67,7 +67,7 @@ namespace MgmtScopeResource
                 try
                 {
                     var response = await ResourceLinkRestClient.ListAtSubscriptionAsync(Id.SubscriptionId, filter, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new ResourceLink(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new ResourceLink(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -82,7 +82,7 @@ namespace MgmtScopeResource
                 try
                 {
                     var response = await ResourceLinkRestClient.ListAtSubscriptionNextPageAsync(nextLink, Id.SubscriptionId, filter, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new ResourceLink(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new ResourceLink(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -109,7 +109,7 @@ namespace MgmtScopeResource
                 try
                 {
                     var response = ResourceLinkRestClient.ListAtSubscription(Id.SubscriptionId, filter, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new ResourceLink(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new ResourceLink(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -124,7 +124,7 @@ namespace MgmtScopeResource
                 try
                 {
                     var response = ResourceLinkRestClient.ListAtSubscriptionNextPage(nextLink, Id.SubscriptionId, filter, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new ResourceLink(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new ResourceLink(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {

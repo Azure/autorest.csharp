@@ -52,7 +52,7 @@ namespace SingletonResource
         internal ParentResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _parentResourceClientDiagnostics = new ClientDiagnostics("SingletonResource", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string parentResourceApiVersion);
+            Client.TryGetApiVersion(ResourceType, out string parentResourceApiVersion);
             _parentResourceRestClient = new ParentResourcesRestOperations(_parentResourceClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, parentResourceApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -87,7 +87,7 @@ namespace SingletonResource
         /// <returns> Returns a <see cref="SingletonResource" /> object. </returns>
         public virtual SingletonResource GetSingletonResource()
         {
-            return new SingletonResource(ArmClient, new ResourceIdentifier(Id.ToString() + "/singletonResources/current"));
+            return new SingletonResource(Client, new ResourceIdentifier(Id.ToString() + "/singletonResources/current"));
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}
@@ -104,7 +104,7 @@ namespace SingletonResource
                 var response = await _parentResourceRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _parentResourceClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new ParentResource(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ParentResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -127,7 +127,7 @@ namespace SingletonResource
                 var response = _parentResourceRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _parentResourceClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new ParentResource(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ParentResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -163,7 +163,7 @@ namespace SingletonResource
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _parentResourceRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new ParentResource(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new ParentResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -199,7 +199,7 @@ namespace SingletonResource
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _parentResourceRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
-                return Response.FromValue(new ParentResource(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new ParentResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -231,7 +231,7 @@ namespace SingletonResource
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _parentResourceRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new ParentResource(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new ParentResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -263,7 +263,7 @@ namespace SingletonResource
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _parentResourceRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
-                return Response.FromValue(new ParentResource(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new ParentResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -294,7 +294,7 @@ namespace SingletonResource
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _parentResourceRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new ParentResource(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new ParentResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -325,7 +325,7 @@ namespace SingletonResource
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _parentResourceRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
-                return Response.FromValue(new ParentResource(ArmClient, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new ParentResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {

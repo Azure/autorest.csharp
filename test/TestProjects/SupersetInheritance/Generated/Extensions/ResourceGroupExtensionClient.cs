@@ -44,7 +44,7 @@ namespace SupersetInheritance
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {
-            ArmClient.TryGetApiVersion(resourceType, out string apiVersion);
+            Client.TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
         }
 
@@ -52,28 +52,28 @@ namespace SupersetInheritance
         /// <returns> An object representing collection of SupersetModel1s and their operations over a SupersetModel1. </returns>
         public virtual SupersetModel1Collection GetSupersetModel1s()
         {
-            return new SupersetModel1Collection(ArmClient, Id);
+            return new SupersetModel1Collection(Client, Id);
         }
 
         /// <summary> Gets a collection of SupersetModel4s in the SupersetModel4. </summary>
         /// <returns> An object representing collection of SupersetModel4s and their operations over a SupersetModel4. </returns>
         public virtual SupersetModel4Collection GetSupersetModel4s()
         {
-            return new SupersetModel4Collection(ArmClient, Id);
+            return new SupersetModel4Collection(Client, Id);
         }
 
         /// <summary> Gets a collection of SupersetModel6s in the SupersetModel6. </summary>
         /// <returns> An object representing collection of SupersetModel6s and their operations over a SupersetModel6. </returns>
         public virtual SupersetModel6Collection GetSupersetModel6s()
         {
-            return new SupersetModel6Collection(ArmClient, Id);
+            return new SupersetModel6Collection(Client, Id);
         }
 
         /// <summary> Gets a collection of SupersetModel7s in the SupersetModel7. </summary>
         /// <returns> An object representing collection of SupersetModel7s and their operations over a SupersetModel7. </returns>
         public virtual SupersetModel7Collection GetSupersetModel7s()
         {
-            return new SupersetModel7Collection(ArmClient, Id);
+            return new SupersetModel7Collection(Client, Id);
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel2s/{supersetModel2sName}

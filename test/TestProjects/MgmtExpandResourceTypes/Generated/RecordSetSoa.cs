@@ -53,7 +53,7 @@ namespace MgmtExpandResourceTypes
         internal RecordSetSoa(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _recordSetSoaRecordSetsClientDiagnostics = new ClientDiagnostics("MgmtExpandResourceTypes", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string recordSetSoaRecordSetsApiVersion);
+            Client.TryGetApiVersion(ResourceType, out string recordSetSoaRecordSetsApiVersion);
             _recordSetSoaRecordSetsRestClient = new RecordSetsRestOperations(_recordSetSoaRecordSetsClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, recordSetSoaRecordSetsApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -98,7 +98,7 @@ namespace MgmtExpandResourceTypes
                 var response = await _recordSetSoaRecordSetsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, "SOA".ToRecordType(), Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _recordSetSoaRecordSetsClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new RecordSetSoa(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new RecordSetSoa(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -121,7 +121,7 @@ namespace MgmtExpandResourceTypes
                 var response = _recordSetSoaRecordSetsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, "SOA".ToRecordType(), Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _recordSetSoaRecordSetsClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new RecordSetSoa(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new RecordSetSoa(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -202,7 +202,7 @@ namespace MgmtExpandResourceTypes
             try
             {
                 var response = await _recordSetSoaRecordSetsRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, "SOA".ToRecordType(), Id.Name, parameters, ifMatch, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new RecordSetSoa(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new RecordSetSoa(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -231,7 +231,7 @@ namespace MgmtExpandResourceTypes
             try
             {
                 var response = _recordSetSoaRecordSetsRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, "SOA".ToRecordType(), Id.Name, parameters, ifMatch, cancellationToken);
-                return Response.FromValue(new RecordSetSoa(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new RecordSetSoa(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

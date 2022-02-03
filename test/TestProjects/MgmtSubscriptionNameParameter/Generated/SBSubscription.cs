@@ -53,7 +53,7 @@ namespace MgmtSubscriptionNameParameter
         internal SBSubscription(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _sBSubscriptionSubscriptionsClientDiagnostics = new ClientDiagnostics("MgmtSubscriptionNameParameter", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string sBSubscriptionSubscriptionsApiVersion);
+            Client.TryGetApiVersion(ResourceType, out string sBSubscriptionSubscriptionsApiVersion);
             _sBSubscriptionSubscriptionsRestClient = new SubscriptionsRestOperations(_sBSubscriptionSubscriptionsClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, sBSubscriptionSubscriptionsApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -98,7 +98,7 @@ namespace MgmtSubscriptionNameParameter
                 var response = await _sBSubscriptionSubscriptionsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _sBSubscriptionSubscriptionsClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new SBSubscription(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SBSubscription(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -121,7 +121,7 @@ namespace MgmtSubscriptionNameParameter
                 var response = _sBSubscriptionSubscriptionsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _sBSubscriptionSubscriptionsClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new SBSubscription(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SBSubscription(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

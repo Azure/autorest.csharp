@@ -40,7 +40,7 @@ namespace MgmtScopeResource
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {
-            ArmClient.TryGetApiVersion(resourceType, out string apiVersion);
+            Client.TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
         }
 
@@ -48,7 +48,7 @@ namespace MgmtScopeResource
         /// <returns> An object representing collection of DeploymentExtendeds and their operations over a DeploymentExtended. </returns>
         public virtual DeploymentExtendedCollection GetDeploymentExtendeds()
         {
-            return new DeploymentExtendedCollection(ArmClient, Id);
+            return new DeploymentExtendedCollection(Client, Id);
         }
 
         /// <summary> Gets a collection of ResourceLinks in the ResourceLink. </summary>
@@ -56,7 +56,7 @@ namespace MgmtScopeResource
         /// <returns> An object representing collection of ResourceLinks and their operations over a ResourceLink. </returns>
         public virtual ResourceLinkCollection GetResourceLinks(string scope)
         {
-            return new ResourceLinkCollection(ArmClient, Id, scope);
+            return new ResourceLinkCollection(Client, Id, scope);
         }
 
         /// RequestPath: /providers/Microsoft.Resources/calculateTemplateHash

@@ -39,7 +39,7 @@ namespace MgmtExtensionResource
         internal SubscriptionPolicyDefinitionCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _subscriptionPolicyDefinitionPolicyDefinitionsClientDiagnostics = new ClientDiagnostics("MgmtExtensionResource", SubscriptionPolicyDefinition.ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(SubscriptionPolicyDefinition.ResourceType, out string subscriptionPolicyDefinitionPolicyDefinitionsApiVersion);
+            Client.TryGetApiVersion(SubscriptionPolicyDefinition.ResourceType, out string subscriptionPolicyDefinitionPolicyDefinitionsApiVersion);
             _subscriptionPolicyDefinitionPolicyDefinitionsRestClient = new PolicyDefinitionsRestOperations(_subscriptionPolicyDefinitionPolicyDefinitionsClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, subscriptionPolicyDefinitionPolicyDefinitionsApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -75,7 +75,7 @@ namespace MgmtExtensionResource
             try
             {
                 var response = await _subscriptionPolicyDefinitionPolicyDefinitionsRestClient.CreateOrUpdateAsync(Id.SubscriptionId, policyDefinitionName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new SubscriptionPolicyDefinitionCreateOrUpdateOperation(ArmClient, response);
+                var operation = new SubscriptionPolicyDefinitionCreateOrUpdateOperation(Client, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -110,7 +110,7 @@ namespace MgmtExtensionResource
             try
             {
                 var response = _subscriptionPolicyDefinitionPolicyDefinitionsRestClient.CreateOrUpdate(Id.SubscriptionId, policyDefinitionName, parameters, cancellationToken);
-                var operation = new SubscriptionPolicyDefinitionCreateOrUpdateOperation(ArmClient, response);
+                var operation = new SubscriptionPolicyDefinitionCreateOrUpdateOperation(Client, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -141,7 +141,7 @@ namespace MgmtExtensionResource
                 var response = await _subscriptionPolicyDefinitionPolicyDefinitionsRestClient.GetAsync(Id.SubscriptionId, policyDefinitionName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _subscriptionPolicyDefinitionPolicyDefinitionsClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new SubscriptionPolicyDefinition(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SubscriptionPolicyDefinition(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -169,7 +169,7 @@ namespace MgmtExtensionResource
                 var response = _subscriptionPolicyDefinitionPolicyDefinitionsRestClient.Get(Id.SubscriptionId, policyDefinitionName, cancellationToken);
                 if (response.Value == null)
                     throw _subscriptionPolicyDefinitionPolicyDefinitionsClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new SubscriptionPolicyDefinition(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SubscriptionPolicyDefinition(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -195,7 +195,7 @@ namespace MgmtExtensionResource
                 try
                 {
                     var response = await _subscriptionPolicyDefinitionPolicyDefinitionsRestClient.ListAsync(Id.SubscriptionId, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new SubscriptionPolicyDefinition(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new SubscriptionPolicyDefinition(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -210,7 +210,7 @@ namespace MgmtExtensionResource
                 try
                 {
                     var response = await _subscriptionPolicyDefinitionPolicyDefinitionsRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new SubscriptionPolicyDefinition(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new SubscriptionPolicyDefinition(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -238,7 +238,7 @@ namespace MgmtExtensionResource
                 try
                 {
                     var response = _subscriptionPolicyDefinitionPolicyDefinitionsRestClient.List(Id.SubscriptionId, filter, top, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new SubscriptionPolicyDefinition(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new SubscriptionPolicyDefinition(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -253,7 +253,7 @@ namespace MgmtExtensionResource
                 try
                 {
                     var response = _subscriptionPolicyDefinitionPolicyDefinitionsRestClient.ListNextPage(nextLink, Id.SubscriptionId, filter, top, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new SubscriptionPolicyDefinition(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new SubscriptionPolicyDefinition(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -335,7 +335,7 @@ namespace MgmtExtensionResource
                 var response = await _subscriptionPolicyDefinitionPolicyDefinitionsRestClient.GetAsync(Id.SubscriptionId, policyDefinitionName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<SubscriptionPolicyDefinition>(null, response.GetRawResponse());
-                return Response.FromValue(new SubscriptionPolicyDefinition(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SubscriptionPolicyDefinition(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -363,7 +363,7 @@ namespace MgmtExtensionResource
                 var response = _subscriptionPolicyDefinitionPolicyDefinitionsRestClient.Get(Id.SubscriptionId, policyDefinitionName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<SubscriptionPolicyDefinition>(null, response.GetRawResponse());
-                return Response.FromValue(new SubscriptionPolicyDefinition(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SubscriptionPolicyDefinition(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

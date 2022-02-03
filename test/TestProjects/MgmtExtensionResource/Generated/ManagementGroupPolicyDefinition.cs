@@ -53,7 +53,7 @@ namespace MgmtExtensionResource
         internal ManagementGroupPolicyDefinition(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _managementGroupPolicyDefinitionPolicyDefinitionsClientDiagnostics = new ClientDiagnostics("MgmtExtensionResource", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string managementGroupPolicyDefinitionPolicyDefinitionsApiVersion);
+            Client.TryGetApiVersion(ResourceType, out string managementGroupPolicyDefinitionPolicyDefinitionsApiVersion);
             _managementGroupPolicyDefinitionPolicyDefinitionsRestClient = new PolicyDefinitionsRestOperations(_managementGroupPolicyDefinitionPolicyDefinitionsClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, managementGroupPolicyDefinitionPolicyDefinitionsApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -98,7 +98,7 @@ namespace MgmtExtensionResource
                 var response = await _managementGroupPolicyDefinitionPolicyDefinitionsRestClient.GetAtManagementGroupAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _managementGroupPolicyDefinitionPolicyDefinitionsClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new ManagementGroupPolicyDefinition(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ManagementGroupPolicyDefinition(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -121,7 +121,7 @@ namespace MgmtExtensionResource
                 var response = _managementGroupPolicyDefinitionPolicyDefinitionsRestClient.GetAtManagementGroup(Id.Parent.Name, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _managementGroupPolicyDefinitionPolicyDefinitionsClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new ManagementGroupPolicyDefinition(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ManagementGroupPolicyDefinition(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

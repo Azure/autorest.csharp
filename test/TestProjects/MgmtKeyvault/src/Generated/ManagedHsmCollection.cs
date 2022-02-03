@@ -39,7 +39,7 @@ namespace MgmtKeyvault
         internal ManagedHsmCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _managedHsmClientDiagnostics = new ClientDiagnostics("MgmtKeyvault", ManagedHsm.ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ManagedHsm.ResourceType, out string managedHsmApiVersion);
+            Client.TryGetApiVersion(ManagedHsm.ResourceType, out string managedHsmApiVersion);
             _managedHsmRestClient = new ManagedHsmsRestOperations(_managedHsmClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, managedHsmApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -75,7 +75,7 @@ namespace MgmtKeyvault
             try
             {
                 var response = await _managedHsmRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, name, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new ManagedHsmCreateOrUpdateOperation(ArmClient, _managedHsmClientDiagnostics, Pipeline, _managedHsmRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, name, parameters).Request, response);
+                var operation = new ManagedHsmCreateOrUpdateOperation(Client, _managedHsmClientDiagnostics, Pipeline, _managedHsmRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, name, parameters).Request, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -110,7 +110,7 @@ namespace MgmtKeyvault
             try
             {
                 var response = _managedHsmRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, name, parameters, cancellationToken);
-                var operation = new ManagedHsmCreateOrUpdateOperation(ArmClient, _managedHsmClientDiagnostics, Pipeline, _managedHsmRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, name, parameters).Request, response);
+                var operation = new ManagedHsmCreateOrUpdateOperation(Client, _managedHsmClientDiagnostics, Pipeline, _managedHsmRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, name, parameters).Request, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -141,7 +141,7 @@ namespace MgmtKeyvault
                 var response = await _managedHsmRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _managedHsmClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new ManagedHsm(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ManagedHsm(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -169,7 +169,7 @@ namespace MgmtKeyvault
                 var response = _managedHsmRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken);
                 if (response.Value == null)
                     throw _managedHsmClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new ManagedHsm(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ManagedHsm(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -194,7 +194,7 @@ namespace MgmtKeyvault
                 try
                 {
                     var response = await _managedHsmRestClient.ListByResourceGroupAsync(Id.SubscriptionId, Id.ResourceGroupName, top, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new ManagedHsm(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new ManagedHsm(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -209,7 +209,7 @@ namespace MgmtKeyvault
                 try
                 {
                     var response = await _managedHsmRestClient.ListByResourceGroupNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, top, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new ManagedHsm(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new ManagedHsm(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -236,7 +236,7 @@ namespace MgmtKeyvault
                 try
                 {
                     var response = _managedHsmRestClient.ListByResourceGroup(Id.SubscriptionId, Id.ResourceGroupName, top, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new ManagedHsm(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new ManagedHsm(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -251,7 +251,7 @@ namespace MgmtKeyvault
                 try
                 {
                     var response = _managedHsmRestClient.ListByResourceGroupNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, top, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new ManagedHsm(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new ManagedHsm(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -333,7 +333,7 @@ namespace MgmtKeyvault
                 var response = await _managedHsmRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<ManagedHsm>(null, response.GetRawResponse());
-                return Response.FromValue(new ManagedHsm(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ManagedHsm(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -361,7 +361,7 @@ namespace MgmtKeyvault
                 var response = _managedHsmRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<ManagedHsm>(null, response.GetRawResponse());
-                return Response.FromValue(new ManagedHsm(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ManagedHsm(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

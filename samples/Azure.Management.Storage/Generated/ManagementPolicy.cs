@@ -53,7 +53,7 @@ namespace Azure.Management.Storage
         internal ManagementPolicy(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _managementPolicyClientDiagnostics = new ClientDiagnostics("Azure.Management.Storage", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string managementPolicyApiVersion);
+            Client.TryGetApiVersion(ResourceType, out string managementPolicyApiVersion);
             _managementPolicyRestClient = new ManagementPoliciesRestOperations(_managementPolicyClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, managementPolicyApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -98,7 +98,7 @@ namespace Azure.Management.Storage
                 var response = await _managementPolicyRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _managementPolicyClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new ManagementPolicy(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ManagementPolicy(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -121,7 +121,7 @@ namespace Azure.Management.Storage
                 var response = _managementPolicyRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _managementPolicyClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new ManagementPolicy(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ManagementPolicy(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -200,7 +200,7 @@ namespace Azure.Management.Storage
             try
             {
                 var response = await _managementPolicyRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, properties, cancellationToken).ConfigureAwait(false);
-                var operation = new ManagementPolicyCreateOrUpdateOperation(ArmClient, response);
+                var operation = new ManagementPolicyCreateOrUpdateOperation(Client, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -232,7 +232,7 @@ namespace Azure.Management.Storage
             try
             {
                 var response = _managementPolicyRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, properties, cancellationToken);
-                var operation = new ManagementPolicyCreateOrUpdateOperation(ArmClient, response);
+                var operation = new ManagementPolicyCreateOrUpdateOperation(Client, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

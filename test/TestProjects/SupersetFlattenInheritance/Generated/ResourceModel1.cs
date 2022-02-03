@@ -52,7 +52,7 @@ namespace SupersetFlattenInheritance
         internal ResourceModel1(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _resourceModel1ClientDiagnostics = new ClientDiagnostics("SupersetFlattenInheritance", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string resourceModel1ApiVersion);
+            Client.TryGetApiVersion(ResourceType, out string resourceModel1ApiVersion);
             _resourceModel1RestClient = new ResourceModel1SRestOperations(_resourceModel1ClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, resourceModel1ApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -96,7 +96,7 @@ namespace SupersetFlattenInheritance
                 var response = await _resourceModel1RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _resourceModel1ClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new ResourceModel1(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ResourceModel1(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -118,7 +118,7 @@ namespace SupersetFlattenInheritance
                 var response = _resourceModel1RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _resourceModel1ClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new ResourceModel1(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ResourceModel1(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

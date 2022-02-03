@@ -28,7 +28,7 @@ namespace MgmtListMethods
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {
-            ArmClient.TryGetApiVersion(resourceType, out string apiVersion);
+            Client.TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
         }
 
@@ -36,7 +36,7 @@ namespace MgmtListMethods
         /// <returns> An object representing collection of TenantTests and their operations over a TenantTest. </returns>
         public virtual TenantTestCollection GetTenantTests()
         {
-            return new TenantTestCollection(ArmClient, Id);
+            return new TenantTestCollection(Client, Id);
         }
     }
 }

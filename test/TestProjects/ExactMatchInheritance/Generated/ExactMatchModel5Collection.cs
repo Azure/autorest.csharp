@@ -39,7 +39,7 @@ namespace ExactMatchInheritance
         internal ExactMatchModel5Collection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _exactMatchModel5ClientDiagnostics = new ClientDiagnostics("ExactMatchInheritance", ExactMatchModel5.ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ExactMatchModel5.ResourceType, out string exactMatchModel5ApiVersion);
+            Client.TryGetApiVersion(ExactMatchModel5.ResourceType, out string exactMatchModel5ApiVersion);
             _exactMatchModel5RestClient = new ExactMatchModel5SRestOperations(_exactMatchModel5ClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, exactMatchModel5ApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -74,7 +74,7 @@ namespace ExactMatchInheritance
             try
             {
                 var response = await _exactMatchModel5RestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, exactMatchModel5SName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new ExactMatchModel5CreateOrUpdateOperation(ArmClient, response);
+                var operation = new ExactMatchModel5CreateOrUpdateOperation(Client, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -108,7 +108,7 @@ namespace ExactMatchInheritance
             try
             {
                 var response = _exactMatchModel5RestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, exactMatchModel5SName, parameters, cancellationToken);
-                var operation = new ExactMatchModel5CreateOrUpdateOperation(ArmClient, response);
+                var operation = new ExactMatchModel5CreateOrUpdateOperation(Client, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -138,7 +138,7 @@ namespace ExactMatchInheritance
                 var response = await _exactMatchModel5RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, exactMatchModel5SName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _exactMatchModel5ClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new ExactMatchModel5(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ExactMatchModel5(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -165,7 +165,7 @@ namespace ExactMatchInheritance
                 var response = _exactMatchModel5RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, exactMatchModel5SName, cancellationToken);
                 if (response.Value == null)
                     throw _exactMatchModel5ClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new ExactMatchModel5(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ExactMatchModel5(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -188,7 +188,7 @@ namespace ExactMatchInheritance
                 try
                 {
                     var response = await _exactMatchModel5RestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new ExactMatchModel5(ArmClient, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new ExactMatchModel5(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -213,7 +213,7 @@ namespace ExactMatchInheritance
                 try
                 {
                     var response = _exactMatchModel5RestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new ExactMatchModel5(ArmClient, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new ExactMatchModel5(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -295,7 +295,7 @@ namespace ExactMatchInheritance
                 var response = await _exactMatchModel5RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, exactMatchModel5SName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<ExactMatchModel5>(null, response.GetRawResponse());
-                return Response.FromValue(new ExactMatchModel5(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ExactMatchModel5(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -323,7 +323,7 @@ namespace ExactMatchInheritance
                 var response = _exactMatchModel5RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, exactMatchModel5SName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<ExactMatchModel5>(null, response.GetRawResponse());
-                return Response.FromValue(new ExactMatchModel5(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ExactMatchModel5(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

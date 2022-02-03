@@ -53,7 +53,7 @@ namespace Azure.Management.Storage
         internal FileService(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _fileServiceClientDiagnostics = new ClientDiagnostics("Azure.Management.Storage", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string fileServiceApiVersion);
+            Client.TryGetApiVersion(ResourceType, out string fileServiceApiVersion);
             _fileServiceRestClient = new FileServicesRestOperations(_fileServiceClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, fileServiceApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -88,7 +88,7 @@ namespace Azure.Management.Storage
         /// <returns> An object representing collection of FileShares and their operations over a FileShare. </returns>
         public virtual FileShareCollection GetFileShares()
         {
-            return new FileShareCollection(ArmClient, Id);
+            return new FileShareCollection(Client, Id);
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/default
@@ -105,7 +105,7 @@ namespace Azure.Management.Storage
                 var response = await _fileServiceRestClient.GetServicePropertiesAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _fileServiceClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new FileService(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new FileService(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -128,7 +128,7 @@ namespace Azure.Management.Storage
                 var response = _fileServiceRestClient.GetServiceProperties(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, cancellationToken);
                 if (response.Value == null)
                     throw _fileServiceClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new FileService(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new FileService(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -157,7 +157,7 @@ namespace Azure.Management.Storage
             try
             {
                 var response = await _fileServiceRestClient.SetServicePropertiesAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new FileServiceCreateOrUpdateOperation(ArmClient, response);
+                var operation = new FileServiceCreateOrUpdateOperation(Client, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -189,7 +189,7 @@ namespace Azure.Management.Storage
             try
             {
                 var response = _fileServiceRestClient.SetServiceProperties(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, parameters, cancellationToken);
-                var operation = new FileServiceCreateOrUpdateOperation(ArmClient, response);
+                var operation = new FileServiceCreateOrUpdateOperation(Client, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

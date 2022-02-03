@@ -44,7 +44,7 @@ namespace MgmtExtensionCommonRestOperation
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {
-            ArmClient.TryGetApiVersion(resourceType, out string apiVersion);
+            Client.TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
         }
 
@@ -63,7 +63,7 @@ namespace MgmtExtensionCommonRestOperation
                 try
                 {
                     var response = await TypeOneCommonRestClient.ListTypeOnesBySubscriptionAsync(Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new TypeOne(ArmClient, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new TypeOne(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -89,7 +89,7 @@ namespace MgmtExtensionCommonRestOperation
                 try
                 {
                     var response = TypeOneCommonRestClient.ListTypeOnesBySubscription(Id.SubscriptionId, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new TypeOne(ArmClient, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new TypeOne(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -115,7 +115,7 @@ namespace MgmtExtensionCommonRestOperation
                 try
                 {
                     var response = await TypeTwoCommonRestClient.ListTypeTwosBySubscriptionAsync(Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new TypeTwo(ArmClient, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new TypeTwo(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -141,7 +141,7 @@ namespace MgmtExtensionCommonRestOperation
                 try
                 {
                     var response = TypeTwoCommonRestClient.ListTypeTwosBySubscription(Id.SubscriptionId, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new TypeTwo(ArmClient, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new TypeTwo(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
