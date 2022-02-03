@@ -51,7 +51,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private MgmtTypeProvider This { get; }
 
-        protected virtual string ArmClientReference { get; } = "ArmClient";
+        protected virtual string ArmClientReference { get; } = "Client";
 
         protected virtual bool UseField => true;
 

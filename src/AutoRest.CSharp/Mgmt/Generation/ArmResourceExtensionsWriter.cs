@@ -11,6 +11,7 @@ using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using System;
+using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
@@ -35,9 +36,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             if (!IsArmCore)
             {
-                using (_writer.Scope($"return {This.ExtensionParameter.Name}.GetCachedClient<{signature.ReturnType}>((armClient) =>"))
+                using (_writer.Scope($"return {This.ExtensionParameter.Name}.GetCachedClient<{signature.ReturnType}>(({ArmClientReference.ToVariableName()}) =>"))
                 {
-                    WriteGetter(signature.ReturnType, "armClient");
+                    WriteGetter(signature.ReturnType, $"{ArmClientReference.ToVariableName()}");
                 }
                 _writer.Line($");");
             }

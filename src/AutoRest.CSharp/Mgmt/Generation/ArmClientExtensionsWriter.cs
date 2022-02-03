@@ -5,6 +5,7 @@ using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
@@ -53,7 +54,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     using (_writer.Scope($"return {This.ExtensionParameter.Name}.GetClient<{resource.Type}>(() =>"))
                     {
-                        WriteGetter(resource, "client");
+                        WriteGetter(resource, $"{ArmClientReference.ToVariableName()}");
                     }
                     _writer.Line($");");
                 }

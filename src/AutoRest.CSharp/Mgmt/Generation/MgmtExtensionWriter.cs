@@ -46,9 +46,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
             FormattableString signatureParamText = IsArmCore ? (FormattableString)$"" : (FormattableString)$"{This.ExtensionParameter.Type} {This.ExtensionParameter.Name}";
             using (_writer.Scope($"private {staticText}{This.ExtensionParameter.Type.Name}ExtensionClient GetExtensionClient({signatureParamText})"))
             {
-                using (_writer.Scope($"return {This.ExtensionParameter.Name}.GetCachedClient((armClient) =>"))
+                using (_writer.Scope($"return {This.ExtensionParameter.Name}.GetCachedClient(({ArmClientReference.ToVariableName()}) =>"))
                 {
-                    _writer.Line($"return new {This.ExtensionParameter.Type.Name}ExtensionClient(armClient, {This.ExtensionParameter.Name}.Id);");
+                    _writer.Line($"return new {This.ExtensionParameter.Type.Name}ExtensionClient({ArmClientReference.ToVariableName()}, {This.ExtensionParameter.Name}.Id);");
                 }
                 _writer.Line($");");
             }
