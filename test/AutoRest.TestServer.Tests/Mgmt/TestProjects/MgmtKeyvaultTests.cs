@@ -4,12 +4,15 @@ using System.Text;
 using System.Reflection;
 using System.Linq;
 using NUnit.Framework;
+using MgmtKeyvault;
 
 namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 {
     public class MgmtKeyvaultTestsTests : TestProjectTests
     {
         public MgmtKeyvaultTestsTests() : base("MgmtKeyvault", "tests") { }
+
+        protected override HashSet<Type> ListExceptionCollections { get; } = new HashSet<Type>() { typeof(DeletedManagedHsmCollection), typeof(DeletedVaultCollection) };
 
         [TestCase("ReplaceWith")]
         public void ValidateHelperMethods(string methodName, params string[] argTypes)

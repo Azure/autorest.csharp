@@ -8,6 +8,7 @@ using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Types;
 
@@ -49,9 +50,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 return false;
 
             // we only wrap NonLongRunningOperation when it is a CRUD with the desired method of a resource
-            var requestPath = operation.GetHttpPath();
-            var resourceRequestPaths = resource.RequestPaths.Select(path => path.SerializedPath);
-            return resourceRequestPaths.Contains(requestPath);
+            var requestPath = operation.GetRequestPath(context, resource.ResourceType);
+            return resource.RequestPaths.Contains(requestPath);
         }
 
         public static LongRunningOperationInfo FindLongRunningOperationInfo(this Operation operation, BuildContext<MgmtOutputLibrary> context)

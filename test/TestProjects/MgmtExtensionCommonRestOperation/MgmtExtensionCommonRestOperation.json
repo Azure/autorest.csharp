@@ -99,7 +99,7 @@
             }
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeOne/typeOnes": {
-            "post": {
+            "get": {
                 "tags": [
                     "TypeOne"
                 ],
@@ -138,7 +138,7 @@
             }
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeTwo/typeTwos": {
-            "post": {
+            "get": {
                 "tags": [
                     "TypeTwo"
                 ],
