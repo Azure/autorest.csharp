@@ -45,6 +45,19 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         protected Type? GetType(string name) => MyTypes().FirstOrDefault(t => t.Name == name);
 
         [Test]
+        public void PropertiesEndingInUriShouldBeUriType()
+        {
+            foreach (var type in MyTypes())
+            {
+                foreach (var property in type.GetProperties())
+                {
+                    if (property.Name.EndsWith("Uri"))
+                        Assert.AreEqual(typeof(Uri), property.PropertyType);
+                }
+            }
+        }
+
+        [Test]
         public void ArmClientParameterShouldBeClient()
         {
             foreach (var resource in FindAllResources())
