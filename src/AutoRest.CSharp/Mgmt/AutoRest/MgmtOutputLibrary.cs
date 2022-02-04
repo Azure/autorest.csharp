@@ -87,6 +87,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 .Concat(_codeModel.Schemas.Objects)
                 .Concat(_codeModel.Schemas.Groups);
 
+            UpdateFrameworkTypes(_allSchemas);
+
             // We can only manipulate objects from the code model, not RestClientMethod
             ReorderOperationParameters();
 
@@ -95,6 +97,21 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
             // Decorate the operation sets to see if it corresponds to a resource
             DecorateOperationSets();
+        }
+
+        private void UpdateFrameworkTypes(IEnumerable<Schema> allSchemas)
+        {
+            foreach (var schema in _allSchemas)
+            {
+                if (schema is not ObjectSchema objSchema)
+                    continue;
+
+                foreach (var property in objSchema.Properties)
+                {
+                    if (property.Language.Default.Name.EndsWith("Uri"))
+                        property.Schema.Type = AllSchemaTypes.Uri;
+                }
+            }
         }
 
         private void UpdateSubscriptionIdForAllResource(CodeModel codeModel)
