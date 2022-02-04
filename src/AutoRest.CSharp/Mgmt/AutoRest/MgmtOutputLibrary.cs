@@ -87,6 +87,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 .Concat(_codeModel.Schemas.Objects)
                 .Concat(_codeModel.Schemas.Groups);
 
+            ModelForest modelForest = new ModelForest(_allSchemas, _codeModel);
+
             // We can only manipulate objects from the code model, not RestClientMethod
             ReorderOperationParameters();
 

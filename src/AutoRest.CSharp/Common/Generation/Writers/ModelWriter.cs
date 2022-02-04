@@ -6,6 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
@@ -80,23 +81,80 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             foreach (var property in schema.Properties)
             {
-                writer.WriteXmlDocumentationSummary(CreatePropertyDescription(property));
+                Stack<ObjectTypeProperty> heiarchyStack = new Stack<ObjectTypeProperty>();
+                heiarchyStack.Push(property);
+                BuildHeirarchy(property, heiarchyStack);
+                if (heiarchyStack.Count > 1)
+                {
+                    var innerProperty = heiarchyStack.Pop();
+                    var immediateParentProperty = heiarchyStack.Pop();
+                    WriteProperty(writer, property, "internal");
 
-                CSharpType propertyType = property.Declaration.Type;
-                writer.Append($"{property.Declaration.Accessibility} {propertyType} {property.Declaration.Name:D}");
-                writer.AppendRaw(property.IsReadOnly ? "{ get; }" : "{ get; set; }");
+                    string myPropertyName = $"{immediateParentProperty.Declaration.Name}{innerProperty.Declaration.Name}";
+                    string childPropertyName = property.Equals(immediateParentProperty) ? innerProperty.Declaration.Name : myPropertyName;
+                    writer.WriteXmlDocumentationSummary(CreatePropertyDescription(innerProperty, myPropertyName));
+                    using (writer.Scope($"{innerProperty.Declaration.Accessibility} {innerProperty.Declaration.Type} {myPropertyName:D}"))
+                    {
+                        writer.Line($"get => {property.Declaration.Name:D}.{childPropertyName};");
+                        if (!innerProperty.IsReadOnly)
+                            writer.Line($"set => {property.Declaration.Name:D}.{childPropertyName} = value;");
+                    }
 
-                writer.Line();
+                    writer.Line();
+                }
+                else
+                {
+                    WriteProperty(writer, property);
+                }
             }
         }
 
-        private FormattableString CreatePropertyDescription(ObjectTypeProperty property)
+        private void WriteProperty(CodeWriter writer, ObjectTypeProperty property, string? overrideAccessibility = null)
+        {
+            writer.WriteXmlDocumentationSummary(CreatePropertyDescription(property));
+            var accessibility = overrideAccessibility ?? property.Declaration.Accessibility;
+            CSharpType propertyType = property.Declaration.Type;
+            writer.Append($"{accessibility} {propertyType} {property.Declaration.Name:D}");
+            writer.AppendRaw(property.IsReadOnly ? "{ get; }" : "{ get; set; }");
+
+            writer.Line();
+        }
+
+        private void BuildHeirarchy(ObjectTypeProperty property, Stack<ObjectTypeProperty> heirarchyStack)
+        {
+            if (IsSinglePropertyObject(property, out var childProp))
+            {
+                heirarchyStack.Push(childProp);
+                BuildHeirarchy(childProp, heirarchyStack);
+            }
+        }
+
+        private bool IsSinglePropertyObject(ObjectTypeProperty property, [MaybeNullWhen(false)] out ObjectTypeProperty innerProperty)
+        {
+            innerProperty = null;
+
+            if (property.ValueType.IsFrameworkType)
+                return false;
+
+            if (property.ValueType.Implementation is not ObjectType objType)
+                return false;
+
+            bool isSingleProperty = objType.Properties.Length == 1;
+
+            if (isSingleProperty)
+                innerProperty = objType.Properties[0];
+
+            return isSingleProperty;
+        }
+
+        private FormattableString CreatePropertyDescription(ObjectTypeProperty property, string? overrideName = null)
         {
             if (!string.IsNullOrWhiteSpace(property.Description))
             {
                 return $"{property.Description}";
             }
-            String splitDeclarationName = string.Join(" ", StringExtensions.SplitByCamelCase(property.Declaration.Name)).ToLower();
+            var nameToUse = overrideName ?? property.Declaration.Name;
+            String splitDeclarationName = string.Join(" ", StringExtensions.SplitByCamelCase(nameToUse)).ToLower();
             if (property.IsReadOnly)
             {
                 return $"Gets the {splitDeclarationName}";
