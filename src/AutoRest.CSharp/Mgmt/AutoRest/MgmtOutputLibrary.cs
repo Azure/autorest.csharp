@@ -87,7 +87,11 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 .Concat(_codeModel.Schemas.Objects)
                 .Concat(_codeModel.Schemas.Groups);
 
+            //this is where we change property types to use csharp standards like BlobUri of type string becomes BlobUri of type Uri
             UpdateFrameworkTypes(_allSchemas);
+
+            //this is where we update
+            UpdateParameterNames();
 
             // We can only manipulate objects from the code model, not RestClientMethod
             ReorderOperationParameters();
@@ -97,6 +101,69 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
             // Decorate the operation sets to see if it corresponds to a resource
             DecorateOperationSets();
+        }
+
+        private void UpdateParameterNames()
+        {
+            Dictionary<Schema, Dictionary<HttpMethod, int>> usageCounts = new Dictionary<Schema, Dictionary<HttpMethod, int>>();
+            foreach (var operationGroup in _codeModel.OperationGroups)
+            {
+                foreach (var operation in operationGroup.Operations)
+                {
+                    foreach (var request in operation.Requests)
+                    {
+                        var httpRequest = request.Protocol.Http as HttpRequest;
+                        if (httpRequest is null)
+                            continue;
+
+                        var bodyParam = request.Parameters.FirstOrDefault(p => p.In == ParameterLocation.Body);
+                        if (bodyParam is null)
+                            continue;
+
+                        if (!usageCounts.TryGetValue(bodyParam.Schema, out var counts))
+                        {
+                            counts = new Dictionary<HttpMethod, int>();
+                            usageCounts.Add(bodyParam.Schema, counts);
+                        }
+
+                        if (!counts.TryGetValue(httpRequest.Method, out var count))
+                        {
+                            counts.Add(httpRequest.Method, 0);
+                        }
+
+                        counts[httpRequest.Method]++;
+                    }
+                }
+            }
+
+            foreach (var operationGroup in _codeModel.OperationGroups)
+            {
+                foreach (var operation in operationGroup.Operations)
+                {
+                    foreach (var request in operation.Requests)
+                    {
+                        var httpRequest = request.Protocol.Http as HttpRequest;
+                        if (httpRequest is null)
+                            continue;
+
+                        if (httpRequest.Method != HttpMethod.Patch)
+                            continue;
+
+                        var bodyParam = request.Parameters.FirstOrDefault(p => p.In == ParameterLocation.Body);
+                        if (bodyParam is null)
+                            continue;
+
+                        if (!usageCounts.TryGetValue(bodyParam.Schema, out var counts))
+                            continue;
+
+                        if (counts.Count != 1 || !counts.TryGetValue(httpRequest.Method, out var count) || count != 1)
+                            continue;
+
+                        bodyParam.Schema.Language.Default.Name = $"{operationGroup.Key.LastWordToSingular()}UpdateOptions";
+                        bodyParam.Language.Default.Name = "options";
+                    }
+                }
+            }
         }
 
         private void UpdateFrameworkTypes(IEnumerable<Schema> allSchemas)
