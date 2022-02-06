@@ -811,6 +811,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             foreach (var parameter in mapping)
             {
+                if (!parameter.IsPassThru && parameter.Parameter.IsEnumType)
+                    writer.UseNamespace(parameter.Parameter.Type.Namespace);
+
                 if (parameter.IsPassThru)
                 {
                     if (PagingMethod.IsPageSizeName(parameter.Parameter.Name))
