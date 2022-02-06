@@ -103,26 +103,18 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         {
             foreach (var resource in FindAllResources())
             {
-                var responseType = typeof(Response<>).MakeGenericType(resource);
-                VerifyMethodReturnType(resource, responseType, "Get");
+                VerifyMethodReturnType(resource, resource, "Get");
                 var resourceData = GetResourceDataByResource(resource);
                 if (typeof(TrackedResource).IsAssignableFrom(resourceData))
                 {
-                    VerifyMethodReturnType(resource, responseType, "AddTag");
-                    VerifyMethodReturnType(resource, responseType, "SetTags");
-                    VerifyMethodReturnType(resource, responseType, "RemoveTag");
+                    VerifyMethodReturnType(resource, resource, "AddTag");
+                    VerifyMethodReturnType(resource, resource, "SetTags");
+                    VerifyMethodReturnType(resource, resource, "RemoveTag");
                 }
                 var updateMethod = resource.GetMethod("Update");
                 if (updateMethod is not null)
                 {
-                    if (updateMethod.ReturnType.IsGenericType)
-                    {
-                        VerifyMethodReturnType(resource, responseType, "Update");
-                    }
-                    else
-                    {
-                        VerifyMethodReturnType(resource, typeof(Operation<>).MakeGenericType(resource), "Update", true);
-                    }
+                    VerifyMethodReturnType(resource, resource, "Update");
                 }
             }
 
@@ -130,37 +122,29 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             {
                 var resource = GetResourceFromCollection(collection);
                 Assert.NotNull(resource);
-                var responseType = typeof(Response<>).MakeGenericType(resource);
-                var pagingType = typeof(Pageable<>).MakeGenericType(resource);
-                var lroType = typeof(Operation<>).MakeGenericType(resource);
-                VerifyMethodReturnType(collection, responseType, "Get");
-                VerifyMethodReturnType(collection, responseType, "GetIfExists");
+                VerifyMethodReturnType(collection, resource, "Get");
+                VerifyMethodReturnType(collection, resource, "GetIfExists");
 
                 if (!ListExceptionCollections.Contains(collection))
-                    VerifyMethodReturnType(collection, pagingType, collection.GetMethods().First(m => m.Name == "GetAll" && !m.GetParameters().Any(p => !p.IsOptional)));
+                    VerifyMethodReturnType(collection, resource, collection.GetMethods().First(m => m.Name == "GetAll" && !m.GetParameters().Any(p => !p.IsOptional)));
 
                 if (collection.GetMethod("CreateOrUpdate") is not null)
-                    VerifyMethodReturnType(collection, lroType, "CreateOrUpdate", true);
+                    VerifyMethodReturnType(collection, resource, "CreateOrUpdate");
             }
         }
 
-        private void VerifyMethodReturnType(Type collection, Type expectedType, string methodName, bool useIsAssignableFrom = false)
+        private void VerifyMethodReturnType(Type type, Type expectedType, string methodName)
         {
-            var method = collection.GetMethod(methodName);
-            Assert.NotNull(method, $"Method {methodName} was not found on {collection.Name}");
-            VerifyMethodReturnType(collection, expectedType, method, useIsAssignableFrom);
+            var method = type.GetMethod(methodName);
+            Assert.NotNull(method, $"Method {methodName} was not found on {type.Name}");
+            VerifyMethodReturnType(type, expectedType, method);
         }
 
-        private static void VerifyMethodReturnType(Type collection, Type expectedType, MethodInfo method, bool useIsAssignableFrom = false)
+        private static void VerifyMethodReturnType(Type type, Type expectedType, MethodInfo method)
         {
-            if (useIsAssignableFrom)
-            {
-                Assert.IsTrue(expectedType.IsAssignableFrom(method.ReturnType), $"Return type did not match for {collection.Name}.{method.Name}");
-            }
-            else
-            {
-                Assert.AreEqual(expectedType, method.ReturnType, $"Return type did not match for {collection.Name}.{method.Name}");
-            }
+            Assert.IsTrue(method.ReturnType.IsGenericType);
+            var genericArgument = method.ReturnType.GetGenericArguments()[0];
+            Assert.AreEqual(expectedType, genericArgument, $"Return type did not match for {type.Name}.{method.Name}");
         }
 
         private Type? GetResourceFromCollection(Type collection) => MyTypes().FirstOrDefault(t => t.Name == GetResourceNameFromCollectionName(collection.Name));
