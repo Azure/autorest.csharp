@@ -418,6 +418,10 @@
                 "MyType": {
                     "type": "string",
                     "description": "The details of the type."
+                },
+                "properties": {
+                    "$ref": "#/definitions/LayerOneSingle",
+                    "description": "The single value prop."
                 }
             },
             "allOf": [

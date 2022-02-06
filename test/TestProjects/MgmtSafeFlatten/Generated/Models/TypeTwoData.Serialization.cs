@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
+using MgmtSafeFlatten.Models;
 
 namespace MgmtSafeFlatten
 {
@@ -21,6 +22,11 @@ namespace MgmtSafeFlatten
             {
                 writer.WritePropertyName("MyType");
                 writer.WriteStringValue(MyType);
+            }
+            if (Optional.IsDefined(Properties))
+            {
+                writer.WritePropertyName("properties");
+                writer.WriteObjectValue(Properties);
             }
             writer.WritePropertyName("tags");
             writer.WriteStartObject();
@@ -38,6 +44,7 @@ namespace MgmtSafeFlatten
         internal static TypeTwoData DeserializeTypeTwoData(JsonElement element)
         {
             Optional<string> myType = default;
+            Optional<LayerOneSingle> properties = default;
             IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
@@ -49,6 +56,16 @@ namespace MgmtSafeFlatten
                 if (property.NameEquals("MyType"))
                 {
                     myType = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("properties"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    properties = LayerOneSingle.DeserializeLayerOneSingle(property.Value);
                     continue;
                 }
                 if (property.NameEquals("tags"))
@@ -87,7 +104,7 @@ namespace MgmtSafeFlatten
                     continue;
                 }
             }
-            return new TypeTwoData(id, name, type, systemData, tags, location, myType.Value);
+            return new TypeTwoData(id, name, type, systemData, tags, location, myType.Value, properties.Value);
         }
     }
 }

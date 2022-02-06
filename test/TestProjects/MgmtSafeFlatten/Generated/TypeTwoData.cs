@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Models;
+using MgmtSafeFlatten.Models;
 
 namespace MgmtSafeFlatten
 {
@@ -28,12 +29,22 @@ namespace MgmtSafeFlatten
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
         /// <param name="myType"> The details of the type. </param>
-        internal TypeTwoData(ResourceIdentifier id, string name, ResourceType type, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string myType) : base(id, name, type, systemData, tags, location)
+        /// <param name="properties"> The single value prop. </param>
+        internal TypeTwoData(ResourceIdentifier id, string name, ResourceType type, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string myType, LayerOneSingle properties) : base(id, name, type, systemData, tags, location)
         {
             MyType = myType;
+            Properties = properties;
         }
 
         /// <summary> The details of the type. </summary>
         public string MyType { get; set; }
+        /// <summary> The single value prop. </summary>
+        internal LayerOneSingle Properties { get; set; }
+        /// <summary> MyProp description. </summary>
+        public string LayerTwoMyProp
+        {
+            get => Properties.LayerTwoMyProp;
+            set => Properties.LayerTwoMyProp = value;
+        }
     }
 }

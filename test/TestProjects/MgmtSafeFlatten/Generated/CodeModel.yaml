@@ -21,7 +21,7 @@ schemas: !Schemas
           name: String
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_11
+    - !StringSchema &ref_12
       type: string
       apiVersions:
         - !ApiVersion 
@@ -31,7 +31,7 @@ schemas: !Schemas
           name: TypeOneMyType
           description: The details of the type.
       protocol: !Protocols {}
-    - !StringSchema &ref_12
+    - !StringSchema &ref_5
       type: string
       apiVersions:
         - !ApiVersion 
@@ -41,7 +41,7 @@ schemas: !Schemas
           name: LayerTwoSingleMyProp
           description: MyProp description.
       protocol: !Protocols {}
-    - !StringSchema &ref_13
+    - !StringSchema &ref_14
       type: string
       apiVersions:
         - !ApiVersion 
@@ -51,7 +51,7 @@ schemas: !Schemas
           name: LayerOneSingleConflictId
           description: The id of layer one.
       protocol: !Protocols {}
-    - !StringSchema &ref_6
+    - !StringSchema &ref_7
       type: string
       apiVersions:
         - !ApiVersion 
@@ -61,7 +61,7 @@ schemas: !Schemas
           name: ResourceId
           description: Resource Id
       protocol: !Protocols {}
-    - !StringSchema &ref_7
+    - !StringSchema &ref_8
       type: string
       apiVersions:
         - !ApiVersion 
@@ -71,7 +71,7 @@ schemas: !Schemas
           name: ResourceName
           description: Resource name
       protocol: !Protocols {}
-    - !StringSchema &ref_8
+    - !StringSchema &ref_9
       type: string
       apiVersions:
         - !ApiVersion 
@@ -81,7 +81,7 @@ schemas: !Schemas
           name: ResourceType
           description: Resource type
       protocol: !Protocols {}
-    - !StringSchema &ref_9
+    - !StringSchema &ref_10
       type: string
       apiVersions:
         - !ApiVersion 
@@ -91,7 +91,7 @@ schemas: !Schemas
           name: ResourceLocation
           description: Resource location
       protocol: !Protocols {}
-    - !StringSchema &ref_14
+    - !StringSchema &ref_15
       type: string
       apiVersions:
         - !ApiVersion 
@@ -153,7 +153,7 @@ schemas: !Schemas
           description: Content Type 'application/json'
       protocol: !Protocols {}
   dictionaries:
-    - !DictionarySchema &ref_10
+    - !DictionarySchema &ref_11
       type: dictionary
       elementType: *ref_1
       language: !Languages 
@@ -189,7 +189,7 @@ schemas: !Schemas
                     children: !Relations 
                       all:
                         - *ref_2
-                        - !ObjectSchema &ref_5
+                        - !ObjectSchema &ref_6
                           type: object
                           apiVersions:
                             - !ApiVersion 
@@ -208,6 +208,62 @@ schemas: !Schemas
                                   name: myType
                                   description: The details of the type.
                               protocol: !Protocols {}
+                            - !Property 
+                              schema: !ObjectSchema &ref_13
+                                type: object
+                                apiVersions:
+                                  - !ApiVersion 
+                                    version: '2020-09-01'
+                                properties:
+                                  - !Property 
+                                    schema: !ObjectSchema &ref_16
+                                      type: object
+                                      apiVersions:
+                                        - !ApiVersion 
+                                          version: '2020-09-01'
+                                      properties:
+                                        - !Property 
+                                          schema: *ref_5
+                                          serializedName: myProp
+                                          language: !Languages 
+                                            default:
+                                              name: myProp
+                                              description: MyProp description.
+                                          protocol: !Protocols {}
+                                      serializationFormats:
+                                        - json
+                                      usage:
+                                        - output
+                                        - input
+                                      language: !Languages 
+                                        default:
+                                          name: LayerTwoSingle
+                                          description: ''
+                                          namespace: ''
+                                      protocol: !Protocols {}
+                                    serializedName: layerTwo
+                                    language: !Languages 
+                                      default:
+                                        name: layerTwo
+                                        description: The second single value prop.
+                                    protocol: !Protocols {}
+                                serializationFormats:
+                                  - json
+                                usage:
+                                  - output
+                                  - input
+                                language: !Languages 
+                                  default:
+                                    name: LayerOneSingle
+                                    description: ''
+                                    namespace: ''
+                                protocol: !Protocols {}
+                              serializedName: properties
+                              language: !Languages 
+                                default:
+                                  name: properties
+                                  description: The single value prop.
+                              protocol: !Protocols {}
                           serializationFormats:
                             - json
                           usage:
@@ -221,10 +277,10 @@ schemas: !Schemas
                           protocol: !Protocols {}
                       immediate:
                         - *ref_2
-                        - *ref_5
+                        - *ref_6
                     properties:
                       - !Property 
-                        schema: *ref_6
+                        schema: *ref_7
                         readOnly: true
                         required: false
                         serializedName: id
@@ -234,7 +290,7 @@ schemas: !Schemas
                             description: Resource Id
                         protocol: !Protocols {}
                       - !Property 
-                        schema: *ref_7
+                        schema: *ref_8
                         readOnly: true
                         required: false
                         serializedName: name
@@ -244,7 +300,7 @@ schemas: !Schemas
                             description: Resource name
                         protocol: !Protocols {}
                       - !Property 
-                        schema: *ref_8
+                        schema: *ref_9
                         readOnly: true
                         required: false
                         serializedName: type
@@ -254,7 +310,7 @@ schemas: !Schemas
                             description: Resource type
                         protocol: !Protocols {}
                       - !Property 
-                        schema: *ref_9
+                        schema: *ref_10
                         required: true
                         serializedName: location
                         language: !Languages 
@@ -263,7 +319,7 @@ schemas: !Schemas
                             description: Resource location
                         protocol: !Protocols {}
                       - !Property 
-                        schema: *ref_10
+                        schema: *ref_11
                         required: false
                         serializedName: tags
                         language: !Languages 
@@ -288,7 +344,7 @@ schemas: !Schemas
                   - *ref_3
               properties:
                 - !Property 
-                  schema: *ref_11
+                  schema: *ref_12
                   serializedName: MyType
                   language: !Languages 
                     default:
@@ -296,55 +352,7 @@ schemas: !Schemas
                       description: The details of the type.
                   protocol: !Protocols {}
                 - !Property 
-                  schema: !ObjectSchema &ref_15
-                    type: object
-                    apiVersions:
-                      - !ApiVersion 
-                        version: '2020-09-01'
-                    properties:
-                      - !Property 
-                        schema: !ObjectSchema &ref_16
-                          type: object
-                          apiVersions:
-                            - !ApiVersion 
-                              version: '2020-09-01'
-                          properties:
-                            - !Property 
-                              schema: *ref_12
-                              serializedName: myProp
-                              language: !Languages 
-                                default:
-                                  name: myProp
-                                  description: MyProp description.
-                              protocol: !Protocols {}
-                          serializationFormats:
-                            - json
-                          usage:
-                            - output
-                            - input
-                          language: !Languages 
-                            default:
-                              name: LayerTwoSingle
-                              description: ''
-                              namespace: ''
-                          protocol: !Protocols {}
-                        serializedName: layerTwo
-                        language: !Languages 
-                          default:
-                            name: layerTwo
-                            description: The second single value prop.
-                        protocol: !Protocols {}
-                    serializationFormats:
-                      - json
-                    usage:
-                      - output
-                      - input
-                    language: !Languages 
-                      default:
-                        name: LayerOneSingle
-                        description: ''
-                        namespace: ''
-                    protocol: !Protocols {}
+                  schema: *ref_13
                   serializedName: layerOne
                   language: !Languages 
                     default:
@@ -359,7 +367,7 @@ schemas: !Schemas
                         version: '2020-09-01'
                     properties:
                       - !Property 
-                        schema: *ref_13
+                        schema: *ref_14
                         serializedName: id
                         language: !Languages 
                           default:
@@ -407,7 +415,7 @@ schemas: !Schemas
               description: The list of of typeones.
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_14
+          schema: *ref_15
           required: false
           serializedName: nextLink
           language: !Languages 
@@ -426,7 +434,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_2
-    - *ref_15
+    - *ref_13
     - *ref_16
     - *ref_17
     - *ref_3
@@ -442,7 +450,7 @@ schemas: !Schemas
             apiVersions:
               - !ApiVersion 
                 version: '2020-09-01'
-            elementType: *ref_5
+            elementType: *ref_6
             language: !Languages 
               default:
                 name: TypeTwoListResultValue
@@ -474,7 +482,7 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - *ref_5
+    - *ref_6
   arrays:
     - *ref_19
     - *ref_20
@@ -1026,7 +1034,7 @@ operationGroups:
           - *ref_37
         responses:
           - !SchemaResponse 
-            schema: *ref_5
+            schema: *ref_6
             language: !Languages 
               default:
                 name: ''
@@ -1093,7 +1101,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_38
-                schema: *ref_5
+                schema: *ref_6
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -1136,7 +1144,7 @@ operationGroups:
           - *ref_40
         responses:
           - !SchemaResponse 
-            schema: *ref_5
+            schema: *ref_6
             language: !Languages 
               default:
                 name: ''
