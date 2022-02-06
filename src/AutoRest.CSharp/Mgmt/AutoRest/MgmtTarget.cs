@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
@@ -152,21 +153,21 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 AddGeneratedFile(project, $"Extensions/{armResourceExtensionsCodeWriter.FileName}.cs", armResourceExtensionsCodeWriter.ToString());
             }
 
-            // we must output the LROs and fake LROs as the last step to sure all the LRO and fake LRO object could be initialized.
-            foreach (var operation in context.Library.LongRunningOperations)
+            if (context.Library.OperationSources.Any())
             {
-                var codeWriter = new CodeWriter();
-                new MgmtLongRunningOperationWriter().Write(codeWriter, operation);
-
-                AddGeneratedFile(project, $"LongRunningOperation/{operation.Type.Name}.cs", codeWriter.ToString());
+                var writer = new MgmtLongRunningOperationWriter(context, true);
+                writer.Write();
+                AddGeneratedFile(project, writer.Filename, writer.ToString());
+                writer = new MgmtLongRunningOperationWriter(context, false);
+                writer.Write();
+                AddGeneratedFile(project, writer.Filename, writer.ToString());
             }
 
-            foreach (var operation in context.Library.NonLongRunningOperations)
+            foreach (var operationSource in context.Library.OperationSources)
             {
-                var codeWriter = new CodeWriter();
-                new NonLongRunningOperationWriter().Write(codeWriter, operation);
-
-                AddGeneratedFile(project, $"LongRunningOperation/{operation.Type.Name}.cs", codeWriter.ToString());
+                var writer = new OperationSourceWriter(operationSource, context);
+                writer.Write();
+                AddGeneratedFile(project, $"LongRunningOperation/{operationSource.TypeName}.cs", writer.ToString());
             }
 
             if (_overriddenProjectFilenames.TryGetValue(project, out var overriddenFilenames))
