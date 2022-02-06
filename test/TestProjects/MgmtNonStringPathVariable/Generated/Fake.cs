@@ -187,22 +187,22 @@ namespace MgmtNonStringPathVariable
         /// OperationId: Fakes_Update
         /// <summary> Update an fake. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
-        /// <param name="parameters"> Parameters supplied to the Update Availability Set operation. </param>
+        /// <param name="options"> Parameters supplied to the Update Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<FakeUpdateOperation> UpdateAsync(bool waitForCompletion, FakeUpdate parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
+        public async virtual Task<FakeUpdateOperation> UpdateAsync(bool waitForCompletion, FakeUpdateOptions options, CancellationToken cancellationToken = default)
         {
-            if (parameters == null)
+            if (options == null)
             {
-                throw new ArgumentNullException(nameof(parameters));
+                throw new ArgumentNullException(nameof(options));
             }
 
             using var scope = _fakeClientDiagnostics.CreateScope("Fake.Update");
             scope.Start();
             try
             {
-                var response = await _fakeRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new FakeUpdateOperation(Client, _fakeClientDiagnostics, Pipeline, _fakeRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters).Request, response);
+                var response = await _fakeRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, options, cancellationToken).ConfigureAwait(false);
+                var operation = new FakeUpdateOperation(Client, _fakeClientDiagnostics, Pipeline, _fakeRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, options).Request, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -219,22 +219,22 @@ namespace MgmtNonStringPathVariable
         /// OperationId: Fakes_Update
         /// <summary> Update an fake. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
-        /// <param name="parameters"> Parameters supplied to the Update Availability Set operation. </param>
+        /// <param name="options"> Parameters supplied to the Update Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual FakeUpdateOperation Update(bool waitForCompletion, FakeUpdate parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
+        public virtual FakeUpdateOperation Update(bool waitForCompletion, FakeUpdateOptions options, CancellationToken cancellationToken = default)
         {
-            if (parameters == null)
+            if (options == null)
             {
-                throw new ArgumentNullException(nameof(parameters));
+                throw new ArgumentNullException(nameof(options));
             }
 
             using var scope = _fakeClientDiagnostics.CreateScope("Fake.Update");
             scope.Start();
             try
             {
-                var response = _fakeRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
-                var operation = new FakeUpdateOperation(Client, _fakeClientDiagnostics, Pipeline, _fakeRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters).Request, response);
+                var response = _fakeRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, options, cancellationToken);
+                var operation = new FakeUpdateOperation(Client, _fakeClientDiagnostics, Pipeline, _fakeRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, options).Request, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

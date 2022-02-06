@@ -141,7 +141,7 @@ namespace MgmtMultipleParentResource
             }
         }
 
-        internal HttpMessage CreateUpdateRequest(string subscriptionId, string resourceGroupName, string anotherName, AnotherParentUpdate anotherBody)
+        internal HttpMessage CreateUpdateRequest(string subscriptionId, string resourceGroupName, string anotherName, AnotherParentUpdateOptions options)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -159,7 +159,7 @@ namespace MgmtMultipleParentResource
             request.Headers.Add("Accept", "application/json, text/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(anotherBody);
+            content.JsonWriter.WriteObjectValue(options);
             request.Content = content;
             message.SetProperty("SDKUserAgent", _userAgent);
             return message;
@@ -169,10 +169,10 @@ namespace MgmtMultipleParentResource
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="anotherName"> The name of the virtual machine where the run command should be updated. </param>
-        /// <param name="anotherBody"> Parameters supplied to the Update Virtual Machine RunCommand operation. </param>
+        /// <param name="options"> Parameters supplied to the Update Virtual Machine RunCommand operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="anotherName"/>, or <paramref name="anotherBody"/> is null. </exception>
-        public async Task<Response> UpdateAsync(string subscriptionId, string resourceGroupName, string anotherName, AnotherParentUpdate anotherBody, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="anotherName"/>, or <paramref name="options"/> is null. </exception>
+        public async Task<Response> UpdateAsync(string subscriptionId, string resourceGroupName, string anotherName, AnotherParentUpdateOptions options, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -186,12 +186,12 @@ namespace MgmtMultipleParentResource
             {
                 throw new ArgumentNullException(nameof(anotherName));
             }
-            if (anotherBody == null)
+            if (options == null)
             {
-                throw new ArgumentNullException(nameof(anotherBody));
+                throw new ArgumentNullException(nameof(options));
             }
 
-            using var message = CreateUpdateRequest(subscriptionId, resourceGroupName, anotherName, anotherBody);
+            using var message = CreateUpdateRequest(subscriptionId, resourceGroupName, anotherName, options);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -206,10 +206,10 @@ namespace MgmtMultipleParentResource
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="anotherName"> The name of the virtual machine where the run command should be updated. </param>
-        /// <param name="anotherBody"> Parameters supplied to the Update Virtual Machine RunCommand operation. </param>
+        /// <param name="options"> Parameters supplied to the Update Virtual Machine RunCommand operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="anotherName"/>, or <paramref name="anotherBody"/> is null. </exception>
-        public Response Update(string subscriptionId, string resourceGroupName, string anotherName, AnotherParentUpdate anotherBody, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="anotherName"/>, or <paramref name="options"/> is null. </exception>
+        public Response Update(string subscriptionId, string resourceGroupName, string anotherName, AnotherParentUpdateOptions options, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -223,12 +223,12 @@ namespace MgmtMultipleParentResource
             {
                 throw new ArgumentNullException(nameof(anotherName));
             }
-            if (anotherBody == null)
+            if (options == null)
             {
-                throw new ArgumentNullException(nameof(anotherBody));
+                throw new ArgumentNullException(nameof(options));
             }
 
-            using var message = CreateUpdateRequest(subscriptionId, resourceGroupName, anotherName, anotherBody);
+            using var message = CreateUpdateRequest(subscriptionId, resourceGroupName, anotherName, options);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

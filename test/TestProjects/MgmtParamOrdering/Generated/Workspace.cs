@@ -191,21 +191,21 @@ namespace MgmtParamOrdering
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}
         /// OperationId: Workspaces_Update
         /// <summary> Updates a machine learning workspace with the specified parameters. </summary>
-        /// <param name="parameters"> The parameters for updating a machine learning workspace. </param>
+        /// <param name="options"> The parameters for updating a machine learning workspace. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<Response<Workspace>> UpdateAsync(WorkspaceUpdateParameters parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
+        public async virtual Task<Response<Workspace>> UpdateAsync(WorkspaceUpdateOptions options, CancellationToken cancellationToken = default)
         {
-            if (parameters == null)
+            if (options == null)
             {
-                throw new ArgumentNullException(nameof(parameters));
+                throw new ArgumentNullException(nameof(options));
             }
 
             using var scope = _workspaceClientDiagnostics.CreateScope("Workspace.Update");
             scope.Start();
             try
             {
-                var response = await _workspaceRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _workspaceRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, options, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new Workspace(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -219,21 +219,21 @@ namespace MgmtParamOrdering
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}
         /// OperationId: Workspaces_Update
         /// <summary> Updates a machine learning workspace with the specified parameters. </summary>
-        /// <param name="parameters"> The parameters for updating a machine learning workspace. </param>
+        /// <param name="options"> The parameters for updating a machine learning workspace. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual Response<Workspace> Update(WorkspaceUpdateParameters parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
+        public virtual Response<Workspace> Update(WorkspaceUpdateOptions options, CancellationToken cancellationToken = default)
         {
-            if (parameters == null)
+            if (options == null)
             {
-                throw new ArgumentNullException(nameof(parameters));
+                throw new ArgumentNullException(nameof(options));
             }
 
             using var scope = _workspaceClientDiagnostics.CreateScope("Workspace.Update");
             scope.Start();
             try
             {
-                var response = _workspaceRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
+                var response = _workspaceRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, options, cancellationToken);
                 return Response.FromValue(new Workspace(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)

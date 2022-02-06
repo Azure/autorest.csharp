@@ -194,22 +194,22 @@ namespace MgmtMultipleParentResource
         /// OperationId: AnotherParents_Update
         /// <summary> The operation to update the run command. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
-        /// <param name="anotherBody"> Parameters supplied to the Update Virtual Machine RunCommand operation. </param>
+        /// <param name="options"> Parameters supplied to the Update Virtual Machine RunCommand operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="anotherBody"/> is null. </exception>
-        public async virtual Task<AnotherParentUpdateOperation> UpdateAsync(bool waitForCompletion, AnotherParentUpdate anotherBody, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
+        public async virtual Task<AnotherParentUpdateOperation> UpdateAsync(bool waitForCompletion, AnotherParentUpdateOptions options, CancellationToken cancellationToken = default)
         {
-            if (anotherBody == null)
+            if (options == null)
             {
-                throw new ArgumentNullException(nameof(anotherBody));
+                throw new ArgumentNullException(nameof(options));
             }
 
             using var scope = _anotherParentClientDiagnostics.CreateScope("AnotherParent.Update");
             scope.Start();
             try
             {
-                var response = await _anotherParentRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, anotherBody, cancellationToken).ConfigureAwait(false);
-                var operation = new AnotherParentUpdateOperation(Client, _anotherParentClientDiagnostics, Pipeline, _anotherParentRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, anotherBody).Request, response);
+                var response = await _anotherParentRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, options, cancellationToken).ConfigureAwait(false);
+                var operation = new AnotherParentUpdateOperation(Client, _anotherParentClientDiagnostics, Pipeline, _anotherParentRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, options).Request, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -226,22 +226,22 @@ namespace MgmtMultipleParentResource
         /// OperationId: AnotherParents_Update
         /// <summary> The operation to update the run command. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
-        /// <param name="anotherBody"> Parameters supplied to the Update Virtual Machine RunCommand operation. </param>
+        /// <param name="options"> Parameters supplied to the Update Virtual Machine RunCommand operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="anotherBody"/> is null. </exception>
-        public virtual AnotherParentUpdateOperation Update(bool waitForCompletion, AnotherParentUpdate anotherBody, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
+        public virtual AnotherParentUpdateOperation Update(bool waitForCompletion, AnotherParentUpdateOptions options, CancellationToken cancellationToken = default)
         {
-            if (anotherBody == null)
+            if (options == null)
             {
-                throw new ArgumentNullException(nameof(anotherBody));
+                throw new ArgumentNullException(nameof(options));
             }
 
             using var scope = _anotherParentClientDiagnostics.CreateScope("AnotherParent.Update");
             scope.Start();
             try
             {
-                var response = _anotherParentRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, anotherBody, cancellationToken);
-                var operation = new AnotherParentUpdateOperation(Client, _anotherParentClientDiagnostics, Pipeline, _anotherParentRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, anotherBody).Request, response);
+                var response = _anotherParentRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, options, cancellationToken);
+                var operation = new AnotherParentUpdateOperation(Client, _anotherParentClientDiagnostics, Pipeline, _anotherParentRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, options).Request, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
