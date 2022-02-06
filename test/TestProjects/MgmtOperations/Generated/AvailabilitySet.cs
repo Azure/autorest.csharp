@@ -145,14 +145,14 @@ namespace MgmtOperations
         /// <summary> Delete an availability set. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<AvailabilitySetDeleteOperation> DeleteAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
+        public async virtual Task<ArmOperation> DeleteAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _availabilitySetClientDiagnostics.CreateScope("AvailabilitySet.Delete");
             scope.Start();
             try
             {
                 var response = await _availabilitySetRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                var operation = new AvailabilitySetDeleteOperation(response);
+                var operation = new MgmtOperationsArmOperation(response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -170,14 +170,14 @@ namespace MgmtOperations
         /// <summary> Delete an availability set. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual AvailabilitySetDeleteOperation Delete(bool waitForCompletion, CancellationToken cancellationToken = default)
+        public virtual ArmOperation Delete(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _availabilitySetClientDiagnostics.CreateScope("AvailabilitySet.Delete");
             scope.Start();
             try
             {
                 var response = _availabilitySetRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
-                var operation = new AvailabilitySetDeleteOperation(response);
+                var operation = new MgmtOperationsArmOperation(response);
                 if (waitForCompletion)
                     operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
@@ -253,7 +253,7 @@ namespace MgmtOperations
         /// <param name="parameters"> Parameters supplied to the Begin Set Virtual Network Gateway connection Shared key operation throughNetwork resource provider. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<AvailabilitySetTestSetSharedKeyOperation> TestSetSharedKeyAsync(bool waitForCompletion, ConnectionSharedKey parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<ArmOperation<ConnectionSharedKey>> TestSetSharedKeyAsync(bool waitForCompletion, ConnectionSharedKey parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -265,7 +265,7 @@ namespace MgmtOperations
             try
             {
                 var response = await _availabilitySetRestClient.TestSetSharedKeyAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new AvailabilitySetTestSetSharedKeyOperation(_availabilitySetClientDiagnostics, Pipeline, _availabilitySetRestClient.CreateTestSetSharedKeyRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters).Request, response);
+                var operation = new MgmtOperationsArmOperation<ConnectionSharedKey>(new ConnectionSharedKeySource(Client), _availabilitySetClientDiagnostics, Pipeline, _availabilitySetRestClient.CreateTestSetSharedKeyRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters).Request, response, OperationFinalStateVia.Location);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -285,7 +285,7 @@ namespace MgmtOperations
         /// <param name="parameters"> Parameters supplied to the Begin Set Virtual Network Gateway connection Shared key operation throughNetwork resource provider. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual AvailabilitySetTestSetSharedKeyOperation TestSetSharedKey(bool waitForCompletion, ConnectionSharedKey parameters, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<ConnectionSharedKey> TestSetSharedKey(bool waitForCompletion, ConnectionSharedKey parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -297,7 +297,7 @@ namespace MgmtOperations
             try
             {
                 var response = _availabilitySetRestClient.TestSetSharedKey(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
-                var operation = new AvailabilitySetTestSetSharedKeyOperation(_availabilitySetClientDiagnostics, Pipeline, _availabilitySetRestClient.CreateTestSetSharedKeyRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters).Request, response);
+                var operation = new MgmtOperationsArmOperation<ConnectionSharedKey>(new ConnectionSharedKeySource(Client), _availabilitySetClientDiagnostics, Pipeline, _availabilitySetRestClient.CreateTestSetSharedKeyRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters).Request, response, OperationFinalStateVia.Location);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

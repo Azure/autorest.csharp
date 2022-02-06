@@ -18,7 +18,6 @@ using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources;
-using TenantOnly.Models;
 
 namespace TenantOnly
 {
@@ -62,7 +61,7 @@ namespace TenantOnly
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="billingAccountName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="billingAccountName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<BillingAccountCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string billingAccountName, BillingAccountData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<ArmOperation<BillingAccount>> CreateOrUpdateAsync(bool waitForCompletion, string billingAccountName, BillingAccountData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(billingAccountName, nameof(billingAccountName));
             if (parameters == null)
@@ -75,7 +74,7 @@ namespace TenantOnly
             try
             {
                 var response = await _billingAccountRestClient.CreateAsync(billingAccountName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new BillingAccountCreateOrUpdateOperation(Client, _billingAccountClientDiagnostics, Pipeline, _billingAccountRestClient.CreateCreateRequest(billingAccountName, parameters).Request, response);
+                var operation = new TenantOnlyArmOperation<BillingAccount>(new BillingAccountSource(Client), _billingAccountClientDiagnostics, Pipeline, _billingAccountRestClient.CreateCreateRequest(billingAccountName, parameters).Request, response, OperationFinalStateVia.AzureAsyncOperation);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -97,7 +96,7 @@ namespace TenantOnly
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="billingAccountName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="billingAccountName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual BillingAccountCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string billingAccountName, BillingAccountData parameters, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<BillingAccount> CreateOrUpdate(bool waitForCompletion, string billingAccountName, BillingAccountData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(billingAccountName, nameof(billingAccountName));
             if (parameters == null)
@@ -110,7 +109,7 @@ namespace TenantOnly
             try
             {
                 var response = _billingAccountRestClient.Create(billingAccountName, parameters, cancellationToken);
-                var operation = new BillingAccountCreateOrUpdateOperation(Client, _billingAccountClientDiagnostics, Pipeline, _billingAccountRestClient.CreateCreateRequest(billingAccountName, parameters).Request, response);
+                var operation = new TenantOnlyArmOperation<BillingAccount>(new BillingAccountSource(Client), _billingAccountClientDiagnostics, Pipeline, _billingAccountRestClient.CreateCreateRequest(billingAccountName, parameters).Request, response, OperationFinalStateVia.AzureAsyncOperation);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

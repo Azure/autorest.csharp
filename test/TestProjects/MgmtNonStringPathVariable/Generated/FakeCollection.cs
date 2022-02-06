@@ -61,7 +61,7 @@ namespace MgmtNonStringPathVariable
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<FakeCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, FakeNameAsEnum fakeName, FakeData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<ArmOperation<Fake>> CreateOrUpdateAsync(bool waitForCompletion, FakeNameAsEnum fakeName, FakeData parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -73,7 +73,7 @@ namespace MgmtNonStringPathVariable
             try
             {
                 var response = await _fakeRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, fakeName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new FakeCreateOrUpdateOperation(Client, _fakeClientDiagnostics, Pipeline, _fakeRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, fakeName, parameters).Request, response);
+                var operation = new MgmtNonStringPathVariableArmOperation<Fake>(new FakeSource(Client), _fakeClientDiagnostics, Pipeline, _fakeRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, fakeName, parameters).Request, response, OperationFinalStateVia.Location);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -94,7 +94,7 @@ namespace MgmtNonStringPathVariable
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual FakeCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, FakeNameAsEnum fakeName, FakeData parameters, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<Fake> CreateOrUpdate(bool waitForCompletion, FakeNameAsEnum fakeName, FakeData parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -106,7 +106,7 @@ namespace MgmtNonStringPathVariable
             try
             {
                 var response = _fakeRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, fakeName, parameters, cancellationToken);
-                var operation = new FakeCreateOrUpdateOperation(Client, _fakeClientDiagnostics, Pipeline, _fakeRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, fakeName, parameters).Request, response);
+                var operation = new MgmtNonStringPathVariableArmOperation<Fake>(new FakeSource(Client), _fakeClientDiagnostics, Pipeline, _fakeRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, fakeName, parameters).Request, response, OperationFinalStateVia.Location);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

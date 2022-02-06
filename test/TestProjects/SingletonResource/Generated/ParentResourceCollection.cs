@@ -18,7 +18,6 @@ using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources;
-using SingletonResource.Models;
 
 namespace SingletonResource
 {
@@ -61,7 +60,7 @@ namespace SingletonResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="parentName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="parentName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<ParentResourceCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string parentName, ParentResourceData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<ArmOperation<ParentResource>> CreateOrUpdateAsync(bool waitForCompletion, string parentName, ParentResourceData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(parentName, nameof(parentName));
             if (parameters == null)
@@ -74,7 +73,7 @@ namespace SingletonResource
             try
             {
                 var response = await _parentResourceRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, parentName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new ParentResourceCreateOrUpdateOperation(Client, response);
+                var operation = new SingletonResourceArmOperation<ParentResource>(Response.FromValue(new ParentResource(Client, response), response.GetRawResponse()));
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -95,7 +94,7 @@ namespace SingletonResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="parentName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="parentName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ParentResourceCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string parentName, ParentResourceData parameters, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<ParentResource> CreateOrUpdate(bool waitForCompletion, string parentName, ParentResourceData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(parentName, nameof(parentName));
             if (parameters == null)
@@ -108,7 +107,7 @@ namespace SingletonResource
             try
             {
                 var response = _parentResourceRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, parentName, parameters, cancellationToken);
-                var operation = new ParentResourceCreateOrUpdateOperation(Client, response);
+                var operation = new SingletonResourceArmOperation<ParentResource>(Response.FromValue(new ParentResource(Client, response), response.GetRawResponse()));
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

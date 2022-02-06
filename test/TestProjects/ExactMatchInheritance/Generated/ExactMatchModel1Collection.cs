@@ -18,7 +18,6 @@ using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources;
-using ExactMatchInheritance.Models;
 
 namespace ExactMatchInheritance
 {
@@ -61,7 +60,7 @@ namespace ExactMatchInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="exactMatchModel1SName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel1SName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<ExactMatchModel1CreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string exactMatchModel1SName, ExactMatchModel1Data parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<ArmOperation<ExactMatchModel1>> CreateOrUpdateAsync(bool waitForCompletion, string exactMatchModel1SName, ExactMatchModel1Data parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(exactMatchModel1SName, nameof(exactMatchModel1SName));
             if (parameters == null)
@@ -74,7 +73,7 @@ namespace ExactMatchInheritance
             try
             {
                 var response = await _exactMatchModel1RestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, exactMatchModel1SName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new ExactMatchModel1CreateOrUpdateOperation(Client, response);
+                var operation = new ExactMatchInheritanceArmOperation<ExactMatchModel1>(Response.FromValue(new ExactMatchModel1(Client, response), response.GetRawResponse()));
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -95,7 +94,7 @@ namespace ExactMatchInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="exactMatchModel1SName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel1SName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ExactMatchModel1CreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string exactMatchModel1SName, ExactMatchModel1Data parameters, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<ExactMatchModel1> CreateOrUpdate(bool waitForCompletion, string exactMatchModel1SName, ExactMatchModel1Data parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(exactMatchModel1SName, nameof(exactMatchModel1SName));
             if (parameters == null)
@@ -108,7 +107,7 @@ namespace ExactMatchInheritance
             try
             {
                 var response = _exactMatchModel1RestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, exactMatchModel1SName, parameters, cancellationToken);
-                var operation = new ExactMatchModel1CreateOrUpdateOperation(Client, response);
+                var operation = new ExactMatchInheritanceArmOperation<ExactMatchModel1>(Response.FromValue(new ExactMatchModel1(Client, response), response.GetRawResponse()));
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

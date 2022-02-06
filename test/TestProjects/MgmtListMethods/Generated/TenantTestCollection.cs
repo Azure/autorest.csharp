@@ -18,7 +18,6 @@ using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources;
-using MgmtListMethods.Models;
 
 namespace MgmtListMethods
 {
@@ -62,7 +61,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="tenantTestName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantTestName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<TenantTestCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string tenantTestName, TenantTestData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<ArmOperation<TenantTest>> CreateOrUpdateAsync(bool waitForCompletion, string tenantTestName, TenantTestData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(tenantTestName, nameof(tenantTestName));
             if (parameters == null)
@@ -75,7 +74,7 @@ namespace MgmtListMethods
             try
             {
                 var response = await _tenantTestRestClient.CreateAsync(tenantTestName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new TenantTestCreateOrUpdateOperation(Client, _tenantTestClientDiagnostics, Pipeline, _tenantTestRestClient.CreateCreateRequest(tenantTestName, parameters).Request, response);
+                var operation = new MgmtListMethodsArmOperation<TenantTest>(new TenantTestSource(Client), _tenantTestClientDiagnostics, Pipeline, _tenantTestRestClient.CreateCreateRequest(tenantTestName, parameters).Request, response, OperationFinalStateVia.AzureAsyncOperation);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -97,7 +96,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="tenantTestName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantTestName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual TenantTestCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string tenantTestName, TenantTestData parameters, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<TenantTest> CreateOrUpdate(bool waitForCompletion, string tenantTestName, TenantTestData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(tenantTestName, nameof(tenantTestName));
             if (parameters == null)
@@ -110,7 +109,7 @@ namespace MgmtListMethods
             try
             {
                 var response = _tenantTestRestClient.Create(tenantTestName, parameters, cancellationToken);
-                var operation = new TenantTestCreateOrUpdateOperation(Client, _tenantTestClientDiagnostics, Pipeline, _tenantTestRestClient.CreateCreateRequest(tenantTestName, parameters).Request, response);
+                var operation = new MgmtListMethodsArmOperation<TenantTest>(new TenantTestSource(Client), _tenantTestClientDiagnostics, Pipeline, _tenantTestRestClient.CreateCreateRequest(tenantTestName, parameters).Request, response, OperationFinalStateVia.AzureAsyncOperation);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

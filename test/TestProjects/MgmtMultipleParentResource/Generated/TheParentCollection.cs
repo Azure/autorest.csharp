@@ -18,7 +18,6 @@ using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources;
-using MgmtMultipleParentResource.Models;
 
 namespace MgmtMultipleParentResource
 {
@@ -62,7 +61,7 @@ namespace MgmtMultipleParentResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="theParentName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="theParentName"/> or <paramref name="body"/> is null. </exception>
-        public async virtual Task<TheParentCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string theParentName, TheParentData body, CancellationToken cancellationToken = default)
+        public async virtual Task<ArmOperation<TheParent>> CreateOrUpdateAsync(bool waitForCompletion, string theParentName, TheParentData body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(theParentName, nameof(theParentName));
             if (body == null)
@@ -75,7 +74,7 @@ namespace MgmtMultipleParentResource
             try
             {
                 var response = await _theParentRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, theParentName, body, cancellationToken).ConfigureAwait(false);
-                var operation = new TheParentCreateOrUpdateOperation(Client, _theParentClientDiagnostics, Pipeline, _theParentRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, theParentName, body).Request, response);
+                var operation = new MgmtMultipleParentResourceArmOperation<TheParent>(new TheParentSource(Client), _theParentClientDiagnostics, Pipeline, _theParentRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, theParentName, body).Request, response, OperationFinalStateVia.Location);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -97,7 +96,7 @@ namespace MgmtMultipleParentResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="theParentName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="theParentName"/> or <paramref name="body"/> is null. </exception>
-        public virtual TheParentCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string theParentName, TheParentData body, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<TheParent> CreateOrUpdate(bool waitForCompletion, string theParentName, TheParentData body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(theParentName, nameof(theParentName));
             if (body == null)
@@ -110,7 +109,7 @@ namespace MgmtMultipleParentResource
             try
             {
                 var response = _theParentRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, theParentName, body, cancellationToken);
-                var operation = new TheParentCreateOrUpdateOperation(Client, _theParentClientDiagnostics, Pipeline, _theParentRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, theParentName, body).Request, response);
+                var operation = new MgmtMultipleParentResourceArmOperation<TheParent>(new TheParentSource(Client), _theParentClientDiagnostics, Pipeline, _theParentRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, theParentName, body).Request, response, OperationFinalStateVia.Location);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

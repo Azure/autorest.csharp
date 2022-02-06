@@ -8,6 +8,7 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
 using MgmtOperations.Models;
 
@@ -42,7 +43,7 @@ namespace MgmtOperations
         /// <param name="parameters"> Parameters supplied to the Update Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public async static Task<TestLROMethodAvailabilitySetOperation> TestLROMethodAvailabilitySetAsync(this ResourceGroup resourceGroup, bool waitForCompletion, AvailabilitySetUpdate parameters, CancellationToken cancellationToken = default)
+        public async static Task<ArmOperation<TestAvailabilitySet>> TestLROMethodAvailabilitySetAsync(this ResourceGroup resourceGroup, bool waitForCompletion, AvailabilitySetUpdate parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -61,7 +62,7 @@ namespace MgmtOperations
         /// <param name="parameters"> Parameters supplied to the Update Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public static TestLROMethodAvailabilitySetOperation TestLROMethodAvailabilitySet(this ResourceGroup resourceGroup, bool waitForCompletion, AvailabilitySetUpdate parameters, CancellationToken cancellationToken = default)
+        public static ArmOperation<TestAvailabilitySet> TestLROMethodAvailabilitySet(this ResourceGroup resourceGroup, bool waitForCompletion, AvailabilitySetUpdate parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {

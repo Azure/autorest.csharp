@@ -18,7 +18,6 @@ using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources;
-using Pagination.Models;
 
 namespace Pagination
 {
@@ -58,7 +57,7 @@ namespace Pagination
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<PageSizeDoubleModelCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string name, PageSizeDoubleModelData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<ArmOperation<PageSizeDoubleModel>> CreateOrUpdateAsync(bool waitForCompletion, string name, PageSizeDoubleModelData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
             if (parameters == null)
@@ -71,7 +70,7 @@ namespace Pagination
             try
             {
                 var response = await _pageSizeDoubleModelRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, name, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new PageSizeDoubleModelCreateOrUpdateOperation(Client, response);
+                var operation = new PaginationArmOperation<PageSizeDoubleModel>(Response.FromValue(new PageSizeDoubleModel(Client, response), response.GetRawResponse()));
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -89,7 +88,7 @@ namespace Pagination
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual PageSizeDoubleModelCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string name, PageSizeDoubleModelData parameters, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<PageSizeDoubleModel> CreateOrUpdate(bool waitForCompletion, string name, PageSizeDoubleModelData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
             if (parameters == null)
@@ -102,7 +101,7 @@ namespace Pagination
             try
             {
                 var response = _pageSizeDoubleModelRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, name, parameters, cancellationToken);
-                var operation = new PageSizeDoubleModelCreateOrUpdateOperation(Client, response);
+                var operation = new PaginationArmOperation<PageSizeDoubleModel>(Response.FromValue(new PageSizeDoubleModel(Client, response), response.GetRawResponse()));
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

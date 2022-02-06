@@ -18,7 +18,6 @@ using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources;
-using NoTypeReplacement.Models;
 
 namespace NoTypeReplacement
 {
@@ -58,7 +57,7 @@ namespace NoTypeReplacement
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="noTypeReplacementModel3SName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="noTypeReplacementModel3SName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<NoTypeReplacementModel3CreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string noTypeReplacementModel3SName, NoTypeReplacementModel3Data parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<ArmOperation<NoTypeReplacementModel3>> CreateOrUpdateAsync(bool waitForCompletion, string noTypeReplacementModel3SName, NoTypeReplacementModel3Data parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(noTypeReplacementModel3SName, nameof(noTypeReplacementModel3SName));
             if (parameters == null)
@@ -71,7 +70,7 @@ namespace NoTypeReplacement
             try
             {
                 var response = await _noTypeReplacementModel3RestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, noTypeReplacementModel3SName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new NoTypeReplacementModel3CreateOrUpdateOperation(Client, response);
+                var operation = new NoTypeReplacementArmOperation<NoTypeReplacementModel3>(Response.FromValue(new NoTypeReplacementModel3(Client, response), response.GetRawResponse()));
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -89,7 +88,7 @@ namespace NoTypeReplacement
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="noTypeReplacementModel3SName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="noTypeReplacementModel3SName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual NoTypeReplacementModel3CreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string noTypeReplacementModel3SName, NoTypeReplacementModel3Data parameters, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<NoTypeReplacementModel3> CreateOrUpdate(bool waitForCompletion, string noTypeReplacementModel3SName, NoTypeReplacementModel3Data parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(noTypeReplacementModel3SName, nameof(noTypeReplacementModel3SName));
             if (parameters == null)
@@ -102,7 +101,7 @@ namespace NoTypeReplacement
             try
             {
                 var response = _noTypeReplacementModel3RestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, noTypeReplacementModel3SName, parameters, cancellationToken);
-                var operation = new NoTypeReplacementModel3CreateOrUpdateOperation(Client, response);
+                var operation = new NoTypeReplacementArmOperation<NoTypeReplacementModel3>(Response.FromValue(new NoTypeReplacementModel3(Client, response), response.GetRawResponse()));
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

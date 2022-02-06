@@ -18,7 +18,6 @@ using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources;
-using OmitOperationGroups.Models;
 
 namespace OmitOperationGroups
 {
@@ -61,7 +60,7 @@ namespace OmitOperationGroups
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="model2SName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="model2SName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<Model2CreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string model2SName, Model2Data parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<ArmOperation<Model2>> CreateOrUpdateAsync(bool waitForCompletion, string model2SName, Model2Data parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(model2SName, nameof(model2SName));
             if (parameters == null)
@@ -74,7 +73,7 @@ namespace OmitOperationGroups
             try
             {
                 var response = await _model2RestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, model2SName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new Model2CreateOrUpdateOperation(Client, response);
+                var operation = new OmitOperationGroupsArmOperation<Model2>(Response.FromValue(new Model2(Client, response), response.GetRawResponse()));
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -95,7 +94,7 @@ namespace OmitOperationGroups
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="model2SName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="model2SName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual Model2CreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string model2SName, Model2Data parameters, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<Model2> CreateOrUpdate(bool waitForCompletion, string model2SName, Model2Data parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(model2SName, nameof(model2SName));
             if (parameters == null)
@@ -108,7 +107,7 @@ namespace OmitOperationGroups
             try
             {
                 var response = _model2RestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, model2SName, parameters, cancellationToken);
-                var operation = new Model2CreateOrUpdateOperation(Client, response);
+                var operation = new OmitOperationGroupsArmOperation<Model2>(Response.FromValue(new Model2(Client, response), response.GetRawResponse()));
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

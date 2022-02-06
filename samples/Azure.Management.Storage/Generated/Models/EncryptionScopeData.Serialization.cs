@@ -50,7 +50,7 @@ namespace Azure.Management.Storage
             string name = default;
             ResourceType type = default;
             SystemData systemData = default;
-            Optional<EncryptionScopeSource> source = default;
+            Optional<Models.EncryptionScopeSource> source = default;
             Optional<EncryptionScopeState> state = default;
             Optional<DateTimeOffset> creationTime = default;
             Optional<DateTimeOffset> lastModifiedTime = default;
@@ -94,7 +94,7 @@ namespace Azure.Management.Storage
                                 property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
-                            source = new EncryptionScopeSource(property0.Value.GetString());
+                            source = new Models.EncryptionScopeSource(property0.Value.GetString());
                             continue;
                         }
                         if (property0.NameEquals("state"))

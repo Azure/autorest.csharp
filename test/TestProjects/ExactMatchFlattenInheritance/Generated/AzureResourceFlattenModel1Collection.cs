@@ -18,7 +18,6 @@ using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources;
-using ExactMatchFlattenInheritance.Models;
 
 namespace ExactMatchFlattenInheritance
 {
@@ -62,7 +61,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<AzureResourceFlattenModel1CreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string name, AzureResourceFlattenModel1Data parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<ArmOperation<AzureResourceFlattenModel1>> CreateOrUpdateAsync(bool waitForCompletion, string name, AzureResourceFlattenModel1Data parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
             if (parameters == null)
@@ -75,7 +74,7 @@ namespace ExactMatchFlattenInheritance
             try
             {
                 var response = await _azureResourceFlattenModel1RestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, name, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new AzureResourceFlattenModel1CreateOrUpdateOperation(Client, response);
+                var operation = new ExactMatchFlattenInheritanceArmOperation<AzureResourceFlattenModel1>(Response.FromValue(new AzureResourceFlattenModel1(Client, response), response.GetRawResponse()));
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -97,7 +96,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual AzureResourceFlattenModel1CreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string name, AzureResourceFlattenModel1Data parameters, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<AzureResourceFlattenModel1> CreateOrUpdate(bool waitForCompletion, string name, AzureResourceFlattenModel1Data parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
             if (parameters == null)
@@ -110,7 +109,7 @@ namespace ExactMatchFlattenInheritance
             try
             {
                 var response = _azureResourceFlattenModel1RestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, name, parameters, cancellationToken);
-                var operation = new AzureResourceFlattenModel1CreateOrUpdateOperation(Client, response);
+                var operation = new ExactMatchFlattenInheritanceArmOperation<AzureResourceFlattenModel1>(Response.FromValue(new AzureResourceFlattenModel1(Client, response), response.GetRawResponse()));
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
