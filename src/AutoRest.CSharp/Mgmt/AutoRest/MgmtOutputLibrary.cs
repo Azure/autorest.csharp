@@ -111,7 +111,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 }
             }
         }
-        
+
         // Initialize ResourceData, Models and resource manager common types
         private void InitializeModels()
         {
