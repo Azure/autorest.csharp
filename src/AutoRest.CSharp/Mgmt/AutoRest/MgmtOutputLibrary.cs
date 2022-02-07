@@ -76,16 +76,16 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             _context = context;
             _mgmtConfiguration = context.Configuration.MgmtConfiguration;
             _codeModel = codeModel;
-            codeModel.UpdateAcronyms(_mgmtConfiguration.RenameRules);
+            _allSchemas = _codeModel.GetAllSchemas();
+            _allSchemas.UpdateAcronyms(_mgmtConfiguration.RenameRules);
             codeModel.UpdateSubscriptionIdForAllResource();
             _operationGroupToRequestPaths = new Dictionary<OperationGroup, IEnumerable<string>>();
             _rawRequestPathToOperationSets = new Dictionary<string, OperationSet>();
             _resourceDataSchemaNameToOperationSets = new Dictionary<string, HashSet<OperationSet>>();
             _nameToTypeProvider = new Dictionary<string, TypeProvider>();
             _mergedOperations = _mgmtConfiguration.MergeOperations.SelectMany(kv => kv.Value.Select(v => (FullOperationName: v, MethodName: kv.Key))).ToDictionary(kv => kv.FullOperationName, kv => kv.MethodName);
-            _allSchemas = _codeModel.GetAllSchemas();
 
-            UpdateFrameworkTypes(_allSchemas);
+            _allSchemas.UpdateFrameworkTypes();
 
             // We can only manipulate objects from the code model, not RestClientMethod
             ReorderOperationParameters();
@@ -95,21 +95,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
             // Decorate the operation sets to see if it corresponds to a resource
             DecorateOperationSets();
-        }
-
-        private void UpdateFrameworkTypes(IEnumerable<Schema> allSchemas)
-        {
-            foreach (var schema in _allSchemas)
-            {
-                if (schema is not ObjectSchema objSchema)
-                    continue;
-
-                foreach (var property in objSchema.Properties)
-                {
-                    if (property.Language.Default.Name.EndsWith("Uri"))
-                        property.Schema.Type = AllSchemaTypes.Uri;
-                }
-            }
         }
 
         // Initialize ResourceData, Models and resource manager common types

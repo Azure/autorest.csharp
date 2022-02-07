@@ -16,7 +16,22 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class CodeModelExtension
     {
-        private static readonly IDictionary<string, string> _cache = new ConcurrentDictionary<string, string>();
+        private static readonly ConcurrentDictionary<string, string> _cache = new ConcurrentDictionary<string, string>();
+
+        public static void UpdateFrameworkTypes(this IEnumerable<Schema> allSchemas)
+        {
+            foreach (var schema in allSchemas)
+            {
+                if (schema is not ObjectSchema objSchema)
+                    continue;
+
+                foreach (var property in objSchema.Properties)
+                {
+                    if (property.Language.Default.Name.EndsWith("Uri"))
+                        property.Schema.Type = AllSchemaTypes.Uri;
+                }
+            }
+        }
 
         public static void UpdateSubscriptionIdForAllResource(this CodeModel codeModel)
         {
@@ -70,26 +85,21 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             _regex = new Regex(@$"([\W|_|\.|@|-|\s|\$\da-z]|^)({regexRawString})([\W|_|\.|@|-|\s|\$A-Z]|$)");
         }
 
-        public static void UpdateAcronyms(this CodeModel codeModel, IReadOnlyDictionary<string, string> renameRules)
+        public static void UpdateAcronyms(this IEnumerable<Schema> allSchemas, IReadOnlyDictionary<string, string> renameRules)
         {
             ApplyRenameRules(renameRules);
-            foreach (var schema in codeModel.GetAllSchemas())
+            foreach (var schema in allSchemas)
             {
                 TransformSchema(schema);
             }
         }
 
-        private static IEnumerable<Schema>? _allSchemas;
         public static IEnumerable<Schema> GetAllSchemas(this CodeModel codeModel)
         {
-            if (_allSchemas != null)
-                return _allSchemas;
-
-            _allSchemas = codeModel.Schemas.Choices.Cast<Schema>()
+            return codeModel.Schemas.Choices.Cast<Schema>()
                 .Concat(codeModel.Schemas.SealedChoices)
                 .Concat(codeModel.Schemas.Objects)
                 .Concat(codeModel.Schemas.Groups);
-            return _allSchemas;
         }
 
         private static void TransformSchema(Schema schema)
