@@ -1,0 +1,25 @@
+{
+  "OutputFolder": ".",
+  "Namespace": "MgmtRenameRules",
+  "LibraryName": null,
+  "SharedSourceFolders": [
+    "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Generator.Shared",
+    "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Azure.Core.Shared"
+  ],
+  "azure-arm": true,
+  "public-clients": true,
+  "skip-csproj-packagereference": true,
+  "RenameRules": {
+    "Os": "OS",
+    "Ip": "IP",
+    "Ips": "IPs",
+    "ID": "Id",
+    "IDs": "Ids",
+    "VM": "Vm",
+    "VMs": "Vms",
+    "VMScaleSet": "VmScaleSet"
+  },
+  "MgmtDebug": {
+    "ShowRequestPath": true
+  }
+}
