@@ -18,10 +18,12 @@ using AutoRest.CSharp.Mgmt.Generation;
 using AutoRest.CSharp.Mgmt.Models;
 using System.Text.RegularExpressions;
 using Azure.Core;
+using Azure.ResourceManager.Resources;
+using AutoRest.CSharp.Output.Models;
 
 namespace AutoRest.CSharp.MgmtTest.Generation
 {
-    internal partial class MgmtBaseTestWriter: MgmtClientBaseWriter<MgmtTypeProvider>
+    internal partial class MgmtBaseTestWriter: MgmtClientBaseWriter
     {
         public CodeWriterDelegate? _tagsWriterDelegate = null;
 
@@ -562,27 +564,24 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             throw new NotImplementedException();
         }
 
-        protected override void WriteSingletonResourceEntry(Resource resource, string singletonResourceIdSuffix)
+        protected override void WriteSingletonResourceEntry(Resource resource, string singletonResourceIdSuffix, MethodSignature signature)
         {
             throw new NotImplementedException();
         }
 
-        protected override void WriteResourceCollectionEntry(Resource resource)
+        protected override void WriteResourceCollectionEntry(ResourceCollection resource, MethodSignature signature)
         {
             throw new NotImplementedException();
         }
 
-        protected override ResourceTypeSegment GetBranchResourceType(RequestPath branch)
-        {
-            throw new NotImplementedException();
-        }
-
-        // return a list of pair <parameter-name, value-variable>
         public List<KeyValuePair<string, FormattableString>> WriteOperationParameters(IEnumerable<Parameter> methodParameters, ExampleModel exampleModel)
         {
             var parameterValues = new List<KeyValuePair<string, FormattableString>>();
             foreach (var passThruParameter in methodParameters)
             {
+                if (passThruParameter.Name == MgmtClientOperation.WaitForCompletionParameter.Name ||
+                    passThruParameter.Name == MgmtClientBaseWriter.CancellationTokenParameter.Name)
+                    continue;
                 FormattableString? paramName = null;
                 foreach (ExampleParameter exampleParameter in exampleModel.AllParameter)
                 {
@@ -654,13 +653,16 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                         return String.Join("/", result.ToArray());
                     }
             int maxSegment = 0;
-            if (tp is ResourceGroupExtensions)
+            if (tp is MgmtExtensions extension)
             {
-                maxSegment = 5;
-            }
-            else if (tp is SubscriptionExtensions)
-            {
-                maxSegment = 3;
+                if (extension.ArmCoreType == typeof(ResourceGroup))
+                {
+                    maxSegment = 5;
+                }
+                else if (extension.ArmCoreType == typeof(Subscription))
+                {
+                    maxSegment = 3;
+                }
             }
             int i = 0;
             foreach (string segment in segements)
@@ -739,11 +741,11 @@ namespace AutoRest.CSharp.MgmtTest.Generation
         protected void WriteMethodTestInvocation(bool async, MgmtClientOperation clientOperation, bool isLroOperation, FormattableString methodName, IEnumerable<FormattableString> paramNames)
         {
             _writer.Append($"{GetAwait(async)}");
-            if (isLroOperation || clientOperation.IsLongRunningOperation() && !clientOperation.IsPagingOperation(Context)) {
+            if (isLroOperation || clientOperation.IsLongRunningOperation && !clientOperation.IsPagingOperation) {
                 paramNames = new List<FormattableString>().Append<FormattableString>($"true").Concat(paramNames);   // assign  waitForCompletion = true
             }
-            var isPagingOperation = clientOperation.IsPagingOperation(Context)|| clientOperation.IsListOperation(Context, out var _);
-            if (isPagingOperation)
+
+            if (clientOperation.IsPagingOperation)
             {
                 using (_writer.Scope($"foreach (var _ in {WriteMethodInvocation($"{methodName}", paramNames)})"))
                 { }

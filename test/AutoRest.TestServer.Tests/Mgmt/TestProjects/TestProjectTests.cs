@@ -8,6 +8,7 @@ using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Models;
 using Azure.ResourceManager.Resources;
@@ -32,8 +33,6 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             _subFolder = subFolder;
         }
 
-        protected HashSet<string> ListExceptions = new HashSet<string>();
-
         protected virtual IEnumerable<Type> MyTypes()
         {
             foreach (var type in GetType().Assembly.GetTypes())
@@ -44,6 +43,180 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         }
 
         protected Type? GetType(string name) => MyTypes().FirstOrDefault(t => t.Name == name);
+
+        [Test]
+        public void PropertiesEndingInUriShouldBeUriType()
+        {
+            foreach (var type in MyTypes())
+            {
+                foreach (var property in type.GetProperties())
+                {
+                    if (property.Name.EndsWith("Uri"))
+                        Assert.AreEqual(typeof(Uri), property.PropertyType);
+                }
+            }
+        }
+
+        [Test]
+        public void ArmClientParameterShouldBeClient()
+        {
+            foreach (var resource in FindAllResources())
+            {
+                ValidateConstructorsForArmClientParameter(resource);
+            }
+            foreach (var collection in FindAllCollections())
+            {
+                ValidateConstructorsForArmClientParameter(collection);
+            }
+            foreach (var extensionClient in FindAllExtensionClients())
+            {
+                ValidateConstructorsForArmClientParameter(extensionClient);
+            }
+            foreach (var extension in FindAllExtensions())
+            {
+                foreach (var method in extension.GetMethods(BindingFlags.Public | BindingFlags.Static))
+                {
+                    ValidateArmClientParameter($"{extension.Name}.{method.Name}", method.GetParameters());
+                }
+            }
+        }
+
+        private void ValidateConstructorsForArmClientParameter(Type type)
+        {
+            foreach (var ctor in type.GetConstructors(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic))
+            {
+                ValidateArmClientParameter($"{type.Name}.Ctor", ctor.GetParameters());
+            }
+        }
+
+        private void ValidateArmClientParameter(string methodName, ParameterInfo[] parameters)
+        {
+            var armClientParam = parameters.FirstOrDefault(p => p.ParameterType == typeof(ArmClient));
+            if (armClientParam is null)
+                return;
+
+            Assert.AreEqual("client", armClientParam.Name, $"Expected 'client' for ArmClient parameter in {methodName}({string.Join(',', parameters.Select(p => $"{p.ParameterType.Name} {p.Name}").ToArray())})");
+        }
+
+        [Test]
+        public void GetShouldMatchResource()
+        {
+            foreach (var resource in FindAllResources())
+            {
+                var responseType = typeof(Response<>).MakeGenericType(resource);
+                VerifyMethodReturnType(resource, responseType, "Get");
+                var resourceData = GetResourceDataByResource(resource);
+                if (typeof(TrackedResource).IsAssignableFrom(resourceData))
+                {
+                    VerifyMethodReturnType(resource, responseType, "AddTag");
+                    VerifyMethodReturnType(resource, responseType, "SetTags");
+                    VerifyMethodReturnType(resource, responseType, "RemoveTag");
+                }
+                var updateMethod = resource.GetMethod("Update");
+                if (updateMethod is not null)
+                {
+                    if (updateMethod.ReturnType.IsGenericType)
+                    {
+                        VerifyMethodReturnType(resource, responseType, "Update");
+                    }
+                    else
+                    {
+                        VerifyMethodReturnType(resource, typeof(Operation<>).MakeGenericType(resource), "Update", true);
+                    }
+                }
+            }
+
+            foreach (var collection in FindAllCollections())
+            {
+                var resource = GetResourceFromCollection(collection);
+                Assert.NotNull(resource);
+                var responseType = typeof(Response<>).MakeGenericType(resource);
+                var pagingType = typeof(Pageable<>).MakeGenericType(resource);
+                var lroType = typeof(Operation<>).MakeGenericType(resource);
+                VerifyMethodReturnType(collection, responseType, "Get");
+                VerifyMethodReturnType(collection, responseType, "GetIfExists");
+
+                if (!ListExceptionCollections.Contains(collection))
+                    VerifyMethodReturnType(collection, pagingType, collection.GetMethods().First(m => m.Name == "GetAll" && !m.GetParameters().Any(p => !p.IsOptional)));
+
+                if (collection.GetMethod("CreateOrUpdate") is not null)
+                    VerifyMethodReturnType(collection, lroType, "CreateOrUpdate", true);
+            }
+        }
+
+        private void VerifyMethodReturnType(Type collection, Type expectedType, string methodName, bool useIsAssignableFrom = false)
+        {
+            var method = collection.GetMethod(methodName);
+            Assert.NotNull(method, $"Method {methodName} was not found on {collection.Name}");
+            VerifyMethodReturnType(collection, expectedType, method, useIsAssignableFrom);
+        }
+
+        private static void VerifyMethodReturnType(Type collection, Type expectedType, MethodInfo method, bool useIsAssignableFrom = false)
+        {
+            if (useIsAssignableFrom)
+            {
+                Assert.IsTrue(expectedType.IsAssignableFrom(method.ReturnType), $"Return type did not match for {collection.Name}.{method.Name}");
+            }
+            else
+            {
+                Assert.AreEqual(expectedType, method.ReturnType, $"Return type did not match for {collection.Name}.{method.Name}");
+            }
+        }
+
+        private Type? GetResourceFromCollection(Type collection) => MyTypes().FirstOrDefault(t => t.Name == GetResourceNameFromCollectionName(collection.Name));
+        private string GetResourceNameFromCollectionName(string collectionName) => collectionName.Substring(0, collectionName.IndexOf("Collection"));
+
+        protected virtual HashSet<Type> ListExceptionCollections { get; } = new HashSet<Type>();
+        [Test]
+        public void IEnumerableShouldMatchResource()
+        {
+            foreach (var collection in FindAllCollections())
+            {
+                if (ListExceptionCollections.Contains(collection))
+                    continue;
+
+                var interfaces = collection.GetInterfaces();
+                Assert.AreEqual(3, interfaces.Length, $"For {collection.Name} expected IEnumerable<T>, IEnumerable, and IAsyncEnumerable<T>, found {string.Join(',', interfaces.Select(i => i.Name).ToArray())}");
+                foreach (var interFace in interfaces)
+                {
+                    if (!interFace.IsGenericType)
+                        continue;
+                    var genericArg = interFace.GetGenericArguments().FirstOrDefault();
+                    Assert.NotNull(genericArg, $"{interFace.Name} did not have a type argument for {collection.Name}");
+                    Assert.AreEqual(GetResourceNameFromCollectionName(collection.Name), genericArg.Name);
+                }
+            }
+        }
+
+        [Test]
+        public void ValidatePublicMethodsAreVirtual()
+        {
+            foreach (var type in FindAllResources())
+            {
+                ValidatePublicMethods(type);
+            }
+            foreach (var type in FindAllCollections())
+            {
+                ValidatePublicMethods(type);
+            }
+            foreach (var type in FindAllExtensionClients())
+            {
+                ValidatePublicMethods(type);
+            }
+        }
+
+        private void ValidatePublicMethods(Type type)
+        {
+            if (!type.IsPublic)
+                return;
+            foreach (var method in type.GetMethods(BindingFlags.Instance | BindingFlags.Public))
+            {
+                if (method.DeclaringType != type)
+                    continue;
+
+                Assert.IsTrue(method.IsVirtual, $"{method.Name} was not virtual but was public on {type.Name}");
+            }
+        }
 
         [Test]
         public void AllClientsShouldHaveMockingCtor()
@@ -156,7 +329,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 var method = type.GetMethod(methodName);
                 Assert.NotNull(method, $"{type.Name} does not implement the {methodName} method.");
 
-                Assert.AreEqual(3, method.GetParameters().Length);
+                Assert.AreEqual(3, method.GetParameters().Length, $"{type.Name}.{method.Name} had more parameters than expected. Only expected 3 but got {{{string.Join(',', method.GetParameters().Select(p => p.Name))}}}");
                 var param1 = TypeAsserts.HasParameter(method, "key");
                 Assert.AreEqual(typeof(string), param1.ParameterType);
                 var param2 = TypeAsserts.HasParameter(method, "value");
@@ -263,6 +436,19 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             foreach (Type t in allTypes)
             {
                 if (t.Name.EndsWith("ExtensionClient"))
+                {
+                    yield return t;
+                }
+            }
+        }
+
+        public IEnumerable<Type> FindAllExtensions()
+        {
+            Type[] allTypes = Assembly.GetExecutingAssembly().GetTypes();
+
+            foreach (Type t in allTypes)
+            {
+                if (t.Name.EndsWith("Extensions"))
                 {
                     yield return t;
                 }

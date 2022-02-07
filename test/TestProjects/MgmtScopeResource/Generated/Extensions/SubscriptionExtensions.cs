@@ -14,32 +14,31 @@ namespace MgmtScopeResource
     /// <summary> A class to add extension methods to Subscription. </summary>
     public static partial class SubscriptionExtensions
     {
-        #region DeploymentExtended
-        /// <summary> Gets an object representing a DeploymentExtendedCollection along with the instance operations that can be performed on it. </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="DeploymentExtendedCollection" /> object. </returns>
-        public static DeploymentExtendedCollection GetDeploymentExtendeds(this Subscription subscription)
-        {
-            return new DeploymentExtendedCollection(subscription);
-        }
-        #endregion
-
         private static SubscriptionExtensionClient GetExtensionClient(Subscription subscription)
         {
-            return subscription.GetCachedClient((armClient) =>
+            return subscription.GetCachedClient((client) =>
             {
-                return new SubscriptionExtensionClient(armClient, subscription.Id);
+                return new SubscriptionExtensionClient(client, subscription.Id);
             }
             );
+        }
+
+        /// <summary> Gets a collection of DeploymentExtendeds in the DeploymentExtended. </summary>
+        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <returns> An object representing collection of DeploymentExtendeds and their operations over a DeploymentExtended. </returns>
+        public static DeploymentExtendedCollection GetDeploymentExtendeds(this Subscription subscription)
+        {
+            return GetExtensionClient(subscription).GetDeploymentExtendeds();
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Resources/links
         /// ContextualPath: /subscriptions/{subscriptionId}
         /// OperationId: ResourceLinks_ListAtSubscription
+        /// <summary> Gets all the linked resources for the subscription. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="filter"> The filter to apply on the list resource links operation. The supported filter for list resource links is targetId. For example, $filter=targetId eq {value}. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="ResourceLink" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<ResourceLink> GetResourceLinksAsync(this Subscription subscription, string filter = null, CancellationToken cancellationToken = default)
         {
             return GetExtensionClient(subscription).GetResourceLinksAsync(filter, cancellationToken);
@@ -48,10 +47,11 @@ namespace MgmtScopeResource
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Resources/links
         /// ContextualPath: /subscriptions/{subscriptionId}
         /// OperationId: ResourceLinks_ListAtSubscription
+        /// <summary> Gets all the linked resources for the subscription. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="filter"> The filter to apply on the list resource links operation. The supported filter for list resource links is targetId. For example, $filter=targetId eq {value}. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="ResourceLink" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<ResourceLink> GetResourceLinks(this Subscription subscription, string filter = null, CancellationToken cancellationToken = default)
         {
             return GetExtensionClient(subscription).GetResourceLinks(filter, cancellationToken);

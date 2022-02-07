@@ -11,7 +11,7 @@ using Azure.ResourceManager.Core;
 
 namespace MgmtExtensionCommonRestOperation
 {
-    /// <summary> An internal class to add extension methods to. </summary>
+    /// <summary> A class to add extension methods to ResourceGroup. </summary>
     internal partial class ResourceGroupExtensionClient : ArmResource
     {
         /// <summary> Initializes a new instance of the <see cref="ResourceGroupExtensionClient"/> class for mocking. </summary>
@@ -20,16 +20,30 @@ namespace MgmtExtensionCommonRestOperation
         }
 
         /// <summary> Initializes a new instance of the <see cref="ResourceGroupExtensionClient"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal ResourceGroupExtensionClient(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        internal ResourceGroupExtensionClient(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
         }
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {
-            ArmClient.TryGetApiVersion(resourceType, out string apiVersion);
+            Client.TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
+        }
+
+        /// <summary> Gets a collection of TypeOnes in the TypeOne. </summary>
+        /// <returns> An object representing collection of TypeOnes and their operations over a TypeOne. </returns>
+        public virtual TypeOneCollection GetTypeOnes()
+        {
+            return new TypeOneCollection(Client, Id);
+        }
+
+        /// <summary> Gets a collection of TypeTwos in the TypeTwo. </summary>
+        /// <returns> An object representing collection of TypeTwos and their operations over a TypeTwo. </returns>
+        public virtual TypeTwoCollection GetTypeTwos()
+        {
+            return new TypeTwoCollection(Client, Id);
         }
     }
 }

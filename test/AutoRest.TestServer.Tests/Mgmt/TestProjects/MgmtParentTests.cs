@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
 using NUnit.Framework;
+using System.Collections.Generic;
+using MgmtParent;
 
 namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 {
@@ -9,8 +11,9 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         public MgmtParentTests()
             : base("MgmtParent")
         {
-            ListExceptions.Add("DedicatedHostGroupCollection");
         }
+
+        protected override HashSet<Type> ListExceptionCollections { get; } = new HashSet<Type>() { typeof(DedicatedHostGroupCollection) };
 
         [TestCase("AvailabilitySet", true)]
         [TestCase("DedicatedHostGroup", true)]

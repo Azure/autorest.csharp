@@ -17,7 +17,7 @@ using SupersetFlattenInheritance.Models;
 
 namespace SupersetFlattenInheritance
 {
-    /// <summary> An internal class to add extension methods to. </summary>
+    /// <summary> A class to add extension methods to ResourceGroup. </summary>
     internal partial class ResourceGroupExtensionClient : ArmResource
     {
         private ClientDiagnostics _customModel1sClientDiagnostics;
@@ -45,9 +45,9 @@ namespace SupersetFlattenInheritance
         }
 
         /// <summary> Initializes a new instance of the <see cref="ResourceGroupExtensionClient"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal ResourceGroupExtensionClient(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        internal ResourceGroupExtensionClient(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
         }
 
@@ -72,8 +72,22 @@ namespace SupersetFlattenInheritance
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {
-            ArmClient.TryGetApiVersion(resourceType, out string apiVersion);
+            Client.TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
+        }
+
+        /// <summary> Gets a collection of ResourceModel1s in the ResourceModel1. </summary>
+        /// <returns> An object representing collection of ResourceModel1s and their operations over a ResourceModel1. </returns>
+        public virtual ResourceModel1Collection GetResourceModel1s()
+        {
+            return new ResourceModel1Collection(Client, Id);
+        }
+
+        /// <summary> Gets a collection of TrackedResourceModel1s in the TrackedResourceModel1. </summary>
+        /// <returns> An object representing collection of TrackedResourceModel1s and their operations over a TrackedResourceModel1. </returns>
+        public virtual TrackedResourceModel1Collection GetTrackedResourceModel1s()
+        {
+            return new TrackedResourceModel1Collection(Client, Id);
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel1s
@@ -132,16 +146,8 @@ namespace SupersetFlattenInheritance
         /// <param name="customModel1SName"> The String to use. </param>
         /// <param name="parameters"> The CustomModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="customModel1SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="customModel1SName"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<Response<CustomModel1>> PutCustomModel1Async(string customModel1SName, CustomModel1 parameters, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(customModel1SName, nameof(customModel1SName));
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
             using var scope = CustomModel1sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.PutCustomModel1");
             scope.Start();
             try
@@ -162,16 +168,8 @@ namespace SupersetFlattenInheritance
         /// <param name="customModel1SName"> The String to use. </param>
         /// <param name="parameters"> The CustomModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="customModel1SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="customModel1SName"/> or <paramref name="parameters"/> is null. </exception>
         public virtual Response<CustomModel1> PutCustomModel1(string customModel1SName, CustomModel1 parameters, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(customModel1SName, nameof(customModel1SName));
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
             using var scope = CustomModel1sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.PutCustomModel1");
             scope.Start();
             try
@@ -191,12 +189,8 @@ namespace SupersetFlattenInheritance
         /// OperationId: CustomModel1s_Get
         /// <param name="customModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="customModel1SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="customModel1SName"/> is null. </exception>
         public async virtual Task<Response<CustomModel1>> GetCustomModel1Async(string customModel1SName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(customModel1SName, nameof(customModel1SName));
-
             using var scope = CustomModel1sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.GetCustomModel1");
             scope.Start();
             try
@@ -216,12 +210,8 @@ namespace SupersetFlattenInheritance
         /// OperationId: CustomModel1s_Get
         /// <param name="customModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="customModel1SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="customModel1SName"/> is null. </exception>
         public virtual Response<CustomModel1> GetCustomModel1(string customModel1SName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(customModel1SName, nameof(customModel1SName));
-
             using var scope = CustomModel1sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.GetCustomModel1");
             scope.Start();
             try
@@ -292,16 +282,8 @@ namespace SupersetFlattenInheritance
         /// <param name="customModel2SName"> The String to use. </param>
         /// <param name="parameters"> The CustomModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="customModel2SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="customModel2SName"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<Response<CustomModel2>> PutCustomModel2Async(string customModel2SName, CustomModel2 parameters, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(customModel2SName, nameof(customModel2SName));
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
             using var scope = CustomModel2sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.PutCustomModel2");
             scope.Start();
             try
@@ -322,16 +304,8 @@ namespace SupersetFlattenInheritance
         /// <param name="customModel2SName"> The String to use. </param>
         /// <param name="parameters"> The CustomModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="customModel2SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="customModel2SName"/> or <paramref name="parameters"/> is null. </exception>
         public virtual Response<CustomModel2> PutCustomModel2(string customModel2SName, CustomModel2 parameters, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(customModel2SName, nameof(customModel2SName));
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
             using var scope = CustomModel2sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.PutCustomModel2");
             scope.Start();
             try
@@ -351,12 +325,8 @@ namespace SupersetFlattenInheritance
         /// OperationId: CustomModel2s_Get
         /// <param name="customModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="customModel2SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="customModel2SName"/> is null. </exception>
         public async virtual Task<Response<CustomModel2>> GetCustomModel2Async(string customModel2SName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(customModel2SName, nameof(customModel2SName));
-
             using var scope = CustomModel2sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.GetCustomModel2");
             scope.Start();
             try
@@ -376,12 +346,8 @@ namespace SupersetFlattenInheritance
         /// OperationId: CustomModel2s_Get
         /// <param name="customModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="customModel2SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="customModel2SName"/> is null. </exception>
         public virtual Response<CustomModel2> GetCustomModel2(string customModel2SName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(customModel2SName, nameof(customModel2SName));
-
             using var scope = CustomModel2sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.GetCustomModel2");
             scope.Start();
             try
@@ -452,16 +418,8 @@ namespace SupersetFlattenInheritance
         /// <param name="subResourceModel1SName"> The String to use. </param>
         /// <param name="parameters"> The SubResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="subResourceModel1SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="subResourceModel1SName"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<Response<SubResourceModel1>> PutSubResourceModel1Async(string subResourceModel1SName, SubResourceModel1 parameters, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subResourceModel1SName, nameof(subResourceModel1SName));
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
             using var scope = SubResourceModel1sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.PutSubResourceModel1");
             scope.Start();
             try
@@ -482,16 +440,8 @@ namespace SupersetFlattenInheritance
         /// <param name="subResourceModel1SName"> The String to use. </param>
         /// <param name="parameters"> The SubResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="subResourceModel1SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="subResourceModel1SName"/> or <paramref name="parameters"/> is null. </exception>
         public virtual Response<SubResourceModel1> PutSubResourceModel1(string subResourceModel1SName, SubResourceModel1 parameters, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subResourceModel1SName, nameof(subResourceModel1SName));
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
             using var scope = SubResourceModel1sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.PutSubResourceModel1");
             scope.Start();
             try
@@ -511,12 +461,8 @@ namespace SupersetFlattenInheritance
         /// OperationId: SubResourceModel1s_Get
         /// <param name="subResourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="subResourceModel1SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="subResourceModel1SName"/> is null. </exception>
         public async virtual Task<Response<SubResourceModel1>> GetSubResourceModel1Async(string subResourceModel1SName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subResourceModel1SName, nameof(subResourceModel1SName));
-
             using var scope = SubResourceModel1sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.GetSubResourceModel1");
             scope.Start();
             try
@@ -536,12 +482,8 @@ namespace SupersetFlattenInheritance
         /// OperationId: SubResourceModel1s_Get
         /// <param name="subResourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="subResourceModel1SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="subResourceModel1SName"/> is null. </exception>
         public virtual Response<SubResourceModel1> GetSubResourceModel1(string subResourceModel1SName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subResourceModel1SName, nameof(subResourceModel1SName));
-
             using var scope = SubResourceModel1sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.GetSubResourceModel1");
             scope.Start();
             try
@@ -612,16 +554,8 @@ namespace SupersetFlattenInheritance
         /// <param name="subResourceModel2SName"> The String to use. </param>
         /// <param name="parameters"> The SubResourceModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="subResourceModel2SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="subResourceModel2SName"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<Response<SubResourceModel2>> PutSubResourceModel2Async(string subResourceModel2SName, SubResourceModel2 parameters, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subResourceModel2SName, nameof(subResourceModel2SName));
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
             using var scope = SubResourceModel2sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.PutSubResourceModel2");
             scope.Start();
             try
@@ -642,16 +576,8 @@ namespace SupersetFlattenInheritance
         /// <param name="subResourceModel2SName"> The String to use. </param>
         /// <param name="parameters"> The SubResourceModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="subResourceModel2SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="subResourceModel2SName"/> or <paramref name="parameters"/> is null. </exception>
         public virtual Response<SubResourceModel2> PutSubResourceModel2(string subResourceModel2SName, SubResourceModel2 parameters, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subResourceModel2SName, nameof(subResourceModel2SName));
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
             using var scope = SubResourceModel2sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.PutSubResourceModel2");
             scope.Start();
             try
@@ -671,12 +597,8 @@ namespace SupersetFlattenInheritance
         /// OperationId: SubResourceModel2s_Get
         /// <param name="subResourceModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="subResourceModel2SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="subResourceModel2SName"/> is null. </exception>
         public async virtual Task<Response<SubResourceModel2>> GetSubResourceModel2Async(string subResourceModel2SName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subResourceModel2SName, nameof(subResourceModel2SName));
-
             using var scope = SubResourceModel2sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.GetSubResourceModel2");
             scope.Start();
             try
@@ -696,12 +618,8 @@ namespace SupersetFlattenInheritance
         /// OperationId: SubResourceModel2s_Get
         /// <param name="subResourceModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="subResourceModel2SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="subResourceModel2SName"/> is null. </exception>
         public virtual Response<SubResourceModel2> GetSubResourceModel2(string subResourceModel2SName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subResourceModel2SName, nameof(subResourceModel2SName));
-
             using var scope = SubResourceModel2sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.GetSubResourceModel2");
             scope.Start();
             try
@@ -772,16 +690,8 @@ namespace SupersetFlattenInheritance
         /// <param name="writableSubResourceModel1SName"> The String to use. </param>
         /// <param name="parameters"> The WritableSubResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="writableSubResourceModel1SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="writableSubResourceModel1SName"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<Response<WritableSubResourceModel1>> PutWritableSubResourceModel1Async(string writableSubResourceModel1SName, WritableSubResourceModel1 parameters, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(writableSubResourceModel1SName, nameof(writableSubResourceModel1SName));
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
             using var scope = WritableSubResourceModel1sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.PutWritableSubResourceModel1");
             scope.Start();
             try
@@ -802,16 +712,8 @@ namespace SupersetFlattenInheritance
         /// <param name="writableSubResourceModel1SName"> The String to use. </param>
         /// <param name="parameters"> The WritableSubResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="writableSubResourceModel1SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="writableSubResourceModel1SName"/> or <paramref name="parameters"/> is null. </exception>
         public virtual Response<WritableSubResourceModel1> PutWritableSubResourceModel1(string writableSubResourceModel1SName, WritableSubResourceModel1 parameters, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(writableSubResourceModel1SName, nameof(writableSubResourceModel1SName));
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
             using var scope = WritableSubResourceModel1sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.PutWritableSubResourceModel1");
             scope.Start();
             try
@@ -831,12 +733,8 @@ namespace SupersetFlattenInheritance
         /// OperationId: WritableSubResourceModel1s_Get
         /// <param name="writableSubResourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="writableSubResourceModel1SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="writableSubResourceModel1SName"/> is null. </exception>
         public async virtual Task<Response<WritableSubResourceModel1>> GetWritableSubResourceModel1Async(string writableSubResourceModel1SName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(writableSubResourceModel1SName, nameof(writableSubResourceModel1SName));
-
             using var scope = WritableSubResourceModel1sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.GetWritableSubResourceModel1");
             scope.Start();
             try
@@ -856,12 +754,8 @@ namespace SupersetFlattenInheritance
         /// OperationId: WritableSubResourceModel1s_Get
         /// <param name="writableSubResourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="writableSubResourceModel1SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="writableSubResourceModel1SName"/> is null. </exception>
         public virtual Response<WritableSubResourceModel1> GetWritableSubResourceModel1(string writableSubResourceModel1SName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(writableSubResourceModel1SName, nameof(writableSubResourceModel1SName));
-
             using var scope = WritableSubResourceModel1sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.GetWritableSubResourceModel1");
             scope.Start();
             try
@@ -932,16 +826,8 @@ namespace SupersetFlattenInheritance
         /// <param name="writableSubResourceModel2SName"> The String to use. </param>
         /// <param name="parameters"> The WritableSubResourceModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="writableSubResourceModel2SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="writableSubResourceModel2SName"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<Response<WritableSubResourceModel2>> PutWritableSubResourceModel2Async(string writableSubResourceModel2SName, WritableSubResourceModel2 parameters, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(writableSubResourceModel2SName, nameof(writableSubResourceModel2SName));
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
             using var scope = WritableSubResourceModel2sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.PutWritableSubResourceModel2");
             scope.Start();
             try
@@ -962,16 +848,8 @@ namespace SupersetFlattenInheritance
         /// <param name="writableSubResourceModel2SName"> The String to use. </param>
         /// <param name="parameters"> The WritableSubResourceModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="writableSubResourceModel2SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="writableSubResourceModel2SName"/> or <paramref name="parameters"/> is null. </exception>
         public virtual Response<WritableSubResourceModel2> PutWritableSubResourceModel2(string writableSubResourceModel2SName, WritableSubResourceModel2 parameters, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(writableSubResourceModel2SName, nameof(writableSubResourceModel2SName));
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
             using var scope = WritableSubResourceModel2sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.PutWritableSubResourceModel2");
             scope.Start();
             try
@@ -991,12 +869,8 @@ namespace SupersetFlattenInheritance
         /// OperationId: WritableSubResourceModel2s_Get
         /// <param name="writableSubResourceModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="writableSubResourceModel2SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="writableSubResourceModel2SName"/> is null. </exception>
         public async virtual Task<Response<WritableSubResourceModel2>> GetWritableSubResourceModel2Async(string writableSubResourceModel2SName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(writableSubResourceModel2SName, nameof(writableSubResourceModel2SName));
-
             using var scope = WritableSubResourceModel2sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.GetWritableSubResourceModel2");
             scope.Start();
             try
@@ -1016,12 +890,8 @@ namespace SupersetFlattenInheritance
         /// OperationId: WritableSubResourceModel2s_Get
         /// <param name="writableSubResourceModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="writableSubResourceModel2SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="writableSubResourceModel2SName"/> is null. </exception>
         public virtual Response<WritableSubResourceModel2> GetWritableSubResourceModel2(string writableSubResourceModel2SName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(writableSubResourceModel2SName, nameof(writableSubResourceModel2SName));
-
             using var scope = WritableSubResourceModel2sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.GetWritableSubResourceModel2");
             scope.Start();
             try
@@ -1092,16 +962,8 @@ namespace SupersetFlattenInheritance
         /// <param name="resourceModel2SName"> The String to use. </param>
         /// <param name="parameters"> The ResourceModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="resourceModel2SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceModel2SName"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<Response<ResourceModel2>> PutResourceModel2Async(string resourceModel2SName, ResourceModel2 parameters, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(resourceModel2SName, nameof(resourceModel2SName));
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
             using var scope = ResourceModel2sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.PutResourceModel2");
             scope.Start();
             try
@@ -1122,16 +984,8 @@ namespace SupersetFlattenInheritance
         /// <param name="resourceModel2SName"> The String to use. </param>
         /// <param name="parameters"> The ResourceModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="resourceModel2SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceModel2SName"/> or <paramref name="parameters"/> is null. </exception>
         public virtual Response<ResourceModel2> PutResourceModel2(string resourceModel2SName, ResourceModel2 parameters, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(resourceModel2SName, nameof(resourceModel2SName));
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
             using var scope = ResourceModel2sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.PutResourceModel2");
             scope.Start();
             try
@@ -1151,12 +1005,8 @@ namespace SupersetFlattenInheritance
         /// OperationId: ResourceModel2s_Get
         /// <param name="resourceModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="resourceModel2SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceModel2SName"/> is null. </exception>
         public async virtual Task<Response<ResourceModel2>> GetResourceModel2Async(string resourceModel2SName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(resourceModel2SName, nameof(resourceModel2SName));
-
             using var scope = ResourceModel2sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.GetResourceModel2");
             scope.Start();
             try
@@ -1176,12 +1026,8 @@ namespace SupersetFlattenInheritance
         /// OperationId: ResourceModel2s_Get
         /// <param name="resourceModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="resourceModel2SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceModel2SName"/> is null. </exception>
         public virtual Response<ResourceModel2> GetResourceModel2(string resourceModel2SName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(resourceModel2SName, nameof(resourceModel2SName));
-
             using var scope = ResourceModel2sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.GetResourceModel2");
             scope.Start();
             try
@@ -1252,16 +1098,8 @@ namespace SupersetFlattenInheritance
         /// <param name="trackedResourceModel2SName"> The String to use. </param>
         /// <param name="parameters"> The TrackedResourceModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="trackedResourceModel2SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel2SName"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<Response<TrackedResourceModel2>> PutTrackedResourceModel2Async(string trackedResourceModel2SName, TrackedResourceModel2 parameters, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(trackedResourceModel2SName, nameof(trackedResourceModel2SName));
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
             using var scope = TrackedResourceModel2sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.PutTrackedResourceModel2");
             scope.Start();
             try
@@ -1282,16 +1120,8 @@ namespace SupersetFlattenInheritance
         /// <param name="trackedResourceModel2SName"> The String to use. </param>
         /// <param name="parameters"> The TrackedResourceModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="trackedResourceModel2SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel2SName"/> or <paramref name="parameters"/> is null. </exception>
         public virtual Response<TrackedResourceModel2> PutTrackedResourceModel2(string trackedResourceModel2SName, TrackedResourceModel2 parameters, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(trackedResourceModel2SName, nameof(trackedResourceModel2SName));
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
             using var scope = TrackedResourceModel2sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.PutTrackedResourceModel2");
             scope.Start();
             try
@@ -1311,12 +1141,8 @@ namespace SupersetFlattenInheritance
         /// OperationId: TrackedResourceModel2s_Get
         /// <param name="trackedResourceModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="trackedResourceModel2SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel2SName"/> is null. </exception>
         public async virtual Task<Response<TrackedResourceModel2>> GetTrackedResourceModel2Async(string trackedResourceModel2SName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(trackedResourceModel2SName, nameof(trackedResourceModel2SName));
-
             using var scope = TrackedResourceModel2sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.GetTrackedResourceModel2");
             scope.Start();
             try
@@ -1336,12 +1162,8 @@ namespace SupersetFlattenInheritance
         /// OperationId: TrackedResourceModel2s_Get
         /// <param name="trackedResourceModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="trackedResourceModel2SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel2SName"/> is null. </exception>
         public virtual Response<TrackedResourceModel2> GetTrackedResourceModel2(string trackedResourceModel2SName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(trackedResourceModel2SName, nameof(trackedResourceModel2SName));
-
             using var scope = TrackedResourceModel2sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.GetTrackedResourceModel2");
             scope.Start();
             try
@@ -1362,16 +1184,8 @@ namespace SupersetFlattenInheritance
         /// <param name="nonResourceModel1SName"> The String to use. </param>
         /// <param name="parameters"> The NonResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="nonResourceModel1SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="nonResourceModel1SName"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<Response<NonResourceModel1>> PutNonResourceModel1Async(string nonResourceModel1SName, NonResourceModel1 parameters, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(nonResourceModel1SName, nameof(nonResourceModel1SName));
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
             using var scope = NonResourceModel1sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.PutNonResourceModel1");
             scope.Start();
             try
@@ -1392,16 +1206,8 @@ namespace SupersetFlattenInheritance
         /// <param name="nonResourceModel1SName"> The String to use. </param>
         /// <param name="parameters"> The NonResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="nonResourceModel1SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="nonResourceModel1SName"/> or <paramref name="parameters"/> is null. </exception>
         public virtual Response<NonResourceModel1> PutNonResourceModel1(string nonResourceModel1SName, NonResourceModel1 parameters, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(nonResourceModel1SName, nameof(nonResourceModel1SName));
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
             using var scope = NonResourceModel1sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.PutNonResourceModel1");
             scope.Start();
             try
@@ -1421,12 +1227,8 @@ namespace SupersetFlattenInheritance
         /// OperationId: NonResourceModel1s_Get
         /// <param name="nonResourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="nonResourceModel1SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="nonResourceModel1SName"/> is null. </exception>
         public async virtual Task<Response<NonResourceModel1>> GetNonResourceModel1Async(string nonResourceModel1SName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(nonResourceModel1SName, nameof(nonResourceModel1SName));
-
             using var scope = NonResourceModel1sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.GetNonResourceModel1");
             scope.Start();
             try
@@ -1446,12 +1248,8 @@ namespace SupersetFlattenInheritance
         /// OperationId: NonResourceModel1s_Get
         /// <param name="nonResourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="nonResourceModel1SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="nonResourceModel1SName"/> is null. </exception>
         public virtual Response<NonResourceModel1> GetNonResourceModel1(string nonResourceModel1SName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(nonResourceModel1SName, nameof(nonResourceModel1SName));
-
             using var scope = NonResourceModel1sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.GetNonResourceModel1");
             scope.Start();
             try

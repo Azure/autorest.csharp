@@ -12,6 +12,7 @@ using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
@@ -114,6 +115,13 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                         if (keySegment.IsReference)
                         {
                             parameterMappingStack.Push(new ContextualParameterMapping(string.Empty, keySegment, $"{idVariableName}{invocationSuffix}.ResourceType.GetLastType()", new[] { "System.Linq" }));
+                            appendParent = true;
+                        }
+                        else if (keySegment.IsExpandable)
+                        {
+                            //this is the case where we have expanded the reference into its enumerations
+                            var keyParam = keySegment.Type.Name.ToVariableName();
+                            parameterMappingStack.Push(new ContextualParameterMapping(keyParam, keyParam, keySegment.Type, $"\"{keySegment.ConstantValue}\"", Enumerable.Empty<string>()));
                             appendParent = true;
                         }
                         // add .Parent suffix
@@ -326,18 +334,39 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             // if we match one parameter, we need to remove the matching ContextualParameterMapping from the list to avoid multiple matching
             if (result != null)
                 contextualParameterMappings.Remove(result);
+            if (result is null && pathParameter.IsEnumType)
+            {
+                var requestSegment = requestPath.Where(s => s.IsExpandable && s.Type.Equals(pathParameter.Type));
+                if (requestSegment.Any())
+                {
+                    var keySegment = requestSegment.First();
+                    var keyParam = keySegment.Type.Name.ToVariableName();
+                    return new ContextualParameterMapping(keyParam, keyParam, keySegment.Type, $"\"{keySegment.ConstantValue}\"", Enumerable.Empty<string>());
+                }
+            }
             return result;
         }
 
         public static string FindKeyOfParameter(Reference reference, RequestPath requestPath)
         {
             var segments = requestPath.ToList();
-            int index = segments.FindIndex(segment => segment.IsReference && segment.ReferenceName == reference.Name && segment.Type.Equals(reference.Type));
+            int index = segments.FindIndex(segment =>
+            {
+                if (segment.IsReference && segment.ReferenceName == reference.Name && segment.Type.Equals(reference.Type))
+                    return true;
+                if (segment.IsExpandable && segment.Type.Equals(reference.Type))
+                    return true;
+
+                return false;
+            });
             if (index < 0)
                 throw new InvalidOperationException($"Cannot find the key corresponding to parameter {reference.Name} in path {requestPath}");
 
             if (index == 0)
                 return string.Empty;
+
+            if (segments[index].IsExpandable)
+                return segments[index].Type.Name.ToVariableName();
 
             var keySegment = segments[index - 1];
             return keySegment.IsConstant ? keySegment.ConstantValue : string.Empty;

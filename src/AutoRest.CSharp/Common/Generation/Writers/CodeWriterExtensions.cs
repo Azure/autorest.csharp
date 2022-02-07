@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Serialization;
@@ -91,10 +92,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static CodeWriter.CodeWriterScope WriteMethodDeclaration(this CodeWriter writer, MethodSignatureBase methodBase, params string[] disabledWarnings)
         {
-            foreach (var disabledWarning in disabledWarnings)
-            {
-                writer.Line($"#pragma warning disable {disabledWarning}");
-            }
+            WriteDisableWarnings(writer, disabledWarnings);
 
             writer.Append($"{methodBase.Modifiers} ");
             if (methodBase is MethodSignature method)
@@ -108,7 +106,55 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.AppendRaw("void ");
                 }
             }
-            writer.Append($"{methodBase.Name}(");
+
+            return WriteMethodDeclarationParameters(writer, methodBase, disabledWarnings, methodBase.Name);
+        }
+
+        public static CodeWriter.CodeWriterScope WriteMethodDeclaration(this CodeWriter writer, MethodSignatureBase methodBase, bool isAsync, params string[] disabledWarnings)
+        {
+            WriteDisableWarnings(writer, disabledWarnings);
+
+            writer.Append($"{methodBase.Modifiers} ");
+            if (methodBase is MethodSignature method)
+            {
+                if (isAsync && !method.IsPageable)
+                    writer.Append($"async ");
+
+                var firstParam = method.Parameters.FirstOrDefault();
+                bool isExtensionMethod = firstParam is not null && firstParam.IsExtensionParameter;
+
+                if (method.Modifiers.Contains("public") && !isExtensionMethod)
+                    writer.Append($"virtual ");
+
+                if (isExtensionMethod)
+                    writer.Append($"static ");
+
+                if (method.ReturnType != null)
+                {
+                    var finalType = method.IsPageable ? method.ReturnType.WrapPageable(isAsync) : method.ReturnType.WrapAsync(isAsync);
+                    writer.Append($"{finalType} ");
+                }
+                else
+                {
+                    writer.AppendRaw("void ");
+                }
+            }
+
+            string methodName = isAsync ? $"{methodBase.Name}Async" : methodBase.Name;
+            return WriteMethodDeclarationParameters(writer, methodBase, disabledWarnings, methodName);
+        }
+
+        private static void WriteDisableWarnings(CodeWriter writer, string[] disabledWarnings)
+        {
+            foreach (var disabledWarning in disabledWarnings)
+            {
+                writer.Line($"#pragma warning disable {disabledWarning}");
+            }
+        }
+
+        private static CodeWriter.CodeWriterScope WriteMethodDeclarationParameters(CodeWriter writer, MethodSignatureBase methodBase, string[] disabledWarnings, string methodName)
+        {
+            writer.Append($"{methodName}(");
 
             foreach (var parameter in methodBase.Parameters)
             {
@@ -117,7 +163,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.RemoveTrailingComma();
             writer.Append($")");
 
-            if (methodBase is ConstructorSignature {Initializer: { }} constructor)
+            if (methodBase is ConstructorSignature { Initializer: { } } constructor)
             {
                 var (isBase, arguments) = constructor.Initializer;
 
@@ -168,6 +214,8 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.AppendRaw("]");
             }
 
+            if (clientParameter.IsExtensionParameter)
+                writer.Append($"this ");
             writer.Append($"{clientParameter.Type} {clientParameter.Name:D}");
             if (clientParameter.DefaultValue != null && clientParameter.UseDefaultValueInCtorParam)
             {

@@ -3,15 +3,20 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
+using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
+using Azure;
+using Operation = AutoRest.CSharp.Input.Operation;
 
 namespace AutoRest.CSharp.Mgmt.Models
 {
@@ -23,6 +28,9 @@ namespace AutoRest.CSharp.Mgmt.Models
     /// </summary>
     internal record MgmtRestOperation
     {
+        private bool? _isLongRunning;
+        private BuildContext<MgmtOutputLibrary> _context;
+
         /// <summary>
         /// The underlying <see cref="Operation"/> object.
         /// </summary>
@@ -36,10 +44,32 @@ namespace AutoRest.CSharp.Mgmt.Models
         /// The name of this operation
         /// </summary>
         public string Name { get; }
-        public string? Description => Method.Description;
+
+        private string? _description;
+        public string? Description => _description ??= Method.Description;
         public IEnumerable<Parameter> Parameters => Method.Parameters;
-        public CSharpType? ReturnType { get; }
+
+        private Func<bool, FormattableString>? _returnsDescription;
+        public Func<bool, FormattableString>? ReturnsDescription => IsPagingOperation ? _returnsDescription ??= EnsureReturnsDescription() : null;
+
+        private PagingMethodWrapper? _pagingMethodWrapper;
+        public PagingMethodWrapper? PagingMethod => _pagingMethodWrapper ??= EnsurePagingMethodWrapper();
+
+        private CSharpType? _mgmtReturnType;
+        public CSharpType? MgmtReturnType => _mgmtReturnType ??= GetMgmtReturnType(Method.ReturnType);
+
+        public CSharpType? ListItemType => IsPagingOperation ? MgmtReturnType : null;
+
+        private CSharpType? _wrappedMgmtReturnType;
+        public CSharpType ReturnType => _wrappedMgmtReturnType ??= GetWrappedMgmtReturnType(MgmtReturnType);
+
         public string Accessibility => Method.Accessibility;
+        public bool IsPagingOperation => Operation.Language.Default.Paging != null || IsListOperation;
+
+        private bool? _isListOperation;
+        private bool IsListOperation => _isListOperation ??= _context.Library.GetRestClientMethod(Operation).IsListMethod(out var _);
+        public CSharpType? OriginalReturnType => Method.ReturnType;
+
         /// <summary>
         /// The actual operation
         /// </summary>
@@ -59,16 +89,45 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         public Resource? Resource { get; }
 
-        public MgmtRestOperation(RestClientMethod method, MgmtRestClient restClient, RequestPath requestPath, RequestPath contextualPath, string methodName, CSharpType? returnType, BuildContext<MgmtOutputLibrary> context)
+        public bool ThrowIfNull { get; }
+
+        public bool IsLongRunningOperation => _isLongRunning.HasValue ? _isLongRunning.Value : Operation.IsLongRunning;
+
+        public Parameter[] OverrideParameters { get; } = new Parameter[] { };
+
+        public MgmtRestOperation(RestClientMethod method, MgmtRestClient restClient, RequestPath requestPath, RequestPath contextualPath, string methodName, CSharpType? returnType, BuildContext<MgmtOutputLibrary> context, bool? isLongRunning = null, bool throwIfNull = false)
         {
+            _context = context;
+            _isLongRunning = isLongRunning;
+            ThrowIfNull = throwIfNull;
             Method = method;
             RestClient = restClient;
             RequestPath = requestPath;
             ContextualPath = contextualPath;
             Name = methodName;
-            Resource = GetResourceMatch(restClient, method, requestPath, context);
-            ReturnType = returnType ?? method.ReturnType;
+            Resource = GetResourceMatch(restClient, method, requestPath);
+            _mgmtReturnType = returnType;
         }
+
+        public MgmtRestOperation(MgmtRestOperation other, string nameOverride, CSharpType? overrideReturnType, string overrideDescription, BuildContext<MgmtOutputLibrary> context, params Parameter[] overrideParameters)
+        {
+            //copy values from other method
+            _context = context;
+            _isLongRunning = other.IsLongRunningOperation;
+            ThrowIfNull = other.ThrowIfNull;
+            Method = other.Method;
+            RestClient = other.RestClient;
+            RequestPath = other.RequestPath;
+            ContextualPath = other.ContextualPath;
+            Resource = other.Resource;
+
+            //modify some of the values
+            Name = nameOverride;
+            _mgmtReturnType = overrideReturnType;
+            _description = overrideDescription;
+            OverrideParameters = overrideParameters;
+        }
+
 
         internal enum ResourceMatchType
         {
@@ -81,7 +140,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             None
         }
 
-        private static Resource? GetResourceMatch(MgmtRestClient restClient, RestClientMethod method, RequestPath requestPath, BuildContext<MgmtOutputLibrary> context)
+        private Resource? GetResourceMatch(MgmtRestClient restClient, RestClientMethod method, RequestPath requestPath)
         {
             if (restClient.Resources.Count == 1)
                 return restClient.Resources[0];
@@ -109,7 +168,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             FormattableString errorText = (FormattableString)$"{restClient.Type.Name}.{method.Name}";
             foreach (ResourceMatchType? matchType in Enum.GetValues(typeof(ResourceMatchType)))
             {
-                var resource = GetMatch(matchType!.Value, matches, context, errorText);
+                var resource = GetMatch(matchType!.Value, matches, errorText);
 
                 if (resource is not null)
                     return resource;
@@ -117,7 +176,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             return null;
         }
 
-        private static Resource? GetMatch(ResourceMatchType matchType, Dictionary<ResourceMatchType, HashSet<Resource>> matches, BuildContext<MgmtOutputLibrary> context, FormattableString error)
+        private Resource? GetMatch(ResourceMatchType matchType, Dictionary<ResourceMatchType, HashSet<Resource>> matches, FormattableString error)
         {
             if (!matches.TryGetValue(matchType, out var matchTypeMatches))
                 return null;
@@ -126,8 +185,8 @@ namespace AutoRest.CSharp.Mgmt.Models
             if (matchTypeMatches.Count == 1)
                 return first;
 
-            var parent = first.Parent(context).First();
-            if (parent is not null && AllMatchesSameParent(matchTypeMatches, context, parent, out bool areAllSingleton) && areAllSingleton)
+            var parent = first.Parent(_context).First();
+            if (parent is not null && AllMatchesSameParent(matchTypeMatches, _context, parent, out bool areAllSingleton) && areAllSingleton)
                 return parent as Resource;
 
             //this throw catches anything we do not expect if it ever fires it means our logic is either incomplete or we need a directive to adjust the request paths
@@ -222,5 +281,81 @@ namespace AutoRest.CSharp.Mgmt.Models
             }
             return true;
         }
+
+        private CSharpType GetWrappedMgmtReturnType(CSharpType? originalType)
+        {
+            if (originalType is null)
+                return typeof(Response);
+
+            if (IsPagingOperation || IsLongRunningOperation)
+                return originalType;
+
+            return originalType.WrapResponse(false);
+        }
+
+        private CSharpType? GetMgmtReturnType(CSharpType? originalType)
+        {
+            _context.Library.PagingMethods.TryGetValue(Method, out var pagingMethod);
+
+            if (pagingMethod is not null)
+            {
+                originalType = pagingMethod.PagingResponse.ItemType;
+            }
+
+            //try for list method
+            originalType = GetListMethodItemType() ?? originalType;
+
+            if (!IsResourceDataType(originalType, out var data))
+                return originalType;
+
+            if (Resource is not null && Resource.ResourceData.Type.Equals(originalType))
+                return Resource.Type;
+
+            var foundResource = _context.Library.ArmResources.FirstOrDefault(resource => resource.ResourceData.Type.Equals(originalType));
+            if (foundResource is not null)
+                return foundResource.Type;
+
+            throw new InvalidOperationException($"Found a resource data return type but resource was null for method {RestClient.Type.Name}.{Method.Name}: {originalType?.Name}");
+        }
+
+        private bool IsResourceDataType(CSharpType? type, [MaybeNullWhen(false)] out ResourceData data)
+        {
+            data = null;
+            if (_context.Configuration.MgmtConfiguration.IsArmCore)
+            {
+                if (type == null || type.IsFrameworkType)
+                    return false;
+
+                if (_context.Library.TryGetTypeProvider(type.Name, out var provider))
+                {
+                    data = provider as ResourceData;
+                    return data != null;
+                }
+                return false;
+            }
+            else
+            {
+                data = _context.Library.ResourceData.FirstOrDefault(d => d.Type.Equals(type));
+                return data != null;
+            }
+        }
+
+        private CSharpType? GetListMethodItemType()
+        {
+            if (Method.ReturnType is null)
+                return null;
+
+            var restClientMethod = _context.Library.GetRestClientMethod(Operation);
+            return restClientMethod.IsListMethod(out var item) ? item : null;
+        }
+
+        private PagingMethodWrapper EnsurePagingMethodWrapper()
+        {
+            _context.Library.PagingMethods.TryGetValue(Method, out var pagingMethod);
+            return pagingMethod is null ? new PagingMethodWrapper(Method) : new PagingMethodWrapper(pagingMethod);
+        }
+
+        private Func<bool, FormattableString> EnsureReturnsDescription()
+            => (isAsync) => $"{(isAsync ? "An async" : "A")} collection of <see cref=\"{ListItemType!}\" /> that may take multiple service requests to iterate over.";
     }
 }
