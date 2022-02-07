@@ -26,6 +26,7 @@ rename-rules:
   IDs: Ids
   VM: Vm
   VMs: Vms
+  VMScaleSet: VmScaleSet
   
 directive:
   - rename-model:
