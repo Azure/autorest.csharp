@@ -156,23 +156,20 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
         public MgmtTypeProvider? FindParentByRequestPath(RequestPath requestPath)
         {
-            var mgmtParents = new List<MgmtTypeProvider>(This.Resource.Parent(Context));
-            // what is the purpose of this sorting?
-            mgmtParents.Sort(Comparer<MgmtTypeProvider>.Create(
-                (x1, x2) =>
+            // sort this list to ensure that we will always check real resource first and then extensions
+            var mgmtParents = This.Resource.Parent(Context).OrderBy(provider =>
                 {
                     // order by path length descendently
-                    if (x1 is Resource)
-                    {
-                        return -1; // we are returning -1 for both Resource and MgmtExtensions, but we only have these two types?
-                    }
-                    else if (x1 is MgmtExtensions)
+                    if (provider is Resource)
                     {
                         return -1;
                     }
-
-                    throw new Exception($"Unexpected ParentResource {x1}");
-                }));
+                    if (provider is MgmtExtensions)
+                    {
+                        return 1;
+                    }
+                    throw new Exception($"Unexpected ParentResource {provider.GetType()}");
+                });
 
             MgmtTypeProvider? lastChoice = null;
             foreach (var provider in mgmtParents)
