@@ -197,7 +197,11 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             {
                 if (!parentDict.TryGetValue(enumValue.Declaration.Name, out var parentProperty))
                     return false;
-                if (parentProperty.Name != enumValue.Declaration.Name)
+                // Need to compare the string values for the enum as in the case of the SystemAssignedUserAssigned property of ManagedServiceIdentityType, the underlying value could be different:
+                // "SystemAssigned, UserAssigned" or "SystemAssigned,UserAssigned".
+                var parentValue = parentProperty.GetValue(parentProperty, null);
+                var childValue = enumValue.Value.Value;
+                if (parentValue?.ToString() != childValue?.ToString())
                     return false;
             }
 

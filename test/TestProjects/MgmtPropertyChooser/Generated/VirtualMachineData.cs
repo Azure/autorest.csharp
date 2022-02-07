@@ -39,6 +39,7 @@ namespace MgmtPropertyChooser
         /// <param name="identityWithDifferentPropertyType"> The identity of the virtual machine, if configured. </param>
         /// <param name="identityWithNoUserIdentity"> The identity of the virtual machine, if configured. </param>
         /// <param name="identityWithNoSystemIdentity"> The identity of the virtual machine, if configured. </param>
+        /// <param name="identityV3"> The identity of the virtual machine, if configured. </param>
         /// <param name="zones"> The virtual machine zones. </param>
         /// <param name="fakeResources"> The fake resources for the virtual machine. </param>
         /// <param name="fakeSubResource"> The fake subresource. </param>
@@ -47,7 +48,7 @@ namespace MgmtPropertyChooser
         /// <param name="licenseType"> Specifies that the image or disk that is being used was licensed on-premises. This element is only used for images that contain the Windows Server operating system. &lt;br&gt;&lt;br&gt; Possible values are: &lt;br&gt;&lt;br&gt; Windows_Client &lt;br&gt;&lt;br&gt; Windows_Server &lt;br&gt;&lt;br&gt; If this element is included in a request for an update, the value must match the initial value. This value cannot be updated. &lt;br&gt;&lt;br&gt; For more information, see [Azure Hybrid Use Benefit for Windows Server](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-hybrid-use-benefit-licensing?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) &lt;br&gt;&lt;br&gt; Minimum api-version: 2015-06-15. </param>
         /// <param name="vmId"> Specifies the VM unique ID which is a 128-bits identifier that is encoded and stored in all Azure IaaS VMs SMBIOS and can be read using platform BIOS commands. </param>
         /// <param name="extensionsTimeBudget"> Specifies the time alloted for all extensions to start. The time duration should be between 15 minutes and 120 minutes (inclusive) and should be specified in ISO 8601 format. The default value is 90 minutes (PT1H30M). &lt;br&gt;&lt;br&gt; Minimum api-version: 2020-06-01. </param>
-        internal VirtualMachineData(ResourceIdentifier id, string name, ResourceType type, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, Models.Plan plan, IReadOnlyList<VirtualMachineExtension> resources, ManagedServiceIdentity identity, IdentityWithRenamedProperty identityWithRenamedProperty, IdentityWithDifferentPropertyType identityWithDifferentPropertyType, IdentityWithNoUserIdentity identityWithNoUserIdentity, IdentityWithNoSystemIdentity identityWithNoSystemIdentity, IList<string> zones, IReadOnlyList<Models.Resource> fakeResources, SubResource fakeSubResource, WritableSubResource fakeWritableSubResource, string provisioningState, string licenseType, string vmId, string extensionsTimeBudget) : base(id, name, type, systemData, tags, location)
+        internal VirtualMachineData(ResourceIdentifier id, string name, ResourceType type, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, Models.Plan plan, IReadOnlyList<VirtualMachineExtension> resources, ManagedServiceIdentity identity, IdentityWithRenamedProperty identityWithRenamedProperty, IdentityWithDifferentPropertyType identityWithDifferentPropertyType, IdentityWithNoUserIdentity identityWithNoUserIdentity, IdentityWithNoSystemIdentity identityWithNoSystemIdentity, IdentityV3 identityV3, IList<string> zones, IReadOnlyList<Models.Resource> fakeResources, SubResource fakeSubResource, WritableSubResource fakeWritableSubResource, string provisioningState, string licenseType, string vmId, string extensionsTimeBudget) : base(id, name, type, systemData, tags, location)
         {
             Plan = plan;
             Resources = resources;
@@ -56,6 +57,7 @@ namespace MgmtPropertyChooser
             IdentityWithDifferentPropertyType = identityWithDifferentPropertyType;
             IdentityWithNoUserIdentity = identityWithNoUserIdentity;
             IdentityWithNoSystemIdentity = identityWithNoSystemIdentity;
+            IdentityV3 = identityV3;
             Zones = zones;
             FakeResources = fakeResources;
             FakeSubResource = fakeSubResource;
@@ -80,6 +82,8 @@ namespace MgmtPropertyChooser
         public IdentityWithNoUserIdentity IdentityWithNoUserIdentity { get; set; }
         /// <summary> The identity of the virtual machine, if configured. </summary>
         public IdentityWithNoSystemIdentity IdentityWithNoSystemIdentity { get; set; }
+        /// <summary> The identity of the virtual machine, if configured. </summary>
+        public IdentityV3 IdentityV3 { get; set; }
         /// <summary> The virtual machine zones. </summary>
         public IList<string> Zones { get; }
         /// <summary> The fake resources for the virtual machine. </summary>
