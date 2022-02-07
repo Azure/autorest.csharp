@@ -15,6 +15,7 @@ using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Utilities;
 using System.Diagnostics.CodeAnalysis;
+using AutoRest.CSharp.MgmtTest.Decorator;
 
 namespace AutoRest.CSharp.MgmtTest.Generation
 {
@@ -122,9 +123,9 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             var methodName = clientOperation.Name;
 
             int exampleIdx = 0;
-            foreach ((var branch, var operation) in GetSortedOperationMappings(clientOperation))
+            foreach ((var branch, var operation) in clientOperation.GetSortedOperationMappings())
             {
-                var exampleGroup = MgmtBaseTestWriter.FindExampleGroup(Context, operation);
+                var exampleGroup = operation.FindExampleGroup(Context);
                 if (exampleGroup is null || exampleGroup.Examples.Count() == 0)
                     return;
                 var testMethodName = CreateMethodName(methodName, async);
@@ -138,7 +139,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
                     WriteTestDecorator();
                     var testCaseSuffix = exampleIdx > 0 ? (exampleIdx + 1).ToString() : String.Empty;
-                    _writer.Append($"public {GetAsyncKeyword(async)} {MgmtBaseTestWriter.GetTaskOrVoid(async)} {(resource == This ? "" : resource.Type.Name)}{methodName}{testCaseSuffix}()");
+                    _writer.Append($"public {GetAsyncKeyword(async)} {GetTaskOrVoid(async)} {(resource == This ? "" : resource.Type.Name)}{methodName}{testCaseSuffix}()");
 
                     using (_writer.Scope())
                     {

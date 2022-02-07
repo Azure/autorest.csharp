@@ -20,6 +20,8 @@ using System.Text.RegularExpressions;
 using Azure.Core;
 using Azure.ResourceManager.Resources;
 using AutoRest.CSharp.Output.Models;
+using AutoRest.CSharp.MgmtTest.Decorator;
+using System.Threading.Tasks;
 
 namespace AutoRest.CSharp.MgmtTest.Generation
 {
@@ -71,61 +73,9 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             return String.Join("/", elements);
         }
 
-        public static string GetTaskOrVoid(bool isAsync)
+        public FormattableString GetTaskOrVoid(bool isAsync)
         {
-            return isAsync ? "Task" : "void";
-        }
-
-        public static ExampleGroup? FindExampleGroup(BuildContext<MgmtOutputLibrary> context, MgmtRestOperation restOperation)
-        {
-            if (restOperation is null)
-                return null;
-            foreach (var exampleGroup in context.CodeModel.TestModel?.MockTest.ExampleGroups ?? Enumerable.Empty<ExampleGroup>())
-            {
-                if (exampleGroup.Examples.Count > 0 && exampleGroup.Examples.First().Operation == restOperation.Operation)
-                {
-                    return exampleGroup;
-                }
-            }
-            return null;
-        }
-
-        public static SortedDictionary<RequestPath, MgmtRestOperation> GetSortedOperationMappings(MgmtClientOperation clientOperation) {
-            var operationMappings = clientOperation.ToDictionary(
-                operation => operation.ContextualPath,
-                operation => operation);
-            return new SortedDictionary<RequestPath, MgmtRestOperation>(operationMappings, Comparer<RequestPath>.Create(
-                (x1, x2) =>
-                {
-                    // order by path length descendently
-                    if (x1.ToString() is null)
-                    {
-                        return 1;
-                    }
-                    else if (x2.ToString() is null)
-                    {
-                        return -1;
-                    }
-
-                    return x2.ToString()!.Length - x1.ToString()!.Length;
-                }));
-        }
-
-        public static bool HasExample(BuildContext<MgmtOutputLibrary> context, MgmtClientOperation? clientOperation)
-        {
-            if (clientOperation is null)
-            {
-                return false;
-            }
-
-            foreach ((var branch, var operation) in GetSortedOperationMappings(clientOperation))
-            {
-                var exampleGroup = MgmtBaseTestWriter.FindExampleGroup(context, operation);
-                if (exampleGroup is not null && exampleGroup.Examples.Count > 0)
-                    return true;
-                break;
-            }
-            return false;
+            return isAsync ? (FormattableString)$"{typeof(Task)}" : $"void";
         }
 
         public static ObjectTypeProperty? FindPropertyThroughSerialization(List<string> flattenedNames, JsonSerialization js)
@@ -610,6 +560,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
         public string? ParseRequestPath(MgmtTypeProvider tp, string requestPath, ExampleModel exampleModel)
         {
+            // TODO -- this should be refactored
             List<string> result = new List<string>();
             var segements = requestPath.Split('/');
             if (tp is Resource resource)
