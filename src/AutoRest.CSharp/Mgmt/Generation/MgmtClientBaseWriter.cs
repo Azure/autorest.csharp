@@ -93,8 +93,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         WriteMethod(clientOperation, false);
                     }
 
-                    WriteCustomMethods();
-
                     if (This.EnumerableInterfaces.Any())
                         WriteEnumerables();
                 }
@@ -103,7 +101,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected virtual void WritePrivateHelpers() { }
         protected virtual void WriteProperties() { }
         protected virtual void WriteStaticMethods() { }
-        protected virtual void WriteCustomMethods() { }
 
         protected void WriteClassDeclaration()
         {

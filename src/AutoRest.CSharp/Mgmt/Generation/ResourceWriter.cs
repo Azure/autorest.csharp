@@ -62,12 +62,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        protected override void WriteCustomMethods()
-        {
-            WriteListAvailableLocationsMethod(true);
-            WriteListAvailableLocationsMethod(false);
-        }
-
         protected override void WriteProperties()
         {
             _writer.WriteXmlDocumentationSummary($"Gets the resource type for the operations");
@@ -91,25 +85,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             _writer.Line();
             WriteStaticValidate($"ResourceType", _writer);
-        }
-
-        private void WriteListAvailableLocationsMethod(bool async)
-        {
-            _writer.Line();
-            _writer.WriteXmlDocumentationSummary($"Lists all available geo-locations.");
-            _writer.WriteXmlDocumentationParameter("cancellationToken", $"A token to allow the caller to cancel the call to the service. The default value is <see cref=\"CancellationToken.None\" />.");
-            _writer.WriteXmlDocumentationReturns($"A collection of locations that may take multiple service requests to iterate over.");
-
-            var responseType = new CSharpType(typeof(IEnumerable<AzureLocation>)).WrapAsync(async);
-
-            using (_writer.Scope($"public {GetAsyncKeyword(async)} virtual {responseType} {CreateMethodName("GetAvailableLocations", async)}({typeof(CancellationToken)} cancellationToken = default)"))
-            {
-                Diagnostic diagnostic = new Diagnostic($"{This.Type.Name}.GetAvailableLocations", Array.Empty<DiagnosticAttribute>());
-                using (WriteDiagnosticScope(_writer, diagnostic, GetDiagnosticName(This.GetOperation.OperationMappings.Values.First())))
-                {
-                    _writer.Line($"return {GetAwait(async)} {CreateMethodName("ListAvailableLocations", async)}(ResourceType, cancellationToken){GetConfigureAwait(async)};");
-                }
-            }
         }
 
         private void WriteAddTagBody(MgmtClientOperation clientOperation, Diagnostic diagnostic, bool async)
